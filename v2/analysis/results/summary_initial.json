@@ -1,0 +1,64 @@
+{
+ "mass": 90.32000000000001,
+ "fails": [
+  "mass budget",
+  "speed hip_pitch",
+  "speed knee",
+  "speed ankle_pitch",
+  "speed elbow",
+  "speed wrist_pitch",
+  "speed wrist_yaw",
+  "struct hip bearing moment"
+ ],
+ "req": {
+  "hip_pitch": 108.4,
+  "hip_roll": 115.2,
+  "hip_yaw": 22.6,
+  "knee": 146.2,
+  "ankle_pitch": 144.5,
+  "ankle_roll": 54.2,
+  "waist_pitch": 108.4,
+  "waist_yaw": 40,
+  "shoulder_pitch": 98.8,
+  "shoulder_roll": 98.8,
+  "shoulder_yaw": 39.5,
+  "elbow": 49.0,
+  "wrist_roll": 4.9,
+  "wrist_pitch": 9.8,
+  "wrist_yaw": 5.9,
+  "neck_yaw": 2.0,
+  "neck_pitch": 1.4
+ },
+ "cap": {
+  "hip_yaw": 107,
+  "hip_roll": 204,
+  "hip_pitch": 433,
+  "knee": 314.2,
+  "ankle_pitch": 603.2,
+  "ankle_roll": 402.1,
+  "waist_yaw": 204,
+  "waist_pitch": 433,
+  "shoulder_pitch": 204,
+  "shoulder_roll": 204,
+  "shoulder_yaw": 107,
+  "elbow": 201.1,
+  "wrist_roll": 28,
+  "wrist_pitch": 125.7,
+  "wrist_yaw": 125.7,
+  "neck_yaw": 11,
+  "neck_pitch": 11
+ },
+ "segments": {
+  "foot": 0.9,
+  "shank": 2.95,
+  "thigh": 2.6500000000000004,
+  "pelvis": 20.660000000000004,
+  "upper": 56.660000000000004
+ },
+ "power": {
+  "walk": 555.175774117647,
+  "stand": 235.0,
+  "mix": 395.0878870588235,
+  "runtime_mix": 5.239340581686331
+ }
+}

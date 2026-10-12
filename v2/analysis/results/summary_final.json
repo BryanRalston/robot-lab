@@ -1,0 +1,55 @@
+{
+ "mass": 64.785,
+ "fails": [],
+ "req": {
+  "hip_pitch": 77.7,
+  "hip_roll": 82.6,
+  "hip_yaw": 16.2,
+  "knee": 110.6,
+  "ankle_pitch": 103.7,
+  "ankle_roll": 38.9,
+  "waist_pitch": 78.5,
+  "waist_yaw": 40,
+  "shoulder_pitch": 98.8,
+  "shoulder_roll": 98.8,
+  "shoulder_yaw": 39.5,
+  "elbow": 49.0,
+  "wrist_roll": 4.9,
+  "wrist_pitch": 9.8,
+  "wrist_yaw": 5.9,
+  "neck_yaw": 2.0,
+  "neck_pitch": 1.4
+ },
+ "cap": {
+  "hip_yaw": 107,
+  "hip_roll": 204,
+  "hip_pitch": 204,
+  "knee": 226.2,
+  "ankle_pitch": 251.3,
+  "ankle_roll": 201.1,
+  "waist_yaw": 107,
+  "waist_pitch": 204,
+  "shoulder_pitch": 204,
+  "shoulder_roll": 204,
+  "shoulder_yaw": 107,
+  "elbow": 100.5,
+  "wrist_roll": 28,
+  "wrist_pitch": 62.8,
+  "wrist_yaw": 62.8,
+  "neck_yaw": 11,
+  "neck_pitch": 11
+ },
+ "segments": {
+  "foot": 0.9,
+  "shank": 3.0,
+  "thigh": 2.5375,
+  "pelvis": 10.9,
+  "upper": 41.01
+ },
+ "power": {
+  "walk": 548.4468282352941,
+  "stand": 254.2,
+  "mix": 401.3234141176471,
+  "runtime_mix": 5.157934790700211
+ }
+}
