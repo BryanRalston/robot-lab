@@ -20,7 +20,7 @@ v2 keeps what makes **Berkeley Humanoid Lite (BHL)** work: one smart actuator pe
 | Spec | v2 | Check |
 |---|---|---|
 | Height | 1.73 m | geometry |
-| Mass | **64.8 kg** (target ≤ 65) | mass budget: PASS after fixes (initially 90.3 kg) |
+| Mass | **64.3 kg** budget (target ≤ 65); CAD solids 58.5 kg + 4.5 kg unmodeled harness/covers/thermal = 63.0 kg | mass budget: PASS after fixes (initially 90.3 kg) |
 | Body DoF | 30: legs 2×6, waist 2, arms 2×7, neck 2 | |
 | Hand DoF | 22 per hand (17 actuated + 5 coupled DIP), actuators in the forearm | hand tendon and grip: PASS after fixes |
 | Actuators | 32 body actuators (18 rotary strain-wave, 14 linear roller-screw), plus 34 hand micro-actuators | torque/speed: all 17 joint types PASS |
@@ -44,7 +44,7 @@ Motor classes are **generic frameless PMSM sizes** (M115/M85/M60/M38 = stator OD
 | Waist pitch | rotary | M85 | CSG-25-100 | 204 | 118 | 5.2 |
 | Shoulder pitch / roll | rotary | M85 | CSG-25-100 | 204 | 148 | 5.2 |
 | Shoulder yaw | rotary | M60 | CSG-20-100 | 107 | 59 | 6.3 |
-| Elbow | **linear**, 4 mm lead, 40 mm lever | M60 | roller screw | 101 | 73 | 10 |
+| Elbow | **rotary** (changed after CAD: the linear elbow's screw and lever clashed with the forearm/upper-arm at flexion) | M60 | CSG-20-100 | 107 | 49 | 6.3 |
 | Wrist roll | rotary | M38 | size-14 strain-wave [EST] | 28 | 7 | 8.4 |
 | Wrist pitch + yaw | **2 parallel linear**, 2 mm lead | 2× M38 | roller screws | 63 | 15 / 9 | 10.7 |
 | Neck yaw / pitch | rotary | M38 | size-11 strain-wave [EST] | 11 | 3 / 2 | 8.4 |
@@ -93,7 +93,7 @@ I²R model with first-order RC per motor: 1 h walking, then 10 cycles of a 10 s 
 ## 10. What changed after the checks failed (v2.0 → v2.1)
 | Failed check (v2.0) | Fix (v2.1) |
 |---|---|
-| Mass 90.3 kg | CSG component sets in our own housings instead of housed 2UH units (catalog: CSG-32 component set 0.89 kg vs 3.2 kg unit) [HD]. CF torso shells. 230 Wh/kg pack. Downsized over-margined joints (hip yaw, waist, hip pitch, knee motor). Overhead model refined by motor size. Result: 64.8 kg |
+| Mass 90.3 kg | CSG component sets in our own housings instead of housed 2UH units (catalog: CSG-32 component set 0.89 kg vs 3.2 kg unit) [HD]. CF torso shells. 230 Wh/kg pack. Downsized over-margined joints (hip yaw, waist, hip pitch, knee motor). Overhead model refined by motor size. Result: 64.8 kg; 64.3 kg after the CAD-driven rotary elbow |
 | Hip pitch speed 3.1 < 4 rad/s | 4500 rpm winding at 52 V (Km unchanged, so thermal unchanged; higher drive current) |
 | Knee, ankle, elbow and wrist speed | Re-chose roller-screw lead and lever arm (e.g. knee 4 mm/50 mm → 5 mm/45 mm; ankle 2 → 4 mm lead) |
 | Hip output bearing moment SF 1.18 | Added a crossed-roller support bearing (≥ 600 N·m [EST]) sized to carry the full moment alone → SF 3.1 |
@@ -117,7 +117,7 @@ I²R model with first-order RC per motor: 1 h walking, then 10 cycles of a 10 s 
 3. **Hand:** holds peak grip only briefly (continuous fingertip force 14.7 N). There is no tactile-skin design detail and no durability data.
 4. **Control:** no walking, no stepping recovery, and no whole-body or VLA policy. Optimus demonstrates walking and dexterous manipulation [ARS].
 5. **Thermal model** ignores gear, screw and driver losses and the enclosure. **Structure** is beam-theory only (no FEA or fatigue at joints).
-6. **Mass** sits at 64.8 kg, right at the target, and is within estimate uncertainty (±10% [EST]).
+6. **Mass** sits at 64.3 kg, right at the target, and is within estimate uncertainty (±10% [EST]).
 7. **Manufacturing:** no CAD, tolerance stack or DFM. Optimus is designed for volume production [R247].
 
 ## Sources
@@ -130,3 +130,7 @@ I²R model with first-order RC per motor: 1 h walking, then 10 cycles of a 10 s 
 - [OPT] Optimusk blog, Optimus Gen 3 hardware (third-party, unofficial): https://optimusk.blog/blog/tesla-optimus-hardware-specs/
 - [HD] Harmonic Drive CSG catalog/product pages: https://www.harmonicdrive.net/products/gear-units/gear-units/csg-2uh/csg-32-100-2uh · https://www.harmonicdrive.net/products/component-sets/cup-type/csg-2a/csg-32-100-2a-gr · https://www.harmonicdrive.net/_hd/content/documents1/CSG-CSF_GearUnits.pdf
 - [NV] NVIDIA Jetson Thor: https://www.nvidia.com/en-us/autonomous-machines/embedded-systems/jetson-thor/
+
+
+## CAD, interference, mass and FEA (v2.2)
+See [cad/RESULTS.md](cad/RESULTS.md), [cad/out/mass.md](cad/out/mass.md), [cad/out/fea.md](cad/out/fea.md). Leg joint ranges are now set by CAD hard stops: hip pitch −105..40°, hip roll −12..20° (adduction only with both hips rolled, i.e. pelvis shifted over the stance foot), hip yaw −35..45°, knee 0..120°, ankle pitch −45..40°, ankle roll ±25°.

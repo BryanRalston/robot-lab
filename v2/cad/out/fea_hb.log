@@ -1,0 +1,5 @@
+Transforming over 1000 vertices to C_CONTIGUOUS.
+Transforming over 1000 elements to C_CONTIGUOUS.
+hip bracket tets 15861 dofs 80106 load area 4382 mm2
+hip bracket {"vm_max": 108.94, "vm_p995": 44.97, "at_mm": [26.7, 34.4, 1208.1], "max_disp_mm": 0.06, "tets": 15861, "dofs": 80106, "F_axial": 1892.35, "M_lateral_Nm": 189.2, "SF_yield_landing": 11.19, "SF_yield_landing_peak": 4.62, "SF_fatigue_walk": 8.16}
+EXIT 0

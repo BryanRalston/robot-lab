@@ -1,0 +1,404 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>v2 CAD + FEA</title><style>*{box-sizing:border-box}body{margin:0;font:15px/1.55 system-ui,sans-serif;background:#0b141d;color:#dbe7f2}
+nav{position:fixed;top:0;left:0;bottom:0;width:260px;overflow:auto;background:#101e2b;padding:16px;border-right:1px solid #1e3347}
+nav h1{font-size:16px;margin:0 0 12px;color:#fff}nav a{display:block;color:#9fc3e3;text-decoration:none;padding:4px 6px;border-radius:4px;font-size:14px}
+nav a.sub{padding-left:20px;font-size:13px;color:#7ea4c6}nav a.active,nav a:hover{background:#1f3b57;color:#fff}
+main{margin-left:260px;padding:24px 40px;max-width:1200px}section{margin-bottom:40px;scroll-margin-top:10px}h2{border-bottom:2px solid #f5a623;padding-bottom:4px}
+table{border-collapse:collapse;width:100%;font-size:13px;margin:12px 0;display:block;overflow-x:auto}th,td{border:1px solid #24405a;padding:6px 8px;vertical-align:top}
+th{background:#16293b;cursor:pointer;user-select:none;position:sticky;top:0}th[data-dir=asc]:after{content:" ▲"}th[data-dir=desc]:after{content:" ▼"}tr:nth-child(even) td{background:#0f1c28}
+a{color:#7fc4ff}.card{background:#101e2b;border:1px solid #1e3347;border-radius:8px;padding:10px 16px;margin:12px 0;scroll-margin-top:10px}.card h3{margin:4px 0;color:#f5a623}
+.svgbox{background:#0e1a26;border:1px solid #1e3347;border-radius:8px;padding:10px;display:inline-block;margin:8px 0}
+#viewer{position:relative;border:1px solid #1e3347;border-radius:8px;overflow:hidden;margin:10px 0}#three{width:100%;height:480px}
+.hint{position:absolute;top:8px;left:10px;font-size:12px;color:#9fc3e3}#tip{position:absolute;display:none;background:#000c;padding:6px 8px;border-radius:6px;font-size:12px;pointer-events:none}
+blockquote{border-left:4px solid #f5a623;margin:0;padding:4px 12px;background:#101e2b}#three{height:520px}
+.topbar{display:none}
+table{display:table;width:100%}.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:12px 0}.tw table{margin:0}
+#three{height:min(62vh,520px)}#three canvas{touch-action:none;display:block}
+#tip a{color:#ffd27f;pointer-events:auto}
+.controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:10px 0}.controls button{min-height:44px;min-width:88px;font-size:16px;border-radius:8px;border:1px solid #3a6a95;background:#1f3b57;color:#fff;padding:8px 14px}
+.controls input[type=range]{flex:1;min-width:160px;height:32px}
+@media (max-width:820px){
+ body{font-size:16px}
+ .topbar{display:flex;position:sticky;top:0;z-index:20;background:#101e2b;border-bottom:1px solid #1e3347;align-items:center;gap:10px;padding:8px 12px}
+ .topbar button{font-size:22px;background:none;border:1px solid #3a6a95;color:#fff;border-radius:8px;width:44px;height:44px}
+ .topbar a{color:#fff;font-weight:600;text-decoration:none;font-size:16px}
+ nav{transform:translateX(-100%);transition:transform .2s;z-index:30;width:80vw;max-width:300px;box-shadow:4px 0 20px #000a}
+ body.navopen nav{transform:none}
+ nav a{padding:10px 8px;font-size:16px}
+ main{margin-left:0;padding:12px 14px}
+ h2{font-size:20px}main h1{font-size:26px;line-height:1.25}th,td{font-size:13px;padding:6px}
+ #three{height:62vh}.svgbox{display:block;overflow-x:auto}.svgbox svg{max-width:100%;height:auto}
+ .controls{flex-direction:column;align-items:stretch}.controls button{width:100%}
+}.legend{font-size:13px;color:#9fc3e3}.crumb{font-size:13px}</style><script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script></head><body><div class="topbar"><button aria-label="Menu" onclick="document.body.classList.toggle('navopen')">☰</button><a href="index.html">Humanoid Design v1</a></div><nav><h1><a href="index.html" style="padding:0;color:#fff">Humanoid Design v1</a></h1><a href="index.html">Overview (assembled)</a><a href="head.html">Head &amp; sensors</a><a href="torso.html">Torso, spine, power &amp; compute</a><a href="arms.html">Shoulders &amp; arms</a><a href="hands.html">Hands (2 × 21 DoF)</a><a href="hips.html">Hips &amp; pelvis</a><a href="legs.html">Legs &amp; feet</a><a href="control.html">Control &amp; AI stack</a><a href="sim.html">▶ Physics sim (MuJoCo)</a><div style="margin:12px 0 4px;color:#f5a623;font-size:12px;letter-spacing:.08em">V2 · BHL → OPTIMUS-CLASS</div><a href="v2.html">v2 design</a><a href="v2_checks.html">v2 engineering checks</a><a href="v2_sim.html">▶ v2 balance sim</a><a href="v2_cad.html" class=active>v2 CAD + FEA</a></nav><main><h2>v2 parametric CAD (CadQuery)</h2><p id="cadload">loading…</p><div id="cadview" style="width:100%;height:min(75vh,640px);border-radius:8px;overflow:hidden;touch-action:none"></div><p><button id="cadexp" style="padding:10px 18px;font-size:16px">Explode</button> <span id="cadinfo">Tap a part to see its name, material and mass.</span></p><p>Downloads: <a href="https://github.com/BryanRalston/robot-lab/raw/main/v2/cad/export/bhl_v2_assembly.step">STEP assembly</a> · <a href="cad/bhl_v2.glb">GLB</a> · <a href="https://github.com/BryanRalston/robot-lab/tree/main/v2/cad">CAD source</a></p><h1>v2 CAD mass and inertia vs budget</h1>
+<p>CAD total: <strong>58.5 kg</strong>; budget (checks.py final): <strong>64.3 kg</strong>; difference -5.8 kg (-9.1 %).</p>
+<p>Densities: 7075 2810, CFRP 1550, steel 7850, Ti 4430, PA12 1010 kg/m³. Motors, gears, battery, compute and bearings use catalog/[EST] mass overrides applied over their envelope volume.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>group</th>
+<th>CAD kg (per unit)</th>
+<th>budget kg</th>
+<th>Δ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>foot</td>
+<td>2.36</td>
+<td>0.90</td>
+<td>+1.46</td>
+</tr>
+<tr>
+<td>shank</td>
+<td>2.20</td>
+<td>3.00</td>
+<td>-0.80</td>
+</tr>
+<tr>
+<td>thigh</td>
+<td>1.74</td>
+<td>2.54</td>
+<td>-0.80</td>
+</tr>
+<tr>
+<td>pelvis</td>
+<td>15.88</td>
+<td>10.90</td>
+<td>+4.98</td>
+</tr>
+<tr>
+<td>upper</td>
+<td>29.98</td>
+<td>40.51</td>
+<td>-10.53</td>
+</tr>
+</tbody>
+</table></div>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>segment</th>
+<th>mass kg</th>
+<th>COM mm (world, standing)</th>
+<th>Ixx Iyy Izz about COM kg·m²</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>L_foot</td>
+<td>2.36</td>
+<td>[np.float64(13.6), np.float64(100.0), np.float64(58.3)]</td>
+<td>[np.float64(0.01572), np.float64(0.02575), np.float64(0.01397)]</td>
+</tr>
+<tr>
+<td>L_forearm</td>
+<td>1.39</td>
+<td>[np.float64(-0.0), np.float64(282.0), np.float64(1021.2)]</td>
+<td>[np.float64(0.00641), np.float64(0.00641), np.float64(0.00073)]</td>
+</tr>
+<tr>
+<td>L_hand</td>
+<td>0.31</td>
+<td>[np.float64(4.0), np.float64(279.5), np.float64(846.9)]</td>
+<td>[np.float64(0.00073), np.float64(0.00064), np.float64(0.0003)]</td>
+</tr>
+<tr>
+<td>L_hipR</td>
+<td>2.92</td>
+<td>[np.float64(0.0), np.float64(113.3), np.float64(921.3)]</td>
+<td>[np.float64(0.00766), np.float64(0.00723), np.float64(0.00744)]</td>
+</tr>
+<tr>
+<td>L_hipY</td>
+<td>2.39</td>
+<td>[np.float64(-3.2), np.float64(100.0), np.float64(1052.2)]</td>
+<td>[np.float64(0.0048), np.float64(0.0054), np.float64(0.00451)]</td>
+</tr>
+<tr>
+<td>L_pelvis</td>
+<td>1.23</td>
+<td>[np.float64(-0.0), np.float64(100.0), np.float64(1175.8)]</td>
+<td>[np.float64(0.00198), np.float64(0.00211), np.float64(0.00129)]</td>
+</tr>
+<tr>
+<td>L_shank</td>
+<td>2.20</td>
+<td>[np.float64(-35.0), np.float64(100.0), np.float64(384.3)]</td>
+<td>[np.float64(0.03391), np.float64(0.03469), np.float64(0.00492)]</td>
+</tr>
+<tr>
+<td>L_shoulderP</td>
+<td>1.40</td>
+<td>[np.float64(0.5), np.float64(282.0), np.float64(1460.0)]</td>
+<td>[np.float64(0.00159), np.float64(0.00182), np.float64(0.00182)]</td>
+</tr>
+<tr>
+<td>L_thigh</td>
+<td>1.74</td>
+<td>[np.float64(-44.3), np.float64(100.0), np.float64(723.0)]</td>
+<td>[np.float64(0.0207), np.float64(0.02459), np.float64(0.00607)]</td>
+</tr>
+<tr>
+<td>L_upper_arm</td>
+<td>1.76</td>
+<td>[np.float64(-0.0), np.float64(283.0), np.float64(1281.0)]</td>
+<td>[np.float64(0.01289), np.float64(0.0127), np.float64(0.00149)]</td>
+</tr>
+<tr>
+<td>R_foot</td>
+<td>2.36</td>
+<td>[np.float64(13.6), np.float64(-100.0), np.float64(58.3)]</td>
+<td>[np.float64(0.01572), np.float64(0.02575), np.float64(0.01397)]</td>
+</tr>
+<tr>
+<td>R_forearm</td>
+<td>1.39</td>
+<td>[np.float64(-0.0), np.float64(-282.0), np.float64(1021.2)]</td>
+<td>[np.float64(0.00641), np.float64(0.00641), np.float64(0.00073)]</td>
+</tr>
+<tr>
+<td>R_hand</td>
+<td>0.31</td>
+<td>[np.float64(4.0), np.float64(-279.5), np.float64(846.9)]</td>
+<td>[np.float64(0.00073), np.float64(0.00064), np.float64(0.0003)]</td>
+</tr>
+<tr>
+<td>R_hipR</td>
+<td>2.92</td>
+<td>[np.float64(-0.0), np.float64(-118.5), np.float64(921.3)]</td>
+<td>[np.float64(0.00718), np.float64(0.00723), np.float64(0.00696)]</td>
+</tr>
+<tr>
+<td>R_hipY</td>
+<td>2.39</td>
+<td>[np.float64(-3.2), np.float64(-100.0), np.float64(1052.2)]</td>
+<td>[np.float64(0.0048), np.float64(0.0054), np.float64(0.00451)]</td>
+</tr>
+<tr>
+<td>R_pelvis</td>
+<td>1.23</td>
+<td>[np.float64(-0.0), np.float64(-100.0), np.float64(1175.8)]</td>
+<td>[np.float64(0.00198), np.float64(0.00211), np.float64(0.00129)]</td>
+</tr>
+<tr>
+<td>R_shank</td>
+<td>2.20</td>
+<td>[np.float64(-35.0), np.float64(-100.0), np.float64(384.3)]</td>
+<td>[np.float64(0.03391), np.float64(0.03469), np.float64(0.00492)]</td>
+</tr>
+<tr>
+<td>R_shoulderP</td>
+<td>1.40</td>
+<td>[np.float64(0.5), np.float64(-282.0), np.float64(1460.0)]</td>
+<td>[np.float64(0.00159), np.float64(0.00182), np.float64(0.00182)]</td>
+</tr>
+<tr>
+<td>R_thigh</td>
+<td>1.74</td>
+<td>[np.float64(-44.3), np.float64(-100.0), np.float64(723.0)]</td>
+<td>[np.float64(0.0207), np.float64(0.02459), np.float64(0.00607)]</td>
+</tr>
+<tr>
+<td>R_upper_arm</td>
+<td>1.76</td>
+<td>[np.float64(-0.0), np.float64(-283.0), np.float64(1281.0)]</td>
+<td>[np.float64(0.01289), np.float64(0.0127), np.float64(0.00149)]</td>
+</tr>
+<tr>
+<td>head</td>
+<td>0.58</td>
+<td>[np.float64(44.9), np.float64(0.0), np.float64(1684.1)]</td>
+<td>[np.float64(0.00219), np.float64(0.00257), np.float64(0.00305)]</td>
+</tr>
+<tr>
+<td>neckY</td>
+<td>0.36</td>
+<td>[np.float64(-0.0), np.float64(2.8), np.float64(1604.0)]</td>
+<td>[np.float64(0.00019), np.float64(0.0001), np.float64(0.00019)]</td>
+</tr>
+<tr>
+<td>pelvis</td>
+<td>2.80</td>
+<td>[np.float64(-0.0), np.float64(0.0), np.float64(1182.8)]</td>
+<td>[np.float64(0.02374), np.float64(0.01192), np.float64(0.02825)]</td>
+</tr>
+<tr>
+<td>torso</td>
+<td>17.92</td>
+<td>[np.float64(-1.2), np.float64(-0.0), np.float64(1425.6)]</td>
+<td>[np.float64(0.26358), np.float64(0.12403), np.float64(0.24479)]</td>
+</tr>
+<tr>
+<td>waistY</td>
+<td>1.40</td>
+<td>[np.float64(-0.0), np.float64(0.5), np.float64(1280.0)]</td>
+<td>[np.float64(0.00182), np.float64(0.00159), np.float64(0.00182)]</td>
+</tr>
+<tr>
+<td>## Reconciliation</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Budget items not modeled as solids in the CAD: harness/connectors 2.0 kg, covers/padding 1.5 kg, thermal loop 1.0 kg (= 4.5 kg, from design.py MASS_ITEMS) plus fasteners and driver boards. CAD solids 58.5 kg + 4.5 kg = 63.0 kg vs 64.3 kg budget (−2 %). Per-group differences are mostly bookkeeping (the budget puts ankle actuators in the shank and hip actuators in "upper"; the CAD assigns parts to the body they ride on) — the foot is heavier in CAD (+1.5 kg: F/T sensor, universal cross, actuator rod ends ride on the foot) which matters for swing-leg inertia.</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table></div>
+<h1>v2 FEA (scikit-fem, quadratic P2 tetrahedra, TetGen mesh via meshpy, linear elastic 7075-T6 E=71.7 GPa ν=0.33)</h1>
+<p>Loads = worst cases from v2/analysis/checks.py: landing 3×BW (BW = 64.3 kg × 9.81 = 631 N) with the checks.py bending levers (femur 0.12 m, tibia 0.10 m, hip lateral 0.10 m). Walking fatigue = 1.3×BW (linear scaling of the same field). Allowables: yield 503 MPa, fatigue ~159 MPa (as in checks.py, typical, not a certified value).</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>part</th>
+<th>model region</th>
+<th>tets / DOF</th>
+<th>max von Mises MPa (single element)</th>
+<th>99.5th pct MPa</th>
+<th>where (mm, local)</th>
+<th>SF yield (landing, p99.5)</th>
+<th>SF yield (landing, peak)</th>
+<th>SF fatigue (walk)</th>
+<th>max disp mm</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>hip bracket</td>
+<td>whole part</td>
+<td>15861 / 80106</td>
+<td>109</td>
+<td>45</td>
+<td>[26.7, 34.4, 1208.1]</td>
+<td>11.2</td>
+<td>4.6</td>
+<td>8.2</td>
+<td>0.06</td>
+</tr>
+<tr>
+<td>femur</td>
+<td>hip-end lug + 150 mm tube</td>
+<td>20352 / 120123</td>
+<td>95</td>
+<td>63</td>
+<td>[42.0, 4.6, 824.6]</td>
+<td>8.0</td>
+<td>5.3</td>
+<td>5.8</td>
+<td>0.39</td>
+</tr>
+<tr>
+<td>tibia</td>
+<td>ankle fork + 150 mm tube</td>
+<td>18154 / 107049</td>
+<td>77</td>
+<td>62</td>
+<td>[34.6, 7.5, 130.3]</td>
+<td>8.2</td>
+<td>6.5</td>
+<td>6.0</td>
+<td>0.54</td>
+</tr>
+</tbody>
+</table></div>
+<p>Hand check (beam theory, checks.py): femur ~72 MPa, tibia ~75 MPa at the root — FEA agrees within ~10 %.
+All SF ≥ 2, so no redesign was needed for strength. FEA did find a real CAD defect: the tibia tube stopped 2 mm short of the ankle fork (solver had a floating body); fixed by extending the tube to the fork and widening the fork to 62 mm.
+Limits: peaks sit at sharp re-entrant corners and load-application edges (no fillets modeled) and are mesh-dependent; femur/tibia were modeled at their highest-moment end only (lug/fork + 150 mm tube, cut-face loads = exact resultant). Pin/bearing contact, bolts and welds/bonds not modeled.</p>
+<h1>v2 CAD: interference results</h1>
+<p>Model: <code>model.py</code> (CadQuery, parametric; ~161 parts). Check: <code>clash.py</code> (exact OCC boolean intersection, &gt;1 mm³, intended mates whitelisted). Range sweep: <code>sweep.py</code> (5° steps).</p>
+<p><strong>Standing pose:</strong> 72 clashes in the first assembly → 0 after the fixes listed as <code># FIX</code> comments in model.py (yaw/roll yoke rebuilt, pelvis enlarged to enclose the yaw actuators, knee tongue/lever merged, ankle top spherical bearings, torso openings, battery/compute repackaged, linear elbow → rotary, head/neck re-stacked, ankle fork narrowed, hip bracket ring resized).</p>
+<p><strong>Range extremes (first sweep):</strong> knee clash-free only 0..40° (need 0..120°) and hip roll only 0..15°. Fixes: femur axis 18 mm forward; knee clevis bridge moved in front of the pin; knee lever re-clocked to 30° behind straight down (r = 52 mm, effective arm 26 mm at full extension, ≥45 mm over 30–120° [EST]); tibia axis 14 mm forward. Hip adduction is checked with both hips rolled together (pelvis over the stance foot); single-leg adduction at the narrow 200 mm stance hits the other leg, which is a whole-body self-collision constraint for the controller.</p>
+<p><strong>Final hard stops (all 0 clashes, plus sit pose hip −90°/knee 120°):</strong></p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>joint</th>
+<th>clash-free (sweep)</th>
+<th>functional need [EST]</th>
+<th>hard stop</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>hip pitch</td>
+<td>−105..40</td>
+<td>−100..30</td>
+<td>−105..40</td>
+</tr>
+<tr>
+<td>hip roll</td>
+<td>0..20 single leg; −12 both</td>
+<td>−10..15</td>
+<td>−12..20</td>
+</tr>
+<tr>
+<td>hip yaw</td>
+<td>−35..45</td>
+<td>−20..30</td>
+<td>−35..45</td>
+</tr>
+<tr>
+<td>knee</td>
+<td>0..120 (knee actuator body meets ankle actuators at 125)</td>
+<td>0..120</td>
+<td>0..120</td>
+</tr>
+<tr>
+<td>ankle pitch</td>
+<td>−45..40</td>
+<td>−35..30</td>
+<td>−45..40</td>
+</tr>
+<tr>
+<td>ankle roll</td>
+<td>±25</td>
+<td>±20</td>
+<td>±25</td>
+</tr>
+</tbody>
+</table></div>
+<p>Note: knee 120° leaves no margin over the stated need; deep squats beyond 120° would need a linkage knee.</p></main><script>
+// sortable tables
+document.querySelectorAll('table').forEach(t=>{const ths=t.querySelectorAll('th');ths.forEach((th,i)=>{th.title='Click to sort';th.addEventListener('click',()=>{const tb=t.tBodies[0];const rows=[...tb.rows];const asc=th.dataset.dir!=='asc';ths.forEach(h=>{delete h.dataset.dir});th.dataset.dir=asc?'asc':'desc';const num=s=>{const m=s.replace(/,/g,'').match(/-?\d+(\.\d+)?/);return m?parseFloat(m[0]):NaN};rows.sort((a,b)=>{const x=a.cells[i].innerText.trim(),y=b.cells[i].innerText.trim();const nx=num(x),ny=num(y);let r=(!isNaN(nx)&&!isNaN(ny))?nx-ny:x.localeCompare(y);return asc?r:-r});rows.forEach(r=>tb.appendChild(r))})})});
+// active nav
+const links=[...document.querySelectorAll('nav a')];const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){links.forEach(l=>l.classList.toggle('active',l.getAttribute('href')==='#'+e.target.id))}}),{rootMargin:'-20% 0px -70% 0px'});document.querySelectorAll('section,.card').forEach(s=>obs.observe(s));
+</script><script type="module">import * as THREE from 'three';
+import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
+import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
+const box=document.getElementById('cadview'), info=document.getElementById('cadinfo');
+const r=new THREE.WebGLRenderer({antialias:true}); r.setPixelRatio(Math.min(devicePixelRatio,2)); box.appendChild(r.domElement);
+const sc=new THREE.Scene(); sc.background=new THREE.Color(0x15181d);
+const cam=new THREE.PerspectiveCamera(35,1,0.01,50); cam.position.set(1.5,1.3,3.0);
+const ctl=new OrbitControls(cam,r.domElement); ctl.target.set(0,0.85,0); ctl.update();
+sc.add(new THREE.HemisphereLight(0xffffff,0x333344,1.2)); const dl=new THREE.DirectionalLight(0xffffff,1.6); dl.position.set(2,3,2); sc.add(dl);
+const grid=new THREE.GridHelper(2,20,0x444444,0x2a2a2a); sc.add(grid);
+function size(){const w=box.clientWidth,h=box.clientHeight; r.setSize(w,h); cam.aspect=w/h; cam.updateProjectionMatrix();}
+addEventListener('resize',size); size();
+const meta=await (await fetch('cad/parts.json')).json(); const byId={}; meta.forEach(m=>byId[m.id]=m);
+const parts=[]; let ex=0, exT=0, sel=null;
+new GLTFLoader().load('cad/bhl_v2.glb',g=>{
+  sc.add(g.scene);
+  g.scene.traverse(o=>{ if(o.isMesh){ const m=byId[o.name]||byId[o.parent&&o.parent.name]; if(!m) return;
+     const n=m.name, col=/battery/.test(n)?0x2a5aa0:/compute/.test(n)?0x1e8c5a:/motor|strain-wave/.test(n)?0xb87333:({'7075-T6':0xb0b8c4,'CFRP':0x3a3d44,'steel':0x8a8e96,'Ti-6Al-4V':0x9a8c80,'PA12':0xe6e6e1}[m.material]??0x999999);
+     o.geometry.computeVertexNormals(); o.material=new THREE.MeshStandardMaterial({color:col,metalness:.3,roughness:.5});
+     // explode direction: outward from the body's centre, segment-weighted
+     const c=new THREE.Vector3(...m.c), d=c.clone().sub(new THREE.Vector3(0,0.9,0)); d.y*=0.6;
+     const seg=m.seg.replace(/^[LR]_/,''); const k={foot:1.4,shank:1.2,thigh:1.0,hipR:.8,hipY:.7,pelvis:.6,head:1.2,hand:1.5,forearm:1.3,upper_arm:1.1,shoulderP:.9}[seg]||.5;
+     o.userData={m,base:o.position.clone(),dir:d.multiplyScalar(k)}; parts.push(o);} });
+  document.getElementById('cadload').textContent=`${meta.length} parts · CAD mass ${meta.reduce((a,b)=>a+b.mass_kg,0).toFixed(1)} kg`;
+});
+document.getElementById('cadexp').onclick=e=>{exT=exT?0:1; e.target.textContent=exT?'Assemble':'Explode';};
+const ray=new THREE.Raycaster(), pt=new THREE.Vector2(); let down=null;
+r.domElement.addEventListener('pointerdown',e=>down=[e.clientX,e.clientY]);
+r.domElement.addEventListener('pointerup',e=>{ if(!down||Math.hypot(e.clientX-down[0],e.clientY-down[1])>6) return;
+  const b=r.domElement.getBoundingClientRect(); pt.set((e.clientX-b.left)/b.width*2-1,-(e.clientY-b.top)/b.height*2+1);
+  ray.setFromCamera(pt,cam); const h=ray.intersectObjects(parts,false)[0];
+  if(sel){sel.material.emissive.setHex(0);} sel=h?h.object:null;
+  if(sel){sel.material.emissive.setHex(0x553300); const m=sel.userData.m;
+    info.innerHTML=`<b>${m.name}</b><br>segment: ${m.seg}<br>material: ${m.material}<br>mass: ${(m.mass_kg*1000).toFixed(0)} g <span style="color:#999">(${m.mass_src})</span>`;}
+  else info.textContent='Tap a part to see its name, material and mass.';});
+(function loop(){ requestAnimationFrame(loop); ex+=(exT-ex)*0.12;
+  for(const o of parts){o.position.copy(o.userData.base).addScaledVector(o.userData.dir,ex*0.6);} r.render(sc,cam); })();
+</script><script>document.querySelectorAll("nav a").forEach(a=>a.addEventListener("click",()=>document.body.classList.remove("navopen")));document.querySelector("main").addEventListener("click",()=>document.body.classList.remove("navopen"))</script></body></html>

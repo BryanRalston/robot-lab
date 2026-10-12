@@ -1,5 +1,5 @@
 # v2 engineering checks (final)
-All inputs are ESTIMATES unless sourced in design.py. Robot mass used: 64.8 kg.
+All inputs are ESTIMATES unless sourced in design.py. Robot mass used: 64.3 kg.
 
 ### Actuator masses [EST]
 
@@ -16,7 +16,7 @@ All inputs are ESTIMATES unless sourced in design.py. Robot mass used: 64.8 kg.
 | shoulder_pitch | rotary | M85 | CSG-25-100 | 2 | 1.40 | 2.80 |
 | shoulder_roll | rotary | M85 | CSG-25-100 | 2 | 1.40 | 2.80 |
 | shoulder_yaw | rotary | M60 | CSG-20-100 | 2 | 0.85 | 1.70 |
-| elbow | linear | M60 | roller screw 4.0 mm | 2 | 1.10 | 2.20 |
+| elbow | rotary | M60 | CSG-20-100 | 2 | 0.85 | 1.70 |
 | wrist_roll | rotary | M38 | SW-14-100 | 2 | 0.52 | 1.04 |
 | wrist_pitch | linear2 | M38 | roller screw 2.0 mm | 2 | 0.65 | 1.29 |
 | wrist_yaw | linear2 | M38 | roller screw 2.0 mm | 2 | 0.65 | 1.29 |
@@ -40,36 +40,36 @@ All inputs are ESTIMATES unless sourced in design.py. Robot mass used: 64.8 kg.
 | harness, connectors | 2.0 |
 | covers/padding | 1.5 |
 | thermal (pump, radiator, coolant) | 1.0 |
-| actuators (all) | 32.9 |
-| **TOTAL** | **64.8** |
+| actuators (all) | 32.4 |
+| **TOTAL** | **64.3** |
 
-Mass check: total 64.8 kg vs target <= 65.0 kg (Optimus Gen 1 reported 73 kg; Gen 2 is 10 kg lighter per Tesla): PASS
+Mass check: total 64.3 kg vs target <= 65.0 kg (Optimus Gen 1 reported 73 kg; Gen 2 is 10 kg lighter per Tesla): PASS
 
 ### Squat with 20 kg (static, 110° knee flexion, per leg)
 
 | quantity | value |
 |---|---|
-| trunk lean (deg) | -8.6 |
+| trunk lean (deg) | -8.7 |
 | ankle N·m | 24 |
-| knee N·m | 111 |
+| knee N·m | 110 |
 | hip N·m | 15 |
 
 ### Joint torque & speed vs requirement (requirement = max of walk, stairs, 20 kg squat; ×1.5 safety margin)
 
 | joint | actuator | req N·m | req×1.5 | peak avail | margin | torque | req rad/s | max rad/s | speed |
 |---|---|---|---|---|---|---|---|---|---|
-| hip_yaw | rotary | 16 | 24 | 107 | 6.61 | PASS | 3 | 6.3 | PASS |
-| hip_roll | rotary | 83 | 124 | 204 | 2.47 | PASS | 3 | 4.7 | PASS |
-| hip_pitch | rotary | 78 | 117 | 204 | 2.62 | PASS | 4 | 4.7 | PASS |
-| knee | linear | 111 | 166 | 226 | 2.05 | PASS | 8 | 9.3 | PASS |
-| ankle_pitch | linear2 | 104 | 155 | 251 | 2.42 | PASS | 6 | 8.0 | PASS |
-| ankle_roll | linear2 | 39 | 58 | 201 | 5.17 | PASS | 4 | 10.0 | PASS |
+| hip_yaw | rotary | 16 | 24 | 107 | 6.66 | PASS | 3 | 6.3 | PASS |
+| hip_roll | rotary | 82 | 123 | 204 | 2.49 | PASS | 3 | 4.7 | PASS |
+| hip_pitch | rotary | 77 | 116 | 204 | 2.64 | PASS | 4 | 4.7 | PASS |
+| knee | linear | 110 | 165 | 226 | 2.06 | PASS | 8 | 9.3 | PASS |
+| ankle_pitch | linear2 | 103 | 154 | 251 | 2.44 | PASS | 6 | 8.0 | PASS |
+| ankle_roll | linear2 | 39 | 58 | 201 | 5.21 | PASS | 4 | 10.0 | PASS |
 | waist_yaw | rotary | 40 | 60 | 107 | 2.67 | PASS | 2 | 6.3 | PASS |
-| waist_pitch | rotary | 78 | 118 | 204 | 2.60 | PASS | 2 | 5.2 | PASS |
+| waist_pitch | rotary | 77 | 116 | 204 | 2.63 | PASS | 2 | 5.2 | PASS |
 | shoulder_pitch | rotary | 99 | 148 | 204 | 2.07 | PASS | 4 | 5.2 | PASS |
 | shoulder_roll | rotary | 99 | 148 | 204 | 2.07 | PASS | 4 | 5.2 | PASS |
 | shoulder_yaw | rotary | 40 | 59 | 107 | 2.71 | PASS | 4 | 6.3 | PASS |
-| elbow | linear | 49 | 73 | 101 | 2.05 | PASS | 6 | 10.0 | PASS |
+| elbow | rotary | 49 | 73 | 107 | 2.19 | PASS | 6 | 6.3 | PASS |
 | wrist_roll | rotary | 5 | 7 | 28 | 5.71 | PASS | 6 | 8.4 | PASS |
 | wrist_pitch | linear2 | 10 | 15 | 63 | 6.40 | PASS | 6 | 10.7 | PASS |
 | wrist_yaw | linear2 | 6 | 9 | 63 | 10.67 | PASS | 6 | 10.7 | PASS |
@@ -80,32 +80,32 @@ Mass check: total 64.8 kg vs target <= 65.0 kg (Optimus Gen 1 reported 73 kg; Ge
 
 | joint | motor | walk Cu loss W | walk ΔT K | hold Cu loss W | hold motor torque/peak N·m | max ΔT K | result |
 |---|---|---|---|---|---|---|---|
-| hip_pitch | M115 | 2 | 2 | 0 | 0.20/12.0 | 2 | PASS |
+| hip_pitch | M115 | 2 | 1 | 0 | 0.20/12.0 | 1 | PASS |
 | hip_roll | M115 | 1 | 1 | 1 | 0.33/12.0 | 1 | PASS |
-| knee | M85 | 26 | 39 | 149 | 2.44/5.0 | 60 | PASS |
-| ankle_pitch | M60 | 51 | 64 | 9 | 0.19/2.0 | 63 | PASS |
-| waist_pitch | M85 | 1 | 1 | 27 | 1.05/5.0 | 5 | PASS |
+| knee | M85 | 26 | 39 | 147 | 2.43/5.0 | 59 | PASS |
+| ankle_pitch | M60 | 50 | 63 | 9 | 0.19/2.0 | 62 | PASS |
+| waist_pitch | M85 | 1 | 1 | 27 | 1.03/5.0 | 5 | PASS |
 | shoulder_pitch | M85 | 0 | 0 | 30 | 1.10/5.0 | 5 | PASS |
-| elbow | M60 | 1 | 2 | 81 | 0.81/2.0 | 30 | PASS |
+| elbow | M60 | 0 | 1 | 37 | 0.54/2.0 | 13 | PASS |
 
 ### Structural checks (landing 3.0×BW, walking 1.3×BW, SF required ≥ 2)
 
 | part | material | section | case | stress MPa / load | limit | SF | result |
 |---|---|---|---|---|---|---|---|
-| femur | 7075-T6 | Ø50×2.0 | landing | 72 | 503 (yield) | 6.98 | PASS |
-| femur | 7075-T6 | Ø50×2.0 | walking fatigue | 31 | 159 (endurance) | 5.09 | PASS |
-| tibia | 7075-T6 | Ø45×2.0 | landing | 76 | 503 (yield) | 6.65 | PASS |
-| tibia | 7075-T6 | Ø45×2.0 | walking fatigue | 33 | 159 (endurance) | 4.85 | PASS |
-| hip actuator flange bolts | 8×M5 12.9 | PCD 90 | landing | 58 | 900 (yield) | 15.52 | PASS |
-| hip pitch output moment (CSG-25-100 bearing Mc not published, not credited + 600 N·m crossed-roller support bearing [EST]) | - | - | landing moment | 191 N·m | 600 N·m | 3.15 | PASS |
+| femur | 7075-T6 | Ø50×2.0 | landing | 72 | 503 (yield) | 7.03 | PASS |
+| femur | 7075-T6 | Ø50×2.0 | walking fatigue | 31 | 159 (endurance) | 5.13 | PASS |
+| tibia | 7075-T6 | Ø45×2.0 | landing | 75 | 503 (yield) | 6.70 | PASS |
+| tibia | 7075-T6 | Ø45×2.0 | walking fatigue | 33 | 159 (endurance) | 4.89 | PASS |
+| hip actuator flange bolts | 8×M5 12.9 | PCD 90 | landing | 58 | 900 (yield) | 15.64 | PASS |
+| hip pitch output moment (CSG-25-100 bearing Mc not published, not credited + 600 N·m crossed-roller support bearing [EST]) | - | - | landing moment | 189 N·m | 600 N·m | 3.17 | PASS |
 
 ### Power & runtime [EST]
 
 | mode | W | runtime h (90% usable of 2300 Wh) |
 |---|---|---|
-| walking 1.2 m/s | 548 | 3.8 |
-| standing/manipulating | 254 | 8.1 |
-| 50/50 mix | 401 | 5.2 |
+| walking 1.2 m/s | 543 | 3.8 |
+| standing/manipulating | 253 | 8.2 |
+| 50/50 mix | 398 | 5.2 |
 
 Reference: Tesla stated ~100 W sitting / 500 W walking for Optimus (AI Day 2022, via Forbes). Runtime check (mix ≥ 4 h): PASS
 

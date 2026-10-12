@@ -14,7 +14,8 @@ head=mi['head (cameras, shell)']+am('neck_pitch')
 shoulder_block=am('shoulder_pitch')+am('shoulder_roll')
 torso=seg['upper']-2*(upper_arm+forearm+hand)-head-am('neck_yaw')  # includes battery, compute, waist acts, shoulder blocks
 G=d['GEO']
-lim={'hip_yaw':(-45,45),'hip_roll':(-30,90),'hip_pitch':(-150,40),'knee':(0,150),'ankle_pitch':(-45,40),'ankle_roll':(-25,25),
+# leg ranges = CAD hard stops verified clash-free in v2/cad/clash.py (was hip_roll -30..90, knee 0..150, hip_pitch -150..40)
+lim={'hip_yaw':(-35,45),'hip_roll':(-12,20),'hip_pitch':(-105,40),'knee':(0,120),'ankle_pitch':(-45,40),'ankle_roll':(-25,25),
      'waist_yaw':(-90,90),'waist_pitch':(-30,60),'shoulder_pitch':(-180,60),'shoulder_roll':(-15,180),'shoulder_yaw':(-150,150),
      'elbow':(-140,0),'wrist_roll':(-170,170),'wrist_pitch':(-70,70),'wrist_yaw':(-40,40),'neck_yaw':(-80,80),'neck_pitch':(-40,40)}
 acts=[]

@@ -99,7 +99,11 @@ def fix_downsize_overmargined(d):
 # Model refinement (not a hardware change): v2.0 used one flat housing/driver overhead per actuator type, which
 # over-counts small wrist/neck/ankle units. Overhead now scales with motor size (ESTIMATES).
 OVERHEAD_BY_MOTOR={'M115':0.45,'M85':0.35,'M60':0.25,'M38':0.12}
-FIXES=dict(gears=fix_gear_component_sets,mass=fix_mass_items,speed=fix_speed_windings,screws=fix_screw_geometry,hip=fix_hip_support_bearing,downsize=fix_downsize_overmargined)
+def fix_elbow_rotary(d):
+    """CAD packaging FAIL (v2/cad clash check): the linear elbow had ~128 mm pivot-to-pivot inside the 300 mm upper arm,
+    less than the 115 mm actuator body plus stroke. Elbow becomes rotary M60 + CSG-20-100 (107 N·m rep. peak, catalog)."""
+    d['JOINTS']['elbow']=('arm','rotary','M60','CSG-20-100',None,None,2)
+FIXES=dict(gears=fix_gear_component_sets,mass=fix_mass_items,speed=fix_speed_windings,screws=fix_screw_geometry,hip=fix_hip_support_bearing,downsize=fix_downsize_overmargined,elbow=fix_elbow_rotary)
 def final():
     d=dict(MOTORS=copy.deepcopy(MOTORS),GEARS=GEARS,JOINTS=copy.deepcopy(JOINTS),GEO=GEO,MASS_ITEMS=copy.deepcopy(MASS_ITEMS),
            BATTERY=dict(BATTERY),LINKS=copy.deepcopy(LINKS),HIP=dict(HIP),LOADS=LOADS,MATERIALS=MATERIALS)

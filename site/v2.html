@@ -28,7 +28,7 @@ table{display:table;width:100%}.tw{overflow-x:auto;-webkit-overflow-scrolling:to
  h2{font-size:20px}main h1{font-size:26px;line-height:1.25}th,td{font-size:13px;padding:6px}
  #three{height:62vh}.svgbox{display:block;overflow-x:auto}.svgbox svg{max-width:100%;height:auto}
  .controls{flex-direction:column;align-items:stretch}.controls button{width:100%}
-}.legend{font-size:13px;color:#9fc3e3}.crumb{font-size:13px}</style><script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script></head><body><div class="topbar"><button aria-label="Menu" onclick="document.body.classList.toggle('navopen')">☰</button><a href="index.html">Humanoid Design v1</a></div><nav><h1><a href="index.html" style="padding:0;color:#fff">Humanoid Design v1</a></h1><a href="index.html">Overview (assembled)</a><a href="head.html">Head &amp; sensors</a><a href="torso.html">Torso, spine, power &amp; compute</a><a href="arms.html">Shoulders &amp; arms</a><a href="hands.html">Hands (2 × 21 DoF)</a><a href="hips.html">Hips &amp; pelvis</a><a href="legs.html">Legs &amp; feet</a><a href="control.html">Control &amp; AI stack</a><a href="sim.html">▶ Physics sim (MuJoCo)</a><div style="margin:12px 0 4px;color:#f5a623;font-size:12px;letter-spacing:.08em">V2 · BHL → OPTIMUS-CLASS</div><a href="v2.html" class=active>v2 design</a><a href="v2_checks.html">v2 engineering checks</a><a href="v2_sim.html">▶ v2 balance sim</a></nav><main><h1>Robot Lab v2: Berkeley Humanoid Lite, re-engineered toward Optimus Gen 2/3 class</h1>
+}.legend{font-size:13px;color:#9fc3e3}.crumb{font-size:13px}</style><script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script></head><body><div class="topbar"><button aria-label="Menu" onclick="document.body.classList.toggle('navopen')">☰</button><a href="index.html">Humanoid Design v1</a></div><nav><h1><a href="index.html" style="padding:0;color:#fff">Humanoid Design v1</a></h1><a href="index.html">Overview (assembled)</a><a href="head.html">Head &amp; sensors</a><a href="torso.html">Torso, spine, power &amp; compute</a><a href="arms.html">Shoulders &amp; arms</a><a href="hands.html">Hands (2 × 21 DoF)</a><a href="hips.html">Hips &amp; pelvis</a><a href="legs.html">Legs &amp; feet</a><a href="control.html">Control &amp; AI stack</a><a href="sim.html">▶ Physics sim (MuJoCo)</a><div style="margin:12px 0 4px;color:#f5a623;font-size:12px;letter-spacing:.08em">V2 · BHL → OPTIMUS-CLASS</div><a href="v2.html" class=active>v2 design</a><a href="v2_checks.html">v2 engineering checks</a><a href="v2_sim.html">▶ v2 balance sim</a><a href="v2_cad.html">v2 CAD + FEA</a></nav><main><h1>Robot Lab v2: Berkeley Humanoid Lite, re-engineered toward Optimus Gen 2/3 class</h1>
 <p><em>Oct 12, 2026 · Draft for Bryan Ralston · Every number marked </em><em>[EST]</em><em> is an engineering estimate. Sourced facts carry a citation. Checks live in <code>analysis/</code> and results in <code>analysis/results/</code>.</em></p>
 <h2>0. Honest framing</h2>
 <p>v2 keeps what makes <strong>Berkeley Humanoid Lite (BHL)</strong> work: one smart actuator per joint, a bus per limb, a central policy computer, and RL sim-to-real. Everything else is re-engineered to a full-size, metal-geared, Optimus-class architecture. "Works if manufactured" here means the design passes <strong>first-order</strong> checks: torque and speed with a 1.5× margin, I²R thermal, link stress with SF ≥ 2, mass, power, COM, and hand force. It has <strong>not</strong> been validated by FEA, actuator dyno tests or a prototype. Those are listed as gaps in §10.</p>
@@ -101,7 +101,7 @@ table{display:table;width:100%}.tw{overflow-x:auto;-webkit-overflow-scrolling:to
 </tr>
 <tr>
 <td>Mass</td>
-<td><strong>64.8 kg</strong> (target ≤ 65)</td>
+<td><strong>64.3 kg</strong> budget (target ≤ 65); CAD solids 58.5 kg + 4.5 kg unmodeled harness/covers/thermal = 63.0 kg</td>
 <td>mass budget: PASS after fixes (initially 90.3 kg)</td>
 </tr>
 <tr>
@@ -244,12 +244,12 @@ table{display:table;width:100%}.tw{overflow-x:auto;-webkit-overflow-scrolling:to
 </tr>
 <tr>
 <td>Elbow</td>
-<td><strong>linear</strong>, 4 mm lead, 40 mm lever</td>
+<td><strong>rotary</strong> (changed after CAD: the linear elbow's screw and lever clashed with the forearm/upper-arm at flexion)</td>
 <td>M60</td>
-<td>roller screw</td>
-<td>101</td>
-<td>73</td>
-<td>10</td>
+<td>CSG-20-100</td>
+<td>107</td>
+<td>49</td>
+<td>6.3</td>
 </tr>
 <tr>
 <td>Wrist roll</td>
@@ -334,7 +334,7 @@ table{display:table;width:100%}.tw{overflow-x:auto;-webkit-overflow-scrolling:to
 <tbody>
 <tr>
 <td>Mass 90.3 kg</td>
-<td>CSG component sets in our own housings instead of housed 2UH units (catalog: CSG-32 component set 0.89 kg vs 3.2 kg unit) [HD]. CF torso shells. 230 Wh/kg pack. Downsized over-margined joints (hip yaw, waist, hip pitch, knee motor). Overhead model refined by motor size. Result: 64.8 kg</td>
+<td>CSG component sets in our own housings instead of housed 2UH units (catalog: CSG-32 component set 0.89 kg vs 3.2 kg unit) [HD]. CF torso shells. 230 Wh/kg pack. Downsized over-margined joints (hip yaw, waist, hip pitch, knee motor). Overhead model refined by motor size. Result: 64.8 kg; 64.3 kg after the CAD-driven rotary elbow</td>
 </tr>
 <tr>
 <td>Hip pitch speed 3.1 &lt; 4 rad/s</td>
@@ -377,7 +377,7 @@ table{display:table;width:100%}.tw{overflow-x:auto;-webkit-overflow-scrolling:to
 <li><strong>Hand:</strong> holds peak grip only briefly (continuous fingertip force 14.7 N). There is no tactile-skin design detail and no durability data.</li>
 <li><strong>Control:</strong> no walking, no stepping recovery, and no whole-body or VLA policy. Optimus demonstrates walking and dexterous manipulation [ARS].</li>
 <li><strong>Thermal model</strong> ignores gear, screw and driver losses and the enclosure. <strong>Structure</strong> is beam-theory only (no FEA or fatigue at joints).</li>
-<li><strong>Mass</strong> sits at 64.8 kg, right at the target, and is within estimate uncertainty (±10% [EST]).</li>
+<li><strong>Mass</strong> sits at 64.3 kg, right at the target, and is within estimate uncertainty (±10% [EST]).</li>
 <li><strong>Manufacturing:</strong> no CAD, tolerance stack or DFM. Optimus is designed for volume production [R247].</li>
 </ol>
 <h2>Sources</h2>
@@ -391,7 +391,9 @@ table{display:table;width:100%}.tw{overflow-x:auto;-webkit-overflow-scrolling:to
 <li>[OPT] Optimusk blog, Optimus Gen 3 hardware (third-party, unofficial): https://optimusk.blog/blog/tesla-optimus-hardware-specs/</li>
 <li>[HD] Harmonic Drive CSG catalog/product pages: https://www.harmonicdrive.net/products/gear-units/gear-units/csg-2uh/csg-32-100-2uh · https://www.harmonicdrive.net/products/component-sets/cup-type/csg-2a/csg-32-100-2a-gr · https://www.harmonicdrive.net/_hd/content/documents1/CSG-CSF_GearUnits.pdf</li>
 <li>[NV] NVIDIA Jetson Thor: https://www.nvidia.com/en-us/autonomous-machines/embedded-systems/jetson-thor/</li>
-</ul><p><a href="v2_checks.html">→ Engineering check results</a> · <a href="v2_sim.html">→ Balance sim</a> · <a href="https://github.com/BryanRalston/robot-lab/tree/main/v2">source on GitHub</a></p></main><script>
+</ul>
+<h2>CAD, interference, mass and FEA (v2.2)</h2>
+<p>See <a href="cad/RESULTS.md">cad/RESULTS.md</a>, <a href="cad/out/mass.md">cad/out/mass.md</a>, <a href="cad/out/fea.md">cad/out/fea.md</a>. Leg joint ranges are now set by CAD hard stops: hip pitch −105..40°, hip roll −12..20° (adduction only with both hips rolled, i.e. pelvis shifted over the stance foot), hip yaw −35..45°, knee 0..120°, ankle pitch −45..40°, ankle roll ±25°.</p><p><a href="v2_checks.html">→ Engineering check results</a> · <a href="v2_sim.html">→ Balance sim</a> · <a href="https://github.com/BryanRalston/robot-lab/tree/main/v2">source on GitHub</a></p></main><script>
 // sortable tables
 document.querySelectorAll('table').forEach(t=>{const ths=t.querySelectorAll('th');ths.forEach((th,i)=>{th.title='Click to sort';th.addEventListener('click',()=>{const tb=t.tBodies[0];const rows=[...tb.rows];const asc=th.dataset.dir!=='asc';ths.forEach(h=>{delete h.dataset.dir});th.dataset.dir=asc?'asc':'desc';const num=s=>{const m=s.replace(/,/g,'').match(/-?\d+(\.\d+)?/);return m?parseFloat(m[0]):NaN};rows.sort((a,b)=>{const x=a.cells[i].innerText.trim(),y=b.cells[i].innerText.trim();const nx=num(x),ny=num(y);let r=(!isNaN(nx)&&!isNaN(ny))?nx-ny:x.localeCompare(y);return asc?r:-r});rows.forEach(r=>tb.appendChild(r))})})});
 // active nav
