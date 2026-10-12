@@ -9,7 +9,26 @@ a{color:#7fc4ff}.card{background:#101e2b;border:1px solid #1e3347;border-radius:
 .svgbox{background:#0e1a26;border:1px solid #1e3347;border-radius:8px;padding:10px;display:inline-block;margin:8px 0}
 #viewer{position:relative;border:1px solid #1e3347;border-radius:8px;overflow:hidden;margin:10px 0}#three{width:100%;height:480px}
 .hint{position:absolute;top:8px;left:10px;font-size:12px;color:#9fc3e3}#tip{position:absolute;display:none;background:#000c;padding:6px 8px;border-radius:6px;font-size:12px;pointer-events:none}
-blockquote{border-left:4px solid #f5a623;margin:0;padding:4px 12px;background:#101e2b}#three{height:520px}.legend{font-size:13px;color:#9fc3e3}.crumb{font-size:13px}</style><script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script></head><body><nav><h1><a href="index.html" style="padding:0;color:#fff">Humanoid Design v1</a></h1><a href="index.html">Overview (assembled)</a><a href="head.html">Head &amp; sensors</a><a href="torso.html">Torso, spine, power &amp; compute</a><a href="arms.html">Shoulders &amp; arms</a><a href="hands.html">Hands (2 × 21 DoF)</a><a href="hips.html">Hips &amp; pelvis</a><a href="legs.html">Legs &amp; feet</a><a href="control.html" class=active>Control &amp; AI stack</a><a href="sim.html">▶ Physics sim (MuJoCo)</a></nav><main><p class="crumb"><a href="index.html">← Overview</a></p><h2>Control &amp; AI stack</h2><div id="viewer"><div id="three"></div><div class="hint">Drag to rotate · scroll to zoom · hover joints for actuator/torque</div><div id="tip"></div></div><p class="legend">Highlighted: this part. Values marked [EST] are design targets.</p><ol>
+blockquote{border-left:4px solid #f5a623;margin:0;padding:4px 12px;background:#101e2b}#three{height:520px}
+.topbar{display:none}
+table{display:table;width:100%}.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:12px 0}.tw table{margin:0}
+#three{height:min(62vh,520px)}#three canvas{touch-action:none;display:block}
+#tip a{color:#ffd27f;pointer-events:auto}
+.controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:10px 0}.controls button{min-height:44px;min-width:88px;font-size:16px;border-radius:8px;border:1px solid #3a6a95;background:#1f3b57;color:#fff;padding:8px 14px}
+.controls input[type=range]{flex:1;min-width:160px;height:32px}
+@media (max-width:820px){
+ body{font-size:16px}
+ .topbar{display:flex;position:sticky;top:0;z-index:20;background:#101e2b;border-bottom:1px solid #1e3347;align-items:center;gap:10px;padding:8px 12px}
+ .topbar button{font-size:22px;background:none;border:1px solid #3a6a95;color:#fff;border-radius:8px;width:44px;height:44px}
+ .topbar a{color:#fff;font-weight:600;text-decoration:none;font-size:16px}
+ nav{transform:translateX(-100%);transition:transform .2s;z-index:30;width:80vw;max-width:300px;box-shadow:4px 0 20px #000a}
+ body.navopen nav{transform:none}
+ nav a{padding:10px 8px;font-size:16px}
+ main{margin-left:0;padding:12px 14px}
+ h2{font-size:20px}main h1{font-size:26px;line-height:1.25}th,td{font-size:13px;padding:6px}
+ #three{height:62vh}.svgbox{display:block;overflow-x:auto}.svgbox svg{max-width:100%;height:auto}
+ .controls{flex-direction:column;align-items:stretch}.controls button{width:100%}
+}.legend{font-size:13px;color:#9fc3e3}.crumb{font-size:13px}</style><script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script></head><body><div class="topbar"><button aria-label="Menu" onclick="document.body.classList.toggle('navopen')">☰</button><a href="index.html">Humanoid Design v1</a></div><nav><h1><a href="index.html" style="padding:0;color:#fff">Humanoid Design v1</a></h1><a href="index.html">Overview (assembled)</a><a href="head.html">Head &amp; sensors</a><a href="torso.html">Torso, spine, power &amp; compute</a><a href="arms.html">Shoulders &amp; arms</a><a href="hands.html">Hands (2 × 21 DoF)</a><a href="hips.html">Hips &amp; pelvis</a><a href="legs.html">Legs &amp; feet</a><a href="control.html" class=active>Control &amp; AI stack</a><a href="sim.html">▶ Physics sim (MuJoCo)</a></nav><main><p class="crumb"><a href="index.html">← Overview</a></p><h2>Control &amp; AI stack</h2><div id="viewer"><div id="three"></div><div class="hint">Drag to rotate · pinch/scroll to zoom · hover or tap joints for actuator/torque</div><div id="tip"></div></div><p class="legend">Highlighted: this part. Values marked [EST] are design targets.</p><ol>
 <li><strong>Actuator level (20–40 kHz / 2 kHz):</strong> FOC with feedforward friction and cogging compensation. Joint impedance control with torque-sensor feedback.</li>
 <li><strong>State estimation (1 kHz):</strong> invariant EKF fusing IMU, kinematics, foot contacts, and visual-inertial odometry.</li>
 <li><strong>Whole-body control (1 kHz):</strong> hierarchical QP WBC as a safety and constraint layer, combined with a centroidal MPC (100 Hz) for contact planning.</li>
@@ -54,6 +73,7 @@ const P={head:[0,1.68,0,'head'],chest:[0,1.42,0,'torso'],pel:[0,0.92,0,'hips']};
 const pos=k=>new THREE.Vector3(...(J[k]||P[k]).slice(0,3));
 const partOf=k=>(J[k]||P[k])[J[k]?7:3];
 const L=[['head','neck','head'],['neck','chest','head'],['chest','lsh','arms'],['chest','rsh','arms'],['lsh','lel','arms'],['lel','lwr','arms'],['lwr','lha','hands'],['rsh','rel','arms'],['rel','rwr','arms'],['rwr','rha','hands'],['chest','waist','torso'],['waist','pel','torso'],['pel','lhip','hips'],['pel','rhip','hips'],['lhip','lkn','legs'],['lkn','lan','legs'],['lan','lto','legs'],['rhip','rkn','legs'],['rkn','ran','legs'],['ran','rto','legs']];
+const NAMES={head:'Head & sensors',torso:'Torso & spine',arms:'Shoulders & arms',hands:'Hands',hips:'Hips & pelvis',legs:'Legs & feet'};
 export function mount(el,{part,focus}){
  if(!el)return;const W=el.clientWidth||800,H=el.clientHeight||520;
  const r=new THREE.WebGLRenderer({antialias:true});r.setSize(W,H);r.setPixelRatio(devicePixelRatio);el.appendChild(r.domElement);
@@ -81,12 +101,18 @@ export function mount(el,{part,focus}){
  oc.target.copy(tgt);cam.position.copy(tgt).add(new THREE.Vector3(dist*.65,dist*.3,dist*.7));oc.update();
  const ray=new THREE.Raycaster(),mp=new THREE.Vector2(),tip=document.getElementById('tip');
  const hit=e=>{const b=r.domElement.getBoundingClientRect();mp.x=(e.clientX-b.left)/b.width*2-1;mp.y=-(e.clientY-b.top)/b.height*2+1;ray.setFromCamera(mp,cam);return [ray.intersectObjects(clickable)[0],b]};
- r.domElement.addEventListener('pointermove',e=>{const [h,b]=hit(e);if(!tip)return;if(h){const u=h.object.userData;tip.style.display='block';tip.style.left=(e.clientX-b.left+12)+'px';tip.style.top=(e.clientY-b.top+12)+'px';tip.innerHTML=u.j?`<b>${u.j[3]}</b><br>${u.j[4]} DoF · ${u.j[5]}<br>Peak: ${u.j[6]} [EST]`+(part==='index'?'<br><i>click to open</i>':''):`<b>${u.part}</b>`+(part==='index'?' (click to open)':'');r.domElement.style.cursor=part==='index'?'pointer':'default'}else{tip.style.display='none';r.domElement.style.cursor='grab'}});
+ r.domElement.addEventListener('pointermove',e=>{if(e.pointerType!=='mouse')return;const [h,b]=hit(e);if(!tip)return;if(h){const u=h.object.userData;tip.style.display='block';tip.style.left=(e.clientX-b.left+12)+'px';tip.style.top=(e.clientY-b.top+12)+'px';tip.innerHTML=u.j?`<b>${u.j[3]}</b><br>${u.j[4]} DoF · ${u.j[5]}<br>Peak: ${u.j[6]} [EST]`+(part==='index'?'<br><i>click to open</i>':''):`<b>${u.part}</b>`+(part==='index'?' (click to open)':'');r.domElement.style.cursor=part==='index'?'pointer':'default'}else{tip.style.display='none';r.domElement.style.cursor='grab'}});
  let down;r.domElement.addEventListener('pointerdown',e=>down=[e.clientX,e.clientY]);
- r.domElement.addEventListener('pointerup',e=>{if(part!=='index'||!down||Math.hypot(e.clientX-down[0],e.clientY-down[1])>4)return;const [h]=hit(e);if(h)location.href=h.object.userData.part+'.html'});
- addEventListener('resize',()=>{const w=el.clientWidth;r.setSize(w,H);cam.aspect=w/H;cam.updateProjectionMatrix()});
+ r.domElement.addEventListener('pointerup',e=>{if(!down||Math.hypot(e.clientX-down[0],e.clientY-down[1])>6)return;const [h,b]=hit(e);
+  if(!h){if(tip)tip.style.display='none';return}
+  const u=h.object.userData;
+  if(e.pointerType==='mouse'){if(part==='index')location.href=u.part+'.html';return}
+  // touch/pen: tap shows info card (hover doesn't exist on phones)
+  if(!tip)return;const x=Math.min(e.clientX-b.left+10,b.width-200);tip.style.left=Math.max(4,x)+'px';tip.style.top=(e.clientY-b.top+10)+'px';tip.style.display='block';
+  tip.innerHTML=(u.j?`<b>${u.j[3]}</b><br>${u.j[4]} DoF · ${u.j[5]}<br>Peak: ${u.j[6]} [EST]`:`<b>${NAMES[u.part]||u.part}</b>`)+(part==='index'?`<br><a href="${u.part}.html">Open ${NAMES[u.part]||u.part} page →</a>`:'')});
+ addEventListener('resize',()=>{const w=el.clientWidth,h=el.clientHeight;r.setSize(w,h);cam.aspect=w/h;cam.updateProjectionMatrix()});
  (function loop(){requestAnimationFrame(loop);r.render(sc,cam)})();
  window.__threeOK=true;
 }
 
-mount(document.getElementById("three"), {"part": "control", "focus": []});</script></body></html>
+mount(document.getElementById("three"), {"part": "control", "focus": []});</script><script>document.querySelectorAll("nav a").forEach(a=>a.addEventListener("click",()=>document.body.classList.remove("navopen")));document.querySelector("main").addEventListener("click",()=>document.body.classList.remove("navopen"))</script></body></html>

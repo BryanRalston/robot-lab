@@ -17,6 +17,7 @@ const P={head:[0,1.68,0,'head'],chest:[0,1.42,0,'torso'],pel:[0,0.92,0,'hips']};
 const pos=k=>new THREE.Vector3(...(J[k]||P[k]).slice(0,3));
 const partOf=k=>(J[k]||P[k])[J[k]?7:3];
 const L=[['head','neck','head'],['neck','chest','head'],['chest','lsh','arms'],['chest','rsh','arms'],['lsh','lel','arms'],['lel','lwr','arms'],['lwr','lha','hands'],['rsh','rel','arms'],['rel','rwr','arms'],['rwr','rha','hands'],['chest','waist','torso'],['waist','pel','torso'],['pel','lhip','hips'],['pel','rhip','hips'],['lhip','lkn','legs'],['lkn','lan','legs'],['lan','lto','legs'],['rhip','rkn','legs'],['rkn','ran','legs'],['ran','rto','legs']];
+const NAMES={head:'Head & sensors',torso:'Torso & spine',arms:'Shoulders & arms',hands:'Hands',hips:'Hips & pelvis',legs:'Legs & feet'};
 export function mount(el,{part,focus}){
  if(!el)return;const W=el.clientWidth||800,H=el.clientHeight||520;
  const r=new THREE.WebGLRenderer({antialias:true});r.setSize(W,H);r.setPixelRatio(devicePixelRatio);el.appendChild(r.domElement);
@@ -44,10 +45,16 @@ export function mount(el,{part,focus}){
  oc.target.copy(tgt);cam.position.copy(tgt).add(new THREE.Vector3(dist*.65,dist*.3,dist*.7));oc.update();
  const ray=new THREE.Raycaster(),mp=new THREE.Vector2(),tip=document.getElementById('tip');
  const hit=e=>{const b=r.domElement.getBoundingClientRect();mp.x=(e.clientX-b.left)/b.width*2-1;mp.y=-(e.clientY-b.top)/b.height*2+1;ray.setFromCamera(mp,cam);return [ray.intersectObjects(clickable)[0],b]};
- r.domElement.addEventListener('pointermove',e=>{const [h,b]=hit(e);if(!tip)return;if(h){const u=h.object.userData;tip.style.display='block';tip.style.left=(e.clientX-b.left+12)+'px';tip.style.top=(e.clientY-b.top+12)+'px';tip.innerHTML=u.j?`<b>${u.j[3]}</b><br>${u.j[4]} DoF · ${u.j[5]}<br>Peak: ${u.j[6]} [EST]`+(part==='index'?'<br><i>click to open</i>':''):`<b>${u.part}</b>`+(part==='index'?' (click to open)':'');r.domElement.style.cursor=part==='index'?'pointer':'default'}else{tip.style.display='none';r.domElement.style.cursor='grab'}});
+ r.domElement.addEventListener('pointermove',e=>{if(e.pointerType!=='mouse')return;const [h,b]=hit(e);if(!tip)return;if(h){const u=h.object.userData;tip.style.display='block';tip.style.left=(e.clientX-b.left+12)+'px';tip.style.top=(e.clientY-b.top+12)+'px';tip.innerHTML=u.j?`<b>${u.j[3]}</b><br>${u.j[4]} DoF · ${u.j[5]}<br>Peak: ${u.j[6]} [EST]`+(part==='index'?'<br><i>click to open</i>':''):`<b>${u.part}</b>`+(part==='index'?' (click to open)':'');r.domElement.style.cursor=part==='index'?'pointer':'default'}else{tip.style.display='none';r.domElement.style.cursor='grab'}});
  let down;r.domElement.addEventListener('pointerdown',e=>down=[e.clientX,e.clientY]);
- r.domElement.addEventListener('pointerup',e=>{if(part!=='index'||!down||Math.hypot(e.clientX-down[0],e.clientY-down[1])>4)return;const [h]=hit(e);if(h)location.href=h.object.userData.part+'.html'});
- addEventListener('resize',()=>{const w=el.clientWidth;r.setSize(w,H);cam.aspect=w/H;cam.updateProjectionMatrix()});
+ r.domElement.addEventListener('pointerup',e=>{if(!down||Math.hypot(e.clientX-down[0],e.clientY-down[1])>6)return;const [h,b]=hit(e);
+  if(!h){if(tip)tip.style.display='none';return}
+  const u=h.object.userData;
+  if(e.pointerType==='mouse'){if(part==='index')location.href=u.part+'.html';return}
+  // touch/pen: tap shows info card (hover doesn't exist on phones)
+  if(!tip)return;const x=Math.min(e.clientX-b.left+10,b.width-200);tip.style.left=Math.max(4,x)+'px';tip.style.top=(e.clientY-b.top+10)+'px';tip.style.display='block';
+  tip.innerHTML=(u.j?`<b>${u.j[3]}</b><br>${u.j[4]} DoF · ${u.j[5]}<br>Peak: ${u.j[6]} [EST]`:`<b>${NAMES[u.part]||u.part}</b>`)+(part==='index'?`<br><a href="${u.part}.html">Open ${NAMES[u.part]||u.part} page →</a>`:'')});
+ addEventListener('resize',()=>{const w=el.clientWidth,h=el.clientHeight;r.setSize(w,h);cam.aspect=w/h;cam.updateProjectionMatrix()});
  (function loop(){requestAnimationFrame(loop);r.render(sc,cam)})();
  window.__threeOK=true;
 }

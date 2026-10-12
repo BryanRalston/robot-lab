@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Simulation</title><style>*{box-sizing:border-box}body{margin:0;font:15px/1.55 system-ui,sans-serif;background:#0b141d;color:#dbe7f2}
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Simulation</title><style>*{box-sizing:border-box}body{margin:0;font:15px/1.55 system-ui,sans-serif;background:#0b141d;color:#dbe7f2}
 nav{position:fixed;top:0;left:0;bottom:0;width:260px;overflow:auto;background:#101e2b;padding:16px;border-right:1px solid #1e3347}
 nav h1{font-size:16px;margin:0 0 12px;color:#fff}nav a{display:block;color:#9fc3e3;text-decoration:none;padding:4px 6px;border-radius:4px;font-size:14px}
 nav a.sub{padding-left:20px;font-size:13px;color:#7ea4c6}nav a.active,nav a:hover{background:#1f3b57;color:#fff}
@@ -9,10 +9,29 @@ a{color:#7fc4ff}.card{background:#101e2b;border:1px solid #1e3347;border-radius:
 .svgbox{background:#0e1a26;border:1px solid #1e3347;border-radius:8px;padding:10px;display:inline-block;margin:8px 0}
 #viewer{position:relative;border:1px solid #1e3347;border-radius:8px;overflow:hidden;margin:10px 0}#three{width:100%;height:480px}
 .hint{position:absolute;top:8px;left:10px;font-size:12px;color:#9fc3e3}#tip{position:absolute;display:none;background:#000c;padding:6px 8px;border-radius:6px;font-size:12px;pointer-events:none}
-blockquote{border-left:4px solid #f5a623;margin:0;padding:4px 12px;background:#101e2b}#three{height:520px}.legend{font-size:13px;color:#9fc3e3}.crumb{font-size:13px}</style><script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script></head><body><nav><h1><a href="index.html" style="padding:0;color:#fff">Humanoid Design v1</a></h1><a href="index.html">Overview (assembled)</a><a href="head.html">Head &amp; sensors</a><a href="torso.html">Torso, spine, power &amp; compute</a><a href="arms.html">Shoulders &amp; arms</a><a href="hands.html">Hands (2 × 21 DoF)</a><a href="hips.html">Hips &amp; pelvis</a><a href="legs.html">Legs &amp; feet</a><a href="control.html">Control &amp; AI stack</a><a href="sim.html" class=active>▶ Physics sim (MuJoCo)</a></nav><main><p class="crumb"><a href="index.html">← Overview</a></p><h2>Physics simulation (MuJoCo WASM)</h2>
+blockquote{border-left:4px solid #f5a623;margin:0;padding:4px 12px;background:#101e2b}#three{height:520px}
+.topbar{display:none}
+table{display:table;width:100%}.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:12px 0}.tw table{margin:0}
+#three{height:min(62vh,520px)}#three canvas{touch-action:none;display:block}
+#tip a{color:#ffd27f;pointer-events:auto}
+.controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:10px 0}.controls button{min-height:44px;min-width:88px;font-size:16px;border-radius:8px;border:1px solid #3a6a95;background:#1f3b57;color:#fff;padding:8px 14px}
+.controls input[type=range]{flex:1;min-width:160px;height:32px}
+@media (max-width:820px){
+ body{font-size:16px}
+ .topbar{display:flex;position:sticky;top:0;z-index:20;background:#101e2b;border-bottom:1px solid #1e3347;align-items:center;gap:10px;padding:8px 12px}
+ .topbar button{font-size:22px;background:none;border:1px solid #3a6a95;color:#fff;border-radius:8px;width:44px;height:44px}
+ .topbar a{color:#fff;font-weight:600;text-decoration:none;font-size:16px}
+ nav{transform:translateX(-100%);transition:transform .2s;z-index:30;width:80vw;max-width:300px;box-shadow:4px 0 20px #000a}
+ body.navopen nav{transform:none}
+ nav a{padding:10px 8px;font-size:16px}
+ main{margin-left:0;padding:12px 14px}
+ h2{font-size:20px}main h1{font-size:26px;line-height:1.25}th,td{font-size:13px;padding:6px}
+ #three{height:62vh}.svgbox{display:block;overflow-x:auto}.svgbox svg{max-width:100%;height:auto}
+ .controls{flex-direction:column;align-items:stretch}.controls button{width:100%}
+}.legend{font-size:13px;color:#9fc3e3}.crumb{font-size:13px}</style><script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script></head><body><div class="topbar"><button aria-label="Menu" onclick="document.body.classList.toggle('navopen')">☰</button><a href="index.html">Humanoid Design v1</a></div><nav><h1><a href="index.html" style="padding:0;color:#fff">Humanoid Design v1</a></h1><a href="index.html">Overview (assembled)</a><a href="head.html">Head &amp; sensors</a><a href="torso.html">Torso, spine, power &amp; compute</a><a href="arms.html">Shoulders &amp; arms</a><a href="hands.html">Hands (2 × 21 DoF)</a><a href="hips.html">Hips &amp; pelvis</a><a href="legs.html">Legs &amp; feet</a><a href="control.html">Control &amp; AI stack</a><a href="sim.html" class=active>▶ Physics sim (MuJoCo)</a></nav><main><p class="crumb"><a href="index.html">← Overview</a></p><h2>Physics simulation (MuJoCo WASM)</h2>
 <p>This is the design's MJCF model (<a href="humanoid.xml">humanoid.xml</a>, 67.7 kg, 33 actuated body joints, torque limits from the joint table) running live in your browser with the official <code>@mujoco/mujoco</code> 3.14 WebAssembly build. Controller: joint-space PD holding the standing pose, with torques clipped to each actuator's limit. Hands are rigid bodies in this version.</p>
-<p><button id="pause">Pause</button> <button id="reset">Reset</button> <button id="push">Push pelvis</button> force <input id="force" type="range" min="-300" max="300" value="100" oninput="fv.textContent=this.value"> <span id="fv">100</span> N for 0.2 s</p>
-<div id="viewer"><div id="three"></div><div class="hint">Drag to rotate · scroll to zoom</div></div><p id="simstatus">Loading MuJoCo WASM…</p>
+<div class="controls"><button id="pause">Pause</button><button id="reset">Reset</button><button id="push">Push pelvis</button><label>Push force <span id="fv">100</span> N (0.2 s)</label><input id="force" type="range" min="-300" max="300" value="100" oninput="fv.textContent=this.value"></div>
+<div id="viewer"><div id="three"></div><div class="hint">Drag to rotate · pinch/scroll to zoom</div></div><p id="simstatus">Loading MuJoCo WASM…</p>
 <p class="legend">Offline Python test: stands indefinitely; survives forward pushes up to ~125 N for 0.2 s with plain PD. There is no stepping or balance controller yet, so larger pushes make it fall.</p>
 <script type="text/plain" id="mjcf"><mujoco model="humanoid_v1">
   <!-- Generated by gen.py from humanoid_plan_v1.md. Masses = mass-budget estimates [EST]; joint ranges and motor torque limits = joint table §3 [EST].
@@ -148,7 +167,7 @@ try{
  const nu=m.nu,trn=m.actuator_trnid,qadr=m.jnt_qposadr,dadr=m.jnt_dofadr,cr=m.actuator_ctrlrange;
  const qa=[],va=[],kp=[],kd=[];for(let i=0;i<nu;i++){const j=trn[2*i];qa.push(qadr[j]);va.push(dadr[j]);kp.push(Math.max(50,cr[2*i+1]*4));kd.push(kp[i]*0.05)}
  const el=document.getElementById('three');const W=el.clientWidth,H=el.clientHeight;
- const r=new THREE.WebGLRenderer({antialias:true});r.setSize(W,H);el.appendChild(r.domElement);
+ const r=new THREE.WebGLRenderer({antialias:true});r.setSize(W,H);r.setPixelRatio(Math.min(2,devicePixelRatio));el.appendChild(r.domElement);
  const sc=new THREE.Scene();sc.background=new THREE.Color(0x0e1a26);
  const cam=new THREE.PerspectiveCamera(40,W/H,0.01,50);cam.up.set(0,0,1);cam.position.set(2.5,2.0,1.4);
  const oc=new OrbitControls(cam,r.domElement);oc.target.set(0,0,0.9);oc.update();
@@ -161,6 +180,7 @@ try{
   const mat=t===0?new THREE.MeshStandardMaterial({color:0x1a2a38}):new THREE.MeshStandardMaterial({color:0x7fb3e0,metalness:.3,roughness:.5});
   const me=new THREE.Mesh(g,mat);me.matrixAutoUpdate=false;sc.add(me);meshes.push(me)}
  {const gh=new THREE.GridHelper(20,40,0x335577,0x223344);gh.rotation.x=Math.PI/2;sc.add(gh)}
+ addEventListener('resize',()=>{const w=el.clientWidth,h=el.clientHeight;r.setSize(w,h);cam.aspect=w/h;cam.updateProjectionMatrix()});
  let paused=false,pushT=-1;
  document.getElementById('reset').onclick=()=>{mj.mj_resetData(m,d);mj.mj_forward(m,d)};
  document.getElementById('pause').onclick=e=>{paused=!paused;e.target.textContent=paused?'Resume':'Pause'};
@@ -179,4 +199,4 @@ try{
   status.textContent=`t=${d.time.toFixed(2)} s · pelvis height ${d.qpos[2].toFixed(3)} m · ${d.qpos[2]>0.85?'standing':'FALLEN, press Reset'}`})(performance.now());
  window.__simOK=true;
 }catch(e){status.textContent='Simulation failed to load: '+e;console.error(e)}
-</script></body></html>
+</script><script>document.querySelectorAll("nav a").forEach(a=>a.addEventListener("click",()=>document.body.classList.remove("navopen")));document.querySelector("main").addEventListener("click",()=>document.body.classList.remove("navopen"))</script></body></html>

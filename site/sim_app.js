@@ -10,7 +10,7 @@ try{
  const nu=m.nu,trn=m.actuator_trnid,qadr=m.jnt_qposadr,dadr=m.jnt_dofadr,cr=m.actuator_ctrlrange;
  const qa=[],va=[],kp=[],kd=[];for(let i=0;i<nu;i++){const j=trn[2*i];qa.push(qadr[j]);va.push(dadr[j]);kp.push(Math.max(50,cr[2*i+1]*4));kd.push(kp[i]*0.05)}
  const el=document.getElementById('three');const W=el.clientWidth,H=el.clientHeight;
- const r=new THREE.WebGLRenderer({antialias:true});r.setSize(W,H);el.appendChild(r.domElement);
+ const r=new THREE.WebGLRenderer({antialias:true});r.setSize(W,H);r.setPixelRatio(Math.min(2,devicePixelRatio));el.appendChild(r.domElement);
  const sc=new THREE.Scene();sc.background=new THREE.Color(0x0e1a26);
  const cam=new THREE.PerspectiveCamera(40,W/H,0.01,50);cam.up.set(0,0,1);cam.position.set(2.5,2.0,1.4);
  const oc=new OrbitControls(cam,r.domElement);oc.target.set(0,0,0.9);oc.update();
@@ -23,6 +23,7 @@ try{
   const mat=t===0?new THREE.MeshStandardMaterial({color:0x1a2a38}):new THREE.MeshStandardMaterial({color:0x7fb3e0,metalness:.3,roughness:.5});
   const me=new THREE.Mesh(g,mat);me.matrixAutoUpdate=false;sc.add(me);meshes.push(me)}
  {const gh=new THREE.GridHelper(20,40,0x335577,0x223344);gh.rotation.x=Math.PI/2;sc.add(gh)}
+ addEventListener('resize',()=>{const w=el.clientWidth,h=el.clientHeight;r.setSize(w,h);cam.aspect=w/h;cam.updateProjectionMatrix()});
  let paused=false,pushT=-1;
  document.getElementById('reset').onclick=()=>{mj.mj_resetData(m,d);mj.mj_forward(m,d)};
  document.getElementById('pause').onclick=e=>{paused=!paused;e.target.textContent=paused?'Resume':'Pause'};
