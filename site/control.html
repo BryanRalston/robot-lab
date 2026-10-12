@@ -1,0 +1,92 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Control &amp; AI stack</title><style>*{box-sizing:border-box}body{margin:0;font:15px/1.55 system-ui,sans-serif;background:#0b141d;color:#dbe7f2}
+nav{position:fixed;top:0;left:0;bottom:0;width:260px;overflow:auto;background:#101e2b;padding:16px;border-right:1px solid #1e3347}
+nav h1{font-size:16px;margin:0 0 12px;color:#fff}nav a{display:block;color:#9fc3e3;text-decoration:none;padding:4px 6px;border-radius:4px;font-size:14px}
+nav a.sub{padding-left:20px;font-size:13px;color:#7ea4c6}nav a.active,nav a:hover{background:#1f3b57;color:#fff}
+main{margin-left:260px;padding:24px 40px;max-width:1200px}section{margin-bottom:40px;scroll-margin-top:10px}h2{border-bottom:2px solid #f5a623;padding-bottom:4px}
+table{border-collapse:collapse;width:100%;font-size:13px;margin:12px 0;display:block;overflow-x:auto}th,td{border:1px solid #24405a;padding:6px 8px;vertical-align:top}
+th{background:#16293b;cursor:pointer;user-select:none;position:sticky;top:0}th[data-dir=asc]:after{content:" ▲"}th[data-dir=desc]:after{content:" ▼"}tr:nth-child(even) td{background:#0f1c28}
+a{color:#7fc4ff}.card{background:#101e2b;border:1px solid #1e3347;border-radius:8px;padding:10px 16px;margin:12px 0;scroll-margin-top:10px}.card h3{margin:4px 0;color:#f5a623}
+.svgbox{background:#0e1a26;border:1px solid #1e3347;border-radius:8px;padding:10px;display:inline-block;margin:8px 0}
+#viewer{position:relative;border:1px solid #1e3347;border-radius:8px;overflow:hidden;margin:10px 0}#three{width:100%;height:480px}
+.hint{position:absolute;top:8px;left:10px;font-size:12px;color:#9fc3e3}#tip{position:absolute;display:none;background:#000c;padding:6px 8px;border-radius:6px;font-size:12px;pointer-events:none}
+blockquote{border-left:4px solid #f5a623;margin:0;padding:4px 12px;background:#101e2b}#three{height:520px}.legend{font-size:13px;color:#9fc3e3}.crumb{font-size:13px}</style><script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script></head><body><nav><h1><a href="index.html" style="padding:0;color:#fff">Humanoid Design v1</a></h1><a href="index.html">Overview (assembled)</a><a href="head.html">Head &amp; sensors</a><a href="torso.html">Torso, spine, power &amp; compute</a><a href="arms.html">Shoulders &amp; arms</a><a href="hands.html">Hands (2 × 21 DoF)</a><a href="hips.html">Hips &amp; pelvis</a><a href="legs.html">Legs &amp; feet</a><a href="control.html" class=active>Control &amp; AI stack</a><a href="sim.html">▶ Physics sim (MuJoCo)</a></nav><main><p class="crumb"><a href="index.html">← Overview</a></p><h2>Control &amp; AI stack</h2><div id="viewer"><div id="three"></div><div class="hint">Drag to rotate · scroll to zoom · hover joints for actuator/torque</div><div id="tip"></div></div><p class="legend">Highlighted: this part. Values marked [EST] are design targets.</p><ol>
+<li><strong>Actuator level (20–40 kHz / 2 kHz):</strong> FOC with feedforward friction and cogging compensation. Joint impedance control with torque-sensor feedback.</li>
+<li><strong>State estimation (1 kHz):</strong> invariant EKF fusing IMU, kinematics, foot contacts, and visual-inertial odometry.</li>
+<li><strong>Whole-body control (1 kHz):</strong> hierarchical QP WBC as a safety and constraint layer, combined with a centroidal MPC (100 Hz) for contact planning.</li>
+<li><strong>Learned whole-body policy (200 Hz):</strong> a single RL policy (HOVER/ExBody-style command space covering base velocity, root pose, and upper-body keypoints) trained in Isaac Lab with thousands of parallel environments and validated in MuJoCo (sim2sim). Human motion priors come from retargeted mocap (AMP). Teacher-student distillation with privileged terrain. Domain randomization covers mass, friction, latency, motor constants, and actuator networks fit from dyno data.</li>
+<li><strong>Dexterous manipulation:</strong> RL in-hand manipulation policies trained in sim with tactile simulation, plus imitation from teleop.</li>
+<li><strong>Vision-language-action (dual system, as in Figure Helix):</strong> System 2, a VLM at 7–10 Hz (fine-tuned from GR00T N1.x or π0.5-class open models), produces latent intent. System 1, a visuomotor diffusion/flow transformer at 50–200 Hz, outputs whole-body targets (arms, hands, torso, base velocity) to the WBC.</li>
+<li><strong>Data:</strong> full-body VR teleop (Vision Pro hand tracking plus a mocap suit, haptic gloves with force feedback), egocentric human video pretraining, and sim-generated synthetic demonstrations (Isaac/Cosmos). Fleet learning feeds failures back into data.</li>
+<li><strong>Safety layers:</strong> control barrier functions for self-collision and human distance; ISO/TS 15066 speed and separation; a learned safe-fall policy (curl, protect head and hands); a watchdog falls back to a stand-in-place or crouch controller.</li>
+<li><strong>Middleware:</strong> RT-Linux, a deterministic shared-memory RT loop, ROS 2 for tooling, MCAP logging, and OTA updates with signed images.</li>
+</ol>
+<hr />
+<h3>Design risks</h3>
+<ul>
+<li><strong>Knee and hip thermal limits</strong> at 60 kg payload. Mitigation: liquid cooling and torque-sensor-based efficiency maps.</li>
+<li><strong>Roller screw shock loads and backdrivability</strong> on falls. Mitigation: series compliance and sacrificial overload clutches.</li>
+<li><strong>21-DoF tendon hand durability and calibration drift.</strong> Mitigation: tension sensing and auto-recalibration.</li>
+<li><strong>Mass creep</strong> above the 68 kg target. Mitigation: a hard mass budget per segment.</li>
+<li><strong>Sim-to-real for 75 DoF</strong>, especially the hands. Mitigation: system ID, actuator nets, real-data fine-tuning.</li>
+<li><strong>Dual-Thor power and heat</strong> in the torso. Mitigation: the shared liquid loop.</li>
+<li><strong>IP67 sealing vs. heat rejection.</strong> Mitigation: sealed modules with external radiators.</li>
+</ul></main><script>
+// sortable tables
+document.querySelectorAll('table').forEach(t=>{const ths=t.querySelectorAll('th');ths.forEach((th,i)=>{th.title='Click to sort';th.addEventListener('click',()=>{const tb=t.tBodies[0];const rows=[...tb.rows];const asc=th.dataset.dir!=='asc';ths.forEach(h=>{delete h.dataset.dir});th.dataset.dir=asc?'asc':'desc';const num=s=>{const m=s.replace(/,/g,'').match(/-?\d+(\.\d+)?/);return m?parseFloat(m[0]):NaN};rows.sort((a,b)=>{const x=a.cells[i].innerText.trim(),y=b.cells[i].innerText.trim();const nx=num(x),ny=num(y);let r=(!isNaN(nx)&&!isNaN(ny))?nx-ny:x.localeCompare(y);return asc?r:-r});rows.forEach(r=>tb.appendChild(r))})})});
+// active nav
+const links=[...document.querySelectorAll('nav a')];const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){links.forEach(l=>l.classList.toggle('active',l.getAttribute('href')==='#'+e.target.id))}}),{rootMargin:'-20% 0px -70% 0px'});document.querySelectorAll('section,.card').forEach(s=>obs.observe(s));
+</script><script type="module">import * as THREE from 'three';
+import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
+// joint: [x,y,z,label,DoF,actuator,torque,part]
+export const J={
+ neck:[0,1.55,0,'Neck yaw/pitch',2,'Strain-wave','10 N·m','head'],
+ waist:[0,1.02,0,'Waist yaw/pitch/roll',3,'Cycloidal + 2 roller screws','250/400/250 N·m','torso'],
+ lsh:[0.21,1.42,0,'L shoulder',3,'Strain-wave','180/150/80 N·m','arms'],rsh:[-0.21,1.42,0,'R shoulder',3,'Strain-wave','180/150/80 N·m','arms'],
+ lel:[0.23,1.13,0,'L elbow',1,'Planetary roller screw','150 N·m','arms'],rel:[-0.23,1.13,0,'R elbow',1,'Planetary roller screw','150 N·m','arms'],
+ lwr:[0.24,0.86,0,'L wrist',3,'Strain-wave roll + 2 linear','25/30 N·m','arms'],rwr:[-0.24,0.86,0,'R wrist',3,'Strain-wave roll + 2 linear','25/30 N·m','arms'],
+ lha:[0.25,0.76,0,'L hand',21,'Tendon, forearm motors','300 N grasp','hands'],rha:[-0.25,0.76,0,'R hand',21,'Tendon, forearm motors','300 N grasp','hands'],
+ lhip:[0.1,0.92,0,'L hip yaw/roll/pitch',3,'QDD planetary','150/300/400 N·m','hips'],rhip:[-0.1,0.92,0,'R hip yaw/roll/pitch',3,'QDD planetary','150/300/400 N·m','hips'],
+ lkn:[0.1,0.5,0,'L knee',1,'Roller screw + linkage','450 N·m','legs'],rkn:[-0.1,0.5,0,'R knee',1,'Roller screw + linkage','450 N·m','legs'],
+ lan:[0.1,0.08,0,'L ankle pitch/roll',2,'2× parallel linear','250/120 N·m','legs'],ran:[-0.1,0.08,0,'R ankle pitch/roll',2,'2× parallel linear','250/120 N·m','legs'],
+ lto:[0.1,0.02,0.14,'L toe',1,'QDD + belt','40 N·m','legs'],rto:[-0.1,0.02,0.14,'R toe',1,'QDD + belt','40 N·m','legs'],
+};
+const P={head:[0,1.68,0,'head'],chest:[0,1.42,0,'torso'],pel:[0,0.92,0,'hips']};
+const pos=k=>new THREE.Vector3(...(J[k]||P[k]).slice(0,3));
+const partOf=k=>(J[k]||P[k])[J[k]?7:3];
+const L=[['head','neck','head'],['neck','chest','head'],['chest','lsh','arms'],['chest','rsh','arms'],['lsh','lel','arms'],['lel','lwr','arms'],['lwr','lha','hands'],['rsh','rel','arms'],['rel','rwr','arms'],['rwr','rha','hands'],['chest','waist','torso'],['waist','pel','torso'],['pel','lhip','hips'],['pel','rhip','hips'],['lhip','lkn','legs'],['lkn','lan','legs'],['lan','lto','legs'],['rhip','rkn','legs'],['rkn','ran','legs'],['ran','rto','legs']];
+export function mount(el,{part,focus}){
+ if(!el)return;const W=el.clientWidth||800,H=el.clientHeight||520;
+ const r=new THREE.WebGLRenderer({antialias:true});r.setSize(W,H);r.setPixelRatio(devicePixelRatio);el.appendChild(r.domElement);
+ const sc=new THREE.Scene();sc.background=new THREE.Color(0x0e1a26);
+ const cam=new THREE.PerspectiveCamera(40,W/H,0.01,50);
+ const oc=new OrbitControls(cam,r.domElement);
+ sc.add(new THREE.HemisphereLight(0xffffff,0x334455,1.2));const dl=new THREE.DirectionalLight(0xffffff,1);dl.position.set(2,4,3);sc.add(dl);
+ sc.add(new THREE.GridHelper(4,20,0x335577,0x223344));
+ const isIdx=part==='index'||part==='control';
+ const on=p=>isIdx||p===part;
+ const mat=p=>new THREE.MeshStandardMaterial({color:on(p)?0x7fb3e0:0x3a4a5a,metalness:.3,roughness:.5,transparent:!on(p),opacity:on(p)?1:.25});
+ const clickable=[];
+ const add=(m,p)=>{m.userData.part=p;sc.add(m);clickable.push(m)};
+ L.forEach(([a,b,p])=>{const A=pos(a),B=pos(b);const m=new THREE.Mesh(new THREE.CylinderGeometry(p==='legs'||p==='hips'?0.045:0.035,0.035,A.distanceTo(B),14),mat(p));m.position.copy(A).add(B).multiplyScalar(.5);m.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),B.clone().sub(A).normalize());add(m,p)});
+ const hd=new THREE.Mesh(new THREE.SphereGeometry(0.1,24,16),mat('head'));hd.position.copy(pos('head'));add(hd,'head');
+ const to=new THREE.Mesh(new THREE.BoxGeometry(0.36,0.44,0.22),mat('torso'));to.position.set(0,1.2,0);add(to,'torso');
+ const pv=new THREE.Mesh(new THREE.BoxGeometry(0.3,0.1,0.18),mat('hips'));pv.position.copy(pos('pel'));add(pv,'hips');
+ ['l','r'].forEach(s=>{const f=new THREE.Mesh(new THREE.BoxGeometry(0.1,0.04,0.26),mat('legs'));f.position.set(s==='l'?0.1:-0.1,0.02,0.05);add(f,'legs');
+   const h=new THREE.Mesh(new THREE.BoxGeometry(0.08,0.1,0.04),mat('hands'));h.position.copy(pos(s+'ha'));h.position.y-=0.05;add(h,'hands')});
+ const joints=[];
+ Object.entries(J).forEach(([k,d])=>{const hot=on(d[7]);const m=new THREE.Mesh(new THREE.SphereGeometry(0.03+Math.min(d[4],6)*0.006,20,14),new THREE.MeshStandardMaterial({color:hot?(d[4]>=21?0x4cd964:0xf5a623):0x665533,emissive:hot?0x331a00:0,transparent:!hot,opacity:hot?1:.35}));m.position.copy(pos(k));m.userData={part:d[7],j:d};sc.add(m);joints.push(m);clickable.push(m)});
+ // camera focus
+ let tgt=new THREE.Vector3(0,0.9,0),dist=3.2;
+ if(focus&&focus.length&&!isIdx){const b=new THREE.Box3();focus.forEach(k=>b.expandByPoint(pos(k)));b.getCenter(tgt);dist=Math.max(0.9,b.getSize(new THREE.Vector3()).length()*2.2)}
+ oc.target.copy(tgt);cam.position.copy(tgt).add(new THREE.Vector3(dist*.65,dist*.3,dist*.7));oc.update();
+ const ray=new THREE.Raycaster(),mp=new THREE.Vector2(),tip=document.getElementById('tip');
+ const hit=e=>{const b=r.domElement.getBoundingClientRect();mp.x=(e.clientX-b.left)/b.width*2-1;mp.y=-(e.clientY-b.top)/b.height*2+1;ray.setFromCamera(mp,cam);return [ray.intersectObjects(clickable)[0],b]};
+ r.domElement.addEventListener('pointermove',e=>{const [h,b]=hit(e);if(!tip)return;if(h){const u=h.object.userData;tip.style.display='block';tip.style.left=(e.clientX-b.left+12)+'px';tip.style.top=(e.clientY-b.top+12)+'px';tip.innerHTML=u.j?`<b>${u.j[3]}</b><br>${u.j[4]} DoF · ${u.j[5]}<br>Peak: ${u.j[6]} [EST]`+(part==='index'?'<br><i>click to open</i>':''):`<b>${u.part}</b>`+(part==='index'?' (click to open)':'');r.domElement.style.cursor=part==='index'?'pointer':'default'}else{tip.style.display='none';r.domElement.style.cursor='grab'}});
+ let down;r.domElement.addEventListener('pointerdown',e=>down=[e.clientX,e.clientY]);
+ r.domElement.addEventListener('pointerup',e=>{if(part!=='index'||!down||Math.hypot(e.clientX-down[0],e.clientY-down[1])>4)return;const [h]=hit(e);if(h)location.href=h.object.userData.part+'.html'});
+ addEventListener('resize',()=>{const w=el.clientWidth;r.setSize(w,H);cam.aspect=w/H;cam.updateProjectionMatrix()});
+ (function loop(){requestAnimationFrame(loop);r.render(sc,cam)})();
+ window.__threeOK=true;
+}
+
+mount(document.getElementById("three"), {"part": "control", "focus": []});</script></body></html>

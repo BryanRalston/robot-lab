@@ -1,0 +1,9 @@
+arms.html 3D True tables 2 errors []
+control.html 3D True tables 0 errors []
+hands.html 3D True tables 0 errors []
+head.html 3D True tables 2 errors []
+hips.html 3D True tables 2 errors []
+index.html 3D True tables 3 errors []
+legs.html 3D True tables 2 errors []
+torso.html 3D False tables 1 errors ["Cannot read properties of undefined (reading 'slice')"]
+after click: file:///workspace/robot-lab/site/torso.html

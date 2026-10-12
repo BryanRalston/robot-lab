@@ -1,0 +1,437 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Humanoid Design v1 — Overview</title><style>*{box-sizing:border-box}body{margin:0;font:15px/1.55 system-ui,sans-serif;background:#0b141d;color:#dbe7f2}
+nav{position:fixed;top:0;left:0;bottom:0;width:260px;overflow:auto;background:#101e2b;padding:16px;border-right:1px solid #1e3347}
+nav h1{font-size:16px;margin:0 0 12px;color:#fff}nav a{display:block;color:#9fc3e3;text-decoration:none;padding:4px 6px;border-radius:4px;font-size:14px}
+nav a.sub{padding-left:20px;font-size:13px;color:#7ea4c6}nav a.active,nav a:hover{background:#1f3b57;color:#fff}
+main{margin-left:260px;padding:24px 40px;max-width:1200px}section{margin-bottom:40px;scroll-margin-top:10px}h2{border-bottom:2px solid #f5a623;padding-bottom:4px}
+table{border-collapse:collapse;width:100%;font-size:13px;margin:12px 0;display:block;overflow-x:auto}th,td{border:1px solid #24405a;padding:6px 8px;vertical-align:top}
+th{background:#16293b;cursor:pointer;user-select:none;position:sticky;top:0}th[data-dir=asc]:after{content:" ▲"}th[data-dir=desc]:after{content:" ▼"}tr:nth-child(even) td{background:#0f1c28}
+a{color:#7fc4ff}.card{background:#101e2b;border:1px solid #1e3347;border-radius:8px;padding:10px 16px;margin:12px 0;scroll-margin-top:10px}.card h3{margin:4px 0;color:#f5a623}
+.svgbox{background:#0e1a26;border:1px solid #1e3347;border-radius:8px;padding:10px;display:inline-block;margin:8px 0}
+#viewer{position:relative;border:1px solid #1e3347;border-radius:8px;overflow:hidden;margin:10px 0}#three{width:100%;height:480px}
+.hint{position:absolute;top:8px;left:10px;font-size:12px;color:#9fc3e3}#tip{position:absolute;display:none;background:#000c;padding:6px 8px;border-radius:6px;font-size:12px;pointer-events:none}
+blockquote{border-left:4px solid #f5a623;margin:0;padding:4px 12px;background:#101e2b}#three{height:520px}.legend{font-size:13px;color:#9fc3e3}.crumb{font-size:13px}</style><script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script></head><body><nav><h1><a href="index.html" style="padding:0;color:#fff">Humanoid Design v1</a></h1><a href="index.html" class=active>Overview (assembled)</a><a href="head.html">Head &amp; sensors</a><a href="torso.html">Torso, spine, power &amp; compute</a><a href="arms.html">Shoulders &amp; arms</a><a href="hands.html">Hands (2 × 21 DoF)</a><a href="hips.html">Hips &amp; pelvis</a><a href="legs.html">Legs &amp; feet</a><a href="control.html">Control &amp; AI stack</a><a href="sim.html">▶ Physics sim (MuJoCo)</a></nav><main><h1>Humanoid Robot Design Specification (v1, revised: design-only, unconstrained budget)</h1>
+<p><em>Prepared for Bryan Ralston · Oct 12, 2026 · Status: draft</em></p>
+<blockquote>
+<p>Benchmark specs are cited. Everything marked <strong>[EST]</strong> is our engineering estimate or design target, not a published figure. Competitor numbers are vendor claims; Optimus figures are third-party reports only.</p>
+</blockquote>
+<hr /><div id="viewer"><div id="three"></div><div class="hint">Drag to rotate · hover a joint · <b>click a part to open its page</b></div><div id="tip"></div></div><h2>Parts</h2><a class="card" style="display:block" href="head.html"><h3>Head &amp; sensors</h3></a><a class="card" style="display:block" href="torso.html"><h3>Torso, spine, power &amp; compute</h3></a><a class="card" style="display:block" href="arms.html"><h3>Shoulders &amp; arms</h3></a><a class="card" style="display:block" href="hands.html"><h3>Hands (2 × 21 DoF)</h3></a><a class="card" style="display:block" href="hips.html"><h3>Hips &amp; pelvis</h3></a><a class="card" style="display:block" href="legs.html"><h3>Legs &amp; feet</h3></a><a class="card" style="display:block" href="control.html"><h3>Control &amp; AI stack</h3></a><section><h2>2. Target specs: beat every current humanoid on every axis</h2><p>All targets are <strong>[EST]</strong> design goals. The comparison column shows the current best published figure from §1.</p>
+<table>
+<thead>
+<tr>
+<th>Spec</th>
+<th>Target</th>
+<th>Current best (source)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Height</td>
+<td>1.75 m (fits human workspaces; reach 2.3 m+)</td>
+<td>Atlas 1.9 m, reach 2.3 m [BD]</td>
+</tr>
+<tr>
+<td>Mass</td>
+<td>68 kg</td>
+<td>Figure 03 61 kg at 20 kg payload [F03]</td>
+</tr>
+<tr>
+<td>Total DoF</td>
+<td><strong>75</strong> (body 33 + hands 2×21)</td>
+<td>NEO 75 per vendor tracker [RR]; Atlas 56 [BD]</td>
+</tr>
+<tr>
+<td>Hand DoF</td>
+<td>21 actuated per hand + 3 wrist (counted in body)</td>
+<td>NEO 22 + 3 wrist [TQ]; Optimus Gen 3 22 (reported) [OPT]</td>
+</tr>
+<tr>
+<td>Payload</td>
+<td>60 kg instant / 35 kg sustained (two-arm); 10 kg per arm at full reach</td>
+<td>Atlas 50 / 30 kg [BD]</td>
+</tr>
+<tr>
+<td>Walk / run</td>
+<td>2.0 m/s walk, 5 m/s run</td>
+<td>H1 3.3 m/s [UH1]; NEO 6.2 m/s max run [TQ]</td>
+</tr>
+<tr>
+<td>Runtime</td>
+<td>6 h mixed duty, plus self-swappable battery (unlimited uptime)</td>
+<td>Figure 03 5 h [F03-batt]; Atlas 4 h with swap [BD]</td>
+</tr>
+<tr>
+<td>Battery</td>
+<td>3.0 kWh, 2.5 kW wireless charge plus hot-swap</td>
+<td>Figure 03 2.3 kWh, 2 kW [F03-batt]</td>
+</tr>
+<tr>
+<td>Joint range</td>
+<td>Continuous-rotation waist, wrist roll, and neck yaw</td>
+<td>Atlas "continuous" [BD]</td>
+</tr>
+<tr>
+<td>Ingress / temp</td>
+<td>IP67, −20 to 45 °C</td>
+<td>Atlas IP67, −20 to 40 °C [BD]</td>
+</tr>
+<tr>
+<td>Fingertip sensing</td>
+<td>&lt; 1 g force threshold, plus palm cameras</td>
+<td>Figure 03 ~3 g [F03]</td>
+</tr>
+<tr>
+<td>Compute</td>
+<td>2× Jetson Thor T5000 (4,140 FP4 TFLOPS sparse, 260 W max) + RT controller</td>
+<td>Thor 2,070 TFLOPS each [NV]</td>
+</tr>
+<tr>
+<td>Control rates</td>
+<td>Joint current loop 20–40 kHz, joint impedance 2 kHz, WBC 1 kHz, RL policy 200 Hz, VLA 10–50 Hz</td>
+<td></td>
+</tr>
+<tr>
+<td>Noise</td>
+<td>&lt; 55 dB(A) at 1 m when walking</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<hr /></section><section><h2>1. State of the art: benchmark (Oct 2026)</h2><table>
+<thead>
+<tr>
+<th>Robot</th>
+<th>Height</th>
+<th>Mass</th>
+<th>Total DoF</th>
+<th>Hand DoF</th>
+<th>Payload</th>
+<th>Speed</th>
+<th>Battery / runtime</th>
+<th>Price</th>
+<th>Sources</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Boston Dynamics Atlas (electric, product)</strong></td>
+<td>1.9 m</td>
+<td>90 kg</td>
+<td>56</td>
+<td>not published (tactile hands)</td>
+<td>50 kg instant / 30 kg sustained</td>
+<td>not published</td>
+<td>4 h, self-swapping battery; IP67</td>
+<td>Enterprise only (not public)</td>
+<td>[BD]</td>
+</tr>
+<tr>
+<td><strong>Figure 03</strong></td>
+<td>1.73 m (5'8")</td>
+<td>61 kg</td>
+<td>Not published (third parties say ~30)</td>
+<td>Not published (third parties say ~20); palm cams, 3 g fingertip sensing</td>
+<td>20 kg</td>
+<td>1.2 m/s</td>
+<td>2.3 kWh, ~5 h; 2 kW wireless charging</td>
+<td>Not public</td>
+<td>[F03], [F03-batt], [RG]</td>
+</tr>
+<tr>
+<td><strong>Tesla Optimus Gen 2 → Gen 3</strong></td>
+<td>~1.73 m</td>
+<td>~57 kg</td>
+<td>28 body (14 rotary + 14 linear actuators)</td>
+<td>11/hand (Gen 2) → 22/hand (Gen 3, reported)</td>
+<td>~20 kg carry (Gen 2)</td>
+<td>~1.3–1.6 m/s (reported)</td>
+<td>~2.3 kWh (reported)</td>
+<td>$20–30k target at scale (unconfirmed)</td>
+<td>[OPT], [HA] (no official Tesla spec sheet)</td>
+</tr>
+<tr>
+<td><strong>Unitree H1</strong></td>
+<td>~1.80 m</td>
+<td>~47 kg</td>
+<td>19 actuated (5/leg, 4/arm + torso)</td>
+<td>none standard</td>
+<td>not specified</td>
+<td>3.3 m/s (claimed record)</td>
+<td>864 Wh</td>
+<td>~$90k (quote)</td>
+<td>[UH1], [RZ-H1]</td>
+</tr>
+<tr>
+<td><strong>Unitree G1</strong></td>
+<td>1.32 m</td>
+<td>~35 kg</td>
+<td>23–43</td>
+<td>7 (optional Dex3-1 three-finger hand)</td>
+<td>~2 kg per arm</td>
+<td>up to 2 m/s</td>
+<td>9 Ah, ~2 h</td>
+<td>from $13,500</td>
+<td>[UG1], [UG1-doc]</td>
+</tr>
+<tr>
+<td><strong>1X NEO</strong></td>
+<td>1.68 m</td>
+<td>~30 kg</td>
+<td>75 (per vendor tracker)</td>
+<td>22 finger/palm + 3 wrist, tendon-driven</td>
+<td>25 kg carry / 8 kg arm</td>
+<td>1.4 m/s walk, 6.2 m/s max run</td>
+<td>842 Wh, ~4 h</td>
+<td>$20,000 or $499/mo</td>
+<td>[TQ], [RR]</td>
+</tr>
+<tr>
+<td><strong>Agility Digit (current) / Digit 5</strong></td>
+<td>1.75 m / 1.81 m</td>
+<td>~64 kg / 129 kg</td>
+<td>28 (current, per trackers)</td>
+<td>grippers, not dexterous hands</td>
+<td>16 kg / 22.7 kg</td>
+<td>not published here</td>
+<td>up to 4 h (current); 90 min with 9 min charge (Digit 5)</td>
+<td>RaaS / enterprise</td>
+<td>[RZ], [IDT]</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key reference parts:</strong> NVIDIA Jetson AGX Thor (T5000): 2,070 FP4 TFLOPS (sparse), 128 GB LPDDR5X, 14-core Arm, 40–130 W; dev kit $5,499 (raised from $3,499 in July 2026). T4000: 1,200 TFLOPS, 40–70 W. [NV], [NV-blog], [ANT]</p>
+<p><strong>Takeaways</strong>
+1. The <strong>leading benchmark is ~1.7 m, 55–65 kg, ~20 kg payload, 4–5 h runtime, 1.2–1.5 m/s walk</strong>, plus dexterous hands with roughly 20 DoF.
+2. The edge comes from <strong>in-house actuators</strong> (Figure, Tesla, BD), <strong>dexterous hands with tactile sensing</strong>, and above all <strong>VLA autonomy and data scale</strong> (Figure Helix, 1X Redwood, Tesla). Hardware is necessary, but autonomy is the differentiator.
+3. Unitree shows the cost frontier: a full robot for $13.5k–$90k built around integrated QDD-style PMSM joints.</p>
+<hr /></section><section><h2>Full joint table</h2><p>Kinematic layout: legs 2×7 (hip 3, knee 1, ankle 2, toe 1), waist 3, arms 2×7 (shoulder 3, elbow 1, wrist 3), neck 2. Arm wrists are counted in the arms, so the <strong>body total is 33</strong>; with 2×21 hand DoF the robot has <strong>75 actuated DoF</strong>, which equals or exceeds every published total. All torques and speeds are peak values <strong>[EST]</strong>, to be validated by trajectory-optimization sweeps (sprint, jump 0.5 m, 60 kg deadlift, stairs, fall recovery).</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Joint</th>
+<th>DoF</th>
+<th>Actuator</th>
+<th>Peak torque</th>
+<th>Peak speed</th>
+<th>Range</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Hip yaw</td>
+<td>1 ×2</td>
+<td>QDD: frameless PMSM Ø100 + 1-stage planetary 9:1</td>
+<td>150 N·m</td>
+<td>20 rad/s</td>
+<td>±45°</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Hip roll</td>
+<td>1 ×2</td>
+<td>QDD Ø120, planetary 9:1</td>
+<td>300 N·m</td>
+<td>18 rad/s</td>
+<td>−30/+90°</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Hip pitch</td>
+<td>1 ×2</td>
+<td>QDD Ø130, 2-stage compound planetary 12:1, liquid-cooled</td>
+<td>400 N·m</td>
+<td>18 rad/s</td>
+<td>−160/+45°</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Knee</td>
+<td>1 ×2</td>
+<td>Inverted planetary roller screw (Ø16, 4 mm lead) + PMSM in the thigh, via a variable-ratio linkage</td>
+<td>450 N·m (&gt; H1 360 [UH1])</td>
+<td>20 rad/s</td>
+<td>0–165°</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Ankle pitch + roll</td>
+<td>2 ×2</td>
+<td>Parallel: 2× ball/roller-screw linear actuators in the shank (differential)</td>
+<td>250 N·m pitch / 120 N·m roll combined</td>
+<td>25 rad/s</td>
+<td>±50° / ±30°</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Toe</td>
+<td>1 ×2</td>
+<td>Small QDD + belt, passive spring</td>
+<td>40 N·m</td>
+<td>20 rad/s</td>
+<td>0–60°</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Waist yaw</td>
+<td>1</td>
+<td>Cycloidal 30:1 + hollow PMSM, slip ring</td>
+<td>250 N·m</td>
+<td>8 rad/s</td>
+<td>continuous</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Waist pitch/roll</td>
+<td>2</td>
+<td>Two linear roller screws, parallel (spine)</td>
+<td>400 / 250 N·m</td>
+<td>6 rad/s</td>
+<td>±60° / ±30°</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Shoulder pitch</td>
+<td>1 ×2</td>
+<td>Strain-wave (CSG-25 class) 50:1 + frameless</td>
+<td>180 N·m</td>
+<td>10 rad/s</td>
+<td>continuous</td>
+</tr>
+<tr>
+<td>10</td>
+<td>Shoulder roll</td>
+<td>1 ×2</td>
+<td>Strain-wave 50:1</td>
+<td>150 N·m</td>
+<td>10 rad/s</td>
+<td>−20/+190°</td>
+</tr>
+<tr>
+<td>11</td>
+<td>Upper-arm yaw</td>
+<td>1 ×2</td>
+<td>Strain-wave (CSG-20)</td>
+<td>80 N·m</td>
+<td>12 rad/s</td>
+<td>±170°</td>
+</tr>
+<tr>
+<td>12</td>
+<td>Elbow</td>
+<td>1 ×2</td>
+<td>Planetary roller screw linear actuator, in the upper arm</td>
+<td>150 N·m</td>
+<td>12 rad/s</td>
+<td>0–150°</td>
+</tr>
+<tr>
+<td>13</td>
+<td>Wrist roll</td>
+<td>1 ×2</td>
+<td>Strain-wave CSF-14</td>
+<td>25 N·m</td>
+<td>15 rad/s</td>
+<td>continuous</td>
+</tr>
+<tr>
+<td>14</td>
+<td>Wrist pitch/yaw</td>
+<td>2 ×2</td>
+<td>2× micro ball-screw linear actuators in the forearm (parallel)</td>
+<td>30 N·m</td>
+<td>15 rad/s</td>
+<td>±80° / ±40°</td>
+</tr>
+<tr>
+<td>15</td>
+<td>Neck yaw / pitch</td>
+<td>2</td>
+<td>Strain-wave micro + PMSM</td>
+<td>10 N·m</td>
+<td>15 rad/s</td>
+<td>continuous / ±50°</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Actuator rationale.</strong> Low-ratio quasi-direct-drive in the hips gives backdrivability, impact tolerance, and transparency for RL sim-to-real. Roller screws handle the highest-torque, high-impact points (knee, ankle, spine, elbow), following Optimus's 14 linear actuators [OPT]: they offer high force density and shock load capacity, and placing motors proximally cuts leg inertia. Strain-wave drives in the shoulders and wrists give zero-backlash precision.</p>
+<p><strong>Every actuator module includes:</strong> frameless PMSM (NdFeB N52SH, concentrated windings, segmented stator), an integrated 48–100 V GaN inverter (20–40 kHz FOC), dual absolute encoders (motor 19-bit, output 21-bit), a winding NTC plus an inverter thermistor, a strain-gauge output torque sensor on the hips, knees, and shoulders, a power-off brake on the shoulders and waist, and a hollow shaft for harnessing.</p>
+<hr /></section><section><h2>Sources</h2><ul>
+<li>[BD] Boston Dynamics, Atlas product page: https://bostondynamics.com/products/atlas/</li>
+<li>[F03] Figure, "Introducing Figure 03": https://www.figure.ai/news/introducing-figure-03</li>
+<li>[F03-batt] Figure, "F.03 Battery Development": https://www.figure.ai/news/f-03-battery-development</li>
+<li>[RG] Robotica Guide, Figure 03 specs: https://roboticaguide.com/figure-03-specs-helix-botq-what-is-undisclosed/</li>
+<li>[OPT] Optimusk blog, Optimus hardware (third-party, unofficial): https://optimusk.blog/blog/tesla-optimus-hardware-specs/</li>
+<li>[HA] HumanoidApplications compare: https://humanoidapplications.com/compare/</li>
+<li>[UH1] Unitree H1: https://www.unitree.com/h1</li>
+<li>[RZ-H1] RoboZaps H1 review: https://blog.robozaps.com/b/unitree-h1-review</li>
+<li>[UG1] Unitree G1: https://www.unitree.com/g1/</li>
+<li>[UG1-doc] Unitree G1 developer docs: https://support.unitree.com/home/en/G1_developer/about_G1</li>
+<li>[TQ] TechniaHQ comparison (NEO details): https://www.techniahqservice.com/robotics-news/tesla-optimus-vs-figure-unitree-1x-neo</li>
+<li>[RR] RankedRobot NEO vs G1: https://rankedrobot.com/compare/1x-neo-vs-unitree-g1/</li>
+<li>[RZ] RoboZaps Optimus alternatives: https://blog.robozaps.com/b/tesla-optimus-alternatives-competitors</li>
+<li>[IDT] Inside Deep Tech 2026 guide (Digit 5): https://www.insidedeeptech.com/humanoid-robots-2026-full-guide/</li>
+<li>[NV] NVIDIA Jetson Thor: https://www.nvidia.com/en-us/autonomous-machines/embedded-systems/jetson-thor/</li>
+<li>[NV-blog] NVIDIA technical blog, Jetson Thor: https://developer.nvidia.com/blog/introducing-nvidia-jetson-thor-the-ultimate-platform-for-physical-ai/</li>
+<li>[ANT] Antarum, Thor pricing: https://www.antarum.ai/parts-power/nvidia-jetson-agx-thor-dev-kit/</li>
+</ul>
+<p><em>Note: Component part names in §3 are candidates to evaluate. Their specs should be confirmed against current datasheets before purchase.</em></p></section></main><script>
+// sortable tables
+document.querySelectorAll('table').forEach(t=>{const ths=t.querySelectorAll('th');ths.forEach((th,i)=>{th.title='Click to sort';th.addEventListener('click',()=>{const tb=t.tBodies[0];const rows=[...tb.rows];const asc=th.dataset.dir!=='asc';ths.forEach(h=>{delete h.dataset.dir});th.dataset.dir=asc?'asc':'desc';const num=s=>{const m=s.replace(/,/g,'').match(/-?\d+(\.\d+)?/);return m?parseFloat(m[0]):NaN};rows.sort((a,b)=>{const x=a.cells[i].innerText.trim(),y=b.cells[i].innerText.trim();const nx=num(x),ny=num(y);let r=(!isNaN(nx)&&!isNaN(ny))?nx-ny:x.localeCompare(y);return asc?r:-r});rows.forEach(r=>tb.appendChild(r))})})});
+// active nav
+const links=[...document.querySelectorAll('nav a')];const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){links.forEach(l=>l.classList.toggle('active',l.getAttribute('href')==='#'+e.target.id))}}),{rootMargin:'-20% 0px -70% 0px'});document.querySelectorAll('section,.card').forEach(s=>obs.observe(s));
+</script><script type="module">import * as THREE from 'three';
+import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
+// joint: [x,y,z,label,DoF,actuator,torque,part]
+export const J={
+ neck:[0,1.55,0,'Neck yaw/pitch',2,'Strain-wave','10 N·m','head'],
+ waist:[0,1.02,0,'Waist yaw/pitch/roll',3,'Cycloidal + 2 roller screws','250/400/250 N·m','torso'],
+ lsh:[0.21,1.42,0,'L shoulder',3,'Strain-wave','180/150/80 N·m','arms'],rsh:[-0.21,1.42,0,'R shoulder',3,'Strain-wave','180/150/80 N·m','arms'],
+ lel:[0.23,1.13,0,'L elbow',1,'Planetary roller screw','150 N·m','arms'],rel:[-0.23,1.13,0,'R elbow',1,'Planetary roller screw','150 N·m','arms'],
+ lwr:[0.24,0.86,0,'L wrist',3,'Strain-wave roll + 2 linear','25/30 N·m','arms'],rwr:[-0.24,0.86,0,'R wrist',3,'Strain-wave roll + 2 linear','25/30 N·m','arms'],
+ lha:[0.25,0.76,0,'L hand',21,'Tendon, forearm motors','300 N grasp','hands'],rha:[-0.25,0.76,0,'R hand',21,'Tendon, forearm motors','300 N grasp','hands'],
+ lhip:[0.1,0.92,0,'L hip yaw/roll/pitch',3,'QDD planetary','150/300/400 N·m','hips'],rhip:[-0.1,0.92,0,'R hip yaw/roll/pitch',3,'QDD planetary','150/300/400 N·m','hips'],
+ lkn:[0.1,0.5,0,'L knee',1,'Roller screw + linkage','450 N·m','legs'],rkn:[-0.1,0.5,0,'R knee',1,'Roller screw + linkage','450 N·m','legs'],
+ lan:[0.1,0.08,0,'L ankle pitch/roll',2,'2× parallel linear','250/120 N·m','legs'],ran:[-0.1,0.08,0,'R ankle pitch/roll',2,'2× parallel linear','250/120 N·m','legs'],
+ lto:[0.1,0.02,0.14,'L toe',1,'QDD + belt','40 N·m','legs'],rto:[-0.1,0.02,0.14,'R toe',1,'QDD + belt','40 N·m','legs'],
+};
+const P={head:[0,1.68,0,'head'],chest:[0,1.42,0,'torso'],pel:[0,0.92,0,'hips']};
+const pos=k=>new THREE.Vector3(...(J[k]||P[k]).slice(0,3));
+const partOf=k=>(J[k]||P[k])[J[k]?7:3];
+const L=[['head','neck','head'],['neck','chest','head'],['chest','lsh','arms'],['chest','rsh','arms'],['lsh','lel','arms'],['lel','lwr','arms'],['lwr','lha','hands'],['rsh','rel','arms'],['rel','rwr','arms'],['rwr','rha','hands'],['chest','waist','torso'],['waist','pel','torso'],['pel','lhip','hips'],['pel','rhip','hips'],['lhip','lkn','legs'],['lkn','lan','legs'],['lan','lto','legs'],['rhip','rkn','legs'],['rkn','ran','legs'],['ran','rto','legs']];
+export function mount(el,{part,focus}){
+ if(!el)return;const W=el.clientWidth||800,H=el.clientHeight||520;
+ const r=new THREE.WebGLRenderer({antialias:true});r.setSize(W,H);r.setPixelRatio(devicePixelRatio);el.appendChild(r.domElement);
+ const sc=new THREE.Scene();sc.background=new THREE.Color(0x0e1a26);
+ const cam=new THREE.PerspectiveCamera(40,W/H,0.01,50);
+ const oc=new OrbitControls(cam,r.domElement);
+ sc.add(new THREE.HemisphereLight(0xffffff,0x334455,1.2));const dl=new THREE.DirectionalLight(0xffffff,1);dl.position.set(2,4,3);sc.add(dl);
+ sc.add(new THREE.GridHelper(4,20,0x335577,0x223344));
+ const isIdx=part==='index'||part==='control';
+ const on=p=>isIdx||p===part;
+ const mat=p=>new THREE.MeshStandardMaterial({color:on(p)?0x7fb3e0:0x3a4a5a,metalness:.3,roughness:.5,transparent:!on(p),opacity:on(p)?1:.25});
+ const clickable=[];
+ const add=(m,p)=>{m.userData.part=p;sc.add(m);clickable.push(m)};
+ L.forEach(([a,b,p])=>{const A=pos(a),B=pos(b);const m=new THREE.Mesh(new THREE.CylinderGeometry(p==='legs'||p==='hips'?0.045:0.035,0.035,A.distanceTo(B),14),mat(p));m.position.copy(A).add(B).multiplyScalar(.5);m.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),B.clone().sub(A).normalize());add(m,p)});
+ const hd=new THREE.Mesh(new THREE.SphereGeometry(0.1,24,16),mat('head'));hd.position.copy(pos('head'));add(hd,'head');
+ const to=new THREE.Mesh(new THREE.BoxGeometry(0.36,0.44,0.22),mat('torso'));to.position.set(0,1.2,0);add(to,'torso');
+ const pv=new THREE.Mesh(new THREE.BoxGeometry(0.3,0.1,0.18),mat('hips'));pv.position.copy(pos('pel'));add(pv,'hips');
+ ['l','r'].forEach(s=>{const f=new THREE.Mesh(new THREE.BoxGeometry(0.1,0.04,0.26),mat('legs'));f.position.set(s==='l'?0.1:-0.1,0.02,0.05);add(f,'legs');
+   const h=new THREE.Mesh(new THREE.BoxGeometry(0.08,0.1,0.04),mat('hands'));h.position.copy(pos(s+'ha'));h.position.y-=0.05;add(h,'hands')});
+ const joints=[];
+ Object.entries(J).forEach(([k,d])=>{const hot=on(d[7]);const m=new THREE.Mesh(new THREE.SphereGeometry(0.03+Math.min(d[4],6)*0.006,20,14),new THREE.MeshStandardMaterial({color:hot?(d[4]>=21?0x4cd964:0xf5a623):0x665533,emissive:hot?0x331a00:0,transparent:!hot,opacity:hot?1:.35}));m.position.copy(pos(k));m.userData={part:d[7],j:d};sc.add(m);joints.push(m);clickable.push(m)});
+ // camera focus
+ let tgt=new THREE.Vector3(0,0.9,0),dist=3.2;
+ if(focus&&focus.length&&!isIdx){const b=new THREE.Box3();focus.forEach(k=>b.expandByPoint(pos(k)));b.getCenter(tgt);dist=Math.max(0.9,b.getSize(new THREE.Vector3()).length()*2.2)}
+ oc.target.copy(tgt);cam.position.copy(tgt).add(new THREE.Vector3(dist*.65,dist*.3,dist*.7));oc.update();
+ const ray=new THREE.Raycaster(),mp=new THREE.Vector2(),tip=document.getElementById('tip');
+ const hit=e=>{const b=r.domElement.getBoundingClientRect();mp.x=(e.clientX-b.left)/b.width*2-1;mp.y=-(e.clientY-b.top)/b.height*2+1;ray.setFromCamera(mp,cam);return [ray.intersectObjects(clickable)[0],b]};
+ r.domElement.addEventListener('pointermove',e=>{const [h,b]=hit(e);if(!tip)return;if(h){const u=h.object.userData;tip.style.display='block';tip.style.left=(e.clientX-b.left+12)+'px';tip.style.top=(e.clientY-b.top+12)+'px';tip.innerHTML=u.j?`<b>${u.j[3]}</b><br>${u.j[4]} DoF · ${u.j[5]}<br>Peak: ${u.j[6]} [EST]`+(part==='index'?'<br><i>click to open</i>':''):`<b>${u.part}</b>`+(part==='index'?' (click to open)':'');r.domElement.style.cursor=part==='index'?'pointer':'default'}else{tip.style.display='none';r.domElement.style.cursor='grab'}});
+ let down;r.domElement.addEventListener('pointerdown',e=>down=[e.clientX,e.clientY]);
+ r.domElement.addEventListener('pointerup',e=>{if(part!=='index'||!down||Math.hypot(e.clientX-down[0],e.clientY-down[1])>4)return;const [h]=hit(e);if(h)location.href=h.object.userData.part+'.html'});
+ addEventListener('resize',()=>{const w=el.clientWidth;r.setSize(w,H);cam.aspect=w/H;cam.updateProjectionMatrix()});
+ (function loop(){requestAnimationFrame(loop);r.render(sc,cam)})();
+ window.__threeOK=true;
+}
+
+mount(document.getElementById("three"), {"part": "index", "focus": []});</script></body></html>

@@ -1,0 +1,545 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Humanoid Design Spec v1</title><style>*{box-sizing:border-box}body{margin:0;font:15px/1.55 system-ui,sans-serif;background:#0b141d;color:#dbe7f2}
+nav{position:fixed;top:0;left:0;bottom:0;width:260px;overflow:auto;background:#101e2b;padding:16px;border-right:1px solid #1e3347}
+nav h1{font-size:16px;margin:0 0 12px;color:#fff}nav a{display:block;color:#9fc3e3;text-decoration:none;padding:4px 6px;border-radius:4px;font-size:14px}
+nav a.sub{padding-left:20px;font-size:13px;color:#7ea4c6}nav a.active,nav a:hover{background:#1f3b57;color:#fff}
+main{margin-left:260px;padding:24px 40px;max-width:1200px}section{margin-bottom:40px;scroll-margin-top:10px}h2{border-bottom:2px solid #f5a623;padding-bottom:4px}
+table{border-collapse:collapse;width:100%;font-size:13px;margin:12px 0;display:block;overflow-x:auto}th,td{border:1px solid #24405a;padding:6px 8px;vertical-align:top}
+th{background:#16293b;cursor:pointer;user-select:none;position:sticky;top:0}th[data-dir=asc]:after{content:" ▲"}th[data-dir=desc]:after{content:" ▼"}tr:nth-child(even) td{background:#0f1c28}
+a{color:#7fc4ff}.card{background:#101e2b;border:1px solid #1e3347;border-radius:8px;padding:10px 16px;margin:12px 0;scroll-margin-top:10px}.card h3{margin:4px 0;color:#f5a623}
+.svgbox{background:#0e1a26;border:1px solid #1e3347;border-radius:8px;padding:10px;display:inline-block;margin:8px 0}
+#viewer{position:relative;border:1px solid #1e3347;border-radius:8px;overflow:hidden;margin:10px 0}#three{width:100%;height:480px}
+.hint{position:absolute;top:8px;left:10px;font-size:12px;color:#9fc3e3}#tip{position:absolute;display:none;background:#000c;padding:6px 8px;border-radius:6px;font-size:12px;pointer-events:none}
+blockquote{border-left:4px solid #f5a623;margin:0;padding:4px 12px;background:#101e2b}</style></head>
+<body><nav><h1>Humanoid Design v1</h1><a href="#1-state-of-the-art-benchmark-oct-2026">1. State of the art: benchmark (Oct 2026)</a><a href="#2-target-specs-beat-every-current-humanoid-on-every-axis">2. Target specs: beat every current humanoid on every axis</a><a href="#3-body-plan-and-joint-table">3. Body plan and joint table</a><a href="#4-mechanical-design-by-segment">4. Mechanical design by segment</a><a class="sub" href="#seg-head">Head</a><a class="sub" href="#seg-torso-chest">Torso / chest</a><a class="sub" href="#seg-spine-waist">Spine / waist</a><a class="sub" href="#seg-pelvis">Pelvis</a><a class="sub" href="#seg-thigh">Thigh</a><a class="sub" href="#seg-shank">Shank</a><a class="sub" href="#seg-foot">Foot</a><a class="sub" href="#seg-shoulder-girdle">Shoulder girdle</a><a class="sub" href="#seg-upper-arm-forearm">Upper arm / forearm</a><a class="sub" href="#seg-covers">Covers</a><a class="sub" href="#seg-fasteners-and-serviceability">Fasteners and serviceability</a><a href="#5-hands-2-21-dof">5. Hands (2 × 21 DoF)</a><a href="#6-sensors">6. Sensors</a><a href="#7-compute-and-electronics">7. Compute and electronics</a><a href="#8-power">8. Power</a><a href="#9-thermal">9. Thermal</a><a href="#10-control-and-ai-stack">10. Control and AI stack</a><a href="#11-key-design-risks">11. Key design risks</a><a href="#12-next-design-steps">12. Next design steps</a><a href="#sources">Sources</a></nav><main><header><h1>Humanoid Robot Design Specification (v1, revised: design-only, unconstrained budget)</h1>
+<p><em>Prepared for Bryan Ralston · Oct 12, 2026 · Status: draft</em></p>
+<blockquote>
+<p>Benchmark specs are cited. Everything marked <strong>[EST]</strong> is our engineering estimate or design target, not a published figure. Competitor numbers are vendor claims; Optimus figures are third-party reports only.</p>
+</blockquote>
+<hr /></header><section id="1-state-of-the-art-benchmark-oct-2026"><h2>1. State of the art: benchmark (Oct 2026)</h2><table>
+<thead>
+<tr>
+<th>Robot</th>
+<th>Height</th>
+<th>Mass</th>
+<th>Total DoF</th>
+<th>Hand DoF</th>
+<th>Payload</th>
+<th>Speed</th>
+<th>Battery / runtime</th>
+<th>Price</th>
+<th>Sources</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Boston Dynamics Atlas (electric, product)</strong></td>
+<td>1.9 m</td>
+<td>90 kg</td>
+<td>56</td>
+<td>not published (tactile hands)</td>
+<td>50 kg instant / 30 kg sustained</td>
+<td>not published</td>
+<td>4 h, self-swapping battery; IP67</td>
+<td>Enterprise only (not public)</td>
+<td>[BD]</td>
+</tr>
+<tr>
+<td><strong>Figure 03</strong></td>
+<td>1.73 m (5'8")</td>
+<td>61 kg</td>
+<td>Not published (third parties say ~30)</td>
+<td>Not published (third parties say ~20); palm cams, 3 g fingertip sensing</td>
+<td>20 kg</td>
+<td>1.2 m/s</td>
+<td>2.3 kWh, ~5 h; 2 kW wireless charging</td>
+<td>Not public</td>
+<td>[F03], [F03-batt], [RG]</td>
+</tr>
+<tr>
+<td><strong>Tesla Optimus Gen 2 → Gen 3</strong></td>
+<td>~1.73 m</td>
+<td>~57 kg</td>
+<td>28 body (14 rotary + 14 linear actuators)</td>
+<td>11/hand (Gen 2) → 22/hand (Gen 3, reported)</td>
+<td>~20 kg carry (Gen 2)</td>
+<td>~1.3–1.6 m/s (reported)</td>
+<td>~2.3 kWh (reported)</td>
+<td>$20–30k target at scale (unconfirmed)</td>
+<td>[OPT], [HA] (no official Tesla spec sheet)</td>
+</tr>
+<tr>
+<td><strong>Unitree H1</strong></td>
+<td>~1.80 m</td>
+<td>~47 kg</td>
+<td>19 actuated (5/leg, 4/arm + torso)</td>
+<td>none standard</td>
+<td>not specified</td>
+<td>3.3 m/s (claimed record)</td>
+<td>864 Wh</td>
+<td>~$90k (quote)</td>
+<td>[UH1], [RZ-H1]</td>
+</tr>
+<tr>
+<td><strong>Unitree G1</strong></td>
+<td>1.32 m</td>
+<td>~35 kg</td>
+<td>23–43</td>
+<td>7 (optional Dex3-1 three-finger hand)</td>
+<td>~2 kg per arm</td>
+<td>up to 2 m/s</td>
+<td>9 Ah, ~2 h</td>
+<td>from $13,500</td>
+<td>[UG1], [UG1-doc]</td>
+</tr>
+<tr>
+<td><strong>1X NEO</strong></td>
+<td>1.68 m</td>
+<td>~30 kg</td>
+<td>75 (per vendor tracker)</td>
+<td>22 finger/palm + 3 wrist, tendon-driven</td>
+<td>25 kg carry / 8 kg arm</td>
+<td>1.4 m/s walk, 6.2 m/s max run</td>
+<td>842 Wh, ~4 h</td>
+<td>$20,000 or $499/mo</td>
+<td>[TQ], [RR]</td>
+</tr>
+<tr>
+<td><strong>Agility Digit (current) / Digit 5</strong></td>
+<td>1.75 m / 1.81 m</td>
+<td>~64 kg / 129 kg</td>
+<td>28 (current, per trackers)</td>
+<td>grippers, not dexterous hands</td>
+<td>16 kg / 22.7 kg</td>
+<td>not published here</td>
+<td>up to 4 h (current); 90 min with 9 min charge (Digit 5)</td>
+<td>RaaS / enterprise</td>
+<td>[RZ], [IDT]</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key reference parts:</strong> NVIDIA Jetson AGX Thor (T5000): 2,070 FP4 TFLOPS (sparse), 128 GB LPDDR5X, 14-core Arm, 40–130 W; dev kit $5,499 (raised from $3,499 in July 2026). T4000: 1,200 TFLOPS, 40–70 W. [NV], [NV-blog], [ANT]</p>
+<p><strong>Takeaways</strong>
+1. The <strong>leading benchmark is ~1.7 m, 55–65 kg, ~20 kg payload, 4–5 h runtime, 1.2–1.5 m/s walk</strong>, plus dexterous hands with roughly 20 DoF.
+2. The edge comes from <strong>in-house actuators</strong> (Figure, Tesla, BD), <strong>dexterous hands with tactile sensing</strong>, and above all <strong>VLA autonomy and data scale</strong> (Figure Helix, 1X Redwood, Tesla). Hardware is necessary, but autonomy is the differentiator.
+3. Unitree shows the cost frontier: a full robot for $13.5k–$90k built around integrated QDD-style PMSM joints.</p>
+<hr /></section><section id="2-target-specs-beat-every-current-humanoid-on-every-axis"><h2>2. Target specs: beat every current humanoid on every axis</h2><p>All targets are <strong>[EST]</strong> design goals. The comparison column shows the current best published figure from §1.</p>
+<table>
+<thead>
+<tr>
+<th>Spec</th>
+<th>Target</th>
+<th>Current best (source)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Height</td>
+<td>1.75 m (fits human workspaces; reach 2.3 m+)</td>
+<td>Atlas 1.9 m, reach 2.3 m [BD]</td>
+</tr>
+<tr>
+<td>Mass</td>
+<td>68 kg</td>
+<td>Figure 03 61 kg at 20 kg payload [F03]</td>
+</tr>
+<tr>
+<td>Total DoF</td>
+<td><strong>75</strong> (body 33 + hands 2×21)</td>
+<td>NEO 75 per vendor tracker [RR]; Atlas 56 [BD]</td>
+</tr>
+<tr>
+<td>Hand DoF</td>
+<td>21 actuated per hand + 3 wrist (counted in body)</td>
+<td>NEO 22 + 3 wrist [TQ]; Optimus Gen 3 22 (reported) [OPT]</td>
+</tr>
+<tr>
+<td>Payload</td>
+<td>60 kg instant / 35 kg sustained (two-arm); 10 kg per arm at full reach</td>
+<td>Atlas 50 / 30 kg [BD]</td>
+</tr>
+<tr>
+<td>Walk / run</td>
+<td>2.0 m/s walk, 5 m/s run</td>
+<td>H1 3.3 m/s [UH1]; NEO 6.2 m/s max run [TQ]</td>
+</tr>
+<tr>
+<td>Runtime</td>
+<td>6 h mixed duty, plus self-swappable battery (unlimited uptime)</td>
+<td>Figure 03 5 h [F03-batt]; Atlas 4 h with swap [BD]</td>
+</tr>
+<tr>
+<td>Battery</td>
+<td>3.0 kWh, 2.5 kW wireless charge plus hot-swap</td>
+<td>Figure 03 2.3 kWh, 2 kW [F03-batt]</td>
+</tr>
+<tr>
+<td>Joint range</td>
+<td>Continuous-rotation waist, wrist roll, and neck yaw</td>
+<td>Atlas "continuous" [BD]</td>
+</tr>
+<tr>
+<td>Ingress / temp</td>
+<td>IP67, −20 to 45 °C</td>
+<td>Atlas IP67, −20 to 40 °C [BD]</td>
+</tr>
+<tr>
+<td>Fingertip sensing</td>
+<td>&lt; 1 g force threshold, plus palm cameras</td>
+<td>Figure 03 ~3 g [F03]</td>
+</tr>
+<tr>
+<td>Compute</td>
+<td>2× Jetson Thor T5000 (4,140 FP4 TFLOPS sparse, 260 W max) + RT controller</td>
+<td>Thor 2,070 TFLOPS each [NV]</td>
+</tr>
+<tr>
+<td>Control rates</td>
+<td>Joint current loop 20–40 kHz, joint impedance 2 kHz, WBC 1 kHz, RL policy 200 Hz, VLA 10–50 Hz</td>
+<td></td>
+</tr>
+<tr>
+<td>Noise</td>
+<td>&lt; 55 dB(A) at 1 m when walking</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<hr /></section><section id="3-body-plan-and-joint-table"><h2>3. Body plan and joint table</h2><div id="viewer"><div id="three"></div><div class="hint">Drag to rotate · scroll to zoom · hover a joint</div><div id="tip"></div></div><p>Kinematic layout: legs 2×7 (hip 3, knee 1, ankle 2, toe 1), waist 3, arms 2×7 (shoulder 3, elbow 1, wrist 3), neck 2. Arm wrists are counted in the arms, so the <strong>body total is 33</strong>; with 2×21 hand DoF the robot has <strong>75 actuated DoF</strong>, which equals or exceeds every published total. All torques and speeds are peak values <strong>[EST]</strong>, to be validated by trajectory-optimization sweeps (sprint, jump 0.5 m, 60 kg deadlift, stairs, fall recovery).</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Joint</th>
+<th>DoF</th>
+<th>Actuator</th>
+<th>Peak torque</th>
+<th>Peak speed</th>
+<th>Range</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Hip yaw</td>
+<td>1 ×2</td>
+<td>QDD: frameless PMSM Ø100 + 1-stage planetary 9:1</td>
+<td>150 N·m</td>
+<td>20 rad/s</td>
+<td>±45°</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Hip roll</td>
+<td>1 ×2</td>
+<td>QDD Ø120, planetary 9:1</td>
+<td>300 N·m</td>
+<td>18 rad/s</td>
+<td>−30/+90°</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Hip pitch</td>
+<td>1 ×2</td>
+<td>QDD Ø130, 2-stage compound planetary 12:1, liquid-cooled</td>
+<td>400 N·m</td>
+<td>18 rad/s</td>
+<td>−160/+45°</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Knee</td>
+<td>1 ×2</td>
+<td>Inverted planetary roller screw (Ø16, 4 mm lead) + PMSM in the thigh, via a variable-ratio linkage</td>
+<td>450 N·m (&gt; H1 360 [UH1])</td>
+<td>20 rad/s</td>
+<td>0–165°</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Ankle pitch + roll</td>
+<td>2 ×2</td>
+<td>Parallel: 2× ball/roller-screw linear actuators in the shank (differential)</td>
+<td>250 N·m pitch / 120 N·m roll combined</td>
+<td>25 rad/s</td>
+<td>±50° / ±30°</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Toe</td>
+<td>1 ×2</td>
+<td>Small QDD + belt, passive spring</td>
+<td>40 N·m</td>
+<td>20 rad/s</td>
+<td>0–60°</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Waist yaw</td>
+<td>1</td>
+<td>Cycloidal 30:1 + hollow PMSM, slip ring</td>
+<td>250 N·m</td>
+<td>8 rad/s</td>
+<td>continuous</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Waist pitch/roll</td>
+<td>2</td>
+<td>Two linear roller screws, parallel (spine)</td>
+<td>400 / 250 N·m</td>
+<td>6 rad/s</td>
+<td>±60° / ±30°</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Shoulder pitch</td>
+<td>1 ×2</td>
+<td>Strain-wave (CSG-25 class) 50:1 + frameless</td>
+<td>180 N·m</td>
+<td>10 rad/s</td>
+<td>continuous</td>
+</tr>
+<tr>
+<td>10</td>
+<td>Shoulder roll</td>
+<td>1 ×2</td>
+<td>Strain-wave 50:1</td>
+<td>150 N·m</td>
+<td>10 rad/s</td>
+<td>−20/+190°</td>
+</tr>
+<tr>
+<td>11</td>
+<td>Upper-arm yaw</td>
+<td>1 ×2</td>
+<td>Strain-wave (CSG-20)</td>
+<td>80 N·m</td>
+<td>12 rad/s</td>
+<td>±170°</td>
+</tr>
+<tr>
+<td>12</td>
+<td>Elbow</td>
+<td>1 ×2</td>
+<td>Planetary roller screw linear actuator, in the upper arm</td>
+<td>150 N·m</td>
+<td>12 rad/s</td>
+<td>0–150°</td>
+</tr>
+<tr>
+<td>13</td>
+<td>Wrist roll</td>
+<td>1 ×2</td>
+<td>Strain-wave CSF-14</td>
+<td>25 N·m</td>
+<td>15 rad/s</td>
+<td>continuous</td>
+</tr>
+<tr>
+<td>14</td>
+<td>Wrist pitch/yaw</td>
+<td>2 ×2</td>
+<td>2× micro ball-screw linear actuators in the forearm (parallel)</td>
+<td>30 N·m</td>
+<td>15 rad/s</td>
+<td>±80° / ±40°</td>
+</tr>
+<tr>
+<td>15</td>
+<td>Neck yaw / pitch</td>
+<td>2</td>
+<td>Strain-wave micro + PMSM</td>
+<td>10 N·m</td>
+<td>15 rad/s</td>
+<td>continuous / ±50°</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Actuator rationale.</strong> Low-ratio quasi-direct-drive in the hips gives backdrivability, impact tolerance, and transparency for RL sim-to-real. Roller screws handle the highest-torque, high-impact points (knee, ankle, spine, elbow), following Optimus's 14 linear actuators [OPT]: they offer high force density and shock load capacity, and placing motors proximally cuts leg inertia. Strain-wave drives in the shoulders and wrists give zero-backlash precision.</p>
+<p><strong>Every actuator module includes:</strong> frameless PMSM (NdFeB N52SH, concentrated windings, segmented stator), an integrated 48–100 V GaN inverter (20–40 kHz FOC), dual absolute encoders (motor 19-bit, output 21-bit), a winding NTC plus an inverter thermistor, a strain-gauge output torque sensor on the hips, knees, and shoulders, a power-off brake on the shoulders and waist, and a hollow shaft for harnessing.</p>
+<hr /></section><section id="4-mechanical-design-by-segment"><h2>4. Mechanical design by segment</h2><div class="svgbox"><svg viewBox="0 0 300 420" width="300" height="420" aria-label="Body segment diagram">
+<style>.s{fill:#1f3b57;stroke:#7fb3e0;stroke-width:2}.j{fill:#f5a623}.t{fill:#cfe3f5;font:11px sans-serif}</style>
+<rect class="s" x="125" y="10" width="50" height="55" rx="18"/><text class="t" x="185" y="35">Head</text>
+<rect class="s" x="105" y="80" width="90" height="110" rx="12"/><text class="t" x="200" y="120">Torso/battery</text>
+<rect class="s" x="115" y="195" width="70" height="35" rx="8"/><text class="t" x="190" y="215">Pelvis</text>
+<rect class="s" x="65" y="85" width="30" height="100" rx="10"/><rect class="s" x="205" y="85" width="30" height="100" rx="10"/>
+<rect class="s" x="60" y="190" width="28" height="90" rx="10"/><rect class="s" x="212" y="190" width="28" height="90" rx="10"/><text class="t" x="245" y="240">Forearm/hand</text>
+<rect class="s" x="118" y="235" width="28" height="80" rx="10"/><rect class="s" x="154" y="235" width="28" height="80" rx="10"/><text class="t" x="190" y="280">Thigh</text>
+<rect class="s" x="118" y="320" width="28" height="70" rx="10"/><rect class="s" x="154" y="320" width="28" height="70" rx="10"/><text class="t" x="190" y="360">Shank</text>
+<rect class="s" x="108" y="395" width="40" height="14" rx="4"/><rect class="s" x="152" y="395" width="40" height="14" rx="4"/><text class="t" x="200" y="407">Foot</text>
+<g class="j"><circle cx="150" cy="72" r="5"/><circle cx="80" cy="85" r="5"/><circle cx="220" cy="85" r="5"/><circle cx="74" cy="187" r="5"/><circle cx="226" cy="187" r="5"/><circle cx="132" cy="232" r="5"/><circle cx="168" cy="232" r="5"/><circle cx="132" cy="317" r="5"/><circle cx="168" cy="317" r="5"/><circle cx="132" cy="392" r="5"/><circle cx="168" cy="392" r="5"/><circle cx="150" cy="192" r="5"/></g>
+<text class="t" x="5" y="415">● joint groups (see 3D view in §3)</text></svg></div><div class="card" id="seg-head"><h3>Head</h3><p><strong>Head (2.5 kg):</strong> magnesium shell with a glass visor. Holds the sensor cluster (§6) and a 4-mic array. Neck carries a continuous slip ring.</p></div><div class="card" id="seg-torso-chest"><h3>Torso / chest</h3><p><strong>Torso / chest (14 kg including battery):</strong> monocoque of carbon-fiber composite skins over a 7075-T7351 machined frame. The structural battery pack (3.0 kWh) is load-bearing between the pelvis and the shoulder girdle. Compute bay in the upper chest, with a liquid-cooling loop and radiator plus fan in the back.</p></div><div class="card" id="seg-spine-waist"><h3>Spine / waist</h3><p><strong>Spine / waist:</strong> cycloidal yaw ring (Ø200 crossed-roller bearing) plus two spine roller screws in parallel. Hollow center for the main power bus and cooling lines.</p></div><div class="card" id="seg-pelvis"><h3>Pelvis</h3><p><strong>Pelvis:</strong> Ti-6Al-4V additively manufactured (laser powder bed fusion) topology-optimized node housing the hip yaw/roll/pitch actuators in a compact co-located arrangement, with the hip axes intersecting for clean kinematics. Primary IMU sits here.</p></div><div class="card" id="seg-thigh"><h3>Thigh</h3><p><strong>Thigh (6 kg each):</strong> carbon-fiber tube with AM titanium end fittings. Contains the knee roller screw and motor, mounted proximally.</p></div><div class="card" id="seg-shank"><h3>Shank</h3><p><strong>Shank (3 kg each):</strong> CF tube carrying the 2 ankle linear actuators mounted near the knee (low distal mass) and 2-DOF parallel rods to the ankle.</p></div><div class="card" id="seg-foot"><h3>Foot</h3><p><strong>Foot (1.2 kg each):</strong> CF plate with an Al heel and a sprung toe joint. 6-axis F/T in the ankle plus a 16-zone pressure insole. Replaceable rubber sole; 2.5 kW wireless charging coil in each foot (an extension of Figure 03's approach [F03]).</p></div><div class="card" id="seg-shoulder-girdle"><h3>Shoulder girdle</h3><p><strong>Shoulder girdle:</strong> magnesium AZ91 casting. The shoulder pitch axis is offset forward 30 mm for a larger frontal workspace.</p></div><div class="card" id="seg-upper-arm-forearm"><h3>Upper arm / forearm</h3><p><strong>Upper arm / forearm:</strong> CF-wrapped Al shells. The forearm houses all 21 hand motors plus the 2 wrist linear actuators, so hand mass stays low (tendon routing through the wrist).</p></div><div class="card" id="seg-covers"><h3>Covers</h3><p><strong>Covers:</strong> replaceable TPU lattice padding plus a washable textile suit (IP67 is sealed at the module level, not the suit). Skin-level capacitive proximity and contact sensing (§6).</p></div><div class="card" id="seg-fasteners-and-serviceability"><h3>Fasteners and serviceability</h3><p><strong>Fasteners and serviceability:</strong> each limb segment is a field-replaceable unit with a quick connector (power plus EtherCAT plus coolant dry-break). Target: swap a limb in &lt; 10 min.</p></div><p><strong>Materials summary:</strong> Ti-6Al-4V AM (pelvis, joint nodes), 7075 Al (frames, actuator housings), T800 carbon fiber (long bones, shells), Mg AZ91 (head, shoulder girdle), PEEK/POM (hand links), Dyneema SK99 (hand tendons), NdFeB N52SH (magnets), 52100/440C steel (bearings, screws).</p>
+<p><strong>Mass budget [EST]:</strong> actuators 30 kg, structure 13 kg, battery 13 kg, hands 2×1.1 kg, compute/electronics 4 kg, cooling 2 kg, sensors/covers/harness 4 kg. Total ≈ 68 kg.</p>
+<hr /></section><section id="5-hands-2-21-dof"><h2>5. Hands (2 × 21 DoF)</h2><div class="svgbox"><svg viewBox="0 0 260 260" width="260" height="260" aria-label="Hand DoF diagram"><style>.f{fill:#1f3b57;stroke:#7fb3e0;stroke-width:2}.j{fill:#f5a623}.t{fill:#cfe3f5;font:11px sans-serif}</style>
+<rect class="f" x="70" y="130" width="110" height="100" rx="20"/>
+<g><rect class="f" x="75" y="30" width="20" height="100" rx="9"/><circle class="j" cx="85" cy="128" r="5"/><circle class="j" cx="85" cy="90" r="4"/><circle class="j" cx="85" cy="58" r="4"/><rect class="f" x="100" y="30" width="20" height="100" rx="9"/><circle class="j" cx="110" cy="128" r="5"/><circle class="j" cx="110" cy="90" r="4"/><circle class="j" cx="110" cy="58" r="4"/><rect class="f" x="125" y="30" width="20" height="100" rx="9"/><circle class="j" cx="135" cy="128" r="5"/><circle class="j" cx="135" cy="90" r="4"/><circle class="j" cx="135" cy="58" r="4"/><rect class="f" x="150" y="30" width="20" height="100" rx="9"/><circle class="j" cx="160" cy="128" r="5"/><circle class="j" cx="160" cy="90" r="4"/><circle class="j" cx="160" cy="58" r="4"/></g>
+<rect class="f" x="20" y="150" width="60" height="20" rx="9" transform="rotate(-35 50 160)"/><circle class="j" cx="70" cy="175" r="5"/><circle class="j" cx="40" cy="145" r="4"/>
+<text class="t" x="5" y="250">Thumb 5 · fingers 4 each · palm arch 1 = 21 DoF</text></svg></div><ul>
+<li><strong>Kinematics:</strong> thumb 5 DoF (CMC 2, MCP 2, IP 1). Each finger 4 DoF (MCP flex and abduction, PIP, DIP). DIP is independently actuated on the index and middle fingers and coupled on the ring and little fingers. Palm arch 1 DoF. Total 21.</li>
+<li><strong>Actuation:</strong> forearm-mounted brushless micro-motors (Ø16–22 mm) with micro ball screws driving Dyneema tendons in antagonistic pairs (flex plus extend), with series springs for compliance, as in the Optimus Gen 3 forearm approach [OPT] and the NEO tendon hand [TQ].</li>
+<li><strong>Targets [EST]:</strong> 25 N fingertip force per finger, 60 N thumb-index pinch, 300 N power grasp, full close in &lt; 0.25 s, 1.1 kg per hand.</li>
+<li><strong>Sensing:</strong> tendon tension sensors, joint absolute encoders (magnetic, Hall-array), and a 3-axis tactile skin on all phalanges plus palm (&gt; 1,000 taxels per hand, &lt; 1 g threshold, 500 Hz). Optical-tactile (GelSight-style) fingertips on the thumb, index, and middle fingers. Palm RGB camera (Figure 03 approach [F03]) plus a ToF depth sensor.</li>
+<li><strong>Durability:</strong> tendons field-replaceable, IP67 glove, rated for 1M grasp cycles <strong>[EST]</strong>.</li>
+</ul>
+<hr /></section><section id="6-sensors"><h2>6. Sensors</h2><table>
+<thead>
+<tr>
+<th>Location</th>
+<th>Sensors</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Head</td>
+<td>2× stereo pairs (forward global-shutter, 2.3 MP, 90 fps, HDR), 1 wide fisheye up, 4 side/rear fisheye cameras (360° coverage like Atlas [BD]), solid-state LiDAR (forward), thermal camera, 4–6 mic array, ambient light</td>
+</tr>
+<tr>
+<td>Chest</td>
+<td>Down-facing stereo depth for footstep planning, mmWave radar for human detection</td>
+</tr>
+<tr>
+<td>Pelvis</td>
+<td>Tactical-grade IMU (fiber-optic gyro class) plus a redundant MEMS IMU</td>
+</tr>
+<tr>
+<td>Joints</td>
+<td>Dual encoders, torque sensors (major joints), current, temperature, vibration (accelerometer per actuator for predictive maintenance)</td>
+</tr>
+<tr>
+<td>Feet</td>
+<td>6-axis F/T at the ankle, 16-zone pressure insole, contact switch</td>
+</tr>
+<tr>
+<td>Wrists</td>
+<td>6-axis F/T</td>
+</tr>
+<tr>
+<td>Hands</td>
+<td>§5</td>
+</tr>
+<tr>
+<td>Skin</td>
+<td>Capacitive proximity plus contact sensing on the torso and arms, for safety and whole-body contact manipulation</td>
+</tr>
+<tr>
+<td>Power</td>
+<td>Cell-level voltage and temperature, pack current, insulation monitoring</td>
+</tr>
+</tbody>
+</table>
+<hr /></section><section id="7-compute-and-electronics"><h2>7. Compute and electronics</h2><ul>
+<li><strong>AI compute:</strong> 2× NVIDIA Jetson Thor T5000 [NV]. Node A runs perception, VLM reasoning, and memory. Node B runs the fast VLA action head and the RL whole-body policy. Interconnect: 25 GbE.</li>
+<li><strong>Real-time controller:</strong> a lockstep safety-rated MCU cluster (e.g., TI Sitara AM6x / Infineon AURIX class) as EtherCAT master running joint impedance at 2 kHz and WBC at 1 kHz.</li>
+<li><strong>Bus:</strong> EtherCAT ring (redundant), 3 branches (left/right legs+torso, arms, hands).</li>
+<li><strong>Safety:</strong> independent SIL-2/PLd safety chain: STO on every drive, dual-channel e-stop, wireless e-stop, and safe torque/speed monitoring near humans.</li>
+<li><strong>Comms:</strong> Wi-Fi 7 plus 5G, plus 60 GHz mmWave dock offload (Figure 03 uses 10 Gbps [F03]), and a 4 TB NVMe logger.</li>
+</ul>
+<hr /></section><section id="8-power"><h2>8. Power</h2><div class="svgbox"><svg viewBox="0 0 520 140" width="520" height="140" aria-label="Power architecture"><style>.b{fill:#1f3b57;stroke:#7fb3e0;stroke-width:2}.t{fill:#cfe3f5;font:12px sans-serif}.l{stroke:#f5a623;stroke-width:2;marker-end:url(#a)}</style>
+<defs><marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8z" fill="#f5a623"/></marker></defs>
+<rect class="b" x="10" y="45" width="110" height="50" rx="8"/><text class="t" x="20" y="67">3.0 kWh pack</text><text class="t" x="20" y="84">~88 V, swappable</text>
+<line class="l" x1="120" y1="70" x2="190" y2="70"/>
+<rect class="b" x="190" y="45" width="110" height="50" rx="8"/><text class="t" x="200" y="67">88 V main bus</text><text class="t" x="200" y="84">+ leg supercaps</text>
+<line class="l" x1="300" y1="60" x2="380" y2="25"/><line class="l" x1="300" y1="70" x2="380" y2="70"/><line class="l" x1="300" y1="80" x2="380" y2="115"/>
+<rect class="b" x="380" y="5" width="130" height="36" rx="8"/><text class="t" x="390" y="28">Body actuators 88 V</text>
+<rect class="b" x="380" y="52" width="130" height="36" rx="8"/><text class="t" x="390" y="75">Hands 48 V (GaN)</text>
+<rect class="b" x="380" y="99" width="130" height="36" rx="8"/><text class="t" x="390" y="122">Compute/sensors 12/5 V</text></svg></div><ul>
+<li><strong>Pack:</strong> 3.0 kWh, 24S high-silicon-anode NMC pouch or 4680-class cells, ~88 V nominal (higher voltage, lower current). Structural, self-swappable in &lt; 60 s via a rear dock (Atlas-style [BD]), plus a 2.5 kW wireless charge through the feet.</li>
+<li><strong>Bus:</strong> 88 V main bus, 48 V for the hands, 12/5 V for sensors. GaN DC-DC.</li>
+<li><strong>Regeneration:</strong> absorbed by the battery plus 200 J of supercaps on each leg bus, to handle jump/landing transients.</li>
+<li><strong>Budget [EST]:</strong> standing ~180 W, walking 450 W, heavy lifting 1.5–3 kW peaks, compute 100–260 W. That gives ~6 h mixed duty.</li>
+<li><strong>Safety:</strong> cell-level fusing, aerogel thermal-propagation barriers, and a BMS designed for UN38.3 + UL 2271 (Figure 03 path [F03-batt]).</li>
+</ul>
+<hr /></section><section id="9-thermal"><h2>9. Thermal</h2><ul>
+<li><strong>Liquid cooling loop:</strong> glycol-water through jackets on hip pitch/roll, knee, and spine actuators, plus the compute cold plates. A pump in the torso and a radiator-fan module in the back, at 1.2 kW heat rejection <strong>[EST]</strong>.</li>
+<li><strong>Air cooling:</strong> forced air for the arm actuators. Hand motors are in the forearm with ducted air.</li>
+<li><strong>Motor design:</strong> high slot fill, Class H insulation (180 °C), stator potted in thermally conductive epoxy.</li>
+<li><strong>Control:</strong> real-time copper-temperature observer per actuator, with torque derating and thermal awareness exposed to the planner, so the policy learns to rest hot joints.</li>
+<li><strong>Ambient range:</strong> −20 to 45 °C, with a battery heater for cold starts.</li>
+</ul>
+<hr /></section><section id="10-control-and-ai-stack"><h2>10. Control and AI stack</h2><ol>
+<li><strong>Actuator level (20–40 kHz / 2 kHz):</strong> FOC with feedforward friction and cogging compensation. Joint impedance control with torque-sensor feedback.</li>
+<li><strong>State estimation (1 kHz):</strong> invariant EKF fusing IMU, kinematics, foot contacts, and visual-inertial odometry.</li>
+<li><strong>Whole-body control (1 kHz):</strong> hierarchical QP WBC as a safety and constraint layer, combined with a centroidal MPC (100 Hz) for contact planning.</li>
+<li><strong>Learned whole-body policy (200 Hz):</strong> a single RL policy (HOVER/ExBody-style command space covering base velocity, root pose, and upper-body keypoints) trained in Isaac Lab with thousands of parallel environments and validated in MuJoCo (sim2sim). Human motion priors come from retargeted mocap (AMP). Teacher-student distillation with privileged terrain. Domain randomization covers mass, friction, latency, motor constants, and actuator networks fit from dyno data.</li>
+<li><strong>Dexterous manipulation:</strong> RL in-hand manipulation policies trained in sim with tactile simulation, plus imitation from teleop.</li>
+<li><strong>Vision-language-action (dual system, as in Figure Helix):</strong> System 2, a VLM at 7–10 Hz (fine-tuned from GR00T N1.x or π0.5-class open models), produces latent intent. System 1, a visuomotor diffusion/flow transformer at 50–200 Hz, outputs whole-body targets (arms, hands, torso, base velocity) to the WBC.</li>
+<li><strong>Data:</strong> full-body VR teleop (Vision Pro hand tracking plus a mocap suit, haptic gloves with force feedback), egocentric human video pretraining, and sim-generated synthetic demonstrations (Isaac/Cosmos). Fleet learning feeds failures back into data.</li>
+<li><strong>Safety layers:</strong> control barrier functions for self-collision and human distance; ISO/TS 15066 speed and separation; a learned safe-fall policy (curl, protect head and hands); a watchdog falls back to a stand-in-place or crouch controller.</li>
+<li><strong>Middleware:</strong> RT-Linux, a deterministic shared-memory RT loop, ROS 2 for tooling, MCAP logging, and OTA updates with signed images.</li>
+</ol>
+<hr /></section><section id="11-key-design-risks"><h2>11. Key design risks</h2><ul>
+<li><strong>Knee and hip thermal limits</strong> at 60 kg payload. Mitigation: liquid cooling and torque-sensor-based efficiency maps.</li>
+<li><strong>Roller screw shock loads and backdrivability</strong> on falls. Mitigation: series compliance and sacrificial overload clutches.</li>
+<li><strong>21-DoF tendon hand durability and calibration drift.</strong> Mitigation: tension sensing and auto-recalibration.</li>
+<li><strong>Mass creep</strong> above the 68 kg target. Mitigation: a hard mass budget per segment.</li>
+<li><strong>Sim-to-real for 75 DoF</strong>, especially the hands. Mitigation: system ID, actuator nets, real-data fine-tuning.</li>
+<li><strong>Dual-Thor power and heat</strong> in the torso. Mitigation: the shared liquid loop.</li>
+<li><strong>IP67 sealing vs. heat rejection.</strong> Mitigation: sealed modules with external radiators.</li>
+</ul></section><section id="12-next-design-steps"><h2>12. Next design steps</h2><ol>
+<li>Build the full parametric CAD skeleton plus URDF/MJCF, and run trajectory-optimization torque/speed sweeps to freeze the joint table in §3.</li>
+<li>Prototype and dyno-test 3 hero actuators: hip-pitch QDD, knee roller screw, shoulder strain-wave.</li>
+<li>Build a 21-DoF hand on the bench with tactile skin.</li>
+<li>Train a locomotion policy on the target model in Isaac Lab, then cross-check in MuJoCo.</li>
+</ol>
+<hr /></section><section id="sources"><h2>Sources</h2><ul>
+<li>[BD] Boston Dynamics, Atlas product page: https://bostondynamics.com/products/atlas/</li>
+<li>[F03] Figure, "Introducing Figure 03": https://www.figure.ai/news/introducing-figure-03</li>
+<li>[F03-batt] Figure, "F.03 Battery Development": https://www.figure.ai/news/f-03-battery-development</li>
+<li>[RG] Robotica Guide, Figure 03 specs: https://roboticaguide.com/figure-03-specs-helix-botq-what-is-undisclosed/</li>
+<li>[OPT] Optimusk blog, Optimus hardware (third-party, unofficial): https://optimusk.blog/blog/tesla-optimus-hardware-specs/</li>
+<li>[HA] HumanoidApplications compare: https://humanoidapplications.com/compare/</li>
+<li>[UH1] Unitree H1: https://www.unitree.com/h1</li>
+<li>[RZ-H1] RoboZaps H1 review: https://blog.robozaps.com/b/unitree-h1-review</li>
+<li>[UG1] Unitree G1: https://www.unitree.com/g1/</li>
+<li>[UG1-doc] Unitree G1 developer docs: https://support.unitree.com/home/en/G1_developer/about_G1</li>
+<li>[TQ] TechniaHQ comparison (NEO details): https://www.techniahqservice.com/robotics-news/tesla-optimus-vs-figure-unitree-1x-neo</li>
+<li>[RR] RankedRobot NEO vs G1: https://rankedrobot.com/compare/1x-neo-vs-unitree-g1/</li>
+<li>[RZ] RoboZaps Optimus alternatives: https://blog.robozaps.com/b/tesla-optimus-alternatives-competitors</li>
+<li>[IDT] Inside Deep Tech 2026 guide (Digit 5): https://www.insidedeeptech.com/humanoid-robots-2026-full-guide/</li>
+<li>[NV] NVIDIA Jetson Thor: https://www.nvidia.com/en-us/autonomous-machines/embedded-systems/jetson-thor/</li>
+<li>[NV-blog] NVIDIA technical blog, Jetson Thor: https://developer.nvidia.com/blog/introducing-nvidia-jetson-thor-the-ultimate-platform-for-physical-ai/</li>
+<li>[ANT] Antarum, Thor pricing: https://www.antarum.ai/parts-power/nvidia-jetson-agx-thor-dev-kit/</li>
+</ul>
+<p><em>Note: Component part names in §3 are candidates to evaluate. Their specs should be confirmed against current datasheets before purchase.</em></p></section></main><script>
+// sortable tables
+document.querySelectorAll('table').forEach(t=>{const ths=t.querySelectorAll('th');ths.forEach((th,i)=>{th.title='Click to sort';th.addEventListener('click',()=>{const tb=t.tBodies[0];const rows=[...tb.rows];const asc=th.dataset.dir!=='asc';ths.forEach(h=>{delete h.dataset.dir});th.dataset.dir=asc?'asc':'desc';const num=s=>{const m=s.replace(/,/g,'').match(/-?\d+(\.\d+)?/);return m?parseFloat(m[0]):NaN};rows.sort((a,b)=>{const x=a.cells[i].innerText.trim(),y=b.cells[i].innerText.trim();const nx=num(x),ny=num(y);let r=(!isNaN(nx)&&!isNaN(ny))?nx-ny:x.localeCompare(y);return asc?r:-r});rows.forEach(r=>tb.appendChild(r))})})});
+// active nav
+const links=[...document.querySelectorAll('nav a')];const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){links.forEach(l=>l.classList.toggle('active',l.getAttribute('href')==='#'+e.target.id))}}),{rootMargin:'-20% 0px -70% 0px'});document.querySelectorAll('section,.card').forEach(s=>obs.observe(s));
+</script>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
+<script type="module">
+import * as THREE from 'three';
+import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
+const el=document.getElementById('three'); if(el){
+const W=el.clientWidth||600,H=480;
+const r=new THREE.WebGLRenderer({antialias:true});r.setSize(W,H);r.setPixelRatio(devicePixelRatio);el.appendChild(r.domElement);
+const sc=new THREE.Scene();sc.background=new THREE.Color(0x0e1a26);
+const cam=new THREE.PerspectiveCamera(40,W/H,0.01,50);cam.position.set(2.2,1.2,2.2);
+const oc=new OrbitControls(cam,r.domElement);oc.target.set(0,0.9,0);oc.update();
+sc.add(new THREE.HemisphereLight(0xffffff,0x334455,1.2));const dl=new THREE.DirectionalLight(0xffffff,1);dl.position.set(2,4,3);sc.add(dl);
+sc.add(new THREE.GridHelper(4,20,0x335577,0x223344));
+// joint positions (m), name, DoF, actuator, torque
+const J={
+ neck:[0,1.55,0,'Neck yaw/pitch',2,'Strain-wave','10 N·m'],
+ waist:[0,1.02,0,'Waist yaw/pitch/roll',3,'Cycloidal + 2 roller screws','250/400/250 N·m'],
+ lsh:[0.21,1.42,0,'L shoulder (3)',3,'Strain-wave','180/150/80 N·m'],rsh:[-0.21,1.42,0,'R shoulder (3)',3,'Strain-wave','180/150/80 N·m'],
+ lel:[0.23,1.13,0,'L elbow',1,'Roller screw','150 N·m'],rel:[-0.23,1.13,0,'R elbow',1,'Roller screw','150 N·m'],
+ lwr:[0.24,0.86,0,'L wrist (3)',3,'Strain-wave + 2 linear','25/30 N·m'],rwr:[-0.24,0.86,0,'R wrist (3)',3,'Strain-wave + 2 linear','25/30 N·m'],
+ lha:[0.25,0.76,0,'L hand',21,'Tendon, forearm motors','300 N grasp'],rha:[-0.25,0.76,0,'R hand',21,'Tendon, forearm motors','300 N grasp'],
+ lhip:[0.1,0.92,0,'L hip (3)',3,'QDD planetary','150/300/400 N·m'],rhip:[-0.1,0.92,0,'R hip (3)',3,'QDD planetary','150/300/400 N·m'],
+ lkn:[0.1,0.5,0,'L knee',1,'Roller screw','450 N·m'],rkn:[-0.1,0.5,0,'R knee',1,'Roller screw','450 N·m'],
+ lan:[0.1,0.08,0,'L ankle (2)',2,'2× parallel linear','250/120 N·m'],ran:[-0.1,0.08,0,'R ankle (2)',2,'2× parallel linear','250/120 N·m'],
+ lto:[0.1,0.02,0.14,'L toe',1,'QDD + belt','40 N·m'],rto:[-0.1,0.02,0.14,'R toe',1,'QDD + belt','40 N·m'],
+ head:[0,1.68,0,null],chest:[0,1.42,0,null],pel:[0,0.92,0,null]};
+const links=[['head','neck'],['neck','chest'],['chest','lsh'],['chest','rsh'],['lsh','lel'],['lel','lwr'],['lwr','lha'],['rsh','rel'],['rel','rwr'],['rwr','rha'],['chest','waist'],['waist','pel'],['pel','lhip'],['pel','rhip'],['lhip','lkn'],['lkn','lan'],['lan','lto'],['rhip','rkn'],['rkn','ran'],['ran','rto']];
+const v=k=>new THREE.Vector3(...J[k].slice(0,3));
+const lm=new THREE.MeshStandardMaterial({color:0x7fb3e0,metalness:.3,roughness:.5});
+links.forEach(([a,b])=>{const A=v(a),B=v(b);const len=A.distanceTo(B);const g=new THREE.CylinderGeometry(0.025,0.025,len,12);const m=new THREE.Mesh(g,lm);m.position.copy(A).add(B).multiplyScalar(.5);m.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),B.clone().sub(A).normalize());sc.add(m)});
+const head=new THREE.Mesh(new THREE.SphereGeometry(0.1,24,16),lm);head.position.copy(v('head'));sc.add(head);
+const torso=new THREE.Mesh(new THREE.BoxGeometry(0.34,0.42,0.2),new THREE.MeshStandardMaterial({color:0x1f3b57,transparent:true,opacity:.6}));torso.position.set(0,1.2,0);sc.add(torso);
+const pick=[];Object.entries(J).forEach(([k,d])=>{if(!d[3])return;const rad=0.03+Math.min(d[4],21)*0.004;const m=new THREE.Mesh(new THREE.SphereGeometry(rad,20,14),new THREE.MeshStandardMaterial({color:d[4]>=21?0x4cd964:0xf5a623,emissive:0x221100}));m.position.copy(v(k));m.userData=d;sc.add(m);pick.push(m)});
+const ray=new THREE.Raycaster(),mp=new THREE.Vector2(),tip=document.getElementById('tip');
+r.domElement.addEventListener('pointermove',e=>{const b=r.domElement.getBoundingClientRect();mp.x=(e.clientX-b.left)/b.width*2-1;mp.y=-(e.clientY-b.top)/b.height*2+1;ray.setFromCamera(mp,cam);const h=ray.intersectObjects(pick)[0];if(h){const d=h.object.userData;tip.style.display='block';tip.style.left=(e.clientX-b.left+12)+'px';tip.style.top=(e.clientY-b.top+12)+'px';tip.innerHTML=`<b>${d[3]}</b><br>${d[4]} DoF · ${d[5]}<br>Peak: ${d[6]} [EST]`}else tip.style.display='none'});
+(function loop(){requestAnimationFrame(loop);r.render(sc,cam)})();
+window.__threeOK=true;}
+</script></body></html>
