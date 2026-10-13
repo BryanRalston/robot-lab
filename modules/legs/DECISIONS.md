@@ -132,3 +132,18 @@
     - DS 0.25 at 1.0: FAIL, 7.13 s. DS 0.35 at 1.0: FAIL, 6.95 s.
     - DS 0.25 at 1.2: FAIL, 4.784 s, flight 3.5 %.
   - Takeaway: a longer reference double support is the effective fix (it removes the flight). Above 0.8 m/s the toe-off edge CoP plus the stance unloading before touchdown still tip the foot. Contact-gated unloading (hold trail load until swing fz > 0) is the next WBC change. In parallel, RL brief grokbuild/rl_walk_brief.md (MuJoCo Playground/MJX: same MJCF, CPU replay on the box).
+- L33 (r7b, approved by Robot Lab) WBC touchdown gate + margin references:
+  - Gate (`WBC_GATE=1`, controller.py): while the plan is in DS and the landing foot fz < 60 N, the stance foot gets fz ≥ 0.85 mg in the QP and the clock runs at 0.3× rate_nom. After touchdown the hold ramps off over 50 ms. Timeout fallback releases after 0.2 s (initial 0.12 s / 0.5× was 10.19 s at 1.0).
+  - References `results/r7/ref_m12/walk_{0p8,1p0,1p2}_r7.npz`: DS 0.25, flat CoP inset 12 mm (`LEGS_COP_INSET`), toe-rocker pivot inset 12 mm (`LEGS_TOE_MARGIN`). Plan min margin 12.0 mm, planned DS 32 %, flight 0.
+  - Results, 20 s runs at 65 kg:
+
+    | speed | fell at | DS | flight | measured CoP margin min / median | mean speed | result |
+    |---|---|---|---|---|---|---|
+    | 0.8 | — (20 s) | 17.8 % | 0.0 % | 0 / 18 mm | 0.733 | **PASS** survival; speed under command |
+    | 1.0 | 10.19 s | 13.5 % | 0.33 % | 0 / 0.1 mm | 0.928 | FAIL |
+    | 1.0, rate 0.3 + timeout 0.2 | 10.84 s | 14.5 % | 0.02 % | 0 / 5.1 mm | 0.943 | FAIL (best) |
+    | 1.0, hold 0.95 + ramp 0.08 | 10.26 s | 14.4 % | 0.0 % | — | 0.958 | FAIL |
+    | 1.0, + QP CoP margin 10 mm | 10.50 s | 14.0 % | 0.81 % | — | 0.930 | FAIL |
+    | 1.2, best gate settings | 5.45 s | 14.8 % | 0.51 % | 0 / 0.0 mm | 1.059 | FAIL |
+
+  - The gate removes the flight (9.5 % → ≤0.5 %) and lifts 1.0 m/s from 7.1 to 10.8 s. The measured CoP still rides the sole edge (50–66 % of loaded frames at 1.0–1.2) even with a 12 mm plan margin, so the remaining failure is CoP tracking (foot rolling onto an edge) at speed, not the plan or the bounce. Media: media/progress/2026-10-13_legs_wbc_r7_walk0p8.png.

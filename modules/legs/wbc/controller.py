@@ -43,6 +43,13 @@ DS_FRAC = 0.15
 # sharing load before the plan's touchdown. The playback clock is not
 # what creates that overlap.
 DS_PAD_LO = 0.120
+import os as _os
+GATE = _os.environ.get('WBC_GATE', '0') == '1'
+GATE_TD = float(_os.environ.get('WBC_GATE_TD', '60'))      # N, touchdown detect
+GATE_TO = float(_os.environ.get('WBC_GATE_TO', '0.12'))    # s, timeout fallback
+GATE_RAMP = float(_os.environ.get('WBC_GATE_RAMP', '0.05'))  # s, load-transfer ramp
+GATE_HOLD = float(_os.environ.get('WBC_GATE_HOLD', '0.85'))  # x mg held on stance while waiting
+GATE_RATE = float(_os.environ.get('WBC_GATE_RATE', '0.5'))   # clock rate while waiting
 DS_PAD_TD = 0.070
 T_NOM = 0.42
 PEL_Z = 1.02
@@ -1262,6 +1269,7 @@ class WalkController:
         self.swing_lo = 0.0
         self._ds_u = 1.0
         self.freeze_swing = False
+        self.gate_wait = None; self.gate_td = None; self.gate_lo = 0.0; self.gate_st = None
         self.e_xi = np.zeros(2)
         self.dcm_off = np.zeros(2)
         self._dcm_side = None
@@ -1582,6 +1590,31 @@ class WalkController:
             self.rate = float(self.rate_nom)
             self.dcm_off *= 0.8
             self.freeze_swing = False
+        # --- r7 touchdown gate (WBC_GATE=1): hold the stance load until the
+        # landing foot is actually down (fz > GATE_TD), slow the clock while
+        # waiting, ramp the hold off after touchdown, release on timeout.
+        self.gate_lo = 0.0
+        if GATE:
+            t = float(d.time)
+            land = getattr(self, '_dcm_side', None)
+            if land is not None and swing is None:
+                st = 'r' if land == 'l' else 'l'
+                li = 0 if land == 'l' else 1
+                fz_l = self._measured_fz(d, land)
+                if self.gate_wait is None and al[li] > 0.15 and fz_l < GATE_TD and self.gate_td is None:
+                    self.gate_wait = t
+                if self.gate_wait is not None:
+                    if fz_l >= GATE_TD or t - self.gate_wait > GATE_TO:
+                        self.gate_wait = None; self.gate_td = t
+                    else:
+                        self.rate = float(self.rate_nom) * GATE_RATE
+                        self.gate_lo = GATE_HOLD * self.mg; self.gate_st = st
+                if self.gate_td is not None:
+                    r_ = (t - self.gate_td) / GATE_RAMP
+                    if r_ < 1.0:
+                        self.gate_lo = GATE_HOLD * self.mg * (1.0 - r_); self.gate_st = st
+            elif swing is not None:
+                self.gate_wait = None; self.gate_td = None
         self.contact_mode = mode
         self.phase = 'ds' if mode in ('ds', 'ds_hold', 'landing') else 'ss'
         self.dbg_line = (f'rate={self.rate:.2f} {mode:8} off=({self.foot_off[0]:+.3f},'
@@ -1934,7 +1967,8 @@ class WalkController:
             lim = self.tau_max[i]
             add_row(coeff, -lim - h[dof], lim - h[dof])
         for i, s in enumerate('lr'):
-            G = foot_cone(HEEL, TOE, HALFW, MU, YAW_MZ)
+            _cm = float(_os.environ.get('WBC_COP_M', '0'))   # r7: QP CoP margin inside the sole (m)
+            G = foot_cone(HEEL + _cm, TOE - _cm, HALFW - _cm, MU, YAW_MZ)
             # A wrench is a real contact force. Zero it when the foot is in the
             # air, including a planned stance foot that has not landed yet.
             ankle_z = float(feet[s]['p'][2])
@@ -1950,6 +1984,8 @@ class WalkController:
                     add_row(coeff, 0.0, 0.0 if r == 0 else 1e6)
                 elif r == 0:
                     lo_fz = 15.0 if (s != swing and alphas[i] > 0.15) else 0.0
+                    if GATE and self.gate_lo > 0 and s == self.gate_st:
+                        lo_fz = max(lo_fz, float(self.gate_lo))
                     add_row(coeff, lo_fz, 1.55 * self.mg)
                 else:
                     add_row(coeff, 0.0, 1e6)

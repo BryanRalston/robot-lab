@@ -158,6 +158,7 @@ def diff_traj(m,Q,dt=DT):
     A[1:-1]=(V[2:]-V[:-2])/(2*dt); A[0]=A[1]; A[-1]=A[-2]
     return V,A
 
+TOE_M=float(os.environ.get('LEGS_TOE_MARGIN','0'))   # r7 toe-rocker: toe-line pivot inset from the toe edge (m)
 MU=0.8   # friction coefficient used for the wrench-distribution feasibility constraints
 
 def _foot_cons(nw):
@@ -167,7 +168,7 @@ def _foot_cons(nw):
         G=[[0,0,1,0,0,0],[-SOLE,0,-(HEEL+ci),0,-1,0],[SOLE,0,TOE-ci,0,1,0],[0,SOLE,HALFW-ci,-1,0,0],[0,-SOLE,HALFW-ci,1,0,0],
            [-1,0,MU,0,0,0],[1,0,MU,0,0,0],[0,-1,MU,0,0,0],[0,1,MU,0,0,0],[0,0,0.05,0,0,-1],[0,0,0.05,0,0,1]]
     else:
-        G=[[0,0,1,0,0],[0,0,HALFW,-1,0],[0,0,HALFW,1,0],[-1,0,MU,0,0],[1,0,MU,0,0],[0,-1,MU,0,0],[0,1,MU,0,0],[0,0,0.03,0,-1],[0,0,0.03,0,1]]
+        G=[[0,0,1,0,0],[0,0,HALFW-ci,-1,0],[0,0,HALFW-ci,1,0],[-1,0,MU,0,0],[1,0,MU,0,0],[0,-1,MU,0,0],[0,1,MU,0,0],[0,0,0.03,0,-1],[0,0,0.03,0,1]]
     return np.array(G,float)
 
 def distribute(Ab,f,alphas,nws,mg,JL=None,fl=None):
@@ -206,7 +207,7 @@ def inverse_dynamics(r,Q,V,A,alpha,armature=True,toe=None):
             if alpha[k,i]>1e-6:
                 b=r.foot[side]; jp=np.zeros((3,m.nv)); jr=np.zeros((3,m.nv))
                 istoe=bool(toe is not None and toe[k,i]); R=d.xmat[b].reshape(3,3)
-                pt=d.xpos[b]+R@np.array([TOE,0,-SOLE]) if istoe else d.xpos[b].copy()
+                pt=d.xpos[b]+R@np.array([TOE-TOE_M,0,-SOLE]) if istoe else d.xpos[b].copy()
                 mujoco.mj_jac(m,d,jp,jr,pt,b)
                 Rw=np.zeros((6,6)); Rw[:3,:3]=R; Rw[3:,3:]=R; J=Rw.T@np.r_[jp,jr]
                 if istoe: J=J[[0,1,2,3,5]]
@@ -220,7 +221,7 @@ def inverse_dynamics(r,Q,V,A,alpha,armature=True,toe=None):
         for (J,istoe,i,R) in Js:
             nw=J.shape[0]; w=W[o:o+nw]; o+=nw; tau-=J.T@w
             Fl=w[:3]; Fw=R@Fl; FZ[k,i]=Fw[2]
-            if Fl[2]>1: COP[k,i]=[TOE,w[3]/Fl[2]] if istoe else [(-w[4]-SOLE*Fl[0])/Fl[2],(w[3]-SOLE*Fl[1])/Fl[2]]
+            if Fl[2]>1: COP[k,i]=[TOE-TOE_M,w[3]/Fl[2]] if istoe else [(-w[4]-SOLE*Fl[0])/Fl[2],(w[3]-SOLE*Fl[1])/Fl[2]]
             FR[k]=max(FR[k],np.hypot(Fl[0],Fl[1])/max(Fl[2],1e-6))
         RES[k]=np.abs(tau[:6]).max(); TAU[k]=tau
     m.dof_armature[:]=arm0
