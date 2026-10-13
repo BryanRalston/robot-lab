@@ -1,0 +1,236 @@
+[
+ {
+  "it": 0,
+  "area": "v3.0 = v2 with catalog parts substituted 1:1",
+  "failure": "output-bearing-static hip_yaw: CRBH 5013 A fs=2.23",
+  "fix": "(see later iterations)"
+ },
+ {
+  "it": 0,
+  "area": "v3.0 = v2 with catalog parts substituted 1:1",
+  "failure": "speed hip_pitch: 3.9 < 4 rad/s at 30 % torque, 44 V bus",
+  "fix": "(see later iterations)"
+ },
+ {
+  "it": 0,
+  "area": "v3.0 = v2 with catalog parts substituted 1:1",
+  "failure": "speed knee: 5.6 < 8 rad/s at 30 % torque, 44 V bus",
+  "fix": "(see later iterations)"
+ },
+ {
+  "it": 0,
+  "area": "v3.0 = v2 with catalog parts substituted 1:1",
+  "failure": "thermal ankle_pitch: winding \u0394T 320 K > 100 K (air, R_h-a 2.99 K/W)",
+  "fix": "(see later iterations)"
+ },
+ {
+  "it": 0,
+  "area": "v3.0 = v2 with catalog parts substituted 1:1",
+  "failure": "speed shoulder_pitch: 3.2 < 4 rad/s at 30 % torque, 44 V bus",
+  "fix": "(see later iterations)"
+ },
+ {
+  "it": 0,
+  "area": "v3.0 = v2 with catalog parts substituted 1:1",
+  "failure": "speed shoulder_roll: 3.2 < 4 rad/s at 30 % torque, 44 V bus",
+  "fix": "(see later iterations)"
+ },
+ {
+  "it": 0,
+  "area": "v3.0 = v2 with catalog parts substituted 1:1",
+  "failure": "speed elbow: 5.1 < 6 rad/s at 30 % torque, 44 V bus",
+  "fix": "(see later iterations)"
+ },
+ {
+  "it": 0,
+  "area": "v3.0 = v2 with catalog parts substituted 1:1",
+  "failure": "fall-shoulder-gear: 4984 N\u00b7m > momentary peak 369 (ratcheting 650)",
+  "fix": "(see later iterations)"
+ },
+ {
+  "it": 0,
+  "area": "v3.0 = v2 with catalog parts substituted 1:1",
+  "failure": "bolted hip-pitch flexspline \u2192 output flange (momentary peak by friction): separation_or_slip",
+  "fix": "(see later iterations)"
+ },
+ {
+  "it": 0,
+  "area": "v3.0 = v2 with catalog parts substituted 1:1",
+  "failure": "bolted shoulder actuator \u2192 torso frame (side-fall impact): separation_or_slip, fatigue",
+  "fix": "(see later iterations)"
+ },
+ {
+  "it": 0,
+  "area": "v3.0 = v2 with catalog parts substituted 1:1",
+  "failure": "tendon-fatigue-UNVERIFIABLE: needs 1.75e+06 bend cycles; published evidence \u2264 5e4 (D/d 4, 150 N)",
+  "fix": "(see later iterations)"
+ },
+ {
+  "it": 0,
+  "area": "v3.0 = v2 with catalog parts substituted 1:1",
+  "failure": "FEA-convergence knee_clevis: last refinement changed peak 11 %",
+  "fix": "(see later iterations)"
+ },
+ {
+  "it": 0,
+  "area": "v3.0 = v2 with catalog parts substituted 1:1",
+  "failure": "mass-target: 76.8 kg > 65 kg",
+  "fix": "(see later iterations)"
+ },
+ {
+  "it": 1,
+  "area": "actuator ankle_pitch",
+  "failure": "thermal ankle_pitch (winding \u0394T 320 K > 100 K (air, R_h-a 2.99 K/W))",
+  "fix": "TBM2G-06013C + RV12x4 arm 50 mm [air; ] \u2192 TBM2G-06813D + RV12x4 arm 65 mm [air; ]"
+ },
+ {
+  "it": 1,
+  "area": "actuator elbow",
+  "failure": "speed elbow (5.1 < 6 rad/s at 30 % torque, 44 V bus)",
+  "fix": "TBM2G-06013C + CSG-20-100 [air; CRBH 5013 A] \u2192 TBM2G-05013C + CSG-20-100 [air; CRBH 3010 A]"
+ },
+ {
+  "it": 1,
+  "area": "actuator hip_pitch",
+  "failure": "speed hip_pitch (3.9 < 4 rad/s at 30 % torque, 44 V bus)",
+  "fix": "TBM2G-11513C + CSG-25-100 [air; CRBH 9016 A] \u2192 TBM2G-07608C + CSG-25-100 [air; CRBH 7013 A]"
+ },
+ {
+  "it": 1,
+  "area": "actuator hip_yaw",
+  "failure": "output-bearing-static hip_yaw (CRBH 5013 A fs=2.23)",
+  "fix": "TBM2G-06013C + CSG-20-100 [air; CRBH 5013 A] \u2192 TBM2G-05008A + CSG-14-100 [air; CRBH 7013 A]"
+ },
+ {
+  "it": 1,
+  "area": "actuator knee",
+  "failure": "speed knee (5.6 < 8 rad/s at 30 % torque, 44 V bus)",
+  "fix": "TBM2G-08513C + RV12x5 arm 45 mm [air; ] \u2192 TBM2G-07613D + RV12x5 arm 58 mm [air_fins; ]"
+ },
+ {
+  "it": 1,
+  "area": "actuator shoulder_pitch",
+  "failure": "speed shoulder_pitch (3.2 < 4 rad/s at 30 % torque, 44 V bus)",
+  "fix": "TBM2G-08513C + CSG-25-100 [air; CRBH 9016 A] \u2192 TBM2G-07608C + CSG-25-100 [air; CRBH 8016 A]"
+ },
+ {
+  "it": 1,
+  "area": "actuator shoulder_roll",
+  "failure": "speed shoulder_roll (3.2 < 4 rad/s at 30 % torque, 44 V bus)",
+  "fix": "TBM2G-08513C + CSG-25-100 [air; CRBH 9016 A] \u2192 TBM2G-06813C + CSG-25-100 [air; CRBH 4010 A]"
+ },
+ {
+  "it": 1,
+  "area": "side fall",
+  "failure": "fall-shoulder-gear: 4984 N\u00b7m > momentary peak 369 (ratcheting 650)",
+  "fix": "friction overload clutch at shoulder-roll output (slip 300 N\u00b7m < 369 N\u00b7m momentary peak) + 30 mm EPP pads on shoulder/hip"
+ },
+ {
+  "it": 1,
+  "area": "bolted joint",
+  "failure": "bolted hip-pitch flexspline \u2192 output flange (momentary peak by friction): separation_or_slip",
+  "fix": "8\u00d7M4 \u2192 8\u00d7M5 (12.9)"
+ },
+ {
+  "it": 1,
+  "area": "bolted joint",
+  "failure": "bolted shoulder actuator \u2192 torso frame (side-fall impact): separation_or_slip, fatigue",
+  "fix": "6\u00d7M5 \u2192 6\u00d7M6 (12.9)"
+ },
+ {
+  "it": 2,
+  "area": "bolted joint",
+  "failure": "bolted hip-pitch flexspline \u2192 output flange (momentary peak by friction): separation_or_slip",
+  "fix": "8\u00d7M5 \u2192 8\u00d7M6 (12.9)"
+ },
+ {
+  "it": 2,
+  "area": "bolted joint",
+  "failure": "bolted shoulder actuator \u2192 torso frame (side-fall impact): separation_or_slip",
+  "fix": "6\u00d7M6 \u2192 6\u00d7M8 (12.9)"
+ },
+ {
+  "it": 3,
+  "area": "actuator hip_yaw (mass reduction)",
+  "failure": "passing but oversized; robot 70.5 kg",
+  "fix": "TBM2G-05008A + CSG-14-100 [air; CRBH 7013 A] \u2192 TBM2G-05008A + CSG-14-100 [air; CRBH 6013 A] (\u22120.21 kg)"
+ },
+ {
+  "it": 3,
+  "area": "actuator hip_roll (mass reduction)",
+  "failure": "passing but oversized; robot 70.3 kg",
+  "fix": "TBM2G-11513C + CSG-25-100 [air; CRBH 9016 A] \u2192 TBM2G-07608C + CSG-25-100 [air; CRBH 6013 A] (\u22122.72 kg)"
+ },
+ {
+  "it": 3,
+  "area": "actuator hip_pitch (mass reduction)",
+  "failure": "passing but oversized; robot 67.6 kg",
+  "fix": "TBM2G-07608C + CSG-25-100 [air; CRBH 7013 A] \u2192 TBM2G-07608C + CSG-25-100 [air; CRBH 6013 A] (\u22120.21 kg)"
+ },
+ {
+  "it": 3,
+  "area": "actuator ankle_pitch (mass reduction)",
+  "failure": "passing but oversized; robot 67.4 kg",
+  "fix": "TBM2G-06813D + RV12x4 arm 65 mm [air; ] \u2192 TBM2G-06013D + RV12x4 arm 70 mm [air_fins; ] (\u22120.18 kg)"
+ },
+ {
+  "it": 3,
+  "area": "actuator waist_yaw (mass reduction)",
+  "failure": "passing but oversized; robot 67.2 kg",
+  "fix": "TBM2G-06013C + CSG-20-100 [air; CRBH 5013 A] \u2192 TBM2G-06008A + CSG-17-100 [air; CRBH 5013 A] (\u22120.21 kg)"
+ },
+ {
+  "it": 3,
+  "area": "actuator waist_pitch (mass reduction)",
+  "failure": "passing but oversized; robot 67.0 kg",
+  "fix": "TBM2G-08513C + CSG-25-100 [air; CRBH 9016 A] \u2192 TBM2G-07608A + CSG-25-100 [air; CRBH 5013 A] (\u22121.02 kg)"
+ },
+ {
+  "it": 3,
+  "area": "actuator shoulder_pitch (mass reduction)",
+  "failure": "passing but oversized; robot 66.0 kg",
+  "fix": "TBM2G-07608C + CSG-25-100 [air; CRBH 8016 A] \u2192 TBM2G-07608C + CSG-25-100 [air; CRBH 6013 A] (\u22121.20 kg)"
+ },
+ {
+  "it": 3,
+  "area": "actuator shoulder_yaw (mass reduction)",
+  "failure": "passing but oversized; robot 64.8 kg",
+  "fix": "TBM2G-06013C + CSG-20-100 [air; CRBH 5013 A] \u2192 TBM2G-06008C + CSG-17-100 [air; CRBH 4010 A] (\u22120.84 kg)"
+ },
+ {
+  "it": 3,
+  "area": "actuator wrist_roll (mass reduction)",
+  "failure": "passing but oversized; robot 64.0 kg",
+  "fix": "TBM2G-05008C + CSG-14-100 [air; CRBH 5013 A] \u2192 TBM2G-05008C + CSG-14-100 [air; CRBH 208 A] (\u22120.78 kg)"
+ },
+ {
+  "it": 3,
+  "area": "actuator neck_yaw (mass reduction)",
+  "failure": "passing but oversized; robot 63.2 kg",
+  "fix": "TBM2G-05008C + CSG-14-100 [air; CRBH 5013 A] \u2192 TBM2G-05008A + CSG-14-100 [air; CRBH 208 A] (\u22120.39 kg)"
+ },
+ {
+  "it": 3,
+  "area": "actuator neck_pitch (mass reduction)",
+  "failure": "passing but oversized; robot 62.8 kg",
+  "fix": "TBM2G-05008C + CSG-14-100 [air; CRBH 5013 A] \u2192 TBM2G-05008A + CSG-14-100 [air; CRBH 208 A] (\u22120.39 kg)"
+ },
+ {
+  "it": 4,
+  "area": "actuator knee (mass reduction)",
+  "failure": "passing but oversized; robot 62.4 kg",
+  "fix": "TBM2G-07613D + RV12x5 arm 58 mm [air_fins; ] \u2192 TBM2G-06813D + RV12x4 arm 58 mm [air; ] (\u22120.20 kg)"
+ },
+ {
+  "it": 4,
+  "area": "actuator waist_pitch (mass reduction)",
+  "failure": "passing but oversized; robot 62.2 kg",
+  "fix": "TBM2G-07608A + CSG-25-100 [air; CRBH 5013 A] \u2192 TBM2G-06808A + CSG-25-100 [air; CRBH 5013 A] (\u22120.05 kg)"
+ },
+ {
+  "it": 4,
+  "area": "actuator shoulder_pitch (mass reduction)",
+  "failure": "passing but oversized; robot 62.2 kg",
+  "fix": "TBM2G-07608C + CSG-25-100 [air; CRBH 6013 A] \u2192 TBM2G-07608C + CSG-25-100 [air; CRBH 5013 A] (\u22120.19 kg)"
+ }
+]

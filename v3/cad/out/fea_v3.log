@@ -1,0 +1,21 @@
+knee_clevis (3.0, 100) 3959 51 MPa (max 87)
+knee_clevis (3.0, 25) 8631 47 MPa (max 88)
+knee_clevis (3.0, 8) 23697 42 MPa (max 91)
+fall_hip_bracket (3.0, 100) 2509 36 MPa (max 57)
+fall_hip_bracket (3.0, 25) 9646 34 MPa (max 69)
+fall_hip_bracket (3.0, 8) 31515 33 MPa (max 98)
+fall_shoulder_housing (3.0, 100) 3031 54 MPa (max 62)
+fall_shoulder_housing (3.0, 25) 9226 56 MPa (max 62)
+fall_shoulder_housing (3.0, 8) 28612 56 MPa (max 67)
+Killed
+fall_torso_panel (3.0, 100) 5209 311 MPa (max 382)
+fall_torso_panel (3.0, 25) 17463 298 MPa (max 383)
+Iterative solver did not converge.
+pelvis_hip (3.0, 300) 8001 464583042 MPa (max 771517217)
+Iterative solver did not converge.
+pelvis_hip (3.0, 100) 17473 17086 MPa (max 38836)
+Iterative solver did not converge.
+pelvis_hip (3.0, 40) 42152 330522 MPa (max 809285)
+Killed
+femur_full (3.0, 2000) 30105 47 MPa (max 64)
+femur_full (3.0, 50) 35703 47 MPa (max 65)

@@ -1,0 +1,1 @@
+{"ok": true, "stands": true, "push": [125, 125], "pd_only": [225, 0], "text": "Stands 10 s with balance ON: True; recovers from 0.2 s pushes up to 125 N forward / 125 N sideways (v2 capsule model: 175 N). Plain PD (balance OFF) falls backwards in ~2 s: CAD centre of mass is 20\u201335 mm behind the ankles."}

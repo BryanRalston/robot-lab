@@ -1,0 +1,206 @@
+{
+ "120": [],
+ "125": [
+  [
+   "L_femur knee fillet collar",
+   "L_knee actuator rod-end bearing"
+  ],
+  [
+   "L_knee actuator screw rod",
+   "L_ankle actuator in cooling fin 1"
+  ],
+  [
+   "L_knee actuator screw rod",
+   "L_ankle actuator in cooling fin 2"
+  ],
+  [
+   "L_knee actuator screw rod",
+   "L_ankle actuator out cooling fin 1"
+  ],
+  [
+   "L_knee actuator screw rod",
+   "L_ankle actuator out cooling fin 2"
+  ]
+ ],
+ "130": [
+  [
+   "L_femur tube 7075 \u00d850x2.0",
+   "L_knee actuator rod-end bearing"
+  ],
+  [
+   "L_femur knee fillet collar",
+   "L_knee actuator rod-end bearing"
+  ],
+  [
+   "L_knee actuator body (motor TBM2G-06813 + Rollvis RV12 roller-screw nut, lead 4 mm)",
+   "L_ankle actuator in body (motor TBM2G-06013 + Rollvis RV12 roller-screw nut, lead 4 mm)"
+  ],
+  [
+   "L_knee actuator body (motor TBM2G-06813 + Rollvis RV12 roller-screw nut, lead 4 mm)",
+   "L_ankle actuator out body (motor TBM2G-06013 + Rollvis RV12 roller-screw nut, lead 4 mm)"
+  ],
+  [
+   "L_knee actuator screw rod",
+   "L_ankle actuator in cooling fin 1"
+  ],
+  [
+   "L_knee actuator screw rod",
+   "L_ankle actuator in cooling fin 2"
+  ],
+  [
+   "L_knee actuator screw rod",
+   "L_ankle actuator in cooling fin 3"
+  ],
+  [
+   "L_knee actuator screw rod",
+   "L_ankle actuator out cooling fin 1"
+  ],
+  [
+   "L_knee actuator screw rod",
+   "L_ankle actuator out cooling fin 2"
+  ],
+  [
+   "L_knee actuator screw rod",
+   "L_ankle actuator out cooling fin 3"
+  ]
+ ],
+ "135": [
+  [
+   "L_femur tube 7075 \u00d850x2.0",
+   "L_knee actuator rod-end bearing"
+  ],
+  [
+   "L_femur knee fillet collar",
+   "L_knee actuator rod-end bearing"
+  ],
+  [
+   "L_knee actuator body (motor TBM2G-06813 + Rollvis RV12 roller-screw nut, lead 4 mm)",
+   "L_ankle actuator in body (motor TBM2G-06013 + Rollvis RV12 roller-screw nut, lead 4 mm)"
+  ],
+  [
+   "L_knee actuator body (motor TBM2G-06813 + Rollvis RV12 roller-screw nut, lead 4 mm)",
+   "L_ankle actuator out body (motor TBM2G-06013 + Rollvis RV12 roller-screw nut, lead 4 mm)"
+  ],
+  [
+   "L_knee actuator screw rod",
+   "L_ankle actuator in cooling fin 1"
+  ],
+  [
+   "L_knee actuator screw rod",
+   "L_ankle actuator in cooling fin 2"
+  ],
+  [
+   "L_knee actuator screw rod",
+   "L_ankle actuator in cooling fin 3"
+  ],
+  [
+   "L_knee actuator screw rod",
+   "L_ankle actuator in cooling fin 4"
+  ],
+  [
+   "L_knee actuator screw rod",
+   "L_ankle actuator out cooling fin 1"
+  ],
+  [
+   "L_knee actuator screw rod",
+   "L_ankle actuator out cooling fin 2"
+  ],
+  [
+   "L_knee actuator screw rod",
+   "L_ankle actuator out cooling fin 3"
+  ],
+  [
+   "L_knee actuator screw rod",
+   "L_ankle actuator out cooling fin 4"
+  ]
+ ],
+ "140": [
+  [
+   "L_femur tube 7075 \u00d850x2.0",
+   "L_knee actuator rod-end bearing"
+  ],
+  [
+   "L_femur tube 7075 \u00d850x2.0",
+   "L_ankle actuator in body (motor TBM2G-06013 + Rollvis RV12 roller-screw nut, lead 4 mm)"
+  ],
+  [
+   "L_femur tube 7075 \u00d850x2.0",
+   "L_ankle actuator in cooling fin 1"
+  ],
+  [
+   "L_femur tube 7075 \u00d850x2.0",
+   "L_ankle actuator in cooling fin 2"
+  ],
+  [
+   "L_femur tube 7075 \u00d850x2.0",
+   "L_ankle actuator out body (motor TBM2G-06013 + Rollvis RV12 roller-screw nut, lead 4 mm)"
+  ],
+  [
+   "L_femur tube 7075 \u00d850x2.0",
+   "L_ankle actuator out cooling fin 1"
+  ],
+  [
+   "L_femur tube 7075 \u00d850x2.0",
+   "L_ankle actuator out cooling fin 2"
+  ],
+  [
+   "L_femur knee fillet collar",
+   "L_knee actuator rod-end bearing"
+  ],
+  [
+   "L_knee actuator body (motor TBM2G-06813 + Rollvis RV12 roller-screw nut, lead 4 mm)",
+   "L_ankle actuator in body (motor TBM2G-06013 + Rollvis RV12 roller-screw nut, lead 4 mm)"
+  ],
+  [
+   "L_knee actuator body (motor TBM2G-06813 + Rollvis RV12 roller-screw nut, lead 4 mm)",
+   "L_ankle actuator out body (motor TBM2G-06013 + Rollvis RV12 roller-screw nut, lead 4 mm)"
+  ],
+  [
+   "L_knee actuator screw rod",
+   "L_ankle actuator in cooling fin 1"
+  ],
+  [
+   "L_knee actuator screw rod",
+   "L_ankle actuator in cooling fin 2"
+  ],
+  [
+   "L_knee actuator screw rod",
+   "L_ankle actuator in cooling fin 3"
+  ],
+  [
+   "L_knee actuator screw rod",
+   "L_ankle actuator in cooling fin 4"
+  ],
+  [
+   "L_knee actuator screw rod",
+   "L_ankle actuator out cooling fin 1"
+  ],
+  [
+   "L_knee actuator screw rod",
+   "L_ankle actuator out cooling fin 2"
+  ],
+  [
+   "L_knee actuator screw rod",
+   "L_ankle actuator out cooling fin 3"
+  ],
+  [
+   "L_knee actuator screw rod",
+   "L_ankle actuator out cooling fin 4"
+  ]
+ ],
+ "single_roll_-6": [],
+ "single_roll_-8": [
+  [
+   "L_ankle actuator in body (motor TBM2G-06013 + Rollvis RV12 roller-screw nut, lead 4 mm)",
+   "R_ankle actuator in body (motor TBM2G-06013 + Rollvis RV12 roller-screw nut, lead 4 mm)"
+  ],
+  [
+   "L_ankle actuator in cooling fin 3",
+   "R_ankle actuator in cooling fin 1"
+  ],
+  [
+   "L_ankle actuator in cooling fin 4",
+   "R_ankle actuator in cooling fin 2"
+  ]
+ ]
+}

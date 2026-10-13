@@ -1,0 +1,160 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>v3 sim with CAD parts</title><style>*{box-sizing:border-box}body{margin:0;font:15px/1.55 system-ui,sans-serif;background:#0b141d;color:#dbe7f2}
+nav{position:fixed;top:0;left:0;bottom:0;width:260px;overflow:auto;background:#101e2b;padding:16px;border-right:1px solid #1e3347}
+nav h1{font-size:16px;margin:0 0 12px;color:#fff}nav a{display:block;color:#9fc3e3;text-decoration:none;padding:4px 6px;border-radius:4px;font-size:14px}
+nav a.sub{padding-left:20px;font-size:13px;color:#7ea4c6}nav a.active,nav a:hover{background:#1f3b57;color:#fff}
+main{margin-left:260px;padding:24px 40px;max-width:1200px}section{margin-bottom:40px;scroll-margin-top:10px}h2{border-bottom:2px solid #f5a623;padding-bottom:4px}
+table{border-collapse:collapse;width:100%;font-size:13px;margin:12px 0;display:block;overflow-x:auto}th,td{border:1px solid #24405a;padding:6px 8px;vertical-align:top}
+th{background:#16293b;cursor:pointer;user-select:none;position:sticky;top:0}th[data-dir=asc]:after{content:" ▲"}th[data-dir=desc]:after{content:" ▼"}tr:nth-child(even) td{background:#0f1c28}
+a{color:#7fc4ff}.card{background:#101e2b;border:1px solid #1e3347;border-radius:8px;padding:10px 16px;margin:12px 0;scroll-margin-top:10px}.card h3{margin:4px 0;color:#f5a623}
+.svgbox{background:#0e1a26;border:1px solid #1e3347;border-radius:8px;padding:10px;display:inline-block;margin:8px 0}
+#viewer{position:relative;border:1px solid #1e3347;border-radius:8px;overflow:hidden;margin:10px 0}#three{width:100%;height:480px}
+.hint{position:absolute;top:8px;left:10px;font-size:12px;color:#9fc3e3}#tip{position:absolute;display:none;background:#000c;padding:6px 8px;border-radius:6px;font-size:12px;pointer-events:none}
+blockquote{border-left:4px solid #f5a623;margin:0;padding:4px 12px;background:#101e2b}#three{height:520px}
+.topbar{display:none}
+table{display:table;width:100%}.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:12px 0}.tw table{margin:0}
+#three{height:min(62vh,520px)}#three canvas{touch-action:none;display:block}
+#tip a{color:#ffd27f;pointer-events:auto}
+.controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:10px 0}.controls button{min-height:44px;min-width:88px;font-size:16px;border-radius:8px;border:1px solid #3a6a95;background:#1f3b57;color:#fff;padding:8px 14px}
+.controls input[type=range]{flex:1;min-width:160px;height:32px}
+@media (max-width:820px){
+ body{font-size:16px}
+ .topbar{display:flex;position:sticky;top:0;z-index:20;background:#101e2b;border-bottom:1px solid #1e3347;align-items:center;gap:10px;padding:8px 12px}
+ .topbar button{font-size:22px;background:none;border:1px solid #3a6a95;color:#fff;border-radius:8px;width:44px;height:44px}
+ .topbar a{color:#fff;font-weight:600;text-decoration:none;font-size:16px}
+ nav{transform:translateX(-100%);transition:transform .2s;z-index:30;width:80vw;max-width:300px;box-shadow:4px 0 20px #000a}
+ body.navopen nav{transform:none}
+ nav a{padding:10px 8px;font-size:16px}
+ main{margin-left:0;padding:12px 14px}
+ h2{font-size:20px}main h1{font-size:26px;line-height:1.25}th,td{font-size:13px;padding:6px}
+ #three{height:62vh}.svgbox{display:block;overflow-x:auto}.svgbox svg{max-width:100%;height:auto}
+ .controls{flex-direction:column;align-items:stretch}.controls button{width:100%}
+}.legend{font-size:13px;color:#9fc3e3}.crumb{font-size:13px}</style><script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script></head><body><div class="topbar"><button aria-label="Menu" onclick="document.body.classList.toggle('navopen')">☰</button><a href="index.html">Humanoid Design v1</a></div><nav><h1><a href="index.html" style="padding:0;color:#fff">Humanoid Design v1</a></h1><a href="index.html">Overview (assembled)</a><a href="head.html">Head &amp; sensors</a><a href="torso.html">Torso, spine, power &amp; compute</a><a href="arms.html">Shoulders &amp; arms</a><a href="hands.html">Hands (2 × 21 DoF)</a><a href="hips.html">Hips &amp; pelvis</a><a href="legs.html">Legs &amp; feet</a><a href="control.html">Control &amp; AI stack</a><a href="sim.html">▶ Physics sim (MuJoCo)</a><div style="margin:12px 0 4px;color:#f5a623;font-size:12px;letter-spacing:.08em">V2 · BHL → OPTIMUS-CLASS</div><a href="v2.html">v2 design</a><a href="v2_checks.html">v2 engineering checks</a><a href="v2_sim.html">▶ v2 balance sim</a><a href="v2_cad.html">v2 CAD + FEA</a><div style="margin:12px 0 4px;color:#5ad17a;font-size:12px;letter-spacing:.08em">V3 · HARDENING LOOP</div><a href="v3.html">v3 dashboard + CAD</a><a href="v3_checks.html">v3 checks, parts, revisions</a><a href="v3_sim.html" class=active>▶ v3 sim (CAD parts)</a></nav><main><h2>v3 simulation with CAD parts (MuJoCo WASM)</h2><p>MJCF generated from the v3 CAD (<a href="humanoid_v3.xml">humanoid_v3.xml</a>, 62.0 kg; joint locations, per-segment mass/COM/inertia from the CAD, torque limits = catalog actuator peaks). The 3D view draws the actual CAD parts attached to the simulated bodies; collisions use simple shapes (toggle to see them). Controller: scripted joint PD + COM ankle strategy. Stands 10 s with balance ON: True; recovers from 0.2 s pushes up to 125 N forward / 125 N sideways (v2 capsule model: 175 N). Plain PD (balance OFF) falls backwards in ~2 s: CAD centre of mass is 20–35 mm behind the ankles.</p><div class="controls"><button id="bal">Balance: ON</button><button id="pause">Pause</button><button id="reset">Reset</button><button id="push">Push pelvis</button><button id="cadtog" disabled>Show: CAD parts</button><label>Direction <select id="pdir" style="font-size:16px;min-height:36px"><option value="0">forward (+x)</option><option value="1">sideways (+y)</option></select></label><label>Push force <span id="fv">100</span> N (0.2 s)</label><input id="force" type="range" min="-300" max="300" value="100" oninput="fv.textContent=this.value"></div><div id="viewer"><div id="three"></div><div class="hint">Drag to rotate · pinch/scroll to zoom</div></div><p id="simstatus">Loading MuJoCo WASM…</p><script type="text/plain" id="mjcf"><mujoco model="robotlab_v3">
+  <!-- Generated by sim/v3/gen_v3.py from v3 CAD (joint locations, per-segment mass/COM/inertia scaled to the 62.0 kg catalog rollup)
+       and v3/analysis (ctrlrange = catalog peak torque, armature = TBM2G rotor inertia x ratio^2). Collision = primitives; visuals on the site = CAD GLB parts.
+       Linear (roller-screw) joints modelled as rotary with their effective ratio at the nominal lever arm. Leg-leg contacts are enabled
+       (single-leg adduction beyond -6 deg collides in CAD). -->
+  <compiler angle="degree" autolimits="true" inertiafromgeom="false"/>
+  <option timestep="0.002" integrator="implicitfast"/>
+  <default><geom contype="1" conaffinity="1" condim="3" rgba="0.5 0.7 0.88 1"/></default>
+  <asset><texture name="grid" type="2d" builtin="checker" rgb1=".1 .15 .2" rgb2=".15 .2 .25" width="300" height="300"/><material name="grid" texture="grid" texrepeat="8 8"/></asset>
+  <worldbody><light pos="0 0 4" dir="0 0 -1"/><geom name="floor" type="plane" size="20 20 0.1" material="grid"/>
+  <body name="pelvis" pos="0 0 1.160"><freejoint name="root"/><site name="imu"/><inertial pos="0.0000 0.0000 0.0194" mass="6.418" diaginertia="0.09835 0.02270 0.10197"/>
+    <geom name="pelvis" type="box" pos="0 0 0.018" size="0.085 0.185 0.052"/>
+    <body name="L_hipY" pos="0.000 0.130 0.000"><joint name="l_hip_yaw" pos="0.000 0.000 0.000" axis="0 0 1" range="-35 45" armature="0.0790" damping="0.5" frictionloss="0.3"/><inertial pos="0.0059 0.0000 -0.1058" mass="1.941" diaginertia="0.00309 0.00417 0.00331"/>
+      <body name="L_hipR" pos="0.000 0.000 -0.115"><joint name="l_hip_roll" pos="0.000 0.000 0.000" axis="1 0 0" range="-12 15" armature="0.4410" damping="0.5" frictionloss="0.3"/><inertial pos="0.0000 0.0023 -0.1151" mass="1.783" diaginertia="0.00357 0.00310 0.00263"/>
+      <body name="L_thigh" pos="0.000 0.000 -0.125"><joint name="l_hip_pitch" pos="0.000 0.000 0.000" axis="0 1 0" range="-105 40" armature="0.4410" damping="0.5" frictionloss="0.3"/><inertial pos="-0.0309 0.0000 -0.2003" mass="1.626" diaginertia="0.02466 0.02827 0.00532"/>
+        <geom name="l_thigh" type="capsule" fromto="0.018 0 -0.06 0.018 0 -0.370" size="0.04"/>
+        <body name="L_shank" pos="0.000 0.000 -0.420"><joint name="l_knee" pos="0.000 0.000 0.000" axis="0 1 0" range="0 120" armature="0.2609" damping="0.5" frictionloss="0.3"/><inertial pos="-0.0340 0.0009 -0.1245" mass="2.494" diaginertia="0.03919 0.03913 0.00693"/>
+          <geom name="l_shank" type="capsule" fromto="0.014 0 -0.05 0.014 0 -0.350" size="0.035"/>
+          <geom name="l_calf" type="capsule" fromto="-0.06 0 -0.12 -0.06 0 -0.260" size="0.045"/>
+          <body name="L_foot" pos="0.000 0.000 -0.420"><joint name="l_ankle_pitch" pos="0.000 0.000 0.000" axis="0 1 0" range="-45 40" armature="0.1777" damping="0.5" frictionloss="0.3"/><joint name="l_ankle_roll" pos="0.000 0.000 0.000" axis="1 0 0" range="-25 25" armature="0.0580" damping="0.5" frictionloss="0.3"/><inertial pos="0.0175 0.0007 -0.0308" mass="2.433" diaginertia="0.01305 0.02300 0.01461"/>
+            <geom name="l_foot" type="box" pos="0.060 0 -0.071" size="0.120 0.05 0.009" friction="1.0"/>
+          </body></body></body></body></body><body name="R_hipY" pos="0.000 -0.130 0.000"><joint name="r_hip_yaw" pos="0.000 0.000 0.000" axis="0 0 1" range="-35 45" armature="0.0790" damping="0.5" frictionloss="0.3"/><inertial pos="0.0059 0.0000 -0.1058" mass="1.941" diaginertia="0.00309 0.00417 0.00331"/>
+      <body name="R_hipR" pos="0.000 0.000 -0.115"><joint name="r_hip_roll" pos="0.000 0.000 0.000" axis="1 0 0" range="-15 12" armature="0.4410" damping="0.5" frictionloss="0.3"/><inertial pos="0.0000 0.0106 -0.1151" mass="1.783" diaginertia="0.00338 0.00310 0.00243"/>
+      <body name="R_thigh" pos="0.000 0.000 -0.125"><joint name="r_hip_pitch" pos="0.000 0.000 0.000" axis="0 1 0" range="-105 40" armature="0.4410" damping="0.5" frictionloss="0.3"/><inertial pos="-0.0309 0.0000 -0.2003" mass="1.626" diaginertia="0.02466 0.02827 0.00532"/>
+        <geom name="r_thigh" type="capsule" fromto="0.018 0 -0.06 0.018 0 -0.370" size="0.04"/>
+        <body name="R_shank" pos="0.000 0.000 -0.420"><joint name="r_knee" pos="0.000 0.000 0.000" axis="0 1 0" range="0 120" armature="0.2609" damping="0.5" frictionloss="0.3"/><inertial pos="-0.0340 -0.0009 -0.1245" mass="2.494" diaginertia="0.03919 0.03913 0.00693"/>
+          <geom name="r_shank" type="capsule" fromto="0.014 0 -0.05 0.014 0 -0.350" size="0.035"/>
+          <geom name="r_calf" type="capsule" fromto="-0.06 0 -0.12 -0.06 0 -0.260" size="0.045"/>
+          <body name="R_foot" pos="0.000 0.000 -0.420"><joint name="r_ankle_pitch" pos="0.000 0.000 0.000" axis="0 1 0" range="-45 40" armature="0.1777" damping="0.5" frictionloss="0.3"/><joint name="r_ankle_roll" pos="0.000 0.000 0.000" axis="1 0 0" range="-25 25" armature="0.0580" damping="0.5" frictionloss="0.3"/><inertial pos="0.0175 -0.0007 -0.0308" mass="2.433" diaginertia="0.01305 0.02300 0.01461"/>
+            <geom name="r_foot" type="box" pos="0.060 0 -0.071" size="0.120 0.05 0.009" friction="1.0"/>
+          </body></body></body></body></body>
+    <body name="waistY" pos="0.000 0.000 0.028"><joint name="waist_yaw" pos="0.000 0.000 0.000" axis="0 0 1" range="-90 90" armature="0.1370" damping="0.5" frictionloss="0.3"/><inertial pos="0.0000 0.0083 0.0920" mass="1.391" diaginertia="0.00187 0.00160 0.00187"/>
+    <body name="torso" pos="0.000 0.000 0.092"><joint name="waist_pitch" pos="0.000 0.000 0.000" axis="0 1 0" range="-30 60" armature="0.2390" damping="0.5" frictionloss="0.3"/><inertial pos="0.0014 0.0000 0.1600" mass="21.151" diaginertia="0.29549 0.16965 0.26497"/>
+      <geom name="torso" type="box" pos="0 0 0.180" size="0.11 0.17 0.130"/>
+      <body name="L_shoulderP" pos="0.000 0.170 0.220"><joint name="l_shoulder_pitch" pos="0.000 0.000 0.000" axis="0 1 0" range="-180 60" armature="0.4410" damping="0.5" frictionloss="0.3"/><inertial pos="0.0052 0.1120 -0.0400" mass="1.317" diaginertia="0.00143 0.00182 0.00182"/>
+        <body name="L_upper_arm" pos="0.000 0.112 -0.040"><joint name="l_shoulder_roll" pos="0.000 0.000 0.000" axis="1 0 0" range="-15 180" armature="0.3090" damping="0.5" frictionloss="0.3"/><joint name="l_shoulder_yaw" pos="0.000 0.000 -0.100" axis="0 0 1" range="-150 150" armature="0.1370" damping="0.5" frictionloss="0.3"/><inertial pos="0.0000 0.0033 -0.1851" mass="1.725" diaginertia="0.01317 0.01282 0.00161"/>
+          <geom name="l_upper_arm" type="capsule" fromto="0 0 -0.05 0 0 -0.220" size="0.04"/>
+          <body name="L_forearm" pos="0.000 0.000 -0.260"><joint name="l_elbow" pos="0.000 0.000 0.000" axis="0 1 0" range="-140 0" armature="0.1040" damping="0.5" frictionloss="0.3"/><inertial pos="0.0000 0.0000 -0.1582" mass="1.863" diaginertia="0.00809 0.00809 0.00127"/>
+            <geom name="l_forearm" type="capsule" fromto="0 0 -0.04 0 0 -0.240" size="0.038"/>
+            <body name="L_hand" pos="0.000 0.000 -0.250"><joint name="l_wrist_roll" pos="0.000 0.000 0.000" axis="0 0 1" range="-170 170" armature="0.0790" damping="0.5" frictionloss="0.3"/><joint name="l_wrist_pitch" pos="0.000 0.000 -0.030" axis="0 1 0" range="-70 70" armature="0.0122" damping="0.5" frictionloss="0.3"/><joint name="l_wrist_yaw" pos="0.000 0.000 -0.030" axis="1 0 0" range="-40 40" armature="0.0122" damping="0.5" frictionloss="0.3"/><inertial pos="0.0029 -0.0011 -0.0959" mass="0.780" diaginertia="0.00134 0.00102 0.00057"/>
+              <geom name="l_hand" type="box" pos="0 0 -0.1" size="0.016 0.043 0.07"/>
+            </body></body></body></body><body name="R_shoulderP" pos="0.000 -0.170 0.220"><joint name="r_shoulder_pitch" pos="0.000 0.000 0.000" axis="0 1 0" range="-180 60" armature="0.4410" damping="0.5" frictionloss="0.3"/><inertial pos="0.0052 -0.1120 -0.0400" mass="1.317" diaginertia="0.00143 0.00182 0.00182"/>
+        <body name="R_upper_arm" pos="0.000 -0.112 -0.040"><joint name="r_shoulder_roll" pos="0.000 0.000 0.000" axis="1 0 0" range="-180 15" armature="0.3090" damping="0.5" frictionloss="0.3"/><joint name="r_shoulder_yaw" pos="0.000 0.000 -0.100" axis="0 0 1" range="-150 150" armature="0.1370" damping="0.5" frictionloss="0.3"/><inertial pos="0.0000 -0.0033 -0.1851" mass="1.725" diaginertia="0.01317 0.01282 0.00161"/>
+          <geom name="r_upper_arm" type="capsule" fromto="0 0 -0.05 0 0 -0.220" size="0.04"/>
+          <body name="R_forearm" pos="0.000 0.000 -0.260"><joint name="r_elbow" pos="0.000 0.000 0.000" axis="0 1 0" range="-140 0" armature="0.1040" damping="0.5" frictionloss="0.3"/><inertial pos="0.0000 0.0000 -0.1582" mass="1.863" diaginertia="0.00809 0.00809 0.00127"/>
+            <geom name="r_forearm" type="capsule" fromto="0 0 -0.04 0 0 -0.240" size="0.038"/>
+            <body name="R_hand" pos="0.000 0.000 -0.250"><joint name="r_wrist_roll" pos="0.000 0.000 0.000" axis="0 0 1" range="-170 170" armature="0.0790" damping="0.5" frictionloss="0.3"/><joint name="r_wrist_pitch" pos="0.000 0.000 -0.030" axis="0 1 0" range="-70 70" armature="0.0122" damping="0.5" frictionloss="0.3"/><joint name="r_wrist_yaw" pos="0.000 0.000 -0.030" axis="1 0 0" range="-40 40" armature="0.0122" damping="0.5" frictionloss="0.3"/><inertial pos="0.0029 0.0011 -0.0959" mass="0.780" diaginertia="0.00134 0.00102 0.00057"/>
+              <geom name="r_hand" type="box" pos="0 0 -0.1" size="0.016 0.043 0.07"/>
+            </body></body></body></body>
+      <body name="neckY" pos="0.000 0.000 0.295"><joint name="neck_yaw" pos="0.000 0.000 0.000" axis="0 0 1" range="-80 80" armature="0.0790" damping="0.5" frictionloss="0.3"/><inertial pos="0.0000 0.0004 0.0750" mass="0.467" diaginertia="0.00039 0.00023 0.00039"/>
+      <body name="head" pos="0.000 0.000 0.075"><joint name="neck_pitch" pos="0.000 0.000 0.000" axis="0 1 0" range="-40 40" armature="0.0790" damping="0.5" frictionloss="0.3"/><inertial pos="0.0456 0.0000 0.0848" mass="0.618" diaginertia="0.00226 0.00266 0.00326"/>
+        <geom name="head" type="sphere" pos="0.01 0 0.08" size="0.1"/></body></body>
+    </body></body></body>
+  </worldbody>
+  <contact><exclude body1="pelvis" body2="L_thigh"/><exclude body1="pelvis" body2="R_thigh"/><exclude body1="pelvis" body2="torso"/><exclude body1="torso" body2="L_upper_arm"/><exclude body1="torso" body2="R_upper_arm"/><exclude body1="L_thigh" body2="L_shank"/><exclude body1="R_thigh" body2="R_shank"/><exclude body1="L_shank" body2="L_foot"/><exclude body1="R_shank" body2="R_foot"/><exclude body1="L_upper_arm" body2="L_forearm"/><exclude body1="R_upper_arm" body2="R_forearm"/></contact>
+  <actuator><motor name="l_hip_yaw" joint="l_hip_yaw" ctrlrange="-36 36"/><motor name="l_hip_roll" joint="l_hip_roll" ctrlrange="-167 167"/><motor name="l_hip_pitch" joint="l_hip_pitch" ctrlrange="-167 167"/><motor name="l_knee" joint="l_knee" ctrlrange="-170 170"/><motor name="l_ankle_pitch" joint="l_ankle_pitch" ctrlrange="-311 311"/><motor name="l_ankle_roll" joint="l_ankle_roll" ctrlrange="-177 177"/><motor name="r_hip_yaw" joint="r_hip_yaw" ctrlrange="-36 36"/><motor name="r_hip_roll" joint="r_hip_roll" ctrlrange="-167 167"/><motor name="r_hip_pitch" joint="r_hip_pitch" ctrlrange="-167 167"/><motor name="r_knee" joint="r_knee" ctrlrange="-170 170"/><motor name="r_ankle_pitch" joint="r_ankle_pitch" ctrlrange="-311 311"/><motor name="r_ankle_roll" joint="r_ankle_roll" ctrlrange="-177 177"/><motor name="waist_yaw" joint="waist_yaw" ctrlrange="-70 70"/><motor name="waist_pitch" joint="waist_pitch" ctrlrange="-116 116"/><motor name="l_shoulder_pitch" joint="l_shoulder_pitch" ctrlrange="-167 167"/><motor name="l_shoulder_roll" joint="l_shoulder_roll" ctrlrange="-164 164"/><motor name="l_shoulder_yaw" joint="l_shoulder_yaw" ctrlrange="-70 70"/><motor name="l_elbow" joint="l_elbow" ctrlrange="-76 76"/><motor name="l_wrist_roll" joint="l_wrist_roll" ctrlrange="-36 36"/><motor name="l_wrist_pitch" joint="l_wrist_pitch" ctrlrange="-48 48"/><motor name="l_wrist_yaw" joint="l_wrist_yaw" ctrlrange="-48 48"/><motor name="r_shoulder_pitch" joint="r_shoulder_pitch" ctrlrange="-167 167"/><motor name="r_shoulder_roll" joint="r_shoulder_roll" ctrlrange="-164 164"/><motor name="r_shoulder_yaw" joint="r_shoulder_yaw" ctrlrange="-70 70"/><motor name="r_elbow" joint="r_elbow" ctrlrange="-76 76"/><motor name="r_wrist_roll" joint="r_wrist_roll" ctrlrange="-36 36"/><motor name="r_wrist_pitch" joint="r_wrist_pitch" ctrlrange="-48 48"/><motor name="r_wrist_yaw" joint="r_wrist_yaw" ctrlrange="-48 48"/><motor name="neck_yaw" joint="neck_yaw" ctrlrange="-36 36"/><motor name="neck_pitch" joint="neck_pitch" ctrlrange="-36 36"/></actuator>
+</mujoco></script><script type="application/json" id="ids">{"jq": {"root": 0, "l_hip_yaw": 7, "l_hip_roll": 8, "l_hip_pitch": 9, "l_knee": 10, "l_ankle_pitch": 11, "l_ankle_roll": 12, "r_hip_yaw": 13, "r_hip_roll": 14, "r_hip_pitch": 15, "r_knee": 16, "r_ankle_pitch": 17, "r_ankle_roll": 18, "waist_yaw": 19, "waist_pitch": 20, "l_shoulder_pitch": 21, "l_shoulder_roll": 22, "l_shoulder_yaw": 23, "l_elbow": 24, "l_wrist_roll": 25, "l_wrist_pitch": 26, "l_wrist_yaw": 27, "r_shoulder_pitch": 28, "r_shoulder_roll": 29, "r_shoulder_yaw": 30, "r_elbow": 31, "r_wrist_roll": 32, "r_wrist_pitch": 33, "r_wrist_yaw": 34, "neck_yaw": 35, "neck_pitch": 36}, "g": {"l_foot": 5, "r_foot": 9}, "a": {"l_hip_yaw": 0, "l_hip_roll": 1, "l_hip_pitch": 2, "l_knee": 3, "l_ankle_pitch": 4, "l_ankle_roll": 5, "r_hip_yaw": 6, "r_hip_roll": 7, "r_hip_pitch": 8, "r_knee": 9, "r_ankle_pitch": 10, "r_ankle_roll": 11, "waist_yaw": 12, "waist_pitch": 13, "l_shoulder_pitch": 14, "l_shoulder_roll": 15, "l_shoulder_yaw": 16, "l_elbow": 17, "l_wrist_roll": 18, "l_wrist_pitch": 19, "l_wrist_yaw": 20, "r_shoulder_pitch": 21, "r_shoulder_roll": 22, "r_shoulder_yaw": 23, "r_elbow": 24, "r_wrist_roll": 25, "r_wrist_pitch": 26, "r_wrist_yaw": 27, "neck_yaw": 28, "neck_pitch": 29}, "b": {"world": 0, "pelvis": 1, "L_hipY": 2, "L_hipR": 3, "L_thigh": 4, "L_shank": 5, "L_foot": 6, "R_hipY": 7, "R_hipR": 8, "R_thigh": 9, "R_shank": 10, "R_foot": 11, "waistY": 12, "torso": 13, "L_shoulderP": 14, "L_upper_arm": 15, "L_forearm": 16, "L_hand": 17, "R_shoulderP": 18, "R_upper_arm": 19, "R_forearm": 20, "R_hand": 21, "neckY": 22, "head": 23}}</script></main><script>
+// sortable tables
+document.querySelectorAll('table').forEach(t=>{const ths=t.querySelectorAll('th');ths.forEach((th,i)=>{th.title='Click to sort';th.addEventListener('click',()=>{const tb=t.tBodies[0];const rows=[...tb.rows];const asc=th.dataset.dir!=='asc';ths.forEach(h=>{delete h.dataset.dir});th.dataset.dir=asc?'asc':'desc';const num=s=>{const m=s.replace(/,/g,'').match(/-?\d+(\.\d+)?/);return m?parseFloat(m[0]):NaN};rows.sort((a,b)=>{const x=a.cells[i].innerText.trim(),y=b.cells[i].innerText.trim();const nx=num(x),ny=num(y);let r=(!isNaN(nx)&&!isNaN(ny))?nx-ny:x.localeCompare(y);return asc?r:-r});rows.forEach(r=>tb.appendChild(r))})})});
+// active nav
+const links=[...document.querySelectorAll('nav a')];const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){links.forEach(l=>l.classList.toggle('active',l.getAttribute('href')==='#'+e.target.id))}}),{rootMargin:'-20% 0px -70% 0px'});document.querySelectorAll('section,.card').forEach(s=>obs.observe(s));
+</script><script type="module">import * as THREE from 'three';
+import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
+import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
+import loadMujoco from 'https://cdn.jsdelivr.net/npm/@mujoco/mujoco@3.14.0/mujoco.js';
+const status=document.getElementById('simstatus');
+try{
+ const mj=await loadMujoco();
+ const xml=document.getElementById('mjcf').textContent;
+ const m=mj.MjModel.from_xml_string(xml);const d=new mj.MjData(m);mj.mj_forward(m,d);
+ const IDS=JSON.parse(document.getElementById("ids").textContent);const jq=n=>IDS.jq[n];
+ function nominal(){mj.mj_resetData(m,d);for(const s of ['l','r']){d.qpos[jq(s+'_hip_pitch')]=-0.25;d.qpos[jq(s+'_knee')]=0.5;d.qpos[jq(s+'_ankle_pitch')]=-0.25;d.qpos[jq(s+'_elbow')]=-0.3}
+  mj.mj_forward(m,d);let lo=1e9;for(const g of [gl,gr]){lo=Math.min(lo,d.geom_xpos[3*g+2]-0.02)}d.qpos[2]-=lo-0.0005;mj.mj_forward(m,d)}
+ const gid=n=>IDS.g[n];const gl=gid('l_foot'),gr=gid('r_foot');
+ mj.mj_resetData(m,d);mj.mj_forward(m,d);const xpos0=Float64Array.from(d.xpos);
+ nominal();const q0=Float64Array.from(d.qpos);
+ const aid=n=>IDS.a[n];const ankP=['l','r'].map(s=>aid(s+'_ankle_pitch')),ankR=['l','r'].map(s=>aid(s+'_ankle_roll'));
+ const Mtot=m.body_subtreemass[1];let balance=true;
+ const nu=m.nu,trn=m.actuator_trnid,qadr=m.jnt_qposadr,dadr=m.jnt_dofadr,cr=m.actuator_ctrlrange;
+ const qa=[],va=[],kp=[],kd=[];for(let i=0;i<nu;i++){const j=trn[2*i];qa.push(qadr[j]);va.push(dadr[j]);kp.push(Math.min(600,Math.max(30,cr[2*i+1]*3)));kd.push(kp[i]*0.04)}
+ const el=document.getElementById('three');const W=el.clientWidth,H=el.clientHeight;
+ const r=new THREE.WebGLRenderer({antialias:true});r.setSize(W,H);r.setPixelRatio(Math.min(2,devicePixelRatio));el.appendChild(r.domElement);
+ const sc=new THREE.Scene();sc.background=new THREE.Color(0x0e1a26);
+ const cam=new THREE.PerspectiveCamera(40,W/H,0.01,50);cam.up.set(0,0,1);cam.position.set(2.5,2.0,1.4);
+ const oc=new OrbitControls(cam,r.domElement);oc.target.set(0,0,0.9);oc.update();
+ sc.add(new THREE.HemisphereLight(0xffffff,0x334455,1.3));const dl=new THREE.DirectionalLight(0xffffff,1);dl.position.set(2,3,4);sc.add(dl);
+ const gs=m.geom_size,gt=m.geom_type,meshes=[];
+ for(let i=0;i<m.ngeom;i++){const t=gt[i],s=[gs[3*i],gs[3*i+1],gs[3*i+2]];let g;
+  if(t===0){g=new THREE.PlaneGeometry(20,20)}else if(t===2){g=new THREE.SphereGeometry(s[0],24,16)}
+  else if(t===3){g=new THREE.CapsuleGeometry(s[0],2*s[1],8,16);g.rotateX(Math.PI/2)}
+  else if(t===6){g=new THREE.BoxGeometry(2*s[0],2*s[1],2*s[2])}else{g=new THREE.SphereGeometry(0.02)}
+  const mat=t===0?new THREE.MeshStandardMaterial({color:0x1a2a38}):new THREE.MeshStandardMaterial({color:0x7fb3e0,metalness:.3,roughness:.5});
+  const me=new THREE.Mesh(g,mat);me.matrixAutoUpdate=false;me.userData.prim=t!==0;sc.add(me);meshes.push(me)}
+ // CAD parts (v3 GLB) attached to their MuJoCo bodies: M = Body(t) * T(-body_rest) * R^T(glTF->CAD)
+ const cad=[];let showCad=true;const Rt=new THREE.Matrix4().set(0,0,1,0, 1,0,0,0, 0,1,0,0, 0,0,0,1);
+ const meta=await (await fetch('cad/parts_v3.json')).json();const byId={};meta.forEach(x=>byId[x.id]=x);
+ new GLTFLoader().load('cad/bhl_v3.glb',g=>{g.scene.updateMatrixWorld(true);const todo=[];g.scene.traverse(o=>{if(o.isMesh)todo.push(o)});
+  for(const o of todo){const x=byId[o.name]||byId[o.parent&&o.parent.name];if(!x)continue;let bn=x.seg;if(/^[LR]_pelvis$/.test(bn))bn='pelvis';const b=IDS.b[bn];if(b===undefined)continue;
+   const geo=o.geometry.clone().applyMatrix4(o.matrixWorld);geo.computeVertexNormals();
+   const col=/battery/.test(x.name)?0x2a5aa0:/motor|Harmonic|drive/.test(x.name)?0xb87333:({'CFRP':0x3a3d44,'PA12':0xe6e6e1,'steel':0x8a8e96}[x.material]??0xb0b8c4);
+   const me=new THREE.Mesh(geo,new THREE.MeshStandardMaterial({color:col,metalness:.3,roughness:.55}));me.matrixAutoUpdate=false;
+   me.userData.b=b;me.userData.off=new THREE.Matrix4().makeTranslation(-xpos0[3*b],-xpos0[3*b+1],-xpos0[3*b+2]).multiply(Rt);sc.add(me);cad.push(me)}
+  for(const me of meshes)if(me.userData.prim)me.visible=!showCad;document.getElementById('cadtog').disabled=false;});
+ document.getElementById('cadtog').onclick=e=>{showCad=!showCad;e.target.textContent=showCad?'Show: CAD parts':'Show: collision shapes';for(const me of cad)me.visible=showCad;for(const me of meshes)if(me.userData.prim)me.visible=!showCad};
+ const bm=new THREE.Matrix4();
+ {const gh=new THREE.GridHelper(20,40,0x335577,0x223344);gh.rotation.x=Math.PI/2;sc.add(gh)}
+ addEventListener('resize',()=>{const w=el.clientWidth,h=el.clientHeight;r.setSize(w,h);cam.aspect=w/h;cam.updateProjectionMatrix()});
+ let paused=false,pushT=-1;
+ document.getElementById('reset').onclick=()=>{nominal()};document.getElementById('bal').onclick=e=>{balance=!balance;e.target.textContent='Balance: '+(balance?'ON':'OFF')};
+ document.getElementById('pause').onclick=e=>{paused=!paused;e.target.textContent=paused?'Resume':'Pause'};
+ document.getElementById('push').onclick=()=>{pushT=d.time};
+ const pushF=document.getElementById('force');
+ const mtx=new THREE.Matrix4();
+ function step(){const q=d.qpos,v=d.qvel,c=d.ctrl,xf=d.xfrc_applied;
+  const tau=new Float64Array(nu);for(let i=0;i<nu;i++)tau[i]=kp[i]*(q0[qa[i]]-q[qa[i]])-kd[i]*v[va[i]];
+  if(balance){const sc=d.subtree_com,gx=d.geom_xpos;const ex=sc[3]-0.5*(gx[3*gl]+gx[3*gr]),ey=sc[4]-0.5*(gx[3*gl+1]+gx[3*gr+1]);
+   const ax=Mtot*9.81*ex+20*v[0],ay=Mtot*9.81*ey+20*v[1];for(const i of ankP)tau[i]+=ax;for(const i of ankR)tau[i]-=ay}
+  for(let i=0;i<nu;i++)c[i]=Math.min(cr[2*i+1],Math.max(cr[2*i],tau[i]));
+  const on=(pushT>=0&&d.time-pushT<0.2);const dir=document.getElementById('pdir').value|0;xf[6]=on&&dir===0?+pushF.value:0;xf[7]=on&&dir===1?+pushF.value:0;
+  mj.mj_step(m,d)}
+ function draw(){const p=d.geom_xpos,R=d.geom_xmat;
+  for(let i=0;i<meshes.length;i++){const k=9*i;mtx.set(R[k],R[k+1],R[k+2],p[3*i],R[k+3],R[k+4],R[k+5],p[3*i+1],R[k+6],R[k+7],R[k+8],p[3*i+2],0,0,0,1);meshes[i].matrix.copy(mtx)}
+  const X=d.xpos,XM=d.xmat;for(const me of cad){const b=me.userData.b,k=9*b;bm.set(XM[k],XM[k+1],XM[k+2],X[3*b],XM[k+3],XM[k+4],XM[k+5],X[3*b+1],XM[k+6],XM[k+7],XM[k+8],X[3*b+2],0,0,0,1);me.matrix.multiplyMatrices(bm,me.userData.off)}
+  r.render(sc,cam)}
+ let last=performance.now();
+ (function loop(now){requestAnimationFrame(loop);if(!paused){const steps=Math.min(50,Math.round((now-last)/1000/m.opt.timestep));for(let i=0;i<steps;i++)step()}last=now;draw();
+  status.textContent=`t=${d.time.toFixed(2)} s · pelvis height ${d.qpos[2].toFixed(3)} m · ${d.qpos[2]>0.9?'standing':'FALLEN, press Reset'}`})(performance.now());
+ window.__simOK=true;
+}catch(e){status.textContent='Simulation failed to load: '+e;console.error(e)}
+</script><script>document.querySelectorAll("nav a").forEach(a=>a.addEventListener("click",()=>document.body.classList.remove("navopen")));document.querySelector("main").addEventListener("click",()=>document.body.classList.remove("navopen"))</script></body></html>

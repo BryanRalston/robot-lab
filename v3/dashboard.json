@@ -1,0 +1,526 @@
+{
+"rows": [
+[
+"actuator",
+"hip_yaw: TBM2G-05008A + CSG-14-100",
+"torque 36/23 N\u00b7m, speed 5.3/3 rad/s, \u0394T 6 K, hold 0.8 A rms, L10 1.9e+05 h",
+"PASS"
+],
+[
+"actuator",
+"hip_roll: TBM2G-07608C + CSG-25-100",
+"torque 167/119 N\u00b7m, speed 4.9/3 rad/s, \u0394T 51 K, hold 3.3 A rms, L10 1.3e+05 h",
+"PASS"
+],
+[
+"actuator",
+"hip_pitch: TBM2G-07608C + CSG-25-100",
+"torque 167/111 N\u00b7m, speed 4.9/4 rad/s, \u0394T 65 K, hold 10.3 A rms, L10 3.7e+04 h",
+"PASS"
+],
+[
+"actuator",
+"knee: TBM2G-06813D + RV12x4",
+"torque 170/159 N\u00b7m, speed 8.1/8 rad/s, \u0394T 90 K, hold 21.0 A rms, L10 4.0e+04 h",
+"PASS"
+],
+[
+"actuator",
+"ankle_pitch: TBM2G-06013D + RV12x4",
+"torque 311/149 N\u00b7m, speed 8.6/6 rad/s, \u0394T 77 K, hold 10.5 A rms, L10 3.1e+05 h",
+"PASS"
+],
+[
+"actuator",
+"ankle_roll: TBM2G-06013D + RV12x4",
+"torque 177/56 N\u00b7m, speed 15.0/4 rad/s, \u0394T 6 K, hold 2.1 A rms, L10 3.8e+07 h",
+"PASS"
+],
+[
+"actuator",
+"waist_yaw: TBM2G-06008A + CSG-17-100",
+"torque 70/60 N\u00b7m, speed 3.4/2 rad/s, \u0394T 8 K, hold 1.3 A rms, L10 1.5e+06 h",
+"PASS"
+],
+[
+"actuator",
+"waist_pitch: TBM2G-06808A + CSG-25-100",
+"torque 116/112 N\u00b7m, speed 2.8/2 rad/s, \u0394T 57 K, hold 6.5 A rms, L10 1.0e+07 h",
+"PASS"
+],
+[
+"actuator",
+"shoulder_pitch: TBM2G-07608C + CSG-25-100",
+"torque 167/148 N\u00b7m, speed 4.9/4 rad/s, \u0394T 6 K, hold 4.1 A rms, L10 4.8e+06 h",
+"PASS"
+],
+[
+"actuator",
+"shoulder_roll: TBM2G-06813C + CSG-25-100",
+"torque 164/148 N\u00b7m, speed 4.1/4 rad/s, \u0394T 5 K, hold 3.5 A rms, L10 9.7e+07 h",
+"PASS"
+],
+[
+"actuator",
+"shoulder_yaw: TBM2G-06008C + CSG-17-100",
+"torque 70/59 N\u00b7m, speed 7.6/4 rad/s, \u0394T 3 K, hold 2.6 A rms, L10 6.9e+07 h",
+"PASS"
+],
+[
+"actuator",
+"elbow: TBM2G-05013C + CSG-20-100",
+"torque 76/74 N\u00b7m, speed 7.6/6 rad/s, \u0394T 9 K, hold 3.2 A rms, L10 1.3e+07 h",
+"PASS"
+],
+[
+"actuator",
+"wrist_roll: TBM2G-05008C + CSG-14-100",
+"torque 36/7 N\u00b7m, speed 11.8/6 rad/s, \u0394T 0 K, hold 0.5 A rms, L10 1.2e+09 h",
+"PASS"
+],
+[
+"actuator",
+"neck_yaw: TBM2G-05008A + CSG-14-100",
+"torque 36/3 N\u00b7m, speed 5.3/4 rad/s, \u0394T 0 K, hold 0.1 A rms, L10 1.8e+10 h",
+"PASS"
+],
+[
+"actuator",
+"neck_pitch: TBM2G-05008A + CSG-14-100",
+"torque 36/2 N\u00b7m, speed 5.3/4 rad/s, \u0394T 0 K, hold 0.1 A rms, L10 5.2e+10 h",
+"PASS"
+],
+[
+"actuator",
+"wrist_pitch: TBM2G-05008C + RV12x4",
+"torque 48/15 N\u00b7m, speed 30.1/6 rad/s, \u0394T 1 K, hold 1.1 A rms, L10 2.0e+11 h",
+"PASS"
+],
+[
+"actuator",
+"wrist_yaw: TBM2G-05008C + RV12x4",
+"torque 48/9 N\u00b7m, speed 30.1/6 rad/s, \u0394T 1 K, hold 0.7 A rms, L10 9.3e+11 h",
+"PASS"
+],
+[
+"output bearing",
+"hip_yaw: IKO CRBH 6013 A",
+"L10 3.0e+06 h, fs 3.6 (\u22653)",
+"PASS"
+],
+[
+"output bearing",
+"hip_roll: IKO CRBH 6013 A",
+"L10 2.4e+06 h, fs 3.6 (\u22653)",
+"PASS"
+],
+[
+"output bearing",
+"hip_pitch: IKO CRBH 6013 A",
+"L10 6.0e+05 h, fs 3.6 (\u22653)",
+"PASS"
+],
+[
+"output bearing",
+"waist_yaw: IKO CRBH 5013 A",
+"L10 7.6e+07 h, fs 5.1 (\u22653)",
+"PASS"
+],
+[
+"output bearing",
+"waist_pitch: IKO CRBH 5013 A",
+"L10 1.5e+08 h, fs 5.1 (\u22653)",
+"PASS"
+],
+[
+"output bearing",
+"shoulder_pitch: IKO CRBH 5013 A",
+"L10 1.8e+08 h, fs 1.0 (\u22651)",
+"PASS"
+],
+[
+"output bearing",
+"shoulder_roll: IKO CRBH 4010 A",
+"L10 5.8e+07 h, fs 4.4 (\u22653)",
+"PASS"
+],
+[
+"output bearing",
+"shoulder_yaw: IKO CRBH 4010 A",
+"L10 5.8e+07 h, fs 4.4 (\u22653)",
+"PASS"
+],
+[
+"output bearing",
+"elbow: IKO CRBH 3010 A",
+"L10 1.5e+08 h, fs 8.8 (\u22653)",
+"PASS"
+],
+[
+"output bearing",
+"wrist_roll: IKO CRBH 208 A",
+"L10 7.1e+07 h, fs 3.2 (\u22653)",
+"PASS"
+],
+[
+"output bearing",
+"neck_yaw: IKO CRBH 208 A",
+"L10 7.1e+07 h, fs 3.2 (\u22653)",
+"PASS"
+],
+[
+"output bearing",
+"neck_pitch: IKO CRBH 208 A",
+"L10 7.1e+07 h, fs 3.2 (\u22653)",
+"PASS"
+],
+[
+"bolted joint (VDI 2230-style)",
+"hip bracket \u2192 pelvis (landing 3BW + 0.10 m moment)",
+"8\u00d7M5: clamp 6.4 \u2265 0.3 kN, \u03c3a 6 \u2264 64 MPa",
+"PASS"
+],
+[
+"bolted joint (VDI 2230-style)",
+"hip-pitch flexspline \u2192 output flange (momentary peak by friction)",
+"8\u00d7M6: clamp 10.3 \u2265 9.2 kN, \u03c3a 0 \u2264 60 MPa",
+"PASS"
+],
+[
+"bolted joint (VDI 2230-style)",
+"knee clevis \u2192 femur flange (landing 3BW, 0.12 m lever)",
+"4\u00d7M5: clamp 4.2 \u2265 0.3 kN, \u03c3a 19 \u2264 64 MPa",
+"PASS"
+],
+[
+"bolted joint (VDI 2230-style)",
+"shoulder actuator \u2192 torso frame (side-fall impact)",
+"6\u00d7M8: clamp 14.7 \u2265 12.4 kN, \u03c3a 10 \u2264 54 MPa",
+"PASS"
+],
+[
+"side fall 1 m",
+"energy method",
+"596 J; hip 13.7 kN, shoulder 11.2 kN with 30 mm pads",
+"PASS"
+],
+[
+"side fall 1 m",
+"shoulder harmonic drive",
+"impact 1676 N\u00b7m > momentary 369 \u2192 overload clutch slips at 300 N\u00b7m",
+"PASS"
+],
+[
+"hand",
+"continuous fingertip force",
+"38.2 N (target \u2265 30 N)",
+"PASS"
+],
+[
+"hand",
+"tendon static",
+"SF 7.1 at 276 N",
+"PASS"
+],
+[
+"hand",
+"tendon bend fatigue, 5 y",
+"needs 1.8e+06 cycles; published evidence \u2264 31,826 (D/d 4); our idlers D/d 8",
+"OPEN"
+],
+[
+"power",
+"walking runtime",
+"3.1 h at 614 W",
+"PASS"
+],
+[
+"mass",
+"target \u2264 65 kg",
+"62.0 kg catalog rollup (CAD solids 57.3 kg)",
+"PASS"
+],
+[
+"cable routing",
+"elbow",
+"r 43.0 \u2265 40.0 mm (\u00d84.0 [EST])",
+"PASS"
+],
+[
+"cable routing",
+"hip pitch",
+"r 53.0 \u2265 40.0 mm (\u00d84.0 [EST])",
+"PASS"
+],
+[
+"cable routing",
+"hip roll",
+"r 53.0 \u2265 40.0 mm (\u00d84.0 [EST])",
+"PASS"
+],
+[
+"cable routing",
+"hip yaw",
+"r 53.0 \u2265 40.0 mm (\u00d84.0 [EST])",
+"PASS"
+],
+[
+"cable routing",
+"shoulder pitch",
+"r 50.5 \u2265 40.0 mm (\u00d84.0 [EST])",
+"PASS"
+],
+[
+"cable routing",
+"shoulder roll",
+"r 50.5 \u2265 40.0 mm (\u00d84.0 [EST])",
+"PASS"
+],
+[
+"cable routing",
+"shoulder yaw",
+"r 40.5 \u2265 40.0 mm (\u00d84.0 [EST])",
+"PASS"
+],
+[
+"cable routing",
+"wrist roll",
+"r 34.0 \u2265 30.0 mm (\u00d83.0 [EST])",
+"PASS"
+],
+[
+"cable routing",
+"neck pitch",
+"r 34.0 \u2265 30.0 mm (\u00d83.0 [EST])",
+"PASS"
+],
+[
+"cable routing",
+"neck yaw",
+"r 34.0 \u2265 30.0 mm (\u00d83.0 [EST])",
+"PASS"
+],
+[
+"cable routing",
+"waist pitch",
+"r 50.5 \u2265 40.0 mm (\u00d84.0 [EST])",
+"PASS"
+],
+[
+"cable routing",
+"waist yaw",
+"r 48.0 \u2265 40.0 mm (\u00d84.0 [EST])",
+"PASS"
+],
+[
+"cable routing",
+"knee",
+"r 45 \u2265 40.0 mm (\u00d84.0 [EST])",
+"PASS"
+],
+[
+"cable routing",
+"ankle (pitch+roll)",
+"r 35 \u2265 30.0 mm (\u00d83.0 [EST])",
+"PASS"
+],
+[
+"CAD",
+"interference: standing + 14 range extremes",
+"0 clashes",
+"PASS"
+],
+[
+"CAD",
+"single-leg hip adduction",
+"clash-free to \u22126\u00b0 (\u22128\u00b0: 3 clashes); \u221212\u00b0 with pelvis shift",
+"PASS"
+],
+[
+"CAD",
+"knee flexion > 135\u00b0 (linkage knee)",
+"120\u00b0 clash-free; 125\u00b0: 5, 130\u00b0: 10, 140\u00b0: 18 clashes (knee body vs ankle actuators; linkage does not help)",
+"FAIL"
+],
+[
+"FEA",
+"knee_clevis",
+"42 MPa, SF 11.94 (\u22652), Goodman 13.63, 3 mesh levels, \u0394 10.6 %",
+"OPEN"
+],
+[
+"FEA",
+"fall_hip_bracket",
+"33 MPa, SF 15.34 (\u22651), 3 mesh levels, \u0394 2.7 %",
+"PASS"
+],
+[
+"FEA",
+"fall_shoulder_housing",
+"56 MPa, SF 8.92 (\u22651), 3 mesh levels, \u0394 0.5 %",
+"PASS"
+],
+[
+"FEA",
+"pelvis_hip",
+"44 MPa, SF 11.37 (\u22652), Goodman 12.98, 3 mesh levels, \u0394 1.7 %",
+"PASS"
+],
+[
+"FEA",
+"femur_full",
+"47 MPa, SF 10.62 (\u22652), Goodman 12.13, 2 mesh levels, \u0394 0.1 %",
+"PASS"
+],
+[
+"FEA",
+"fall_torso_panel",
+"298 MPa, SF 1.34 (\u22651), 2 mesh levels, \u0394 4.3 %",
+"PASS"
+],
+[
+"simulation",
+"stand + push recovery (MuJoCo, CAD mass properties)",
+"Stands 10 s with balance ON: True; recovers from 0.2 s pushes up to 125 N forward / 125 N sideways (v2 capsule model: 175 N). Plain PD (balance OFF) falls backwards in ~2 s: CAD centre of mass is 20\u201335 mm behind the ankles.",
+"PASS"
+],
+[
+"unverifiable without hardware",
+"thermal",
+"two-node winding/housing model, h = 12 W/m\u00b2K, fins \u00d72 [EST]: needs dynamometer test",
+"OPEN"
+],
+[
+"unverifiable without hardware",
+"fall",
+"pad crush model and 55/45 hip/shoulder split [EST]: needs drop test",
+"OPEN"
+],
+[
+"unverifiable without hardware",
+"clutch",
+"300 N\u00b7m friction clutch slip repeatability: needs test",
+"OPEN"
+],
+[
+"unverifiable without hardware",
+"torso shell",
+"CFRP properties isotropic [EST]: needs laminate data / coupon test",
+"OPEN"
+],
+[
+"unverifiable without hardware",
+"bolted joints",
+"\u03bc = 0.12, embedding 11 \u00b5m [EST]: needs torque-tension test",
+"OPEN"
+],
+[
+"unverifiable without hardware",
+"harmonic drive",
+"life vs. ratcheting under repeated falls: vendor/test",
+"OPEN"
+]
+],
+"summary": "Bryan asked for a design that would hold up in the real world. v3 replaces every estimated actuator part with a catalog part (Kollmorgen TBM2G, Harmonic Drive CSG, Rollvis RV, IKO CRBH, Everest XCR, RLS AksIM-2, maxon, Molicel), adds bolts, bearings, cable drums, fins and a tendon hand to the CAD, and re-checks thermal, life, fall, fatigue and FEA. The loop started with 13 failures; 62.0 kg after fixes.",
+"sim": {
+"mass": 61.969,
+"text": "Stands 10 s with balance ON: True; recovers from 0.2 s pushes up to 125 N forward / 125 N sideways (v2 capsule model: 175 N). Plain PD (balance OFF) falls backwards in ~2 s: CAD centre of mass is 20\u201335 mm behind the ankles."
+},
+"ids": {
+"jq": {
+"root": 0,
+"l_hip_yaw": 7,
+"l_hip_roll": 8,
+"l_hip_pitch": 9,
+"l_knee": 10,
+"l_ankle_pitch": 11,
+"l_ankle_roll": 12,
+"r_hip_yaw": 13,
+"r_hip_roll": 14,
+"r_hip_pitch": 15,
+"r_knee": 16,
+"r_ankle_pitch": 17,
+"r_ankle_roll": 18,
+"waist_yaw": 19,
+"waist_pitch": 20,
+"l_shoulder_pitch": 21,
+"l_shoulder_roll": 22,
+"l_shoulder_yaw": 23,
+"l_elbow": 24,
+"l_wrist_roll": 25,
+"l_wrist_pitch": 26,
+"l_wrist_yaw": 27,
+"r_shoulder_pitch": 28,
+"r_shoulder_roll": 29,
+"r_shoulder_yaw": 30,
+"r_elbow": 31,
+"r_wrist_roll": 32,
+"r_wrist_pitch": 33,
+"r_wrist_yaw": 34,
+"neck_yaw": 35,
+"neck_pitch": 36
+},
+"g": {
+"l_foot": 5,
+"r_foot": 9
+},
+"a": {
+"l_hip_yaw": 0,
+"l_hip_roll": 1,
+"l_hip_pitch": 2,
+"l_knee": 3,
+"l_ankle_pitch": 4,
+"l_ankle_roll": 5,
+"r_hip_yaw": 6,
+"r_hip_roll": 7,
+"r_hip_pitch": 8,
+"r_knee": 9,
+"r_ankle_pitch": 10,
+"r_ankle_roll": 11,
+"waist_yaw": 12,
+"waist_pitch": 13,
+"l_shoulder_pitch": 14,
+"l_shoulder_roll": 15,
+"l_shoulder_yaw": 16,
+"l_elbow": 17,
+"l_wrist_roll": 18,
+"l_wrist_pitch": 19,
+"l_wrist_yaw": 20,
+"r_shoulder_pitch": 21,
+"r_shoulder_roll": 22,
+"r_shoulder_yaw": 23,
+"r_elbow": 24,
+"r_wrist_roll": 25,
+"r_wrist_pitch": 26,
+"r_wrist_yaw": 27,
+"neck_yaw": 28,
+"neck_pitch": 29
+},
+"b": {
+"world": 0,
+"pelvis": 1,
+"L_hipY": 2,
+"L_hipR": 3,
+"L_thigh": 4,
+"L_shank": 5,
+"L_foot": 6,
+"R_hipY": 7,
+"R_hipR": 8,
+"R_thigh": 9,
+"R_shank": 10,
+"R_foot": 11,
+"waistY": 12,
+"torso": 13,
+"L_shoulderP": 14,
+"L_upper_arm": 15,
+"L_forearm": 16,
+"L_hand": 17,
+"R_shoulderP": 18,
+"R_upper_arm": 19,
+"R_forearm": 20,
+"R_hand": 21,
+"neckY": 22,
+"head": 23
+}
+}
+}
