@@ -4,3 +4,14 @@
 == L_hip_roll=-6 (single leg, v3 limit): 0 clashes
 == L+R_hip_roll=-12 (pelvis shift): 0 clashes
 == L_hip_roll=15: 0 clashes
+== L_knee=0: 0 clashes
+== L_knee=135: 0 clashes
+== L_ankle_pitch=-45: 0 clashes
+== L_ankle_pitch=40: 0 clashes
+== L_ankle_roll=-25: 0 clashes
+== L_ankle_roll=25: 0 clashes
+== L+R_hip_yaw=-35 (turn): 0 clashes
+== L_hip_yaw=45: 0 clashes
+== L hip -90 + knee 120 (sit): 0 clashes
+== L hip -100 + knee 135 (deep squat): 0 clashes
+TOTAL clashes: 0

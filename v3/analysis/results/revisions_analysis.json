@@ -74,19 +74,7 @@
  {
   "it": 0,
   "area": "v3.0 = v2 with catalog parts substituted 1:1",
-  "failure": "FEA-convergence knee_clevis: last refinement changed peak 11 %",
-  "fix": "(see later iterations)"
- },
- {
-  "it": 0,
-  "area": "v3.0 = v2 with catalog parts substituted 1:1",
-  "failure": "FEA-yield fall_torso_panel: SF 1.34 < 2.0",
-  "fix": "(see later iterations)"
- },
- {
-  "it": 0,
-  "area": "v3.0 = v2 with catalog parts substituted 1:1",
-  "failure": "FEA-convergence tibia_full: only one mesh level",
+  "failure": "FEA-convergence fall_torso_panel: only one mesh level",
   "fix": "(see later iterations)"
  },
  {
@@ -228,39 +216,57 @@
   "fix": "TBM2G-05008C + CSG-14-100 [air; CRBH 5013 A] \u2192 TBM2G-05008A + CSG-14-100 [air; CRBH 208 A] (\u22120.39 kg)"
  },
  {
+  "it": 4,
+  "area": "battery (mass reduction)",
+  "failure": "runtime 2.9 h > 2 h; robot 68.2 kg",
+  "fix": "13S10P \u2192 13S9P (\u22121.14 kg, runtime 2.7 h)"
+ },
+ {
+  "it": 4,
+  "area": "battery (mass reduction)",
+  "failure": "runtime 2.7 h > 2 h; robot 67.0 kg",
+  "fix": "13S9P \u2192 13S8P (\u22121.14 kg, runtime 2.4 h)"
+ },
+ {
+  "it": 4,
+  "area": "battery (mass reduction)",
+  "failure": "runtime 2.4 h > 2 h; robot 65.9 kg",
+  "fix": "13S8P \u2192 13S7P (\u22121.14 kg, runtime 2.1 h)"
+ },
+ {
   "it": 5,
   "area": "actuator hip_yaw (mass reduction)",
-  "failure": "passing but oversized; robot 68.2 kg",
+  "failure": "passing but oversized; robot 64.8 kg",
   "fix": "TBM2G-05008A + CSG-14-100 [air; CRBH 7013 A] \u2192 TBM2G-05008A + CSG-14-100 [air; CRBH 6013 A] (\u22120.21 kg)"
  },
  {
   "it": 5,
   "area": "actuator hip_roll (mass reduction)",
-  "failure": "passing but oversized; robot 68.0 kg",
+  "failure": "passing but oversized; robot 64.6 kg",
   "fix": "TBM2G-07608C + CSG-25-100 [air; CRBH 7013 A] \u2192 TBM2G-07608C + CSG-25-100 [air; CRBH 6013 A] (\u22120.21 kg)"
  },
  {
   "it": 5,
   "area": "actuator hip_pitch (mass reduction)",
-  "failure": "passing but oversized; robot 67.8 kg",
+  "failure": "passing but oversized; robot 64.4 kg",
   "fix": "TBM2G-07608C + CSG-25-100 [air_fins; CRBH 7013 A] \u2192 TBM2G-07608C + CSG-25-100 [air; CRBH 6013 A] (\u22120.21 kg)"
  },
  {
   "it": 5,
   "area": "actuator knee (mass reduction)",
-  "failure": "passing but oversized; robot 67.5 kg",
-  "fix": "TBM2G-06813D + RV12x4 arm 52 mm [air; ] \u2192 TBM2G-06013D + RV12x4 arm 58 mm [air_fins; ] (\u22120.37 kg)"
- },
- {
-  "it": 5,
-  "area": "actuator ankle_pitch (mass reduction)",
-  "failure": "passing but oversized; robot 67.2 kg",
-  "fix": "TBM2G-06808D + RV12x4 arm 70 mm [air_fins; ] \u2192 TBM2G-06013D + RV12x4 arm 70 mm [air_fins; ] (\u22120.07 kg)"
+  "failure": "passing but oversized; robot 64.1 kg",
+  "fix": "TBM2G-06813D + RV12x4 arm 52 mm [air; ] \u2192 TBM2G-06808D + RV12x4 arm 58 mm [air; ] (\u22120.29 kg)"
  },
  {
   "it": 5,
   "area": "actuator waist_pitch (mass reduction)",
-  "failure": "passing but oversized; robot 67.1 kg",
+  "failure": "passing but oversized; robot 63.8 kg",
   "fix": "TBM2G-07608A + CSG-25-100 [air; CRBH 5013 A] \u2192 TBM2G-06013A + CSG-25-100 [air; CRBH 5013 A] (\u22120.03 kg)"
+ },
+ {
+  "it": 6,
+  "area": "actuator waist_pitch (mass reduction)",
+  "failure": "passing but oversized; robot 63.8 kg",
+  "fix": "TBM2G-06013A + CSG-25-100 [air; CRBH 5013 A] \u2192 TBM2G-06808A + CSG-25-100 [air; CRBH 5013 A] (\u22120.02 kg)"
  }
 ]

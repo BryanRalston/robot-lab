@@ -1,16 +1,16 @@
 {
  "knee_clevis": {
-  "desc": "bridge top fixed; pin bores loaded 3 BW + peak knee-actuator reaction 4436 N [half model, symmetry plane]",
+  "desc": "bridge top fixed; pin bores loaded 3 BW + peak knee-actuator reaction 4064 N [half model, symmetry plane]",
   "levels": [
    {
-    "vm_max": 120.79312398836149,
-    "vm": 55.74243655540358,
+    "vm_max": 111.96451689051874,
+    "vm": 51.66829677636647,
     "at_mm": [
      3.2,
      150.5,
      542.3
     ],
-    "disp_mm": 0.08901287797116311,
+    "disp_mm": 0.08250704633829797,
     "tets": 11922,
     "dofs": 57729,
     "load_area": 727.6299056601126,
@@ -20,14 +20,14 @@
     ]
    },
    {
-    "vm_max": 117.54602453466457,
-    "vm": 53.7710902731029,
+    "vm_max": 108.95474356296,
+    "vm": 49.84103354361499,
     "at_mm": [
      3.5,
      150.4,
      560.3
     ],
-    "disp_mm": 0.0887579115604972,
+    "disp_mm": 0.08227071507995111,
     "tets": 23085,
     "dofs": 107550,
     "load_area": 727.7453449302204,
@@ -37,14 +37,14 @@
     ]
    }
   ],
-  "vm": 53.7710902731029,
-  "vm_max": 117.54602453466457,
-  "SF_yield": 9.354469054751677,
-  "delta_pct": 3.536526933732645,
+  "vm": 49.84103354361499,
+  "vm_max": 108.95474356296,
+  "SF_yield": 10.092086063179925,
+  "delta_pct": 3.536526935773279,
   "converged": true,
   "material": "7075-T6",
-  "goodman": 10.679104389864815,
-  "walk_vm": 23.30080578501126,
+  "goodman": 11.521171319226653,
+  "walk_vm": 21.597781202233165,
   "cycles": 52560000.0
  },
  "fall_hip_bracket": {

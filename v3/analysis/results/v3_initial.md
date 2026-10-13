@@ -52,7 +52,7 @@ Requirements: 5 y × 365 d × 8 h walking = 14600 h; 1 stride/s → 5.26e+07 cyc
 | shoulder actuator → torso frame (side-fall impact) | 6×M5 | 7.7 | -5.8 | 38.5 | 1036 | 81 / 64 | **FAIL** |
 
 ## Side fall from standing (energy method)
-Energy 645 J; topple rate at impact 4.28 rad/s; hip contact 3.9 m/s → 14.8 kN; shoulder 6.4 m/s → 12.1 kN (pad 10 mm, 70 % usable crush + 3 mm structure, constant-force crush, 55/45 hip/shoulder split [EST]). These forces drive the fall FEA cases.
+Energy 613 J; topple rate at impact 4.28 rad/s; hip contact 3.9 m/s → 14.1 kN; shoulder 6.4 m/s → 11.5 kN (pad 10 mm, 70 % usable crush + 3 mm structure, constant-force crush, 55/45 hip/shoulder split [EST]). These forces drive the fall FEA cases.
 Shoulder-roll strain wave: impact torque 5200 N·m (force on upper arm 0.15 m below the axis) vs momentary peak 369 / ratcheting 650 N·m → with overload clutch 5200 N·m.
 
 ## Hand drive
@@ -65,13 +65,13 @@ Walking: mechanical 307 W + copper 173 W + compute/drives/sensors → 726 W → 
 
 | case | peak vM MPa | SF yield | Goodman SF (5 y) | converged |
 |---|---|---|---|---|
-| knee_clevis | 42 | 11.94 | 13.63 | False |
+| knee_clevis | 54 | 9.35 | 10.68 | True |
 | fall_hip_bracket | 33 | 15.34 | — | True |
 | fall_shoulder_housing | 56 | 8.92 | — | True |
 | pelvis_hip | 44 | 11.37 | 12.98 | True |
 | femur_full | 47 | 10.62 | 12.13 | True |
-| fall_torso_panel | 298 | 1.34 | — | True |
-| tibia_full | 66 | 7.57 | 8.64 | False |
+| fall_torso_panel | 132 | 3.04 | — | False |
+| tibia_full | 81 | 6.19 | 7.06 | True |
 
 ## Cable routing (igus CFROBOT rule: bend radius ≥ 10 × d when moving)
 
@@ -81,7 +81,7 @@ Walking: mechanical 307 W + copper 173 W + compute/drives/sensors → 726 W → 
 | hip pitch | 4.0 | 53 | 40 | PASS |
 | hip roll | 4.0 | 53 | 40 | PASS |
 | hip yaw | 4.0 | 53 | 40 | PASS |
-| shoulder pitch | 4.0 | 50 | 40 | PASS |
+| shoulder pitch | 4.0 | 53 | 40 | PASS |
 | shoulder roll | 4.0 | 50 | 40 | PASS |
 | shoulder yaw | 4.0 | 40 | 40 | PASS |
 | wrist roll | 3.0 | 34 | 30 | PASS |
@@ -106,7 +106,5 @@ Walking: mechanical 307 W + copper 173 W + compute/drives/sensors → 726 W → 
 - bolted hip-pitch flexspline → output flange (momentary peak by friction): separation_or_slip
 - bolted shoulder actuator → torso frame (side-fall impact): separation_or_slip, fatigue
 - tendon-fatigue-UNVERIFIABLE: needs 1.75e+06 bend cycles; published evidence ≤ 5e4 (D/d 4, 150 N)
-- FEA-convergence knee_clevis: last refinement changed peak 11 %
-- FEA-yield fall_torso_panel: SF 1.34 < 2.0
-- FEA-convergence tibia_full: only one mesh level
+- FEA-convergence fall_torso_panel: only one mesh level
 - mass-target: 80.1 kg > 65 kg
