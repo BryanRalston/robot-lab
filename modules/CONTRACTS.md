@@ -1,12 +1,12 @@
 # CONTRACTS.md: module interfaces and budgets (v3-derived, rev 0)
-Single source of truth for interfaces and budgets (CHARTER). Changes only via PROPOSALS.md → RULINGS.md. Written by RL Arbiter 2026-10-13 from v3.2 results; every number cites its v3 file. Targets referenced are in TARGETS.md (DRAFT).
+Single source of truth for interfaces and budgets (CHARTER). Changes only via PROPOSALS.md → RULINGS.md. Written by RL Arbiter 2026-10-13 from v3.2 results; every number cites its v3 file. Targets referenced are in TARGETS.md (APPROVED; T2 amended R-017).
 
 Sources used: `v3/analysis/results/v3_checks.md` and `v3.json` (per-joint rows, mass, power), `v3/analysis/v3.py` (requirement formulas, housing envelope model), `v3/REVISIONS.md` §F–G, `sim/v3/humanoid_v3.xml`, `sim/v3/balance_v3.json`.
 
 ## 0. Global
 | item | value | derivation / source |
 |---|---|---|
-| Robot mass budget | ≤ 65.0 kg (T2) | v3 rollup 63.8 kg → 1.2 kg unallocated reserve (owned by Arbiter) |
+| Robot mass budget | ≤ 66.5 kg (T2; amended Bryan 2026-10-13 via R-016/R-017; was 65.0) | v3 rollup 63.8 kg; reserve owned by Arbiter; module budgets not loosened |
 | DC bus | 13S Li-ion, 44.2 V min (3.4 V/cell) … 54.6 V max (4.2 V/cell) [max EST from cell chemistry] | `v3.py` VBUS_MIN = 13 × 3.4; Molicel P45B 13S7P, 91 cells, 1474 Wh |
 | Drive (every joint) | Novanta Everest XCR: 31.8 A rms cont. / 42.4 A rms 1 s, 80 V max, 38 g | `parts.py` DRIVE (45/60 A crest ÷ √2) |
 | Thermal rule | winding ΔT ≤ 100 K at 40 °C ambient | `v3.py` AMB, DT_LIMIT |
@@ -23,12 +23,12 @@ Sources used: `v3/analysis/results/v3_checks.md` and `v3.json` (per-joint rows, 
 | leg actuators, both legs (all-in incl. linkage, hip pivot bearings, rod ends; R-015 M1) | 15.36 kg | 18.63 kg all-in (16.79 incl. 0.609 linkage + 0.477 table delta − 0.084 Legs-owned lugs + 1.032 unmassed + 0.409 hip lever B; R-015) | ≤ 17.63 kg all-in |
 | leg structure, both legs (incl. thigh clamp, instep lugs; R-015 M2) | 5.40 kg | 5.40 kg in rollup (4.85 parametric + 0.20 clamp [EST] + 0.084 lugs; provisional until FEA) | ≤ 4.85 kg |
 | leg linkages, both legs (R-015) | — | 2.527 kg (`actuators/results/LINKAGE_TABLE.json` 33a7186: incl. lever B, hip bearings 0.628, rod ends 0.300 [EST], 6 trunnion pairs) + thigh clamp 0.20 [EST] | 2.53 kg line, hip pivot bearing owned by Actuators (R-016); inside actuator all-in ceiling |
-| harness (Torso placeholder) | 2.00 kg | 2.00 kg | ≤ 1.46 kg (R-015 M3) |
-| covers (Torso placeholder) | 1.86 kg | 1.86 kg | ≤ 1.20 kg (R-015 M3) |
-| brain (placeholder) | 1.80 kg | 1.80 kg | ≤ 1.50 kg (R-015 M4) |
+| harness (M3; owner RL Actuators, R-017) | 2.00 kg | 2.00 kg | ≤ 1.46 kg (R-015 M3; credit on real numbers) |
+| covers (M3; Arbiter placeholder, R-017) | 1.86 kg | 1.86 kg | ≤ 1.20 kg (R-015 M3; credit on real numbers) |
+| brain (M4; Arbiter placeholder, R-017) | 1.80 kg | 1.80 kg | ≤ 1.50 kg (R-015 M4; credit on real numbers) |
 | battery 20S5P 1620 Wh | 7.96 kg | 8.75 kg | 8.75 kg |
-| Arbiter reserve | 1.2 kg | −2.91 kg (overrun at 67.91) | +0.39 kg |
-| **robot** | 63.79 kg | **67.91 kg incl. unmassed (R-015)** | **64.61 kg after R-015 M1–M4 + pending credits; ≤ 65.00 kg (hard)** |
+| Arbiter reserve | 1.2 kg | −1.41 kg (overrun at 67.91 vs 66.5) | +1.89 kg vs 66.5 if M1–M4 land (0.55 on credible 65.95) |
+| **robot** | 63.79 kg | **67.91 kg incl. unmassed (R-015)** | **64.61 kg after R-015 M1–M4 + pending credits; ≤ 66.5 kg hard (R-017); credible ≈ 65.95 kg [EST]** |
 
 ### R1.2 Leg actuator contract (R-004, R-005, R-006, R-008)
 | joint | need peak N·m | need RMS N·m | need speed rad/s | selection (Actuators) | avail peak | max mass kg |
@@ -126,4 +126,4 @@ Owns: pelvis-to-foot kinematics, thigh/shank/foot structure, knee/ankle linkages
 | Hands | 4.2 kg both (`v3.json` hands) | not separately budgeted (TBD) | wrist flange, tendon routing, tactile bus |
 | Head (incl. neck structure, sensors) | 1.6 kg | in 40 W sensors line | neck flange, cameras |
 | Brain (compute) | 1.8 kg | 120 W | bus master, sensors, safety |
-| Arbiter reserve | 1.2 kg | — | 65.0 − 63.8 |
+| Arbiter reserve | (see §R1.1; T2 ≤ 66.5 kg per R-017) | — | 66.5 − rollup |

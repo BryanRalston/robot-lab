@@ -179,7 +179,21 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
 - Ruling: **R-015 M1–M4 stand (−1.95 kg total, target 64.61 kg, reserve 0.39), with M1 (−1.00, Actuators) now explicitly comprising straddle −0.20, lever SF 1.5 −0.10, margin 1.3 hip_roll/hip_pitch ~−0.30, housing CAD ≥ −0.40.** Acceptance per R-015; deadline end of round 4. T2 status: **NOT MET**.
 - Risk stated: evidence-backed savings today are ~−0.30 (straddle + SF, [EST]) plus a script-backed margin cut not yet re-run → credible end state ≈ 66.55 − 0.30 − 0.30 = **65.95 kg [EST]**, i.e. ~0.95 kg over unless housing CAD and placeholder cuts (all ×0 evidence today) deliver. No credible plan reaches 65.00 kg on current evidence.
 
-#### R-016 recommendation: PENDING BRYAN (T2 hard limit; Arbiter does not change it)
+#### R-016 recommendation: RESOLVED by R-017 (Bryan approved Option B)
 - Option A, keep 65.0 kg: depends on ~1.0 kg of unsubstantiated cuts; if they miss, the next levers are T5 payload 20 → 15 kg (weighted −(5/20) × 0.12 = **−0.030**) or T7 runtime (hard, no room).
 - Option B, raise T2 hard limit to **66.5 kg** (stretch ≤ 60 kg unchanged): covers the current-evidence end state 65.95 with 0.55 reserve. Weighted cost −(1.5/65) × 0.15 = **−0.0035** — an order of magnitude cheaper than A's fallback and below the 0.01 threshold. Optimus reference: secondary 57/63 kg figures (TARGETS T2), so 66.5 sits ~5 % above the heavier report.
-- Arbiter recommends **B (66.5 kg), keeping all R-015/R-016 cuts ordered so the design lands as low as possible.** Until Bryan decides, 65.0 kg remains binding.
+- Arbiter recommended **B (66.5 kg), keeping all R-015/R-016 cuts ordered.** Bryan approved B on 2026-10-13 (R-017); 66.5 kg is now the binding hard limit.
+
+### R-017: Bryan approves T2 hard limit 65.0 → 66.5 kg (resolves R-016 PENDING BRYAN)
+- Date: 2026-10-13 (Bryan confirmation in Arbiter chat ~2:14 PM ET)
+- Module(s) / proposer: Arbiter (R-016 Option B); Bryan approval relayed via Robot Lab and confirmed directly to Arbiter
+- Change requested: raise T2 hard limit from ≤ 65.0 kg to ≤ 66.5 kg; keep 20 kg carry (T5); keep all R-015/R-016 cuts M1–M4 ordered
+- Impact on contracts / targets: T2 hard → ≤ 66.5 kg (stretch ≤ 60 kg unchanged). Rollup if M1–M4 land: 64.61 kg (reserve 1.89 vs 66.5). Credible evidence end state ≈ 65.95 kg [EST] (reserve 0.55, thin). Weighted cost of the limit raise: −(1.5/65) × 0.15 = −0.0035 (below 0.01 threshold). T5 20 kg carry retained (vs fallback 15 kg at −0.030). No module budget loosened.
+- Evidence reviewed: R-016 recommendation and numbers; Bryan direct confirmation in Arbiter chat 2026-10-13 ~2:14 PM ET ("Yea i dont see why not"); Robot Lab standing delegation that the crew owns design calls.
+- Ruling: **accepted.** T2 hard limit is **≤ 66.5 kg**. Cuts M1–M4 remain ordered and binding. Owners for unstaffed cuts (Robot Lab assignment, recorded here):
+  - **M3 harness** (2.00 → 1.46 kg): **RL Actuators** (owns bus and harness).
+  - **M3 covers** (1.86 → 1.20 kg): **Arbiter placeholder** — size from catalog parts; credit only when backed by real numbers.
+  - **M4 brain/compute** (1.80 → 1.50 kg): **Arbiter placeholder** — size from catalog parts; credit only when backed by real numbers.
+  - M1 Actuators and M2 Legs unchanged from R-015/R-016.
+- Rationale: Bryan confirmed the R-016 Option B recommendation. Raising the hard limit by 1.5 kg is far cheaper on the TARGETS score than cutting payload, and the credible end state (65.95 kg) fits inside 66.5 with a thin reserve. Cuts stay ordered so the design still lands as low as evidence allows.
+- Contract edits made: TARGETS.md T2 row + hard-constraints + R5 status; CONTRACTS.md §0 robot mass and §R1.1 robot row → ≤ 66.5 kg (module budgets unchanged).
