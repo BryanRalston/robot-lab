@@ -45,7 +45,7 @@ Reproduce: `python3 scenarios.py <name>` (one scenario per process, under 150 MB
 ## Requirement table (envelope over all 7 scenarios; governing scenario in brackets)
 | joint | peak τ N·m | RMS τ N·m | peak ω rad/s | ω @ ≥30 % τ rad/s | peak power W | duty (≥50 % peak) |
 |---|---|---|---|---|---|---|
-| hip_yaw | 57 [carry] | 16 [carry] | 0.57 [walk 1.2] | 0.24 [walk 1.2] | 3 [carry] | 0.21 (walk 1.2) |
+| hip_yaw | 57 [carry] | 16 [carry] | 0.57 [walk 1.2] | 0.24 [walk 1.2] | 3 [carry] | 0.19 (carry) |
 | hip_roll | 122 [carry] | 50 [carry] | 1.23 [push] | 1.16 [push] | 55 [push] | 0.33 (carry) |
 | hip_pitch | 265 [carry] | 100 [carry] | 8.11 [walk 1.2] | 8.09 [walk 1.2] | 1017 [walk 1.2] | 0.21 (carry) |
 | knee | 178 [carry] | 77 [carry] | 13.33 [stairs] | 13.27 [stairs] | 865 [stairs] | 0.27 (carry) |
