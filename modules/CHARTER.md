@@ -16,3 +16,8 @@ After every round that changes the design, save dated images to media/progress/ 
 ## Usage (Bryan, 2026-10-13 10:07 AM)
 Conserve Grok Bot usage; other projects need it. Keep rounds tight: one focused deliverable per turn, no exploratory sprawl, no polling, reuse existing scripts. If a Grok Bot usage limit is hit, Grok Build via Grok Interface may supplement, one session at a time, only through Robot Lab and the crew one-job rule.
 Update (Bryan, 10:08 AM): Grok Build may be used whenever it makes sense, not only at a limit; prefer it to save Grok Bot usage. One session at a time via Grok Interface (aa95bf5f), requested through Robot Lab.
+
+## Standing decisions (Bryan via Grok Bot, 2026-10-13 10:12 AM)
+- Agents decide for themselves when to use Grok Build for testing/training; don't ask Bryan these judgment calls. One session at a time via Grok Interface on the "bryan" PC (check it has a usable GPU first), routed through Robot Lab under the crew one-job rule. No cloud agents without Grok Bot's OK.
+- Walking: push model-based walking on CPU first; GPU RL only when truly needed (via Grok Build as above).
+- Spending/budget limit: noted but NOT enforced; project is theoretical for now. Keep listing real part costs for reference.
