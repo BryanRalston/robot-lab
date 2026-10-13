@@ -81,10 +81,11 @@ def com_height(r):
     return r.com()[2]
 
 def sc_walk(carry=0.0,v=1.2,Tstep=0.45,name='walk_1p2'):
-    m=load(carry); r=Robot(m)
-    if carry: r.set_arms(-0.6,-1.2)
+    m=load(carry,(0.25,0.0,0.10)); r=Robot(m)
+    if carry:   # box held close in front of the chest (payload rigid on torso, 0.25 m ahead of the waist axis), trunk leaned back 0.25 rad at the waist
+        r.set_arms(-0.6,-1.2); r.q[m.jnt_qposadr[m.joint('waist_pitch').id]]=-0.25
     zc=com_height(r); L=v*Tstep
-    lens=[0.25*L,0.5*L,0.75*L]+[L]*10
+    lens=[0.25*L,0.5*L,0.75*L]+[L]*10+[0.75*L,0.5*L]
     steps=[]; x=0; side='r'
     for i,l in enumerate(lens):
         x+=l; steps.append((side,[x if i else x, FY if side=='l' else -FY, SOLE])); side='l' if side=='r' else 'r'
@@ -125,23 +126,24 @@ def sc_sit_to_stand(T=1.2,seat_h=0.46):
         q[0:3]=np.array([hip_x,0,hip_z])-R@np.array([0,0,-0.240])
         q=r.ik_legs(q,feet,iters=80); r.fk(q); return q,r.com()
     # seat-off: thighs ~horizontal on a 0.46 m seat, hip 0.30 m behind ankle; search trunk lean so COM is over the foot (x>=+0.01)
-    best=None
-    for pitch in np.radians(np.arange(10,61,2)):
-        q,c=pose(-0.30,seat_h+0.04,pitch,np.radians(20))
-        if c[0]>=0.01: best=(pitch,q,c); break
+    best=None   # seat-off: hip 0.20 m behind the ankle, 0.04 m above a 0.46 m seat; largest trunk lean the hip ROM allows (IK exact), COM must be on the sole
+    for pitch in np.radians(np.arange(0,46,1)):
+        q,c=pose(-0.20,seat_h+0.04,pitch,np.radians(35))
+        r.fk(q); e=max(np.linalg.norm(r.d.xpos[r.foot[s_]]-feet[s_][0]) for s_ in 'lr')
+        if e<1e-4 and c[0]>=HEEL+0.02: best=(pitch,q,c)
     pitch0,q0,c0=best
     q1,c1=pose(0.0,0.90,0.0,0.0)
     N=int(T/DT); Q=np.zeros((N,m.nq))
-    hip0=np.array([-0.30,seat_h+0.04]); hip1=np.array([0.0,0.90])
+    hip0=np.array([-0.20,seat_h+0.04]); hip1=np.array([0.0,0.90])
     for k in range(N):
         s=k/(N-1); mj=10*s**3-15*s**4+6*s**5
         # hip path: rise lags forward travel slightly (human-like), lean returns to upright
         hx=hip0[0]+(hip1[0]-hip0[0])*mj; hz=hip0[1]+(hip1[1]-hip0[1])*mj
-        Q[k],_=pose(hx,hz,pitch0*(1-mj),np.radians(20)*(1-mj))
+        Q[k],_=pose(hx,hz,pitch0*(1-mj),np.radians(35)*(1-mj))
     AL=np.full((N,2),0.5)
-    r.fk(Q[0]); return r,Q,AL,dict(seat_h=seat_h,T=T,lean_deg=float(np.degrees(pitch0)),com_x_seatoff=float(c0[0])),None,None
+    r.fk(Q[0]); r.pad=0.3; r.trim=(0.25,0.25); return r,Q,AL,dict(seat_h=seat_h,T=T,lean_deg=float(np.degrees(pitch0)),com_x_seatoff=float(c0[0])),None,None
 
-def sc_push(v0=0.8,react=0.10,Tsw=0.35,Tend=1.6):
+def sc_push(v0=0.6,react=0.10,Tsw=0.35,Tend=1.6):
     """Forward push gives COM velocity v0 at t=0 from quiet stance; ankle ZMP to toes, quick weight shift, then a capture step with the right foot.
     COM follows LIPM x''=w^2(x-p) with p chosen by capture-point control inside the support polygon."""
     m=load(); r=Robot(m); zc=com_height(r); w=np.sqrt(G/zc)
@@ -156,13 +158,13 @@ def sc_push(v0=0.8,react=0.10,Tsw=0.35,Tend=1.6):
         elif t<react+Tsw:        # single support on left, right foot swings to predicted capture point
             if land is None:
                 # predict xi at touchdown with p at left toe, place right foot centre there (x), lateral at -FY
-                pL=np.array([TOE,FY]); xiT=pL+(xi-pL)*np.exp(w*Tsw)
-                land=np.array([xiT[0]-FC,-FY,SOLE]); land[0]=min(land[0],0.55)
+                pL=np.array([TOE,FY-HALFW]); xiT=pL+(xi-pL)*np.exp(w*Tsw)
+                land=np.array([xiT[0]-FC,min(-FY,xiT[1]-0.05),SOLE]); land[0]=min(land[0],0.55); land[1]=max(land[1],-0.40)
             lo=np.array([HEEL,FY-HALFW]); hi=np.array([TOE,FY+HALFW]); p=np.clip(np.array([TOE,FY-HALFW]),lo,hi)
             s=(t-react)/Tsw; feet['r']=swing(pr0,land,s,0.06); a=np.array([1.0,0.0])
         else:                    # double support, capture-point control to mid-feet
-            feet['r']=land; tgt=0.5*(np.array([FC,FY])+np.array([land[0]+FC,-FY]))
-            p=xi+1.5*(xi-tgt); lo=np.array([HEEL,-FY-HALFW]); hi=np.array([land[0]+TOE,FY+HALFW]); p=np.clip(p,lo,hi)
+            feet['r']=land; tgt=0.5*(np.array([FC,FY])+np.array([land[0]+FC,land[1]]))
+            p=xi+1.5*(xi-tgt); lo=np.array([HEEL,land[1]-HALFW]); hi=np.array([land[0]+TOE,FY+HALFW]); p=np.clip(p,lo,hi)
             # load share from ZMP position between feet centres (x)
             s=np.clip((p[0]-FC)/max(land[0],1e-3),0,1); a=np.clip(np.array([1-s,s]),0.02,1); a/=a.sum()
         xdd=w*w*(x-p); xd=xd+xdd*DT; x=x+xd*DT
@@ -172,17 +174,21 @@ def sc_push(v0=0.8,react=0.10,Tsw=0.35,Tend=1.6):
     for k in range(N):
         q=r.ik_com(q,{'l':(F['l'][k],0.0),'r':(F['r'][k],0.0)},COM[k],PEL_Z,quat_pitch(0)); Q[k]=q
         r.fk(q); err=max(err,max(np.linalg.norm(r.d.xpos[r.foot[s]]-F[s][k]) for s in 'lr'))
-    return r,Q,AL,dict(v0=v0,impulse_Ns=float(v0*m.body_subtreemass[1]),land_x=float(land[0]),zc=zc,ik_err_m=err,final_com_v=float(np.linalg.norm(xd))),COM,np.array(ZMP)
+    r.trim=(0.0,0.3)   # push gives the COM velocity at t=0; keep the start
+    return r,Q,AL,dict(v0=v0,impulse_Ns=float(v0*m.body_subtreemass[1]),land_x=float(land[0]),land_y=float(land[1]),zc=zc,ik_err_m=err,final_com_v=float(np.linalg.norm(xd))),COM,np.array(ZMP)
 
-SC={'walk_1p2':lambda:sc_walk(),'stairs_18cm':lambda:sc_stairs(),'carry_20kg':lambda:sc_walk(carry=20.0,name='carry_20kg'),
+SC={'walk_1p2':lambda:sc_walk(),'walk_0p8':lambda:sc_walk(v=0.8,Tstep=0.5),'stairs_18cm':lambda:sc_stairs(),'carry_20kg':lambda:sc_walk(carry=20.0,name='carry_20kg'),
     'sit_to_stand':lambda:sc_sit_to_stand(),'push_recover':lambda:sc_push()}
 
 TRIM=0.3   # s; first/last frames are finite-difference/preview start-up edges and are excluded from all metrics
 
 def run(name):
     r,Q,AL,info,com,zmp=SC[name]()
+    tr=getattr(r,'trim',(TRIM,TRIM))
+    if getattr(r,'pad',0):   # static hold before/after (sit-to-stand starts and ends at rest)
+        n=int(r.pad/DT); Q=np.r_[np.repeat(Q[:1],n,0),Q,np.repeat(Q[-1:],n,0)]; AL=np.r_[np.repeat(AL[:1],n,0),AL,np.repeat(AL[-1:],n,0)]
     V,A=diff_traj(r.m,Q)
-    n=int(TRIM/DT); sl=slice(n,len(Q)-n); Q,V,A,AL=Q[sl],V[sl],A[sl],AL[sl]
+    sl=slice(int(tr[0]/DT),len(Q)-int(tr[1]/DT)); Q,V,A,AL=Q[sl],V[sl],A[sl],AL[sl]
     if getattr(r,'toe',None) is not None: r.toe=r.toe[sl]
     if com is not None: com,zmp=com[sl],zmp[sl]
     toe=getattr(r,'toe',None)
@@ -192,7 +198,7 @@ def run(name):
     for j in met: met[j]['peak_Nm_no_armature']=met0[j]['peak_Nm']
     cx=COP[:,:,0]; cy=COP[:,:,1]
     cop_ok=bool(np.nanmax(cx)<=TOE+1e-4 and np.nanmin(cx)>=HEEL-1e-4 and np.nanmax(np.abs(cy))<=HALFW+1e-4)
-    info.update(residual_times_s=[round(x,3) for x in (np.where(RES>0.05*r.m.body_subtreemass[1]*G)[0]*DT+TRIM)[:60].tolist()],base_residual_p99_N=float(np.percentile(RES,99)),frames_residual_gt_5pctBW=int((RES>0.05*r.m.body_subtreemass[1]*G).sum()),zmp_iter=getattr(r,'zmp_hist',None),mass_kg=float(r.m.body_subtreemass[1]),duration_s=len(Q)*DT,base_residual_max=float(RES.max()),
+    info.update(residual_times_s=[round(x,3) for x in (np.where(RES>0.05*r.m.body_subtreemass[1]*G)[0]*DT+tr[0])[:60].tolist()],base_residual_p99_N=float(np.percentile(RES,99)),frames_residual_gt_5pctBW=int((RES>0.05*r.m.body_subtreemass[1]*G).sum()),zmp_iter=getattr(r,'zmp_hist',None),mass_kg=float(r.m.body_subtreemass[1]),duration_s=len(Q)*DT,base_residual_max=float(RES.max()),
         cop_x_range_m=[float(np.nanmin(cx)),float(np.nanmax(cx))],cop_y_absmax_m=float(np.nanmax(np.abs(cy))),cop_inside_sole=bool(cop_ok),
         max_friction_ratio=float(FR.max()),max_vertical_GRF_BW=float(FZ.max()/(r.m.body_subtreemass[1]*G)))
     json.dump(dict(info=info,metrics=met),open(f'{OUT}/{name}.json','w'),indent=1)
