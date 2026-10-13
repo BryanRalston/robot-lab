@@ -1,0 +1,137 @@
+{
+ "mode": "walk",
+ "carry_kg": 0.0,
+ "cruise_cmd_mps": 0.8,
+ "timestep_s": 0.001,
+ "wbc_hz": 1000,
+ "mpc_hz": 100,
+ "seconds_commanded": 20.0,
+ "sim_time_s": 1.74,
+ "fell_at_s": 1.74,
+ "fall_trigger": "pelvis",
+ "completed": false,
+ "mean_speed_pelvis_mps": 0.3949,
+ "mean_speed_com_vx_mps": 0.4205,
+ "pelvis_x_m": 0.6872,
+ "touchdowns": 2,
+ "ds_frac": 0.0253,
+ "flight_frac": 0.0678,
+ "rate_nom": 1.0002,
+ "v_plan_mps": 0.7998,
+ "cop_margin_min_mm": -0.0,
+ "cop_offset_from_sole_center_peak_mm": 130.0,
+ "joints": [
+  {
+   "joint": "l_hip_yaw",
+   "peak_Nm": 27.64,
+   "rms_Nm": 9.89,
+   "avail_Nm": 70.0,
+   "peak_over_avail": 0.395,
+   "saturated_pct": 0.0
+  },
+  {
+   "joint": "l_hip_roll",
+   "peak_Nm": 102.98,
+   "rms_Nm": 54.45,
+   "avail_Nm": 204.0,
+   "peak_over_avail": 0.505,
+   "saturated_pct": 0.0
+  },
+  {
+   "joint": "l_hip_pitch",
+   "peak_Nm": 261.17,
+   "rms_Nm": 70.18,
+   "avail_Nm": 350.0,
+   "peak_over_avail": 0.746,
+   "saturated_pct": 0.0
+  },
+  {
+   "joint": "l_knee",
+   "peak_Nm": 216.2,
+   "rms_Nm": 118.86,
+   "avail_Nm": 258.0,
+   "peak_over_avail": 0.838,
+   "saturated_pct": 0.0
+  },
+  {
+   "joint": "l_ankle_pitch",
+   "peak_Nm": 254.96,
+   "rms_Nm": 54.88,
+   "avail_Nm": 311.0,
+   "peak_over_avail": 0.82,
+   "saturated_pct": 0.0
+  },
+  {
+   "joint": "l_ankle_roll",
+   "peak_Nm": 27.37,
+   "rms_Nm": 9.01,
+   "avail_Nm": 177.0,
+   "peak_over_avail": 0.155,
+   "saturated_pct": 0.0
+  },
+  {
+   "joint": "r_hip_yaw",
+   "peak_Nm": 26.54,
+   "rms_Nm": 9.29,
+   "avail_Nm": 70.0,
+   "peak_over_avail": 0.379,
+   "saturated_pct": 0.0
+  },
+  {
+   "joint": "r_hip_roll",
+   "peak_Nm": 95.7,
+   "rms_Nm": 49.82,
+   "avail_Nm": 204.0,
+   "peak_over_avail": 0.469,
+   "saturated_pct": 0.0
+  },
+  {
+   "joint": "r_hip_pitch",
+   "peak_Nm": 247.14,
+   "rms_Nm": 71.16,
+   "avail_Nm": 350.0,
+   "peak_over_avail": 0.706,
+   "saturated_pct": 0.0
+  },
+  {
+   "joint": "r_knee",
+   "peak_Nm": 249.38,
+   "rms_Nm": 115.92,
+   "avail_Nm": 258.0,
+   "peak_over_avail": 0.967,
+   "saturated_pct": 0.0
+  },
+  {
+   "joint": "r_ankle_pitch",
+   "peak_Nm": 253.06,
+   "rms_Nm": 58.26,
+   "avail_Nm": 311.0,
+   "peak_over_avail": 0.814,
+   "saturated_pct": 0.0
+  },
+  {
+   "joint": "r_ankle_roll",
+   "peak_Nm": 34.43,
+   "rms_Nm": 6.52,
+   "avail_Nm": 177.0,
+   "peak_over_avail": 0.195,
+   "saturated_pct": 0.0
+  }
+ ],
+ "qp_ok": 1740,
+ "qp_fail": 0,
+ "mean_wbc_ms": 2.789,
+ "wall_s": 5.4,
+ "push_applied": false,
+ "push_time_s": null,
+ "push_swing_foot": null,
+ "push_impulse_Ns": 0.0,
+ "push_vy_before": null,
+ "push_vy_after": null,
+ "push_dvy": null,
+ "landings": [],
+ "note": "",
+ "mass_kg": 65.0,
+ "com_z_m": 0.8989,
+ "yaw_roll_plot": "results/r7/wbc_0p8_pz98/walk_yaw_roll.png"
+}

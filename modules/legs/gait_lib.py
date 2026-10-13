@@ -162,8 +162,9 @@ MU=0.8   # friction coefficient used for the wrench-distribution feasibility con
 
 def _foot_cons(nw):
     """linear inequality rows G w >= 0 in foot-local wrench coords. flat: [Fx Fy Fz Mx My Mz] about ankle; toe line: [Fx Fy Fz Mx Mz] at toe edge."""
+    ci=float(os.environ.get("LEGS_COP_INSET","0"))   # r7: plan CoP inset from the sole edge (m), flat contacts only
     if nw==6:
-        G=[[0,0,1,0,0,0],[-SOLE,0,-HEEL,0,-1,0],[SOLE,0,TOE,0,1,0],[0,SOLE,HALFW,-1,0,0],[0,-SOLE,HALFW,1,0,0],
+        G=[[0,0,1,0,0,0],[-SOLE,0,-(HEEL+ci),0,-1,0],[SOLE,0,TOE-ci,0,1,0],[0,SOLE,HALFW-ci,-1,0,0],[0,-SOLE,HALFW-ci,1,0,0],
            [-1,0,MU,0,0,0],[1,0,MU,0,0,0],[0,-1,MU,0,0,0],[0,1,MU,0,0,0],[0,0,0.05,0,0,-1],[0,0,0.05,0,0,1]]
     else:
         G=[[0,0,1,0,0],[0,0,HALFW,-1,0],[0,0,HALFW,1,0],[-1,0,MU,0,0],[1,0,MU,0,0],[0,-1,MU,0,0],[0,1,MU,0,0],[0,0,0.03,0,-1],[0,0,0.03,0,1]]

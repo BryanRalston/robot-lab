@@ -119,3 +119,16 @@
   - Push at 66.054 kg. ID plan: ankle_roll q [−14, +9]°, so the stop is not hit. Peak 42.2 N·m; CoP inside the sole; friction ratio 1.13 and residual max 122.6 N are unchanged by the stop. fsim step-recover falls in both cases (pre-existing; 63.8 kg r2 run fell at 1.142 s): base falls at 1.016 s with roll peaks −35.1/+33.8° (soft ±25° range overrun). With the stop it falls at 1.048 s, roll peaks −19.9/+19.4°, stop hit from 0.408 s, overtravel 1.9°, so clearance margin 8.7 mm of the 10.9 mm.
 - L30 (A14) thigh-clamp pin access. Removable front panel 60×70 mm (R8) at collar mid, 4 × M3 quarter-turn, plus a rear 40×50 exit window with 2 × M3. PA12-CF 1.5 mm, 0.018 kg/leg [EST]. Pins are pushed out to the rear with a ø5 punch L ≥ 72 mm. Pin axis and fairing clearances are layout assumptions [EST]: there is no thigh fairing CAD in the repo to check against.
 - L31 (r6) WBC plan-path rework (`modules/legs/wbc/`, default contact, LEGS_MASS=65, LEGS_LIMITS=r1, LEGS_CONTACT unset). `_plan_mpc` is closed-loop: sagittal (lengthen-only) and lateral (±40 mm) DCM foot placement, playback rate around `cruise/v_plan`, `yaw_off` into stance hip yaw (±12 N·m) and swing-foot yaw. `--cruise` 0.5 and 0.8 now differ (`rate_nom` 0.4168 vs 0.6668; falls 1.278 s and 1.730 s). Pass criteria not met. Walk falls at 5.676 s, mean 1.082 m/s, 10 touchdowns, CoP margin 0 mm, double support 2.41%, airborne 9.81%, right knee saturated 3.28%. Push 60 N·s at 4.059 s, fall 4.754 s. Carry 85 kg falls at 4.686 s, mean 0.9699 m/s, both knees saturated (3.59% / 4.89%). Wider steps and a faster clock made the unpushed walk fall sooner. Report: grokbuild/results/REPORT.md.
+- L31 (R-022) sim/v3: ankle_roll range ±18° with solreflimit 0.004 1 and solimplimit .95 .99 .001 (cleared by Robot Lab), commit 93cb518.
+- L32 (r7) WBC r6 (c744739) QC diagnosis on the box (65 kg, r1 limits, osqp; results/r7/wbc_*):
+  - Baseline reproduces: fell at 5.763 s, DS 2.6 %, flight 9.5 %.
+  - The reference `walk_1p2_r2` itself plans the CoP within 5 mm of the sole edge on 26–28 % of loaded frames (heel −0.06, toe 0.18, |y| 0.05), so a 0 mm margin is planned, not a tracking error. The WBC CoP clip is also the full sole (no margin).
+  - The reference has DS 25 % and zero flight, but in the realized gait the stance foot unloads 40–70 ms before the swing foot lands (contact sequence …R 0000 B L…). That flight is the bounce; the slice drops the trail load on schedule.
+  - Test results, one at a time:
+    - Plan CoP inset 15 mm (`LEGS_COP_INSET`, flat contacts) at 1.2: FAIL, 4.807 s. Toe-line phases still sit on the edge.
+    - Speed-matched slice `walk_0p8_r7` at 0.8: FAIL, 8.773 s, flight 1.2 %.
+    - Same with DS 0.25 at 0.8: **PASS 20 s**, DS 16 %, flight 0.01 %. Mean speed 0.73 m/s, under the 0.8 command.
+    - PELZ 0.98 at 0.8: FAIL, 1.74 s.
+    - DS 0.25 at 1.0: FAIL, 7.13 s. DS 0.35 at 1.0: FAIL, 6.95 s.
+    - DS 0.25 at 1.2: FAIL, 4.784 s, flight 3.5 %.
+  - Takeaway: a longer reference double support is the effective fix (it removes the flight). Above 0.8 m/s the toe-off edge CoP plus the stance unloading before touchdown still tip the foot. Contact-gated unloading (hold trail load until swing fz > 0) is the next WBC change. In parallel, RL brief grokbuild/rl_walk_brief.md (MuJoCo Playground/MJX: same MJCF, CPU replay on the box).

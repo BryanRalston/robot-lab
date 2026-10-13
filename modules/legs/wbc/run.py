@@ -35,7 +35,7 @@ def run(mode='walk', seconds=20.0, cruise=1.20, dt=0.001, push=False, carry=Fals
         ctrl.stand_only = True
     info = ctrl.initialize(d)
     if mode != 'stand':
-        plan = os.path.join(LEGS, 'results', 'r2',
+        plan = os.environ.get('WBC_PLAN') or os.path.join(LEGS, 'results', 'r2',
                             'carry_20kg_r2.npz' if carry else 'walk_1p2_r2.npz')
         extra = ctrl.use_plan(plan, d)
         info.update(extra)

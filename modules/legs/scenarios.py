@@ -189,7 +189,8 @@ def sc_push(v0=0.6,react=0.10,Tsw=0.35,Tend=1.6):
 SC={'walk_1p2_r2':lambda:sc_walk(v=1.2,Tstep=float(os.environ.get('TSTEP','0.5')),arm=float(os.environ.get('ARM','0.35')),yaw=float(os.environ.get('YAW','0.12')),ds=float(os.environ.get('DS','0.15')),pel_z=float(os.environ.get('PELZ','1.02'))),
     'carry_20kg_r2':lambda:sc_walk(carry=20.0,v=1.2,Tstep=float(os.environ.get('TSTEP','0.5')),yaw=float(os.environ.get('YAW','0.12')),ds=float(os.environ.get('DS','0.15')),pel_z=float(os.environ.get('PELZ','1.02'))),
     'walk_1p2':lambda:sc_walk(),'walk_0p8':lambda:sc_walk(v=0.8,Tstep=0.5),'walk_1p0':lambda:sc_walk(v=1.0,Tstep=0.47),'stairs_18cm':lambda:sc_stairs(),'carry_20kg':lambda:sc_walk(carry=20.0,name='carry_20kg'),
-    'sit_to_stand':lambda:sc_sit_to_stand(),'sit_to_stand_r3':lambda:sc_sit_to_stand_r3(),'carry_20kg_0p8':lambda:sc_walk(carry=20.0,v=0.8,Tstep=0.5,name='carry_20kg_0p8'),'carry_20kg_1p0':lambda:sc_walk(carry=20.0,v=1.0,Tstep=0.47,name='carry_20kg_1p0'),'push_recover':lambda:sc_push()}
+    'sit_to_stand':lambda:sc_sit_to_stand(),'sit_to_stand_r3':lambda:sc_sit_to_stand_r3(),'carry_20kg_0p8':lambda:sc_walk(carry=20.0,v=0.8,Tstep=0.5,name='carry_20kg_0p8'),'carry_20kg_1p0':lambda:sc_walk(carry=20.0,v=1.0,Tstep=0.47,name='carry_20kg_1p0'),'push_recover':lambda:sc_push(),
+    **{f'walk_{k}_r7':(lambda v=v,k=k:sc_walk(v=v,Tstep=0.5,name=f'walk_{k}_r7',arm=0.35,yaw=0.12,ds=float(os.environ.get('DS','0.15')),pel_z=float(os.environ.get('PELZ','1.02')))) for k,v in (('0p8',0.8),('1p0',1.0),('1p2',1.2))}}
 def sc_sit_to_stand_r3(T=1.4):
     '''R-012 re-plan: hip_pitch kept >= HIPMIN (default -78 deg, 2 deg inside the -80 loaded limit).
     Strategy: forward lean from the WAIST (does not add hip flexion), pelvis pitch only as far as the hip limit allows, knees/ankles take the rise.
