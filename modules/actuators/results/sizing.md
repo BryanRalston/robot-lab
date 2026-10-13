@@ -71,3 +71,28 @@ Rest of robot: compute 120 + sensors 40 + 26 drives × 3.3 W idle + other-joint 
 | battery 13S7P 1474 Wh → 20S5P 1620 Wh | 7.96 | 8.75 | +0.79 |
 | **robot total** | 63.79 | **67.60** | +3.81 → **over 65 kg by 2.6 kg** |
 Sensitivity: margin 1.3 instead of 1.5 → 67.08 kg (hip_roll TBM2G-07608A 1.50 kg, hip_pitch 2 × 06813D at 65 mm 2.17 kg, ankle lever 60 mm). Without the [EST] linkage allowance (the v3 basis) → 66.30 kg.
+
+---
+# Round 2 update (2026-10-13 PM)
+New: `cad_mass.py` (CadQuery housings + linkages → `results/cad_mass.json`, STEP files in `cad/`), `regen_sim.py` (→ `results/regen_sim.json`, `regen_sim_eod.json`), datasheets in `datasheets/` (SOURCES.md). `size.py` now uses datasheet GEAR_LEN, RV12x6, Km fix, rpm ≤ 0.95 Nmax, CAD housing/linkage masses and a CAD-area thermal re-check.
+
+## Selected leg actuators, round 2 (one side)
+| joint | selection | mass kg (r1) | housing model → CAD+fasteners kg | linkage kg | avail N·m | ω30 rad/s | motor rpm at need | ΔT K walk / carry (CAD area) | carry ratio |
+|---|---|---|---|---|---|---|---|---|---|
+| hip_yaw | TBM2G-06008A + CSG-17-100 + CRBH 6013 A | 1.02 (1.11) | 0.355 → 0.264 | — | 70 | 6.1 | 2865 | 17 / 22 | 1.22 |
+| hip_roll | TBM2G-08508A + CSG-25-100 + CRBH 6013 A | 1.46 (1.56) | 0.366 → 0.276 | — | 204 | 3.6 | 2865 | 26 / 33 | 1.67 |
+| hip_pitch | 2× TBM2G-07613D + 2× RV12x4, 50 mm | 2.15 (2.37) | 0.545 → 0.353 | 0.221 | 454 (350 worst) | 12.2 | 6066 | 58 / 78 | 1.32 |
+| knee | **2× TBM2G-07613D + 2× RV12x5, 47.5 mm** | 1.98 (2.37) | 0.545 → 0.353 | 0.051 | 345 (245 worst ÷0.71) | 16.0 | **7565 ≤ 7600** | 70 / 82 | 1.37 |
+| ankle_pitch/roll | 2× TBM2G-06013D + 2× RV12x4, 70/40 mm | 1.78 (1.89) | 0.410 → 0.422 (fins) | 0.032 | 311 / 177 | 13.7 | 7267 | 31 / 43 | 1.30 |
+| **both legs** | | **16.79 (18.60)** | **4.44 → 3.34 (−1.11)** | **0.61 (was 1.30 EST)** | | | | | |
+
+## Mass (T2)
+Robot 63.79 − 15.36 + 16.79 − 0.22 + 0.79 = **65.79 kg** (actuator module recovered −1.81 kg vs −1.30 target). With Legs −0.50 and Torso −0.80 (R-001 items 3–4, not yet delivered): **64.49 kg**, 0.51 kg reserve.
+
+## Regen sim, walk 1.2 m/s, 1620 Wh × 0.9
+| case | whole trace (incl. ~1 s stand at each end) W / h | **steady walking 2–7 s** W / h | end-of-discharge (3.4 V/cell, IR ×1.5) steady W / h |
+|---|---|---|---|
+| A: no regen | 744 / 1.96 | **942 / 1.55** | 952 / 1.53 |
+| B: shared bus, no charge | 566 / 2.58 | 672 / 2.17 | 678 / 2.15 |
+| C: shared bus + 30 A charge | 561 / 2.60 | **667 / 2.19** | 673 / 2.17 |
+Bus: 70.4–72.3 V nominal, 65.5–68.5 V end-of-discharge (≤ 90 V clamp never approached); chopper energy 5 W mean in case B, 0 in C. Bus net-negative 3 % of the time, peak −341 W (4.7 A charge, well under 30 A).

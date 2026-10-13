@@ -1,0 +1,61 @@
+                                                                                          PRODUCT DATA SHEET
+LITHIUM-ION RECHARGEABLE BATTERY                                                       MODEL INR-21700-P45B
+
+ CELL CHARACTERISTICS                                                                 Charge Characteristics
+
+                                Typical            4500 mAh
+                                                    16.2 Wh
+   Capacity
+                                Minimum            4300 mAh
+                                                   15.5 Wh
+                                Nominal            3.6 V
+   Cell Voltage                 Charge             4.2 V
+                                Discharge          2.5 V
+                                Standard            4.5 A
+   Charge Current               Maximum            13.5 A
+                                                   (70oC cut-off)                      Discharge Rate Characteristics
+   Charge Time                  Standard           1.5 hr
+                                                   45 A
+   Discharge Current            Continuous
+                                                   (80oC cut-off)
+                                Charge               0°C to 60°C
+   Temperature
+                                Discharge          -40°C to 60°C
+   Energy Density               Volumetric         643 Wh/l
+                                Gravimetric        242 Wh/kg
+   Typical                      AC (30%SOC)            7 mΩ
+   Impedance                    DC (50%SOC)           15 mΩ
+                                                                                       Discharge Temperature Characteristics
+ PHYSICAL CHARACTERISTICS
+
+
+
+
+                                Shape         Cylindrical
+                                Can           Steel
+                                Diameter      21.55 mm (Max)
+                                Height        70.15 mm (Max)
+                                Weight          70 g       (Max)
+                                                                                       Cycle Characteristics
+
+
+
+
+The information contained herein is for reference only and does not
+imply a performance guarantee or a product warranty. Specifications
+and characteristics are subject to change without prior notice.
+This product is prohibited for use in and shall not be sold for use in e-
+cigarettes, vaporizers (e-cig, vape, mod) or any applications not
+permitted in Molicel product specifications and Molicel terms and
+conditions (https://www.molicel.com/terms-and-conditions/).
+
+Version 1.4
+
+ Taiwan Facility                                 Canada Facility                                Headquarters
+  10 Dali 2nd Rd., Shan-Hwa,                       20 000 Stewart Crescent                         10F, 113, Sec.2, Zhung Shan N Rd.,
+  Tainan City, Taiwan, R.O.C.                      Maple Ridge, BC, Canada, V2X 9E7                Taipei, Taiwan, R.O.C.
+  Tel: 886-6-505-0666                              Tel: 1-604-466-6654                             Tel: 886-2-2567-3500
+  Fax: 886-6-505-0777                              Fax: 1-604-466-6600                             Fax: 886-2-2567-6500
+  Mail to:service@molicel.com                      Mail to:molicel@molienergy.com                  Mail to:service@molicel.com
+  http://www.molicel.com                           http://www.molicel.com                          http://www.molicel.com
+

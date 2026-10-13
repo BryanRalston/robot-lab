@@ -21,6 +21,11 @@ PT.CSG.update({
 v3.GEAR_LEN.update({'CSG-20-50':36,'CSG-25-50':42,'CSG-25-80':42,'CSG-32-50':54,'CSG-32-80':54,'CSG-40-50':66,'CSG-40-100':66})  # [EST] as v3
 NIN_GREASE={14:8500,17:7300,20:6500,25:5600,32:4800,40:4000}   # max input rpm, grease (CSG catalog; size 17 [EST])
 BEAR={14:'CRBH 6013 A',17:'CRBH 6013 A',20:'CRBH 6013 A',25:'CRBH 6013 A',32:'CRBH 8016 A',40:'CRBH 9016 A'}   # hips: v3 final selection CRBH 6013 A passed v3 bearing_check (hip loads); larger gears need a larger bore [EST]
+# ---- round 2 datasheet corrections (datasheets/*.pdf)
+PT.MOT['TBM2G-07613']['Km']=[0.201,0.201,0.201]   # manual p.284 prints 2.01 for winding C; lb-in/sqrtW column (1.78) proves 0.201
+PT.RV['RV12x6']=dict(d=12,lead=6,Ca=18400,C0a=26500,eta=0.88,D1=26,L1=36)   # Rollvis RV tables p.24/25
+v3.GEAR_LEN.update({'CSG-14-100':28.5,'CSG-17-100':32.5,'CSG-20-100':33.5,'CSG-25-100':37.0,'CSG-32-100':44.0,'CSG-20-50':33.5,'CSG-25-50':37,'CSG-25-80':37,'CSG-32-50':44,'CSG-32-80':44,'CSG-40-50':53,'CSG-40-100':53})  # CSG Table 8 dim B (was [EST])
+RPM_MARGIN=0.95   # R-005: motor rpm at speed need <= 95 % Nmax (7600 rpm)
 ARMCAP={'knee':0.0585,'ankle_pitch':0.070,'hip_pitch':0.080}   # hip_pitch 80 mm [EST] packaging, needs Legs geometry check
 MARGIN=float(os.environ.get('MARGIN',1.5))
 # ---- round-1 architecture decisions (see results/DECISIONS.md)
@@ -69,7 +74,7 @@ def evalA(j,d):
     inside=bool(np.all(tw[:,1]<=w_at(A,tw[:,0]) )) if len(tw) else True
     A['w30']=ws
     ok=dict(torque=A['T_out']>=need,speed=ws>=r['speed'],envelope=inside,thermal=dT<=v3.DT_LIMIT,cont=Tm_rms<=A['M']['Tc'],drive=I_rms<=v3.I_CONT)
-    ok['motor_nmax']=r['speed']*A['ratio']*60/(2*math.pi)<=PT.MOT[d['motor']]['Nmax'][d['w']]
+    ok['motor_nmax']=r['speed']*A['ratio']*60/(2*math.pi)<=RPM_MARGIN*PT.MOT[d['motor']]['Nmax'][d['w']]
     if g: ok['input_rpm']=r['speed']*g['N']*60/(2*math.pi)<=NIN_GREASE[int(d['gear'].split('-')[1])]; ok['avg']=r['rms']<= (g['avg'] or 1e9)
     return dict(A=A,need=need,cu=cu,dT=dT,I_rms=I_rms,Tm_rms=Tm_rms,ok=ok,pass_=all(ok.values()),mass=A['mass'])
 def candidates(j):
@@ -103,20 +108,37 @@ def baseline():
     v3.omega_max.__defaults__,v3.I_PEAK,v3.I_CONT,PT.DRIVE['mass']=keep; return o
 BASE=baseline()
 # ---- twin-screw linkage hardware not in the v3 actuator() mass (decision D5) [EST]
-LINK={'hip_pitch':0.25,'knee':0.25,'ankle_pitch':0.15,'ankle_roll':0.0,'hip_yaw':0,'hip_roll':0}
+CAD=json.load(open(os.path.join(H,'results/cad_mass.json')))   # round 2: CadQuery mass properties (cad_mass.py), replaces [EST] housing x1.25 and linkage allowances
+F=CAD['fasteners']
+CADH={'hip_yaw':CAD['hip_yaw_housing']['mass']+F['rotary'],'hip_roll':CAD['hip_roll_housing']['mass']+F['rotary'],
+      'hip_pitch':CAD['hip_pitch_body_x1']['mass']+F['linear'],'knee':CAD['knee_body_x1']['mass']+F['linear'],'ankle_pitch':CAD['ankle_body_x1']['mass']+F['linear'],'ankle_roll':0}
+HUB,PIN=CAD['nut_rotor_hub_x1']['mass'],CAD['trunnion_pins_pair']['mass']
+LINK={'hip_pitch':2*HUB+2*PIN+CAD['hip_pitch_lever_r50']['mass'],'knee':2*HUB+2*PIN+CAD['knee_lever_r47p5']['mass']-CAD['knee_lever_r58p5_v3']['mass'],
+      'ankle_pitch':2*HUB,'ankle_roll':0.0,'hip_yaw':0,'hip_roll':0}
+CADMOT={'hip_yaw':'TBM2G-06008','hip_roll':'TBM2G-08508','hip_pitch':'TBM2G-07613','knee':'TBM2G-07613','ankle_pitch':'TBM2G-06013','ankle_roll':'TBM2G-06013'}
 def label(d): return f"{d['motor']}{'ACD'[d['w']]} + "+(f"{d['gear']} (CSG-2A) + {d['bear']}" if d['kind']=='rotary' else f"2× {d['screw']} roller screw, arm {d['arm']*1000:.1f} mm")
 SEL={}
 for j in LEG:
     e,d=best[j]; A=e['A']; r=req[j]
     cnt=0 if j=='ankle_roll' else 2
+    assert d['motor']==CADMOT[j], f'{j}: selection changed ({d["motor"]}); re-run cad_mass.py geometry'
+    # thermal re-check with the CAD housing outer area (narrower nut section -> less area than the v3 cylinder model)
+    MD={'TBM2G-06008':(60,17.71),'TBM2G-08508':(85,19.34),'TBM2G-07613':(76,23.09),'TBM2G-06013':(60,22.21)}[d['motor']]
+    if d['kind']=='rotary':
+        Dc=max(MD[0],90)+6; Lc=MD[1]+8+v3.GEAR_LEN[d['gear']]+13+6; area=(math.pi*Dc*Lc+2*math.pi/4*Dc**2)*1e-6
+    else:
+        Dc=MD[0]+6; Lm=MD[1]+20; Dn=41; area=(math.pi*Dc*Lm+math.pi*Dn*56+math.pi/4*Dc**2*2)*1e-6
+    fins=2.0; Rha=1/(12.0*area*fins); dT_cad=e['cu']/A['nmot']*0.6*A['M']['Rth']+e['cu']*Rha
+    Tm_c=r['carry_rms']/(A['ratio']*A['eta'])/A['nmot']; cu_c=A['nmot']*(Tm_c/(A['M']['Km']/math.sqrt(1.4)))**2; dT_cad_carry=cu_c/A['nmot']*0.6*A['M']['Rth']+cu_c*Rha
+    mass_model=e['mass']; e=dict(e); e['mass']=mass_model-A['housing']['mass']*A['nmot']+CADH[j]*A['nmot']   # CAD housing replaces v3 housing() [EST x1.25]
     carry_ok=dict(torque_ratio=A['T_out']*(KK if j=='knee' else K_HIP if (j=='hip_pitch' and d['kind']=='linear2') else 1)/r['carry_peak'],
         w_at_carry30=float(w_at(A,0.3*r['carry_peak']/(KK if j=='knee' else 1))[0]),carry_w=r['carry_w'])
     Tm_c=r['carry_rms']/(A['ratio']*A['eta'])/A['nmot']; cu_c=A['nmot']*(Tm_c/(A['M']['Km']/math.sqrt(1.4)))**2
     carry_ok['dT_carry']=cu_c/A['nmot']*0.6*A['M']['Rth']+cu_c/(12*A['housing']['area_m2']*2)
-    SEL[j]=dict(label=label(d),d=d,cnt=cnt,mass=e['mass']+LINK[j] if cnt else 0.0,mass_model=e['mass'],link=LINK[j],T_out=A['T_out'],need=e['need'],
+    SEL[j]=dict(label=label(d),d=d,cnt=cnt,mass=e['mass']+LINK[j] if cnt else 0.0,mass_model=mass_model,housing_model=A['housing']['mass']*A['nmot'],housing_cad=CADH[j]*A['nmot'],link=LINK[j],T_out=A['T_out'],need=e['need'],
         w30=A['w30'],speed_need=r['speed'],ratio=A['ratio'],eta=A['eta'],nmot=A['nmot'],Km=A['M']['Km'],Kt=A['M']['Kt'],Rm=A['M']['Rm'],
-        cu_rms=e['cu'],dT=e['dT'],I_rms=e['I_rms'],motor_rpm=r['speed']*A['ratio']*60/(2*math.pi),ok=e['ok'],carry=carry_ok,D=A['housing']['D'],L=A['housing']['L'])
-    print(f"{j:12s} {SEL[j]['label']:60s} m {SEL[j]['mass']:.2f} T {A['T_out']:.0f}/{e['need']:.0f} w {A['w30']:.1f}/{r['speed']:.1f} dT {e['dT']:.0f} carryT x{carry_ok['torque_ratio']:.2f}")
+        cu_rms=e['cu'],dT=e['dT'],dT_cad=dT_cad,dT_cad_carry=dT_cad_carry,area_cad=area,I_rms=e['I_rms'],motor_rpm=r['speed']*A['ratio']*60/(2*math.pi),ok=e['ok'],carry=carry_ok,D=A['housing']['D'],L=A['housing']['L'])
+    print(f"{j:12s} {SEL[j]['label']:60s} m {SEL[j]['mass']:.2f} T {A['T_out']:.0f}/{e['need']:.0f} w {A['w30']:.1f}/{r['speed']:.1f} dT {e['dT']:.0f} carryT x{carry_ok['torque_ratio']:.2f} dT_cad {dT_cad:.0f} carry {dT_cad_carry:.0f} rpm {r['speed']*A['ratio']*60/(2*math.pi):.0f}")
 # ---- power & energy from gait time series (both legs, 12 joints)
 ETA_DRV=0.98   # [EST] Gold Twitter >99 % at rated power (datasheet); 98 % incl. light-load switching
 def power(sc):

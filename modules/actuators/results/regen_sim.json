@@ -1,0 +1,64 @@
+{
+ "inputs": {
+  "gait": "walk_1p2",
+  "duration_s": 8.505,
+  "R_eq": 0.011427405366799306,
+  "k_sw": 0.5656565656565656,
+  "OCV": 72.0,
+  "R_pack": 0.06,
+  "I_charge_BMS": 30.0,
+  "P_other": 253.8,
+  "selections": {
+   "hip_yaw": "TBM2G-06008A + CSG-17-100 (CSG-2A) + CRBH 6013 A",
+   "hip_roll": "TBM2G-08508A + CSG-25-100 (CSG-2A) + CRBH 6013 A",
+   "hip_pitch": "TBM2G-07613D + 2\u00d7 RV12x4 roller screw, arm 50.0 mm",
+   "knee": "TBM2G-07613D + 2\u00d7 RV12x5 roller screw, arm 47.5 mm",
+   "ankle_pitch": "TBM2G-06013D + 2\u00d7 RV12x4 roller screw, arm 70.0 mm",
+   "ankle_roll": "TBM2G-06013D + 2\u00d7 RV12x4 roller screw, arm 40.0 mm"
+  }
+ },
+ "mean_W": {
+  "copper_legs": 147.48778453194933,
+  "drive_loss_legs": 41.866153829484944,
+  "legs_positive_sum": 481.46571481419545,
+  "legs_negative_sum": -180.75536091259727
+ },
+ "cases": {
+  "A_no_regen": {
+   "P_chem_mean": 743.9772849878691,
+   "P_chem_steady_2to7s": 942.438104916462,
+   "runtime_h_steady": 1.5470511987938322,
+   "P_brake_mean": 0.0,
+   "runtime_h": 1.9597372519562521,
+   "Vbus_min": 70.30654582621838,
+   "Vbus_max": 71.77705755673009,
+   "P_bus_min": 266.70254304037667,
+   "P_bus_max": 1984.34855789298,
+   "frac_time_bus_negative": 0.0
+  },
+  "B_bus_netting_only": {
+   "P_chem_mean": 565.6049367520649,
+   "P_chem_steady_2to7s": 672.2871549693914,
+   "runtime_h_steady": 2.168716134501159,
+   "P_brake_mean": 4.965119148939497,
+   "runtime_h": 2.577770993959906,
+   "Vbus_min": 70.43037595163466,
+   "Vbus_max": 72.0,
+   "P_bus_min": -341.256492284948,
+   "P_bus_max": 1842.4868638183038,
+   "frac_time_bus_negative": 0.02937720329024677
+  },
+  "C_netting_plus_charge": {
+   "P_chem_mean": 560.701815631806,
+   "P_chem_steady_2to7s": 666.6125232856139,
+   "runtime_h_steady": 2.187177631787922,
+   "P_brake_mean": 0.0,
+   "runtime_h": 2.6003126070799447,
+   "Vbus_min": 70.43037595163466,
+   "Vbus_max": 72.28326597120355,
+   "P_bus_min": -341.256492284948,
+   "P_bus_max": 1842.4868638183038,
+   "frac_time_bus_negative": 0.02937720329024677
+  }
+ }
+}

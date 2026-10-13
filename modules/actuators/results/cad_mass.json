@@ -1,0 +1,80 @@
+{
+ "hip_yaw_housing": {
+  "mass": 0.2144971221443857,
+  "mat": "7075",
+  "group": "housing",
+  "note": ""
+ },
+ "hip_roll_housing": {
+  "mass": 0.2264362938916485,
+  "mat": "7075",
+  "group": "housing",
+  "note": ""
+ },
+ "hip_pitch_body_x1": {
+  "mass": 0.15310929082912592,
+  "mat": "7075",
+  "group": "housing",
+  "note": ""
+ },
+ "knee_body_x1": {
+  "mass": 0.15310929082912592,
+  "mat": "7075",
+  "group": "housing",
+  "note": ""
+ },
+ "ankle_body_x1": {
+  "mass": 0.18745784639858387,
+  "mat": "7075",
+  "group": "housing",
+  "note": "4 cooling fins (air_fins, v3 thermal choice)"
+ },
+ "nut_rotor_hub_x1": {
+  "mass": 0.015996639818657617,
+  "mat": "7075",
+  "group": "linkage",
+  "note": ""
+ },
+ "trunnion_pins_pair": {
+  "mass": 0.025894577447213865,
+  "mat": "steel",
+  "group": "linkage",
+  "note": ""
+ },
+ "hip_pitch_lever_r50": {
+  "mass": 0.13734726646153847,
+  "mat": "7075",
+  "group": "linkage",
+  "note": "new part (hip_pitch twin screw); Legs to integrate on thigh"
+ },
+ "knee_lever_r47p5": {
+  "mass": 0.1346496664615385,
+  "mat": "7075",
+  "group": "linkage",
+  "note": "replaces v3 r58.5 lever in shank CAD"
+ },
+ "knee_lever_r58p5_v3": {
+  "mass": 0.16725120000000002,
+  "mat": "7075",
+  "group": "reference",
+  "note": "v3 shank part (already in Legs structure mass)"
+ },
+ "hip_pitch_lever_check": {
+  "F_N": 4540.0,
+  "sigma_MPa": 240.39930555555551,
+  "SF_yield": 2.0923521340362536
+ },
+ "knee_lever_check": {
+  "F_N": 3631.578947368421,
+  "sigma_MPa": 192.29714912280696,
+  "SF_yield": 2.615743406985033
+ },
+ "fasteners": {
+  "rotary": 0.0498,
+  "linear": 0.023600000000000003
+ },
+ "per_leg": {
+  "housing": 1.6694862721497055,
+  "linkage": 0.3043038816238781
+ }
+}

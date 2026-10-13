@@ -1,0 +1,2486 @@
+              Gold Twitter
+           Digital Servo Drive
+           Installation Guide
+           CAN and EtherCAT
+
+
+
+
+January 2023 (Ver. 2.011)   www.elmomc.com
+Notice
+
+
+This guide is delivered subject to the following conditions and restrictions:
+•       This guide contains proprietary information belonging to Elmo Motion Control Ltd. Such
+        information is supplied solely for the purpose of assisting users of the Gold Twitter servo
+        drive in its installation.
+•       The text and graphics included in this manual are for the purpose of illustration and
+        reference only. The specifications on which they are based are subject to change without
+        notice.
+•       Information in this document is subject to change without notice.
+
+                                                               Document no. MAN-G-TWI (Ver. 2.011)
+                                                                                 Copyright  2023
+                                                                           Elmo Motion Control Ltd.
+                                                                                All rights reserved.
+
+Catalog Number
+
+
+
+
+To order the accessories refer to the Chapter 13: Accessories.
+Revision History
+Version      Date
+Ver. 1.004   Oct 2014
+Ver. 1.005   Nov 2014
+Ver. 1.006   Nov 2014
+Ver. 1.007   Dec 2014
+Ver. 1.008   Jan 2015
+Ver. 1.009   Jan 2015
+Ver. 1.010   Feb 2015
+Ver. 1.011   Mar 2015
+Ver. 1.012   Mar 2015
+Ver. 1.013   May 2015
+Ver. 1.014   June 2015
+Ver. 1.015   Dec 2015
+Ver. 1.016   Mar 2016
+Ver. 1.017   Sep 2016
+Ver. 1.018   Oct 2016
+Ver. 1.019   Jan 2017
+Ver. 1.020   Apr 2017
+Ver. 1.021   Apr 2017
+Ver. 1.022   Aug 2017
+Ver. 1.023   Aug 2017
+Ver. 1.024   Oct 2018
+Ver. 2.000   Nov 2018
+Ver. 2.002   Oct 2019
+Ver. 2.003   Jan 2020
+Ver. 2.004   Apr 2020
+Ver. 2.005   Dec 2020
+Ver. 2.006   Sept 2021
+Ver. 2.007   Oct 2021
+Ver. 2.008   Nov 2021
+Ver. 2.009   Apr 2022
+Ver. 2.010   Sept 2022
+Ver. 2.011   Jan 2023
+                       Table of Contents
+                       MAN-G-TWI (Ver. 2.011)
+                                                                                                                                            4
+
+
+
+
+Chapter 1:     This Installation Guide ................................................................................ 7
+
+Chapter 2:     Safety Information ..................................................................................... 7
+  2.1.   Warnings .................................................................................................................... 8
+  2.2.   Cautions...................................................................................................................... 8
+  2.3.   Warranty Information ................................................................................................ 8
+
+Chapter 3:     Product Description .................................................................................... 9
+
+Chapter 4:     Technical Information ................................................................................10
+  4.1.   Physical Specifications.............................................................................................. 10
+  4.2.   60V and 100V Models Technical Data...................................................................... 11
+  4.3.   200V Models Technical Data .................................................................................... 11
+  4.4.   R Type Technical Data .............................................................................................. 12
+  4.5.   Control Supply Input Voltage (VL) ............................................................................ 13
+  4.6.   Product Features ...................................................................................................... 13
+  4.7.   Environmental Conditions ........................................................................................ 14
+
+Chapter 5:     Standards and Certifications ......................................................................15
+  5.1.   Functional Safety ...................................................................................................... 15
+  5.2.   Electrical Safety ........................................................................................................ 15
+  5.3.   Electromagnetic Compatibility ................................................................................. 15
+  5.4.   Environmental .......................................................................................................... 16
+  5.5.   Other Compliant Standards...................................................................................... 16
+  5.6.   CE Declaration .......................................................................................................... 16
+  5.7.   Dual Use ................................................................................................................... 16
+
+Chapter 6:     Unpacking the Drive Components ..............................................................17
+
+Chapter 7:     Mounting the Gold Twitter ........................................................................18
+  7.1.   Mounting the Optional Accessories Heat Sinks ....................................................... 20
+  7.2.   Mounting Gold Twitter to an External Heatsink ...................................................... 22
+
+Chapter 8:     Integrating the Gold Twitter on a PCB ........................................................23
+  8.1.   Power Returns (PR) .................................................................................................. 23
+  8.2.   COMRET.................................................................................................................... 23
+  8.3.   Earth Connection (PE) .............................................................................................. 23
+  8.4.   Power Return (PR), Common Return (COMRET) and Earth Connections (PE) ......... 24
+  8.5.   Logic and Control Cabling and Wiring ...................................................................... 25
+         8.5.1.        Feedback ports, VL, RS232, USB, Analog Input ......................................... 25
+                          Table of Contents
+                          MAN-G-TWI (Ver. 2.011)
+                                                                                                                                           5
+
+
+
+
+             8.5.2.       Digital Inputs/Outputs, STO ...................................................................... 25
+             8.5.3.       EtherCAT or CAN Communication ............................................................. 25
+             8.5.4.       COMRET to PE Connection ........................................................................ 25
+   8.6.      Power Conductors PCB layout.................................................................................. 26
+
+Chapter 9:         Wiring .......................................................................................................27
+   9.1.      Wiring Legend .......................................................................................................... 27
+   9.2.      The Gold Twitter Connection Diagram..................................................................... 28
+
+Chapter 10: Connections ..............................................................................................30
+   10.1. Motor Power ............................................................................................................ 33
+             10.1.1. Motor Power Connections ........................................................................ 34
+   10.2. Main Power and Control Connector ........................................................................ 35
+             10.2.1. Main Power ............................................................................................... 35
+             10.2.2. Control Supply ........................................................................................... 36
+             10.2.3. Control Supply Connections for G-TWIXXX/YYYZZ(Blank) ......................... 37
+                          10.2.3.1. Dual Power Supply Topology .................................................... 37
+                          10.2.3.2. Single Power Supply Topology (VP+ < 40VDC) ......................... 39
+             10.2.4. Control Supply Connections for G-TWIXXX/YYYZZS or H .......................... 42
+                          10.2.4.1. Dual Power Supply Topology .................................................... 42
+                          10.2.4.2. Single Power Supply Topology (VP+ < 95VDC) ......................... 44
+   10.3. Feedback Connector FDB ......................................................................................... 47
+             10.3.1. Port A ......................................................................................................... 49
+                          10.3.1.1. Incremental Encoder ................................................................ 49
+                          10.3.1.2. Absolute Serial Encoder ........................................................... 50
+                          10.3.1.3. Hall Sensors .............................................................................. 52
+             10.3.2. Port B ......................................................................................................... 53
+                          10.3.2.1. Incremental Encoder ................................................................ 53
+                          10.3.2.2. Interpolated Analog Encoder ................................................... 54
+                          10.3.2.3. Resolver .................................................................................... 55
+             10.3.3. Port C – Emulated Encoder Output (FDB) ................................................. 56
+   10.4. Main Connector (MAIN) ........................................................................................... 57
+             10.4.1. Digital Inputs ............................................................................................. 60
+             10.4.2. Digital Outputs........................................................................................... 62
+             10.4.3. STO (Safe Torque Off) ................................................................................ 65
+             10.4.4. Analog Input .............................................................................................. 66
+             10.4.5. CAN Option ................................................................................................ 67
+                          10.4.5.1. Interface ................................................................................... 67
+                          Table of Contents
+                          MAN-G-TWI (Ver. 2.011)
+                                                                                                                                          6
+
+
+
+
+                          10.4.5.2. CAN Layout ............................................................................... 68
+             10.4.6. RS232 ......................................................................................................... 69
+   10.5. EtherCAT Module ..................................................................................................... 71
+             10.5.1. EtherCAT Module Connectors ................................................................... 71
+                          10.5.1.1. ECT2 connector......................................................................... 71
+                          10.5.1.2. ECT1 connector......................................................................... 72
+                          10.5.1.3. ECT3 Connector ........................................................................ 72
+                          10.5.1.4. 3.3V Connector ......................................................................... 72
+             10.5.2. EtherCAT Communication ......................................................................... 73
+             10.5.3. USB 2.0 Communication (for EtherCAT model only)................................. 74
+
+Chapter 11: Powering Up..............................................................................................75
+   11.1. Initializing the System .............................................................................................. 75
+   11.2. Heat Dissipation ....................................................................................................... 75
+             11.2.1. Heat Dissipation Data ................................................................................ 75
+             11.2.2. How to Use the Chart ................................................................................ 78
+
+Chapter 12: Dimensions ...............................................................................................79
+   12.1. EtherCAT without Heatsink ...................................................................................... 79
+   12.2. EtherCAT with Heatsink............................................................................................ 80
+   12.3. CAN without Heatsink .............................................................................................. 81
+   12.4. CAN with Heatsink.................................................................................................... 82
+
+Chapter 13: Accessories................................................................................................83
+   13.1. Accessories Heat Sink Dimensions ........................................................................... 84
+           Gold Twitter Installation Guide
+           MAN-G-TWI (Ver. 2.011
+                                                                                                   7
+
+
+
+
+Chapter 1: This I nstallation Guide
+This installation Guide details the technical data, pinouts, and power connectivity of the Gold
+Twitter. For a comprehensive detailed description of the functions and connections of the
+drive, refer to the Gold Board Level Module Hardware Manual.
+
+
+
+
+Chapter 2: Safety I nform ation
+In order to achieve the optimum, safe operation of the Gold Twitter, it is imperative that you
+implement the safety procedures included in this installation guide. This information is
+provided to protect you and to keep your work area safe when operating the Gold Twitter and
+accompanying equipment.
+Please read this chapter carefully before you begin the installation process.
+Before you start, ensure that all system components are connected to earth ground. Electrical
+safety is provided through a low-resistance earth connection.
+Only qualified personnel may install, adjust, maintain and repair the servo drive. A qualified
+person has the knowledge and authorization to perform tasks such as transporting,
+assembling, installing, commissioning and operating motors.
+The Gold Twitter contains electrostatic-sensitive components that can be damaged if handled
+incorrectly. To prevent any electrostatic damage, avoid contact with highly insulating
+materials, such as plastic film and synthetic fabrics. Place the product on a conductive surface
+and ground yourself in order to discharge any possible static electricity build-up.
+To avoid any potential hazards that may cause severe personal injury or damage to the
+product during operation, keep all covers and cabinet doors shut.
+The following safety symbols are used in this and all Elmo Motion Control manuals:
+
+                  Warning:
+                  This information is needed to avoid a safety hazard, which might cause bodily
+                  injury or death as a result of incorrect operation.
+
+                  Caution:
+                  This information is necessary to prevent bodily injury, damage to the product
+                  or to other equipment.
+
+                  Important:
+                  Identifies information that is critical for successful application and
+                  understanding of the product.
+
+
+
+
+Table of Contents        |Warnings|www.elmomc.com
+           Gold Twitter Installation Guide
+                                                                                                 8
+           MAN-G-TWI (Ver. 2.011)
+
+
+
+
+2.1. Warnings
+•      To avoid electric arcing and hazards to personnel and electrical contacts, never
+       connect/disconnect the servo drive while the power source is on.
+•      Power cables can carry a high voltage, even when the motor is not in motion.
+       Disconnect the Gold Twitter from all voltage sources before servicing.
+•      The high voltage products within the Gold Line range contain grounding conduits for
+       electric current protection. Any disruption to these conduits may cause the instrument
+       to become hot (live) and dangerous.
+•      After shutting off the power and removing the power source from your equipment,
+       wait at least 3 minutes before touching or disconnecting parts of the equipment that
+       are normally loaded with electrical charges (such as capacitors or contacts). Measuring
+       the electrical contact points with a meter, before touching the equipment, is
+       recommended.
+
+2.2. Cautions
+•      The maximum DC power supply connected to the instrument must comply with the
+       parameters outlined in this guide.
+•      When connecting the Gold Twitter to an approved control supply, connect it through a
+       line that is separated from hazardous live voltages using reinforced or double
+       insulation in accordance with approved safety standards.
+•      Before switching on the Gold Twitter, verify that all safety precautions have been
+       observed and that the installation procedures in this manual have been followed.
+•      Make sure that the Safe Torque Off is operational
+
+2.3. Warranty Information
+The products covered in this manual are warranted to be free of defects in material and
+workmanship and conform to the specifications stated either within this document or in the
+product catalog description. All Elmo drives are warranted for a period of 12 months from the
+date of shipment. No other warranties, expressed or implied — and including a warranty of
+merchantability and fitness for a particular purpose — extend beyond this warranty.
+
+
+
+
+Table of Contents        |Warnings|www.elmomc.com
+           Gold Twitter Installation Guide
+                                                                                                   9
+           MAN-G-TWI (Ver. 2.011)
+
+
+
+
+Chapter 3: Product Description
+The Gold Twitter is an advanced high power density servo drive, delivering up to 5.6 kW power
+in a 12.6 cm3 (0.769 in³) compact package (35 x 30 x 11.5 mm or 1.38" x 1.18" x 0.45"). The
+Gold Twitter is designed to be mounted on a PCB by soldering its pins directly to the PCB.
+This advanced, high power density servo drive provides top performance, advanced
+networking and built-in safety, as well as a fully featured motion controller and local
+intelligence. Power to the Gold Twitter is provided by a DC power source which is isolated
+from the Mains. The Gold Twitter can operate with single or dual power supplies. If separation
+between the main DC power source and a control supply is required, then a control supply
+(isolated from the Mains) is required.
+The drive can operate as a stand-alone device or as part of a multi-axis system in a distributed
+configuration on a real-time network.
+The Gold Twitter drive is easily set up and tuned using the Elmo Application Studio (EASII)
+software tools. As part of the Gold product line, it is fully programmable with the Elmo motion
+control language. For more information about software tools refer to the Elmo Application
+Studio (EASII) User Guide.
+The Gold Twitter is available in a variety of models. There are a number of possible options;
+multiple power rating, various communications, and feedback.
+
+
+
+
+             ETHERCAT MODULE                                          CAN MODULE
+Figure 1: Difference between 3-Tier CAN and 4-Tier EtherCAT modules with/without Heatsink
+
+Within the variety of models offered, the CAN and EtherCAT versions are physically different in
+that the CAN version has three tiers, whereas the EtherCAT version has four tiers, as shown in
+Figure 1.
+Optionally, where necessary, Elmo offers two external heat sinks (Catalog number:
+G-TWIHSFINS01, and G-TWIHSFLAT01) which should be ordered separately. Refer to the
+section 7.1 Mounting the Optional Accessories Heat Sinks for details of installing the heat
+sinks.
+Table of Contents        |Warranty Information|www.elmomc.com
+           Gold Twitter Installation Guide
+                                                                                                     10
+           MAN-G-TWI (Ver. 2.011)
+
+
+
+
+Chapter 4: Technical I nform ation
+Note:        It should be noted that for all models, the Max Output current
+             is guaranteed for THeat-Sink <85°C
+
+
+
+4.1. Physical Specifications
+ Feature                                Units                          All Types
+ Weight without Heatsink                  g (oz)            EtherCAT Version: 22.2 g (0.78 oz)
+                                                              CAN Version: 18.6 g (0.66 oz)
+
+ Weight with Heatsink                     g (oz)            EtherCAT Version: 43.2 g (1.52 oz)
+                                                              CAN Version: 39.6 g (1.40 oz)
+
+ EtherCAT Version Dimension                             35 x 30 x 14.4 mm (1.38" x 1.18" x 0.57")
+ without Heatsink
+
+ CAN Version Dimension                                  35 x 30 x 11.5 mm (1.38" x 1.18" x 0.45")
+ without Heatsink
+                                        mm (in)
+ EtherCAT Version Dimension                            47 x 41.3 x 18.4 mm (1.85" x 1.63" x 0.72")
+ with Heatsink
+
+ CAN Version Dimension with                            47 x 41.3 x 15.5 mm (1.85" x 1.63" x 0.61")
+ Heatsink
+
+ Mounting method                                                       PCB mount
+
+ IP                                                                       IP00
+
+
+
+
+Table of Contents        |Physical Specifications|www.elmomc.com
+                Gold Twitter Installation Guide
+                                                                                                                    11
+                MAN-G-TWI (Ver. 2.011)
+
+
+
+
+     4.2. 60V and 100V Models Technical Data
+Feature                             Units        30/60 1/100 3/100 6/100 10/100                            15/100   25/100
+Minimum supply voltage                   VDC        8                                        10
+
+Nominal supply voltage                   VDC       48                                        85
+
+Maximum supply voltage                   VDC       55                                        95
+
+Maximum continuous                       W        1370      80           235     470              800       1125     2000
+power output
+
+Efficiency at rated power                %                                            > 99
+(at nominal conditions)
+
+Maximum output voltage                                                Up to 96% of DC bus voltage
+
+Ic, Amplitude                            A         30        1            3       6               10         15       25
+sinusoidal/DC continuous
+current
+
+Sinusoidal continuous RMS                A         21       0.7           2.1     4.2             7.1        10      17.7
+current limit (Ic)
+
+Peak current limit                       A                                         2 x Ic
+
+                                    Table 1: 60V and 100V Models Technical Data
+
+     4.3. 200V Models Technical Data
+      Feature                                                     Units         3/200        6/200         10/200
+      Minimum supply voltage                                        VDC                            20
+
+      Nominal supply voltage                                        VDC                           170
+
+      Maximum supply voltage                                        VDC                           195
+
+      Maximum continuous power output                                W           485              975       1650
+
+      Efficiency at rated power (at nominal                          %                            > 99
+      conditions)
+
+      Maximum output voltage                                                     Up to 96% of DC bus voltage
+
+      Ic, Amplitude sinusoidal/DC continuous                         A            3                6         10
+      current
+
+      Sinusoidal continuous RMS current limit (Ic)                   A           2.1              4.2        7.1
+
+      Peak current limit                                             A                            2 x Ic
+
+                                             Table 2: 200V Models Technical Data
+
+
+
+
+     Table of Contents        |60V and 100V Models Technical Data|www.elmomc.com
+                      Gold Twitter Installation Guide
+                                                                                                           12
+                      MAN-G-TWI (Ver. 2.011)
+
+
+
+
+          4.4. R Type Technical Data
+Feature               Units         R50/60         R80/80      R50/100      R70/100    R45/150   R15/200   R35/200
+Minimum supply         VDC                 8           10          10          10          12      20           20
+voltage
+
+Nominal supply         VDC                48           65          85          85         115      170          170
+voltage
+
+Maximum supply         VDC                55           75          95          95         135      195          195
+voltage
+
+Maximum                 kW               2.3           5          4.0          5.6         5       2.5          5.6
+continuous
+Electrical power
+output
+
+Efficiency at rated      %                                                    > 99
+power (at
+nominal
+conditions)
+
+Maximum output                                                     Up to 96% of DC bus voltage
+voltage
+
+Amplitude                A                50           80          50          70          45      15           35
+sinusoidal/DC
+continuous
+current
+
+Sinusoidal               A              35.3          56.5        35.3        49.5         32      10.6         24.7
+continuous RMS
+current limit (Ic)
+
+                                               Table 3: R Type Models Technical Data
+
+
+
+
+           Table of Contents        |R Type Technical Data|www.elmomc.com
+            Gold Twitter Installation Guide
+                                                                                                     13
+            MAN-G-TWI (Ver. 2.011)
+
+
+
+
+4.5. Control Supply Input Voltage (VL)
+The Control Supply input voltage (VL) must be either SELV or PELV rated.
+
+ Feature                                                  Unit            Details
+ Standard CAN
+ Input range for G-TWIXXX/YYYSZ(Blank)                    V               12 – 40
+
+ Input range for G-TWIXXX/YYYSZS or H                     V               12 – 95
+
+ 24V Control supply input power consumption               W               <2.5
+ with encoder up to 200mA@5V
+
+ ETHERCAT
+ Input range for G-TWIXXX/YYYEZ(Blank)                    V               14 – 40
+
+ Input range for G-TWIXXX/YYYEZS or H                     V               12 – 95
+
+ 24V Control supply input power consumption               W               <4
+ with encoder up to 200mA@5V
+
+
+4.6. Product Features
+ Main Feature                 Details                                               Presence / No.
+
+ STO                          5V Logic Level, Opto isolated from the Control        √
+                              section
+
+ Digital Input                5V Logic Level (Internally connected to               6
+ Option                       COMRET)
+
+ Digital Output               5V logic (Internally connected to COMRET)             2
+ Option
+                              3.3V logic (Internally connected to COMRET)           2
+
+ Analog Input                 Differential ±10V                                     1
+
+                              Single Ended                                          1
+
+ Feedback                     Standard Port A, B, & C                               √
+
+ Communication                USB (only for EtherCAT version)                       √
+ Option
+                              EtherCAT or                                           √
+
+                              CAN                                                   √
+
+                              RS232 TTL level                                       √
+
+                              Standard RS232                                        √
+
+
+
+
+Table of Contents         |Control Supply Input Voltage (VL)|www.elmomc.com
+           Gold Twitter Installation Guide
+                                                                                                      14
+           MAN-G-TWI (Ver. 2.011)
+
+
+
+
+4.7. Environmental Conditions
+You can guarantee the safe operation of the Gold Twitter by ensuring that it is installed in an
+appropriate environment. The following table describes the certified environmental conditions
+for STO of the Gold series servo drives.
+
+
+
+                    Warning: During operation the Gold Twitter becomes hot to the touch (the
+                    heatsink and wires may heat up to 92 °C). Care should be taken when
+                    handling it.
+
+
+
+                    Caution:
+                    The Gold Twitter dissipates its heat by convection or by conduction. The
+                    maximum ambient operating temperature of 50 °C (122°F) must not be
+                    exceeded.
+
+
+
+ Feature                                            Details
+ Operating ambient temperature                      0 °C to +50 °C (32 °F to +122 °F)
+
+ Storage temperature                                -40 °C to +85 °C ( -40 °F to +185 °F)
+
+ Maximum non-condensing humidity                    95%
+ according to IEC60068-2-78
+ Maximum Operating Altitude                         2,000 m (6562 feet)
+                                                    It should be noted that servo drives capable of
+                                                    higher operating altitudes are available on
+                                                    request.
+
+ Mechanical Shock                                   15g / 11ms Half Sine
+ according to IEC60068-2-27
+ Vibration                                          5 Hz ≤ f ≤ 10 Hz: ±10mm
+ according to IEC60068-2-6
+                                                    10 Hz ≤ f ≤ 57 Hz: 4G
+                                                    57 Hz ≤ f ≤ 500 Hz:5G
+
+
+
+
+Table of Contents        |Environmental Conditions|www.elmomc.com
+           Gold Twitter Installation Guide
+           MAN-G-TWI (Ver. 2.011
+
+                                                                                                  15
+Chapter 5: Standards and Certifications
+5.1. Functional Safety
+ Standard                              Item
+
+ IEC 61800-5-2:2017                    Adjustable speed electrical power drive systems – Safety
+                                       requirements – Functional
+
+ EN ISO 13849-1:2015                   Safety of machinery — Safety-related parts of control
+                                       systems.
+
+ EN 61508-1:2010                       Functional safety of electrical/electronic/
+                                       programmable electronic safety-related systems
+
+ EN 61508-2:2010                       Functional safety of electrical/electronic/
+                                       programmable electronic safety-related systems
+
+ EN 61508-3:2010                       Functional safety of electrical/electronic/
+                                       programmable electronic safety-related systems
+
+
+5.2. Electrical Safety
+ Specification                         Details
+
+ Recognized UL 61800-5-1               Adjustable speed electrical power drive systems: Safety
+                                       requirements – Electrical, thermal and energy
+
+ CSA C22.2 NO. 274-17                  Adjustable speed drives
+
+
+5.3. Electromagnetic Compatibility
+ Specification                         Details
+
+ EN 61800-3:2004/A1:2011               Adjustable speed electrical power drive systems
+                                       Part 3: EMC requirements and specific test methods
+ EN 61800-5-2: 2017                    Adjustable speed electrical power drive systems
+ Annex E
+                                       Part 5-2: Safety requirements – Functional
+
+
+
+
+Table of Contents        |Functional Safety|www.elmomc.com
+           Gold Twitter Installation Guide
+           MAN-G-TWI (Ver. 2.011)                                                                      16
+
+5.4. Environmental
+ Specification                           Details
+
+ IEC60068-2-78                           Damp heat, steady state
+
+ IEC60068-2-6                            Vibration (sinusoidal)
+
+ IEC60068-2-2                            Dry heat
+
+ IEC60068-2-27                           Shock
+
+
+5.5. Other Compliant Standards
+For other compliant standards refer to the
+MAN-G-Board Level Modules Hardware Manual section 17.7 or refer to the Elmo website:
+https://www.elmomc.com/capabilities/standards-compliance/gold-family/
+
+5.6.     CE Declaration
+Refer to the complete EC Declaration of Conformity available on the internet at:
+
+https://www.elmomc.com/wp-content/uploads/dlm_uploads/2018/05/Gold-Line-CE-Declaration-
+of-Conformity.pdf.
+
+5.7.     Dual Use
+No export license is required for the Gold Line products signified with the suffix Q in the Part
+Number.
+The operating frequency of the Gold Line products is “factory limited” to ≤ 599 Hz, and therefore
+complies with the EU Dual Use Regulation 428/2009, 3A225, and the US Dual Use regulation EAR
+ECCN# 3A225.
+This statement applies to all identical specimens and will become invalid if a change is made in the
+firmware.
+
+
+
+
+Table of Contents        |Environmental|www.elmomc.com
+           Gold Twitter Installation Guide
+           MAN-G-TWI (Ver. 2.011)                                                                    17
+
+Chapter 6: Unpack ing the Drive Com ponents
+Before you begin working with the Gold Twitter, verify that you have all of its components, as
+follows:
+•      The Gold Twitter servo drive
+•      The Elmo Application Studio (EASII) software and software manual
+The Gold Twitter is shipped in a cardboard box with Styrofoam protection.
+
+To unpack the Gold Twitter:
+1.     Carefully remove the servo drive from the box and the Styrofoam.
+2.     Check the drive to ensure that there is no visible damage to the instrument. If any damage
+       has occurred, report it immediately to the carrier that delivered your drive.
+3.     To ensure that the Gold Twitter you have unpacked is the appropriate type for your
+       requirements, locate the part number sticker on the side of the Gold Twitter. It looks like
+       this:
+
+
+
+
+4.     Verify that the Gold Twitter type is the one that you ordered, and ensure that the voltage
+       meets your specific requirements.
+       The part number at the top provides the type designation. Refer to the appropriate part
+       number in the section Catalog Number at the beginning of the installation guide.
+
+
+
+
+Table of Contents        |Dual Use|www.elmomc.com
+          Gold Twitter Installation Guide
+          MAN-G-TWI (Ver. 2.011)                                                                18
+
+Chapter 7: M ounting the Gold Tw itter
+The Gold Twitter was designed for mounting on a printed circuit board (PCB) via 1.27 mm pitch 0.40
+mm square pins, 2 mm pitch 0.51 mm square pins and 3.65 mm pitch 1.02 mm round pins. When
+integrating the Gold Twitter into a device, be sure to leave about 1 cm (0.4") outward from the
+heat-sink to enable free air convection around the drive. We recommend that the Gold Twitter be
+soldered directly to the board. If the PCB is enclosed in a metal chassis, we recommend that the
+Gold Twitter be screw-mounted to it as well to help with heat dissipation. The Gold Twitter has
+screw-mount holes on each corner of the heat-sink for this purpose – see below
+
+
+
+
+                                   Figure 2: Gold Twitter CAN Version Dimensions1
+
+
+
+
+                                   Figure 3: Gold Twitter CAN Version Dimensions2
+
+
+
+
+Table of Contents       |Dual Use|www.elmomc.com
+          Gold Twitter Installation Guide
+          MAN-G-TWI (Ver. 2.011)                                                    19
+
+
+
+
+                                   Figure 4: Gold Twitter CAN Version Dimensions3
+
+
+
+
+                             Figure 5: Gold Twitter EtherCAT Version Dimensions
+
+
+
+
+Table of Contents       |Dual Use|www.elmomc.com
+          Gold Twitter Installation Guide
+          MAN-G-TWI (Ver. 2.011)                                                               20
+
+7.1. Mounting the Optional Accessories Heat Sinks
+There are two optional heat sinks, available as accessory kits (the model G-TWIXXX/YYYZZH is
+integrated with the Flat Heatsink P/N G-TWIHSFLAT01):
+
+
+
+
+                                   Flat Heat Sink (P/N G-TWIHSFLAT01)
+
+
+
+
+                                   Fins Heat Sink (P/N G-TWIHSFINS01)
+
+
+
+
+Table of Contents       |Mounting the Optional Accessories Heat Sinks|www.elmomc.com
+           Gold Twitter Installation Guide
+          MAN-G-TWI (Ver. 2.011)                                                                  21
+
+The optional heat sink must be screwed to the lower surface of the Gold Twitter.
+To mount the accessory heatsink (Not available for the option G-TWIXXX/YYYZZH):
+1.     Mount the heat sink under the base of the Gold Twitter.
+2.     Place the Thermal foil (enclosed in the heat sink accessories kit) between the lower surface
+       of the servo drive, and the upper surface of the heat sink.
+3.     Use four M2 screws (enclosed in the heat sink accessories kit) to secure the heat sink under
+       the servo drive.
+4.     Tighten the screws to the relevant torque force applicable to an M2 stainless steel A2
+       screw.
+
+
+
+
+                 Figure 6: Mount the Heat Sink and Thermal Foil to the Gold Twitter
+
+
+
+
+Table of Contents       |Mounting the Optional Accessories Heat Sinks|www.elmomc.com
+           Gold Twitter Installation Guide
+          MAN-G-TWI (Ver. 2.011)                                                                  22
+
+7.2. Mounting Gold Twitter to an External Heatsink
+This option is only available for G-TWIXXX/YYYZZH.
+The selected heat sink must be screwed to the lower surface of the Gold Twitter.
+To mount the Gold Twitter to an external heat sink:
+1.     Mount the heat sink under the base of the Gold Twitter.
+2.     Place the Thermal foil (PN IMT-GTWIALHFLAT purchased from Elmo) between the lower
+       surface of the servo drive, and the upper surface of the heat sink.
+3.     Use four M2.5 head cup Allen screws to secure the heat sink under the servo drive.
+4.     Tighten the screws to the relevant torque force applicable to an M2.5 stainless steel A2
+       screw.
+
+
+
+
+               Figure 7: Mounting the Heat Sink and Thermal Foil to the Gold Twitter
+
+
+
+
+Table of Contents       |Mounting Gold Twitter to an External Heatsink|www.elmomc.com
+           Gold Twitter Installation Guide
+           MAN-G-TWI (Ver. 2.011)                                                                   23
+
+Chapter 8: I ntegrating the Gold Tw itter on a PCB
+The Gold Twitter is designed to be mounted on a PCB by soldering its pins directly to the PCB. Refer
+to Chapter 5 in the MAN-G-Board Level Modules Hardware Manual for further information.
+
+8.1. Power Returns (PR)
+In the Gold Twitter, the power stage and control stage are internally connected, and the negative
+node of the DC power bus is designated as PR
+The maximum realistic Power Return is achieved using a plane, which connects between the Gold
+Drive and the power source. The impedance on this plane must be as low as possible to reduce the
+impedance between the “Grounds”. This effectively reduces the levels of common mode
+differences, interferences, EMI etc.
+
+8.2. COMRET
+For details of the COMRET, refer to the section 5.4 in the MAN-G-Board Level Modules Hardware
+Manual.
+
+8.3. Earth Connection (PE)
+The PE (Earth connection) terminal is connected internally in the drive to the Gold Twitter’s chassis
+(heat-sink) which serves as an EMI common plane. Any other assembly metallic parts (such as the
+chassis) should also be connected to the PE.
+Under normal operating conditions, the PE trace carries no current. The only time these traces carry
+current is under unusual conditions (such as when the device has become a potential shock or fire
+hazard while conducting external EMI interferences directly to ground). When connected properly
+the PE trace prevents these hazards from affecting the drive.
+
+
+
+
+Table of Contents        |Power Returns (PR)|www.elmomc.com
+           Gold Twitter Installation Guide
+           MAN-G-TWI (Ver. 2.011)                                                                          24
+
+8.4.     Power Return (PR), Common Return (COMRET) and
+         Earth Connections (PE)
+Safety regulations (UL61800-5-1, IEC61800-5-1, and UL508C) require that the servo drive, as a
+“stand alone”, must withstand breakdown voltages of 2KV for the 200V models, and 1.7KV for the
+100V models, between PE to PR. However, the connections between PE to PR and the COMRET are
+essential for the safe operation of the servo drive. Therefore the following topology must be used:
+
+
+
+
+                                    Figure 8: Gold Twitter Earth Connections
+
+The connections to PE are essential, but must be done externally to the integration board.
+The COMRET should be connected to the PR in the Integration Board.
+
+
+
+
+Table of Contents        |Power Return (PR), Common Return (COMRET) and Earth Connections (PE)|www.elmomc.com
+           Gold Twitter Installation Guide
+           MAN-G-TWI (Ver. 2.011)                                                               25
+
+8.5. Logic and Control Cabling and Wiring
+
+8.5.1.       Feedback ports, VL, RS232, USB, Analog Input
+
+For short distances between the drive and control, 0.5 to 1.0 m wires can be used and shielding is
+not required. For longer distances than 1.0 m and/or high EMI environment, shielded and twisted
+wires should be used. Drain wires should be connected to Elmo COMRET.
+
+8.5.2.       Digital Inputs/Outputs, STO
+
+Wires can be always used, no need for twisting, no need for shielding.
+
+8.5.3.       EtherCAT or CAN Communication
+
+Always use CAT5e cables.
+
+8.5.4.       COMRET to PE Connection
+
+
+
+
+                                    Figure 9: COMRET Connection to the PE
+
+At least one COMRET pin (Figure 9) must be connected to the Protective Earth (PE).
+Earthing the COMRET by connecting the Earth (PE) to the drive COMRET is mandatory to insure
+reliable operation, high noise immunity and rejection of voltage common mode interferences.
+
+
+
+
+Table of Contents        |Logic and Control Cabling and Wiring|www.elmomc.com
+           Gold Twitter Installation Guide
+           MAN-G-TWI (Ver. 2.011)                                                              26
+
+8.6. Power Conductors PCB layout
+The PCB virtually divided into two zones; Power Zone, and Control & Communication Zone.
+•   Power Zone
+    This area is dedicated to Power conductors only: VP+, PR, PE, VL+, VL-, and motor leads.
+•   Control and Communication Zone
+    This area of the PCB is dedicated to Control low level signals
+
+
+
+
+                     Figure 10: Gold Twitter EtherCAT Power Conductors PCB layout
+
+
+
+
+                         Figure 11: Gold Twitter CAN Power Conductors PCB layout
+For more details, refer to the section 5.4 in the MAN-G-Board Level Modules Hardware Manual.
+
+
+
+Table of Contents        |Power Conductors PCB layout|www.elmomc.com
+           Gold Twitter Installation Guide
+           MAN-G-TWI (Ver. 2.011)                                                                        27
+
+Chapter 9: W iring
+9.1. Wiring Legend
+The following table legend describes the wiring symbols detailed in all installation guides. All the
+wiring diagrams show wiring for D-TYPE connectors.
+
+ Wiring Symbol                                Description
+
+                                              Earth connection (PE)
+
+
+                                              Protective Earth Connection
+
+
+
+                                              Common at the Controller
+
+
+                                              Shielded cable with drain wire.
+                                              The drain wire is a non-insulated wire that is in direct
+                                              contact with the braid (shielding).
+                                              Shielded cable with drain wire significantly simplifies
+                                              the wiring and earthing.
+
+
+                                              Shielded cable braid only, without drain wire.
+
+
+
+
+                                              Twisted-pair wires
+
+
+
+
+ Encoder Earthing.
+ The cable`s shield is connected to the chassis (PE) in the connector.
+ Earthing the Encoder and connecting the Earth (PE) to the drive COMRET is mandatory to insure
+ reliable operation, high noise immunity and rejection of voltage common mode interferences.
+
+
+
+
+Table of Contents        |Wiring Legend|www.elmomc.com
+          Gold Twitter Installation Guide
+          MAN-G-TWI (Ver. 2.011)                                                 28
+
+9.2. The Gold Twitter Connection Diagram
+
+
+
+
+                            Figure 12: The Gold Twitter CAN Connection Diagram
+
+
+Table of Contents       |The Gold Twitter Connection Diagram|www.elmomc.com
+          Gold Twitter Installation Guide
+          MAN-G-TWI (Ver. 2.011)                                                  29
+
+
+
+
+                        Figure 13: The Gold Twitter EtherCAT Connection Diagram
+
+
+Table of Contents       |The Gold Twitter Connection Diagram|www.elmomc.com
+          Gold Twitter Installation Guide
+          MAN-G-TWI (Ver. 2.011)                                                                        30
+
+Chapter 10: Connections
+The Gold Twitter has nine connectors.
+Port             Pins          Type                          Function
+
+FDB             2x12           1.27 mm pitch 0.40 mm sq.     Feedbacks, Digital Halls, Analog Inputs,
+                                                             Communications
+
+M3              1x1                                          Motor power output 3
+
+M2              1x1                                          Motor power output 2
+
+M1              1x1            3.65 mm pitch 1.02 mm         Motor power output 1
+
+PE              1x1            round pins                    Protective earth
+
+PR              1x1                                          Power output return
+
+VP+             1x1                                          DC Positive power input
+
+VL+             1x2            2 mm pitch 0.51 mm sq.        VL+
+
+VL-                                                          VL-
+
+MAIN            2x14           1.27 mm pitch 0.40 mm sq.     I/O, LEDs, STO,
+                                                             CAN or EtherCAT
+
+ECT1            2x4            1.27 mm pitch 0.40 mm sq.     Available only for EtherCAT Version
+
+ECT2            2x4            1.27 mm pitch 0.40 mm sq.     Available only for EtherCAT Version
+
+ECT3            1x2            1.27 mm pitch 0.40 mm sq.     Available only for EtherCAT Version
+
+3.3 V           1x2            1.27 mm pitch 0.40 mm sq.     Available only for EtherCAT Version
+                                                             Only for LEDS end Transformer
+
+
+
+
+Table of Contents       |The Gold Twitter Connection Diagram|www.elmomc.com
+          Gold Twitter Installation Guide
+          MAN-G-TWI (Ver. 2.011)                                              31
+
+Connectors Location
+
+
+
+
+                                            EtherCAT Version
+
+
+
+
+                                               CAN Version
+
+
+
+
+Table of Contents       |The Gold Twitter Connection Diagram|www.elmomc.com
+          Gold Twitter Installation Guide
+          MAN-G-TWI (Ver. 2.011)                                              32
+
+
+
+
+                                         Table 4: Connector Types
+
+
+
+
+Table of Contents       |The Gold Twitter Connection Diagram|www.elmomc.com
+          Gold Twitter Installation Guide
+          MAN-G-TWI (Ver. 2.011)                                                             33
+
+10.1. Motor Power
+This section describes the Motor Power.
+For full details see Section 7.3 in the manual: MAN-G-Board Level Modules Hardware manual.
+
+ Pin       Function                Cable                      Pin Positions
+                                   Brushless    Brushed DC
+                                   Motor        Motor
+    PE     Connection              Motor        Motor
+           earth
+
+   M1      Motor phase             Motor        N/C
+
+   M2      Motor phase             Motor        Motor
+
+   M3      Motor phase             Motor        Motor
+
+
+
+
+                                        Table 5: Motor Connector
+
+
+
+
+                           Figure 14: Brushless Motor Power Connection Diagram
+
+
+
+
+                            Figure 15: Brushed Motor Power Connection Diagram
+
+
+
+
+Table of Contents       |Motor Power|www.elmomc.com
+          Gold Twitter Installation Guide
+          MAN-G-TWI (Ver. 2.011)                                                                      34
+
+10.1.1.     Motor Power Connections
+
+1.     Ensure that the motor chassis is properly earthed.
+2.     Connect the appropriate wire from the Motor Power cables to the M1, M2, M3, and PE
+       terminals on the Gold Twitter.
+       Make sure not to bundle the wires.
+       The phase connection is arbitrary as Elmo Application Studio (EAS II) will establish the
+       proper commutation automatically during setup. When tuning a number of drives, you can
+       copy the setup file to the other drives and thus avoid tuning each drive separately. In this
+       case the motor-phase order must be the same as on the first drive.
+3.     For high EMI environment, it is highly recommended to use a 4-wire shielded (not twisted)
+       cable for the motor connection. The gauge is determined by the actual RMS current
+       consumption of the motor.
+       Connect the cable shield to the closest ground connection at the motor end.
+       For better EMI performance, the shield should be connected to Earth Connection (heat sink
+       mounting holes).
+
+
+
+
+Table of Contents       |Motor Power|www.elmomc.com
+              Gold Twitter Installation Guide
+              MAN-G-TWI (Ver. 2.011)                                                               35
+
+10.2. Main Power and Control Connector
+This section describes the Main Power and the Control supply connector.
+
+10.2.1.         Main Power
+
+The VDC isolated from the Mains DC power source is not included with the Gold Twitter.
+
+ Pin            Function                      Cable               Pin Positions
+     VP+        DC Pos. Power input           Power
+
+     PR         Power output return           Power
+
+     PE         Protective earth              Power
+
+
+
+
+                                       Table 6: Connector for Main Power
+
+Connect the DC power cable to the VP+ and PR terminals on the main power connector.
+To connect the Gold Twitter to the DC power source:
+1.         The source of the VDC power supply must be isolated from the Mains.
+2.         Verify that the rectified VDC is indeed within the range of the drive.
+3.         Connect the VP+ and PR wires to the terminals on the servo-drive.
+           It is highly recommended to twist the two DC main power cables at intervals of 10 cm.
+4.         Connect the PE to the closest earth connection near the power supply.
+5.         Connect the PR to the closest earth connection near the power supply.
+6.         Before applying power, first verify the polarity of the connection.
+
+
+
+
+Table of Contents           |Main Power and Control Connector|www.elmomc.com
+            Gold Twitter Installation Guide
+            MAN-G-TWI (Ver. 2.011)                                                                  36
+
+10.2.2.       Control Supply
+
+Connect the VL+ and VL- pins on the Gold Twitter in the manner described in the table and drawing
+below.
+
+ Pin        Signal         Function                      Pin Positions
+     1      VL+            Control Supply Input
+
+     2      VL-            Control Supply Return
+
+ 1. Standard CAN (G-TWIXXX/YYYSZ(Blank))
+       Input range: 12 – 40VDC
+       Power consumption: <2.5W
+       (including up to 200mA@5V for encoder)
+ 2. EtherCAT (G-TWIXXX/YYYEZ(Blank))
+       Input range: 14 – 40VDC
+       Power consumption: <4W
+       (including up to 200mA@5V for encoder)
+ 3. Standard CAN (G-TWIXXX/YYYSZS or H)
+       Input range: 12 – 95VDC
+       Power consumption: <2.5W
+       (including up to 200mA@5V for encoder)
+ 4. EtherCAT (G-TWIXXX/YYYEZS or H)
+       Input range: 12 – 95VDC
+       Power consumption: <4W
+       (including up to 200mA@5V for encoder)
+
+                                         Table 7: Control Supply Pins
+
+Connect the VL+ and VL- terminals to the power supply Control Connector.
+To connect the VL+ and VL- to the control supply:
+1.       The source of the control supply must be isolated from the Mains.
+2.       Connect the return (common) of the control supply source to the closest earth connection
+         near the control supply source.
+3.       Connect the VL+ and VL- wires to the terminals on the servo-drive.
+         For short distances between the drive and control, 0.5 to 1.0 m wires can be used and
+         shielding is not required. For longer distances than 1.0 m and/or high EMI environment,
+         shielded and twisted wires should be used. Drain wires should be connected to Elmo COMRET.
+4.       Before applying power, first verify the polarity of the connection.
+
+Note: For VL 12 to 40VDC (G-TWIXXX/YYYZZ(Blank)) refer to section 10.2.3.
+
+         For VL 12 to 95VDC (G-TWIXXX/YYYZZS or H) refer to section 10.2.4.
+
+
+
+Table of Contents         |Main Power and Control Connector|www.elmomc.com
+             Gold Twitter Installation Guide
+             MAN-G-TWI (Ver. 2.011)                                                                  37
+
+10.2.3.        Control Supply Connections for G-TWIXXX/YYYZZ(Blank)
+
+Note: This section is for VL 12 to 40VDC (G-TWIXXX/YYYZZ(Blank)).
+
+        For VL 12 to 95VDC (G-TWIXXX/YYYZZS or H) refer to section 10.2.4.
+
+10.2.3.1.      Dual Power Supply Topology
+Two DC power sources isolated-from-the-mains are required:
+•     A main DC power source derived from the Mains, according to specification
+•     A control supply for the logic
+
+10.2.3.1.1     Ordinary Option
+This option describes an Ordinary power supply for Servo drives with sufficient internal capacitance
+and shunt regulator to handle power flow in both directions to-and-from the motor. The following
+figure describes this connection of main power and control power.
+
+Note: The PR and the VL- are connected internally in the Gold Twitter.
+
+
+
+
+       Figure 16: Ordinary Option: Separate VP and VL Power Supplies Connection Diagram
+
+The (+) of the control power supply is connected to the VL+ terminal, while the (-) of the control
+power supply is connected directly to the (-) of the DC bus power supply. This connection avoids
+high current ground loops due to poor wiring (Figure 16).
+
+
+
+
+Table of Contents          |Main Power and Control Connector|www.elmomc.com
+             Gold Twitter Installation Guide
+             MAN-G-TWI (Ver. 2.011)                                                                  38
+
+10.2.3.1.2     SMPS Option
+This option describes a topology with a main power without regeneration, but with limited Braking
+capabilities dependent on additional capacitance.
+The Cexternal can be mounted on the Integration Board if there are no space limitations.
+Minimum capacitance of the Power supply: Cexternal > “Drive’s Rated Current” *20uF
+
+
+
+
+        Figure 17: SMPS Option: Separate VP and VL Power Supplies Connection Diagram
+
+The (+) of the control power supply is connected to the VL+ terminal, while the (-) of the control
+power supply is connected directly to the (-) of the DC bus power supply. This connection avoids
+high current ground loops due to poor wiring (Figure 17).
+
+
+
+
+Table of Contents          |Main Power and Control Connector|www.elmomc.com
+                 Gold Twitter Installation Guide
+                 MAN-G-TWI (Ver. 2.011)                                                               39
+
+    10.2.3.2.      Single Power Supply Topology (VP+ < 40VDC)
+    A single power supply can be used to power both the main and control. For the CAN version power
+    rating of minimum 12 to 40VDC, or minimum 14 to 40VDC for the EtherCAT version.
+    When regeneration or braking occurs, the DC bus may increase and may exceed the VL limit of
+    over 40VDC, possibly causing the VL to fail. Under these conditions, you must install the Dual
+    Power Supply described above in section 10.2.3.1.
+
+    10.2.3.2.1     Recommended Option
+    This option describes an Ordinary power supply for Servo drives with sufficient internal capacitance
+    and shunt regulator to handle power flow in both directions to-and-from the motor. In this
+    configuration the Gold Twitter max operating voltage depends on the model, and is 55VDC, 75VDC,
+    or 95VDC. However the DC bus must be limited to VP+ <40VDC to prevent failure of the VL supply.
+    The following figure describes this connection of main power and control.
+
+
+
+
+Figure 18: Recommended Single Power Supply (VP+<40V) Connection Diagram with VL+ Connected Internally
+
+    Note: This option is available for power supply up to 40VDC.
+
+    For applications where the recommended single power supply is used, the following conditions
+    must apply:
+    •     The “Shunt On” trip voltage in the power supply must be <40VDC
+    •     If there is no shunt in the Power Supply the Over Voltage must be programmed using the
+          drive software command XP[1]=38 (over-voltage set to 38V)
+    •     Minimum capacitance of the Power supply: CPower_Supply > Drive’s Rated Current *20uF
+    •     The VL- to PR is connected on the Integration Board (no external wiring)
+    •     The VL- to PR connection must be as thick as possible, actually a Ground Plane is most
+          preferable
+
+
+
+    Table of Contents          |Main Power and Control Connector|www.elmomc.com
+             Gold Twitter Installation Guide
+             MAN-G-TWI (Ver. 2.011)                                                              40
+
+10.2.3.2.2     SMPS Option
+This option describes a main power and control topology without regeneration, but with limited
+Braking capabilities dependent on additional capacitance.
+The Cexternal can be mounted on the Integration Board if there are no space limitations.
+In this configuration the Gold Twitter max operating voltage depends on the model, and is 55VDC,
+75VDC, or 95VDC. However the DC bus must be limited to VP+ <40VDC to prevent failure of the VL
+supply.
+
+
+
+
+Figure 19: SMPS Single Power Supply (VP+<40V) Connection Diagram with VL+ Connected Internally
+
+Note: This option is available for power supply up to 40VDC.
+
+For applications where a SMPS single power supply is used, the following conditions must apply:
+•     External capacitance must be added on the DC bus
+•     The Over Voltage of the Gold Twitter must be programmed using the drive software
+      command XP[1]=38 (over-voltage set to 38V)
+•     The Minimum capacitance of the Power supply: Cexternal > “Drive’s Rated Current” *20uF
+•     The VL- to PR is connected on the Integration Board (no external wiring)
+•     The VL- to PR connection must be as thick as possible, actually a “Ground Plane” is most
+      preferable
+
+
+
+Table of Contents          |Main Power and Control Connector|www.elmomc.com
+             Gold Twitter Installation Guide
+             MAN-G-TWI (Ver. 2.011)                                                              41
+
+10.2.3.2.3     Forbidden Option
+Do NOT use the following wiring topology. Only connect the VL- to PR internally on the Integration
+Board.
+
+
+
+
+ Figure 20: Forbidden Single Power Supply (<40V) Connection Diagram with VL+ Cable Connected
+                                           Externally
+
+
+
+
+Table of Contents          |Main Power and Control Connector|www.elmomc.com
+             Gold Twitter Installation Guide
+             MAN-G-TWI (Ver. 2.011)                                                                  42
+
+10.2.4.        Control Supply Connections for G-TWIXXX/YYYZZS or H
+
+Note: This section is for VL 12 to 95VDC (G-TWIXXX/YYYZZS or H).
+
+        For VL 12 to 40VDC (G-TWIXXX/YYYZZ(Blank)) refer to section 10.2.3.
+
+10.2.4.1.      Dual Power Supply Topology
+Two DC power sources isolated-from-the-mains are required:
+•     A main DC power source derived from the Mains, according to specification
+•     A control supply for the logic
+
+10.2.4.1.1     Ordinary Option
+This option describes an ordinary power supply for Servo drives with sufficient internal capacitance
+and shunt regulator to handle power flow in both directions to-and-from the motor. The following
+figure describes this connection of main power and control power.
+
+Note: The PR and the VL- are connected internally in the Gold Twitter.
+
+
+
+
+       Figure 21: Ordinary Option: Separate VP and VL Power Supplies Connection Diagram
+
+The (+) of the control power supply is connected to the VL+ terminal, while the (-) of the control
+power supply is connected directly to the (-) of the DC bus power supply. This connection avoids
+high current ground loops due to poor wiring (Figure 21).
+
+
+
+
+Table of Contents          |Main Power and Control Connector|www.elmomc.com
+             Gold Twitter Installation Guide
+             MAN-G-TWI (Ver. 2.011)                                                                  43
+
+10.2.4.1.2     SMPS Option
+This option describes a topology with a main power without regeneration, but with limited Braking
+capabilities dependent on additional capacitance.
+The Cexternal can be mounted on the Integration Board if there are no space limitations.
+Minimum capacitance of the Power supply: Cexternal > “Drive’s Rated Current” *20uF
+
+
+
+
+        Figure 22: SMPS Option: Separate VP and VL Power Supplies Connection Diagram
+
+The (+) of the control power supply is connected to the VL+ terminal, while the (-) of the control
+power supply is connected directly to the (-) of the DC bus power supply. This connection avoids
+high current ground loops due to poor wiring (Figure 22).
+
+
+
+
+Table of Contents          |Main Power and Control Connector|www.elmomc.com
+             Gold Twitter Installation Guide
+             MAN-G-TWI (Ver. 2.011)                                                               44
+
+10.2.4.2.      Single Power Supply Topology (VP+ < 95VDC)
+A single power supply can be used to power both the main and control within the
+range of 12 to 95VDC.
+
+10.2.4.2.1     Recommended Option
+This option describes an ordinary power supply for Servo drives with sufficient internal capacitance
+and shunt regulator to handle power flow in both directions to-and-from the motor. In the
+configuration of the 200V Gold Twitter model, the max operating voltage is 195VDC, but the DC bus
+must be limited to VP+ <95VDC to prevent failure of the VL supply.
+The following figure describes a single connection of main power and control.
+
+
+
+
+             Figure 23: Recommended Single Power Supply (VP+<95V) Connection Diagram
+                                       with VL+ Connected Internally
+
+Note: This option is available for power supply up to 95VDC.
+
+For applications where the recommended single power supply is used, the following conditions
+must apply:
+•     Minimum capacitance of the Power supply: CPower_Supply > Drive’s Rated Current *20uF
+•     The VL- to PR is connected on the Integration Board (no external wiring)
+•     The VL- to PR connection must be as thick as possible, actually a Ground Plane is most
+      preferable
+
+
+
+
+Table of Contents          |Main Power and Control Connector|www.elmomc.com
+             Gold Twitter Installation Guide
+             MAN-G-TWI (Ver. 2.011)                                                              45
+
+10.2.4.2.2     SMPS Option
+This option describes a main power and control topology without regeneration, but with limited
+Braking capabilities dependent on additional capacitance.
+The Cexternal can be mounted on the Integration Board if there are no space limitations.
+In the configuration of the 200V Gold Twitter model, the max operating voltage is 195VDC, but the
+DC bus must be limited to VP+ <95VDC to prevent failure of the VL supply.
+
+
+
+
+Figure 24: SMPS Single Power Supply (VP+<95V) Connection Diagram with VL+ Connected Internally
+
+Note: This option is available for power supply up to 95VDC.
+
+For applications where a SMPS single power supply is used, the following conditions must apply:
+•     External capacitance must be added on the DC bus
+•     The Minimum capacitance of the Power supply: Cexternal > “Drive’s Rated Current” *20uF
+•     The VL- to PR is connected on the Integration Board (no external wiring)
+•     The VL- to PR connection must be as thick as possible, actually a “Ground Plane” is most
+      preferable
+
+
+
+
+Table of Contents          |Main Power and Control Connector|www.elmomc.com
+             Gold Twitter Installation Guide
+             MAN-G-TWI (Ver. 2.011)                                                              46
+
+10.2.4.2.3     Forbidden Option
+Do NOT use the following wiring topology. Only connect the VL- to PR internally on the Integration
+Board.
+
+
+
+
+ Figure 25: Forbidden Single Power Supply (<95V) Connection Diagram with VL+ Cable Connected
+                                           Externally
+
+
+
+
+Table of Contents          |Main Power and Control Connector|www.elmomc.com
+          Gold Twitter Installation Guide
+          MAN-G-TWI (Ver. 2.011)                                                                47
+
+10.3. Feedback Connector FDB
+
+
+
+
+     FDB Connector in the CAN option                     FDB Connector in the EtherCAT option
+
+Feedback A/B/C, Digital Halls – see Section 9.2 in the manual: MAN-G-Board Level Modules
+Hardware Manual.
+
+ Pin        Signal                                Function
+ FDB
+     1      PortA_ENC_A+ /ABS_CLK+                Port A- channel A/ Absolute encoder clock+
+
+     2      PortB_ENC_A-/SIN-                     Port B - channel A complement
+
+     3      PortA_ENC_A-/ABS_CLK-                 Port A- channel A complement / Absolute
+                                                  encoder clock-
+
+     4      PortB_ENC_A+/SIN+                     Port B - channel A
+
+     5      PortA_ENC_B+/ABS_DATA+                Port A - channel B/ Absolute encoder Data+
+
+     6      PortB_ENC_B-/COS-                     Port B - channel B complement
+
+     7      PortA_ENC_B-/ABS_DATA-                Port A - channel B complement / Absolute
+                                                  encoder Data-
+
+     8      PortB_ENC_B+/COS+                     Port B - channel B
+
+     9      PortA_ENC_INDEX+                      Port A – index
+
+    10      PortB_ENC_INDEX-/ANALOG_I-            Port B – index complement
+
+            RESOLVER_OUT-                         Vref complement
+
+    11      PortA_ENC_INDEX-                      Port A - index complement
+
+    12      PortB_ENC_INDEX+/ANALOG_I+ Port B – index
+
+Table of Contents       |Feedback Connector FDB|www.elmomc.com
+          Gold Twitter Installation Guide
+          MAN-G-TWI (Ver. 2.011)                                                                48
+
+ Pin        Signal                                Function
+ FDB
+            RESOLVER_OUT+                         Vref
+
+    13      HA                                    Hall sensor A input
+
+    14      PortC_ENCO_A-                         Port C- channel A complement output
+
+    15      HB                                    Hall sensor B input
+
+    16      PortC_ENCO_A+                         Port C- channel A output
+
+    17      HC                                    Hall sensor C input
+
+    18      PortC_ENCO_B-                         Port C - channel B complement output
+
+    19      +5VE                                  Encoder +5 V supply @ Limit 200 mA
+
+    20      PortC_ENCO_B+                         Port C - channel B output
+
+    21      COMRET                                Common return
+
+    22      PortC_ENCO_INDEX-                     Port C - index complement output
+
+    23      COMRET                                Common return
+
+    24      PortC_ENCO_INDEX+                     Port C - index output
+
+                                   Table 8: Connector FDB – Feedback
+
+For short distances between the drive and control, 0.5 to 1.0 m wires can be used and shielding is
+not required. For longer distances than 1.0 m and/or high EMI environment, shielded and twisted
+wires should be used. Drain wires should be connected to Elmo COMRET.
+
+
+
+
+Table of Contents       |Feedback Connector FDB|www.elmomc.com
+            Gold Twitter Installation Guide
+            MAN-G-TWI (Ver. 2.011)                                                               49
+
+10.3.1.       Port A
+
+Refer to section 10.3 in the MAN-G-Board Level Modules Hardware Manual for further details of
+the Port A connections.
+
+10.3.1.1.     Incremental Encoder
+
+
+
+
+        Figure 26: Port A Incremental Encoder Input – Recommended Connection Diagram
+
+For short distances between the drive and control, 0.5 to 1.0 m wires can be used, and shielding is
+not required. For longer distances than 1.0 m and/or high EMI environment, shielded and twisted
+wires should be used. Drain wires should be connected to Elmo COMRET.
+
+
+
+
+Table of Contents         |Feedback Connector FDB|www.elmomc.com
+            Gold Twitter Installation Guide
+            MAN-G-TWI (Ver. 2.011)                                                               50
+
+10.3.1.2.     Absolute Serial Encoder
+
+
+
+
+ Figure 27: Absolute Serial Encoder – Recommended Connection Diagram for Sensors Supporting
+                             Data/Clock (e.g., Biss / SSI / EnDAT, etc.)
+
+For short distances between the drive and control, 0.5 to 1.0 m wires can be used, and shielding is
+not required. For longer distances than 1.0 m and/or high EMI environment, shielded and twisted
+wires should be used. Drain wires should be connected to Elmo COMRET.
+
+
+
+
+Table of Contents         |Feedback Connector FDB|www.elmomc.com
+           Gold Twitter Installation Guide
+          MAN-G-TWI (Ver. 2.011)                                                                 51
+
+
+
+
+ Figure 28: Absolute Serial Encoder – Recommended Connection Diagram for Sensors Supporting
+                   Data Line Only (NRZ types, e.g., Panasonic / Mitutoyo / etc.)
+
+For short distances between the drive and control, 0.5 to 1.0 m wires can be used, and shielding is
+not required. For longer distances than 1.0 m and/or high EMI environment, shielded and twisted
+wires should be used. Drain wires should be connected to Elmo COMRET.
+
+
+
+
+Table of Contents       |Feedback Connector FDB|www.elmomc.com
+            Gold Twitter Installation Guide
+            MAN-G-TWI (Ver. 2.011)                                                               52
+
+10.3.1.3.     Hall Sensors
+
+
+
+
+                                     Figure 29: Hall Sensors Connection Diagram
+
+For short distances between the drive and control, 0.5 to 1.0 m wires can be used, and shielding is
+not required. For longer distances than 1.0 m and/or high EMI environment, shielded and twisted
+wires should be used. Drain wires should be connected to Elmo COMRET.
+
+
+
+
+Table of Contents         |Feedback Connector FDB|www.elmomc.com
+            Gold Twitter Installation Guide
+            MAN-G-TWI (Ver. 2.011)                                                               53
+
+10.3.2.       Port B
+
+Refer to section 10.4 in the MAN-G-Board Level Modules Hardware Manual for further details of
+the Port B connections.
+
+10.3.2.1.     Incremental Encoder
+
+
+
+
+        Figure 30: Port B Incremental Encoder Input – Recommended Connection Diagram
+
+For short distances between the drive and control, 0.5 to 1.0 m wires can be used, and shielding is
+not required. For longer distances than 1.0 m and/or high EMI environment, shielded and twisted
+wires should be used. Drain wires should be connected to Elmo COMRET.
+
+
+
+
+Table of Contents         |Feedback Connector FDB|www.elmomc.com
+            Gold Twitter Installation Guide
+            MAN-G-TWI (Ver. 2.011)                                                               54
+
+10.3.2.2.     Interpolated Analog Encoder
+
+
+
+
+                  Figure 31: Port B - Interpolated Analog Encoder Connection Diagram
+
+For short distances between the drive and control, 0.5 to 1.0 m wires can be used, and shielding is
+not required. For longer distances than 1.0 m and/or high EMI environment, shielded and twisted
+wires should be used. Drain wires should be connected to Elmo COMRET.
+
+
+
+
+Table of Contents         |Feedback Connector FDB|www.elmomc.com
+            Gold Twitter Installation Guide
+            MAN-G-TWI (Ver. 2.011)                                                               55
+
+10.3.2.3.     Resolver
+
+
+
+
+                                     Figure 32: Port B – Resolver Connection Diagram
+
+For short distances between the drive and control, 0.5 to 1.0 m wires can be used, and shielding is
+not required. For longer distances than 1.0 m and/or high EMI environment, shielded and twisted
+wires should be used. Drain wires should be connected to Elmo COMRET.
+
+
+
+
+Table of Contents         |Feedback Connector FDB|www.elmomc.com
+           Gold Twitter Installation Guide
+          MAN-G-TWI (Ver. 2.011)                                                                 56
+
+10.3.3.     Port C – Emulated Encoder Output (FDB)
+
+See Section 10.5 in the manual: MAN-G-Board Level Modules Hardware Manual for further details
+of Port C.
+
+
+
+
+     Figure 33: Emulated Encoder Differential Output – Recommended Connection Diagram
+
+For short distances between the drive and control, 0.5 to 1.0 m wires can be used, and shielding is
+not required. For longer distances than 1.0 m and/or high EMI environment, shielded and twisted
+wires should be used. Drain wires should be connected to Elmo COMRET.
+
+
+
+
+Table of Contents       |Feedback Connector FDB|www.elmomc.com
+           Gold Twitter Installation Guide
+           MAN-G-TWI (Ver. 2.011)                                                                       57
+
+10.4. Main Connector (MAIN)
+
+
+
+
+      FDB Connector in the CAN option                      FDB Connector in the EtherCAT option
+
+
+
+
+ Pin (MAIN)          Signal                         Function
+       1             CAN Version: CANH              CAN Version: CAN_H BUS Line (dominant high)
+
+
+                     ECAT Version: LED_ET_ERR       ECT Version: EtherCAT status LED Error
+
+
+       2             CAN Version: CANL              CAN Version: CAN_L BUS Line (dominant low)
+
+                     ECAT Version: LED_ET_RUN       ECT Version: EtherCAT status LED Run
+
+       3             RS232_TX_S                     Standard RS232 transmit
+
+       4             RS232_RX_S                     Standard RS232 receive
+
+       5             RS232_TX /SB_IN                There are two options for this pin:
+                                                    Option 1:       TTL RS232 transmit (Default)
+                                                    Option 2:       Serial Bus IN for extended I/O
+                                                                    (refer to MAN-G-Board Level
+                                                                    Modules Hardware manual)
+                                                                    This option is only available for
+                                                                    EtherCAT
+
+
+
+
+Table of Contents        |Main Connector (MAIN)|www.elmomc.com
+           Gold Twitter Installation Guide
+           MAN-G-TWI (Ver. 2.011)                                                                       58
+
+ Pin (MAIN)          Signal                         Function
+       6             RS232_RX /SB_OUT               There are two options for this pin:
+                                                    Option 1:        TTL RS232 receive (default)
+                                                    Option 2:        Serial Bus output for extended I/O
+                                                                     (refer to MAN-G-Board Level
+                                                                     Modules Hardware manual)
+                                                                     This option is only available for
+                                                                     EtherCAT
+
+       7             COMRET                         Common return
+
+       8             COMRET                         Common return
+
+       9             ANALOG1+                       Analog input 1             There is no ANARET
+                                                                               (analog return) pin.
+      10             ANALOG1-                       Analog input 1
+                                                                               Instead, the COMRET pin
+                                                    complement
+                                                                               used.
+      11             ANALOG_IN2                     Analog input 2
+
+      12             STO1                           STO 1 input, opto isolated from control (COMRET)
+
+      13             STO_RET                        STO signal return.
+                                                    The two digital STO inputs are optically isolated
+                                                    from the other parts of the drive and share one
+                                                    return line.
+
+      14             STO2                           STO 2 input
+
+      15             LED1                           Bi-color indication output 1 (Cathode) Internal
+                                                    Resistor 1K Ω
+
+      16             LED2                           Bi-color indication output 2 (Cathode) Internal
+                                                    Resistor 1K Ω
+
+      17             OUT4                           Programmable output 4 (connected to COMRET)
+                                                    (3.3V logic level)
+
+      18             OUT2                           Programmable output 2 (connected to COMRET)
+                                                    (5V logic level)
+
+      19             OUT3                           Programmable output 3 (connected to COMRET)
+                                                    (3.3V logic level)
+
+      20             OUT1                           Programmable output 1 (connected to COMRET)
+                                                    (5V logic level)
+
+      21             COMRET                         Common return
+
+      22             COMRET                         Common return
+
+      23             IN6                            Programmable digital input 6 (connected to
+                                                    COMRET) (5V logic level)
+
+
+
+Table of Contents        |Main Connector (MAIN)|www.elmomc.com
+            Gold Twitter Installation Guide
+            MAN-G-TWI (Ver. 2.011)                                                                  59
+
+ Pin (MAIN)           Signal                           Function
+       24             IN5                              Programmable digital input 5 (connected to
+                                                       COMRET) (5V logic level)
+
+       25             IN4                              Programmable digital input (connected to
+                                                       COMRET)
+                                                       (5V logic level)
+
+       26             IN3                              Programmable digital input 3 (connected to
+                                                       COMRET) (5V logic level)
+
+       27             IN2                              Programmable digital input 2 (connected to
+                                                       COMRET) (5V logic level)
+
+       28             IN1                              Programmable digital input 1 (connected to
+                                                       COMRET) (5V logic level)
+
+                                 Table 9: Connector MAIN – I/O, STO, Analog, LEDs
+
+LEDs
+For full details on the LEDs, see Chapter 7, and section 12.2.1 in the in the MAN-G-Board Level
+Modules Hardware manual for full details.
+STO (safety)
+For full details on STO, see Chapter 9 in the in the MAN-G-Board Level Modules Hardware manual
+for full details.
+For RS232, and Analog Input Wires
+For short distances between the drive and control, 0.5 to 1.0 m wires can be used, and shielding is
+not required. For longer distances than 1.0 m and/or high EMI environment, shielded and twisted
+wires should be used. Drain wires should be connected to Elmo COMRET.
+For Digital Inputs/Outputs, STO
+Wires can be always used, no need for twisting, no need for shielding.
+For CAN Communication
+Always use CAT5e cables.
+
+
+
+
+Table of Contents         |Main Connector (MAIN)|www.elmomc.com
+            Gold Twitter Installation Guide
+            MAN-G-TWI (Ver. 2.011)                                                                          60
+
+10.4.1.       Digital Inputs
+
+The following table describes the electrical specification of the inputs IN1 and IN6:
+
+  Feature                                     Details
+  Input Voltage (VIN)                         0 to 6V
+
+  Vih min                                     2.2V
+
+  Vil max                                     0.6V
+
+  R1 Pull-up Resistor                         If VT = 3.3V, R1<3.3KΩ
+                                              If VT = 5V, R1<10KΩ
+
+  Minimum pulse width                         > 250 µsec
+
+  Execution time (all inputs):                0 < T < 250 µsec
+  the time from application of voltage
+  on input until execution is complete
+  High-speed inputs – 1–6 minimum             T = 5 µsec if the input functionality is set to
+  pulse width, in high-speed mode             latch/capture (index/strobe).
+                                              Note: Home mode is high-speed mode and can be
+                                              used for fast capture and precise homing.
+  Capture with differential input             T > 0.1 µsec if the differential input functionality is set
+  Port A, Port B Index                        to touch probe/capture (index/strobe).
+
+
+
+
+Table of Contents         |Main Connector (MAIN)|www.elmomc.com
+          Gold Twitter Installation Guide
+          MAN-G-TWI (Ver. 2.011)                                                     61
+
+
+
+
+                   Figure 34: Digital Input 5V Logic level Mode Connection Diagram
+
+
+
+
+Table of Contents       |Main Connector (MAIN)|www.elmomc.com
+              Gold Twitter Installation Guide
+              MAN-G-TWI (Ver. 2.011)                                                                     62
+
+10.4.2.         Digital Outputs
+
+There are two types of Digital outputs:
+•       Out1 and Out2 5V Logic
+•       Out3 and Out4 3.3V Logic
+The following table describes the electrical specification of the outputs OUT1 and OUT2:
+
+    Feature                                    Details
+    Type of output                             5V Logic
+
+    Output Configuration
+
+
+
+
+    VOL max of TTL Buffer (low level)          Vout (Low) ≤ 0.44V @ 8mA
+
+    VOH min of TTL Buffer (High level)         Vout (High) >4.4V @ 8mA
+
+    Output current                                                                  5𝑉𝑉
+                                                          𝐼𝐼𝑜𝑜𝑜𝑜𝑜𝑜(max) =
+                                                                            500𝛺𝛺 + 𝑅𝑅𝐿𝐿 (external)
+                                               Where:
+                                                          𝑉𝑉𝑅𝑅𝐿𝐿 (𝐻𝐻𝐻𝐻𝐻𝐻ℎ) = 5𝑉𝑉 − 500 ∗ 𝐼𝐼𝑜𝑜𝑜𝑜𝑜𝑜(max)
+
+    Example of connection to the
+    opto-couplers
+
+
+
+
+                                               Where:
+                                                                            5𝑉𝑉 − 2.0𝑉𝑉
+                                                          𝐼𝐼𝑜𝑜𝑜𝑜𝑜𝑜(max) =               = 6.0𝑚𝑚𝑚𝑚
+                                                                              500𝛺𝛺
+    Ton (time from low to high)                <1µsec
+
+    Toff (time from high to low)               <1µsec
+
+    Executable time                            0 < T < 250 µsec
+
+
+
+
+Table of Contents           |Main Connector (MAIN)|www.elmomc.com
+           Gold Twitter Installation Guide
+           MAN-G-TWI (Ver. 2.011)                                                                       63
+
+The following table describes the electrical specification of the outputs OUT3 and OUT4.
+
+ Feature                                     Details
+ Type of output                              3.3V Logic
+
+ Output Configuration
+
+
+
+
+ VOL max of TTL buffer (low level)           Vout (On) ≤ 0.4V @ 8mA
+
+ VOH min of TTL buffer (High level)          Vout (High) >2.9V @ 8mA
+
+ Output current                                                                  3.3𝑉𝑉
+                                                        𝐼𝐼𝑜𝑜𝑜𝑜𝑜𝑜(max) =
+                                                                          220𝛺𝛺 + 𝑅𝑅𝐿𝐿 (external)
+                                             Where:
+                                                       𝑉𝑉𝑅𝑅𝐿𝐿 (𝐻𝐻𝐻𝐻𝐻𝐻ℎ) = 3.3𝑉𝑉 − 220 ∗ 𝐼𝐼𝑜𝑜𝑢𝑢𝑡𝑡(max)
+ Example of connection to the
+ opto-couplers
+
+
+
+
+                                             Where:
+                                                                        3.3𝑉𝑉 − 2.0𝑉𝑉
+                                                      𝐼𝐼𝑜𝑜𝑜𝑜𝑜𝑜(max) =                 = 4.8 𝑚𝑚𝑚𝑚
+                                                                        220𝛺𝛺 + 50𝛺𝛺
+ Ton (time from low to high)                 <1usec
+
+ Toff (time from high to low)                <1usec
+
+ Executable time                             0 < T < 250 µsec
+
+
+
+
+Table of Contents        |Main Connector (MAIN)|www.elmomc.com
+          Gold Twitter Installation Guide
+          MAN-G-TWI (Ver. 2.011)                                                   64
+
+
+
+
+                      Figure 35: Digital Output 5V Logic Mode Connection Diagram
+
+
+
+
+                    Figure 36: Digital Output 3.3V Logic Mode Connection Diagram
+
+
+
+
+Table of Contents       |Main Connector (MAIN)|www.elmomc.com
+          Gold Twitter Installation Guide
+          MAN-G-TWI (Ver. 2.011)                                                           65
+
+10.4.3.     STO (Safe Torque Off)
+
+For full details on STO, see Chapter 9 in the MAN-G-Board Level Modules Hardware manual.
+
+
+
+
+                                   Figure 37: STO Input Connection – 5V Logic Level
+
+
+
+
+                               Figure 38: STO Input Connection – PLC (24V Logic)
+
+
+
+
+Table of Contents       |Main Connector (MAIN)|www.elmomc.com
+           Gold Twitter Installation Guide
+          MAN-G-TWI (Ver. 2.011)                                                                 66
+
+10.4.4.     Analog Input
+
+For full details on Analog Inputs, see section 11.3 in the MAN-G-Board Level Modules Hardware
+manual.
+
+
+
+
+                                         Figure 39: Analog Input
+
+For short distances between the drive and control, 0.5 to 1.0 m wires can be used, and shielding is
+not required. For longer distances than 1.0 m and/or high EMI environment, shielded and twisted
+wires should be used. Drain wires should be connected to Elmo COMRET.
+
+
+
+
+Table of Contents       |Main Connector (MAIN)|www.elmomc.com
+            Gold Twitter Installation Guide
+            MAN-G-TWI (Ver. 2.011)                                                              67
+
+10.4.5.       CAN Option
+
+For full details on CANopen communication, see section 14.3 in the MAN-G-Board Level Modules
+Hardware manual.
+
+10.4.5.1.     Interface
+The PCB-Mounted Module includes the CAN transceiver and mode choke. Therefore, it is required
+to add a CAN Bus Protector for ESD and other harmful transient voltage events.
+The following signals describe how to connect CAN to the external connector.
+
+
+
+
+                                          Figure 40: CAN Interface
+
+The following are examples of the components described in Figure 40.
+
+ Interface Components                                             Part       P/N
+ 33PF/50V,NPO,10%                                                 AVX        06035A330JAT1A
+
+ DUAL BIDIRECTIONAL VOLTAGE                                       ON SEMIC   NUP2105LT1G
+ SUPPRESSOR,NUP2105L
+
+
+
+
+Table of Contents         |Main Connector (MAIN)|www.elmomc.com
+            Gold Twitter Installation Guide
+            MAN-G-TWI (Ver. 2.011)                                                                68
+
+10.4.5.2.     CAN Layout
+
+
+
+
+                                      Figure 41: CAN Network Diagram
+
+
+                    Caution: When installing CAN communication, ensure that each servo drive is
+                    allocated a unique ID. Otherwise, the CAN network may “hang”.
+
+Note: Always use CAT5e cables.
+
+
+
+
+Table of Contents         |Main Connector (MAIN)|www.elmomc.com
+           Gold Twitter Installation Guide
+          MAN-G-TWI (Ver. 2.011)                                                                 69
+
+10.4.6.     RS232
+
+There are two types of RS232: Standard RS232 and RS232 TTL Level.
+Figure 42 describes the Standard RS232 connection diagram.
+
+
+
+
+                                   Figure 42: RS232 Connection Diagram
+
+For full details on RS232 TTL Level communication, see section 12.5.1 in the MAN-G-Board Level
+Modules Hardware manual.
+For short distances between the drive and control, 0.5 to 1.0 m wires can be used, and shielding is
+not required. For longer distances than 1.0 m and/or high EMI environment, shielded and twisted
+wires should be used. Drain wires should be connected to Elmo COMRET.
+
+
+
+
+Table of Contents       |Main Connector (MAIN)|www.elmomc.com
+           Gold Twitter Installation Guide
+           MAN-G-TWI (Ver. 2.011)                                                   70
+
+The RS232 TTL Level will be used in order to connect Differential RS232 (RS422).
+
+
+
+
+                         Figure 43: Differential RS232 (RS422) Connection Diagram
+
+
+
+
+Table of Contents        |Main Connector (MAIN)|www.elmomc.com
+            Gold Twitter Installation Guide
+            MAN-G-TWI (Ver. 2.011)                                                                71
+
+10.5. EtherCAT Module
+                                                             For full details on EtherCAT
+                                                             communication, see Section 12.2 in
+                                                             the in the MAN-G-Board Level
+                                                             Modules Hardware manual.
+
+
+
+
+10.5.1.       EtherCAT Module Connectors
+
+10.5.1.1.     ECT2 connector
+ Pin (ECT2)            Signal                   Function
+
+ 1                     USB_VBUS                 USB VBUS 5V Detector
+
+ 2                     USBD+                    USB_P line
+
+ 3                     COMRET                   USB communication return
+
+ 4                     USBD-                    USB_N line
+
+ 5                     PHY_IN_LINK_ACT          Indicates EtherCAT IN/Ethernet LINK input
+
+ 6                     PHY_OUT_LINK_ACT         Indicates EtherCAT OUT LINK
+
+ 7                     PHY_IN_SPEED             Indicates EtherCAT IN/Ethernet Speed input
+
+ 8                     PHY_OUT_SPEED            Indicates EtherCAT OUT Speed
+
+                                         Table 10: Connector ECT2
+
+For USB Wires
+For short distances between the drive and control, 0.5 to 1.0 m wires can be used, and shielding is
+not required. For longer distances than 1.0 m and/or high EMI environment, shielded and twisted
+wires should be used. Drain wires should be connected to Elmo COMRET.
+
+
+
+Table of Contents         |EtherCAT Module|www.elmomc.com
+            Gold Twitter Installation Guide
+            MAN-G-TWI (Ver. 2.011)                                                                    72
+
+10.5.1.2.     ECT1 connector
+ Pin (ECT1)            Signal                 Function
+
+ 1                     PHY_OUT_RX+            EtherCAT OUT RX+ Line
+
+ 2                     PHY_OUT_TX+            EtherCAT OUT TX+ Line
+
+ 3                     PHY_OUT_RX-            EtherCAT OUT RX- Line
+
+ 4                     PHY_OUT_TX-            EtherCAT OUT TX- Line
+
+ 5                     PHY_IN_RX+             EtherCAT IN/Ethernet RX+ Line
+
+ 6                     PHY_IN_TX+             EtherCAT IN/Ethernet TX+ Line
+
+ 7                     PHY_IN_RX-             EtherCAT IN/ Ethernet RX- Line
+
+ 8                     PHY_IN_TX-             EtherCAT IN/Ethernet TX- Line
+
+                                          Table 11: Connector ECT1
+
+Note: EtherCAT IN port can be configured to an Ethernet Port.
+
+Note: Always use CAT5e cables.
+
+10.5.1.3.     ECT3 Connector
+ Pin (ECT3)            Signal        Function
+        1              SB_Clock      Serial Bus_Clock (9.375Mhz) for extended IO (refer to the MAN-
+                                     G-Panel Mounted Drives Hardware Manual)
+
+        2              SB_Load       Serial Bus Load for extended IO
+                                     (refer to the MAN-G-Panel Mounted Drives Hardware Manual)
+
+                                          Table 12: Connector ECT3
+
+10.5.1.4.     3.3V Connector
+ Pin                   Signal                 Function
+
+ 1                     3.3V                   3.3 V supply voltage for EtherCAT LEDs
+
+ 2                     3.3V                   3.3 V supply voltage for EtherCAT LEDs
+
+                                          Table 13: 3.3V Connector
+
+
+
+
+Table of Contents         |EtherCAT Module|www.elmomc.com
+          Gold Twitter Installation Guide
+          MAN-G-TWI (Ver. 2.011)                                                               73
+
+10.5.2.     EtherCAT Communication
+This section only describes the EtherCAT communication, and the pinout drawing of the connector.
+
+
+                   When the EtherCAT is connected and the FoE is in operation, the USB cable
+                   connection must be disconnected.
+
+
+
+
+                             Figure 44: EtherCAT Connection Schematic Diagram
+
+Note: Always use CAT5e cables.
+
+
+Table of Contents       |EtherCAT Module|www.elmomc.com
+          Gold Twitter Installation Guide
+          MAN-G-TWI (Ver. 2.011)                                                                74
+
+10.5.3.     USB 2.0 Communication (for EtherCAT model only)
+
+For full details on USB communication, see section 12.1 in the MAN-G-Board Level Modules
+Hardware manual.
+
+
+
+
+                                    Figure 45: USB Network Diagram
+
+For short distances between the drive and control, 0.5 to 1.0 m wires can be used and shielding is
+not required. For longer distances than 1.0 m and/or high EMI environment, shielded and twisted
+wires should be used. Drain wires should be connected to Elmo COMRET.
+
+
+
+
+Table of Contents       |EtherCAT Module|www.elmomc.com
+           Gold Twitter Installation Guide
+           MAN-G-TWI (Ver. 2.011)                                                                   75
+
+Chapter 11: Pow ering Up
+After the Gold Twitter is connected to its device, it is ready to be powered up.
+
+                   Caution:
+                   Before applying power, ensure that the DC supply is within the specified range
+                   and that the proper plus-minus connections are in order.
+
+
+11.1. Initializing the System
+After the Gold Twitter has been connected and mounted, the system must be set up and initialized.
+This is accomplished using the EASII, Elmo’s Windows-based software application. Install the
+application and then perform setup and initialization according to the directions in the EASII User
+Manual.
+
+11.2. Heat Dissipation
+The best way to dissipate heat from the Gold Twitter is to mount it so that its heat-sink is attached
+to the machine chassis. If mounted with its heat-sink suspended, then for best results mount the
+servo drive faced upwards and leave approximately 10 mm of space between the Gold Twitter's
+heat-sink and any other assembly.
+
+11.2.1.      Heat Dissipation Data
+
+Heat Dissipation is shown graphically below. It should be noted in the graphs below that the Flat
+Heat Sink and Fins Heat Sink can dissipate up to 5.5W and 7.0W respectively:
+
+
+
+
+Table of Contents        |Initializing the System|www.elmomc.com
+          Gold Twitter Installation Guide
+          MAN-G-TWI (Ver. 2.011)                           76
+
+
+
+
+Table of Contents       |Heat Dissipation|www.elmomc.com
+          Gold Twitter Installation Guide
+          MAN-G-TWI (Ver. 2.011)                           77
+
+
+
+
+Table of Contents       |Heat Dissipation|www.elmomc.com
+           Gold Twitter Installation Guide
+           MAN-G-TWI (Ver. 2.011)                                                                    78
+
+11.2.2.      How to Use the Chart
+
+The charts above are based upon the theoretical worst-case scenario. The actual test results display
+a 20% -30% lower power dissipation.
+The above charts indicate the net power conversion losses and exclude the control losses.
+To determine if your application heat dissipation requires a heat sink:
+1.     Determine the power dissipation according to the "continuous current" and the DC bus
+       voltage curve.
+       If the DC bus is not one of the three curves above, estimate the dissipation by interpolation.
+       The estimation error is not critical.
+2.     The chart is calculated for continuous current operation, if the actual operation is pulsed
+       current, add 25% to 30% to the power dissipation of the average (RMS) current.
+3.     When the Heat-Sink temperature reaches ≈ 85 °C, the Gold Twitter will shut down.
+       Design the system for continuous operation so that the maximum Heat Sink temperature
+       should be no higher than between 80°C to 82°C.
+4.     For model G-TWIXXX/YYYZZ(Blank) or S
+       If the average heat dissipation is less than ≈1.5W (Average operating power of 100W to
+       200W) there will be no requirement for an external heat sink.
+       If the average Heat dissipation is higher than 1.5W then an additional heat dissipation
+       means is required, usually by connecting to an external heat-sink.
+       For model G-TWIXXX/YYYZZH
+       If the average heat dissipation is less than ≈4W to 5W (Average operating power of 300W to
+       600W) there will be no requirement for an additional external heat sink.
+       If the average Heat dissipation is higher than 4W then an additional heat dissipation means
+       is required, usually by connecting to an additional external heat-sink.
+5.     When an external Heat-Sink is required, calculate the thermal resistance of the heat sink
+       according to:
+                                                     80℃ − 𝑇𝑇𝐴𝐴𝐴𝐴𝐴𝐴𝐴𝐴𝐴𝐴𝐴𝐴𝐴𝐴
+                                        ∅℃/𝑊𝑊 =
+                                                    𝐻𝐻𝐻𝐻𝐻𝐻𝐻𝐻 𝐷𝐷𝐷𝐷𝐷𝐷𝐷𝐷𝐷𝐷𝐷𝐷𝐷𝐷𝐷𝐷𝐷𝐷𝐷𝐷𝐷𝐷
+
+
+
+
+Table of Contents        |Heat Dissipation|www.elmomc.com
+           Gold Twitter Installation Guide
+           MAN-G-TWI (Ver. 2.011)                                                 79
+
+
+
+
+Chapter 12: Dim ensions
+This chapter provides detailed technical dimensions regarding the Gold Twitter.
+
+12.1. EtherCAT without Heatsink
+
+
+
+
+                                    Figure 46: G-Twitter –EtherCAT version
+
+
+Table of Contents        |EtherCAT without Heatsink|www.elmomc.com
+          Gold Twitter Installation Guide
+          MAN-G-TWI (Ver. 2.011)                                            80
+
+12.2. EtherCAT with Heatsink
+
+
+
+
+                                   Figure 47: G-Twitter –EtherCAT version
+
+
+
+
+Table of Contents       |EtherCAT with Heatsink|www.elmomc.com
+          Gold Twitter Installation Guide
+          MAN-G-TWI (Ver. 2.011)                                       81
+
+12.3. CAN without Heatsink
+
+
+
+
+                                   Figure 48: G-Twitter –CAN version
+
+
+
+
+Table of Contents       |CAN without Heatsink|www.elmomc.com
+          Gold Twitter Installation Guide
+          MAN-G-TWI (Ver. 2.011)                                       82
+
+12.4. CAN with Heatsink
+
+
+
+
+                                   Figure 49: G-Twitter –CAN version
+
+
+
+
+Table of Contents       |CAN with Heatsink|www.elmomc.com
+           Gold Twitter Installation Guide
+           MAN-G-TWI (Ver. 2.011)                                                                  83
+
+Chapter 13: Accessories
+The model G-TWIXXX/YYYZZH is integrated with the Flat Heatsink P/N G-TWIHSFLAT01.
+The following describes the accessory kits available for the Gold Twitter.
+
+ Part Number                             Description
+ G-TWIHSFLAT01                           Flat Heat-Sink Kit
+
+ G-TWIHSFINS01                           FINs Heat-Sink Kit
+
+Optionally, the Gold Twitter has two standard heat-sink configurations which are obtainable
+separately as kit accessories from Elmo:
+
+
+
+
+    Default Heat Sink                                         Flat Heat Sink (P/N G-TWIHSFLAT01)
+
+
+
+
+                                    Fins Heat Sink (P/N G-TWIHSFINS01)
+
+
+
+
+Table of Contents        |CAN with Heatsink|www.elmomc.com
+          Gold Twitter Installation Guide
+          MAN-G-TWI (Ver. 2.011)                                                 84
+
+13.1. Accessories Heat Sink Dimensions
+
+
+
+
+          Figure 50: G-Twitter – Flat Heat Sink (P/N G-TWIHSFLAT01) Dimensions
+
+
+
+
+Table of Contents       |Accessories Heat Sink Dimensions|www.elmomc.com
+          Gold Twitter Installation Guide
+          MAN-G-TWI (Ver. 2.011)                                                 85
+
+
+
+
+          Figure 51: G-Twitter – Fins Heat Sink (P/N G-TWIHSFINS01) Dimensions
+
+
+
+
+Table of Contents       |Accessories Heat Sink Dimensions|www.elmomc.com
+                                                                       86
+
+
+
+
+Table of Contents   |Accessories Heat Sink Dimensions|www.elmomc.com
+

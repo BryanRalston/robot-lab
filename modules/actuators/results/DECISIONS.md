@@ -35,3 +35,63 @@ Format: ID, date, decision, reasoning, evidence. Estimates are marked [EST].
 - O3 (Arbiter): T5/T6. Carry at 1.2 m/s exceeds the walk/stairs sizing only through margin. Remaining carry margin: torque ratio avail/carry-peak hip_yaw 1.22, hip_roll 1.67, hip_pitch 1.32 (worst-angle), knee 1.44 (worst-angle), ankle_pitch 1.30. Speed and thermal pass with carry (max ΔT 66 K at hip_pitch). The carry is feasible on these actuators at < 1.5× margin. T7 carry runtime is 1.74 / 2.31 h (no regen / netting).
 - O4 (Actuators): knee motor at 7963 rpm at the 13.3 rad/s need, against Nmax 8000. Also needed: the Rollvis RV12 max-speed rating (dN ≈ 96 k), L10 re-check at the new levers, and the Gold Twitter peak-current rating. Next round: knee lead 5 mm or a 45 mm lever trade.
 - O5 (Torso/Brain placeholders): 20S pack, BMS limits (D9), regen clamp, EtherCAT master and junction.
+
+## Round 2 (2026-10-13 PM). Inputs: R-001, R-002, R-005, R-008, CONTRACTS R1.1–R1.4
+**D12. Knee rpm margin (R-005).** Rule added for all joints: motor rpm at the speed need ≤ 0.95 × Nmax (7600 rpm). The knee changes from RV12x4 on a 40 mm lever to **RV12x5 (lead 5) on a 47.5 mm lever** with the same 2 × TBM2G-07613D. Ratio is 59.7 → **7565 rpm at 13.3 rad/s**.
+- Torque: 345 N·m nominal = 245 N·m at the worst linkage angle (÷0.71) vs the 231 need.
+- Speed: ω30 = 16.0 rad/s.
+- Thermal: ΔT 70 K walk / 82 K carry (CAD area).
+- Mass: −0.39 kg per knee vs round 1, mostly from the CAD housing.
+- Screw: RV12x5 has Ca 18.1 / C0a 27.3 kN (datasheet). Peak force at the need is 328 / 0.0475 / 2 = 3.5 kN per screw.
+
+**D13. Housing mass from CAD, not the v3 formula (R-001 item 2).** `cad_mass.py` models each leg housing in CadQuery (7075-T6, 2.0 mm wall).
+- Rotary: stator land, rear cap, CRBH 6013 A seat, flange with 8 × M5. Lengths are drawing values (TBM2G stack length, CSG Table 8 B).
+- Screw unit: motor can plus a necked nut housing (ø41 over the nut bearings), trunnion bosses, ankle fins.
+- A counted fastener + connector allowance is added (rotary 50 g, linear 24 g).
+- Wall check at hip_roll: 204 N·m gives 7 MPa shear; a 3 BW × 0.1 m landing moment gives 14 MPa bending, against 503 MPa yield. The wall is set by machining minimum, not strength.
+- Result: both-leg housings 4.44 → 3.34 kg (**−1.11 kg**, target −0.65). Per housing, model → CAD:
+  - hip_yaw 0.355 → 0.264 kg
+  - hip_roll 0.366 → 0.276 kg
+  - hip_pitch pair 0.545 → 0.353 kg
+  - knee pair 0.545 → 0.353 kg
+  - ankle pair 0.410 → 0.422 kg (fins are now counted)
+- Thermal re-run with the smaller CAD outer area: max ΔT 70 K walk / 82 K carry (knee), still ≤ 100 K.
+
+**D14. Linkage mass from CAD (R-001 item 1): 0.61 kg for both legs, vs ≤ 0.65 kg target and 1.30 kg [EST] before.** Parts, per leg:
+- 6 nut-rotor hubs, 7075, 16 g each (bolt to the RV12 ø46 flange, 6 × M5).
+- 4 hollow steel trunnion pin pairs, ø16/ø9, 26 g per pair (v3 stubs were solid).
+- hip_pitch tapered crossbar lever at r 50 mm: 137 g (new).
+- knee lever at r 47.5 mm: 127 g, replacing the v3 shank lever (r 58.5, untapered, 167 g, already counted in Legs structure). Only the −40 g difference is booked here.
+Lever check: per screw at actuator max force 4.5 kN (hip) / 3.6 kN (knee) gives 240 / 192 MPa, SF 2.1 / 2.6 on 7075 yield. Ankle levers are the v3 foot instep lever (Legs structure, unchanged); ankle top bearings are the v3 spherical bearings (in the rod-end term).
+**Split and what Legs must confirm (joint item with Legs):**
+- (a) The hip_pitch lever (137 g) is a Legs part on the thigh top. Its mass sits in the actuator linkage line, so Legs must not count it again. Legs to confirm trunnion position on the pelvis, lever clocking, and clearance over −120…+40°.
+- (b) The knee lever r 58.5 → 47.5 mm is a Legs shank part. Legs to re-run `v3/cad/knee_linkage.py` for the new radius and confirm the worst-angle factor ≥ 0.71 (if it drops, the knee needs re-sizing).
+- (c) Legs to confirm the v3 thigh no longer carries the rotary hip_pitch output flange (8 × M6 interface). That mass is not credited here.
+- STEP files are in `modules/actuators/cad/`.
+
+**D15. Datasheets attached and corrected (R-008 O4).**
+- Corrections: TBM2G-07613 Km (C winding) 2.01 → 0.201 (typo in the manual itself); CSG lengths from Table 8; RV12x6 added.
+- Confirmed: Gold Twitter R types state no peak current (peak "2 × Ic" applies to the non-R models), so peak = Ic 49.5 A stays.
+- Rollvis publishes no max speed in its tables: open, needs a vendor query.
+- Re-run of `size.py` after the corrections changed only the knee (D12).
+- Details: `datasheets/SOURCES.md`.
+
+**D16. Regen path and BMS regen limit (R-002).** Shared 20S DC bus. The BMS accepts up to 30 A regen charge (6 A per cell; P45B max charge 13.5 A per cell); a brake chopper takes any excess, clamp ≤ 90 V. `regen_sim.py` result: net bus power goes to −341 W peak (4.7 A charge), so the chopper is idle in practice. Drive losses come from the Gold Twitter > 99 % rating (56 W at 5.6 kW), split [EST] into conduction and switching. Pack IR is 60 mΩ (P45B DC IR 15 mΩ).
+
+**D17. Runtime finding: the round-1 and R-002 averages were too optimistic.** The walk_1p2 trace includes about 1 s of standing at each end. Over the steady walking window (2–7 s):
+| case | steady power | runtime |
+|---|---|---|
+| no regen | 942 W | 1.55 h |
+| shared bus + charge | 667 W | **2.19 h** |
+| shared bus + charge, end of discharge | 673 W | 2.17 h |
+The whole-trace average (561 W, 2.60 h) must not be used. Conclusions:
+- T7 at 1.2 m/s passes **only** with regen, and the margin is about 9 %.
+- Without regen it fails by 23 %.
+- Regen moves to evidence ×1.0: a time-domain bus model with drive losses, battery IR and charge limit.
+- Remaining unmodelled items: motor iron loss and the drive idle split (idle is counted at 3.3 W per drive).
+
+## Open after round 2
+- O6 (Arbiter): update R1.3 to steady-state numbers (667 W with regen, 942 W without).
+- O7 (Legs): re-run gait ID at the final mass (R-001 item 7). Needs rise about 3 % at 65.8 kg. Knee worst-angle 245 vs 231 (6 % margin) and ankle 311 vs 305 (2 %) are the first to break.
+- O8 (Actuators): Rollvis max-speed query; screw L10 at the new levers; motor iron/eddy loss in the regen sim (G5 bench test would close it). If any of these turns out heavy, write a Grok Build brief (none needed this round; all runs take seconds on CPU).
+- O9: Gold Twitter sourced price is $0.9–1.7k per drive vs $0.6k [EST] in round 1, about +$8–30k per robot (T10 is not enforced).
