@@ -1,0 +1,36 @@
+{
+ "geometry": "Legs L10 config B: r 50, clock 60, trunnion (30,-300), sign -1",
+ "old_boss_in_screw_plane": {
+  "full_rom": {
+   "rod_min_mm": -21.84,
+   "at_deg": -114.5,
+   "rod_end_min_mm": 8.0
+  },
+  "loaded_rom": {
+   "rod_min_mm": 2.69,
+   "at_deg": -80.0,
+   "rod_end_min_mm": 10.69
+  },
+  "stand_limit": {
+   "rod_min_mm": 4.01,
+   "at_deg": -78.0,
+   "rod_end_min_mm": 11.0
+  }
+ },
+ "stack_mm": {
+  "pin_positions_mm": 0.35,
+  "lever_deflection_mm": 0.2,
+  "rod_bow_and_runout_mm": 0.1,
+  "bearing_play_mm": 0.05,
+  "boss_and_rod_OD_tol_mm": 0.1
+ },
+ "stack_total_mm": 0.8,
+ "worst_case_loaded_mm": 1.89,
+ "toggle_deg": -114.5,
+ "new_design": {
+  "rule": "pivot hub, bearing and femur tongue confined to |y|<=22 mm; screw rods at |y| 63..75 (half-spacing 69)",
+  "lateral_clearance_mm": 41,
+  "ear_to_rod_end_axial_gap_mm": 1.0,
+  "fix": "2 mm: add 1 mm hardened spacer washer or move ear inboard (y 49..61)"
+ }
+}

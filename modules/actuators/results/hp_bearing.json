@@ -1,0 +1,61 @@
+{
+ "CRBH 4010 A": {
+  "d": 40,
+  "D": 65,
+  "B": 10,
+  "mass": 0.15,
+  "C": 8610,
+  "C0": 10600,
+  "fs_max": 0.6082093910721295,
+  "fs_fault": 0.42698582995751355,
+  "P_walk_N": 6943.0610468604345,
+  "L10_h_walking": 1707.3634473134396
+ },
+ "CRBH 4510 A": {
+  "d": 45,
+  "D": 70,
+  "B": 10,
+  "mass": 0.16,
+  "C": 8860,
+  "C0": 11300,
+  "fs_max": 0.6728947788571182,
+  "fs_fault": 0.48808055695928054,
+  "P_walk_N": 6667.854303655178,
+  "L10_h_walking": 2149.3682104887494
+ },
+ "CRBH 5013 A": {
+  "d": 50,
+  "D": 80,
+  "B": 13,
+  "mass": 0.29,
+  "C": 17300,
+  "C0": 20900,
+  "fs_max": 1.304319858182976,
+  "fs_fault": 0.9893635232452094,
+  "P_walk_N": 6334.430749387274,
+  "L10_h_walking": 23729.05569328416
+ },
+ "CRBH 6013 A": {
+  "d": 60,
+  "D": 90,
+  "B": 13,
+  "mass": 0.33,
+  "C": 18800,
+  "C0": 24300,
+  "fs_max": 1.594787546633136,
+  "fs_fault": 1.2754285751816818,
+  "P_walk_N": 5993.597782802304,
+  "L10_h_walking": 37646.06618010691
+ },
+ "selected": {
+  "part": "CRBH 5013 A",
+  "why": "lightest with fs>=1.3 at actuator max + design moments (4010/4510 fs<0.8); fs~1 only in the one-screw fault case; L10 >> 20 000 h",
+  "mass_bearing": 0.29,
+  "seat_extra": {
+   "inner_clamp_ring_7075": 0.012,
+   "fasteners_6xM4": 0.012
+  },
+  "mass_line": 0.314,
+  "note": "inner ring on lever spigot (lever mass includes spigot), outer ring in femur tongue: Legs pivot bore \u00f832 -> \u00f880 H7 seat, tongue 25 >= B 13"
+ }
+}
