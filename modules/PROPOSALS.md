@@ -204,4 +204,4 @@ Any change to CONTRACTS.md or TARGETS.md, or to another module's files, starts h
 - **Information, 66.5 kg re-run.** At the R-017 mass limit, ankle_pitch need = 1.5 × 209.3 = **314 N·m > 311 avail (0.99×)**.
   - Options: a 73 mm ankle lever (Actuators D28 maximum, 323.8 N·m), or keep the needs basis at the actual rollup mass.
   - Other joints fit. Carry at 1.0 m/s gives 1.29×. Evidence: `legs/results/r4/requirements.md`.
-- Status: open
+- Status: **ruled R-019** — hip stop −105° accepted (R-012 amended); ankle 73 mm accepted conditional (stroke, L10, instep clearance); clamp form accepted conditional on Actuators; M2 credited −0.339 of −0.892 (foot+clamp FEA ×1, hand parts ×0.5)
