@@ -31,7 +31,7 @@
   {
    "joint": "shoulder pitch",
    "d_mm": 4.0,
-   "r_min_mm": 50.5,
+   "r_min_mm": 53.0,
    "r_req_mm": 40.0,
    "route": "clock-spring wrap on actuator housing (+3 mm liner)"
   },
@@ -96,7 +96,7 @@
    "d_mm": 3.0,
    "r_min_mm": 35,
    "r_req_mm": 30.0,
-   "route": "F/T sensor cable only (\u00d83 [EST]) on \u00d870 drum; actuators are shank-side"
+   "route": "F/T sensor cable only (\u00d83 [EST]) on \u00d870 drum; actuators on the shank front"
   }
  ],
  "rule": "bend radius >= 10 x cable OD (moving)",

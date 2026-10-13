@@ -10,4 +10,4 @@ Body weight 658 N (v3 mass 67.1 kg); landing 3 BW, walking 1.3 BW (0→peak, σa
 | pelvis_hip | waist-yaw opening rim fixed; single-leg landing 3 BW (+0.15 lateral) into the hip-bracket ring | 42625 | 44 (max el. 95) | 1.7 | yes | 11.37 | 12.98 |
 | femur_full | hip lug top fixed; knee-pin bore loaded 3 BW axial + lateral H (root moment 3 BW × 0.12 m) | 35703 | 47 (max el. 65) | 0.1 | yes | 10.62 | 12.13 |
 | fall_torso_panel | torso side panel (CFRP 3 mm [EST isotropic]); front/back wall strips fixed; 50 % of shoulder impact at the pass-through rim | 25716 | 138 (max el. 200) | 5.0 | yes | 2.89 | — |
-| tibia_full | knee-pin bore fixed; ankle fork underside loaded 3 BW + lateral H (3 BW × 0.10 m) | 48607 | 66 (max el. 465) | — | NO | 7.57 | 8.64 |
+| tibia_full | knee-pin bore fixed; ankle fork underside loaded 3 BW + lateral H (3 BW × 0.10 m) [half model, symmetry plane] | 30515 | 81 (max el. 1114) | 2.1 | yes | 6.19 | 7.06 |
