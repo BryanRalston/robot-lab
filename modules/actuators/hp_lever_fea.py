@@ -10,7 +10,15 @@ Supports: bearing seat (r 25, |y|<=6.5) and cheek bolt faces (|y| = 22) fixed (r
 (evaluated in arms/ears |y| in [24, 62]; pin stub is steel, hand-checked). 7075-T6 plate: E 71.7 GPa, nu 0.33, Sy 503 MPa, Su 572 MPa (MMPDS),
 fatigue 159 MPa @ 5e8 (R=-1 unnotched) x 0.8 surface/size = 127 MPa.
 Usage: python3 hp_lever_fea.py [b d0 d1 fr h] [--export]  (x-depth b, arm yz-width root d0 / tip d1, profile fillet fr, mesh h); writes results/hp_lever_fea*.json, cad/'+os.environ.get('STEPNAME','hip_pitch_lever_B')+'.step"""
-import cadquery as cq, numpy as np, json, os, sys, gmsh, meshio
+import os, sys, tempfile
+if sys.platform == "win32":
+    import sysconfig
+    _sp = sysconfig.get_paths()["purelib"]
+    for _sub in ("cadquery_ocp.libs", "vtk.libs"):
+        _p = os.path.join(_sp, _sub)
+        if os.path.isdir(_p):
+            os.add_dll_directory(_p)
+import cadquery as cq, numpy as np, json, gmsh, meshio
 from skfem import MeshTet, ElementTetP2, ElementVector, Basis, FacetBasis, asm, condense
 from skfem.models.elasticity import linear_elasticity, lame_parameters
 from skfem.helpers import dot
@@ -18,6 +26,19 @@ import pyamg
 H=os.path.dirname(os.path.abspath(__file__))
 E,NU,RHO,SY,SU,SE=71.7e3,0.33,2.81e-6,503.,572.,159*0.8   # MPa, kg/mm3
 F=454.2/0.050/2; DY=69.0; R=50.0; FR=float(os.environ.get('FR','2.0')); FILLET_OK=None
+def _cheek_junction_bsplines(shape):
+    """Arm-to-cheek curves on the cheek end face |y|=33.5 that span the 5 mm wall (r 21..26)."""
+    from OCP.BRepAdaptor import BRepAdaptor_Curve
+    out=[]
+    for e in shape.edges().vals():
+        if e.geomType()!='BSPLINE': continue
+        p=e.Center()
+        if abs(abs(p.y)-33.5)>0.4: continue
+        c=BRepAdaptor_Curve(e.wrapped); u0,u1=c.FirstParameter(),c.LastParameter(); rs=[]
+        for i in range(7):
+            q=c.Value(u0+(u1-u0)*i/6.0); rs.append((q.X()**2+q.Z()**2)**0.5)
+        if min(rs)<21.6 and max(rs)>25.4: out.append(e)
+    return out
 def geom4(b=26,d0=24,d1=16,fr=0):
     """round hub (|y|<=22, ø56, bore ø40, bearing groove r25 |y|<12.5 with r0.6 shoulders) + 3-section smooth lofted arms + ears + pins"""
     NEEDLE=os.environ.get('HUB','crbh')=='needle'   # R4: needle straddle -> two cheeks ø52 x 20 with TLA 3520 Z outer-ring bores ø42, |y| 13.5..33.5
@@ -43,21 +64,54 @@ def geom4(b=26,d0=24,d1=16,fr=0):
     if NEEDLE: s=s.cut(cq.Workplane('XY').box(200,27,200))   # femur tongue + shaft between the cheeks: no lever material at |y|<13.5 (two halves joined by the hip-roll yoke)
     s=s.cut(cq.Workplane('XY').moveTo(25,-13.5).lineTo(120,-13.5).lineTo(120,13.5).lineTo(25,13.5).close().revolve(360,(0,0,0),(0,1,0)))   # femur-tongue sweep space |y|<13.5, r>25
     s=s.cut(cq.Workplane('XY').box(200,200,200).translate((0,0,0)).cut(cq.Workplane('XZ').circle(200).extrude(75,both=True)))
-    es=[e for e in s.edges().vals() if 21.5<abs(e.Center().y)<23 and e.Center().z<-0.5 and abs(e.Center().x)<25 and (e.geomType()=='BSPLINE' or (e.geomType()=='CIRCLE' and e.Length()<20))]
     geom4.fillet='none'
-    for r in (2.0,1.5):   # arm-flank / hub-face junction fillets (re-entrant edges); the two straight root edges stay sharp (OCC fails) -> drawing R2 all round
-        try:
-            t=s.newObject(es).fillet(r)
-            if t.val().isValid() and len(t.solids().vals())==1: s=t; geom4.fillet=f'R{r} on {len(es)} junction edges'; break
-        except Exception: pass
+    if NEEDLE:
+        es=_cheek_junction_bsplines(s)
+        # Drawing callout is R3. The cheek wall is only 5 mm (r 21..26) and the
+        # junction spline spans that wall, so a constant R3 self-intersects
+        # (BRepCheck fails, volume jumps by ~0.8 cm^3). Use the first valid radius.
+        for r in (3.0,2.8,2.5,2.0,1.5):
+            if not es: break
+            try:
+                t=s.newObject(es).fillet(r)
+                if t.val().isValid() and len(t.solids().vals())==2:
+                    s=t; geom4.fillet=f'R{r:g} on {len(es)} BSPLINE junction edges at |y|=33.5'; break
+            except Exception: pass
+    else:
+        es=[e for e in s.edges().vals() if 21.5<abs(e.Center().y)<23 and e.Center().z<-0.5 and abs(e.Center().x)<25 and (e.geomType()=='BSPLINE' or (e.geomType()=='CIRCLE' and e.Length()<20))]
+        for r in (2.0,1.5):   # arm-flank / hub-face junction fillets (re-entrant edges); the two straight root edges stay sharp (OCC fails) -> drawing R2 all round
+            try:
+                t=s.newObject(es).fillet(r)
+                if t.val().isValid() and len(t.solids().vals())==1: s=t; geom4.fillet=f'R{r} on {len(es)} junction edges'; break
+            except Exception: pass
     assert len(s.solids().vals())==(2 if NEEDLE else 1), [x.Volume() for x in s.solids().vals()]
     return s
 def lever_only_mass(s):   # steel pins ø12 x 25 (through ear + rod-end stub) excluded from the 7075 volume
     vp=2*np.pi*6**2*25; V=sum(x.Volume() for x in s.solids().vals()); return (V-vp)*RHO, vp*7.85e-6
-def mesh(s,h,fn):
+def _junction_box_field(h_in,h_out):
+    """gmsh Field Box: h_in at the arm/cheek junctions |y|~34, h_out elsewhere."""
+    tags=[]
+    for i,(y0,y1) in enumerate(((30.0,38.0),(-38.0,-30.0)),start=1):
+        gmsh.model.mesh.field.add('Box',i)
+        gmsh.model.mesh.field.setNumber(i,'VIn',h_in); gmsh.model.mesh.field.setNumber(i,'VOut',h_out)
+        gmsh.model.mesh.field.setNumber(i,'XMin',-40); gmsh.model.mesh.field.setNumber(i,'XMax',40)
+        gmsh.model.mesh.field.setNumber(i,'YMin',y0); gmsh.model.mesh.field.setNumber(i,'YMax',y1)
+        gmsh.model.mesh.field.setNumber(i,'ZMin',-60); gmsh.model.mesh.field.setNumber(i,'ZMax',10)
+        gmsh.model.mesh.field.setNumber(i,'Thickness',4.0); tags.append(i)
+    gmsh.model.mesh.field.add('Min',3); gmsh.model.mesh.field.setNumbers(3,'FieldsList',tags)
+    gmsh.model.mesh.field.setAsBackgroundMesh(3)
+    gmsh.option.setNumber('Mesh.MeshSizeExtendFromBoundary',0)
+    gmsh.option.setNumber('Mesh.MeshSizeFromPoints',0)
+    gmsh.option.setNumber('Mesh.MeshSizeFromCurvature',0)
+def mesh(s,h,fn,h_local=None):
     cq.exporters.export(s,fn+'.step'); gmsh.initialize(); gmsh.option.setNumber('General.Terminal',0)
+    try: gmsh.option.setNumber('General.NumThreads',int(os.environ.get('NTHREADS','8')))
+    except Exception: pass
     gmsh.model.occ.importShapes(fn+'.step'); gmsh.model.occ.synchronize()
-    gmsh.option.setNumber('Mesh.MeshSizeMax',h); gmsh.option.setNumber('Mesh.MeshSizeMin',h/3); gmsh.option.setNumber('Mesh.MeshSizeFromCurvature',int(os.environ.get('NCURV','6')))
+    hmin=min(h/3, h_local/2) if h_local else h/3
+    gmsh.option.setNumber('Mesh.MeshSizeMax',h); gmsh.option.setNumber('Mesh.MeshSizeMin',hmin)
+    gmsh.option.setNumber('Mesh.MeshSizeFromCurvature',int(os.environ.get('NCURV','6')))
+    if h_local: _junction_box_field(float(h_local),h)
     gmsh.model.mesh.generate(3); gmsh.write(fn+'.msh'); gmsh.finalize()
     m=meshio.read(fn+'.msh'); t=m.cells_dict['tetra']; return MeshTet(m.points.T.copy(),t.T.copy())
 def solve(m):
@@ -78,7 +132,10 @@ def solve(m):
     I=ib.complement_dofs(D); Kc=K[I][:,I].tocsr(); del K; A=pyamg.smoothed_aggregation_solver(Kc,max_coarse=500,keep=False,improve_candidates=None,smooth=("jacobi",{})); nd=Kc.shape[0]+len(D)
     U={}
     for k,f in loads.items():
-        u=np.zeros(nd); res=[]; u[I]=A.solve(f[I],tol=1e-8,accel='cg',maxiter=3000,residuals=res); U[k]=u; print('cg',k,len(res),res[-1]/res[0],flush=True)
+        u=np.zeros(nd); res=[]; u[I]=A.solve(f[I],tol=1e-8,accel='cg',maxiter=5000,residuals=res); U[k]=u
+        rel=(res[-1]/res[0]) if res and res[0] else float('inf')
+        print('cg',k,len(res),rel,flush=True)
+        if not res or rel>1e-6: raise RuntimeError(f'CG not converged for {k}: rel={rel} iters={len(res)}')
     return ib,U
 def vm_elem(ib,u):
     lam,mu=lame_parameters(E,NU); g=ib.interpolate(u).grad   # (3,3,nel,nqp)
@@ -87,8 +144,9 @@ def vm_elem(ib,u):
     for i in range(3): s[i,i]+=lam*tr
     vm=np.sqrt(0.5*((s[0,0]-s[1,1])**2+(s[1,1]-s[2,2])**2+(s[2,2]-s[0,0])**2)+3*(s[0,1]**2+s[1,2]**2+s[0,2]**2))
     return vm.max(1)
-def run(b=26,d0=24,d1=16,fr=4,h=3.0,tag='',export=False):
-    s=geom4(b,d0,d1,fr); fn=f'/tmp/hplever{tag}'; m=mesh(s,h,fn); ib,U=solve(m)
+def run(b=26,d0=24,d1=16,fr=4,h=3.0,tag='',export=False,h_local=None):
+    if h_local is None and os.environ.get('HLOCAL'): h_local=float(os.environ['HLOCAL'])
+    s=geom4(b,d0,d1,fr); fn=os.path.join(tempfile.gettempdir(),f'hplever{tag}'); m=mesh(s,h,fn,h_local=h_local); ib,U=solve(m)
     c=m.p[:,m.t].mean(1); ay=np.abs(c[1]); ev=(ay>24)&(ay<62)&~((ay>60.5)&(np.hypot(c[0],c[2]+50)<8))&~((ay<=34)&(np.hypot(c[0],c[2])<23.5))
     cases={}
     for ph in (-90,-60,-30,0,30,60,90):
@@ -103,14 +161,23 @@ def run(b=26,d0=24,d1=16,fr=4,h=3.0,tag='',export=False):
         iw=np.where(ev)[0][np.argmax(vm[ev])]; out[k]=dict(at=[round(float(x),1) for x in c[:,iw]],vm_max_MPa=smax,vm_p999_MPa=s999,hub_max_MPa=hub,hub_p995_MPa=hub995,SF_yield=SY/smax,pin_disp_mm=dmax)
         if k.startswith('sym') and (worst is None or smax>out[worst]['vm_max_MPa']): worst=k; wvm=vm
     mal,mst=lever_only_mass(s)
-    res=dict(params=dict(b=b,d0=d0,d1=d1,fillet=fr,h=h,topology='round hub + smooth 3-section loft arms',junction_fillet=geom4.fillet),nodes=int(m.p.shape[1]),tets=int(m.t.shape[1]),mass_7075_kg=mal,mass_pins_steel_kg=mst,mass_kg=mal+mst,
+    res=dict(params=dict(b=b,d0=d0,d1=d1,fillet=fr,h=h,h_local=h_local,topology='round hub + smooth 3-section loft arms',junction_fillet=geom4.fillet),nodes=int(m.p.shape[1]),ndof=int(ib.N),tets=int(m.t.shape[1]),mass_7075_kg=mal,mass_pins_steel_kg=mst,mass_kg=mal+mst,
              cases=out,worst_sym=worst,SF_sym=SY/out[worst]['vm_max_MPa'],SF_fault=SY/max(v['vm_max_MPa'] for k,v in out.items() if k.startswith('fault')))
     if export:
         cq.exporters.export(s,f'{H}/cad/'+os.environ.get('STEPNAME','hip_pitch_lever_B')+'.step')
         np.savez_compressed(f'{H}/results/hp_lever_fea_field.npz',p=m.p,t=m.t,vm=wvm,case=worst)
     return res
 if __name__=='__main__':
-    a=[float(x) for x in sys.argv[1:6] if not x.startswith('--')] or [26,24,16,4,3.0]
-    r=run(*a,export='--export' in sys.argv); print(json.dumps({k:v for k,v in r.items() if k!='cases'},indent=1))
-    for k,v in r['cases'].items(): print(k,{a:(round(b,2) if isinstance(b,float) else b) for a,b in v.items()})
-    json.dump(r,open(f'{H}/results/hp_lever_fea_last.json','w'),indent=1)
+    argv=sys.argv[1:]; export='--export' in argv; outp=None; nums=[]
+    i=0
+    while i<len(argv):
+        if argv[i]=='--export': i+=1
+        elif argv[i]=='--out': outp=argv[i+1]; i+=2
+        elif argv[i].startswith('--'): i+=1
+        else: nums.append(float(argv[i])); i+=1
+    a=nums[:5] or [26,24,16,4,3.0]
+    tag=os.environ.get('FEATAG','')
+    r=run(*a,tag=tag,export=export); print(json.dumps({k:v for k,v in r.items() if k!='cases'},indent=1),flush=True)
+    for k,v in r['cases'].items(): print(k,{a:(round(b,2) if isinstance(b,float) else b) for a,b in v.items()},flush=True)
+    dest=outp or f'{H}/results/hp_lever_fea_last.json'
+    json.dump(r,open(dest,'w'),indent=1); print('wrote',dest,flush=True)
