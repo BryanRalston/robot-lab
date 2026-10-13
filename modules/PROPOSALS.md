@@ -107,3 +107,48 @@ Any change to CONTRACTS.md or TARGETS.md, or to another module's files, starts h
 - Evidence: `modules/actuators/iron_loss.py`, `regen_core.py`, `regen_sim.py` → `results/regen_sim.json`; `regen_sweep.py` → `results/regen_sweep_walk_1p2.json`, `results/regen_sweep_walk_1p0.json` (6561 corners each; retention minimum 0.62 / 0.59); `results/BENCH_TEST_PLAN.md`; `media/progress/2026-10-13_actuators_r3_regen_sweep.png`; DECISIONS D18–D24.
 - Affected owner response:
 - Status: open
+
+### P-008: Legs round 2: 65 kg requirement table update, ankle-pitch carry margin, ankle loaded ROM
+- Owner: Legs. Date: 2026-10-13.
+- Change 1, requirement table at 65 kg (R-001 item 7).
+  - Basis: 1.5 × max non-carry peak over walk 0.8/1.0/1.2 (reference plan), stairs 18 cm, push, sit-to-stand.
+  - Needs: hip_yaw 66 (R-004: 66), hip_roll 180 (177), hip_pitch 334 (331), knee 235 (231), ankle_pitch 309 (305), ankle_roll 62 (61) N·m.
+  - All fit R1.2 avail (70/204/350/258/311/177), but ankle_pitch has only 2 N·m of headroom.
+- Change 2, carry check.
+  - 20 kg carry peaks (max of the two carry plans): ankle_pitch 283 N·m. avail/carry = 1.10, below a 1.2 margin.
+  - Hip_pitch 276 (1.27), knee 180 (1.43), hip_yaw 56 (1.26).
+  - Proposal: either restrict carry gait to ≤ 1.0 m/s, or let Actuators review ankle_pitch. No selection change is made by Legs.
+- Change 3, ankle ROM need.
+  - −60° → −50° loaded dorsiflexion. Swing is unconstrained.
+  - Stance minimum is −48° in walk_1p2_r2 and −36 to −42° in stairs. The −74° on stairs is a swing artefact of holding the swing foot flat (DECISIONS L5).
+- Note: the longer-step r2 gait (arm swing + pelvis yaw) raises hip_pitch to 282, knee to 201 and ankle to 243 N·m with no benefit to hip yaw. It is not adopted (L3).
+- Evidence:
+  - modules/legs/results/r2/requirements.md, envelope.json, run65.log, stairs_var/
+  - plots/r2/envelope_vs_contract.png
+- Status: open
+
+### P-009: Legs round 2: hip_pitch deep flexion and knee lever (information for Actuators)
+- Owner: Legs. Date: 2026-10-13.
+- Finding 1, hip_pitch (50 mm lever, 9084 N, slider-crank, Lmin ≥ 250 mm).
+  - A packaged pelvis-mounted geometry gives min ratio 1.27 (torque/speed/carry) over the gait range −80…+40°, with 94 mm stroke.
+  - Below −80° the available torque collapses (5 N·m vs a 111 N·m sit-to-stand need at −120°).
+  - Proposal: change the hip ROM need to −80…+40° loaded and −120° unloaded. Legs re-plans sit-to-stand within this range (higher seat or trunk lean), or a second linkage is added.
+  - The arm factor min is 0.56 vs the assumed K_HIP 0.77, which is acceptable on the angle-resolved basis.
+- Finding 2, knee lever sweep with RV12x5 (7267 N, 0.633 m/s).
+  - Speed ratio: 58.5 mm 0.92 (fails), 52.5 mm 0.99, 47.5 mm 1.06 (current, OK), 42.5 mm 1.14 (best balanced; torque 1.31, carry 1.14).
+  - No change is requested. 47.5 mm is fine.
+- Evidence: results/r2/linkage_study.json, plots/r2/linkage_study.png, DECISIONS L7.
+- Status: open
+
+### P-010: Legs round 2: structure 4.84 kg + linkage allowance 0.588 kg (R-001 items)
+- Structure (both legs): 6.13 kg v3-CAD basis → 4.84 kg. Tube walls 1.6 mm, pocketed lugs/clevis/tongue/fork, ribbed foot plate −25 %.
+- Margin against 4.90 kg is +0.06 kg, pending FEA (grokbuild/structure_fea.md).
+- Linkage allowance per leg:
+  - knee crossbar + cheeks 0.125 kg
+  - hip crossbar + cheeks 0.127 kg
+  - ankle instep lugs 0.042 kg
+  - total 0.294 kg per leg; 0.588 kg both legs
+  - this leaves 0.062 kg of 0.65 for nut-rotor hubs
+- These are parametric-solid estimates. The pelvis trunnion bracket is out of scope (Torso).
+- Evidence: modules/legs/structure.py, results/r2/structure_mass.md/.json, DECISIONS L6, L8.
+- Status: open

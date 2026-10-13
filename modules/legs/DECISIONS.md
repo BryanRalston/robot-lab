@@ -9,3 +9,15 @@
 - L4. Forward sim at 1.2 m/s is still not stable with time-indexed tracking. Tried, all falling at 4–6 s: VMC gains, capture-point foot placement, CoP-limited ankle torque, stronger yaw control, the r1 plan on R1.2 limits. The failure mode is an accumulating stance-foot yaw slip/roll after about 4 s of full speed. The next step needs online replanning (LIPM-MPC footsteps + whole-body QP). It is too heavy for this box/usage, so it goes to a Grok Build brief (`grokbuild/wbc_walk_1p2.md`).
 - L5. Stairs ankle: with the IK ROM margin widened to 1.0 rad, the flat-swing-foot plan reaches −74° dorsiflexion, but only in SWING (stance max −36 to −42°; walking stance max −48°). Swing dorsiflexion is a plan artifact (swing foot held flat); the swing foot can pitch freely at < 90 N·m. → proposal P-006: loaded ankle ROM need −50°, not −60°; no toe joint needed.
 - L6. Structure boundary for the 4.90 kg budget: thigh = upper lug + femur tube + collars + knee clevis; shank = tibia tube + collar + ankle fork; foot = foot plate (excl. instep lever). The linkages (knee tongue + twin lever, ankle instep lever + cross, hip_pitch lever + trunnions) are counted in the R-001 linkage line, not in structure.
+- L7 (2026-10-13) Linkage
+  - Knee lever 47.5 mm kept (sweep: ≥ 47.5 needed for speed; 42.5 best balanced). Informational only.
+  - Hip_pitch packaged geometry A: clock 120°, trunnion x30 z300; gait ROM ratio 1.27.
+  - Deep flexion (< −80°) is unsupported, so sit-to-stand must be re-planned (P-009).
+- L8 (2026-10-13) Structure 4.84 kg both legs
+  - The knee tongue is counted as structure: v3 0.447 kg minus 0.173 kg lever solids.
+  - The foot cut grew from 18 % to 25 % to stay under 4.90.
+  - FEA brief: grokbuild/structure_fea.md.
+- L9 (2026-10-13) 65 kg forward sim on R1.2 limits
+  - walk_0p8 completes the full plan (16 steps, 5.13 m, track error 2 mm).
+  - walk_1p2_r2 falls at 5.45 s.
+  - The 1.2 m/s work is handed to grokbuild/wbc_walk_1p2.md.

@@ -99,3 +99,14 @@ Torques are clipped to the v3 catalog peaks (MJCF ctrlrange). Contacts are on, w
 | carry 20 kg at 1.2 m/s, v3 limits | falls at 2.8 s after 6 touchdowns |
 | push step, sit-to-stand in forward sim | not achieved (push run falls at 1.14 s; the sit-to-stand run has no chair in the scene and is not valid). Reported only for completeness |
 What works: CPU-only model-based walking on the v3 model at 0.8 m/s, with v3 actuator limits, for 16 steps and 5.1 m. What doesn't: 1.0 m/s holds for 14 steps, then falls. 1.2 m/s and the 20 kg carry fall within about 10 steps. The ID shows 1.2 m/s needs more hip-pitch and hip-yaw torque than v3 has. A better controller (whole-body QP with CoP constraints, online footstep adjustment) is the next step before anyone can claim 1.2 m/s on hardware limits.
+
+## Round 2 (2026-10-13): 65 kg, CONTRACTS R1.2 limits
+- Requirements: results/r2/requirements.md (all scenarios re-run at 65 kg). See P-008.
+- Forward sim:
+  - 0.8 m/s stable.
+  - 1.2 m/s falls at about 5.5 s, with every controller variant tried.
+  - Handed off as grokbuild/wbc_walk_1p2.md.
+- Linkage: linkage_study.py / linkage_plot.py → results/r2/linkage_study.json. See P-009.
+- Structure: structure.py → results/r2/structure_mass.md (4.84 kg both legs). See P-010 and grokbuild/structure_fea.md.
+- Media: media/progress/2026-10-13_legs_fsim_*.png (render_strip.py).
+- Decisions: DECISIONS.md L1–L9.
