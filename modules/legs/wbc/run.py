@@ -132,8 +132,8 @@ def run(mode='walk', seconds=20.0, cruise=1.20, dt=0.001, push=False, carry=Fals
         if k % int(0.5 / dt) == 0:
             print(f't={d.time:5.2f} x={d.qpos[0]:5.2f} vx={vx:5.2f} y={d.qpos[1]:5.2f} '
                   f'z={d.qpos[2]:5.3f} rpy=({np.degrees(roll):4.1f},{np.degrees(pitch):4.1f},{np.degrees(yaw):4.1f}) '
-                  f'{ctrl.phase:7} s={ctrl.s:4.2f} ncon={d.ncon:2d} cop={cop_log[k]:6.1f} '
-                  f'qp={ctrl.last_ms:5.1f}ms base={ctrl.last_base_res:5.1f} {ctrl.last_status}',
+                  f'{ctrl.phase:7} s={ctrl.s:4.2f} sw={ctrl.swing} ncon={d.ncon:2d} cop={cop_log[k]:6.1f} '
+                  f'qp={ctrl.last_ms:5.1f}ms {ctrl.dbg_line} {ctrl.last_status}',
                   flush=True)
     elapsed = time.perf_counter() - t0
     sl = slice(0, k_end)
@@ -176,6 +176,12 @@ def run(mode='walk', seconds=20.0, cruise=1.20, dt=0.001, push=False, carry=Fals
     else:
         cop_exc_peak = None
     mean_speed = float(st[-1, 1] / t_end) if t_end > 0 else 0.0
+    if k_end:
+        ds_frac = float(np.mean((fz_log[sl, 0] > 40.0) & (fz_log[sl, 1] > 40.0)))
+        flight_frac = float(np.mean((fz_log[sl, 0] < 20.0) & (fz_log[sl, 1] < 20.0)))
+    else:
+        ds_frac = 0.0
+        flight_frac = 0.0
     # steady window: last half, if long enough
     if t_end > 4:
         mask = st[:, 0] > t_end * 0.5
@@ -193,6 +199,10 @@ def run(mode='walk', seconds=20.0, cruise=1.20, dt=0.001, push=False, carry=Fals
         mean_speed_com_vx_mps=round(steady, 4),
         pelvis_x_m=round(float(st[-1, 1]), 4) if k_end else 0.0,
         touchdowns=int(td),
+        ds_frac=round(ds_frac, 4),
+        flight_frac=round(flight_frac, 4),
+        rate_nom=round(float(getattr(ctrl, 'rate_nom', 1.0)), 4),
+        v_plan_mps=round(float(getattr(ctrl, 'v_plan', 0.0)), 4),
         cop_margin_min_mm=None if cop_min is None else round(cop_min, 2),
         cop_offset_from_sole_center_peak_mm=None if cop_exc_peak is None else round(cop_exc_peak, 2),
         joints=joints,
@@ -215,7 +225,8 @@ def run(mode='walk', seconds=20.0, cruise=1.20, dt=0.001, push=False, carry=Fals
     # value stored on the controller if present
     print('RESULT', json.dumps({k: res[k] for k in
           ('sim_time_s', 'fell_at_s', 'mean_speed_pelvis_mps', 'mean_speed_com_vx_mps',
-           'touchdowns', 'cop_margin_min_mm', 'qp_ok', 'qp_fail', 'wall_s', 'push_impulse_Ns')}),
+           'touchdowns', 'ds_frac', 'flight_frac', 'cop_margin_min_mm', 'qp_ok', 'qp_fail',
+           'wall_s', 'push_impulse_Ns', 'rate_nom')}),
           flush=True)
     os.makedirs(OUT, exist_ok=True)
     tag = mode
@@ -223,12 +234,35 @@ def run(mode='walk', seconds=20.0, cruise=1.20, dt=0.001, push=False, carry=Fals
                         state=st, yaw=yaw_log[:k_end], tau=tau, cop_margin_mm=cop_log[sl],
                         cop_local=loc if k_end else cop_local[:1], fz=fz_log[sl],
                         t_q=np.array(t_keep), q=np.array(q_keep) if q_keep else np.zeros((0, m.nq)))
+    write_attitude_plot(os.path.join(OUT, f'{tag}_yaw_roll.png'), st, yaw_log[:k_end])
+    res['yaw_roll_plot'] = os.path.join(OUT, f'{tag}_yaw_roll.png')
     if gif and q_keep:
         write_gif(GIF if mode == 'walk' else os.path.join(OUT, f'{tag}.gif'),
                   np.array(q_keep), np.array(t_keep), m, fell)
         res['gif'] = GIF if mode == 'walk' else os.path.join(OUT, f'{tag}.gif')
     json.dump(res, open(os.path.join(OUT, f'{tag}.json'), 'w'), indent=1)
     return res
+
+
+def write_attitude_plot(path, st, yaw):
+    import matplotlib
+    matplotlib.use('Agg')
+    import matplotlib.pyplot as plt
+    if len(st) < 2:
+        return
+    fig, ax = plt.subplots(2, 1, figsize=(7.2, 4.4), sharex=True)
+    t = st[:, 0]
+    ax[0].plot(t, np.degrees(yaw[:len(t)]), color='C0', lw=1.0)
+    ax[0].set_ylabel('pelvis yaw (deg)')
+    ax[0].axhline(0.0, color='0.5', lw=0.4)
+    ax[1].plot(t, np.degrees(st[:, 6]), color='C1', lw=1.0)
+    ax[1].set_ylabel('pelvis roll (deg)')
+    ax[1].set_xlabel('time (s)')
+    ax[1].axhline(0.0, color='0.5', lw=0.4)
+    fig.tight_layout()
+    fig.savefig(path, dpi=110)
+    plt.close(fig)
+    print('plot', path, flush=True)
 
 
 def write_gif(path, Q, times, m, fell):

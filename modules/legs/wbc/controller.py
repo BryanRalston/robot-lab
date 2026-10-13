@@ -7,12 +7,15 @@ CoP inside the sole, |Mz| <= 0.05 Fz). Tasks: centroidal linear and angular
 momentum, stance/swing foot pose (swing yaw and roll tracked explicitly),
 pelvis attitude, and a joint-posture null space.
 
-The MPC shoots a handful of step timings through the linear inverted pendulum
-and, for each timing, places the next sole with a 1-D LIPM QP (sagittal) plus
-a lateral law that widens the step with the capture point. Landing yaw unloads
-hip yaw when it leaves the planned band. Toe-off pitch follows the walk_1p2_r2
-schedule: 25 deg across the double-support interval, back to flat in the first
-half of swing.
+The plan path (use_plan) tracks a cruise slice of walk_1p2_r2. _plan_mpc closes
+that loop at 100 Hz: sagittal and lateral DCM / capture-point foot placement,
+a bounded step-time change (playback rate), and stance-yaw feedback through
+yaw_off and the swing-foot yaw. --cruise scales the slice (rate = cruise / v_plan,
+velocities * rate, feedforward * rate^2 about gravity). The trail foot is held
+down and the landing is accepted early so double support is longer than the
+slice's ~3% , and a vertical impedance task kills the touchdown bounce.
+
+The FSM path below is the earlier LIPM stepper. Acceptance runs use the plan path.
 """
 import os, sys
 import numpy as np
@@ -35,6 +38,12 @@ FC = 0.06                 # sole-center x in the foot frame (matches the gait pl
 TH_TO = np.deg2rad(25.0) # toe-roll amplitude from walk_plan
 YAW_MZ = 0.05            # |Mz| <= YAW_MZ * Fz, same couple limit as gait_lib
 DS_FRAC = 0.15
+# Realized double support on the open-loop slice was 3.3% (design DS_FRAC
+# is 0.15). Hold the trailing foot after the plan lifts it, and start
+# sharing load before the plan's touchdown. The playback clock is not
+# what creates that overlap.
+DS_PAD_LO = 0.120
+DS_PAD_TD = 0.070
 T_NOM = 0.42
 PEL_Z = 1.02
 HALF_W = 0.13
@@ -132,6 +141,7 @@ class WalkController:
         self.dt = m.opt.timestep
         self.robot = Robot(m)
         self.ds = mujoco.MjData(m)
+        self.dg = mujoco.MjData(m)
         self.pelvis = m.body('pelvis').id
         self.torso = m.body('torso').id
         self.foot = {s: m.body(f'{s.upper()}_foot').id for s in 'lr'}
@@ -223,9 +233,26 @@ class WalkController:
         self.mg = self.mass * G
         self.plan_on = False
         self.rate = 1.0
-        self.foot_off = np.zeros(2)
+        self.rate_nom = 1.0
+        self.v_plan = 1.2
+        self.foot_off = np.zeros(3)
         self.yaw_off = 0.0
+        self.yaw_int = 0.0
+        self.swing_yaw = 0.0
         self.phase_t = 0.0
+        self.contact_mode = 'ss'
+        self.dcm_off = np.zeros(2)
+        self._dcm_side = None
+        self._hold_key = None
+        self._hold_p = np.zeros(3)
+        self._hold_yaw = 0.0
+        self.foot_tgt = None
+        self.foot_tgt_yaw = 0.0
+        self.foot_tgt_on = False
+        self.load_override = None
+        self.g_dof = None
+        self.dbg_line = ''
+        self.swing_iv = {}
 
     # ---------------------------------------------------------------- setup
     def initialize(self, d):
@@ -1222,9 +1249,28 @@ class WalkController:
         self.y_ref0 = float(com[1])
         self.omega = float(np.sqrt(G / max(self.com_z_ref, 0.4)))
         self.phase_t = 0.0
-        self.rate = 1.0
-        self.foot_off = np.zeros(2)
+        self.v_plan = float(dx / self.period) if self.period > 1e-6 else float(self.cruise)
+        # --cruise scales the slice. 0.5 and 0.8 must not collapse to the same run.
+        self.rate_nom = float(np.clip(self.cruise / max(self.v_plan, 0.2), 0.30, 1.35))
+        self.rate = self.rate_nom
+        d.qvel[:] *= self.rate_nom
+        self.foot_off = np.zeros(3)
         self.yaw_off = 0.0
+        self.yaw_int = 0.0
+        self.swing_yaw = 0.0
+        self.t_since = 0.0
+        self.swing_lo = 0.0
+        self._ds_u = 1.0
+        self.freeze_swing = False
+        self.e_xi = np.zeros(2)
+        self.dcm_off = np.zeros(2)
+        self._dcm_side = None
+        self._hold_key = None
+        self.contact_mode = 'ss'
+        self.foot_tgt = None
+        self.foot_tgt_on = False
+        self.load_override = None
+        self.g_dof = None
         self.plan_on = True
         self.phase = 'plan'
         self.s = 0.0
@@ -1235,8 +1281,11 @@ class WalkController:
             R = d.xmat[self.foot[s]].reshape(3, 3)
             yaw = float(np.arctan2(R[1, 0], R[0, 0]))
             self.plant[s] = self._make_plant(np.array([p[0], p[1], SOLE]), yaw)
+        self._precompute_plan_feet()
+        self._cache_gravity(d.qpos)
         return dict(seam_err=err, period=self.period, dx=dx, z_drop=self.z_drop,
-                    pelvis_z=self.z0, com_z=self.com_z_ref, x_origin=x0)
+                    pelvis_z=self.z0, com_z=self.com_z_ref, x_origin=x0,
+                    v_plan=self.v_plan, rate_nom=self.rate_nom, cruise=self.cruise)
 
     def _sample_plan(self):
         cycle = int(np.floor(self.phase_t / self.period))
@@ -1261,6 +1310,11 @@ class WalkController:
         c = c.copy()
         c[0] += cycle * self.cycle_dx
         cd = (self.plan_C[min(i + 1, n)] - self.plan_C[i]) / self.plan_dt
+        # Time-scale the slice. Positions stay; speed follows --cruise.
+        rate = float(getattr(self, 'rate', 1.0))
+        v = v * rate
+        a = a * (rate * rate)
+        cd = cd * rate
         return q, v, a, al, c, cd
 
     def _sample_tau(self):
@@ -1297,34 +1351,242 @@ class WalkController:
                 cop[s] = (0.06, 0.0)
         return fz, cop
 
+    def _wrap(self, a):
+        return float((a + np.pi) % (2.0 * np.pi) - np.pi)
+
+    def _precompute_plan_feet(self):
+        """Foot poses of the cruise slice, and each foot's swing window."""
+        m = self.m
+        dg = self.dg
+        n = len(self.plan_Q)
+        xy = np.zeros((n, 2, 2))
+        yaw = np.zeros((n, 2))
+        z = np.zeros((n, 2))
+        for k in range(n):
+            dg.qpos[:] = self.plan_Q[k]
+            mujoco.mj_kinematics(m, dg)
+            for si, s in enumerate('lr'):
+                b = self.foot[s]
+                p = dg.xpos[b]
+                R = dg.xmat[b].reshape(3, 3)
+                xy[k, si] = p[:2]
+                z[k, si] = p[2]
+                yaw[k, si] = np.arctan2(R[1, 0], R[0, 0])
+        self.plan_fxy = xy
+        self.plan_fyaw = yaw
+        self.plan_fzht = z
+        self.plan_down = z < (SOLE + 0.012)
+        dt = self.plan_dt
+        nfr = n - 1
+        self.swing_iv = {}
+        for si, s in enumerate('lr'):
+            air = ~self.plan_down[:nfr, si]
+            iv = []
+            i = 0
+            while i < nfr:
+                if not air[i]:
+                    i += 1
+                    continue
+                j = i
+                while j < nfr and air[j]:
+                    j += 1
+                iv.append([i * dt, j * dt])
+                i = j
+            if len(iv) >= 2 and air[0] and air[-1]:
+                lo = iv[-1][0]
+                td = iv[0][1] + self.period
+                iv = [[lo, td]] + iv[1:-1]
+            self.swing_iv[s] = iv
+
+    def _plan_foot_at(self, local, side, cycle):
+        local = float(local % self.period)
+        u = local / self.plan_dt
+        i = int(u)
+        f = float(u - i)
+        n = len(self.plan_Q) - 1
+        if i >= n:
+            i, f = n - 1, 1.0
+        si = 0 if side == 'l' else 1
+        xy = (1.0 - f) * self.plan_fxy[i, si] + f * self.plan_fxy[min(i + 1, n), si]
+        xy = np.array(xy, float)
+        xy[0] += cycle * self.cycle_dx
+        z = (1.0 - f) * self.plan_fzht[i, si] + f * self.plan_fzht[min(i + 1, n), si]
+        yaw = (1.0 - f) * self.plan_fyaw[i, si] + f * self.plan_fyaw[min(i + 1, n), si]
+        return np.array([xy[0], xy[1], float(z)]), float(yaw)
+
+    def _event_pose(self, t_ev, local, cycle, side):
+        """Plan foot pose at a swing edge. t_ev may sit past the seam."""
+        if t_ev >= self.period:
+            local_ev = t_ev - self.period
+            cyc = cycle if local <= local_ev else cycle + 1
+            return self._plan_foot_at(local_ev, side, cyc)
+        if local + 1e-9 < t_ev and (t_ev - local) > 0.5 * self.period:
+            return self._plan_foot_at(t_ev, side, cycle - 1)
+        return self._plan_foot_at(t_ev, side, cycle)
+
+    def _swing_at(self, local):
+        for s, ivs in self.swing_iv.items():
+            for lo, td in ivs:
+                t = local
+                if td > self.period and t < (td - self.period):
+                    t = t + self.period
+                if lo <= t < td:
+                    dur = max(td - lo, 1e-3)
+                    return s, float((t - lo) / dur), float(t - lo), float(td - t), float(dur), float(lo), float(td)
+        return None, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0
+
+    def _sole_xy(self, ankle_xy, yaw):
+        return np.asarray(ankle_xy, float) + FC * np.array([np.cos(yaw), np.sin(yaw)])
+
+    def _cache_gravity(self, q):
+        m = self.m
+        dg = self.dg
+        flags = m.opt.disableflags
+        m.opt.disableflags = flags | int(mujoco.mjtDisableBit.mjDSBL_CONTACT
+                                          | mujoco.mjtDisableBit.mjDSBL_LIMIT
+                                          | mujoco.mjtDisableBit.mjDSBL_FRICTIONLOSS)
+        try:
+            dg.qpos[:] = q
+            dg.qvel[:] = 0.0
+            dg.qacc[:] = 0.0
+            mujoco.mj_inverse(m, dg)
+            self.g_dof = dg.qfrc_inverse.copy()
+        finally:
+            m.opt.disableflags = flags
+
+    def _quat_yaw(self, q):
+        w, x, y, z = q[3:7]
+        return float(np.arctan2(2.0 * (w * z + x * y), 1.0 - 2.0 * (y * y + z * z)))
+
+    def _q_at(self, local):
+        """Cruise-slice qpos at a phase in [0, period). Joint angles only."""
+        local = float(local % self.period) if self.period else 0.0
+        u = local / self.plan_dt
+        n = len(self.plan_Q) - 1
+        i = int(u)
+        if i >= n:
+            i, f = n - 1, 1.0
+        else:
+            f = float(u - i)
+        return (1.0 - f) * self.plan_Q[i] + f * self.plan_Q[i + 1]
+
     def _plan_mpc(self, d):
-        """100 Hz LIPM correction: step position, width, yaw, and playback timing."""
+        """100 Hz closed loop on the cruise slice.
+
+        Sagittal and lateral foot placement follow the DCM (capture point)
+        predicted to touchdown. Step timing is a bounded playback-rate change
+        around rate_nom = cruise / v_plan. yaw_off integrates heading and
+        stance-foot yaw error; the swing foot lands at that yaw and the stance
+        hip yaw servo uses the same offset.
+        """
         q_ref, v_ref, _, al, c_ref, cd_ref = self._sample_plan()
+        self._cache_gravity(q_ref)
         mujoco.mj_subtreeVel(self.m, d)
         com = d.subtree_com[1]
         cd = d.subtree_linvel[1]
-        # Lateral capture shift of the swing foot only. Cleared at stance so the
-        # planted foot is not dragged. This is the shift that extended the
-        # open-loop cruise from ~4 s to ~6 s; sagittal offsets made it fall.
-        err_y = (float(com[1]) + float(cd[1]) / self.omega) - (
-            float(c_ref[1]) + float(cd_ref[1]) / self.omega)
+        cycle = int(np.floor(self.phase_t / self.period)) if self.period > 0 else 0
+        local = float(self.phase_t - cycle * self.period)
+        # Foot to step with is the unloaded leg in the slice (same test the
+        # open-loop cruise used). The geometric window is only the double
+        # support pads; those two disagree for ~70 ms at each transition.
+        geo, s_ph, t_since, t_to, dur, lo, td = self._swing_at(local)
         swing = None
         if al[0] < 0.15 <= al[1]:
             swing = 'l'
         elif al[1] < 0.15 <= al[0]:
             swing = 'r'
-        if swing is not None:
-            tgt = float(np.clip(0.45 * err_y, -0.04, 0.04))
-            self.foot_off[1] += float(np.clip(tgt - self.foot_off[1], -0.004, 0.004))
-            self.foot_off[0] = 0.0
-        else:
-            self.foot_off[:] = 0.0
-        # Timing stays on the cruise clock. Slowing the plan when behind pitched
-        # the robot off the slice in the PD trials.
-        self.rate = 1.0
-        self.yaw_off = 0.0
-        self.swing = swing
         self._plan_al = al
+        self.swing = swing
+
+        # --- yaw_off: heading and stance-foot slip ---
+        # Proportional to the heading error, with a small leaky integral.
+        # Swing-foot yaw is 0.30 * yaw_off, which is the gain the slice was
+        # tracked with. A saturated offset held for the whole step yawed the
+        # pelvis through the stance foot.
+        Rp = d.xmat[self.pelvis].reshape(3, 3)
+        yaw_m = float(np.arctan2(Rp[1, 0], Rp[0, 0]))
+        yaw_r = self._quat_yaw(q_ref)
+        ey = self._wrap(yaw_r - yaw_m)
+        stance = None if swing is None else ('r' if swing == 'l' else 'l')
+        fy = 0.0
+        if stance is not None:
+            R_st = d.xmat[self.foot[stance]].reshape(3, 3)
+            yaw_st = float(np.arctan2(R_st[1, 0], R_st[0, 0]))
+            _, yaw_pl = self._plan_foot_at(local, stance, cycle)
+            fy = self._wrap(yaw_pl - yaw_st)
+        self.yaw_int = float(np.clip(0.98 * self.yaw_int + ey * 0.001, -0.03, 0.03))
+        self.yaw_off = float(np.clip(ey + 0.20 * fy + 0.30 * self.yaw_int, -0.15, 0.15))
+        self.swing_yaw = float(np.clip(0.30 * self.yaw_off, -0.08, 0.08))
+
+        # --- DCM foot placement and step timing ---
+        # Reference velocity is the slice at rate_nom. The timing trim (self.rate)
+        # must not look like a speed error, or the step chases its own clock.
+        omega = max(self.omega, 1.0)
+        xi = com[:2] + cd[:2] / omega
+        v_nom = cd_ref[:2] * (self.rate_nom / max(self.rate, 0.25))
+        xi_p = c_ref[:2] + v_nom / omega
+        e_xi = (xi - xi_p) + np.array([
+            0.12 * (float(cd[0]) - self.cruise),
+            0.0,
+        ])
+        self.foot_tgt_on = False
+        self.load_override = None
+        self.foot_off[:] = 0.0
+        self.t_since = float(t_since)
+        self.swing_lo = float(lo)
+        # Double support pads follow the geometric trail foot, and only while
+        # that foot is the one the slice has unloaded.
+        mode = 'ds' if swing is None else 'swing'
+        if swing is not None:
+            if swing != self._dcm_side:
+                self._dcm_side = swing
+                self.dcm_off[:] = 0.0
+            # ±4 cm at 4 mm/tick. 8 cm on this sole rolled it onto two
+            # contacts and the walk ended sooner. Push recovery uses the
+            # timing term below once the error is past 10 cm.
+            ay = abs(float(e_xi[1]))
+            lat = float(np.clip(0.45 * float(e_xi[1]), -0.040, 0.040))
+            lat_step = 0.004
+            # Lengthen when the DCM is ahead of the plan. Shortening this
+            # torque tracker ran away, so a slow COM is not stepped shorter.
+            sag = float(np.clip(0.20 * max(0.0, float(e_xi[0]) - 0.03), 0.0, 0.030))
+            self.dcm_off[1] += float(np.clip(lat - self.dcm_off[1], -lat_step, lat_step))
+            self.dcm_off[0] += float(np.clip(sag - self.dcm_off[0], -0.0015, 0.0015))
+            pad = geo == swing
+            fz_sw = self._measured_fz(d, swing)
+            # The slice drops this foot's load ~70 ms before the sole leaves.
+            # Freeze it while it is still carrying weight so the other foot
+            # can land. That gap was the airborne bounce.
+            self.freeze_swing = (not pad) and fz_sw > 50.0
+            if pad and (s_ph > 0.45 and fz_sw > 60.0 or t_to < DS_PAD_TD):
+                mode = 'landing'
+            elif self.freeze_swing or (pad and t_since < DS_PAD_LO):
+                mode = 'ds_hold'
+            else:
+                mode = 'swing'
+            # A few percent only. Speeding the slice to 1.10 pitched the
+            # robot once the foot was already on its edge. Do not slow it.
+            hurry = 0.0
+            if float(e_xi[0]) > 0.06:
+                hurry += 0.15 * (float(e_xi[0]) - 0.06)
+            if ay > 0.10:
+                hurry += 0.08 * min(ay - 0.10, 0.15)
+            self.rate = float(np.clip(
+                self.rate_nom * (1.0 + hurry), self.rate_nom * 0.98, self.rate_nom * 1.03))
+            self.e_xi = np.array(e_xi, float)
+            self.foot_off[0] = float(self.dcm_off[0])
+            self.foot_off[1] = float(self.dcm_off[1])
+            self.foot_off[2] = 0.0
+            self.foot_tgt_on = False
+        else:
+            self.rate = float(self.rate_nom)
+            self.dcm_off *= 0.8
+            self.freeze_swing = False
+        self.contact_mode = mode
+        self.phase = 'ds' if mode in ('ds', 'ds_hold', 'landing') else 'ss'
+        self.dbg_line = (f'rate={self.rate:.2f} {mode:8} off=({self.foot_off[0]:+.3f},'
+                         f'{self.foot_off[1]:+.3f},{self.foot_off[2]:+.3f}) yaw={self.yaw_off:+.3f} '
+                         f'exi=({float(e_xi[0]):+.3f},{float(e_xi[1]):+.3f})')
 
     def _ref_acc(self, ds, v_ref, a_ref, bodies):
         """J a + Jdot v for each body and the COM, evaluated on the reference state."""
@@ -1362,6 +1624,74 @@ class WalkController:
         Jc = J0['com']
         acc['com'] = Jc @ a_ref + (J1['com'] - Jc) @ v_ref / eps
         return acc
+
+    def _ik_swing(self, q_ref, v_ref, swing):
+        """Move the swing-leg joints so that foot hits the MPC target.
+
+        Returns the position command and a velocity command whose swing-leg
+        part matches a held or speed-limited foot. The plan feedforward is
+        left for the caller to scale down when this correction is large.
+        """
+        q = q_ref.copy()
+        v = np.array(v_ref, float, copy=True)
+        if (not self.foot_tgt_on) or swing is None or self.foot_tgt is None:
+            return q, v
+        m = self.m
+        nv = self.nv
+        dg = self.dg
+        cols = [int(self.va[swing + j]) for j in LEG]
+        qas = [int(self.qa[swing + j]) for j in LEG]
+        body = self.foot[swing]
+        tgt = np.asarray(self.foot_tgt, float)
+        yaw_des = float(self.foot_tgt_yaw)
+        for _ in range(3):
+            dg.qpos[:] = q
+            mujoco.mj_kinematics(m, dg)
+            p = dg.xpos[body]
+            R = dg.xmat[body].reshape(3, 3)
+            yaw = float(np.arctan2(R[1, 0], R[0, 0]))
+            err = np.zeros(4)
+            err[:3] = tgt - p
+            err[3] = self._wrap(yaw_des - yaw)
+            if float(np.linalg.norm(err)) < 2e-3:
+                break
+            jp = np.zeros((3, nv))
+            jr = np.zeros((3, nv))
+            mujoco.mj_jacBody(m, dg, jp, jr, body)
+            J = np.vstack([jp[:, cols], jr[2:3, cols]])
+            W = np.diag([1.0, 1.0, 1.2, 0.20])
+            H = J.T @ W @ J + 2e-3 * np.eye(6)
+            dq = np.linalg.solve(H, J.T @ (W @ err))
+            dq = np.clip(dq, -0.12, 0.12)
+            for n_i, qa in enumerate(qas):
+                dof = cols[n_i]
+                q[qa] = float(np.clip(q[qa] + dq[n_i], self.qmin[dof] + 0.01, self.qmax[dof] - 0.01))
+        mode = self.contact_mode
+        dg.qpos[:] = q
+        mujoco.mj_kinematics(m, dg)
+        jp = np.zeros((3, nv))
+        mujoco.mj_jacBody(m, dg, jp, np.zeros((3, nv)), body)
+        z = float(dg.xpos[body][2])
+        shape_v = mode == 'ds_hold' or (mode in ('landing', 'swing') and z < SOLE + 0.06)
+        if shape_v:
+            v_other = v.copy()
+            for c in cols:
+                v_other[c] = 0.0
+            v_base = jp @ v_other
+            if mode == 'ds_hold':
+                v_des = np.zeros(3)
+            else:
+                v_des = jp @ v
+                clear = max(0.0, z - SOLE)
+                vz_cap = -0.08 - 0.70 * float(np.clip(clear / 0.06, 0.0, 1.0))
+                if v_des[2] < vz_cap:
+                    v_des[2] = vz_cap
+            Jv = jp[:, cols]
+            dv = np.linalg.solve(Jv @ Jv.T + 1e-3 * np.eye(3), v_des - v_base)
+            v_sw = np.clip(Jv.T @ dv, -8.0, 8.0)
+            for n_i, c in enumerate(cols):
+                v[c] = float(v_sw[n_i])
+        return q, v
 
     def _wbc_plan(self, d):
         """1 kHz QP: track the planned motion, with cone, torque, and speed limits."""
@@ -1408,7 +1738,7 @@ class WalkController:
         com = d.subtree_com[1]
         cd = d.subtree_linvel[1]
         # Centroidal linear momentum, light on purpose: the torque objective
-        # below is what kept the cruise slice up, and a stiff COM task pitches it.
+        # is what keeps the cruise slice up, and a stiff COM task pitches it.
         pd_c = np.array([
             8.0 * (c_ref3[0] - com[0]) + 3.0 * (cd_ref3[0] - cd[0]),
             10.0 * (c_ref3[1] - com[1]) + 3.0 * (cd_ref3[1] - cd[1]),
@@ -1426,32 +1756,93 @@ class WalkController:
         yaw = float(np.arctan2(Rp[1, 0], Rp[0, 0]))
         yaw_r = float(np.arctan2(Rr[1, 0], Rr[0, 0]))
         ey = (yaw_r - yaw + np.pi) % (2.0 * np.pi) - np.pi
-        swing = None
-        if al[0] < 0.15 <= al[1]:
-            swing = 'l'
-        elif al[1] < 0.15 <= al[0]:
-            swing = 'r'
-        self.swing = swing
-        self.phase = 'ss' if swing else 'ds'
+        swing = self.swing
+        mode = self.contact_mode
         q_cmd = q_ref.copy()
-        if swing is not None and abs(float(self.foot_off[1])) > 1e-4:
+        # DCM shift of the swing foot. XY only; yaw is the hip_yaw joint below
+        # so a heading correction does not drag the sole sideways.
+        if swing is not None and float(np.linalg.norm(self.foot_off[:2])) > 1e-4:
             jp_s = np.zeros((3, nv))
             mujoco.mj_jacBody(m, ds, jp_s, None, self.foot[swing])
             cols = [int(self.va[swing + j]) for j in LEG]
-            Jxy = jp_s[:2][:, cols]
-            dq = Jxy.T @ np.linalg.solve(Jxy @ Jxy.T + 1e-4 * np.eye(2), self.foot_off)
+            Jxy = jp_s[:2, cols]
+            reach = 0.22
+            dq = np.linalg.solve(Jxy @ Jxy.T + 1e-4 * np.eye(2), self.foot_off[:2])
+            dq = np.clip(Jxy.T @ dq, -reach, reach)
             for n_i, jn in enumerate(LEG):
-                q_cmd[int(self.qa[swing + jn])] += dq[n_i]
+                dof = cols[n_i]
+                qa = int(self.qa[swing + jn])
+                q_cmd[qa] = float(np.clip(q_cmd[qa] + dq[n_i], self.qmin[dof] + 0.01, self.qmax[dof] - 0.01))
         if swing is not None:
-            # Land the swing foot slightly against the heading error. The plan
-            # already carries the gait's yaw oscillation; this is only the error.
-            q_cmd[int(self.qa[swing + 'hip_yaw'])] += float(np.clip(-0.30 * ey, -0.08, 0.08))
+            # Swing-foot yaw follows yaw_off. Negative hip yaw on this model
+            # swings the foot the way the stance-yaw servo wants.
+            dof = int(self.va[swing + 'hip_yaw'])
+            qa = int(self.qa[swing + 'hip_yaw'])
+            q_cmd[qa] = float(np.clip(q_cmd[qa] - self.swing_yaw,
+                                       self.qmin[dof] + 0.01, self.qmax[dof] - 0.01))
+        # Keep the trail foot at the liftoff pose, then blend back onto the
+        # slice so the release is continuous. This is the extra double support.
+        if swing is not None and mode == 'ds_hold' and self.freeze_swing:
+            # Sole is still carrying load after the slice let go of it.
+            # Hold the measured leg pose; do not play the liftoff.
+            for jn in LEG:
+                dof = int(self.va[swing + jn])
+                qa = int(self.qa[swing + jn])
+                q_cmd[qa] = float(d.qpos[qa])
+                v_ref[dof] = 0.0
+            self._ds_u = 0.0
+        elif swing is not None and mode == 'ds_hold':
+            u_ds = float(np.clip(self.t_since / max(DS_PAD_LO, 1e-3), 0.0, 1.0))
+            # Pose from before the plan's liftoff, while that foot was loaded.
+            q_lo = self._q_at(self.swing_lo - 0.060)
+            for jn in LEG:
+                dof = int(self.va[swing + jn])
+                qa = int(self.qa[swing + jn])
+                q_cmd[qa] = float(np.clip(
+                    (1.0 - u_ds) * float(q_lo[qa]) + u_ds * q_cmd[qa],
+                    self.qmin[dof] + 0.01, self.qmax[dof] - 0.01))
+                v_ref[dof] *= u_ds
+            self._ds_u = u_ds
+        else:
+            self._ds_u = 1.0
+        # Bleed a fast swing-down, hold the trail foot, resist a bounce.
+        for s in 'lr':
+            z = float(feet[s]['p'][2])
+            vz = float(feet[s]['v'][2])
+            clear = z - SOLE
+            if mode == 'ds_hold' and s == swing and clear < 0.025:
+                add_task(feet[s]['jp'][2:3], np.array([36.0 * (SOLE - z) - 8.0 * vz]), 3.0)
+            elif s == swing and mode == 'landing' and 0.0 < clear < 0.08:
+                # Put the foot down before the stance foot has left, then bleed
+                # the last centimetre so the landing does not bounce both soles off.
+                vz_des = -0.18 if clear > 0.025 else -0.05
+                add_task(feet[s]['jp'][2:3], np.array([14.0 * (vz_des - vz)]), 5.0)
+            elif s == swing and 0.0 < clear < 0.05 and vz < -0.20:
+                vz_des = -0.08 - 0.50 * float(np.clip(clear / 0.05, 0.0, 1.0))
+                add_task(feet[s]['jp'][2:3], np.array([10.0 * (vz_des - vz)]), 2.5)
+            if feet[s]['fz'] > 40.0 and vz > 0.10 and s != swing:
+                add_task(feet[s]['jp'][2:3], np.array([-22.0 * vz]), 4.0)
         tff = self._sample_tau()
+        g = self.g_dof
+        # Cruise scales the slice. Stance feedforward stays on that scale.
+        # The swing leg is slowed with the liftoff/landing pace so the trail
+        # foot is not yanked up during the extra double support.
+        s2 = float(self.rate_nom) ** 2
+        ds_u = float(getattr(self, '_ds_u', 1.0))
         tau_des = np.zeros(nu)
         for i in range(nu):
             dof = int(self.act_va[i])
             qa_i = int(self.act_qa[i])
-            tau_des[i] = (tff[dof]
+            raw = float(tff[dof])
+            if g is None:
+                ff = raw
+            else:
+                ff = float(g[dof] + s2 * (raw - g[dof]))
+                # Don't yank the trail foot up while it is being held down.
+                if (swing is not None and ds_u < 0.98
+                        and self.act_name[i].startswith(swing + '_')):
+                    ff = float(g[dof] + (ds_u ** 2) * s2 * (raw - g[dof]))
+            tau_des[i] = (ff
                           + self.pd_kp[i] * (q_cmd[qa_i] - d.qpos[qa_i])
                           + self.pd_kd[i] * (v_ref[dof] - d.qvel[dof]))
         ep = float(np.arctan2(-Rr[2, 0], np.hypot(Rr[2, 1], Rr[2, 2]))
@@ -1466,12 +1857,15 @@ class WalkController:
             i_hy = self.act_name.index(f'{s}_hip_yaw')
             # Measured on this model, both legs: negative hip/ankle pitch torque
             # raises the nose; negative hip yaw torque increases pelvis yaw.
-            # Clipped to a moment the sole (mu 0.8) can produce.
+            # Yaw is clipped to 14 Nm. The sole cone only allows |Mz| <= 0.05 Fz
+            # (~20 Nm at half body weight), and a larger command rolls the foot.
             wy_e = float(wp[1] - wrv[1])
             wz_e = float(wp[2] - wrv[2])
             tau_des[i_ap] += al[si] * float(np.clip(-220.0 * ep + 25.0 * wy_e, -28.0, 28.0))
             tau_des[i_hp] += al[si] * float(np.clip(-520.0 * ep + 40.0 * wy_e, -55.0, 55.0))
-            tau_des[i_hy] += al[si] * float(np.clip(-240.0 * ey + 18.0 * wz_e, -22.0, 22.0))
+            # Half the old ±22 Nm. That moment was the whole yaw couple the
+            # cone allows, so the CoP had nothing left and the foot rolled.
+            tau_des[i_hy] += al[si] * float(np.clip(-160.0 * self.yaw_off + 10.0 * wz_e, -12.0, 12.0))
         # tau = (M qacc + h - J^T w) on each actuator. Track tau_des.
         tw = 2.0
         for i in range(nu):
@@ -1482,16 +1876,38 @@ class WalkController:
             rhs = float(tau_des[i] * self.gear[i] - h[dof])
             P += tw * np.outer(row, row)
             qv += -tw * rhs * row
-        alphas = np.asarray(al, float)
+        if self.load_override is not None:
+            alphas = np.asarray(self.load_override, float)
+        else:
+            alphas = np.asarray(al, float)
         if float(alphas.sum()) > 1e-6:
             alphas = alphas / alphas.sum()
         else:
             alphas = np.array([0.5, 0.5])
         fz_ref, cop_ref = self._sample_contact()
+        fz_ref = np.array(fz_ref, float, copy=True)
+        # Share weight with a trail foot that is still on the ground, and with
+        # a swing foot that has touched down early. The plan's force is ~0
+        # there, which is why realized double support was 3.3%.
+        if swing is not None and mode in ('ds_hold', 'landing'):
+            on_ground = (feet[swing]['fz'] > 30.0
+                         or float(feet[swing]['p'][2]) < SOLE + 0.006)
+            if on_ground:
+                share = 0.45 if mode == 'ds_hold' else 0.40
+                si = 0 if swing == 'l' else 1
+                fz_ref[si] = share * self.mg
+                fz_ref[1 - si] = (1.0 - share) * self.mg
+                cop_ref = np.array(cop_ref, float, copy=True)
+                cop_ref[si] = (0.06, 0.0)
         for i, s in enumerate('lr'):
             o = nv + 6 * i
-            fz_r = float(max(fz_ref[i], 0.0))
+            if self.load_override is not None:
+                fz_r = float(max(alphas[i], 0.0) * self.mg)
+            else:
+                fz_r = float(max(fz_ref[i], 0.0))
             cx, cy = float(cop_ref[i, 0]), float(cop_ref[i, 1])
+            cx = float(np.clip(cx, HEEL, TOE))
+            cy = float(np.clip(cy, -HALFW, HALFW))
             # My = -cop_x Fz, Mx = cop_y Fz with Fx = Fy = 0.
             ref = np.array([0.0, 0.0, fz_r, cy * fz_r, -cx * fz_r, 0.0])
             reg = np.array([2e-3, 2e-3, 5e-2, 4e-3, 4e-3, 8e-3])
@@ -1522,7 +1938,11 @@ class WalkController:
             # A wrench is a real contact force. Zero it when the foot is in the
             # air, including a planned stance foot that has not landed yet.
             ankle_z = float(feet[s]['p'][2])
-            airborne = feet[s]['fz'] < 30.0 and (s == swing or ankle_z > SOLE + 0.015)
+            near = ankle_z < SOLE + 0.008 or feet[s]['fz'] > 40.0
+            # ds_hold / landing keep a wrench on a foot that is actually down.
+            swing_air = s == swing and not (mode in ('ds_hold', 'landing') and near)
+            airborne = feet[s]['fz'] < 30.0 and (
+                swing_air or (s != swing and ankle_z > SOLE + 0.015))
             for r in range(G.shape[0]):
                 coeff = np.zeros(n)
                 coeff[nv + 6 * i:nv + 6 * i + 6] = G[r]

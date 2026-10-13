@@ -1,0 +1,137 @@
+{
+ "mode": "walk",
+ "carry_kg": 0.0,
+ "cruise_cmd_mps": 0.8,
+ "timestep_s": 0.001,
+ "wbc_hz": 1000,
+ "mpc_hz": 100,
+ "seconds_commanded": 4.0,
+ "sim_time_s": 1.73,
+ "fell_at_s": 1.73,
+ "fall_trigger": "pelvis",
+ "completed": false,
+ "mean_speed_pelvis_mps": 0.4797,
+ "mean_speed_com_vx_mps": 0.5,
+ "pelvis_x_m": 0.8299,
+ "touchdowns": 1,
+ "ds_frac": 0.1867,
+ "flight_frac": 0.0006,
+ "rate_nom": 0.6668,
+ "v_plan_mps": 1.1997,
+ "cop_margin_min_mm": -0.0,
+ "cop_offset_from_sole_center_peak_mm": 130.0,
+ "joints": [
+  {
+   "joint": "l_hip_yaw",
+   "peak_Nm": 42.14,
+   "rms_Nm": 12.69,
+   "avail_Nm": 70.0,
+   "peak_over_avail": 0.602,
+   "saturated_pct": 0.0
+  },
+  {
+   "joint": "l_hip_roll",
+   "peak_Nm": 88.64,
+   "rms_Nm": 49.98,
+   "avail_Nm": 204.0,
+   "peak_over_avail": 0.434,
+   "saturated_pct": 0.0
+  },
+  {
+   "joint": "l_hip_pitch",
+   "peak_Nm": 125.43,
+   "rms_Nm": 56.82,
+   "avail_Nm": 350.0,
+   "peak_over_avail": 0.358,
+   "saturated_pct": 0.0
+  },
+  {
+   "joint": "l_knee",
+   "peak_Nm": 214.2,
+   "rms_Nm": 109.3,
+   "avail_Nm": 258.0,
+   "peak_over_avail": 0.83,
+   "saturated_pct": 0.0
+  },
+  {
+   "joint": "l_ankle_pitch",
+   "peak_Nm": 248.77,
+   "rms_Nm": 49.14,
+   "avail_Nm": 311.0,
+   "peak_over_avail": 0.8,
+   "saturated_pct": 0.0
+  },
+  {
+   "joint": "l_ankle_roll",
+   "peak_Nm": 47.36,
+   "rms_Nm": 14.7,
+   "avail_Nm": 177.0,
+   "peak_over_avail": 0.268,
+   "saturated_pct": 0.0
+  },
+  {
+   "joint": "r_hip_yaw",
+   "peak_Nm": 27.9,
+   "rms_Nm": 10.84,
+   "avail_Nm": 70.0,
+   "peak_over_avail": 0.399,
+   "saturated_pct": 0.0
+  },
+  {
+   "joint": "r_hip_roll",
+   "peak_Nm": 135.96,
+   "rms_Nm": 57.15,
+   "avail_Nm": 204.0,
+   "peak_over_avail": 0.666,
+   "saturated_pct": 0.0
+  },
+  {
+   "joint": "r_hip_pitch",
+   "peak_Nm": 127.96,
+   "rms_Nm": 55.38,
+   "avail_Nm": 350.0,
+   "peak_over_avail": 0.366,
+   "saturated_pct": 0.0
+  },
+  {
+   "joint": "r_knee",
+   "peak_Nm": 182.75,
+   "rms_Nm": 89.95,
+   "avail_Nm": 258.0,
+   "peak_over_avail": 0.708,
+   "saturated_pct": 0.0
+  },
+  {
+   "joint": "r_ankle_pitch",
+   "peak_Nm": 251.63,
+   "rms_Nm": 48.92,
+   "avail_Nm": 311.0,
+   "peak_over_avail": 0.809,
+   "saturated_pct": 0.0
+  },
+  {
+   "joint": "r_ankle_roll",
+   "peak_Nm": 27.33,
+   "rms_Nm": 12.57,
+   "avail_Nm": 177.0,
+   "peak_over_avail": 0.154,
+   "saturated_pct": 0.0
+  }
+ ],
+ "qp_ok": 1730,
+ "qp_fail": 0,
+ "mean_wbc_ms": 2.263,
+ "wall_s": 4.26,
+ "push_applied": false,
+ "push_time_s": null,
+ "push_swing_foot": null,
+ "push_impulse_Ns": 0.0,
+ "push_vy_before": null,
+ "push_vy_after": null,
+ "push_dvy": null,
+ "landings": [],
+ "note": "",
+ "mass_kg": 65.0,
+ "com_z_m": 0.9329,
+ "yaw_roll_plot": "C:\\Users\\bryma\\AppData\\Local\\Temp\\wbc_r6_c08\\walk_yaw_roll.png"
+}
