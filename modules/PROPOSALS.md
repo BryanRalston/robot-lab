@@ -212,4 +212,4 @@ Any change to CONTRACTS.md or TARGETS.md, or to another module's files, starts h
 - **Hip-body interface.** Hip_pitch bodies mount on the clamp through a GE 12 E eye with a ø12 pin (D46). The clamp arm bore is ø12 H7. Linkage +0.068 kg/leg vs pin pairs.
 - **Clamp retention.** The femur clamp needs bonded or form-locked axial retention. Friction alone crushes the 1.2 mm tube (SF 1.06).
 - **Contract rows.** Harness 1.296 kg (O20/O21) and linkage both legs 2.326 kg.
-- Status: open
+- Status: **ACCEPTED with conditions (R-020)** — needle/ø35 tongue holds (O17 closed); bond + light clamp + Legs sleeve/cross-pin backup (shoulder overruled); maintenance-free GE eyes subject to T9 life (A8); linkage 2.326 accepted; harness credited 1.324 (JST calc ×0.5); credible 66.89 vs 66.5. Legs r5 (L21–L24) ruled in R-020: M2 4.862 accepted, tongue −0.086 credited ×0.5.
