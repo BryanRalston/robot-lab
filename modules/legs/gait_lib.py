@@ -8,7 +8,7 @@ IKM=float(os.environ.get('LEGS_IKMARGIN','0.26'))   # rad the IK may exceed mode
 LEG=['hip_yaw','hip_roll','hip_pitch','knee','ankle_pitch','ankle_roll']
 G=9.81; DT=0.005
 SOLE=0.080            # ankle axis height above sole (foot box bottom at -0.080 in foot frame)
-HEEL,TOE,HALFW=-0.060,0.180,0.050   # sole extents in foot frame (x from ankle, half width)
+HEEL,TOE,HALFW=-0.060,0.180,float(os.environ.get("LEGS_HALFW","0.050"))   # sole extents in foot frame (x from ankle, half width)
 
 # CONTRACTS.md R1.2 available peak torque (Actuators selections, R-008); used as ctrlrange in round 2
 LIM_R1={'hip_yaw':70,'hip_roll':204,'hip_pitch':350,'knee':258,'ankle_pitch':311,'ankle_roll':177}
@@ -21,6 +21,18 @@ def load(carry=0.0, carry_pos=(0.32,0.0,0.12)):
         for i in range(m.nbody):
             if m.body(i).name!='payload': m.body_mass[i]*=k; m.body_inertia[i]*=k
         mujoco.mj_setConst(m,mujoco.MjData(m))
+    cx=os.environ.get('LEGS_CONTACT')   # r6 contact-model experiments (json): condim, torsion, cone, impratio, foot_halfw, solref
+    if cx:
+        cx=json.loads(cx)
+        for s_ in ('l_foot','r_foot'):
+            g=m.geom(s_).id
+            if 'condim' in cx: m.geom_condim[g]=cx['condim']
+            if 'torsion' in cx: m.geom_friction[g][1]=cx['torsion']
+            if 'roll' in cx: m.geom_friction[g][2]=cx['roll']
+            if 'foot_halfw' in cx: m.geom_size[g][1]=cx['foot_halfw']
+            if 'solref' in cx: m.geom_solref[g]=cx['solref']
+        if 'cone' in cx: m.opt.cone=mujoco.mjtCone.mjCONE_ELLIPTIC if cx['cone']=='elliptic' else mujoco.mjtCone.mjCONE_PYRAMIDAL
+        if 'impratio' in cx: m.opt.impratio=cx['impratio']
     if LIMITS=='r1':
         for i in range(m.nu):
             n=m.actuator(i).name

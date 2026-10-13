@@ -21,7 +21,7 @@ if LEGS not in sys.path:
 from gait_lib import load, LEG, LIM_R1, SOLE, HEEL, TOE, HALFW
 from controller import WalkController, measured_cop, cop_margin_mm
 
-OUT = os.path.join(LEGS, 'grokbuild', 'results')
+OUT = os.environ.get('WBC_OUT', os.path.join(LEGS, 'grokbuild', 'results'))
 GIF = os.path.join(ROOT, 'media', 'progress', '2026-10-13_legs_wbc_walk1p2.gif')
 
 

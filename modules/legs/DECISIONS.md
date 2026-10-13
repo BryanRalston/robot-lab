@@ -109,3 +109,9 @@
   - Mass 0.015 kg/leg bumper + 0.016 collar bolts = 0.031/leg, **0.062 both legs vs 0.04 allowance (+0.022)**.
   - Open: an unpowered back-driven fall (screw backdrive speed unknown) needs a forward sim with the stop modelled.
 - L27 (r6) A1': ø35 tongue and clamp pins/sleeve/bond added to grokbuild/structure_fea.md (items 6–7).
+- L28 (r6) WBC QC failure diagnosis (box re-sim, osqp 1.1.3, LEGS_MASS=65, walk 10 s, results/r6/wbc/*):
+  - Baseline reproduces: fell 5.039 s (Grok REPORT 4.915 s), qp_fail 0, CoP margin 0 mm.
+  - Contact fixes, one at a time, all FAIL (fell earlier): condim 6 + torsion 0.02 → 4.505 s; elliptic cone impratio 10 → 4.320 s; foot half-width 60 mm → 4.329 s.
+  - `--cruise 0.8` and `0.5` both give identical 4.317 s at 1.13 m/s mean, so the cruise arg doesn't reach the plan (bug; the 1 s cruise slice is fixed).
+  - Torque saturation is 0 in the REPORT, so ankle_roll saturation is ruled out.
+  - Root cause: `_plan_mpc` plays the fixed 1 s cruise slice back open-loop. `rate=1.0`, `yaw_off=0`, `foot_off[0]=0` mean there's no sagittal step, timing or yaw feedback, only a ±40 mm lateral nudge. Any error (accumulated drift, push, 20 kg carry) can only go into the CoP. The CoP saturates at the sole edge (about 20 % of frames), the foot rolls onto an edge (2 contacts), stance yaw twists to −17.6°, and the robot falls. Short double support (3.3 %) and impact bounce (7 % airborne) make it worse. This is a controller rework, owned by Grok Build: brief grokbuild/wbc_fix_r6.md.
