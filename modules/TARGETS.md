@@ -33,6 +33,8 @@ Tesla has **never published an Optimus datasheet**. Most numbers that circulate 
 
 **Status 2026-10-13 R8 (R-020):** T2 paper **65.75 kg**, credible **66.89 kg (NOT MET vs ≤ 66.5; −0.39)**; 66.27 after Grok Build FEA (A1'), still short of the 0.30 reserve → R-018 fallback likely. O17 closed (needle/ø35 tongue). Clamp: bond + pinned sleeve backup. GE eyes life vs T9 open (A8). Target values unchanged (T2 66.5, T5 20 kg).
 
+**Status 2026-10-13 R9 (R-021):** T2 paper **64.52 kg**, credible **66.07 kg (MET vs ≤ 66.5; reserve 0.43)** after A3 covers/brain sizing (brain 1.216 credited, covers 1.622 credited); 65.47 after Grok Build FEA (A1'). R-018 fallback not expected. Target values unchanged (T2 66.5, T5 20 kg).
+
 Weights sum to 1.00. **Hard constraints (cannot be traded): T2 ≤ 66.5 kg (amended Bryan 2026-10-13 via R-016/R-017; was 65.0), T7 ≥ 2 h walking, T8 structural survival, safety.** Weights apply only to trades among soft margins.
 
 ## How the Arbiter uses the weights

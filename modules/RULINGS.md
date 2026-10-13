@@ -276,3 +276,39 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
 | A3 | Arbiter | covers / brain from cited catalogue parts (only remaining route to ≥ 0.30 reserve) | ×0 until cited | end of round 5 |
 
 - Fallback (R-018) now likely triggers: even with A1' at full credit, 66.27 > 66.2. If so at end of round 5, Arbiter re-rules covers/brain/arms/hands/Torso budgets; T2 (66.5) and T5 (20 kg) are not touched.
+
+### R-021: A3, M3 covers and M4 brain sized from cited parts (Arbiter placeholders, R-017/R-018)
+- Date: 2026-10-13
+- Module(s) / proposer: Arbiter (A3, R-018 to R-020)
+- Change requested: replace v3 placeholder lines covers 1.86 kg and brain 1.80 kg (`v3/analysis/v3.py` line 162) with sized stacks. Script: `modules/arbiter/a3_size.py` → `a3_size.json`.
+- **M4 brain (v3 compute bay 130×200×40 mm, Jetson AGX Thor per `v3/cad/model.py`):**
+
+| item | kg | source / quality |
+|---|---|---|
+| NVIDIA Jetson T5000 module (100×87×15.3 mm, TTP + heatpipe) | 0.280 | NVIDIA product sheet 900-13834-0080-000, "weight w/out packaging (approx.) 0.28 kg" (https://www.es-france.com/index.php?controller=attachment&id_attachment=17976 ; also https://download.kamami.pl/p1200075-Jetson%20Thor%20T5000%20SKU%20Setup.docx.pdf). The module datasheet DS-11945-001 gives no mass. Cited ×1.0 |
+| Connect Tech Gauntlet AGX301 carrier, board only + PHY heat spreader | 0.266 | Connect Tech manual CTIM-00140 "Weight" table (https://connecttech.com/ftp/pdf/CTIM-00140-AGX301_Manual.pdf). Cited ×1.0 (alt.: Seeed reComputer J601 312 g, distributor listing) |
+| Vicor DCM3623x75H26C2 48→24 V, 320 W isolated DC-DC | 0.024 | Vicor datasheet 24.0 g (https://www.vicorpower.com/documents/datasheets/DCM3623x75H26C2yzz_ds.pdf). Cited ×1.0 |
+| cold plate 6061, 100×87×6 mm on TTP | 0.141 | calc, thickness [EST] |
+| tray 7075, 130×200×2 mm | 0.146 | calc, thickness [EST] |
+| lid PA12 MJF 1.5 mm | 0.079 | calc (HP PA12 1.01 g/cm³), thickness [EST] |
+| RT / safety MCU board (EtherCAT master + e-stop) | 0.040 | [EST], basis: Nucleo-144 class board, no part chosen |
+| NVMe 2280 SSD | 0.008 | [EST] |
+| DCM input filter + heatsink | 0.030 | [EST] |
+| standoffs, fasteners | 0.030 | [EST] |
+| **paper total** | **1.044** | cited 0.570 + [EST] 0.474 |
+
+  - Credit: saving 1.80 − 1.044 = 0.756 is split by mass share. The cited share (54.6 %, 0.413) is credited ×1.0, and the [EST] share (0.343) ×0.5. **Credited brain = 1.216 kg (−0.584). Meets the M4 ≤ 1.50 target on both paper and credible numbers.** The heat path beyond the cold plate stays in the torso thermal line (1.0 kg) and is not double counted. Open item: Thor SYS_VIN is 7–20 V, so the carrier's input range must accept the DCM output, or a 48→12 V DCM variant has to be picked (same 24 g ChiP package). Brain power stays 120 W (T5000 modes 70–130 W).
+- **M3 covers:**
+  - Area: convex-hull area of v3 CAD segments (`v3/cad/export/bhl_v3.glb`). Thigh 0.209, shank 0.290, upper arm 0.079, forearm 0.065 m², each ×2, for **1.285 m²**. Torso and pelvis get no cover, because the CFRP 3 mm and 7075 4 mm structural shells already form the outer skin (v3 CAD). The head keeps its PA12 shell in the head line. Hands and feet are not covered.
+  - Material: HP 3D High Reusability PA 12 (MJF), density 1.01 g/cm³ ASTM D792 (https://www.shapeways.com/wp-content/uploads/2021/01/HP-MJF-PA-12-Data-sheet.pdf). Wall 1.5 mm [EST], set to the Shapeways MJF PA12 1.5 mm smooth unsupported-wall minimum (https://www.shapeways.com/materials/multi-jet-fusion-pa12).
+  - Full-coverage limb skins would weigh 1.285 × 1.5e-3 × 1010 = 1.948 kg (+0.41 pads and clips = **2.36 kg, over v3's 1.86**). The design is therefore **front and lateral panels at 50 % coverage [EST]**: 0.974 kg, plus clips and fasteners 0.050 [EST], plus EPP fall pads 0.360 (v3 formula at 30 mm, carried unchanged, still [EST]) = **paper 1.384 kg**.
+  - Credit: the whole saving rests on the [EST] wall and coverage, so 1.86 − 0.5 × 0.476 = **credited 1.622 kg (−0.238). This misses the M3 ≤ 1.20 target** (paper −0.18, credited −0.42).
+- **Mass reconciliation (vs ≤ 66.5 hard):** credible 66.891 − 0.584 − 0.238 = **66.07 kg (reserve 0.43, MET on credible)**. Paper 65.75 − 0.756 − 0.476 = **64.52 kg (reserve 1.98)**. With A1' FEA at full credit, credible is 66.07 − 0.596 = 65.47.
+- **R-018 fallback:** **not expected to trigger.** Credible 66.07 is below the 66.2 trigger and the reserve of 0.43 is at least 0.30. A1' and the other round-5 items have no further downside on this line. The trigger is re-checked at end of round 5 as written.
+- Ruling: **accepted. M4 credited 1.216 kg (target met). M3 credited 1.622 kg (target missed, gap carried by reserve).** No change to T2 (66.5), T5 (20 kg) or any authority wording.
+- Actions:
+
+| # | owner | action | releases | deadline |
+|---|---|---|---|---|
+| A10 | Arbiter (placeholder; Torso when staffed) | covers: panel layout on CAD, measured panel areas, and a wall/rib check of the 1.5 mm panels against the T8 fall case. Cite the EPP grade density and size pads from contact patches | up to −0.24 covers, plus pad delta | round 6 |
+| A11 | Arbiter (placeholder; Brain when staffed) | brain: pick the RT MCU part, confirm the carrier input voltage and DCM variant, and draw the cold plate and tray | up to −0.17 brain | round 6 |

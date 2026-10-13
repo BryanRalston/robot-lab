@@ -1,0 +1,39 @@
+{
+ "hull_m2": {
+  "L_thigh": 0.209,
+  "L_shank": 0.29,
+  "L_upper_arm": 0.079,
+  "L_forearm": 0.065,
+  "R_thigh": 0.209,
+  "R_shank": 0.29,
+  "R_upper_arm": 0.079,
+  "R_forearm": 0.065
+ },
+ "A_limb_m2": 1.285,
+ "covers": {
+  "limb_panels": 0.974,
+  "clips_fasteners": 0.05,
+  "epp_pads": 0.36
+ },
+ "covers_paper": 1.384,
+ "covers_credited": 1.622,
+ "brain_cited": {
+  "jetson_t5000": 0.28,
+  "gauntlet_agx301": 0.266,
+  "vicor_dcm3623": 0.024
+ },
+ "brain_est": {
+  "cold_plate": 0.141,
+  "tray": 0.146,
+  "lid": 0.079,
+  "rt_safety_mcu": 0.04,
+  "nvme_2280": 0.008,
+  "dcm_filter_heatsink": 0.03,
+  "standoffs_fasteners": 0.03
+ },
+ "brain_paper": 1.044,
+ "brain_credited": 1.216,
+ "credible": 66.069,
+ "paper": 64.518,
+ "full_coverage_covers": 2.357
+}
