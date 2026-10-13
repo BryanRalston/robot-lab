@@ -163,3 +163,23 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
 
 - Result: 66.56 − 1.95 = **64.61 kg (reserve 0.39)**. Reserve stays with the Arbiter. If M1–M4 miss by > reserve at end of round 4, Arbiter re-rules (candidate: arm/hand mass, then T5 carry 20 → 15 kg at w 0.12).
 - Structure remains provisional (R-013); the FEA after the walking-controller session gates the −0.55 credit.
+
+### R-016: whole-robot T2 mass ruling: P-012 folded with P-011 overrun (supersedes R-015 allocation table; R-015 verification stands)
+- Date: 2026-10-13. Inputs: P-012 (f484aca, 33a7186, c37232a; D25–D31), P-011, R-001 fallback, R-010 (pack), R-015.
+- Verified: lever B 0.371 kg each (SF 2.13, coarse CPU FEA, ×0.5 for SF), CRBH 5013 A 0.29 kg datasheet + 0.024 [EST] = 0.314/leg, table 2.527 kg both vs 0.609 → +1.918; Actuators rollup 65.79 + 1.918 = 67.71 kg (reproduces); with Legs structure −0.56 and Torso −0.80 → 66.35. Arbiter adds thigh clamp 0.20 [EST] (unsized, not in table) → **67.91 / 66.55 kg**. Gap to 65.00 at best current evidence: **1.55 kg**.
+- (a) Contract linkage line 2.53 kg, hip pivot bearing owned by Actuators: **accepted** (inside the R-015 M1 all-in ceiling).
+- (c) Ankle lever stays 70 mm: **accepted** (77 mm at 99.9 % Nmax violates R-005); R-014 1.0 m/s carry (1.31×) stands; 1.2 m/s carry tracked, path closed unless a new lever/screw option appears.
+- Levers evaluated (kg, evidence):
+  - Needle-roller straddle instead of CRBH: −0.20 [EST, datasheet needed] → ordered.
+  - Lever SF 2.0 → 1.5 + bench proof test at 1.5× fall load: −0.10 [EST] → ordered (proof test added to G5).
+  - Margin 1.5 → 1.3 (R-001 item 6, pre-approved): −0.52 script-backed (`sizing_m1.3.json`) for hip_roll, hip_pitch, ankle. Ankle_pitch is the tightest joint (309 need vs 311, carry 1.31× at 1.0 m/s) → **invoked for hip_roll and hip_pitch only**; ankle excluded. Credit: not until Actuators re-runs sizing for those two joints [EST −0.30, ×0.5]. Condition: carry ratio ≥ 1.2 at 1.0 m/s on every joint after re-size.
+  - Housing ×1.25 [EST] factor replaced by CAD solids: unknown, credit 0 until CAD.
+  - Battery: smaller pack → T7 hard FAIL (R-010, binned pack has 13.8 W margin) → rejected. Bigger pack also rejected (T2).
+  - Torso/arms/hands/head/brain budgets: unstaffed v3 placeholder [EST] numbers; cuts are paper until a module owner substantiates → ordered but credited ×0.
+- Ruling: **R-015 M1–M4 stand (−1.95 kg total, target 64.61 kg, reserve 0.39), with M1 (−1.00, Actuators) now explicitly comprising straddle −0.20, lever SF 1.5 −0.10, margin 1.3 hip_roll/hip_pitch ~−0.30, housing CAD ≥ −0.40.** Acceptance per R-015; deadline end of round 4. T2 status: **NOT MET**.
+- Risk stated: evidence-backed savings today are ~−0.30 (straddle + SF, [EST]) plus a script-backed margin cut not yet re-run → credible end state ≈ 66.55 − 0.30 − 0.30 = **65.95 kg [EST]**, i.e. ~0.95 kg over unless housing CAD and placeholder cuts (all ×0 evidence today) deliver. No credible plan reaches 65.00 kg on current evidence.
+
+#### R-016 recommendation: PENDING BRYAN (T2 hard limit; Arbiter does not change it)
+- Option A, keep 65.0 kg: depends on ~1.0 kg of unsubstantiated cuts; if they miss, the next levers are T5 payload 20 → 15 kg (weighted −(5/20) × 0.12 = **−0.030**) or T7 runtime (hard, no room).
+- Option B, raise T2 hard limit to **66.5 kg** (stretch ≤ 60 kg unchanged): covers the current-evidence end state 65.95 with 0.55 reserve. Weighted cost −(1.5/65) × 0.15 = **−0.0035** — an order of magnitude cheaper than A's fallback and below the 0.01 threshold. Optimus reference: secondary 57/63 kg figures (TARGETS T2), so 66.5 sits ~5 % above the heavier report.
+- Arbiter recommends **B (66.5 kg), keeping all R-015/R-016 cuts ordered so the design lands as low as possible.** Until Bryan decides, 65.0 kg remains binding.
