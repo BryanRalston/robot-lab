@@ -1,0 +1,15 @@
+{
+ "base_R018_credible": 66.976,
+ "linkage_delta": 0.16135596657875828,
+ "harness_delta": -0.0482774450997987,
+ "robot": 67.08907852147895,
+ "limit": 66.5,
+ "legs_A1_pending": -0.868,
+ "robot_if_A1": 66.22107852147896,
+ "harness": {
+  "model_kg": 1.2957225549002014,
+  "R018_credited": 1.344,
+  "delta": -0.0482774450997987,
+  "src": "results/harness.json (harness.py)"
+ }
+}

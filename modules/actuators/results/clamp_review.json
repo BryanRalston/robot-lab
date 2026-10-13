@@ -1,0 +1,57 @@
+{
+ "inputs": {
+  "F_per_body": 4542.0,
+  "femur": "\u00f850.0x1.2",
+  "collar_h": 30.0,
+  "mu": 0.15,
+  "SF_slip": 1.5,
+  "scatter": 1.25
+ },
+ "body_angle_deg": {
+  "min": -15.256514168294528,
+  "max": -7.028447054675343,
+  "swing": 8.228067113619185
+ },
+ "F_axial_both": 8763.856336107032,
+ "F_transverse_both": 2390.3719627030077,
+ "friction_only": {
+  "N_radial_req_N": 87638.56336107032,
+  "p_contact_MPa": 18.597480752515484,
+  "tube_hoop_MPa": 378.14877530114813,
+  "SF_tube_yield_with_scatter": 1.0641314378964704,
+  "p_collapse_long_tube_MPa": 2.3928031943472488,
+  "hoop_tension_per_side_N": 13948.110564386614,
+  "bolts": "2x M6 10.9 per side (FM ~ 10.4 kN each at muG 0.12, VDI 2230 table) -> 20.8 kN >= 13.9 kN",
+  "verdict": "FAIL: tube hoop yield SF 1.06 < 1.5 with preload scatter; friction alone not acceptable"
+ },
+ "bonded_plus_light_clamp": {
+  "tau_MPa": 1.859748075251548,
+  "SF_fatigue": 3.2262434250340304,
+  "clamp_p_MPa": 3.0,
+  "tube_hoop_MPa": 60.99999999999999,
+  "verdict": "PASS"
+ },
+ "eye": {
+  "part": "SKF GE 12 E",
+  "s0": 11.889035667107,
+  "p_walk_Nmm2": 21.86888888888889,
+  "G_h_relubricated": 3423.6063661983094,
+  "tilt_needed_deg": 4.114033556809592,
+  "tilt_allow_deg": 10.0,
+  "note": "if the eye pin is parallel to the hip axis the swing is plain rotation; if truly axial the \u00b14.1\u00b0 swing uses tilt (\u2264 10\u00b0 OK)"
+ },
+ "pin": {
+  "tau_MPa": 40.16009730685492,
+  "bend_MPa": 240.96058384112956,
+  "material": "42CrMo4 QT Sy 750",
+  "SF": 3.1125422591708647
+ },
+ "clamp_fatigue": {
+  "SF_max": 1.762032643157999,
+  "SF_p999": 2.658378972730514
+ },
+ "legs_FEA": {
+  "vm_max": 173.5321033674022,
+  "SF": 2.9
+ }
+}

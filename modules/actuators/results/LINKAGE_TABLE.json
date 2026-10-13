@@ -37,13 +37,31 @@
    "legs_confirm": ""
   },
   {
-   "part": "trunnion pin pair \u00f816/\u00f89 steel (one pair per screw body)",
+   "part": "trunnion pin pair \u00f816/\u00f89 steel (knee + ankle bodies; hip bodies now on clamp eyes, R5b)",
    "owner": "Actuators",
    "kg_each": 0.025894577447213865,
-   "n_per_leg": 6,
-   "kg_per_leg": 0.1553674646832832,
-   "source": "CAD; 6 bodies/leg -> 6 pairs (was 4; risk line closed as real)",
+   "n_per_leg": 4,
+   "kg_per_leg": 0.10357830978885546,
+   "source": "CAD; 6 -> 4 pairs/leg (Legs L18 clamp form, P-014)",
    "legs_confirm": ""
+  },
+  {
+   "part": "hip_pitch body axial eye: SKF GE 12 E in 7075 eye on body end + \u00f812x28 42CrMo4 pin in clamp arm",
+   "owner": "Actuators",
+   "kg_each": 0.05985879434932532,
+   "n_per_leg": 2,
+   "kg_per_leg": 0.11971758869865064,
+   "source": "GE 12 E datasheet 0.016 + eye 0.019 CAD-calc + pin calc; clamp_review.py",
+   "legs_confirm": "Legs: clamp arm bore \u00f812 H7"
+  },
+  {
+   "part": "ankle_pitch 73 mm lever (R5b): 2 RV12 screws +4 mm and 2 body tubes +4 mm for +4.3 % stroke",
+   "owner": "Actuators",
+   "kg_each": 0.012752352899451688,
+   "n_per_leg": 1,
+   "kg_per_leg": 0.012752352899451688,
+   "source": "calc; size.py ARM_FIX 0.073",
+   "legs_confirm": "Legs: instep lug pin radius 70 -> 73 mm"
   },
   {
    "part": "rod-end: SKF GE 12 E spherical plain bearing (0.016 kg, C0 54 kN) in a 7075 eye \u00f830x12 with M12 boss (0.019 kg CAD-calc)",
@@ -57,36 +75,51 @@
   {
    "part": "ankle rod-end lugs on foot instep (2)",
    "owner": "Legs",
-   "kg_each": 0.042,
+   "kg_each": 0.0,
    "n_per_leg": 1,
-   "kg_per_leg": 0.042,
-   "source": "Legs structure.py parametric",
-   "legs_confirm": "Legs confirm not also in structure 4.85"
+   "kg_per_leg": 0.0,
+   "source": "0.042/leg counted in Legs M2 line (L19); removed here (\u22120.084 both legs, R5b)",
+   "legs_confirm": ""
   },
   {
-   "part": "thigh trunnion clamp for hip_pitch bodies (config B)",
+   "part": "thigh split-collar clamp for hip_pitch bodies",
    "owner": "Legs",
-   "kg_each": null,
+   "kg_each": 0.0,
    "n_per_leg": 1,
-   "kg_per_leg": null,
-   "source": "OPEN, not sized",
-   "legs_confirm": "Legs to size"
+   "kg_per_leg": 0.0,
+   "source": "0.237/leg counted in Legs M2 line (L18); Actuators review clamp_review.json: bond + light clamp required",
+   "legs_confirm": ""
   }
  ],
- "per_leg": 1.1243971965857047,
- "both_legs": 2.2487943931714094,
+ "per_leg": 1.1630779832893792,
+ "both_legs": 2.3261559665787583,
  "contract_both": 0.609,
- "delta_vs_rollup": 1.6401866299236532,
+ "delta_vs_rollup": 1.717548203331002,
  "rollup": {
   "base_CAD_supported": 65.79,
   "actuators_r3b_hip": {
    "hip_lever": 0.22360404030354758,
    "hip_bearing": 0.4745018798312499
   },
-  "other_linkage_corrections": 0.9420807097888557,
+  "other_linkage_corrections": 1.0194422831962047,
   "thigh_clamp_R016": 0.2,
-  "new_total": 67.63018662992366,
-  "if_legs_structure_and_torso_land": 66.27018662992366,
+  "new_total": 67.70754820333102,
+  "if_legs_structure_and_torso_land": 66.34754820333102,
   "limit": 65.0
+ },
+ "harness": {
+  "model_kg": 1.2957225549002014,
+  "R018_credited": 1.344,
+  "delta": -0.0482774450997987,
+  "src": "results/harness.json (harness.py)"
+ },
+ "rollup_r5b": {
+  "base_R018_credible": 66.976,
+  "linkage_delta": 0.16135596657875828,
+  "harness_delta": -0.0482774450997987,
+  "robot": 67.08907852147895,
+  "limit": 66.5,
+  "legs_A1_pending": -0.868,
+  "robot_if_A1": 66.22107852147896
  }
 }

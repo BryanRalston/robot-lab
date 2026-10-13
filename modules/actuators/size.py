@@ -26,7 +26,8 @@ PT.MOT['TBM2G-07613']['Km']=[0.201,0.201,0.201]   # manual p.284 prints 2.01 for
 PT.RV['RV12x6']=dict(d=12,lead=6,Ca=18400,C0a=26500,eta=0.88,D1=26,L1=36)   # Rollvis RV tables p.24/25
 v3.GEAR_LEN.update({'CSG-14-100':28.5,'CSG-17-100':32.5,'CSG-20-100':33.5,'CSG-25-100':37.0,'CSG-32-100':44.0,'CSG-20-50':33.5,'CSG-25-50':37,'CSG-25-80':37,'CSG-32-50':44,'CSG-32-80':44,'CSG-40-50':53,'CSG-40-100':53})  # CSG Table 8 dim B (was [EST])
 RPM_MARGIN=0.95   # R-005: motor rpm at speed need <= 95 % Nmax (7600 rpm)
-ARMCAP={'knee':0.0585,'ankle_pitch':0.070,'hip_pitch':0.080}   # hip_pitch 80 mm [EST] packaging, needs Legs geometry check
+ARMCAP={'knee':0.0585,'ankle_pitch':0.073,'hip_pitch':0.080}   # hip_pitch 80 mm [EST] packaging, needs Legs geometry check
+ARM_FIX={'ankle_pitch':0.073}   # R5b (Robot Lab, P-014): 73 mm ankle lever adopted so need at 66.5 kg (314 N·m, Legs L20) is covered; 95 % rpm rule checked in evalA
 MARGIN=float(os.environ.get('MARGIN',1.5))
 # ---- round-1 architecture decisions (see results/DECISIONS.md)
 BUS_S=20; v3.omega_max.__defaults__=(BUS_S*3.4,)              # D2: 20S bus, 68.0 V min (3.4 V/cell) .. 84.0 V max
@@ -82,7 +83,7 @@ def candidates(j):
         for w in range(3):
             if j in('knee','ankle_pitch','hip_pitch'):
                 for s in PT.RV:
-                    for arm in np.arange(0.040,ARMCAP[j]+1e-9,0.0025 if j!='hip_pitch' else 0.005):
+                    for arm in ([ARM_FIX[j]] if j in ARM_FIX else np.arange(0.040,ARMCAP[j]+1e-9,0.0025 if j!='hip_pitch' else 0.005)):
                         yield dict(kind='linear2',motor=mname,w=w,screw=s,arm=round(float(arm),4))
             if j in('hip_yaw','hip_roll','hip_pitch'):
                 for g in PT.CSG:

@@ -283,3 +283,60 @@ Retention at 1.2 m/s:
 - O17 Legs: tongue bore ø35 press-fit; yoke joining the two lever halves.
 - O20 (new) clock-spring flex-life qualification for SiF + GORE quadrax (1e6 cycles, full ROM, r_min), or a thinner flex-rated EtherCAT cable.
 - O21 (new) connector masses to be weighed (JST-GH, AS150U); ROMs other than hip pitch are [EST] human-range values.
+
+## Round 5b (2026-10-13): ankle 73 mm, thigh clamp review, linkage cleanup, O20/O21
+**D45. Ankle_pitch lever 73 mm adopted (Robot Lab; P-014).**
+- Change: `size.py` ARM_FIX 0.073. Unit unchanged: TBM2G-06013D + 2× RV12x4, 1.78 kg.
+- T_out 323.8 N·m vs the 66.5 kg need of 314 (Legs L20) → **1.03×**.
+- Carry at 1.0 m/s: 323.8 / (239.1 × 66.5/65) = **1.32×** (≥ 1.2).
+- Motor speed: 7578 rpm vs 7600 (95 % rule) → **passes with only 0.3 % margin**.
+- Thermal: ΔT_cad 31 → 28 K; carry 43 → 39 K.
+- Mass: stroke +4.3 %. Two RV12 screws +4 mm and two body tubes +4 mm = +0.013 kg/leg (calc, linkage table). There is no Actuators ankle lever solid. Legs moves the instep-lug pin radius 70 → 73 mm.
+
+**D46. Thigh split-collar clamp (Legs L18): agree on form and FEA; counter on retention (`clamp_review.py`, `results/clamp_review.json`).**
+- **Loads.** Body angle to the femur is −15.3…−7.0° over −105…+40°. Both bodies together give 8764 N axial and 2390 N transverse at max force.
+- **Friction-only collar fails.**
+  - At μ 0.15 with SF_slip 1.5 it needs 87.6 kN radial, i.e. 18.6 MPa on the ø50 × 1.2 tube.
+  - That is 378 MPa hoop stress: SF 1.06 against 7075 yield including ±25 % torque-tightening scatter. The long-tube collapse pressure is only 2.4 MPa.
+  - Bolts could deliver it (13.9 kN per side, 2× M6 10.9), but the tube cannot take it.
+- **Counter.** Bond the collar to the femur (DP490-class epoxy, τ 1.86 MPa, fatigue SF 3.2 at 20 % of lap shear [EST]) plus a light clamp at ~3 MPa (hoop 61 MPa). Alternatively, add an internal 7075 sleeve or plug under the collar, or seat the collar on a machined femur collar shoulder. Mass +~0.003 kg adhesive.
+- **Spherical eye, SKF GE 12 E.**
+  - Static s0 = 11.9.
+  - Walking p = 21.9 N/mm² (K 100). G_h ≈ 3400 h at 1 Hz when relubricated (steel/steel). Use the maintenance-free variant or set a relube interval.
+  - Swing ±4.1°: plain rotation if the pin is parallel to the hip axis, otherwise tilt within α 10°.
+  - Pin ø12 42CrMo4 in single shear: τ 40 MPa, bending 241 MPa → SF 3.1.
+- **Clamp fatigue.** Legs FEA 174 MPa max × 0.52 gives SF 1.76 on Se 159 [EST]; p99.9 gives 2.66. Accept, pending the Grok Build refinement.
+- **Mass.** "Two fewer pin pairs" is not a saving. −2 pin pairs (0.026 each) + 2 eyes (GE 12 E + eye + pin, 0.060 each) = **+0.068 kg/leg**. A GE 10 E with a ø10 pin would save ~0.012 kg per eye (s0 still > 6); this is offered to Legs.
+
+**D47. Linkage table.**
+- Ankle-lug row zeroed (−0.084 both legs). It is in the Legs M2 line (L19); the rollup already counted it once, so the rollup impact is 0.
+- Thigh clamp row marked as in the Legs M2 line.
+- Trunnion pin pairs 6 → 4 per leg. Hip-body eyes +2 per leg. Ankle 73 mm row added.
+- Linkage both legs 2.249 → 2.326. Net vs R-018: **+0.161 kg**.
+
+**D48. Harness line now generated from data.** `linkage_table.py` reads `results/harness.json` and writes `results/mass_rollup_r5b.json`. Re-running verified that it persists, and the hand-appended line is gone.
+
+**D49. O20 flex cable.**
+- EtherCAT is now **Belden MachFlex MRTA2P26S** on every branch: 4.2 mm, 25.9 g/m, 8e6 bend at 7.5D and 8e6 torsion. Minimum drum r/OD is 8.1 ≥ 7.5.
+- Power cores inside the loops are **Stäubli SILI-E** (class 6).
+- Δ **+0.053 kg** (EtherCAT +0.044, SILI-E +0.003, sleeving +0.006).
+- Lighter Ethernet-rated flex cables (Lapp ETHERLINE Flex, igus CFBUS) need r 70–84 mm and do not fit the drums.
+- Still open: O20a, a power-loop cycle test (Stäubli gives no cycle rating), and O20b, a TDR/EtherCAT link test (MachFlex has no 100 Ω specification).
+
+**D50. O21.**
+- Joint ranges now come from the v3 MJCF (hip pitch −105…+40, knee 0…135, shoulder pitch −180…60 etc.); hip roll is 27°.
+- AS150U: 41.4 g/pair, from a distributor listing.
+- JST-GH: 0.5 g/pair, calculated from datasheet dimensions (was 1.2 [EST]).
+- Harness **1.296 kg** (was 1.314) → −0.048 vs R-018's 1.344.
+- **O21 is closed, except that the JST-GH mass is a calculation, not a weighed value.**
+
+**D51. Rollup R5b.** R-018 credible 66.976 + 0.161 linkage − 0.048 harness = **67.089 kg, 0.59 over 66.5**. With Legs A1 (P-014 4.79 kg, −0.868 provisional) it would be **66.22** (reserve 0.28).
+
+**Conflict flag.** Legs L17 confirms a ø80 femur seat for the CRBH 5013. Actuators replaced that bearing with the needle straddle in R4 (D32/O17: tongue bore ø35 press-fit, two lever halves + yoke). Legs and the Arbiter need to resolve which design holds.
+
+## Open after round 5b
+- O13: converged lever FEA (Grok Build).
+- O17: ø35 vs ø80 seat conflict (see the flag above).
+- O20a: power-loop flex test.
+- O20b: MachFlex EtherCAT TDR/link test.
+- O22: Legs adopts bonded clamp retention, and optionally GE 10 E eyes.

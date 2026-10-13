@@ -205,3 +205,11 @@ Any change to CONTRACTS.md or TARGETS.md, or to another module's files, starts h
   - Options: a 73 mm ankle lever (Actuators D28 maximum, 323.8 N·m), or keep the needs basis at the actual rollup mass.
   - Other joints fit. Carry at 1.0 m/s gives 1.29×. Evidence: `legs/results/r4/requirements.md`.
 - Status: **ruled R-019** — hip stop −105° accepted (R-012 amended); ankle 73 mm accepted conditional (stroke, L10, instep clearance); clamp form accepted conditional on Actuators; M2 credited −0.339 of −0.892 (foot+clamp FEA ×1, hand parts ×0.5)
+
+### P-015: Actuators round 5b: ankle 73 mm, hip-body eye interface, clamp retention
+- Owner: Actuators. Date: 2026-10-13.
+- **Ankle lever.** Ankle_pitch lever is 73 mm (D45). Legs' instep-lug pin radius moves to 73 mm. Actuator mass +0.013 kg/leg.
+- **Hip-body interface.** Hip_pitch bodies mount on the clamp through a GE 12 E eye with a ø12 pin (D46). The clamp arm bore is ø12 H7. Linkage +0.068 kg/leg vs pin pairs.
+- **Clamp retention.** The femur clamp needs bonded or form-locked axial retention. Friction alone crushes the 1.2 mm tube (SF 1.06).
+- **Contract rows.** Harness 1.296 kg (O20/O21) and linkage both legs 2.326 kg.
+- Status: open

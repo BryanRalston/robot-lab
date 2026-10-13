@@ -2,10 +2,10 @@
  "cables": {
   "power": "Lapp OELFLEX HEAT 180 SiF",
   "ecat": {
-   "part": "GORE GSC-03-84820-00",
-   "gpm": 23.0,
-   "od": 3.3,
-   "bend_min": 15.0
+   "part": "Belden MachFlex MRTA2P26S",
+   "gpm": 25.9,
+   "od": 4.2,
+   "bend_min": 31.5
   },
   "ecat_flex_ref": {
    "part": "igus CFBUS.040",
@@ -13,15 +13,15 @@
    "od": 7.0
   }
  },
- "I_leg_pk": 33.18245857076484,
- "I_leg_rms": 6.951533488665732,
+ "I_leg_pk": 33.14097456920561,
+ "I_leg_rms": 6.920010699836878,
  "rows": [
   {
    "item": "leg trunk pack->hip_pitch",
    "n": 2,
    "route_m": 0.638,
-   "loops_m": 0.506,
-   "len_m": 1.144,
+   "loops_m": 0.529,
+   "len_m": 1.167,
    "joints": [
     "waist yaw",
     "waist pitch",
@@ -32,32 +32,32 @@
    "lapp_art": "0052001",
    "gpm": 32,
    "cond": 2,
-   "kg": 0.14646956599516234,
-   "I_rms": 6.951533488665732,
-   "I_pk": 33.18245857076484,
-   "dV_pct": 0.7683436512390894,
-   "dT_K": 6.2251652253160294,
+   "kg": 0.15153710545579868,
+   "I_rms": 6.920010699836878,
+   "I_pk": 33.14097456920561,
+   "dV_pct": 0.7828447039212263,
+   "dT_K": 5.377958989543219,
    "bend_r_mm": 48.0,
-   "bend_ratio": 14.117647058823529
+   "bend_ratio": 12.307692307692308
   },
   {
    "item": "leg hip_pitch->knee",
    "n": 2,
    "route_m": 0.483,
-   "loops_m": 0.198,
-   "len_m": 0.681,
+   "loops_m": 0.184,
+   "len_m": 0.667,
    "joints": [
     "hip pitch"
    ],
-   "mm2": 2.5,
-   "lapp_art": "0052001",
-   "gpm": 32,
+   "mm2": 1.5,
+   "lapp_art": "0051001",
+   "gpm": 20,
    "cond": 2,
-   "kg": 0.08716850183284724,
-   "I_rms": 4.866073442066012,
-   "I_pk": 26.54596685661187,
-   "dV_pct": 0.36581177538822335,
-   "dT_K": 3.050330960404854,
+   "kg": 0.054843312665387244,
+   "I_rms": 4.844007489885814,
+   "I_pk": 26.51277965536449,
+   "dV_pct": 0.5965173255686991,
+   "dT_K": 5.03788217108681,
    "bend_r_mm": 53.0,
    "bend_ratio": 15.588235294117647
   },
@@ -65,8 +65,8 @@
    "item": "leg knee->ankle drives",
    "n": 2,
    "route_m": 0.23,
-   "loops_m": 0.168,
-   "len_m": 0.398,
+   "loops_m": 0.156,
+   "len_m": 0.386,
    "joints": [
     "knee"
    ],
@@ -74,13 +74,13 @@
    "lapp_art": "0050001",
    "gpm": 15,
    "cond": 2,
-   "kg": 0.02386858347057703,
-   "I_rms": 2.7806133954662933,
-   "I_pk": 16.59122928538242,
-   "dV_pct": 0.3338900601242783,
-   "dT_K": 3.38648988257192,
+   "kg": 0.02378584013175395,
+   "I_rms": 2.7680042799347513,
+   "I_pk": 16.570487284602805,
+   "dV_pct": 0.3235969819783514,
+   "dT_K": 2.796538674562475,
    "bend_r_mm": 45,
-   "bend_ratio": 18.0
+   "bend_ratio": 15.0
   },
   {
    "item": "leg drive pigtails (7/leg)",
@@ -105,8 +105,8 @@
    "item": "arm trunk pack->shoulder_yaw",
    "n": 2,
    "route_m": 0.71,
-   "loops_m": 0.7,
-   "len_m": 1.41,
+   "loops_m": 0.756,
+   "len_m": 1.465,
    "joints": [
     "shoulder pitch",
     "shoulder roll",
@@ -116,20 +116,20 @@
    "lapp_art": "0048001",
    "gpm": 9,
    "cond": 2,
-   "kg": 0.050754683273537236,
+   "kg": 0.05154795309730291,
    "I_rms": 1.1764705882352942,
    "I_pk": 4.411764705882353,
-   "dV_pct": 0.6293112401274801,
-   "dT_K": 1.4433824464949614,
+   "dV_pct": 0.6541436820584288,
+   "dT_K": 1.3178709294084432,
    "bend_r_mm": 40.5,
-   "bend_ratio": 19.285714285714285
+   "bend_ratio": 17.608695652173914
   },
   {
    "item": "arm elbow->wrist",
    "n": 2,
    "route_m": 0.31,
-   "loops_m": 0.163,
-   "len_m": 0.473,
+   "loops_m": 0.155,
+   "len_m": 0.466,
    "joints": [
     "elbow"
    ],
@@ -137,13 +137,13 @@
    "lapp_art": "0048001",
    "gpm": 9,
    "cond": 2,
-   "kg": 0.01703065452313083,
+   "kg": 0.016512367441370017,
    "I_rms": 0.7058823529411765,
    "I_pk": 2.6470588235294117,
-   "dV_pct": 0.1266986409160252,
-   "dT_K": 0.519617680738186,
+   "dV_pct": 0.12468867385149665,
+   "dT_K": 0.4744335345870396,
    "bend_r_mm": 43.0,
-   "bend_ratio": 20.476190476190474
+   "bend_ratio": 18.695652173913047
   },
   {
    "item": "arm drive pigtails (7/arm)",
@@ -156,7 +156,7 @@
    "lapp_art": "0048001",
    "gpm": 9,
    "cond": 2,
-   "kg": 0.020160000000000004,
+   "kg": 0.02016,
    "I_rms": 1.5,
    "I_pk": 5.0,
    "dV_pct": 0.04047058823529411,
@@ -168,8 +168,8 @@
    "item": "hand 24 V from wrist DC/DC",
    "n": 2,
    "route_m": 0.115,
-   "loops_m": 0.228,
-   "len_m": 0.343,
+   "loops_m": 0.252,
+   "len_m": 0.367,
    "joints": [
     "wrist roll"
    ],
@@ -177,20 +177,20 @@
    "lapp_art": "0048001",
    "gpm": 9,
    "cond": 2,
-   "kg": 0.012348849013323178,
+   "kg": 0.012800546116650732,
    "I_rms": 0.5,
    "I_pk": 2.0,
-   "dV_pct": 0.0694118310552806,
-   "dT_K": 0.26071095439815234,
+   "dV_pct": 0.074214977156769,
+   "dT_K": 0.23804043662440003,
    "bend_r_mm": 34.0,
-   "bend_ratio": 16.19047619047619
+   "bend_ratio": 14.782608695652176
   },
   {
    "item": "waist drives feed",
    "n": 1,
    "route_m": 0.109,
-   "loops_m": 0.151,
-   "len_m": 0.26,
+   "loops_m": 0.201,
+   "len_m": 0.31,
    "joints": [
     "waist yaw"
    ],
@@ -198,20 +198,20 @@
    "lapp_art": "0050001",
    "gpm": 15,
    "cond": 2,
-   "kg": 0.0077934289474462,
+   "kg": 0.009702986315913922,
    "I_rms": 1.5,
    "I_pk": 6.0,
-   "dV_pct": 0.07885116346827921,
-   "dT_K": 0.985487407625016,
+   "dV_pct": 0.09410821579065409,
+   "dT_K": 0.82123950635418,
    "bend_r_mm": 48.0,
-   "bend_ratio": 19.2
+   "bend_ratio": 16.0
   },
   {
    "item": "neck/head bus",
    "n": 1,
    "route_m": 0.259,
-   "loops_m": 0.26,
-   "len_m": 0.519,
+   "loops_m": 0.242,
+   "len_m": 0.501,
    "joints": [
     "neck yaw",
     "neck pitch"
@@ -220,13 +220,13 @@
    "lapp_art": "0049001",
    "gpm": 12,
    "cond": 2,
-   "kg": 0.012455309407993905,
+   "kg": 0.012028052807105696,
    "I_rms": 1.0,
    "I_pk": 4.0,
-   "dV_pct": 0.1400204717761406,
-   "dT_K": 0.6083255602623554,
+   "dV_pct": 0.13521732567465228,
+   "dT_K": 0.540733831344316,
    "bend_r_mm": 34.0,
-   "bend_ratio": 14.166666666666668
+   "bend_ratio": 12.592592592592592
   },
   {
    "item": "waist/neck pigtails (4)",
@@ -278,10 +278,10 @@
    "gpm": 50,
    "cond": 2,
    "kg": 0.03,
-   "I_rms": 13.903066977331465,
-   "I_pk": 66.36491714152967,
-   "dV_pct": 0.2517963032722743,
-   "dT_K": 12.598548670282437,
+   "I_rms": 13.840021399673756,
+   "I_pk": 66.28194913841122,
+   "dV_pct": 0.2514815129075014,
+   "dT_K": 12.484547654296762,
    "bend_r_mm": null,
    "bend_ratio": null
   },
@@ -308,8 +308,8 @@
    "item": "ECAT leg branch -> foot F/T",
    "n": 2,
    "route_m": 1.797,
-   "loops_m": 0.977,
-   "len_m": 3.414,
+   "loops_m": 1.002,
+   "len_m": 3.439,
    "joints": [
     "waist yaw",
     "waist pitch",
@@ -319,18 +319,18 @@
     "knee",
     "ankle (pitch+roll)"
    ],
-   "cable": "GORE GSC-03-84820-00",
-   "gpm": 23.0,
-   "kg": 0.1570571100392731,
+   "cable": "Belden MachFlex MRTA2P26S",
+   "gpm": 25.9,
+   "kg": 0.1781491819121371,
    "bend_r_mm": 35,
-   "bend_ratio": 10.606060606060607
+   "bend_ratio": 8.333333333333332
   },
   {
    "item": "ECAT arm branch -> hand/tactile",
    "n": 2,
    "route_m": 1.11,
-   "loops_m": 1.091,
-   "len_m": 2.841,
+   "loops_m": 1.163,
+   "len_m": 2.913,
    "joints": [
     "shoulder pitch",
     "shoulder roll",
@@ -338,44 +338,44 @@
     "elbow",
     "wrist roll"
    ],
-   "cable": "GORE GSC-03-84820-00",
-   "gpm": 23.0,
-   "kg": 0.13066988314609995,
+   "cable": "Belden MachFlex MRTA2P26S",
+   "gpm": 25.9,
+   "kg": 0.15086820269609783,
    "bend_r_mm": 34.0,
-   "bend_ratio": 10.303030303030303
+   "bend_ratio": 8.095238095238095
   },
   {
    "item": "ECAT waist+neck+head",
    "n": 1,
    "route_m": 0.524,
-   "loops_m": 0.411,
-   "len_m": 1.335,
+   "loops_m": 0.443,
+   "len_m": 1.368,
    "joints": [
     "neck yaw",
     "neck pitch",
     "waist yaw"
    ],
-   "cable": "GORE GSC-03-84820-00",
-   "gpm": 23.0,
-   "kg": 0.030708500375702916,
+   "cable": "Belden MachFlex MRTA2P26S",
+   "gpm": 25.9,
+   "kg": 0.03542123664127772,
    "bend_r_mm": 34.0,
-   "bend_ratio": 10.303030303030303
+   "bend_ratio": 8.095238095238095
   },
   {
    "item": "head cameras data (2 x quad, completeness)",
    "n": 2,
    "route_m": 0.222,
-   "loops_m": 0.26,
-   "len_m": 0.482,
+   "loops_m": 0.242,
+   "len_m": 0.464,
    "joints": [
     "neck yaw",
     "neck pitch"
    ],
-   "cable": "GORE GSC-03-84820-00",
-   "gpm": 23.0,
-   "kg": 0.022179876365321653,
+   "cable": "Belden MachFlex MRTA2P26S",
+   "gpm": 25.9,
+   "kg": 0.024054307308669788,
    "bend_r_mm": 34.0,
-   "bend_ratio": 10.303030303030303
+   "bend_ratio": 8.095238095238095
   },
   {
    "item": "IMU (torso, completeness)",
@@ -384,9 +384,9 @@
    "loops_m": 0,
    "len_m": 0.25,
    "joints": [],
-   "cable": "GORE GSC-03-84820-00",
-   "gpm": 23.0,
-   "kg": 0.00575,
+   "cable": "Belden MachFlex MRTA2P26S",
+   "gpm": 25.9,
+   "kg": 0.006475,
    "bend_r_mm": null,
    "bend_ratio": null
   },
@@ -409,8 +409,8 @@
    "kg": 0.033048
   }
  ],
- "power_wire_kg": 0.5400943364640179,
- "ecat_kg": 0.34636536992639766,
+ "power_wire_kg": 0.5149629240312832,
+ "ecat_kg": 0.39496792855818247,
  "connectors": {
   "parts": {
    "XT60 pair (Amass XT60, 30 A)": {
@@ -428,28 +428,28 @@
     "n": 0,
     "evidence": "1.2 g/pc AMOV listing; phases soldered, n=0"
    },
-   "JST-GH 4-pin pair + crimps (ECAT/sensor)": {
-    "each_kg": 0.0012,
+   "JST-GH 4-pin pair (GHR-04V-S + 4 SSHL-002T + BM04B-GHS header)": {
+    "each_kg": 0.0005,
     "n": 80,
-    "evidence": "[EST] JST datasheet gives no mass"
+    "evidence": "CALC from jst_gh.pdf dims: housing 6.25x4.15x~10 mm PA9T ~50 % solid 0.15 g + header 0.20 g + 4 contacts 0.03 g"
    },
    "AS150U pair (pack main)": {
-    "each_kg": 0.03,
+    "each_kg": 0.0414,
     "n": 1,
-    "evidence": "[EST] datasheet gives no mass"
+    "evidence": "41.4 g/pair distributor listing (Rotorama)"
    }
   },
-  "kg": 0.30119999999999997
+  "kg": 0.2566
  },
- "sleeving_kg": 0.10637516476684987,
+ "sleeving_kg": 0.10919170231073587,
  "ecat_junction_kg": 0.02,
- "total_kg": 1.3140348711572654,
+ "total_kg": 1.2957225549002014,
  "R4_model_kg": 0.821,
  "R018_credited_kg": 1.344,
  "contract": 2.0,
- "worst_dV_pct": 0.7683436512390894,
+ "worst_dV_pct": 0.7828447039212263,
  "worst_dT_K": 15.767798522000255,
- "min_bend_ratio": 10.303030303030303,
- "ecat_loop_m": 5.067,
- "flex_fallback_ecat_kg": 0.18241200000000002
+ "min_bend_ratio": 8.095238095238095,
+ "ecat_loop_m": 5.257,
+ "flex_fallback_ecat_kg": 0.1740067
 }

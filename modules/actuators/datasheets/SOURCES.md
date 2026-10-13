@@ -48,3 +48,19 @@
 - XT60: 7.8 g/pair (Alise Operations listing).
 - XT30: 1.8 g per half, and MR30: 1.2 g/pc (AMOV Lab listing, https://amovrobotlab.com/products/amass-connector-xt90s-xt90-s-xt30u-xt60-xt90-mr30-xt60h-cables).
 - JST-GH and AS150U: [EST].
+
+## R5b (O20 flex cable, O21 connector masses), downloaded 2026-10-13
+| file | part(s) | data used | source URL |
+|---|---|---|---|
+| belden_mrta2p26s.pdf | Belden MachFlex MRTA2P26S robotic 2 pr 26 AWG shielded | 4.2 mm OD, 25.9 kg/km, 8e6 bend cycles at 7.5D, 8e6 torsion cycles ±180°/m | https://catalog.belden.com/techdata/EN/MRTA2P26S_techdata.pdf |
+| staubli_cables_catalog.pdf | Stäubli SILI-E super-flexible silicone wires (0.07 mm strands) | kg/km 4.5/8.6/12/16/22/33 for 0.25/0.5/0.75/1/1.5/2.5 mm²; OD | https://www.staubli.com/content/dam/ecs/catalogs-brochures/TM/CAB-Main-11014119-en.pdf |
+
+Rejected for not fitting the drums (r_min 34–53 mm):
+- Lapp ETHERLINE P Flex Cat.5e 2×2×AWG26: 5.6 mm, 45 kg/km, flexing bend 15 × OD = 84 mm (https://e.lapp.com/apac/p/ethernet-cable/etherline-p-flex-cat-5e-4x2xawg26-7-2170300).
+- igus CFBUS.040: 7.0 mm, 59 kg/km.
+
+Connector masses (O21):
+- AS150U: 41.4 g/pair (Rotorama, https://www.rotorama.com/product/amass-as150u-1-par).
+- JST-GH 4-pin: 0.5 g/pair, calculated from jst_gh.pdf dimensions.
+
+Joint ranges: from the v3 MJCF, `sim/v3/humanoid_v3.xml` (CONTRACTS "Range of motion").
