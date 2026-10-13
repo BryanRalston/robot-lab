@@ -1,0 +1,22 @@
+hip_yaw      TBM2G-06008A + CSG-17-100 (CSG-2A) + CRBH 6013 A             m 1.11 T 70/66 w 6.1/3.0 dT 17 carryT x1.22
+hip_roll     TBM2G-08508A + CSG-25-100 (CSG-2A) + CRBH 6013 A             m 1.56 T 204/177 w 3.6/3.0 dT 26 carryT x1.67
+hip_pitch    TBM2G-07613D + 2× RV12x4 roller screw, arm 50.0 mm           m 2.37 T 454/429 w 12.2/8.1 dT 49 carryT x1.32
+knee         TBM2G-07613D + 2× RV12x4 roller screw, arm 40.0 mm           m 2.37 T 363/328 w 15.2/13.3 dT 54 carryT x1.44
+ankle_pitch  TBM2G-06013D + 2× RV12x4 roller screw, arm 70.0 mm           m 1.89 T 311/305 w 13.7/6.9 dT 27 carryT x1.30
+ankle_roll   TBM2G-06013D + 2× RV12x4 roller screw, arm 40.0 mm           m 0.00 T 177/61 w 24.4/4.0 dT 2 carryT x5.70
+MASS {'v3_total': 63.79, 'leg_act_v3': 15.36, 'leg_act_new': 18.6, 'drive_delta_nonleg': -0.22, 'battery_new': 8.75, 'battery_delta': 0.79, 'total_new': 67.6, 'limit': 65.0}
+EN walk_0p8/mean_noregen {'P_total': 550.86, 'runtime_h_1620': 2.65, 'runtime_h_1474': 2.41, 'Wh_for_2h': 1224.14}
+EN walk_0p8/mean_netbus {'P_total': 451.52, 'runtime_h_1620': 3.23, 'runtime_h_1474': 2.94, 'Wh_for_2h': 1003.38}
+EN walk_1p0/mean_noregen {'P_total': 657.63, 'runtime_h_1620': 2.22, 'runtime_h_1474': 2.02, 'Wh_for_2h': 1461.39}
+EN walk_1p0/mean_netbus {'P_total': 511.77, 'runtime_h_1620': 2.85, 'runtime_h_1474': 2.59, 'Wh_for_2h': 1137.27}
+EN walk_1p2/mean_noregen {'P_total': 772.1, 'runtime_h_1620': 1.89, 'runtime_h_1474': 1.72, 'Wh_for_2h': 1715.77}
+EN walk_1p2/mean_netbus {'P_total': 576.3, 'runtime_h_1620': 2.53, 'runtime_h_1474': 2.3, 'Wh_for_2h': 1280.67}
+EN carry_20kg/mean_noregen {'P_total': 836.77, 'runtime_h_1620': 1.74, 'runtime_h_1474': 1.59, 'Wh_for_2h': 1859.49}
+EN carry_20kg/mean_netbus {'P_total': 630.95, 'runtime_h_1620': 2.31, 'runtime_h_1474': 2.1, 'Wh_for_2h': 1402.11}
+PW walk_0p8 297 198 peak legs 1109 limb 1039 {'hip_yaw': 38, 'hip_roll': 79, 'hip_pitch': 501, 'knee': 273, 'ankle_pitch': 774, 'ankle_roll': 18}
+PW walk_1p0 404 258 peak legs 1470 limb 1391 {'hip_yaw': 48, 'hip_roll': 81, 'hip_pitch': 866, 'knee': 418, 'ankle_pitch': 987, 'ankle_roll': 21}
+PW walk_1p2 518 323 peak legs 1612 limb 1366 {'hip_yaw': 54, 'hip_roll': 82, 'hip_pitch': 1332, 'knee': 460, 'ankle_pitch': 991, 'ankle_roll': 20}
+PW stairs_18cm 341 287 peak legs 2636 limb 2249 {'hip_yaw': 65, 'hip_roll': 123, 'hip_pitch': 712, 'knee': 1093, 'ankle_pitch': 820, 'ankle_roll': 17}
+PW carry_20kg 583 377 peak legs 1992 limb 1416 {'hip_yaw': 110, 'hip_roll': 121, 'hip_pitch': 1285, 'knee': 637, 'ankle_pitch': 1166, 'ankle_roll': 26}
+PW push_recover 167 114 peak legs 577 limb 321 {'hip_yaw': 18, 'hip_roll': 98, 'hip_pitch': 277, 'knee': 240, 'ankle_pitch': 122, 'ankle_roll': 27}
+plot /workspace/robot-lab/modules/actuators/../../media/progress/2026-10-13_actuators_torque_speed.png

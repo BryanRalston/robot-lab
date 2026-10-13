@@ -100,6 +100,8 @@ Every failure found in the v3 hardening loop and what was done about it. "it" = 
 
 ## F. v3.2 round (continued after the previous worker crashed)
 
+> **Erratum (RL Actuators, 2026-10-13, AUDIT A5):** the knee row in this section says "TBM2G-06013D each". That is stale. The v3.2 final data (`analysis/results/v3.json`, `v3_checks.md`, `PARTS.md`) uses **TBM2G-06808D** (REVISIONS iteration 5). Both are superseded for v4 by 2 × TBM2G-07613D + RV12x4 on a 40 mm lever. The 06808D at 58.5 mm needs 11 646 rpm at the 13.3 rad/s stairs knee speed, above TBM2G Nmax 8000 rpm. See `modules/actuators/results/DECISIONS.md` D5–D6.
+
 | failure found | fix | result |
 |---|---|---|
 | Sim text said "CAD centre of mass 20–35 mm behind the ankles". Re-measured: CAD COM is 1.4 mm behind the ankle axis standing straight and 13 mm **ahead** of it in the sim's crouched stance; foot centre is +60 mm. The plain-PD fall is a controller-stiffness problem (joint gains capped at 600 N·m/rad in series hip/knee/ankle < m·g·h), not a COM-geometry problem. The old text was wrong. | Ankle actuators still moved from the back of the shank to the **front** (x −62 → +90 mm, lever on the instep, foot lever 50 → 70 mm to match the 70 mm arm the analysis sized for; the CAD had 50 mm, which was a hidden mismatch). | COM moves forward (see mass.md). The ankle bodies no longer sit behind the calf, so they stop limiting knee flexion. |
