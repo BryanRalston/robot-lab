@@ -16,6 +16,35 @@ Sources used: `v3/analysis/results/v3_checks.md` and `v3.json` (per-joint rows, 
 | Field bus / data | **TBD (open Q2)**. v3 selects Everest XCR (EtherCAT/CANopen capable [check datasheet]) but no topology, cycle rate or cabling is specified anywhere in v3 | — |
 | Encoders | RLS AksIM-2, 2 per joint (motor + output) | `v3.py` actuator() mass term `2*(ring+head)` |
 
+## Round 1 amendments (Arbiter, 2026-10-13; supersede the rev 0 rows they name)
+### R1.1 Mass budgets (R-001)
+| item | rev 0 | now (P-005 actual) | binding target after recovery |
+|---|---|---|---|
+| leg actuators, both legs | 15.36 kg | 18.60 kg (incl. 1.30 [EST] linkage) | ≤ 17.30 kg |
+| leg structure, both legs | 5.40 kg | 5.40 kg | ≤ 4.90 kg |
+| harness (Torso placeholder) | 2.00 kg | 2.00 kg | ≤ 1.60 kg |
+| covers (Torso placeholder) | 1.86 kg | 1.86 kg | ≤ 1.46 kg |
+| battery 20S5P 1620 Wh | 7.96 kg | 8.75 kg | 8.75 kg |
+| Arbiter reserve | 1.2 kg | −2.60 kg (overrun) | 0.00 kg (any found mass goes here) |
+| **robot** | 63.79 kg | **67.60 kg** | **≤ 65.00 kg (hard)** |
+
+### R1.2 Leg actuator contract (R-004, R-005, R-006, R-008)
+| joint | need peak N·m | need RMS N·m | need speed rad/s | selection (Actuators) | avail peak | max mass kg |
+|---|---|---|---|---|---|---|
+| hip_yaw | 66 | 14 | 3 [EST] | TBM2G-06008A + CSG-17-100 | 70 | 1.11 |
+| hip_roll | 177 | 45 | 3 [EST] | TBM2G-08508A + CSG-25-100 | 204 | 1.56 |
+| hip_pitch | 331 | 86 | 8.1 | 2 × TBM2G-07613D + 2 × RV12x4, 50 mm | 350 worst-angle | 2.37 |
+| knee | 231 | 72 | 13.3 | 2 × TBM2G-07613D + 2 × RV12x4, 40 mm | 258 worst-angle | 2.37 |
+| ankle_pitch | 305 | 44 | 6.9 | 2 × TBM2G-06013D + 2 × RV12x4, 70 mm | 311 | 1.89 |
+| ankle_roll | 61 | 7 | 4 [EST] | shared pair, 40 mm | 177 | 0 (shared) |
+Carry verification (R-003): 20 kg at 1.2 m/s with avail/carry-peak ≥ 1.2 on every leg joint. Knee motor rpm at speed need ≤ 7600 (R-005). ROM: ankle_pitch ≥ −60…40°, hip_pitch ≥ −120…40° (R-006). Needs computed at 63.79 kg; re-run at final mass.
+
+### R1.3 Power (R-002, R-007)
+DC bus 20S 68.0…84.0 V, regen clamp ≤ 90 V. Walking 1.2 m/s: legs mech 426 W (gait ID); robot electrical 772 W no regen, **674 W contract value** (half netting credit) → 2.16 h on 1620 Wh × 0.9. Pack: 60 A continuous, 100 A for 2 s, fuse 125 A. Peak electrical per joint: hip_pitch 1.33, knee 1.09, ankle_pitch 0.99 kW; per limb 2.25 kW.
+
+### R1.4 Drive and field bus (R-008)
+Elmo Gold Twitter R70/100 (legs) / R50/100 (others), EtherCAT, 1 kHz distributed clocks, CSP + torque feed-forward, one line per limb plus torso/neck; master in Brain.
+
 ## 1. Actuator module (owner: RL Actuators)
 Supplies every joint actuator (motor + transmission + output bearing + encoders + drive + housing) to the other modules. Owns: motor/gear/screw selection, thermal, drive current, life.
 

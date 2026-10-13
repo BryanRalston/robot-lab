@@ -1,5 +1,5 @@
-# TARGETS.md: whole-robot targets — **DRAFT (pending Bryan's approval via Robot Lab)**
-Written by RL Arbiter, 2026-10-13. Until Bryan approves, the Arbiter rules only provisionally against this file.
+# TARGETS.md: whole-robot targets — **APPROVED (Bryan, 2026-10-13)**
+Written by RL Arbiter, 2026-10-13. Approved by Bryan via Robot Lab on 2026-10-13. Arbiter rulings against this file are final. Interpretations: see RULINGS.md (R-003 clarifies T5 carry speed).
 
 ## Important caveat about the benchmark
 Tesla has **never published an Optimus datasheet**. Most numbers that circulate (173 cm, 57 kg, 20 kg payload, 2.3 kWh) trace back to AI Day 2021/2022 slides for the first-generation concept/prototype and are often relabelled as Gen 2 or Gen 3 [S1][S2][S3]. Tesla's own Gen 2 claims (Dec 2023 video) are relative: −10 kg, +30 % walking speed, 2-DoF neck, 11-DoF tactile hands, foot F/T sensing [S1][S4]. Gen 3's only firm hardware disclosure is the hand/forearm: 22 DoF per hand, 25 actuators per forearm+hand (23 hand linear + 2 wrist linear), tendon driven [S2][S5]. Each benchmark below is labelled **Tesla** (Tesla statement or patent), **2nd** (secondary/unverified), or **[EST]**.
@@ -35,3 +35,14 @@ For a disputed proposal: score Δ on each affected target as fraction of target 
 - [S8] Optimusk blog, actuators & DoF Gen 2 vs 3 — https://optimusk.blog/blog/tesla-optimus-degrees-of-freedom-actuators/
 - [S9] Humanoid.press, Optimus 3 database entry (unverified claims) — https://humanoid.press/database/humanoid-press-database-tesla-optimus-3/
 Primary Tesla documents (AI Day slides, 13 Dec 2023 video, patent numbers) were not fetched directly; an open action is to replace secondary citations with them.
+
+## READY-FOR-BUILD gates (updated every round by the Arbiter)
+The design is ready to build only when all five gates are PASS.
+
+| # | gate | status | as of | evidence / what's missing |
+|---|---|---|---|---|
+| G1 | Every part is a catalog part number or has a drawing-ready spec (material, tolerances, process) | NOT MET | 2026-10-13 R1 | Leg actuators now catalog (TBM2G, CSG, RV12x4, Gold Twitter, AksIM-2; `actuators/results/sizing.md`). Housings are a parametric [EST ×1.25] model. Linkages (crossbar, trunnions, hubs) are [EST] masses only. Structure has no drawings. Placeholders (torso, arms, hands, head, brain) are unstaffed. |
+| G2 | CAD assembly complete, zero clashes across full ROM | NOT MET | 2026-10-13 R1 | v3 CAD + `v3/cad/clash.py` cover v3 only. Twin-screw hip_pitch, 40 mm knee lever and the P-003 ROM (ankle −60°, hip −120°) are not in CAD. |
+| G3 | Strength, fatigue, thermal and life checks pass with converged FEA | NOT MET | 2026-10-13 R1 | v3 FEA (`v3/cad/out/fea_v3.md`) is for v3 loads/geometry. Actuator thermal is a lumped model (max ΔT 54 K walk/stairs, 66 K carry). Screw L10 at new levers not re-run (O4). |
+| G4 | Walks 1.2 m/s, does 20 kg carry and push recovery in a domain-randomized sim with CONTRACTS limits | NOT MET | 2026-10-13 R1 | Forward sim (`legs/results/fsim/`) walks 0.8 m/s; falls after ~14 steps at 1.0 and ~10 at 1.2 m/s, even with 2× torque limits. No domain randomization yet. |
+| G5 | Hardware test plan: single-actuator bench, then single-leg, with pass criteria | NOT STARTED | 2026-10-13 R1 | No plan exists. Must cover torque/speed envelope, thermal at gait RMS, regen/bus netting (R-002), screw life sample. |
