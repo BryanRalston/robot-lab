@@ -1,5 +1,5 @@
 # RFQ: ITECH IT6005C-80-150 battery emulator for the G5 regen bench (R-010)
-Status: **DRAFT ONLY, nothing sent.** No email has been sent and no web form submitted. Bryan sends it himself, or approves a send.
+Status: **PARKED (R5, Robot Lab ruling).** This is a theoretical project, so there will be no vendor contact. Nothing has been sent and nothing will be sent. The emulator stays **[EST]** from ITECH's published specs. The contacts and text below are kept for reference only.
 
 ## Quote route (found 2026-10-13)
 | route | contact | source |

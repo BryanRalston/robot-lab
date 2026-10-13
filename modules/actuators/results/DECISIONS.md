@@ -250,3 +250,36 @@ Retention at 1.2 m/s:
 - O17 Legs: tongue bore ø35 press-fit; yoke joining the two lever halves.
 - O18 RFQ send (Bryan).
 - O19 M1 shortfall 0.72 kg: no further actuator lever without a T5/T6 trade.
+
+## Round 5 A2 (2026-10-13): O16 harness datasheets + routed lengths (R-018)
+**D41. Harness model rebuilt on datasheet g/m and v3 CAD routed lengths (`harness.py`, `results/harness.md`, `results/harness.json`): 1.314 kg.**
+- **Routes.**
+  - Coordinates come from `v3/cad/model.py`: the hip yaw/roll/pitch, knee and ankle chain points; the pack and compute bounding boxes; shoulder, neck and waist from P.
+  - Straight runs are Manhattan distance × 1.15.
+  - Each crossed joint gets a clock-spring loop of r_wrap (`v3/cad/out/cables.json`) × ROM + 50 mm, and each drive gets an 80 mm pigtail.
+  - The per-run table is in harness.md. Completeness runs are now modelled instead of the 0.10 allowance: foot F/T on the leg EtherCAT branch, hand/tactile on the arm branch, 2 head-camera quads, IMU, and the e-stop loop.
+- **Cables.**
+  - Power: Lapp ÖLFLEX HEAT 180 SiF. Gauge is auto-chosen per run: ΔV ≤ 2 % series at peak, ΔT ≤ 30 K at rms with a 2× bundle factor, 0.5 mm² floor on bus runs. The result is leg trunk 2.5 mm², thigh 2.5 mm², shank 1.0 mm².
+  - EtherCAT: GORE GSC-03-84820-00 at 23 g/m. The R4 [EST] was 14 g/m, so this raises the mass.
+- **Mass blocks.** Power wire 0.533, EtherCAT/data 0.346 (wire + data = 0.886, datasheet × routed), connectors 0.301, sleeving 12 % 0.106 [EST], EtherCAT junction 0.020 [EST].
+- **Checks.**
+  - Worst ΔV is 0.77 %, against the 2 % limit.
+  - Worst ΔT is 15.8 K, against the 30 K limit.
+  - Drum bend radius is r/OD ≥ 10.3 at every moving joint.
+- **Flex life is not qualified.** SiF is datasheet-rated for fixed install only. GORE quadrax has a static 15 mm bend rating and no published cycle rating. The flex-rated igus CFBUS.040 (7 mm, 59 g/m) would need r ≥ 70 mm, which does not fit the drums, and would add 0.18 kg on the 5.1 m of loops. → O20.
+
+**D42. Credit per R-018: essentially none; the R4 [EST] model was optimistic.**
+- Moving from [EST] to datasheet-backed values roughly doubled wire + EtherCAT: 0.435 → 0.886 kg.
+- **Claim:** model value 1.314 vs R-018 credited 1.344 → **−0.030 kg**. Credible robot 66.976 → **66.946 kg, 0.45 over 66.5.**
+- If the R-018 half-credit rule is applied to the remaining 0.252 kg of [EST] items (JST-GH/AS150U masses, sleeving, junction), with listed connectors at ×1.2, the harness is 1.530 → +0.186 → 67.16 kg.
+- The −0.52 kg A2 potential is **not** available. A1 (Legs −0.81) remains necessary.
+
+**D43. AS150U 2025V0 is rated 80 V DC, below the 84 V bus max.** Pack main connector needs the 500 V-rated AS150U (older 2+4 spec) or an XT90-class part; mass impact is small [EST].
+
+**D44. ITECH RFQ parked (Robot Lab, R5).** Theoretical project, so no vendor contact. `RFQ_ITECH.md` is marked PARKED. The emulator stays [EST] from published ITECH specs. O18 is closed.
+
+## Open after round 5 A2
+- O13 converged lever FEA (Grok Build, untouched).
+- O17 Legs: tongue bore ø35 press-fit; yoke joining the two lever halves.
+- O20 (new) clock-spring flex-life qualification for SiF + GORE quadrax (1e6 cycles, full ROM, r_min), or a thinner flex-rated EtherCAT cable.
+- O21 (new) connector masses to be weighed (JST-GH, AS150U); ROMs other than hip pitch are [EST] human-range values.

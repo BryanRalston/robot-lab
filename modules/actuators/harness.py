@@ -1,48 +1,109 @@
-"""R4 M3: whole-robot harness mass model (owner RL Actuators per R-017). Target <= 1.46 kg (contract line 2.00).
-Architecture: 20S bus (68-84 V) star from the pack/BMS in the torso to 4 limb trunks + waist/neck/head branch; inside each limb the bus and
-EtherCAT daisy-chain drive-to-drive (Elmo Gold Twitter mounted on each actuator, so motor phase/encoder leads are short local leads).
-Conductor: silicone-insulated tinned Cu (mass = Cu 8.96 g/cm3 x area + insulation per AWG table below, typical of e.g. Alpha Wire/BRT silicone).
-Gauge: from limb RMS/peak current, ampacity derated 50 % for bundles; voltage drop at peak <= 2 % of 68 V; temperature rise from I^2R vs 10 W/m.K free-air estimate.
-Currents: legs from results/sizing.json power (walk_1p2 / stairs / push peak_limb), arms from contract needs (<= 300 W peak/arm) [EST]."""
+"""R5 A2 (R-018, O16): harness mass model backed by datasheet g/m and routed lengths from the v3 CAD layout.
+Supersedes the R4 [EST] model (kept in git history, 0.821 kg). Owner RL Actuators per R-017.
+Cable (datasheets/):  power = Lapp OELFLEX HEAT 180 SiF fine-wire silicone single cores (lapp_oelflex_heat180_sif.pdf: weight kg/km, OD);
+                      EtherCAT = GORE GSC-03-84820-00 star-quadrax Cat5e 26 AWG, 3.3 mm, 23.0 kg/km, min bend 15 mm (gore_hs_data_cables_catalog.pdf Table "Ethernet Quadrax").
+                      Flex-rated reference: igus CFBUS.040 Cat5 (4x0.25)C 7.0 mm 59 kg/km (igus_cfbus.pdf), CFROBOT4 (igus_cfrobot4.pdf) -> too thick for the clock-spring drums (r req 70 mm).
+Connectors: Amass XT60 / XT30U / MR30 / AS150U, JST GH datasheets (ratings, AWG); masses are NOT in the Amass/JST datasheets -> distributor-listed masses (SOURCES.md) or [EST].
+Routes: joint/part coordinates from v3/cad/model.py (P, CHAINS, pack/compute bounding boxes), straight segments x1.15 routing factor (clips, bends around housings),
+        + clock-spring service loop at every moving joint crossed = r_wrap (v3/cad/out/cables.json r_min) x joint ROM + 50 mm slack, + 80 mm tee pigtail per drive.
+Gauge: smallest SiF size meeting the per-segment voltage-drop budget at peak (series leg segments sum <= 2 % of 68 V) and conductor rise <= 30 K at rms (2x bundle factor); fixed-size runs use their listed size as a floor."""
 import json, os, math
-H=os.path.dirname(os.path.abspath(__file__)); S=json.load(open(f'{H}/results/sizing.json'))
-V=68.0; RHO_CU=1.72e-8
-AWG={12:(3.31,4.5),14:(2.08,3.6),16:(1.31,3.0),18:(0.823,2.4),20:(0.518,1.9),22:(0.326,1.5),24:(0.205,1.2)}   # mm2, insulation g/m (silicone, ~0.4-0.8 mm wall) [EST from vendor tables]
-def gpm(a): A,ins=AWG[a]; return A*8.96+ins
-def R(a): return RHO_CU/(AWG[a][0]*1e-6)
+H=os.path.dirname(os.path.abspath(__file__)); ROOT=os.path.abspath(f'{H}/../..')
+S=json.load(open(f'{H}/results/sizing.json')); CAB={r['joint']:r for r in json.load(open(f'{ROOT}/v3/cad/out/cables.json'))['joints']}
+V=68.0; RHO_CU=1.72e-8 * 1.0
+# Lapp OELFLEX HEAT 180 SiF: mm2 -> (weight g/m, OD mm, article no. black)  [datasheet]
+SIF={4.0:(50,4.2,'0053001'),2.5:(32,3.4,'0052001'),1.5:(20,2.8,'0051001'),1.0:(15,2.5,'0050001'),0.75:(12,2.4,'0049001'),0.5:(9,2.1,'0048001'),0.25:(5.4,1.9,'0047001')}
+ECAT=dict(part='GORE GSC-03-84820-00',gpm=23.0,od=3.3,bend_min=15.0)
+ECAT_FLEX=dict(part='igus CFBUS.040',gpm=59.0,od=7.0)
+RF=1.15; SLACK=0.05; PIG=0.08
+# v3 layout (mm) from v3/cad/model.py P + bounding boxes (pack z 1333..1477, compute z 1485..1525)
+PACK_BOT=(12,0,1333); PACK_TOP=(12,0,1477); COMPUTE=(8,0,1505); WAIST=(0,0,1250)   # waist joints between pelvis_top 1230 and pack
+HIPY,HIPR,HIPP,KNEE,ANK_DRV,ANK=(0,130,1160),(0,130,1045),(0,130,920),(0,130,500),(0,130,300),(0,130,80)
+SHP=(0,190,1500); SHR=(0,282,1500); ELB=(0,282,1200); WRI=(0,282,930); HAND=(0,282,830); NECK=(0,0,1590); HEAD=(0,0,1690)
+ROM={'hip yaw':90,'hip roll':75,'hip pitch':160,'knee':150,'ankle (pitch+roll)':90,'waist yaw':120,'waist pitch':60,
+     'shoulder pitch':240,'shoulder roll':180,'shoulder yaw':240,'elbow':150,'wrist roll':300,'neck yaw':180,'neck pitch':90}   # deg; hip pitch -120..+40 (Legs CAD), others [EST] human-range
+def d(a,b): return sum(abs(x-y) for x,y in zip(a,b))/1000   # Manhattan along structure, m
+def path(*pts): return RF*sum(d(a,b) for a,b in zip(pts,pts[1:]))
+def loop(j): return CAB[j]['r_min_mm']/1000*math.radians(ROM[j])+SLACK
+def loops(*js): return sum(loop(j) for j in js)
 pk_leg=max(v['peak_limb'] for v in S['power'].values()); mean_leg=max(v['mean_noregen'] for v in S['power'].values())/2
-I_leg_pk=pk_leg/V; I_leg_rms=1.6*mean_leg/V     # rms ~ 1.6 x mean for gait power waveform [EST]
-I_arm_pk,I_arm_rms=300/V,80/V
-runs=[]  # name, n, length m, awg, conductors, I_rms, I_pk
-for side in ('L','R'):
-    runs+=[(f'leg{side} trunk pack->hip',1,0.40,12,2,I_leg_rms,I_leg_pk),(f'leg{side} hip->knee',1,0.40,14,2,I_leg_rms*0.7,I_leg_pk*0.8),(f'leg{side} knee->ankle',1,0.40,16,2,I_leg_rms*0.4,I_leg_pk*0.5),
-           (f'leg{side} drive drops (8)',8,0.08,18,2,4.0,12.0),
-           (f'arm{side} trunk pack->shoulder',1,0.35,16,2,I_arm_rms,I_arm_pk),(f'arm{side} along arm',1,0.55,18,2,I_arm_rms*0.6,I_arm_pk*0.6),(f'arm{side} drive drops (7)',7,0.06,20,2,1.5,5.0),
-           (f'hand{side} power (24 V from wrist DC/DC, 2 cond)',1,0.15,22,2,0.5,2.0)]
-runs+=[('waist+neck+head bus',1,0.80,18,2,1.5,6.0),('waist/neck drive drops (4)',4,0.08,20,2,1.0,4.0),('compute/sensors 24 V feed',1,0.40,18,2,6.0,8.0)]
-ecat=[('EtherCAT limb runs (4) incl. return',4,1.6,'ECAT',1),('EtherCAT jumpers drive-to-drive',30,0.12,'ECAT',1),('EtherCAT waist/neck/head',1,1.0,'ECAT',1)]
-ECAT_GPM=14.0   # 4 x AWG26 shielded PUR, e.g. igus CFBUS.PUR.045 class [EST g/m, datasheet to confirm]
-local=[('motor phase leads (34 drives, 3 x 20 AWG x 0.06 m)',34,0.06,20,3),('encoder/thermistor leads (34, 6 x 28 AWG-class 0.06 m) ',34,0.06,24,3)]
-CON={'XT60 pair (Amass XT60PW, 30 A cont)':(0.0085,4),'XT30 pair (Amass XT30U, 15 A)':(0.0034,30+8),'MR30 3-pin phase (Amass)':(0.0025,0),
-     'EtherCAT JST-GH 4-pin pair (latching)':(0.0012,2*34+8),'Pack Anderson-class main (Amass AS150U pair)':(0.030,1)}
-rows=[]; tot=0
-for nm,n,L,a,c,irms,ipk in runs:
-    m=n*L*c*gpm(a)/1000; dv=ipk*R(a)*L*c; P=irms**2*R(a)  # W/m per conductor
-    rows.append(dict(item=nm,n=n,len_m=L,awg=a,cond=c,kg=m,I_rms=irms,I_pk=ipk,dV_pk_V=dv,dV_pct=100*dv/V,W_per_m=P,dT_K=P/(math.pi*(math.sqrt(AWG[a][0]/math.pi)*2+1.2)*1e-3*10)))
-    tot+=m
-for nm,n,L,_,c in ecat: m=n*L*ECAT_GPM/1000; rows.append(dict(item=nm,n=n,len_m=L,kg=m)); tot+=m
-for nm,n,L,a,c in local: m=n*L*c*gpm(a)/1000; rows.append(dict(item=nm,n=n,len_m=L,awg=a,cond=c,kg=m)); tot+=m
+I_leg_pk=pk_leg/V; I_leg_rms=1.6*mean_leg/V; I_arm_pk,I_arm_rms=300/V,80/V
+# --- routed runs (per side where noted): name, n, L m, joints crossed, mm2, conductors, I_rms, I_pk
+legJ1=('waist yaw','waist pitch','hip yaw','hip roll'); armJ=('shoulder pitch','shoulder roll','shoulder yaw','elbow')
+P=[]
+P.append(('leg trunk pack->hip_pitch',2,path(PACK_BOT,WAIST,HIPY,HIPR,HIPP),legJ1,4.0,2,I_leg_rms,I_leg_pk))
+P.append(('leg hip_pitch->knee',2,path(HIPP,KNEE),('hip pitch',),2.5,2,I_leg_rms*0.7,I_leg_pk*0.8))
+P.append(('leg knee->ankle drives',2,path(KNEE,ANK_DRV),('knee',),1.5,2,I_leg_rms*0.4,I_leg_pk*0.5))
+P.append(('leg drive pigtails (7/leg)',14,PIG,(),1.0,2,4.0,12.0))
+P.append(('arm trunk pack->shoulder_yaw',2,path(PACK_TOP,SHP,SHR,ELB),armJ[:3],1.5,2,I_arm_rms,I_arm_pk))
+P.append(('arm elbow->wrist',2,path(ELB,WRI),('elbow',),0.75,2,I_arm_rms*0.6,I_arm_pk*0.6))
+P.append(('arm drive pigtails (7/arm)',14,PIG,(),0.5,2,1.5,5.0))
+P.append(('hand 24 V from wrist DC/DC',2,path(WRI,HAND),('wrist roll',),0.5,2,0.5,2.0))
+P.append(('waist drives feed',1,path(PACK_BOT,WAIST),('waist yaw',),1.0,2,1.5,6.0))
+P.append(('neck/head bus',1,path(PACK_TOP,NECK,HEAD),('neck yaw','neck pitch'),0.75,2,1.0,4.0))
+P.append(('waist/neck pigtails (4)',4,PIG,(),0.5,2,1.0,4.0))
+P.append(('compute 24 V feed',1,path(PACK_TOP,COMPUTE),(),1.0,2,6.0,8.0))
+P.append(('BMS->fuse->contactor->bus bar',1,0.30,(),4.0,2,I_leg_rms*2,I_leg_pk*2))
+P.append(('e-stop loop (back button, completeness)',1,2*path(PACK_TOP,(-100,0,1450)),(),0.25,2,0.1,0.1))
+E=[]  # EtherCAT line topology per branch from torso junction at compute; frames return on the same quad
+E.append(('ECAT leg branch -> foot F/T',2,path(COMPUTE,WAIST,HIPY,HIPR,HIPP,KNEE,ANK),legJ1+('hip pitch','knee','ankle (pitch+roll)'),8))
+E.append(('ECAT arm branch -> hand/tactile',2,path(COMPUTE,SHP,SHR,ELB,WRI,HAND),armJ+('wrist roll',),8))
+E.append(('ECAT waist+neck+head',1,path(COMPUTE,NECK,HEAD)+path(COMPUTE,WAIST),('neck yaw','neck pitch','waist yaw'),5))
+E.append(('head cameras data (2 x quad, completeness)',2,path(COMPUTE,NECK,HEAD),('neck yaw','neck pitch'),0))
+E.append(('IMU (torso, completeness)',1,0.25,(),0))
+local=[('motor phase leads (34 drives, 3 x 0.5 mm2 x 0.06 m)',34,0.06,0.5,3),('encoder/thermistor leads (34, 3 x 0.25 mm2 x 0.06 m)',34,0.06,0.25,3)]
+# connectors: (each pair kg, n, evidence)
+CON={'XT60 pair (Amass XT60, 30 A)':(0.0078,4,'7.8 g/pair distributor listing (Alise Ops)'),
+     'XT30U pair (Amass, 15 A, drive tees)':(0.0036,32+8,'1.8 g each half, AMOV listing'),
+     'MR30 3-pin pair (Amass, phase)':(0.0024,0,'1.2 g/pc AMOV listing; phases soldered, n=0'),
+     'JST-GH 4-pin pair + crimps (ECAT/sensor)':(0.0012,2*34+12,'[EST] JST datasheet gives no mass'),
+     'AS150U pair (pack main)':(0.030,1,'[EST] datasheet gives no mass')}
+rows=[]; wire=0; ecat=0; loop_len=0
+def R(a): return RHO_CU/(a*1e-6)
+DT_MAX=30.0; BUNDLE=2.0   # conductor rise limit at rms (K) and bundle factor on free-air rise
+BUDGET={'leg trunk pack->hip_pitch':0.8,'leg hip_pitch->knee':0.6,'leg knee->ankle drives':0.4,'arm trunk pack->shoulder_yaw':1.0,'arm elbow->wrist':0.6}  # % of 68 V; series legs sum <= 2 %
+def choose(L,c,irms,ipk,bud,a_min):
+    for a in sorted(SIF):
+        if a<a_min: continue
+        g,od,_=SIF[a]
+        if 100*ipk*R(a)*L*c/V<=bud and BUNDLE*irms**2*R(a)/(math.pi*od*1e-3*10)<=DT_MAX: return a
+    return max(SIF)
+for nm,n,L0,js,a_min,c,irms,ipk in P:
+    lp=loops(*js); L=L0+lp; a=choose(L,c,irms,ipk,BUDGET.get(nm,1.0),a_min if nm not in BUDGET else 0.5); g,od,art=SIF[a]; m=n*L*c*g/1000; dv=ipk*R(a)*L*c; Pw=irms**2*R(a)
+    dT=BUNDLE*Pw/(math.pi*od*1e-3*10); rb=min([CAB[j]['r_min_mm'] for j in js],default=None)
+    rows.append(dict(item=nm,n=n,route_m=round(L0,3),loops_m=round(lp,3),len_m=round(L,3),joints=list(js),mm2=a,lapp_art=art,gpm=g,cond=c,kg=m,I_rms=irms,I_pk=ipk,
+        dV_pct=100*dv/V,dT_K=dT,bend_r_mm=rb,bend_ratio=(rb/od if rb else None))); wire+=m; loop_len+=n*c*lp
+for nm,n,L0,js,npig in E:
+    lp=loops(*js); L=L0+lp+npig*PIG; m=n*L*ECAT['gpm']/1000
+    rb=min([CAB[j]['r_min_mm'] for j in js],default=None)
+    rows.append(dict(item=nm,n=n,route_m=round(L0,3),loops_m=round(lp,3),len_m=round(L,3),joints=list(js),cable=ECAT['part'],gpm=ECAT['gpm'],kg=m,bend_r_mm=rb,bend_ratio=(rb/ECAT['od'] if rb else None)))
+    ecat+=m; loop_len_e=0
+ecat_loop=sum(r['n']*r['loops_m'] for r in rows if 'cable' in r)
+for nm,n,L,a,c in local: m=n*L*c*SIF[a][0]/1000; rows.append(dict(item=nm,n=n,len_m=L,mm2=a,cond=c,gpm=SIF[a][0],kg=m)); wire+=m
 con=sum(v[0]*v[1] for v in CON.values())
-extras=dict(sleeving_ties_strain_relief=0.12*tot,bms_to_bus_fuse_contactor_leads=0.05)
-total=tot+con+sum(extras.values())
-out=dict(I_leg_pk=I_leg_pk,I_leg_rms=I_leg_rms,rows=rows,wire_kg=tot,connectors=dict(parts={k:dict(each_kg=v[0],n=v[1]) for k,v in CON.items()},kg=con),extras=extras,total_kg=total,target=1.46,contract=2.00,
-   worst_dV_pct=max(r.get('dV_pct',0) for r in rows),worst_dT_K=max(r.get('dT_K',0) for r in rows))
+junction=0.020   # EtherCAT 4-port junction PCB in torso [EST]
+sleeve=0.12*(wire+ecat)
+total=wire+ecat+con+sleeve+junction
+flex_fallback=ecat_loop*(ECAT_FLEX['gpm']-ECAT['gpm'])/1000
+worst=[r for r in rows if r.get('bend_ratio')]
+out=dict(cables=dict(power='Lapp OELFLEX HEAT 180 SiF',ecat=ECAT,ecat_flex_ref=ECAT_FLEX),I_leg_pk=I_leg_pk,I_leg_rms=I_leg_rms,rows=rows,
+   power_wire_kg=wire,ecat_kg=ecat,connectors=dict(parts={k:dict(each_kg=v[0],n=v[1],evidence=v[2]) for k,v in CON.items()},kg=con),
+   sleeving_kg=sleeve,ecat_junction_kg=junction,total_kg=total,R4_model_kg=0.821,R018_credited_kg=1.344,contract=2.00,
+   worst_dV_pct=max(r.get('dV_pct',0) for r in rows),worst_dT_K=max(r.get('dT_K',0) for r in rows),
+   min_bend_ratio=min(r['bend_ratio'] for r in worst),ecat_loop_m=ecat_loop,flex_fallback_ecat_kg=flex_fallback)
 json.dump(out,open(f'{H}/results/harness.json','w'),indent=1)
-L=['# Harness mass model (M3, R-017 owner Actuators)','','`harness.py` -> `harness.json`. Bus 20S 68–84 V, EtherCAT daisy chain per limb, drives on the actuators.','',
- f'Leg trunk current: peak {I_leg_pk:.1f} A (peak_limb {pk_leg:.0f} W / 68 V), rms {I_leg_rms:.1f} A [EST 1.6 × mean].','',
- '| item | n | length m | AWG | cond | kg | I rms / pk A | ΔV pk % | ΔT K |','|---|---|---|---|---|---|---|---|---|']
-for r in rows: L.append(f"| {r['item']} | {r['n']} | {r['len_m']} | {r.get('awg','4×26 ECAT')} | {r.get('cond','')} | {r['kg']:.3f} | {r.get('I_rms',0):.1f} / {r.get('I_pk',0):.1f} | {r.get('dV_pct',0):.2f} | {r.get('dT_K',0):.1f} |")
-L+=['',f"Connectors {con:.3f} kg: "+'; '.join(f'{k} ×{v[1]}' for k,v in CON.items()),'',f"Sleeving/ties 12 % {extras['sleeving_ties_strain_relief']:.3f}, BMS/fuse/contactor leads {extras['bms_to_bus_fuse_contactor_leads']:.3f}.",'',
- f"**Total {total:.3f} kg vs target 1.46 (contract 2.00).** Worst voltage drop {out['worst_dV_pct']:.2f} % at peak, worst conductor ΔT {out['worst_dT_K']:.1f} K at rms (free-air, h 10 W/m²K; bundle derate covered by ampacity 50 %).",
- 'Evidence level: wire mass per AWG and EtherCAT 14 g/m are vendor-typical [EST, datasheets to pull]; connector masses Amass/JST catalogue values [EST ±20 %]. Lengths from v3 limb geometry [EST ±20 %].']
-open(f'{H}/results/harness.md','w').write('\n'.join(L)+'\n'); print('\n'.join(L[-3:])); print(round(tot,3),round(con,3))
+L=['# Harness mass model R5 (O16, R-018 A2): datasheet g/m + routed lengths','',
+ '`harness.py` → `harness.json`. Bus 20S 68–84 V, star from pack/BMS; EtherCAT line per branch from a torso junction. Coordinates from `v3/cad/model.py`; service-loop radii from `v3/cad/out/cables.json`.','',
+ '**Cables.** Power: Lapp ÖLFLEX HEAT 180 SiF silicone single cores (datasheet kg/km: 4.0 mm² 50, 2.5 mm² 32, 1.5 mm² 20, 1.0 mm² 15, 0.75 mm² 12, 0.5 mm² 9, 0.25 mm² 5.4). EtherCAT: GORE GSC-03-84820-00 quadrax Cat5e 26 AWG, 3.3 mm, 23.0 kg/km.','',
+ f'**Routing rule.** Straight segments are Manhattan distances along the structure × {RF}. Each crossed joint adds a clock-spring loop: r_wrap × ROM + {SLACK*1000:.0f} mm. Each drive adds a {PIG*1000:.0f} mm tee pigtail.','',
+ '| run | n | route m | loops m | length m | joints crossed | cable | g/m | cond | kg | ΔV pk % | ΔT K | bend r/OD |','|---|---|---|---|---|---|---|---|---|---|---|---|---|']
+for r in rows:
+    cab=r.get('cable',f"SiF {r.get('mm2')} mm²")
+    L.append(f"| {r['item']} | {r['n']} | {r.get('route_m',r['len_m'])} | {r.get('loops_m',0)} | {r['len_m']} | {', '.join(r.get('joints',[])) or '-'} | {cab} | {r['gpm']} | {r.get('cond',1)} | {r['kg']:.3f} | {r.get('dV_pct',0):.2f} | {r.get('dT_K',0):.1f} | {r['bend_ratio']:.1f} |" if r.get('bend_ratio') else
+             f"| {r['item']} | {r['n']} | {r.get('route_m',r['len_m'])} | {r.get('loops_m',0)} | {r['len_m']} | - | {cab} | {r['gpm']} | {r.get('cond',1)} | {r['kg']:.3f} | {r.get('dV_pct',0):.2f} | {r.get('dT_K',0):.1f} | - |")
+L+=['','Joint ROM used (deg): '+', '.join(f'{k} {v}' for k,v in ROM.items())+'. Hip pitch is from the Legs CAD (−120..+40); the others are [EST] human-range values.','',
+ f"Connectors {con:.3f} kg: "+'; '.join(f'{k} ×{v[1]} ({v[2]})' for k,v in CON.items()),'',
+ f"| block | kg |\n|---|---|\n| power wire (datasheet g/m × routed L) | {wire:.3f} |\n| EtherCAT + completeness data (datasheet g/m × routed L) | {ecat:.3f} |\n| connectors | {con:.3f} |\n| sleeving/ties 12 % [EST] | {sleeve:.3f} |\n| EtherCAT junction PCB [EST] | {junction:.3f} |\n| **total** | **{total:.3f}** |",'',
+ f"Worst ΔV {out['worst_dV_pct']:.2f} % at peak (limit 2 %). Worst conductor ΔT {out['worst_dT_K']:.1f} K at rms (free air h 10 W/m²K × 2 bundle factor, limit 30 K; SiF rated 180 °C). Minimum bend ratio at the drums is r/OD {out['min_bend_ratio']:.1f}.",
+ f"**Flex life.** SiF is datasheet-rated only for fixed install (6 × OD). GORE quadrax is rated for 15 mm static bend and has no published cycle rating. Both are therefore **not yet flex-qualified**; this is open item O20 (clock-spring cycle test, 1e6 cycles over the full ROM at r_min). The flex-rated igus CFBUS.040 (7.0 mm) needs r ≥ 70 mm, which does not fit the drums. Using it on the {ecat_loop:.2f} m of EtherCAT loops would also add {flex_fallback:.3f} kg."]
+open(f'{H}/results/harness.md','w').write('\n'.join(L)+'\n'); print('\n'.join(L[-8:]))

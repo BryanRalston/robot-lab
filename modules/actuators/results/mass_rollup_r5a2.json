@@ -1,0 +1,18 @@
+{
+ "base_R018_credible": 66.976,
+ "harness_R018_credited": 1.344,
+ "harness_model_R5": 1.3140348711572654,
+ "datasheet_routed_kg": 0.8864597063904156,
+ "listed_connector_kg": 0.1752,
+ "est_kg": 0.2523751647668499,
+ "claim_credit": -0.029965128842734723,
+ "robot_claim": 66.94603487115727,
+ "harness_strict_R018": 1.5301540518774803,
+ "strict_credit": 0.18615405187748024,
+ "robot_strict": 67.16215405187748,
+ "limit": 66.5,
+ "waterfall": {
+  "R4 model wire+ECAT (EST g/m)": 0.435,
+  "datasheet g/m + routed L": 0.8864597063904156
+ }
+}
