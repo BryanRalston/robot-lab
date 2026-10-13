@@ -180,7 +180,7 @@ json.dump(dict(margin=MARGIN,bus=dict(S=BUS_S,Vmin=BUS_S*3.4,Vmax=BUS_S*4.2),dri
     battery=dict(cells=CELLS,Wh=WH,kg=BATT_KG),mass=MASS),open(f'results/sizing{tag}.json','w'),indent=1,default=lambda o:float(o) if hasattr(o,'__float__') else str(o))
 
 # ---- progress plot: gait tau-omega vs selected and v3 actuator envelopes
-if MARGIN==1.5:
+if MARGIN==1.5 and os.environ.get('PLOT_R1')=='1':   # round-1 image is frozen media; set PLOT_R1=1 to regenerate
     import matplotlib; matplotlib.use('Agg'); import matplotlib.pyplot as plt
     fig,ax=plt.subplots(2,3,figsize=(15,9)); ax=ax.ravel()
     for i,j in enumerate(LEG):
