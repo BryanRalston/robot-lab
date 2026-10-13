@@ -9,3 +9,10 @@ Coordinator: Robot Lab (9598b055). Phase 1 agents: Actuators, Legs, Arbiter.
 - Arbiter rules only against TARGETS.md (whole-robot targets, Bryan approved) and evidence (checks, datasheets, sim). Rulings logged in modules/RULINGS.md.
 - Work in rounds, one agent at a time; Robot Lab sequences them. Bryan's crew rule: one job at a time crew-wide (Grok Bot releases).
 - Every claim cites a datasheet/source or a check script; estimates marked [EST]. Commit to git after each step as Bryan Ralston <BryanRalston@users.noreply.github.com>; push with gh.
+
+## Progress media (for Bryan's future process video)
+After every round that changes the design, save dated images to media/progress/ named YYYY-MM-DD_<module>_<what>.png: the 3D model (assembled + exploded, same camera angles each time), key plots, and sim screenshots or short clips. Add a line to media/progress/LOG.md saying what changed. Never delete old media.
+
+## Usage (Bryan, 2026-10-13 10:07 AM)
+Conserve Grok Bot usage; other projects need it. Keep rounds tight: one focused deliverable per turn, no exploratory sprawl, no polling, reuse existing scripts. If a Grok Bot usage limit is hit, Grok Build via Grok Interface may supplement, one session at a time, only through Robot Lab and the crew one-job rule.
+Update (Bryan, 10:08 AM): Grok Build may be used whenever it makes sense, not only at a limit; prefer it to save Grok Bot usage. One session at a time via Grok Interface (aa95bf5f), requested through Robot Lab.
