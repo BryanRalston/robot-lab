@@ -20,14 +20,15 @@ Sources used: `v3/analysis/results/v3_checks.md` and `v3.json` (per-joint rows, 
 ### R1.1 Mass budgets (R-001)
 | item | rev 0 | now (P-005 actual) | binding target after recovery |
 |---|---|---|---|
-| leg actuators, both legs | 15.36 kg | 18.60 kg (incl. 1.30 [EST] linkage) | ≤ 17.30 kg |
-| leg structure, both legs | 5.40 kg | 5.40 kg (4.84 kg parametric, provisional until FEA, R-013) | ≤ 4.90 kg |
-| leg linkages, both legs (R-013) | — | 0.609 kg CAD (in actuator line) + up to 0.21 kg risk (ankle lugs, hubs) | ≤ 0.65 kg, one table |
-| harness (Torso placeholder) | 2.00 kg | 2.00 kg | ≤ 1.60 kg |
-| covers (Torso placeholder) | 1.86 kg | 1.86 kg | ≤ 1.46 kg |
+| leg actuators, both legs (all-in incl. linkage, hip pivot bearings, rod ends; R-015 M1) | 15.36 kg | 18.63 kg all-in (16.79 incl. 0.609 linkage + 0.477 table delta − 0.084 Legs-owned lugs + 1.032 unmassed + 0.409 hip lever B; R-015) | ≤ 17.63 kg all-in |
+| leg structure, both legs (incl. thigh clamp, instep lugs; R-015 M2) | 5.40 kg | 5.40 kg in rollup (4.85 parametric + 0.20 clamp [EST] + 0.084 lugs; provisional until FEA) | ≤ 4.85 kg |
+| leg linkages, both legs (R-015) | — | 2.527 kg (`actuators/results/LINKAGE_TABLE.json` 33a7186: incl. lever B, hip bearings 0.628, rod ends 0.300 [EST], 6 trunnion pairs) + thigh clamp 0.20 [EST] | inside actuator all-in ceiling (R-015) |
+| harness (Torso placeholder) | 2.00 kg | 2.00 kg | ≤ 1.46 kg (R-015 M3) |
+| covers (Torso placeholder) | 1.86 kg | 1.86 kg | ≤ 1.20 kg (R-015 M3) |
+| brain (placeholder) | 1.80 kg | 1.80 kg | ≤ 1.50 kg (R-015 M4) |
 | battery 20S5P 1620 Wh | 7.96 kg | 8.75 kg | 8.75 kg |
-| Arbiter reserve | 1.2 kg | −2.60 kg (overrun) | 0.00 kg (any found mass goes here) |
-| **robot** | 63.79 kg | **67.60 kg** | **≤ 65.00 kg (hard)** |
+| Arbiter reserve | 1.2 kg | −2.91 kg (overrun at 67.91) | +0.39 kg |
+| **robot** | 63.79 kg | **67.91 kg incl. unmassed (R-015)** | **64.61 kg after R-015 M1–M4 + pending credits; ≤ 65.00 kg (hard)** |
 
 ### R1.2 Leg actuator contract (R-004, R-005, R-006, R-008)
 | joint | need peak N·m | need RMS N·m | need speed rad/s | selection (Actuators) | avail peak | max mass kg |
@@ -38,7 +39,7 @@ Sources used: `v3/analysis/results/v3_checks.md` and `v3.json` (per-joint rows, 
 | knee | 231 | 72 | 13.3 | 2 × TBM2G-07613D + 2 × RV12x4, 40 mm | 258 worst-angle | 2.37 |
 | ankle_pitch | 305 | 44 | 6.9 | 2 × TBM2G-06013D + 2 × RV12x4, 70 mm | 311 | 1.89 |
 | ankle_roll | 61 | 7 | 4 [EST] | shared pair, 40 mm | 177 | 0 (shared) |
-Needs at 65 kg (R-011): hip_yaw 66, hip_roll 180, hip_pitch 334, knee 235, ankle_pitch 309, ankle_roll 62 N·m (supersede the need column above). Carry verification (R-003, R-011): 20 kg with avail/carry-peak ≥ 1.2 on every leg joint at **0.8 m/s (provisional, Legs re-run pending)**; tracked at 1.2 m/s: ankle_pitch 311/283.2 = 1.10× (fails). Knee motor rpm at speed need ≤ 7600 (R-005). ROM (R-011, R-012): ankle_pitch loaded −50…+40°, mechanical −60…+40°; hip_pitch loaded −80…+40°, mechanical −120…+40°.
+Needs at 65 kg (R-011): hip_yaw 66, hip_roll 180, hip_pitch 334, knee 235, ankle_pitch 309, ankle_roll 62 N·m (supersede the need column above). Carry verification (R-003, R-011): 20 kg with avail/carry-peak ≥ 1.2 on every leg joint at **1.0 m/s (R-014: verified, ankle 311/238.3 = 1.31×, fsim no fall/no saturation)**; 77 mm ankle lever path open to restore 1.2 m/s; tracked at 1.2 m/s: ankle_pitch 311/283.2 = 1.10× (fails). Knee motor rpm at speed need ≤ 7600 (R-005). ROM (R-011, R-012): ankle_pitch loaded −50…+40°, mechanical −60…+40°; hip_pitch loaded −80…+40°, mechanical −120…+40°.
 
 ### R1.3 Power (R-002, R-007, R-009, R-010)
 DC bus 20S 68.0…84.0 V, regen clamp ≤ 90 V, brake chopper, BMS regen-charge limit 30 A. Steady-state walking incl. motor iron loss (`actuators/results/regen_sim.json`, D18–D21):

@@ -132,3 +132,34 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
 - Structure 4.84 kg (both legs) vs 4.90 binding: **accepted provisionally.** Not credited to the CAD-supported total until `grokbuild/structure_fea.md` shows SF ≥ 2 fall and Goodman pass at 65 kg loads (R-001 item 3). Until then the rollup keeps 5.40 kg.
 - Linkage split (0.588 kg both legs, 0.062 kg left for nut-rotor hubs): **not plausible as stated.** Actuators CAD `cad_mass.json` nut_rotor_hub_x1 = 0.0160 kg each. Two hubs per twin-screw unit (Legs' own note) × 3 units (hip_pitch, knee, ankle) × 2 legs = 12 hubs = **0.192 kg** vs 0.062 → 0.130 kg short (0.062/12 = 5.2 g per hub, 1/3 of the CAD part). Also overlap risk: Actuators' CAD linkage line (0.609 kg both legs, already in the 16.79 kg actuator rollup) contains the hip/knee levers that Legs' "crossbar + cheeks" appear to re-estimate, while Legs' ankle instep lugs (0.084 kg) are in neither CAD table.
 - Ruling: **rejected as a contract split; one linkage table required.** Rollup keeps Actuators' CAD 0.609 kg. Mass risk carried: +0.084 (ankle lugs) + up to +0.128 (hubs beyond the 4 already in Actuators' table) = **+0.21 kg risk**. Actuators + Legs deliver one non-overlapping linkage table (part, owner, CAD mass, count) next round; target stays ≤ 0.65 kg.
+
+### R-014: on P-011 change 1, T5 carry verification speed 0.8 → 1.0 m/s; change 2, sit-to-stand
+- Date: 2026-10-13. Proposer: Legs (1e65b3f, 284251e).
+- Verification (`legs/results/r3/carry_20kg_1p0.json` peaks vs CONTRACTS R1.2 avail): hip_yaw 70/41.3 = 1.69, hip_roll 204/112.1 = 1.82, hip_pitch 350/229.9 = 1.52, knee 258/159.6 = 1.62, **ankle_pitch 311/238.3 = 1.31**, ankle_roll 177/31.6 = 5.6 → all ≥ 1.2 (R-003). Forward sim `fsim/carry_20kg_1p0_fb1_kr4.json`: fell_at_s null, 16 touchdowns, saturated_frac {} (none), torque_limit_scale 1.0, final track error −0.9 mm. Steady step 0.47 m / 0.47 s = 1.0 m/s (mean 0.68 m/s over 8.75 s includes ramp-up/down steps). 0.8 m/s run: ankle 219.8 → 1.41. All P-011 claims reproduce.
+- Caveats weighed: 29 frames (~0.15 s) with base residual > 5 % BW (max 61.2 N, friction ratio 1.13) at touchdowns, same as every carry run; one nominal gait, no domain randomization (G4) → evidence ×0.5 for G4, ×1.0 for the R-003 margin test as written.
+- Ruling: **accepted. T5 carry verification speed = 1.0 m/s, replacing the R-011 0.8 m/s fallback.** 1.2 m/s carry stays tracked (ankle 1.10×, fails). 77 mm ankle lever path (R-011) stays open with Actuators; if it lands (≥ 1.2× at 1.2 m/s carry, stroke/L10/clash pass, mass ≤ R-015 actuator ceiling) carry returns to 1.2 m/s. Weighted: T5 deficit vs 1.2 m/s drops from (0.4/1.2) to (0.2/1.2) × 0.12 = 0.020.
+- Change 2 (sit-to-stand 0.46 m seat, hip ≥ −74.6°, hip ratio ≥ 20.6, knee ≥ 2.35, ID only): **R-012 condition met (ID).** Forward-sim confirmation folds into G4; no re-proposal needed.
+
+### R-015: on P-011 information, leg linkage overrun and T2 mass recovery (supersedes R-013 risk numbers)
+- Date: 2026-10-13. Inputs: `legs/LINKAGE_TABLE.md` (committed, 284251e); Actuators' `actuators/results/LINKAGE_TABLE.json` (33a7186, 2.527 kg both legs, rollup 67.71) cross-checked.
+- Verified (committed table): per leg 0.1666 + 0.1346 + 0.0960 + 0.1036 + 0.0420 = 0.5428 → **1.086 kg both** vs 0.609 in rollup → **+0.477 kg**. Leg total: structure 4.85 + linkage 1.086 = 5.94 vs 4.90 + 0.65 = 5.55 → +0.39 kg (Robot Lab figure reproduces).
+- Unmassed / risk lines (both legs):
+  - trunnion pairs 5–6: 2 × 2 × 0.0259 = **+0.104** (Actuators 33a7186 confirms 6 pairs/leg → real).
+  - rod-end eyes ø12, 12 pcs × 0.025 [EST, Actuators 33a7186; catalog datasheet pending] = **+0.300 [EST]**.
+  - hip_pitch pivot bearing (owner Actuators per Robot Lab 1:09): IKO CRBH 5013 A 0.29 kg (datasheet, per Actuators 33a7186) + 0.024 clamp [EST] = 0.314 × 2 = **+0.628**.
+  - thigh trunnion clamp (Legs, unsized): 2 × 0.10 [EST] = **+0.200 [EST]**.
+  - Sum unmassed = 1.232 kg. Hip lever config B (Actuators CAD+FEA, 33a7186): 0.371 vs 0.167 each → **+0.409** (committed, counted).
+- Rollup (math): CAD-supported 65.79 + 0.477 = **66.27 kg**; + 1.232 unmassed = **67.50 kg**; pending credits: Legs structure 5.40 → 4.85 (−0.55, FEA pending) and Torso −0.80 (R-001) → 66.15 kg; + config B lever 0.409 → **66.56 kg** (Actuators' 66.35 = same minus my 0.20 [EST] clamp; incl. lever, uncredited total 67.91 vs Actuators 67.71). **Overrun vs 65.00: 1.56 kg.**
+- Options: bigger linkage budget alone → T2 hard FAIL, rejected; 20S5P → smaller pack → T7 hard FAIL (R-010), rejected; drop twin-screw → reopens R1.2 torque, rejected. Only recovery across module budgets passes all hard constraints.
+- Ruling: **linkage table accepted as the single source (1.086 kg counted, unmassed carried at the values above). Linkage budget raised 0.65 → 1.40 kg incl. hip pivot bearings and rod ends, inside a reduced leg-actuator ceiling. Recovery of 1.95 kg ordered:**
+
+| # | owner | budget change | kg | acceptance criterion |
+|---|---|---|---|---|
+| M1 | Actuators | leg actuator line incl. linkage, hip bearings, rod ends: all-in now 16.79 (incl. 0.609 linkage) + 0.477 − 0.084 (Legs-owned lugs) + 1.032 (trunnion, rod ends, hip bearings) + 0.409 (lever B) = 18.63 → ceiling **≤ 17.63 kg** all-in (replaces 17.30 excl. linkage) | −1.00 | CAD mass of housings (remove ×1.25 [EST] factor with solids), hip lever B back toward ≤ 0.20 kg each (FEA SF held) or offset, catalog rod ends with datasheet mass; one table, round 4 |
+| M2 | Legs | structure + thigh clamp + instep lugs ≤ **4.85 kg** both legs (clamp absorbed: −0.25 vs 4.85 + 0.20 + 0.084) | −0.25 | Grok Build FEA SF ≥ 2 fall + Goodman at 65 kg incl. clamp; until then structure stays provisional at 5.40 in rollup |
+| M3 | Torso (placeholder, Robot Lab assigns) | covers 1.46 → 1.20, harness 1.60 → 1.46 (on top of R-001 −0.80) | −0.40 | cover areal mass + harness routing estimate with sources |
+| M4 | Brain/Head (placeholders) | brain 1.80 → 1.50 kg | −0.30 | compute module + enclosure datasheet mass |
+| | | **total** | **−1.95** | |
+
+- Result: 66.56 − 1.95 = **64.61 kg (reserve 0.39)**. Reserve stays with the Arbiter. If M1–M4 miss by > reserve at end of round 4, Arbiter re-rules (candidate: arm/hand mass, then T5 carry 20 → 15 kg at w 0.12).
+- Structure remains provisional (R-013); the FEA after the walking-controller session gates the −0.55 credit.

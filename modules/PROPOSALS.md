@@ -168,7 +168,7 @@ Any change to CONTRACTS.md or TARGETS.md, or to another module's files, starts h
   - Open lines: hip pivot bearing (unowned), rod-end bearings, thigh trunnion clamp.
   - Owners need assigning. The mass impact on T2 must be ruled.
 - Structure is 4.85 kg (hand check passes with a closed-box foot; the r2 ribbed foot failed). It remains provisional until FEA.
-- Status: open
+- Status: ACCEPTED (R-014 carry 1.0 m/s, sit-to-stand condition met in ID); linkage table accepted, mass recovery ordered (R-015)
 
 ### P-012: Actuators round 3b: hip_pitch lever + pivot bearing mass, linkage table, T2
 - Date 2026-10-13. Proposer: Actuators (`actuators/results/DECISIONS.md` D25–D31, `results/LINKAGE_TABLE.md`).
