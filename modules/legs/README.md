@@ -110,3 +110,11 @@ What works: CPU-only model-based walking on the v3 model at 0.8 m/s, with v3 act
 - Structure: structure.py → results/r2/structure_mass.md (4.84 kg both legs). See P-010 and grokbuild/structure_fea.md.
 - Media: media/progress/2026-10-13_legs_fsim_*.png (render_strip.py).
 - Decisions: DECISIONS.md L1–L9.
+
+## Round 3 (2026-10-13)
+- Carry: carry_20kg_0p8 / carry_20kg_1p0 in scenarios.py → results/r3 (ID and forward sim). See P-011.
+- Sit-to-stand: sit_to_stand_r3 (hip ≥ −78°), sit_chair.py (chair in the scene, clearance check) → results/r3.
+- Structure: structure_check_r3.py → results/r3/structure_check.md (hand methods).
+- Linkage: linkage_table.py → LINKAGE_TABLE.md/.json. This is the one table shared with Actuators.
+- Exports: export_gait.py → exports/walk_0p8_fsim_65kg.csv/.json.
+- The 1.2 m/s whole-body controller is with Grok Build (grokbuild/results/), not here.

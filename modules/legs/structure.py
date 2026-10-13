@@ -28,10 +28,10 @@ A0,Z0=tube(45,2.0); A1,Z1=tube(45,1.6); r=(BW/BW3)*(Z0/Z1)
 add('shank','tibia tube 7075 Ø45',m('tibia tube 7075 Ø45x2.0'),m('tibia tube 7075 Ø45x2.0')*A1/A0,'wall 2.0 → 1.6 mm',
     f"σ {FEA['tibia'][0]*r:.0f} MPa, SF yield {FEA['tibia'][1]/r:.2f}, Goodman {FEA['tibia'][2]/r:.2f}")
 add('shank','tibia collar',m('tibia ankle fillet collar'),m('tibia ankle fillet collar')*A1/A0,'follow tube wall','with tube')
-add('shank','ankle fork',m('ankle fork (shank)'),m('ankle fork (shank)')*0.85,'pocket 15 % [design rule]','FEA required (tibia_full SF 6.2 includes fork)')
+add('shank','ankle fork',m('ankle fork (shank)'),m('ankle fork (shank)')-0.30*box(62,44,10),'r3: pocket the 10 mm top plate 30 % only; the 4 mm side walls stay solid (structure_check r3)','r3 hand check: walls net tension SF 3.44 at 3 BW (pin ø12 assumed); FEA required')
 lev_v3=box(24,130,12)+2*box(24,8,52+10.5)   # v3 crossbar + cheeks (model.py line 158, r=52)
 add('shank','knee tongue (pin lug, lever removed)',m('knee tongue + twin lever (shank)')-lev_v3,(m('knee tongue + twin lever (shank)')-lev_v3)*0.85,f'v3 tongue+twin lever {m("knee tongue + twin lever (shank)"):.3f} minus v3 lever solids {lev_v3:.3f}; pocket 15 % [design rule]','FEA required (knee_clevis case covers the thigh side only)')
-add('foot','foot plate + instep lever',m('foot plate + instep lever'),m('foot plate + instep lever')*0.75,'7075 plate → ribbed plate, 25 % lighter: 4 mm skin + 3 mm ribs at 40 mm pitch, instep lever kept [design rule]','FEA required (no v3 foot case): 3 BW heel strike and toe-off at CoP extremes')
+add('foot','foot plate + instep lever',m('foot plate + instep lever'),m('foot plate + instep lever')*0.75,'r3: closed box section 18 mm (4 mm top + bottom skins, 4 webs 4 mm; open ribbed r2 spec FAILS, SF 0.44 fall). Budgeted 25 % lighter; the box section alone computes 0.891 kg (−0.20 kg/leg reserve, not taken)','r3 hand check: bending SF 2.70 fall 6 BW, Goodman 4.92 (results/r3/structure_check.md); FEA required (no v3 foot case): 3 BW heel strike and toe-off at CoP extremes')
 tot3=sum(x['v3_kg'] for x in rows); totn=sum(x['new_kg'] for x in rows)
 # linkage allowance (both legs <= 0.65 kg). Parametric 7075 solids; trunnion spherical bearings and rod ends stay in the actuator unit mass.
 def box(a,b,c): return a*b*c*1e-9*rho
@@ -43,6 +43,7 @@ L=['# Leg structure and linkage mass (round 2, per leg; ×2 for both legs)\n','G
    '| segment | part | v3 CAD kg | new kg | change | check |\n|---|---|---|---|---|---|\n']
 for x in rows: L.append(f"| {x['seg']} | {x['part']} | {x['v3_kg']:.3f} | {x['new_kg']:.3f} | {x['change']} | {x['check']} |\n")
 L.append(f"| **total per leg** | | **{tot3:.3f}** | **{totn:.3f}** | | |\n| **both legs** | | **{2*tot3:.2f}** | **{2*totn:.2f}** | budget R-001: ≤ 4.90 kg | margin {4.90-2*totn:+.2f} kg |\n")
+L.append('\n> r3 (2026-10-13): the linkage section below is SUPERSEDED by modules/legs/LINKAGE_TABLE.md (one table with Actuators, R-013). Kept for history only.')
 L.append('\nBoundary (DECISIONS L6): structure = thigh lug, femur tube + collars, knee clevis; tibia tube + collar, ankle fork; foot plate. Not structure: knee lever crossbar + cheeks (moved to the linkage line), ankle cross (Ti, 0.120 kg/leg, joint hardware with the ankle actuator), cable drums (harness).\n')
 L.append('\n## Linkage allowance (R-001 item 1: ≤ 0.65 kg both legs)\n\n| item | kg per leg | definition |\n|---|---|---|\n')
 for n,v,d in lk: L.append(f'| {n} | {v:.3f} | {d} |\n')

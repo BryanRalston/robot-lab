@@ -1,0 +1,70 @@
+{
+ "rows": [
+  {
+   "part": "hip_pitch lever r50, thigh-mounted twin screw dy 69 mm (L10)",
+   "owner": "Legs integrates / Actuators line",
+   "kg_each": 0.16657983101123597,
+   "count_per_leg": 1,
+   "basis": "Actuators lever(50,dy=69) CadQuery solid, 7075; replaces the dy 45 part (0.137); crossbar re-size pending (SF ~1.37 by linear scaling)"
+  },
+  {
+   "part": "knee lever r47.5 (crossbar + 2 cheeks)",
+   "owner": "Legs integrates / Actuators line",
+   "kg_each": 0.1346496664615385,
+   "count_per_leg": 1,
+   "basis": "Actuators CAD. Counted IN FULL: Legs structure 4.85 kg excludes all lever solids (L8), so the \u22120.167 v3-lever credit in cad_mass.py per_leg must be dropped"
+  },
+  {
+   "part": "nut-rotor hub",
+   "owner": "Actuators",
+   "kg_each": 0.015996639818657617,
+   "count_per_leg": 6,
+   "basis": "Actuators CAD, one per screw: hip 2 + knee 2 + ankle 2 (= 12 both legs, R-013 count; already 6/leg in cad_mass.py)"
+  },
+  {
+   "part": "trunnion pin pair (\u00f816/\u00f89 hollow steel)",
+   "owner": "Actuators",
+   "kg_each": 0.025894577447213865,
+   "count_per_leg": 4,
+   "basis": "Actuators CAD count 4/leg"
+  },
+  {
+   "part": "trunnion pin pair, screws 5-6 (if every screw has its own trunnion pair)",
+   "owner": "Actuators (open)",
+   "kg_each": 0.025894577447213865,
+   "count_per_leg": 2,
+   "basis": "RISK line: 6 screws/leg vs 4 pairs counted; Actuators to confirm"
+  },
+  {
+   "part": "ankle rod-end lugs on foot instep (2)",
+   "owner": "Legs",
+   "kg_each": 0.042,
+   "count_per_leg": 1,
+   "basis": "Legs parametric solid 2 \u00d7 15\u00d720\u00d725 mm 7075 (structure.py); not in Actuators table"
+  },
+  {
+   "part": "rod-end spherical bearings at the levers (6)",
+   "owner": "Actuators (open)",
+   "kg_each": null,
+   "count_per_leg": 6,
+   "basis": "no CAD/datasheet mass in either table: OPEN"
+  },
+  {
+   "part": "hip pitch pivot bearing + seat (was the rotary CRBH output bearing in v3)",
+   "owner": "UNOWNED (open)",
+   "kg_each": null,
+   "count_per_leg": 1,
+   "basis": "no mass in any line (L10c): OPEN, owner to be assigned"
+  },
+  {
+   "part": "thigh trunnion clamp for the hip_pitch screws (config B)",
+   "owner": "Legs (open)",
+   "kg_each": null,
+   "count_per_leg": 1,
+   "basis": "replaces the pelvis bracket of config A; not sized: OPEN"
+  }
+ ],
+ "counted_per_leg": 0.5427876461735757,
+ "counted_both": 1.0855752923471513,
+ "risk_both": 0.10357830978885546
+}

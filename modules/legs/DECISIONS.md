@@ -35,3 +35,23 @@
   - (c) The v3 thigh has no separate hip_pitch flange part. The 8 × M6 interface is the "femur upper lug" (v3 0.265 kg, 0.212 kg after pocketing), and it stays as the pitch pivot boss and bearing seat.
     - Nothing comes off. The total stays **4.84 kg**.
     - Gap: the v3 hip pitch joint used the rotary actuator's CRBH output bearing. With the screw drive, that pitch bearing is in no mass line.
+- L11 (2026-10-13, r3) 20 kg carry at 65 kg on R1.2 limits
+  - **0.8 m/s:** ID peaks hip_yaw 32.7, hip_roll 110.8, hip_pitch 190.1, knee 147.4, ankle_pitch 219.8, ankle_roll 31.6 N·m. Ankle_pitch margin 311/219.8 = 1.41.
+  - **1.0 m/s:** ID peaks 41.3 / 112.1 / 229.9 / 159.6 / 238.3 / 31.6 N·m. Ankle_pitch margin 311/238.3 = **1.31 ≥ 1.2**; lowest other margin hip_yaw 1.69.
+  - Forward sim completes both: 16 touchdowns, final tracking error 1 mm, no torque saturation. 1.0 m/s is re-proposed in P-011.
+- L12 (r3) Sit-to-stand re-planned per R-012
+  - Forward lean comes from the waist (35°) with pelvis pitch 0°, so the lean adds no hip flexion. Standard 0.46 m seat, seat front 0.06 m behind the ankle.
+  - Hip_pitch stays at or above −74.6° (limit −78°).
+  - Peaks: hip_pitch 12.8, knee 103.5, ankle_pitch 13.4 N·m.
+  - Angle-resolved minimum ratios: hip 20.6 (avail 261 at −74°), knee 2.35 (avail 240 at 116°).
+  - Chair is in the scene (visual only, no contact). Thigh-to-seat gap at seat-off 0.6 mm, no robot geom penetrates the chair over the rise.
+  - Inverse dynamics only, no forward sim. The rise starts at seat-off (no seat reaction modelled).
+- L13 (r3) Structure check by hand methods, not FEA (box had under 0.5 GB free)
+  - Clevis, tongue, lug and fork all pass, minimum SF 3.44 (fork net tension at 3 BW).
+  - The r2 open-ribbed foot **fails** (SF 0.44 fall, Goodman 0.8). Switched to a closed 18 mm box section with 4 mm skins and 4 webs: SF 2.70 fall, Goodman 4.92.
+  - Fork walls (4 mm) are no longer pocketed; only the top plate. Structure rises to 4.85 kg.
+  - The hip pivot bore and ankle pin diameters are assumed (ø32 / ø12), so R-013 credit still needs the FEA brief.
+- L14 (r3) One linkage table in modules/legs/LINKAGE_TABLE.md (Legs-owned file; Actuators reads it)
+  - Counted 0.543 kg per leg, **1.086 kg both legs**, against the 0.65 target. The difference from the 0.609 contract is the hip lever at dy 69 (+0.029/leg), dropping Actuators' v3 knee-lever credit (+0.167/leg, since Legs structure excludes the lever) and the ankle lugs (+0.042/leg).
+  - Open lines: rod-end bearings, hip pivot bearing (unowned), thigh trunnion clamp, and 2 possible extra trunnion pin pairs per leg (+0.104 kg both legs).
+- L15 (r3) Export: exports/walk_0p8_fsim_65kg.csv/.json at 100 Hz, 9.3 s. Contains base pose, all hinge joints, leg qd, reference q and ID feed-forward torque.

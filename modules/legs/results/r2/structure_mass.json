@@ -52,9 +52,9 @@
    "seg": "shank",
    "part": "ankle fork",
    "v3_kg": 0.181,
-   "new_kg": 0.15385,
-   "change": "pocket 15 % [design rule]",
-   "check": "FEA required (tibia_full SF 6.2 includes fork)"
+   "new_kg": 0.15800296,
+   "change": "r3: pocket the 10 mm top plate 30 % only; the 4 mm side walls stay solid (structure_check r3)",
+   "check": "r3 hand check: walls net tension SF 3.44 at 3 BW (pin \u00f812 assumed); FEA required"
   },
   {
    "seg": "shank",
@@ -69,13 +69,13 @@
    "part": "foot plate + instep lever",
    "v3_kg": 1.457,
    "new_kg": 1.09275,
-   "change": "7075 plate \u2192 ribbed plate, 25 % lighter: 4 mm skin + 3 mm ribs at 40 mm pitch, instep lever kept [design rule]",
-   "check": "FEA required (no v3 foot case): 3 BW heel strike and toe-off at CoP extremes"
+   "change": "r3: closed box section 18 mm (4 mm top + bottom skins, 4 webs 4 mm; open ribbed r2 spec FAILS, SF 0.44 fall). Budgeted 25 % lighter; the box section alone computes 0.891 kg (\u22120.20 kg/leg reserve, not taken)",
+   "check": "r3 hand check: bending SF 2.70 fall 6 BW, Goodman 4.92 (results/r3/structure_check.md); FEA required (no v3 foot case): 3 BW heel strike and toe-off at CoP extremes"
   }
  ],
  "per_leg_v3": 3.0633536,
- "per_leg_new": 2.4186835057364346,
- "both_new": 4.837367011472869,
+ "per_leg_new": 2.4228364657364345,
+ "both_new": 4.845672931472869,
  "linkage": [
   {
    "item": "knee crossbar + 2 cheeks (lever 47.5 mm)",

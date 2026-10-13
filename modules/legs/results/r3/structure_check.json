@@ -1,0 +1,470 @@
+{
+ "GRF_peak_N": 1039.8,
+ "loads": {
+  "F_knee_screw": 7267.4,
+  "F_hip_screw": 9084.3,
+  "F_ankle_screw": 4045.7,
+  "W3": 1912.9,
+  "fall6": 3825.9
+ },
+ "rows": [
+  {
+   "part": "knee clevis (thigh), 2 cheeks 46\u00d714, pin \u00f816",
+   "case": "operating peak (ID GRF 1040 N + screw)",
+   "stress_MPa": 29.7,
+   "kind": "net tension \u00d7Kt 3.0",
+   "SF": 16.95,
+   "need": 1.5,
+   "ok": true,
+   "note": "bridge pocket 15 % is outside the pin path; v3 FEA scaled SF 4.80 (structure_mass.md) is the governing whole-part number",
+   "goodman_SF": 8.39
+  },
+  {
+   "part": "knee clevis (thigh), 2 cheeks 46\u00d714, pin \u00f816",
+   "case": "operating peak (ID GRF 1040 N + screw)",
+   "stress_MPa": 18.5,
+   "kind": "bearing",
+   "SF": 27.13,
+   "need": 1.5,
+   "ok": true,
+   "note": "bridge pocket 15 % is outside the pin path; v3 FEA scaled SF 4.80 (structure_mass.md) is the governing whole-part number"
+  },
+  {
+   "part": "knee clevis (thigh), 2 cheeks 46\u00d714, pin \u00f816",
+   "case": "operating peak (ID GRF 1040 N + screw)",
+   "stress_MPa": 11.4,
+   "kind": "shear",
+   "SF": 25.43,
+   "need": 1.5,
+   "ok": true,
+   "note": "bridge pocket 15 % is outside the pin path; v3 FEA scaled SF 4.80 (structure_mass.md) is the governing whole-part number"
+  },
+  {
+   "part": "knee clevis (thigh), 2 cheeks 46\u00d714, pin \u00f816",
+   "case": "3 BW + screw",
+   "stress_MPa": 32.8,
+   "kind": "net tension \u00d7Kt 3.0",
+   "SF": 15.34,
+   "need": 2.0,
+   "ok": true,
+   "note": "bridge pocket 15 % is outside the pin path; v3 FEA scaled SF 4.80 (structure_mass.md) is the governing whole-part number"
+  },
+  {
+   "part": "knee clevis (thigh), 2 cheeks 46\u00d714, pin \u00f816",
+   "case": "3 BW + screw",
+   "stress_MPa": 20.5,
+   "kind": "bearing",
+   "SF": 24.55,
+   "need": 2.0,
+   "ok": true,
+   "note": "bridge pocket 15 % is outside the pin path; v3 FEA scaled SF 4.80 (structure_mass.md) is the governing whole-part number"
+  },
+  {
+   "part": "knee clevis (thigh), 2 cheeks 46\u00d714, pin \u00f816",
+   "case": "3 BW + screw",
+   "stress_MPa": 12.6,
+   "kind": "shear",
+   "SF": 23.02,
+   "need": 2.0,
+   "ok": true,
+   "note": "bridge pocket 15 % is outside the pin path; v3 FEA scaled SF 4.80 (structure_mass.md) is the governing whole-part number"
+  },
+  {
+   "part": "knee clevis (thigh), 2 cheeks 46\u00d714, pin \u00f816",
+   "case": "fall 6 BW",
+   "stress_MPa": 13.7,
+   "kind": "net tension \u00d7Kt 3.0",
+   "SF": 36.81,
+   "need": 2.0,
+   "ok": true,
+   "note": "bridge pocket 15 % is outside the pin path; v3 FEA scaled SF 4.80 (structure_mass.md) is the governing whole-part number"
+  },
+  {
+   "part": "knee clevis (thigh), 2 cheeks 46\u00d714, pin \u00f816",
+   "case": "fall 6 BW",
+   "stress_MPa": 8.5,
+   "kind": "bearing",
+   "SF": 58.9,
+   "need": 2.0,
+   "ok": true,
+   "note": "bridge pocket 15 % is outside the pin path; v3 FEA scaled SF 4.80 (structure_mass.md) is the governing whole-part number"
+  },
+  {
+   "part": "knee clevis (thigh), 2 cheeks 46\u00d714, pin \u00f816",
+   "case": "fall 6 BW",
+   "stress_MPa": 5.3,
+   "kind": "shear",
+   "SF": 55.23,
+   "need": 2.0,
+   "ok": true,
+   "note": "bridge pocket 15 % is outside the pin path; v3 FEA scaled SF 4.80 (structure_mass.md) is the governing whole-part number"
+  },
+  {
+   "part": "knee tongue (shank), R32 \u00d7 40, pin \u00f816",
+   "case": "operating peak (ID GRF 1040 N + screw)",
+   "stress_MPa": 13.0,
+   "kind": "net tension \u00d7Kt 3.0",
+   "SF": 38.75,
+   "need": 1.5,
+   "ok": true,
+   "note": "pocket 15 % keeps a 12 mm ligament ring around the pin",
+   "goodman_SF": 19.17
+  },
+  {
+   "part": "knee tongue (shank), R32 \u00d7 40, pin \u00f816",
+   "case": "operating peak (ID GRF 1040 N + screw)",
+   "stress_MPa": 13.0,
+   "kind": "bearing",
+   "SF": 38.75,
+   "need": 1.5,
+   "ok": true,
+   "note": "pocket 15 % keeps a 12 mm ligament ring around the pin"
+  },
+  {
+   "part": "knee tongue (shank), R32 \u00d7 40, pin \u00f816",
+   "case": "operating peak (ID GRF 1040 N + screw)",
+   "stress_MPa": 4.3,
+   "kind": "shear",
+   "SF": 67.08,
+   "need": 1.5,
+   "ok": true,
+   "note": "pocket 15 % keeps a 12 mm ligament ring around the pin"
+  },
+  {
+   "part": "knee tongue (shank), R32 \u00d7 40, pin \u00f816",
+   "case": "3 BW + screw",
+   "stress_MPa": 14.3,
+   "kind": "net tension \u00d7Kt 3.0",
+   "SF": 35.07,
+   "need": 2.0,
+   "ok": true,
+   "note": "pocket 15 % keeps a 12 mm ligament ring around the pin"
+  },
+  {
+   "part": "knee tongue (shank), R32 \u00d7 40, pin \u00f816",
+   "case": "3 BW + screw",
+   "stress_MPa": 14.3,
+   "kind": "bearing",
+   "SF": 35.07,
+   "need": 2.0,
+   "ok": true,
+   "note": "pocket 15 % keeps a 12 mm ligament ring around the pin"
+  },
+  {
+   "part": "knee tongue (shank), R32 \u00d7 40, pin \u00f816",
+   "case": "3 BW + screw",
+   "stress_MPa": 4.8,
+   "kind": "shear",
+   "SF": 60.7,
+   "need": 2.0,
+   "ok": true,
+   "note": "pocket 15 % keeps a 12 mm ligament ring around the pin"
+  },
+  {
+   "part": "knee tongue (shank), R32 \u00d7 40, pin \u00f816",
+   "case": "fall 6 BW",
+   "stress_MPa": 6.0,
+   "kind": "net tension \u00d7Kt 3.0",
+   "SF": 84.14,
+   "need": 2.0,
+   "ok": true,
+   "note": "pocket 15 % keeps a 12 mm ligament ring around the pin"
+  },
+  {
+   "part": "knee tongue (shank), R32 \u00d7 40, pin \u00f816",
+   "case": "fall 6 BW",
+   "stress_MPa": 6.0,
+   "kind": "bearing",
+   "SF": 84.14,
+   "need": 2.0,
+   "ok": true,
+   "note": "pocket 15 % keeps a 12 mm ligament ring around the pin"
+  },
+  {
+   "part": "knee tongue (shank), R32 \u00d7 40, pin \u00f816",
+   "case": "fall 6 BW",
+   "stress_MPa": 2.0,
+   "kind": "shear",
+   "SF": 145.65,
+   "need": 2.0,
+   "ok": true,
+   "note": "pocket 15 % keeps a 12 mm ligament ring around the pin"
+  },
+  {
+   "part": "femur upper lug \u2192 hip pivot boss, assumed bore \u00f832 [EST: pivot bearing unowned]",
+   "case": "operating peak (ID GRF 1040 N + screw)",
+   "stress_MPa": 26.4,
+   "kind": "net tension \u00d7Kt 3.0",
+   "SF": 19.08,
+   "need": 1.5,
+   "ok": true,
+   "note": "thickness \u00d70.8 for the 20 % pocket; bore and bearing not defined (open linkage-table line)",
+   "goodman_SF": 9.44
+  },
+  {
+   "part": "femur upper lug \u2192 hip pivot boss, assumed bore \u00f832 [EST: pivot bearing unowned]",
+   "case": "operating peak (ID GRF 1040 N + screw)",
+   "stress_MPa": 13.2,
+   "kind": "bearing",
+   "SF": 38.16,
+   "need": 1.5,
+   "ok": true,
+   "note": "thickness \u00d70.8 for the 20 % pocket; bore and bearing not defined (open linkage-table line)"
+  },
+  {
+   "part": "femur upper lug \u2192 hip pivot boss, assumed bore \u00f832 [EST: pivot bearing unowned]",
+   "case": "operating peak (ID GRF 1040 N + screw)",
+   "stress_MPa": 15.1,
+   "kind": "shear",
+   "SF": 19.26,
+   "need": 1.5,
+   "ok": true,
+   "note": "thickness \u00d70.8 for the 20 % pocket; bore and bearing not defined (open linkage-table line)"
+  },
+  {
+   "part": "femur upper lug \u2192 hip pivot boss, assumed bore \u00f832 [EST: pivot bearing unowned]",
+   "case": "3 BW + screw",
+   "stress_MPa": 28.6,
+   "kind": "net tension \u00d7Kt 3.0",
+   "SF": 17.56,
+   "need": 2.0,
+   "ok": true,
+   "note": "thickness \u00d70.8 for the 20 % pocket; bore and bearing not defined (open linkage-table line)"
+  },
+  {
+   "part": "femur upper lug \u2192 hip pivot boss, assumed bore \u00f832 [EST: pivot bearing unowned]",
+   "case": "3 BW + screw",
+   "stress_MPa": 14.3,
+   "kind": "bearing",
+   "SF": 35.13,
+   "need": 2.0,
+   "ok": true,
+   "note": "thickness \u00d70.8 for the 20 % pocket; bore and bearing not defined (open linkage-table line)"
+  },
+  {
+   "part": "femur upper lug \u2192 hip pivot boss, assumed bore \u00f832 [EST: pivot bearing unowned]",
+   "case": "3 BW + screw",
+   "stress_MPa": 16.4,
+   "kind": "shear",
+   "SF": 17.73,
+   "need": 2.0,
+   "ok": true,
+   "note": "thickness \u00d70.8 for the 20 % pocket; bore and bearing not defined (open linkage-table line)"
+  },
+  {
+   "part": "femur upper lug \u2192 hip pivot boss, assumed bore \u00f832 [EST: pivot bearing unowned]",
+   "case": "fall 6 BW",
+   "stress_MPa": 10.0,
+   "kind": "net tension \u00d7Kt 3.0",
+   "SF": 50.49,
+   "need": 2.0,
+   "ok": true,
+   "note": "thickness \u00d70.8 for the 20 % pocket; bore and bearing not defined (open linkage-table line)"
+  },
+  {
+   "part": "femur upper lug \u2192 hip pivot boss, assumed bore \u00f832 [EST: pivot bearing unowned]",
+   "case": "fall 6 BW",
+   "stress_MPa": 5.0,
+   "kind": "bearing",
+   "SF": 100.97,
+   "need": 2.0,
+   "ok": true,
+   "note": "thickness \u00d70.8 for the 20 % pocket; bore and bearing not defined (open linkage-table line)"
+  },
+  {
+   "part": "femur upper lug \u2192 hip pivot boss, assumed bore \u00f832 [EST: pivot bearing unowned]",
+   "case": "fall 6 BW",
+   "stress_MPa": 5.7,
+   "kind": "shear",
+   "SF": 50.98,
+   "need": 2.0,
+   "ok": true,
+   "note": "thickness \u00d70.8 for the 20 % pocket; bore and bearing not defined (open linkage-table line)"
+  },
+  {
+   "part": "ankle fork (shank), 2 walls 4 mm, assumed pin \u00f812 [EST]",
+   "case": "operating peak (ID GRF 1040 N + screw)",
+   "stress_MPa": 124.6,
+   "kind": "net tension \u00d7Kt 3.0",
+   "SF": 4.04,
+   "need": 1.5,
+   "ok": true,
+   "note": "walls are only 4 mm: pocketing them (\u00d70.85) is NOT recommended; pocket the 10 mm top plate only",
+   "goodman_SF": 2.0
+  },
+  {
+   "part": "ankle fork (shank), 2 walls 4 mm, assumed pin \u00f812 [EST]",
+   "case": "operating peak (ID GRF 1040 N + screw)",
+   "stress_MPa": 62.3,
+   "kind": "bearing",
+   "SF": 8.07,
+   "need": 1.5,
+   "ok": true,
+   "note": "walls are only 4 mm: pocketing them (\u00d70.85) is NOT recommended; pocket the 10 mm top plate only"
+  },
+  {
+   "part": "ankle fork (shank), 2 walls 4 mm, assumed pin \u00f812 [EST]",
+   "case": "operating peak (ID GRF 1040 N + screw)",
+   "stress_MPa": 41.5,
+   "kind": "shear",
+   "SF": 6.99,
+   "need": 1.5,
+   "ok": true,
+   "note": "walls are only 4 mm: pocketing them (\u00d70.85) is NOT recommended; pocket the 10 mm top plate only"
+  },
+  {
+   "part": "ankle fork (shank), 2 walls 4 mm, assumed pin \u00f812 [EST]",
+   "case": "3 BW + screw",
+   "stress_MPa": 146.0,
+   "kind": "net tension \u00d7Kt 3.0",
+   "SF": 3.44,
+   "need": 2.0,
+   "ok": true,
+   "note": "walls are only 4 mm: pocketing them (\u00d70.85) is NOT recommended; pocket the 10 mm top plate only"
+  },
+  {
+   "part": "ankle fork (shank), 2 walls 4 mm, assumed pin \u00f812 [EST]",
+   "case": "3 BW + screw",
+   "stress_MPa": 73.0,
+   "kind": "bearing",
+   "SF": 6.89,
+   "need": 2.0,
+   "ok": true,
+   "note": "walls are only 4 mm: pocketing them (\u00d70.85) is NOT recommended; pocket the 10 mm top plate only"
+  },
+  {
+   "part": "ankle fork (shank), 2 walls 4 mm, assumed pin \u00f812 [EST]",
+   "case": "3 BW + screw",
+   "stress_MPa": 48.7,
+   "kind": "shear",
+   "SF": 5.96,
+   "need": 2.0,
+   "ok": true,
+   "note": "walls are only 4 mm: pocketing them (\u00d70.85) is NOT recommended; pocket the 10 mm top plate only"
+  },
+  {
+   "part": "ankle fork (shank), 2 walls 4 mm, assumed pin \u00f812 [EST]",
+   "case": "fall 6 BW",
+   "stress_MPa": 93.8,
+   "kind": "net tension \u00d7Kt 3.0",
+   "SF": 5.36,
+   "need": 2.0,
+   "ok": true,
+   "note": "walls are only 4 mm: pocketing them (\u00d70.85) is NOT recommended; pocket the 10 mm top plate only"
+  },
+  {
+   "part": "ankle fork (shank), 2 walls 4 mm, assumed pin \u00f812 [EST]",
+   "case": "fall 6 BW",
+   "stress_MPa": 46.9,
+   "kind": "bearing",
+   "SF": 10.73,
+   "need": 2.0,
+   "ok": true,
+   "note": "walls are only 4 mm: pocketing them (\u00d70.85) is NOT recommended; pocket the 10 mm top plate only"
+  },
+  {
+   "part": "ankle fork (shank), 2 walls 4 mm, assumed pin \u00f812 [EST]",
+   "case": "fall 6 BW",
+   "stress_MPa": 31.3,
+   "kind": "shear",
+   "SF": 9.29,
+   "need": 2.0,
+   "ok": true,
+   "note": "walls are only 4 mm: pocketing them (\u00d70.85) is NOT recommended; pocket the 10 mm top plate only"
+  },
+  {
+   "part": "foot plate v3 solid 100\u00d718",
+   "case": "operating peak GRF at toe",
+   "stress_MPa": 43.3,
+   "kind": "bending \u00d7Kt 1.5",
+   "SF": 11.61,
+   "need": 1.5,
+   "ok": true,
+   "note": "A 1800 mm\u00b2, I 48600 mm\u2074, c 9.0 mm",
+   "goodman_SF": 5.74
+  },
+  {
+   "part": "foot plate v3 solid 100\u00d718",
+   "case": "3 BW at toe",
+   "stress_MPa": 79.7,
+   "kind": "bending \u00d7Kt 1.5",
+   "SF": 6.31,
+   "need": 2.0,
+   "ok": true,
+   "note": "A 1800 mm\u00b2, I 48600 mm\u2074, c 9.0 mm"
+  },
+  {
+   "part": "foot plate v3 solid 100\u00d718",
+   "case": "fall 6 BW at toe",
+   "stress_MPa": 159.4,
+   "kind": "bending \u00d7Kt 1.5",
+   "SF": 3.16,
+   "need": 2.0,
+   "ok": true,
+   "note": "A 1800 mm\u00b2, I 48600 mm\u2074, c 9.0 mm"
+  },
+  {
+   "part": "foot plate open ribbed 4 mm skin + 3 ribs 3\u00d714 (r2 spec)",
+   "case": "operating peak GRF at toe",
+   "stress_MPa": 312.9,
+   "kind": "bending \u00d7Kt 1.5",
+   "SF": 1.61,
+   "need": 1.5,
+   "ok": false,
+   "note": "A 526 mm\u00b2, I 10353 mm\u2074, c 13.8 mm",
+   "goodman_SF": 0.8
+  },
+  {
+   "part": "foot plate open ribbed 4 mm skin + 3 ribs 3\u00d714 (r2 spec)",
+   "case": "3 BW at toe",
+   "stress_MPa": 575.6,
+   "kind": "bending \u00d7Kt 1.5",
+   "SF": 0.87,
+   "need": 2.0,
+   "ok": false,
+   "note": "A 526 mm\u00b2, I 10353 mm\u2074, c 13.8 mm"
+  },
+  {
+   "part": "foot plate open ribbed 4 mm skin + 3 ribs 3\u00d714 (r2 spec)",
+   "case": "fall 6 BW at toe",
+   "stress_MPa": 1151.2,
+   "kind": "bending \u00d7Kt 1.5",
+   "SF": 0.44,
+   "need": 2.0,
+   "ok": false,
+   "note": "A 526 mm\u00b2, I 10353 mm\u2074, c 13.8 mm"
+  },
+  {
+   "part": "foot plate closed box 18: 4 mm skins top+bottom + 4 webs 4 mm (r3 spec)",
+   "case": "operating peak GRF at toe",
+   "stress_MPa": 50.6,
+   "kind": "bending \u00d7Kt 1.5",
+   "SF": 9.94,
+   "need": 1.5,
+   "ok": true,
+   "note": "A 960 mm\u00b2, I 41600 mm\u2074, c 9.0 mm",
+   "goodman_SF": 4.92
+  },
+  {
+   "part": "foot plate closed box 18: 4 mm skins top+bottom + 4 webs 4 mm (r3 spec)",
+   "case": "3 BW at toe",
+   "stress_MPa": 93.1,
+   "kind": "bending \u00d7Kt 1.5",
+   "SF": 5.4,
+   "need": 2.0,
+   "ok": true,
+   "note": "A 960 mm\u00b2, I 41600 mm\u2074, c 9.0 mm"
+  },
+  {
+   "part": "foot plate closed box 18: 4 mm skins top+bottom + 4 webs 4 mm (r3 spec)",
+   "case": "fall 6 BW at toe",
+   "stress_MPa": 186.2,
+   "kind": "bending \u00d7Kt 1.5",
+   "SF": 2.7,
+   "need": 2.0,
+   "ok": true,
+   "note": "A 960 mm\u00b2, I 41600 mm\u2074, c 9.0 mm"
+  }
+ ],
+ "method": "classical lug / beam hand methods, not FEA; R-013 credit still needs grokbuild/structure_fea.md"
+}

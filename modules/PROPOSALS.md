@@ -152,3 +152,20 @@ Any change to CONTRACTS.md or TARGETS.md, or to another module's files, starts h
 - These are parametric-solid estimates. The pelvis trunnion bracket is out of scope (Torso).
 - Evidence: modules/legs/structure.py, results/r2/structure_mass.md/.json, DECISIONS L6, L8.
 - Status: structure accepted provisionally (FEA pending); linkage split rejected → R-013 (hubs 12 × 16 g = 0.192 kg ≠ 0.062).
+
+### P-011: Legs round 3: T5 carry verification at 1.0 m/s (evidence run), sit-to-stand re-plan done, linkage table
+- Owner: Legs. Date: 2026-10-13. Commits: 1e65b3f and later.
+- Change 1, carry verification speed 0.8 → **1.0 m/s**.
+  - The 20 kg carry at 65 kg (`legs/results/r3/carry_20kg_1p0.json`) has ankle_pitch peak 238.3 N·m, so 311/238.3 = 1.31 ≥ 1.2. Avail/peak on the other joints: hip_yaw 1.69, hip_roll 1.82, hip_pitch 1.52, knee 1.62, ankle_roll 5.6.
+  - The forward sim completes on R1.2 limits (16 touchdowns, no saturation: `results/r3/fsim/carry_20kg_1p0_fb1_kr4.json`).
+  - Run at 0.8 m/s: ankle_pitch 219.8 (1.41).
+  - Caveat, the same as every carry run: 29–30 frames (≈0.15 s total, at touchdown transitions) have a base residual above 5 % BW, with friction ratio 1.13 in those frames. CoP stays inside the sole.
+- Change 2, R-012 condition met.
+  - Sit-to-stand from a 0.46 m seat with hip ≥ −74.6°. Hip ratio is ≥ 20.6 throughout and knee ≥ 2.35 (DECISIONS L12).
+  - Loaded hip need −80…+40° stands. Note: the condition is shown in inverse dynamics only, not forward sim.
+- Information (R-013): one linkage table, `modules/legs/LINKAGE_TABLE.md`.
+  - It counts 1.086 kg both legs, against the 0.609 kg in CONTRACTS. The difference is the dropped v3 knee-lever credit, the hip lever at dy 69 and the ankle lugs.
+  - Open lines: hip pivot bearing (unowned), rod-end bearings, thigh trunnion clamp.
+  - Owners need assigning. The mass impact on T2 must be ruled.
+- Structure is 4.85 kg (hand check passes with a closed-box foot; the r2 ribbed foot failed). It remains provisional until FEA.
+- Status: open

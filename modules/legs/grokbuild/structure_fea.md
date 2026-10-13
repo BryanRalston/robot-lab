@@ -29,3 +29,15 @@ Material: 7075-T6 (yield 503 MPa, fatigue 159 MPa at 5e8 cycles).
 ## Inputs
 - v3 CAD/FEA scripts in v3/ (parametric solids)
 - modules/legs/structure.py (mass basis)
+
+## r3 update (2026-10-13)
+`structure_check_r3.py` → `results/r3/structure_check.md` used hand methods (lug net tension with Kt 3, bearing, shear-out; foot as a beam section). It is not FEA.
+- Clevis, tongue, lug and fork pass. Minimum SF is 3.44 (fork walls, 3 BW).
+- The open-ribbed foot failed (SF 0.44 fall). The foot is now a closed 18 mm box: 4 mm skins and 4 webs of 4 mm. Hand check gives SF 2.70 fall and Goodman 4.92.
+
+FEA must confirm:
+- the closed-box foot, including skin buckling and sole contact pressure
+- the hip pivot boss once the pivot bearing exists (bore ø32 assumed)
+- the ankle fork with the real pin (ø12 assumed)
+
+Worst ID GRF is from `results/r3/structure_check.json`.
