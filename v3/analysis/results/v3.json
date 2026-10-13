@@ -216,10 +216,6 @@
   [
    "tendon-fatigue-UNVERIFIABLE",
    "needs 1.75e+06 bend cycles; published evidence \u2264 5e4 (D/d 4, 150 N)"
-  ],
-  [
-   "FEA-convergence fall_torso_panel",
-   "only one mesh level"
   ]
  ],
  "rows": [

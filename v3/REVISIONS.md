@@ -90,4 +90,4 @@ Every failure found in the v3 hardening loop and what was done about it. "it" = 
 
 | failure | fix / status |
 |---|---|
-| v3 model with CAD mass properties: plain PD (balance off) falls backwards in ~2 s | CAD centre of mass sits 20–35 mm behind the ankles (knee/ankle actuators behind the legs). With the COM ankle strategy (balance ON) it stands and rejects 125 N / 0.2 s pushes forward and sideways (v2 capsule model: 175 N). Not fixed in hardware geometry; flagged. |
+| v3 model with CAD mass properties: plain PD (balance off) falls | v3.2 re-measure (ankle actuators on shank front): CAD COM **+4.4 mm ahead** of the ankle axis standing straight, +21 mm in the sim's crouched stance (foot centre +60, heel −60, toe +180), so the COM is inside the support polygon; the old "20–35 mm behind" text is obsolete. **Balance OFF still does not stand**: plain PD survives 4 s (and 175 N forward pushes over 4 s) but sinks/falls before 10 s, because the capped joint gains are softer than m·g·h. This is a controller-stiffness limit, not a geometry one; a real robot always runs a balance controller. Balance ON: stands 10 s, rejects 125 N / 0.2 s forward and sideways. |

@@ -65,12 +65,12 @@ Walking: mechanical 244 W + copper 132 W + compute/drives/sensors → 622 W → 
 
 | case | peak vM MPa | SF yield | Goodman SF (5 y) | converged |
 |---|---|---|---|---|
-| knee_clevis | 54 | 9.35 | 10.68 | True |
+| knee_clevis | 50 | 10.09 | 11.52 | True |
 | fall_hip_bracket | 33 | 15.34 | — | True |
 | fall_shoulder_housing | 56 | 8.92 | — | True |
 | pelvis_hip | 44 | 11.37 | 12.98 | True |
 | femur_full | 47 | 10.62 | 12.13 | True |
-| fall_torso_panel | 132 | 3.04 | — | False |
+| fall_torso_panel | 138 | 2.89 | — | True |
 | tibia_full | 81 | 6.19 | 7.06 | True |
 
 ## Cable routing (igus CFROBOT rule: bend radius ≥ 10 × d when moving)
@@ -95,4 +95,3 @@ Walking: mechanical 244 W + copper 132 W + compute/drives/sensors → 622 W → 
 ## Open failures
 
 - tendon-fatigue-UNVERIFIABLE: needs 1.75e+06 bend cycles; published evidence ≤ 5e4 (D/d 4, 150 N)
-- FEA-convergence fall_torso_panel: only one mesh level

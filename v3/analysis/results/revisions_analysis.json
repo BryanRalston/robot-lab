@@ -74,12 +74,6 @@
  {
   "it": 0,
   "area": "v3.0 = v2 with catalog parts substituted 1:1",
-  "failure": "FEA-convergence fall_torso_panel: only one mesh level",
-  "fix": "(see later iterations)"
- },
- {
-  "it": 0,
-  "area": "v3.0 = v2 with catalog parts substituted 1:1",
   "failure": "mass-target: 80.1 kg > 65 kg",
   "fix": "(see later iterations)"
  },
