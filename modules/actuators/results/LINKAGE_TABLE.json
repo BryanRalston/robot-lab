@@ -1,22 +1,22 @@
 {
  "rows": [
   {
-   "part": "hip_pitch lever, config B (hub+bearing spigot, 2 loft arms, ears; dy 69), 7075 + 2 steel pins \u00f812x25",
+   "part": "hip_pitch lever, config B, needle-cheek hub, SF 1.5 + proof test (2 halves, loft arms, ears; dy 69), 7075 + 2 steel pins \u00f812x25",
    "owner": "Actuators",
-   "kg_each": 0.37143474232192214,
+   "kg_each": 0.24914928661331226,
    "n_per_leg": 1,
-   "kg_per_leg": 0.37143474232192214,
-   "source": "CAD+FEA hp_lever_fea.py (R3b), replaces lever(50,dy=69) 0.167",
+   "kg_per_leg": 0.24914928661331226,
+   "source": "CAD+FEA hp_lever_fea.py HUB=needle (R4), was 0.371 at SF 2.13",
    "legs_confirm": ""
   },
   {
-   "part": "hip_pitch pivot bearing IKO CRBH 5013 A + inner clamp ring + 6xM4",
-   "owner": "Actuators (from R3b)",
-   "kg_each": 0.314,
+   "part": "hip_pitch pivot: 2x IKO TLA 3520 Z needle + hardened shaft \u00f835/30x67 + thrust washers + circlips",
+   "owner": "Actuators",
+   "kg_each": 0.23725093991562496,
    "n_per_leg": 1,
-   "kg_per_leg": 0.314,
-   "source": "datasheet 0.29 kg + 0.024 [EST]",
-   "legs_confirm": "Legs: femur tongue seat \u00f880 H7 x 13 (was \u00f832)"
+   "kg_per_leg": 0.23725093991562496,
+   "source": "datasheet 2x0.0435 + shaft CAD-calc + washers [EST]; replaces CRBH 5013 A line 0.314",
+   "legs_confirm": "Legs: tongue bore \u00f835 press fit (not \u00f880)"
   },
   {
    "part": "knee lever r47.5",
@@ -46,12 +46,12 @@
    "legs_confirm": ""
   },
   {
-   "part": "rod-end spherical eye \u00f812 (one per screw rod)",
+   "part": "rod-end: SKF GE 12 E spherical plain bearing (0.016 kg, C0 54 kN) in a 7075 eye \u00f830x12 with M12 boss (0.019 kg CAD-calc)",
    "owner": "Actuators",
-   "kg_each": 0.025,
+   "kg_each": 0.035,
    "n_per_leg": 6,
-   "kg_per_leg": 0.15000000000000002,
-   "source": "[EST] steel rod-end eye M12 / \u00f812 bore, GE12-class; datasheet pending",
+   "kg_per_leg": 0.21000000000000002,
+   "source": "datasheets/skf_ge12e.pdf; catalog SIKAC 12 M (0.118 kg, C0 14 kN) rejected: 3.4x heavier",
    "legs_confirm": ""
   },
   {
@@ -73,19 +73,20 @@
    "legs_confirm": "Legs to size"
   }
  ],
- "per_leg": 1.2634317123786898,
- "both_legs": 2.5268634247573796,
+ "per_leg": 1.1243971965857047,
+ "both_legs": 2.2487943931714094,
  "contract_both": 0.609,
- "delta_vs_rollup": 1.9182556615096233,
+ "delta_vs_rollup": 1.6401866299236532,
  "rollup": {
   "base_CAD_supported": 65.79,
   "actuators_r3b_hip": {
-   "hip_lever": 0.46817495172076734,
-   "hip_bearing": 0.628
+   "hip_lever": 0.22360404030354758,
+   "hip_bearing": 0.4745018798312499
   },
-  "other_linkage_corrections": 0.822080709788856,
-  "new_total": 67.70825566150963,
-  "if_legs_structure_and_torso_land": 66.34825566150963,
+  "other_linkage_corrections": 0.9420807097888557,
+  "thigh_clamp_R016": 0.2,
+  "new_total": 67.63018662992366,
+  "if_legs_structure_and_torso_land": 66.27018662992366,
   "limit": 65.0
  }
 }

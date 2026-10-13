@@ -1,0 +1,174 @@
+                                       GE 12 ERadial spherical plain
+                                       bearing, requiring maintenance,
+                                       metric sizes
+                                       Radial spherical plain bearing, requiring
+                                       maintenance, metric sizes
+                                       Radial spherical plain bearings are designed to accommodate radial and
+                                       combined radial and axial loads, and also misalignment. This specific
+                                       design includes a steel/steel sliding contact surface combination. The
+                                       bearings require maintenance and can be relubricated only from the side.
+
+                                       • Designed for radial and combined radial and axial loads
+                                       • Suitable for heavy static, alternating or impact loads
+
+Overview
+
+                                                           Dimensions
+
+                                                            Bore diameter                                        12 mm
+
+                                                            Outside diameter                                     22 mm
+
+                                                            Width, inner ring                                    10 mm
+
+                                                            Width, outer ring                                     7 mm
+
+
+
+
+Performance                                                Properties
+
+Basic dynamic load rating                    10.8 kN        Sliding contact                        Steel/steel, standard
+                                                            surface combination
+Basic static load rating                       54 kN
+                                                            Material, inner ring                           Bearing steel
+
+                                                            Material, outer ring                           Bearing steel
+
+                                                            Maintenance                           Relubrication required
+
+                                                            Radial internal clearance                                   CN
+
+                                                            Sealing                                             Without
+
+                                                            Relubrication feature                               Without
+
+
+
+
+Generated from www.skf.com on 2023-12-15                                                                  Page 1 of 4
+Technical Specification
+
+
+
+Maintenance                                                           Relubrication required
+
+Sliding contact surface combination                                    Steel/steel, standard
+
+Material, inner ring                                                           Bearing steel
+
+Material, outer ring                                                           Bearing steel
+
+Sealing                                                                             Without
+
+
+
+
+                                           Dimensions
+
+                                           d    12 mm                         Bore diameter
+
+                                           D    22 mm                      Outside diameter
+
+                                           B    10 mm                                  Width
+
+                                           C    7 mm                        Width outer ring
+
+                                           α    10 °                             Angle of tilt
+                                           dk   18 mm           Raceway diameter inner ring
+                                           r1   min. 0.3 mm        Chamfer dimension bore
+                                           r2   min. 0.3 mm    Chamfer dimension outer ring
+
+
+
+
+                                           Abutment dimensions
+
+                                           da   min. 13.8 mm       Abutment diameter shaft
+                                           da   max. 15 mm         Abutment diameter shaft
+                                           Da min. 17.1 mm      Abutment diameter housing
+                                           Da max. 20.4 mm      Abutment diameter housing
+                                           ra   max. 0.3 mm               Fillet radius shaft
+                                           rb   max. 0.3 mm             Fillet radius housing
+
+
+
+
+Calculation data
+
+
+Generated from www.skf.com on 2023-12-15                                          Page 2 of 4
+Basic dynamic load rating                  C       10.8 kN
+
+Basic static load rating                   C0       54 kN
+
+Specific dynamic load factor               K    100 N/mm²
+
+Specific static load factor                K0   500 N/mm²
+
+Material constant                          KM         330
+
+
+
+
+Mass
+
+Mass plain bearing                                0.016 kg
+
+
+
+
+Generated from www.skf.com on 2023-12-15         Page 3 of 4
+Terms and conditions
+By accessing and using this website / app owned and published by AB SKF (publ.)
+(556007-3495 · Gothenburg) (“SKF”), you agree to the following terms and conditions:
+
+
+Warranty Disclaimer and Limitation of Liability
+Although every care has been taken to assure the accuracy of the information on this website / app, SKF
+provides this information "AS IS" and DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING, BUT
+NOT LIMITED TO, IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+PURPOSE. You acknowledge that your use of this website / app is at your sole risk, that you assume full
+responsibility for all costs associated with use of this website / app, and that SKF shall not be liable for any
+direct, incidental, consequential, or indirect damages of any kind arising out of your access to, or use of the
+information or software made available on this website / app. Any warranties and representations in this
+website / app for SKF products or services that you purchase or use will be subject to the agreed upon terms
+and conditions in the contract for such product or service. Further, for non-SKF websites / apps that are
+referenced in our website / app or where a hyperlink appears, SKF makes no warranties concerning the
+accuracy or reliability of the information in these websites / apps and assumes no responsibility for material
+created or published by third parties contained therein. In addition, SKF does not warrant that this website /
+app or these other linked websites / apps are free from viruses or other harmful elements.
+
+
+Third Party Services
+When viewing YouTube content via the SKF website(s) (i.e. using YouTube API Services), you agree to be
+bound by the YouTube Terms of Service.
+
+
+Copyright
+Copyright in this website / app copyright of the information and software made available on this website /
+app rest with SKF or its licensors. All rights are reserved. All licensed material will reference the licensor that
+has granted SKF the right to use the material. The information and software made available on this website /
+app may not be reproduced, duplicated, copied, transferred, distributed, stored, modified, downloaded or
+otherwise exploited for any commercial use without the prior written approval of SKF. However, it may be
+reproduced, stored and downloaded for use by individuals without prior written approval of SKF. Under no
+circumstances may this information or software be supplied to third parties.
+This website /app includes certain images used under license from Shutterstock, Inc.
+
+
+Trademarks and Patents
+All trademarks, brand names, and corporate logos displayed on the website / app are the property of SKF or
+its licensors, and may not be used in any way without prior written approval by SKF. All licensed trademarks
+published on this website / app reference the licensor that has granted SKF the right to use the trademark.
+Access to this website / app does not grant to the user any license under any patents owned by or licensed to
+SKF.
+
+
+Changes
+SKF reserves the right to make changes or additions to this website / app at any time.
+
+
+
+
+Generated from www.skf.com on 2023-12-15                                                                              Page 4 of 4
+

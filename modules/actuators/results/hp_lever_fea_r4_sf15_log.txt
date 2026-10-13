@@ -1,0 +1,38 @@
+
+cg (1, 't') 182 9.614770236865537e-09
+cg (1, 'r') 181 7.571236267942349e-09
+cg (-1, 't') 190 7.191384440260066e-09
+cg (-1, 'r') 190 9.547948887986056e-09
+{
+ "params": {
+  "b": 25.0,
+  "d0": 25.0,
+  "d1": 15.0,
+  "fillet": 0.0,
+  "h": 4.0,
+  "topology": "round hub + smooth 3-section loft arms",
+  "junction_fillet": "none"
+ },
+ "nodes": 2563,
+ "tets": 8106,
+ "mass_7075_kg": 0.20475858241808848,
+ "mass_pins_steel_kg": 0.04439070419522377,
+ "mass_kg": 0.24914928661331226,
+ "worst_sym": "sym_phi-60",
+ "SF_sym": 1.5143159104207478,
+ "SF_fault": 1.5400289631900765
+}
+sym_phi-90 {'at': [-12.0, 34.0, -16.6], 'vm_max_MPa': 254.71, 'vm_p999_MPa': 204.49, 'hub_max_MPa': 82.82, 'hub_p995_MPa': 73.09, 'SF_yield': 1.97, 'pin_disp_mm': 0.18}
+fault_phi-90 {'at': [-12.0, 34.0, -16.6], 'vm_max_MPa': 254.71, 'vm_p999_MPa': 163.74, 'hub_max_MPa': 82.82, 'hub_p995_MPa': 68.27, 'SF_yield': 1.97, 'pin_disp_mm': 0.18}
+sym_phi-60 {'at': [12.6, -34.5, -16.9], 'vm_max_MPa': 332.16, 'vm_p999_MPa': 201.73, 'hub_max_MPa': 87.65, 'hub_p995_MPa': 75.07, 'SF_yield': 1.51, 'pin_disp_mm': 0.16}
+fault_phi-60 {'at': [12.6, 34.5, -16.9], 'vm_max_MPa': 324.59, 'vm_p999_MPa': 189.02, 'hub_max_MPa': 87.65, 'hub_p995_MPa': 71.36, 'SF_yield': 1.55, 'pin_disp_mm': 0.16}
+sym_phi-30 {'at': [12.6, -34.5, -16.9], 'vm_max_MPa': 321.53, 'vm_p999_MPa': 198.88, 'hub_max_MPa': 83.09, 'hub_p995_MPa': 69.29, 'SF_yield': 1.56, 'pin_disp_mm': 0.18}
+fault_phi-30 {'at': [12.6, 34.5, -16.9], 'vm_max_MPa': 314.18, 'vm_p999_MPa': 190.56, 'hub_max_MPa': 83.03, 'hub_p995_MPa': 64.13, 'SF_yield': 1.6, 'pin_disp_mm': 0.17}
+sym_phi+0 {'at': [12.6, -34.5, -16.9], 'vm_max_MPa': 224.96, 'vm_p999_MPa': 193.12, 'hub_max_MPa': 56.85, 'hub_p995_MPa': 54.64, 'SF_yield': 2.24, 'pin_disp_mm': 0.2}
+fault_phi+0 {'at': [12.6, 34.5, -16.9], 'vm_max_MPa': 219.82, 'vm_p999_MPa': 155.78, 'hub_max_MPa': 56.85, 'hub_p995_MPa': 51.63, 'SF_yield': 2.29, 'pin_disp_mm': 0.2}
+sym_phi+30 {'at': [-12.0, 34.0, -16.6], 'vm_max_MPa': 311.97, 'vm_p999_MPa': 212.77, 'hub_max_MPa': 83.6, 'hub_p995_MPa': 71.84, 'SF_yield': 1.61, 'pin_disp_mm': 0.18}
+fault_phi+30 {'at': [-12.0, 34.0, -16.6], 'vm_max_MPa': 311.97, 'vm_p999_MPa': 191.12, 'hub_max_MPa': 83.6, 'hub_p995_MPa': 65.46, 'SF_yield': 1.61, 'pin_disp_mm': 0.17}
+sym_phi+60 {'at': [-12.0, 34.0, -16.6], 'vm_max_MPa': 326.62, 'vm_p999_MPa': 216.49, 'hub_max_MPa': 87.99, 'hub_p995_MPa': 77.51, 'SF_yield': 1.54, 'pin_disp_mm': 0.16}
+fault_phi+60 {'at': [-12.0, 34.0, -16.6], 'vm_max_MPa': 326.62, 'vm_p999_MPa': 192.2, 'hub_max_MPa': 87.99, 'hub_p995_MPa': 71.9, 'SF_yield': 1.54, 'pin_disp_mm': 0.16}
+sym_phi+90 {'at': [-12.0, 34.0, -16.6], 'vm_max_MPa': 254.71, 'vm_p999_MPa': 204.49, 'hub_max_MPa': 82.82, 'hub_p995_MPa': 73.09, 'SF_yield': 1.97, 'pin_disp_mm': 0.18}
+fault_phi+90 {'at': [-12.0, 34.0, -16.6], 'vm_max_MPa': 254.71, 'vm_p999_MPa': 163.74, 'hub_max_MPa': 82.82, 'hub_p995_MPa': 68.27, 'SF_yield': 1.97, 'pin_disp_mm': 0.18}

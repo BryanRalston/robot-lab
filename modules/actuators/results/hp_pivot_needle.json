@@ -1,0 +1,20 @@
+{
+ "span_m": 0.047,
+ "Fr_bearing_max_N": 9099.355451149904,
+ "fs_max": 4.648680912300713,
+ "Fr_bearing_fault_N": 13496.398004341394,
+ "fs_fault": 3.1341695752002376,
+ "P_walk_N": 3613.6681538316257,
+ "L10_h_walking": 280258.64033171907,
+ "shaft_bending_MPa": 110.38364072434335,
+ "parts": {
+  "TLA3520Z_x2": 0.087,
+  "shaft_16MnCr5_35x30x67": 0.13425093991562498,
+  "thrust_washers_x2": 0.012,
+  "circlips_x2": 0.004
+ },
+ "mass_line": 0.23725093991562496,
+ "crbh_line": 0.314,
+ "delta_per_leg": -0.07674906008437504,
+ "notes": "fs >= 3 (IKO shell rule) in both cases; lever cheeks change -> lever FEA HUB=needle; lateral clearance rod (|y| 63) to cheek (33.5) = 29.5 mm; Legs: tongue bore \u00f880 -> \u00f835 press fit"
+}

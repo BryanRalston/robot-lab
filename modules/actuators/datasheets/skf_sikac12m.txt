@@ -1,0 +1,179 @@
+                                       SIKAC 12 MRod end, requires
+                                       maintenance, female thread
+                                       Rod end, requires maintenance, female thread
+                                       These SKF rod ends contain a spherical plain bearing with a steel/bronze
+                                       sliding contact surface combination. The bearing requires maintenance,
+                                       sizes 6 and larger can be relubricated via a grease fitting in the housing
+                                       and via the shank. The female thread is available with a left- (prefix SIL)
+                                       or right-hand thread.
+                                       • Suitable where lubricant starvation might occur
+                                       • Simple and ready-to-mount
+                                       • Easy to relubricate (sizes ≥ 6)
+
+Overview
+
+                                                           Dimensions
+
+                                                            Bore diameter, bearing inner ring                  12 mm
+
+                                                            Outside diameter, housing eye                      33 mm
+
+                                                            Width, bearing inner ring                          16 mm
+
+                                                            Thread designation                                   M 12
+
+                                                            Width, housing eye                               12.5 mm
+
+                                                            Centre height, housing (from end of shank)         50 mm
+
+                                                            Housing length, total                              67 mm
+
+
+
+
+Performance                                                Properties
+
+Basic dynamic load rating                    12.2 kN        Sliding contact                              Steel/bronze
+                                                            surface combination
+Basic static load rating                       14 kN
+                                                            Material, housing                                    Steel
+
+                                                            Material, inner ring                         Bearing steel
+
+                                                            Maintenance                         Relubrication required
+
+                                                            Attachment feature,             Right-hand female thread
+                                                            rod end shank
+
+                                                            Sealing                                           Without
+
+
+
+
+Generated from www.skf.com on 2023-12-14                                                                Page 1 of 4
+Technical Specification
+
+
+
+Maintenance                                                               Relubrication required
+
+Sliding contact surface combination                                                Steel/bronze
+
+Material, inner ring                                                               Bearing steel
+
+Sealing                                                                                 Without
+
+Attachment feature, rod end shank                                      Right-hand female thread
+
+
+
+
+                                           Dimensions
+
+                                           d    12 mm                             Bore diameter
+                                           d2   max. 33                          Diameter head
+                                                mm
+
+                                           B    16 mm                           Width inner ring
+
+                                           G    M 12                                     Thread
+                                           C1   max. 12.5                           Width head
+                                                mm
+                                           h1   50 mm         Height shank end face - centre rod
+                                                                                        end eye
+
+                                           α    13 °                                 Angle of tilt
+                                           dk   22.225              Raceway diameter inner ring
+                                                mm
+                                           d3   ≈ 17.5 mm               Housing diameter shank
+                                           d4   max. 23                 Housing diameter shank
+                                                mm
+                                           l3   min. 18 mm                        Length threat
+                                           l4   max. 67                  Length (height) housing
+                                                mm
+                                           l5   ≈ 6.5 mm                     Length wrench flat
+                                           l7   min. 16 mm   Distance shank chamfer - centre rod
+                                                                                        end eye
+
+                                           w    19 mm                               Size wrench
+                                           r1   min. 0.3                Chamfer dimension bore
+                                                mm
+
+
+
+
+Generated from www.skf.com on 2023-12-14                                              Page 2 of 4
+Calculation data
+
+Basic dynamic load rating                  C      12.2 kN
+
+Basic static load rating                   C0      14 kN
+
+Specific dynamic load factor               K    50 N/mm²
+
+Material constant                          KM        330
+
+
+
+
+Mass
+
+Mass rod end                                      0.11 kg
+
+
+
+
+Generated from www.skf.com on 2023-12-14        Page 3 of 4
+Terms and conditions
+By accessing and using this website / app owned and published by AB SKF (publ.)
+(556007-3495 · Gothenburg) (“SKF”), you agree to the following terms and conditions:
+
+
+Warranty Disclaimer and Limitation of Liability
+Although every care has been taken to assure the accuracy of the information on this website / app, SKF
+provides this information "AS IS" and DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING, BUT
+NOT LIMITED TO, IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+PURPOSE. You acknowledge that your use of this website / app is at your sole risk, that you assume full
+responsibility for all costs associated with use of this website / app, and that SKF shall not be liable for any
+direct, incidental, consequential, or indirect damages of any kind arising out of your access to, or use of the
+information or software made available on this website / app. Any warranties and representations in this
+website / app for SKF products or services that you purchase or use will be subject to the agreed upon terms
+and conditions in the contract for such product or service. Further, for non-SKF websites / apps that are
+referenced in our website / app or where a hyperlink appears, SKF makes no warranties concerning the
+accuracy or reliability of the information in these websites / apps and assumes no responsibility for material
+created or published by third parties contained therein. In addition, SKF does not warrant that this website /
+app or these other linked websites / apps are free from viruses or other harmful elements.
+
+
+Third Party Services
+When viewing YouTube content via the SKF website(s) (i.e. using YouTube API Services), you agree to be
+bound by the YouTube Terms of Service.
+
+
+Copyright
+Copyright in this website / app copyright of the information and software made available on this website /
+app rest with SKF or its licensors. All rights are reserved. All licensed material will reference the licensor that
+has granted SKF the right to use the material. The information and software made available on this website /
+app may not be reproduced, duplicated, copied, transferred, distributed, stored, modified, downloaded or
+otherwise exploited for any commercial use without the prior written approval of SKF. However, it may be
+reproduced, stored and downloaded for use by individuals without prior written approval of SKF. Under no
+circumstances may this information or software be supplied to third parties.
+This website /app includes certain images used under license from Shutterstock, Inc.
+
+
+Trademarks and Patents
+All trademarks, brand names, and corporate logos displayed on the website / app are the property of SKF or
+its licensors, and may not be used in any way without prior written approval by SKF. All licensed trademarks
+published on this website / app reference the licensor that has granted SKF the right to use the trademark.
+Access to this website / app does not grant to the user any license under any patents owned by or licensed to
+SKF.
+
+
+Changes
+SKF reserves the right to make changes or additions to this website / app at any time.
+
+
+
+
+Generated from www.skf.com on 2023-12-14                                                                              Page 4 of 4
+
