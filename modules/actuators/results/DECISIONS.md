@@ -155,3 +155,51 @@ Retention at 1.2 m/s:
 - O10 (Arbiter): the pass condition in R-009 should be absolute, P ≤ 729 W (96 % retention with iron loss), not 77 %. The sweep shows that 1.2 m/s cannot be shown robustly in simulation. Recommend ruling the T6/T7 trade now, with **1.0 m/s as the 2 h rating speed** and 1.2 m/s as a burst/shorter-duration speed; bench results still go in.
 - O11 (Legs): export the forward-sim gait in regen_core format (b) (`t`, `tau[N,12]`, `omega[N,12]`, LEG order L then R) once 1.2 m/s walks. Then run `python3 regen_sweep.py <path>`.
 - O12 (Torso placeholder): the 1550 Wh minimum-capacity pack fails 1.0 m/s half credit by 4 W. Either cell binning or a 2 % pack-usable increase (90 → 92 %) closes it.
+
+## Round 3b (2026-10-13): hip_pitch lever (config B), clearance, pivot bearing
+**D25. hip_pitch lever re-designed for the thigh-mounted layout (L10 config B, screw half-spacing 69 mm): 0.371 kg, SF_yield 2.13 (CPU FEA).**
+- New topology (`hp_lever_fea.py`, `cad/hip_pitch_lever_B.step`): round hub ø56 / bore ø40 clamped on the pelvis-side shaft, ø50 spigot carrying the pivot-bearing inner ring, two smooth 3-section lofted arms (root 44×30 → 30×30 → 25.5×18 mm), ears ø26×12, pressed steel pins ø12×25 (single shear, rod-end at y ±69). R2 fillets at the arm/hub-face junction.
+- FEA: CadQuery → gmsh → scikit-fem P2 tets (h 4 mm, 5.2k nodes / 18.8k tets; the box had <1 GB free, so finer meshes OOM'd), pyamg CG to 1e-8. 4542 N per screw (454 N·m / 50 mm / 2), force direction φ = −90…+90° from tangential (loaded ROM −80…+40° is |φ| ≤ 60°), symmetric and one-screw-fault cases.
+- Worst: symmetric φ −60° 237 MPa max, **SF 2.13** (p99.9 183 MPa → 2.75); fault 2.41; tangential φ 0° SF 4.35. Hub max 293 MPa next to the clamped bore (support-adjacent; SF 1.72 there, p99.5 150 MPa).
+- Mesh caveat: the peak is at the arm-root junction and rose 250→343 MPa from h 3.5 → 3.2 before the fillet was added. Treat SF 2.13 as ±15 %. A converged run at h ≤ 2 mm, with the fillets drawn, is needed (Grok Build or a box with ≥4 GB free).
+- Fatigue (walking peak per screw 2377 N = 0.52 × max, σ ≈ 93 MPa, fully reversed, 7075-T6 Se 159 × 0.8 = 127 MPa at 5e8): SF 1.37. Goodman R=0: 2.2.
+- Pin deflection under max load 0.20 mm. Material stays 7075-T6; Ti-6Al-4V would be +58 % mass for the same SF.
+- Mass vs Legs' 0.167 estimate: +0.204 kg/leg. Breakdown: the bearing spigot/hub (~0.11), steel pins (0.044) and arm sections sized for the radial φ ±60…90° case, which the crossbar estimate left out.
+
+**D26. Clearance (`hp_clearance.py`, `results/hp_clearance.json`).** L10 layout (ø32 boss in the screw plane):
+- 2.69 mm nominal at −80° (4.01 at the −78° L12 limit). Stack: pins 0.35 + lever deflection 0.20 + rod bow 0.10 + bearing play 0.05 + OD tolerances 0.10 = 0.80 mm → **1.89 mm worst case, < 2 mm**.
+- Full −120…+40°: the screw line passes through the pivot at the toggle **−114.5° (−21.8 mm, hard clash; arm 0.5 mm, stroke reversal)**.
+- Fix adopted in D25: nothing of the pivot (hub, bearing, femur tongue) outside |y| ≤ 22 mm. Rods run at |y| 63…75 → **41 mm lateral clearance at every angle**. Ear-to-rod-end axial gap 1.0 mm → add a 1 mm spacer washer (2 mm).
+- The mechanical stop must stay ≥ −105° (toggle at −114.5°) → Legs/Arbiter.
+
+**D27. hip_pitch pivot bearing is now Actuators-owned: IKO CRBH 5013 A (50×80×13, 0.29 kg, C 17.3 kN, C0 20.9 kN; `datasheets/iko_crb_catalog.pdf`).**
+- Loads: 2 × 4542 N + 1.5 BW + M = 192 N·m (hip_roll 180 / yaw 66 needs) → static fs 1.30. One-screw fault +313 N·m → fs 0.99.
+- Walking life L10 23 700 h. CRBH 4010/4510 are rejected (fs 0.61 / 0.67); CRBH 6013 would give fs 1.59 for +0.04 kg.
+- Line: 0.314 kg/leg (bearing + clamp ring + 6 × M4 [EST]).
+- Legs: femur tongue seat ø32 → ø80 H7 × 13; tongue stays inside |y| ≤ 12.5.
+
+**D28. Ankle lever 77 mm (R-011): not adopted. 73 mm is the maximum under R-005.**
+- 77 mm gives 341.6 N·m (1.21× carry at 1.2 m/s), but the motor needs 7993 rpm at the 6.92 rad/s speed need = 99.9 % Nmax > 95 %. Max lever for 95 % is 73.2 mm (323.8 N·m, 1.14× at 1.2 m/s).
+- With carry rated at 0.8 m/s (R-011) / 1.0 m/s (Legs L11, 238.3 N·m), 70 mm already gives 1.41× / 1.30×, so keep 70 mm.
+- Stroke +10 % and mass +0.003 kg at 77 mm. Clearance not checked; Legs owns the instep geometry. `ankle_lever.py`, `results/ankle_lever_77.json`.
+
+**D29. One linkage table (R-013): `results/LINKAGE_TABLE.md` (`linkage_table.py`): 1.263 kg/leg, 2.527 kg both legs vs 0.609 contract.**
+- Accepts Legs L14 (knee-lever credit dropped, ankle lugs).
+- Closes the trunnion risk as real: 6 pin pairs/leg.
+- Adds rod-end eyes 6 × 0.025 [EST], the R3b lever and the pivot bearing.
+- Open: the thigh trunnion clamp (Legs).
+
+**D30. Mass rollup: 65.79 → 67.71 kg CAD-supported.**
+- Actuators R3b hip_pitch: +1.096 (lever +0.468, bearing +0.628). Linkage corrections: +0.822.
+- 66.35 kg if Legs structure and Torso −0.80 land. **T2 NOT MET; P-012 opened.**
+
+**D31. Battery placeholder (`battery_bin.py`).**
+- Published 0.2C P45B capacities (n = 6, three sources): mean 4479, sd 14 mAh. Yield ≥ 4400 mAh: ≈ 100 % (published sd), 97 % (sd ×3 for lot spread), 84 % (conservative 4450 / 50).
+- Usable to 3.4 V at 1.94 A/cell: 0.91 [EST] (range 0.88–0.93).
+- 1.0 m/s half credit, binned-minimum pack: 2.06 h (1.99 h at 0.88, 2.11 h at 0.93). 1.2 m/s half credit: 1.71 h.
+- Bench must measure the usable fraction.
+
+## Open after round 3b
+- O13 (Grok Build): converged lever FEA, h ≤ 2 mm with drawn fillets, SF target 2 (D25).
+- O14 (Legs): pivot structure inside |y| ≤ 22, femur seat ø80, mechanical stop ≥ −105°, thigh trunnion clamp mass (D26/D27/D29).
+- O15 (Arbiter): T2 67.71 kg (P-012).

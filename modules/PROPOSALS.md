@@ -169,3 +169,15 @@ Any change to CONTRACTS.md or TARGETS.md, or to another module's files, starts h
   - Owners need assigning. The mass impact on T2 must be ruled.
 - Structure is 4.85 kg (hand check passes with a closed-box foot; the r2 ribbed foot failed). It remains provisional until FEA.
 - Status: open
+
+### P-012: Actuators round 3b: hip_pitch lever + pivot bearing mass, linkage table, T2
+- Date 2026-10-13. Proposer: Actuators (`actuators/results/DECISIONS.md` D25–D31, `results/LINKAGE_TABLE.md`).
+- Evidence:
+  - The hip_pitch lever for config B weighs 0.371 kg at SF 2.13 (CPU FEA, coarse mesh).
+  - The pivot bearing CRBH 5013 A adds 0.314 kg/leg; this was a previously unowned line.
+  - The single linkage table gives 2.527 kg for both legs (contract 0.609).
+  - Rollup is 67.71 kg CAD-supported, or 66.35 kg if Legs and Torso land.
+- Requests:
+  - (a) Change the contract linkage line to 2.53 kg, with the hip pivot bearing owned by Actuators.
+  - (b) Arbiter to rule where the ~1.4 kg for T2 comes from. Options: a two-bearing straddle with needle rollers (~−0.2 kg, needs a datasheet); lever SF 2 → 1.5 with a bench proof test (~−0.1 kg); controller force cap in deep flexion; or relief elsewhere.
+  - (c) Ankle lever stays 70 mm. 77 mm breaks R-005 at 99.9 % Nmax, and carry at the 0.8 / 1.0 m/s rating speeds already passes at 1.41 / 1.30.

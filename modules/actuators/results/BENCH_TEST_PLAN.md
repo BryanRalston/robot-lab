@@ -63,3 +63,29 @@ All logs share the EtherCAT distributed-clock timestamp. The power analyser is t
 - Rig: one leg with 4-quadrant loads plus a battery emulator. This is the long pole for the end-of-round-4 deadline.
 - The CPU-only fallback is available now (forward-sim trace through `regen_sweep.py`). It upgrades the sim to ×1.0 but does not replace the bench, per R-009.
 - Risk: the load motors' torque ripple corrupts small regen phases. Mitigation: compare against the torque sensor, not the commanded torque.
+
+## 7. R-010 update (round 3b): 235 W pass line, rig BOM, schedule
+**Pass line, replacing the 77 % / 213 W wording.**
+- The rig projects robot-equivalent realised regen at 1.2 m/s. The projection is (Σ measured per-joint DC energy returned to the bus and consumed on the shared bus) / stride time, scaled from one leg ×2 with the same gait trace.
+- Pass: **≥ 235 W**. Equivalently, the absolute steady P ≤ 729.0 W on 1620 × 0.9 Wh (R-010).
+- Also report P at 1.0 m/s (rated, ≤ 712.8 W binned pack) and the usable fraction to a 3.4 V/cell floor (D31) from a 0.42C pack-level discharge.
+
+**Rig BOM.** Prices are list/retail where found; [EST] lines still need a quote.
+| item | part | qty | price | note |
+|---|---|---|---|---|
+| battery emulator / regen sink | ITECH IT6005C-80-150 (80 V / 150 A / 5 kW, bidirectional, 95 % regen) | 1 | [EST] ~$9–12 k, quote | source and sink in one; programmable IR (60 mΩ) and 30 A charge limit |
+| real pack, final check | 20S1P P45B string (subset) + BMS, or full 20S5P from Torso | 20–100 cells | €3.50/cell (cellpow.eu) → €70–350 | binned ≥ 4400 mAh (D31) |
+| load motors (4-quadrant) | reuse a 2nd set of TBM2G-07613D/06013D + Gold Twitter drives on the opposite side of a torque-sensor shaft | 5 | from robot spares | reuses already-qualified hardware |
+| joint torque sensors | 500 N·m rotary (hip/knee/ankle), e.g. FUTEK TRS705 class | 3 | [EST] ~$3–4 k each | ±0.2 % FS |
+| DC power analyser | Yokogawa WT500 or HIOKI PW3390, 3 ch + 0.1 % shunts | 1 | [EST] ~$10 k (rental ~$1 k/month) | bus + 2 drive branches |
+| brake chopper | 88 V threshold, 200 W resistor | 1 | [EST] $150 | case-C clamp |
+| EtherCAT master + DAQ | Beckhoff CX/EL37xx sync or PC + SOEM | 1 | [EST] $2 k | sync to gait trace |
+| fixture (one leg, hip on bench) | 7075 / steel plate, machined | 1 | [EST] $3 k | |
+| **total** | | | **≈ $35–40 k [EST]** (rental analyser: −$9 k) | |
+
+**Schedule to end of round 4.**
+- W1: emulator + analyser order/rental; fixture drawing.
+- W2: single-actuator back-drive efficiency and iron-loss runs (rotary + linear), which close the D21/D23 [EST]s.
+- W3: one leg on the fixture; replay walk_1p0 / walk_1p2 in bus configs A/B/C.
+- W4: real-pack run + 0.42C usable-fraction discharge; report.
+- Critical path: emulator lead time (2–4 weeks). Fallback: a 20S pack + DC electronic load with a separately logged charge current, at reduced accuracy (±5 %).

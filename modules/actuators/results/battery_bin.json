@@ -1,0 +1,54 @@
+{
+ "caps_mAh": [
+  4477.0,
+  4488.0,
+  4453.0,
+  4479.0,
+  4485.0,
+  4492.0
+ ],
+ "mean": 4479.0,
+ "sd": 13.899640283115243,
+ "yield_ge_4400": {
+  "published n=6": 0.9999999934055851,
+  "lot spread x3 sd": 0.9709228800171841,
+  "conservative mean 4450 sd 50": 0.8413447460685429
+ },
+ "usable_fraction": {
+  "low": 0.88,
+  "central": 0.91,
+  "high": 0.93
+ },
+ "runtime_h": {
+  "binned_min_4400_uf0.88": {
+   "1p0_half": 1.994,
+   "1p0_none": 1.78,
+   "1p2_half": 1.656
+  },
+  "binned_min_4400_uf0.91": {
+   "1p0_half": 2.062,
+   "1p0_none": 1.84,
+   "1p2_half": 1.713
+  },
+  "binned_min_4400_uf0.93": {
+   "1p0_half": 2.107,
+   "1p0_none": 1.881,
+   "1p2_half": 1.75
+  },
+  "published_mean_uf0.88": {
+   "1p0_half": 2.047,
+   "1p0_none": 1.827,
+   "1p2_half": 1.7
+  },
+  "published_mean_uf0.91": {
+   "1p0_half": 2.117,
+   "1p0_none": 1.889,
+   "1p2_half": 1.758
+  },
+  "published_mean_uf0.93": {
+   "1p0_half": 2.163,
+   "1p0_none": 1.93,
+   "1p2_half": 1.797
+  }
+ }
+}
