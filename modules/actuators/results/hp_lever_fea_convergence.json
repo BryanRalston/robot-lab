@@ -1,0 +1,219 @@
+{
+ "history": [
+  {
+   "d0": 25.0,
+   "richardson_max": {
+    "h": [
+     3.0,
+     2.5,
+     2.0
+    ],
+    "f": [
+     335.54199214511124,
+     359.5114899619248,
+     378.9198745059589
+    ],
+    "monotone": true,
+    "p": 2.0520432068200822,
+    "C": -8.058842676740666,
+    "vm0": 412.339319663112,
+    "note": "three-point Richardson on the finest uniform meshes"
+   },
+   "richardson_p999": {
+    "h": [
+     3.0,
+     2.5,
+     2.0
+    ],
+    "f": [
+     248.20948078066533,
+     235.31540556468076,
+     237.77504594528386
+    ],
+    "monotone": false,
+    "p": null,
+    "C": null,
+    "vm0": null,
+    "note": "three finest values are not monotone"
+   },
+   "peak_MPa": 454.9111252560148,
+   "SF_yield": 1.1057104829364675,
+   "meshes": [
+    {
+     "params": {
+      "b": 25.0,
+      "d0": 25.0,
+      "d1": 15.0,
+      "fillet": 0.0,
+      "h": 4.0,
+      "h_local": null,
+      "topology": "round hub + smooth 3-section loft arms",
+      "junction_fillet": "R2.8 on 4 BSPLINE junction edges at |y|=33.5"
+     },
+     "nodes": 2811,
+     "ndof": 51426,
+     "tets": 9093,
+     "mass_7075_kg": 0.20484889771213677,
+     "mass_kg": 0.24923960190736055,
+     "worst_sym": "sym_phi-60",
+     "SF_sym": 1.4671025807875027,
+     "SF_fault": 1.5078688116459715,
+     "sym_phi-60": {
+      "at": [
+       13.6,
+       -34.3,
+       -16.4
+      ],
+      "vm_max_MPa": 342.8526447891617,
+      "vm_p999_MPa": 292.16401900438666,
+      "hub_max_MPa": 87.1735088794826,
+      "hub_p995_MPa": 74.15932135610393,
+      "SF_yield": 1.4671025807875027,
+      "pin_disp_mm": 0.1613495721499869
+     }
+    },
+    {
+     "params": {
+      "b": 25.0,
+      "d0": 25.0,
+      "d1": 15.0,
+      "fillet": 0.0,
+      "h": 3.0,
+      "h_local": null,
+      "topology": "round hub + smooth 3-section loft arms",
+      "junction_fillet": "R2.8 on 4 BSPLINE junction edges at |y|=33.5"
+     },
+     "nodes": 4696,
+     "ndof": 88686,
+     "tets": 16411,
+     "mass_7075_kg": 0.20484889771213677,
+     "mass_kg": 0.24923960190736055,
+     "worst_sym": "sym_phi+60",
+     "SF_sym": 1.4461391531549146,
+     "SF_fault": 1.4928760762179325,
+     "sym_phi-60": {
+      "at": [
+       13.6,
+       -34.3,
+       -16.4
+      ],
+      "vm_max_MPa": 335.54199214511124,
+      "vm_p999_MPa": 248.20948078066533,
+      "hub_max_MPa": 92.03225880948835,
+      "hub_p995_MPa": 78.61271970622509,
+      "SF_yield": 1.49906721595212,
+      "pin_disp_mm": 0.1614658526173352
+     }
+    },
+    {
+     "params": {
+      "b": 25.0,
+      "d0": 25.0,
+      "d1": 15.0,
+      "fillet": 0.0,
+      "h": 2.5,
+      "h_local": null,
+      "topology": "round hub + smooth 3-section loft arms",
+      "junction_fillet": "R2.8 on 4 BSPLINE junction edges at |y|=33.5"
+     },
+     "nodes": 7500,
+     "ndof": 146913,
+     "tets": 28641,
+     "mass_7075_kg": 0.20484889771213677,
+     "mass_kg": 0.24923960190736055,
+     "worst_sym": "sym_phi+60",
+     "SF_sym": 1.391101664080506,
+     "SF_fault": 1.391101664080506,
+     "sym_phi-60": {
+      "at": [
+       13.2,
+       34.0,
+       -15.6
+      ],
+      "vm_max_MPa": 359.5114899619248,
+      "vm_p999_MPa": 235.31540556468076,
+      "hub_max_MPa": 94.20689475651731,
+      "hub_p995_MPa": 78.15206634073859,
+      "SF_yield": 1.3991207904183307,
+      "pin_disp_mm": 0.1656931179340614
+     }
+    },
+    {
+     "params": {
+      "b": 25.0,
+      "d0": 25.0,
+      "d1": 15.0,
+      "fillet": 0.0,
+      "h": 2.0,
+      "h_local": null,
+      "topology": "round hub + smooth 3-section loft arms",
+      "junction_fillet": "R2.8 on 4 BSPLINE junction edges at |y|=33.5"
+     },
+     "nodes": 12432,
+     "ndof": 250542,
+     "tets": 50586,
+     "mass_7075_kg": 0.20484889771213677,
+     "mass_kg": 0.24923960190736055,
+     "worst_sym": "sym_phi+60",
+     "SF_sym": 1.3168849007985424,
+     "SF_fault": 1.3168849007985424,
+     "sym_phi-60": {
+      "at": [
+       13.1,
+       34.1,
+       -16.7
+      ],
+      "vm_max_MPa": 378.9198745059589,
+      "vm_p999_MPa": 237.77504594528386,
+      "hub_max_MPa": 95.67861186979303,
+      "hub_p995_MPa": 75.15002633331588,
+      "SF_yield": 1.3274574226432925,
+      "pin_disp_mm": 0.16540330171837242
+     }
+    },
+    {
+     "params": {
+      "b": 25.0,
+      "d0": 25.0,
+      "d1": 15.0,
+      "fillet": 0.0,
+      "h": 2.0,
+      "h_local": 1.5,
+      "topology": "round hub + smooth 3-section loft arms",
+      "junction_fillet": "R2.8 on 4 BSPLINE junction edges at |y|=33.5"
+     },
+     "nodes": 15133,
+     "ndof": 310827,
+     "tets": 64255,
+     "mass_7075_kg": 0.20484889771213677,
+     "mass_kg": 0.24923960190736055,
+     "worst_sym": "sym_phi+60",
+     "SF_sym": 1.0275037126284703,
+     "SF_fault": 1.1365214981478367,
+     "sym_phi-60": {
+      "at": [
+       13.5,
+       -34.4,
+       -16.3
+      ],
+      "vm_max_MPa": 454.9111252560148,
+      "vm_p999_MPa": 262.64440816632407,
+      "hub_max_MPa": 95.38800424963752,
+      "hub_p995_MPa": 75.20328796504899,
+      "SF_yield": 1.1057104829364675,
+      "pin_disp_mm": 0.16558160208152037
+     }
+    }
+   ]
+  }
+ ],
+ "verdict": {
+  "pass": false,
+  "governing_case": "sym_phi+60",
+  "governing_peak_MPa": 489.5359440729117,
+  "SF_yield": 1.0275037126284703,
+  "richardson_sym_phi-60_vm0_MPa": 412.339319663112,
+  "richardson_sym_phi-60_not_the_peak": "Local-mesh sym_phi-60 max exceeds vm0, and sym_phi+60 is higher and has no positive Richardson p.",
+  "d0_increased": false
+ }
+}

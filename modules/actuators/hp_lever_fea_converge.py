@@ -2,9 +2,10 @@
 
 Runs hp_lever_fea.py at h = 4, 3, 2.5, 2 mm and at h = 2 mm with a gmsh
 Field Box of 1.5 mm on the arm/cheek junctions. Richardson-extrapolates the
-symmetric phi -60 peak. If SF_yield on that peak is below 1.5, increases d0
-by 1 mm and repeats. Writes one JSON per mesh, a convergence plot, the
-updated results/hp_lever_fea_r4.json, and the O13 report.
+symmetric phi -60 peak from the three finest uniform meshes. If SF_yield on
+that peak is below 1.5 and FEA_D0_STEP=1, increases d0 by 1 mm and repeats.
+Writes one JSON per mesh and results/hp_lever_fea_convergence.json.
+The plot, the r4 JSON update, and the O13 report are written from those files.
 """
 import json, os, subprocess, sys
 H = os.path.dirname(os.path.abspath(__file__))
