@@ -39,8 +39,8 @@ Sources used: `v3/analysis/results/v3_checks.md` and `v3.json` (per-joint rows, 
 | ankle_roll | 61 | 7 | 4 [EST] | shared pair, 40 mm | 177 | 0 (shared) |
 Carry verification (R-003): 20 kg at 1.2 m/s with avail/carry-peak ≥ 1.2 on every leg joint. Knee motor rpm at speed need ≤ 7600 (R-005). ROM: ankle_pitch ≥ −60…40°, hip_pitch ≥ −120…40° (R-006). Needs computed at 63.79 kg; re-run at final mass.
 
-### R1.3 Power (R-002, R-007)
-DC bus 20S 68.0…84.0 V, regen clamp ≤ 90 V. Walking 1.2 m/s: legs mech 426 W (gait ID); robot electrical 772 W no regen, **674 W contract value** (half netting credit) → 2.16 h on 1620 Wh × 0.9. Pack: 60 A continuous, 100 A for 2 s, fuse 125 A. Peak electrical per joint: hip_pitch 1.33, knee 1.09, ankle_pitch 0.99 kW; per limb 2.25 kW.
+### R1.3 Power (R-002, R-007, R-009)
+DC bus 20S 68.0…84.0 V, regen clamp ≤ 90 V, brake chopper, BMS regen-charge limit 30 A (R-009). Walking 1.2 m/s, steady state (2–7 s of walk_1p2, `actuators/results/regen_sim.json`): robot electrical 942 W no regen, 667 W modeled shared-bus regen; **804.5 W contract value** (regen ×0.5: 942.4 − 0.5 × 275.8) → **1.81 h** on 1620 Wh × 0.9 — **T7 NOT MET**; pass requires ≤ 729 W (≥ 213 W realised regen, bench-verified per R-009). Pack 20S5P unchanged (20S6P breaks T2). Legs mech 426 W (gait ID, mean over trace). R-002 values 772/674 W/2.16 h are void (whole-trace averages, D17). Pack: 60 A continuous, 100 A for 2 s, fuse 125 A. Peak electrical per joint: hip_pitch 1.33, knee 1.09, ankle_pitch 0.99 kW; per limb 2.25 kW.
 
 ### R1.4 Drive and field bus (R-008)
 Elmo Gold Twitter R70/100 (legs) / R50/100 (others), EtherCAT, 1 kHz distributed clocks, CSP + torque feed-forward, one line per limb plus torso/neck; master in Brain.

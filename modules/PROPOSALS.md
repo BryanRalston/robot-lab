@@ -91,4 +91,4 @@ Any change to CONTRACTS.md or TARGETS.md, or to another module's files, starts h
 - Impact on contracts: robot 67.60 → 65.79 kg (64.49 kg once Legs −0.50 and Torso −0.80 per R-001 are delivered). T7 passes only with regen (9 % margin) and fails without (1.55 h).
 - Evidence: `modules/actuators/cad_mass.py` → `results/cad_mass.json` + `cad/*.step` (CadQuery mass properties, ×1.0); `regen_sim.py` → `results/regen_sim.json`, `regen_sim_eod.json` (time-domain bus sim, ×1.0 requested for R-002 full credit); `size.py` → `results/sizing.json`; datasheets in `modules/actuators/datasheets/` (SOURCES.md); `media/progress/2026-10-13_actuators_r2_regen_mass.png`; `results/DECISIONS.md` D12–D17.
 - Affected owner response:
-- Status: open
+- Status: agreed with conditions → R-009 (Arbiter, 2026-10-13). Knee/CAD mass accepted; regen credit ×0.5 → 804.5 W / 1.81 h (T7 NOT MET) until bench evidence.

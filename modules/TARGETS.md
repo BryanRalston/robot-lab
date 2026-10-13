@@ -19,6 +19,8 @@ Tesla has **never published an Optimus datasheet**. Most numbers that circulate 
 | T9 | Service life | no Tesla figure | 5 y × 365 d × 8 h = 14 600 h walking design life (`v3.py` LIFE_H) | 14 600 h L10 for all actuators/bearings at walking duty; wear parts (pads, tendons) replaceable with stated intervals | 0.10 |
 | T10 | Manufacturability / BOM | Tesla target ~$20–30k at volume (Tesla statements, 2nd) — not used for ruling | catalog parts (Kollmorgen frameless, Harmonic Drive, Rollvis) — high cost [EST] | every part catalog or drawing-ready; cost tracked per module [EST] | 0.10 |
 
+**Status 2026-10-13 R2:** T2 mass 65.79 kg (NOT MET; 64.49 kg if R-001 Legs −0.50 / Torso −0.80 land). T7 runtime 1.81 h at weighted evidence, 2.19 h modeled (NOT MET, R-009). T6 NOT DEMONSTRATED (G4).
+
 Weights sum to 1.00. **Hard constraints (cannot be traded): T2 ≤ 65 kg, T7 ≥ 2 h walking, T8 structural survival, safety.** Weights apply only to trades among soft margins.
 
 ## How the Arbiter uses the weights
@@ -45,4 +47,4 @@ The design is ready to build only when all five gates are PASS.
 | G2 | CAD assembly complete, zero clashes across full ROM | NOT MET | 2026-10-13 R1 | v3 CAD + `v3/cad/clash.py` cover v3 only. Twin-screw hip_pitch, 40 mm knee lever and the P-003 ROM (ankle −60°, hip −120°) are not in CAD. |
 | G3 | Strength, fatigue, thermal and life checks pass with converged FEA | NOT MET | 2026-10-13 R1 | v3 FEA (`v3/cad/out/fea_v3.md`) is for v3 loads/geometry. Actuator thermal is a lumped model (max ΔT 54 K walk/stairs, 66 K carry). Screw L10 at new levers not re-run (O4). |
 | G4 | Walks 1.2 m/s, does 20 kg carry and push recovery in a domain-randomized sim with CONTRACTS limits | NOT MET | 2026-10-13 R1 | Forward sim (`legs/results/fsim/`) walks 0.8 m/s; falls after ~14 steps at 1.0 and ~10 at 1.2 m/s, even with 2× torque limits. No domain randomization yet. |
-| G5 | Hardware test plan: single-actuator bench, then single-leg, with pass criteria | NOT STARTED | 2026-10-13 R1 | No plan exists. Must cover torque/speed envelope, thermal at gait RMS, regen/bus netting (R-002), screw life sample. |
+| G5 | Hardware test plan: single-actuator bench, then single-leg, with pass criteria | NOT STARTED | 2026-10-13 R2 | No plan exists. Must cover torque/speed envelope, thermal at gait RMS, screw life sample, and **(R-009, deadline end of round 4) net DC-bus energy per stride on walk_1p2: pass = steady robot draw ≤ 729 W (≥ 213 W regen)**. |
