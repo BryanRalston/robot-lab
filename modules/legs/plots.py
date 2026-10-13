@@ -4,8 +4,8 @@ matplotlib.use('Agg'); import matplotlib.pyplot as plt
 from gait_lib import LEG,HERE
 import os
 OUT=os.path.join(HERE,'results'); PL=os.path.join(HERE,'plots'); os.makedirs(PL,exist_ok=True)
-def scen(name):
-    d=np.load(f'{OUT}/{name}.npz'); t=d['t']; T=d['TAU']; V=d['V']; va=d['va']; Q=d['Q']; qa=d['qa']
+def scen(name,sub=''):
+    d=np.load(f'{OUT}/{sub}/{name}.npz' if sub else f'{OUT}/{name}.npz'); t=d['t']; T=d['TAU']; V=d['V']; va=d['va']; Q=d['Q']; qa=d['qa']
     fig,ax=plt.subplots(5,1,figsize=(11,13),sharex=True)
     for i,j in enumerate(LEG):
         for side,off,ls in (('L',0,'-'),('R',6,'--')):
@@ -17,8 +17,8 @@ def scen(name):
     ax[4].plot(t,d['FZ'][:,0],label='Fz left'); ax[4].plot(t,d['FZ'][:,1],'--',label='Fz right')
     for a,l in zip(ax,['torque N·m','speed rad/s','power W','angle deg','vertical GRF N']): a.set_ylabel(l); a.grid(alpha=.3)
     ax[0].legend(ncol=6,fontsize=8); ax[4].legend(); ax[4].set_xlabel('time s (solid = left, dashed = right)')
-    ax[0].set_title(f'{name}: inverse dynamics on sim/v3 model (63.8 kg)')
-    fig.tight_layout(); fig.savefig(f'{PL}/{name}.png',dpi=80); plt.close(fig)
+    ax[0].set_title(f'{name}: inverse dynamics on sim/v3 model ({"65 kg" if sub else "63.8 kg"})')
+    os.makedirs(os.path.join(PL,sub),exist_ok=True); fig.tight_layout(); fig.savefig(os.path.join(PL,sub,name+'.png'),dpi=80); plt.close(fig)
 def envelope(env,contract):
     fig,ax=plt.subplots(1,3,figsize=(15,4.5)); x=np.arange(len(LEG))
     for k,(key,lab) in enumerate([('peak_Nm','peak torque N·m'),('peak_rads','peak speed rad/s'),('peak_W','peak power W')]):
@@ -29,4 +29,5 @@ def envelope(env,contract):
         ax[k].set_xticks(x); ax[k].set_xticklabels(LEG,rotation=30,fontsize=8); ax[k].set_title(lab); ax[k].legend(fontsize=7); ax[k].grid(alpha=.3)
     fig.tight_layout(); fig.savefig(f'{PL}/envelope_vs_contract.png',dpi=80); plt.close(fig)
 if __name__=='__main__':
-    for n in sys.argv[1:]: scen(n)
+    sub=os.environ.get('LEGS_OUT','')
+    for n in sys.argv[1:]: scen(n,sub)

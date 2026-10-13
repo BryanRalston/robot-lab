@@ -2,7 +2,7 @@
 usage: python3 scenarios.py [scenario ...]   (one at a time keeps RAM small)"""
 import sys, json, numpy as np, mujoco
 from gait_lib import *
-OUT=os.path.join(HERE,'results'); os.makedirs(OUT,exist_ok=True)
+OUT=os.path.join(HERE,'results',os.environ.get('LEGS_OUT','')); os.makedirs(OUT,exist_ok=True)
 TH_TO=np.radians(25); PEL_Z=1.04; FY=0.13; FC=0.06   # pelvis height while walking, foot lateral, foot centre x offset
 
 def heel_off(p,th):
@@ -55,7 +55,12 @@ def walk_plan(steps,Td,Ts,T0=1.0,T1=1.0,stairs=False,swing_h=0.07,th_to=0.0):
 def ik_track(r,F,com,pel_z,pitch=0.0,P=None):
     N=len(com); Q=np.zeros((N,r.m.nq)); q=r.q.copy(); err=0
     for k in range(N):
-        q=r.ik_com(q,{s_:(F[s_][k],0.0,0.0 if P is None else P[s_][k]) for s_ in 'lr'},com[k],pel_z[k],quat_pitch(pitch))
+        ge=getattr(r,'gait_extra',None); pq=quat_pitch(pitch)
+        if ge is not None:
+            y=ge['yaw'][k]; pq=np.array([np.cos(y/2),0,0,np.sin(y/2)])
+            q[r.m.jnt_qposadr[r.m.joint('waist_yaw').id]]=-y
+            for sd,sg in (('l',1),('r',-1)): q[r.m.jnt_qposadr[r.m.joint(f'{sd}_shoulder_pitch').id]]=r.q[r.m.jnt_qposadr[r.m.joint(f'{sd}_shoulder_pitch').id]]+sg*ge['arm'][k]
+        q=r.ik_com(q,{s_:(F[s_][k],0.0,0.0 if P is None else P[s_][k]) for s_ in 'lr'},com[k],pel_z[k],pq)
         r.fk(q); e=max(np.linalg.norm(r.d.xpos[r.foot[s]]-F[s][k]) for s in 'lr'); err=max(err,e)
         Q[k]=q
     return Q,err
@@ -80,7 +85,7 @@ def com_height(r):
     q=r.ik_com(r.q.copy(),{'l':(np.array([0,FY,SOLE]),0.0),'r':(np.array([0,-FY,SOLE]),0.0)},np.array([FC,0]),PEL_Z,quat_pitch(0))
     return r.com()[2]
 
-def sc_walk(carry=0.0,v=1.2,Tstep=0.45,name='walk_1p2'):
+def sc_walk(carry=0.0,v=1.2,Tstep=0.45,name='walk_1p2',arm=0.0,yaw=0.0,ds=0.2,pel_z=None,swing_h=0.07):
     m=load(carry,(0.25,0.0,0.10)); r=Robot(m)
     if carry:   # box held close in front of the chest (payload rigid on torso, 0.25 m ahead of the waist axis), trunk leaned back 0.25 rad at the waist
         r.set_arms(-0.6,-1.2); r.q[m.jnt_qposadr[m.joint('waist_pitch').id]]=-0.25
@@ -95,8 +100,12 @@ def sc_walk(carry=0.0,v=1.2,Tstep=0.45,name='walk_1p2'):
         front+=l; steps.append((side,[front,FY if side=='l' else -FY,SOLE])); side='l' if side=='r' else 'r'
     other='l' if steps[-1][0]=='r' else 'r'
     steps.append((other,[front,FY if other=='l' else -FY,SOLE]))
-    F,P,TO,AL,Z=walk_plan(steps,Td=0.2*Tstep,Ts=0.8*Tstep,th_to=TH_TO)
-    Q,com,zmp,err=build_walk(r,F,AL,Z,zc,P=P)
+    F,P,TO,AL,Z=walk_plan(steps,Td=ds*Tstep,Ts=(1-ds)*Tstep,th_to=TH_TO,swing_h=swing_h)
+    # round 2: arm swing (shoulder pitch opposite to the same-side leg) and pelvis yaw (forward hip follows forward foot), waist counter-rotates
+    dl=(F['l'][:,0]-F['r'][:,0])/max(L,1e-3)
+    r.gait_extra=dict(arm=arm*dl,yaw=-yaw*dl)
+    if pel_z is not None: r.pel_z_walk=pel_z
+    Q,com,zmp,err=build_walk(r,F,AL,Z,zc,P=P,pel_z=None if pel_z is None else np.full(len(Z),pel_z))
     r.toe=TO
     return r,Q,AL,dict(zc=zc,ik_err_m=err,v=v,Tstep=Tstep,carry=carry,step_lengths=lens),com,zmp
 
@@ -115,8 +124,8 @@ def sc_stairs(rise=0.18,tread=0.30,Tstep=0.9):
     # pelvis height follows load-weighted support height, smoothed (0.4 s window)
     hs=AL[:,0]*(F['l'][:,2]-SOLE)+AL[:,1]*(F['r'][:,2]-SOLE)
     w=int(0.4/DT); hsm=np.convolve(np.r_[np.full(w,hs[0]),hs,np.full(w,hs[-1])],np.ones(w)/w,'same')[w:-w]
-    Q,com,zmp,err=build_walk(r,F,AL,Z,zc,pel_z=PEL_Z+hsm,P=P)
-    return r,Q,AL,dict(zc=zc,ik_err_m=err,rise=rise,tread=tread,Tstep=Tstep),com,zmp
+    pz0=float(os.environ.get('PELZ_ST',PEL_Z)); Q,com,zmp,err=build_walk(r,F,AL,Z,zc,pel_z=pz0+hsm,P=P); info_pz=pz0
+    return r,Q,AL,dict(pelvis_z=info_pz,zc=zc,ik_err_m=err,rise=rise,tread=tread,Tstep=Tstep),com,zmp
 
 def sc_sit_to_stand(T=1.2,seat_h=0.46):
     m=load(); r=Robot(m); feet={'l':(np.array([0,FY,SOLE]),0.0),'r':(np.array([0,-FY,SOLE]),0.0)}
@@ -177,13 +186,16 @@ def sc_push(v0=0.6,react=0.10,Tsw=0.35,Tend=1.6):
     r.trim=(0.0,0.3)   # push gives the COM velocity at t=0; keep the start
     return r,Q,AL,dict(v0=v0,impulse_Ns=float(v0*m.body_subtreemass[1]),land_x=float(land[0]),land_y=float(land[1]),zc=zc,ik_err_m=err,final_com_v=float(np.linalg.norm(xd))),COM,np.array(ZMP)
 
-SC={'walk_1p2':lambda:sc_walk(),'walk_0p8':lambda:sc_walk(v=0.8,Tstep=0.5),'walk_1p0':lambda:sc_walk(v=1.0,Tstep=0.47),'stairs_18cm':lambda:sc_stairs(),'carry_20kg':lambda:sc_walk(carry=20.0,name='carry_20kg'),
+SC={'walk_1p2_r2':lambda:sc_walk(v=1.2,Tstep=float(os.environ.get('TSTEP','0.5')),arm=float(os.environ.get('ARM','0.35')),yaw=float(os.environ.get('YAW','0.12')),ds=float(os.environ.get('DS','0.15')),pel_z=float(os.environ.get('PELZ','1.02'))),
+    'carry_20kg_r2':lambda:sc_walk(carry=20.0,v=1.2,Tstep=float(os.environ.get('TSTEP','0.5')),yaw=float(os.environ.get('YAW','0.12')),ds=float(os.environ.get('DS','0.15')),pel_z=float(os.environ.get('PELZ','1.02'))),
+    'walk_1p2':lambda:sc_walk(),'walk_0p8':lambda:sc_walk(v=0.8,Tstep=0.5),'walk_1p0':lambda:sc_walk(v=1.0,Tstep=0.47),'stairs_18cm':lambda:sc_stairs(),'carry_20kg':lambda:sc_walk(carry=20.0,name='carry_20kg'),
     'sit_to_stand':lambda:sc_sit_to_stand(),'push_recover':lambda:sc_push()}
 
 TRIM=0.3   # s; first/last frames are finite-difference/preview start-up edges and are excluded from all metrics
 
 def run(name):
     r,Q,AL,info,com,zmp=SC[name]()
+    info.update(model_mass_setting=MASS or 'as built',torque_limits=LIMITS,ik_rom_margin_rad=IKM)
     tr=getattr(r,'trim',(TRIM,TRIM))
     if getattr(r,'pad',0):   # static hold before/after (sit-to-stand starts and ends at rest)
         n=int(r.pad/DT); Q=np.r_[np.repeat(Q[:1],n,0),Q,np.repeat(Q[-1:],n,0)]; AL=np.r_[np.repeat(AL[:1],n,0),AL,np.repeat(AL[-1:],n,0)]

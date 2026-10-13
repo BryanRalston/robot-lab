@@ -4,12 +4,30 @@ import os, json, numpy as np, mujoco
 from scipy.linalg import solve_discrete_are
 HERE=os.path.dirname(os.path.abspath(__file__)); ROOT=os.path.abspath(os.path.join(HERE,'..','..'))
 XML=os.path.join(ROOT,'sim','v3','humanoid_v3.xml')
+IKM=float(os.environ.get('LEGS_IKMARGIN','0.26'))   # rad the IK may exceed model ROM (reported as ROM need)
 LEG=['hip_yaw','hip_roll','hip_pitch','knee','ankle_pitch','ankle_roll']
 G=9.81; DT=0.005
 SOLE=0.080            # ankle axis height above sole (foot box bottom at -0.080 in foot frame)
 HEEL,TOE,HALFW=-0.060,0.180,0.050   # sole extents in foot frame (x from ankle, half width)
 
+# CONTRACTS.md R1.2 available peak torque (Actuators selections, R-008); used as ctrlrange in round 2
+LIM_R1={'hip_yaw':70,'hip_roll':204,'hip_pitch':350,'knee':258,'ankle_pitch':311,'ankle_roll':177}
+MASS=float(os.environ.get('LEGS_MASS','0'))        # 0 = model as built (63.794 kg); else uniform scale of all bodies to this total (excl. payload)
+LIMITS=os.environ.get('LEGS_LIMITS','r1')          # 'v3' = MJCF ctrlrange, 'r1' = CONTRACTS R1.2
 def load(carry=0.0, carry_pos=(0.32,0.0,0.12)):
+    m=_load(carry,carry_pos)
+    if MASS>0:
+        base=sum(m.body_mass[i] for i in range(m.nbody) if m.body(i).name!='payload'); k=MASS/base
+        for i in range(m.nbody):
+            if m.body(i).name!='payload': m.body_mass[i]*=k; m.body_inertia[i]*=k
+        mujoco.mj_setConst(m,mujoco.MjData(m))
+    if LIMITS=='r1':
+        for i in range(m.nu):
+            n=m.actuator(i).name
+            for j,v in LIM_R1.items():
+                if n.endswith(j) and n[:2] in('l_','r_'): m.actuator_ctrlrange[i]=[-v,v]
+    return m
+def _load(carry=0.0, carry_pos=(0.32,0.0,0.12)):
     xml=open(XML).read()
     if carry>0:   # payload rigidly attached to torso (two-handed carry in front of torso)
         tag='<geom name="torso" type="box"'
@@ -59,7 +77,7 @@ class Robot:
                 q[s.legq[side]]+=dq
                 q[s.legq[side][3]]=max(q[s.legq[side][3]],0.02)   # keep knee on the flexed branch
                 jr_=s.m.jnt_range[[s.m.joint(f'{side}_{j}').id for j in LEG]]   # IK may exceed model ROM by <=15 deg (reported as a ROM need)
-                q[s.legq[side]]=np.clip(q[s.legq[side]],jr_[:,0]-0.26,jr_[:,1]+0.26)
+                q[s.legq[side]]=np.clip(q[s.legq[side]],jr_[:,0]-IKM,jr_[:,1]+IKM)
 
         return q
     def ik_com(s,q,feet,com_xy,pel_z,pel_quat,iters=6):

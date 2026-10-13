@@ -1,0 +1,31 @@
+{
+ "scenario": "walk_1p2_r2",
+ "feedback": true,
+ "kp_max": 800,
+ "kc": 10.0,
+ "sim_time_s": 5.231999999999646,
+ "planned_s": 9.325000000000001,
+ "fell_at_s": 5.231999999999646,
+ "touchdowns": 10,
+ "pelvis_x_m": 4.3110835934992435,
+ "ref_x_m": 4.330294513701925,
+ "mean_speed_mps": 0.8239838672590855,
+ "track_err_x_final_m": -0.019210920202681336,
+ "kr": 4.0,
+ "torque_limit_scale": 1.0,
+ "saturated_frac": {
+  "l_hip_yaw": 0.103,
+  "l_hip_roll": 0.08,
+  "l_hip_pitch": 0.018,
+  "l_knee": 0.055,
+  "l_ankle_pitch": 0.132,
+  "l_ankle_roll": 0.177,
+  "r_hip_yaw": 0.096,
+  "r_hip_roll": 0.029,
+  "r_hip_pitch": 0.062,
+  "r_knee": 0.114,
+  "r_ankle_pitch": 0.126,
+  "r_ankle_roll": 0.096,
+  "waist_yaw": 0.072
+ }
+}
