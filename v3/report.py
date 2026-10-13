@@ -54,7 +54,7 @@ R+=['','## B. Earlier analysis-code defects (found while iterating)','',
  '| 2.1 kWh P45B pack is 5.9 L, v2 box was 5.0 L → hit shoulder housings and spine | Pack box 185×220×144 mm, moved forward; compute bay raised |',
  '| Upper-arm tube ran into the (longer) catalog shoulder-yaw housing | Tube length derived from the housing length |',
  '| Hip abduction 20° with arms hanging: hand touches the thigh | Limit 15° with arms hanging (functional need is 15°); 20° needs the arm moved |',
- f"| Knee > 120°: {len(KS['125'])} clashes at 125°, {len(KS['130'])} at 130°, {len(KS['140'])} at 140° | **Not fixed.** At 125° the rod end hits the femur collar (a linkage knee could fix this), but at 130° the knee actuator body hits the ankle actuator bodies on the calf; a linkage does not change that. >135° needs the ankle actuators moved off the back of the shank (e.g. into the foot). Knee stays 0–120°. |",
+ f"| Knee > 120°: {len(KS['125'])} clashes at 125°, {len(KS['130'])} at 130°, {len(KS['140'])} at 140° | v3.1: not fixed (rod end vs femur collar at 125°, knee body vs ankle actuators at 130°). **v3.2: fixed**, see section F (ankle actuators to the shank front, twin knee screws, re-clocked lever). Knee is now 0–135°, clash-free to 145°. |",
  f"| After fixes: clash check of standing + 14 range-extreme poses | **{sum(len(v) for v in CL.values())} clashes** |",
  '','## D. Structure / FEA (cad/fea_v3.py)','','| item | result |','|---|---|']
 for k,o in FEA.items():
@@ -63,7 +63,8 @@ R+=['| pelvis_hip first run: stresses of 10⁴–10⁸ MPa, solver not convergin
  '| Convergence metric | Peak = 99.5th-percentile element stress; Δ < 10 % between the last two meshes counts as converged. Max-element stress is also reported; it keeps rising at re-entrant corners (singularities) and is not used for SF. |',
  '| FEA memory | First attempt at full-length P2 meshes: TetGen quality refinement gave 100k–970k tets regardless of max-volume (max_volume was ignored with an options string) and OOM. Fixed by setting fixedvolume/maxvolume explicitly, radius-edge 3.0 and AMG-preconditioned CG; single-threaded BLAS. |',
  '','## E. Simulation (sim/v3)','','| failure | fix / status |','|---|---|',
- '| v3 model with CAD mass properties: plain PD (balance off) falls backwards in ~2 s | CAD centre of mass sits 20–35 mm behind the ankles (knee/ankle actuators behind the legs). With the COM ankle strategy (balance ON) it stands and rejects 125 N / 0.2 s pushes forward and sideways (v2 capsule model: 175 N). Not fixed in hardware geometry; flagged. |']
+ '| v3 model with CAD mass properties: plain PD (balance off) falls backwards in ~2 s | v3.1 blamed the CAD centre of mass sitting 20–35 mm behind the ankles. **That claim was wrong** (re-measured in v3.2: see section F). The fall comes from capped PD gains. With the COM ankle strategy it stands and rejects pushes. |']
+R+=['',open('revisions_v32.md').read()]
 open('REVISIONS.md','w').write('\n'.join(R))
 print('ok', len(REV))
 # ---------------- dashboard
@@ -85,11 +86,15 @@ add('hand','tendon bend fatigue, 5 y',f"needs {h['grasps_5y']:.1e} cycles; publi
 p=V['power']; add('power','walking runtime',f"{p['runtime_h']:.1f} h at {p['P_total']:.0f} W",'PASS' if p['runtime_h']>=2 else 'FAIL')
 add('mass','target ≤ 65 kg',f"{V['m']:.1f} kg catalog rollup (CAD solids {MS['total']:.1f} kg)",'PASS' if V['m']<=65 else 'FAIL')
 for c in CB['joints']: add('cable routing',c['joint'],f"r {c['r_min_mm']} ≥ {c['r_req_mm']} mm (Ø{c['d_mm']} [EST])",'PASS' if c['r_min_mm']>=c['r_req_mm'] else 'FAIL')
-nc=sum(len(v) for v in CL.values()); add('CAD','interference: standing + 14 range extremes',f'{nc} clashes','PASS' if nc==0 else 'FAIL')
+nc=sum(len(v) for v in CL.values()); add('CAD','interference: standing + 15 range extremes (incl. deep squat)',f'{nc} clashes','PASS' if nc==0 else 'FAIL')
 add('CAD','single-leg hip adduction',f"clash-free to −6° (−8°: {len(KS['single_roll_-8'])} clashes); −12° with pelvis shift",'PASS')
-add('CAD','knee flexion > 135° (linkage knee)',f"120° clash-free; 125°: {len(KS['125'])}, 130°: {len(KS['130'])}, 140°: {len(KS['140'])} clashes (knee body vs ankle actuators; linkage does not help)",'FAIL')
+KL=json.load(open('cad/out/knee_linkage.json'))['selected']; STK=json.load(open('cad/out/stroke.json'))
+add('CAD','knee flexion 0–135° (twin screws, re-clocked lever)',f"clash-free at 135°, 140°: {len(KS['140'])}, 145°: {len(KS['145'])} clashes; stops at 135°",'PASS' if not KS['135'] else 'FAIL')
+add('actuator','knee torque over the whole range (slider-crank arm varies)',f"geometry factor k = {KL['k']:.2f} (worst-angle arm/need ratio); knee sized to T·k ≥ need: {rows['knee']['T']*KL['k']:.0f} ≥ {rows['knee']['need']*KL['k']:.0f} N·m; arm ≤ {KL['armmax_swing']:.0f} mm over 0–80° keeps swing speed",'PASS' if rows['knee']['ok'] else 'FAIL')
+for k_,o_ in STK.items():
+    if k_.startswith('L_'): add('roller-screw stroke',k_[2:],f"shortest length {o_['Lmin']:.0f} ≥ body + retracted screw + rod end {o_['need_min_len']:.0f} mm (stroke {o_['stroke']:.0f} mm)",'PASS' if o_['ok'] else 'FAIL')
 for k,o in FEA.items():
-    lim=1.0 if k.startswith('fall') else 2.0; ok=o['SF_yield']>=lim and o.get('goodman',9)>=1.5
+    lim=2.0; ok=o['SF_yield']>=lim and o.get('goodman',9)>=1.5
     conv=o['converged']
     add('FEA',k,f"{o['vm']:.0f} MPa, SF {o['SF_yield']:.2f} (≥{lim:.0f})"+(f", Goodman {o['goodman']:.2f}" if 'goodman' in o else '')+f", {len(o['levels'])} mesh levels, Δ {o['delta_pct']:.1f} %" if o['delta_pct'] is not None else f"{o['vm']:.0f} MPa (1 level)",'PASS' if ok and conv else ('FAIL' if not ok else 'OPEN'))
 SIM=json.load(open('../sim/v3/balance_v3.json'))

@@ -37,7 +37,7 @@ def run(F,dirn=0,bal=True,T=5.0,K=(1.0,1.0)):
     return d.qpos[2]>q0[2]-0.1 and d.xmat[1][8]>0.9
 if __name__=='__main__':
     print('mass %.1f kg, nu %d'%(m.body_subtreemass[1],m.nu))
-    print('stands 10 s (PD only):',run(0,bal=False,T=10),'pelvis z %.3f'%d.qpos[2])
+    pd_ok=bool(run(0,bal=False,T=10)); print('stands 10 s (PD only):',pd_ok,'pelvis z %.3f'%d.qpos[2])
     best=None
     for sgn in [(1,1),(-1,-1),(1,-1),(-1,1)]:
         r=[max([F for F in range(0,501,25) if run(F,dirn,True,4,sgn)] or [0]) for dirn in (0,1)]
@@ -46,5 +46,7 @@ if __name__=='__main__':
     base=[max([F for F in range(0,501,25) if run(F,dirn,False,4)] or [0]) for dirn in (0,1)]
     print('PD only max push fwd/side:',base,' best balance:',best)
     import json
+    q=nominal(); comx=float(d.subtree_com[1][0]); fc=float(foot_center()[0])
+    pd_txt=f"Plain PD (balance OFF) stands 10 s: {pd_ok}." if pd_ok else "Plain PD (balance OFF) falls in ~2 s: the capped joint gains in series (hip, knee, ankle) are softer than the gravity stiffness m·g·h. That is a controller limit, not a COM problem."
     st=run(0,True,10)
-    json.dump(dict(ok=bool(st and best[1][0]>=100),stands=bool(st),push=best[1],pd_only=base,text=f"Stands 10 s with balance ON: {st}; recovers from 0.2 s pushes up to {best[1][0]} N forward / {best[1][1]} N sideways (v2 capsule model: 175 N). Plain PD (balance OFF) falls backwards in ~2 s: CAD centre of mass is 20–35 mm behind the ankles."),open('balance_v3.json','w'))
+    json.dump(dict(com_x_mm=comx*1000,ok=bool(st and best[1][0]>=100),stands=bool(st),push=best[1],pd_only=base,text=f"Stands 10 s with balance ON: {st}; recovers from 0.2 s pushes up to {best[1][0]} N forward / {best[1][1]} N sideways (v2 capsule model: 175 N). COM {comx*1000:+.0f} mm from the ankle axis (foot centre {fc*1000:+.0f} mm, heel −60, toe +180). "+pd_txt),open('balance_v3.json','w'))

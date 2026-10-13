@@ -281,6 +281,12 @@ def run(extra=None):
                     m1=evaluate(st)['m']
                     if m1<m0-0.01: rev(it,f'actuator {n} (mass reduction)',f'passing but oversized; robot {m0:.1f} kg',f'{res[0]} → {res[1]} (−{m0-m1:.2f} kg)'); lighter=True
                     else: st.clear(); st.update(snap)
+            # v3.2: battery is part of the mass-down pass (it was only ever increased): smallest 13S·xP pack that still gives >= 2 h walking
+            while st['battery']['P']>1:
+                m0=evaluate(st)['m']; st['battery']['P']-=1; R2=evaluate(st)
+                if R2['power']['runtime_h']>=2.0 and not any(f=='battery-runtime' for f,_ in R2['fails']):
+                    rev(it,'battery (mass reduction)',f'runtime {evaluate(dict(st,battery=dict(st["battery"],P=st["battery"]["P"]+1)))["power"]["runtime_h"]:.1f} h > 2 h; robot {m0:.1f} kg',f"13S{st['battery']['P']+1}P → 13S{st['battery']['P']}P (−{m0-R2['m']:.2f} kg, runtime {R2['power']['runtime_h']:.1f} h)"); lighter=True
+                else: st['battery']['P']+=1; break
             R=evaluate(st)
             if not lighter: break
     return st,first,R

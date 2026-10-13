@@ -25,7 +25,7 @@ def tetmesh(wp,lev,tol):
     o=Options(f'pq{q}Q'); o.fixedvolume=1; o.maxvolume=maxvol
     m=build(mi,options=o)
     return fe.MeshTet(np.array(m.points).T,np.array(m.elements).T)
-def solve(mesh,mat,fixed,load,F):
+def solve(mesh,mat,fixed,load,F,sym_y=None):
     if mesh.t.shape[1]>85000: raise RuntimeError('mesh too big %d'%mesh.t.shape[1])
     e=fe.ElementVector(fe.ElementTetP2()); ib=fe.Basis(mesh,e,intorder=2)
     lam,mu=lame_parameters(mat['E'],mat['nu'])
@@ -35,6 +35,8 @@ def solve(mesh,mat,fixed,load,F):
     fb=fe.FacetBasis(mesh,e,facets=fac); area=fe.Functional(lambda w:1.0+0*w.x[0]).assemble(fb); tr=np.array(F)/area
     f=fe.LinearForm(lambda v,w: tr[0]*v[0]+tr[1]*v[1]+tr[2]*v[2]).assemble(fb)
     D=ib.get_dofs(fixed).all()
+    if sym_y is not None:   # v3.2: half model about the y-symmetry plane -> u_y = 0 there (halves memory, allows one more mesh level)
+        D=np.unique(np.concatenate([D,ib.get_dofs(lambda x:np.abs(x[1]-sym_y)<1e-3).all('u^2')]))
     A,b,x,I=fe.condense(K,f,D=D)
     try: Mpc=fe.build_pc_amg(A)
     except Exception: Mpc=None
@@ -88,16 +90,20 @@ def save(n,lv,mat,desc,res,op):
         sw=last['vm']*WALK/LAND; sa=sm=sw/2; o['goodman']=1/(sa/AL['Sf']+sm/AL['Su']); o['walk_vm']=sw; o['cycles']=CYC
     cur=json.load(open(op)) if os.path.exists(op) else {}
     cur[n]=o; res.clear(); res.update(cur); json.dump(cur,open(op,'w'),indent=1)
+SYM={'knee_clevis':((3.0,8),(2.0,4),(2.0,2)),'tibia_full':((3.0,200),(3.0,60),(3.0,25))}
 if __name__=='__main__':
     names=sys.argv[1].split(',') if len(sys.argv)>1 else list(cases())
     op='out/fea_v3.json'; res=json.load(open(op)) if os.path.exists(op) else {}
     for n in names:
         build_all(); wp,mat,fx,ld,F,desc,levels,tol=cases()[n]()
+        sym=None
+        if n in SYM:   # half model: loads and geometry symmetric about the leg's y plane; half the load on the half part
+            sym=model.P['hip_y']; wp=wp.intersect(cq.Workplane('XY').box(600,300,1400).translate((0,sym+150,700))); F=tuple(f/2 for f in F); levels=SYM[n]; desc+=' [half model, symmetry plane]'
         lv=[]
         if os.environ.get('MAXLEV'): levels=levels[:int(os.environ['MAXLEV'])]
         for mv in levels:
             try:
-                m=tetmesh(wp,mv,tol); r=solve(m,mat,fx,ld,F); r['mesh']=list(mv); lv.append(r)
+                m=tetmesh(wp,mv,tol); r=solve(m,mat,fx,ld,F,sym); r['mesh']=list(mv); lv.append(r)
                 print(n,mv,r['tets'],'%.0f MPa (max %.0f)'%(r['vm'],r['vm_max']),flush=True)
             except Exception as ex: print(n,mv,'FAILED',ex,flush=True); break
             gc.collect(); save(n,lv,mat,desc,res,op)

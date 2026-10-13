@@ -155,7 +155,7 @@ def build_leg(s):
         linear_actuator(S(f'knee actuator {"in" if dy*s<0 else "out"}'),S('thigh'),(KL['tx'],y+dy*P['knee_dy'],kz+KL['tz_rel']),(-kr*math.sin(kc),y+dy*P['knee_dy'],kz-kr*math.cos(kc)),ST['J']['knee']['motor'],PT.RV[ST['J']['knee']['screw']]['lead'],S('shank'),top='sphere',fins=ST['cooling']['knee']=='air_fins')
     # --- shank
     # FIX: solid tongue blocked the screw rod -> tongue + open lever clevis (two cheeks, 26 mm slot for the rod end), one machined part
-    lev=box(24,2*P['knee_dy']+40,12,(0,y,-kr)).union(box(24,8,kr+10,(0,y+P['knee_dy']+16,-kr/2))).union(box(24,8,kr+10,(0,y-P['knee_dy']-16,-kr/2)))   # crossbar + two outboard cheeks (a central web hit the femur collar at 135°).rotate((0,0,0),(0,1,0),-KL['clock']).translate((0,0,kz))
+    lev=box(24,2*P['knee_dy']+40,12,(0,y,-kr)).union(box(24,8,kr+10,(0,y+P['knee_dy']+16,-kr/2))).union(box(24,8,kr+10,(0,y-P['knee_dy']-16,-kr/2))).rotate((0,0,0),(0,1,0),-KL['clock']).translate((0,0,kz))   # crossbar + two outboard cheeks (a central web hit the femur collar at 135°)
     add(S('knee tongue + twin lever (shank)'),S('shank'),box(50,40,60,(5,y,kz-20)).intersect(cyl(64,40,'y',center=(0,y,kz)).union(box(40,40,40,(15,y,kz-30)))).union(lev).cut(cyl(16,60,'y',center=(0,y,kz))),'7075-T6')   # v3.2: tongue rounded to R32 about the pin (square corner hit the femur collar at 135°)
     # v3: cable drums (bend radius ≥ 10×d for moving cables) — knee Ø90 outboard of the clevis, ankle Ø70
     add(S('knee cable drum Ø90 (PA12)'),S('shank'),cyl(90,8,'y',id_=20,center=(0,y+s*(P['knee_dy']+30),kz)),'PA12',group='harness')

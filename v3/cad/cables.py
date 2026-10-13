@@ -11,7 +11,7 @@ for n,(od,L) in sorted(D.items()):
         d=4.0 if not any(k in n for k in ('neck','wrist')) else 3.0
         add(n.replace('L_',''),od/2+3,d,'clock-spring wrap on actuator housing (+3 mm liner)')
 add('knee',45,4.0,'clock-spring wrap on Ø90 drum outboard of knee clevis')
-add('ankle (pitch+roll)',35,3.0,'F/T sensor cable only (Ø3 [EST]) on Ø70 drum; actuators are shank-side')
+add('ankle (pitch+roll)',35,3.0,'F/T sensor cable only (Ø3 [EST]) on Ø70 drum; actuators on the shank front')
 add('finger tendons (wrist idler)',4,1.0,'Dyneema 1 mm over Ø8 idlers: D/d 8 (tendon rule in hand check, not cable rule)')
 rows=[r for r in rows if 'tendon' not in r['joint']]
 json.dump(dict(joints=rows,rule='bend radius >= 10 x cable OD (moving)',source='IGUS'),open('out/cables.json','w'),indent=1)
