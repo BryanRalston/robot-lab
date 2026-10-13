@@ -77,3 +77,18 @@ Any change to CONTRACTS.md or TARGETS.md, or to another module's files, starts h
 - Evidence: `modules/actuators/size.py`, `results/sizing.md`, `results/sizing.json`, `results/sizing_m1.3.json`, `results/DECISIONS.md` (D1–D11); `media/progress/2026-10-13_actuators_torque_speed.png`. Datasheets: Kollmorgen TBM2G manual (v3 parts.py), Harmonic Drive CSG-2A rating table (harmonicdrive.net CSG-32-50-2A-GR, CSG-40-50-2A-GR), Rollvis RV tables, Elmo Gold Twitter (elmomc.com/product/gold-twitter).
 - Affected owner response:
 - Status: agreed with conditions → R-001, R-008 (Arbiter, 2026-10-13)
+
+### P-006: Round-2 actuator updates: knee screw/lever, CAD masses, steady-state walking power
+- Date: 2026-10-13
+- Module / proposer: Actuators / RL Actuators
+- Affected owners: Legs (knee lever r 58.5 → 47.5 mm, hip_pitch lever on the thigh, gait re-run at final mass), Arbiter (R1.1 mass, R1.3 power), Torso placeholder (BMS regen limit)
+- Change:
+  - CONTRACTS R1.2 knee: 2 × TBM2G-07613D + RV12x4 at 40 mm → 2 × TBM2G-07613D + **RV12x5 at 47.5 mm**. 345 N·m nominal (245 worst-angle), 16.0 rad/s, 7565 rpm at 13.3 rad/s (R-005 met).
+  - R1.2 max mass per side: hip_yaw 1.02, hip_roll 1.46, hip_pitch 2.15, knee 1.98, ankle 1.78 kg.
+  - R1.1 leg actuators both legs: 18.60 → **16.79 kg** (≤ 17.30 target met). Housing CAD −1.11 kg, linkage CAD 0.61 kg vs 1.30 [EST].
+  - R1.3 walking power at 1.2 m/s, steady state (2–7 s of walk_1p2): 942 W no regen / **667 W with shared bus + 30 A BMS regen charge → 2.19 h** on 1620 Wh × 0.9 (2.17 h at end of discharge). This replaces 772 / 674 W, which averaged in the standing start and stop.
+  - R1.3 add: BMS regen-charge limit 30 A, brake chopper, clamp ≤ 90 V.
+- Impact on contracts: robot 67.60 → 65.79 kg (64.49 kg once Legs −0.50 and Torso −0.80 per R-001 are delivered). T7 passes only with regen (9 % margin) and fails without (1.55 h).
+- Evidence: `modules/actuators/cad_mass.py` → `results/cad_mass.json` + `cad/*.step` (CadQuery mass properties, ×1.0); `regen_sim.py` → `results/regen_sim.json`, `regen_sim_eod.json` (time-domain bus sim, ×1.0 requested for R-002 full credit); `size.py` → `results/sizing.json`; datasheets in `modules/actuators/datasheets/` (SOURCES.md); `media/progress/2026-10-13_actuators_r2_regen_mass.png`; `results/DECISIONS.md` D12–D17.
+- Affected owner response:
+- Status: open
