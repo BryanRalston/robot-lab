@@ -21,14 +21,14 @@ Sources used: `v3/analysis/results/v3_checks.md` and `v3.json` (per-joint rows, 
 | item | rev 0 | now (P-005 actual) | binding target after recovery |
 |---|---|---|---|
 | leg actuators, both legs (all-in incl. linkage, hip pivot bearings, rod ends; R-015 M1) | 15.36 kg | 18.63 kg all-in (16.79 incl. 0.609 linkage + 0.477 table delta − 0.084 Legs-owned lugs + 1.032 unmassed + 0.409 hip lever B; R-015) | ≤ 17.63 kg all-in; M1 closed at −0.278 (R-018: 1.3× re-size heavier, housing −0.40 was a double count); linkage line 2.25 kg (ce469c4) |
-| leg structure, both legs (incl. thigh clamp, instep lugs; R-015 M2) | 5.40 kg | 4.862 kg design (Legs r5: 4.822 + bolts/bumper 0.04; ø35 tongue, bonded clamp + sleeve/pins); credited 5.418 (R-020) | ≤ 4.87 kg (R-020); full credit on Grok Build FEA (A1') |
+| leg structure, both legs (incl. thigh clamp, instep lugs; R-015 M2) | 5.40 kg | 4.862 kg design (Legs r5: 4.822 + bolts/bumper 0.04; ø35 tongue, bonded clamp + sleeve/pins); credited 5.418 (R-020) | ≤ 4.87 kg (R-020); r6 bumper/bolts +0.022 → 4.884 accepted (R-022, reserve-funded); full credit on Grok Build FEA (A1') |
 | leg linkages, both legs (R-015) | — | 2.527 kg (`actuators/results/LINKAGE_TABLE.json` 33a7186: incl. lever B, hip bearings 0.628, rod ends 0.300 [EST], 6 trunnion pairs) + thigh clamp 0.20 [EST] | 2.53 kg line, hip pivot bearing owned by Actuators (R-016); inside actuator all-in ceiling |
-| harness (M3; owner RL Actuators, R-017) | 2.00 kg | 1.296 kg datasheet model (a09054a); **1.324 kg credited** (R-020: JST-GH calc ×0.5) | ≤ 1.46 kg met; −0.028 more on JST weighed/datasheet (A9) |
+| harness (M3; owner RL Actuators, R-017) | 2.00 kg | 1.286 kg datasheet/listing model (71f3c3e); **1.286 kg credited** (R-022: JST-GH published weights ×1.0) | ≤ 1.46 kg met; A9 closed |
 | covers (M3; Arbiter placeholder, R-017) | 1.86 kg | 1.384 kg paper (PA12 MJF 1.5 mm panels, 50 % limb coverage [EST] + EPP 0.36); **1.622 kg credited** (R-021) | ≤ 1.20 kg (R-015 M3) NOT MET; A10 |
 | brain (M4; Arbiter placeholder, R-017) | 1.80 kg | 1.044 kg paper (T5000 0.280 + Gauntlet AGX301 0.266 + DCM3623 0.024 cited; 0.474 [EST]); **1.216 kg credited** (R-021) | ≤ 1.50 kg (R-015 M4) MET; A11 |
 | battery 20S5P 1620 Wh | 7.96 kg | 8.75 kg | 8.75 kg |
-| Arbiter reserve | 1.2 kg | **+0.43 kg credible (66.07 vs 66.5); +1.98 paper (R-021)** | ≥ +0.30 kg credible (met; 1.03 after A1' FEA) |
-| **robot** | 63.79 kg | **paper 64.52 / credible 66.07 kg (R-021)** | **≤ 66.5 kg hard (R-017); credible 65.47 after A1' FEA** |
+| Arbiter reserve | 1.2 kg | **+0.446 kg credible (66.054 vs 66.5); +1.969 paper (R-022, `arbiter/mass_rollup_official.json`)** | ≥ +0.30 kg credible (met; 1.04 after A1' FEA) |
+| **robot** | 63.79 kg | **paper 64.531 / credible 66.054 kg (R-022, official rollup = single source of truth)** | **≤ 66.5 kg hard (R-017); credible 65.458 after A1' FEA** |
 
 ### R1.2 Leg actuator contract (R-004, R-005, R-006, R-008)
 | joint | need peak N·m | need RMS N·m | need speed rad/s | selection (Actuators) | avail peak | max mass kg |
@@ -39,7 +39,7 @@ Sources used: `v3/analysis/results/v3_checks.md` and `v3.json` (per-joint rows, 
 | knee | 231 | 72 | 13.3 | 2 × TBM2G-07613D + 2 × RV12x4, 40 mm | 258 worst-angle | 2.37 |
 | ankle_pitch | 305 (314 at 66.5 kg) | 44 | 6.9 | 2 × TBM2G-06013D + 2 × RV12x4, 73 mm (R-019/R-020) | 323.8 | 1.89 |
 | ankle_roll | 61 | 7 | 4 [EST] | shared pair, 40 mm | 177 | 0 (shared) |
-Needs at 65 kg (R-011): hip_yaw 66, hip_roll 180, hip_pitch 334, knee 235, ankle_pitch 309, ankle_roll 62 N·m (supersede the need column above). Carry verification (R-003, R-011): 20 kg with avail/carry-peak ≥ 1.2 on every leg joint at **1.0 m/s (R-014: verified, ankle 311/238.3 = 1.31×, fsim no fall/no saturation)**; 77 mm ankle lever closed (R-016, R-005 Nmax); 1.2 m/s carry tracked only; tracked at 1.2 m/s: ankle_pitch 311/283.2 = 1.10× (fails). Knee motor rpm at speed need ≤ 7600 (R-005). ROM (R-011, R-012): ankle_pitch loaded −50…+40°, mechanical −60…+40°; hip_pitch loaded −80…+40°, mechanical **−105…+40° (R-019; toggle −114.5°)**. Ankle_pitch lever **73 mm (R-019, conditional C2a/C2b)**: avail 323.8 N·m, 94.7 % Nmax, need at 66.5 kg 314 (1.03×), carry 1.0 m/s 1.34×.
+Needs at 65 kg (R-011): hip_yaw 66, hip_roll 180, hip_pitch 334, knee 235, ankle_pitch 309, ankle_roll 62 N·m (supersede the need column above). Carry verification (R-003, R-011): 20 kg with avail/carry-peak ≥ 1.2 on every leg joint at **1.0 m/s (R-014: verified, ankle 311/238.3 = 1.31×, fsim no fall/no saturation)**; 77 mm ankle lever closed (R-016, R-005 Nmax); 1.2 m/s carry tracked only; tracked at 1.2 m/s: ankle_pitch 311/283.2 = 1.10× (fails). Knee motor rpm at speed need ≤ 7600 (R-005). ROM (R-011, R-012): ankle_pitch loaded −50…+40°, mechanical −60…+40°; hip_pitch loaded −80…+40°, mechanical **−105…+40° (R-019; toggle −114.5°)**; ankle_roll mechanical **±18° hard stop (R-022, A5: RV12x4 pin-to-pin margin 10.9 mm; gait need ≤ 13.8°)**; nominal pin-to-pin margin ≥ 5 mm on parametric layouts. Hip-body eyes GE 12 C are a wear part, replaced every 5 250 h (R-022). Ankle_pitch lever **73 mm (R-019, conditional C2a/C2b)**: avail 323.8 N·m, 94.7 % Nmax, need at 66.5 kg 314 (1.03×), carry 1.0 m/s 1.34×.
 
 ### R1.3 Power (R-002, R-007, R-009, R-010)
 DC bus 20S 68.0…84.0 V, regen clamp ≤ 90 V, brake chopper, BMS regen-charge limit 30 A. Steady-state walking incl. motor iron loss (`actuators/results/regen_sim.json`, D18–D21):
@@ -126,4 +126,4 @@ Owns: pelvis-to-foot kinematics, thigh/shank/foot structure, knee/ankle linkages
 | Hands | 4.2 kg both (`v3.json` hands) | not separately budgeted (TBD) | wrist flange, tendon routing, tactile bus |
 | Head (incl. neck structure, sensors) | 1.6 kg | in 40 W sensors line | neck flange, cameras |
 | Brain (compute) | 1.8 kg | 120 W | bus master, sensors, safety |
-| Arbiter reserve | 1.2 kg | **+0.43 kg credible (66.07 vs 66.5); +1.98 paper (R-021)** | ≥ +0.30 kg credible (met; 1.03 after A1' FEA) |
+| Arbiter reserve | 1.2 kg | **+0.446 kg credible (66.054 vs 66.5); +1.969 paper (R-022, `arbiter/mass_rollup_official.json`)** | ≥ +0.30 kg credible (met; 1.04 after A1' FEA) |

@@ -1,0 +1,51 @@
+{
+ "A_actuators_-45..40_x_25": {
+  "Lmin": 260.6,
+  "Lmax": 379.2,
+  "stroke": 118.6,
+  "need": 257.6,
+  "margin": 2.9
+ },
+ "B_mech_-60..40_x_25": {
+  "Lmin": 260.5,
+  "Lmax": 379.2,
+  "stroke": 118.7,
+  "need": 257.7,
+  "margin": 2.9
+ },
+ "C_mech_-60..40_x_15": {
+  "Lmin": 262.9,
+  "Lmax": 372.2,
+  "stroke": 109.3,
+  "need": 248.3,
+  "margin": 14.6
+ },
+ "D_mech_-60..40_x_12": {
+  "Lmin": 263.7,
+  "Lmax": 370.1,
+  "stroke": 106.4,
+  "need": 245.4,
+  "margin": 18.3
+ },
+ "E_loaded_-50..40_x_25": {
+  "Lmin": 260.5,
+  "Lmax": 379.2,
+  "stroke": 118.7,
+  "need": 257.7,
+  "margin": 2.9
+ },
+ "F_mech_-60..40_x_18": {
+  "Lmin": 262.1,
+  "Lmax": 374.3,
+  "stroke": 112.2,
+  "need": 251.2,
+  "margin": 10.9
+ },
+ "G_x_25_upto_+20_only": {
+  "Lmin": 260.5,
+  "Lmax": 356.5,
+  "stroke": 96.0,
+  "need": 235.0,
+  "margin": 25.6
+ }
+}

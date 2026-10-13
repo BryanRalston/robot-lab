@@ -312,3 +312,33 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
 |---|---|---|---|---|
 | A10 | Arbiter (placeholder; Torso when staffed) | covers: panel layout on CAD, measured panel areas, and a wall/rib check of the 1.5 mm panels against the T8 fall case. Cite the EPP grade density and size pads from contact patches | up to −0.24 covers, plus pad delta | round 6 |
 | A11 | Arbiter (placeholder; Brain when staffed) | brain: pick the RT MCU part, confirm the carrier input voltage and DCM variant, and draw the cold plate and tray | up to −0.17 brain | round 6 |
+
+### R-022: official mass rollup + Actuators R6 (71f3c3e: A8 eye life, A9 JST-GH, A5 ankle stroke) + Legs r6 mass (2bf99d5)
+- Date: 2026-10-13. Proposers: Actuators (D52–D55, `life_r6.json`, `ankle_stroke_73.json`, `harness.json`, `mass_rollup_r6.json`); Legs r6 (L25–L27, `r5/hip_stop.json`). Arbiter checks: `arbiter/mass_rollup_official.py`, `arbiter/a5_ankle_rom.py` (+ `.json`). Targets unchanged (T2 ≤ 66.5, T5 20 kg).
+- **1. One official rollup: `modules/arbiter/mass_rollup_official.json` (+ `MASS_ROLLUP_OFFICIAL.md`) is the single source of truth.** Module rollups must reconcile to it line by line, naming the line and ruling for any difference. Only the Arbiter edits it.
+  - **Why 66.853 vs 66.07:** Actuators started from R-020's 66.89 and kept the **stale v3 brain 1.80 / covers 1.86 placeholders** (missing R-021's −0.584 and −0.238). R-021 predates the new real deltas A9 harness −0.038 and GE 12 C linkage +0.0002. **Both missed Legs r6's new real +0.022** (bumper + collar bolts 0.062 vs 0.04 allowance, addition ×1.0). No double counts; the JST credit (release +0.028 hold, −0.010 new) is correct.
+  - Credible = 66.891 − 0.584 − 0.238 − 0.038 + 0.0002 + 0.022 = **66.054 kg, MET, reserve +0.446** (≥ 0.30). Paper = 65.75 − 0.756 − 0.476 − 0.010 + 0.0002 + 0.022 = **64.531 kg**. With A1' FEA: 65.458.
+  - Note: M2 design now 4.884 vs the ≤ 4.87 line (+0.014); accepted, funded from reserve (weighted cost (0.014/66.5)×0.15 ≈ 0.00003 ≪ 0.01).
+- **2. A8: GE 12 C (steel/PTFE sintered bronze) eye as a wear part, replace every 5 250 h: ACCEPTED with conditions.**
+  - Math checked (walk 1.0 row): p = K·P/C = 100 × 0.778/11.4 = 6.82 N/mm²; v = 5.82e-7 × 18 × 3.05° × 63.8 min⁻¹ = 2.04e-3 m/s; G_h = 0.2 × 1 × 1400/(6.82^1.3 × 2.04e-3) = 280/(12.13 × 2.04e-3) ≈ 11 300 h ✓. Duty-weighted harmonic mean 10 612 h < 14 600 h T9. b1 0.2 at p < 25 is conservative; duty mix is [EST].
+  - Interval 5 250 h = 0.49 × G_h (G_h is a mean wear life, not L10), so 2 replacements over T9; T9 allows stated-interval wear parts. Plus play inspection every 1 000 h, replace if radial play > 0.15 mm.
+  - Cost check: GE 12 C listed at €9.79 ex VAT (motionparts.de), US$31.37 (sunrisebearingsfl.com, maintenance-free steel/PTFE confirmed), vs Actuators' $17.20. Bearing $10–31 + eye $25 [EST] + pin/clips $5 [EST] ≈ **$40–61 per eye**, 4 eyes/robot → **$160–245 per interval, ≤ $490 over life**. Negligible against T9 weight.
+  - Access: 30 min/leg procedure accepted. **Conditions:** (a) the femur clamp-arm pin and circlip must be reachable through a removable cover panel. The Arbiter covers line keeps the thigh lateral panel tool-removable (no mass change). (b) Legs confirms tool access at the clamp in the r7 layout. (c) O23 bench wear test in the O20 rig confirms G_h before G5.
+- **3. A9: harness 1.286 kg credited ×1.0 (−0.038 vs 1.324).** JST-GH 0.384 g/pair is from published distributor weights (TME; GAM 0.32 g), not calculated, so it is listing grade under R-020 §6. TME gross weights bias high (packaging share), so ±0.06 g × 80 = ±0.005 kg is conservative. No scale weigh required. Sleeving 12 % [EST] is unchanged and gains no credit.
+- **4. A5: ankle RV12x4 pin-to-pin margin 2.9 mm: NOT ADEQUATE as a design margin. Ruling: limit ankle_roll mechanical range to ±18° (hard stop); rod end not shortened.**
+  - Actuators' sweep covered pitch only −45…+40 (MJCF). Arbiter re-ran their rule over the contract mechanical −60…+40: margin is still 2.9 mm (B), because the governing corner is pitch +40 × roll ±25.
+  - Stack against 2.9 mm (a nominal, parametric v3 layout with no assembly CAD, G2): eye length set ±0.1, 2 PTFE eyes at the 0.2 mm wear limit (≈ 0.4), screw/nut/housing/motor-envelope machining and thread engagement (≈ 4 × ±0.2 worst case 0.8), lug and lever positions (±0.2 each) → worst case ≈ 1.5–2 mm [EST]. Elastic shortening of the screw at 2.22 kN: δ = FL/EA = 2220 × 250/(71 mm² × 210 GPa) ≈ 0.04 mm (negligible). Remaining ≤ 1 mm on a model that is not CAD is too thin. Floor set: **≥ 5 mm** nominal pin-to-pin margin on parametric layouts.
+  - Gait need (Legs npz, all scenarios): ankle_pitch −59.9…+25.7°, |roll| ≤ 7.8° walking/carry, ≤ 11.3° stairs, **13.8° push recovery**, and no roll at pitch > +30°.
+  - Options: shorten the rod end by 3 mm → 5.9 mm, and it adds an unverified eye-on-screw part. ±22° at full dorsiflexion (D54) is not computed. **±18° everywhere → 10.9 mm (F)**, keeping 4.2° over the push peak. ±15° gives 14.6 mm but only 1.2° over the push. A coupled ±25° up to +20° pitch gives 25.6 mm, but its stop is complex. **Pick ±18°.** It is the simplest stop, covers every gait with headroom, and costs no mass. Ankle roll torque/speed needs are unchanged.
+  - L10 544 000 h ≫ 14 600 h and static C0a/F 12.3 accepted as computed (not re-derived). **R-020 C2a closed with the ±18° condition.**
+- Actions:
+
+| # | owner | action | effect | deadline |
+|---|---|---|---|---|
+| A1' | RL Legs → Grok Build | structure FEA items 1–7 (unchanged) | releases −0.596 | queued |
+| A12 | Arbiter | itemise "all other lines" (leg actuators/linkage, torso, arms, hands, head) in the official rollup | audit trail | round 7 |
+| A13 | RL Actuators | re-base `mass_rollup_*` on `arbiter/mass_rollup_official.json`; ankle_stroke at ROM −60…+40 × ±18 | reconcile | round 7 |
+| A14 | RL Legs | ankle_roll hard stop ±18° in MJCF/CAD; re-run push recovery with the stop; femur clamp pin tool access through the thigh panel | A5, A8(b) | round 7 |
+| O23 | RL Actuators | GE 12 C bench wear test (O20 rig) | confirms 5 250 h | before G5 |
+
+- Needs Bryan: nothing. All calls are within approved targets.

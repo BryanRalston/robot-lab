@@ -1,0 +1,88 @@
+{
+ "status": "OFFICIAL single source of truth (R-022). Module rollups must reconcile to this file line by line; any module figure that differs must cite the line and the ruling that changes it.",
+ "limit_kg": 66.5,
+ "reserve_target_kg": 0.3,
+ "lines": [
+  {
+   "line": "leg structure M2 (Legs r5 design)",
+   "paper_kg": 4.862,
+   "credible_kg": 5.418,
+   "evidence": "scikit-fem foot+clamp FEA; tubes/tongue/clamp sleeve hand checks",
+   "credit_rule": "reductions on hand checks x0.5, FEA x1.0, additions x1.0 (R-019/R-020)",
+   "source": "R-020 \u00a74-5"
+  },
+  {
+   "line": "leg structure r6 add: hip-stop bumper + collar bolts over 0.04 allowance",
+   "paper_kg": 0.022,
+   "credible_kg": 0.022,
+   "evidence": "hand sizing, PU props [EST]",
+   "credit_rule": "addition x1.0",
+   "source": "Legs 2bf99d5 L25-L27, hip_stop.json"
+  },
+  {
+   "line": "harness M3 (Actuators)",
+   "paper_kg": 1.2864,
+   "credible_kg": 1.2864,
+   "evidence": "Belden MachFlex datasheet g/m x routed lengths; connectors distributor listings; JST-GH TME/GAM published weights (+-0.06 g/pair); sleeving 12 % [EST] already at par",
+   "credit_rule": "datasheet/listing x1.0 (R-020 \u00a76); sleeving no credit gained",
+   "source": "Actuators 71f3c3e D53, harness.json"
+  },
+  {
+   "line": "covers M3 (Arbiter)",
+   "paper_kg": 1.384,
+   "credible_kg": 1.622,
+   "evidence": "HP PA12 density cited; 1.5 mm wall + 50 % coverage [EST]",
+   "credit_rule": "saving vs 1.86 x0.5 (rests on [EST])",
+   "source": "R-021, a3_size.json"
+  },
+  {
+   "line": "brain M4 (Arbiter)",
+   "paper_kg": 1.044,
+   "credible_kg": 1.216,
+   "evidence": "T5000/AGX301/DCM3623 cited 0.570; 0.474 [EST]",
+   "credit_rule": "cited share x1.0, [EST] share x0.5",
+   "source": "R-021, a3_size.json"
+  },
+  {
+   "line": "linkage r6 delta (GE 12 E -> GE 12 C eye)",
+   "paper_kg": 0.0002,
+   "credible_kg": 0.0002,
+   "evidence": "SKF GE 12 C 0.016 kg = GE 12 E 0.016 kg",
+   "credit_rule": "datasheet x1.0",
+   "source": "Actuators 71f3c3e LINKAGE_TABLE"
+  },
+  {
+   "line": "battery 20S5P P45B",
+   "paper_kg": 8.75,
+   "credible_kg": 8.75,
+   "evidence": "R-010",
+   "credit_rule": "x1.0",
+   "source": "CONTRACTS R1.1"
+  },
+  {
+   "line": "all other lines (DERIVED: leg actuators+linkage, torso, arms, hands, head, thermal, pelvis; v3 basis + R-015..R-020 credits)",
+   "paper_kg": 47.182,
+   "credible_kg": 47.739,
+   "evidence": "see RULINGS R-015..R-020",
+   "credit_rule": "as ruled there; to be itemised (A12)",
+   "source": "derived"
+  }
+ ],
+ "paper_kg": 64.531,
+ "credible_kg": 66.054,
+ "credible_reserve_kg": 0.446,
+ "paper_reserve_kg": 1.969,
+ "pending": {
+  "A1prime_structure_FEA": -0.596,
+  "credible_if_A1prime": 65.458
+ },
+ "reconciliation": {
+  "actuators_r6": 66.85259852147897,
+  "arbiter_R021": 66.069,
+  "actuators_missing_R021_brain": -0.584,
+  "actuators_missing_R021_covers": -0.238,
+  "both_missing_legs_r6_bumper_bolts": 0.022,
+  "R021_missing_harness_A9": -0.038,
+  "R021_missing_linkage": 0.0002
+ }
+}

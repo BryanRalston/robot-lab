@@ -213,3 +213,7 @@ Any change to CONTRACTS.md or TARGETS.md, or to another module's files, starts h
 - **Clamp retention.** The femur clamp needs bonded or form-locked axial retention. Friction alone crushes the 1.2 mm tube (SF 1.06).
 - **Contract rows.** Harness 1.296 kg (O20/O21) and linkage both legs 2.326 kg.
 - Status: **ACCEPTED with conditions (R-020)** — needle/ø35 tongue holds (O17 closed); bond + light clamp + Legs sleeve/cross-pin backup (shoulder overruled); maintenance-free GE eyes subject to T9 life (A8); linkage 2.326 accepted; harness credited 1.324 (JST calc ×0.5); credible 66.89 vs 66.5. Legs r5 (L21–L24) ruled in R-020: M2 4.862 accepted, tongue −0.086 credited ×0.5.
+
+### P-016: Actuators round 6 (71f3c3e): A8 eye wear part, A9 JST-GH weights, A5 ankle stroke/L10, rollup 66.853 (logged by Arbiter; no P-number filed)
+- Date: 2026-10-13. Proposer: Actuators (D52–D55).
+- Status: **ruled R-022**. A8 GE 12 C wear part every 5 250 h accepted with access conditions. A9 harness 1.286 credited ×1.0. A5 2.9 mm not adequate, so ankle_roll is limited to ±18° (margin 10.9 mm). The 66.853 rollup is superseded by the official rollup, credible 66.054.
