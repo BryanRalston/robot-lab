@@ -1,0 +1,82 @@
+{
+ "ankle_roll_stop": {
+  "range_deg": 18,
+  "model": "jnt_range \u00b118\u00b0, solref [2dt,1] solimp [.95,.99,.001] (gait_lib LEGS_AROLL)",
+  "geometry": "2 x 7075 stop blocks 20x12x10 mm on the ankle cross (\u00b1roll), contact face at r 45 mm, faces strike foot-fork shoulders; 2 mm PU 95A pad bonded on each face; 1 x M4x10 + dowel per block",
+  "hold_force_N": 3933,
+  "face_pressure_MPa": 16.4,
+  "pad_deflection_mm": 0.82,
+  "overtravel_pad_deg": 1.04,
+  "sim_overtravel_deg": 1.9,
+  "clearance_margin_mm_at_sim_overtravel": 8.7,
+  "soft_limit": {
+   "decel_rad_s2": 1587,
+   "brake_deg_from_10p26": 1.9,
+   "start_deg": 16.1
+  },
+  "impact_energy_J_if_unbraked": 5.9,
+  "mass_kg_per_leg": 0.0166,
+  "mass_both": 0.033
+ },
+ "thigh_pin_panel": {
+  "outline_mm": "front (x+) panel 60 w x 70 h, R8 corners, centred on collar mid-height; matching rear 40x50 exit window",
+  "pins": "2 x \u00f86 x 62 42CrMo4, x-axis, z \u00b18.5 from collar mid [EST layout]",
+  "access": {
+   "front_clear_mm": "\u226525 free in front of pin heads (cover 3 mm off collar OD \u00f864 \u2192 ~35 mm to fairing inner wall)",
+   "rear_push_out_mm": "pin exits rear through 40x50 window, \u226562 mm needed, \u226570 available behind collar to the seat/hip envelope [EST]",
+   "tool": "\u00f85 pin punch L\u226572 mm + 200 g hammer, or M3 extractor thread",
+   "lateral_margin_mm": 15.5
+  },
+  "fasteners": "front 4 x M3 captive quarter-turn (Southco-type) [EST]; rear 2 x M3",
+  "mass_kg_per_leg": 0.0179,
+  "material": "PA12-CF 1.5 mm, 1.15 g/cc [EST]"
+ },
+ "push": {
+  "base": {
+   "l": {
+    "min_all": -29.4,
+    "max_all": 33.8,
+    "min_t09": -29.4,
+    "max_t09": 33.8,
+    "first_over18_s": 0.408
+   },
+   "r": {
+    "min_all": -35.1,
+    "max_all": 25.3,
+    "min_t09": -35.1,
+    "max_t09": 25.3,
+    "first_over18_s": 0.472
+   },
+   "ID": {
+    "cop_inside_sole": true,
+    "max_friction_ratio": 1.1313708498984771,
+    "base_residual_max": 122.59109432607835,
+    "frames_residual_gt_5pctBW": 19,
+    "mass_kg": 66.054
+   }
+  },
+  "stop": {
+   "l": {
+    "min_all": -18.8,
+    "max_all": 19.4,
+    "min_t09": -18.8,
+    "max_t09": 19.4,
+    "first_over18_s": 0.408
+   },
+   "r": {
+    "min_all": -19.9,
+    "max_all": 18.1,
+    "min_t09": -19.9,
+    "max_t09": 18.1,
+    "first_over18_s": 0.47
+   },
+   "ID": {
+    "cop_inside_sole": true,
+    "max_friction_ratio": 1.1313708498984771,
+    "base_residual_max": 122.59109432607835,
+    "frames_residual_gt_5pctBW": 19,
+    "mass_kg": 66.054
+   }
+  }
+ }
+}

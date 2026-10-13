@@ -33,6 +33,11 @@ def load(carry=0.0, carry_pos=(0.32,0.0,0.12)):
             if 'solref' in cx: m.geom_solref[g]=cx['solref']
         if 'cone' in cx: m.opt.cone=mujoco.mjtCone.mjCONE_ELLIPTIC if cx['cone']=='elliptic' else mujoco.mjtCone.mjCONE_PYRAMIDAL
         if 'impratio' in cx: m.opt.impratio=cx['impratio']
+    ar=os.environ.get('LEGS_AROLL')   # R-022 A14: ankle_roll hard stop +-deg, stiff limit (solref 2*dt, solimp .95/.99)
+    if ar:
+        for s_ in ('l','r'):
+            j=m.joint(f'{s_}_ankle_roll').id; m.jnt_range[j]=np.radians([-float(ar),float(ar)]); m.jnt_limited[j]=1
+            m.jnt_solref[j]=[2*m.opt.timestep,1.0]; m.jnt_solimp[j][:3]=[0.95,0.99,0.001]
     if LIMITS=='r1':
         for i in range(m.nu):
             n=m.actuator(i).name
