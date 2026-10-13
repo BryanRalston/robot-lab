@@ -21,5 +21,4 @@ No double counting: Legs structure 4.85 kg excludes all lever solids, bearings, 
 
 Rollup: 65.79 + 1.718 + thigh clamp 0.20 (R-016 [EST]) = **67.71 kg** CAD-supported (of which Actuators R3b hip_pitch lever +0.224, pivot bearing +0.475; other linkage corrections +1.019). If Legs structure (−0.56) and Torso (−0.80) land: 66.35 kg vs 66.5 kg hard (R-017). Harness M3 not included here (see results/harness.md).
 
-**Harness line (generated from `results/harness.json`):** 1.286 kg vs R-020 credited 1.324 → -0.038 kg.
-**R6 rollup (R-020 basis):** credible 66.89 +0.000 linkage -0.038 harness = **66.853 kg** vs 66.5 hard. With A1' (Grok Build FEA, −0.596) → 66.257 kg.
+**Actuator-owned deltas vs `arbiter/mass_rollup_official.json` (R-022 single source of truth; no robot total computed here):** harness 1.2864 vs official 1.2864 → +0.0000 kg; linkage both legs 2.3262 vs official 2.3262 → -0.0000 kg. Official credible robot total: 66.054 kg.

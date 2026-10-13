@@ -107,19 +107,20 @@
   "if_legs_structure_and_torso_land": 66.34754820333102,
   "limit": 65.0
  },
- "harness": {
-  "model_kg": 1.2864425549002014,
-  "R020_credited": 1.324,
-  "delta": -0.037557445099798636,
-  "src": "results/harness.json (harness.py)"
- },
- "rollup_r6": {
-  "base_R020_credible": 66.89,
-  "linkage_delta": 0.0001559665787582709,
-  "harness_delta": -0.037557445099798636,
-  "robot": 66.85259852147897,
-  "limit": 66.5,
-  "A1prime_pending": -0.596,
-  "robot_if_A1prime": 66.25659852147896
+ "actuator_deltas": {
+  "source": "modules/arbiter/mass_rollup_official.json (R-022)",
+  "harness": {
+   "official_kg": 1.2864,
+   "actuators_model_kg": 1.2864425549002014,
+   "delta_kg": 4.255490020144137e-05
+  },
+  "linkage_both_legs": {
+   "official_kg": 2.3262,
+   "actuators_table_kg": 2.3261559665787583,
+   "delta_kg": -4.403342124170706e-05
+  },
+  "note": "Robot total: read official credible_kg; add these deltas only after an Arbiter ruling.",
+  "actuator_delta_total_kg": -1.47852104026569e-06,
+  "official_credible_kg": 66.054
  }
 }

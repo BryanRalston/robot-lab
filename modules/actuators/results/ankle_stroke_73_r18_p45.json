@@ -1,0 +1,30 @@
+{
+ "73mm L_ankle actuator in": {
+  "pitch": [
+   -45.0,
+   40
+  ],
+  "roll": 18.0,
+  "Lmin": 262.6,
+  "Lmax": 374.3,
+  "stroke": 111.7,
+  "body": 125,
+  "need_min_len": 250.7,
+  "margin": 11.9,
+  "ok": true
+ },
+ "73mm L_ankle actuator out": {
+  "pitch": [
+   -45.0,
+   40
+  ],
+  "roll": 18.0,
+  "Lmin": 262.6,
+  "Lmax": 374.3,
+  "stroke": 111.7,
+  "body": 125,
+  "need_min_len": 250.7,
+  "margin": 11.9,
+  "ok": true
+ }
+}
