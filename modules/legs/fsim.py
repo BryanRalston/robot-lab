@@ -4,7 +4,7 @@ Controller (no RL, ~0.1 ms/step on CPU): inverse-dynamics feed-forward from scen
 usage: python3 fsim.py <scenario> [--fb 0|1] [--T seconds]"""
 import sys,json,argparse,numpy as np,mujoco
 from gait_lib import *
-ap=argparse.ArgumentParser(); ap.add_argument('scenario'); ap.add_argument('--fb',type=int,default=1); ap.add_argument('--kp',type=float,default=800); ap.add_argument('--tag',default=''); ap.add_argument('--kc',type=float,default=20.0); ap.add_argument('--kr',type=float,default=1.0); ap.add_argument('--tscale',type=float,default=1.0); ap.add_argument('--fp',type=float,default=0.0); ap.add_argument('--cop',type=int,default=0); ap.add_argument('--kyaw',type=float,default=0.3); ap.add_argument('--fprate',type=float,default=1.5)
+ap=argparse.ArgumentParser(); ap.add_argument('scenario'); ap.add_argument('--fb',type=int,default=1); ap.add_argument('--kp',type=float,default=800); ap.add_argument('--tag',default=''); ap.add_argument('--kc',type=float,default=20.0); ap.add_argument('--kr',type=float,default=1.0); ap.add_argument('--tscale',type=float,default=1.0); ap.add_argument('--fp',type=float,default=0.0); ap.add_argument('--record',type=float,default=0); ap.add_argument('--cop',type=int,default=0); ap.add_argument('--kyaw',type=float,default=0.3); ap.add_argument('--fprate',type=float,default=1.5)
 a=ap.parse_args()
 R=np.load(os.path.join(HERE,'results',os.environ.get('LEGS_OUT',''),a.scenario+'.npz')); Qr=R['Q'].astype(float); Vr=R['V'].astype(float); Tr=R['TAU'].astype(float); AL=R['AL']
 m=load(20.0,(0.25,0,0.10)) if a.scenario.startswith('carry') else load(); print('mass',round(sum(m.body_mass),2),'limits',[round(m.actuator_ctrlrange[i,1]) for i in range(6)]); d=mujoco.MjData(m); r=Robot(m)
@@ -25,7 +25,7 @@ def foot_contact(side):
         if g in (c.geom1,c.geom2):
             fr=np.zeros(6); mujoco.mj_contactForce(m,d,list(d.contact).index(c) if False else 0,fr)
     return any(g in (c.geom1,c.geom2) for c in d.contact[:d.ncon])
-nsteps=int(T/m.opt.timestep); rd=mujoco.MjData(m); off={'l':np.zeros(2),'r':np.zeros(2)}; OMG=np.sqrt(G/0.94); sat=np.zeros(m.nu)
+nsteps=int(T/m.opt.timestep); rd=mujoco.MjData(m); off={'l':np.zeros(2),'r':np.zeros(2)}; rec=[]; OMG=np.sqrt(G/0.94); sat=np.zeros(m.nu)
 KC=np.array([a.kc,a.kc,30.0]); DC=2*np.sqrt(KC); KR=a.kr*np.array([400.,600.,100.])*m.body_subtreemass[1]/60; DR=0.15*KR
 for k in range(nsteps):
     t=d.time; q,v,tff,al=ref(t)
@@ -72,6 +72,7 @@ for k in range(nsteps):
             if air[i]>0.1 and d.time>0.3: steps+=1    # real step: foot airborne >0.1 s then lands
             air[i]=0.0
     contact_prev=cs
+    if a.record and k%int(a.record/m.opt.timestep)==0: rec.append(d.qpos.copy())
     if k%25==0:
         Rm=d.xmat[1].reshape(3,3); log.append([d.time,d.qpos[0],d.qpos[1],d.qpos[2],ref(d.time)[0][0],ref(d.time)[0][1],np.degrees(np.arctan2(Rm[2,1],Rm[2,2])),np.degrees(-np.arcsin(Rm[2,0])),cs[0],cs[1]])
 log=np.array(log)
@@ -82,3 +83,4 @@ print(json.dumps(res))
 FS=os.path.join(HERE,'results',os.environ.get('LEGS_OUT',''),'fsim'); os.makedirs(FS,exist_ok=True)
 json.dump(res,open(os.path.join(FS,f'{a.scenario}_fb{a.fb}{a.tag}.json'),'w'),indent=1)
 np.save(os.path.join(FS,f'{a.scenario}_fb{a.fb}{a.tag}_log.npy'),log)
+if rec: np.save(os.path.join(FS,f'{a.scenario}_fb{a.fb}{a.tag}_qpos.npy'),np.array(rec))

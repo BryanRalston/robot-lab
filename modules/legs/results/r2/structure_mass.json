@@ -1,0 +1,98 @@
+{
+ "rows": [
+  {
+   "seg": "thigh",
+   "part": "femur tube 7075 \u00d850",
+   "v3_kg": 0.253,
+   "new_kg": 0.2040866666666668,
+   "change": "wall 2.0 \u2192 1.6 mm",
+   "check": "\u03c3 58 MPa, SF yield 8.54, Goodman 9.76 (v3 FEA \u00d7 BW ratio \u00d7 Z ratio 1.220)"
+  },
+  {
+   "seg": "thigh",
+   "part": "femur collars \u00d72",
+   "v3_kg": 0.078,
+   "new_kg": 0.06292000000000005,
+   "change": "follow tube wall",
+   "check": "with tube"
+  },
+  {
+   "seg": "thigh",
+   "part": "femur upper lug",
+   "v3_kg": 0.265,
+   "new_kg": 0.21200000000000002,
+   "change": "pocket 20 % (side pockets, 3 mm webs) [design rule]",
+   "check": "FEA required (no v3 case for lug alone; femur_full SF 10.6 includes it)"
+  },
+  {
+   "seg": "thigh",
+   "part": "knee clevis",
+   "v3_kg": 0.276,
+   "new_kg": 0.2346,
+   "change": "pocket 15 % in the bridge [design rule]",
+   "check": "\u03c3 \u2264 105 MPa, SF yield \u2265 4.80, Goodman \u2265 5.48 (whole v3 stress scaled by knee screw force 7267/4064 N and 1/0.85 section; conservative) \u2014 confirm by FEA"
+  },
+  {
+   "seg": "shank",
+   "part": "tibia tube 7075 \u00d845",
+   "v3_kg": 0.243,
+   "new_kg": 0.19620837209302341,
+   "change": "wall 2.0 \u2192 1.6 mm",
+   "check": "\u03c3 100 MPa, SF yield 4.99, Goodman 5.70"
+  },
+  {
+   "seg": "shank",
+   "part": "tibia collar",
+   "v3_kg": 0.036,
+   "new_kg": 0.029067906976744207,
+   "change": "follow tube wall",
+   "check": "with tube"
+  },
+  {
+   "seg": "shank",
+   "part": "ankle fork",
+   "v3_kg": 0.181,
+   "new_kg": 0.15385,
+   "change": "pocket 15 % [design rule]",
+   "check": "FEA required (tibia_full SF 6.2 includes fork)"
+  },
+  {
+   "seg": "shank",
+   "part": "knee tongue (pin lug, lever removed)",
+   "v3_kg": 0.2743536,
+   "new_kg": 0.23320055999999997,
+   "change": "v3 tongue+twin lever 0.447 minus v3 lever solids 0.173; pocket 15 % [design rule]",
+   "check": "FEA required (knee_clevis case covers the thigh side only)"
+  },
+  {
+   "seg": "foot",
+   "part": "foot plate + instep lever",
+   "v3_kg": 1.457,
+   "new_kg": 1.09275,
+   "change": "7075 plate \u2192 ribbed plate, 25 % lighter: 4 mm skin + 3 mm ribs at 40 mm pitch, instep lever kept [design rule]",
+   "check": "FEA required (no v3 foot case): 3 BW heel strike and toe-off at CoP extremes"
+  }
+ ],
+ "per_leg_v3": 3.0633536,
+ "per_leg_new": 2.4186835057364346,
+ "both_new": 4.837367011472869,
+ "linkage": [
+  {
+   "item": "knee crossbar + 2 cheeks (lever 47.5 mm)",
+   "kg": 0.124764,
+   "defn": "crossbar 20\u00d7130\u00d710, cheeks 20\u00d78\u00d757.5 mm, 7075"
+  },
+  {
+   "item": "hip_pitch crossbar + 2 cheeks (lever 50 mm)",
+   "kg": 0.127012,
+   "defn": "same section, cheeks 20\u00d78\u00d760 mm"
+  },
+  {
+   "item": "ankle rod-end lugs on instep (2)",
+   "kg": 0.04215,
+   "defn": "2 lugs 15\u00d720\u00d725 mm on the foot instep (the instep lever itself stays in the foot plate)"
+  }
+ ],
+ "linkage_both": 0.587852,
+ "F_knee_N": 7267.408586437425
+}
