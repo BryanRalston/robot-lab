@@ -1,0 +1,91 @@
+{
+ "rows": [
+  {
+   "part": "hip_pitch lever, config B (hub+bearing spigot, 2 loft arms, ears; dy 69), 7075 + 2 steel pins \u00f812x25",
+   "owner": "Actuators",
+   "kg_each": 0.37143474232192214,
+   "n_per_leg": 1,
+   "kg_per_leg": 0.37143474232192214,
+   "source": "CAD+FEA hp_lever_fea.py (R3b), replaces lever(50,dy=69) 0.167",
+   "legs_confirm": ""
+  },
+  {
+   "part": "hip_pitch pivot bearing IKO CRBH 5013 A + inner clamp ring + 6xM4",
+   "owner": "Actuators (from R3b)",
+   "kg_each": 0.314,
+   "n_per_leg": 1,
+   "kg_per_leg": 0.314,
+   "source": "datasheet 0.29 kg + 0.024 [EST]",
+   "legs_confirm": "Legs: femur tongue seat \u00f880 H7 x 13 (was \u00f832)"
+  },
+  {
+   "part": "knee lever r47.5",
+   "owner": "Actuators",
+   "kg_each": 0.1346496664615385,
+   "n_per_leg": 1,
+   "kg_per_leg": 0.1346496664615385,
+   "source": "CAD",
+   "legs_confirm": "v3 knee-lever credit dropped (Legs L14 accepted)"
+  },
+  {
+   "part": "nut-rotor hub",
+   "owner": "Actuators",
+   "kg_each": 0.015996639818657617,
+   "n_per_leg": 6,
+   "kg_per_leg": 0.0959798389119457,
+   "source": "CAD",
+   "legs_confirm": ""
+  },
+  {
+   "part": "trunnion pin pair \u00f816/\u00f89 steel (one pair per screw body)",
+   "owner": "Actuators",
+   "kg_each": 0.025894577447213865,
+   "n_per_leg": 6,
+   "kg_per_leg": 0.1553674646832832,
+   "source": "CAD; 6 bodies/leg -> 6 pairs (was 4; risk line closed as real)",
+   "legs_confirm": ""
+  },
+  {
+   "part": "rod-end spherical eye \u00f812 (one per screw rod)",
+   "owner": "Actuators",
+   "kg_each": 0.025,
+   "n_per_leg": 6,
+   "kg_per_leg": 0.15000000000000002,
+   "source": "[EST] steel rod-end eye M12 / \u00f812 bore, GE12-class; datasheet pending",
+   "legs_confirm": ""
+  },
+  {
+   "part": "ankle rod-end lugs on foot instep (2)",
+   "owner": "Legs",
+   "kg_each": 0.042,
+   "n_per_leg": 1,
+   "kg_per_leg": 0.042,
+   "source": "Legs structure.py parametric",
+   "legs_confirm": "Legs confirm not also in structure 4.85"
+  },
+  {
+   "part": "thigh trunnion clamp for hip_pitch bodies (config B)",
+   "owner": "Legs",
+   "kg_each": null,
+   "n_per_leg": 1,
+   "kg_per_leg": null,
+   "source": "OPEN, not sized",
+   "legs_confirm": "Legs to size"
+  }
+ ],
+ "per_leg": 1.2634317123786898,
+ "both_legs": 2.5268634247573796,
+ "contract_both": 0.609,
+ "delta_vs_rollup": 1.9182556615096233,
+ "rollup": {
+  "base_CAD_supported": 65.79,
+  "actuators_r3b_hip": {
+   "hip_lever": 0.46817495172076734,
+   "hip_bearing": 0.628
+  },
+  "other_linkage_corrections": 0.822080709788856,
+  "new_total": 67.70825566150963,
+  "if_legs_structure_and_torso_land": 66.34825566150963,
+  "limit": 65.0
+ }
+}

@@ -1,0 +1,64 @@
+{
+ "70": {
+  "T_out": 310.5,
+  "carry_ratio_1p2": 1.096,
+  "carry_ratio_1p0": 1.303,
+  "carry_ratio_0p8": 1.413,
+  "motor_rpm_at_speed_need": 7267,
+  "rpm_frac": 0.908,
+  "rpm_ok": true,
+  "w30": 13.7,
+  "stroke_scale": 1.0,
+  "lever_mass_delta_kg": 0.0
+ },
+ "73": {
+  "T_out": 323.8,
+  "carry_ratio_1p2": 1.143,
+  "carry_ratio_1p0": 1.359,
+  "carry_ratio_0p8": 1.473,
+  "motor_rpm_at_speed_need": 7578,
+  "rpm_frac": 0.947,
+  "rpm_ok": true,
+  "w30": 13.14,
+  "stroke_scale": 1.043,
+  "lever_mass_delta_kg": 0.0014
+ },
+ "74": {
+  "T_out": 328.3,
+  "carry_ratio_1p2": 1.159,
+  "carry_ratio_1p0": 1.377,
+  "carry_ratio_0p8": 1.493,
+  "motor_rpm_at_speed_need": 7682,
+  "rpm_frac": 0.96,
+  "rpm_ok": false,
+  "w30": 12.96,
+  "stroke_scale": 1.057,
+  "lever_mass_delta_kg": 0.0018
+ },
+ "77": {
+  "T_out": 341.6,
+  "carry_ratio_1p2": 1.206,
+  "carry_ratio_1p0": 1.433,
+  "carry_ratio_0p8": 1.554,
+  "motor_rpm_at_speed_need": 7993,
+  "rpm_frac": 0.999,
+  "rpm_ok": false,
+  "w30": 12.46,
+  "stroke_scale": 1.1,
+  "lever_mass_delta_kg": 0.0032
+ },
+ "80": {
+  "T_out": 354.9,
+  "carry_ratio_1p2": 1.253,
+  "carry_ratio_1p0": 1.489,
+  "carry_ratio_0p8": 1.615,
+  "motor_rpm_at_speed_need": 8305,
+  "rpm_frac": 1.038,
+  "rpm_ok": false,
+  "w30": 11.99,
+  "stroke_scale": 1.143,
+  "lever_mass_delta_kg": 0.0046
+ },
+ "arm_max_for_95pct_mm": 73.2,
+ "speed_need_rad_s": 6.9207024574279785
+}
