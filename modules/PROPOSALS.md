@@ -189,3 +189,4 @@ Any change to CONTRACTS.md or TARGETS.md, or to another module's files, starts h
 - (b) Harness line 2.00 → **0.82 kg [EST]**. Ask for credit ×0.5 now, full credit after datasheets + routed CAD.
 - (c) Robot 66.45 kg vs 66.5 (full credit). At ×0.5 harness credit it is 67.04 kg.
 - No targets loosened.
+- Status: ACCEPTED with conditions (R-018): (a) linkage 2.25 kg, M1 closed at −0.278, 1.3× re-size rescinded; (b) harness credited per part at 1.344 kg (−0.656), not ×0.5 flat; (c) credible 66.98 kg, 0.78 kg reassigned to Legs M2 (A1) + harness evidence (A2), deadline end of round 5

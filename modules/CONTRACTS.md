@@ -20,15 +20,15 @@ Sources used: `v3/analysis/results/v3_checks.md` and `v3.json` (per-joint rows, 
 ### R1.1 Mass budgets (R-001)
 | item | rev 0 | now (P-005 actual) | binding target after recovery |
 |---|---|---|---|
-| leg actuators, both legs (all-in incl. linkage, hip pivot bearings, rod ends; R-015 M1) | 15.36 kg | 18.63 kg all-in (16.79 incl. 0.609 linkage + 0.477 table delta − 0.084 Legs-owned lugs + 1.032 unmassed + 0.409 hip lever B; R-015) | ≤ 17.63 kg all-in |
+| leg actuators, both legs (all-in incl. linkage, hip pivot bearings, rod ends; R-015 M1) | 15.36 kg | 18.63 kg all-in (16.79 incl. 0.609 linkage + 0.477 table delta − 0.084 Legs-owned lugs + 1.032 unmassed + 0.409 hip lever B; R-015) | ≤ 17.63 kg all-in; M1 closed at −0.278 (R-018: 1.3× re-size heavier, housing −0.40 was a double count); linkage line 2.25 kg (ce469c4) |
 | leg structure, both legs (incl. thigh clamp, instep lugs; R-015 M2) | 5.40 kg | 5.40 kg in rollup (4.85 parametric + 0.20 clamp [EST] + 0.084 lugs; provisional until FEA) | ≤ 4.85 kg |
 | leg linkages, both legs (R-015) | — | 2.527 kg (`actuators/results/LINKAGE_TABLE.json` 33a7186: incl. lever B, hip bearings 0.628, rod ends 0.300 [EST], 6 trunnion pairs) + thigh clamp 0.20 [EST] | 2.53 kg line, hip pivot bearing owned by Actuators (R-016); inside actuator all-in ceiling |
-| harness (M3; owner RL Actuators, R-017) | 2.00 kg | 2.00 kg | ≤ 1.46 kg (R-015 M3; credit on real numbers) |
+| harness (M3; owner RL Actuators, R-017) | 2.00 kg | 0.821 kg model (26c6f8b); **1.344 kg credited** per part (R-018) | ≤ 1.46 kg met on credit; full credit after O16 datasheets + routed lengths (R-018 A2) |
 | covers (M3; Arbiter placeholder, R-017) | 1.86 kg | 1.86 kg | ≤ 1.20 kg (R-015 M3; credit on real numbers) |
 | brain (M4; Arbiter placeholder, R-017) | 1.80 kg | 1.80 kg | ≤ 1.50 kg (R-015 M4; credit on real numbers) |
 | battery 20S5P 1620 Wh | 7.96 kg | 8.75 kg | 8.75 kg |
-| Arbiter reserve | 1.2 kg | −1.41 kg (overrun at 67.91 vs 66.5) | +1.89 kg vs 66.5 if M1–M4 land (0.55 on credible 65.95) |
-| **robot** | 63.79 kg | **67.91 kg incl. unmassed (R-015)** | **64.61 kg after R-015 M1–M4 + pending credits; ≤ 66.5 kg hard (R-017); credible ≈ 65.95 kg [EST]** |
+| Arbiter reserve | 1.2 kg | −0.48 kg credible (66.98 vs 66.5); +0.05 paper (R-018) | ≥ +0.30 kg credible after R-018 A1 (66.17) |
+| **robot** | 63.79 kg | **paper 66.45 / credible 66.98 kg (R-018)** | **≤ 66.5 kg hard (R-017); credible 66.17 after R-018 A1, 65.65 after A1+A2** |
 
 ### R1.2 Leg actuator contract (R-004, R-005, R-006, R-008)
 | joint | need peak N·m | need RMS N·m | need speed rad/s | selection (Actuators) | avail peak | max mass kg |

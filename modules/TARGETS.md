@@ -25,6 +25,8 @@ Tesla has **never published an Optimus datasheet**. Most numbers that circulate 
 
 **Status 2026-10-13 R4 (R-014, R-015):** T2 mass **67.91 kg incl. hip lever B and unmassed linkage lines (NOT MET vs then-65.0)**; 66.56 kg with pending structure/Torso credits; **64.61 kg if R-015 M1–M4 (−1.95 kg) land**. T5 carry verified at **1.0 m/s** (R-014, ankle 1.31×); 1.2 m/s carry tracked at 1.10× (77 mm path closed by R-016: R-005 Nmax). T7/T6 unchanged from R3.
 
+**Status 2026-10-13 R6 (R-018):** T2 paper **66.45 kg**, credible **66.98 kg (NOT MET vs ≤ 66.5; −0.48)**; 66.17 kg after Legs M2 FEA credit (R-018 A1, reserve 0.33), 65.65 after harness evidence (A2). Target values unchanged.
+
 **Status 2026-10-13 R5 (R-016, R-017):** T2 hard limit **raised to ≤ 66.5 kg** (Bryan, 2026-10-13, via R-017; recommendation was R-016 Option B). Stretch ≤ 60 kg unchanged. 20 kg carry retained. Cuts M1–M4 stay ordered. Rollup if M1–M4 land: **64.61 kg (reserve 1.89 vs 66.5)**; credible evidence end state ≈ **65.95 kg [EST] (reserve 0.55, thin)**. T2 status: **MET provisionally on credible evidence once M1–M4 land; NOT MET today at 67.91 kg**. T5/T7/T6 unchanged from R4. Target values: T2 hard limit only.
 
 Weights sum to 1.00. **Hard constraints (cannot be traded): T2 ≤ 66.5 kg (amended Bryan 2026-10-13 via R-016/R-017; was 65.0), T7 ≥ 2 h walking, T8 structural survival, safety.** Weights apply only to trades among soft margins.

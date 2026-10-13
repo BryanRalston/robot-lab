@@ -197,3 +197,28 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
   - M1 Actuators and M2 Legs unchanged from R-015/R-016.
 - Rationale: Bryan confirmed the R-016 Option B recommendation. Raising the hard limit by 1.5 kg is far cheaper on the TARGETS score than cutting payload, and the credible end state (65.95 kg) fits inside 66.5 with a thin reserve. Cuts stay ordered so the design still lands as low as evidence allows.
 - Contract edits made: TARGETS.md T2 row + hard-constraints + R5 status; CONTRACTS.md §0 robot mass and §R1.1 robot row → ≤ 66.5 kg (module budgets unchanged).
+
+### R-018: on P-013 (Actuators round 4: M1 result, M3 harness credit, O19 shortfall)
+- Date: 2026-10-13. Proposer: Actuators (ce469c4, 26c6f8b, 0f21a0a; D32–D40, `results/mass_rollup_r4.json`, `results/harness.{py,json,md}`).
+- **Verified (reproduced from `mass_rollup_r4.json`):** base 67.91 (R-016) − 0.153 needle straddle − 0.245 lever SF 1.5 + 0.120 rod ends (GE 12 E datasheet 0.016 kg + 7075 eye 0.019 calc, ×12) + 0 margin 1.3 + 0 housing = **67.632 kg; M1 = −0.278** (vs −1.00). Harness model 0.435 wire + 0.284 connectors + 0.052 sleeving + 0.050 BMS leads = **0.821 kg**, cut vs 2.00 rollup line = −1.179 → paper **66.453 kg**; flat ×0.5 → 67.04. All Robot Lab numbers reproduce.
+- **D34 (1.3× re-size) accepted:** catalogue steps make hip_roll 1.500 vs 1.455 kg and hip_pitch 2.171 vs 2.154 kg at 1.3×, i.e. heavier. **R-016's 1.3× invocation for hip_roll/hip_pitch is rescinded; both stay at 1.5× units.** R-001 1.3× fallback stays closed for mass purposes (no gain). Carry 1.0 m/s ratios unchanged (1.82 / 1.97).
+- **D35 accepted:** housing ×1.25 factor was already removed in round 2 (D13, −1.11 in the 65.79 base); R-016's −0.40 was a double count, withdrawn.
+- **Lever SF 1.5 (−0.245):** mass is CAD (credited ×1.0); structural adequacy stays gated on O13 converged FEA + the hip-lever proof test before G5. If O13 shows SF < 1.5 the mass returns.
+- **Harness credit, per part** (`harness.py` evidence; no harness datasheet is committed in the repo):
+  - Physics/catalogue-named parts, full credit at the +20 % length/tolerance bound: copper (area × 8.96 g/cm³) 0.217 × 1.2 = 0.261; connectors (Amass XT60/XT30/AS150U, JST-GH masses named, ±20 %) 0.284 × 1.2 = 0.341 → **0.602**.
+  - [EST] parts, half credit against their pro-rata share of the 2.00 baseline (k = 2.00/0.821 = 2.435): insulation g/m 0.063 × 1.2, EtherCAT 14 g/m 0.154 × 1.2, BMS leads 0.050 → 0.311 → credited 0.311 + 0.5 × (0.311 × 1.435) = **0.534**; sleeving 12 % of the 1.2× wire (0.522) = 0.0626 → credited **0.108**.
+  - Completeness allowance [EST] for runs not in the model (cameras/head data, IMU, foot F/T, e-stop loop, tactile bus): **+0.10**.
+  - **Credited harness = 0.602 + 0.534 + 0.108 + 0.100 = 1.344 kg → credit −0.656 kg** (vs −1.179 paper, −0.589 flat ×0.5). Full credit to the routed-CAD mass once O16 delivers datasheet g/m + routed lengths.
+- **Rollup vs 66.5 hard:** paper 66.45 (reserve 0.05); **credible 67.632 − 0.656 = 66.976 kg → 0.48 kg OVER.** Torso −0.80 (R-001) and M3 covers / M4 brain stay credited ×0 (no owner data; Arbiter could not source a catalogue mass for the compute module this round: NVIDIA AGX Orin datasheet gives 100×87×16 mm with TTP, mass not stated → [EST]).
+- **O19 ruling:** Actuators' M1 obligation is closed at −0.278 (no further actuator lever without a T5/T6 trade; accepted). The 0.72 shortfall is reassigned. Required: 0.48 to reach 66.5 + **0.30 kg reserve** = **0.78 kg credible**.
+
+| # | owner | action | credible kg | acceptance | deadline |
+|---|---|---|---|---|---|
+| A1 | RL Legs | M2: structure FEA credit (5.40 → 4.85) and absorb thigh clamp + lugs inside 4.85 | −0.56 −0.25 = **−0.81** | `grokbuild/structure_fea.md`: SF ≥ 2 fall + Goodman pass at 66.5 kg loads incl. clamp; CAD/parametric mass table ≤ 4.85 kg both legs | end of round 5 |
+| A2 | RL Actuators | O16 harness: datasheet g/m (silicone AWG, EtherCAT cable), connector datasheets, routed lengths from Legs/Torso geometry, incl. the completeness runs | up to −0.52 more (1.344 → model value) | committed datasheets + routed-length table; credit moves part by part | end of round 5 |
+| A3 | Arbiter | M3 covers / M4 brain sized from cited catalogue parts | credited ×0 until cited | each line cites a datasheet mass | end of round 5 |
+| A4 | RL Actuators | O13 converged lever FEA + proof-test plan | 0 (protects −0.245) | SF ≥ 1.5 converged | before G5 |
+
+- **Result:** A1 alone → 66.976 − 0.81 = **66.17 kg (reserve 0.33)**; A1 + A2 full → 65.65 (reserve 0.85). T2 stays **NOT MET** until A1 lands.
+- **Fallback (end of round 5, if credible > 66.2):** Arbiter re-rules across arms/hands/Torso budgets first. Any change to T2 or T5 values goes to Bryan; the Arbiter will not change them.
+- Contract edits: CONTRACTS R1.1 harness, actuator, reserve, robot rows; TARGETS status R6; P-013 status.
