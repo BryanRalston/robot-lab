@@ -182,3 +182,10 @@ Any change to CONTRACTS.md or TARGETS.md, or to another module's files, starts h
   - (b) Arbiter to rule where the ~1.4 kg for T2 comes from. Options: a two-bearing straddle with needle rollers (~−0.2 kg, needs a datasheet); lever SF 2 → 1.5 with a bench proof test (~−0.1 kg); controller force cap in deep flexion; or relief elsewhere.
   - (c) Ankle lever stays 70 mm. 77 mm breaks R-005 at 99.9 % Nmax, and carry at the 0.8 / 1.0 m/s rating speeds already passes at 1.41 / 1.30.
 - Status: ACCEPTED with conditions (R-016): (a) linkage 2.53 kg, hip bearing Actuators; (b) cuts ordered per R-015/R-016, T2 limit raise PENDING BRYAN; (c) ankle 70 mm
+
+### P-013: Actuators round 4: M1 result, M3 harness 0.82 kg, contract lines
+- Date 2026-10-13. Proposer: Actuators (D32–D40, `results/mass_rollup_r4.json`).
+- (a) Linkage line 2.53 → **2.25 kg** (needle straddle, lever SF 1.5 + proof test, catalogue rod ends). Net M1 is −0.278 kg. Margin 1.3 and housing CAD deliver 0, with evidence in D34 and D35.
+- (b) Harness line 2.00 → **0.82 kg [EST]**. Ask for credit ×0.5 now, full credit after datasheets + routed CAD.
+- (c) Robot 66.45 kg vs 66.5 (full credit). At ×0.5 harness credit it is 67.04 kg.
+- No targets loosened.

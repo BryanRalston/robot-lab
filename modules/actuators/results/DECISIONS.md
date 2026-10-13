@@ -203,3 +203,50 @@ Retention at 1.2 m/s:
 - O13 (Grok Build): converged lever FEA, h ≤ 2 mm with drawn fillets, SF target 2 (D25).
 - O14 (Legs): pivot structure inside |y| ≤ 22, femur seat ø80, mechanical stop ≥ −105°, thigh trunnion clamp mass (D26/D27/D29).
 - O15 (Arbiter): T2 67.71 kg (P-012).
+
+## Round 4 (2026-10-13): M1 cuts, M3 harness, emulator RFQ (R-016/R-017, limit 66.5 kg)
+**D32. M1(a) needle straddle (`hp_pivot_needle.py`): −0.153 kg both legs (target −0.20).**
+- Two IKO TLA 3520 Z (35×42×20, 43.5 g, C 20.7 / C0 42.3 kN; `datasheets/iko_shell_needle_catalog.pdf`) sit in the lever cheeks (span 47 mm) on a case-hardened 16MnCr5 shaft ø35/ø30 × 67 pressed into the femur tongue. PTFE/bronze thrust washers + circlips.
+- Static fs 4.65 at max (9.1 kN per bearing) and 3.13 in the one-screw fault, both ≥ 3 (IKO shell rule). L10 280 000 h walking. Shaft bending 110 MPa.
+- Line 0.237 vs 0.314 kg/leg. The shaft (0.134) is the cost; a thinner wall would fail the raceway case depth.
+
+**D33. M1(b) lever SF 2.0 → 1.5 with the new needle cheeks: 0.249 kg/leg (was 0.371), −0.245 both legs (incl. hub change).**
+- FEA (HUB=needle, h 4 mm): SF 1.51 at φ −60° (fault 1.54), pin deflection 0.16 mm. STEP is `cad/hip_pitch_lever_B_needle_sf15.step`.
+- The lever is now two halves joined by the hip-roll yoke; nothing sits in |y| < 13.5, where the femur tongue is.
+- Lateral clearance to the rods is 29.5 mm.
+- Proof test: `results/PROOF_TEST_hip_lever.md` (100 % at 1.25 × design, qualification to 2 ×).
+- O13 is NOT closed: < 1.5 GB was free and h = 3 swapped, so it was killed. Brief: `results/GROKBUILD_lever_fea_converged.md`.
+
+**D34. M1(c) margin 1.3 for hip_roll / hip_pitch: 0 kg.** `sizing_m1.3.json`:
+- hip_roll at 1.3 picks TBM2G-07608A + CSG-25 at 1.500 kg vs 1.455 at 1.5. Heavier: the catalogue steps don't go down.
+- hip_pitch at 1.3 picks TBM2G-06813D at arm 65 mm, 2.171 vs 2.154 kg. Heavier, and it would undo the 50 mm lever/clearance geometry.
+- Keep the current units. The carry checks at 1.0 m/s still pass (hip_roll 204/112 = 1.82, hip_pitch 454/230 = 1.97). The R-016 [EST −0.30] does not exist.
+
+**D35. M1(d) housing CAD: 0 kg new.**
+- No unit changed (D34), so there are no new housings.
+- The ×1.25 [EST] housing factor was already replaced by CAD in round 2 (D13, −1.11 kg in the 65.79 base). R-016's "≥ −0.40" would double-count it.
+
+**D36. M1(e) rod ends: +0.120 kg both legs.**
+- Catalogue SKF SIKAC 12 M (0.118 kg, C0 14 kN, fs 3.1) is rejected for mass.
+- Chosen: SKF GE 12 E spherical plain bearing (0.016 kg, C 10.8 / C0 54 kN, fs 11.9; `datasheets/skf_ge12e.pdf`) in a 7075 eye ø30 × 12 with an M12 boss (0.019 kg calc) = 0.035 vs 0.025 [EST], × 12.
+
+**D37. M1 total −0.278 kg vs −1.00 target.** The linkage table is now 2.249 kg both legs (`LINKAGE_TABLE.md`). Shortfall 0.72 kg: margin and housing were paper credits (D34/D35).
+
+**D38. M3 harness (`harness.py`, `results/harness.md`): 0.821 kg vs ≤ 1.46 target (contract 2.00) → −1.179 kg.**
+- 20S star to 4 limb trunks: leg 12/14/16 AWG tapered (peak 33.2 A, rms 7.0 A), arms 16/18 AWG.
+- EtherCAT daisy chain 4 × 26 AWG at 14 g/m [EST], 34 drives on the actuators, short phase/encoder leads.
+- Connectors: Amass XT60/XT30/MR30/AS150U, JST-GH for EtherCAT.
+- Worst voltage drop 0.30 % at peak; worst conductor ΔT 10.8 K (24 V compute feed).
+- Evidence [EST]: vendor-typical g/m and connector masses, lengths ±20 %. Credit at ×0.5 until datasheets and a routed CAD harness exist.
+
+**D39. Rollup: 67.91 (R-016) − 0.278 − 1.179 = 66.45 kg vs 66.5 hard (0.05 reserve). It becomes 65.09 if Legs structure and Torso −0.80 land.** At ×0.5 harness credit it would be 67.04 (over).
+
+**D40. Emulator RFQ drafted, not sent (`results/RFQ_ITECH.md`).** Route: AV-TEK (US distributor) sales@avtekconsulting.com, ITECH direct info@itechate.com as fallback.
+- Flag: the IT6005C-80-150 is an 80 V class unit and the bus reaches 84 V. The RFQ asks the vendor to confirm 84 V operation, else the 300 V class.
+
+## Open after round 4
+- O13 converged lever FEA (Grok Build brief).
+- O16 harness datasheets + routed lengths (Legs/Torso geometry).
+- O17 Legs: tongue bore ø35 press-fit; yoke joining the two lever halves.
+- O18 RFQ send (Bryan).
+- O19 M1 shortfall 0.72 kg: no further actuator lever without a T5/T6 trade.
