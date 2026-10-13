@@ -1,0 +1,38 @@
+{
+ "70mm L_ankle actuator in": {
+  "Lmin": 263.2,
+  "Lmax": 377.5,
+  "stroke": 114.4,
+  "body": 125,
+  "need_min_len": 253.4,
+  "margin": 9.8,
+  "ok": true
+ },
+ "70mm L_ankle actuator out": {
+  "Lmin": 263.2,
+  "Lmax": 377.5,
+  "stroke": 114.4,
+  "body": 125,
+  "need_min_len": 253.4,
+  "margin": 9.8,
+  "ok": true
+ },
+ "73mm L_ankle actuator in": {
+  "Lmin": 260.6,
+  "Lmax": 379.2,
+  "stroke": 118.6,
+  "body": 125,
+  "need_min_len": 257.6,
+  "margin": 2.9,
+  "ok": true
+ },
+ "73mm L_ankle actuator out": {
+  "Lmin": 260.6,
+  "Lmax": 379.2,
+  "stroke": 118.6,
+  "body": 125,
+  "need_min_len": 257.6,
+  "margin": 2.9,
+  "ok": true
+ }
+}

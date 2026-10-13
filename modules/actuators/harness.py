@@ -62,7 +62,7 @@ local=[('motor phase leads (34 drives, 3 x 0.5 mm2 x 0.06 m)',34,0.06,0.5,3),('e
 CON={'XT60 pair (Amass XT60, 30 A)':(0.0078,4,'7.8 g/pair distributor listing (Alise Ops)'),
      'XT30U pair (Amass, 15 A, drive tees)':(0.0036,32+8,'1.8 g each half, AMOV listing'),
      'MR30 3-pin pair (Amass, phase)':(0.0024,0,'1.2 g/pc AMOV listing; phases soldered, n=0'),
-     'JST-GH 4-pin pair (GHR-04V-S + 4 SSHL-002T + BM04B-GHS header)':(0.0005,2*34+12,'CALC from jst_gh.pdf dims: housing 6.25x4.15x~10 mm PA9T ~50 % solid 0.15 g + header 0.20 g + 4 contacts 0.03 g'),
+     'JST-GH 4-pin pair (GHR-04V-S + 4 SSHL-002T-P0.2 + BM04B-GHS-TBT)':(0.000384,2*34+12,'R6 A9 published: TME weights housing 0.079 g + 4 x 0.021 g contacts + header 0.221 g (gross) = 0.384 g; GAM listing 0.08+0.08+0.16 = 0.32 g; +-0.06 g'),
      'AS150U pair (pack main)':(0.0414,1,'41.4 g/pair distributor listing (Rotorama)')}
 rows=[]; wire=0; ecat=0; loop_len=0
 def R(a): return RHO_CU/(a*1e-6)

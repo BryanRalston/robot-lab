@@ -64,3 +64,11 @@ Connector masses (O21):
 - JST-GH 4-pin: 0.5 g/pair, calculated from jst_gh.pdf dimensions.
 
 Joint ranges: from the v3 MJCF, `sim/v3/humanoid_v3.xml` (CONTRACTS "Range of motion").
+
+## R6 (R-020 A8/A9), 2026-10-13
+| file / source | part | data used |
+|---|---|---|
+| skf_plain_bearings_catalogue.pdf (https://cdn.skfmediahub.skf.com/api/public/0901d19680154a05/pdf_preview_medium/0901d19680154a05_pdf_preview_medium.pdf) | SKF spherical plain bearings and rod ends catalogue | steel/PTFE sintered bronze life G_h = b1 b2 1400/(p^1.3 v); Table 6: b1 0.2 for alternating load 0.5–5 Hz (p ≤ 40 N/mm²); v = 5.82e-7 dm β f |
+| skf_ge12c.html (Acorn listing of the SKF data; SKF product page https://www.skf.com/products/plain-bearings/spherical-plain-bearings-rod-ends/radial/productid-GE%2012%20C) | SKF GE 12 C, maintenance-free steel/PTFE sintered bronze | C 11.4 kN, C0 28.5 kN, K 100, dk 18, α 10°, 0.016 kg, $17.20 each |
+| TME product pages (https://www.tme.eu/en/details/ghr-04v-s/…, …/bm04b-ghs-tbt/…, https://www.tme.com/us/en-us/details/sshl-002t-p0.2/…) | JST GHR-04V-S, BM04B-GHS-TBT, SSHL-002T-P0.2 | weights 0.079 g, 0.221 g (gross), 0.021 g |
+| GAM-GEC listings (https://gam-gec.com/product/ghr-04v-s/, …/bm04b-ghs-tbt/) | same | 0.08 g, 0.16 g |

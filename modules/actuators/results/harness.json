@@ -428,10 +428,10 @@
     "n": 0,
     "evidence": "1.2 g/pc AMOV listing; phases soldered, n=0"
    },
-   "JST-GH 4-pin pair (GHR-04V-S + 4 SSHL-002T + BM04B-GHS header)": {
-    "each_kg": 0.0005,
+   "JST-GH 4-pin pair (GHR-04V-S + 4 SSHL-002T-P0.2 + BM04B-GHS-TBT)": {
+    "each_kg": 0.000384,
     "n": 80,
-    "evidence": "CALC from jst_gh.pdf dims: housing 6.25x4.15x~10 mm PA9T ~50 % solid 0.15 g + header 0.20 g + 4 contacts 0.03 g"
+    "evidence": "R6 A9 published: TME weights housing 0.079 g + 4 x 0.021 g contacts + header 0.221 g (gross) = 0.384 g; GAM listing 0.08+0.08+0.16 = 0.32 g; +-0.06 g"
    },
    "AS150U pair (pack main)": {
     "each_kg": 0.0414,
@@ -439,11 +439,11 @@
     "evidence": "41.4 g/pair distributor listing (Rotorama)"
    }
   },
-  "kg": 0.2566
+  "kg": 0.24731999999999998
  },
  "sleeving_kg": 0.10919170231073587,
  "ecat_junction_kg": 0.02,
- "total_kg": 1.2957225549002014,
+ "total_kg": 1.2864425549002014,
  "R4_model_kg": 0.821,
  "R018_credited_kg": 1.344,
  "contract": 2.0,

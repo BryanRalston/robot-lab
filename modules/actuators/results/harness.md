@@ -32,16 +32,16 @@
 
 Joint ROM used (deg): hip yaw 80.0, hip roll 27.0, hip pitch 145.0, knee 135.0, waist yaw 180.0, waist pitch 90.0, shoulder pitch 240.0, shoulder roll 195.0, shoulder yaw 300.0, elbow 140.0, wrist roll 340.0, wrist pitch 140.0, wrist yaw 80.0, neck yaw 160.0, neck pitch 80.0, ankle (pitch+roll) 135.0. Hip pitch is from the Legs CAD (−120..+40); the others are [EST] human-range values.
 
-Connectors 0.257 kg: XT60 pair (Amass XT60, 30 A) ×4 (7.8 g/pair distributor listing (Alise Ops)); XT30U pair (Amass, 15 A, drive tees) ×40 (1.8 g each half, AMOV listing); MR30 3-pin pair (Amass, phase) ×0 (1.2 g/pc AMOV listing; phases soldered, n=0); JST-GH 4-pin pair (GHR-04V-S + 4 SSHL-002T + BM04B-GHS header) ×80 (CALC from jst_gh.pdf dims: housing 6.25x4.15x~10 mm PA9T ~50 % solid 0.15 g + header 0.20 g + 4 contacts 0.03 g); AS150U pair (pack main) ×1 (41.4 g/pair distributor listing (Rotorama))
+Connectors 0.247 kg: XT60 pair (Amass XT60, 30 A) ×4 (7.8 g/pair distributor listing (Alise Ops)); XT30U pair (Amass, 15 A, drive tees) ×40 (1.8 g each half, AMOV listing); MR30 3-pin pair (Amass, phase) ×0 (1.2 g/pc AMOV listing; phases soldered, n=0); JST-GH 4-pin pair (GHR-04V-S + 4 SSHL-002T-P0.2 + BM04B-GHS-TBT) ×80 (R6 A9 published: TME weights housing 0.079 g + 4 x 0.021 g contacts + header 0.221 g (gross) = 0.384 g; GAM listing 0.08+0.08+0.16 = 0.32 g; +-0.06 g); AS150U pair (pack main) ×1 (41.4 g/pair distributor listing (Rotorama))
 
 | block | kg |
 |---|---|
 | power wire (datasheet g/m × routed L) | 0.515 |
 | EtherCAT + completeness data (datasheet g/m × routed L) | 0.395 |
-| connectors | 0.257 |
+| connectors | 0.247 |
 | sleeving/ties 12 % [EST] | 0.109 |
 | EtherCAT junction PCB [EST] | 0.020 |
-| **total** | **1.296** |
+| **total** | **1.286** |
 
 Worst ΔV 0.78 % at peak (limit 2 %). Worst conductor ΔT 15.8 K at rms (free air h 10 W/m²K × 2 bundle factor, limit 30 K; SiF rated 180 °C). Minimum bend ratio at the drums is r/OD 8.1 (MachFlex rated 7.5 × OD for 8e6 cycles; SILI-E / SiF ≥ 6 × OD).
 **Flex (R5b, O20).** In every clock-spring loop the EtherCAT is Belden MachFlex MRTA2P26S: 2×2×26 AWG robotic cable, 4.2 mm, 25.9 g/m, 8e6 bend cycles at 7.5D and 8e6 torsion cycles at ±180°/m. It is used for the whole branch, so there are no splices. Belden does not specify 100 Ω impedance, so a TDR or EtherCAT link test is needed (O20b). Power cores inside the loops are Stäubli SILI-E super-flexible silicone (class 6, 0.07 mm strands). Stäubli publishes no cycle rating, so the clock-spring cycle test stays (O20a). igus CFBUS/CFROBOT and Lapp ETHERLINE Flex need 70–90 mm bend radius and do not fit the drums.
