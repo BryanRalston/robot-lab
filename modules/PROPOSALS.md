@@ -190,3 +190,18 @@ Any change to CONTRACTS.md or TARGETS.md, or to another module's files, starts h
 - (c) Robot 66.45 kg vs 66.5 (full credit). At ×0.5 harness credit it is 67.04 kg.
 - No targets loosened.
 - Status: ACCEPTED with conditions (R-018): (a) linkage 2.25 kg, M1 closed at −0.278, 1.3× re-size rescinded; (b) harness credited per part at 1.344 kg (−0.656), not ×0.5 flat; (c) credible 66.98 kg, 0.78 kg reassigned to Legs M2 (A1) + harness evidence (A2), deadline end of round 5
+
+### P-014: Legs round 4: M2 design 4.79 kg, hip mechanical range −105°, thigh clamp form, ankle_pitch at 66.5 kg
+- Owner: Legs. Date: 2026-10-13.
+- **Change 1, M2.** Structure + thigh clamp + instep lugs = **4.792 kg** both legs (≤ 4.85). Breakdown in `legs/results/r4/structure_m2.md`.
+  - FEA (box, P2, coarse): foot SF 2.77 at p99.9 under a 6 BW fall, with a singular peak of SF 1.56 at the rigid fixture. Clamp SF 2.90.
+  - Hand checks for the tubes at 1.2 mm wall and the ring.
+  - Request: provisional credit 5.40 → 4.79, final when `grokbuild/structure_fea.md` r4 confirms.
+- **Change 2, hip_pitch mechanical range.** −120…+40° → **−105…+40°** (hard stop −105°, screw toggle −114.5°, Actuators D26). The loaded −80…+40° range is unchanged. Sit-to-stand needs only −76°.
+- **Change 3, clamp form (Actuators interface).** Hip_pitch bodies mount on an axial ø12 spherical eye at the body end, not on side trunnion pin pairs. A two-sided trunnion's inner boss would sit inside the femur (L18).
+  - Actuators' table changes by −2 trunnion pin pairs per leg and +1 eye per body.
+  - Clamp mass 0.237 kg/leg, included in Change 1.
+- **Information, 66.5 kg re-run.** At the R-017 mass limit, ankle_pitch need = 1.5 × 209.3 = **314 N·m > 311 avail (0.99×)**.
+  - Options: a 73 mm ankle lever (Actuators D28 maximum, 323.8 N·m), or keep the needs basis at the actual rollup mass.
+  - Other joints fit. Carry at 1.0 m/s gives 1.29×. Evidence: `legs/results/r4/requirements.md`.
+- Status: open

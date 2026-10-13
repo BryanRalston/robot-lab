@@ -1,0 +1,40 @@
+{
+ "params": "{\"hz\":28,\"b\":10}",
+ "part": "clamp",
+ "h_mm": 2.5,
+ "nodes": 3612,
+ "tets": 13363,
+ "dofs": 69924,
+ "mass_kg": 0.2068,
+ "note": "each hip_pitch screw body pushes/pulls 4542 N (actuator max) axially through a \u00f812 eye pin at y=69; half model (y>=0) with symmetry = both screws loaded; femur bore fixed",
+ "cases": {
+  "screw_max_push": {
+   "vm_max": 222.64033682067313,
+   "vm_p999": 148.96272260979592,
+   "vm_p99": 115.32824567883878,
+   "at_mm": [
+    -4.7,
+    32.0,
+    -13.6
+   ],
+   "umax_mm": 0.1522409205364068,
+   "cg_iters": 297,
+   "SF_yield_max": 2.26,
+   "SF_yield_p999": 3.38
+  },
+  "screw_max_pull": {
+   "vm_max": 222.64033682067313,
+   "vm_p999": 148.96272260979592,
+   "vm_p99": 115.32824567883878,
+   "at_mm": [
+    -4.7,
+    32.0,
+    -13.6
+   ],
+   "umax_mm": 0.1522409205364068,
+   "cg_iters": 297,
+   "SF_yield_max": 2.26,
+   "SF_yield_p999": 3.38
+  }
+ }
+}

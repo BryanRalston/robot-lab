@@ -1,0 +1,55 @@
+{
+ "params": "{\"padt\":6,\"pad\":45,\"skin\":3.5,\"instep_wall\":5}",
+ "part": "foot",
+ "h_mm": 6.0,
+ "nodes": 2745,
+ "tets": 8436,
+ "dofs": 49983,
+ "mass_kg": 0.8703,
+ "note": "op case: ankle_pitch carry peak 283.2 N\u00b7m as toe GRF 1716 N at x\u2248165 + screw 4046 N down on the instep block; fall cases 6 BW 3826 N on toe / heel patches",
+ "cases": {
+  "fall_6BW_toe": {
+   "vm_max": 276.86539986916193,
+   "vm_p999": 177.52491901499062,
+   "vm_p99": 116.46301265920238,
+   "at_mm": [
+    34.4,
+    0.9,
+    16.5
+   ],
+   "umax_mm": 1.848118021095027,
+   "cg_iters": 583,
+   "SF_yield_max": 1.82,
+   "SF_yield_p999": 2.83
+  },
+  "fall_6BW_heel": {
+   "vm_max": 65.61319687963356,
+   "vm_p999": 41.903850315390855,
+   "vm_p99": 24.63462039974342,
+   "at_mm": [
+    -31.2,
+    13.1,
+    16.5
+   ],
+   "umax_mm": 0.0471336542078387,
+   "cg_iters": 582,
+   "SF_yield_max": 7.67,
+   "SF_yield_p999": 12.0
+  },
+  "op_carry_toe_plus_screw": {
+   "vm_max": 47.55766887890198,
+   "vm_p999": 38.22367818695923,
+   "vm_p99": 29.17957294059143,
+   "at_mm": [
+    87.2,
+    44.9,
+    17.1
+   ],
+   "umax_mm": 0.43063992312935606,
+   "cg_iters": 592,
+   "SF_yield_max": 10.58,
+   "SF_yield_p999": 13.16,
+   "goodman_SF": 5.23
+  }
+ }
+}

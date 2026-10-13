@@ -41,3 +41,18 @@ FEA must confirm:
 - the ankle fork with the real pin (ø12 assumed)
 
 Worst ID GRF is from `results/r3/structure_check.json`.
+
+## r4 refresh (2026-10-13), queued behind the 1.2 m/s controller
+Box FEA was done with `fea_r4.py`: scikit-fem P2, half models, h 5–6 mm for the foot and 2.5 mm for the clamp. The box OOMs above about 15k P2 tets.
+Results so far:
+- foot closed box 0.870 kg: p99.9 SF 2.77 (fall 6 BW). The peak, SF 1.56, is singular at the rigid sensor edge.
+- thigh clamp 0.237 kg: SF 2.90.
+
+Grok Build to do:
+1. Foot at h ≤ 2 mm, with the ankle F/T sensor flange and bolts modelled instead of a rigid face. Add skin buckling and sole contact.
+2. Clamp at h ≤ 1.5 mm with fillets drawn, plus a fatigue check at 0.52× fully reversed.
+3. Femur hip ring (ø80 seat, OD 96 × 25) under the D27 bearing loads (12.4 kN + 192 N·m).
+4. Femur and tibia at 1.2 mm wall: 3 BW and fall, local buckling and denting.
+5. Clevis, tongue and fork with real pin sizes.
+
+Acceptance: SF ≥ 2 fall, Goodman ≥ 1.5, total M2 line ≤ 4.85 kg (results/r4/structure_m2.md).

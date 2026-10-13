@@ -118,3 +118,7 @@ What works: CPU-only model-based walking on the v3 model at 0.8 m/s, with v3 act
 - Linkage: linkage_table.py → LINKAGE_TABLE.md/.json. This is the one table shared with Actuators.
 - Exports: export_gait.py → exports/walk_0p8_fsim_65kg.csv/.json.
 - The 1.2 m/s whole-body controller is with Grok Build (grokbuild/results/), not here.
+
+## Round 4 (2026-10-13)
+- M2: fea_r4.py (scikit-fem P2, foot and clamp), structure_r4.py → results/r4/structure_m2.md (4.792 kg).
+- Gait at 66.5 kg → results/r4/requirements.md. See P-014.

@@ -1,3 +1,5 @@
+> **Superseded (r4, R-015):** the accepted single linkage table is `modules/actuators/results/LINKAGE_TABLE.md`. This file is kept for history.
+
 # Leg linkage table, Legs + Actuators (R-013): one table, no overlaps
 
 Source of truth for both modules. Actuators masses come from `modules/actuators/results/cad_mass.json` (read-only here); regenerate with `python3 modules/legs/linkage_table.py`.

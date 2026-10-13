@@ -1,0 +1,7 @@
+sit_to_stand_r3 {"seat_h": 0.46, "hip_x_seatoff": -0.12, "pelvis_pitch_deg": 0.0, "waist_lean_deg": 35.0, "T": 1.4, "hip_min_allowed_deg": -78.0, "hip_min_traj_deg": -74.61261789295745, "com_x_seatoff": -0.030375243983118205, "model_mass_setting": 66.5, "torque_limits": "r1", "ik_rom_margin_rad": 0.26, "residual_times_s": [], "base_residual_p99_N": 4.514313719862265, "frames_residual_gt_5pctBW": 0, "zmp_iter": null, "mass_kg": 66.50000000000001, "duration_s": 1.5, "base_residual_max": 4.515261743600483, "cop_x_range_m": [-0.035752124844064724, 0.04336390966340543], "cop_y_absmax_m": 0.0005458361788733927, "cop_inside_sole": true, "max_friction_ratio": 0.022813875845966534, "max_vertical_GRF_BW": 0.550129251659787}
+  hip_yaw      pk     0.0 rms    0.0 w  0.00 w@30%  0.00 P      0 duty 0.42 q [0,0]
+  hip_roll     pk     0.0 rms    0.0 w  0.00 w@30%  0.00 P      0 duty 0.74 q [0,0]
+  hip_pitch    pk    13.1 rms    8.9 w  1.29 w@30%  1.29 P     12 duty 0.58 q [-75,-13]
+  knee         pk   105.7 rms   74.4 w  2.09 w@30%  2.09 P    138 duty 0.61 q [25,117]
+  ankle_pitch  pk    13.6 rms    9.1 w  0.86 w@30%  0.86 P      9 duty 0.66 q [-43,-13]
+  ankle_roll   pk     0.2 rms    0.1 w  0.00 w@30%  0.00 P      0 duty 1.00 q [0,0]

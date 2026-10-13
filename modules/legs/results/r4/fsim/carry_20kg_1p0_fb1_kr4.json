@@ -1,0 +1,20 @@
+{
+ "scenario": "carry_20kg_1p0",
+ "feedback": true,
+ "kp_max": 800,
+ "kc": 10.0,
+ "sim_time_s": 8.749999999999591,
+ "planned_s": 8.75,
+ "fell_at_s": null,
+ "touchdowns": 16,
+ "pelvis_x_m": 5.95134121634855,
+ "ref_x_m": 5.952339059352875,
+ "mean_speed_mps": 0.6801532818684375,
+ "track_err_x_final_m": -0.0009978430043249276,
+ "kr": 4.0,
+ "torque_limit_scale": 1.0,
+ "foot_placement_gain": 0.0,
+ "cop_clamp": 0,
+ "kyaw": 0.3,
+ "saturated_frac": {}
+}

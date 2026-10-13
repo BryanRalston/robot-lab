@@ -1,0 +1,81 @@
+{
+ "rows": [
+  {
+   "zone": "thigh",
+   "part": "femur tube \u00d850 wall 1.2 mm (was 1.6)",
+   "kg": 0.1543300000000001,
+   "basis": "SF yield 6.56 (v3 FEA \u00d7 BW \u00d7 Z ratio); +9084 N hip screw axial below the clamp: 49 MPa"
+  },
+  {
+   "zone": "thigh",
+   "part": "femur collars \u00d72",
+   "kg": 0.06292000000000005,
+   "basis": "unchanged"
+  },
+  {
+   "zone": "thigh",
+   "part": "femur hip ring: CRBH 5013 seat \u00f880 H7\u00d713, OD 96 \u00d7 25 (|y|\u226412.5) + neck",
+   "kg": 0.2256206062759368,
+   "basis": "hand: net tension SF 5.39, shear-out SF 9.33, fatigue 3.28 at P 12440 N; replaces the 0.212 kg \u00f832 lug"
+  },
+  {
+   "zone": "thigh",
+   "part": "knee clevis",
+   "kg": 0.2346,
+   "basis": "r3 (SF \u2265 4.80 v3-scaled, hand 15.3)"
+  },
+  {
+   "zone": "shank",
+   "part": "tibia tube \u00d845 wall 1.2 mm (was 1.6)",
+   "kg": 0.14851255813953498,
+   "basis": "SF yield 3.84"
+  },
+  {
+   "zone": "shank",
+   "part": "tibia collar",
+   "kg": 0.029067906976744207,
+   "basis": "unchanged"
+  },
+  {
+   "zone": "shank",
+   "part": "ankle fork (top plate pocketed)",
+   "kg": 0.15800296,
+   "basis": "r3 hand SF 3.44"
+  },
+  {
+   "zone": "shank",
+   "part": "knee tongue",
+   "kg": 0.23320055999999997,
+   "basis": "r3 hand SF 35"
+  },
+  {
+   "zone": "foot",
+   "part": "foot closed box (3.5 mm skins, 4 webs, 6 mm skins under sensor, hollow instep 5 mm)",
+   "kg": 0.8703,
+   "basis": "FEA P2 h5: fall 6 BW toe p99.9 182 MPa SF 2.77 (max 322 MPa at the rigid sensor-ring edge, SF 1.56, mesh-dependent); carry Goodman 4.81"
+  },
+  {
+   "zone": "thigh",
+   "part": "thigh clamp (hip_pitch bodies, axial eye form)",
+   "kg": 0.2372,
+   "basis": "FEA P2 h2.5: 4542 N per screw max 174 MPa SF 2.9; walking 0.52\u00d7 fully reversed SF 1.76"
+  },
+  {
+   "zone": "foot",
+   "part": "ankle rod-end lugs on instep (2)",
+   "kg": 0.042,
+   "basis": "Legs line (LINKAGE_TABLE); counted here once"
+  }
+ ],
+ "per_leg": 2.3957545913922162,
+ "both": 4.7915091827844325,
+ "ring_lug": {
+  "P_N": 12440,
+  "net_tension_MPa": 93.3,
+  "shear_out_MPa": 31.1,
+  "bearing_MPa": 12.0,
+  "SF_net": 5.39,
+  "SF_shear": 9.33,
+  "fatigue_SF_net": 3.28
+ }
+}

@@ -55,3 +55,30 @@
   - Counted 0.543 kg per leg, **1.086 kg both legs**, against the 0.65 target. The difference from the 0.609 contract is the hip lever at dy 69 (+0.029/leg), dropping Actuators' v3 knee-lever credit (+0.167/leg, since Legs structure excludes the lever) and the ankle lugs (+0.042/leg).
   - Open lines: rod-end bearings, hip pivot bearing (unowned), thigh trunnion clamp, and 2 possible extra trunnion pin pairs per leg (+0.104 kg both legs).
 - L15 (r3) Export: exports/walk_0p8_fsim_65kg.csv/.json at 100 Hz, 9.3 s. Contains base pose, all hinge joints, leg qd, reference q and ID feed-forward torque.
+- L16 (2026-10-13, r4) M2 baseline confirmed from R-015: 4.85 parametric + 0.20 clamp [EST] + 0.084 lugs = 5.134 kg both legs. Target ≤ 4.85 kg covers structure, thigh clamp and instep lugs.
+  - Design reaches **4.792 kg** (margin +0.058; about +0.02 after ~0.04 kg of bolts and bumper [EST]). Files: results/r4/structure_m2.md, structure_r4.py.
+  - **Foot:** closed box (3.5 mm skins, 6 mm skins under the sensor, 4 webs, hollow instep). 0.870 kg vs 1.093.
+    - FEA P2 (half model, h 5): fall 6 BW at the toe gives p99.9 182 MPa (SF 2.77).
+    - The peak, 322 MPa (SF 1.56), sits at the rigid sensor-ring edge and grows with refinement (singular). It needs a modelled flange.
+    - Carry Goodman 4.81.
+  - **Tubes:** 1.6 → 1.2 mm wall. Hand / v3-scaled SF: femur 6.56, tibia 3.84.
+- L17 (r4) Femur bearing seat ø32 → ø80 H7×13 for the CRBH 5013, confirmed.
+  - Ring OD 96 × 25 (|y| ≤ 12.5) plus neck: 0.226 kg (+0.014 vs the ø32 lug).
+  - Hand check at 12.44 kN: net tension SF 5.39, shear-out SF 9.33, fatigue 3.28.
+  - Hip hard stop at **−105°**: toggle at −114.5°, so 9.5° margin. The v3 model joint range is already −105…+40.
+  - Conflict: R-012 keeps a −120° mechanical range for clash checks. That is now physically impossible, so P-014 asks for −105°.
+- L18 (r4) Thigh trunnion clamp
+  - A two-sided trunnion does not fit. The screw body's inner boss would sit at |y| 22–28, inside the femur (r25 at x18, trunnion x30).
+  - Recommended form: a split collar on the femur plus one arm per side to y ±69, with an axial ø12 spherical eye at the body end (v3 'sphere' top).
+  - FEA at 4542 N per screw: max 174 MPa (SF 2.90); walking fully reversed SF 1.76. Mass **0.237 kg/leg** vs the 0.10 [EST].
+  - Needs Actuators to swap the 2 hip trunnion pin pairs per leg for the axial eye.
+- L19 (r4) Ankle lugs counted once
+  - The 0.042 kg/leg sits in the M2 line (this file) and in Actuators' LINKAGE_TABLE per_leg 1.263. The actuator all-in subtracts 0.084, so the rollup counts them once.
+  - Anyone adding LINKAGE_TABLE both_legs (2.527) to the M2 line double-counts 0.084.
+  - modules/legs/LINKAGE_TABLE.md is superseded by actuators/results/LINKAGE_TABLE.md (R-015).
+- L20 (r4) Gait at 66.5 kg (the R-017 limit, worst case) on R1.2 limits; table in results/r4/requirements.md
+  - **ankle_pitch need 314 > 311 avail (0.99×).** walk_1p0 peak is 209.3 N·m.
+  - All other needs fit: hip_yaw 69/70, hip_pitch 338/350, knee 240/258, hip_roll 184/204.
+  - Carry at 1.0 m/s: ankle 311/241.5 = 1.29 ≥ 1.2.
+  - Forward sim: walk 0.8 and carry 1.0 complete (16 steps, no saturation); walk 1.0 falls at 5.1 s (not a new regression).
+  - Sit-to-stand r3: hip ≥ −76°.
