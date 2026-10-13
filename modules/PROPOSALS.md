@@ -92,3 +92,18 @@ Any change to CONTRACTS.md or TARGETS.md, or to another module's files, starts h
 - Evidence: `modules/actuators/cad_mass.py` → `results/cad_mass.json` + `cad/*.step` (CadQuery mass properties, ×1.0); `regen_sim.py` → `results/regen_sim.json`, `regen_sim_eod.json` (time-domain bus sim, ×1.0 requested for R-002 full credit); `size.py` → `results/sizing.json`; datasheets in `modules/actuators/datasheets/` (SOURCES.md); `media/progress/2026-10-13_actuators_r2_regen_mass.png`; `results/DECISIONS.md` D12–D17.
 - Affected owner response:
 - Status: agreed with conditions → R-009 (Arbiter, 2026-10-13). Knee/CAD mass accepted; regen credit ×0.5 → 804.5 W / 1.81 h (T7 NOT MET) until bench evidence.
+
+### P-007: Walking power with iron loss, 1.0 m/s fallback and regen sensitivity (input to the R-009 T6/T7 re-rule)
+- Date: 2026-10-13
+- Module / proposer: Actuators / RL Actuators
+- Affected owners: Arbiter (T6/T7), Legs (forward-sim trace export), Torso placeholder (pack usable %)
+- Change: CONTRACTS R1.3 steady walking power with motor iron loss (D18, D19):
+  - 1.2 m/s: 942/667 → **964 W no regen / 842 W half credit / 719 W full**.
+  - Add 1.0 m/s: **783 / 699 / 615 W → 1.86 / 2.09 / 2.37 h** on 1620 Wh × 0.9.
+  - Proposed T7 rating: 2 h at 1.0 m/s (passes at R-009 half credit); 1.2 m/s rated at 1.73 h (half credit) until the bench (BENCH_TEST_PLAN.md) shows ≥ 235 W realised regen.
+  - Proposed restatement of the R-009 pass condition in absolute terms: steady P ≤ 729 W. With iron loss, 77 % retention is no longer sufficient; 96 % is needed.
+- Impact on contracts: no mass change; power line as above.
+- Impact on targets: T7 met at 1.0 m/s (half credit); T6 1.2 m/s remains a capability without the 2 h rating unless bench-proven.
+- Evidence: `modules/actuators/iron_loss.py`, `regen_core.py`, `regen_sim.py` → `results/regen_sim.json`; `regen_sweep.py` → `results/regen_sweep_walk_1p2.json`, `results/regen_sweep_walk_1p0.json` (6561 corners each; retention minimum 0.62 / 0.59); `results/BENCH_TEST_PLAN.md`; `media/progress/2026-10-13_actuators_r3_regen_sweep.png`; DECISIONS D18–D24.
+- Affected owner response:
+- Status: open

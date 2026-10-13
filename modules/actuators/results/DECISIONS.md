@@ -95,3 +95,63 @@ The whole-trace average (561 W, 2.60 h) must not be used. Conclusions:
 - O7 (Legs): re-run gait ID at the final mass (R-001 item 7). Needs rise about 3 % at 65.8 kg. Knee worst-angle 245 vs 231 (6 % margin) and ankle 311 vs 305 (2 %) are the first to break.
 - O8 (Actuators): Rollvis max-speed query; screw L10 at the new levers; motor iron/eddy loss in the regen sim (G5 bench test would close it). If any of these turns out heavy, write a Grok Build brief (none needed this round; all runs take seconds on CPU).
 - O9: Gold Twitter sourced price is $0.9–1.7k per drive vs $0.6k [EST] in round 1, about +$8–30k per robot (T10 is not enforced).
+
+## Round 3 (2026-10-13 PM). Input: R-009 (half regen credit, 804.5 W, 1.81 h, T7 not met, pass line ≤ 729 W)
+**D18. Motor iron loss added (`iron_loss.py`), derived from datasheet rated points.** At the same 130 K winding limit, the copper loss a TBM2G gives up between stall (Tc130) and its rated point at speed must be speed-dependent loss. Fitting the 24 V and 48 V @155 °C points gives P_fe = a·n + b·n² (n in krpm):
+
+| motor | a | b | loss at 5600 rpm |
+|---|---|---|---|
+| 07613D | 1.83 | 0.195 | 16 W |
+| 06013D | 1.02 | 0.058 | — |
+| 06008A | 1.56 | 0 | — |
+| 08508A | 1.07 | 0.489 | — |
+
+The manual gives no no-load loss table and says static friction should not be used for rotational loss, so this rated-point method is the datasheet route. The figure includes rotor drag. The bench test (§4.1) replaces it with a no-load measurement.
+
+**D19. Transmission back-drive efficiency now separate.** Screws use the Rollvis RV12 "indirect" η 0.88 × 0.95 (datasheet p.24). The CSG back-drive value is 0.65 [EST]. Round 2 used the forward efficiency in both directions.
+
+**D20. Steady window is now automatic:** from 1 s after hip_pitch first exceeds 1 rad/s to 1 s before it last does. That gives 1.78–6.76 s at 1.2 m/s and 1.80–7.00 s at 1.0 m/s.
+
+**D21. Result at 1.2 m/s with iron loss.** No regen 964 W (1.51 h); modeled regen 245 W (iron loss takes about 24 W of it); half credit 842 W (1.73 h); full regen 719 W (2.03 h). Full regen passes the 729 W line by only 10 W. Against the absolute line, realised regen must be ≥ 964 − 729 = 235 W, i.e. **96 % of modeled**, not the 77 % in R-009. R-009 used the iron-free 942/276 W numbers.
+
+**D22. Sensitivity sweep (`regen_sweep.py`)**: 6561 corners varying:
+- drive loss ×0.5–2
+- iron ×0.5–2
+- back-drive η ×0.85–1.1
+- copper temperature factor 1.0–1.6
+- charge limit 0/10/30 A
+- battery 3.4 V + IR ×1.5 … 4.0 V
+- torque ×1–1.06 (mass)
+- cadence ×0.9–1.1
+
+Retention at 1.2 m/s:
+| statistic | value |
+|---|---|
+| worst corner | **0.62** (drive ×2, iron ×2, back-drive η ×0.85, hot copper, no charging, faster cadence) |
+| worst, model uncertainty only (mass and cadence nominal) | 0.70 |
+| 5th percentile | 0.75 |
+| median | 0.99 |
+
+**The ≥ 77 % worst-corner condition is NOT met.** Only 37 % of corners (47 % model-only) meet ≤ 729 W. The largest single factors are back-drive η (−15 % → −15 % regen), iron ×2 (−9 %), drive loss ×2 (−5.5 %) and cadence. The worst corners combine all of them pessimistically, which is unlikely in practice. Only a measurement narrows this, hence the bench test plan.
+
+**D23. 1.0 m/s fallback (steady, iron incl.).** 1.0 m/s passes T7 at half credit on the 1620 Wh nominal pack. On the 1550 Wh minimum-capacity pack it is 4 W over the line (1.996 h).
+
+| case | power | 1620 Wh | 1550 Wh (min-capacity pack) |
+|---|---|---|---|
+| no regen | 783 W | 1.86 h | 1.78 h |
+| half credit | **699 W ≤ 729** | **2.09 h** | 2.00 h (1.996, 4 W over) |
+| full regen | 615 W | 2.37 h | 2.27 h |
+
+1.0 m/s sweep:
+- 99 % of model-only corners and 95 % of all corners keep full-regen power ≤ 729 W.
+- Retention minimum is 0.59 (0.67 model-only).
+- At the worst model-only corner, P_regen is 709 W, still ≤ 729.
+
+0.8 m/s passes even with no regen (626 W, 2.33 h).
+
+**D24. Bench plan drafted** (`BENCH_TEST_PLAN.md`): one-leg, 4-quadrant load rig, shared 20S bus or battery emulator, A/B/C bus configurations, stride-synced DC energy. Pass: P1 netting ≥ 213 W robot-equivalent and P2 ≤ 729 W absolute.
+
+## Open after round 3
+- O10 (Arbiter): the pass condition in R-009 should be absolute, P ≤ 729 W (96 % retention with iron loss), not 77 %. The sweep shows that 1.2 m/s cannot be shown robustly in simulation. Recommend ruling the T6/T7 trade now, with **1.0 m/s as the 2 h rating speed** and 1.2 m/s as a burst/shorter-duration speed; bench results still go in.
+- O11 (Legs): export the forward-sim gait in regen_core format (b) (`t`, `tau[N,12]`, `omega[N,12]`, LEG order L then R) once 1.2 m/s walks. Then run `python3 regen_sweep.py <path>`.
+- O12 (Torso placeholder): the 1550 Wh minimum-capacity pack fails 1.0 m/s half credit by 4 W. Either cell binning or a 2 % pack-usable increase (90 → 92 %) closes it.
