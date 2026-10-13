@@ -82,3 +82,19 @@
   - Carry at 1.0 m/s: ankle 311/241.5 = 1.29 ≥ 1.2.
   - Forward sim: walk 0.8 and carry 1.0 complete (16 steps, no saturation); walk 1.0 falls at 5.1 s (not a new regression).
   - Sit-to-stand r3: hip ≥ −76°.
+- L21 (2026-10-13, r5) O17: femur seat ø80 ring dropped. Tongue now has a ø35 press-fit bore for Actuators' needle straddle (D32 shaft ø35/ø30). The ø80/CRBH conflict is resolved toward the needle design.
+  - Geometry: tongue OD 55 × 27 (|y| ≤ 13.5) + neck, 0.183 kg/leg (−0.043 vs the ring).
+  - Hand checks at 10.06 kN + 192 N·m: net tension SF 9.0, shear-out 15.6, bearing incl. moment 9.0.
+  - Press fit: 60 MPa contact (0.141 mm diametral interference); hoop 142 MPa (SF 3.55); 49 MPa left at +60 K; axial hold 21.9 kN; Goodman 2.74.
+- L22 (r5) O22 thigh clamp: friction-only abandoned. Bonded collar (DP490-class, L 34 mm) plus a light 3 MPa split clamp (tube hoop 62.5 MPa).
+  - Positive backup: internal 7075 sleeve (47.6/43.6 × 34, bonded) and 2 cross pins ø6 42CrMo4 through collar, tube and sleeve.
+  - Bond (lap shear 31 MPa × 0.5 knock-down): SF static 9.4, one-screw fault 2.8; fatigue 7.3 (at 20 % of lap shear).
+  - Backup alone (bond failed): pin shear SF 6.7, tube + sleeve bearing SF 4.41, fatigue 2.68.
+  - Body FEA unchanged: SF 2.90, fatigue 1.76.
+  - Eyes: maintenance-free GE 12 type (PTFE liner), mass in the Actuators line.
+  - Clamp 0.295 kg/leg (+0.058 for sleeve, pins and adhesive).
+- L23 (r5) Instep pin radius 70 → 73 mm. Clearance swept over pitch −60…+40° × roll ±25°.
+  - Minimum gaps: rod vs tibia 8.5 mm, rod vs fork 16.3, eye vs fork 10.3, nut housing vs tibia 27.7, instep block vs fork 33.9 mm.
+  - Sagittal arm minimum 31.7 mm (was 29.3 at 70). Foot mass unchanged.
+- L24 (r5) M2 = 2.411 kg/leg, **4.822 kg both legs** (+0.028 vs 4.85). Including split-collar bolts + bumper (0.04 [EST]) it is 4.862, **0.012 over**.
+  - Candidate trims: ø5 cross pins (−0.008), shorter collar (L 30 still gives bond SF 2.5 fault). Not taken without FEA.
