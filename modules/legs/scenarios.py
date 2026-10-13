@@ -177,7 +177,7 @@ def sc_push(v0=0.6,react=0.10,Tsw=0.35,Tend=1.6):
     r.trim=(0.0,0.3)   # push gives the COM velocity at t=0; keep the start
     return r,Q,AL,dict(v0=v0,impulse_Ns=float(v0*m.body_subtreemass[1]),land_x=float(land[0]),land_y=float(land[1]),zc=zc,ik_err_m=err,final_com_v=float(np.linalg.norm(xd))),COM,np.array(ZMP)
 
-SC={'walk_1p2':lambda:sc_walk(),'walk_0p8':lambda:sc_walk(v=0.8,Tstep=0.5),'stairs_18cm':lambda:sc_stairs(),'carry_20kg':lambda:sc_walk(carry=20.0,name='carry_20kg'),
+SC={'walk_1p2':lambda:sc_walk(),'walk_0p8':lambda:sc_walk(v=0.8,Tstep=0.5),'walk_1p0':lambda:sc_walk(v=1.0,Tstep=0.47),'stairs_18cm':lambda:sc_stairs(),'carry_20kg':lambda:sc_walk(carry=20.0,name='carry_20kg'),
     'sit_to_stand':lambda:sc_sit_to_stand(),'push_recover':lambda:sc_push()}
 
 TRIM=0.3   # s; first/last frames are finite-difference/preview start-up edges and are excluded from all metrics

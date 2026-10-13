@@ -3,7 +3,7 @@ import json,numpy as np,os
 from gait_lib import LEG,HERE,DT
 import plots
 OUT=os.path.join(HERE,'results')
-SCN=['walk_1p2','walk_0p8','stairs_18cm','carry_20kg','sit_to_stand','push_recover']
+SCN=['walk_1p2','walk_1p0','walk_0p8','stairs_18cm','carry_20kg','sit_to_stand','push_recover']
 # CONTRACTS.md rev 0 §1a: need peak (=1.5 x req), v3 available peak, need speed [EST v2], v3 available speed
 C={'hip_yaw':(24.0,36,3,5.3),'hip_roll':(122.1,167,3,4.9),'hip_pitch':(114.8,167,4,4.9),'knee':(231.9,238,8,12.1),'ankle_pitch':(153.2,284,6,10.1),'ankle_roll':(57.5,163,4,17.7)}
 contract={j:dict(need=c[0],req=c[0]/1.5,avail=c[1],speed=c[2],avail_speed=c[3]) for j,c in C.items()}

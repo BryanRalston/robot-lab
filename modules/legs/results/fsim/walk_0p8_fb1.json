@@ -1,0 +1,18 @@
+{
+ "scenario": "walk_0p8",
+ "feedback": true,
+ "kp_max": 800,
+ "kc": 10.0,
+ "sim_time_s": 9.299999999999775,
+ "planned_s": 9.3,
+ "fell_at_s": null,
+ "touchdowns": 16,
+ "pelvis_x_m": 5.1256472421939385,
+ "ref_x_m": 5.127569599151611,
+ "mean_speed_mps": 0.5511448647520497,
+ "track_err_x_final_m": -0.0019223569576727328,
+ "kr": 4.0,
+ "saturated_frac": {
+  "l_hip_yaw": 0.003
+ }
+}

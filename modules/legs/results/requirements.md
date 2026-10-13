@@ -36,6 +36,19 @@ checks: {"mass_kg": 63.794, "duration_s": 8.51, "cop_inside_sole": true, "base_r
 | ankle_pitch | 202.9 | 178.7 | 43.6 | 8.79 | 6.30 | 710 | 0.04 | 146.1 | -56 … 10 |
 | ankle_roll | 26.2 | 23.2 | 7.0 | 0.50 | 0.50 | 8 | 0.11 | 25.8 | -6 … 8 |
 
+## walk_1p0
+
+checks: {"mass_kg": 63.794, "duration_s": 8.75, "cop_inside_sole": true, "base_residual_max": 46.80663131414993, "base_residual_p99_N": 35.772923775149295, "frames_residual_gt_5pctBW": 32, "max_vertical_GRF_BW": 1.2169090283971407, "max_friction_ratio": 1.1313708498984796}
+
+| joint | peak τ | p99 τ | RMS τ | peak ω | ω@30% | peak |P| | duty | peak τ w/o armature | ROM used deg |
+|---|---|---|---|---|---|---|---|---|---|
+| hip_yaw | 37.9 | 34.0 | 13.1 | 0.56 | 0.23 | 3 | 0.20 | 37.9 | -1 … 3 |
+| hip_roll | 94.7 | 85.4 | 42.6 | 0.40 | 0.40 | 27 | 0.36 | 94.4 | -7 … 6 |
+| hip_pitch | 179.7 | 159.5 | 69.7 | 6.58 | 6.56 | 662 | 0.26 | 162.4 | -53 … -4 |
+| knee | 141.6 | 141.0 | 69.5 | 7.13 | 7.13 | 564 | 0.33 | 140.3 | 43 … 86 |
+| ankle_pitch | 203.5 | 181.4 | 42.3 | 7.30 | 6.43 | 688 | 0.04 | 145.7 | -54 … 2 |
+| ankle_roll | 25.7 | 23.2 | 7.0 | 0.51 | 0.51 | 8 | 0.10 | 24.9 | -6 … 8 |
+
 ## walk_0p8
 
 checks: {"mass_kg": 63.794, "duration_s": 9.3, "cop_inside_sole": true, "base_residual_max": 44.13814838881933, "base_residual_p99_N": 34.644384592163625, "frames_residual_gt_5pctBW": 29, "max_vertical_GRF_BW": 1.1567658362597117, "max_friction_ratio": 1.1313708498984874}
