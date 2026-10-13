@@ -63,7 +63,7 @@ def cases():
         wp=get(['L_knee clevis (thigh)']); bb=wp.val().BoundingBox()
         T=V3['rows'][[r['joint'] for r in V3['rows']].index('knee')]['T']; arm=V3['state']['J']['knee']['arm']; Fa=T/arm
         F=LAND*BW+Fa
-        return wp,AL,(lambda x:x[2]>bb.zmax-0.5),near_axis_y(0,kz,8.6),(0,0,F),f'bridge top fixed; pin bores loaded 3 BW + peak knee-actuator reaction {Fa:.0f} N',((3.0,100),(3.0,25),(3.0,8)),0.5
+        return wp,AL,(lambda x:x[2]>bb.zmax-0.5),near_axis_y(0,kz,8.6),(0,0,F),f'bridge top fixed; pin bores loaded 3 BW + peak knee-actuator reaction {Fa:.0f} N',((3.0,25),(3.0,8),(2.0,4),(2.0,2.5)),0.3   # v3.2: 4 levels, finer surface tessellation (3-level run changed 10.6 %)
     def pelvis():
         wp=get(['pelvis shell','L_hip bracket (yaw mount)']); bb=wp.val().BoundingBox()
         F=LAND*BW; ring=[p for p in model.PARTS if p['name']=='L_hip bracket (yaw mount)'][0]['solid'].val().BoundingBox()

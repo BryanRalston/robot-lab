@@ -3,7 +3,7 @@ import itertools,sys,json
 import model
 LIM_V2_0={'hip_pitch':(-150,40),'hip_roll':(-30,90),'knee':(0,150),'ankle_pitch':(-45,40),'ankle_roll':(-25,25),'hip_yaw':(-45,45)}  # sim limits before CAD
 # FIX: hard-stop limits after CAD clash checks (each still covers the functional need: walk, stairs, 110° squat, sitting)
-LIM={'hip_pitch':(-105,40),'hip_roll':(-12,15),'knee':(0,int(__import__('os').environ.get('KNEE_MAX','120'))),'ankle_pitch':(-45,40),'ankle_roll':(-25,25),'hip_yaw':(-35,45)}
+LIM={'hip_pitch':(-105,40),'hip_roll':(-12,15),'knee':(0,int(__import__('os').environ.get('KNEE_MAX','135'))),'ankle_pitch':(-45,40),'ankle_roll':(-25,25),'hip_yaw':(-35,45)}
 import sys as _s
 if '--v20' in _s.argv: LIM=LIM_V2_0
 # intended mates: pinned/bolted interfaces that touch or pass through by design
@@ -37,7 +37,7 @@ if __name__=='__main__':
             elif jn=='hip_yaw' and v<0:   # inward toe yaw: other foot turned the same way (turning step), not toe-to-toe
                 poses.append(({'L_hip_yaw':v,'R_hip_yaw':v},f'L+R_hip_yaw={v} (turn)'))
             else: poses.append(({f'L_{jn}':v},f'L_{jn}={v}'))
-    poses.append(({'L_hip_pitch':-90,'L_knee':120},'L hip -90 + knee 120 (sit)'))
+    poses.append(({'L_hip_pitch':-90,'L_knee':120},'L hip -90 + knee 120 (sit)')); poses.append(({'L_hip_pitch':-100,'L_knee':135},'L hip -100 + knee 135 (deep squat)'))
     if only: poses=[p for p in poses if p[1] in only]
     out={l:run(p,l) for p,l in poses}
     json.dump(out,open('out/clash.json','w'),indent=1)

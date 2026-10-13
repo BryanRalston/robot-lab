@@ -10,13 +10,15 @@ P=dict(  # ---- layout parameters (mm). FIX log in README tracks changes made af
  hip_y=130,   # v3 FIX (2 iterations: 115 still clashed at single-leg adduction -6°): was 100 -> single-leg adduction clashed with the other leg; pelvis 300 wide still encloses both yaw housings
  hip_z=920, knee_z=500, ankle_z=80, foot_len=240, heel=60,
  knee_act_x=-95,   # FIX: was -80 -> knee actuator body hit femur tube           # knee linear actuator offset behind femur axis
- ankle_act_x=-62, ankle_act_dy=45,   # v3 FIX: was 37 -> finned ankle actuator bodies (fin OD 86) overlapped
- ankle_lever=50,   # FIX: dy was 30 -> in/out ankle actuator bodies overlapped
+ ankle_act_x=90, ankle_act_dy=45,   # v3.2 FIX: was -62 (behind shank) -> moved to the FRONT of the shank: COM forward, knee body no longer hits them past 120°
+    # v3 FIX: was 37 -> finned ankle actuator bodies (fin OD 86) overlapped
+ ankle_lever=70,   # v3.2 FIX: was 50 in CAD while v3 analysis sized the ankle with a 70 mm arm (mismatch); FIX(v2): dy was 30 -> in/out ankle actuator bodies overlapped
  roll_z_off=125,           # hip roll axis height above hip pitch axis
  yaw_z_off=240,          # FIX: was 210/230 -> yoke top plate needs room between roll housing and yaw output            # hip yaw actuator center above hip pitch axis
  pelvis_bot=1126, pelvis_top=1230, torso_top=1590,   # v3 FIX: was 1556 -> catalog neck-yaw housing hit the compute bay
    # FIX: torso_top was 1540 -> shoulder-pitch housing hit torso top wall
  shoulder_z=1500, shoulder_y=190, sh_roll_dy=92,   # FIX: shoulder roll moved outboard (was +45) to clear pitch housing
+ knee_dy=45,   # v3.2: twin knee actuators side by side (fin OD 86; 36 overlapped fins and hit the thigh clevis)
  femur_x=18,   # FIX: femur axis moved 18 mm forward so the knee lever/rod can swing behind it (knee was clash-free only to 40°)
  wall=3.0, femur_od=50, femur_t=2.0, tibia_od=45, tibia_t=2.0,
 )
@@ -146,23 +148,28 @@ def build_leg(s):
     # knee linear actuator: thigh trunnion -> shank lever behind knee
     # FIX: lever re-clocked to 30° behind straight-down (r=52 mm) so over 0..135° it sweeps behind the femur instead of into it.
     # effective arm = 52*sin(30+θ) [EST]: 26 mm at full extension, ≥45 mm for 30–120° (where squat torque is needed)
-    linear_actuator(S('knee actuator'),S('thigh'),(P['knee_act_x'],y,fl_top-60),(-26,y,kz-45),ST['J']['knee']['motor'],PT.RV[ST['J']['knee']['screw']]['lead'],S('shank'),fins=ST['cooling']['knee']=='air_fins')
+    # v3.2 FIX: single knee screw could not give the torque at 120-135° (slider-crank arm collapsed to 14 mm at 120°) AND 8 rad/s swing speed.
+    # Now two parallel RV12 actuators (y ±KNEE_DY) on a lever clocked 10° behind straight-down, r 58.5 mm, trunnions at x=-125 (cad/knee_linkage.py search).
+    KL=json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)),'out/knee_linkage.json')))['selected']['geom']; kc=math.radians(KL['clock']); kr=KL['r']
+    for dy in (-1,1):
+        linear_actuator(S(f'knee actuator {"in" if dy*s<0 else "out"}'),S('thigh'),(KL['tx'],y+dy*P['knee_dy'],kz+KL['tz_rel']),(-kr*math.sin(kc),y+dy*P['knee_dy'],kz-kr*math.cos(kc)),ST['J']['knee']['motor'],PT.RV[ST['J']['knee']['screw']]['lead'],S('shank'),top='sphere',fins=ST['cooling']['knee']=='air_fins')
     # --- shank
     # FIX: solid tongue blocked the screw rod -> tongue + open lever clevis (two cheeks, 26 mm slot for the rod end), one machined part
-    add(S('knee tongue + lever clevis (shank)'),S('shank'),box(50,40,60,(5,y,kz-20)).union(box(24,6,70,(0,y+16,-30)).rotate((0,0,0),(0,1,0),-30).translate((0,0,kz))).union(box(24,6,70,(0,y-16,-30)).rotate((0,0,0),(0,1,0),-30).translate((0,0,kz))).cut(cyl(16,60,'y',center=(0,y,kz))),'7075-T6')
+    lev=box(24,2*P['knee_dy']+40,12,(0,y,-kr)).union(box(24,8,kr+10,(0,y+P['knee_dy']+16,-kr/2))).union(box(24,8,kr+10,(0,y-P['knee_dy']-16,-kr/2)))   # crossbar + two outboard cheeks (a central web hit the femur collar at 135°).rotate((0,0,0),(0,1,0),-KL['clock']).translate((0,0,kz))
+    add(S('knee tongue + twin lever (shank)'),S('shank'),box(50,40,60,(5,y,kz-20)).intersect(cyl(64,40,'y',center=(0,y,kz)).union(box(40,40,40,(15,y,kz-30)))).union(lev).cut(cyl(16,60,'y',center=(0,y,kz))),'7075-T6')   # v3.2: tongue rounded to R32 about the pin (square corner hit the femur collar at 135°)
     # v3: cable drums (bend radius ≥ 10×d for moving cables) — knee Ø90 outboard of the clevis, ankle Ø70
-    add(S('knee cable drum Ø90 (PA12)'),S('shank'),cyl(90,8,'y',id_=20,center=(0,y+s*44,kz)),'PA12',group='harness')
+    add(S('knee cable drum Ø90 (PA12)'),S('shank'),cyl(90,8,'y',id_=20,center=(0,y+s*(P['knee_dy']+30),kz)),'PA12',group='harness')
     tb_top=kz-50; tb_bot=az+50   # FIX (FEA): was +52 -> 2 mm gap, tibia tube was not attached to the ankle fork   # FIX: was +45 -> tibia ran into ankle fork
     add(S('tibia tube 7075 Ø%dx%.1f'%(P['tibia_od'],P['tibia_t'])),S('shank'),cyl(P['tibia_od'],tb_top-tb_bot,'z',id_=P['tibia_od']-2*P['tibia_t'],center=(14,y,(tb_top+tb_bot)/2)),'7075-T6')  # FIX: tibia axis 14 mm forward to clear the re-clocked knee lever/rod end
     add(S('tibia ankle fillet collar'),S('shank'),fcollar(P['tibia_od'],P['tibia_t'],(14,y,tb_bot),1),'7075-T6')
     add(S('ankle fork (shank)'),S('shank'),box(62,44,40,(6,y,az+30)).cut(box(64,36,30,(6,y,az+15))),'7075-T6')   # FIX: was 60 wide -> rod ends hit it at ankle +40°
     for dy in (-1,1):
-        linear_actuator(S(f'ankle actuator {"in" if dy*s<0 else "out"}'),S('shank'),(P['ankle_act_x'],y+dy*P['ankle_act_dy'],tb_top-40),(-P['ankle_lever'],y+dy*P['ankle_act_dy'],az+20),ST['J']['ankle_pitch']['motor'],PT.RV[ST['J']['ankle_pitch']['screw']]['lead'],S('foot'),top='sphere',fins=ST['cooling']['ankle_pitch']=='air_fins')
+        linear_actuator(S(f'ankle actuator {"in" if dy*s<0 else "out"}'),S('shank'),(P['ankle_act_x'],y+dy*P['ankle_act_dy'],tb_top-40),(P['ankle_lever'],y+dy*P['ankle_act_dy'],az+20),ST['J']['ankle_pitch']['motor'],PT.RV[ST['J']['ankle_pitch']['screw']]['lead'],S('foot'),top='sphere',fins=ST['cooling']['ankle_pitch']=='air_fins')
     # --- foot
     add(S('ankle cross (universal)'),S('foot'),box(30,30,30,(0,y,az)),'Ti-6Al-4V')
     add(S('ankle cable drum Ø70 (PA12)'),S('foot'),cyl(70,6,'y',id_=20,center=(0,y+s*(P['ankle_act_dy']+26),az)),'PA12',group='harness')
     add(S('ankle 6-axis F/T sensor'),S('foot'),cyl(60,20,'z',center=(0,y,az-35)),'steel',mass=0.25,group='sensor')
-    add(S('foot plate + heel lever'),S('foot'),box(P['foot_len'],100,18,(P['foot_len']/2-P['heel'],y,9)).union(box(30,90,40,(-P['ankle_lever'],y,30))),'7075-T6')
+    add(S('foot plate + instep lever'),S('foot'),box(P['foot_len'],100,18,(P['foot_len']/2-P['heel'],y,9)).union(box(30,90,40,(P['ankle_lever'],y,30))),'7075-T6')
 def fcollar(od,t,c,up):
     """v3: tapered weld-free collar (OD+16 -> OD over 14 mm) bonded/shrunk over the tube end = fillet-equivalent transition (r≈8) into the lug."""
     sol=cq.Solid.makeCone((od+16)/2,od/2,14,cq.Vector(c[0],c[1],c[2]),cq.Vector(0,0,up))
@@ -185,8 +192,10 @@ def build_upper():
     tb=pt+100;tt=P['torso_top']
     ts=shell_box(220,340,tt-tb,3,(0,0,(tb+tt)/2))
     for sy in (1,-1): ts=ts.cut(cyl(100,40,'y',center=(0,sy*170,P['shoulder_z'])))   # FIX: shoulder-pitch pass-throughs
+    for sy in (1,-1):   # v3.2 FIX (FEA fall_torso_panel SF 1.34 < 2): 4 mm CFRP doubler ring (OD 200 / ID 100) bonded inside each side wall around the shoulder pass-through -> local wall 7 mm
+        ts=ts.union(cyl(200,4,'y',id_=100,center=(0,sy*(170-3-2),P['shoulder_z'])).intersect(box(214,20,tt-tb-6,(0,sy*165,(tb+tt)/2))))
     ts=ts.cut(cyl(64,20,'z',center=(0,0,tt)))                                           # FIX: neck pass-through
-    add('torso shell (CFRP sandwich 3 mm)','torso',ts,'CFRP')
+    add('torso shell (CFRP sandwich 3 mm, 7 mm at shoulder doublers)','torso',ts,'CFRP')
     add('torso spine frame (7075)','torso',box(20,300,tt-tb-10,(-95,0,(tb+tt)/2)).cut(box(22,260,tt-tb-60,(-95,0,(tb+tt)/2))),'7075-T6')
     add(f"battery pack 13S{ST['battery']['P']}P Molicel P45B ({V3['mass']['battery_Wh']:.0f} Wh, 5.9 L)",'torso',box(185,220,144,(12,0,tb+75)),'steel',mass=V3['mass']['battery'],group='power')
     add('compute bay: Jetson AGX Thor + cold plate','torso',box(130,200,40,(8,0,tb+175)),'7075-T6',mass=DES['MASS_ITEMS']['compute (Jetson Thor + RT ctrl + cooling)'],group='electronics')

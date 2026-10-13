@@ -66,6 +66,7 @@ def actuator(n,d,st):
         Hs=housing(M,s['L1']+20,'CRBH 3010 A'); Hs['mass']*=0.8
         mass=M['mass']+nut+shaft+0.08+Hs['mass']+0.10+2*(PT.ENC['ring_mass']+PT.ENC['head_mass'])+PT.DRIVE['mass']
         if n=='knee' and st.get('knee_linkage'): mass+=st['knee_linkage_mass']
+        mass=mass*nmot if nmot==2 else mass   # v3.2 FIX: a 2-screw pair was counted as ONE actuator (ankle, wrist pairs under-weighted)
     wm=omega_max(M,0.3*Tmot_peak); wj=wm/ratio
     return dict(M=M,T_out=T_out,ratio=ratio,eta=eta,nmot=nmot,wj=wj,mass=mass,housing=Hs,Tmot_peak=Tmot_peak)
 def thermal(A,P_w,P_h,cool):
@@ -118,9 +119,12 @@ def bolted(name,n,size,FA_total,FQ_total,Mt=0.0,r_pcd=0.05,mu_T=0.15,clamp_len=1
     sig_max=(FMzul+phi*FA)/As; sig_a=phi*FA/(2*As); sig_ASV=0.85*(150/size+45)
     ok=dict(separation_or_slip=F_res>=F_req,yield_=sig_max<=Rp,fatigue=sig_a<=sig_ASV/1.2)
     return dict(name=name,n=n,size=f'M{size}',FMzul=FMzul,FMmin=FMmin,FZ=FZ,FA=FA,F_res=F_res,F_req=F_req,sig_max=sig_max,sig_a=sig_a,sig_ASV=sig_ASV,ok=all(ok.values()),detail=ok)
+_KL=os.path.join(os.path.dirname(os.path.abspath(__file__)),'../cad/out/knee_linkage.json')
+KNEE_K=json.load(open(_KL))['selected']['k'] if os.path.exists(_KL) else 1.0
 def joint_checks(n,d,st,m,A=None):
     """All single-joint checks; returns (row, list of (fail, detail))."""
     A=A or actuator(n,d,st); r=V2REQ[n]*((m/64.285) if n in LEGSCALE else 1.0); need=1.5*r; fails=[]
+    if n=='knee': need/=KNEE_K   # v3.2: slider-crank arm varies over 0-135° (cad/knee_linkage.py); nominal-arm torque must cover the worst angle
     rng,wf=GAIT.get(n,(5,0.1)); Twalk=wf*r
     Pw,Tm_w=cu_loss(A,0.55*Twalk); Ph,Tm_h=cu_loss(A,HOLD.get(n,0.3)*r)
     th=thermal(A,Pw,Ph,st['cooling'][n]); Iph=Tm_h/A['M']['Kt']
@@ -188,10 +192,10 @@ def evaluate(st):
             if c['r_min_mm']<c['r_req_mm']: R['fails'].append((f"cable-bend {c['joint']}",f"{c['r_min_mm']:.0f} < {c['r_req_mm']:.0f} mm"))
     fp=os.path.join(H,'../cad/out/fea_v3.json'); R['fea']=json.load(open(fp)) if os.path.exists(fp) else {}
     for k,v in R['fea'].items():
-        lim=1.0 if k.startswith('fall') else 2.0
+        lim=2.0   # v3.2: fall cases also need SF >= 2 (was 1.0: one-off load, but repeated falls over the robot's life)
         if v.get('SF_yield',9)<lim: R['fails'].append((f'FEA-yield {k}',f"SF {v['SF_yield']:.2f} < {lim}"))
         if v.get('goodman',9)<1.5: R['fails'].append((f'FEA-fatigue {k}',f"Goodman SF {v['goodman']:.2f} < 1.5"))
-        if v.get('converged') is False: R['fails'].append((f'FEA-convergence {k}',f"last refinement changed peak {v.get('delta_pct',0):.0f} %"))
+        if v.get('converged') is False: R['fails'].append((f'FEA-convergence {k}',f"last refinement changed peak {(v.get('delta_pct') or 0):.0f} %" if v.get('delta_pct') is not None else 'only one mesh level'))
     P_walk=sum(rw['P_walk']*st['J'][rw['joint']]['cnt'] for rw in rows)
     mech=0.25*m*G*1.2*1.3; P_tot=mech+P_walk+120+3.3*sum(d['cnt'] for d in st['J'].values())+40
     R['power']=dict(P_walk_cu=P_walk,P_mech=mech,P_total=P_tot,runtime_h=Wh*0.9/P_tot)
@@ -207,7 +211,7 @@ def fix_actuator(st,n,m):
     if n in SHARED: n=SHARED[n]
     d=st['J'][n]; best=None
     cand=['CSG-14-100','CSG-17-100','CSG-20-100','CSG-25-100','CSG-32-100'] if d['kind']=='rotary' else list(PT.RV)
-    ARMCAP={'knee':0.060,'ankle_pitch':0.070,'wrist_pitch':0.030}   # packaging limits from the v2/v3 CAD envelopes
+    ARMCAP={'knee':0.0585,'ankle_pitch':0.070,'wrist_pitch':0.030}   # packaging limits from the v2/v3 CAD envelopes
     arms=[None] if d['kind']=='rotary' else sorted(set(min(ARMCAP.get(n,1),round(d['arm']*f,4)) for f in (0.87,1.0,1.15,1.3)))
     lim={'CSG-14-100':60,'CSG-17-100':68,'CSG-20-100':85,'CSG-25-100':94,'CSG-32-100':115}
     for mname in PT.MOT:
@@ -215,8 +219,9 @@ def fix_actuator(st,n,m):
             for g in cand:
                 if d['kind']=='rotary' and int(mname[6:9])>lim[g]: continue
                 for arm in arms:
+                  for kind in ((d['kind'],) if n!='knee' else ('linear','linear2')):   # v3.2: knee may use two parallel screws (single one cannot reach torque + speed over 0-135°)
                     for cool in ('air','air_fins','liquid'):
-                        t=copy.deepcopy(st); dd=t['J'][n]; dd['motor']=mname; dd['w']=w; t['cooling'][n]=cool
+                        t=copy.deepcopy(st); dd=t['J'][n]; dd['motor']=mname; dd['w']=w; t['cooling'][n]=cool; dd['kind']=kind if d['kind']!='rotary' else 'rotary'
                         if d['kind']=='rotary': dd['gear']=g
                         else: dd['screw']=g; dd['arm']=arm
                         if d['kind']=='rotary':   # pick smallest bearing that passes for this config
