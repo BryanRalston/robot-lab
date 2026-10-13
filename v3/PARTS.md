@@ -9,20 +9,20 @@ Every actuator part below is a catalog item; values are copied from the cited so
 | hip_yaw | 2 | Kollmorgen TBM2G-05008A | 0.081 | 1.47 | 3.6 | 0.111 | Harmonic Drive CSG-14-100 | rated 10 / rep. peak 36 / mom. 70 / ratchet 100 N·m | IKO CRBH 6013 A (18.8 / 24.3) | Everest XCR / RLS AksIM-2 | 1.02 |
 | hip_roll | 2 | Kollmorgen TBM2G-07608C | 0.096 | 0.318 | 2.15 | 0.236 | Harmonic Drive CSG-25-100 | rated 87 / rep. peak 204 / mom. 369 / ratchet 650 N·m | IKO CRBH 6013 A (18.8 / 24.3) | Everest XCR / RLS AksIM-2 | 1.52 |
 | hip_pitch | 2 | Kollmorgen TBM2G-07608C | 0.096 | 0.318 | 2.15 | 0.236 | Harmonic Drive CSG-25-100 | rated 87 / rep. peak 204 / mom. 369 / ratchet 650 N·m | IKO CRBH 6013 A (18.8 / 24.3) | Everest XCR / RLS AksIM-2 | 1.52 |
-| knee | 2 | Kollmorgen TBM2G-06813D | 0.065 | 0.142 | 2.3 | 0.254 | Rollvis RV12x4 roller screw, 58 mm lever | Ca 17.2 kN, C0a 27.2 kN, η 0.89 | rod-end spherical bearings [EST] | Everest XCR / RLS AksIM-2 | 0.98 |
-| ankle_pitch | 2 | Kollmorgen TBM2G-06013D | 0.051 | 0.168 | 2.52 | 0.195 | Rollvis RV12x4 roller screw, 70 mm lever | Ca 17.2 kN, C0a 27.2 kN, η 0.89 | rod-end spherical bearings [EST] | Everest XCR / RLS AksIM-2 | 0.88 |
-| ankle_roll | 0 | Kollmorgen TBM2G-06013D | 0.051 | 0.168 | 2.52 | 0.195 | Rollvis RV12x4 roller screw, 40 mm lever | Ca 17.2 kN, C0a 27.2 kN, η 0.89 | rod-end spherical bearings [EST] | Everest XCR / RLS AksIM-2 | 0.88 |
+| knee | 2 | Kollmorgen TBM2G-06808D | 0.044 | 0.115 | 2.45 | 0.188 | Rollvis RV12x4 roller screw, 58 mm lever | Ca 17.2 kN, C0a 27.2 kN, η 0.89 | rod-end spherical bearings [EST] | Everest XCR / RLS AksIM-2 | 1.81 |
+| ankle_pitch | 2 | Kollmorgen TBM2G-06808D | 0.044 | 0.115 | 2.45 | 0.188 | Rollvis RV12x4 roller screw, 70 mm lever | Ca 17.2 kN, C0a 27.2 kN, η 0.89 | rod-end spherical bearings [EST] | Everest XCR / RLS AksIM-2 | 1.81 |
+| ankle_roll | 0 | Kollmorgen TBM2G-06808D | 0.044 | 0.115 | 2.45 | 0.188 | Rollvis RV12x4 roller screw, 40 mm lever | Ca 17.2 kN, C0a 27.2 kN, η 0.89 | rod-end spherical bearings [EST] | Everest XCR / RLS AksIM-2 | 1.81 |
 | waist_yaw | 1 | Kollmorgen TBM2G-06008A | 0.121 | 1.6 | 2.6 | 0.139 | Harmonic Drive CSG-17-100 | rated 31 / rep. peak 70 / mom. 143 / ratchet 200 N·m | IKO CRBH 5013 A (17.3 / 20.9) | Everest XCR / RLS AksIM-2 | 1.03 |
 | waist_pitch | 1 | Kollmorgen TBM2G-06808A | 0.153 | 1.38 | 2.45 | 0.188 | Harmonic Drive CSG-25-100 | rated 87 / rep. peak 204 / mom. 369 / ratchet 650 N·m | IKO CRBH 5013 A (17.3 / 20.9) | Everest XCR / RLS AksIM-2 | 1.37 |
-| shoulder_pitch | 2 | Kollmorgen TBM2G-07608C | 0.096 | 0.318 | 2.15 | 0.236 | Harmonic Drive CSG-25-100 | rated 87 / rep. peak 204 / mom. 369 / ratchet 650 N·m | IKO CRBH 5013 A (17.3 / 20.9) | Everest XCR / RLS AksIM-2 | 1.42 |
+| shoulder_pitch | 2 | Kollmorgen TBM2G-07608C | 0.096 | 0.318 | 2.15 | 0.236 | Harmonic Drive CSG-25-100 | rated 87 / rep. peak 204 / mom. 369 / ratchet 650 N·m | IKO CRBH 6013 A (18.8 / 24.3) | Everest XCR / RLS AksIM-2 | 1.52 |
 | shoulder_roll | 2 | Kollmorgen TBM2G-06813C | 0.113 | 0.427 | 2.3 | 0.254 | Harmonic Drive CSG-25-100 | rated 87 / rep. peak 204 / mom. 369 / ratchet 650 N·m | IKO CRBH 4010 A (8.6 / 10.6) | Everest XCR / RLS AksIM-2 | 1.24 |
 | shoulder_yaw | 2 | Kollmorgen TBM2G-06008C | 0.061 | 0.4 | 2.6 | 0.139 | Harmonic Drive CSG-17-100 | rated 31 / rep. peak 70 / mom. 143 / ratchet 200 N·m | IKO CRBH 4010 A (8.6 / 10.6) | Everest XCR / RLS AksIM-2 | 0.81 |
 | elbow | 2 | Kollmorgen TBM2G-05013C | 0.061 | 0.46 | 3.4 | 0.149 | Harmonic Drive CSG-20-100 | rated 52 / rep. peak 107 / mom. 191 / ratchet 330 N·m | IKO CRBH 3010 A (7.6 / 8.4) | Everest XCR / RLS AksIM-2 | 0.90 |
 | wrist_roll | 2 | Kollmorgen TBM2G-05008C | 0.04 | 0.37 | 3.6 | 0.111 | Harmonic Drive CSG-14-100 | rated 10 / rep. peak 36 / mom. 70 / ratchet 100 N·m | IKO CRBH 208 A (2.9 / 2.4) | Everest XCR / RLS AksIM-2 | 0.55 |
 | neck_yaw | 1 | Kollmorgen TBM2G-05008A | 0.081 | 1.47 | 3.6 | 0.111 | Harmonic Drive CSG-14-100 | rated 10 / rep. peak 36 / mom. 70 / ratchet 100 N·m | IKO CRBH 208 A (2.9 / 2.4) | Everest XCR / RLS AksIM-2 | 0.55 |
 | neck_pitch | 1 | Kollmorgen TBM2G-05008A | 0.081 | 1.47 | 3.6 | 0.111 | Harmonic Drive CSG-14-100 | rated 10 / rep. peak 36 / mom. 70 / ratchet 100 N·m | IKO CRBH 208 A (2.9 / 2.4) | Everest XCR / RLS AksIM-2 | 0.55 |
-| wrist_pitch | 2 | Kollmorgen TBM2G-05008C | 0.04 | 0.37 | 3.6 | 0.111 | Rollvis RV12x4 roller screw, 25 mm lever | Ca 17.2 kN, C0a 27.2 kN, η 0.89 | rod-end spherical bearings [EST] | Everest XCR / RLS AksIM-2 | 0.78 |
-| wrist_yaw | 0 | Kollmorgen TBM2G-05008C | 0.04 | 0.37 | 3.6 | 0.111 | Rollvis RV12x4 roller screw, 25 mm lever | Ca 17.2 kN, C0a 27.2 kN, η 0.89 | rod-end spherical bearings [EST] | Everest XCR / RLS AksIM-2 | 0.78 |
+| wrist_pitch | 2 | Kollmorgen TBM2G-05008C | 0.04 | 0.37 | 3.6 | 0.111 | Rollvis RV12x4 roller screw, 25 mm lever | Ca 17.2 kN, C0a 27.2 kN, η 0.89 | rod-end spherical bearings [EST] | Everest XCR / RLS AksIM-2 | 1.55 |
+| wrist_yaw | 0 | Kollmorgen TBM2G-05008C | 0.04 | 0.37 | 3.6 | 0.111 | Rollvis RV12x4 roller screw, 25 mm lever | Ca 17.2 kN, C0a 27.2 kN, η 0.89 | rod-end spherical bearings [EST] | Everest XCR / RLS AksIM-2 | 1.55 |
 
 Gear sizes 14 and 17 component-set masses are [EST] (not given in the table used). Housings are parametric 7075 shells (wall 3 mm), modelled in the CAD; harmonic-drive efficiency 75 % [EST]. Linear joints listed with ×0 share their screw pair with the pitch joint (differential pair).
 
@@ -32,7 +32,7 @@ Gear sizes 14 and 17 component-set masses are [EST] (not given in the table used
 |---|---|---|---|
 | servo drive (one per motor) | Novanta Everest XCR | 45 A crest cont. (31.8 A rms), 60 A crest 1 s, ≤80 V, 38 g | EVE |
 | joint encoder | RLS AksIM-2 off-axis absolute | 17–20 bit; ring + readhead masses per datasheet | AKSIM |
-| battery cells | Molicel INR-21700-P45B ×130 (13S10P) | 16.2 Wh, ≤70 g each → 2106 Wh, 11.4 kg incl. 1.25× pack overhead [EST] | P45B |
+| battery cells | Molicel INR-21700-P45B ×91 (13S7P) | 16.2 Wh, ≤70 g each → 1474 Wh, 8.0 kg incl. 1.25× pack overhead [EST] | P45B |
 | finger flexor drives (6 per hand) | maxon DCX 22 S + GPX 22 HP 111:1 | 15.3 mN·m cont.; gearhead 3.3 N·m cont., η 0.65 | DCX22, GPX22 |
 | abduction/thumb drives (5 per hand) | maxon DCX 16 S + GPX 16 LN 103:1 | 5.2 mN·m cont.; 0.28 N·m cont. | DCX16, GPX16 |
 | tendons | LIROS D-Pro 1 mm (Dyneema SK78) | 195 daN break | LIROS |

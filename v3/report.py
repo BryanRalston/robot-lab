@@ -63,7 +63,7 @@ R+=['| pelvis_hip first run: stresses of 10⁴–10⁸ MPa, solver not convergin
  '| Convergence metric | Peak = 99.5th-percentile element stress; Δ < 10 % between the last two meshes counts as converged. Max-element stress is also reported; it keeps rising at re-entrant corners (singularities) and is not used for SF. |',
  '| FEA memory | First attempt at full-length P2 meshes: TetGen quality refinement gave 100k–970k tets regardless of max-volume (max_volume was ignored with an options string) and OOM. Fixed by setting fixedvolume/maxvolume explicitly, radius-edge 3.0 and AMG-preconditioned CG; single-threaded BLAS. |',
  '','## E. Simulation (sim/v3)','','| failure | fix / status |','|---|---|',
- '| v3 model with CAD mass properties: plain PD (balance off) falls backwards in ~2 s | v3.1 blamed the CAD centre of mass sitting 20–35 mm behind the ankles. **That claim was wrong** (re-measured in v3.2: see section F). The fall comes from capped PD gains. With the COM ankle strategy it stands and rejects pushes. |']
+ '| v3 model with CAD mass properties: plain PD (balance off) does not stand 10 s | v3.1 blamed the CAD centre of mass sitting 20–35 mm behind the ankles. **That claim was wrong** (re-measured in v3.2: COM +4.4 mm ahead of the ankle axis, see section G). The fall comes from capped PD gains. With the COM ankle strategy it stands and rejects pushes. |']
 R+=['',open('revisions_v32.md').read()]
 open('REVISIONS.md','w').write('\n'.join(R))
 print('ok', len(REV))
@@ -99,6 +99,7 @@ for k,o in FEA.items():
     add('FEA',k,f"{o['vm']:.0f} MPa, SF {o['SF_yield']:.2f} (≥{lim:.0f})"+(f", Goodman {o['goodman']:.2f}" if 'goodman' in o else '')+f", {len(o['levels'])} mesh levels, Δ {o['delta_pct']:.1f} %" if o['delta_pct'] is not None else f"{o['vm']:.0f} MPa (1 level)",'PASS' if ok and conv else ('FAIL' if not ok else 'OPEN'))
 SIM=json.load(open('../sim/v3/balance_v3.json'))
 add('simulation','stand + push recovery (MuJoCo, CAD mass properties)',SIM['text'],'PASS' if SIM['ok'] else 'FAIL')
+add('simulation','stands with balance controller OFF (plain joint PD only)','holds ~4 s then falls before 10 s; COM %+.0f mm ahead of ankle axis (inside the foot), so this is joint-gain softness, not geometry. Real robots always run balance.'%SIM.get('com_x_mm',0),'FAIL')
 for a,c in [('thermal','two-node winding/housing model, h = 12 W/m²K, fins ×2 [EST]: needs dynamometer test'),('fall','pad crush model and 55/45 hip/shoulder split [EST]: needs drop test'),('clutch','300 N·m friction clutch slip repeatability: needs test'),('torso shell','CFRP properties isotropic [EST]: needs laminate data / coupon test'),('bolted joints','μ = 0.12, embedding 11 µm [EST]: needs torque-tension test'),('harmonic drive','life vs. ratcheting under repeated falls: vendor/test')]:
     add('unverifiable without hardware',a,c,'OPEN')
 import mujoco

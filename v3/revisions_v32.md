@@ -10,3 +10,19 @@
 | **Analysis bug: 2-screw pairs (ankle, wrist) were weighed as ONE actuator** | mass × 2 for linear2 | robot mass rises from the under-counted 62.0 kg to 67.1 kg, so the 65 kg target now FAILS (see below) |
 | v3.py crashed on an FEA case with one mesh level; fall cases only needed SF ≥ 1.0 | Fixed. Fall cases now need SF ≥ 2 (repeated falls over the robot's life) | |
 | **fall_torso_panel SF 1.34 < 2** (3 mm CFRP side wall carries 50 % of a side-fall shoulder impact) | 4 mm CFRP doubler ring (OD 200 / ID 100) bonded inside each side wall around the shoulder pass-through (local wall 7 mm, +~0.15 kg) | peak 138 MPa, **SF 2.89**, 2 mesh levels Δ 5 % (third level hit the memory cap) |
+
+## G. v3.2 close-out (this round)
+
+| item | result |
+|---|---|
+| Knee lever rotate/translate had been left inside a code comment (lever modelled un-clocked at the origin) | Fixed in model.py; all clash checks re-run on the corrected geometry |
+| Clash check, v3.2 geometry | **0 clashes** at standing + 15 range-extreme poses incl. deep squat (hip −100°, knee 135°); knee clash-free to 145° (stops 135°); single-leg adduction −6° OK, −8° ankle actuators touch (pelvis shift used for −12°) |
+| Roller-screw stroke / cable bend radius | re-run, pass |
+| FEA fall_torso_panel (with 4 mm doubler ring) | 138 MPa, **SF 2.89 ≥ 2**, 2 mesh levels Δ 5.0 % (third level exceeds the box's memory) |
+| FEA knee_clevis | half model on the symmetry plane: 50 MPa, **SF 10.1, converged** (Δ 3.5 %) |
+| FEA tibia_full | half model converged Δ 2.1 %, SF 6.2 (max-element stress is a re-entrant-corner singularity, not used); full model OOMs at 1 GB free |
+| CAD centre of mass (v3.2, ankle actuators on shank front) | **+4.4 mm ahead of the ankle axis** standing straight (+21 mm in sim crouch); foot −60…+180 mm, so COM is well inside the support polygon |
+| Sim, balance ON | stands 10 s, recovers from 125 N / 0.2 s pushes forward and sideways |
+| Sim, balance OFF | **does not stand**: holds ~4 s then falls before 10 s. Cause: capped joint PD gains (series hip/knee/ankle softer than m·g·h); not geometry. Logged as FAIL on the dashboard |
+| Mass | 63.8 kg catalog rollup (battery mass-down pass 2.1 h runtime) ≤ 65 kg target: pass. CAD solids 56.3 kg (no harness/covers) |
+| Exports | GLB (283 parts), STEP assembly, MuJoCo humanoid_v3.xml regenerated |

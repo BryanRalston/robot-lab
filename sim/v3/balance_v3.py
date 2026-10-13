@@ -47,6 +47,6 @@ if __name__=='__main__':
     print('PD only max push fwd/side:',base,' best balance:',best)
     import json
     q=nominal(); comx=float(d.subtree_com[1][0]); fc=float(foot_center()[0])
-    pd_txt=f"Plain PD (balance OFF) stands 10 s: {pd_ok}." if pd_ok else "Plain PD (balance OFF) falls in ~2 s: the capped joint gains in series (hip, knee, ankle) are softer than the gravity stiffness m·g·h. That is a controller limit, not a COM problem."
+    pd_txt=f"Plain PD (balance OFF) stands 10 s: {pd_ok}." if pd_ok else "Plain PD (balance OFF) does NOT stand: it holds about 4 s, then sinks and falls before 10 s, because the capped joint gains in series (hip, knee, ankle) are softer than the gravity stiffness m·g·h. That is a controller limit, not a COM problem."
     st=run(0,True,10)
     json.dump(dict(com_x_mm=comx*1000,ok=bool(st and best[1][0]>=100),stands=bool(st),push=best[1],pd_only=base,text=f"Stands 10 s with balance ON: {st}; recovers from 0.2 s pushes up to {best[1][0]} N forward / {best[1][1]} N sideways (v2 capsule model: 175 N). COM {comx*1000:+.0f} mm from the ankle axis (foot centre {fc*1000:+.0f} mm, heel −60, toe +180). "+pd_txt),open('balance_v3.json','w'))
