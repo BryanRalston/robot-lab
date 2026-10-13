@@ -56,3 +56,13 @@ Grok Build to do:
 5. Clevis, tongue and fork with real pin sizes.
 
 Acceptance: SF ≥ 2 fall, Goodman ≥ 1.5, total M2 line ≤ 4.85 kg (results/r4/structure_m2.md).
+
+## r5 additions (R-020 A1')
+6. **Femur tongue with Ø35 press-fit** (OD 55 × 27, |y| ≤ 13.5, plus neck to the femur collar; `results/r5/structure_r5.json`).
+   - Model the 16MnCr5 shaft Ø35/Ø30 with 0.141 mm diametral interference: contact with friction μ 0.15, or an equivalent 60 MPa pressure.
+   - Loads: 10.06 kN + 192 N·m pivot load (D32 bearing reactions 9.1 kN per needle at max), one-screw fault, 6 BW fall.
+   - Check hoop plus load stress (hand: 142 MPa hoop, SF 3.55), contact gapping under the moment, and fretting-relevant micro-slip. Repeat at +60 K (interference −0.025 mm).
+7. **Thigh clamp retention:** collar (bonded, 0.10 mm DP490 layer as a cohesive or tied layer with E ≈ 2–3 GPa [EST]), internal sleeve 47.6/43.6 × 34, and **2 cross-pin holes Ø6 through collar, tube and sleeve**.
+   - Cases: 8.76 kN axial + 2.39 kN transverse (both screws max), one-screw fault (313 N·m), 13.1 kN proof load.
+   - Report: bond shear peak at the collar ends (hand average 1.64 MPa; allowable 11.5 at 23 °C and 4.75 at 82 °C), and Kt at the pin holes in the 1.2 mm tube under walking fatigue (0.52×) with bond intact and with bond failed (hand bearing 114 MPa, SF 4.41).
+Acceptance is unchanged: SF ≥ 2 fall, Goodman ≥ 1.5, at 66.5 kg loads.

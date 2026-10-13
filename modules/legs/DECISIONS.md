@@ -98,3 +98,14 @@
   - Sagittal arm minimum 31.7 mm (was 29.3 at 70). Foot mass unchanged.
 - L24 (r5) M2 = 2.411 kg/leg, **4.822 kg both legs** (+0.028 vs 4.85). Including split-collar bolts + bumper (0.04 [EST]) it is 4.862, **0.012 over**.
   - Candidate trims: ø5 cross pins (−0.008), shorter collar (L 30 still gives bond SF 2.5 fault). Not taken without FEA.
+- L25 (2026-10-13, r6) A7 bond spec: BOND_SPEC.md.
+  - DP490 values cited from 3M datasheets [A]/[B]: 23 MPa sandblasted Al at 23 °C, 9.5 MPa at 82 °C. Fatigue and creep data are not available and are stated as not verified.
+  - With 23 MPa × 0.5: one-screw fault bond SF 2.08 at 23 °C but **0.86 at 82 °C**. The pins are the retention when hot, and the bondline must stay ≤ 60 °C (G5 bench to measure).
+  - Proof 13.1 kN (2.45 MPa), slip ≤ 0.01 mm, before pin drilling. Torque-seal and laser witness mark.
+- L26 (r6) A6 hip stop at −105°.
+  - A passive bumper cannot absorb a full-speed impact: 117.6 J at 8.11 rad/s (J = 3.575 kg·m² at 66.5 kg).
+  - Required soft limit: decelerate from −86° (19.2° braking zone at 97.9 rad/s² from 350 N·m) to ≤ 1.6 rad/s at contact. Torque limit 150 N·m inside the stop zone.
+  - Bumper: PU 90A Ø25 × 12 at r 80 mm (modulus [EST] 25 MPa, unverified). 4.6 J, k ≈ 1023 N/mm. Overtravel 2.15° bumper + 0.18° structure = 2.33° ≪ 9.5°.
+  - Mass 0.015 kg/leg bumper + 0.016 collar bolts = 0.031/leg, **0.062 both legs vs 0.04 allowance (+0.022)**.
+  - Open: an unpowered back-driven fall (screw backdrive speed unknown) needs a forward sim with the stop modelled.
+- L27 (r6) A1': ø35 tongue and clamp pins/sleeve/bond added to grokbuild/structure_fea.md (items 6–7).

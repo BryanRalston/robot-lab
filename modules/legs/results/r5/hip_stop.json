@@ -1,0 +1,32 @@
+{
+ "J_kgm2": 3.575,
+ "decel_rad_s2": 97.9,
+ "brake_zone_deg_from_8p11": 19.2,
+ "soft_limit_start_deg": -85.8,
+ "bumper": {
+  "material": "PU Shore 90A [EST props]",
+  "d_mm": 25.0,
+  "L_mm": 12.0,
+  "radius_mm": 80.0,
+  "max_compression_mm": 3.0,
+  "F_at_25pct_N": 3068,
+  "energy_J": 4.6,
+  "k_N_per_mm": 1023
+ },
+ "w_contact_limit_rad_s": 1.6,
+ "energy_at_gait_peak_J": 117.6,
+ "overtravel_deg": {
+  "bumper_full": 2.15,
+  "hold_150Nm": 1.31,
+  "structure": 0.18,
+  "total": 2.33,
+  "budget": 9.5
+ },
+ "mass_kg_per_leg": {
+  "bumper": 0.0151,
+  "collar_bolts": 0.016,
+  "total": 0.0311
+ },
+ "allowance_both_legs": 0.04,
+ "mass_both_legs": 0.062
+}
