@@ -106,7 +106,7 @@ Any change to CONTRACTS.md or TARGETS.md, or to another module's files, starts h
 - Impact on targets: T7 met at 1.0 m/s (half credit); T6 1.2 m/s remains a capability without the 2 h rating unless bench-proven.
 - Evidence: `modules/actuators/iron_loss.py`, `regen_core.py`, `regen_sim.py` → `results/regen_sim.json`; `regen_sweep.py` → `results/regen_sweep_walk_1p2.json`, `results/regen_sweep_walk_1p0.json` (6561 corners each; retention minimum 0.62 / 0.59); `results/BENCH_TEST_PLAN.md`; `media/progress/2026-10-13_actuators_r3_regen_sweep.png`; DECISIONS D18–D24.
 - Affected owner response:
-- Status: open
+- Status: accepted with conditions → R-010 (Arbiter, 2026-10-13). Absolute pass line ≤ usable Wh/2 h; 2 h rated at 1.0 m/s (deviation, 1.2 m/s tracked at 1.73 h); 92 % usable rejected; cell binning ≥ 4400 mAh required.
 
 ### P-008: Legs round 2: 65 kg requirement table update, ankle-pitch carry margin, ankle loaded ROM
 - Owner: Legs. Date: 2026-10-13.
@@ -125,7 +125,7 @@ Any change to CONTRACTS.md or TARGETS.md, or to another module's files, starts h
 - Evidence:
   - modules/legs/results/r2/requirements.md, envelope.json, run65.log, stairs_var/
   - plots/r2/envelope_vs_contract.png
-- Status: open
+- Status: accepted with conditions → R-011. Needs accepted; carry speed 0.8 m/s per R-003 (not 1.0) pending re-run; ankle lever 77 mm study ordered; ankle loaded −50°, mechanical −60°.
 
 ### P-009: Legs round 2: hip_pitch deep flexion and knee lever (information for Actuators)
 - Owner: Legs. Date: 2026-10-13.
@@ -138,7 +138,7 @@ Any change to CONTRACTS.md or TARGETS.md, or to another module's files, starts h
   - Speed ratio: 58.5 mm 0.92 (fails), 52.5 mm 0.99, 47.5 mm 1.06 (current, OK), 42.5 mm 1.14 (best balanced; torque 1.31, carry 1.14).
   - No change is requested. 47.5 mm is fine.
 - Evidence: results/r2/linkage_study.json, plots/r2/linkage_study.png, DECISIONS L7.
-- Status: open
+- Status: accepted (re-plan) → R-012. Loaded hip_pitch −80…+40°, second linkage rejected; Legs re-plans sit-to-stand.
 
 ### P-010: Legs round 2: structure 4.84 kg + linkage allowance 0.588 kg (R-001 items)
 - Structure (both legs): 6.13 kg v3-CAD basis → 4.84 kg. Tube walls 1.6 mm, pocketed lugs/clevis/tongue/fork, ribbed foot plate −25 %.
@@ -151,4 +151,4 @@ Any change to CONTRACTS.md or TARGETS.md, or to another module's files, starts h
   - this leaves 0.062 kg of 0.65 for nut-rotor hubs
 - These are parametric-solid estimates. The pelvis trunnion bracket is out of scope (Torso).
 - Evidence: modules/legs/structure.py, results/r2/structure_mass.md/.json, DECISIONS L6, L8.
-- Status: open
+- Status: structure accepted provisionally (FEA pending); linkage split rejected → R-013 (hubs 12 × 16 g = 0.192 kg ≠ 0.062).

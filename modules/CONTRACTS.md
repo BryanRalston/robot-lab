@@ -21,7 +21,8 @@ Sources used: `v3/analysis/results/v3_checks.md` and `v3.json` (per-joint rows, 
 | item | rev 0 | now (P-005 actual) | binding target after recovery |
 |---|---|---|---|
 | leg actuators, both legs | 15.36 kg | 18.60 kg (incl. 1.30 [EST] linkage) | ≤ 17.30 kg |
-| leg structure, both legs | 5.40 kg | 5.40 kg | ≤ 4.90 kg |
+| leg structure, both legs | 5.40 kg | 5.40 kg (4.84 kg parametric, provisional until FEA, R-013) | ≤ 4.90 kg |
+| leg linkages, both legs (R-013) | — | 0.609 kg CAD (in actuator line) + up to 0.21 kg risk (ankle lugs, hubs) | ≤ 0.65 kg, one table |
 | harness (Torso placeholder) | 2.00 kg | 2.00 kg | ≤ 1.60 kg |
 | covers (Torso placeholder) | 1.86 kg | 1.86 kg | ≤ 1.46 kg |
 | battery 20S5P 1620 Wh | 7.96 kg | 8.75 kg | 8.75 kg |
@@ -37,10 +38,15 @@ Sources used: `v3/analysis/results/v3_checks.md` and `v3.json` (per-joint rows, 
 | knee | 231 | 72 | 13.3 | 2 × TBM2G-07613D + 2 × RV12x4, 40 mm | 258 worst-angle | 2.37 |
 | ankle_pitch | 305 | 44 | 6.9 | 2 × TBM2G-06013D + 2 × RV12x4, 70 mm | 311 | 1.89 |
 | ankle_roll | 61 | 7 | 4 [EST] | shared pair, 40 mm | 177 | 0 (shared) |
-Carry verification (R-003): 20 kg at 1.2 m/s with avail/carry-peak ≥ 1.2 on every leg joint. Knee motor rpm at speed need ≤ 7600 (R-005). ROM: ankle_pitch ≥ −60…40°, hip_pitch ≥ −120…40° (R-006). Needs computed at 63.79 kg; re-run at final mass.
+Needs at 65 kg (R-011): hip_yaw 66, hip_roll 180, hip_pitch 334, knee 235, ankle_pitch 309, ankle_roll 62 N·m (supersede the need column above). Carry verification (R-003, R-011): 20 kg with avail/carry-peak ≥ 1.2 on every leg joint at **0.8 m/s (provisional, Legs re-run pending)**; tracked at 1.2 m/s: ankle_pitch 311/283.2 = 1.10× (fails). Knee motor rpm at speed need ≤ 7600 (R-005). ROM (R-011, R-012): ankle_pitch loaded −50…+40°, mechanical −60…+40°; hip_pitch loaded −80…+40°, mechanical −120…+40°.
 
-### R1.3 Power (R-002, R-007, R-009)
-DC bus 20S 68.0…84.0 V, regen clamp ≤ 90 V, brake chopper, BMS regen-charge limit 30 A (R-009). Walking 1.2 m/s, steady state (2–7 s of walk_1p2, `actuators/results/regen_sim.json`): robot electrical 942 W no regen, 667 W modeled shared-bus regen; **804.5 W contract value** (regen ×0.5: 942.4 − 0.5 × 275.8) → **1.81 h** on 1620 Wh × 0.9 — **T7 NOT MET**; pass requires ≤ 729 W (≥ 213 W realised regen, bench-verified per R-009). Pack 20S5P unchanged (20S6P breaks T2). Legs mech 426 W (gait ID, mean over trace). R-002 values 772/674 W/2.16 h are void (whole-trace averages, D17). Pack: 60 A continuous, 100 A for 2 s, fuse 125 A. Peak electrical per joint: hip_pitch 1.33, knee 1.09, ankle_pitch 0.99 kW; per limb 2.25 kW.
+### R1.3 Power (R-002, R-007, R-009, R-010)
+DC bus 20S 68.0…84.0 V, regen clamp ≤ 90 V, brake chopper, BMS regen-charge limit 30 A. Steady-state walking incl. motor iron loss (`actuators/results/regen_sim.json`, D18–D21):
+| speed | no regen | half credit (contract) | full regen (modeled) | h @ 1620×0.9 (half) | h @ 1584×0.9 binned (half) |
+|---|---|---|---|---|---|
+| 1.0 m/s (**T7 rating speed, R-010 deviation**) | 783.3 W | **699.0 W** | 614.8 W | 2.09 | 2.04 |
+| 1.2 m/s (T6, tracked) | 963.9 W | **841.6 W** | 719.4 W | 1.73 | 1.69 |
+**T7 pass line (absolute): steady P ≤ usable Wh / 2 h** = 729.0 W (1620 typical), 712.8 W (binned ≥ 4400 mAh), 697.5 W (1550 minimum, fails at 699.0). 2 h rating moves to 1.2 m/s only when the G5 bench shows ≥ 235 W realised regen. Pack 20S5P Molicel P45B, cells binned ≥ 4400 mAh at 0.2C (R-010); usable 90 % is [EST] until checked at the 3.4 V/cell floor; 92 % not accepted. 20S6P breaks T2. Pack: 60 A continuous, 100 A for 2 s, fuse 125 A. Peak electrical per joint: hip_pitch 1.33, knee 1.09, ankle_pitch 0.99 kW; per limb 2.25 kW. R-002 and R-009 power values are void.
 
 ### R1.4 Drive and field bus (R-008)
 Elmo Gold Twitter R70/100 (legs) / R50/100 (others), EtherCAT, 1 kHz distributed clocks, CSP + torque feed-forward, one line per limb plus torso/neck; master in Brain.
