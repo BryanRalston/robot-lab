@@ -21,3 +21,17 @@
   - walk_0p8 completes the full plan (16 steps, 5.13 m, track error 2 mm).
   - walk_1p2_r2 falls at 5.45 s.
   - The 1.2 m/s work is handed to grokbuild/wbc_walk_1p2.md.
+- L10 (2026-10-13) Actuators follow-up (cad_mass.py / sizing at main ca6992c)
+  - (a) Knee lever 47.5 mm uses Actuators' parameters: RV12x5, F 7267 N = 345 N·m / 0.0475 m, screw speed 0.633 m/s.
+    - v3-style angle-resolved factor k = min(arm(θ)/arm_nom ÷ need(θ)/need_peak) = torque_ratio_min 1.275 × need 235 / 345 = **0.87 ≥ 0.71**. Speed ratio 1.06.
+    - The pure geometric arm minimum is 18.0 mm (0.38), at angles where the need is low.
+  - (b) Hip_pitch lever, 137 g, Actuators' lever(): screws at y ±45, motor can ø82, nut housing ø41, pivot boss ø32. In v3 the hip yaw sits 240 mm above the pitch axis and the hip roll 125 mm above it.
+    - Config A (trunnion x30 z300 above the pitch axis) **clashes**. Over −80…+40° the screw line crosses the roll-actuator band (z 79.5–170.5) at x −30…+6 mm, and the ø91 roll housing (y ±45.5) overlaps the nut housing (inner edge y 24.5) by 21 mm laterally. It also passes the ø81 yaw housing.
+    - Config B (thigh-mounted mirror, same ratios 1.27) clashes with the femur tube: nut housing gap −0.5 mm, motor can −21 mm.
+    - Pivot-boss clearance to the screw line is 2.7 mm (arm minimum 24.7 mm − boss 16 − RV12 rod 6).
+    - Fix: config B with screw spacing dy ≥ 69 mm (femur 25 + can 41 + 3). Actuators' own lever() then weighs 0.167 kg (+0.029 kg; dy 90 for A gives 0.192 kg).
+    - Crossbar root stress scales with dy: 240 × 69/45 = 368 MPa, SF ~1.37. This is a linear estimate; Actuators to re-size.
+    - Mass stays in Actuators' linkage line. Legs structure 4.84 kg excludes all levers. The P-010 linkage table (0.588 kg) duplicates Actuators' line and is not additive.
+  - (c) The v3 thigh has no separate hip_pitch flange part. The 8 × M6 interface is the "femur upper lug" (v3 0.265 kg, 0.212 kg after pocketing), and it stays as the pitch pivot boss and bearing seat.
+    - Nothing comes off. The total stays **4.84 kg**.
+    - Gap: the v3 hip pitch joint used the rotary actuator's CRBH output bearing. With the screw drive, that pitch bearing is in no mass line.
