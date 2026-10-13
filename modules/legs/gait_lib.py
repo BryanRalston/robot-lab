@@ -32,7 +32,13 @@ def _load(carry=0.0, carry_pos=(0.32,0.0,0.12)):
     if carry>0:   # payload rigidly attached to torso (two-handed carry in front of torso)
         tag='<geom name="torso" type="box"'
         xml=xml.replace(tag,f'<body name="payload" pos="{carry_pos[0]} {carry_pos[1]} {carry_pos[2]}"><inertial pos="0 0 0" mass="{carry}" diaginertia="0.2 0.15 0.2"/></body>'+tag,1)
-    m=mujoco.MjModel.from_xml_path(XML) if carry<=0 else mujoco.MjModel.from_xml_string(xml)
+    ch=os.environ.get('LEGS_CHAIR')   # r3: 'x_front,seat_h' -> static chair (seat box + backrest), contype/conaffinity 0 (visual + clearance only)
+    if ch:
+        xf,h=map(float,ch.split(',')); t=0.03
+        xml=xml.replace('<worldbody>',f'<worldbody><geom name="chair_seat" type="box" size="0.21 0.22 {t/2}" pos="{xf-0.21} 0 {h-t/2}" contype="0" conaffinity="0" rgba=".6 .4 .2 1"/>'
+            f'<geom name="chair_back" type="box" size="0.015 0.22 0.25" pos="{xf-0.435} 0 {h+0.25}" contype="0" conaffinity="0" rgba=".6 .4 .2 1"/>'+
+            ''.join(f'<geom name="chair_post{i}" type="cylinder" size="0.012 {(h-t)/2}" pos="{xf-0.02-0.38*(i//2)} {0.2*(1-2*(i%2))} {(h-t)/2}" contype="0" conaffinity="0" rgba=".6 .4 .2 1"/>' for i in range(4)),1)
+    m=mujoco.MjModel.from_xml_string(xml) if (carry>0 or ch) else mujoco.MjModel.from_xml_path(XML)
     return m
 
 class Robot:

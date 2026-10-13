@@ -1,0 +1,9 @@
+{
+ "seat_h_m": 0.46,
+ "seat_front_x_m": -0.06,
+ "min_clearance_m": 0.0006455364777962769,
+ "at_t_s": 0.0,
+ "geom": "l_thigh",
+ "clearance_at_start_m": 0.0006455364777962769,
+ "penetration_frames": 0
+}

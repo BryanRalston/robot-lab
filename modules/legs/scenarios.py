@@ -189,7 +189,41 @@ def sc_push(v0=0.6,react=0.10,Tsw=0.35,Tend=1.6):
 SC={'walk_1p2_r2':lambda:sc_walk(v=1.2,Tstep=float(os.environ.get('TSTEP','0.5')),arm=float(os.environ.get('ARM','0.35')),yaw=float(os.environ.get('YAW','0.12')),ds=float(os.environ.get('DS','0.15')),pel_z=float(os.environ.get('PELZ','1.02'))),
     'carry_20kg_r2':lambda:sc_walk(carry=20.0,v=1.2,Tstep=float(os.environ.get('TSTEP','0.5')),yaw=float(os.environ.get('YAW','0.12')),ds=float(os.environ.get('DS','0.15')),pel_z=float(os.environ.get('PELZ','1.02'))),
     'walk_1p2':lambda:sc_walk(),'walk_0p8':lambda:sc_walk(v=0.8,Tstep=0.5),'walk_1p0':lambda:sc_walk(v=1.0,Tstep=0.47),'stairs_18cm':lambda:sc_stairs(),'carry_20kg':lambda:sc_walk(carry=20.0,name='carry_20kg'),
-    'sit_to_stand':lambda:sc_sit_to_stand(),'push_recover':lambda:sc_push()}
+    'sit_to_stand':lambda:sc_sit_to_stand(),'sit_to_stand_r3':lambda:sc_sit_to_stand_r3(),'carry_20kg_0p8':lambda:sc_walk(carry=20.0,v=0.8,Tstep=0.5,name='carry_20kg_0p8'),'carry_20kg_1p0':lambda:sc_walk(carry=20.0,v=1.0,Tstep=0.47,name='carry_20kg_1p0'),'push_recover':lambda:sc_push()}
+def sc_sit_to_stand_r3(T=1.4):
+    '''R-012 re-plan: hip_pitch kept >= HIPMIN (default -78 deg, 2 deg inside the -80 loaded limit).
+    Strategy: forward lean from the WAIST (does not add hip flexion), pelvis pitch only as far as the hip limit allows, knees/ankles take the rise.
+    Searches the lowest seat (0.46..0.66 m) where seat-off has the COM over the sole with exact IK and hip >= HIPMIN.'''
+    HIPMIN=np.radians(float(os.environ.get('HIPMIN','-78')))
+    m=load(); r=Robot(m); feet={'l':(np.array([0,FY,SOLE]),0.0),'r':(np.array([0,-FY,SOLE]),0.0)}
+    hp=[r.qa[s_+'hip_pitch'] for s_ in 'lr']
+    def pose(hip_x,hip_z,pitch,waist,q0=None):
+        q=(r.q if q0 is None else q0).copy(); q[m.jnt_qposadr[m.joint('waist_pitch').id]]=waist
+        q[3:7]=quat_pitch(pitch); R=np.array([[np.cos(pitch),0,np.sin(pitch)],[0,1,0],[-np.sin(pitch),0,np.cos(pitch)]])
+        q[0:3]=np.array([hip_x,0,hip_z])-R@np.array([0,0,-0.240])
+        q=r.ik_legs(q,feet,iters=80); r.fk(q); e=max(np.linalg.norm(r.d.xpos[r.foot[s_]]-feet[s_][0]) for s_ in 'lr'); return q,r.com(),e
+    best=None
+    for seat_h in np.arange(0.46,0.665,0.02):
+        for hip_x in (-0.20,-0.16,-0.12):
+            for wd in (35,45,55,60):
+                for pd in range(0,41,2):
+                    q,c,e=pose(hip_x,seat_h+0.04,np.radians(pd),np.radians(wd))
+                    if e<1e-4 and min(q[hp])>=HIPMIN and c[0]>=HEEL+0.02:
+                        best=(seat_h,hip_x,np.radians(pd),np.radians(wd),c); break
+                if best: break
+            if best: break
+        if best: break
+    if best is None: raise RuntimeError('no feasible seat 0.46-0.66 m with hip >= %.0f deg'%np.degrees(HIPMIN))
+    seat_h,hx0,p0,w0,c0=best
+    N=int(T/DT); Q=np.zeros((N,m.nq)); qp=None
+    for k in range(N):
+        s_=k/(N-1); mj=10*s_**3-15*s_**4+6*s_**5
+        Q[k],_,_=pose(hx0*(1-mj),seat_h+0.04+(0.90-seat_h-0.04)*mj,p0*(1-mj),w0*(1-mj),qp); qp=Q[k]
+    AL=np.full((N,2),0.5)
+    r.fk(Q[0]); r.pad=0.3; r.trim=(0.25,0.25)
+    return r,Q,AL,dict(seat_h=float(seat_h),hip_x_seatoff=float(hx0),pelvis_pitch_deg=float(np.degrees(p0)),waist_lean_deg=float(np.degrees(w0)),T=T,hip_min_allowed_deg=float(np.degrees(HIPMIN)),
+                       hip_min_traj_deg=float(np.degrees(Q[:,hp].min())),com_x_seatoff=float(c0[0])),None,None
+
 
 TRIM=0.3   # s; first/last frames are finite-difference/preview start-up edges and are excluded from all metrics
 
