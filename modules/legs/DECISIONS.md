@@ -168,3 +168,23 @@
   - Tubes: bonded internal 0.5 × 100 mm doublers at mid-span. Hand SF ~1.65–1.72, pending GB. +0.042/leg (vs +0.175 for a full 1.9 mm wall).
   - Hip ring: artifact (tensile bonded bore traction) and obsolete geometry (ø80 CRBH, replaced by the ø35 tongue in L21). No change.
   - Total +0.146 kg/leg, **+0.292 kg both legs**. M2 4.822 → **5.114 kg** (5.154 incl. bolts/bumper), within the +0.45 reserve. The Arbiter should note it exceeds the old 4.85 cap. Re-check brief: grokbuild/structure_fea_r2.md. Hardware note: Actuators a64816e caps the hip bore corner at R0.6 (not R1.0), which affects the lever, not the tongue (shaft-in-tongue fit); noted for L34.
+- L37 (v4 audit) Hip body vs thigh clamp: the 0.3 mm was hand-note text in audit_v4.py, not a measurement. Model v4 measures the body at ≥ 3.0 mm (femur tube 3.0, collar > 6) at stand, −60 and +40, consistent with Actuators D62. The note is corrected. The clamp arm's outer 13 mm (y 50–63) steps down from 34 to the 24 mm tine depth, so the eye-stub flange [EST] clears the root by more than its old 2.94 mm. −0.021 kg/leg. Clamp FEA re-check needed (added to structure_fea_r2).
+- L38 (v4 audit, Actuators D60/D61 accepted) Ankle:
+  - Top: two shank clevises at y±45, slot 11.95, PTFE washers, ø12 pins, trunnion z 410 → 450. They replace the cheeks, pins and centre plate.
+  - Bottom: QA1 MGF12T 27° rod end with a 4.5 mm spacer from the ball face (y 53) to the lug, lug inner face 52.5 → 57.5, pin +5 mm.
+  - Our foot is 100 mm wide, so lugs at y 57.5–72.5 sit outside it. Added an instep outrigger beam 20×145×10 on the instep tower (x 58–88, z 18–50 per fea_r5). +0.031/leg (pushback: noted, accepted).
+  - Swept clear on pitch −45…+40 × roll ±18 (grid in results/r8/model_v4_legsweep.json). QA1 head-to-lug is 2.75 mm in the model (no spin); Actuators' 2.15 mm hand figure with spin governs.
+  - Pitch −60 (asked) is outside the ±45/+40 range and the D60 stroke. It clashes: fork cheek × stop carrier [EST], body × clevis tine.
+  - Net +0.024/leg (clevis + pins + outrigger), excluding Actuators' parts.
+- L39 (v4 audit) Hip yaw/roll hard stops.
+  - Yaw: tab 10×12×70 on the yoke plate at r64, pointing to the midline (to avoid the pelvis wall), via a 12×40×8 arm. It hits 2 PU 90A ø16×10 bumpers on brackets under the deck. Swept contact at −35/+45. Hold 70 N·m → 1.1 kN, 5.4 MPa. Gait-peak impact 0.07 J [EST J 0.13] ≪ bumper 1.2 J. 0.055/leg [EST].
+  - Roll: lug 12×12×26 on the roll-output web at r63 hits 2 PU ø20×10 bumper blocks under the yaw yoke plate at −32/+28°. Swept contact at −12/+15. Hold 204 N·m → 3.2 kN. Impact 0.76 J [EST J 1.0] vs 4 J. 0.035/leg [EST].
+  - Controller soft limits are required before both.
+- L40 (v4 audit) [EST] → real Legs dimensions in model_v4:
+  - knee clevis: cheeks 46×14×62 at |y| 21–35, rounded R23 about the pin below centre, rear-top trimmed 4 mm so the knee lever clears at 135°; bridge 40×70×22 + 16 mm pads (fea_r8)
+  - foot: 240×100×18, steel F/T flange OD60×8, doubler collar r30.2–45×3, instep tower
+  - Knee/ankle trunnion bracket plates and struts and the hip yoke brackets stay [EST]: there is no Legs design for them yet.
+  - Clevis −0.024/leg; foot unchanged (FEA mass).
+  - Knee: Actuators D59 twin housing placed as one part, so the standing clash is gone.
+- Mass: Legs +0.100 kg/leg, **+0.200 both legs**. Plus Actuators D59–D62 +0.138 = **+0.338 vs reserve 0.375** (R-023). results/r8/model_v4_fix_mass.json.
+- Audit rerun: BUILDABLE 6 / PLACEHOLDER 26 / FAIL 0. All 6 leg joints are swept clear over full range, with 0 standing clashes and 0 floating parts.

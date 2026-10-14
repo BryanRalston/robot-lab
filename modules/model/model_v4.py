@@ -18,7 +18,8 @@ P=dict(hip_y=130,hip_z=920,knee_z=500,ankle_z=80,pelvis_bot=1126,pelvis_top=1230
        femur_x=18,femur_od=50,femur_t=1.2,tibia_x=14,tibia_od=45,tibia_t=1.2,
        hip_dy=69,      # Legs L10 fix: screw spacing dy>=69
        knee_dy=45,     # Actuators cad_mass.lever(dy=45) for knee_lever_r47p5
-       ankle_dy=45, ankle_lever=73, ankle_tx=90, ankle_tz=410, ankle_ez=20,   # v3 layout + L23 r73
+       ankle_dy=45, ankle_lever=73, ankle_tx=90, ankle_tz=450,   # D60: trunnion z 410 -> 450
+       ankle_ez=20,   # v3 layout + L23 r73
        upper_arm=300, forearm=270)
 # ---------------- kinematics ----------------
 JOINTS={}   # name -> dict(seg, parent_seg, point, axis, range, ...)
@@ -71,8 +72,8 @@ def along(p0,p1,s,L,od,id_=0):
     d=np.array(p1,float)-np.array(p0,float); u=d/np.linalg.norm(d)
     return frame(cyl(od,L,id_=id_,c=(0,0,L/2)),tuple(np.array(p0)+u*s),u,(1,0,0) if abs(u[0])<0.9 else (0,1,0))
 # ---------------- leg mechanisms ----------------
-BOSS_Z={'knee_body_x1':(23.09+20)/2,'ankle_body_x1':(22.21+20)/2,'hip_pitch_body_x1':None}   # cad_mass.linear_body: bosses at Lm/2
-def screw_unit(name,body_step,seg_body,p0,seg_rod,p1,boss_dir,asm,deps,top='trunnion'):
+BOSS_Z={'knee_body_x1':(23.09+20)/2,'ankle_body_x1':'eye15','hip_pitch_body_x1':None}   # D61: ankle body axial eye lug at body z -15   # cad_mass.linear_body: bosses at Lm/2
+def screw_unit(name,body_step,seg_body,p0,seg_rod,p1,boss_dir,asm,deps,top='trunnion',skip_body=False,eye='GE12'):
     """Twin-screw half: Actuators body STEP (local z = screw axis, base at the top pin) + RV12 rod ø12 + SKF GE12 C rod-end eye (ø30x12)."""
     asm=name; a=xf_pt(seg_body,p0); b=xf_pt(seg_rod,p1); bd=xf_pt(seg_body,np.array(p0)+np.array(boss_dir))-a
     u=(b-a)/np.linalg.norm(b-a); L=float(np.linalg.norm(b-a))
@@ -82,12 +83,16 @@ def screw_unit(name,body_step,seg_body,p0,seg_rod,p1,boss_dir,asm,deps,top='trun
         add(f'{name} axial GE12 C eye ø30x12 on body end',seg_body,frame(cyl(30,12,'z'),tuple(a),(0,1,0),u),'bearing',asm,posed=True,deps=deps)
         add(f'{name} eye stub ø12 [EST]',seg_body,along(a,b,6,19,12),'actuator',asm,posed=True,deps=deps)
         add(f'{name} eye stub flange ø30 [EST]',seg_body,along(a,b,24,off-24+1,30),'actuator',asm,posed=True,deps=deps)
+    elif bz=='eye15':   # D60/D61: axial GE12 C eye in the body's rear-cap lug (body z -15), held in a shank clevis
+        off=15.0
+        add(f'{name} axial GE12 C top eye ø30x12 (D60)',seg_body,frame(cyl(30,12,'z'),tuple(a),(0,1,0),u),'bearing',asm,posed=True,deps=deps)
     else: off=-bz   # trunnion bosses sit at Lm/2 along the body: the body base is behind the pivot
     a0=a+u*off
-    add(f'{name} body ({body_step})',seg_body,frame(step(body_step),tuple(a0),u,bd),'actuator',asm,posed=True,deps=deps)
-    add(f'{name} RV12 roller-screw rod ø12',seg_rod,along(a,b,off+105,L-off-105-9,12),'actuator',asm,posed=True,deps=deps)
-    add(f'{name} GE12 C rod-end eye',seg_rod,frame(cyl(30,12,'z'),tuple(b),bd,u),'bearing',asm,posed=True,deps=deps)
-    return L
+    if not skip_body: add(f'{name} body ({body_step})',seg_body,frame(step(body_step),tuple(a0),u,bd),'actuator',asm,posed=True,deps=deps)
+    add(f'{name} RV12 roller-screw rod ø12',seg_rod,along(a,b,off+105,L-off-105-(15 if eye=='QA1' else 9),12),'actuator',asm,posed=True,deps=deps)   # QA1: rod-end shank starts at the head OD (D60)
+    if eye=='QA1': add(f'{name} QA1 MGF12T 27° rod end ø30x10.75 (D60)',seg_rod,frame(cyl(30,10.75,'z'),tuple(b),bd,u),'bearing',asm,posed=True,deps=deps)
+    else: add(f'{name} GE12 C rod-end eye',seg_rod,frame(cyl(30,12,'z'),tuple(b),bd,u),'bearing',asm,posed=True,deps=deps)
+    return L,a0,u,bd
 def rot_housing(name,stp,seg,center,axis,out_sign,asm):
     """Actuators housing STEP (local z axis, 0..H). Placed centred on the joint axis."""
     s=step(stp); H=s.BoundingBox().zmax; ax=np.array({'x':(1,0,0),'y':(0,1,0),'z':(0,0,1)}[axis],float)*out_sign
@@ -105,10 +110,20 @@ def build_leg(s):
     yb=yawz-H/2
     if s>0: add('hip yaw + waist mount deck (pelvis)','pelvis',box(160,364,8,(0,0,yawz+H/2+4)),est=True,asm='pelvis')
     add(S('hip yaw output yoke plate'),S('hipY'),box(140,70,8,(0,y,yb-4)),est=True,asm=S('yoke'))
+    # hip_yaw hard stop (L39): tab on the yoke plate at r64 (outside the r55 housing) strikes 2 PU 90A ø16x10 bumpers on brackets under the deck at -47/+57 deg (contact at -35/+45)
+    ph0=-90*s   # tab points to the midline so it never reaches the pelvis side wall
+    add(S('hip_yaw stop tab 10x12x70 (L39)'),S('hipY'),box(10,12,70,(64*math.cos(math.radians(ph0)),y+64*math.sin(math.radians(ph0)),yb+35)),'stop',asm=S('yoke'))
+    add(S('hip_yaw stop tab arm 12x40x8 (yoke plate -> tab, L39)'),S('hipY'),box(12,40,8,(0,y-s*(35+20-0.5),yb-4)),'stop',asm=S('yoke'))
+    for lim in (-35,45):
+        a_=math.radians(ph0+lim+(17 if lim>0 else -17)); add(S(f'hip_yaw PU bumper + bracket {lim:+d}° (L39)'),'pelvis',cyl(16,30,'z',c=(64*math.cos(a_),y+64*math.sin(a_),yawz+H/2-15)),'stop',asm='pelvis')
     Hr=step('hip_roll_housing').BoundingBox().zmax
     add(S('hip yaw yoke rear cheek (roll housing back face)'),S('hipY'),box(8,70,yb-8-(rollz-35),(-(Hr/2+4),y,(yb-8+rollz-35)/2)),est=True,asm=S('yoke'))
     # hip roll: Actuators hip_roll_housing, axis x
     rot_housing(S('hip roll housing (Actuators STEP, CRBH output)'),'hip_roll_housing',S('hipY'),(0,y,rollz),'x',1,S('yoke'))
+    # hip_roll hard stop (L39): lug on the roll-output web top (r63 above the roll axis) strikes 2 PU 90A ø20x10 bumpers under the yaw yoke plate at -26/+29 deg (contact at -12/+15)
+    add(S('hip_roll stop lug 12x12x26 (L39)'),S('hipR'),box(12,12,26,(Hr/2+14,y,rollz+50)),'stop',asm=S('hipR_br'))
+    for ang in (-32,28):
+        a_=math.radians(ang); add(S(f'hip_roll PU bumper block {ang:+d}° (L39)'),S('hipY'),box(14,20,yb-8-(rollz+65*math.cos(a_))+5,(Hr/2+14,y+65*math.sin(a_),(yb-8+rollz+65*math.cos(a_)-5)/2)),'stop',asm=S('yoke'))
     # roll output bracket (hipR) -> hip_pitch lever hub
     lev=step('hip_pitch_lever_B_needle_sf15').rotate((0,0,0),(0,1,0),HIP_G['clock_deg']); ht=hz+lev.BoundingBox().zmax
     add(S('roll-output bracket web (on roll output face)'),S('hipR'),box(8,76,rollz+40-(hz+60),(Hr/2+4,y,(rollz+40+hz+60)/2)),est=True,asm=S('hipR_br'))
@@ -134,7 +149,8 @@ def build_leg(s):
     tz=hz+HIP_G['trunnion_z_mm']; tx=HIP_G['trunnion_x_mm']
     add(S('thigh split collar ø64 L34 bonded (DP490) + sleeve + 2x ø6 pins'),S('thigh'),cyl(64,34,'z',id_=50,c=(P['femur_x'],y,tz)),asm=S('thigh_s'))
     for sy in (-1,1):
-        add(S(f'clamp arm root {"+" if sy>0 else "-"}y (depth 34, r8)'),S('thigh'),box(28,37,34,(tx-4,y+sy*44.5,tz)),asm=S('thigh_s'))
+        add(S(f'clamp arm root {"+" if sy>0 else "-"}y (depth 34, r8)'),S('thigh'),box(28,24,34,(tx-4,y+sy*38,tz)),asm=S('thigh_s'))
+        add(S(f'clamp arm outer step {"+" if sy>0 else "-"}y (depth 24 to the tines, L37)'),S('thigh'),box(28,13.2,24,(tx-4,y+sy*56.5,tz-5)),asm=S('thigh_s'))
         for k in (-1,1): add(S(f'clamp arm eye tine {"+" if sy>0 else "-"}y{"o" if k>0 else "i"} [fork form EST]'),S('thigh'),box(30,8,24,(tx,y+sy*(P['hip_dy']+k*10),tz)),asm=S('thigh_s'))
         add(S(f'clamp eye pin ø12x28 42CrMo4 {"+" if sy>0 else "-"}y'),S('thigh'),cyl(12,28,'y',c=(tx,y+sy*P['hip_dy'],tz)),'bearing',asm=S('thigh_s'))
     E=lambda r,clk,t:(-r*math.sin(math.radians(clk+t)),-r*math.cos(math.radians(clk+t)))
@@ -142,15 +158,18 @@ def build_leg(s):
     for sy in (-1,1):
         screw_unit(S(f'hip_pitch screw {"+" if sy>0 else "-"}y'),'hip_pitch_body_x1',S('thigh'),(tx,y+sy*P['hip_dy'],tz),S('hipR'),(ex,y+sy*P['hip_dy'],hz+ez),(1,0,0),S('hp_act'),chain(S('thigh')))
     # knee: clevis (thigh) + tongue (shank) + pin ø16; knee lever r47.5 (Actuators STEP) on shank; twin screws, trunnion x-130 z+270 on thigh
-    add(S('knee clevis cheeks + bridge (r8: bridge +16, R6)'),S('thigh'),box(46,70,24,(8,y,kz+60+12)),asm=S('thigh_s'))
-    for sy in (-1,1): add(S(f'knee clevis cheek {"+" if sy>0 else "-"}y'),S('thigh'),cq.Workplane('XY').add(cyl(46,12,'y',c=(0,y+sy*21,kz))).union(cq.Workplane('XY').add(box(38,12,60,(4,y+sy*21,kz+30)))).val(),asm=S('thigh_s'))   # rounded about the pin (r8 'R6 corners'; exact profile EST)
+    add(S('knee clevis bridge 40x70x22 + 16 mm pad over cheeks (fea_r8, L36)'),S('thigh'),cq.Workplane('XY').add(box(40,70,22,(23,y,kz+51))).union(cq.Workplane('XY').add(box(16,14,22,(-5,y+21+7,kz+51)))).union(cq.Workplane('XY').add(box(16,14,22,(-5,y-21-7,kz+51)))).val(),asm=S('thigh_s'))
+    for sy in (-1,1): add(S(f'knee clevis cheek {"+" if sy>0 else "-"}y 46x14x62 (fea_r5/r8)'),S('thigh'),cq.Workplane('XY').add(cyl(46,14,'y',c=(0,y+sy*28,kz))).union(cq.Workplane('XY').add(box(42,14,41,(2,y+sy*28,kz+20.5)))).val(),asm=S('thigh_s'))   # L40: rounded R23 about the pin below centre
     add(S('knee pin ø16 (through clevis + lever cheeks)'),S('shank'),cyl(16,132,'y',c=(0,y,kz)),'bearing',asm=S('knee_pin'))
     add(S('knee tongue (shank)'),S('shank'),cyl(56,28,'y',id_=16,c=(0,y,kz)),asm=S('shank_s'))
     add(S('knee tongue neck into tibia'),S('shank'),box(36,28,40,(10,y,kz-42)),asm=S('shank_s'))
     add(S('knee lever r47.5 (Actuators STEP)'),S('shank'),step('knee_lever_r47p5').rotate((0,0,0),(0,1,0),KNEE_G['clock_deg']).translate((0,y,kz)),'linkage',asm=S('shank_s'))
     ktx,ktz=KNEE_G['trunnion_x_mm'],kz+KNEE_G['trunnion_z_mm']; kx,kzz=E(KNEE_G['lever_mm'],KNEE_G['clock_deg'],0)
     for sy in (-1,1):
-        screw_unit(S(f'knee screw {"+" if sy>0 else "-"}y'),'knee_body_x1',S('thigh'),(ktx,y+sy*P['knee_dy'],ktz),S('shank'),(kx,y+sy*P['knee_dy'],kz+kzz),(0,1,0),S('kn_act'),chain(S('shank')))
+        _,a0k,uk,bdk=screw_unit(S(f'knee screw {"+" if sy>0 else "-"}y'),'knee_body_x1',S('thigh'),(ktx,y+sy*P['knee_dy'],ktz),S('shank'),(kx,y+sy*P['knee_dy'],kz+kzz),(0,1,0),S('kn_act'),chain(S('shank')),skip_body=True)
+        if sy>0: a0p=a0k
+        else: a0m=a0k
+    add(S('knee twin housing (Actuators D59 STEP, shared centre web)'),S('thigh'),frame(step('knee_twin_housing'),tuple((a0p+a0m)/2),uk,bdk),'actuator',S('kn_act'),posed=True,deps=chain(S('shank')))
     add(S('knee trunnion bracket top plate (thigh)'),S('thigh'),box(-40-(ktx-45),196,8,((-40+ktx-45)/2,y,ktz+50)),est=True,asm=S('kn_br'))
     add(S('knee trunnion bracket strut to femur'),S('thigh'),box(50,40,8,(-20,y,ktz+50)),est=True,asm=S('kn_br'))
     for sy in (-1,1):
@@ -163,14 +182,13 @@ def build_leg(s):
     add(S('ankle fork bridge'),S('shank'),box(56,60,14,(6,y,az+56)),asm=S('shank_s'))
     for sy in (-1,1): add(S(f'ankle fork cheek {"+" if sy>0 else "-"}y'),S('shank'),box(40,6,56,(0,y+sy*27,az+28)),asm=S('shank_s'))
     for sy in (-1,1):
-        screw_unit(S(f'ankle screw {"+" if sy>0 else "-"}y'),'ankle_body_x1',S('shank'),(P['ankle_tx'],y+sy*P['ankle_dy'],P['ankle_tz']),S('foot'),(P['ankle_lever'],y+sy*P['ankle_dy'],az+P['ankle_ez']),(0,1,0),S('an_act'),chain(S('foot')))
+        screw_unit(S(f'ankle screw {"+" if sy>0 else "-"}y'),'ankle_body_x1',S('shank'),(P['ankle_tx'],y+sy*P['ankle_dy'],P['ankle_tz']),S('foot'),(P['ankle_lever'],y+sy*P['ankle_dy'],az+P['ankle_ez']),(0,1,0),S('an_act'),chain(S('foot')),eye='QA1')
     atz=P['ankle_tz']
     add(S('ankle trunnion bracket top plate (shank)'),S('shank'),box(P['ankle_tx']+40-40,180,8,((P['ankle_tx']+40+40)/2,y,atz+46)),est=True,asm=S('an_br'))
     add(S('ankle trunnion bracket strut to tibia'),S('shank'),box(16,30,60,(38,y,atz+20)),est=True,asm=S('an_br'))
-    add(S('ankle trunnion centre plate 12 mm'),S('shank'),box(30,12,60,(P['ankle_tx'],y,atz+16)),est=True,asm=S('an_br'))
-    for sy in (-1,1):
-        add(S(f'ankle trunnion cheek {"+" if sy>0 else "-"}y'),S('shank'),box(30,6,60,(P['ankle_tx'],y+sy*(P['ankle_dy']+39+3),atz+16)),est=True,asm=S('an_br'))
-        for k in (0,1): add(S(f'ankle trunnion pin ø9 {"+" if sy>0 else "-"}y {"out" if k else "in"}'),S('shank'),cyl(9,12,'y',c=(P['ankle_tx'],y+sy*(P['ankle_dy']+(39 if k else -39)),atz)),'bearing',asm=S('an_br'))
+    for sy in (-1,1):   # D60: two clevises at y±45 (slot 10.75+2x0.6 = 11.95, PTFE thrust washers, ø12 pin) for the axial top eye
+        for k in (-1,1): add(S(f'ankle top clevis tine {"+" if sy>0 else "-"}y{"o" if k>0 else "i"} (D60)'),S('shank'),box(30,6,58,(P['ankle_tx'],y+sy*(P['ankle_dy']+k*8.975),atz+17)),asm=S('an_br'))
+        add(S(f'ankle top clevis pin ø12 {"+" if sy>0 else "-"}y (D60)'),S('shank'),cyl(12,24,'y',c=(P['ankle_tx'],y+sy*P['ankle_dy'],atz)),'bearing',asm=S('an_br'))
     # ankle cross (universal): pitch pins in fork (y), roll pins in foot lugs (x); ±18° roll stop blocks on the cross (A14)
     add(S('ankle cross Ti-6Al-4V'),S('ankX'),box(30,46,30,(0,y,az)),asm=S('ank_x'))
     for sy in (-1,1): add(S(f'ankle pitch pin stub ø12 {"+" if sy>0 else "-"}y'),S('ankX'),cyl(12,18,'y',c=(0,y+sy*24,az)),'bearing',asm=S('ank_x'))
@@ -179,13 +197,18 @@ def build_leg(s):
     add(S('ankle-roll stop carrier under cross [EST]'),S('ankX'),box(54,62,15,(0,y,az-22.5)),est=True,asm=S('ank_x'))
     for sx in (-1,1):
         add(S(f'ankle roll pin stub ø12 {"F" if sx>0 else "R"}'),S('foot'),cyl(12,22,'x',c=(sx*26,y,az)),'bearing',asm=S('foot_s'))
-        add(S(f'foot roll lug {"F" if sx>0 else "R"}'),S('foot'),box(8,30,az-26+10,(sx*36,y,(az+10+26)/2)),asm=S('foot_s'))
-        for sy in (-1,1): add(S(f'foot roll-stop shoulder {"F" if sx>0 else "R"}{"+" if sy>0 else "-"}y [gap 15 mm = 18° at r48]'),S('foot'),box(12,16,az-45-26,(sx*21,y+sy*48,(az-45+26)/2)),'stop',est=True,asm=S('foot_s'))
+        add(S(f'foot roll lug {"F" if sx>0 else "R"}'),S('foot'),box(8,30,az+10-18,(sx*36,y,(az+10+18)/2)),asm=S('foot_s'))
+        for sy in (-1,1): add(S(f'foot roll-stop shoulder {"F" if sx>0 else "R"}{"+" if sy>0 else "-"}y [gap 15 mm = 18° at r48]'),S('foot'),box(12,16,az-45-18,(sx*21,y+sy*48,(az-45+18)/2)),'stop',est=True,asm=S('foot_s'))
     add(S('ankle 6-axis F/T sensor'),S('foot'),cyl(60,14,'z',c=(0,y,az-47)),'sensor',asm=S('foot_s'))
-    add(S('foot closed box 240x130 (3.5 mm skins, 4 webs; width EST)'),S('foot'),box(240,130,26,(60,y,13)),asm=S('foot_s'))
-    add(S('foot toe doubler collar (r8)'),S('foot'),cyl(90,3,'z',id_=60,c=(0,y,27.5)),asm=S('foot_s'))
-    for sy in (-1,1): add(S(f'instep lug r73 {"+" if sy>0 else "-"}y'),S('foot'),box(20,15,az+P['ankle_ez']-26+8,(P['ankle_lever'],y+sy*(P['ankle_dy']+15),(26+az+P['ankle_ez']+8)/2)),asm=S('foot_s'))
-    for sy in (-1,1): add(S(f'instep pin ø12 {"+" if sy>0 else "-"}y'),S('foot'),cyl(12,28.5,'y',c=(P['ankle_lever'],y+sy*(P['ankle_dy']+8.25),az+P['ankle_ez'])),'bearing',asm=S('foot_s'))
+    add(S('foot closed box 240x100x18 (3.5 mm skins, 4 webs; fea_r5)'),S('foot'),box(240,100,18,(60,y,9)),asm=S('foot_s'))
+    add(S('ankle F/T steel flange OD60/ID22 x8 (fea_r5)'),S('foot'),cyl(60,8,'z',id_=22,c=(0,y,22)),asm=S('foot_s'))
+    add(S('foot flange doubler collar r30.2-45 x3 (r8, L36)'),S('foot'),cyl(90,3,'z',id_=60.4,c=(0,y,19.5)),asm=S('foot_s'))
+    add(S('instep tower 30x90 to z50 (fea_r5)'),S('foot'),box(30,90,32,(73,y,34)),asm=S('foot_s'))
+    add(S('instep outrigger beam 20x145x10 (lugs outside the 100 mm foot, L38)'),S('foot'),box(20,145,10,(73,y,55)),asm=S('foot_s'))
+    for sy in (-1,1): add(S(f'instep lug r73 {"+" if sy>0 else "-"}y (inner face y57.5, D60/L38)'),S('foot'),box(20,15,az+P['ankle_ez']+8-50,(P['ankle_lever'],y+sy*65,(50+az+P['ankle_ez']+8)/2)),asm=S('foot_s'))
+    for sy in (-1,1):
+        add(S(f'instep pin ø12 {"+" if sy>0 else "-"}y (39-72.5, +5 mm, D60)'),S('foot'),cyl(12,33.5,'y',c=(P['ankle_lever'],y+sy*55.75,az+P['ankle_ez'])),'bearing',asm=S('foot_s'))
+        add(S(f'instep rod-end spacer ø16x4.5 {"+" if sy>0 else "-"}y (ball face y53 -> lug 57.5, D60)'),S('foot'),cyl(16,4.5,'y',id_=12,c=(P['ankle_lever'],y+sy*55.25,az+P['ankle_ez'])),'bearing',asm=S('foot_s'))
 # ---------------- upper body placeholders ----------------
 SW={}  # placeholder strain-wave actuators: joint -> (OD, L) [EST, v3 catalog envelopes rounded]
 def sw(jn,seg,axis,c,OD,L,out=1):

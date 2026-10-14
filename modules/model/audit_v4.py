@@ -49,17 +49,17 @@ stand=CL['standing']
 knee_boss=[c for c in stand['clashes'] if 'knee screw' in c[0] and 'knee screw' in c[1]]
 # ---------------- legs ----------------
 joint('hip_yaw','leg','IKO CRBH 6013 A crossed-roller (inside Actuators hip_yaw_housing)','z (vertical) at hip centre +240 mm',SIZ['hip_yaw']['label']+' (rotary)',
-      'housing bolted to pelvis deck [deck EST]; output flange -> yaw yoke plate [EST]','internal soft limit; no mechanical stop modelled [EST needed]','BUILDABLE',
+      'housing bolted to pelvis deck [deck EST]; output flange -> yaw yoke plate [EST]','Legs L39: tab 10x12 on the yoke plate at r64 (midline side) strikes 2 PU 90A ø16x10 bumpers under the deck, contact at -35/+45 (swept); hold 70 N·m -> 1.1 kN','BUILDABLE',
       ['actuators/cad/hip_yaw_housing.step','actuators/results/sizing.json'],'Yoke plate/cheek are [EST] brackets.',keys=('hip yaw housing',))
 joint('hip_roll','leg','IKO CRBH 6013 A crossed-roller (inside Actuators hip_roll_housing)','x (fore-aft) at hip +125 mm',SIZ['hip_roll']['label']+' (rotary)',
-      'housing back face on yaw-yoke rear cheek; output face -> roll bracket web -> lever hub pads [EST]','internal soft limit; mechanical stop not modelled [EST needed]','BUILDABLE',
+      'housing back face on yaw-yoke rear cheek; output face -> roll bracket web -> lever hub pads [EST]','Legs L39: lug 12x12 on the roll-output web (r63) strikes 2 PU 90A ø20x10 bumpers under the yaw yoke plate, contact at -12/+15 (swept); hold 204 N·m -> 3.2 kN','BUILDABLE',
       ['actuators/cad/hip_roll_housing.step','actuators/results/sizing.json'],'Housing is cantilevered from one cheek (CRBH carries the moment, unverified for this load path).',keys=('hip roll housing',))
 joint('hip_pitch','leg','2x IKO TLA3520 Z needle bushes in lever cheeks, hardened shaft ø35/30x66 press-fit in femur tongue ø55x27 (D32/L21)','y (lateral) through hip centre',
       SIZ['hip_pitch']['label']+f"; config B: lever r{hipB['geom']['lever_mm']} clock {hipB['geom']['clock_deg']}° on roll output, bodies on thigh",
       f"body end: axial GE12 C eye on ø12 pin in bonded split-collar clamp arm at (x{hipB['geom']['trunnion_x_mm']}, z{hipB['geom']['trunnion_z_mm']}, y±69); rod end: GE12 C on lever crossbar",
       'PU ø25x12 bumper at r80 (A6, hip_stop.json) engages at -104..-105° (femur front face); toggle at -114.5°','BUILDABLE',
       ['legs/results/r2/linkage_study.json','actuators/cad/hip_pitch_lever_B_needle_sf15.step','actuators/results/hp_pivot_needle.json','legs/DECISIONS.md L18 L21 L22 L35'],
-      f"Pin-to-pin length {hipL[0]:.1f}-{hipL[1]:.1f} mm (stroke {hipL[1]-hipL[0]:.1f}); Legs study stroke {hipB['stroke_mm']:.1f} over its -80..+40 bins. Lever strength O13 still OPEN (FEA v2/G2 queued): lever shown is config-B needle hub, not G2. Body-to-collar clearance 0.3 mm at stand (tight).",
+      f"Pin-to-pin length {hipL[0]:.1f}-{hipL[1]:.1f} mm (stroke {hipL[1]-hipL[0]:.1f}); Legs study stroke {hipB['stroke_mm']:.1f} over its -80..+40 bins. Lever strength O13 still OPEN (FEA v2/G2 queued): lever shown is config-B needle hub, not G2. Body clearance ≥ 3.0 mm to every thigh part (femur tube 3.0, collar > 6) measured over -105…+40 (Actuators D62, Legs L37).",
       keys=('hip_pitch','TLA3520','lever B','clamp'))
 kstat='FAIL' if knee_boss else 'BUILDABLE'
 joint('knee','leg','ø16 pin through clevis cheeks (thigh) + tongue and lever cheeks (shank)','y at knee (z 500)',SIZ['knee']['label']+f"; lever r47.5 clock {knS['geom']['clock_deg']}°",
@@ -70,13 +70,13 @@ joint('knee','leg','ø16 pin through clevis cheeks (thigh) + tongue and lever ch
       f"Pin-to-pin {knL[0]:.1f}-{knL[1]:.1f} mm (stroke {knL[1]-knL[0]:.1f}; Legs study {knS['stroke_mm']:.1f}). Knee trunnion bracket geometry is [EST].",
       keys=('knee',))
 joint('ankle_pitch','leg','Ti universal cross: ø12 pitch pin stubs in shank fork cheeks','y at ankle (z 80)',SIZ['ankle_pitch']['label']+' (both screws in phase)',
-      'trunnion pins ø9 at (x90, z410) y±45 on shank bracket [bracket EST]; GE12 C rod ends on instep pins r73 (L23)','screw end-of-stroke; no mechanical stop modelled','BUILDABLE',
+      'axial GE12 C top eyes in two shank clevises at (x90, z450) y±45, slot 11.95, PTFE washers, ø12 pins (Actuators D60/D61); QA1 MGF12T 27° rod ends + 4.5 mm spacer on instep pins r73, lug inner face y57.5 on an outrigger beam (L23/L38)','screw end-of-stroke; no mechanical stop modelled','BUILDABLE',
       ['actuators/results/ankle_stroke_73_r18_p45.json','legs/DECISIONS.md L23','actuators/cad/ankle_body_x1.step'],
-      f"Actuators stroke check: Lmin {AST['73mm L_ankle actuator in']['Lmin']} / Lmax {AST['73mm L_ankle actuator in']['Lmax']} mm, margin {AST['73mm L_ankle actuator in']['margin']} mm. Ankle body fins overlap its own trunnion bosses in the Actuators STEP (z 6-36 vs boss z 11-31) - check.",keys=('ankle screw','ankle pitch pin','ankle cross'))
+      f"Actuators stroke check: Lmin {AST['73mm L_ankle actuator in']['Lmin']} / Lmax {AST['73mm L_ankle actuator in']['Lmax']} mm, margin {AST['73mm L_ankle actuator in']['margin']} mm. Body bosses removed in D61.",keys=('ankle screw','ankle pitch pin','ankle cross'))
 joint('ankle_roll','leg','Ti universal cross: ø12 roll pin stubs in foot lugs (x axis)','x at ankle (z 80)',SIZ['ankle_pitch']['label']+' (screws differential)',
-      'same two screws; roll = differential stroke','±18° hard stop: 4 blocks + 2 mm PU on a carrier under the cross, faces at r45 (a14.json) strike foot shoulders [shoulder geometry EST]','FAIL',
+      'same two screws; roll = differential stroke','±18° hard stop: 4 blocks + 2 mm PU on a carrier under the cross, faces at r45 (a14.json) strike foot shoulders [shoulder geometry EST]','BUILDABLE',
       ['legs/results/r7/a14.json','actuators/results/ankle_stroke_73_r18_p45.json'],
-      f"FAIL: the screw bodies tilt up to {tilt:.1f}° out of the sagittal plane at ±18° roll, but their top mounts are y-axis pin trunnions (Actuators trunnion_pins_pair), which only allow sagittal swing. Needs a gimbal (2-axis) trunnion or a spherical GE12 top eye like the hip bodies.",
+      f"Body tilt {tilt:.1f}° out of plane is taken by the axial GE12 C top eye (α 10°, 0.6 mm clevis gap limits spin to 2.3°) and the QA1 27° bottom rod end (demand 20.8°), Actuators D60. Swept clear on pitch -45…+40 × roll ±18 (Legs L38 grid, out/clash_v4.json); QA1 head-to-lug ≥ 2.15 mm (Actuators hand incl. spin; model 2.75 mm). Pitch -60 is outside the ±45/40 range and clashes (fork cheek x stop carrier [EST], body x top clevis).",
       keys=('ankle-roll','roll pin','roll lug'))
 # ---------------- upper body (placeholders) ----------------
 for k,ax,att in (('waist_yaw','z','housing on pelvis deck; output -> waist yoke plate'),('waist_pitch','y','housing on single yoke cheek (-y); output (+y) -> torso floor deck bracket'),

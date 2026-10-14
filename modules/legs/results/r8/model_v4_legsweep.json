@@ -1,0 +1,258 @@
+{
+ "sweep": {
+  "hip_yaw": {
+   "limit": [
+    -35,
+    45
+   ],
+   "free": [
+    -35,
+    45
+   ],
+   "clashes": [],
+   "arm_leg": [
+    {
+     "angle": -30,
+     "pairs": [
+      [
+       "L_finger1 phalanx1 [EST]",
+       "L_knee trunnion bracket top plate (thigh) [EST]",
+       1027.9
+      ]
+     ]
+    },
+    {
+     "angle": -35,
+     "pairs": [
+      [
+       "L_finger1 phalanx1 [EST]",
+       "L_knee trunnion bracket top plate (thigh) [EST]",
+       1413.7
+      ]
+     ]
+    }
+   ],
+   "full_range_clear": true
+  },
+  "hip_roll": {
+   "limit": [
+    -12,
+    15
+   ],
+   "free": [
+    -12,
+    15
+   ],
+   "clashes": [],
+   "arm_leg": [
+    {
+     "angle": -12,
+     "pairs": [
+      [
+       "R_palm (7075 skeleton + PA12) [EST]",
+       "R_hip_pitch screw -y RV12 roller-screw rod \u00f812",
+       84.4
+      ],
+      [
+       "R_finger1 phalanx2 [EST]",
+       "R_hip_pitch screw -y body (hip_pitch_body_x1)",
+       443.3
+      ],
+      [
+       "R_finger1 phalanx3 [EST]",
+       "R_hip_pitch screw -y body (hip_pitch_body_x1)",
+       243.7
+      ],
+      [
+       "R_finger2 phalanx1 [EST]",
+       "R_hip_pitch screw -y RV12 roller-screw rod \u00f812",
+       215.7
+      ]
+     ]
+    },
+    {
+     "angle": 15,
+     "pairs": [
+      [
+       "L_palm (7075 skeleton + PA12) [EST]",
+       "L_hip_pitch screw +y RV12 roller-screw rod \u00f812",
+       279.1
+      ],
+      [
+       "L_finger2 phalanx1 [EST]",
+       "L_hip_pitch screw +y RV12 roller-screw rod \u00f812",
+       47.9
+      ],
+      [
+       "L_finger2 phalanx2 [EST]",
+       "L_hip_pitch screw +y body (hip_pitch_body_x1)",
+       790.9
+      ],
+      [
+       "L_finger2 phalanx3 [EST]",
+       "L_hip_pitch screw +y body (hip_pitch_body_x1)",
+       406.3
+      ]
+     ]
+    }
+   ],
+   "full_range_clear": true
+  },
+  "hip_pitch": {
+   "limit": [
+    -105,
+    40
+   ],
+   "free": [
+    -105,
+    40
+   ],
+   "clashes": [],
+   "arm_leg": [],
+   "full_range_clear": true
+  },
+  "knee": {
+   "limit": [
+    0,
+    135
+   ],
+   "free": [
+    0,
+    135
+   ],
+   "clashes": [],
+   "arm_leg": [],
+   "full_range_clear": true
+  },
+  "ankle_pitch": {
+   "limit": [
+    -45,
+    40
+   ],
+   "free": [
+    -45,
+    40
+   ],
+   "clashes": [],
+   "arm_leg": [],
+   "full_range_clear": true
+  },
+  "ankle_roll": {
+   "limit": [
+    -18,
+    18
+   ],
+   "free": [
+    -18,
+    18
+   ],
+   "clashes": [],
+   "arm_leg": [],
+   "full_range_clear": true
+  }
+ },
+ "grid": {
+  "-60,-18": [
+   [
+    "L_ankle fork cheek -y",
+    "L_ankle-roll stop carrier under cross [EST]",
+    37.3
+   ],
+   [
+    "L_ankle fork cheek +y",
+    "L_ankle-roll stop carrier under cross [EST]",
+    37.3
+   ],
+   [
+    "L_ankle screw -y body (ankle_body_x1)",
+    "L_ankle top clevis tine -yi (D60)",
+    8.3
+   ]
+  ],
+  "-60,-9": [
+   [
+    "L_ankle fork cheek -y",
+    "L_ankle-roll stop carrier under cross [EST]",
+    37.3
+   ],
+   [
+    "L_ankle fork cheek +y",
+    "L_ankle-roll stop carrier under cross [EST]",
+    37.3
+   ],
+   [
+    "L_ankle screw -y body (ankle_body_x1)",
+    "L_ankle top clevis tine -yi (D60)",
+    3.2
+   ]
+  ],
+  "-60,9": [
+   [
+    "L_ankle fork cheek -y",
+    "L_ankle-roll stop carrier under cross [EST]",
+    37.3
+   ],
+   [
+    "L_ankle fork cheek +y",
+    "L_ankle-roll stop carrier under cross [EST]",
+    37.3
+   ],
+   [
+    "L_ankle screw +y body (ankle_body_x1)",
+    "L_ankle top clevis tine +yi (D60)",
+    3.2
+   ]
+  ],
+  "-60,18": [
+   [
+    "L_ankle fork cheek -y",
+    "L_ankle-roll stop carrier under cross [EST]",
+    37.3
+   ],
+   [
+    "L_ankle fork cheek +y",
+    "L_ankle-roll stop carrier under cross [EST]",
+    37.3
+   ],
+   [
+    "L_ankle screw +y body (ankle_body_x1)",
+    "L_ankle top clevis tine +yi (D60)",
+    8.3
+   ]
+  ],
+  "-45,-18": [],
+  "-45,-9": [],
+  "-45,9": [],
+  "-45,18": [],
+  "-30,-18": [],
+  "-30,-9": [],
+  "-30,9": [],
+  "-30,18": [],
+  "-15,-18": [],
+  "-15,-9": [],
+  "-15,9": [],
+  "-15,18": [],
+  "0,-18": [],
+  "0,-9": [],
+  "0,9": [],
+  "0,18": [],
+  "15,-18": [],
+  "15,-9": [],
+  "15,9": [],
+  "15,18": [],
+  "30,-18": [],
+  "30,-9": [],
+  "30,9": [],
+  "30,18": [],
+  "40,-18": [],
+  "40,-9": [],
+  "40,9": [],
+  "40,18": []
+ },
+ "combos": {
+  "sit hip-90 knee120": [],
+  "deep squat hip-100 knee135": [],
+  "stance ankle -45 + roll 18": [],
+  "ankle +40 roll -18": []
+ }
+}

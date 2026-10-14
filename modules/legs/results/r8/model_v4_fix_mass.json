@@ -1,0 +1,17 @@
+{
+ "per_leg": {
+  "clamp_outer_step": -0.0208,
+  "clevis_cheek_round": -0.0235,
+  "instep_outrigger": 0.0309,
+  "instep_pin_plus5": 0.0089,
+  "ankle_top_clevis_vs_old": 0.0146,
+  "hip_yaw_stop": 0.0552,
+  "hip_roll_stop": 0.0345
+ },
+ "legs_delta_leg": 0.0998,
+ "legs_delta_both": 0.2,
+ "actuators_D59_62_both": 0.138,
+ "total_both": 0.338,
+ "reserve_R023": 0.375,
+ "note": "hip stop bumper/bracket masses [EST]"
+}

@@ -7,3 +7,4 @@ The box (about 1.2 GB free) can only run h ≥ 3–4 single-material parts. Use 
 5. **Tubes:** dent model with a bonded internal doubler 0.5 mm × 100 mm (DP490 0.10 mm layer) at mid-span, femur ø50 and tibia ø45. Report SF in the tube and the doubler, and the peel/shear in the bond (DP490 values in BOND_SPEC.md).
 6. **Hip ring:** retired. It is the obsolete ø80 CRBH geometry that L21 replaced, so don't re-run it.
 Deliverables: `results/r8gb/*.json`, a convergence table per item, and pass/fail.
+7. **(v4 audit, L37/L40)** Re-check the clamp with the outer arm stepped down to 24 mm over y 50–63, and the clevis with cheeks rounded R23 below the pin and trimmed 4 mm at the rear-top. Use the same loads as items 1–2.

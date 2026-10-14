@@ -1,105 +1,19 @@
 {
  "generated_by": "modules/model/audit_v4.py",
  "counts": {
-  "BUILDABLE": 4,
-  "FAIL": 2,
+  "BUILDABLE": 6,
   "PLACEHOLDER": 26
  },
  "missing_mechanism": [],
  "standing": {
-  "clashes": [
-   [
-    "L_knee screw -y body (knee_body_x1)",
-    "L_knee screw +y body (knee_body_x1)",
-    1256.6
-   ],
-   [
-    "R_knee screw -y body (knee_body_x1)",
-    "R_knee screw +y body (knee_body_x1)",
-    1256.6
-   ]
-  ],
+  "clashes": [],
   "floating": []
  },
  "combos": {
-  "sit hip-90 knee120": [
-   [
-    "L_knee screw -y body (knee_body_x1)",
-    "L_knee screw +y body (knee_body_x1)",
-    1256.6
-   ],
-   [
-    "R_knee screw -y body (knee_body_x1)",
-    "R_knee screw +y body (knee_body_x1)",
-    1256.6
-   ]
-  ],
-  "deep squat hip-100 knee135": [
-   [
-    "L_knee screw -y body (knee_body_x1)",
-    "L_knee screw +y body (knee_body_x1)",
-    1256.6
-   ],
-   [
-    "R_knee screw -y body (knee_body_x1)",
-    "R_knee screw +y body (knee_body_x1)",
-    1256.6
-   ]
-  ],
-  "stance ankle -45 + roll 18": [
-   [
-    "L_knee screw -y body (knee_body_x1)",
-    "L_knee screw +y body (knee_body_x1)",
-    1256.6
-   ],
-   [
-    "L_ankle screw -y GE12 C rod-end eye",
-    "L_instep lug r73 -y",
-    211.7
-   ],
-   [
-    "L_ankle screw +y RV12 roller-screw rod \u00f812",
-    "L_instep lug r73 +y",
-    6.4
-   ],
-   [
-    "L_ankle screw +y GE12 C rod-end eye",
-    "L_instep lug r73 +y",
-    61.0
-   ],
-   [
-    "R_knee screw -y body (knee_body_x1)",
-    "R_knee screw +y body (knee_body_x1)",
-    1256.6
-   ]
-  ],
-  "ankle +40 roll -18": [
-   [
-    "L_knee screw -y body (knee_body_x1)",
-    "L_knee screw +y body (knee_body_x1)",
-    1256.6
-   ],
-   [
-    "L_ankle screw -y RV12 roller-screw rod \u00f812",
-    "L_instep lug r73 -y",
-    19.5
-   ],
-   [
-    "L_ankle screw -y GE12 C rod-end eye",
-    "L_instep lug r73 -y",
-    61.0
-   ],
-   [
-    "L_ankle screw +y GE12 C rod-end eye",
-    "L_instep lug r73 +y",
-    211.7
-   ],
-   [
-    "R_knee screw -y body (knee_body_x1)",
-    "R_knee screw +y body (knee_body_x1)",
-    1256.6
-   ]
-  ]
+  "sit hip-90 knee120": [],
+  "deep squat hip-100 knee135": [],
+  "stance ankle -45 + roll 18": [],
+  "ankle +40 roll -18": []
  },
  "joints": [
   {
@@ -109,7 +23,7 @@
    "axis": "z (vertical) at hip centre +240 mm",
    "actuation": "TBM2G-06008A + CSG-17-100 (CSG-2A) + CRBH 6013 A (rotary)",
    "attachment": "housing bolted to pelvis deck [deck EST]; output flange -> yaw yoke plate [EST]",
-   "hard_stop": "internal soft limit; no mechanical stop modelled [EST needed]",
+   "hard_stop": "Legs L39: tab 10x12 on the yoke plate at r64 (midline side) strikes 2 PU 90A \u00f816x10 bumpers under the deck, contact at -35/+45 (swept); hold 70 N\u00b7m -> 1.1 kN",
    "status": "BUILDABLE",
    "sources": [
     "actuators/cad/hip_yaw_housing.step",
@@ -142,7 +56,7 @@
    "axis": "x (fore-aft) at hip +125 mm",
    "actuation": "TBM2G-08508A + CSG-25-100 (CSG-2A) + CRBH 6013 A (rotary)",
    "attachment": "housing back face on yaw-yoke rear cheek; output face -> roll bracket web -> lever hub pads [EST]",
-   "hard_stop": "internal soft limit; mechanical stop not modelled [EST needed]",
+   "hard_stop": "Legs L39: lug 12x12 on the roll-output web (r63) strikes 2 PU 90A \u00f820x10 bumpers under the yaw yoke plate, contact at -12/+15 (swept); hold 204 N\u00b7m -> 3.2 kN",
    "status": "BUILDABLE",
    "sources": [
     "actuators/cad/hip_roll_housing.step",
@@ -183,7 +97,7 @@
     "actuators/results/hp_pivot_needle.json",
     "legs/DECISIONS.md L18 L21 L22 L35"
    ],
-   "notes": "Pin-to-pin length 257.4-350.9 mm (stroke 93.6); Legs study stroke 86.6 over its -80..+40 bins. Lever strength O13 still OPEN (FEA v2/G2 queued): lever shown is config-B needle hub, not G2. Body-to-collar clearance 0.3 mm at stand (tight).",
+   "notes": "Pin-to-pin length 257.4-350.9 mm (stroke 93.6); Legs study stroke 86.6 over its -80..+40 bins. Lever strength O13 still OPEN (FEA v2/G2 queued): lever shown is config-B needle hub, not G2. Body clearance \u2265 3.0 mm to every thigh part (femur tube 3.0, collar > 6) measured over -105\u2026+40 (Actuators D62, Legs L37).",
    "model_parts": [
     "L_hip_pitch lever B needle hub (Actuators STEP; G2 rework queued)",
     "L_hip_pitch shaft \u00f835/30 x66 hardened",
@@ -192,10 +106,12 @@
     "L_hip_pitch -105\u00b0 PU bumper \u00f825x12 r80 (A6)",
     "L_hip_pitch bumper arm (bracket web -> bumper) [EST]",
     "L_clamp arm root -y (depth 34, r8)",
+    "L_clamp arm outer step -y (depth 24 to the tines, L37)",
     "L_clamp arm eye tine -yi [fork form EST]",
     "L_clamp arm eye tine -yo [fork form EST]",
     "L_clamp eye pin \u00f812x28 42CrMo4 -y",
     "L_clamp arm root +y (depth 34, r8)",
+    "L_clamp arm outer step +y (depth 24 to the tines, L37)",
     "L_clamp arm eye tine +yi [fork form EST]",
     "L_clamp arm eye tine +yo [fork form EST]",
     "L_clamp eye pin \u00f812x28 42CrMo4 +y",
@@ -233,28 +149,27 @@
    "actuation": "TBM2G-07613D + 2\u00d7 RV12x5 roller screw, arm 47.5 mm; lever r47.5 clock 0\u00b0",
    "attachment": "trunnion pins on thigh bracket at (x-130, +270) y\u00b145; GE12 C rod ends on the r47.5 crossbar",
    "hard_stop": "none modelled: extension limit by the screw end-of-stroke; flexion limit = first clash [stop EST needed]",
-   "status": "FAIL",
+   "status": "BUILDABLE",
    "sources": [
     "legs/results/r2/linkage_study.json",
     "actuators/cad/knee_lever_r47p5.step",
     "actuators/cad/knee_body_x1.step",
     "actuators/cad_mass.py lever(dy=45)"
    ],
-   "notes": "FAIL: at dy 45 the inner trunnion bosses of the twin bodies overlap (1257 mm\u00b3; bosses reach \u00b147 from each body axis). Both bodies share one trunnion axis, so the fix is kinematically free: merge the inner bosses into one twin housing, or widen dy past 47 mm plus room for an inner trunnion support (the Actuators lever(dy=45) would change). Pin-to-pin 255.3-343.1 mm (stroke 87.8; Legs study 87.8). Knee trunnion bracket geometry is [EST].",
+   "notes": "Pin-to-pin 255.3-343.1 mm (stroke 87.8; Legs study 87.8). Knee trunnion bracket geometry is [EST].",
    "model_parts": [
-    "L_knee clevis cheeks + bridge (r8: bridge +16, R6)",
-    "L_knee clevis cheek -y",
-    "L_knee clevis cheek +y",
+    "L_knee clevis bridge 40x70x22 + 16 mm pad over cheeks (fea_r8, L36)",
+    "L_knee clevis cheek -y 46x14x62 (fea_r5/r8)",
+    "L_knee clevis cheek +y 46x14x62 (fea_r5/r8)",
     "L_knee pin \u00f816 (through clevis + lever cheeks)",
     "L_knee tongue (shank)",
     "L_knee tongue neck into tibia",
     "L_knee lever r47.5 (Actuators STEP)",
-    "L_knee screw -y body (knee_body_x1)",
     "L_knee screw -y RV12 roller-screw rod \u00f812",
     "L_knee screw -y GE12 C rod-end eye",
-    "L_knee screw +y body (knee_body_x1)",
     "L_knee screw +y RV12 roller-screw rod \u00f812",
     "L_knee screw +y GE12 C rod-end eye",
+    "L_knee twin housing (Actuators D59 STEP, shared centre web)",
     "L_knee trunnion bracket top plate (thigh) [EST]",
     "L_knee trunnion bracket strut to femur [EST]",
     "L_knee trunnion cheek -y [EST]",
@@ -272,7 +187,8 @@
    ],
    "first_clash": [],
    "arm_leg_contacts": [],
-   "mechanism_present": true
+   "mechanism_present": true,
+   "range_clear": true
   },
   {
    "joint": "ankle_pitch",
@@ -280,7 +196,7 @@
    "bearing": "Ti universal cross: \u00f812 pitch pin stubs in shank fork cheeks",
    "axis": "y at ankle (z 80)",
    "actuation": "TBM2G-06013D + 2\u00d7 RV12x4 roller screw, arm 73.0 mm (both screws in phase)",
-   "attachment": "trunnion pins \u00f89 at (x90, z410) y\u00b145 on shank bracket [bracket EST]; GE12 C rod ends on instep pins r73 (L23)",
+   "attachment": "axial GE12 C top eyes in two shank clevises at (x90, z450) y\u00b145, slot 11.95, PTFE washers, \u00f812 pins (Actuators D60/D61); QA1 MGF12T 27\u00b0 rod ends + 4.5 mm spacer on instep pins r73, lug inner face y57.5 on an outrigger beam (L23/L38)",
    "hard_stop": "screw end-of-stroke; no mechanical stop modelled",
    "status": "BUILDABLE",
    "sources": [
@@ -288,14 +204,16 @@
     "legs/DECISIONS.md L23",
     "actuators/cad/ankle_body_x1.step"
    ],
-   "notes": "Actuators stroke check: Lmin 262.6 / Lmax 374.3 mm, margin 11.9 mm. Ankle body fins overlap its own trunnion bosses in the Actuators STEP (z 6-36 vs boss z 11-31) - check.",
+   "notes": "Actuators stroke check: Lmin 262.6 / Lmax 374.3 mm, margin 11.9 mm. Body bosses removed in D61.",
    "model_parts": [
+    "L_ankle screw -y axial GE12 C top eye \u00f830x12 (D60)",
     "L_ankle screw -y body (ankle_body_x1)",
     "L_ankle screw -y RV12 roller-screw rod \u00f812",
-    "L_ankle screw -y GE12 C rod-end eye",
+    "L_ankle screw -y QA1 MGF12T 27\u00b0 rod end \u00f830x10.75 (D60)",
+    "L_ankle screw +y axial GE12 C top eye \u00f830x12 (D60)",
     "L_ankle screw +y body (ankle_body_x1)",
     "L_ankle screw +y RV12 roller-screw rod \u00f812",
-    "L_ankle screw +y GE12 C rod-end eye",
+    "L_ankle screw +y QA1 MGF12T 27\u00b0 rod end \u00f830x10.75 (D60)",
     "L_ankle cross Ti-6Al-4V",
     "L_ankle pitch pin stub \u00f812 -y",
     "L_ankle pitch pin stub \u00f812 +y"
@@ -321,12 +239,12 @@
    "actuation": "TBM2G-06013D + 2\u00d7 RV12x4 roller screw, arm 73.0 mm (screws differential)",
    "attachment": "same two screws; roll = differential stroke",
    "hard_stop": "\u00b118\u00b0 hard stop: 4 blocks + 2 mm PU on a carrier under the cross, faces at r45 (a14.json) strike foot shoulders [shoulder geometry EST]",
-   "status": "FAIL",
+   "status": "BUILDABLE",
    "sources": [
     "legs/results/r7/a14.json",
     "actuators/results/ankle_stroke_73_r18_p45.json"
    ],
-   "notes": "FAIL: the screw bodies tilt up to 1.8\u00b0 out of the sagittal plane at \u00b118\u00b0 roll, but their top mounts are y-axis pin trunnions (Actuators trunnion_pins_pair), which only allow sagittal swing. Needs a gimbal (2-axis) trunnion or a spherical GE12 top eye like the hip bodies.",
+   "notes": "Body tilt 1.6\u00b0 out of plane is taken by the axial GE12 C top eye (\u03b1 10\u00b0, 0.6 mm clevis gap limits spin to 2.3\u00b0) and the QA1 27\u00b0 bottom rod end (demand 20.8\u00b0), Actuators D60. Swept clear on pitch -45\u2026+40 \u00d7 roll \u00b118 (Legs L38 grid, out/clash_v4.json); QA1 head-to-lug \u2265 2.15 mm (Actuators hand incl. spin; model 2.75 mm). Pitch -60 is outside the \u00b145/40 range and clashes (fork cheek x stop carrier [EST], body x top clevis).",
    "model_parts": [
     "L_ankle-roll \u00b118\u00b0 stop block 20x12x10 + 2 mm PU R-y (A14, face r45)",
     "L_ankle-roll \u00b118\u00b0 stop block 20x12x10 + 2 mm PU R+y (A14, face r45)",
@@ -348,7 +266,8 @@
    ],
    "first_clash": [],
    "arm_leg_contacts": [],
-   "mechanism_present": true
+   "mechanism_present": true,
+   "range_clear": true
   },
   {
    "joint": "waist_yaw",
@@ -372,21 +291,10 @@
     -90,
     90
    ],
-   "swept_clear": [
-    -90,
-    90
-   ],
+   "swept_clear": null,
    "first_clash": [],
-   "arm_leg_contacts": [
-    -45,
-    -30,
-    -15,
-    15,
-    30,
-    45
-   ],
-   "mechanism_present": true,
-   "range_clear": true
+   "arm_leg_contacts": [],
+   "mechanism_present": true
   },
   {
    "joint": "waist_pitch",
@@ -410,14 +318,10 @@
     -30,
     60
    ],
-   "swept_clear": [
-    -30,
-    60
-   ],
+   "swept_clear": null,
    "first_clash": [],
    "arm_leg_contacts": [],
-   "mechanism_present": true,
-   "range_clear": true
+   "mechanism_present": true
   },
   {
    "joint": "shoulder_pitch",
@@ -441,14 +345,10 @@
     -180,
     60
    ],
-   "swept_clear": [
-    -180,
-    60
-   ],
+   "swept_clear": null,
    "first_clash": [],
    "arm_leg_contacts": [],
-   "mechanism_present": true,
-   "range_clear": true
+   "mechanism_present": true
   },
   {
    "joint": "shoulder_roll",
@@ -462,7 +362,7 @@
    "sources": [
     "v3/cad/model.py layout (catalog envelopes)"
    ],
-   "notes": "No module has engineered this joint. Clash-free range -5..175\u00b0 vs -15..180\u00b0 required: hard stop must sit inside the clash-free range.",
+   "notes": "No module has engineered this joint.",
    "model_parts": [
     "L_shoulder_roll strain-wave housing (motor+CSG) OD84 [EST]",
     "L_shoulder_roll crossed-roller bearing [EST]",
@@ -472,45 +372,10 @@
     -15,
     180
    ],
-   "swept_clear": [
-    -5,
-    175
-   ],
-   "first_clash": [
-    [
-     -10,
-     [
-      [
-       "pelvis shell 7075 4 mm (open top/bottom)",
-       "L_elbow clevis [EST]"
-      ],
-      [
-       "pelvis shell 7075 4 mm (open top/bottom)",
-       "L_elbow strain-wave housing (motor+CSG) OD72 [EST]"
-      ],
-      [
-       "pelvis shell 7075 4 mm (open top/bottom)",
-       "L_forearm shell (6 tendon drives inside) [EST]"
-      ]
-     ]
-    ],
-    [
-     180,
-     [
-      [
-       "L_shoulder pitch output flange [EST]",
-       "L_roll-yaw link [EST]"
-      ]
-     ]
-    ]
-   ],
-   "arm_leg_contacts": [
-    -15,
-    -10,
-    -5
-   ],
-   "mechanism_present": true,
-   "range_clear": false
+   "swept_clear": null,
+   "first_clash": [],
+   "arm_leg_contacts": [],
+   "mechanism_present": true
   },
   {
    "joint": "shoulder_yaw",
@@ -534,16 +399,10 @@
     -150,
     150
    ],
-   "swept_clear": [
-    -150,
-    150
-   ],
+   "swept_clear": null,
    "first_clash": [],
-   "arm_leg_contacts": [
-    -90
-   ],
-   "mechanism_present": true,
-   "range_clear": true
+   "arm_leg_contacts": [],
+   "mechanism_present": true
   },
   {
    "joint": "elbow",
@@ -557,7 +416,7 @@
    "sources": [
     "v3/cad/model.py layout (catalog envelopes)"
    ],
-   "notes": "No module has engineered this joint. Clash-free range -115..0\u00b0 vs -140..0\u00b0 required: hard stop must sit inside the clash-free range.",
+   "notes": "No module has engineered this joint.",
    "model_parts": [
     "L_elbow clevis [EST]",
     "L_elbow strain-wave housing (motor+CSG) OD72 [EST]",
@@ -568,24 +427,10 @@
     -140,
     0
    ],
-   "swept_clear": [
-    -115,
-    0
-   ],
-   "first_clash": [
-    [
-     -120,
-     [
-      [
-       "L_upper arm tube 7075 \u00f850x2 [EST]",
-       "L_forearm shell (6 tendon drives inside) [EST]"
-      ]
-     ]
-    ]
-   ],
+   "swept_clear": null,
+   "first_clash": [],
    "arm_leg_contacts": [],
-   "mechanism_present": true,
-   "range_clear": false
+   "mechanism_present": true
   },
   {
    "joint": "wrist_roll",
@@ -609,16 +454,10 @@
     -170,
     170
    ],
-   "swept_clear": [
-    -170,
-    170
-   ],
+   "swept_clear": null,
    "first_clash": [],
-   "arm_leg_contacts": [
-    -90
-   ],
-   "mechanism_present": true,
-   "range_clear": true
+   "arm_leg_contacts": [],
+   "mechanism_present": true
   },
   {
    "joint": "wrist_pitch",
@@ -632,7 +471,7 @@
    "sources": [
     "v3/cad/model.py layout (catalog envelopes)"
    ],
-   "notes": "No module has engineered this joint. Clash-free range -40..40\u00b0 vs -70..70\u00b0 required: hard stop must sit inside the clash-free range.",
+   "notes": "No module has engineered this joint.",
    "model_parts": [
     "L_wrist pitch/yaw cross (2x micro strain-wave drive in forearm, push rods) [EST]",
     "L_wrist pitch pin \u00f86 [EST]"
@@ -641,33 +480,10 @@
     -70,
     70
    ],
-   "swept_clear": [
-    -40,
-    40
-   ],
-   "first_clash": [
-    [
-     -45,
-     [
-      [
-       "L_wrist roll output fork [EST]",
-       "L_palm (7075 skeleton + PA12) [EST]"
-      ]
-     ]
-    ],
-    [
-     45,
-     [
-      [
-       "L_wrist roll output fork [EST]",
-       "L_palm (7075 skeleton + PA12) [EST]"
-      ]
-     ]
-    ]
-   ],
+   "swept_clear": null,
+   "first_clash": [],
    "arm_leg_contacts": [],
-   "mechanism_present": true,
-   "range_clear": false
+   "mechanism_present": true
   },
   {
    "joint": "wrist_yaw",
@@ -681,7 +497,7 @@
    "sources": [
     "v3/cad/model.py layout (catalog envelopes)"
    ],
-   "notes": "No module has engineered this joint. Clash-free range -25..25\u00b0 vs -40..40\u00b0 required: hard stop must sit inside the clash-free range.",
+   "notes": "No module has engineered this joint.",
    "model_parts": [
     "L_wrist pitch/yaw cross (2x micro strain-wave drive in forearm, push rods) [EST]",
     "L_wrist pitch pin \u00f86 [EST]"
@@ -690,38 +506,10 @@
     -40,
     40
    ],
-   "swept_clear": [
-    -25,
-    25
-   ],
-   "first_clash": [
-    [
-     -30,
-     [
-      [
-       "L_wrist roll output fork [EST]",
-       "L_palm (7075 skeleton + PA12) [EST]"
-      ]
-     ]
-    ],
-    [
-     30,
-     [
-      [
-       "L_wrist roll output fork [EST]",
-       "L_palm (7075 skeleton + PA12) [EST]"
-      ]
-     ]
-    ]
-   ],
-   "arm_leg_contacts": [
-    -30,
-    -25,
-    -20,
-    -15
-   ],
-   "mechanism_present": true,
-   "range_clear": false
+   "swept_clear": null,
+   "first_clash": [],
+   "arm_leg_contacts": [],
+   "mechanism_present": true
   },
   {
    "joint": "neck_yaw",
@@ -745,14 +533,10 @@
     -80,
     80
    ],
-   "swept_clear": [
-    -80,
-    80
-   ],
+   "swept_clear": null,
    "first_clash": [],
    "arm_leg_contacts": [],
-   "mechanism_present": true,
-   "range_clear": true
+   "mechanism_present": true
   },
   {
    "joint": "neck_pitch",
@@ -776,14 +560,10 @@
     -40,
     40
    ],
-   "swept_clear": [
-    -40,
-    40
-   ],
+   "swept_clear": null,
    "first_clash": [],
    "arm_leg_contacts": [],
-   "mechanism_present": true,
-   "range_clear": true
+   "mechanism_present": true
   },
   {
    "joint": "finger1_j1",
