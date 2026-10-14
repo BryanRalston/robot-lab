@@ -762,3 +762,13 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
 - Impact angle limit is 15° from the core axis. T-030 counts hits beyond it as a fail.
 - **The mount counts.** The 0.100 cap covers the whole pad assembly, mount included. The 7075 doubler is required because the PC cap can't carry the load. The pair is booked at **0.127** (0.097 + 0.030 estimate). ID and Materials should make the doubler *replace* the 3 mm PC saddle and report the net.
 - Reserve ~0.29, **0.01 under the floor**. That's tolerated until the hip-lever reconciliation (R-056), which is booked at the conservative +0.43. If it lands with no credit, an offset is due within a round.
+
+## R-061 (2026-10-14) Hand board rev (Electronics 8f4bad8)
+- XMC4800-F100K2048 replaces the XMC4300 and is **ratified conditionally**. It has 2 HW quadrature decoders but 6 ENX22 encoders, so Electronics must show the other 4 decode correctly (CCU capture or a similar method) at max motor speed with margin. If not, it comes back to me. Dropping the STM32H7 is accepted.
+- DP83822HF PHYs (125 C) are accepted, so **O-E12 closes**.
+- Hand-motor leads -0.274: **no credit**. The 0.404 (option A) was rejected in R-046 and never booked; the booked delta stays at R-047's +0.077. Electronics confirms the B-config leads fit within that +0.077.
+- Bay-air NTC +0.010 is accepted.
+- Board power is now ~4.3 W hot, above the 2–4 W A43C basis, so A43 is open again until Thermal re-checks.
+- The two R-055 assumptions (MCU supply isn't switched with the hand rails; RP40 remote-off uses the existing line) must be verified against the power tree and pinout before G1.
+- Stack 12.4/12.5 mm fits on paper; Arms CAD confirms.
+- Reserve ~0.28 (the floor tolerance from R-060 continues).
