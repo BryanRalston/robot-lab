@@ -1090,3 +1090,6 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
 - The L61 design (Ultem 4001 9/21x20, 33.1 K/W, 14.0 MPa) is technically accepted and booked provisionally at **+0.070** in full. Reserve ~-0.65.
 - +74 g for a heat break is poor value. Trade study ordered: Materials/Thermal look at a bond rated for >=80 C service (higher-Tg adhesive or a mechanical joint) so the break can be dropped or thinned. If it closes, the bush mass is removed. ID checks the 14 mm outward boss.
 - Sole: 3 mm 7373 is available (Leffler); 75A reseller data passes the gate. L59 stands.
+
+## R-111 (2026-10-14) Conditional lighter trunnion break (Thermal 8e2e131)
+- If Materials qualifies a bond rated >=80 C (cited), the trunnion break minimum becomes **>=10 K/W** (70 C worst case at collar R 14 K/W). Legs sizes a thin-wall version of the L61 bush now. The credit is booked only after the bond is cited and the sized mass is known. If the bond is not qualified, L61 stands. J-T1/G5 collar R is still the gate.
