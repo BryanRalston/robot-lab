@@ -26,6 +26,8 @@
   "D72_wrist_leads_both_kg": 0.488,
   "net_both_kg": 0.063,
   "status": "pending Arbiter",
-  "src": "results/d70_wrist.json"
+  "src": "results/d70_wrist.json",
+  "D72_status": "merged into harness.py (harness total 1.4959 -> 1.9841, +0.4882)",
+  "harness_total_kg": 1.9840943079530156
  }
 }

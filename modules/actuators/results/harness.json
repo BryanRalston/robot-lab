@@ -489,6 +489,20 @@
    "cond": 3,
    "gpm": 5.4,
    "kg": 0.031104
+  },
+  {
+   "item": "D72 wrist motor leads L (2 motors: phase/encoder/thermistor)",
+   "n": 2,
+   "len_m": 1.7,
+   "gpm": 63.7,
+   "kg": 0.21658000000000002
+  },
+  {
+   "item": "D72 wrist motor leads R (2 motors: phase/encoder/thermistor)",
+   "n": 2,
+   "len_m": 1.7,
+   "gpm": 63.7,
+   "kg": 0.21658000000000002
   }
  ],
  "power_wire_kg": 0.5138723640312831,
@@ -521,18 +535,18 @@
     "evidence": "41.4 g/pair distributor listing (Rotorama)"
    }
   },
-  "kg": 0.25807199999999997
+  "kg": 0.261144
  },
- "sleeving_kg": 0.13047976156639451,
+ "sleeving_kg": 0.18245896156639452,
  "ecat_junction_kg": 0.02,
- "total_kg": 1.4958831079530155,
+ "total_kg": 1.9840943079530156,
  "R4_model_kg": 0.821,
  "R018_credited_kg": 1.344,
  "contract": 2.0,
  "worst_dV_pct": 0.7828447039212263,
  "worst_dT_K": 14.40771063779263,
  "min_bend_ratio": 8.095238095238095,
- "a25_extra_kg": 0.20920436057656644,
+ "a25_extra_kg": 0.6423643605765664,
  "sto_kg": 0.20553596294130863,
  "sto_with_sleeve_kg": 0.2302002784942657,
  "coax": {

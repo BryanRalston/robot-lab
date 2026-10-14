@@ -106,6 +106,12 @@ COAX['PoC_loop_ohm']=coax_row['len_m']*(747+50)/1000; COAX['neck_r_mm']=coax_row
 sto_kg=sum(r['kg'] for r in rows if r['item'].startswith('STO'))
 for nm,n,L,a,c in local: m=n*L*c*SIF[a][0]/1000; rows.append(dict(item=nm,n=n,len_m=L,mm2=a,cond=c,gpm=SIF[a][0],kg=m)); wire+=m
 con=sum(v[0]*v[1] for v in CON.values())
+# D72 (Electronics R1 §10.6, accepted): wrist D70 motor leads shoulder bay -> wrist, 1.7 m/side, 2 motors/side, 2 sides.
+# per motor: phase 3x SiF 0.25 twisted + encoder Belden MRTA2P26S + 2x SiF 0.25 + thermistor 2x SiF 0.25 (63.7 g/m); 2 JST-GH 4p pairs/motor
+WL=1.7
+for side in ('L','R'):
+    m=2*WL*(7*SIF[0.25][0]+ECAT['gpm'])/1000; rows.append(dict(item=f'D72 wrist motor leads {side} (2 motors: phase/encoder/thermistor)',n=2,len_m=WL,gpm=7*SIF[0.25][0]+ECAT['gpm'],kg=m)); xtra+=m
+con+=4*2*0.000384
 junction=0.020   # EtherCAT 4-port junction PCB in torso [EST]
 sleeve=0.12*(wire+ecat+xtra)
 total=wire+ecat+xtra+con+sleeve+junction
