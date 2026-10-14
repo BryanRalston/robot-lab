@@ -22,7 +22,11 @@ Hull areas now come from the final `legs/results/v5/ENVELOPES_FOR_ID.md`: knee_c
 **Knee cap vs thigh fairing clearance (Legs):** no overlap from 0 to 135°. Minimum keep-out gap is **10.2 mm at 135°** (22 mm from 0 to 105°). After the D69 ø85 knee housing (+4.5 mm radial) it is **≈ 5.7 mm [EST]**, still above the 3 mm PC flex gap. Recheck after the D69 re-CAD.
 
 ## Shoulder impact pad (R-042, P-051 proposed): see `SHOULDER_PAD.md`
-R2: 40 mm EPP failed against the real crush curve (Materials). R5 (R-054 accepted R4 at 0.100; Arms relocation): same 4.5 pcf 62×62×57 core on a conformal PC saddle outboard of the roll housing (y ≈ +0.30), core-sized face plate. **0.097 kg pair**, 8.94 kN / 537 N·m, 282 J, 66.5 mm stack. Arm shells stay deferred.
+R2: 40 mm EPP failed against the real crush curve (Materials). R6 (R-060): roll-output mount, 7075 doubler replaces the PC saddle, lot-tested 4.5 pcf core 60.9×60.9×55. **0.1 kg pair** (booked 0.127), 9.16 kN / 550 N·m, 275 J min. Arm shells stay deferred.
+
+## R-059 / R-060 decisions (recorded)
+- Pad R5 accepted (R-059), then R-060: the mount counts inside the cap, a 7075 doubler is required, the pad is booked 0.127 → R6 above at 0.100. Lot-tested cores ±5 % + G5 rate factor; 15° impact limit.
+- Wrist fairing accepted at +0.079; torso-facing orientation forbidden.
 
 ## R-054 decisions (recorded)
 - Pad R4 accepted at 0.100 kg pair (booked); R5 relocation is 0.097. Cover trims accepted at **−0.118** (half-credit).
@@ -52,10 +56,24 @@ Basis: Actuators D76 (pitch CSG-14-100 + yaw CSF-11-100 units side by side, axia
 - **Mass (PC 1.5, ρ 1.20):** skin 0.044 m² → 0.079 + 4 inserts 0.016 = **0.095 kg/side, 0.190 pair**. Against a plain ø70 forearm shell over the same 141 mm (0.056/side): **+0.039/side, +0.079 pair**. This is an **Arms R2 arm-shell item**: arm shells are deferred and not booked, and since > 0.02 it needs a ruling when they're booked.
 - **Palm grasp clearance:** the fairing is proximal to the pivot (from z +3) and 19 mm per side wider than the 86 palm. For a power grasp the object sits distal of the pivot, so there's no conflict at neutral. At wrist yaw ±30° / pitch ±60° (P-026 ROM) the palm flank swings toward the fairing flank. **No repo CAD for the hand vs fairing sweep: Arms to check ≥ 5 mm at the yaw/pitch limits** (cuff taper to 116 helps).
 - **A44 tuck torso clearance:** the forearm capsule (r 38) clears the torso by **8.6 mm** (Arms R5). If the 124 mm width faces the torso in the tuck, half-width 62 vs 38 → **−15.4 mm clash**. If the wide axis lies parallel to the chest (depth 35 ≤ 38), it is unchanged, **+8.6 mm**. The forearm roll in the tuck pose isn't in the repo: **Arms/Controls to confirm the wrist yaw/pitch unit axis is parallel to the chest in the tuck** (or set wrist roll to make it so).
+- **R-059: accepted at +0.079 pair.** The wide axis must be **parallel to the chest in the tuck; torso-facing is FORBIDDEN** (−15.4 mm clash).
+- **New tuck (Arms c64ab91):** shoulder roll −5, yaw −60, **pitch −30**, elbow −110 → forearm 28.0 mm, wrist **27.8 mm clear** with the width parallel to the chest. Controls to adopt.
+- **Lower (cuff) edge at z ≥ +10 above the wrist pivot over |y| ≤ 62**, and outside r 24.5 + 5 near the pivot (Arms hand calc: palm top ≈ z +5 over pitch ±60 × yaw ±30; bryan-PC sweep to confirm). The cuff taper now ends at z +10, not z +3.
+- **Trims (per side):**
+
+  | trim | kg/side |
+  |---|---|
+  | 1.2 mm PC on the y-flats (low draw, 2 x 54 x 96 mm) | -0.0037 |
+  | dorsal motor slots 20 % (3 mm slots, 2 rows/unit) | -0.0024 |
+  | shorter blends 25->15 mm (elbow) and 20->12 mm (cuff); cuff edge held at z >= +10 over |y|<=62 (Arms sweep) | -0.0106 |
+  | palm-side half as open frame (40 % of area kept, 6 mm rims) | -0.0185 |
+  | **total** | **-0.0353** |
+
+  Pair -0.071 → fairing 0.119 pair, **+0.008 vs a plain ø70 shell (booked +0.079 → -0.071)**. The palm-side open frame exposes tendons to grasped objects; Arms to accept, or drop that item (−0.037 pair).
 - **Verdict: ACCEPTABLE WITH CONDITIONS:** (1) Arms confirms the tuck orientation (wide axis parallel to the chest), otherwise a −15.4 mm clash; (2) Arms hand-sweep check ≥ 5 mm at yaw ±30° / pitch ±60°; (3) Thermal confirms the venting need; (4) +0.079 pair is booked with the arm shells at Arms R2 (ruling needed, > 0.02).
 
 ## R-047 offsets
-See `COVER_TRIMS_R047.md`: −0.236 kg itemized (−0.118 at half-credit; pad item −0.005; grille included).
+See `COVER_TRIMS_R047.md` (rev A36/R6): cover items −0.145 (−0.073 half credit, **+0.044 short of the booked −0.117**), covered by pad R6 −0.027 and wrist trims −0.036 half credit → net −0.019.
 
 ## A29 panel layout and mould list (owner: Industrial Design per R-029)
 Status: layout from Legs keep-out hulls + model_v4 dims, **not yet measured on v4 CAD** (areas [EST]). Delta check: itemized `modules/design/cover_set_v5.json` = **−0.124 kg vs booked (−0.184 CF thigh): PASS**; P-022 +20 % flagged.
@@ -76,11 +94,16 @@ Rigid thermoform tools: **8** (shin deleted, since the lower shank and knee sadd
 ## Area measurement status (R-030)
 Not measured yet. Measuring trimmed panel areas needs the build123d model_v4 rebuild plus the Legs keep-out STLs (not on main), which is a heavy CAD job. Route it to Bryan's PC. Until then `cover_set_v5.json` areas stay [EST] (`measured: false`). Re-rule trigger: any panel measuring > 10 % over its estimate.
 
-## A36 / P-026 vent panels (stub, waiting on Thermal A35)
-R-030 P-026: no closed PC over hip-pitch or knee. The knee cap, hip skirt and thigh panels must be louvred (≥ 30 % open area) or made of CF/aluminium. Thermal's A35 per-joint open-area and airflow spec is **not on main** yet; only `thermal/R1_BUDGET.md` recommends ≥ 30 % louvred/perforated panels.
-- Expected direction: louvres in PC remove material, so mass goes down (≈ −30 % on the affected panels: thigh 0.443, knee cap 0.139 → ≈ −0.17 kg [EST]; no shin panel, and knee saddle/lower shank stay open air), minus the rim/rib stiffening at the louvres (≈ +0.03 [EST]). Al 0.8 mm instead of PC would be heavier (+49 % per m²): **flag to the Arbiter if chosen.**
-- The hip skirt is fabric (P-023); a mesh insert at the hip-pitch zone meets the intent with no mass change [EST].
-- Draft to be done when A35 lands.
+## A36 / P-026 vent layout to Thermal A35 (A35_VENT_SPEC.md f4e6dfb, D68 7675c8b, D69C b785697): `a36_vents.py` → `a36_vents.json`
+Rules per joint per leg: inlet ≥ 50 cm² and ≥ 30 % of the panel over the housing; outlet ≥ 60 cm² and ≥ 35 %; fin tips ≥ 8 mm from the cover's inner face (never < 5); slots ≥ 3 mm, no mesh < 2 mm; low-front in → axial along the cans (louvres aligned with the fins) → out high-rear/outboard.
+| joint | inlet | open cm² | outlet | standoff |
+|---|---|---|---|---|
+| hip_pitch | front-lower thigh fairing below the P-023 skirt line, axial slots | 75 (30 % of ~250) | rear-upper/outboard at skirt hem: laser-cut slotted band in the skirt fabric (slots 3x20 mm), routed outboard of the thigh-clamp collar (collar uncovered); band 171 cm² at 35 % = 60 cm² | ≥ 8 mm from the screw/can, in the existing keep-out (+5) plus the 3 mm flex gap = 8 |
+| knee | front-lower thigh fairing over the housing (axial slots 3-4 mm, aligned with front 9 mm fins) + knee cap louvres as ram entry | 84 (30 % of ~280) + knee cap 109 | rear (popliteal) high: thigh fairing has no rear panel -> free outlet, rear 25 mm fins in free air (>= 60 cm2 trivially) | front fins 9 mm -> fairing inner face at r 59.5 from housing axis (fin tip + 8): local bulge +12 mm vs the R1 keep-out (housing + 5) |
+- **Thigh-clamp collar stays uncovered**; the hip exhaust leaves at the skirt hem rear-outboard, outboard of the collar.
+- **Knee cap (P-022):** the rear 25 mm and front 9 mm fins are on the knee housing at thigh z ≈ 770, ≥ 110 mm from the knee-cap keep-out (Legs 6f53d77). The cap never closes over them, so no reshape is needed for fins. The cap gets 30 % louvres plus an inlet lip; its top edge stays ≤ z 555.
+- **Panel-area check vs Thermal's ~430 cm²:** ours is ~280 (knee) / ~250 (hip), since the fairing is front + outboard only and the rear is open. The % rules govern; open areas still meet ≥ 50/60. Thermal to confirm the rear-open outlet counts.
+- **Mass (pair):** thigh -0.026 (slots minus the +12 mm fin bulge), knee cap -0.033, hip skirt **+0.004 (ADDED: hem stiffener ring holding the exhaust open)**; total **-0.055**. **R-047 item 1 goes from −0.154 to -0.055 (+0.099 less saving: FLAG).**
 
 ## Option: untrimmed set (`python3 cover_set_v5.py --untrimmed` → `cover_set_v5_untrimmed.json`)
 Full-wrap shin/thigh fairings (0.70 hull), foot shell 0.40, upper-arm (ø95×260) + forearm (ø85×250) shells + shoulder caps as placeholders. P-020 1.073 m² → 2.012 kg (+0.855 vs booked) + P-022…P-025 0.383 → **+1.255 kg** (recomputed on the final Legs hulls; was +1.238). Rejected by R-029 against the 1.329 kg reserve / 0.30 floor; kept for reference only.

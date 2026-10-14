@@ -1,0 +1,33 @@
+{
+ "joints": {
+  "knee": {
+   "panel_cm2": 280,
+   "inlet": "front-lower thigh fairing over the housing (axial slots 3-4 mm, aligned with front 9 mm fins) + knee cap louvres as ram entry",
+   "inlet_open_cm2": 84,
+   "outlet": "rear (popliteal) high: thigh fairing has no rear panel -> free outlet, rear 25 mm fins in free air (>= 60 cm2 trivially)",
+   "outlet_open_cm2": "open (no panel)",
+   "standoff": "front fins 9 mm -> fairing inner face at r 59.5 from housing axis (fin tip + 8): local bulge +12 mm vs the R1 keep-out (housing + 5)"
+  },
+  "hip_pitch": {
+   "panel_cm2": 250.0,
+   "inlet": "front-lower thigh fairing below the P-023 skirt line, axial slots",
+   "inlet_open_cm2": 75,
+   "outlet": "rear-upper/outboard at skirt hem: laser-cut slotted band in the skirt fabric (slots 3x20 mm), routed outboard of the thigh-clamp collar (collar uncovered)",
+   "outlet_open_cm2": 60,
+   "outlet_band_cm2": 171
+  }
+ },
+ "thermal_430_check": "ID panel over housing: knee ~280 cm2, hip ~250 cm2 vs Thermal 430 [EST]; ours smaller (front+outboard only, rear open), so % rules govern; open areas still >= 50/60",
+ "per_side_kg": {
+  "thigh": -0.0131,
+  "knee_cap": -0.0167,
+  "hip_skirt": 0.0022
+ },
+ "pair_kg": {
+  "thigh": -0.026,
+  "knee_cap": -0.033,
+  "hip_skirt": 0.004,
+  "total": -0.055
+ },
+ "knee_cap_clearance": "Legs 6f53d77: finned housing >= 110 mm from knee-cap keep-out; cap top edge stays <= z 555; no reshape needed for fins; cap gets 30 % louvres + inlet lip"
+}

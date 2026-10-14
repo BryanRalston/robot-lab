@@ -1,39 +1,36 @@
 {
  "items": [
   {
-   "item": "P-026 louvres 30 % open on thigh fairing + knee cap (cut slots, CNC trim)",
-   "kg": -0.154,
-   "evidence": "calc: skin thigh 0.427 + knee 0.131 kg x 0.30 open x (1-0.15 rib allowance); plus knee-housing front grille 115x110 mm/side at 60 % open merged over the louvres (-0.0116 kg); R-030 P-026 requires >=30 % open; Thermal A35 per-joint spec pending"
+   "item": "P-026 vents to A35 (thigh hip+knee inlets, knee-cap louvres, fin bulge +12 mm, skirt hem exhaust)",
+   "kg": -0.055,
+   "evidence": "a36_vents.json: thigh -0.026, knee cap -0.033, skirt +0.004"
   },
   {
-   "item": "PC 1.2 mm avg (min post-form 0.9 mm) on thigh outboard + foot top (low draw)",
-   "kg": -0.064,
-   "evidence": "calc: (thigh outboard 0.149 after louvres + foot 0.171) x 0.3/1.5; Materials REVIEW_R1 (a) basis 0.3 mm x area x 1.20; bending stiffness x0.51 (t^3) -> 2 formed ribs on thigh outboard, foot shell EPP-backed; dent check (Materials A15) open. Thigh front (2:1) and knee cap (2.5:1) stay 1.5 mm"
+   "item": "PC 1.2 mm avg (min 0.9) on thigh outboard + foot top",
+   "kg": -0.077,
+   "evidence": "calc (thigh outboard 0.213 + foot 0.171) x 0.3/1.5; ribs on thigh outboard; dent check A15 open"
   },
   {
-   "item": "hip-skirt rim strips PC 1.5 -> printed PA12 MJF 1.2 mm",
+   "item": "hip-skirt rim strips -> printed PA12 1.2 mm",
    "kg": -0.013,
-   "evidence": "calc: 0.040 kg pair x (1 - 1.01*1.2/(1.20*1.5)); no-printing is a crew preference, not a Bryan rule (R-027 item 2)"
+   "evidence": "calc 0.040 x (1-1.01*1.2/(1.20*1.5))"
   },
   {
-   "item": "shoulder pad R4 (5052 HC 4.5 pcf cartridge) vs R-042 booked 0.10",
-   "kg": -0.003,
-   "evidence": "shoulder_pad.json; HC crush strength to be cited by Materials"
+   "item": "shoulder pad R6 vs R-060 booked 0.127",
+   "kg": -0.027,
+   "evidence": "pad_r6.json"
   }
  ],
+ "total_kg": -0.172,
+ "total_half_credit_kg": -0.086,
+ "booked_R059_half": -0.117,
+ "shortfall_vs_booked_half": 0.031,
+ "wrist_trims_available_pair": -0.071,
  "shin_addback_option": {
   "PC": 0.3,
   "PC_louvred": 0.227,
   "CF": 0.26,
   "CF_louvred": 0.198,
-  "area_m2_side": 0.0788,
-  "note": "Legs 6f53d77 withdrew the shin no-cover zone; NOT in baseline (R-047 freeze); Arbiter decision"
- },
- "thigh_grille_kg": -0.0116,
- "total_kg": -0.234,
- "total_half_credit_kg": -0.117,
- "target_kg": -0.08,
- "meets_target_full": true,
- "meets_target_half_credit": true,
- "note": "areas [EST] (R-040 credits covers at half until measured)"
+  "preferred": "CF louvred (R-054)"
+ }
 }

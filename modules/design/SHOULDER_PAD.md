@@ -1,7 +1,32 @@
-# Shoulder impact pad (R-042/R-054): R5, shoulder-cap mount, RL Industrial Design, 2026-10-14
+# Shoulder impact pad (R-042/R-054/R-060): R6, roll-output mount + 7075 doubler, RL Industrial Design, 2026-10-14
 **P-number: P-051 (proposed). R-042 approves the pad and its cap but assigns no P-number; the highest P on main is P-050.** Numbers come from `shoulder_pad.py` → `shoulder_pad.json`. All [EST] until Materials confirms the foam data and Controls runs T-030.
 
-## R5: relocated to the shoulder cap (Arms: R4 on the bulkhead face covers the ø96 shoulder-pitch housing and flange, so not viable). CURRENT DESIGN
+## R6 (R-060, Arms c64ab91 R6 §5): CURRENT DESIGN
+- **Decision: mount on the ROLL OUTPUT** (the upper-arm lateral face at shoulder height), not on the cap.
+  - Raising the cap pad to bottom ≥ z +0.19 would technically keep the band inside the core (10 mm below / 21 mm above), but the upper arm would then sit only ≈ 11 mm inboard of the pad face. A 10–15° hip-first lean could land on the arm, which is an out-of-footprint hit (an R-059 fail).
+  - On the roll output the pad moves with the arm: no overlap at any roll angle (Arms' −7.5…−40 mm overlap is gone), and the band stays centred.
+  - **Fallback:** shoulder_P-bracket load ring (Materials fd46ad8 ring frame) with the pad raised to z ≥ +0.19.
+- **Load path, kept out of the bare 2 mm housing ring (Arms: ≈ 2.9 GPa bare-ring bending, FAIL):** core → 7075 doubler (flat 1.5 mm top plate, 4 ribs landing on the roll-output flange, integral 0.8 mm lips replace the guide posts) → 4 × M4 into the roll-output flange (615 N shear each at 15°) → roll output → roll bearing → shoulder_P bracket. **The 7075 doubler REPLACES the PC saddle.**
+- **Core:** 4.5 pcf pre-crushed, lot-tested ±5 %, **60.9 × 60.9 × 55 mm** (61 nominal, 60.9 max). σ band 1.87–2.47 MPa (Materials, incl. rate 1.10–1.30). **Peak 9.16 kN = 550 N·m ≤ 9.17 kN / 550: PASS. Energy at min σ 275 J ≥ 265: PASS.**
+- **Doubler checks:** top plate between ribs at 20 mm pitch, σ 329 MPa vs 7075 ~500 (SF 1.52); rib bearing 25.1 MPa; 15° shear 2.46 kN into the 4 M4.
+- **Trims vs R5:** no guide posts (doubler lips), 0.3 mm face plate, 4 mm EPP face, TPU film sleeve, aramid strap + 2 M3 in the lips.
+
+| item (per side) | kg |
+|---|---|
+| core_HC_4p5pcf_61x61x55_lot_tested | 0.0147 |
+| face_plate_Al_0p3 | 0.003 |
+| doubler_7075_plate_ribs_lips | 0.0256 |
+| retention_aramid_strap_plus_2_M3_in_doubler_lips | 0.003 |
+| EPP80_face_4mm | 0.0012 |
+| face_sleeve_TPU_film | 0.0025 |
+| **per side** | **0.05** |
+| **pair** | **0.1 (R-060 booked 0.127 → -0.027; cap 0.100 → at cap)** |
+
+**R-059 conditions (recorded):** T-030 logs impact points and counts hits outside the core footprint, or beyond 15° (R-060), as a fail; G5 drop test on the cartridge (also measures the rate factor for lot qualification, R-060); the 1.5 mm vent clearance must hold in the crushed-state CAD (re-check at the roll-output location).
+**Bryan-PC jobs:** (1) FEA of doubler + roll-output flange + roll bearing at 9.17 kN, 0–15°; (2) crushed-state CAD clearance; (3) Arms/Controls re-check of the contact band and abduction sweep with the pad on the roll output.
+**Open for Arms:** roll-output flange face ≥ 61 mm, flat, with 4 × M4 available; roll bearing capacity for the 9.17 kN lateral load.
+
+## R5: relocated to the shoulder cap (superseded by R6) (Arms: R4 on the bulkhead face covers the ø96 shoulder-pitch housing and flange, so not viable). CURRENT DESIGN
 R-054 accepted R4 at 0.100 (booked). Same core: **5052 HexWeb CR III 4.5 pcf, pre-crushed, 62 × 62 × 57 → 8.94 kN at ×1.3 (537 N·m) / 282 J at ×1.0: PASS.**
 - **Location:** outboard of the shoulder roll housing, y ≈ +0.30 (Arms: abduction clears, arm gap about 32 mm at roll −5°, A44 tuck clears the torso by 8.6 mm). **Arms to re-confirm with the R5 stack of 66.5 mm** (saddle 3 + core 57 + plate 0.5 + EPP 6).
 - **Minimal carrier (shells deferred):** 3 mm PC conformal saddle on the roll-housing outer face, retained by a bonded aramid band + 2 bonded M4 inserts of its own (the bulkhead's 8 × M8 are taken). **Load path:** ground → EPP → plate → core → saddle → **roll housing (2.33 MPa bearing, compression)** → shoulder structure. The future cosmetic cap carries no load. **Arms to confirm the roll housing takes 8.94 kN lateral in bearing over 62 × 62.**

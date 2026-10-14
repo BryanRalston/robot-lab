@@ -1,0 +1,31 @@
+{
+ "location": "ROLL-OUTPUT MOUNT (Arms c64ab91 R6 \u00a75): pad on the upper-arm/roll-output lateral face at shoulder height; moves with roll; covers the Controls contact band at all roll angles; no overlap with the upper arm",
+ "load_path": "core -> 7075 doubler (ribs land on the roll-output flange, 4x M4, 615 N shear each at 15 deg) -> roll output -> roll bearing -> shoulder_P bracket; bare 2 mm housing ring NOT loaded",
+ "fallback": "shoulder_P-bracket load ring (Materials fd46ad8 ring frame) with pad raised to z>=+0.19 (covers band only 10 mm below / 21 mm above; arm 11 mm inboard of pad face -> risk of out-of-footprint arm hits on hip-first lean)",
+ "core": "60.9x60.9x55 (61 nominal, 60.9 max) 4.5 pcf pre-crushed, lot-tested +-5 %",
+ "peak_kN": 9.16,
+ "M_Nm": 550,
+ "pass_peak": true,
+ "E_min_J": 275,
+ "pass_energy": true,
+ "doubler": {
+  "top_plate_sigma_MPa": 329,
+  "SF": 1.52,
+  "rib_bearing_MPa": 25.1,
+  "shear_15deg_kN": 2.46,
+  "note": "ribs conformal to roll housing carry compression to metal; lips locate core (no posts); 2 M3 lips also retain cosmetic cap"
+ },
+ "mass_items_kg_side": {
+  "core_HC_4p5pcf_61x61x55_lot_tested": 0.0147,
+  "face_plate_Al_0p3": 0.003,
+  "doubler_7075_plate_ribs_lips": 0.0256,
+  "retention_aramid_strap_plus_2_M3_in_doubler_lips": 0.003,
+  "EPP80_face_4mm": 0.0012,
+  "face_sleeve_TPU_film": 0.0025
+ },
+ "kg_side": 0.05,
+ "kg_pair": 0.1,
+ "booked_R060": 0.127,
+ "delta_vs_booked": -0.027,
+ "vs_cap_0p100": -0.0
+}

@@ -1,16 +1,19 @@
-# R-047 cover offsets: Arbiter-ready itemized list (RL Industrial Design, 2026-10-14)
-Target: ≥ 0.08 kg of cited or calculated offsets (reserve about 0.22 vs the 0.30 floor). Script `cover_trims_r047.py` → `cover_trims_r047.json`. Basis: `cover_set_v5.json` (trimmed, areas [EST], measured: false), PC ρ 1.20; skin mass = formed area × average finished wall.
+# R-047 cover offsets: Arbiter-ready itemized list (RL Industrial Design, rev A36 / pad R6, 2026-10-14)
+Scripts: `cover_trims_r047.py` → `cover_trims_r047.json` (reads `a36_vents.json`, `pad_r6.json`, `wrist_trims.json`). Areas [EST] (measured: false); covers count at half credit (R-040).
 
-| # | item | Δ kg | evidence |
+## Cover items (booked R-059: −0.117 at half credit)
+| # | item | Δ kg (full) | evidence |
 |---|---|---|---|
-| 1 | **P-026 louvres, 30 % open area, cut slots** on thigh fairing (0.427 skin) + knee cap (0.131), **plus the knee-housing front grille** (115 × 110 mm/side, 60 % open, Legs 6f53d77) | **−0.154** | calc: 0.557 × 0.30 × (1 − 0.15 allowance for slot rims/ribs) = −0.142; grille 2 × 0.0127 m² × (0.60 − 0.30) × 1.8 kg/m² × 0.85 = −0.012. R-030 already requires ≥ 30 % open over hip-pitch/knee. Slots must be **cut** (CNC trim); formed-only louvres save nothing. Final slot pattern follows Thermal A35. |
-| 2 | **PC 1.2 mm average wall** (post-form minimum 0.9 mm) on low-draw panels: thigh outboard (≤ 1.5:1, 0.149 after louvres) + foot top (≤ 1.5:1, 0.171) | **−0.064** | calc: 0.320 × 0.3/1.5, the Materials REVIEW_R1 (a) basis. Thinning: low draw keeps min/avg ≈ 0.75 [EST] → 0.9 mm min; spec that post-form minimum on the drawing. Stiffness: bending stiffness ×0.51 (t³), so 2 formed ribs on the thigh outboard; the foot top is EPP-backed. **Dent check open** (Materials A15). Thigh front (2:1) and knee cap (2.5:1) stay 1.5 mm. Materials' −0.231 was on the old 0.643 m² full basis; after the trims and the shin deletion only these panels qualify. |
-| 3 | **Printed small parts:** hip-skirt rim strips PC 1.5 → PA12 MJF 1.2 mm | **−0.013** | calc: 0.040 × (1 − 1.01·1.2 / 1.20·1.5). No-printing is a crew preference, not a Bryan rule (R-027 item 2). |
-| 4 | **Shoulder pad netting:** R5 shoulder-cap cartridge 0.097 vs R-054 booked 0.100 | **−0.003** | `shoulder_pad.json`; honeycomb crush strength still to be cited by Materials |
-| | **Total** | **−0.234** | **−0.117 at R-040 half-credit (R-054 accepted −0.118 on R4) (covers unmeasured)**: meets ≥ 0.08 either way |
+| 1 | **P-026 vents to Thermal A35** (replaces the blanket 30 % louvres): thigh hip + knee inlets −0.026, knee-cap louvres −0.033, D69C front-fin bulge +12 mm (included in thigh), skirt hem exhaust band +0.004 | **−0.055** (was −0.154) | `a36_vents.json`; A35 per-joint open areas (≥ 50/60 cm², ≥ 30/35 %) |
+| 2 | PC 1.2 mm average (min 0.9 post-form) on thigh outboard + foot top | **−0.077** | calc: (0.213 + 0.171) × 0.3/1.5; 2 ribs on the thigh outboard; dent check A15 open |
+| 3 | Hip-skirt rim strips → printed PA12 1.2 mm | **−0.013** | calc |
+| | **Items 1–3** | **−0.145 → −0.073 half credit** | **shortfall +0.044 vs the booked −0.117 (FLAG)**: the A35 layout opens only over the housings, not 30 % everywhere |
 
-Conditions: items 1–2 need the A29 CAD measurement to convert to full credit; item 2 needs the dent check; item 1 needs A35 confirming that 30 % cut slots are enough (if Thermal wants more open area, the saving grows). Nothing here adds mass. If the shoulder pad's cited crush strength forces it over 0.10, item 4 flips sign (at most about +0.022 with the 2.3 pcf fallback); total still ≥ 0.08.
+## Offsets that cover the shortfall
+| item | Δ kg | basis |
+|---|---|---|
+| Shoulder pad R6 0.100 vs R-060 booked 0.127 | **−0.027** (full: an assembly estimate, itemized) | `pad_r6.json` |
+| Wrist fairing trims vs R-059 +0.079 | **−0.071 → −0.036 half credit** | `wrist_trims.json` |
+| **Net vs current bookings** | **+0.044 − 0.027 − 0.036 = −0.019** | still an offset, but small |
 
-**Not included (Arbiter decision):** shin fairing add-back after Legs 6f53d77 withdrew the no-cover zone: +0.300 PC / +0.227 PC louvred / +0.260 CF / +0.198 CF louvred (pair). Adding it would consume the offsets above.
-
-R-054: trims accepted at −0.118; shin deferred until D69 rev B, louvred CF (+0.198) preferred at add-back.
+Not included (Arbiter decision): shin add-back, deferred until D69 rev B verified; louvred CF +0.198 preferred (R-054).

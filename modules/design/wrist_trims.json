@@ -1,0 +1,12 @@
+{
+ "items_kg_side": {
+  "1.2 mm PC on the y-flats (low draw, 2 x 54 x 96 mm)": -0.0037,
+  "dorsal motor slots 20 % (3 mm slots, 2 rows/unit)": -0.0024,
+  "shorter blends 25->15 mm (elbow) and 20->12 mm (cuff); cuff edge held at z >= +10 over |y|<=62 (Arms sweep)": -0.0106,
+  "palm-side half as open frame (40 % of area kept, 6 mm rims)": -0.0185
+ },
+ "trim_side": -0.0353,
+ "trim_pair": -0.071,
+ "new_pair": 0.119,
+ "new_delta_vs_plain": 0.008
+}
