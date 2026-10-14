@@ -535,3 +535,19 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
 - The heat-pipe alternative is not directed.
 - Placement: DCM on the Thor cold plate, with the pack sealed from the exhaust.
 - Harness/STO: Actuators' 1.4959 kg harness (STO included) is booked. The separate STO 0.231 booking in R-031 §4 is void.
+
+## R-033 (2026-10-14) Pack disconnect, clamp, OV trip (Electronics 318818f / a095c0c)
+- Pack disconnect: approved as a diverse disconnect (contactor plus semiconductor).
+  - TE LEV100A4ANG contactor: 0.20 kg. This is an estimate, but it's added mass, so it's booked in full.
+  - HS50 47R precharge resistor: 0.032 kg, from the datasheet.
+  - Precharge FET: inside that total.
+  - Booked at +0.232 kg under R-024 unless it's already in the rollup. A cited contactor mass is due before G1.
+- P-045 clamp: the HS100 1R5 resistor is accepted.
+  - The booking stays at 0.15 kg until the parts are fully cited.
+  - Charge-limit rule: ≤4.15 V per cell, with the BMS accepting regen at any state of charge. Adopted.
+  - O-T8: the pulse-overload curve must be read before G3.
+- O-T9 cell-fault sequence (immediate STO, clamp powered from the drive-side bus, latched restart): accepted.
+- New G5 test items:
+  - T-025: read WI[35] on the first bench drive. If it's below 91 V, P-045 thresholds are re-planned with Torso & Power.
+  - T-026: measured clamp pulse test at 4.5 kW / 400 J.
+- No 24 V logic supply is needed (Elmo S-variant). No mass change.
