@@ -264,13 +264,13 @@ def build_upper():
         add(S('wrist roll output fork'),S('wR'),box(40,40,6,(0,ya,wz+20)).fuse(box(30,6,26,(0,ya+17,wz+6))).fuse(box(30,6,26,(0,ya-17,wz+6))),est=True,asm=S('wrist'))
         add(S('wrist pitch pin ø6'),S('wP'),cyl(6,40,'y',c=(0,ya,wz)),'bearing',est=True,asm=S('wrist'))
         add(S('palm 7075-T6 machined shell 1.5 mm w/ openings (P-021/A32, palm_7075.py)'),S('hand'),_palm7075((0,ya,wz-60)),asm=S('hand'))
-        add(S('palm wrist lug'),S('hand'),box(24,12,26,(0,ya,wz-8)),est=True,asm=S('hand'))
+        add(S('palm wrist lug'),S('hand'),box(24,12,32,(0,ya,wz-11)),est=True,asm=S('hand'))   # A42/R5 palm DROP 12: lug keeps the yaw-pin end (top z +5) and now reaches the dropped wrist plate (z -27)
         for i,dy in enumerate([-30,-10,10,30]):
-            zc=wz-105
+            zc=wz-117   # A42/R5: -12 mm with palm_7075.DROP_MM
             for j,l in enumerate([42,26,20]):
                 add(S(f'finger{i+1} phalanx{j+1}'),S('hand'),cyl(15-2*j,l,'z',c=(0,ya+dy*s,zc-l/2)),est=True,asm=S('hand')); zc-=l
         for j,l in enumerate([38,30,24]):
-            add(S(f'thumb phalanx{j+1}'),S('hand'),cyl(17-2*j,l,'x',c=(16+l/2+sum([38,30,24][:j]),ya-s*30,wz-70)),est=True,asm=S('hand'))
+            add(S(f'thumb phalanx{j+1}'),S('hand'),cyl(17-2*j,l,'x',c=(16+l/2+sum([38,30,24][:j]),ya-s*30,wz-82)),est=True,asm=S('hand'))   # A42/R5: thumb -12 mm
     joint('neck_yaw','torso','neckY',(0,0,tt+20),(0,0,1)); joint('neck_pitch','neckY','head',(0,0,tt+70),(0,1,0))
     # Head/neck v5-tweak (modules/head/HEAD_BALANCER.md, P-019): 2x Dynamixel XM430-W350-R (28.5x46.5x34, 82 g) on 12 V RS485,
     # ZED X Mini (94x32x37, 150 g). Shell = CF prepreg layup on a machined mould (no 3D printing). Brackets 7075 machined [EST].
