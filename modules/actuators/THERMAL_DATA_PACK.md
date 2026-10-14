@@ -23,10 +23,11 @@ Sources: Kollmorgen TBM2G manual June 2023 (`datasheets/tbm2g_manual.txt`, §1.2
 | knee (×2/leg) | TBM2G-07613D | 1.23 | 0.081 | 0.136 | 0.205 | 0.201 | 0.321 | 1.85 | 1.83·n + 0.195·n² |
 | ankle pitch/roll diff. (×2/leg) | TBM2G-06013D | 0.6 | 0.051 | 0.168 | 0.254 | 0.114 | 0.195 | 2.52 | 1.02·n + 0.058·n² |
 | waist (O-T2, ×2) | TBM2G-08508A | 1.21 | 0.206 | 0.86 | 1.299 | 0.203 | 0.295 | 1.93 | 1.07·n + 0.489·n² |
-| shoulder (Arms R1) | TBM2G-07608C | 0.89 | 0.096 | 0.318 | 0.480 | 0.156 | 0.236 | 2.15 | not fitted (use 07613D/06008A fit scaled by mass [EST]) |
-| shoulder/upper arm (Arms R1) | TBM2G-06813C | 0.86 | 0.113 | 0.427 | 0.645 | 0.157 | 0.254 | 2.3 | not fitted (use 07613D/06008A fit scaled by mass [EST]) |
-| elbow/forearm (Arms R1) | TBM2G-06008C | 0.45 | 0.061 | 0.4 | 0.604 | 0.087 | 0.139 | 2.6 | not fitted (use 07613D/06008A fit scaled by mass [EST]) |
-| wrist roll (Arms R1) | TBM2G-05013C | 0.38 | 0.061 | 0.46 | 0.695 | 0.082 | 0.149 | 3.4 | not fitted (use 07613D/06008A fit scaled by mass [EST]) |
+| shoulder_pitch (CONTRACTS §1a) | TBM2G-07608C | 0.89 | 0.096 | 0.318 | 0.480 | 0.156 | 0.236 | 2.15 | not fitted (use 07613D/06008A fit scaled by mass [EST]) |
+| shoulder_roll (CONTRACTS §1a) | TBM2G-06813C | 0.86 | 0.113 | 0.427 | 0.645 | 0.157 | 0.254 | 2.3 | not fitted (use 07613D/06008A fit scaled by mass [EST]) |
+| shoulder_yaw (CONTRACTS §1a; row added R5, was mislabelled elbow) | TBM2G-06008C | 0.45 | 0.061 | 0.4 | 0.604 | 0.087 | 0.139 | 2.6 | not fitted (use 07613D/06008A fit scaled by mass [EST]) |
+| elbow (CONTRACTS §1a; was mislabelled wrist roll) | TBM2G-05013C | 0.38 | 0.061 | 0.46 | 0.695 | 0.082 | 0.149 | 3.4 | not fitted (use 07613D/06008A fit scaled by mass [EST]) |
+| wrist_roll (CONTRACTS §1a) | TBM2G-05008C | 0.27 | 0.04 | 0.37 | 0.559 | 0.061 | 0.111 | 3.6 | not fitted (use 07613D/06008A fit scaled by mass [EST]) |
 | wrist pair D65 (×2/side) | TBM2G-05008C | 0.27 | 0.04 | 0.37 | 0.559 | 0.061 | 0.111 | 3.6 | not fitted (use 07613D/06008A fit scaled by mass [EST]) |
 | knee D69 candidate | TBM2G-08513D | 1.65 | 0.085 | 0.082 | 0.124 | 0.271 | 0.403 | 1.8 | not fitted (use 07613D/06008A fit scaled by mass [EST]) |
 

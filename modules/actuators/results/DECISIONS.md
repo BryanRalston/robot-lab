@@ -723,3 +723,37 @@ Retention at 1.2 m/s:
   - That is +0.215 per lever versus the 0.2491 booked in LINKAGE_TABLE, and +0.132 versus the G2-as-briefed loft (0.332).
   - **Legs' +0.118 kg robot is not reproduced. My measurement gives +0.26 to +0.43 kg robot, depending on the baseline.** This needs reconciling.
   - The fatigue check (≤ 58 MPa at 2030 N per pin) is not run on the box (gmsh can't load, and converged dofs need about 4 GB). See brief `results/GROKBUILD_lever_fea_r031.md` (G3).
+
+## D76 (Arms R5 7f0ff7a, Arbiter R-055) D73 compaction
+**Cited unit length** (axis direction):
+- TBM2G-05008 "A" max 19.84 mm (manual §9.2.5 p.260 stack table).
+- CSG-14 H1 18.5 mm (CSF-14 17.6; CSF-11 16.0) (HD CSF/CSG catalog dims table).
+- CRBH 258 A, B 8 mm.
+- AksIM-2 MRA022/MB022 system thickness 12.45 mm (MBD01_15).
+- Total **58.8 mm**, plus 2 × 2 mm walls [EST] = **62.8 mm**. The D73 envelope of 54 was low.
+- With cited lengths, the D73 stack (pitch can on its Ø56 side + yaw axial) reaches z +148.8 above the pivot, not +140.
+
+**Options:**
+- **Shorter stack TBM2G-05004:** does not exist (only 05008/05013/05026; manual p.260). Not found.
+- **CSF-11-100 for yaw:** repeated peak 11 N·m ≥ 8.9 (1.24×), Table 1. Saves 2.5 mm in length and 0.04 kg/side (set 0.05 vs 0.09). Adopt.
+- **Pancake/nested (WG inside the motor rotor):** the TBM2G-050 rotor ID vs the CSF-11/14 WG size is not cited. Not found.
+- **Partly into the forearm bore:** not possible. The R4 pack leaves 13.2 mm, and the centre is only Ø20.
+- **Side by side: CHOSEN.** Both units axial along the forearm axis (z), at y ±(28+1). Each drives its joint by a link, as in D73. They occupy z +28 … +90.8 above the pivot.
+  - **That is −49 mm vs D73 as booked (+140), or −58 mm vs D73 at cited lengths (+148.8). Meets the ≥ 40 mm ask.**
+  - Cost: wrist width in y becomes about 116 mm (2 × 58), vs the 86 mm palm and the Ø70 forearm. This needs a local fairing; ID to accept.
+- **Torque:** pitch CSG-14-100 36 ≥ 14.7 (2.45×). Yaw CSF-11-100 11 ≥ 8.9 (1.24×). Motor Tp 0.72 × 100 × 0.70 [EST η] = 50 N·m, so the gear limits. Input 5730 rpm ≤ 8500.
+- **Mass:** −0.04/side (CSF-11). Links keep 56 mm (D73). **Net −0.08 kg both arms.**
+
+## D77 (Arms R5) Shoulder-pitch slip clutch ≤ 300 N·m: off-the-shelf parts are too heavy
+- **Mayr ROBA-slip hub Size 2:** Type 100.2 130–250 N·m, Type 100.3 250–400 N·m. **1.6 kg** pilot-bored (catalogue K.123.V16 table). Length not extracted.
+- **R+W SK2:** the size 200 (120–240 N·m) is OD 90 mm, **4.0 kg**, length 128/140 mm. Size 300 (200–320 N·m) is 5.9 kg (RW-DS-PK SK2 data sheet, rw_sk2.pdf).
+- Both are ≥ 1.6 kg/side against a frozen mass budget. Per D71, the side fall does not load pitch torque, so **no pitch clutch is recommended**. The open input is still the forward-fall pitch torque (Torso/Arms). A custom friction ring inside the CSG-25 output would need design (not cited).
+
+## D78 (Arms R5) Ø2.5 tendon sheath minimum bend radius ≤ 35 mm
+- **Not found.** No Ø2.5 PTFE-lined or PEEK sheath datasheet with a published bend radius turned up. The nearest cited one is the RINGSPANN Express push/pull cable at **51 mm** (12 mm fixture, too large).
+- Materials should source a candidate (Zeus PTFE/PEEK tubing, Asahi/medical coil sheath) with a datasheet radius.
+
+## D79 (Arms R5) Hand board stays in the forearm; ENX22 EASY INT on 6 flexors
+- The booked harness is unchanged at **1.9841 kg** (option B, D75).
+- The encoder leads board → DCX22 are inside the forearm and not in the harness model (they belong to the hand allowance). The ENX 22 EASY INT is integrated, −1.5 mm length (D68), 10-pin.
+- **Change to flag:** the RP40 converters are in the shoulder bay (R-038). A 24 V pair bay → forearm is needed: **+0.077 kg pending/frozen**, unless the converters move back to the forearm.
