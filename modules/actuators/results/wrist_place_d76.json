@@ -1,0 +1,32 @@
+{
+ "before": {
+  "Z0": 28.0,
+  "top_z": 90.8,
+  "gap_to_fork_cross_sphere_mm": 3.52,
+  "gap_to_fork_cheeks_mm": 18.0,
+  "palm_swept_max_z": 12.9,
+  "gap_to_palm_swept_mm": 15.1,
+  "width_y_mm": 114.0,
+  "width_with_2mm_walls_mm": 118.0
+ },
+ "after": {
+  "Z0": 26.5,
+  "top_z": 89.3,
+  "gap_to_fork_cross_sphere_mm": 2.02,
+  "gap_to_fork_cheeks_mm": 16.5,
+  "palm_swept_max_z": 12.9,
+  "gap_to_palm_swept_mm": 13.6,
+  "width_y_mm": 114.0,
+  "width_with_2mm_walls_mm": 118.0,
+  "pass_2mm": true
+ },
+ "yaw_gear": {
+  "was": "CSF-11-100 set 0.05 kg",
+  "now": "CSG-14-100 set 0.09 kg",
+  "d_kg_per_side": 0.04,
+  "d_kg_pair": 0.08,
+  "src": "HD CSF/CSG catalog weight table (datasheets/hd_csf_csg_catalog.txt l.1101: 11 -> 0.05, 14 -> 0.09)",
+  "length": "CSG-14 H1 18.5 vs CSF-11 16.0: +2.5 mm (yaw unit now = pitch unit, 62.8)",
+  "torque": "CSG-14-100 rep peak 36 vs need 12.9 (2.79x); CSF-11 11 (0.85x) fails"
+ }
+}

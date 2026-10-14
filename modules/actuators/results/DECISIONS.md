@@ -757,3 +757,29 @@ Retention at 1.2 m/s:
 - The booked harness is unchanged at **1.9841 kg** (option B, D75).
 - The encoder leads board → DCX22 are inside the forearm and not in the harness model (they belong to the hand allowance). The ENX 22 EASY INT is integrated, −1.5 mm length (D68), 10-pin.
 - **Change to flag:** the RP40 converters are in the shoulder bay (R-038). A 24 V pair bay → forearm is needed: **+0.077 kg pending/frozen**, unless the converters move back to the forearm.
+
+## D76 update (R-076 yaw CSG-14; R-080 binding −1.5 mm) (`wrist_place_d76.py` → `cad/wrist_place_d76.step`, `results/wrist_place_d76.json`)
+- **Yaw is back to CSG-14-100.** Repeated peak 36 vs the new 12.9 N·m need is 2.79×; CSF-11 at 11 is 0.85× and fails.
+  - Mass: the HD catalog weight table (l.1101) gives CSF/CSG-11 0.05 and size 14 0.09 kg, so **+0.04 kg/side, +0.08 pair** vs D76's CSF-11. That cancels the D76 −0.08 credit. Arms R8 has already booked +0.080, so don't double count it.
+  - Length: +2.5 mm (H1 18.5 vs 16.0). The yaw unit now equals the pitch unit (62.8 mm), so the stack top is set by the pitch unit either way.
+- **Width is unchanged:** 114 mm over the two Ø56 TBM2G-050 cans at y ±29, about 118 with 2 mm walls [EST]. This is inside the ID fairing (124). The Ø56 frame sets the width; the CSG-14 OD was not separately checked, so this rests on the D70 Ø56 envelope [EST].
+- **Lowering 1.5 mm (z +28 → +26.5, top +90.8 → +89.3): FEASIBLE.**
+  - Fork/cross r 24.5 sphere (wrist_clash_r4 rule): 3.52 → **2.02 mm** (rule ≥ 2.0; 0.02 mm spare).
+  - Fork cheeks: 16.5 mm.
+  - Palm swept over P-026 (max z +12.9): 13.6 mm.
+  - No wrist-roll output or bearing sits below the units, because roll is at the elbow end (D76, D74 dropped).
+  - The forearm shell, board and 0.244 kg/side lead bundle are all on the elbow side above the units, so the move only increases those gaps.
+  - **Governing gap: 2.02 mm to the 24.5 mm envelope sphere.** That sphere is a rule envelope, not real cross CAD. Arms must keep every fork/cross part inside r 24.5.
+
+## Tendon spool 10 → 5 mm (Arms R6 trim b): NOT SUPPORTED
+- No catalog Ø5 spool or capstan for 1 mm Dyneema was found.
+- **Cited minimum:** Marlow Ropes, "Maximising Ropes Performance" sheave table: braided ropes need **8 × rope diameter**, so ≥ 8 mm for LIROS D-Pro 1 mm.
+  - 5 mm (D/d 5) violates this. The current 10 mm (D/d 10) complies.
+  - The IFREMER HMPE bend-over-sheave fatigue tests used D/d 20, a larger ratio that gives no basis for going below 8.
+- With stall tension at 775 N (~40 % of break, Materials) and 1.75e6 cycles as a wear part, going smaller would worsen bend fatigue. **Keep 10 mm.** Ø8 is the cited floor and would give back +1 mm at most (needs Arms to check the bend-fatigue life).
+
+## D77 CLOSED: no shoulder-pitch slip clutch (Arms R7 550ab88 / R8)
+- With tuck B, the forward-fall shoulder-pitch torque is **≈ 343 N·m (Arms inertial [EST])**, below the CSG-25-100 momentary rating of 369 N·m (HD Table 3), a 1.08× margin.
+- No clutch is fitted. The cited options are 1.6–4.0 kg/side.
+- **Caveat:** this is an estimate with only 8 % margin, pending Controls T-031. If T-031 exceeds 369 N·m, reopen D77.
+- D71 (CRBH 7013 A, conditional on T-030 ≤ 550 N·m) is consistent. 343 N·m is pitch torque through the gear; the bearing moment basis is unchanged.
