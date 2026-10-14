@@ -527,3 +527,11 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
    - **O-T2:** the waist swap to TBM2G-08508A + CSG-25-100 (+0.19 kg in full) is approved once the torque margin is cited.
    - **O-T3:** a FET-only disconnect is not accepted without a written single-fault safety case. The contactor stays until that case exists.
 11. **A12 (arbiter).** The official rollup will be recomputed with R-028 to R-031. The credible reserve in MASS_ROLLUP_OFFICIAL (0.037 vs 1.329) disagrees with itself and has to be reconciled. Until that's done, no new mass credit goes to anyone.
+
+## R-032 (2026-10-14) A41 Thor cooling (Electronics f4e839c)
+- P-044 basis corrected. Two Delta 40 mm blowers give only 6 CFM, short of the 24.3 CFM needed at a 10 K rise.
+- Accepted: one Sunon PF40281B1-000U-S99 (cited 21.9 CFM min, 42 g). Booked at 0.042 kg (replaces the 0.04 estimate).
+- Power: the R-030 5 W cap is raised for this item only. 6.12 W rated is counted in full in T7 runtime. The fan-law figure of about 3.7 W is not credited until J-T2 CFD and a duct flow measurement confirm it.
+- The heat-pipe alternative is not directed.
+- Placement: DCM on the Thor cold plate, with the pack sealed from the exhaust.
+- Harness/STO: Actuators' 1.4959 kg harness (STO included) is booked. The separate STO 0.231 booking in R-031 §4 is void.
