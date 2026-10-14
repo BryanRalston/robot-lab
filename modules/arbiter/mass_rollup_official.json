@@ -1,5 +1,5 @@
 {
- "status": "OFFICIAL single source of truth (R-022, updated R-025). Module rollups must reconcile to this file line by line; any module figure that differs must cite the line and the ruling that changes it.",
+ "status": "OFFICIAL single source of truth (R-022, updated R-026). Module rollups must reconcile to this file line by line; any module figure that differs must cite the line and the ruling that changes it.",
  "limit_kg": 66.5,
  "reserve_target_kg": 0.3,
  "lines": [
@@ -77,11 +77,11 @@
   },
   {
    "line": "head + neck (P-019; 2x XM430-W350-R, ZED X Mini, CF shell)",
-   "paper_kg": 0.81,
-   "credible_kg": 1.1783,
-   "evidence": "catalog/calc 0.493, [EST] 0.317 (modules/head/BOM.md)",
-   "credit_rule": "replaces v3 basis 2.692 (head 1.6 + 2 neck actuators); saving cited share x1.0, [EST] share x0.5 (R-025)",
-   "source": "a88c2d8 P-019"
+   "paper_kg": 0.817,
+   "credible_kg": 1.1039,
+   "evidence": "catalog/calc 0.567, [EST] 0.250 (modules/head/BOM.md)",
+   "credit_rule": "replaces v3 basis 2.692 (head 1.6 + 2 neck actuators); saving cited share x1.0, [EST] share x0.5 (R-025/R-026)",
+   "source": "a88c2d8 P-019; A23 6e75636 (R-026)"
   },
   {
    "line": "brain add: GMSL2 camera platform JCB022 (A11)",
@@ -108,15 +108,15 @@
    "source": "derived"
   }
  ],
- "paper_kg": 63.392,
- "credible_kg": 64.995,
- "credible_reserve_kg": 1.505,
+ "paper_kg": 63.399,
+ "credible_kg": 64.92,
+ "credible_reserve_kg": 1.58,
  "head_basis_removed_kg": 2.6921,
- "paper_reserve_kg": 3.108,
+ "paper_reserve_kg": 3.101,
  "pending": {
   "A1prime_structure_FEA": "VOID (R-023): GB FEA failed the r5 hand-checked parts; replaced by L36 fixes",
   "tube_hold_kg": 0.267,
-  "credible_if_GB_r2_passes": 64.728,
+  "credible_if_GB_r2_passes": 64.653,
   "risk_unquantified": "foot collar OD (fallback r50 or 4 mm, mass not computed); clamp/tongue/clevis convergence at h<=2"
  },
  "reconciliation": {

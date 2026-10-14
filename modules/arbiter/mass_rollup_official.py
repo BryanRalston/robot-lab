@@ -18,8 +18,9 @@ R020_CRED, R020_PAPER = 66.891, 65.75
 # R-025 (P-019 + A11/A12 partial): head+neck carved out of 'all other lines'. v3 basis = struct head 1.6 + 2 neck actuators (v3.json rows)
 v3=json.load(open('v3/analysis/results/v3.json'))
 HEAD_BASIS=v3['mass']['struct']['head']+sum(r['mass'] for r in v3['rows'] if r['joint'] in ('neck_yaw','neck_pitch'))
-HEAD_CIT=2*0.082+0.150+0.179          # XM430-W350-R x2, ZED X Mini (catalog), CF shell (calc)
-HEAD_EST=0.110+0.070+0.027+0.100+0.010  # yoke, deck, bearings, DC-DC+harness+fasteners, gravity spring (BOM.md total 0.810)
+# R-026 (A23, 6e75636): bearings 6806 0.026 + 6800 0.005 and RECOM RP40-11012SFR 0.043 (with heat-sink, RP40-FR datasheet) now catalog
+HEAD_CIT=2*0.082+0.150+0.026+0.005+0.043+0.179  # XM430 x2, ZED X Mini, bearings, RP40 (catalog 0.388) + CF shell (calc 0.179)
+HEAD_EST=0.110+0.070+0.010+0.060        # yoke, deck, gravity spring, harness+FAKRA+fasteners (BOM.md total 0.817)
 HEAD_PAPER=HEAD_CIT+HEAD_EST; _sv=HEAD_BASIS-HEAD_PAPER
 HEAD_CRED=HEAD_BASIS-(_sv*HEAD_CIT/HEAD_PAPER+0.5*_sv*HEAD_EST/HEAD_PAPER)   # same split rule as R-021
 JCB=0.045   # Connect Tech JCB022/JCB009 GMSL2/3 camera platform, CTIM-00143 datasheet 45 g (AGX301 has no native GMSL2)
@@ -33,7 +34,7 @@ lines=[  # name, paper, credible, evidence, credit rule, source
  ('linkage r6 delta (GE 12 E -> GE 12 C eye)',lk['linkage_delta'],lk['linkage_delta'],'SKF GE 12 C 0.016 kg = GE 12 E 0.016 kg','datasheet x1.0','Actuators 71f3c3e LINKAGE_TABLE'),
  ('Legs v4 audit fixes L37-L40 (clamp step, ankle clevises+outrigger, hip yaw/roll stops, clevis trim)',V4L,V4L,'model_v4 geometry; hip-stop bumper/bracket [EST]','addition x1.0 (R-024)','Legs 15c602d, r8/model_v4_fix_mass.json'),
  ('Actuators v4 audit fixes D59-D62 (knee twin housing, ankle GE top eye + QA1 PTFE bottom rod end, hip body trim)',V4A,V4A,'STEP/cad_mass; QA1 head +0.010 and rod key [EST]','addition x1.0 (R-024)','Actuators 67b0b13 P-018, v4_deltas.json'),
- ('head + neck (P-019; 2x XM430-W350-R, ZED X Mini, CF shell)',HEAD_PAPER,HEAD_CRED,'catalog/calc %.3f, [EST] %.3f (modules/head/BOM.md)'%(HEAD_CIT,HEAD_EST),'replaces v3 basis %.3f (head 1.6 + 2 neck actuators); saving cited share x1.0, [EST] share x0.5 (R-025)'%HEAD_BASIS,'a88c2d8 P-019'),
+ ('head + neck (P-019; 2x XM430-W350-R, ZED X Mini, CF shell)',HEAD_PAPER,HEAD_CRED,'catalog/calc %.3f, [EST] %.3f (modules/head/BOM.md)'%(HEAD_CIT,HEAD_EST),'replaces v3 basis %.3f (head 1.6 + 2 neck actuators); saving cited share x1.0, [EST] share x0.5 (R-025/R-026)'%HEAD_BASIS,'a88c2d8 P-019; A23 6e75636 (R-026)'),
  ('brain add: GMSL2 camera platform JCB022 (A11)',JCB,JCB,'Connect Tech CTIM-00143 datasheet 45 g','datasheet x1.0 (R-025)','R-025 A11'),
  ('battery 20S5P P45B',8.75,8.75,'R-010','x1.0','CONTRACTS R1.1'),
 ]
@@ -42,7 +43,7 @@ cred=R020_CRED-(1.80-a3['brain_credited'])-(1.86-a3['covers_credited'])-(1.324-h
 paper=R020_PAPER-(1.80-a3['brain_paper'])-(1.86-a3['covers_paper'])-(1.296-h['total_kg'])+lk['linkage_delta']+(hip['mass_both_legs']-0.04)+(M2_PAPER-4.862)+AROLL+PANEL+V4L+V4A-(HEAD_BASIS-HEAD_PAPER)+JCB
 ep=sum(l[1] for l in lines); ec=sum(l[2] for l in lines)
 lines.append(('all other lines (DERIVED: leg actuators+linkage, torso, arms, hands, thermal, pelvis; head+neck removed R-025; v3 basis + R-015..R-020 credits)',paper-ep,cred-ec,'see RULINGS R-015..R-020','as ruled there; to be itemised (A12)','derived'))
-out=dict(status='OFFICIAL single source of truth (R-022, updated R-025). Module rollups must reconcile to this file line by line; any module figure that differs must cite the line and the ruling that changes it.',
+out=dict(status='OFFICIAL single source of truth (R-022, updated R-026). Module rollups must reconcile to this file line by line; any module figure that differs must cite the line and the ruling that changes it.',
  limit_kg=66.5, reserve_target_kg=0.30,
  lines=[dict(line=n,paper_kg=round(p,4),credible_kg=round(c,4),evidence=e,credit_rule=r,source=s) for n,p,c,e,r,s in lines],
  paper_kg=round(paper,3), credible_kg=round(cred,3), credible_reserve_kg=round(66.5-cred,3), head_basis_removed_kg=round(HEAD_BASIS,4), paper_reserve_kg=round(66.5-paper,3),

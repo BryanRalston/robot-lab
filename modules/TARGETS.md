@@ -41,7 +41,9 @@ Tesla has **never published an Optimus datasheet**. Most numbers that circulate 
 
 **Status 2026-10-14 R12 (R-024):** T2 paper **65.23 kg**, credible **66.46 kg (MET vs ≤ 66.5; reserve 0.037, below the 0.30 floor — Arbiter waiver to end of round 13)** after the v4 audit fixes (Legs +0.200, Actuators P-018 +0.138; both audit FAILs closed, 0 FAIL). 66.20 (reserve 0.304) if Grok Build job 6 releases the tube hold. Target values unchanged (T2 66.5, T5 20 kg).
 
-**Status 2026-10-14 (R-025, P-019 head):** T2 paper **63.392 kg**, credible **64.995 kg — MET vs ≤ 66.5 (reserve 1.505 ≥ 0.30)**; head + neck moved to its own line (v3 basis 2.692 → 1.178 credited), +0.045 GMSL2 board. T7 still MET at 1.0 m/s with +4.4 W [EST]: 703.4 W, 2.07 h typical / 2.03 h binned; 1.2 m/s tracked 1.72 h (NOT MET). Target values unchanged.
+**Status 2026-10-14 (R-026, A23 head citations):** T2 paper **63.399 kg**, credible **64.920 kg — MET vs ≤ 66.5 (reserve 1.580 ≥ 0.30)**; head + neck 0.817 paper / 1.104 credited. T7 unchanged (MET at 1.0 m/s, 703.4 W). Target values unchanged.
+
+**Superseded status 2026-10-14 (R-025, P-019 head):** T2 paper **63.392 kg**, credible **64.995 kg — MET vs ≤ 66.5 (reserve 1.505 ≥ 0.30)**; head + neck moved to its own line (v3 basis 2.692 → 1.178 credited), +0.045 GMSL2 board. T7 still MET at 1.0 m/s with +4.4 W [EST]: 703.4 W, 2.07 h typical / 2.03 h binned; 1.2 m/s tracked 1.72 h (NOT MET). Target values unchanged.
 
 Weights sum to 1.00. **Hard constraints (cannot be traded): T2 ≤ 66.5 kg (amended Bryan 2026-10-13 via R-016/R-017; was 65.0), T7 ≥ 2 h walking, T8 structural survival, safety.** Weights apply only to trades among soft margins.
 

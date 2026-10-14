@@ -256,3 +256,4 @@ Any change to CONTRACTS.md or TARGETS.md, or to another module's files, starts h
 - Line total **0.817 kg** (+0.007): catalog 0.388, calc 0.179, [EST] 0.250 → cited/calc share 69.4 %.
 - R-021 credit recomputed: saving 2.692 − 0.817 = 1.875; credited 1.875×0.694 + 1.875×0.306×0.5 = 1.588 → **credited head + neck 1.104 kg (was 1.178; −0.074 credible)**. Paper +0.007.
 - The neck servos use the AGX301 RS485, so no added mass. The JCB022/JCB009 +0.045 is unchanged in the brain area (R-025 §4).
+- Status: **ACCEPTED (R-026), A23 closed.** Credited head + neck 1.104 (−0.074) confirmed; converter verified vs RP40-FR datasheet. Conditions: order RP40-11012SFR/P-HC (43 g heat-sink variant); add the note-9 input filter (A27). Credible 64.920, reserve 1.580.
