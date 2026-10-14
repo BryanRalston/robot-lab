@@ -810,6 +810,44 @@ No failing connector was found among the cited parts, so **no mass change**. XT6
 
 **Mass change:** none from this audit. The +0.024 kg RP03 was already booked in R-076. The isolated CAN transceiver and IP2X covers are TBD.
 
+
+### 18.2d Arbiter R-077: AO rail on RP03-11012SRAW, 80 % derate (≤ 2.4 W hot per hand)
+**Ruling.**
+- Part: **RP03-11012SRAW** (RECOM RP03-RAW DS: 36–160 V in, 12 V / 250 mA, 84.5 %, 14 g, reinforced 3 kVAC).
+- The 80 % derate is binding, so the AO load is ≤ 2.4 W hot.
+- Reserve is ≈ 0.22 kg, including the RP03.
+
+**AO load budget per hand (hot, at the RP03 output)**
+| load | basis | W hot |
+|---|---|---|
+| XMC4800, 144/144/144, worst case | DS §3.2.8 Table 33: 250 mA max at 3.6 V, TJ 150 °C (§16.7) | 0.90 |
+| 2 × DP83822HF | TI: < 220 mW each, 3.3 V | 0.44 |
+| 6 encoders (2 ENX22 incremental + 4 ENX22 Absolute) | maxon: 22 mA at 5 V each, 132 mA (§16.8) | 0.66 |
+| 2 × RS-422 quad receivers (AM26C32-Q1 class) | 15 mA max ICC at 5 V each [grade/DS to confirm, §16.8] | 0.15 |
+| TMP117 | 3.5 µA at 1 Hz (TI DS) | ≈ 0 |
+| R-051 latch (LM2903B-Q1 + NTC divider) | ≈ 1 mA at 3.3 V [EST] | 0.005 |
+| 5 V buck loss (0.81 W out) | η 85 % [EST, part not chosen] | 0.14 |
+| 3.3 V buck loss (1.35 W out) | η 85 % [EST] | 0.24 |
+| **total** | | **2.53 W > 2.4 W: FAIL by 0.13 W** |
+
+**Trims (cited)**
+1. **MCU at 72/72/144 MHz, peripherals enabled.**
+   - Table 33: 97 mA vs 135 mA typ (×0.72). Scaling the 0.90 W worst case by 0.72 [EST scaling] gives 0.65 W. That saves 0.25 W, plus 0.04 W of 3.3 V buck loss: **−0.29 W**.
+   - CPU load was ≈ 27 % at 144 MHz (§16.8), so ≈ 54 % at 72 MHz. The BiSS-C 10 kHz read and the 11 + 6 loops still fit (re-confirm in FW-E14 bench).
+   - **Adopted.**
+2. **Single PHY if the hand is end-of-line** (§16.7 fallback): −0.22 W, plus 0.04 W loss, **−0.26 W**. Conditional on the EtherCAT topology (Controls). Not needed to pass.
+3. **Encoders on the switched rail A:** **rejected**. The R-051 latch reset power-cycles rail A. The 2 incremental ENX22 would lose count, and the BiSS-C master would fault during every reset.
+
+**Result.**
+- With trim 1: **≈ 2.24 W hot ≤ 2.4 W (93 % of the derated limit, 75 % of the 3 W rating)**.
+- With trims 1 + 2: ≈ 1.98 W.
+- **No higher-power part is needed. Mass unchanged** (RP03-11012SRAW 14 g ×2, already booked +0.024 kg).
+- **Bench check (T-029):** measure the AO input power hot (TJ near 125 °C, all encoders, both PHYs linked, 72 MHz). If it measures > 2.4 W, this goes back to the Arbiter with a larger isolated part (36–160 V class, mass to be cited and booked in full).
+- **Open:**
+  - buck efficiencies (parts not chosen)
+  - RS-422 receiver datasheet
+  - the 72 MHz scaling of the worst-case figure (Table 33 gives only typical at 72 MHz)
+
 ### 18.2 Checked and not counted
 - **STM32H7 drop:** never booked as a separate mass. The hand board was booked as a board lump (Arms), and Thermal A43C already assumed it dropped. **Saving 0.**
 - **`hand 24 V from wrist DC/DC` row (0.0128 kg):** 0.5 → 0.25 passes (0.6 K), but R-047 put the RP40s in the shoulder bay, so this row's route is stale. Actuators should re-book the row first. **Not counted.**
