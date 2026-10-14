@@ -6,6 +6,7 @@ plateau F_p reached over 2 mm [EST], held to crush s, then densification k_d [ES
 Outputs one JSON line per run + summary. Usage:
   python t030_pushfall.py --pad 40 --runs 50 --dirs L,R,LB --out results/t030_pad40.jsonl
   python t030_pushfall.py --smoke   (one short fall, 30 mm pad)"""
+import collections
 import mujoco, numpy as np, json, argparse, os, math, time
 HERE=os.path.dirname(os.path.abspath(__file__)); ROOT=os.path.abspath(os.path.join(HERE,'..','..','..'))
 P=argparse.ArgumentParser()
@@ -26,6 +27,8 @@ P.add_argument('--spike',type=float,default=1.0,help='start-spike factor over th
 P.add_argument('--area-cm2',type=float,default=109.0)
 P.add_argument('--carry',action='store_true',help='P-042 20 kg carry: release load first, then tuck')
 P.add_argument('--release-s',type=float,default=0.05,help='hook release time s [EST, Arms to confirm]')
+P.add_argument('--chest-k',type=float,default=0.0,help='R-070 T-031: chest/torso shell contact stiffness N/m on all torso geoms (MuJoCo solref -k,-b); 0 = sim/v3 default (rigid-ish, NOT real). Torso/Materials value missing')
+P.add_argument('--chest-zeta',type=float,default=0.3,help='damping ratio for --chest-k (b = 2 zeta sqrt(k m_torso)) [EST]')
 P.add_argument('--out',default=None); P.add_argument('--smoke',action='store_true')
 P.add_argument('--no-fallmode',action='store_true',help='baseline: keep standing PD through the fall')
 A=P.parse_args()
@@ -38,6 +41,10 @@ if A.pad=='hc': A.pad_model='honeycomb'
 RAMP=0.002; KD=2.0e6; MU=0.8; ARM=0.06; C0=27700.0; DPW=0.085; GATE_F=9170.0; GATE_M=9170.0*0.06
 PATCH=PAD['face']; PAD_Y=0.13 if A.pad=='hc' else 0.152; PAD_Z=-0.005 if A.pad=='hc' else 0.0   # pad centre lateral of shoulder-pitch joint: upper-arm offset 0.112 + capsule r 0.04 (sim/v3 geometry)
 m=mujoco.MjModel.from_xml_path(os.path.join(ROOT,'sim','v3','humanoid_v3.xml')); d=mujoco.MjData(m); dt=m.opt.timestep
+if A.chest_k>0:   # R-070: real chest stiffness on torso contact geoms
+    _tb=m.body('torso').id; _b=2*A.chest_zeta*math.sqrt(A.chest_k*m.body_subtreemass[_tb])
+    for _g in range(m.ngeom):
+        if m.geom_bodyid[_g]==_tb: m.geom_solref[_g]=[-A.chest_k,-_b]
 names=[m.actuator(i).name for i in range(m.nu)]; jid=m.actuator_trnid[:,0]; qa=m.jnt_qposadr[jid]; va=m.jnt_dofadr[jid]; lim=m.actuator_ctrlrange[:,1]
 ai=lambda n:names.index(n); kp=np.clip(lim*3,30,600); kd=0.04*kp; MASS=m.body_subtreemass[1]
 footg=[m.geom(n).id for n in ('l_foot','r_foot')]; floor=m.geom('floor').id
@@ -80,7 +87,7 @@ DIRS={'L':(0,1.),'R':(0,-1.),'LB':(-0.7071,0.7071),'LF':(0.7071,0.7071),'RF':(0.
 LEG=lambda S: np.linalg.norm(d.xpos[m.body(S+'_thigh').id]-d.xpos[m.body(S+'_foot').id])
 def run(dirn,J,rng):
     nominal(); qt=q0.copy(); push=np.array([*DIRS[dirn],0.])*J/0.1; side=1 if DIRS[dirn][1]>=0 else -1; fwd=dirn in ('F','LF','RF') and A.dirs.startswith('F')
-    t_det=None; t_rel=None; fc_max=0.; ang_unknown=False; tau_g=0.; FT=None; leg0=leg1=None; Warm=0.; ang0=None; angpk=None; bypass=False; t_fm=None; t_imp=None; com_trig=None; com_imp=None; Wsh=0.; Woth=0.; Fpk=0.; cmax=0.; cen=np.zeros(2); cw=0.; prev_c={}
+    t_det=None; t_rel=None; fc_max=0.; ang_unknown=False; tau_g=0.; FT=None; leg0=leg1=None; Warm=0.; ang0=None; angpk=None; bypass=False; t_fm=None; t_imp=None; com_trig=None; com_imp=None; Wsh=0.; Woth=0.; Fpk=0.; cmax=0.; cen=np.zeros(2); cw=0.; prev_c={}; chest_g=0.; _na=max(1,round(0.002/dt)); _vb=collections.deque(maxlen=_na+1)
     E0=None; T=4.0 if not A.smoke else 2.5; f6=np.zeros(6)
     for k in range(int(T/dt)):
         t=d.time; com=d.subtree_com[1].copy()
@@ -143,13 +150,16 @@ def run(dirn,J,rng):
         ia=ai(('l' if side>0 else 'r')+'_shoulder_roll'); pw=d.ctrl[ia]*d.qvel[va[ia]]
         if t_fm is not None and pw<0: Warm+=-pw*dt
         mujoco.mj_step(m,d)
+        _v=np.zeros(6); mujoco.mj_objectVelocity(m,d,mujoco.mjtObj.mjOBJ_BODY,m.body('torso').id,_v,0)
+        _vb.append(_v[3:].copy())
+        if t_fm is not None and len(_vb)>=_na+1: chest_g=max(chest_g,float(np.linalg.norm(_vb[-1]-_vb[-1-_na]))/(_na*dt)/9.81)
         if t_fm is not None:
             for s_ in 'lr':
                 jd=m.jnt_dofadr[m.joint(s_+'_shoulder_pitch').id]; tg=abs(d.qfrc_actuator[jd]-m.dof_armature[jd]*d.qacc[jd]+d.qfrc_constraint[jd]); tau_g=max(tau_g,tg)
     share=Wsh/(Wsh+Woth) if Wsh+Woth>0 else None; M=Fpk*ARM
     fs_rad=C0/(Fpk+2*M/DPW) if Fpk>0 else None; fs_ax=C0/(2*M/DPW+0.44*Fpk) if Fpk>0 else None
     crouch=(com_trig-com_imp) if (com_trig is not None and com_imp is not None) else None
-    return dict(forearm_crush_max_mm=round(fc_max*1e3,1),tuck=A.tuck,shoulder_pitch_gear_peak_Nm=round(tau_g,1),angle_beyond_25_unknown=ang_unknown,spike=A.spike,hc_stroke_mm=A.hc_stroke*1e3,t_release=t_rel,carry=A.carry,arm_used='tuck',dir=dirn,J=round(J,1),pad_mm=A.pad,fell=bool(t_imp is not None),t_detect=t_det,t_fallmode=t_fm,t_impact=t_imp,
+    return dict(chest_k=A.chest_k,torso_peak_g=round(chest_g,1),forearm_crush_max_mm=round(fc_max*1e3,1),tuck=A.tuck,shoulder_pitch_gear_peak_Nm=round(tau_g,1),angle_beyond_25_unknown=ang_unknown,spike=A.spike,hc_stroke_mm=A.hc_stroke*1e3,t_release=t_rel,carry=A.carry,arm_used='tuck',dir=dirn,J=round(J,1),pad_mm=A.pad,fell=bool(t_imp is not None),t_detect=t_det,t_fallmode=t_fm,t_impact=t_imp,
         crouch_at_impact_m=(leg0-leg1) if (leg0 and leg1) else None,com_drop_at_impact_m=crouch,E_sh_J=round(Wsh,1),E_other_J=round(Woth,1),shoulder_share=share,pad_peak_N=round(Fpk),pad_crush_max_mm=round(cmax*1e3,1),
         bottomed=(cmax>0.75*PAD['t']) if A.pad_model=='curve' else (cmax>PAD['s']),beyond_data_unknown=bool(A.pad_model=='curve' and cmax>0.75*PAD['t']),impact_angle_deg=ang0,peak_angle_deg=angpk,bypass_contact=bypass,pad_model=A.pad_model,arm=A.arm,W_arm_backdrive_J=round(Warm,1),M_bearing_Nm=round(M,1),fs_radial=fs_rad,fs_axial=fs_ax,contact_centroid_mm=(cen/cw*1e3).round(1).tolist() if cw>0 else None)
 JD=lambda o: o.item() if hasattr(o,"item") else str(o)

@@ -1,6 +1,29 @@
 # T-031 brief: forward fall with permanent R5 arm tuck vs shoulder-pitch gear rating (R-057 / D77)
 Grok Build, **bryan PC ff639f5a only, never DESKTOP-B115PVV**. CPU MuJoCo on sim/v3. Same script and setup as T-030 (`T030_BRIEF.md` §5): `modules/controls/fall/t030_pushfall.py --dirs F`.
 
+## R-070 update (2026-10-14): primary = tuck B, gate = chest ≤ 38 g with real chest stiffness
+- **Primary forward tuck: B = arms straight down, roll +5° / yaw 0 / pitch 0 / elbow 0** (76.4 mm clearance crouched). Forward falls only; side falls keep R5. Arms confirms B with model_v4 and real covers.
+- **Pass (a), both required in every run:** `torso_peak_g` ≤ **38 g** and `gear_pitch_max` ≤ 369 N·m.
+  - `torso_peak_g` is new in `t030_pushfall.py`: the torso COM linear-velocity change over a 2 ms window, after fall mode starts.
+  - It must be run **with real chest stiffness**: `--chest-k <N/m> --chest-zeta <ζ>`, which applies MuJoCo solref (−k, −b) on all torso geoms. Without `--chest-k`, the sim/v3 default contact is not a valid result.
+- **MISSING DATA (blocks the (a) verdict):** the repo has no chest stiffness.
+  - Torso R1_ARCHITECTURE gives only a CFRP 2.0 mm monocoque with no covers on the torso (R-021). There is no force–deflection, no local shell stiffness and no allowable crush.
+  - Materials has the shoulder pads only (R042 EPP / honeycomb).
+  - Needed from Torso, with Materials: chest-front force vs deflection at the contact patch (k in N/m, or an F–δ curve), the stroke to damage, and damping/energy loss. One number k plus ζ is enough for the first batch.
+  - 38 g needs ≥ ≈ 42 mm of stopping at 5.6 m/s, so a bare 2 mm CFRP shell is unlikely to pass without a chest crush layer. That is an Arbiter item if it fails.
+- **Fallback (b) preload:** allowed **only with an R-058 contact waiver and defined pads**. Arms/ID must give the forearm pad and chest pad locations (torso frame x/y/z, size), and the batch is run with those. Without them, (b) is not a candidate.
+- (c) is an add-on only, with its mass going to the Arbiter.
+- **Diagonals LF/RF:** `gear_pitch_max` ≤ 369 N·m in every mode (a, b, c), as a gate.
+- **Batch (bryan PC ff639f5a, never DESKTOP-B115PVV), replaces the order below.** Use K = the Torso value and sweep 0.5×/1×/2×K:
+```
+python $F --dirs F,LF,RF --tuck B --chest-k $K        --out $O/t031_a_B_k1.jsonl
+python $F --dirs F,LF,RF --tuck B --chest-k $(0.5K)   --out $O/t031_a_B_k05.jsonl
+python $F --dirs F,LF,RF --tuck B --chest-k $(2K)     --out $O/t031_a_B_k2.jsonl
+python $F --dirs F,LF,RF --tuck B --chest-k $K --carry --out $O/t031_a_B_carry.jsonl
+python $F --dirs F,LF,RF --tuck preload --chest-k $K  --out $O/t031_b_preload.jsonl   # only once the waiver and pads are defined
+```
+- **Box smoke (2026-10-14, 1 run, untuned, NOT a result):** `--smoke --tuck B --chest-k 2e5` (smoke forces dir L), with k = 2e5 a placeholder. Result: torso 79.8 g, gear 721.8 N·m. This only checks that the metric and plumbing work.
+
 ## R-065 update (2026-10-14): remedy order (a) → (b) → (c), diagonals, gate ≤ 369 N·m everywhere
 Candidate search: `tuck_search.py` → `tuck_search.json` (sim/v3 FK + mj_geomDistance, standing and FALL-mode crouch).
 - **R5 tuck:** forearm/hand front at torso x 272 mm vs chest front 110 mm (≈ 160 mm proud), clearance 8.6 mm. Fails R-058 and the outline.

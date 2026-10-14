@@ -1,0 +1,72 @@
+{
+ "basis": "(winding_model.load_params(): fbd762b 0.0703 m2 fins, x2 dropped, h 8 still air, eta_f 0.7, drives off housing, 35 C).",
+ "Rha": 1.601,
+ "tau_cont120": 76.9,
+ "hot_start_Tw": 89.4,
+ "hot_start_Th": 75.4,
+ "rows": [
+  {
+   "tau_Nm": 80,
+   "dwell_hot_s": 1549.5,
+   "dwell_cold_s": 2602.8,
+   "rest_full_s": null,
+   "rest_half_s": 471
+  },
+  {
+   "tau_Nm": 100,
+   "dwell_hot_s": 194.0,
+   "dwell_cold_s": 712.6,
+   "rest_full_s": null,
+   "rest_half_s": 657
+  },
+  {
+   "tau_Nm": 120,
+   "dwell_hot_s": 51.3,
+   "dwell_cold_s": 318.9,
+   "rest_full_s": null,
+   "rest_half_s": 274
+  },
+  {
+   "tau_Nm": 150,
+   "dwell_hot_s": 21.0,
+   "dwell_cold_s": 102.2,
+   "rest_full_s": null,
+   "rest_half_s": 181
+  },
+  {
+   "tau_Nm": 180,
+   "dwell_hot_s": 12.3,
+   "dwell_cold_s": 47.1,
+   "rest_full_s": null,
+   "rest_half_s": 162
+  },
+  {
+   "tau_Nm": 220,
+   "dwell_hot_s": 7.4,
+   "dwell_cold_s": 25.4,
+   "rest_full_s": null,
+   "rest_half_s": 149
+  },
+  {
+   "tau_Nm": 260,
+   "dwell_hot_s": 5.0,
+   "dwell_cold_s": 16.4,
+   "rest_full_s": null,
+   "rest_half_s": 144
+  },
+  {
+   "tau_Nm": 300,
+   "dwell_hot_s": 3.7,
+   "dwell_cold_s": 11.7,
+   "rest_full_s": null,
+   "rest_half_s": 139
+  },
+  {
+   "tau_Nm": 345,
+   "dwell_hot_s": 2.7,
+   "dwell_cold_s": 8.5,
+   "rest_full_s": null,
+   "rest_half_s": 132
+  }
+ ]
+}
