@@ -52,6 +52,22 @@
   "grip_ladderB_sustained_N": 22.058823529411764,
   "grip_ladderB_top_N": 26.47058823529412,
   "peak30N_needs_A": 0.952,
-  "grip_at_cap_N": 34.03361344537816
+  "grip_at_cap_N": 34.03361344537816,
+  "ADOPTED_cap_A": 1.66,
+  "T_1p66_eta065": 500.17407699999995,
+  "T_1p66_ideal": 769.49858,
+  "trip_A": 1.8,
+  "drv_ilim_A": 1.9
+ },
+ "r083_144MHz": {
+  "util_pct": 41.18055555555556,
+  "margin_pct": 58.81944444444444,
+  "step": 71,
+  "sclk_MHz": 4.9921875,
+  "adc_div": 5,
+  "fadci_MHz": 28.8,
+  "t_conv_us": 0.625,
+  "pwm_counts_edge": 7200.0,
+  "pwm_counts_center": 3600.0
  }
 }

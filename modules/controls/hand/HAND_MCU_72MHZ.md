@@ -1,7 +1,20 @@
 # Hand MCU at 72 MHz (Arbiter R-078) and per-flexor stall cap (R-080, Arms R8b) — RL Controls, 2026-10-14
 Script `hand_mcu_72mhz.py` → `hand_mcu_72mhz.json`. Tags: **[REPO]** = robot-lab value; **[DS]** = Infineon/maxon/TI datasheet or reference-manual value from memory, *not re-read here* (verify at FW-E14); **[EST]** = my assumption.
 
-## Inputs
+## ADOPTED (R-083): 144/144/144 MHz, 20 kHz PWM — PASS
+R-083 lifted the 72 MHz limit; Electronics runs the XMC4800 at 144/144/144 MHz with 20 kHz PWM [REPO, Electronics]. The 72 MHz analysis below is kept as the **fallback** (82 %, still fits).
+- **CPU:** the same 59.3 Mcyc/s conservative count gives **41 %, a 59 % margin** (Electronics' counts give 26 %). FW-E14 bench pass is ≤ 70 %, measured with DWT CYCCNT.
+- **BiSS-C (USIC SSC, fPERIPH 144):**
+  - Fractional divider STEP = floor(2 × 5 MHz × 1024 / 144 MHz) = **71**, PDIV = 0, so SCLK = 144 × 71/1024/2 = **4.99 MHz ≤ 5 MHz** (rounded down on purpose).
+  - Read time stays 8.65 µs; 4 × 8.65 = 34.6 µs in the 100 µs frame.
+- **VADC:** the prescaler divides fPERIPH by **5**, giving fADCI = **28.8 MHz ≤ 30 MHz** [DS limit]. Divide-by-4 would give 36 MHz, which exceeds the limit. About 0.63 µs per conversion [EST].
+- **PWM 20 kHz (confirmed by Electronics):** fCCU 144 gives 7200 counts edge-aligned (12.8 bit) or 3600 centre-aligned (11.8 bit). This is unchanged from the fallback.
+- **POSIF:** unchanged, because fCCU was already 144. The margin is 15–27× against the 0.945 µs minimum state.
+- **EtherCAT:** fit a **single PHY**, since the hand is the last device on each arm line (harness.py l.56/64–65). Electronics' rule is binding: **nothing may be added after the hand**, because port 1 is not populated. Adding anything there would need a second PHY (+0.26 W, ~110 mm²).
+- **AO power:** reverting the 72 MHz trim costs about +0.29 W. The AO budget is Electronics' to close under R-083; it is not checked here.
+
+## FALLBACK: 72/72/144 MHz analysis (R-078)
+### Inputs
 - Clocks fCPU/fPERIPH/fCCU = **72/72/144 MHz** [REPO electronics §18.2d trim 1]. Setting: fSYS = fPLL = 144, CPUDIV=1, PBDIV=0 (fPERIPH = fCPU), CCUDIV=0 (fCCU = fSYS) [DS]. The ECAT clock comes from the USB PLL and does not depend on the CPU clock [DS].
 - 11 drives per hand: 6 × DCX 22 S flexors + 5 × DCX 16 S. All are **brushed DC on DRV8874-Q1 PH/EN with IPROPI current sense, so no FOC** [REPO §16.7]. 11 current loops at 10 kHz, 6 position loops at 1 kHz [REPO].
 - Encoders: 2 × ENX22 incremental at 1024 cpt on POSIF0/1, and 4 × ENX22 Absolute BiSS-C (12-bit, 23-bit frame, 5 MHz, 8.65 µs/read, 10 kHz) on 4 USIC SSC channels [REPO §16.8, R-073 FW-E14].
@@ -71,24 +84,22 @@ Constants [REPO arms/A42_A43_R4, R7_ROUND]: Kt 18.4 mN·m/A, I0 35.9 mA, GPX22HP
 | 0.90 | 693 | 1.21 |
 | 1.00 | **770** | **1.09** |
 
-**Adopt 1.08 A per flexor** (1.09 ideal, minus sense tolerance), giving T ≤ 495 N at η = 1 and 322 N at η 0.65. Cold Kt is used; hot Kt is lower, which adds margin.
+**The η table above is kept as the rationale for G5 calibration.**
 
-**Grip under ladder B (55/82/88 °C → 0.84/0.70/0.50/0 A)** [REPO thermal R073; 30 N at 0.952 A, friction 1.3, which already contains η 0.65 and the sheath]:
-- All ladder steps are ≤ 0.84 A < 1.08 A, so **the cap costs no sustained grip**. Ladder B still holds 0.70 A, i.e. **22.1 N (≥ 22 N, PASS)**, or 26.5 N on the 0.84 A step.
-- T4 30 N peak needs 0.952 A < 1.08 A, so it still passes. The maximum burst grip at the cap is about 34 N.
-- What the cap removes is only the unused 0.95–1.67 A burst headroom (~34–52 N).
-- **Both conditions are met, so no trade-off is needed.**
-- If the bench later shows higher sheath friction (grip per amp lower than 31.5 N/A), first measure the real η and friction (G5 capstan test). Options then:
-  - (a) a per-hand calibrated η, which raises the cap to the measured worst η_max; or
-  - (b) a tendon tension sensor with a closed-loop 500 N limit.
-- Not the 0.65 sizing.
+**ADOPTED cap (Arms R8b + Controls):**
+- **Clamp: 1.66 A per flexor.** The basis is the maxon GPX 22 HP 103:1 sheet, η_max 0.65, cited in `arms/hand_close_r4.py` l.4 [REPO, DS] as the datasheet upper bound. At η 0.65 this gives **500 N**.
+- The loaded close needs about 1.7 A transient (A43 sim, T4 0.64–0.68 s [REPO]), so a 1.08 A clamp would block the close.
+- Residual risk: if the as-built η is above 0.65 (static or back-driven), 1.66 A could give up to 770 N at η = 1. The **G5 per-assembly calibration below closes this risk.** Materials already designs the sheath and end stops for a 775 N proof [REPO TENDON_SHEATH].
+- **Grip under ladder B:** every step is ≤ 0.84 A, so the clamp costs nothing. Sustained grip is **22.1 N (≥ 22 N, PASS)** at η 0.65 and friction 1.3, and the 30 N peak (0.952 A) passes.
 
-**Enforcement at 72 MHz (cost 1.8 Mcyc/s, included above):**
-1. Current-loop clamp. The 10 kHz PI setpoint is clamped to 1.08 A per flexor, with output anti-windup. A measured IPROPI value above 1.15 A for 3 consecutive samples (0.3 ms) forces the bridge off for that flexor.
-2. Stall timer. If |I| > 0.9 A and the encoder speed is below 5 counts/ms for more than 0.5 s, the setpoint ramps to the ladder step (≤ 0.84 A). Release needs speed or an EtherCAT command.
-3. Existing protections stay in place:
-   - the 1.67 A rail cap (3 flexors per rail);
-   - the I²t limit of 0.84 A RMS;
-   - the R-051 hardware latch, which disables all bridges independently.
-- The DRV8874 current-regulation (ITRIP) limit is set via its IPROPI/VREF to about 1.2 A, as a hardware backstop above the firmware clamp [DS, check at layout].
-- Bench (T-029/G5): stall each flexor against a load cell. **Pass: ≤ 500 N.**
+**Enforcement (cost 1.8 Mcyc/s, already in the CPU budget):**
+1. **10 kHz current-loop clamp at 1.66 A** per flexor, with anti-windup.
+2. **Trip:** if IPROPI reads above **1.80 A for 3 consecutive samples (0.3 ms)**, that flexor's bridge is switched off.
+3. **Stall timer:** if |I| > 0.9 A and speed is below 5 counts/ms for more than **0.5 s**, the setpoint ramps down to the ladder step (≤ 0.84 A).
+4. **DRV8874 ILIM at about 1.9 A**, above the trip, as a hardware backstop. It must **not** be 1.2 A, which would block the close [DS, set by RIPROPI/VREF at layout].
+5. Existing protections stay: the 1.67 A per-rail cap, I²t at 0.84 A RMS, and the R-051 latch.
+
+**G5 requirement (new):**
+- Measure tendon tension per amp on **every assembly**, both driven and **back-driven**, against a load cell at stall.
+- If the inferred η > 0.65, set a calibrated per-hand cap I_cap = 500 N × r / (Kt × 103 × η_meas) + I0, which keeps tension ≤ 500 N, and store it in hand NVM.
+- If the calibrated cap falls below the about 1.7 A needed for the loaded close, the issue goes back to Arms/Arbiter. Options are a slower close profile or a tendon tension sensor with a closed-loop 500 N limit.

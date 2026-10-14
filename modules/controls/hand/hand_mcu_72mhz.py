@@ -45,5 +45,17 @@ out = dict(budget_Mcyc=budget, total_Mcyc=tot, util_pct=100*util, margin_pct=100
   cap=dict(I_cap_ideal_A=I_cap_ideal, I_cap_eta065_A=I_cap_eta, T_1p67_ideal=tension(1.67),
            T_1p08_ideal=tension(1.08), T_1p08_eta=tension(1.08, eta),
            grip_ladderB_sustained_N=grip_per_A*0.70, grip_ladderB_top_N=grip_per_A*0.84,
-           peak30N_needs_A=0.952, grip_at_cap_N=grip_per_A*1.08))
+           peak30N_needs_A=0.952, grip_at_cap_N=grip_per_A*1.08,
+           ADOPTED_cap_A=1.66, T_1p66_eta065=tension(1.66, eta), T_1p66_ideal=tension(1.66),
+           trip_A=1.80, drv_ilim_A=1.9))
 print(json.dumps(out, indent=1)); json.dump(out, open('hand_mcu_72mhz.json', 'w'), indent=1)
+
+# ---- R-083: adopted 144/144/144 MHz, PWM 20 kHz (72 MHz analysis above kept as fallback)
+f144 = 144e6
+step144 = int(2*biss_clk*1024/f144)               # floor so SCLK stays <= 5 MHz
+adc_div = next(d for d in range(1, 33) if f144/d <= 30e6)
+out144 = dict(util_pct=100*tot*1e6/f144, margin_pct=100*(1-tot*1e6/f144), step=step144,
+  sclk_MHz=f144*step144/1024/2/1e6, adc_div=adc_div, fadci_MHz=f144/adc_div/1e6,
+  t_conv_us=(2+12+4)/(f144/adc_div)*1e6, pwm_counts_edge=f144/20e3, pwm_counts_center=f144/2/20e3)
+print(json.dumps(out144, indent=1)); out['r083_144MHz'] = out144
+json.dump(out, open('hand_mcu_72mhz.json', 'w'), indent=1)
