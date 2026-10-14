@@ -708,3 +708,10 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
 - Ladder: Electronics adopted the tuned 55/70/80/88 ladder. It is **conditional on the Arms grip check** (sustained ~22 N, peak 30 N). Arms reports any continuous-hold target above 22 N.
 - RP40: rail caps follow the graph derate (100% to 60 C). The 11024SFR curve needs RECOM confirmation. The shoulder bay must stay <=60 C, or the rail cap is derated in software.
 - G5 bench thermocouples confirm the [EST] resistances.
+
+## R-052 (2026-10-14) D69 rev B (Actuators 4366d32) + pad R3 (ID 2af8650)
+- D69 rev B: keep 2x TBM2G-07613D and add 0.05 m2 housing fins. Walk is 96 C; carry with 10% added torque is 116 C open, 104 C vented, under the 130 C derate. **Adopted provisionally**, replacing rev C. The motor swap, re-CAD, strap and spreader are all cancelled.
+- Booked at Thermal's upper fin mass of 0.12 kg/knee, **+0.24 kg robot** (was +0.65), a recovery of -0.41. It moves to the measured value from the Legs fin CAD.
+- Conditions: (1) **Controls or Thermal reproduces** the walk and carry temperatures independently (Actuators self-run only, so not yet verified). (2) Covers over the knee **must stay vented**, which ties to the R-050 louvres and Thermal's A35. (3) Fins on the trunnion-plate face are <=9 mm (A47); Legs confirms against the v5 fairings. (4) A G5 bench test checks knee winding temperature on the carry case. If (1) fails, it reverts to rev C at +0.65.
+- Pad R3: 5052 3.1 pcf, pair 0.1004, 548 N·m. **Accepted**; the 0.0004 over the cap is noise and the booking stays 0.100. The trims credit stays at -0.110. Risk: if Materials cites crush strength under 0.90 MPa, the 2.3 pcf fallback costs +0.030.
+- Reserve is ~0.74 provisional. The R-043 waiver **ends**. The rule that additions >0.02 kg need a ruling stays.
