@@ -48,7 +48,7 @@ Closed covers fail (Actuators), so the **knee must be vented to A35** (louvres �
 - The minimum is 0.05 m² net, booked at 0.09 kg/knee.
 - Either way the Legs 0.05 kg booking must rise.
 
-## Rev C check (Actuators 6b86723, R-069; drives OFF the housing per R-066)
+## Rev C check (Actuators 6b86723) — **WITHDRAWN (Controls a5e14ff); kept for record only, do not use**
 Geometry from `actuators/r069_knee_fins_revc.py` / `cad/knee_twin_housing_finned_revc.step`, per knee, both housings (x ±45): 12 rear × 17 mm + 7 front × 9 mm, 1.0 mm thick 6061, 42 mm axial length, pitch 6.6 mm at r 41 (gap 5.6 mm). Mass 0.0605 kg/knee (CAD).
 - **0.0459 m² is GROSS.** It is the CAD surface-area delta of the union: fin faces + tips, with the root footprint already removed (my hand sum of faces + tips is 0.0465). It is **not efficiency-weighted**.
 - **Fin efficiency** (1.0 mm 6061): 17 mm fin η 0.986 (h 12) / 0.988 (h 10); 9 mm fin 0.996. **Effective area = 0.0453 m² (h 12) / 0.0454 (h 10)**, which is −1.3 %.
