@@ -825,3 +825,9 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
 - Pad gate 293.7 J is accepted.
 - Wrist open-frame palm half is **accepted at -0.036 (half credit)**. Conditions: continuous steel-coil sheaths (or a guard strip if PTFE), openings <=10 mm with radiused edges, lower edge z>=+10. The fairing nets to +0.043.
 - Reserve ~0.16 (waiver; the mass-down pass continues, needing >=0.14 more).
+
+## R-071 (2026-10-14) Mass-down: Electronics harness (ca6a83a §18)
+- Cited, rule-checked wire gauge cuts: **-0.064, full credit**. The battery-link share is conditional on Torso confirming the fuse I²t against 2.5 mm²; it's reversed if that fails.
+- XT30U drive tees replaced by **soldered splices: rejected.** Solder joints under vibration and fall shock are a fatigue risk, and the change loses drive serviceability. Allowed alternatives: (a) **crimped** inline splices (IPC/WHMA-A-620 class 3, heat-shrink plus strain relief) **only on branches that aren't field-replaceable**; (b) a lighter rated pluggable connector at serviceable drives. Electronics returns a mixed plan with cited connector masses; estimate items get half credit.
+- Not credited: STM32H7, the stale hand 24 V row (Actuators re-books), the clamp, TMS570/NVMe.
+- Reserve ~0.22 (waiver; >=0.08 still needed).
