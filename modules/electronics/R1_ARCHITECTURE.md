@@ -1030,6 +1030,23 @@ No failing connector was found among the cited parts, so **no mass change**. XT6
 - **AO supplies:** rule: **one RP06-11012SRAW per shoulder bay, never two in the same bay.** Thermal: bay air ≤ 55 °C, case ≈ 65 °C (RP06 rated −40…+105 °C with derating).
 - **Mass:** no change. The electronics total from §18.2i stands at **+0.014 kg booked (+0.026 kg with foot F/T)**.
 
+
+### 18.2k Controls note: hand MCU clock dividers at fPERIPH = 144 MHz (72 MHz restriction lifted, R-083)
+Controls owns `HAND_MCU_72MHZ.md` and updates it on their side.
+
+**BiSS-C MA clock (USIC SSC master), target ≤ 5 MHz.**
+- Infineon XMC4700/XMC4800 Reference Manual, USIC chapter, baud-rate generator. Formulas as used:
+  - Fractional divider mode (FDR.DM = 10b): **f_FD = f_PB × STEP / 1024**.
+  - SSC master shift clock: **f_SCLK = f_PIN / (2 × (PDIV + 1))**, with f_PIN = f_FD (BRG.PPPEN = 0, CLKSEL = f_FD).
+- 72 MHz check (Controls): STEP 142 gives f_FD = 72 × 142/1024 = 9.984 MHz. With PDIV 0, f_SCLK = **4.992 MHz** ✓.
+- **144 MHz: STEP = 71** gives f_FD = 144 × 71/1024 = 9.984 MHz. With PDIV 0, f_SCLK = **4.992 MHz ≤ 5 MHz** ✓. This is identical to the 72 MHz case.
+- Alternative: STEP 142 with PDIV 1 gives the same 4.992 MHz.
+- §16.8 frame timing (23 bits ≈ 4.6 µs + timeout, 8.65 µs/read) is unchanged.
+
+**VADC.** fADCI must be ≤ 30 MHz (XMC4800 DS, VADC f_ADCI). At f_PERIPH 144 MHz: **DIVA = 5 (÷6) gives 24 MHz** ✓. A ÷4 setting would give 36 MHz, which is too fast.
+
+**Citation status.** Formulas are taken from the XMC4700/XMC4800 Reference Manual USIC/VADC chapters (Controls' source). Section and page numbers are to be added at Controls' update, before G1.
+
 ### 18.2 Checked and not counted
 - **STM32H7 drop:** never booked as a separate mass. The hand board was booked as a board lump (Arms), and Thermal A43C already assumed it dropped. **Saving 0.**
 - **`hand 24 V from wrist DC/DC` row (0.0128 kg):** 0.5 → 0.25 passes (0.6 K), but R-047 put the RP40s in the shoulder bay, so this row's route is stale. Actuators should re-book the row first. **Not counted.**
