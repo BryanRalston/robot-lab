@@ -190,6 +190,16 @@ Hardwired dual-channel FAULT_N plus a CAN FD fault frame go to the TMS570. The T
 The earlier ~0.99 kg figure assumed the HS200 clamp (0.475 + board); the HS100 recovers 0.33 kg. Optional: HS25 pre-charge −0.0125 → +0.612. If Arcol rejects the HS100 pulse, 2 × HS100 0R75 → +0.714, still ≤ 0.80.
 **Request to Arbiter (R-034):** "RL Torso & Power requests booking the torso line at 5.024 kg, +0.624 kg net over the 4.40 kg allocation (cap 0.80, margin 0.176). Drivers: regen clamp P-045 0.150 and pack disconnect 0.232, both required for safety (R-033); A41 duct and partition 0.187 (R-030/R-032); shoulder bulkhead +0.150 for side-fall SF 2.1 (§9). Structure itself is 0.095 under allocation. All structure masses are [EST] until CAD. The contactor mass is to be cited before G1."
 
+### 15.7 O-T7: re-split sim torso body, ready for Controls to merge
+`sim_torso_body_r1.json` (from `sim_torso_body_r1.py`), in the waist_pitch frame (sim/v3 body `torso`):
+- **Mass 16.625 kg, COM (−0.0013, 0.0007, 0.158) m.**
+- Full inertia (Ixx Iyy Izz Ixy Ixz Iyz) = 0.297, 0.170, 0.204, −0.0008, −0.0098, −0.0003 kg·m².
+- Replaces sim/v3's 18.762 kg at z 0.169.
+- Includes: the 8.75 kg pack in the lower chest bay; the brain (1.261 kg); the torso items from §15.6; and 2 × 1.52 kg shoulder_pitch actuators at y ±0.170, z 0.22 (inertia taken from `arms/arm_inertials_r3.json`). The shoulder actuators are in **Arms' mass line, not torso**.
+- Excludes: head/neck, waistY, pelvis, and harness/covers.
+- Arms accepted y ±0.170 and 8 × M8 on a BC80 bolt circle.
+- sim/v3 not edited.
+
 ## 7. Open questions / conflicts (not edited in others' files)
 - **O-T1 (Electronics, coordination):** adopt the 48 V intermediate rail with DCM3623TA5N53B4T00; Torso hosts the DCM on the power distribution board or the brain tray? Mass 0.024 [UNVERIFIED for variant] stays in the brain line; who books the 47718-232 choke; 24 V VL source (O-E3); BMS→safety MCU CAN FD message set; e-stop = FET-open vs contactor (O-E6).
 - **O-T2 (Actuators/Arbiter):** waist_pitch 116 N·m < 188 N·m need with T5 payload → TBM2G-08508A, +0.19 kg.
@@ -201,4 +211,5 @@ The earlier ~0.99 kg figure assumed the HS200 clamp (0.475 + board); the HS100 r
 - **O-T9 (Electronics/Arbiter):** interlock exception for cell-at-risk faults.
 - **O-T10:** Sunon PF40281B1 static-pressure curve vs ~20 Pa vents+fins; fan PWM schedule.
 - O-T2 approved on citation (§13.1); O-T3 → contactor (§13.2); O-T5 re-rate proposed (§13.5).
+- O-T7: file delivered (§15.7); Controls to merge.
 - **O-T7 (Legs/Controls):** sim torso 18.762 kg should be re-split (pack 8.75 in chest) when the sim is updated.

@@ -1,0 +1,142 @@
+{
+ "body": "torso",
+ "frame": "waist_pitch joint (sim/v3 body 'torso' origin)",
+ "mass": 16.625,
+ "pos": [
+  -0.0013,
+  0.0007,
+  0.1582
+ ],
+ "fullinertia": [
+  0.29685,
+  0.16983,
+  0.20405,
+  -0.000827,
+  -0.009783,
+  -0.000252
+ ],
+ "replaces": "sim/v3 torso inertial mass 18.762 pos (-0.0008,0,0.1687)",
+ "notes": "Excludes head/neck (own body), arms below shoulder_pitch output, waistY, pelvis, harness/covers (not localized; add 0.3-0.5 kg [EST] if Controls wants them lumped). Shoulder_pitch 2x1.52 belongs to Arms' mass line, not torso. Geometry [EST] until CAD.",
+ "parts": [
+  {
+   "name": "torso shell CFRP 2 mm (hollow box 0.22x0.33x0.36)",
+   "mass": 1.705,
+   "pos": [
+    0,
+    0,
+    0.18
+   ],
+   "line": "torso"
+  },
+  {
+   "name": "shoulder bulkhead 7075 12 mm",
+   "mass": 0.6,
+   "pos": [
+    0,
+    0,
+    0.22
+   ],
+   "line": "torso"
+  },
+  {
+   "name": "waist ring 7075",
+   "mass": 0.25,
+   "pos": [
+    0,
+    0,
+    0.02
+   ],
+   "line": "torso"
+  },
+  {
+   "name": "pack rails + latch",
+   "mass": 0.2,
+   "pos": [
+    -0.01,
+    0,
+    0.1
+   ],
+   "line": "torso"
+  },
+  {
+   "name": "power distribution board/busbars",
+   "mass": 0.25,
+   "pos": [
+    0.06,
+    0,
+    0.16
+   ],
+   "line": "torso"
+  },
+  {
+   "name": "duct, partition, fan, TSR",
+   "mass": 0.187,
+   "pos": [
+    0.05,
+    0,
+    0.27
+   ],
+   "line": "torso"
+  },
+  {
+   "name": "regen clamp P-045",
+   "mass": 0.15,
+   "pos": [
+    -0.07,
+    0,
+    0.25
+   ],
+   "line": "torso"
+  },
+  {
+   "name": "pack disconnect (contactor, pre-charge)",
+   "mass": 0.232,
+   "pos": [
+    0.07,
+    0.05,
+    0.18
+   ],
+   "line": "torso"
+  },
+  {
+   "name": "battery 20S5P 185x220x144 (lower chest bay)",
+   "mass": 8.75,
+   "pos": [
+    -0.01,
+    0,
+    0.11
+   ],
+   "line": "battery"
+  },
+  {
+   "name": "brain (Thor+AGX301+DCM+JCB022), credited",
+   "mass": 1.261,
+   "pos": [
+    0.03,
+    0,
+    0.29
+   ],
+   "line": "brain"
+  },
+  {
+   "name": "L shoulder_pitch actuator (housing in torso wall)",
+   "mass": 1.52,
+   "pos": [
+    0,
+    0.17,
+    0.22
+   ],
+   "line": "arms (arm_inertials_r3.json)"
+  },
+  {
+   "name": "R shoulder_pitch actuator (housing in torso wall)",
+   "mass": 1.52,
+   "pos": [
+    0,
+    -0.17,
+    0.22
+   ],
+   "line": "arms (arm_inertials_r3.json)"
+  }
+ ]
+}
