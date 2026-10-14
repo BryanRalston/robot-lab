@@ -421,6 +421,32 @@ Total ≈ **0.33 m per pole, ≈ 0.66 m of sleeved bus (+ and −)**.
 - Core 88 mm → +0.144; CF/face 1 mm → +0.145; shell 2 mm → **shell skin x ≈ +0.147** (≥ +0.14 ✓).
 - The base shell front was x = +0.11 (220 mm-deep box). So the sternum skin must move **~37 mm forward**: a local bulge ~110 × 110 mm over the pad (or chest depth 0.22 → ~0.257 m if ID prefers a smooth line). **ID impact:** V5 chest shell (row 4) front profile changes. Intake vents (low front) and shoulder-bay vents (lateral) unaffected.
 
+## 25. R-087 (Electronics, Thermal bee2448): EtherCAT junction PCB on the partition's cold face
+Torso frame = waist_pitch origin; x forward, y left, z up. Layout [EST until CAD]:
+- Pack bay: x −0.082…+0.062, y ±0.110, lid at z = +0.2025.
+- Duct partition: **horizontal CFRP plate at z = +0.235**, front half x −0.02…+0.10. Duct/Thor above; cold face below.
+- Bus-bar runs (sleeved): pack connector → PDB → contactor, front, x ≥ +0.06, z +0.16…+0.20. PDB → clamp routed on the **right side (y ≈ −0.08)** to the clamp at (−0.07, 0, +0.25).
+
+**Board (5 × Würth 7490140142 + branch connectors):**
+- **Allowed outline:** x +0.000…+0.080, y −0.060…+0.060 (80 × 120 mm), mounted on the partition underside with **5 mm standoffs** → board plane z = +0.228.
+- **Component height ≤ 12 mm downward** (to z ≥ +0.216), leaving **≥ 13 mm to the pack lid**. Room confirmed for the transformers + low-profile connectors; tall RJ45s are not allowed (use board-edge locking headers).
+- **Mounting:** 4 × M3 at (x, y) = (+0.005, ±0.055) and (+0.075, ±0.055), z = +0.235, into partition inserts.
+- **Keep-outs:**
+  - x > +0.060 below z +0.21 (bus-bar zone), ≥ 15 mm vertical separation + PC cover;
+  - y < −0.040 at x < +0.02 (PDB → clamp sleeved run below);
+  - 2.8 mm creepage / 1.5 mm clearance from any 92 V part (R-076; the board is SELV).
+
+**Cable route:**
+1. **Thor → board:** GbE from Thor (≈ +0.03, 0, +0.29, in the duct) down through a grommet in the partition at **(−0.010, +0.050, +0.235)** (rear-left, away from the bus) to the board's rear-left edge.
+2. **Branches from the board's rear edge:**
+   - **legs ×2:** rear of the pack bay (x ≈ −0.09), down the left/right rear corners to the pelvis;
+   - **waist:** rear centre down to waistY;
+   - **left arm:** up the left side (y ≈ +0.12) to the left shoulder bay grommet;
+   - **right arm:** up the right side (y ≈ −0.12). This is **the only crossing of a bus run (PDB → clamp, sleeved)**, done at **≥ 10 mm with a PC barrier**, at 90°.
+3. No EtherCAT/STO run lies alongside any 92 V conductor; minimum parallel separation **≥ 20 mm** [EST rule].
+
+**Sternum items, same layout:** T-031 pad on Materials' bulkhead land at z ≈ +0.22, shell skin x ≈ +0.147 (≈ 37 mm local bulge, ID). The board (x ≤ +0.08) sits behind and below the land with no conflict.
+
 ## 7. Open questions / conflicts (not edited in others' files)
 - **O-T1 (Electronics, coordination):** adopt the 48 V intermediate rail with DCM3623TA5N53B4T00; Torso hosts the DCM on the power distribution board or the brain tray? Mass 0.024 [UNVERIFIED for variant] stays in the brain line; who books the 47718-232 choke; 24 V VL source (O-E3); BMS→safety MCU CAN FD message set; e-stop = FET-open vs contactor (O-E6).
 - **O-T2 (Actuators/Arbiter):** waist_pitch 116 N·m < 188 N·m need with T5 payload → TBM2G-08508A, +0.19 kg.
