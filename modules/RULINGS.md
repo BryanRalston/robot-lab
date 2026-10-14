@@ -795,3 +795,8 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
 - Forward fall (T-031): the R5 tuck is expected to fail (~510 vs 369 N·m), and 8.6 mm clearance breaks R-058's 10 mm. Order of remedies: (1) **a tuck with the forearm and hand inside the chest outline** (zero mass), as the primary; (2) the forearm preloaded against the chest (intentional contact, defined contact pads); (3) a forearm crush element, last, with its mass coming to me. T-031 runs (1) first.
 - **Diagonal falls:** T-030 and T-031 add diagonal cases. Shoulder-pitch gear torque must be <=369 N·m momentary (CSG-25-100) in every fall mode. The 438 N·m smoke result is a warning.
 - G4 stays open.
+
+## R-066 (2026-10-14) Knee drives off-housing (Electronics §17 1b64e1e, via Actuators)
+- Knee drives go on the thigh shell above the knee, on a 6061 plate with G10/PEEK standoffs and no metal path to the fins. **Adopted.** Hip bay rejected (+0.15–0.17/leg). Booked **+0.142** (estimate; it moves to the measured value at CAD). Required by R-062: drives on the housing leave only 3.7 K carry margin, which isn't acceptable.
+- Legs confirms the thigh volume, clash and fairing fit.
+- Reserve is ~0.16, **below the 0.30 floor. A waiver runs to the end of R13**, tied to the hip-lever reconciliation (R-056 booked at +0.43 conservative vs Legs +0.118). If the reconciled lever doesn't restore >=0.30, Robot Lab runs a mass-down pass across modules (cited or measured items only) before R13 closes. **Freeze:** no additions >0.005 until the reserve is >=0.30.
