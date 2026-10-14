@@ -589,9 +589,9 @@ Recorded: rail A = F1–F3 + S1, S2 + hand logic; rail B = F4–F6 + S3–S5. Si
 - Pin 3 CTRL is **referenced to −Vin**, the bus side.
 - The "/P" suffix is positive logic: **ON = open or 3.0 V < VCTRL < 12 V; OFF = short or 0 V < VCTRL < 1.2 V**. CTRL draws 3 mA when off.
 - **The §16.6 assumption (MCU drives CTRL directly) was wrong as written.** The MCU sits on the isolated 24 V side.
-- **Fix:** tie the hand logic ground to −Vin through the AO feed (item 4a). One EN conductor then runs from an AO-powered open-drain NMOS on the hand board to both CTRL pins through 2× BAS16. Low ≥ 200 ms = OFF; open = ON.
-- A broken EN wire fails ON. The R-051 hardware latch still disables all 11 bridges independently.
-- Opto alternative, if the RP40 isolation must be kept: 2 optos, +~0.5 g.
+- **Fix (R-073, supersedes the tied-grounds design):** RP40 isolation is kept. One **Toshiba TLP383** phototransistor optocoupler per RP40 (2 per hand, 4 total). The output transistor (V_CEO 80 V) runs from CTRL (pin 3) to −Vin. The parts sit on the RP40 bracket PCB in the shoulder bay, next to the pins. The LED is driven from the hand board's AO-powered EN line (one conductor + return).
+  - LED on = CTRL pulled low = OFF, held for ≥ 200 ms. LED off = CTRL open = ON.
+  - A broken EN wire fails ON. The R-051 hardware latch still disables all 11 bridges independently.
 
 **Item 4a: power tree. The assumption was FALSE.**
 - Sources: `arms/A42_A43_R4.md` says "board logic 4 W on rail A"; §16.4 says "rail A = … + hand logic"; §16.6 says 3V3_HAND is derived from rail A. The MCU would lose power during its own reset cycle.
@@ -728,6 +728,25 @@ Recorded: rail A = F1–F3 + S1, S2 + hand logic; rail B = F4–F6 + S3–S5. Si
 **Risks.**
 - MR30 is a hobby-grade connector, the same class as the booked XT30U. It has no positive latch, so it needs a strain-relief clip or tie-down at each drive (mass inside the 12 % sleeving allowance).
 - Mating cycles drop from XT30U's to 1000. That is adequate for service swaps.
+
+
+### 18.2a Arbiter R-073 (recorded 2026-10-14)
+1. **BiSS-C accepted (R-061 condition met in principle).**
+   - Firmware item **FW-E14**: XMC4800 acts as BiSS-C master for the 4 ENX22 Absolute encoders, read at 10 kHz (§16.8 4c: 8.65 µs/read).
+   - Bench item added to **T-029**: run at 12 400 rpm. Pass = 0 CRC errors over the full test duration, and position is correct (checked against the reference encoder/unwrap).
+2. **Hand leads booked +0.022 kg.**
+3. **RP40 CTRL isolation kept.**
+   - Optocoupler adopted: **Toshiba TLP383** (SO6L-4, Ta −55…125 °C, 5000 Vrms, V_CEO 80 V, CTR ≥ 50 %; DS TLP383_E 2022-05-17, **weight 0.128 g typ**).
+   - Placement: one per RP40, on the RP40 bracket PCB in the shoulder bay, output across CTRL/−Vin (§16.8 4b, tied-grounds design removed).
+   - Mass: 4 × 0.128 g + 4 × 0402 resistor ≈ **0.0006 kg robot**, within the +0.001 booked.
+   - **Open (to Arbiter):** the §16.8 AO feed (LM5164-Q1 non-isolated buck, return shared with the rail return) references the hand logic to −Vin anyway. For the isolation to be real, AO must use the isolated fallback **RP03-11024SRAW** (14 g each per DS). The mass delta against the LM5164 is not yet booked or cited, so it is not claimed here.
+4. **MR30 accepted, −0.025 kg.**
+   - Every connector gets a strain-relief clip that positively retains it.
+   - G5 vibration and retention tests are added.
+   - No cited clip mass was found (Amass publishes no MR30 retention clip). Fit inside the 12 % sleeving allowance is **unverified** until a part is chosen and its mass cited.
+5. **ENX22 100 °C limit:** stays open with Thermal and Arms.
+
+**Mass change this section:** +0.022 (hand leads, booked by the Arbiter) + 0.0006 (optos, inside the +0.001 booked). No other change.
 
 ### 18.2 Checked and not counted
 - **STM32H7 drop:** never booked as a separate mass. The hand board was booked as a board lump (Arms), and Thermal A43C already assumed it dropped. **Saving 0.**
