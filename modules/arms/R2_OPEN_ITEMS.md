@@ -150,3 +150,17 @@ Until then O-A3 is OPEN/FAIL.
 - whether shoulder_pitch also needs a slip clutch (≤ 300 N·m)
 
 The arm-side flange stays 8 × M8 12.9 on BC 80 (Torso accepted).
+
+## P-027 credit cross-check (Arms, for R-034)
+**Correct credit: −0.666 kg/side, −1.332 kg both (D67, 0.884/side).**
+- D65's −1.371 (0.865/side) is the mechanical pair only. It leaves out the 2 × RLS AksIM-2 encoders (+0.019/side, D67).
+- The 1.55 kg contract baseline already includes 2 encoders per joint, because v3.py actuator() mass counts `2*(ring+head)`.
+- So the like-for-like replacement is 0.884, and −1.371 overstates the credit by 0.039 kg.
+- Elmo drives stay off-arm (D66 line). With the drives on-arm the side would be 0.928 and fail the ≤ 0.90 cap.
+
+**R-034 budget with −1.332:** 66.511 − 1.332 = **65.179 kg**.
+- That clears the 0.011 kg overage, leaving a **1.321 kg reserve**, vs 65.140 / 1.36 at −1.371.
+- The 0.30 floor is met.
+
+**Arms cross-check verdict:** P-027 confirmed against the Arms R2 numbers. Peak 3.46× pitch, 2.16× simultaneous. L10 57.7 kh at fw 1.5 with the Arms duty in `wrist_duty_r3.json`. Mass 0.884 ≤ 0.90.
+**Caveat:** the O-A3 forearm fit FAILS for the D67 pair, which is packaging, not mass. The credit is valid, but the wrist pair location must change (R4 options above). That change could alter housing mass.
