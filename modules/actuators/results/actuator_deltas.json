@@ -2,9 +2,9 @@
  "source": "modules/arbiter/mass_rollup_official.json (R-022)",
  "harness": {
   "official_kg": 1.2864,
-  "actuators_model_kg": 1.3924676255608095,
-  "delta_kg": 0.10606762556080951,
-  "note": "A25 (D64): +0.106 vs official 1.2864; STO star 0.122 (0.137 incl. sleeving) vs R-028 A33 hold 0.14"
+  "actuators_model_kg": 1.4958831079530155,
+  "delta_kg": 0.2094831079530155,
+  "note": "A25 + A33 (D64/D66): STO 3-wire 0.206 wire + 0.012 JST-GH (0.230 wire incl. sleeving); 32 Elmo drives"
  },
  "linkage_both_legs": {
   "official_kg": 2.3262,
@@ -12,7 +12,7 @@
   "delta_kg": -4.403342124170706e-05
  },
  "note": "Robot total: read official credible_kg; add these deltas only after an Arbiter ruling.",
- "actuator_delta_total_kg": 0.1060235921395678,
+ "actuator_delta_total_kg": 0.2094390745317738,
  "official_credible_kg": 66.054,
  "v4_audit_fixes_pending": {
   "both_legs_kg": 0.138,

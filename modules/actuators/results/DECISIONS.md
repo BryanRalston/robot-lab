@@ -507,3 +507,27 @@ Retention at 1.2 m/s:
   - Nut and rod-end/misc masses are [EST].
 - **Cost:** BNK1004 about $150–250 [EST]; the RV12 price is not public. Net saving likely but not quantified.
 - Pending Arbiter.
+
+## D66 (A33, Electronics 1d70018 §9.4) STO 3-wire daisy chain; drive count 32
+- Elmo STO uses 3 conductors per drive (STO1 / STO_RET / STO2; the return is not shared). Each EtherCAT branch now carries 3 × 0.25 mm² SiF (SILI-E inside the loops), with a 0.08 m tee at each drive.
+
+| Run | n | Length m | kg |
+|---|---|---|---|
+| Legs (8 tees each) | 6 | 3.431 | 0.1058 |
+| Arms (7 tees each) | 6 | 2.833 | 0.0855 |
+| Waist (2 tees) | 3 | 0.663 | 0.0102 |
+| MCU → torso junction | 3 | 0.25 | 0.0041 |
+| **Wire total** | | | **0.2055** |
+
+- With the 32 JST-GH 4-pin tees (0.012 kg) STO is 0.218 kg, or 0.243 kg including sleeving. That replaces D64's 2-wire 0.122.
+- **Electronics' 0.270 is 0.05 high.** Their lengths (3.439 / 2.913) already include the EtherCAT tee pigtails, and they added STO tees on top of that. They also kept the neck segment (1.368 m), but the neck has no Elmo drives.
+- **Drive count: 32 Elmo drives**, from size.py `cnt`:
+  - Legs 8 each: hip yaw, hip roll, 2 × hip_pitch, 2 × knee, 2 × ankle.
+  - Arms 7 each: shoulder ×3, elbow, wrist roll, wrist pair ×2.
+  - Waist 2.
+- Why the counts differ:
+  - The old 34 included the 2 neck motors. Those are now Dynamixel XM430s (P-019 / R-025) with no Elmo STO.
+  - Electronics' 30 took the harness row "leg drive pigtails (7/leg)", which was a typo: it should be 8/leg.
+- Fixed in `harness.py`: leg pigtails 14 → 16 (+0.0048), phase and encoder leads 34 → 32 (−0.0052), JST-GH tees +32.
+- Elmo: R70/100 is verified in MAN-G-TWI v2.011 Table 3 (49.5 A rms, 95 V). R50/100 is in the same table (35.3 A rms, 95 V, 4.0 kW), so it is verified as well. No separate datasheet is needed.
+- **Net harness: 1.4959 kg (+0.2095 vs the official 1.2864).**

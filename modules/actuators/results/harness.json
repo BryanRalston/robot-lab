@@ -83,8 +83,8 @@
    "bend_ratio": 15.0
   },
   {
-   "item": "leg drive pigtails (7/leg)",
-   "n": 14,
+   "item": "leg drive pigtails (8/leg: hip yaw, hip roll, 2 hip_pitch, 2 knee, 2 ankle)",
+   "n": 16,
    "route_m": 0.08,
    "loops_m": 0,
    "len_m": 0.08,
@@ -93,7 +93,7 @@
    "lapp_art": "0050001",
    "gpm": 15,
    "cond": 2,
-   "kg": 0.033600000000000005,
+   "kg": 0.0384,
    "I_rms": 4.0,
    "I_pk": 12.0,
    "dV_pct": 0.04856470588235293,
@@ -405,31 +405,32 @@
    "bend_ratio": 18.478260869565215
   },
   {
-   "item": "STO 2-wire star, legs branch (A25; 0.25 mm2 SiF, SILI-E in loops, 7 drive taps)",
-   "n": 4,
-   "route_m": 1.544,
-   "loops_m": 0.869,
-   "len_m": 2.974,
+   "item": "STO 3-wire daisy chain, legs branch (A33; 0.25 mm2 SiF, SILI-E in loops, 8 drive tees x 0.08 m)",
+   "n": 6,
+   "route_m": 1.797,
+   "loops_m": 0.993,
+   "len_m": 3.431,
    "joints": [
     "waist yaw",
     "waist pitch",
     "hip yaw",
     "hip roll",
     "hip pitch",
-    "knee"
+    "knee",
+    "ankle (pitch+roll)"
    ],
    "cable": "SiF 0.25",
    "gpm": 5.4,
-   "kg": 0.06110273859894848,
-   "bend_r_mm": 45,
-   "bend_ratio": 23.68421052631579
+   "kg": 0.10578900463161563,
+   "bend_r_mm": 35,
+   "bend_ratio": 18.42105263157895
   },
   {
-   "item": "STO 2-wire star, arms branch (A25; 0.25 mm2 SiF, SILI-E in loops, 7 drive taps)",
-   "n": 4,
-   "route_m": 0.995,
+   "item": "STO 3-wire daisy chain, arms branch (A33; 0.25 mm2 SiF, SILI-E in loops, 7 drive tees x 0.08 m)",
+   "n": 6,
+   "route_m": 1.11,
    "loops_m": 1.163,
-   "len_m": 2.718,
+   "len_m": 2.833,
    "joints": [
     "shoulder pitch",
     "shoulder roll",
@@ -439,13 +440,13 @@
    ],
    "cable": "SiF 0.25",
    "gpm": 5.4,
-   "kg": 0.05451234418011123,
+   "kg": 0.08549451627016683,
    "bend_r_mm": 34.0,
    "bend_ratio": 17.894736842105264
   },
   {
-   "item": "STO 2-wire star, waist branch (A25; 0.25 mm2 SiF, SILI-E in loops, 2 drive taps)",
-   "n": 2,
+   "item": "STO 3-wire daisy chain, waist branch (A33; 0.25 mm2 SiF, SILI-E in loops, 2 drive tees x 0.08 m)",
+   "n": 3,
    "route_m": 0.302,
    "loops_m": 0.201,
    "len_m": 0.663,
@@ -454,30 +455,43 @@
    ],
    "cable": "SiF 0.25",
    "gpm": 5.4,
-   "kg": 0.006801628026350791,
+   "kg": 0.010202442039526187,
    "bend_r_mm": 48.0,
    "bend_ratio": 25.263157894736842
   },
   {
-   "item": "motor phase leads (34 drives, 3 x 0.5 mm2 x 0.06 m)",
-   "n": 34,
+   "item": "STO 3-wire MCU -> torso junction (A33)",
+   "n": 3,
+   "route_m": 0.25,
+   "loops_m": 0,
+   "len_m": 0.25,
+   "joints": [],
+   "cable": "SiF 0.25",
+   "gpm": 5.4,
+   "kg": 0.004050000000000001,
+   "bend_r_mm": null,
+   "bend_ratio": null
+  },
+  {
+   "item": "motor phase leads (32 Elmo drives, 3 x 0.5 mm2 x 0.06 m)",
+   "n": 32,
    "len_m": 0.06,
    "mm2": 0.5,
    "cond": 3,
    "gpm": 9,
-   "kg": 0.05508
+   "kg": 0.05184
   },
   {
-   "item": "encoder/thermistor leads (34, 3 x 0.25 mm2 x 0.06 m)",
-   "n": 34,
+   "item": "encoder/thermistor leads (32, 3 x 0.25 mm2 x 0.06 m)",
+   "n": 32,
    "len_m": 0.06,
    "mm2": 0.25,
    "cond": 3,
    "gpm": 5.4,
-   "kg": 0.033048
+   "kg": 0.031104
   }
  ],
- "power_wire_kg": 0.5142563640312832,
+ "power_wire_kg": 0.5138723640312831,
  "ecat_kg": 0.36425462177877144,
  "connectors": {
   "parts": {
@@ -498,7 +512,7 @@
    },
    "JST-GH 4-pin pair (GHR-04V-S + 4 SSHL-002T-P0.2 + BM04B-GHS-TBT)": {
     "each_kg": 0.000384,
-    "n": 80,
+    "n": 108,
     "evidence": "R6 A9 published: TME weights housing 0.079 g + 4 x 0.021 g contacts + header 0.221 g (gross) = 0.384 g; GAM listing 0.08+0.08+0.16 = 0.32 g; +-0.06 g"
    },
    "AS150U pair (pack main)": {
@@ -507,20 +521,20 @@
     "evidence": "41.4 g/pair distributor listing (Rotorama)"
    }
   },
-  "kg": 0.24731999999999998
+  "kg": 0.25807199999999997
  },
- "sleeving_kg": 0.12055153131008674,
+ "sleeving_kg": 0.13047976156639451,
  "ecat_junction_kg": 0.02,
- "total_kg": 1.3924676255608095,
+ "total_kg": 1.4958831079530155,
  "R4_model_kg": 0.821,
  "R018_credited_kg": 1.344,
  "contract": 2.0,
  "worst_dV_pct": 0.7828447039212263,
  "worst_dT_K": 14.40771063779263,
  "min_bend_ratio": 8.095238095238095,
- "a25_extra_kg": 0.12608510844066828,
- "sto_kg": 0.1224167108054105,
- "sto_with_sleeve_kg": 0.13710671610205977,
+ "a25_extra_kg": 0.20920436057656644,
+ "sto_kg": 0.20553596294130863,
+ "sto_with_sleeve_kg": 0.2302002784942657,
  "coax": {
   "part": "HUBER+SUHNER ENVIROFLEX_178 (RG178 class, 50 ohm, 1.84 mm)",
   "gpm": 6.5,

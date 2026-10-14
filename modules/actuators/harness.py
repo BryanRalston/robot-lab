@@ -40,7 +40,7 @@ P=[]
 P.append(('leg trunk pack->hip_pitch',2,path(PACK_BOT,WAIST,HIPY,HIPR,HIPP),legJ1,4.0,2,I_leg_rms,I_leg_pk))
 P.append(('leg hip_pitch->knee',2,path(HIPP,KNEE),('hip pitch',),2.5,2,I_leg_rms*0.7,I_leg_pk*0.8))
 P.append(('leg knee->ankle drives',2,path(KNEE,ANK_DRV),('knee',),1.5,2,I_leg_rms*0.4,I_leg_pk*0.5))
-P.append(('leg drive pigtails (7/leg)',14,PIG,(),1.0,2,4.0,12.0))
+P.append(('leg drive pigtails (8/leg: hip yaw, hip roll, 2 hip_pitch, 2 knee, 2 ankle)',16,PIG,(),1.0,2,4.0,12.0))
 P.append(('arm trunk pack->shoulder_yaw',2,path(PACK_TOP,SHP,SHR,ELB),armJ[:3],1.5,2,I_arm_rms,I_arm_pk))
 P.append(('arm elbow->wrist',2,path(ELB,WRI),('elbow',),0.75,2,I_arm_rms*0.6,I_arm_pk*0.6))
 P.append(('arm drive pigtails (7/arm)',14,PIG,(),0.5,2,1.5,5.0))
@@ -60,14 +60,21 @@ E.append(('IMU (torso, completeness)',1,0.25,(),0))
 # A25 extra cables: (name, n, L route, joints, g/m in run, g/m in loops, extra m)
 COAX=dict(part='HUBER+SUHNER ENVIROFLEX_178 (RG178 class, 50 ohm, 1.84 mm)',gpm=6.5,od=1.84,bend_dyn=30.0,a=1.4067,b=0.2229)   # datasheet: 0.65 kg/100 m; att = a f^0.5 + b f dB/m (f GHz); dynamic bend >= 30 mm
 X=[('GMSL2 coax JCB022 MATE-AX -> FAKRA -> ZED X Mini (PoC) (A25)',1,path(COMPUTE,NECK,HEAD),('neck yaw','neck pitch'),COAX['gpm'],COAX['gpm'],0.10)]
-STO_BR=[('legs',2,path(COMPUTE,WAIST,HIPY,HIPR,HIPP,KNEE,ANK_DRV),legJ1+('hip pitch','knee'),7),('arms',2,path(COMPUTE,SHP,SHR,ELB,WRI),armJ+('wrist roll',),7),('waist',1,path(COMPUTE,WAIST),('waist yaw',),2)]
-for nm,n,L0,js,nd in STO_BR: X.append((f'STO 2-wire star, {nm} branch (A25; 0.25 mm2 SiF, SILI-E in loops, {nd} drive taps)',2*n,L0,js,SIF[0.25][0],SILI.get(0.25,SIF[0.25][:2])[0],nd*PIG))
-local=[('motor phase leads (34 drives, 3 x 0.5 mm2 x 0.06 m)',34,0.06,0.5,3),('encoder/thermistor leads (34, 3 x 0.25 mm2 x 0.06 m)',34,0.06,0.25,3)]
+# A33 (Electronics 1d70018 §9.4): Elmo STO = 3 conductors per drive (STO1/STO_RET/STO2, MAN-G-TWI Table 9), daisy-chained along each EtherCAT branch, tee per drive.
+# Elmo drives: legs 8 + 8, arms 7 + 7 (shoulder 3, elbow, wrist roll, wrist pair 2), waist 2 = 32. Neck = 2 x Dynamixel XM430 (P-019/R-025), no Elmo STO.
+STO_BR=[('legs',2,'ECAT leg branch -> foot F/T',8),('arms',2,'ECAT arm branch -> hand/tactile',7),('waist',1,'ECAT waist only (A25: neck left EtherCAT)',2)]
+N_ELMO=sum(n*nd for _,n,_,nd in STO_BR)
+_E={e[0]:e for e in E}
+for nm,n,en,nd in STO_BR:
+    _,_,L0,js,npig=_E[en]
+    X.append((f'STO 3-wire daisy chain, {nm} branch (A33; 0.25 mm2 SiF, SILI-E in loops, {nd} drive tees x 0.08 m)',3*n,L0,js,SIF[0.25][0],SILI.get(0.25,SIF[0.25][:2])[0],nd*PIG))
+X.append(('STO 3-wire MCU -> torso junction (A33)',3,0.25,(),SIF[0.25][0],SIF[0.25][0],0.0))
+local=[('motor phase leads (32 Elmo drives, 3 x 0.5 mm2 x 0.06 m)',32,0.06,0.5,3),('encoder/thermistor leads (32, 3 x 0.25 mm2 x 0.06 m)',32,0.06,0.25,3)]
 # connectors: (each pair kg, n, evidence)
 CON={'XT60 pair (Amass XT60, 30 A)':(0.0078,4,'7.8 g/pair distributor listing (Alise Ops)'),
      'XT30U pair (Amass, 15 A, drive tees)':(0.0036,32+8,'1.8 g each half, AMOV listing'),
      'MR30 3-pin pair (Amass, phase)':(0.0024,0,'1.2 g/pc AMOV listing; phases soldered, n=0'),
-     'JST-GH 4-pin pair (GHR-04V-S + 4 SSHL-002T-P0.2 + BM04B-GHS-TBT)':(0.000384,2*34+12,'R6 A9 published: TME weights housing 0.079 g + 4 x 0.021 g contacts + header 0.221 g (gross) = 0.384 g; GAM listing 0.08+0.08+0.16 = 0.32 g; +-0.06 g'),
+     'JST-GH 4-pin pair (GHR-04V-S + 4 SSHL-002T-P0.2 + BM04B-GHS-TBT)':(0.000384,2*32+12+32,'R6 A9 published: TME weights housing 0.079 g + 4 x 0.021 g contacts + header 0.221 g (gross) = 0.384 g; GAM listing 0.08+0.08+0.16 = 0.32 g; +-0.06 g'),
      'AS150U pair (pack main)':(0.0414,1,'41.4 g/pair distributor listing (Rotorama)')}
 rows=[]; wire=0; ecat=0; loop_len=0
 def R(a): return RHO_CU/(a*1e-6)
