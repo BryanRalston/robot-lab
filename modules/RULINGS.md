@@ -623,3 +623,17 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
 - Full credit follows the bryan-PC CAD measurement, and anything more than 10% over on any line gets re-ruled.
 - Recount: the credible total is about 66.15 kg and the reserve is about 0.35, back above the 0.30 floor. A43 and A40 still stand as the next releases. The R-039 freeze on new additions lifts for additions of 0.05 kg or less. Anything larger comes back to the arbiter.
 - Tooling is down to 8 PC tools, with the first set costing about $12.5k. Robot Lab updates COVER_COST.md (A30).
+
+## R-041 (2026-10-14) A43 closed: hand supplies (Electronics 413d80f, Thermal d4cca06)
+- 2× RP40-11024SFR per hand is approved. The two rails are independent and are never paralleled.
+- Thermal's four conditions are binding:
+  - Strap each RP40 to the Al shoulder bulkhead through a ≤1 mm, ≥3 W/mK pad. This is preferred because it adds no mass. A separate 6061 bracket only if the bulkhead can't take it, and that mass comes back here.
+  - Vent the bay ≥25 cm² in and ≥25 cm² out, out of the Thor exhaust.
+  - Add a bracket temperature sensor: derate at 90 °C, shut off at 100 °C.
+  - Put a bench thermocouple on the case. This is G5 item T-029.
+- Drop the clip heatsinks. The −0.044 kg is an estimated saving, so it's credited at half (−0.022).
+- Mass:
+  - The R-039 hold drops from 0.228 to 0.146 (0.086 supplies + 0.060 O-E11 filters, booked in full unless Arms shows they're already counted).
+  - Net with the heatsink drop is −0.104 kg.
+  - Credible total is about 66.05 kg, with a reserve of about 0.45 kg.
+- J-T2 chest CFD has to include the shoulder bays. T4 moves from at-risk to pending sim (A43 sim part, Arms).
