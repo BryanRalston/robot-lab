@@ -468,6 +468,9 @@ Torso frame = waist_pitch origin; x forward, y left, z up. Layout [EST until CAD
   - **Service rule:** replace the pad if a dent is > 1 mm deep or it shows any crush.
   - **Mass:** net sternum ≈ **+0.020 kg**; delta vs ab432da ≈ **−0.038 kg**.
 
+- **R-102:** lot acceptance 0° plateau ∈ [19.5, 22.3] kN (min 18.3 kN at 15° for 56.4 mm ≤ 62/1.1 at 1.03 kJ). Fallback core 95 mm (stroke ≈ 66.5 mm, +0.005 kg [EST]). Details in `T031_chest_contact_r2.md`. Mass +0.000.
+- **R-095:** pad face 2K aliphatic PU UV clear 50–100 µm, matte/satin, masked off the edge and crush zone; visual + tap test after impact, replace the cartridge on impact. **+0.008 kg** → sternum net ≈ +0.028 kg.
+
 ## 7. Open questions / conflicts (not edited in others' files)
 - **O-T1 (Electronics, coordination):** adopt the 48 V intermediate rail with DCM3623TA5N53B4T00; Torso hosts the DCM on the power distribution board or the brain tray? Mass 0.024 [UNVERIFIED for variant] stays in the brain line; who books the 47718-232 choke; 24 V VL source (O-E3); BMS→safety MCU CAN FD message set; e-stop = FET-open vs contactor (O-E6).
 - **O-T2 (Actuators/Arbiter):** waist_pitch 116 N·m < 188 N·m need with T5 payload → TBM2G-08508A, +0.19 kg.

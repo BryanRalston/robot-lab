@@ -17,3 +17,11 @@ Basis: Materials' plateau, 1.79 MPa typical × lot band and dynamic factor 1.10�
 Pad 0.061 + backing 0.070 = **0.131 kg** vs 0.078 accepted (R-079) → **+0.053 kg: over the 0.02 freeze → Arbiter request.**
 Lighter alternative to cut it: back the pad directly on the pack enclosure front face if Torso and Pack can make it a stiff 6061 cap (already in the pack line), dropping the sandwich → +0.0 kg net (pad 0.061 < 0.078). Needs the pack enclosure check (O-T14).
 For Controls: plateau 17.7–22.3 kN (0°) / 16.6–20.8 kN (15°); stroke 62 mm usable; no rebound; k_eq 0.53 MN/m with ζ ≈ 1 only if the script needs a spring.
+
+## R-102 stroke margin and lot acceptance (verified)
+- Energy: the r2 gate case 65.4 kg × 38 g × 42 mm = **1.024 kJ**; soft-lot check 16.6 kN × 0.062 m = **1.029 kJ** (consistent; 1.03 kJ used).
+- ≥ 10 % stroke margin → need ≤ 62/1.1 = **56.4 mm** → minimum plateau 1.03 kJ / 0.0564 m = **18.3 kN at 15°** → × 17.7/16.6 = **19.5 kN at 0°**.
+- **Incoming inspection:** per-lot quasi-static crush coupons (same cell, density, height). **Accept a lot if the 0°-equivalent plateau is in [19.5, 22.3] kN** (below the 22.35 kN ceiling); reject soft (< 19.5) and hard (> 22.3) lots. Mass +0.000 kg.
+- **Fallback (poor lot yield):** core 88 → 95 mm, stroke 0.7 × 95 ≈ **66.5 mm**, mass +0.0048 kg ≈ **+0.005 kg** [EST] (R-102's +0.004 rounds low). Needs 7 mm more standout or a recess in the land/bulkhead.
+## R-095 drawing note (pad face)
+Finish: 2K aliphatic PU UV clear, 50–100 µm, matte or satin; mask the pad edge and crush zone. Inspection: visual + tap test after any chest impact; **replace the cartridge on impact**. Booked **+0.008 kg**.
