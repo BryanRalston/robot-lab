@@ -867,3 +867,18 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
 - **RP40 isolation:** accept **functional isolation** on CTRL (4x TLP383 +0.0006) with a shared return, *provided the pack bus is <=60 V DC SELV*. Torso confirms it; if not, book the RP03. The T-029 bench test must show no common-mode errors on BiSS-C/POSIF. The RP03 is not booked.
 - **MR30 clip:** before G1 it needs a cited part or a drawn clip with a mass.
 - Reserve ~0.32, **back above the 0.30 floor**. The waiver and freeze stay in force to the end of R13; L47, pocketing, C1, F1 and G are upside.
+
+## R-076 (2026-10-14) Isolation, pad core, pick limit, forearm, yaw gear, encoder ladder
+- **Bus is NOT SELV** (20S P45B: 68-85 V, 92 V ceiling; Torso 8c26b7f/1dd529b). The R-075 condition fails, so **RP03-11024SRAW x2 is booked at +0.024**.
+  - New binding requirement: every drive-bus circuit (drives, RP40 inputs, bus harness and connectors) needs **reinforced or double isolation to its SELV rails, plus finger-safe (IP2X) touch protection**, and creepage and clearance sized for 92 V.
+  - Every bus connector, including the MR30, needs a **cited DC voltage rating >=100 V** before G1.
+  - The functional-isolation option is withdrawn.
+- **Pad:** the 61 mm core is adopted (297 J at 15°, pair 87.6 g, standout 68.5 mm) because it restores stroke margin. The lot spec is amended per 953cd46. The roll-output mount conditions are binding: Arms qualifies the link face, FEA job 1 passes, and Controls checks the 15° limit at the tuck pose. No new pad credit until Materials and ID reconcile it against the R-073 0.092 doubler-pair booking, to avoid double counting.
+- **Pick limit** (e5f48c2) is accepted as the R-070 pick-pose limit.
+- **T-031 is blocked** on chest stiffness. Torso and Materials supply a chest force-deflection curve, the damage deflection and damping. Any chest crush layer comes to me as a full-credit mass item. Fall torque of 343 vs 369 (EST) is thin, so T-031 must measure it.
+- **Forearm (-13.9 mm):** I'm **not** moving the board to the upper arm (a ~50-conductor elbow crossing is a reliability risk, and R-046 already ruled on the board's place). Instead, **lengthen the forearm by <=15 mm**, provided TARGETS reach and proportion tolerances still hold and Controls re-runs reach and tuck. Mass is booked in full when it's measured. If TARGETS can't absorb it, it comes back to me.
+- **Yaw gear:** CSF-11 at 0.85x is a failure, so **CSG-14 is adopted**: **+0.080 pair**, full. D76 is unchanged.
+- **Encoder thermal** (a8811f5): adopt **ladder B (55/82/88 C) with the flexors and the encoder end cap both clamped to the Al shell**. Book **+0.004** (gap pad or paste). T4 grip of >=22 N is met in still air. Add a G5 encoder-cap thermocouple.
+- **Arms line +0.177:** send me the delta against the existing bookings (fairing R-059 +0.079, etc.). Harness -0.274 stays uncredited (R-061).
+- **Materials mass-down:** pursue the hybrid palm (FEA + grip) and the ankle cross (with Legs). The PA12/PC covers must be reconciled with the ID R-075 trims before they count. Bond pins at -0.008 are booked at half credit (-0.004).
+- Reserve ~0.22 (waiver and freeze to the end of R13). L47 opt, torso pocketing and the palm are the path back to the 0.30 floor.
