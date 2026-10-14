@@ -1,7 +1,34 @@
 # T-030 brief: A44 side-fall push-fall batch (Grok Build, **bryan PC ff639f5a only, never DESKTOP-B115PVV**)
 Owner: RL Controls. Gate for R-042 (A44 provisional). CPU only, MuJoCo ≥3.1, numpy. No jax, no training. Expected wall time is a few minutes per batch: smoke runs take about 0.2–0.6 s each on the box.
 
-## 0. R-049 update (2026-10-14): honeycomb crush element is primary
+## 00. R-054 update (2026-10-14): ID pad R4 + Arms R5 tuck. **Supersedes §0 geometry**
+- **Element = ID R4 cartridge (329a79a, accepted R-054):**
+  - Core: HexWeb CR III 4.5 pcf, pre-crushed, 62 × 62 × 57 mm, 38.4 cm². Usable stroke = 0.72 × 57 = **41.0 mm**.
+  - Face plate: Al 0.5 mm ribbed spreader, 80 w × 100 h, centre 5 mm below the shoulder axis, plus a 6 mm EPP cosmetic face (no energy credit). Stack about 63.5 mm.
+  - Plateau: 1.79 MPa × 38.4 cm² = **6.88 kN at ×1.0, 8.94 kN at ×1.3**. Pair mass **0.095 kg**.
+- **Mount:** the shoulder-cap shell outboard of the roll housing, about y +0.30 in the torso frame (Arms R5 7f0ff7a §3). In sim that's 0.13 m outboard of the shoulder-pitch joint, on the pitch-output body.
+- **Lever:** the 0.06 m impact-to-bearing lever is **unchanged** because Arms R5 gives no new value. **But the cap mount moves the load path outboard of the roll housing, so Arms/Actuators must confirm the lever** before G3.
+- **Hand estimate (CRBH 7013 A, C0 27.7 kN, Dpw 85 mm [EST], M = F × 0.06):**
+
+| plateau | energy (× 41.0 mm) | vs 265 J | M N·m | fs radial / axial |
+|---|---|---|---|---|
+| 6.88 kN (R4 ×1.0) | 282 J | ×1.06 | 413 | 1.67 / 2.17 |
+| **7.05 kN (gate batch)** | 289 J | ×1.09 | 423 | 1.63 / 2.12 |
+| 8.94 kN (R4 ×1.3) | 367 J | ×1.38 | 536 | 1.28 / 1.67 |
+| 9.17 kN (limit) | 376 J | ×1.42 | 550 | 1.25 / 1.63 |
+
+  - The 7.05 kN batch stays the gate (R-054). The R4 ×1.0 plateau is 6.88 kN, about 2 % lower, so an extra 6.88 kN batch is added as a check.
+  - Contact band: the contact centre must stay ≤ 15 mm from the core centre (ID R4). That is the pass limit on `contact_centroid_mm`.
+- **Tuck (Arms R5, 8.6 mm clear):** shoulder_roll −5°, shoulder_yaw −60°, shoulder_pitch −20°, elbow −110° (mirrored for the right arm). Yaw −90° and pitch 0° clash. Implemented in the script.
+- **Carry (P-042):** FALL-mode sequence is detect → **release the hook load** → arm tuck (legs start the knee drop immediately).
+  - `--carry` models 20 kg as 98 N down at each hand until release.
+  - `--release-s` defaults to 0.05 s [EST]; Arms to confirm.
+  - `t_release` is logged.
+- **Forward falls: tuck, no brace** (a hand brace above ~605 N exceeds the CSG-25 369 N·m). `--arm reach` is applied **only on pure side directions (L, R)**. LB is always tucked. `arm_used` is logged.
+- **Motor map check:** `controls/thermal/winding_model.py` already uses shoulder_yaw 06008C, elbow 05013C, wrist_roll 05008C, so no fix is needed. The iron-loss coefficients for 05013/05008 use the 06008 values as a proxy [EST].
+- **Box smoke** (one 80 N·s L fall, untuned, sim mass 69.5 kg): with the cap mount the element is the first contact. In that one run it took 98 % share, 325 J, bottomed past 41 mm, and peaked at 13.1 kN. With carry: release at +50 ms, 400 J, bypass contact. **Not results**, but a warning: the controller must actually move energy off the shoulder (crouch, hip-first), otherwise even 289 J is exceeded.
+
+## 0. R-049 update (geometry superseded by §00) (2026-10-14): honeycomb crush element is primary
 - Arbiter R-049 adopted a constant-force crush element. RL Materials (8a3cc66): **4.5 pcf pre-crushed 5052 Al honeycomb, ≈63 × 63 × 57 mm per side, plateau 7.05–9.17 kN, usable stroke ≤ 41 mm, pair ≈ 0.068 kg.** Strength drops off-axis, so impact-point scatter and angle across the 63 mm face are logged.
 - **Hand estimate:**
 
@@ -62,19 +89,21 @@ python modules/controls/fall/t030_pushfall.py --smoke       # one fall, must pri
 ## 6. Runs (each 50 push-falls × 3 directions L, R, LB(45° rear-left); impulse uniform 40–80 N·s on pelvis over 0.1 s; seed 0)
 ```
 F=modules/controls/fall/t030_pushfall.py; O=modules/controls/fall/results
-# PRIMARY: honeycomb, both plateau bounds, both arm modes
-python $F --pad hc --hc-plateau 9170 --arm tuck  --out $O/t030_hc9170_tuck.jsonl
-python $F --pad hc --hc-plateau 9170 --arm reach --out $O/t030_hc9170_reach.jsonl
+# PRIMARY: R4 cartridge. Gate = 7050. Reach only applies on L/R.
 python $F --pad hc --hc-plateau 7050 --arm tuck  --out $O/t030_hc7050_tuck.jsonl
-python $F --pad hc --hc-plateau 7050 --arm reach --out $O/t030_hc7050_reach.jsonl
+python $F --pad hc --hc-plateau 7050 --arm reach --dirs L,R --out $O/t030_hc7050_reach.jsonl
+python $F --pad hc --hc-plateau 7050 --arm tuck  --carry --out $O/t030_hc7050_tuck_carry.jsonl
+python $F --pad hc --hc-plateau 6880 --arm tuck  --out $O/t030_hc6880_tuck.jsonl
+python $F --pad hc --hc-plateau 8940 --arm tuck  --out $O/t030_hc8940_tuck.jsonl
+python $F --pad hc --hc-plateau 8940 --arm reach --dirs L,R --out $O/t030_hc8940_reach.jsonl
 # CONTRAST: EPP 80 curve (ARPRO 5170 x1.45, no data past 75 %) and plateau models
 python $F --pad 40 --pad-model curve   --arm tuck  --out $O/t030_p40_curve_tuck.jsonl
 python $F --pad 30 --pad-model curve   --arm tuck  --out $O/t030_p30_curve_tuck.jsonl
 python $F --pad 40 --pad-model plateau --arm tuck  --out $O/t030_p40_plateau_tuck.jsonl
 # BASELINE: no fall mode
-python $F --pad hc --hc-plateau 9170 --arm tuck --no-fallmode --out $O/t030_hc9170_nofm.jsonl
+python $F --pad hc --hc-plateau 7050 --arm tuck --no-fallmode --out $O/t030_hc7050_nofm.jsonl
 ```
-If >20 % of runs show `crouch_at_impact_m` < 0.05 or no fall, sweep `--knee 0.9,1.2,1.5` on hc9170-tuck and report all three (don't tune further).
+If >20 % of runs show `crouch_at_impact_m` < 0.05 or no fall, sweep `--knee 0.9,1.2,1.5` on hc7050-tuck and report all three (don't tune further).
 
 ## 7. Measurements (per run, JSON line; last line = summary)
 `shoulder_share` (pad work ÷ pad + all non-foot ground-contact work), `E_sh_J`, `E_other_J`, `crouch_at_impact_m` (mean leg hip→foot shortening, detection → first non-foot contact), `com_drop_at_impact_m`, `t_detect`/`t_fallmode`/`t_impact` (latency 50 ms [EST]), `pad_peak_N`, `pad_crush_max_mm`, `bottomed`, `M_bearing_Nm` (= peak × 0.06), `fs_radial`/`fs_axial` (CRBH 7013 A, C0 27.7 kN, Dpw 85 mm [EST]), `contact_centroid_mm`, `W_arm_backdrive_J`.
@@ -82,12 +111,12 @@ If >20 % of runs show `crouch_at_impact_m` < 0.05 or no fall, sweep `--knee 0.9,
 ## 8. Pass criteria (per configuration; summary `PASS`)
 - **Stroke:** max `pad_crush_max_mm` ≤ **41 mm** (honeycomb). For EPP: ≤ 75 % strain, else UNKNOWN = fail.
 - **Peak force:** max `pad_peak_N` ≤ **9.17 kN**, so `M_bearing_Nm` ≤ 550 and fs radial ≥ 1.25.
-- **Impact within the face:** `bypass_contact` = 0, i.e. no torso, upper-arm or shoulder body touches the ground while the element is loaded. Also log `impact_angle_deg` / `peak_angle_deg` (element normal vs vertical) and `contact_centroid_mm` (x, z on the 63 mm face). Report p95 angle and p95 |centroid|. The angle limit is pending Materials' off-axis knockdown; the run fails if p95 |centroid| > 31 mm (off the face).
+- **Impact within the face:** `bypass_contact` = 0, i.e. no torso, upper-arm or shoulder body touches the ground while the element is loaded. Also log `impact_angle_deg` / `peak_angle_deg` (element normal vs vertical) and `contact_centroid_mm` (x, z on the 63 mm face). Report p95 angle and p95 |centroid|. The angle limit is pending Materials' off-axis knockdown; the run fails if p95 |centroid| > **15 mm** from the core centre (R4).
 - **Shoulder share:** p95 `shoulder_share` ≤ **0.40** (R-042).
 - **Crouch:** min `crouch_at_impact_m` ≥ **0.15 m**.
 - **Arm credit:** `W_arm_backdrive_J` counts only if the reach mode passes everything above.
 
-R-042/R-049 passes if **hc7050-tuck** passes (the worst-case low plateau has the least stroke margin), or if **hc7050-reach** passes with the arm credit shown. EPP and plateau runs are contrast only.
+R-042/R-049/R-054 passes if **hc7050-tuck AND hc7050-tuck-carry** pass (the worst-case low plateau has the least stroke margin), or if **hc7050-reach** passes with the arm credit shown. EPP and plateau runs are contrast only.
 
 ## 9. Results to return
 Commit `modules/controls/fall/results/t030_*.jsonl` plus a `results/T030_SUMMARY.md` table (one row per config: runs, fell, share p50/p95, E_sh p95, crouch min/p50, peak N max, M max, fs min, bottomed, centroid z p95, W_arm p50). Report the hash to RL Controls and Robot Lab.
