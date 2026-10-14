@@ -689,3 +689,8 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
 - The T-029 derate ladder (shell sensor, 60/80/90 C steps) is adopted as a G5 requirement anyway, as a guard. Board parts must be rated >=105 C. Electronics is to cite the RECOM >60 C derate.
 - A43 is still open on one condition: the Arms CAD stack fit.
 - Offsets note: D69 is already booked at +0.65 (R-045), not +0.83. Only savings below 0.65 count, and they must be cited or measured. The reserve is ~0.22 until offsets land.
+
+## R-049 (2026-10-14) A44 shoulder pad (Controls 03fc980)
+- The EPP 40 mm pad **fails** R-039(b): ~1,140 N·m at SF 0.60. It is rejected as the side-fall energy path. Thicker EPP (83–120 mm) is rejected on package and ID grounds. The CRBH 10020 bearing is rejected (+1.45 kg).
+- **Adopted path:** a constant-force crush element (Al honeycomb or crush tube) sized for 265 J at <=9.17 kN plateau (stroke ~29 mm plus 30% margin), replaceable after a fall. It must fit the <=0.100 kg pair cap *including* the backing; the 0.116 PC backing is not accepted. Materials and Arms deliver a cited honeycomb grade and the full pad-pair mass. Credit for the strike roll-clutch slip (T-030) counts only once T-030 shows it; it is not a design basis.
+- The side-fall mode stays **provisional** (R-042). G4 and G5 remain open on T-030 plus the crush-element spec. The pad stays booked at 0.100.
