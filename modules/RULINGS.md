@@ -489,3 +489,14 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
 - Booking: the trimmed delta is booked in full at 0.30 kg, the top of ID's 0.2–0.3 range, until the itemized trimmed JSON lands. With the A33 STO hold (0.07 credited), the reserve is about 0.96 kg, which is above the floor.
 - Condition: ID must send the itemized trimmed cover_set JSON before round 13 closes. If the measured delta is above 0.30 kg, the arbiter re-rules.
 - A29 transfers to Industrial Design.
+
+## R-030 (2026-10-14) Trimmed cover set itemized (f651270), vents, Thermal R1 proposals
+- The trimmed set is booked at +0.236 kg, counted in full as added mass. Panel areas are estimates, so CAD must measure them before G2. If they come in more than 10% higher, the arbiter re-rules. The CF shin/thigh option (+0.126 kg) is preferred, and the booking moves to that number once Legs commits the envelopes to main.
+- A30 (Robot Lab): update COVER_COST.md to the A29 tool list: 12 thermoform tools, 12 trim fixtures, 1 rim strip, 1 bellows mould (or COTS), and 2 sewing patterns.
+- Thermal R1 (0040976) proposals are accepted and assigned:
+  - P-026 (ID): no closed PC over hip-pitch or knee. Knee cap, hip skirt and thigh panels must be louvred with at least 30% open area, or made of CF or aluminium. Thermal sets the open area and airflow path for each joint (A35). ID redesigns to that spec (A36).
+  - P-027 (Legs + Materials): G10 or PEEK thermal break at every motor-to-clamp-collar joint, collar left uncovered, drives mounted off the housings. It must bring the bondline to 60 °C or below. Materials picks the material (A37). Legs books the mass (A38).
+  - P-028 (Arms): carry pose keeps elbow torque at 15 N·m or below, plus a hold-time limit (A39). The 20 kg carry target must still pass.
+  - P-029 (Controls): winding temperature model for each joint, with derating that trips at about 120 °C (A40).
+  - P-030 (Electronics + Torso): ducted chest air for Thor at about 21 CFM (2× 40 mm blowers, about 3 W, about 40 g), chest vents and a fin stack. The brain DC-DC goes on the cold plate or in the duct. The pack stays out of the exhaust (A41). The +0.04 kg blower estimate is booked in full.
+- Any of these that adds net mass, or more than 5 W, comes back to the arbiter with numbers.
