@@ -616,3 +616,10 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
   - So **A43 (confirm the 2× RP40 burst) is now blocking**, and so is the A40 knee re-run.
   - No new additions are booked until one of them lands.
 - The palm credit of −0.120 is already in (R-037). The palm_7075 import is fixed (dd5f70f).
+
+## R-040 (2026-10-14) Cover set rerun on final Legs envelopes (ID e2ad740)
+- P-022 knee cap re-ruled. It's accepted at 0.139 kg, which trips the R-030 10% trigger but is justified because the shin fairing is deleted. P-023 is 0.120, P-024 is 0.055 and P-025 is 0.098.
+- The set rebooks to −0.124 kg against the booking (PC thigh basis). All figures are estimates (measured:false), so under the credit rules the saving counts at half: −0.062 kg credited. The CF-thigh figure (−0.184) gets no extra credit until it's chosen and measured.
+- Full credit follows the bryan-PC CAD measurement, and anything more than 10% over on any line gets re-ruled.
+- Recount: the credible total is about 66.15 kg and the reserve is about 0.35, back above the 0.30 floor. A43 and A40 still stand as the next releases. The R-039 freeze on new additions lifts for additions of 0.05 kg or less. Anything larger comes back to the arbiter.
+- Tooling is down to 8 PC tools, with the first set costing about $12.5k. Robot Lab updates COVER_COST.md (A30).
