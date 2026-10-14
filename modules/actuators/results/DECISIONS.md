@@ -546,3 +546,30 @@ Retention at 1.2 m/s:
   - Mechanical 0.865 (D65).
   - Encoders: +0.019 for 2× RLS AksIM-2 MB022 + MRA022 (2.7 + 7.0 g, MBD01_15 selection table). Total **0.884 ≤ 0.90. PASS.**
   - Elmo Gold Twitter EtherCAT drives on the arm: +0.044 for 2× 22.2 g without heatsink (MAN-G-TWI v2.011 spec table). Total 0.928. FAIL by 28 g. In that case the drives must stay booked in the Electronics drive line (D66, 32 drives).
+
+## D68 (Arms R2 O-A3 + Thermal) maxon drive lengths, TBM2G hot constants, strain-wave efficiency
+**O-A3 lengths.** Length = motor + gearhead L1 + encoder, per maxon's own rule (assembly parts and shaft stub excluded).
+- **DCX 22 S + GPX 22 HP, 3-stage (62–231:1; the config sheets for 231:1 and 103:1 both give 38.2 mm):**
+  - 34.2 + 38.2 = **72.4 mm** with no encoder.
+  - **70.9 mm** with ENX 22 EASY INT (−1.5 mm).
+  - **80.9 mm** with ENX 16 EASY (+8.5 max).
+  - Not the sterilizable GPX 22 HP on p.393 (45.9 mm).
+- **DCX 16 S + GPX 16 LN:**
+  - 3-stage (25.7 mm, matching v3/PARTS): 26.5 + 25.7 = **52.2 mm**, or **60.7 mm** with ENX 16 EASY (8.5 max).
+  - 4-stage (30.6 mm): 57.1 mm, or 65.6 mm with the encoder.
+- maxon flags L1 as configuration-dependent. Allow about 1 mm.
+
+**Thermal: TBM2G hot constants** (manual, June 2023: 05013 §9.2.2 p.254–255; 07608 §9.5.1 p.282–283).
+- Rated winding temperature is 155 °C (ΔT 130 K at 25 °C ambient).
+- **Hot Kt** is published directly:
+  - 07608 A/C/D: 0.193 / 0.096 / 0.056 N·m/Arms (cold: 0.216 / 0.108 / 0.062).
+  - 05013 A/C/D: 0.122 / 0.061 / 0.035 (cold: 0.136 / 0.068 / 0.039).
+  - The implied magnet coefficient is hot/cold = 0.889 (07608C) and 0.897 (05013C), i.e. **about −0.08 %/K**. This comes from the datasheet pair. No magnet grade or Br coefficient is published (not found).
+- **Hot resistance:** Rm is line-to-line at 25 °C. Copper α20 = 0.00393 /°C (NBS Circ. 31), so R(T)/R(25) = (234.5 + T)/(259.5). At 155 °C this is **1.501**.
+  - 07608 A/C/D: 1.27 / 0.318 / 0.106 → **1.906 / 0.477 / 0.159 Ω**.
+  - 05013 A/C/D: 1.78 / 0.46 / 0.15 → **2.672 / 0.690 / 0.225 Ω**.
+
+**Strain-wave hold efficiency** (HD CSF/CSG catalog p.39, Component Set 17–100, SK-1A/SK-2 grease, rated torque, read from the graph, σ ≈ 3 %):
+- Ratio 80/100 at the lowest published speed of 500 r/min: about **84 % at 25 °C** (about 74 % at 0 °C).
+- Below rated torque, multiply by Fig. 9: about 0.9 at 0.5 Trated and about 0.44 at 0.1 Trated.
+- **Efficiency at stall / 0 r/min (true hold) and back-driving efficiency: not found** in the HD catalog. For hold copper loss, Thermal should take the motor torque as T_out/(N·η), with η ≤ 0.84 as the conservative bound [EST].
