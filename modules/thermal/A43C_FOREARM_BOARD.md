@@ -60,7 +60,7 @@ MCU Tj = board + 0.9 W × RthJB ≈ 10 K/W (LQFP-144 with board copper [EST]; Rt
 | case | shell | flexor winding (125) | step held | board | MCU Tj | H-bridge Tj | margin to NTC 110 / parts 125 |
 |---|---|---|---|---|---|---|---|
 | walk, loose (Rm 8) | 60.3 | 95 | 0.70 A | 69 | 78 | 81 | 41 / 44 K |
-| still, loose | 68.7 | 102 | 0.50 A | 77 | 86 | 90 | 33 / 35 K |
+| still, loose | 68.7 | 102 | 0.70 A (dips to 0.50) | 77 | 86 | 90 | 33 / 35 K |
 | **walk, clamped (Arms fix)** | 59.7 | **84** | 0.70 A | 68 | 77 | 81 | 42 / 44 K |
 | **still, clamped** | 70.2 | **95** | 0.50 A | 76 | 85 | 91 | 34 / 34 K |
 | no derate, still (fault reference) | 122–128 | 181–215 FAIL | — | 131–137 | 140–146 | 143–149 | NTC trips |
