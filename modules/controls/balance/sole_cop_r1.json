@@ -1,0 +1,416 @@
+{
+ "basis": "Compliant edge model (Winkler layer, t 6 mm, rigid foot): CoP at an edge needs a triangular pressure block of length a",
+ "E_Pa": {
+  "bare 7075": null,
+  "Gumlite 47A (E 2.2)": 2200000.0,
+  "Gumlite 44A low (Gent)": 1963272.0536310181,
+  "SP 64A (Gent)": 4243550.725571326,
+  "SP 67A (E 4.8)": 4800000.0
+ },
+ "plans": {
+  "walk 0.8 ref_m12": {
+   "bare 7075": {
+    "min_mm": 12.0,
+    "p5_mm": 12.0,
+    "median_mm": 43.7,
+    "frac_lt_12mm": 0.0,
+    "frac_lt_5mm": 0.0,
+    "frac_le_0": 0.0
+   },
+   "Gumlite 47A (E 2.2)": {
+    "min_mm": 5.8,
+    "p5_mm": 8.1,
+    "median_mm": 40.9,
+    "frac_lt_12mm": 0.395,
+    "frac_lt_5mm": 0.0,
+    "frac_le_0": 0.0
+   },
+   "Gumlite 44A low (Gent)": {
+    "min_mm": 5.2,
+    "p5_mm": 7.7,
+    "median_mm": 40.6,
+    "frac_lt_12mm": 0.395,
+    "frac_lt_5mm": 0.0,
+    "frac_le_0": 0.0
+   },
+   "SP 64A (Gent)": {
+    "min_mm": 8.3,
+    "p5_mm": 9.8,
+    "median_mm": 41.9,
+    "frac_lt_12mm": 0.394,
+    "frac_lt_5mm": 0.0,
+    "frac_le_0": 0.0
+   },
+   "SP 67A (E 4.8)": {
+    "min_mm": 8.6,
+    "p5_mm": 10.0,
+    "median_mm": 42.0,
+    "frac_lt_12mm": 0.394,
+    "frac_lt_5mm": 0.0,
+    "frac_le_0": 0.0
+   },
+   "max_FZ_N": 689.0,
+   "max_dzmp_mm": 1.06
+  },
+  "walk 1.0 ref_m12": {
+   "bare 7075": {
+    "min_mm": 12.0,
+    "p5_mm": 12.0,
+    "median_mm": 43.8,
+    "frac_lt_12mm": 0.0,
+    "frac_lt_5mm": 0.0,
+    "frac_le_0": 0.0
+   },
+   "Gumlite 47A (E 2.2)": {
+    "min_mm": 5.7,
+    "p5_mm": 7.8,
+    "median_mm": 40.8,
+    "frac_lt_12mm": 0.388,
+    "frac_lt_5mm": 0.0,
+    "frac_le_0": 0.0
+   },
+   "Gumlite 44A low (Gent)": {
+    "min_mm": 5.0,
+    "p5_mm": 7.3,
+    "median_mm": 40.5,
+    "frac_lt_12mm": 0.389,
+    "frac_lt_5mm": 0.0,
+    "frac_le_0": 0.0
+   },
+   "SP 64A (Gent)": {
+    "min_mm": 8.2,
+    "p5_mm": 9.7,
+    "median_mm": 41.8,
+    "frac_lt_12mm": 0.387,
+    "frac_lt_5mm": 0.0,
+    "frac_le_0": 0.0
+   },
+   "SP 67A (E 4.8)": {
+    "min_mm": 8.5,
+    "p5_mm": 9.9,
+    "median_mm": 41.9,
+    "frac_lt_12mm": 0.387,
+    "frac_lt_5mm": 0.0,
+    "frac_le_0": 0.0
+   },
+   "max_FZ_N": 705.0,
+   "max_dzmp_mm": 1.24
+  },
+  "walk 1.2 ref_m12": {
+   "bare 7075": {
+    "min_mm": 12.0,
+    "p5_mm": 12.0,
+    "median_mm": 43.8,
+    "frac_lt_12mm": 0.0,
+    "frac_lt_5mm": 0.0,
+    "frac_le_0": 0.0
+   },
+   "Gumlite 47A (E 2.2)": {
+    "min_mm": 5.5,
+    "p5_mm": 7.8,
+    "median_mm": 40.7,
+    "frac_lt_12mm": 0.379,
+    "frac_lt_5mm": 0.0,
+    "frac_le_0": 0.0
+   },
+   "Gumlite 44A low (Gent)": {
+    "min_mm": 4.9,
+    "p5_mm": 7.4,
+    "median_mm": 40.4,
+    "frac_lt_12mm": 0.379,
+    "frac_lt_5mm": 0.001,
+    "frac_le_0": 0.0
+   },
+   "SP 64A (Gent)": {
+    "min_mm": 8.0,
+    "p5_mm": 9.6,
+    "median_mm": 41.7,
+    "frac_lt_12mm": 0.378,
+    "frac_lt_5mm": 0.0,
+    "frac_le_0": 0.0
+   },
+   "SP 67A (E 4.8)": {
+    "min_mm": 8.3,
+    "p5_mm": 9.9,
+    "median_mm": 41.8,
+    "frac_lt_12mm": 0.377,
+    "frac_lt_5mm": 0.0,
+    "frac_le_0": 0.0
+   },
+   "max_FZ_N": 746.0,
+   "max_dzmp_mm": 1.43
+  },
+  "walk 1.2 ref_ds25": {
+   "bare 7075": {
+    "min_mm": -0.0,
+    "p5_mm": -0.0,
+    "median_mm": 43.8,
+    "frac_lt_12mm": 0.368,
+    "frac_lt_5mm": 0.34,
+    "frac_le_0": 0.282
+   },
+   "Gumlite 47A (E 2.2)": {
+    "min_mm": -6.5,
+    "p5_mm": -4.2,
+    "median_mm": 40.7,
+    "frac_lt_12mm": 0.376,
+    "frac_lt_5mm": 0.343,
+    "frac_le_0": 0.317
+   },
+   "Gumlite 44A low (Gent)": {
+    "min_mm": -7.1,
+    "p5_mm": -4.7,
+    "median_mm": 40.4,
+    "frac_lt_12mm": 0.376,
+    "frac_lt_5mm": 0.344,
+    "frac_le_0": 0.318
+   },
+   "SP 64A (Gent)": {
+    "min_mm": -4.0,
+    "p5_mm": -2.4,
+    "median_mm": 41.7,
+    "frac_lt_12mm": 0.373,
+    "frac_lt_5mm": 0.341,
+    "frac_le_0": 0.315
+   },
+   "SP 67A (E 4.8)": {
+    "min_mm": -3.7,
+    "p5_mm": -2.2,
+    "median_mm": 41.8,
+    "frac_lt_12mm": 0.373,
+    "frac_lt_5mm": 0.341,
+    "frac_le_0": 0.315
+   },
+   "max_FZ_N": 746.0,
+   "max_dzmp_mm": 1.43
+  },
+  "carry P-042 1.0": {
+   "bare 7075": {
+    "min_mm": -0.0,
+    "p5_mm": -0.0,
+    "median_mm": 42.1,
+    "frac_lt_12mm": 0.343,
+    "frac_lt_5mm": 0.321,
+    "frac_le_0": 0.267
+   },
+   "Gumlite 47A (E 2.2)": {
+    "min_mm": -8.1,
+    "p5_mm": -4.3,
+    "median_mm": 38.4,
+    "frac_lt_12mm": 0.353,
+    "frac_lt_5mm": 0.326,
+    "frac_le_0": 0.31
+   },
+   "Gumlite 44A low (Gent)": {
+    "min_mm": -9.0,
+    "p5_mm": -4.8,
+    "median_mm": 38.1,
+    "frac_lt_12mm": 0.353,
+    "frac_lt_5mm": 0.327,
+    "frac_le_0": 0.311
+   },
+   "SP 64A (Gent)": {
+    "min_mm": -4.8,
+    "p5_mm": -2.4,
+    "median_mm": 39.8,
+    "frac_lt_12mm": 0.347,
+    "frac_lt_5mm": 0.324,
+    "frac_le_0": 0.309
+   },
+   "SP 67A (E 4.8)": {
+    "min_mm": -4.4,
+    "p5_mm": -2.1,
+    "median_mm": 39.9,
+    "frac_lt_12mm": 0.347,
+    "frac_lt_5mm": 0.324,
+    "frac_le_0": 0.308
+   },
+   "max_FZ_N": 941.0,
+   "max_dzmp_mm": 1.34
+  },
+  "push_recover": {
+   "bare 7075": {
+    "min_mm": -0.0,
+    "p5_mm": -0.0,
+    "median_mm": 10.2,
+    "frac_lt_12mm": 0.51,
+    "frac_lt_5mm": 0.471,
+    "frac_le_0": 0.362
+   },
+   "Gumlite 47A (E 2.2)": {
+    "min_mm": -7.1,
+    "p5_mm": -6.7,
+    "median_mm": 8.8,
+    "frac_lt_12mm": 0.522,
+    "frac_lt_5mm": 0.478,
+    "frac_le_0": 0.447
+   },
+   "Gumlite 44A low (Gent)": {
+    "min_mm": -7.7,
+    "p5_mm": -7.3,
+    "median_mm": 8.6,
+    "frac_lt_12mm": 0.522,
+    "frac_lt_5mm": 0.481,
+    "frac_le_0": 0.447
+   },
+   "SP 64A (Gent)": {
+    "min_mm": -4.7,
+    "p5_mm": -4.3,
+    "median_mm": 9.4,
+    "frac_lt_12mm": 0.517,
+    "frac_lt_5mm": 0.476,
+    "frac_le_0": 0.442
+   },
+   "SP 67A (E 4.8)": {
+    "min_mm": -4.4,
+    "p5_mm": -4.0,
+    "median_mm": 9.4,
+    "frac_lt_12mm": 0.517,
+    "frac_lt_5mm": 0.476,
+    "frac_le_0": 0.442
+   },
+   "max_FZ_N": 677.0,
+   "max_dzmp_mm": 2.11
+  },
+  "stairs 18 cm": {
+   "bare 7075": {
+    "min_mm": -0.0,
+    "p5_mm": -0.0,
+    "median_mm": 38.5,
+    "frac_lt_12mm": 0.41,
+    "frac_lt_5mm": 0.373,
+    "frac_le_0": 0.3
+   },
+   "Gumlite 47A (E 2.2)": {
+    "min_mm": -5.2,
+    "p5_mm": -3.4,
+    "median_mm": 37.0,
+    "frac_lt_12mm": 0.415,
+    "frac_lt_5mm": 0.379,
+    "frac_le_0": 0.354
+   },
+   "Gumlite 44A low (Gent)": {
+    "min_mm": -5.7,
+    "p5_mm": -3.8,
+    "median_mm": 36.9,
+    "frac_lt_12mm": 0.416,
+    "frac_lt_5mm": 0.38,
+    "frac_le_0": 0.355
+   },
+   "SP 64A (Gent)": {
+    "min_mm": -3.0,
+    "p5_mm": -1.8,
+    "median_mm": 37.7,
+    "frac_lt_12mm": 0.414,
+    "frac_lt_5mm": 0.375,
+    "frac_le_0": 0.351
+   },
+   "SP 67A (E 4.8)": {
+    "min_mm": -2.7,
+    "p5_mm": -1.6,
+    "median_mm": 37.7,
+    "frac_lt_12mm": 0.414,
+    "frac_lt_5mm": 0.375,
+    "frac_le_0": 0.351
+   },
+   "max_FZ_N": 819.0,
+   "max_dzmp_mm": 0.86
+  },
+  "sit_to_stand": {
+   "bare 7075": {
+    "min_mm": 38.2,
+    "p5_mm": 39.7,
+    "median_mm": 49.6,
+    "frac_lt_12mm": 0.0,
+    "frac_lt_5mm": 0.0,
+    "frac_le_0": 0.0
+   },
+   "Gumlite 47A (E 2.2)": {
+    "min_mm": 36.1,
+    "p5_mm": 37.6,
+    "median_mm": 48.5,
+    "frac_lt_12mm": 0.0,
+    "frac_lt_5mm": 0.0,
+    "frac_le_0": 0.0
+   },
+   "Gumlite 44A low (Gent)": {
+    "min_mm": 35.8,
+    "p5_mm": 37.3,
+    "median_mm": 48.3,
+    "frac_lt_12mm": 0.0,
+    "frac_lt_5mm": 0.0,
+    "frac_le_0": 0.0
+   },
+   "SP 64A (Gent)": {
+    "min_mm": 37.1,
+    "p5_mm": 38.6,
+    "median_mm": 49.0,
+    "frac_lt_12mm": 0.0,
+    "frac_lt_5mm": 0.0,
+    "frac_le_0": 0.0
+   },
+   "SP 67A (E 4.8)": {
+    "min_mm": 37.2,
+    "p5_mm": 38.7,
+    "median_mm": 49.1,
+    "frac_lt_12mm": 0.0,
+    "frac_lt_5mm": 0.0,
+    "frac_le_0": 0.0
+   },
+   "max_FZ_N": 369.0,
+   "max_dzmp_mm": 0.0
+  }
+ },
+ "static_carry": {
+  "payload [0.25, 0, 0.1] waist 0.0": {
+   "bare 7075": 79.5,
+   "Gumlite 47A (E 2.2)": 76.3,
+   "Gumlite 44A low (Gent)": 75.9,
+   "SP 64A (Gent)": 77.8,
+   "SP 67A (E 4.8)": 78.0
+  },
+  "payload [0.25, 0, 0.1] waist -0.25": {
+   "bare 7075": 99.6,
+   "Gumlite 47A (E 2.2)": 96.4,
+   "Gumlite 44A low (Gent)": 96.0,
+   "SP 64A (Gent)": 97.9,
+   "SP 67A (E 4.8)": 98.1
+  },
+  "payload [0.32, 0, 0.415] waist 0.0": {
+   "bare 7075": 63.4,
+   "Gumlite 47A (E 2.2)": 60.2,
+   "Gumlite 44A low (Gent)": 59.8,
+   "SP 64A (Gent)": 61.7,
+   "SP 67A (E 4.8)": 61.9
+  },
+  "payload [0.32, 0, 0.415] waist -0.25": {
+   "bare 7075": 108.7,
+   "Gumlite 47A (E 2.2)": 105.5,
+   "Gumlite 44A low (Gent)": 105.1,
+   "SP 64A (Gent)": 107.0,
+   "SP 67A (E 4.8)": 107.2
+  }
+ },
+ "edge_inset_mm_at_1p31BW_single": {
+  "bare 7075": {
+   "toe_heel": 0.0,
+   "side": 0.0
+  },
+  "Gumlite 47A (E 2.2)": {
+   "toe_heel": 8.5,
+   "side": 3.5
+  },
+  "Gumlite 44A low (Gent)": {
+   "toe_heel": 9.5,
+   "side": 4.0
+  },
+  "SP 64A (Gent)": {
+   "toe_heel": 4.4,
+   "side": 1.8
+  },
+  "SP 67A (E 4.8)": {
+   "toe_heel": 3.9,
+   "side": 1.6
+  }
+ }
+}
