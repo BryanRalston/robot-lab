@@ -1,0 +1,15 @@
+{
+ "hot_start_Tw": 89.4,
+ "rule_peaks_C": {
+  "10on_10off rest idle0": 121.9,
+  "10on_10off rest hold64": 134.5,
+  "40pct_12on_18off rest idle0": 125.3,
+  "40pct_12on_18off rest hold64": 132.1
+ },
+ "tighter": {
+  "D480 R600 idle": 118.5,
+  "D240 R360 idle (40%)": 110.0,
+  "D300 R450 idle (40%)": 112.3,
+  "D180 R270 idle (40%)": 107.7
+ }
+}

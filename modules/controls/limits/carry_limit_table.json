@@ -1,0 +1,95 @@
+{
+ "profile": {
+  "rms_x1.0": 76.66,
+  "pfe_mean_W": 3.988,
+  "knee_col": 3,
+  "cycle_s": 8.76
+ },
+ "basis": "rev B as built 0.0703 m2, eta_f 0.7, 35 C, drives off, target 120 C",
+ "rows": [
+  {
+   "h": 8.0,
+   "scale": 1.0,
+   "hot_Tw": 89.4,
+   "t_hot_s": 1364.44,
+   "t_cold_s": 2379.7000000000003,
+   "tau_cont120": 76.9,
+   "rest_hold64_D60": 28,
+   "duty_hold64_D60": 0.682,
+   "rest_idle0_D60": 14,
+   "duty_idle0_D60": 0.811,
+   "rest_hold64_D120": 63,
+   "duty_hold64_D120": 0.656,
+   "rest_idle0_D120": 21,
+   "duty_idle0_D120": 0.851,
+   "rest_hold64_D300": 162,
+   "duty_hold64_D300": 0.649,
+   "rest_idle0_D300": 49,
+   "duty_idle0_D300": 0.86
+  },
+  {
+   "h": 8.0,
+   "scale": 1.1,
+   "hot_Tw": 89.4,
+   "t_hot_s": 531.34,
+   "t_cold_s": 1276.02,
+   "tau_cont120": 76.9,
+   "rest_hold64_D60": 98,
+   "duty_hold64_D60": 0.38,
+   "rest_idle0_D60": 28,
+   "duty_idle0_D60": 0.682,
+   "rest_hold64_D120": 239,
+   "duty_hold64_D120": 0.334,
+   "rest_idle0_D120": 56,
+   "duty_idle0_D120": 0.682,
+   "rest_hold64_D300": 802,
+   "duty_hold64_D300": 0.272,
+   "rest_idle0_D300": 162,
+   "duty_idle0_D300": 0.649
+  },
+  {
+   "h": 10.0,
+   "scale": 1.0,
+   "hot_Tw": 80.0,
+   "t_hot_s": null,
+   "t_cold_s": null,
+   "tau_cont120": 83.3
+  },
+  {
+   "h": 10.0,
+   "scale": 1.1,
+   "hot_Tw": 80.0,
+   "t_hot_s": 1092.06,
+   "t_cold_s": 1678.9,
+   "tau_cont120": 83.3,
+   "rest_hold64_D60": 28,
+   "duty_hold64_D60": 0.682,
+   "rest_idle0_D60": 14,
+   "duty_idle0_D60": 0.811,
+   "rest_hold64_D120": 56,
+   "duty_hold64_D120": 0.682,
+   "rest_idle0_D120": 21,
+   "duty_idle0_D120": 0.851,
+   "rest_hold64_D300": 169,
+   "duty_hold64_D300": 0.64,
+   "rest_idle0_D300": 63,
+   "duty_idle0_D300": 0.826
+  },
+  {
+   "h": 12.0,
+   "scale": 1.0,
+   "hot_Tw": 74.0,
+   "t_hot_s": null,
+   "t_cold_s": null,
+   "tau_cont120": 88.6
+  },
+  {
+   "h": 12.0,
+   "scale": 1.1,
+   "hot_Tw": 74.0,
+   "t_hot_s": null,
+   "t_cold_s": null,
+   "tau_cont120": 88.6
+  }
+ ]
+}
