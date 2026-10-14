@@ -58,6 +58,49 @@ The 48 V DCM swap is ~power-neutral (both ~92 % class; to confirm from datasheet
 | waist actuators (Actuators line) | 2.40 → 2.59 | | +0.19 if the waist_pitch motor change lands |
 Thermal (1.0 kg in the v3 torso allocation) is RL Thermal's; harness/covers stay with Actuators/Arbiter lines.
 
+## 8. Regen clamp on the torso distribution board (RL Electronics §9.3, 1d70018; closes O-E6 part pick)
+Spec (Electronics): hardware comparator ON 88 V / OFF 86 V; bus ≤ 90 V at the design pulse 4.5 kW, ≤ 400 J/event; absolute ceiling 92 V; R ≤ 1.72 Ω, ≥ 400 J pulse, ≥ 200 W continuous, thermal cutout to safety MCU; FET ≥ 150 V. Roboteq SR5K100V25R rejected (Electronics).
+| function | part | key data (datasheet) | check |
+|---|---|---|---|
+| clamp switch | 2 × **Infineon IPT059N15N3** (ATMA1) in parallel, low side | 150 V, 5.9 mΩ, 155 A, E_AS 520 mJ, R_thJC 0.4 K/W — https://www.infineon.com/part/IPT059N15N3 , DS https://www.tme.eu/Document/3fe4942e828bcb431c03c4d931fded80/IPT059N15N3-DTE.pdf | 58.7 A / 2 = 29 A each → ~5 W each during pulse; 150 V ≥ 1.6 × 92 V |
+| clamp resistor | **Arcol/Ohmite HS200 1R5 F** (1.5 Ω ±1 %, aluminium housed wirewound, "wound to maximise high pulse capability") | 200 W on standard heatsink (3750 cm² × 3 mm Al), 50 W free air, 1900 V limiting voltage, ~475 g — https://www.ohmite.com/hs-aluminium-housed-resistors/ | 1.5 Ω ≤ 1.72: 88²/1.5 = 5.16 kW ≥ 4.5 kW, so the bus stays ≤ 88–90 V at the design pulse; 400 J → ~78 ms at full power. 400 J pulse: inside the HS overload curve [EST, read the curve: O-T8]; 200 W continuous only with the torso Al bulkhead/fin stack as heatsink [EST] |
+| thermal cutout | NC bimetal on resistor body, ~120 °C, wired to TMS570 + hard-latches comparator off | part to cite (O-T8) | |
+| comparator / gate drive | hardware comparator with 86/88 V hysteresis off an always-on 5 V reference; low-side gate driver | parts to cite (O-T8) — no firmware in loop | |
+| main contactor | **TE KILOVAC LEV100A4ANG** (3-1618389-7), 12 V coil from a second LM5164 set to 12 V | 900 VDC switching, 100 A cont, 200 A 3 min, 1250 A short-circuit, coil 461 mA — https://www.te.com/en/product-3-1618389-7.html | 900 V ≥ 92 V; 100 A ≥ 60 A cont; gives galvanic disconnect (answers O-T3); mass not read [EST 0.20] |
+| pre-charge resistor | **Arcol/Ohmite HS50 47R J** | 50 W on heatsink, 1250 V limiting — same HS datasheet | 84 V / 47 Ω = 1.8 A peak; energy ½CV² with drive caps (to be summed, O-T8) |
+| pre-charge switch | **Infineon BSC520N15NS3 G** | 150 V, 52 mΩ, 21 A — https://www.infineon.com/part/BSC520N15NS3-G | 150 V ≥ 92 V |
+**Interlock (requirement on BMS firmware + hardware):** the BMS may not open the charge path (contactor or BQ76200 FETs) while any drive is enabled, except via SS1 controlled stop → STO confirmed (TMS570), then open. Exception: hard faults where the cell is at risk (cell OV/UV/OT, short-circuit) — then STO and open simultaneously, the clamp absorbs the regen. This exception needs Electronics/Arbiter agreement (O-T9).
+**Mass (new, under R-024):** HS200 0.475 + 2 FETs/comparator/board 0.030 + contactor 0.20 [EST] + pre-charge 0.040 [EST] = **+0.745 kg**. Conflicts with Electronics' 0.10–0.15 [EST]; the HS200 is the driver. Cheaper path: smaller pulse-rated resistor using the 400 J transient only (e.g. HS100-size, ~115 g) if the 200 W continuous need is dropped — Arbiter/Electronics call (O-T8).
+
+## 9. Answers to RL Arms & Hands (R2_OPEN_ITEMS O-A1)
+1. **Shoulder y ±0.170 m in the v5 chest: kept.** V5 plan row 4 tapers 330 → 250 mm from shoulder line to waist; 330 mm = ±0.165 m shell at the shoulder line, flange face y ±0.165 [EST], pitch axis at ±0.170, z +0.220 above waist_pitch as sim. ID to confirm the taper starts below the shoulder bulkhead.
+2. **8 × M8 12.9 accepted, PCD 80 mm** (fits the CSG-25 frame D 96 mm envelope). Steel thread inserts in 7075, engagement ≥ 1.5 d. Hand calcs: A_s 36.6 mm², preload 0.7 × 1100 MPa × A_s = 28.2 kN/bolt; max bolt tension from moment = 4M/(n·PCD).
+   | case | moment at flange | shear | bolt tension max | margins |
+   |---|---|---|---|---|
+   | static 82.2 N·m (need 123.4) | 123.4 N·m | ~0.2 kN | 0.77 kN | separation 37×; friction (μ 0.15, 33.8 kN) huge |
+   | side fall (v3 shoulder_F 11.5 kN at 60 mm, `v3.json`; roll clutch 300 N·m caps the roll gear, not the impact path) | 690 N·m | 11.5 kN | 4.31 kN | separation 6.5×; slip 33.8/11.5 = 2.9× |
+   | clutch-limited roll torque | 300 N·m | — | 1.88 kN | 15× |
+   **Bulkhead:** 7075-T6 (yield 503 MPa) boss 120 mm wide: at fall 690 N·m, t = 10 mm → 345 MPa (SF 1.46, fails SF ≥ 2); **t = 12 mm → 240 MPa, SF 2.1**; static 123.4 N·m → 43 MPa. Pocketed 12 mm bulkhead [EST] 0.60 kg vs 0.45 booked (+0.15). FEA later (not this round).
+3. **Arm inertials in sim:** not Torso. CHARTER: modules own only their folder; `sim/v3` is shared and has been edited by Legs on Arbiter request (P-019 → L42), with Controls now owning legs/WBC sim (eac9a46). Proposal: Arms publishes catalog per-body mass/COM/inertia (5.953 → 9.54 kg/side); **Controls (sim owner) applies**, sequenced by Robot Lab; Torso supplies the re-split torso body (pack 8.75 kg in chest, O-T7) in the same change.
+
+## 10. A41 / P-030 (R-030, e149620): Thor cooling duct, joint with RL Electronics
+- Layout: chest duct front-low intake → 2 × 40 mm blowers (~21 CFM, ~3 W) → Thor fin stack/cold plate → exhaust upward/back through chest vents under the shoulder bulkhead. **48 V DCM3623TA5N53B4 mounted on the Thor cold plate** (in the duct airstream downstream of the blowers). **Pack in the lower chest bay, upstream of and separated from the duct by a CFRP baffle; exhaust path never crosses the pack.** Clamp resistor HS200 bolts to the bulkhead on the exhaust side (its heat goes out with the duct air).
+- Mass: **+0.040 kg (P-030) booked in the torso line**; +3 W in power (in the 4 h mixed check: still NOT MET).
+
+## 11. Mass line (updated)
+| line | paper kg | note |
+|---|---|---|
+| torso structure + pelvis + distribution (§1) | 4.305 | |
+| shoulder bulkhead 12 mm (§9) | +0.150 [EST] | |
+| P-030 blowers (R-030) | +0.040 | booked in full |
+| regen clamp + contactor + pre-charge (§8) | +0.745 | new mass, to Arbiter (R-024) |
+| **torso line** | **5.240** | vs 4.40 v3 allocation (+0.84) |
+| battery 20S5P | 8.750 | unchanged |
+
+## 12. Rulings pending and idle-power estimate
+The Arbiter is ruling on **O-T5** (4 h mixed), **O-T2** (waist_pitch), **O-T3** (FET vs contactor disconnect; §8 now adds the contactor). Robot Lab leans to re-rating the mixed duty and cutting idle power.
+Idle-power available in torso/BMS: BMS always-on 1.0 → 0.3 W (sleep host, BQ79616 low-power mode) [EST]; contactor coil 5.5 W while closed (LEV100 datasheet) → economizer/PWM hold ~1.5 W [EST]; FET losses at stand ~0.05 W; blowers 3 W → speed to Thor load. **Torso/BMS savings ≈ 5–6 W**, but the contactor itself adds 5.5 W unless economized. For 4 h mixed, P_mixed must fall from ~500 W to ≤ 365 W (−135 W); the real levers are compute cap (120 W) and drive idle overhead (30 × 3.3 W ≈ 99 W), not torso.
+
 ## 7. Open questions / conflicts (not edited in others' files)
 - **O-T1 (Electronics, coordination):** adopt the 48 V intermediate rail with DCM3623TA5N53B4T00; Torso hosts the DCM on the power distribution board or the brain tray? Mass 0.024 [UNVERIFIED for variant] stays in the brain line; who books the 47718-232 choke; 24 V VL source (O-E3); BMS→safety MCU CAN FD message set; e-stop = FET-open vs contactor (O-E6).
 - **O-T2 (Actuators/Arbiter):** waist_pitch 116 N·m < 188 N·m need with T5 payload → TBM2G-08508A, +0.19 kg.
@@ -65,4 +108,6 @@ Thermal (1.0 kg in the v3 torso allocation) is RL Thermal's; harness/covers stay
 - **O-T4:** L50S125 DC breaking capacity at 84 V and pack prospective short-circuit current (100 cells, ~15 mΩ/cell) to be verified.
 - **O-T5 (Arbiter):** T7 4 h mixed is not met (2.92 h). Options: re-rate mixed duty, 20S6P (breaks T2), or idle-power cuts (compute cap). Ruling requested.
 - **O-T6:** usable 90 % at 3.4 V/cell floor still [EST] (R-010); read P45B discharge curve at ~2 A/cell.
+- **O-T8:** clamp: read HS200/HS100 overload curve for 400 J, cite comparator, gate driver, thermal cutout, sum drive bus capacitance for pre-charge; HS200 mass (0.475) vs Electronics estimate.
+- **O-T9 (Electronics/Arbiter):** interlock exception for cell-at-risk faults.
 - **O-T7 (Legs/Controls):** sim torso 18.762 kg should be re-split (pack 8.75 in chest) when the sim is updated.
