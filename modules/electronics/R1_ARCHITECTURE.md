@@ -341,3 +341,31 @@ All safety frames: counter + CRC (E2E-style). Rates are [EST].
 | per-event pulse (2.6 J gait / 400 J fault) | 0.03 K / 5.2 K | 0.02 K / 2.6 K (each sees half) |
 **Result: the booked HS100 1R5 absorbs the full 5-min top-of-charge window with large margin, even with the BMS refusing charge.** The 2× 0R75 fallback is not needed for this case; it stays only as the O-T8 fallback for the 400 J / 78 ms fault pulse.
 **Caveats:** the traces are nominal walking only. Stairs-down, sit-down, braking from speed and arm lowering are not in the regen model. Bound for those [EST]: descending 18 cm steps at 0.5 step/s gives 65 × 9.81 × 0.18 × 0.5 = **57 W gross**, below the ~140 W compute/sensor load on the same bus, so net bus power stays positive in steady descent. Short transients (sit-down ≤ 319 J CoM drop) are inside the 400 J design event. **O-T8 (pulse curve) is still needed for the 400 J fault event, before G3.** T-027 (BMS acceptance) stays the primary measure; the clamp is the backstop and does not need to stop the robot during the top-of-charge window.
+
+## 16. Alignment with Torso R1.4 (1dd529b) and Arbiter R-038 (2026-10-14)
+
+### 16.1 §13.7 / §13.9 update: BMS fault channels and bus-sense frame
+- **FAULT_N channel 1:** TI BQ79616 fault line (via BQ79600-Q1 bridge path; Torso).
+- **FAULT_N channel 2:** **2× TI BQ77216** (10S + 10S secondary protectors), open-drain outputs wire-ORed, **opto level-shifted** to the TMS570. Independent of the BQ79616 and the host (Torso R1.4).
+- **BMS host:** NXP **S32K344** with TI **BQ79600-Q1** communication bridge to the BQ79616 stack, **CAN FD to the TMS570** (frames per §13.7).
+- **New frame: TMS570 → BMS host, BUS_SENSE_STATUS** (drive-side bus sense, §13.9, 2× AMC1311):
+| field | bits | content |
+|---|---|---|
+| v_bus_ch1 | 12 | drive-side bus voltage ch1, 0.05 V/LSB |
+| v_bus_ch2 | 12 | ch2, same scaling |
+| agree | 1 | ch1/ch2 within ±2 V [EST] |
+| precheck_result | 2 | 0 = not run, 1 = PASS (bus ≈ 0 V with disconnect open), 2 = FAIL (weld/short suspected), 3 = sensor fault |
+| postopen_result | 2 | same coding: bus decayed per RC after open? |
+| weld_short_latched | 1 | latched fault, blocks close until manual reset |
+| amc_hs_supply_ok | 2 | AMC1311 missing-high-side-supply flags ch1/ch2 |
+| counter | 4 | rolling |
+| crc | 16 | E2E CRC |
+Rate: 100 Hz, plus an event frame on any result change. The host must not close the FETs/contactor unless precheck_result = PASS with agree = 1 in the last frame received ≤ 30 ms ago [EST].
+
+### 16.2 §14 update: R-038, 2× RP40-11024SFR per hand (supersedes the RP100H recommendation)
+- **Decision (Arbiter R-038):** 2× RECOM RP40-11024SFR/P-HC per hand, **+0.086 kg total** vs the booked single RP40, in the **shoulder bay with the hand board (A42)**.
+- **Parallel/share check (RP40-FR datasheet REV 8/2020):** the datasheet lists only **ON/OFF CTRL** (positive/negative logic) and **output voltage trimming** (24 V: −10 %/+20 %) as control functions. It gives **no current-share or parallel-operation pin or note**. The single-output parts are not specified for paralleling. **So: two independent rails, never paralleled.** (The statement to Arms & Hands that the RP40 has no current-share pin is correct.)
+- **Architecture:** rail A and rail B, each ≤ 40 W, **firmware cap 1.67 A per rail** on the hand board. **Flexors split 3/3 across rails** and the small drives split as Arms defines, so one rail failure leaves a partial grip. Each rail has its own bulk capacitance **≤ 1300 µF** (RP40-11024SFR max capacitive load, datasheet) including the motor-driver input caps. Burst capability = 2 × 40 W = 80 W total, only if the load is split; no single rail may exceed 40 W.
+- **O-E11 input filter, sized from the RP40-FR datasheet** (note 9 + "EMC filtering EN55032 Class A" component list for RP40-110xx): per converter **TVS1 + TVS2 = 2× SMDJ90A in series**; **C1 = 3× 68 µF/200 V** electrolytic in parallel (datasheet names Rubycon BXF, which is obsolete: equivalent required, see A28); **C2 = 33 µF/250 V** Al (Chemi-con KXJ); **C3, C4 = 1 µF/250 V** 1812 MLCC; **L1 = 22 µH, 1.5 A** SMD inductor (TDK CD series); **C5–C7 = 1000 pF Y1**. Input current per converter at 40 W / 90 % / 68 V = 0.65 A < 1.5 A L1 rating.
+  - **Use one datasheet filter per converter** (validated configuration, keeps rails independent). A shared filter would need L1 ≥ 1.3 A × margin and is not datasheet-validated.
+  - Mass [EST]: ~0.015 kg per filter (3× radial caps + inductor + MLCCs + PCB share) → ~0.03 kg per hand. **Not in the R-038 +0.086**, so Arms to confirm whether that number already includes filters; if not, it is new mass.
