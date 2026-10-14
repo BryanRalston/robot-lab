@@ -38,6 +38,10 @@
   "XL_TPU210": "https://tpufabrics.com/wp-content/uploads/2026/03/TDS-XL-TPU-Coated-Nylon-210D.pdf (300+-15 g/m2, tear 17/10 N) [via search index]",
   "CF_NOTCH_MDPI": "https://www.mdpi.com/2504-477X/10/4/196 (open-hole tension: quasi-iso ~50% loss) [via search index]",
   "CF_NOTCH_FLECK": "https://www.fleckmech.org/papers/331.pdf (open-hole compression 35-75% of unnotched) [via search index]",
+  "ULTEM4001": "https://drakeplastics.com/wp-content/uploads/2024/02/ULTEMResin_4001_Americas_Technical_Data_Sheet.pdf (SABIC ULTEM Resin 4001 Americas TDS; mirror https://www.resinsplastics.com/photo/resinsplastics/document/42878/4001.pdf)",
+  "VIB_TOP85_US": "https://us.vibram.com/on/demandware.static/-/Sites-VibramUS-Library/default/dw453a87e0/pdfs/vibram-shoe-repair-catalog-june-2015.pdf (7373 Protania, TOP85, 85+-3 Shore A)",
+  "VIB_TOP85_LEF": "https://www.leffler.com.au/vibram-techdata/ (TOP 85: 1.15 g/cc, 85+-3 A, <100 mm3, >16 MPa, >450%)",
+  "VIB_7663_CIAC": "https://www.ciac-srl.com/en/articolo/508163/lastra-comp-7163-gemma (7163/7663 Gemma: 1.17 g/cc, 93 Shore A, 180 mm3 DIN 53516)",
   "R027": "modules/RULINGS.md R-027 (PALSUN/LEXAN, Toray 3900, Easy Composites XC110 citations)"
  },
  "materials": [
@@ -608,6 +612,81 @@
    "cost_hint": null,
    "sources": [],
    "notes": "Not fetched [UNKNOWN]."
+  },
+  {
+   "id": "PEI4001",
+   "name": "SABIC ULTEM 4001 (PEI, PTFE-lubricated wear grade)",
+   "used_in": "L61 knee trunnion bushes (R-106 candidate)",
+   "density_g_cc": 1.33,
+   "E_GPa": 3.35,
+   "yield_MPa": 103,
+   "UTS_MPa": null,
+   "fatigue_MPa": null,
+   "elongation_pct": 40,
+   "T_max_mech_C": null,
+   "toughness": null,
+   "other": {
+    "flex_MPa": 151,
+    "PV_limit_MPa_m_s@0.51m/s": 1.9,
+    "K_vs_steel_mm3_Nm": "145e-8 (72e-10 in3min/ft-lb-hr @2000 psi-fpm)",
+    "K_vs_self_mm3_Nm": "54.4e-8",
+    "COF_kinetic_steel": 0.25,
+    "HDT_1.82MPa_C": 200,
+    "RTI_mech_C": 170,
+    "taber_mg_1000cy": 2,
+    "compressive_MPa": null,
+    "k_W_mK": null
+   },
+   "cost_hint": null,
+   "sources": [
+    "ULTEM4001"
+   ],
+   "notes": "Compressive strength and thermal conductivity NOT on SABIC TDS. K/COF are RT SABIC-method values at PV 0.07 MPa m/s; 90-95 C wear and creep untested [EST]."
+  },
+  {
+   "id": "VIB7373",
+   "name": "Vibram 7373 Protania/Tequilgemma sheet, TOP85 compound",
+   "used_in": "sole pad candidate (R-102)",
+   "density_g_cc": 1.15,
+   "E_GPa": null,
+   "yield_MPa": null,
+   "UTS_MPa": ">16",
+   "fatigue_MPa": null,
+   "elongation_pct": ">450",
+   "T_max_mech_C": null,
+   "toughness": null,
+   "other": {
+    "shore_A": "85+-3",
+    "abrasion_DIN_mm3": "<100"
+   },
+   "cost_hint": null,
+   "sources": [
+    "VIB_TOP85_US",
+    "VIB_TOP85_LEF"
+   ],
+   "notes": "Passes >=60A gate. Vibram lists 7373 at 1-1.8 mm; 3 mm per JP reseller (subaru-ec.com) - confirm thickness."
+  },
+  {
+   "id": "VIB7663",
+   "name": "Vibram 7663 Tequilgemma sheet (3 mm available)",
+   "used_in": "sole pad candidate (R-102)",
+   "density_g_cc": 1.17,
+   "E_GPa": null,
+   "yield_MPa": null,
+   "UTS_MPa": null,
+   "fatigue_MPa": null,
+   "elongation_pct": null,
+   "T_max_mech_C": null,
+   "toughness": null,
+   "other": {
+    "shore_A": 93,
+    "abrasion_DIN53516_mm3": 180
+   },
+   "cost_hint": null,
+   "sources": [
+    "VIB_7663_CIAC"
+   ],
+   "notes": "Passes >=60A gate. Reseller (CIAC, Vibram distributor) value; not supplier lot cert."
   },
   {
    "id": "BRG_STEEL",
