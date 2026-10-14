@@ -1056,3 +1056,7 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
 - Elbow accel scale drops to **0.85** at full reach with >8.5 kg (estimated 69.5 Nm vs the 69 cap). G5 may restore 0.87 with measured torque.
 - Chest stroke: zero margin at the soft foam lot is not accepted. Torso must show >=10% stroke margin, either by incoming-inspection minimum stiffness or added stroke, with any mass booked.
 - Sole pad hardness: not ruled yet. Legs proposes the lightest option giving >=8 mm walk CoP margin (64-70A at +0.094/foot is the reference). Nothing booked until then.
+
+## R-103 (2026-10-14) Chest pad crush acceptance (Torso f5cd400)
+- Accepted at +0.000. Every honeycomb lot gets a coupon crush test; a lot is accepted only with a 0 deg plateau of 19.5-22.3 kN. That gives at least 10% stroke margin (<=56.4 of 62 mm) and stays under the 22.35 kN ceiling. The 95 mm core fallback (+0.005) is taken only if lot yield forces it.
+- R-095 callout confirmed. The sternum ledger follows R-093/R-098/R-095. Torso reconciles its +0.028 sternum net against that ledger; there is no new booking.
