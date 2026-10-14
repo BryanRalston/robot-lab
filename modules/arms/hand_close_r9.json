@@ -1,0 +1,395 @@
+{
+ "basis": "R-091: loaded six-flexor close with a 1.50 A SUMMED per-rail bus limit (24 V -> 36.0 W/rail) + start stagger.\nBasis hand_close_r4.py (cited maxon DCX22S/GPX22HP 103:1, eta 0.65 cited max). Per-flexor motor cap 1.66 A (R-090/R-091).\nRail A: F1-F3 + S1,S2 + board logic 4.6 W hot (Thermal 55c80c1 / A43C R-089: MCU 1.2 W [Thermal], rest 3.4 W drivers/encoders/aux [EST split]).\nRail B: F4-F6 + S3-S5. Small drives hold at I_nom (copper 1.72 W each, worst case). Finished flexors hold the contact load (copper i^2 R).\nPower share: rail power left after logic+small+holders split equally among still-closing flexors, each also <= 1.66 A and <= (V-Kt w)/R.\nBus-side ideal converter (no droop), drive losses neglected [EST]. Worst: hot R x1.5, eta 0.50, sheath friction x1.6 (all together).",
+ "rail_limit_A": {
+  "1.5": {
+   "stagger_0ms": {
+    "nominal": {
+     "A": {
+      "t_close_s": 0.656,
+      "flexor_i_pk_A": 1.59,
+      "bus_A_pk": 1.515,
+      "ok": true
+     },
+     "B": {
+      "t_close_s": 0.648,
+      "flexor_i_pk_A": 1.66,
+      "bus_A_pk": 1.517,
+      "ok": true
+     }
+    },
+    "hotR1.5": {
+     "A": {
+      "t_close_s": 0.667,
+      "flexor_i_pk_A": 1.3,
+      "bus_A_pk": 1.51,
+      "ok": true
+     },
+     "B": {
+      "t_close_s": 0.659,
+      "flexor_i_pk_A": 1.36,
+      "bus_A_pk": 1.511,
+      "ok": true
+     }
+    },
+    "eta0.50": {
+     "A": {
+      "t_close_s": 0.728,
+      "flexor_i_pk_A": 1.59,
+      "bus_A_pk": 1.515,
+      "ok": true
+     },
+     "B": {
+      "t_close_s": 0.696,
+      "flexor_i_pk_A": 1.66,
+      "bus_A_pk": 1.517,
+      "ok": true
+     }
+    },
+    "fric1.6": {
+     "A": {
+      "t_close_s": 0.699,
+      "flexor_i_pk_A": 1.59,
+      "bus_A_pk": 1.515,
+      "ok": true
+     },
+     "B": {
+      "t_close_s": 0.678,
+      "flexor_i_pk_A": 1.66,
+      "bus_A_pk": 1.517,
+      "ok": true
+     }
+    },
+    "worst(all3)": {
+     "A": {
+      "t_close_s": null,
+      "flexor_i_pk_A": 1.3,
+      "bus_A_pk": 1.51,
+      "ok": false
+     },
+     "B": {
+      "t_close_s": null,
+      "flexor_i_pk_A": 1.36,
+      "bus_A_pk": 1.511,
+      "ok": false
+     }
+    }
+   },
+   "stagger_50ms": {
+    "nominal": {
+     "A": {
+      "t_close_s": 0.737,
+      "flexor_i_pk_A": 1.66,
+      "bus_A_pk": 1.506,
+      "ok": true
+     },
+     "B": {
+      "t_close_s": 0.734,
+      "flexor_i_pk_A": 1.66,
+      "bus_A_pk": 1.506,
+      "ok": true
+     }
+    },
+    "hotR1.5": {
+     "A": {
+      "t_close_s": 0.749,
+      "flexor_i_pk_A": 1.66,
+      "bus_A_pk": 1.506,
+      "ok": true
+     },
+     "B": {
+      "t_close_s": 0.744,
+      "flexor_i_pk_A": 1.66,
+      "bus_A_pk": 1.506,
+      "ok": true
+     }
+    },
+    "eta0.50": {
+     "A": {
+      "t_close_s": 0.789,
+      "flexor_i_pk_A": 1.66,
+      "bus_A_pk": 1.506,
+      "ok": true
+     },
+     "B": {
+      "t_close_s": 0.763,
+      "flexor_i_pk_A": 1.66,
+      "bus_A_pk": 1.506,
+      "ok": true
+     }
+    },
+    "fric1.6": {
+     "A": {
+      "t_close_s": 0.766,
+      "flexor_i_pk_A": 1.66,
+      "bus_A_pk": 1.506,
+      "ok": true
+     },
+     "B": {
+      "t_close_s": 0.749,
+      "flexor_i_pk_A": 1.66,
+      "bus_A_pk": 1.506,
+      "ok": true
+     }
+    },
+    "worst(all3)": {
+     "A": {
+      "t_close_s": null,
+      "flexor_i_pk_A": 1.66,
+      "bus_A_pk": 1.506,
+      "ok": false
+     },
+     "B": {
+      "t_close_s": null,
+      "flexor_i_pk_A": 1.66,
+      "bus_A_pk": 1.506,
+      "ok": false
+     }
+    }
+   },
+   "stagger_100ms": {
+    "nominal": {
+     "A": {
+      "t_close_s": 0.837,
+      "flexor_i_pk_A": 1.66,
+      "bus_A_pk": 1.506,
+      "ok": true
+     },
+     "B": {
+      "t_close_s": 0.834,
+      "flexor_i_pk_A": 1.66,
+      "bus_A_pk": 1.506,
+      "ok": true
+     }
+    },
+    "hotR1.5": {
+     "A": {
+      "t_close_s": 0.848,
+      "flexor_i_pk_A": 1.66,
+      "bus_A_pk": 1.506,
+      "ok": true
+     },
+     "B": {
+      "t_close_s": 0.844,
+      "flexor_i_pk_A": 1.66,
+      "bus_A_pk": 1.506,
+      "ok": true
+     }
+    },
+    "eta0.50": {
+     "A": {
+      "t_close_s": 0.859,
+      "flexor_i_pk_A": 1.66,
+      "bus_A_pk": 1.506,
+      "ok": true
+     },
+     "B": {
+      "t_close_s": 0.842,
+      "flexor_i_pk_A": 1.66,
+      "bus_A_pk": 1.506,
+      "ok": true
+     }
+    },
+    "fric1.6": {
+     "A": {
+      "t_close_s": 0.845,
+      "flexor_i_pk_A": 1.66,
+      "bus_A_pk": 1.506,
+      "ok": true
+     },
+     "B": {
+      "t_close_s": 0.839,
+      "flexor_i_pk_A": 1.66,
+      "bus_A_pk": 1.506,
+      "ok": true
+     }
+    },
+    "worst(all3)": {
+     "A": {
+      "t_close_s": null,
+      "flexor_i_pk_A": 1.66,
+      "bus_A_pk": 1.506,
+      "ok": false
+     },
+     "B": {
+      "t_close_s": null,
+      "flexor_i_pk_A": 1.66,
+      "bus_A_pk": 1.506,
+      "ok": false
+     }
+    }
+   },
+   "stagger_150ms": {
+    "nominal": {
+     "A": {
+      "t_close_s": 0.937,
+      "flexor_i_pk_A": 1.66,
+      "bus_A_pk": 1.506,
+      "ok": true
+     },
+     "B": {
+      "t_close_s": 0.934,
+      "flexor_i_pk_A": 1.66,
+      "bus_A_pk": 1.506,
+      "ok": true
+     }
+    },
+    "hotR1.5": {
+     "A": {
+      "t_close_s": 0.948,
+      "flexor_i_pk_A": 1.66,
+      "bus_A_pk": 1.506,
+      "ok": true
+     },
+     "B": {
+      "t_close_s": 0.944,
+      "flexor_i_pk_A": 1.66,
+      "bus_A_pk": 1.506,
+      "ok": true
+     }
+    },
+    "eta0.50": {
+     "A": {
+      "t_close_s": 0.951,
+      "flexor_i_pk_A": 1.66,
+      "bus_A_pk": 1.506,
+      "ok": true
+     },
+     "B": {
+      "t_close_s": 0.942,
+      "flexor_i_pk_A": 1.66,
+      "bus_A_pk": 1.506,
+      "ok": true
+     }
+    },
+    "fric1.6": {
+     "A": {
+      "t_close_s": 0.944,
+      "flexor_i_pk_A": 1.66,
+      "bus_A_pk": 1.506,
+      "ok": true
+     },
+     "B": {
+      "t_close_s": 0.939,
+      "flexor_i_pk_A": 1.66,
+      "bus_A_pk": 1.506,
+      "ok": true
+     }
+    },
+    "worst(all3)": {
+     "A": {
+      "t_close_s": null,
+      "flexor_i_pk_A": 1.66,
+      "bus_A_pk": 1.506,
+      "ok": false
+     },
+     "B": {
+      "t_close_s": null,
+      "flexor_i_pk_A": 1.66,
+      "bus_A_pk": 1.506,
+      "ok": false
+     }
+    }
+   },
+   "stagger_200ms": {
+    "nominal": {
+     "A": {
+      "t_close_s": 1.037,
+      "flexor_i_pk_A": 1.66,
+      "bus_A_pk": 1.506,
+      "ok": false
+     },
+     "B": {
+      "t_close_s": 1.034,
+      "flexor_i_pk_A": 1.66,
+      "bus_A_pk": 1.506,
+      "ok": false
+     }
+    },
+    "hotR1.5": {
+     "A": {
+      "t_close_s": 1.048,
+      "flexor_i_pk_A": 1.66,
+      "bus_A_pk": 1.506,
+      "ok": false
+     },
+     "B": {
+      "t_close_s": 1.044,
+      "flexor_i_pk_A": 1.66,
+      "bus_A_pk": 1.506,
+      "ok": false
+     }
+    },
+    "eta0.50": {
+     "A": {
+      "t_close_s": 1.051,
+      "flexor_i_pk_A": 1.66,
+      "bus_A_pk": 1.506,
+      "ok": false
+     },
+     "B": {
+      "t_close_s": 1.042,
+      "flexor_i_pk_A": 1.66,
+      "bus_A_pk": 1.506,
+      "ok": false
+     }
+    },
+    "fric1.6": {
+     "A": {
+      "t_close_s": 1.044,
+      "flexor_i_pk_A": 1.66,
+      "bus_A_pk": 1.506,
+      "ok": false
+     },
+     "B": {
+      "t_close_s": 1.039,
+      "flexor_i_pk_A": 1.66,
+      "bus_A_pk": 1.506,
+      "ok": false
+     }
+    },
+    "worst(all3)": {
+     "A": {
+      "t_close_s": null,
+      "flexor_i_pk_A": 1.66,
+      "bus_A_pk": 1.506,
+      "ok": false
+     },
+     "B": {
+      "t_close_s": null,
+      "flexor_i_pk_A": 1.66,
+      "bus_A_pk": 1.506,
+      "ok": false
+     }
+    }
+   }
+  }
+ },
+ "worst_railA_need": {
+  "stagger_0ms": {
+   "I_rail_A": 2.08,
+   "t": 0.931
+  },
+  "stagger_50ms": {
+   "I_rail_A": 2.08,
+   "t": 0.997
+  },
+  "stagger_100ms": {
+   "I_rail_A": 2.12,
+   "t": 0.976
+  }
+ },
+ "tip22N_check": {
+  "note": "contact load = T4 grip 22 N tip (159 N tendon, same 217/30 ratio)",
+  "worst_all3_1p50A": {
+   "stagger_0ms": {
+    "A": 0.73,
+    "B": 0.695
+   },
+   "stagger_50ms": {
+    "A": 0.8,
+    "B": 0.77
+   }
+  },
+  "need_I_rail_A": 1.5
+ }
+}
