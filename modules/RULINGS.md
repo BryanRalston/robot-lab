@@ -1085,3 +1085,8 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
 
 ## R-109 (2026-10-14) Fall pose (Controls 0bf0228)
 - Elbow 0.84 confirmed (R-104). Diagonal falls: waist yaw +/-45 deg is commanded at fall-mode entry (binding); +/-30 deg is not allowed. Gate: a tuned-waist diagonal sim must show <=15 deg on LF before G4. If LF is late, it comes back to Arbiter with Materials (no wedge).
+
+## R-110 (2026-10-14) Trunnion bush mass (Legs 8908089)
+- The L61 design (Ultem 4001 9/21x20, 33.1 K/W, 14.0 MPa) is technically accepted and booked provisionally at **+0.070** in full. Reserve ~-0.65.
+- +74 g for a heat break is poor value. Trade study ordered: Materials/Thermal look at a bond rated for >=80 C service (higher-Tg adhesive or a mechanical joint) so the break can be dropped or thinned. If it closes, the bush mass is removed. ID checks the 14 mm outward boss.
+- Sole: 3 mm 7373 is available (Leffler); 75A reseller data passes the gate. L59 stands.
