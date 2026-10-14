@@ -1042,3 +1042,6 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
 - Sole pad (R-081): Vibram Gumlite 6 mm plus PU 60A corner bumpers, **+0.186** [CALC] booked in full. Adhesives per Materials: neoprene cement with a pocket/edge lip for the sole; bumpers use flexible PU/acrylic adhesive or mechanical retention; DP490 rejected.
 - ID panel tabs: **+0.004**.
 - Net +0.166. Reserve ~-0.58.
+
+## R-100 (2026-10-14) Carry bout reset (Controls a0dd5de)
+- A bout resets only after **>=120 s with the load set down** (worst compliant peak 116.4 C). 60 s is rejected (0.9 K margin is too thin before G5 validation). The model limit still governs.
