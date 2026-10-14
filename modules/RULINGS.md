@@ -720,3 +720,9 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
 - Pad: Hexcel CR III 5052 crush is 0.896 MPa at 3.1 pcf (cited). The ID R3 **fails** (9.79 kN with the x1.3 dynamic factor, 239 J at x1.0), so the R-052 acceptance is withdrawn. **Adopted provisionally:** a 4.5 pcf pre-crushed 5052 cartridge, ~63x63x57 mm, plateau 7.05–9.17 kN, >=265 J. Mass stays **booked at the 0.100 pair cap** (0.068 is an estimate before the spreader and guides). Conditions: Arms and ID confirm the ~75 mm protrusion clears ROM and the envelope, and the full pair including spreader and guides is <=0.100. G5 measures the rate factor. The side fall stays provisional.
 - A37 rev B: the PEI sleeve with 3-pad flanges (~20 K/W) and Ti compression limiters is **adopted**. G10 and the insulated outer ring are rejected. +0.017 kg is under the 0.02 cap and booked. Conditions: Legs rechecks L1–L4 (ø20 bore, cheek bolts, pin retention, axial load). The G5 100 h creep test at 25 MPa / 100 C is added; the 28 MPa creep rule is an estimate until that test runs.
 - Reserve is ~0.72 provisional.
+
+## R-054 (2026-10-14) Pad R4 + trims update (ID 329a79a, Legs 6f53d77)
+- Pad R4 is **accepted**: 4.5 pcf pre-crushed core 62x62x57, 8.94 kN at x1.3 (537 N·m), 282 J at x1.0, 0.5 mm ribbed Al face plate, pair 0.095. It's still booked at 0.100. Conditions: an off-centre load check on the 0.5 mm face plate (Materials/ID FEA); if it needs 0.8 mm (pair 0.108), the +0.008 has to be offset. Arms checks fit and ROM on the 70 mm stack.
+- Trims: the knee grille is merged into P-026, so the trims total -0.236, booked **-0.118 at half credit** (was -0.110).
+- Shin fairing add-back is **deferred** until D69 rev B is independently verified (R-052 condition 1); about 0.41 of the reserve depends on that. When it's added back, louvred CF (+0.198 pair) is preferred. The shin stays bare in the baseline for now.
+- Reserve is ~0.73 provisional (~0.32 if rev B fails).
