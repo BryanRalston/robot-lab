@@ -294,3 +294,32 @@ Any change to CONTRACTS.md or TARGETS.md, or to another module's files, starts h
 - Impact on targets: T2 +1.30 kg reserve if it lands (weight 0.15). T9: Actuators must show the new screw L10 ≥ 14 600 h at arm duty.
 - Asks: **Actuators**: cite a motor + screw (or ball-screw / micro strain-wave) pair meeting ≥ 14.7 N·m peak, ≥ 6 rad/s at 30 % torque, ≤ 0.90 kg/side all-in incl. encoders/drive, with screw C_a and L10. **Arbiter**: credit on citation.
 - Status: OPEN
+
+### P-028: Arms & Hands: 20 kg carry pose with elbow ≤ 15 N·m, plus a hold-time limit (R-030 A39)
+- Date: 2026-10-14
+- Module / proposer: Arms & Hands / RL Arms & Hands (R3)
+- Affected owners: Controls (pose + I²t limit, P-029/A40), Thermal (confirm with J-T3 transient), Legs/Controls (carry COM), Arbiter
+- Numbering note: R-030 also uses P-026/P-027 for Thermal items (ID louvres, Legs thermal break). Those numbers collide with the Arms P-026/P-027 entries above. The Arbiter should renumber one set. This entry is the P-028 that R-030 assigns to Arms.
+- Change: new carry-pose contract line (CONTRACTS §3 Arms / Controls): **T5 two-hand 20 kg carry is done in "chest carry" pose: shoulder_pitch −60°, elbow −110° (forearm about 10° past vertical, load toward the chest), shoulder roll/yaw 0, wrist 0.** Allowed band is shoulder_pitch −60…−50°, elbow −115…−100°, provided elbow ≤ 15 N·m (band rows in `arms/carry_pose_r3.json`).
+- Evidence: `arms/carry_pose_r3.py` → `carry_pose_r3.json`. This is the R1 load model (sim/v3 masses, 10 kg/hand at the hand-box centre, static).
+  - At the pose: **elbow 6.95 N·m, shoulder_pitch 43.45 N·m**, shoulder_roll 0.02. Hand is 0.321 m forward of and 0.415 m above the waist_pitch axis.
+  - R1 carry pose (sp −30, el −60): elbow 40.14, shoulder 61.25.
+  - Elbow −110° is inside P-026 (−125…0) and inside today's clash-free −115…0 (v4 audit).
+- Thermal (scaled from `thermal/R1_BUDGET.md`; copper ∝ T², steady ΔT ∝ copper, same [EST] h values):
+  - elbow: 59 W → 1.77 W, ΔT 223 → **≈ 6.7 K**
+  - shoulder_pitch: 38 W → 19.1 W, ΔT 90 → **≈ 45 K** (≈ 80 °C at 35 °C ambient vs the 130 °C limit)
+  - Arm hold copper total ≈ 194.6 → ≈ 42 W (both arms)
+- Hold-time limit:
+  - **(a) At the P-028 pose: no thermal time limit. Steady state is inside the limit (scaled Thermal numbers).**
+  - **(b) Any static hold with elbow > 15 N·m (e.g. the R1 carry pose or reaching to pick up): ≤ 30 s, then return to the P-028 pose or set the load down. Repeat no sooner than 5 min.** This is a [CONSERVATIVE ASSUMPTION pending Thermal J-T3]. No transient/thermal-mass data exists in the repo. It goes into Controls' I²t model (P-029), which overrides it once J-T3 lands.
+- Impact on contracts: mass 0. Power: carry arm copper −≈ 150 W (both arms, [EST] scaling). Bus draw in carry falls from the 984 W in Thermal R1 to ≈ 830 W [EST].
+- Impact on targets:
+  - T5 still passes: arm torques are far below need, and wrist 7.4 N·m is unchanged.
+  - Risk: the load is now 0.32 m forward at chest height, vs Legs' carry case. Legs/Controls must re-check COM/ankle margin (R-014: 1.31× at 1.0 m/s) with this load position.
+  - Risk: the sim arm is 3.59 kg/side light (O-A1), so the elbow torque at the pose rises by a small, uncomputed amount. The band keeps ≥ 8 N·m headroom to 15.
+  - T8: none. T9: lower duty helps.
+- Asks:
+  - **Controls:** adopt the pose as the carry primitive, plus the (b) limit in the I²t model.
+  - **Thermal:** J-T3 transient for the elbow at 40 N·m and the shoulder at 43–61 N·m to replace (b).
+  - **Legs/Controls:** confirm the carry COM/ankle margin with load at x +0.32, z +0.415 vs the waist_pitch axis.
+- Status: OPEN

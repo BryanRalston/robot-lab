@@ -60,3 +60,6 @@ That totals ≈ 0.253 kg for both arms. Harness ROM used: shoulder_yaw 300°, wr
 | O-A3 | cross-section FAIL at ID 66; lengths missing | Actuators (lengths) → Arms |
 | O-A4 | harness mass inside 1.286 line (closed); loop-vs-slip-ring + STO open | Electronics |
 | O-A5 | architecture per Electronics R1; node part, DC/DC, tactile bus open | Electronics |
+
+## R3 update (2026-10-14): A39 / P-028, carry pose
+O-A2 is addressed in part by **P-028**. The chest-carry pose is sp −60°, el −110°: elbow 6.95 N·m, shoulder_pitch 43.45 N·m at 10 kg/hand (`carry_pose_r3.json`). Scaled Thermal steady ΔT: elbow ≈ 6.7 K, shoulder ≈ 45 K, so the pose has no time limit. A static hold with elbow > 15 N·m is limited to ≤ 30 s, then a 5 min cool-off [CONSERVATIVE ASSUMPTION pending Thermal J-T3]. The open question for Thermal is now J-T3 (transient), not the steady state.
