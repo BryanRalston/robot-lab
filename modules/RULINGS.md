@@ -478,3 +478,14 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
 - New actions:
   - A33 (Actuators): add STO wiring to the harness model. A +0.14 kg estimate is held in the rollup, credited at half until itemized.
   - A34 (Electronics): get a cited source for Elmo R70/100 integration, or swap the drive.
+## R-029 (2026-10-14) Cover set v5 (A29 input, ID 6cc6c3b) and P-022..P-025
+- Rejected as drawn: the full set adds +1.24 kg. That fails the reserve check (1.329 kg reserve against a 0.30 kg floor).
+- Approved basis for the panel layout and mould list (the trimmed set):
+  - Front and outboard fairings only.
+  - Arm shells deferred to Arms R2.
+  - Foot top cover only.
+  - CF shin and thigh fairings are allowed under R-027 because they are lighter than PC.
+- P-022 (knee cap 0.116 kg), P-023 (hip skirt 0.114 kg), P-024 (waist bellows 0.055 kg) and P-025 (ankle boot 0.098 kg) are booked as part of the trimmed set.
+- Booking: the trimmed delta is booked in full at 0.30 kg, the top of ID's 0.2–0.3 range, until the itemized trimmed JSON lands. With the A33 STO hold (0.07 credited), the reserve is about 0.96 kg, which is above the floor.
+- Condition: ID must send the itemized trimmed cover_set JSON before round 13 closes. If the measured delta is above 0.30 kg, the arbiter re-rules.
+- A29 transfers to Industrial Design.
