@@ -147,3 +147,69 @@ Notes:
   - Retention against rebound and the strap is light. PEM IUTB-M4 in a PC boss (1 710 N cited) is acceptable for retention only.
   - Doubler mass [EST]: a full 2 mm 7075 cradle would be too heavy; use a **1.5 mm 7075 ring frame with 4 legs to the housing, about 12–15 g/side [EST]**, sized by Arms FEA.
   - Mass is about +25–30 g per pair on top of the cartridge, so the ≤ 0.100 kg pair cap will be tight. The Arbiter must rule on whether the mount bracket counts inside the pad cap.
+
+---
+# Part 4: 7075-T6 doubler replacing saddle + band + guide posts (R-060, ID R5 cd5e88c), 2026-10-14
+Properties: AL7075T6 in MATERIALS_DB: yield 480 MPa, UTS 560, shear 330, E 70 GPa, ρ 2.81 (MIF7075/REPO_AL7075). HC5052_4.5 has L-shear 340 psi = 2.34 MPa (HEX_CRIII). [EST] = hand-calc assumption. **FEA** = needs FEA.
+Loads: 9.17 kN axial into the roll housing, 2.46 kN side shear (15°), cartridge on 4 × M4. Core footprint 62 × 62 = 3 844 mm², so the core pressure is **2.39 MPa**.
+
+## Roll-housing data in the repo
+- shoulder_roll is TBM2G-06813C + CSG-25-100 + slip clutch (Arms R1). The housing is **OD 96** (Arms R5 §35).
+- **The repo has no hole pattern, face flatness, material, or note on whether the outboard face rotates.** The model housing is a placeholder. → Ask Actuators/Arms (D1–D3 below). Every fastener check below assumes 4 × M4 tapped ≥ 8 mm into an aluminium housing [EST].
+
+## Concept D-A (recommended): flat plate seated on the housing outboard end face
+- The 62 × 62 square has a diagonal of 87.7 mm, which fits inside the ø96 face. The axial load then goes straight in **bearing**, with no legs and no plate bending.
+- Part: 7075-T6, machined.
+  - Base plate 62 × 62 × 1.0 mm.
+  - Integral guide lips 0.8 mm × 6 mm high on 4 sides.
+  - 4 tabs 8 × 10 × 1.5 mm with M4 clearance holes at the corners. These go into the housing face and give the cartridge a 4 × M4 pattern through the same holes.
+- **Core is bonded to the plate** with DP490 or a film adhesive.
+- Checks:
+  - **Bearing on the housing face:** 9 170 / 3 844 = 2.39 MPa. That's trivial for Al (SF > 100 vs 7075 yield). The housing alloy is unknown (D2).
+  - **Side shear path:** core → bond → plate → 4 × M4.
+    - Core shear capacity 2.34 MPa × 3 844 = 9.0 kN vs 2.46 kN, **SF 3.7** (typical value; a crushed core's residual shear is not cited, **needs test**).
+    - DP490 at 23 MPa: SF > 30.
+  - **M4 in shear:** 615 N per bolt on a minor-diameter area of about 7.75 mm² [EST] = 79 MPa. OK for steel class 8.8 [EST, class not cited].
+  - **Bearing of the bolt on the 1.5 mm tab:** 615 / (4 × 1.5) = 103 MPa vs 480, **SF 4.7**. Tear-out with 4 mm edge distance: 615 / (2 × 4 × 1.5) = 51 MPa vs shear 330, **SF 6.4**.
+  - **Thread in the housing:** shear is carried in bearing, and the axial load is compressive, so the threads only see retention and rebound loads. With ≥ 8 mm engagement in Al it's OK [EST].
+  - **Lips** locate only, since the bond carries the shear. 0.8 × 6 mm is enough [EST]. If the core is **not** bonded, the lips take 2.46 kN: 39.7 N/mm at 3 mm height on 0.8 mm gives about 1 100 MPa, **FAIL**. A 1.5 mm lip gives 317 MPa, SF 1.5. **So either bond the core or use 1.5 mm lips (+3.4 g).**
+- Mass:
+  - Plate 3 844 mm³
+  - Lips 1 190 mm³
+  - Tabs 480 mm³
+  - Total 5 514 mm³ × 2.81 = **15.5 g/side**. With 1.5 mm unbonded lips: 18.9 g.
+
+## Concept D-B (if the face is not flat or not available): plate on 4 legs
+- Leg 8 × 2 × 10 mm, 2.29 kN each.
+  - Axial stress 143 MPa, SF 3.4.
+  - Euler buckling with K = 0.5: P_cr = π²·70 000·5.33/(5)² = 147 kN, SF ≫ 10.
+- **The plate between corner legs is what fails.** A 62 mm span at 2.39 MPa gives M ≈ q·a²/8 = 1 148 N·mm/mm, so t ≈ √(6M/320) = **4.6 mm** for a solid plate, about 50 g/side.
+- A ribbed ring frame could reach about 25–30 g [EST], but **needs FEA**. That is over budget, so D-B only works if the housing offers a solid seat.
+
+## Can the spreader merge into the doubler? No.
+The 0.5 mm Al spreader sits on the **impact side** (under the EPP face) and spreads contact load into the core. The doubler is on the **housing side**. They are on opposite faces of the core, so merging would leave the core with no spreader against a point contact. Keep the spreader (5.2 g).
+
+## Mass per side and per pair (D-A, bonded core)
+| item | ID R5 g | with doubler g |
+|---|---|---|
+| PC saddle | 13.8 | — |
+| aramid band + 2 M4 inserts | 4.0 | — |
+| PC guide posts | 4.0 | — (integral lips) |
+| **7075 doubler** | — | **15.5** |
+| bond film [EST] | — | 0.5 |
+| Al spreader | 5.2 | 5.2 |
+| core | 15.8 | 15.8 |
+| EPP face | 1.8 | 1.8 |
+| sleeve | 4.0 | 4.0 |
+| **per side** | 48.6 | **42.8** |
+| **pair** | 97.2 | **85.6 g, −14.4 vs the 0.100 cap** |
+
+- Unbonded with 1.5 mm lips: 46.2 g/side, 92.4 pair, still under the cap.
+- D-B with an FEA'd frame: about 54–58 g/side, **over the cap**.
+
+## Asks
+- **D1 (Actuators/Arms):** shoulder_roll housing outboard face. Is it flat, solid, and at least ø88 in area? Does it **rotate** (output side) or is it fixed? If it rotates with roll, the pad orientation moves with the roll angle, and Controls has to check the 15° limit across the roll ROM.
+- **D2:** housing material and existing tapped holes (size, depth, PCD). Four new M4 × 8 tapped holes, if allowed.
+- **D3:** clearance for 6 mm lips and tabs within the cap shell.
+- **ID:** replace the saddle, band and posts with D-A. Bond the core to the doubler. Update shoulder_pad.json to 42.8 g/side.
+- **Test (G5):** residual shear of the crushed core bond, which confirms SF 3.7.
