@@ -147,3 +147,16 @@
     | 1.2, best gate settings | 5.45 s | 14.8 % | 0.51 % | 0 / 0.0 mm | 1.059 | FAIL |
 
   - The gate removes the flight (9.5 % → ≤0.5 %) and lifts 1.0 m/s from 7.1 to 10.8 s. The measured CoP still rides the sole edge (50–66 % of loaded frames at 1.0–1.2) even with a 12 mm plan margin, so the remaining failure is CoP tracking (foot rolling onto an edge) at speed, not the plan or the bounce. Media: media/progress/2026-10-13_legs_wbc_r7_walk0p8.png.
+- L34 (O13b, Actuators e582ba4) hip_pitch lever topology: **G2 (closed 5 mm cap, flat-slab arms)**.
+  - Reason: our ø35/ø30 shaft (D32) is press-fit in the femur tongue (27 wide, |y| ≤ 13.5), and the 2 × TLA 3520 Z (20 wide) straddle it in the lever cheeks at |y| 13.5–33.5. The shaft is therefore 67 mm and ends at |y| 33.5. Nothing outboard supports it or passes through: the pivot load reacts tongue → shaft → needles → cheeks. Hold: the 60 MPa fit carries the axial load (L21).
+  - Conditions: shaft length ≤ 66 mm, so the cap face clears the shaft end by ≥ 0.5 mm per side. The bore-corner R1.0 / 0.5×45° must suit the cup free end (check INA rs min). Service means the shaft can't be pressed out through the cap: removing the lever first, then pressing the shaft out of the tongue, is accepted.
+  - G3 is not needed.
+- L35 (O13b) G2 envelope |y| ≤ 38.5 accepted over hip_pitch −105…+40° (145° range, incl. the 2.33° bumper overtravel → −107.3°).
+  - Rods (|y| 63–75): 24.5 mm ≥ 10. Actuators' sweep −120…+40 covers our range.
+  - Cap (r ≤ 27, |y| 33.5–38.5) against our parts:
+    - tongue: axial 33.5 − 13.5 = 20.0 mm. It's axisymmetric about the pivot, so the clearance is angle-independent.
+    - clamp collar: collar centred 69 mm along the femur, L 34, OD ≈ 64 [EST], so its near end is at ≥ 52 mm from the pivot → radial 52 − 27 = 25 mm.
+    - bumper: at r 80 → 80 − 27 = 53 mm radial.
+    - femur tube (ø50, |y| ≤ 25): 33.5 − 25 = 8.5 mm axial only where the tube is within r ≤ 27 of the pivot. In our layout it isn't (the tongue neck sits there), so it's radial ≥ 25 mm as for the collar.
+  - The lever is thigh-mounted, so tongue, femur, collar and bumper co-rotate with it. Those clearances don't change across −105…+40. Only the pelvis-side stop and the rods move relative to it, and those are covered above.
+  - Open check (not verifiable without the v2 STEP): the G2 arm slabs reach r ≈ 61 at the ears (r 50 + ear boss). If the arms are clocked toward the femur axis, they overlap the collar radius band (52–86) at |y| 33.5+ against the collar |y| ≤ 32: 1.5 mm, below the 10 mm minimum. Require the arm clocking to be ≥ 30° off the femur axis, or verify it on `cad/hip_pitch_lever_B_v2.step`.
