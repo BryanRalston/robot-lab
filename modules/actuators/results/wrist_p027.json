@@ -1,0 +1,51 @@
+{
+ "L10_h_fw12": 26196.68459305643,
+ "alt_BNK1404": {
+  "Ca_N": 4200,
+  "L10_h_fw15": 107301.62009315914,
+  "shaft_mass_add_per_side_kg": 0.13021273230598973,
+  "note": "\u00f814 lead 4, nut \u00f826 x 33 (lmsystems table); same force/speed; fails 0.90 kg"
+ },
+ "F_cap_N": 1017.8760197630929,
+ "need_N": {
+  "pitch": 293.99999999999994,
+  "yaw": 178.0,
+  "pitch_plus_yaw": 472.0
+ },
+ "SF": {
+  "pitch": 3.4621633325275276,
+  "yaw": 5.718404605410634,
+  "pitch_plus_yaw": 2.156516991023502
+ },
+ "T_motor_at_30pct_Nm": 0.06238873769202295,
+ "rpm_axis": 2250.0000000000005,
+ "rpm_pitch_plus_yaw": 4500.000000000001,
+ "Ca_N": 2100.0,
+ "fw": 1.5,
+ "duty": [
+  [
+   0.05,
+   293.99999999999994,
+   1.0
+  ],
+  [
+   0.25,
+   148.0,
+   0.3
+  ],
+  [
+   0.7,
+   20.0,
+   0.3
+  ]
+ ],
+ "Fm_N": 165.38511253044993,
+ "n_mean_rpm": 753.7500000000001,
+ "L10_h": 13412.702511644893,
+ "L10_h_if_294N_continuous_full_speed": 799.8496282698854,
+ "mass_mech_kg": 0.8646,
+ "encoders_kg": 0.0194,
+ "drives_kg": 0.0444,
+ "side_with_encoders_kg": 0.884,
+ "side_with_encoders_and_drives_kg": 0.9284
+}

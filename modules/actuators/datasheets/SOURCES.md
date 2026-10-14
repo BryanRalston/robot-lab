@@ -74,3 +74,4 @@ Joint ranges: from the v3 MJCF, `sim/v3/humanoid_v3.xml` (CONTRACTS "Range of mo
 | GAM-GEC listings (https://gam-gec.com/product/ghr-04v-s/, …/bm04b-ghs-tbt/) | same | 0.08 g, 0.16 g |
 | hs_enviroflex_178.pdf | HUBER+SUHNER ENVIROFLEX_178 (RG178 class, 50 Ω, ø1.84): 6.5 g/m, att = 1.4067√f + 0.2229 f dB/m, dynamic bend ≥ 30 mm (A25 GMSL2 coax) | https://www.rf-microwave.com/resources/products_attachments/68eb7bf34ba47.pdf |
 | thk_bnk_lmsystems.html | THK BNK miniature ball screws: BNK1004-2.5 ø10 lead 4, Ca 2.1 / C0a 2.7 kN, nut ø26 (wrist, D65) | https://lmsystems.nl/en/ball-screws/miniature-bnk/ |
+| rls_aksim2_mbd01.pdf | RLS AksIM-2 MBD01_15 (13 May 2026): MB022 readhead 2.7 g, MRA022 ring 7.0 g (selection table) (D67) | https://cdn.rls.si/documents/datasheets/MBD01.pdf |

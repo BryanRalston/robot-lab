@@ -531,3 +531,18 @@ Retention at 1.2 m/s:
 - Fixed in `harness.py`: leg pigtails 14 → 16 (+0.0048), phase and encoder leads 34 → 32 (−0.0052), JST-GH tees +32.
 - Elmo: R70/100 is verified in MAN-G-TWI v2.011 Table 3 (49.5 A rms, 95 V). R50/100 is in the same table (35.3 A rms, 95 V, 4.0 kW), so it is verified as well. No separate datasheet is needed.
 - **Net harness: 1.4959 kg (+0.2095 vs the official 1.2864).**
+
+## D67 (Arms R2 357b72a, P-027) Wrist pair vs exact P-027 numbers (`wrist_p027.py` → `results/wrist_p027.json`)
+- Pair: 2× TBM2G-05008 (Tp 0.72 N·m, tbm2g_manual §9.2.1 p.252) + 2× THK BNK1004-2.5 (ø10, lead 4, **Ca 2.1 kN / C0a 2.7 kN**, thk_bnk_lmsystems.html), arm r 25 mm, η 0.9 [EST].
+- **Peak:** capacity 1018 N per screw. Pitch 14.7 N·m needs 294 N: **3.46×**. Yaw 8.9 N·m needs 178 N: 5.7×. Pitch + yaw together need 472 N: 2.16×. PASS.
+- **Speed:** 6 rad/s is 2250 rpm per axis and 4500 rpm with both axes. At 30 % torque (88 N), the motor needs 0.062 N·m. PASS.
+- **L10 (duty-weighted):** the duty profile is [EST] because no arm duty sim exists (O-A2): 5 % at 294 N at full speed, 25 % at 148 N (7.4 N·m hold), 70 % at 20 N, both at 30 % speed. This gives Fm 165 N and a mean of 754 rpm.
+  - At THK fw 1.2 (smooth): **26.2 kh**. PASS, 1.79×.
+  - At fw 1.5: 13.4 kh. FAIL.
+  - At 294 N continuous and full speed: 0.8 kh.
+  - **Accepted at fw 1.2. This is sensitive to the duty profile.** O-A2 duty data is needed to close.
+- **Alternative:** BNK1404-3 (ø14 lead 4, Ca 4.2 kN, same ø26 nut) gives 8× the L10 (107 kh at fw 1.5), but it adds 0.130 kg per side and fails 0.90.
+- **Mass per side:**
+  - Mechanical 0.865 (D65).
+  - Encoders: +0.019 for 2× RLS AksIM-2 MB022 + MRA022 (2.7 + 7.0 g, MBD01_15 selection table). Total **0.884 ≤ 0.90. PASS.**
+  - Elmo Gold Twitter EtherCAT drives on the arm: +0.044 for 2× 22.2 g without heatsink (MAN-G-TWI v2.011 spec table). Total 0.928. FAIL by 28 g. In that case the drives must stay booked in the Electronics drive line (D66, 32 drives).
