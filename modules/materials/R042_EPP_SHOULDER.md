@@ -248,12 +248,44 @@ Basis:
 ## PART SPEC: shoulder crush cartridge (mandatory items)
 1. **Core:** 5052 aluminium honeycomb, 4.5 pcf, 1/8″ cell (HexWeb CR III or AMS C7438 equivalent, e.g. PAMG-XR1), T-direction loading, 61.8 × 61.8 × 60 mm.
 2. **Pre-crush: MANDATORY**, 2–3 mm in T at the supplier or in house before assembly, to remove the stabilized-compression peak (HEX_ATTR: pre-crush "remove[s] the compressive peak"; stabilized/crush = 2.2× at 4.5 pcf).
-3. **Lot crush certificate: MANDATORY.**
+3. **Lot crush certificate: MANDATORY (amended per R-072).**
    - Per lot, ≥ 3 coupons cut from the same block, quasi-static crush per Hexcel method (≥ 0.625″ thick, fixed plates).
    - Mean crush must be within **±3 % of 1.79 MPa** (1.736–1.844 MPa).
-   - **No initial peak above 1.05 × plateau** on the pre-crushed coupons.
-   - A lot that fails is rejected.
+   - **Reject the lot if any pre-crushed coupon shows an initial peak above 1.00 × its own plateau** (no initial peak at all). This replaces the earlier 1.05 × rule.
+   - **Reject the lot if lot upper bound × core area × 1.30 > 9.17 kN.** 9.17 kN is the **absolute** peak, initial peak included.
 4. **Rate factor:** the G5 drop tower at 3–4 m/s must confirm 1.10 ≤ k ≤ 1.30 before freeze. If it doesn't, re-size.
 5. **Bond:** core bonded to the 7075-T6 doubler (DP490, sandblasted, BOND_SPEC prep). Doubler per Part 4 D-A.
 6. **Single use:** replace the cartridge after any impact that crushes the core more than 2 mm beyond the pre-crush.
 7. **Orientation:** impact within 15° of the core axis (Controls). Beyond 25° the energy capacity falls to about ×0.73.
+
+
+---
+# Part 6: R-072 check of the ±3 % band, and the R-068 mount (2026-10-14)
+## R-072 upper-bound check
+- Using the rounded 38.3 cm²: 1.844 MPa × 3 830 mm² × 1.30 = **9 181 N = 9.18 kN, over 9.17 by 0.1 % → FAIL as written.**
+- The actual footprint is **61.8 × 61.8 = 3 819 mm²** (Part 5's "38.3" was rounded up): 1.844 × 3 819 × 1.30 = **9 155 N, PASS (−15 N)**.
+- Energy at 3 819 mm²:
+  - floor 1.910 × 3 819 = 7.29 kN;
+  - ×0.93 at 15° = 6.78 kN;
+  - stroke for 292 J = **43.1 mm** vs 0.72 × 60 = 43.2 mm.
+  - That's a 0.1 mm margin, too thin.
+- **Spec change: core 61.8 × 61.8 × 61 mm** (usable 43.9 mm → 297 J at 15°). +0.3 g/side, so **pair 87.6 g**. Standout 68.5 mm.
+- ID R6/R7's core (60.9 × 60.9 × 55, 275 J) predates R-065. It must move to 61.8 × 61.8 × 61. Alternative: 60.9² at 3 709 mm² gives a peak of 8.89 kN, floor 6.59 kN at 15°, stroke 44.3 mm, so h = 61.5 mm. Either works.
+
+## R-068: D-A on the fixed housing face vs the roll-output mount (ID R6/R7, 6f842b0)
+| | D-A on the housing face (fixed) | **Roll output (ID R7) with the D-A plate** |
+|---|---|---|
+| seat | Arms: the outboard face is a **bare 2 mm ring, ≈ 2.9 GPa bending: FAIL**. D-A assumed a solid face, and it isn't. | roll-yaw link lateral face. Needs to be flat and solid over the 87.4 mm diagonal (Arms D1) |
+| load path | axial into the housing; would need a ribbed frame (D-B, about 25–30 g, FEA) | 9.17 kN lateral → link → roll output → **CRBH roll bearing radial + moment** → shoulder_P bracket. The roll bearing rating must be checked (R-067, FEA job 1) |
+| fasteners | 4 × M4 into the housing (no holes known) | 4 × M4 8.8 into the link, 615 N shear each at 15°. Bolt bearing and tear-out on the 1.5 mm tab: SF 4.7 / 6.4 (Part 4) |
+| upper-arm clash | overlaps −8.5…−41 mm at roll angles (ID/Arms) | none (pad rides on the arm) |
+| pad angle vs roll | fixed in the torso frame | **rotates with roll.** The impact angle is set by the arm pose at contact, which is the A44 tuck (roll −5°), not by the torso. Controls must check ≤ 15° **at the tuck pose** and over the ±range the tuck controller allows. T-030 already logs > 15° hits as a fail. |
+| mass | D-A 15.5 g only if the face were solid (it isn't); D-B about 25–30 g | **D-A 15.5 g if the link face qualifies**; ID's ribbed doubler 25.7 g otherwise |
+| other | — | the lateral load through the roll output passes the 300 N·m slip clutch only as torque from any pad offset from the roll axis. Keep the pad centred on the roll axis so the clutch isn't loaded. |
+
+**Recommendation (the single mount): roll output (ID R7) with the D-A plate.** It's the only mount without the upper-arm clash, and the fixed housing face can't carry the load anyway.
+- Conditions:
+  - (a) Arms confirms a flat, solid link face ≥ 87.4 mm diagonal with 4 × M4 × 8. Otherwise use ID's 25.7 g ribbed doubler, and the pair goes to about 108 g, over the cap.
+  - (b) FEA job 1 (doubler + link + CRBH at 9.17 kN, 0–15°) passes R-067.
+  - (c) Controls checks the 15° limit at the tuck pose.
+  - (d) The pad stays centred on the roll axis.
