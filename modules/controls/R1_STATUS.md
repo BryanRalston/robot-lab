@@ -35,3 +35,9 @@ Owner: RL Controls. Took handoff of `modules/legs/wbc/` and the RL walk work (`m
 - Queue is sequential: job 4 → 5 → 6 → RL retrain + scoring.
 - RL Controls owns `make_model.py` regeneration after job 4 finishes (not before).
 - sim/v3 neck (A26) is on main via Legs 8a03242; the MJX neck edit is in eac9a46.
+
+## Thermal layer (A40) status, 2026-10-14
+- Limits per RL Thermal 26412c7: derate 130 → 145 °C, torque-off 150 °C (PT1000), 155 °C absolute, design target ≤ 120 °C at 35 °C.
+- Drives off housings (P-027); knee drives on the shank saddle (D69).
+- 1.2 m/s 60 min: every leg joint is ≤ 115 °C. hip_pitch 113/115 is the closest to the target; with drives on the housing it would be 134/136.
+- P-042 carry pose and P-043 hold limits are wired into `thermal/winding_model.py`.

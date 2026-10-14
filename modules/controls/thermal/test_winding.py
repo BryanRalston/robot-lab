@@ -12,7 +12,8 @@ for j in W.LEG + W.UPPER:
     print(f"{j:14s} {p['motor']:14s} {p['nmot']}  {p['Rwh']:.3f} {p['Rha']:.2f}  {p['Cw']*p['Rwh']:4.0f}s {p['Ch']*p['Rha']:4.0f}s  "
           f"{fe:5.1f} W   {W.tau_cont(p):5.0f} / {W.tau_cont(p, p_fe_W=fe):5.0f} N·m   {p['T_out']}")
 # derate shape (unchanged breakpoints; 155 hard limit above torque-off)
-assert W.derate(119, 300, 100) == 300 and abs(W.derate(130, 300, 100) - 100) < 1e-9 and W.derate(140, 300, 100) == 0
+assert W.derate(130, 300, 100) == 300 and abs(W.derate(137.5, 300, 100) - 200) < 1e-9 and W.derate(145, 300, 100) == 100
+assert W.derate(149, 300, 100) == 100 and W.derate(150, 300, 100) == 0 and W.derate(100, 300, 100, T_meas=150) == 0
 assert W.T_TRIP < W.T_HARD == 155.0
 # drive loss table
 assert abs(W.p_drv(dict(ratio=1, eta=1, nmot=1, Kt=1.0), 20 / np.sqrt(2)) - 13) < 1e-9
@@ -22,12 +23,12 @@ tau = d['tau']; dt = float(d['state'][1, 0] - d['state'][0, 0]); seg = tau[int(1
 names = ['l_' + j for j in W.LEG] + ['r_' + j for j in W.LEG]
 fe = np.array([FE[W._base(n)] for n in names])
 out = {}
-for case, kw in (('copper+iron+drive', dict(p_fe_W=fe, drive=True)), ('copper+iron (as knee_thermal.py)', dict(p_fe_W=fe, drive=False))):
+for case, kw in (('baseline: drives off housings (P-027, D69 saddle)', dict(p_fe_W=fe)), ('sensitivity: all drives on housings', dict(p_fe_W=fe, drive=True))):
     m = W.WindingModel(names, P); DT = 0.01; sub = seg[::int(DT/dt)]; t120 = [None] * len(names)
     for k in range(int(3600/DT)):
         Tw = m.step(sub[k % len(sub)], DT, **kw)
         for i in range(len(names)):
-            if t120[i] is None and Tw[i] >= 120: t120[i] = round(k * DT / 60, 1)
+            if t120[i] is None and Tw[i] >= W.T_TARGET: t120[i] = round(k * DT / 60, 1)
     out[case] = {n: dict(Tw60=round(float(Tw[i]), 1), Th60=round(float(m.Th[i]), 1), t120_min=t120[i]) for i, n in enumerate(names)}
     print(f'\n60 min WBC 1.2 m/s cruise, {case}:')
     for n in names: print(f"  {n:14s} Tw {out[case][n]['Tw60']:6.1f}  Th {out[case][n]['Th60']:6.1f} °C  120 °C at {out[case][n]['t120_min']} min")
@@ -40,5 +41,11 @@ for j, T in (('shoulder_pitch', 61.0), ('elbow', 40.0)):
             if lim not in t and Tw >= lim: t[lim] = round(k * 0.01 / 60, 1)
     out[f'hold_{j}'] = dict(T=T, Tw30=round(float(Tw), 1), t_min=t)
     print(f'hold {j} {T} N·m: Tw30min {Tw:.0f} °C, minutes to 120/140/155: {t}')
+# P-043 hold limits
+h = W.WindingModel(['l_elbow', 'l_shoulder_pitch'], P)
+for k in range(int(200 / 0.1)): h.step(np.array([40.0, 60.0]), 0.1)
+lim = h.torque_limits(np.array([76.0, 167.0])); print('P-043 limits after 200 s at 40/60 N·m:', lim)
+assert lim[0] <= 28.0 and lim[1] == 167.0 or lim[1] <= 167.0
+assert W.in_carry_band(dict(shoulder_pitch=np.deg2rad(-55), elbow=np.deg2rad(-110)))
 json.dump(out, open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'demo_60min.json'), 'w'), indent=1)
 print('OK')

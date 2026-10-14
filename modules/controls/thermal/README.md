@@ -1,4 +1,5 @@
 # A40 / P-029 (R-030): per-joint winding temperature model + torque derate
+**v3 (2026-10-14): limits per RL Thermal 26412c7 (authoritative):** design target ≤ 120 °C at 35 °C; linear derate **130 → 145 °C** to the continuous rating; **hard torque-off 150 °C** on the measured PT1000 (model if no sensor); **155 °C absolute**. Drives: P-027 off the housings; D69 knee drives on the shank spreader saddle (~60–65 °C). So by default no leg drive heats its motor housing (`DRIVE_ON_HOUSING`); arm/waist drives sit in the torso shoulder bay (Arms R3, D66), also off. P-042 carry pose and P-043 hold limits are in `HoldLimiter` (below). Sections further down that say 120/130/140 are v2 history.
 Owner: RL Controls. v2 (2026-10-14) uses Actuators `THERMAL_DATA_PACK.md` (f205f7b, D69). Numpy only; `python3 modules/controls/thermal/test_winding.py` (~30 s CPU) writes `demo_60min.json`.
 
 ## Model
@@ -44,6 +45,24 @@ Upper body, τ_cont at 130 °C: waist 83, shoulder_pitch 62, shoulder_roll 62, s
 - The pack's D69 run leaves out drive loss (pack §6 says so). With worst-case Elmo loss in the housing, the knee is 103/108 °C, still below 120.
 - **New:** with drive loss, **hip_pitch crosses 120 °C at about 27–29 min and is about 135 °C at 60 min**, and ankle_pitch is about 1–2 K below 120. Before drive loss, hip_pitch was 113–115 °C.
 - The ankle is a differential pair. sizing.json lists ankle_pitch and ankle_roll each with 2 motors, so modelling them as separate joints splits one motor pair's heat across two nodes. A combined model needs the Actuators differential mapping (gap 5).
+
+## v3 results (35 °C, open, WBC 1.2 m/s cruise looped 60 min; `demo_60min.json`)
+| joint | Tw 60 min, drives off housing (baseline) L/R | all drives on housing (sensitivity) L/R |
+|---|---|---|
+| hip_yaw | 47 / 45 | 48 / 46 |
+| hip_roll | 79 / 76 | 81 / 78 |
+| hip_pitch | **113 / 115** (target met, 5–7 K margin) | 134 / 136 (120 at 28.5 / 26.9 min) |
+| knee D69 | **89 / 92** | 103 / 108 |
+| ankle_pitch | 106 / 106 | 118 / 119 |
+| ankle_roll | 45 / 40 | 49 / 42 |
+None of these reach the 130 °C derate start. Arm holds (drives off): shoulder_pitch 61 N·m reaches 120 °C at 19.6 min (123 °C at 30 min); elbow 40 N·m reaches 120 at 0.7 min and 155 at 1.3 min (open-loop, so the derate/torque-off and P-043 cap it).
+
+## P-042 carry primitive + P-043 hold limits
+`CARRY_POSE` is shoulder_pitch −60°, elbow −110°, other arm joints 0. `CARRY_BAND` is shoulder_pitch −60…−50°, elbow −115…−100°.
+`HoldLimiter` (built into `WindingModel.torque_limits`, min'd with the thermal derate):
+- elbow > 15 N·m: ≤ 3 min at ≤ 40 N·m, then ≤ 28 N·m.
+- shoulder_pitch > 55 N·m: ≤ 10 min, then ≤ 55 N·m.
+- The timer recovers at the same rate below threshold [EST]; P-042 has no recovery rule.
 
 ## Interface for the WBC / RL loop
 ```python
