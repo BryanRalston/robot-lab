@@ -548,6 +548,98 @@ Recorded: rail A = F1–F3 + S1, S2 + hand logic; rail B = F4–F6 + S3–S5. Si
 - O-E13 RECOM.
 - O-E12 **closed** by the DP83822HF.
 
+### 16.8 R-061 conditions: encoder decoding, B-config lead mass vs the R-047 +0.077, power-tree and RP40 CTRL checks (after Arms/Thermal 7f2fa7d)
+
+**Item 2: O-E12 is CLOSED** (R-061, DP83822HF).
+
+**Item 5: Thermal 7f2fa7d (A43C at 4.3 W PASS) clears the 4.3 W A43 reopen condition.** Board 69/77 °C, MCU Tj 78/86 °C, H-bridge Tj 81/91 °C, shoulder bay 48–53 °C in still air (≤ 60 °C, so no RP40 derate). Closing A43 is the Arbiter's call.
+
+**ENX22 EASY INT output** (maxon Product Information ENX EASY INT, DocID 4174182-04, 2023-04, §1.2–1.6 and §5):
+- Output is a **line driver, differential EIA RS-422** (ChA, A/, B, B/, I, I/), not TTL.
+- Vcc is 5 V ±10 %, 22 mA typ.
+- 1…1024 cpt, factory-set; pulse frequency 4 MHz; minimum state 62.5 ns.
+- 10-pin connector, so **8 conductors per encoder**.
+- **Operating temperature is −40…+100 °C** (connectors 105 °C). The maxon shop page says 125 °C; the Product Information governs.
+- This corrects §16.7, which assumed TTL, 5 wires, no receivers and no 5 V rail.
+
+**Item 1: decoding at maximum speed.**
+- **Basis:** DCX 22 S 24 V no-load speed is **12 400 rpm** (D68 datasheet as cited in Arms R6_ROUND.md), i.e. 206.7 rev/s. The maxon max permissible speed was not re-read.
+- At 1024 cpt: A = 211.6 kHz, quadrature states at 846.5 kHz, nominal state 1.18 µs. The minimum state is 0.8 LSB (maxon Table 2), i.e. **0.945 µs**.
+- **2 flexors on POSIF0/1 (incremental, x4 in hardware):**
+  - The input path is a 2-clock synchroniser plus a low-pass filter of 3/5/7 fCCU clocks [XMC4800 RM, not re-read: UNVERIFIED].
+  - Worst case at 144 MHz is (2 + 7)/144 MHz = 62.5 ns per state. **Margin: 0.945 µs / 62.5 ns = 15×.**
+  - Needs 2 RS-422 quad receivers, AEC-Q100 grade 1 (AM26C32-Q1 class, **grade to confirm**), TSSOP-16, ~40 mm² each.
+- **Count/direction on a CCU slice for the other 4: REJECTED.**
+  - Counting on A edges with B level as direction gives x1 at best.
+  - Dither on A while B is static is counted in one direction on every edge, so the count drifts at standstill.
+- **ERU edge-interrupt decoding: REJECTED at 1024 cpt.**
+  - 4 × 846.5 k = 3.39 M interrupts/s leaves 42 CPU cycles per edge, i.e. 100 % load.
+  - It is only feasible at ≤ 64 cpt.
+- **Fix adopted: ENX 22 EASY INT Absolute (BiSS-C) on the 4 non-POSIF flexors.**
+  - Same housing and integration. Read by 4 XMC4800 USIC channels in SSC mode, with BiSS framing and CRC in software. The remaining 2 USICs serve the TMP117 (I²C) and a spare.
+  - 12-bit single-turn. Frame is 3 + 12 + 2 + 6 CRC = 23 bits at 5 MHz (certified maximum) = 4.6 µs. Adding the timeout (1.5/fclk + 3.75 µs) gives **8.65 µs per read**.
+  - Read at the 10 kHz current-loop rate: 7.44° per sample at 12 400 rpm. The unwrap limit is < 180°, so the **margin is 24×** (2.4× at 1 kHz). The CRC catches bad frames.
+  - CPU cost ≈ 8 Mcyc/s (+5.6 %, total ≈ 27 %).
+  - Interface is 4 conductors: CLK in (VIH ≥ 2 V, so a 3.3 V drive works), DATA out (5 V CMOS, so a divider to 3.3 V is needed).
+  - Encoder mass unchanged (5 g). Board area: 4 × ~10 mm² instead of 4 × 25 mm², plus the receivers (+30), so **net −30 mm²**. The §16.7 FITS verdict stands. Connector pins: 32 (was 30).
+  - **New 5 V encoder rail:** 132 mA, fed from the always-on (AO) feed.
+- **Fallback:** 4 encoders at ≤ 64 cpt on ERU interrupts.
+
+**Item 4b: RP40-11024SFR/P CTRL** (RECOM RP40-FR datasheet: ON/OFF CTRL, note 5, pin table):
+- Pin 3 CTRL is **referenced to −Vin**, the bus side.
+- The "/P" suffix is positive logic: **ON = open or 3.0 V < VCTRL < 12 V; OFF = short or 0 V < VCTRL < 1.2 V**. CTRL draws 3 mA when off.
+- **The §16.6 assumption (MCU drives CTRL directly) was wrong as written.** The MCU sits on the isolated 24 V side.
+- **Fix:** tie the hand logic ground to −Vin through the AO feed (item 4a). One EN conductor then runs from an AO-powered open-drain NMOS on the hand board to both CTRL pins through 2× BAS16. Low ≥ 200 ms = OFF; open = ON.
+- A broken EN wire fails ON. The R-051 hardware latch still disables all 11 bridges independently.
+- Opto alternative, if the RP40 isolation must be kept: 2 optos, +~0.5 g.
+
+**Item 4a: power tree. The assumption was FALSE.**
+- Sources: `arms/A42_A43_R4.md` says "board logic 4 W on rail A"; §16.4 says "rail A = … + hand logic"; §16.6 says 3V3_HAND is derived from rail A. The MCU would lose power during its own reset cycle.
+- **Fix: separate always-on 12 V feed (AO).**
+  - Converter: TI LM5164-Q1 class 100 V buck (6–100 V, 1 A, AEC-Q100) in the shoulder bay, fed from the shared O-E11 filter output.
+  - The 92 V bus ceiling against the 100 V rating is tight, so it needs an input TVS/RC. Fallback is the RECOM RP03-11024SRAW (36–160 V, isolated 3 W, DIP-24, 14 g).
+  - Wiring: 1 conductor to the forearm, return shared with the rail return.
+  - AO feeds the XMC4800, PHYs, TMP117 and the 5 V encoder buck.
+  - The latch and 3V3_HAND stay on rail A, so the R-051 reset still works.
+  - Load ≈ 3.0 W hot (0.25 A at 12 V).
+  - **Mass ≈ 0.002 kg/side [EST], +0.004 kg both sides** (RP03 fallback: +0.028).
+
+**Item 3: B-config leads vs the R-047 booking.**
+- The +0.077 kg booked comes from Actuators `harness.py` line 119: a 24 V pair, SiF 0.5 mm² at 9 g/m (Lapp), 1.9 m/side, 2 conductors = 34.2 g/side, × 2 sides × 1.12 sleeving.
+- The same 1.9 m route is used below. The NTC is booked separately (+0.010, R-061).
+
+| line (per side) | conductors | gauge, g/m | g/side |
+|---|---|---|---|
+| +24 V A, +24 V B (never paralleled) | 2 × 1.9 m | SiF 0.25, 5.4 (cited) | 20.5 |
+| common return (≤ 3.4 A) | 1 × 1.9 m | SiF 0.5, 9 (cited) | 17.1 |
+| AO 12 V + EN + bay-air NTC | 3 × 1.9 m | AWG28 PTFE ~1.0 [EST] | 5.7 |
+| local motor leads (Arms: ~0.15 m) | 12 × 0.15 at AWG26 ~1.6 [EST] + 10 × 0.15 at AWG30 ~0.7 [EST] | | 3.9 |
+| encoder leads | maxon integral 200 mm cable | in encoder mass | 0 |
+| AO buck | | | 2.0 |
+| **per side** | | | **49.2** |
+
+| case | both sides (12 % sleeving on the 1.9 m runs) | booked | delta |
+|---|---|---|---|
+| **B-config, best case** | (43.3 × 1.12 + 3.9 + 2.0) × 2 = **0.109 kg** | 0.077 + 0.010 NTC = **0.087** | **+0.022 OVER** |
+| B-config, cited gauges only | 0.193 kg | 0.087 | +0.106 over |
+
+- **Verdict: the B-config leads do NOT fit.** The best case is 0.022 kg over, which is above the R-043 0.02 kg limit, so this goes back to the Arbiter.
+- **Cause:** R-047 booked one pair, but B needs 2 rails + return + AO + EN + NTC.
+- **Options:**
+  - (a) A cited thin multi-core cable for the signal lines.
+  - (b) Move the bay-air derate into the bay as an analog clamp, which saves 1 conductor (−2.1 g/side).
+  - (c) Offsets.
+- Arms CAD may shorten the 1.9 m route.
+
+**Risk only:** if the forearm length forces the board into the upper arm (Arms R6 option a), about 54 conductors cross the elbow (22 motor + 32 encoder), ≈ 0.12 kg [Arms EST]. This is not adopted.
+
+**Open:**
+- RS-422 receiver grade.
+- XMC4800 RM filter figures.
+- LM5164-Q1 transient margin.
+- ENX 100 °C rating vs the motor-end temperature (Thermal/Arms).
+- Item 3 overage (Arbiter).
+
 ## 17. R-062: knee Elmo drives off the finned knee housing (mount location and harness delta)
 
 **Count.** The knee is 2 × TBM2G-07613D + 2 × RV12x5 (`sizing.json` sel.knee, nmot 2), and `harness.py` counts 2 knee drives per leg. So this moves **2 drives per leg (4 per robot)**, not 1 per leg. All figures below are per leg for 2 drives.
