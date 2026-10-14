@@ -376,3 +376,30 @@ Rate: 100 Hz, plus an event frame on any result change. The host must not close 
 - **Bracket temperature sensor: TI TMP117** (ti.com product page, datasheet Rev. D) [DS]: digital I²C/SMBus, ±0.2 °C max (−40…100 °C), ±0.25 °C (−55…125 °C), operating −55…150 °C, 1.7/1.8–5.5 V supply, 3.5 µA at 1 Hz, programmable ALERT, 4 addresses, WSON-6 2 × 2 mm. Mounted on a small flex/PCB tab screwed to the bracket next to the converters, wired to the hand board I²C. Mass negligible (< 1 g) [EST].
 - **Firmware:** the hand board reads the TMP117 at ≥ 1 Hz. At **≥ 90 °C bracket** it derates both rail current caps linearly (1.67 A → 0 A at 100 °C [EST profile]). At **≥ 100 °C** it disables both RP40s via ON/OFF CTRL and reports to Thor/TMS570. The TMP117 ALERT pin is wired to CTRL logic as a hardware backup at 100 °C.
 - **Mass (Arbiter):** +0.086 kg + up to 0.06 kg O-E11 filters (both hands), final in **R-040 (pending)**.
+
+### 16.4 Hand supply rails, RP40 outline, filter mass check, hand-motor leads (after Arms 440c7a8)
+Recorded: rail A = F1–F3 + S1, S2 + hand logic; rail B = F4–F6 + S3–S5. Sim `hand_close_r4.json`: loaded close ≤ 0.68 s, each rail ≤ 40.5 W / 1.69 A peak, hold 11–18 W/rail. **Keep the 1.67 A firmware cap**: 1.69 A is 1 % over and only lengthens the close marginally. Filters booked +0.060 kg (Arms).
+
+**(1) RP40-11024SFR/P (bare) outline** [DS RP40-FR REV 8/2020, "Dimensions and physical characteristics" + dimension drawing]: **50.8 × 25.4 × 10.2 mm**, 32 g, case copper alloy (CuZn33), FR4 base, silicone potting (UL94 V-0); 2" × 1" through-hole, pins Ø1.0 ±0.1 mm on a 2.54 mm grid (pins 1 +Vin, 2 −Vin, 3 CTRL, 4 +Vout, 5 −Vout, 6 Trim), pin standoff 5.6 mm per drawing; max case temperature +105 °C. **Mounting:** PCB-soldered pins. There are no mounting holes or threaded inserts on the bare part, so the Thermal strap (case → gap pad → bracket) is a clamp/strap over the case top. 1.6 kVDC I/P–O/P–case isolation means the case can touch the grounded bracket.
+
+**(2) O-E11 filter mass, itemized (per RP40-110xx Class A list):**
+| item | part | size | mass | basis |
+|---|---|---|---|---|
+| C1 3× 68 µF/200 V | **Panasonic EEU-EE2D680** (A28 choice, head BOM) | 12.5 × 25 mm radial | 3 × 4.7 = **14.1 g** | catalog/distributor (head/BOM.md) |
+| TVS 2× SMDJ90A | Littelfuse SMDJ90A | DO-214AB | 0.4 g | R-027 catalog |
+| C2 33 µF/250 V | Chemi-con KXJ series | ~12.5 × 25 mm [EST, same can class] | ~4.7 g | [EST by similarity] |
+| C3, C4 2× 1 µF/250 V | 1812 MLCC | 4.5 × 3.2 mm | ~0.1 g | [EST] |
+| L1 22 µH 1.5 A | TDK CD-series SMD inductor (per datasheet) | ~12 × 12 mm [EST] | ~2 g | [EST] |
+| C5–C7 3× 1000 pF Y1 | disc ceramic Y1 | ~8 mm disc | ~1.5 g | [EST] |
+| PCB | FR4 1.6 mm, ~45 × 35 mm | 15.8 cm² | ~4.7 g | calc (1.85 g/cm³) [EST area] |
+| **total per filter** | | | **≈ 27.5 g** | 51 % catalog |
+**Corrected: ≈ 0.028 kg per filter, not 0.015.** Four filters (2 per hand × 2 hands) = **0.110 kg vs 0.060 booked, so +0.050 kg short** (to Arms/Arbiter, R-040). Options: one filter per hand feeding both RP40s (L1 then carries 2 × 0.65 A = 1.3 A < 1.5 A rating, but not the datasheet-validated configuration; EMC test required) → 0.055 kg both hands, inside 0.060. **Side finding:** the head filter booked in R-027 (3 caps 0.0105 [EST]) is also light vs 3 × 4.7 g = 14.1 g catalog → Robot Lab (head) should re-book (+0.004).
+
+**(3) Hand-motor leads, shoulder bay → forearm (proposal for Actuators' M3)**
+- **Conductors:** 11 brushed maxon motors per hand (6× DCX 22 S, 5× DCX 16 S; `arms/A42_A43_R4.md`). Each is driven by a full H-bridge (bidirectional), so **2 conductors per motor, no shared return: 22 conductors per side.**
+- **Current:** per motor ≤ rail cap 1.67 A peak (DCX 22 S I_nom 0.869 A; DCX 16 S I_nom 0.144 A, Arms' list). Rail totals ≤ 1.69 A peak, 11–18 W hold.
+- **Gauge: SiF 0.25 mm² (5.4 g/m) for all 22**, SILI-E 0.25 (4.5 g/m) inside the clock-spring loops per the harness rule. Check over 1.7 m: R = 1.72e-8 × 1.7 / 0.25e-6 = 0.117 Ω per conductor → 0.39 V loop drop (1.6 % of 24 V) at 1.67 A; 0.33 W per conductor (0.19 W/m) at peak, much less at hold. Ampacity from the Lapp table not re-read [EST adequate]. No smaller size exists in the harness model's SiF table.
+- **Route/length:** shoulder bay → shoulder pitch/roll/yaw loops → upper arm → elbow loop → forearm motor tiers (not across the wrist; motors sit proximal to the roll). **1.7 m per conductor** (Arms D72 route incl. loops; elbow loop 0.144 m per §10.3).
+- **Mass:** 22 × 1.7 m × 5.4 g/m = **0.202 kg/side, 0.404 kg both** (bare; sleeving +12 % [EST] → 0.452). Using SILI-E in the loop portions (~0.9 m of loops at 4.5 g/m) saves ~0.02 kg/side.
+- **Bundle:** 22 × ~1.9 mm OD [SiF 0.25 datasheet OD] ≈ 10–11 mm bundle; the shoulder clock-spring drums must take it (r_wrap/OD fine for single cores). EMC: twist each motor pair (PWM leads next to EtherCAT).
+- **Encoders:** if maxon ENX encoders are fitted, each adds 4–6 conductors (+50 to +100 % mass). **Recommend no motor encoders**: tendon position from motor-current/back-EMF estimation plus joint sensing at the fingers (Arms decision).
