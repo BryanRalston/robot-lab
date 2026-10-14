@@ -580,3 +580,15 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
 - Runtime: the 2 h at 1.0 m/s passes with screened cells, but only by +1.0 W, so it's flagged thin. Any new continuous load above 1 W comes back to the arbiter with a runtime check.
 - 1.2 m/s still fails (1.65 h) and stays tracked as failing.
 - The mixed-duty figure (4.14 h) depends on which duty definition is used. That's still open with Bryan (O-T5), so it isn't counted as a pass yet.
+
+## R-037 (2026-10-14) Palm CAD, torso R1.4, regen check, hand PSU
+- **Palm (A32/P-021, dd5f70f), accepted.** Measured on the same skin-only basis as the R-027 booking (0.0525 vs 0.1127 kg/hand). Mass is taken from CAD geometry, so it's credited ×1.0: −0.120 kg for both hands. A32 is closed. The hybrid skins aren't needed.
+- **Wrist ROM conflict.** The wrist roll fork against the palm limits pitch to ±40 and yaw to ±25. P-026 is ±60/±30. Arms resolves this in A42: either fix the fork clash, or file an amendment showing every T5 load case and task pose fits within the reduced range. G2 is blocked until one of those lands.
+- **Torso R1.4 (1dd529b), accepted.**
+  - Contactor cited at 190 g, so the torso line becomes 5.016 kg (−0.010).
+  - The BQ77216 independent OV channel plus the S32K344 host adds +0.26 W. The walk margin is now +0.74 W, still under the 1 W rule.
+  - Molicel's written confirmation of the 4.25 V OV threshold is still due before G1.
+  - Cell screening at ≥4400 mAh stays as a supplier requirement.
+- **Regen check (Electronics 605cb1a), accepted.** The booked HS100 1R5 absorbs the full top-of-charge window even when the BMS refuses regen. O-T8 (400 J fault pulse) is still due before G3. Stair-descent regen gets checked against measured traces in G5 (T-028).
+- **A43 hand PSU.** The RP40 can't burst to 80 W. The RP100H-11024SRW is accepted in principle. Its mass is booked in full at the chosen variant once Arms picks it. Until then, +0.228 kg is held, because that's the upper bound.
+- **Net this ruling:** −0.120 − 0.010 + 0.228 hold = +0.098 kg. Credible total is about 65.48 kg, with a reserve of about 1.02 kg.
