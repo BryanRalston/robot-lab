@@ -739,3 +739,8 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
 - D69 rev B: CAD-measured fins are 0.0703 m2, 0.0932 kg/knee, **booked +0.186** (was +0.24). Thermal's independent prediction of 88/105 C matches Actuators' 89.2/106.4 C within 1.4 K, so **R-052 condition 1 is met**. Still open: the trunnion-face fins <=9 mm and the Legs v5 fairing check (A47), plus the G5 bench test. Rev B is no longer at risk of reverting.
 - Hip lever L47: measured 0.464 kg/lever by Actuators against Legs' +0.118. Until they reconcile, the **conservative value is booked: +0.43 kg robot**. Actuators and Legs reconcile on one CAD body and report a single measured number; credit comes back at full value if it's lower. The G3 fatigue check (Grok Build) must run before G3 can close.
 - Reserve is ~0.36 (0.30 floor). The shin fairing stays deferred, and additions >0.02 need a ruling.
+
+## R-057 (2026-10-14) D76 wrist compaction, D77 no clutch (Actuators 9cc2d97)
+- D76 (pitch and yaw side by side, yaw on CSF-11-100): saves 49 mm against the 40 mm needed, so it is **adopted** and the R-055 forearm-lengthening fallback is **closed**. Conditions: Arms confirms the full forearm stack fits with D76 (9 mm margin); ID accepts a local ~116 mm wrist fairing; G3 checks yaw peak and fatigue at its 1.24x margin. Mass -0.08 counts at **half credit (-0.04)** until CAD-measured.
+- D77: there will be **no shoulder-pitch clutch**; the cited options are 1.6 and 4.0 kg. A forward-fall **arm tuck becomes the permanent strategy**, and the hands-first brace is not allowed. T-031 must show forward-fall pitch torque <= the rated limit with tuck. If it fails, the issue comes back to me.
+- Reserve ~0.40.
