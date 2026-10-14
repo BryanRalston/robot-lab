@@ -999,3 +999,6 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
 - Würth junction at ~50 C is closed thermally; the mass still needs citing. Hand always-on at 144 MHz is 3.19 W (53% of RP06), OK.
 - **Bus-bar sleeve: +0.013** in full. Foot F/T +0.012 is still pending.
 - Reserve ~-0.36.
+
+## R-092 (2026-10-14) Hand board thermal (Thermal 55c80c1)
+- R-089 is closed: the board at 144 MHz is 86.4 C (<=90). The MCU/H-bridge gap pad to the shell boss is adopted (board ~81 C), **+0.004** booked. A G5 board thermocouple is added. Reserve ~-0.36.
