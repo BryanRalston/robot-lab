@@ -228,3 +228,11 @@
   - Fin envelope: knee_fin_sweep.py → results/r031/knee_fin_envelope.json. Values: front 12 mm and rear 28 mm at the trunnion end, 37–57 mm at mid-length, none on the ±y flanks. KNEE_THERMAL_NOTE §0 has the details.
   - Mass booking: saddle removed. Knee is +0.254 kg/knee (+0.508 robot) with 0.05 fins [Thermal EST], −0.13 kg robot versus L45.
   - Industrial Design: the shin is coverable again. The no-cover zone moves to the thigh, over the housing's front and rear. The knee cap vs thigh gap is unchanged (housing ≥ 150 mm from the knee-cap keep-out).
+- L47-R (R-066, lever reconciliation; corrects L47's +0.118) **Agreed delta: +0.430 kg robot (+0.215 per lever).**
+  - Measured body: `actuators/cad/hip_pitch_lever_r031_mw_b30_d36_RC.step`, 2 valid solids, 155,055 mm³.
+  - Mass rule (hp_lever_fea_v2): 7075 at 2.81 g/cm³, with the two ø12×25 pin stubs (5,655 mm³) taken as steel at 7.85.
+  - Result: **0.4642 kg** (7075 0.4198 + pins 0.0444). Same value as Actuators and as our L47 figure.
+  - Baseline: `actuators/cad/hip_pitch_lever_B_needle_sf15.step` (D33). This is the part model_v4 uses today, and the RC replaces it 1:1. By the same rule: 78,555 mm³ → **0.2492 kg**, which equals the 0.2491 in LINKAGE_TABLE.
+  - Both bodies include the 2 lever halves (cheeks, arms, ears, bore relief) and the 2 integral ø12 pin stubs. Neither includes the TLA3520 needle bushes, the ø35 shaft, the GE12 eyes or the yoke bolts; those stay in their own lines.
+  - L47's +0.118 used the wrong baseline. Its "0.405 G2" was our own in-memory body: the G2-as-briefed loft (Actuators lever_r031 b25/d30, 0.3318, `cad/hip_pitch_lever_r031_b25_d30.step`) plus our web disc, saved as `legs/cad/hip_pitch_lever_r031_mw_b25_d30.step`. It was never a booked or built part, so +0.118 is withdrawn.
+  - Arbiter R-056's conservative +0.43 is correct, and no credit is due.
