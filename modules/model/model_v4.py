@@ -149,7 +149,7 @@ def build_leg(s):
     add(S('femur tongue ø55x27 (ø35 press-fit bore)'),S('thigh'),cyl(55,27,'y',id_=35,c=(0,y,hz)),asm=S('thigh_s'))
     add(S('femur tongue neck (55 mm, L36)'),S('thigh'),box(30,27,40,(10,y,hz-36)),asm=S('thigh_s'))
     ft=hz-56; fb=kz+60
-    add(S('femur tube 7075 ø50x1.2'),S('thigh'),cyl(50,ft-fb,'z',id_=47.6,c=(P['femur_x'],y,(ft+fb)/2)),asm=S('thigh_s'))
+    add(S('femur tube 7050-T7451 ø50x1.2 (R-031; P-047 wall 1.6 pending FEA)'),S('thigh'),cyl(50,ft-fb,'z',id_=47.6,c=(P['femur_x'],y,(ft+fb)/2)),asm=S('thigh_s'))
     add(S('femur internal doubler sleeve 0.5x100 (r8)'),S('thigh'),cyl(47.6,100,'z',id_=46.6,c=(P['femur_x'],y,(ft+fb)/2)),asm=S('thigh_s'))
     tz=hz+HIP_G['trunnion_z_mm']; tx=HIP_G['trunnion_x_mm']
     add(S('thigh split collar ø64 L34 bonded (DP490) + sleeve + 2x ø6 pins'),S('thigh'),cyl(64,34,'z',id_=50,c=(P['femur_x'],y,tz)),asm=S('thigh_s'))

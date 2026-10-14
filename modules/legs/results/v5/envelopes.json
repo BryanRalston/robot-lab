@@ -16,7 +16,8 @@
   "volume_cm3": 5263.0,
   "area_cm2": 1750.8,
   "stl": "results/v5/shin_fairing_keepout.stl",
-  "note": ""
+  "note": "",
+  "status": "RESTRICTED (Thermal 26412c7 / D69): the shank from the tibia collar to the knee must stay uncovered. Only the knee-region cap (knee_cap) remains; this hull is kept for reference."
  },
  "ankle_boot": {
   "frame": "L_shank",
@@ -112,5 +113,37 @@
   "area_cm2": 1055.2,
   "stl": "results/v5/foot_upper_keepout.stl",
   "note": "upper shell over the 240x100x18 box; sole contact patch unchanged"
+ },
+ "no_cover_zones": {
+  "knee_saddle": {
+   "frame": "L_shank",
+   "desc": "6061 finned clamp-on saddle (knee heat spreader + knee drive mount)",
+   "tibia_axis_xy": [
+    14,
+    130
+   ],
+   "z": [
+    320,
+    415
+   ],
+   "r_max_mm": 47,
+   "fins": "10 axial, 95x20x1.5-2, rear/side sector x<=14+..., none at x>36.5 (ankle screw bodies swept x>=45.6 at z320-400, >=39.4 at z400-420)",
+   "front_wall_x_max": 39.5,
+   "free_air": "required (no cover, exhaust must not wash the tibia collar)"
+  },
+  "lower_shank": {
+   "frame": "L_shank",
+   "z": [
+    136,
+    415
+   ],
+   "desc": "bare tibia, uncovered per Thermal; the ankle boot top stays at z<=170"
+  }
+ },
+ "knee_cap_vs_thigh_gap": {
+  "file": "results/v5/knee_cap_vs_thigh_gap.json",
+  "min_gap_mm": 10.2,
+  "at_knee_deg": 135,
+  "note": "between the two hull+5 keep-outs (hardware-to-hardware ~20 mm); 22 mm from 0 to 105 deg, set by the thigh fairing lower edge z555. D69 \u00f885 housing (+4.5 mm radial) -> ~5.7 mm keep-out gap / ~15.7 hardware [EST, no re-CAD]"
  }
 }

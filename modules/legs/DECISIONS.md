@@ -199,3 +199,19 @@
   - neckY 0.490→0.349 and head 0.647→0.461 kg (×0.7124, inertias scaled the same) to match the P-019 head+neck line of 0.810 kg (paper).
   - Static head moment ≈ 0.46·9.81·0.085 ≈ 0.38 N·m [calc], well under 4.1.
   - Handoff: modules/legs/HANDOFF_CONTROLS.md.
+- L43 (v5 envelopes) Final keep-outs committed (c44da58, fa47eec). Convex hull + 5 mm over the full ranges. Re-sweep clips:
+  - knee_cap: shank r ≤ 110 about the knee axis
+  - hip_skirt: r ≤ 150 about the hip
+  - foot_upper: no screws, z ≤ 165
+  - Knee cap vs thigh keep-out: no overlap from 0 to 135°, minimum 10.2 mm at 135° (`knee_cap_vs_thigh_gap.json`).
+  - Summary for ID: results/v5/ENVELOPES_FOR_ID.md.
+- L44 (R-031) Hip lever section family and P-046…P-050 (R031_FIXES.md, hand checks):
+  - Lever pick: 7075 b30/d0 36 with the cap notch removed, +0.09 kg robot. Fallback b35/d0 40, +0.18. Steel is not needed.
+  - Femur tube material 7050-T7451 applied in model_v4. The P-047 1.6 mm walls are pending FEA.
+  - T&R brief: grokbuild/r031_fatigue_fea_brief.md.
+- L45 (D69 / Thermal 26412c7) Knee heat path is a clamp-on 6061 finned saddle at tibia z 320–415: no tube holes, front sector unfinned (ankle screw bodies at x ≥ 39.4).
+  - The knee drives mount on the saddle. Housing to saddle needs a flexible strap across the trunnion (sized by Thermal/Actuators).
+  - Tube hoop stress 35 MPa compressive, provided the conforming bore wraps ≥ 330°.
+  - The lower shank stays uncovered. +0.32 kg/knee.
+  - KNEE_THERMAL_NOTE.md. P-041 G10 bushes at the hip_pitch clamp eyes, +0.024 kg [EST]; not yet in model_v4.
+- L46 (Materials Q) The ankle cross has no FEA and no pocketed CAD. model_v4 l.194 is a solid 30×46×30 Ti box; the 120 g booking (35 % pocketing) is unverified. It's added as a candidate to the next T&R FEA batch.

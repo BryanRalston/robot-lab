@@ -1,0 +1,114 @@
+[
+ {
+  "knee_deg": 0,
+  "gap_mm": 22.0
+ },
+ {
+  "knee_deg": 5,
+  "gap_mm": 22.0
+ },
+ {
+  "knee_deg": 10,
+  "gap_mm": 22.0
+ },
+ {
+  "knee_deg": 15,
+  "gap_mm": 22.0
+ },
+ {
+  "knee_deg": 20,
+  "gap_mm": 22.0
+ },
+ {
+  "knee_deg": 25,
+  "gap_mm": 22.0
+ },
+ {
+  "knee_deg": 30,
+  "gap_mm": 22.0
+ },
+ {
+  "knee_deg": 35,
+  "gap_mm": 22.0
+ },
+ {
+  "knee_deg": 40,
+  "gap_mm": 22.0
+ },
+ {
+  "knee_deg": 45,
+  "gap_mm": 22.0
+ },
+ {
+  "knee_deg": 50,
+  "gap_mm": 22.0
+ },
+ {
+  "knee_deg": 55,
+  "gap_mm": 22.0
+ },
+ {
+  "knee_deg": 60,
+  "gap_mm": 22.0
+ },
+ {
+  "knee_deg": 65,
+  "gap_mm": 22.0
+ },
+ {
+  "knee_deg": 70,
+  "gap_mm": 22.0
+ },
+ {
+  "knee_deg": 75,
+  "gap_mm": 22.0
+ },
+ {
+  "knee_deg": 80,
+  "gap_mm": 22.0
+ },
+ {
+  "knee_deg": 85,
+  "gap_mm": 22.0
+ },
+ {
+  "knee_deg": 90,
+  "gap_mm": 22.0
+ },
+ {
+  "knee_deg": 95,
+  "gap_mm": 22.0
+ },
+ {
+  "knee_deg": 100,
+  "gap_mm": 22.0
+ },
+ {
+  "knee_deg": 105,
+  "gap_mm": 22.0
+ },
+ {
+  "knee_deg": 110,
+  "gap_mm": 21.4
+ },
+ {
+  "knee_deg": 115,
+  "gap_mm": 20.3
+ },
+ {
+  "knee_deg": 120,
+  "gap_mm": 18.8
+ },
+ {
+  "knee_deg": 125,
+  "gap_mm": 16.9
+ },
+ {
+  "knee_deg": 130,
+  "gap_mm": 13.9
+ },
+ {
+  "knee_deg": 135,
+  "gap_mm": 10.2
+ }
+]
