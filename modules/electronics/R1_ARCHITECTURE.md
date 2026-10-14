@@ -1047,6 +1047,57 @@ Controls owns `HAND_MCU_72MHZ.md` and updates it on their side.
 
 **Citation status.** Formulas are taken from the XMC4700/XMC4800 Reference Manual USIC/VADC chapters (Controls' source). Section and page numbers are to be added at Controls' update, before G1.
 
+
+### 18.2l Completion of the 2026-10-14 package (junction, knee covers, 144 MHz, flexor ILIM/rails, IP2X sleeve)
+**1. EtherCAT junction relocation (Thermal).**
+- The board moves to the duct intake side: front and low, above the pack lid, on the partition cold face, with a ≥ 5 mm standoff.
+- It runs at ≈ 50 °C, so the **Würth 7490140142** (85 °C) has ≈ 35 K margin.
+- Its mass is still [DWG] ≤ 6 g ×5. Cite or weigh it before G1.
+
+**2. Knee drive covers (§18.2f item 10).** These merge into the ID fairing panel. Requirements:
+- C1 (tool-only)
+- 4 × M2.5
+- IP2X finger test with ≥ 8 mm clearance to live parts, or a baffle
+- Legs' air path kept
+
+The 41.8 g [DWG] line is **withdrawn from Electronics** and re-booked when ID sends a figure (ID-owned).
+
+**3. Hand MCU at 144 MHz** (R-083 lifted the 72 MHz restriction).
+- Controls: CPU ≈ 41 % against a 70 % limit. PWM 20 kHz.
+- **Single PHY; nothing ever downstream of the hand** (binding rule).
+- USIC STEP 71 and VADC ÷6 per §18.2k.
+- **AO hot:** 2.9 W (Thermal) + 0.29 W (144 vs 72 MHz) = **≈ 3.19 W**. That is 53 % of the RP06-11012SRAW's 6 W, inside the 80 % limit of 4.8 W.
+
+**4. Flexor current limit (R-080 corrected: firmware cap 1.66 A, firmware trip ≈ 1.80 A).**
+- **DRV8874-Q1 hardware ITRIP ≈ 1.9 A** (TI DRV8874-Q1 DS Rev B, eq. 3: I_TRIP × A_IPROPI = V_VREF / R_IPROPI; A_IPROPI = 450 µA/A).
+  - With V_VREF = 3.3 V (the XMC VAREF, so the IPROPI ADC full-scale is the trip point): R_IPROPI = 3.3 / (1.9 × 450e-6) = 3859 Ω.
+  - Chosen value: **3.83 kΩ, 1 % E96**, giving I_TRIP = 1.915 A.
+  - IMODE = cycle-by-cycle. Add 10 nF on IPROPI per DS §8.3.
+  - The hierarchy holds: cap 1.66 < FW trip 1.80 < HW chop 1.915 A.
+- **Rail current ≠ motor current.**
+  - Low-side IPROPI measures motor current. The 24 V rail sees I_rail ≈ Σ D_i × I_motor,i (+ switching loss, η ≈ 0.95).
+  - At stall or regulation, D is low. At speed under load, D approaches 1, so I_rail approaches I_motor.
+- **Worst case (logic is on AO since §16.8, not on rail A):**
+  - **Rail A** (F1–F3 + S1, S2): 3 × 1.66 A at D → 1 gives **≈ 5.0 A** from the flexors alone.
+  - **Rail B** (F4–F6 + S3–S5): the same, **≈ 5.0 A**.
+  - The per-rail cap is 1.67 A. The RP40-11024 rated output is 1.67 A, and it hiccups at 150 % ≈ **2.5 A**.
+  - **A simultaneous high-duty close CAN trip the RP40.** The earlier sim (≤ 1.69 A/rail, §16.4) used the old lower flexor currents and no longer bounds this.
+- **Fix (firmware, per rail, 20 kHz loop):**
+  - (a) **Summed-current limit:** estimate I_rail = Σ D_i × I_i, using IPROPI per bridge and known duty, and scale all current setpoints on that rail so that I_rail ≤ **1.50 A** (10 % under the 1.67 A cap, 40 % under hiccup).
+  - (b) **Stagger:** at most one flexor per rail in its acceleration phase at a time, with ≥ 20 ms offset. Grip-hold currents (low D) may overlap.
+  - (c) The R-051 derate ladder still applies on top.
+  - (d) **Bench test (T-029):** all of rail A and all of rail B commanded to close simultaneously at 30 N grip. Pass = no RP40 hiccup, and rail current ≤ 1.67 A at 1 ms resolution.
+  - The Arms grip timing (R-081: 500 N = 1.66 A; ladder B 22.1 N) must be re-run with the 1.50 A/rail budget.
+
+**5. IP2X bus-bar sleeve (§18.2f item 5).** The Torso run is **0.66 m** of H2N0.50 at 22.6 g/m = **14.9 g**, against the 2.3 g booked, so **+0.0126 kg**.
+
+**Electronics mass total (this package):**
+- +0.014 (STO buffers, R-086)
+- +0.013 (bus-bar sleeve)
+- −0.042 (knee covers withdrawn to ID; ID re-books)
+- **Net ≈ −0.015 kg** to Electronics, plus +0.012 if foot F/T is confirmed.
+- **Note:** the IP2X credit was ruled at half (R-083), so the Arbiter must re-run the IP2X line with the sleeve and knee-cover changes.
+
 ### 18.2 Checked and not counted
 - **STM32H7 drop:** never booked as a separate mass. The hand board was booked as a board lump (Arms), and Thermal A43C already assumed it dropped. **Saving 0.**
 - **`hand 24 V from wrist DC/DC` row (0.0128 kg):** 0.5 → 0.25 passes (0.6 K), but R-047 put the RP40s in the shoulder bay, so this row's route is stale. Actuators should re-book the row first. **Not counted.**
