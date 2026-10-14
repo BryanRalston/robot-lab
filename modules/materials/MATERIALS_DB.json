@@ -1,0 +1,343 @@
+{
+ "version": "R1 2026-10-14",
+ "owner": "RL Materials",
+ "sources": {
+  "MIF7075": "https://www.makeitfrom.com/material-properties/7075-T6-Aluminum",
+  "MIF7050": "https://www.makeitfrom.com/material-properties/7050-T7451-Aluminum",
+  "MIF6061": "https://www.makeitfrom.com/material-properties/6061-T6-Aluminum",
+  "MIFTi64": "https://www.makeitfrom.com/material-properties/Grade-5-Ti-6Al-4V-3.7165-R56400-Titanium",
+  "MIF4140QT": "https://www.makeitfrom.com/material-properties/Quenched-and-Tempered-4140-Cr-Mo-Steel",
+  "MIFPC": "https://www.makeitfrom.com/material-properties/Polycarbonate-PC",
+  "MIFPTFE": "https://www.makeitfrom.com/material-properties/Polytetrafluoroethylene-PTFE",
+  "REPO_AL7075": "v3/datasheets/al7075.pdf (repo copy; density 2.81 used repo-wide)",
+  "DP490_A": "https://multimedia.3m.com/mws/media/2409614O/3m-scotch-weld-epoxy-adhesive-dp490.pdf (via modules/legs/BOND_SPEC.md)",
+  "DP490_B": "https://multimedia.3m.com/mws/media/82790O/dp490-scotch-weld-tm-adhesive.pdf (via BOND_SPEC.md)",
+  "SKF_GE12C": "modules/actuators/datasheets/skf_ge12c.html (SKF https://www.skf.com/products/plain-bearings/spherical-plain-bearings-rod-ends/radial/productid-GE%2012%20C)",
+  "R027": "modules/RULINGS.md R-027 (PALSUN/LEXAN, Toray 3900, Easy Composites XC110 citations)"
+ },
+ "materials": [
+  {
+   "id": "AL7075T6",
+   "name": "Al 7075-T6/T651",
+   "used_in": "femur/tibia tubes, collars, sleeves, clevises, tongue, fork, foot, levers, palm (P-021), pelvis shell, yokes",
+   "density_g_cc": 2.81,
+   "E_GPa": 70,
+   "yield_MPa": 480,
+   "UTS_MPa": 560,
+   "fatigue_MPa": 160,
+   "elongation_pct": 7.9,
+   "T_max_mech_C": 200,
+   "toughness": null,
+   "other": {
+    "shear_MPa": 330,
+    "CTE_um_mK": 23,
+    "calomel_mV": -750
+   },
+   "cost_hint": "base metal price 10% rel. (MIF)",
+   "sources": [
+    "REPO_AL7075",
+    "MIF7075"
+   ],
+   "notes": "MIF density rounds to 3.0; repo 2.81 kept. Fatigue = MIF value (cycle basis not stated). K1C not verified. SCC-susceptible in T6 (short transverse)."
+  },
+  {
+   "id": "AL7050T7451",
+   "name": "Al 7050-T7451 (candidate)",
+   "used_in": "alternative for 7075 plate parts",
+   "density_g_cc": 3.1,
+   "E_GPa": 70,
+   "yield_MPa": 480,
+   "UTS_MPa": 540,
+   "fatigue_MPa": 200,
+   "elongation_pct": 10,
+   "T_max_mech_C": 190,
+   "toughness": null,
+   "other": {
+    "shear_MPa": 310
+   },
+   "cost_hint": "10% rel.",
+   "sources": [
+    "MIF7050"
+   ],
+   "notes": "MIF density 2-sig-fig. Overaged temper chosen for SCC/exfoliation/toughness balance (MIF text)."
+  },
+  {
+   "id": "AL6061T6",
+   "name": "Al 6061-T6",
+   "used_in": "head neck deck sheet",
+   "density_g_cc": 2.7,
+   "E_GPa": 69,
+   "yield_MPa": 270,
+   "UTS_MPa": 310,
+   "fatigue_MPa": 96,
+   "elongation_pct": 10,
+   "T_max_mech_C": 170,
+   "toughness": null,
+   "other": {
+    "calomel_mV": -740
+   },
+   "cost_hint": "9.5% rel.",
+   "sources": [
+    "MIF6061"
+   ],
+   "notes": ""
+  },
+  {
+   "id": "TI64",
+   "name": "Ti-6Al-4V Grade 5",
+   "used_in": "ankle cross",
+   "density_g_cc": 4.4,
+   "E_GPa": 110,
+   "yield_MPa": "910-1110",
+   "UTS_MPa": "1000-1190",
+   "fatigue_MPa": "530-630",
+   "elongation_pct": "8.6-11",
+   "T_max_mech_C": 330,
+   "toughness": null,
+   "other": {
+    "CTE_um_mK": 8.9
+   },
+   "cost_hint": "36% rel.",
+   "sources": [
+    "MIFTi64"
+   ],
+   "notes": ""
+  },
+  {
+   "id": "STL42CRMO4",
+   "name": "42CrMo4 / 4140 Q&T",
+   "used_in": "clamp eye pins, bond cross pins; 12.9 bolts similar class",
+   "density_g_cc": 7.8,
+   "E_GPa": 190,
+   "yield_MPa": 990,
+   "UTS_MPa": 1080,
+   "fatigue_MPa": 650,
+   "elongation_pct": 16,
+   "T_max_mech_C": 420,
+   "toughness": null,
+   "other": {},
+   "cost_hint": "2.4% rel.",
+   "sources": [
+    "MIF4140QT"
+   ],
+   "notes": "MIF lists AISI 4140 Q&T (42CrMo4 equivalent). Bolt 12.9 grade per ISO 898-1 not fetched."
+  },
+  {
+   "id": "PC",
+   "name": "Polycarbonate sheet (thermoformed)",
+   "used_in": "P-020 covers 1.5 mm",
+   "density_g_cc": 1.2,
+   "E_GPa": null,
+   "yield_MPa": null,
+   "UTS_MPa": "66-160 (range incl. GF)",
+   "fatigue_MPa": null,
+   "elongation_pct": "3.5-110",
+   "T_max_mech_C": null,
+   "toughness": null,
+   "other": {
+    "Tg_C": 150,
+    "HDT_1.82MPa_C": "130-150",
+    "notched_izod_J_m": "140-440"
+   },
+   "cost_hint": "$25.80 per 24x48in sheet (covers/COVER_COST.md)",
+   "sources": [
+    "R027",
+    "MIFPC"
+   ],
+   "notes": "Density 1.20 from Palram PALSUN TDS per R-027. Unfilled-PC-only fatigue not verified."
+  },
+  {
+   "id": "PA12MJF",
+   "name": "PA12 (HP MJF)",
+   "used_in": "legacy covers/palm, brain lid (A31)",
+   "density_g_cc": 1.01,
+   "E_GPa": null,
+   "yield_MPa": null,
+   "UTS_MPa": null,
+   "fatigue_MPa": null,
+   "elongation_pct": null,
+   "T_max_mech_C": null,
+   "toughness": null,
+   "other": {},
+   "cost_hint": null,
+   "sources": [
+    "R027"
+   ],
+   "notes": "Only density verified (repo). MJF datasheet not fetched this round -> TODO."
+  },
+  {
+   "id": "CFRP",
+   "name": "CF prepreg 2x2 twill (Toray 3900 / XC110 class)",
+   "used_in": "torso shell 3 mm, head shell, optional fairings",
+   "density_g_cc": 1.55,
+   "E_GPa": null,
+   "yield_MPa": null,
+   "UTS_MPa": null,
+   "fatigue_MPa": null,
+   "elongation_pct": null,
+   "T_max_mech_C": null,
+   "toughness": null,
+   "other": {},
+   "cost_hint": "~$3.8k mould set [EST R-027]",
+   "sources": [
+    "R027"
+   ],
+   "notes": "Laminate props not verified. Galvanic: carbon is cathodic to Al -> isolate."
+  },
+  {
+   "id": "PTFE",
+   "name": "PTFE composite liner (SKF GE 12 C steel/PTFE sintered bronze; QA1 MGF12T PTFE)",
+   "used_in": "hip/ankle eyes, ankle rod end",
+   "density_g_cc": "2.1-2.3 (bulk PTFE)",
+   "E_GPa": null,
+   "yield_MPa": null,
+   "UTS_MPa": "13-25 (bulk)",
+   "fatigue_MPa": null,
+   "elongation_pct": "75-300",
+   "T_max_mech_C": 260,
+   "toughness": null,
+   "other": {
+    "HDT_C": "66-70",
+    "CTE_um_mK": "110-120",
+    "GE12C_C_kN": 11.4,
+    "GE12C_C0_kN": 28.5
+   },
+   "cost_hint": null,
+   "sources": [
+    "MIFPTFE",
+    "SKF_GE12C"
+   ],
+   "notes": "Bulk PTFE values only; liner composite cold-flow / wear rate not in hand. QA1 MGF12T dynamic rating NOT available (A22)."
+  },
+  {
+   "id": "DP490",
+   "name": "3M Scotch-Weld DP490 epoxy",
+   "used_in": "femur collar + sleeve bond",
+   "density_g_cc": null,
+   "E_GPa": null,
+   "yield_MPa": null,
+   "UTS_MPa": null,
+   "fatigue_MPa": null,
+   "elongation_pct": null,
+   "T_max_mech_C": null,
+   "toughness": null,
+   "other": {
+    "lap_shear_23C_MPa": 23,
+    "lap_shear_82C_MPa": 9.5,
+    "etched_120C_MPa": "2.8-3.2",
+    "peel_daN_cm": 9.24,
+    "bondline_mm": "0.08-0.13"
+   },
+   "cost_hint": null,
+   "sources": [
+    "DP490_A",
+    "DP490_B"
+   ],
+   "notes": "Fatigue, creep, humid-aged not verified."
+  },
+  {
+   "id": "EPP",
+   "name": "EPP foam pads",
+   "used_in": "cover fall pads 0.36 kg",
+   "density_g_cc": null,
+   "E_GPa": null,
+   "yield_MPa": null,
+   "UTS_MPa": null,
+   "fatigue_MPa": null,
+   "elongation_pct": null,
+   "T_max_mech_C": null,
+   "toughness": null,
+   "other": {},
+   "cost_hint": null,
+   "sources": [],
+   "notes": "Grade/density not specified in repo [UNKNOWN]."
+  },
+  {
+   "id": "PU90A",
+   "name": "PU 90A bumpers",
+   "used_in": "hip hard stops",
+   "density_g_cc": null,
+   "E_GPa": null,
+   "yield_MPa": null,
+   "UTS_MPa": null,
+   "fatigue_MPa": null,
+   "elongation_pct": null,
+   "T_max_mech_C": null,
+   "toughness": null,
+   "other": {},
+   "cost_hint": null,
+   "sources": [],
+   "notes": "No datasheet [UNKNOWN]."
+  },
+  {
+   "id": "TPUNYLON",
+   "name": "TPU-coated nylon fabric",
+   "used_in": "ankle boots (V5)",
+   "density_g_cc": null,
+   "E_GPa": null,
+   "yield_MPa": null,
+   "UTS_MPa": null,
+   "fatigue_MPa": null,
+   "elongation_pct": null,
+   "T_max_mech_C": null,
+   "toughness": null,
+   "other": {},
+   "cost_hint": null,
+   "sources": [],
+   "notes": "[UNKNOWN]"
+  },
+  {
+   "id": "SILICONE",
+   "name": "Cast silicone",
+   "used_in": "hand pads",
+   "density_g_cc": null,
+   "E_GPa": null,
+   "yield_MPa": null,
+   "UTS_MPa": null,
+   "fatigue_MPa": null,
+   "elongation_pct": null,
+   "T_max_mech_C": null,
+   "toughness": null,
+   "other": {},
+   "cost_hint": null,
+   "sources": [],
+   "notes": "Shore/grade not specified [UNKNOWN]."
+  },
+  {
+   "id": "SS304",
+   "name": "304 stainless",
+   "used_in": "misc (2 repo mentions)",
+   "density_g_cc": null,
+   "E_GPa": null,
+   "yield_MPa": null,
+   "UTS_MPa": null,
+   "fatigue_MPa": null,
+   "elongation_pct": null,
+   "T_max_mech_C": null,
+   "toughness": null,
+   "other": {},
+   "cost_hint": null,
+   "sources": [],
+   "notes": "Not fetched [UNKNOWN]."
+  },
+  {
+   "id": "BRG_STEEL",
+   "name": "Bearing steel (GE 12 C inner ring, CRBH, IKO)",
+   "used_in": "bearings",
+   "density_g_cc": null,
+   "E_GPa": null,
+   "yield_MPa": null,
+   "UTS_MPa": null,
+   "fatigue_MPa": null,
+   "elongation_pct": null,
+   "T_max_mech_C": null,
+   "toughness": null,
+   "other": {},
+   "cost_hint": null,
+   "sources": [
+    "SKF_GE12C"
+   ],
+   "notes": "Catalog parts; masses from catalogs."
+  }
+ ]
+}

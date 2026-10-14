@@ -1,0 +1,53 @@
+"""Builds MATERIALS_DB.json + MATERIALS_DB.md. RL Materials R1. Values only from cited sources; None = not verified."""
+import json
+S={
+ "MIF7075":"https://www.makeitfrom.com/material-properties/7075-T6-Aluminum",
+ "MIF7050":"https://www.makeitfrom.com/material-properties/7050-T7451-Aluminum",
+ "MIF6061":"https://www.makeitfrom.com/material-properties/6061-T6-Aluminum",
+ "MIFTi64":"https://www.makeitfrom.com/material-properties/Grade-5-Ti-6Al-4V-3.7165-R56400-Titanium",
+ "MIF4140QT":"https://www.makeitfrom.com/material-properties/Quenched-and-Tempered-4140-Cr-Mo-Steel",
+ "MIFPC":"https://www.makeitfrom.com/material-properties/Polycarbonate-PC",
+ "MIFPTFE":"https://www.makeitfrom.com/material-properties/Polytetrafluoroethylene-PTFE",
+ "REPO_AL7075":"v3/datasheets/al7075.pdf (repo copy; density 2.81 used repo-wide)",
+ "DP490_A":"https://multimedia.3m.com/mws/media/2409614O/3m-scotch-weld-epoxy-adhesive-dp490.pdf (via modules/legs/BOND_SPEC.md)",
+ "DP490_B":"https://multimedia.3m.com/mws/media/82790O/dp490-scotch-weld-tm-adhesive.pdf (via BOND_SPEC.md)",
+ "SKF_GE12C":"modules/actuators/datasheets/skf_ge12c.html (SKF https://www.skf.com/products/plain-bearings/spherical-plain-bearings-rod-ends/radial/productid-GE%2012%20C)",
+ "R027":"modules/RULINGS.md R-027 (PALSUN/LEXAN, Toray 3900, Easy Composites XC110 citations)",
+}
+def M(id,name,where,rho=None,E=None,ys=None,uts=None,fat=None,elong=None,tmax=None,other=None,cost=None,src=(),notes=""):
+  return dict(id=id,name=name,used_in=where,density_g_cc=rho,E_GPa=E,yield_MPa=ys,UTS_MPa=uts,fatigue_MPa=fat,elongation_pct=elong,
+    T_max_mech_C=tmax,toughness=None,other=other or {},cost_hint=cost,sources=list(src),notes=notes)
+DB=[
+ M("AL7075T6","Al 7075-T6/T651","femur/tibia tubes, collars, sleeves, clevises, tongue, fork, foot, levers, palm (P-021), pelvis shell, yokes",
+   2.81,70,480,560,160,7.9,200,{"shear_MPa":330,"CTE_um_mK":23,"calomel_mV":-750},"base metal price 10% rel. (MIF)",["REPO_AL7075","MIF7075"],
+   "MIF density rounds to 3.0; repo 2.81 kept. Fatigue = MIF value (cycle basis not stated). K1C not verified. SCC-susceptible in T6 (short transverse)."),
+ M("AL7050T7451","Al 7050-T7451 (candidate)","alternative for 7075 plate parts",3.1,70,480,540,200,10,190,{"shear_MPa":310},"10% rel.",["MIF7050"],
+   "MIF density 2-sig-fig. Overaged temper chosen for SCC/exfoliation/toughness balance (MIF text)."),
+ M("AL6061T6","Al 6061-T6","head neck deck sheet",2.7,69,270,310,96,10,170,{"calomel_mV":-740},"9.5% rel.",["MIF6061"]),
+ M("TI64","Ti-6Al-4V Grade 5","ankle cross",4.4,110,"910-1110","1000-1190","530-630","8.6-11",330,{"CTE_um_mK":8.9},"36% rel.",["MIFTi64"]),
+ M("STL42CRMO4","42CrMo4 / 4140 Q&T","clamp eye pins, bond cross pins; 12.9 bolts similar class",7.8,190,990,1080,650,16,420,{},"2.4% rel.",["MIF4140QT"],"MIF lists AISI 4140 Q&T (42CrMo4 equivalent). Bolt 12.9 grade per ISO 898-1 not fetched."),
+ M("PC","Polycarbonate sheet (thermoformed)","P-020 covers 1.5 mm",1.20,None,None,"66-160 (range incl. GF)",None,"3.5-110",None,
+   {"Tg_C":150,"HDT_1.82MPa_C":"130-150","notched_izod_J_m":"140-440"},"$25.80 per 24x48in sheet (covers/COVER_COST.md)",["R027","MIFPC"],"Density 1.20 from Palram PALSUN TDS per R-027. Unfilled-PC-only fatigue not verified."),
+ M("PA12MJF","PA12 (HP MJF)","legacy covers/palm, brain lid (A31)",1.01,None,None,None,None,None,None,{},None,["R027"],"Only density verified (repo). MJF datasheet not fetched this round -> TODO."),
+ M("CFRP","CF prepreg 2x2 twill (Toray 3900 / XC110 class)","torso shell 3 mm, head shell, optional fairings",1.55,None,None,None,None,None,None,{},"~$3.8k mould set [EST R-027]",["R027"],"Laminate props not verified. Galvanic: carbon is cathodic to Al -> isolate."),
+ M("PTFE","PTFE composite liner (SKF GE 12 C steel/PTFE sintered bronze; QA1 MGF12T PTFE)","hip/ankle eyes, ankle rod end",
+   "2.1-2.3 (bulk PTFE)",None,None,"13-25 (bulk)",None,"75-300",260,{"HDT_C":"66-70","CTE_um_mK":"110-120","GE12C_C_kN":11.4,"GE12C_C0_kN":28.5},None,["MIFPTFE","SKF_GE12C"],
+   "Bulk PTFE values only; liner composite cold-flow / wear rate not in hand. QA1 MGF12T dynamic rating NOT available (A22)."),
+ M("DP490","3M Scotch-Weld DP490 epoxy","femur collar + sleeve bond",None,None,None,None,None,None,None,
+   {"lap_shear_23C_MPa":23,"lap_shear_82C_MPa":9.5,"etched_120C_MPa":"2.8-3.2","peel_daN_cm":9.24,"bondline_mm":"0.08-0.13"},None,["DP490_A","DP490_B"],"Fatigue, creep, humid-aged not verified."),
+ M("EPP","EPP foam pads","cover fall pads 0.36 kg",None,None,None,None,None,None,None,{},None,[],"Grade/density not specified in repo [UNKNOWN]."),
+ M("PU90A","PU 90A bumpers","hip hard stops",None,None,None,None,None,None,None,{},None,[],"No datasheet [UNKNOWN]."),
+ M("TPUNYLON","TPU-coated nylon fabric","ankle boots (V5)",None,None,None,None,None,None,None,{},None,[],"[UNKNOWN]"),
+ M("SILICONE","Cast silicone","hand pads",None,None,None,None,None,None,None,{},None,[],"Shore/grade not specified [UNKNOWN]."),
+ M("SS304","304 stainless","misc (2 repo mentions)",None,None,None,None,None,None,None,{},None,[],"Not fetched [UNKNOWN]."),
+ M("BRG_STEEL","Bearing steel (GE 12 C inner ring, CRBH, IKO)","bearings",None,None,None,None,None,None,None,{},None,["SKF_GE12C"],"Catalog parts; masses from catalogs."),
+]
+json.dump({"version":"R1 2026-10-14","owner":"RL Materials","sources":S,"materials":DB},open("MATERIALS_DB.json","w"),indent=1)
+f=lambda v:"—" if v is None else str(v)
+L=["# MATERIALS_DB (RL Materials R1, 2026-10-14)","Generated by `build_db.py`. Every value cites a source key; — = not verified (never filled by guess). MakeItFrom values are 2-sig-fig summaries citing ASM Handbook vol. 1/2; ASM MatWeb timed out this round.","",
+"| id | material | used in | ρ g/cc | E GPa | YS MPa | UTS MPa | fatigue MPa | elong % | Tmax °C | other | cost | src |","|"+"---|"*13]
+for m in DB:
+  L.append("| "+" | ".join([m["id"],m["name"],m["used_in"],f(m["density_g_cc"]),f(m["E_GPa"]),f(m["yield_MPa"]),f(m["UTS_MPa"]),f(m["fatigue_MPa"]),f(m["elongation_pct"]),f(m["T_max_mech_C"]),
+    "; ".join(f"{k} {v}" for k,v in m["other"].items()) or "—",f(m["cost_hint"]),", ".join(m["sources"]) or "none"])+" |")
+L+=["","Notes:"]+[f"- **{m['id']}**: {m['notes']}" for m in DB if m["notes"]]+["","Fracture toughness (K1C) for all metals: NOT verified this round.","","## Sources"]+[f"- {k}: {v}" for k,v in S.items()]
+open("MATERIALS_DB.md","w").write("\n".join(L)+"\n")
