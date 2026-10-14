@@ -461,3 +461,89 @@ Recorded: rail A = F1–F3 + S1, S2 + hand logic; rail B = F4–F6 + S3–S5. Si
 **Ladder:** The 55/70/80/88 °C → 0.84/0.70/0.50/0.35/0 A ladder stays mandatory as written in §16.5. Tuning it is contingent on the Arms grip check (grip force at each derate step). It is not tuned until Arms reports.
 
 **RECOM curve:** The §16.5 derating (full power to 60 °C, zero at 105 °C) comes from the RP40-2415SFR graph only. Confirming the 11024SFR curve needs a vendor answer. A draft question for Bryan to send to RECOM is held off-repo. Nobody contacts RECOM from the agents. This stays open as O-E13 until RECOM answers.
+
+### 16.7 Forearm hand-board fit (Arms 2026-10-14, R-055), MCU sizing, PHYs, XMC current table, harness re-book, shoulder-bay air sensor
+
+**Inputs.** Arms: annulus board, OD ≤ Ø62 (bore Ø66 × 13.2), centre hole ≥ Ø21 (tendon sheaths), stack ≤ 12.5 mm, axial connectors only; RP40s + filter stay in the shoulder bay (R-047), only the 24 V feed crosses the elbow; 6× maxon ENX22 EASY INT on the DCX22 flexors (local leads), none on the DCX16s; the 1.7 m bay→forearm motor harness is void; size for 11 current + 6 position loops. R-055 accepted these fit conditions (provisional until CAD). Forearm length still open (R-055: D73 compaction first, ≤ 40 mm lengthen fallback). Nothing below depends on forearm length, only on the Ø66 × 13.2 slot. Thermal ceaf729: board 3.5 W typ / 4.0 W hot; asks for the XMC current table; recommends a bay-air sensor.
+
+**(1) MCU check: can the XMC4300 alone run 11 current + 6 position loops?** Figures are from the XMC4300 Data Sheet V1.0 2016-02 (Table 3, Table 6, §3.2.8 Table 33, Table 25).
+| resource | need | XMC4300-F100 has | verdict |
+|---|---|---|---|
+| CPU | 11 PI current loops at 10 kHz (~150 cycles each incl. ADC result handling) = 16.5 Mcyc/s; 6 position loops at 1 kHz (~500 cyc) = 3 Mcyc/s; ladder/OT/EtherCAT application ~10 Mcyc/s [EST cycle counts] | 144 MHz M4F | ≈ 21 % load, **OK** |
+| ADC | 11 IPROPI + sense NTC + rail A/B 24 V monitor (2) + bay-air NTC (item 6) = **15** | 2 VADC × 8 = **16** ch; 12-bit post-calibrated 459 ns | fits with 1 spare. 6 conversions/group/period ≈ 2.8 µs, **OK** |
+| PWM | DRV8874-Q1 in PH/EN mode: 1 PWM (EN) + 1 GPIO (PH) per bridge = **11 PWM** | CCU8 1×4 slices (2 compare ch each → 8 PWM) + CCU4 2×4 slices (8) = 16 timer outputs | OK, 5 CCU4 slices left |
+| encoders | **6 quadrature** counters (ENX22 A/B/I) | **no POSIF** in XMC4300; the 5 remaining CCU4 slices can only do count + direction | **FAIL: 1 slice short, and no x4 hardware decode** |
+
+**Decision: change the MCU to Infineon XMC4800-F100K2048 AA** (XMC4700/XMC4800 Data Sheet V1.2 2023-04; Infineon product page). It is the same family and the same LQFP-100 package, rated −40…125 °C ("K" grade), with the same EtherCAT node. It has 2 POSIF, 4×4 CCU4 + 2×4 CCU8 slices (24 timers), 4 VADC with 24 channels on LQFP-100 per DS Table 6 (the Infineon product page says "18 input lines"; take 18 as the planning figure, which still covers 15), and 2 MB flash / 352 kB RAM. Encoder allocation: 2 flexors on POSIF0/1 (x4 hardware quadrature); 4 flexors on CCU4 slices using external count + external up/down (A edges, B level; x2 if both A edges counted) [check CCU4 function in RM at layout]. The XMC4800-F100 Table 33 supply figures are identical to the XMC4300 (below). Mass and area are unchanged (same package). **STM32H725/735 is dropped** (one IC fewer; the XMC4800 covers loops + EtherCAT). XMC4300→XMC4800 pin-compatibility on LQFP-100 **[UNVERIFIED]**; the layout is not started, so this does not matter yet. The Arbiter accepted the XMC4300 under R-051; this swap needs a note to the Arbiter (temperature grade unchanged, no mass delta).
+
+**(2) XMC4300 / XMC4800 supply current (DS §3.2.8 Table 33; VDDP = 3.3 V, TA = 25 °C unless stated; "not subject to production test")**
+| condition (fCPU / fPERIPH / fCCU MHz) | symbol | typ | max | at 3.3 V |
+|---|---|---|---|---|
+| Active, peripherals enabled, 144/144/144 | IDDPA | 135 mA | – | 0.446 W |
+| Active, peripherals enabled, 144/72/72 | IDDPA | 125 mA | – | 0.41 W |
+| Active, peripherals enabled, 72/72/144 | IDDPA | 97 mA | – | 0.32 W |
+| Active, code from RAM, Flash asleep, 144/144/144 | IDDPA | 108 mA | – | 0.36 W |
+| Active, peripherals disabled, 144/144/144 | IDDPA | 86 mA | – | 0.28 W |
+| Sleep, peripherals enabled, 144/144/144 | IDDPS | 127 mA | – | 0.42 W |
+| **Worst-case active** (VDDP 3.6 V, TJ 150 °C, benchmark from Flash, all CCUs running) | IDDPA | – | **250 mA** | **0.90 W** |
+| Power dissipation limit (VDDP 3.6 V, TJ 150 °C) | PDISS | – | 1.4 W | – |
+| RθJA LQFP-100 (4-layer JEDEC, pad soldered) | | 22.5 K/W | | |
+**Effect on Thermal ceaf729:** Thermal booked 0.33 W typ / 0.6 W hot for the MCU. The datasheet gives **0.45 W typ / 0.90 W worst case**, so the board total rises to **≈ 3.6 W typ / ≈ 4.3 W hot**. That is over the 4.0 W case in `a43c_board.json`, so Thermal must re-check (as an upper bound, PDISS max 1.4 W would give 4.8 W). PHY figure confirmed: DP83822 3.3 V AVD < 220 mW each (TI) → 0.44 W for two, consistent with Thermal's 0.4–0.45 W. EtherCAT ESC current is inside the "peripherals enabled" figure.
+
+**(3) PHYs (closes O-E12): TI DP83822HF** (TI product page: operating temperature **−40…125 °C**, EtherCAT listed, MII/RMII/RGMII, VQFN-32 RHB 5 × 5 mm, single 3.3 V supply < 220 mW). 2 per hand (EtherCAT IN/OUT, MII to the ESC). **Fallback:** if the hand is the end of its EtherCAT line, port 1 is unused, so fit **one** PHY (saves ~70 mm², 0.22 W).
+
+**(4) Annulus area budget.** Usable ring per face: r 11.5…30 mm (1 mm clearance from Ø21 and Ø62) = π(30² − 11.5²) = **2412 mm²/face**. Two boards × top face = **4824 mm²**; the facing (inner) sides give a further 4824 mm² for tall/passive parts and are held as margin.
+| block | parts (package source) | courtyard mm² |
+|---|---|---|
+| MCU | XMC4800 LQFP-100 PG-LQFP-100-25: 14 × 14 body, 16 × 16 over leads, 17 × 17 courtyard (Infineon DS) | 289 |
+| PHYs | 2× DP83822HF VQFN-32 5 × 5 (6 × 6 courtyard) | 72 |
+| clocks | 12 MHz MCU + 25 MHz PHY/ESC crystal, 3.2 × 2.5 | 28 |
+| H-bridges | 11× DRV8874-Q1 HTSSOP-16 PWP: 5.0 × 4.4 body, 6.4 over leads (TI DS), 38.5 mm² courtyard + VM 0.1 µF/10 µF, IPROPI R, ~16 mm² each | 600 |
+| encoder I/F | 6× (ESD array SOT-23-6 + RC filter on A/B/I + supply) [EST 25 mm² each; ENX22 EASY INT is single-ended TTL, so no line receivers; if the line-driver variant is chosen, add 2× quad receivers, ~90 mm²] | 150 |
+| latch | LM2903B-Q1 VSSOP-8 + diode + 14 R + 11 BAT54 SOD-323 (§16.6) | 95 |
+| sensors | 2× NCP15 NTC 0402 + TMP117 WSON 2 × 2 | 15 |
+| decoupling | MCU 10× 0402 + 2× 0805; PHYs 2× ~20 mm² | 65 |
+| PHY coupling | capacitive coupling + ESD per port (no magnetics on an internal link) [EST] | 60 |
+| power | 24 V→3.3 V buck (LMR36006-Q1 class) + 4×4 inductor + caps, input TVS, 24 V bulk MLCC 4× 1210 per rail | 175 |
+| axial connectors | 66 pins (22 motor, 30 encoder 6 × 5, 4 power 24 V A/B + returns, 8 EtherCAT, 2 spare) at 1.0 mm pitch vertical, ~5 mm²/pin + housings [EST] | 365 |
+| board-to-board | 2 × 40-pin 0.5 mm stacker halves | 150 |
+| mounting | 3× M2 holes, Ø5 keep-out | 60 |
+| **sum** | | **2124** |
+| **with 1.5× routing/spacing** | | **3185 of 4824 mm² (66 %)** |
+
+**Geometry checks:**
+- MCU 17 × 17 courtyard with its inner edge at r = 11.5: outer corner at √(28.5² + 8.5²) = **29.74 mm < 30.0**. It fits, with 0.26 mm to spare. This is the tightest single item, and the MCU must sit with one flat edge tangent to the centre hole.
+- DRV8874-Q1 rows: 11 × 6.4 mm tangentially at r ≈ 24 mm uses 70 of 151 mm circumference.
+- Height: 2 × 0.8 mm boards + 5.0 mm stacker gap (inner-face parts ≤ 4.5 mm, e.g. the 4 × 4 × 2 inductor) + outer faces ≤ 2.5 mm each (connector bodies, LQFP 1.6 mm) = **12.4 mm ≤ 12.5** (slot 13.2). The mating plugs sit axially outside the stack, as allowed by "axial connectors".
+- Thermal: the DRV8874 pads need via arrays to inner copper. Board heat spreading is per Thermal A43C.
+
+**Fit verdict: FITS** (area 66 %, MCU corner 0.26 mm inside, height 12.4/12.5 mm), provisional until CAD.
+
+**Fallbacks, in order, if CAD fails:**
+1. Single PHY (end-of-line hand), saving ~110 mm² with coupling.
+2. Fine-pitch 0.5 mm board-to-board header + 0.8 mm connectors (~−150 mm²).
+3. Populate the inner faces with passives, gaining up to +4824 mm².
+4. Put the 5 DCX16 S bridges (I_nom 0.144 A) on one DRV8912-Q1-class multi-half-bridge. This saves ~170 mm² but loses analog current sense on the DCX16s, so it needs Arms/Controls agreement.
+5. If the height fails: 0.6 mm boards (−0.4 mm).
+
+**(5) Harness re-book (supersedes §16.4(3)).** The motors and board are both in the forearm, so the 22 motor conductors × 1.7 m are void.
+| item | conductors × length | gauge / mass per m | per side |
+|---|---|---|---|
+| motor leads, board→motor (local) | 22 × 0.15 m [EST, Arms layout] | SiF 0.25, 5.4 g/m | 17.8 g |
+| 24 V feed bay→forearm, rails A and B never paralleled (R-038), so +A, −A, +B, −B | 4 × 1.6 m [EST, bay→forearm board, incl. loops] | SiF 0.25, 5.4 g/m (0.37 V drop at 1.67 A) | 34.6 g |
+| HAND_RAIL_EN A/B to the RP40 CTRL pins (§16.6 reset) | 2 × 1.6 m | 0.14 mm², ~2.5 g/m [EST] | 8.0 g |
+| encoder leads (local) | 6 × 5 × 0.1 m | AWG30, ~1.5 g/m [EST] | 4.5 g |
+| **total** | | | **≈ 65 g/side → 0.130 kg both** |
+
+**Change: 0.404 → 0.130 kg bare (−0.274 kg); sleeved (+12 %) 0.452 → 0.146 kg (−0.306 kg).** EtherCAT to the hand is unchanged and not in this line. Arms' "only the 24 V pair crosses" needs to say **4 power conductors + 2 enable lines**, because the two rails are separate by R-038. A shared return would save 1 conductor (−8.6 g/side) but couples the rails; not proposed.
+
+**(6) Shoulder-bay air sensor (Thermal ceaf729): ADOPTED.** One NCP15WF104F03RC 0402 NTC (−40…125 °C, §16.6) on the RP40 bracket PCB in bay free air, read differentially on one XMC4800 ADC channel over 1 conductor + the rail-A return (0.14 mm² × 1.6 m ≈ 4 g + 2 resistors). Firmware: per-rail cap 1.67 A to 60 °C bay air, then derated along the RECOM curve (provisionally the RP40-2415SFR bare curve, 2.2 %/K to 0 at 105 °C; O-E13 open). Open-sensor or short-sensor reads as hot, so the cap goes to 0. It replaces the 90/100 °C bracket-NTC rule. **Mass ≈ 0.005 kg/side, 0.010 kg both ≤ 0.02 kg (R-043)**, booked inside the harness credit above.
+
+**Open:**
+- CAD fit (Arms).
+- XMC4300→XMC4800 swap note to the Arbiter.
+- Thermal re-check at 4.3 W hot.
+- XMC4800 pin-compatibility and CCU4 count/direction confirmation in the reference manual.
+- Encoder resolution choice (Arms).
+- O-E13 RECOM.
+- O-E12 **closed** by the DP83822HF.
