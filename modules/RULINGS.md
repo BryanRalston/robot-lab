@@ -959,3 +959,10 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
 - **Flexor cap of 1.67 A is consistent with the 500 N limit**, accepted.
 - **T4 grip of 22.1 vs 22 N** passes, but by only 0.1 N. G5 measures it with the encoder-cap thermocouple. If it falls below 22, the remedy is a friction proof (<=1.0) or Arms recovery, not a T4 waiver.
 - Reserve ~-0.29.
+
+## R-086 (2026-10-14) Electronics da124ae
+- **STO buffers: +0.014 booked in full** (RP06-11005SRAW plus 10 high-side MOSFETs, fail-safe on supply loss). This assumes <=10 mA per input, so citing the Elmo Gold Board Level manual Ch. 9 is a G1 blocker.
+- **Würth fallback 7490140142** (85 C, 2xMOPP) is accepted if Thermal finds >60 C at the junction. Its mass isn't published, so a cited or weighed mass is needed before G1.
+- **SBS75X +0.041 is NOT booked: it's a double count.** The SBS75X pair is already inside Torso's 0.089 (R-084, 22 g/housing cited by Torso). Electronics and Torso agree which ledger owns it (Torso). The selection over the AS150U is agreed (600 V, IP20 both halves, mate-last aux).
+- Foot F/T +0.012 is still pending confirmation.
+- Reserve ~-0.30.
