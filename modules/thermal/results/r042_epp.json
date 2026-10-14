@@ -1,0 +1,18 @@
+{
+ "walk|Al anodised/painted|0mm": 69.0,
+ "walk|Al anodised/painted|3mm": 66.6,
+ "walk|Al anodised/painted|5mm": 66.0,
+ "walk|Al anodised/painted|10mm": 65.2,
+ "walk|low-e foil|0mm": 69.0,
+ "walk|low-e foil|3mm": 65.2,
+ "walk|low-e foil|5mm": 63.3,
+ "walk|low-e foil|10mm": 59.7,
+ "still|Al anodised/painted|0mm": 69.0,
+ "still|Al anodised/painted|3mm": 66.8,
+ "still|Al anodised/painted|5mm": 66.2,
+ "still|Al anodised/painted|10mm": 65.5,
+ "still|low-e foil|0mm": 69.0,
+ "still|low-e foil|3mm": 65.5,
+ "still|low-e foil|5mm": 63.7,
+ "still|low-e foil|10mm": 60.3
+}
