@@ -1,0 +1,57 @@
+{
+ "hip bracket": {
+  "vm_max": 108.94028408089682,
+  "vm_p995": 44.96512909212818,
+  "at_mm": [
+   26.7,
+   34.4,
+   1208.1
+  ],
+  "max_disp_mm": 0.06023708844424342,
+  "tets": 15861,
+  "dofs": 80106,
+  "F_axial": 1892.3490000000002,
+  "M_lateral_Nm": 189.2,
+  "SF_yield_landing": 11.186446256373758,
+  "SF_yield_landing_peak": 4.61720844813001,
+  "SF_fatigue_walk": 8.160169543187465
+ },
+ "femur": {
+  "vm_max": 94.93452902964812,
+  "vm_p995": 62.785985100706384,
+  "at_mm": [
+   42.0,
+   4.6,
+   824.6
+  ],
+  "max_disp_mm": 0.38508678856813344,
+  "tets": 20352,
+  "dofs": 120123,
+  "F_axial": 1892.3490000000002,
+  "H_lateral": 638.8,
+  "M_root_Nm": 227.1,
+  "region": "hip-end lug + 150 mm tube",
+  "SF_yield_landing": 8.011342008781206,
+  "SF_yield_landing_peak": 5.298388322365962,
+  "SF_fatigue_walk": 5.844028350189074
+ },
+ "tibia": {
+  "vm_max": 76.99944700641288,
+  "vm_p995": 61.55347754863427,
+  "at_mm": [
+   34.6,
+   7.5,
+   130.3
+  ],
+  "max_disp_mm": 0.5381339331600262,
+  "tets": 18154,
+  "dofs": 107049,
+  "F_axial": 1892.3490000000002,
+  "H_lateral": 467.2,
+  "M_root_Nm": 189.2,
+  "region": "ankle fork + 150 mm tube",
+  "SF_yield_landing": 8.171756008465527,
+  "SF_yield_landing_peak": 6.532514447254508,
+  "SF_fatigue_walk": 5.9610454443157295
+ }
+}

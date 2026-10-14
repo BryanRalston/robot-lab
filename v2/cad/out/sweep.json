@@ -1,0 +1,80 @@
+{
+ "hip_pitch": {
+  "clash_free": [
+   -105,
+   40
+  ],
+  "need": [
+   -100,
+   30
+  ],
+  "ok": true
+ },
+ "hip_roll": {
+  "clash_free": [
+   0,
+   20
+  ],
+  "need": [
+   0,
+   15
+  ],
+  "ok": true
+ },
+ "knee": {
+  "clash_free": [
+   0,
+   120
+  ],
+  "need": [
+   0,
+   120
+  ],
+  "ok": true
+ },
+ "ankle_pitch": {
+  "clash_free": [
+   -45,
+   40
+  ],
+  "need": [
+   -35,
+   30
+  ],
+  "ok": true
+ },
+ "ankle_roll": {
+  "clash_free": [
+   -25,
+   25
+  ],
+  "need": [
+   -20,
+   20
+  ],
+  "ok": true
+ },
+ "hip_yaw": {
+  "clash_free": [
+   -35,
+   45
+  ],
+  "need": [
+   -20,
+   30
+  ],
+  "ok": true
+ },
+ "both_hip_roll=-5": {
+  "clashes": 0
+ },
+ "both_hip_roll=-8": {
+  "clashes": 0
+ },
+ "both_hip_roll=-10": {
+  "clashes": 0
+ },
+ "both_hip_roll=-12": {
+  "clashes": 0
+ }
+}

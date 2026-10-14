@@ -1,0 +1,18 @@
+{
+ "standing": [],
+ "L_hip_pitch=-105": [],
+ "L_hip_pitch=40": [],
+ "L_hip_roll=-6 (single leg, v3 limit)": [],
+ "L+R_hip_roll=-12 (pelvis shift)": [],
+ "L_hip_roll=15": [],
+ "L_knee=0": [],
+ "L_knee=135": [],
+ "L_ankle_pitch=-45": [],
+ "L_ankle_pitch=40": [],
+ "L_ankle_roll=-25": [],
+ "L_ankle_roll=25": [],
+ "L+R_hip_yaw=-35 (turn)": [],
+ "L_hip_yaw=45": [],
+ "L hip -90 + knee 120 (sit)": [],
+ "L hip -100 + knee 135 (deep squat)": []
+}
