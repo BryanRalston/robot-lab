@@ -748,6 +748,21 @@ Recorded: rail A = F1–F3 + S1, S2 + hand logic; rail B = F4–F6 + S3–S5. Si
 
 **Mass change this section:** +0.022 (hand leads, booked by the Arbiter) + 0.0006 (optos, inside the +0.001 booked). No other change.
 
+
+### 18.2b Arbiter R-075 (recorded 2026-10-14)
+- **Functional isolation not sufficient.** The TLP383 ×4 functional isolation with a shared return was accepted only if the pack bus is SELV (≤ 60 V DC). It is not: 4.20 V/cell (R-036), the P-045 clamp turns on at 88 V, and the ceiling is 92 V. **The condition fails.**
+- **Always-on hand-logic supply:** RECOM RP03-RAW, isolated, ×2 (one per arm, in the shoulder bay). It **replaces the LM5164-Q1** in §16.8 item 4a. The AO return is no longer shared with −Vin. The TLP383s stay on CTRL (§16.8 4b, §18.2a).
+  - **Datasheet:** RECOM RP03-RAW (recom-power.com/pdf/Powerline_DC-DC/RP03-RAW.pdf).
+    - Input 36–160 VDC continuous, 4:1, 200 VDC for 1 s.
+    - 3 kVAC/1 min reinforced isolation.
+    - −40…+105 °C with derating; > 90 °C without derating.
+    - DIP-24, 31.8 × 20.3 × 10.6 mm, **14 g typ.**
+  - **Input check:** 43–92 V lies inside 36–160 V, with a 68 V margin to 160 V and a 108 V margin to the 200 V surge rating. **PASS.** No alternative needed.
+  - **Variant note (to Arbiter):** R-075 names the 11024SRAW (24 V / 125 mA). §16.8 sized AO as a **12 V, ≈ 3.0 W hot** rail. The 12 V variant of the same series is **RP03-11012SRAW** (12 V / 250 mA, 84.5 %, same package and 14 g). Recommend that variant. Load 3.0 W against the 3 W rating gives **≈ 0 % margin**. Thermal and Arms must confirm the 3.0 W hot figure, or hand logic load must be trimmed. Otherwise the next size up is needed (not cited here).
+  - **Mass:** 2 × 0.014 = 0.028 kg, against the 0.004 kg [EST] for the LM5164-Q1 buck. **Net +0.024 kg robot.**
+- **T-029 addition:** no BiSS-C CRC errors and no POSIF count errors under common-mode stress. Test with the isolated AO ground floating against −Vin, with drives PWM-switching at full bus (43–92 V).
+- **G1 gate item:** the MR30 retention clip must be a cited catalogue part or a drawn part with a computed mass before G1.
+
 ### 18.2 Checked and not counted
 - **STM32H7 drop:** never booked as a separate mass. The hand board was booked as a board lump (Arms), and Thermal A43C already assumed it dropped. **Saving 0.**
 - **`hand 24 V from wrist DC/DC` row (0.0128 kg):** 0.5 → 0.25 passes (0.6 K), but R-047 put the RP40s in the shoulder bay, so this row's route is stale. Actuators should re-book the row first. **Not counted.**
