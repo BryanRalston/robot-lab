@@ -1,0 +1,298 @@
+{
+ "A Gumlite 47A 6 full": {
+  "mass_foot_kg": 0.0792,
+  "E_MPa": 2.2,
+  "src": "Vibram tech data 47+-3A, 0.55",
+  "plans": {
+   "walk 0.8 ref_m12": {
+    "min": 5.8,
+    "p5": 8.1
+   },
+   "walk 1.0 ref_m12": {
+    "min": 5.7,
+    "p5": 7.8
+   },
+   "walk 1.2 ref_m12": {
+    "min": 5.5,
+    "p5": 7.8
+   },
+   "walk 1.2 ref_ds25": {
+    "min": -6.5,
+    "p5": -4.2
+   },
+   "carry P-042 1.0": {
+    "min": -8.1,
+    "p5": -4.3
+   },
+   "push_recover": {
+    "min": -7.1,
+    "p5": -6.7
+   },
+   "stairs 18 cm": {
+    "min": -5.2,
+    "p5": -3.4
+   }
+  },
+  "inset_toe_mm_1p31BW": 8.5,
+  "block_fits_band": true
+ },
+ "B SP 67A 6 full (Controls ref)": {
+  "mass_foot_kg": 0.1728,
+  "E_MPa": 4.8,
+  "src": "Vibram 7174-6M SP 64-70A; density EST 1.20",
+  "plans": {
+   "walk 0.8 ref_m12": {
+    "min": 8.6,
+    "p5": 10.0
+   },
+   "walk 1.0 ref_m12": {
+    "min": 8.5,
+    "p5": 9.9
+   },
+   "walk 1.2 ref_m12": {
+    "min": 8.3,
+    "p5": 9.9
+   },
+   "walk 1.2 ref_ds25": {
+    "min": -3.7,
+    "p5": -2.2
+   },
+   "carry P-042 1.0": {
+    "min": -4.4,
+    "p5": -2.1
+   },
+   "push_recover": {
+    "min": -4.4,
+    "p5": -4.0
+   },
+   "stairs 18 cm": {
+    "min": -2.7,
+    "p5": -1.6
+   }
+  },
+  "inset_toe_mm_1p31BW": 3.9,
+  "block_fits_band": true
+ },
+ "C SP 67A 6 frame20": {
+  "mass_foot_kg": 0.0979,
+  "E_MPa": 4.8,
+  "src": "",
+  "plans": {
+   "walk 0.8 ref_m12": {
+    "min": 8.6,
+    "p5": 10.0
+   },
+   "walk 1.0 ref_m12": {
+    "min": 8.5,
+    "p5": 9.9
+   },
+   "walk 1.2 ref_m12": {
+    "min": 8.3,
+    "p5": 9.9
+   },
+   "walk 1.2 ref_ds25": {
+    "min": -3.7,
+    "p5": -2.2
+   },
+   "carry P-042 1.0": {
+    "min": -4.4,
+    "p5": -2.1
+   },
+   "push_recover": {
+    "min": -4.4,
+    "p5": -4.0
+   },
+   "stairs 18 cm": {
+    "min": -2.7,
+    "p5": -1.6
+   }
+  },
+  "inset_toe_mm_1p31BW": 3.9,
+  "block_fits_band": true
+ },
+ "D TOP85 3 full [85A EST]": {
+  "mass_foot_kg": 0.0864,
+  "E_MPa": 13.18,
+  "src": "Vibram 7373 Tequilgemma TOP, TOP85 compound, 1/1.8/3/6 mm (hungtathong); 85A and 1.20 EST",
+  "plans": {
+   "walk 0.8 ref_m12": {
+    "min": 10.6,
+    "p5": 11.2
+   },
+   "walk 1.0 ref_m12": {
+    "min": 10.5,
+    "p5": 11.2
+   },
+   "walk 1.2 ref_m12": {
+    "min": 10.5,
+    "p5": 11.1
+   },
+   "walk 1.2 ref_ds25": {
+    "min": -1.5,
+    "p5": -0.8
+   },
+   "carry P-042 1.0": {
+    "min": -1.8,
+    "p5": -0.8
+   },
+   "push_recover": {
+    "min": -1.9,
+    "p5": -1.7
+   },
+   "stairs 18 cm": {
+    "min": -1.1,
+    "p5": -0.7
+   }
+  },
+  "inset_toe_mm_1p31BW": 1.4,
+  "block_fits_band": true
+ },
+ "E TOP85 3 frame20 [85A EST]": {
+  "mass_foot_kg": 0.049,
+  "E_MPa": 13.18,
+  "src": "",
+  "plans": {
+   "walk 0.8 ref_m12": {
+    "min": 10.6,
+    "p5": 11.2
+   },
+   "walk 1.0 ref_m12": {
+    "min": 10.5,
+    "p5": 11.2
+   },
+   "walk 1.2 ref_m12": {
+    "min": 10.5,
+    "p5": 11.1
+   },
+   "walk 1.2 ref_ds25": {
+    "min": -1.5,
+    "p5": -0.8
+   },
+   "carry P-042 1.0": {
+    "min": -1.8,
+    "p5": -0.8
+   },
+   "push_recover": {
+    "min": -1.9,
+    "p5": -1.7
+   },
+   "stairs 18 cm": {
+    "min": -1.1,
+    "p5": -0.7
+   }
+  },
+  "inset_toe_mm_1p31BW": 1.4,
+  "block_fits_band": true
+ },
+ "F SP 67A 6 frame20 + Gumlite 0 centre": {
+  "mass_foot_kg": 0.0979,
+  "E_MPa": 4.8,
+  "src": "",
+  "plans": {
+   "walk 0.8 ref_m12": {
+    "min": 8.6,
+    "p5": 10.0
+   },
+   "walk 1.0 ref_m12": {
+    "min": 8.5,
+    "p5": 9.9
+   },
+   "walk 1.2 ref_m12": {
+    "min": 8.3,
+    "p5": 9.9
+   },
+   "walk 1.2 ref_ds25": {
+    "min": -3.7,
+    "p5": -2.2
+   },
+   "carry P-042 1.0": {
+    "min": -4.4,
+    "p5": -2.1
+   },
+   "push_recover": {
+    "min": -4.4,
+    "p5": -4.0
+   },
+   "stairs 18 cm": {
+    "min": -2.7,
+    "p5": -1.6
+   }
+  },
+  "inset_toe_mm_1p31BW": 3.9,
+  "block_fits_band": true
+ },
+ "G Tequilgemma 7663 4 full [medium ~65A EST]": {
+  "mass_foot_kg": 0.1152,
+  "E_MPa": 4.43,
+  "src": "Vibram 7663 3/4 mm, \"medium hardness\" - no Shore cited, 65A EST",
+  "plans": {
+   "walk 0.8 ref_m12": {
+    "min": 8.8,
+    "p5": 10.0
+   },
+   "walk 1.0 ref_m12": {
+    "min": 8.7,
+    "p5": 9.8
+   },
+   "walk 1.2 ref_m12": {
+    "min": 8.5,
+    "p5": 9.8
+   },
+   "walk 1.2 ref_ds25": {
+    "min": -3.5,
+    "p5": -2.1
+   },
+   "carry P-042 1.0": {
+    "min": -4.2,
+    "p5": -2.2
+   },
+   "push_recover": {
+    "min": -3.9,
+    "p5": -3.6
+   },
+   "stairs 18 cm": {
+    "min": -2.7,
+    "p5": -1.7
+   }
+  },
+  "inset_toe_mm_1p31BW": 4.2,
+  "block_fits_band": true
+ },
+ "H 7663 4 frame20 [65A EST]": {
+  "mass_foot_kg": 0.0653,
+  "E_MPa": 4.43,
+  "src": "",
+  "plans": {
+   "walk 0.8 ref_m12": {
+    "min": 8.8,
+    "p5": 10.0
+   },
+   "walk 1.0 ref_m12": {
+    "min": 8.7,
+    "p5": 9.8
+   },
+   "walk 1.2 ref_m12": {
+    "min": 8.5,
+    "p5": 9.8
+   },
+   "walk 1.2 ref_ds25": {
+    "min": -3.5,
+    "p5": -2.1
+   },
+   "carry P-042 1.0": {
+    "min": -4.2,
+    "p5": -2.2
+   },
+   "push_recover": {
+    "min": -3.9,
+    "p5": -3.6
+   },
+   "stairs 18 cm": {
+    "min": -2.7,
+    "p5": -1.7
+   }
+  },
+  "inset_toe_mm_1p31BW": 4.2,
+  "block_fits_band": true
+ }
+}

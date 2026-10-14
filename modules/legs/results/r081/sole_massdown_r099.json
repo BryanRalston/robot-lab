@@ -1,0 +1,84 @@
+{
+ "basis": "R-099 sole mass-down study (hand model, [EST] where marked). Foot box 240x100 (x -60..180, y +-50), sole CoP window = whole box.\nGumlite 0.55 g/cm3, 47 Shore A (Vibram tech data); E from Gent: 2.2 MPa [EST]. PU 60A 1.24 g/cm3 [EST]. Load 1.31 BW, 65.8 kg.",
+ "touchdown_EST": "edge touchdown 0.5 m/s x 10 kg effective = 1.25 J [EST]",
+ "rows": [
+  {
+   "option": "A full 6 mm + 4 PU corners (L57 baseline)",
+   "t_mm": 6,
+   "area_mm2": 24000,
+   "mass_foot_kg": 0.0934,
+   "mass_robot_kg": 0.1867,
+   "edge_comp_mm": 2.31,
+   "edge_strain": 0.38,
+   "flat_stance_MPa": 0.035,
+   "edge_energy_to_50pct_J": 3.3,
+   "rel_wear_life": 1.0,
+   "source": "Vibram Acquagum 6 mm Gumlite SKU 35002690B / #8529 12 iron 6.4 mm"
+  },
+  {
+   "option": "B full 4 mm skived Gumlite + lips, no bumpers",
+   "t_mm": 4,
+   "area_mm2": 24000,
+   "mass_foot_kg": 0.0563,
+   "mass_robot_kg": 0.1126,
+   "edge_comp_mm": 1.54,
+   "edge_strain": 0.38,
+   "flat_stance_MPa": 0.035,
+   "edge_energy_to_50pct_J": 2.2,
+   "rel_wear_life": 0.56,
+   "source": "skived from #8529/Acquagum [EST process]"
+  },
+  {
+   "option": "C full 3 mm skived Gumlite + lips, no bumpers",
+   "t_mm": 3,
+   "area_mm2": 24000,
+   "mass_foot_kg": 0.0422,
+   "mass_robot_kg": 0.0845,
+   "edge_comp_mm": 1.15,
+   "edge_strain": 0.38,
+   "flat_stance_MPa": 0.035,
+   "edge_energy_to_50pct_J": 1.65,
+   "rel_wear_life": 0.33,
+   "source": "skived [EST process]"
+  },
+  {
+   "option": "D 6 mm perimeter frame 20 mm + lips, no bumpers",
+   "t_mm": 6,
+   "area_mm2": 12000,
+   "mass_foot_kg": 0.0449,
+   "mass_robot_kg": 0.0898,
+   "edge_comp_mm": 2.31,
+   "edge_strain": 0.38,
+   "flat_stance_MPa": 0.07,
+   "edge_energy_to_50pct_J": 3.3,
+   "rel_wear_life": 1.0,
+   "source": "Acquagum/#8529 6-6.4 mm catalogue"
+  },
+  {
+   "option": "E 4 mm perimeter frame 20 mm + lips, no bumpers",
+   "t_mm": 4,
+   "area_mm2": 12000,
+   "mass_foot_kg": 0.0299,
+   "mass_robot_kg": 0.0598,
+   "edge_comp_mm": 1.54,
+   "edge_strain": 0.38,
+   "flat_stance_MPa": 0.07,
+   "edge_energy_to_50pct_J": 2.2,
+   "rel_wear_life": 0.56,
+   "source": "skived [EST process]"
+  },
+  {
+   "option": "F 6 mm frame + 4 PU corners",
+   "t_mm": 6,
+   "area_mm2": 12000,
+   "mass_foot_kg": 0.0538,
+   "mass_robot_kg": 0.1075,
+   "edge_comp_mm": 2.31,
+   "edge_strain": 0.38,
+   "flat_stance_MPa": 0.07,
+   "edge_energy_to_50pct_J": 3.3,
+   "rel_wear_life": 1.0,
+   "source": "catalogue"
+  }
+ ]
+}

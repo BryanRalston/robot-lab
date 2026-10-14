@@ -1,0 +1,71 @@
+{
+ "DY": 3.0,
+ "DZ": 1.5,
+ "rows": [
+  {
+   "knee": 0,
+   "L_knee trunnion bracket top plate (thigh) [EST]": 3.54,
+   "L_knee trunnion cheek -y [EST]": 3.04,
+   "L_knee trunnion cheek +y [EST]": 3.04
+  },
+  {
+   "knee": 15,
+   "L_knee trunnion bracket top plate (thigh) [EST]": 5.26,
+   "L_knee trunnion cheek -y [EST]": 3.86,
+   "L_knee trunnion cheek +y [EST]": 3.86
+  },
+  {
+   "knee": 30,
+   "L_knee trunnion bracket top plate (thigh) [EST]": 6.78,
+   "L_knee trunnion cheek -y [EST]": 4.55,
+   "L_knee trunnion cheek +y [EST]": 4.55
+  },
+  {
+   "knee": 45,
+   "L_knee trunnion bracket top plate (thigh) [EST]": 7.99,
+   "L_knee trunnion cheek -y [EST]": 5.08,
+   "L_knee trunnion cheek +y [EST]": 5.08
+  },
+  {
+   "knee": 60,
+   "L_knee trunnion bracket top plate (thigh) [EST]": 8.77,
+   "L_knee trunnion cheek -y [EST]": 5.41,
+   "L_knee trunnion cheek +y [EST]": 5.41
+  },
+  {
+   "knee": 75,
+   "L_knee trunnion bracket top plate (thigh) [EST]": 9.01,
+   "L_knee trunnion cheek -y [EST]": 5.51,
+   "L_knee trunnion cheek +y [EST]": 5.51
+  },
+  {
+   "knee": 90,
+   "L_knee trunnion bracket top plate (thigh) [EST]": 8.62,
+   "L_knee trunnion cheek -y [EST]": 5.34,
+   "L_knee trunnion cheek +y [EST]": 5.34
+  },
+  {
+   "knee": 105,
+   "L_knee trunnion bracket top plate (thigh) [EST]": 7.54,
+   "L_knee trunnion cheek -y [EST]": 4.88,
+   "L_knee trunnion cheek +y [EST]": 4.88
+  },
+  {
+   "knee": 120,
+   "L_knee trunnion bracket top plate (thigh) [EST]": 5.83,
+   "L_knee trunnion cheek -y [EST]": 4.12,
+   "L_knee trunnion cheek +y [EST]": 4.12
+  },
+  {
+   "knee": 135,
+   "L_knee trunnion bracket top plate (thigh) [EST]": 3.62,
+   "L_knee trunnion cheek -y [EST]": 3.08,
+   "L_knee trunnion cheek +y [EST]": 3.08
+  }
+ ],
+ "mins": {
+  "L_knee trunnion bracket top plate (thigh) [EST]": 3.54,
+  "L_knee trunnion cheek -y [EST]": 3.04,
+  "L_knee trunnion cheek +y [EST]": 3.04
+ }
+}

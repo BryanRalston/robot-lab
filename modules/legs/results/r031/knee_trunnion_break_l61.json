@@ -1,0 +1,61 @@
+{
+ "basis": "L61 (Thermal ec50e4e): knee trunnion -> femur thermal break, hand calc [EST unless cited].\nLoads: knee peak 159.8 N.m walk_1p2, need 240 N.m (r4/requirements.md); knee lever 47.5 mm -> screw force total walk 3364 N, design 5053 N,\nper trunnion side half. Screw axis ~[-0.378,0,0.926] (model_v4 housing axis), trunnion at x -130 vs femur axis x 18 -> 148 mm offset.\nMaterials: PEI k 0.12 W/mK, sustained <=28 MPa, fault <=76 (A37 rev B); Ti-6Al-4V k 6.7, Sy 880 [cat]; steel bolt k 40; Ti bolt k 6.7.",
+ "F_walk_N": 3364,
+ "F_design_N": 5053,
+ "bracket_moment_Nm": 692,
+ "option1_bolted": {
+  "2 bolts/joint x2 joints (M5 Ti bolt, Ti limiter 7/5.5x25 @4 kN)": {
+   "R_KpW": 43.8,
+   "shear_per_joint_N": 2526,
+   "couple_N": 8656,
+   "slip_capacity_N": 0,
+   "slip_ok": false,
+   "separation_ok": false,
+   "limiter_stress_MPa": 272.0
+  },
+  "3 bolts/joint x2 joints (M5 Ti bolt, Ti limiter 7/5.5x25 @4 kN)": {
+   "R_KpW": 29.2,
+   "shear_per_joint_N": 2526,
+   "couple_N": 8656,
+   "slip_capacity_N": 1003,
+   "slip_ok": false,
+   "separation_ok": true,
+   "limiter_stress_MPa": 272.0
+  },
+  "4 bolts/joint x2 joints (M5 Ti bolt, Ti limiter 7/5.5x25 @4 kN)": {
+   "R_KpW": 21.9,
+   "shear_per_joint_N": 2526,
+   "couple_N": 8656,
+   "slip_capacity_N": 2203,
+   "slip_ok": false,
+   "separation_ok": true,
+   "limiter_stress_MPa": 272.0
+  },
+  "6 bolts/joint x2 joints (M5 Ti bolt, Ti limiter 7/5.5x25 @4 kN)": {
+   "R_KpW": 14.6,
+   "shear_per_joint_N": 2526,
+   "couple_N": 8656,
+   "slip_capacity_N": 4603,
+   "slip_ok": true,
+   "separation_ok": true,
+   "limiter_stress_MPa": 272.0
+  },
+  "6 bolts/joint x2, M6 10.9 @10 kN, Ti 10/6.4x10 (load-capable)": {
+   "R_KpW": 1.8,
+   "slip_capacity_N": 15403,
+   "separation_ok": true
+  }
+ },
+ "option2_trunnion_pin_PEI": {
+  "bush": "PEI \u00f89/13 x 12, 2 mm wall, cheek boss \u00f818 x 12 (cheek 6 -> boss +6 mm)",
+  "bearing_walk_MPa": 15.6,
+  "bearing_design_MPa": 23.4,
+  "creep_ok": true,
+  "fault_ok": true,
+  "R_bush_side": 98.2,
+  "R_washer_side": 803.8,
+  "R_joint_KpW": 43.8,
+  "mass_knee_g": 6.2,
+  "mass_robot_kg": 0.0123
+ }
+}

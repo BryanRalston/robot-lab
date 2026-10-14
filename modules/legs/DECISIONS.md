@@ -290,3 +290,10 @@
 - L58 (ID 629dbed) Rear panel tabs on the drive band clamps at the 80×60 pocket corners: thigh frame (x −38 tip, y 100/160, z 700/780). Tabs 29.5 × 8 × 2 mm from the band (x −8.5) to x −38.
   - Clearance: ≥ 10.4 mm to the hip screw −y body over the hip range (knee_drive_bay_r062.py → results/r031/knee_drive_tabs_r062.json). Drive plate narrowed to y 106–154, so the tabs clear the drives by 2 mm.
   - Mass: integrated as extended clamp ears, ≈ 0.5 g each [EST] = **+0.004 robot**. Separate 6061 tabs would be +0.010.
+
+## L59 — Sole pad (R-099 / R-102), 2026-10-14
+Supersedes the R-099 "D 6 mm frame" pick. Chosen: 3 mm firm Vibram sheet (7373 TOP85 / 7663), ≥ 60A, 20 mm perimeter frame. 0.049 kg/foot, 0.098 robot (−0.088). Walk CoP margin 8.2–10.5 mm (sole_cop_r1 model). Gate: Materials Shore test ≥ 60A, else SP 67A 6 mm frame (0.098/foot). Plans need a 16 mm inset → Grok Build brief. Sim foot 18 → 21 mm.
+## L60 — Trunnion cheeks / top plate moved off rev B fins, 2026-10-14
+Cheeks moved 3.0 mm outward (+y/−y). The 1.5 mm trial gave only 2.33 mm. Top plate raised 1.5 mm in z. Min clearance over knee 0–135°: cheeks 3.04 mm, top plate 3.54 mm (≥ 3 ✓). Rev B fins untrimmed. Pin span +6 mm, mass ≈ +1 g/knee [EST]. knee_bracket_move_l60.py (DY=3.0, DZ=1.5).
+## L61 — Trunnion thermal break, 2026-10-14
+A bolted bracket break at ≥ 30 K/W is infeasible (slip and separation vs the 8.66 kN couple). Proposed: PEI trunnion-pin bushes ø9/13 × 12 + thrust washers, 43.8 K/W, +0.012 kg robot [EST] (FLAG: +3.7 g over Thermal's +8.6 g). See results/a38/TRUNNION_BREAK.md.
