@@ -1008,3 +1008,9 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
 - **Sternum plate P-052: +0.058** in full (needed by the R-088 37 mm chest move). ID checks whether the chest pad 1 mm CF face can serve as the sternum skin, to cut that, and gets credit when it is measured.
 - Forearm cover +0.014 is unchanged.
 - Reserve ~**-0.41** (on estimates).
+
+## R-094 (2026-10-14) Sternum: pad face as skin (ID, Torso ab432da)
+- **Adopted: the chest pad 1 mm CF face serves as the sternum skin**, with a 1.5 mm x 15 mm PC bezel ring (4 captive M4s), replacing P-052. A crushed face is the visible replace-me indicator.
+- Conditions: the face is finished (clear coat or texture); Torso and Materials confirm it survives handling, UV and abrasion as an outer surface; and Controls checks T-031 with the skin at x~+0.147.
+- Mass: ring +0.015 (EST addition, full); CF shell removed -0.045 at half credit, -0.0225. Net -0.0075, replacing the R-093 +0.058, so **-0.066** here.
+- Reserve ~**-0.34**.
