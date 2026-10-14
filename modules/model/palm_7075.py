@@ -3,7 +3,7 @@ palm(c) returns the palm solid centred on c (same envelope as the R-027 booking:
 Side (L/R) is taken from sign(c[1]) so the thumb mount mirrors without changing the model_v4 call.
 
 Parts of the one machined body (all 7075-T6, rho 2.81 g/cc, MATERIALS_DB AL7075T6):
-  - wrist plate   (top, z +41..+45, 4 mm): wrist-lug pocket, 2 underside pockets, + 11 tendon sheath bores dia 2.5 on an r 9 mm circle around
+  - wrist plate   (top, z +41..+45 before the A42 DROP_MM = 12 shift, i.e. +29..+33 after; neck 20x22 bridges to the lug): wrist-lug pocket, 2 underside pockets, + 11 tendon sheath bores dia 2.5 on an r 9 mm circle around
                    the wrist axis (tendon length change with wrist pitch/yaw kept small), 4x M3 sheath-stop holes [EST].
   - shell walls   1.5 mm (R-027 wall; Protolabs nominal >= 1.02 mm). Front (grip) face solid for pads; back face has a
                    60 x 66 window (R3 corners) closed by the CF backplate; each side has an 18 x 60 window (R3).
@@ -52,9 +52,18 @@ def _parts(side=1):
     thumb = _box(6, 22, 22, (t/2 + 3, -30*side, -10)).cut(cq.Workplane('YZ').circle(4).extrude(20).translate((t/2 - 5, -30*side, -10)))
     return dict(shell=shell, plate=plate, bar=bar, thumb=thumb)
 
+DROP_MM = 12.0   # A42 (arms/A42_A43_R4.md, wrist_clash_r4.json): wrist-plate top 27 mm below the wrist pivot (was 15) -> sphere rule,
+                 # fork/cross inside r 24.5, clash-free for any pitch/yaw over P-026 ±60/±30. The palm body moves down DROP_MM inside the
+                 # same model_v4 call; a 7075 neck 20(x) x 22(y) x DROP_MM (|y| <= 11 < cheek inner face 14 - 2 gap) carries the wrist lug load.
+NECK = (20.0, 22.0)
+
 def palm(c=(0, 0, 0)):
     side = 1 if c[1] >= 0 else -1
     p = _parts(side); s = p['shell'].union(p['plate']).union(p['bar']).union(p['thumb'])
+    s = s.translate((0, 0, -DROP_MM))
+    if DROP_MM > 0:
+        neck = _box(NECK[0], NECK[1], DROP_MM, (0, 0, 45 - DROP_MM/2)).cut(_box(NECK[0]-4, NECK[1]-4, DROP_MM+2, (0, 0, 45 - DROP_MM/2)))  # 2 mm wall tube [EST]
+        s = s.union(neck)   # neck from the old plate top (z +45) down to the dropped plate; sheaths inside |x|<8,|y|<9 pass the bore, others beside it
     return s.translate(tuple(c))
 
 def variants():
