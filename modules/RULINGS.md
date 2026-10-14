@@ -847,3 +847,11 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
 - **Wrist open-frame:** -0.067 at half credit gives -0.034 (was -0.036), +0.002. The +0.005 guard contingency is not booked.
 - **Legs:** (1) L47 shape-opt and (2) the pocketed 7075 ankle cross (with FEA and anti-galling) are **approved to pursue**; credit only on FEA/CAD. (3) **The knee-fin cut is rejected** unless Controls/Thermal re-verify the carry x1.1 case at the reduced area, because the margin at fin efficiency 0.7 is already thin. The femur and tibia walls aren't pursued.
 - Reserve ~0.23 (waiver; >=0.07 still needed, expected from L47 opt).
+
+## R-074 (2026-10-14) Torso 8521c35 / f995fb0
+- **The 2.5 mm² battery link is rejected** (it fails overload against the 60 A continuous contract and the 125 A fuse). The main link stays at >=10 mm², and the R-071 -0.012 pending credit is **withdrawn**. 2.5 mm² is allowed only on branches with their own fuse of 30 A or less. Read the L50S125 TCC clearing time before G1.
+- **O-T4 is closed** (450 V DC, 20 kA).
+- **Torso -0.0225 cited is accepted** (190 g contactor, HS25 47R pre-charge).
+- **EV100 contactor is rejected as specified** (+1.5 W coil exceeds the +0.74 W walk margin). It can come back only with a cited economizer/PWM hold that keeps the added heat inside the margin.
+- **Pelvis/web pocketing is approved for FEA** on the bryan PC (FEA_SPEC_torso_pocketing.md), queued through Robot Lab one session at a time after the pad case. It earns credit only once FEA is done. The bulkhead stays at its current size.
+- Reserve ~0.24 (waiver; >=0.06 still needed: L47 opt + torso pocketing).
