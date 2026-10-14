@@ -1,0 +1,74 @@
+{
+ "adopted 55/70/80/88|clamped|walk/carry": {
+  "Te": 75.5,
+  "Te_cl": 66.4,
+  "Tw": 88.7,
+  "Ts": 59.7,
+  "I_sust": 0.7,
+  "grip_N_fric1.3": 22.1,
+  "grip_N_fric1.2": 23.9
+ },
+ "adopted 55/70/80/88|clamped|still": {
+  "Te": 85.6,
+  "Te_cl": 76.5,
+  "Tw": 94.5,
+  "Ts": 70.2,
+  "I_sust": 0.5,
+  "grip_N_fric1.3": 15.8,
+  "grip_N_fric1.2": 17.0
+ },
+ "adopted 55/70/80/88|loose|walk/carry": {
+  "Te": 86.9,
+  "Te_cl": 71.7,
+  "Tw": 101.0,
+  "Ts": 60.3,
+  "I_sust": 0.7,
+  "grip_N_fric1.3": 22.1,
+  "grip_N_fric1.2": 23.9
+ },
+ "adopted 55/70/80/88|loose|still": {
+  "Te": 94.6,
+  "Te_cl": 81.0,
+  "Tw": 103.8,
+  "Ts": 70.4,
+  "I_sust": 0.5,
+  "grip_N_fric1.3": 15.8,
+  "grip_N_fric1.2": 17.0
+ },
+ "tight 50/60/70/80|clamped|walk/carry": {
+  "Te": 75.5,
+  "Te_cl": 66.4,
+  "Tw": 84.1,
+  "Ts": 59.7,
+  "I_sust": 0.7,
+  "grip_N_fric1.3": 22.1,
+  "grip_N_fric1.2": 23.9
+ },
+ "tight 50/60/70/80|clamped|still": {
+  "Te": 75.3,
+  "Te_cl": 69.7,
+  "Tw": 82.9,
+  "Ts": 64.8,
+  "I_sust": 0.55,
+  "grip_N_fric1.3": 17.3,
+  "grip_N_fric1.2": 18.8
+ },
+ "tight 50/60/70/80|loose|walk/carry": {
+  "Te": 85.3,
+  "Te_cl": 71.4,
+  "Tw": 94.3,
+  "Ts": 60.0,
+  "I_sust": 0.55,
+  "grip_N_fric1.3": 17.3,
+  "grip_N_fric1.2": 18.8
+ },
+ "tight 50/60/70/80|loose|still": {
+  "Te": 82.4,
+  "Te_cl": 72.9,
+  "Tw": 91.1,
+  "Ts": 65.1,
+  "I_sust": 0.55,
+  "grip_N_fric1.3": 17.3,
+  "grip_N_fric1.2": 18.8
+ }
+}

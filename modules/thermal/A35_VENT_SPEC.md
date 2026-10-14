@@ -37,3 +37,20 @@ Vents alone can't do this: the case is at about +50 K even at target h. Requirem
 - J-T1 (CFD, 'bryan' PC via Robot Lab): confirm h ≥ 15 and the collar ≤ 60 °C with ID's louvre CAD, at walking, at stand-still (natural convection only) and at 35 °C.
 - ID: the real panel area over each housing (the 430 cm² is [EST]).
 - Standing still with no walking airflow was not computed. The low-inlet/high-outlet chimney is required for that case.
+
+## A36 compliance (ID 6f842b0, `design/a36_vents.json`), RL Thermal 2026-10-14
+ID's panels are smaller than my 430 cm² estimate (knee 280 cm², hip 250 cm², front + outboard only), so the % rules govern.
+
+| joint | inlet (≥ 50 cm² and ≥ 30 %) | outlet (≥ 60 cm² and ≥ 35 %) | series flow at 1 m/s, C_d 0.6 (need 2.9 L/s) | verdict |
+|---|---|---|---|---|
+| knee | 84 cm² = 30.0 % of 280 ✓ | rear fully open (no panel), rear 25 mm fins in free air ✓ | ≈ 5.0 L/s | **PASS** |
+| hip_pitch | 75 cm² = 30.0 % of 250 ✓ | 60 cm² = 35.1 % of the 171 cm² hem band ✓, outboard of the collar ✓ | 1/√(1/75² + 1/60²) = 47 cm² → **2.8 L/s (−3 %)** | **PASS on the rules, zero margin on flow** |
+
+- **Knee:** compliant.
+  - The 12 mm local bulge over the 9 mm front fins (8 mm gap) is accepted. Slots must stay axial and in line with the fins.
+- **Hip:**
+  - Both openings sit exactly at their minima.
+  - **Ask ID to raise the hem band to ≥ 70 cm² open** (41 % of 171, or a longer band). That gives 3.1 L/s.
+  - Inlet 30 % is the floor; do not reduce it further.
+  - Exhaust routing outboard of the thigh-clamp collar, with the collar left uncovered, meets §3.
+- Both still need J-T1 to confirm.
