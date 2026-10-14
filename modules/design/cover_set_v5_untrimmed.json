@@ -22,9 +22,9 @@
    "panel": "foot upper shell",
    "P": "P-020",
    "material": "PC 1.5",
-   "area_m2_side": 0.0771,
+   "area_m2_side": 0.0738,
    "panels": 2,
-   "kg": 0.285,
+   "kg": 0.274,
    "cf_kg": null
   },
   {
@@ -58,18 +58,18 @@
    "panel": "knee cap",
    "P": "P-022 (new)",
    "material": "PC 1.5",
-   "area_m2_side": 0.03,
+   "area_m2_side": 0.0363,
    "panels": 2,
-   "kg": 0.116,
+   "kg": 0.139,
    "cf_kg": null
   },
   {
    "panel": "hip skirt (flexible)",
    "P": "P-023 (new)",
    "material": "TPU-nylon fabric + PC rim strip",
-   "area_m2_side": 0.11,
+   "area_m2_side": 0.1195,
    "panels": 2,
-   "kg": 0.114,
+   "kg": 0.12,
    "cf_kg": null
   },
   {
@@ -92,13 +92,14 @@
   }
  ],
  "totals": {
-  "P-020": 2.012,
-  "P-022 (new)": 0.116,
-  "P-023 (new)": 0.114,
+  "P-020": 2.0,
+  "P-022 (new)": 0.139,
+  "P-023 (new)": 0.12,
   "P-024 (new)": 0.055,
   "P-025 (new)": 0.098
  },
  "booked_P020_skin_kg": 1.157,
- "delta_vs_booked_kg": 1.238,
- "pc_area_m2": 1.073
+ "delta_vs_booked_kg": 1.255,
+ "measured": false,
+ "pc_area_m2": 1.067
 }

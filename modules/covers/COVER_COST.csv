@@ -1,11 +1,11 @@
 item,qty,unit,unit_cost_usd,total_usd,basis,source
 PC sheet 0.060in (1.5mm) 24x48in clear,3,sheet,25.80,77.40,cited,https://www.falkenacrylic.com/products/clear-polycarbonate-sheet-1-16-24x48
-Vacuum-form tool 6061/tooling board per rigid panel (A29 M1-M12; L/R separate),12,tool,900,10800,[EST],-
-Trim fixture per rigid panel,12,fixture,250,3000,[EST],-
-Hip-skirt rim strip former (A29 M13),1,tool,300,300,[EST],-
-Waist bellows dip/rotational mould (A29 M14; COTS bellows ~150 if one fits ø300x90),1,tool,1500,1500,[EST],-
+Vacuum-form tool 6061/tooling board per rigid panel (A29 M1-M8; L/R separate; shin deleted),8,tool,900,7200,[EST],-
+Trim fixture per rigid panel,8,fixture,250,2000,[EST],-
+Hip-skirt rim strip former (A29 M9),1,tool,300,300,[EST],-
+Waist bellows dip/rotational mould (A29 M10; COTS bellows ~150 if one fits ø300x90),1,tool,1500,1500,[EST],-
 Sewing patterns skirt + boot (A29 P1-P2),2,pattern,200,400,[EST],-
-Per rigid panel: forming 25 + CNC trim 30 + coat 20 + inserts 6 + sheet 4.84,12,panel,85.84,1030.08,sheet cited rest [EST],-
+Per rigid panel: forming 25 + CNC trim 30 + coat 20 + inserts 6 + sheet 4.84,8,panel,85.84,686.72,sheet cited rest [EST],-
 Rim strip pieces formed + trimmed,2,piece,20,40,[EST],-
 Sewn fabric parts (2 skirt + 2 boot) incl. TPU-nylon + zips,4,part,60,240,[EST],-
 TPE bellows part,1,part,40,40,[EST],-
