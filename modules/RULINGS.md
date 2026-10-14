@@ -1103,3 +1103,8 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
 - L61 boss windows: 0.
 - TPU film removed from the sternum skin, since the R-095 clear coat is confirmed on the drawing. 4.6 g is cited (DoonX, ASTM D792): **-0.005** at full credit.
 - Net +0.016. Reserve ~-0.67 (before the thin trunnion bush credit).
+
+## R-114 (2026-10-14) L62 thin trunnion bush; bond creep
+- Dropping the break is still not accepted: the 80 C bond allowable is short-term lap shear, not a creep rating (Materials). Book **L62 with a 1.8 mm wall** (Ultem 4001, 12 mm pin, ~10.6 K/W after wear): +0.031, replacing L61 +0.070, so **-0.039**. Actuators must accept opening the trunnion bore to 12 mm; otherwise use the 9 mm fallback (+0.040).
+- G5 test added: EA 9396 lap coupons with our prep, 1000 h at 80 C at >=3.3 MPa. The 2x6 mm pins stay as the backup until it passes (L63 FEA pending).
+- Reserve ~-0.63.
