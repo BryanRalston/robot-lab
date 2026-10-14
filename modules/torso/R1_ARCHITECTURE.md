@@ -409,6 +409,18 @@ Total ≈ **0.33 m per pole, ≈ 0.66 m of sleeved bus (+ and −)**.
 - Cell intrusion: deflections of 1–3 mm need a ≥ 5 mm gap plus margin. SAE J2464 / UN 38.3 give crush/impact tests for packs/cells but no enclosure intrusion allowance (not fetched) → keep cells unloaded by design.
 - **Net vs 0.053: no change** (the sandwich stays; rails/bulkhead path unchanged).
 
+## 24. T-031 backing: three options compared (Materials c859e43)
+| option | load path | check | mass | data | verdict |
+|---|---|---|---|---|---|
+| **A. Materials: machined 101 × 101 land on the 12 mm 7075 shoulder bulkhead + integral 60 × 6 mm back rib, 0.30 m span** | pad → bulkhead → shoulder/shell | 216 MPa at 24.4 kN → SF 2.3 (cited 7075). At our 22.35 kN ceiling: 198 MPa, SF 2.54; at 1.5 × ceiling (33.5 kN): 297 MPa, SF 1.69 on yield (passes the ×1.5 margin rule) | **+0.030** | cited | **RECOMMENDED** |
+| B. our CF/Al-honeycomb sandwich 100 × 100 | 100 mm span, simply supported on two edges (shell frame / pack-bay rails) | 243 MPa at 33.5 kN, SF ≈ 2 vs [EST] CF 500 MPa; k 24 MN/m | 0.070 | CF values [EST] | superseded |
+| C. stiffened pack-enclosure front (O-T14) | 0.22 m span to rails | SF ≤ 1.18 at 33.5 kN | ≥ 0.38 | cited 7075 | fails |
+**Adopt A.** Chest pad total = core 0.061 + land 0.030 = **0.091 kg vs the 0.131 accepted → −0.040 kg returned to reserve.** A's stiffness: the bulkhead + rib is far stiffer than the pad's 0.53 MN/m [Materials to state k; 0.30 m span with rib ≫ 5.3 MN/m expected].
+**Chest depth at the sternum (x):**
+- Bulkhead front face x = +0.050, land +0.006 → +0.056.
+- Core 88 mm → +0.144; CF/face 1 mm → +0.145; shell 2 mm → **shell skin x ≈ +0.147** (≥ +0.14 ✓).
+- The base shell front was x = +0.11 (220 mm-deep box). So the sternum skin must move **~37 mm forward**: a local bulge ~110 × 110 mm over the pad (or chest depth 0.22 → ~0.257 m if ID prefers a smooth line). **ID impact:** V5 chest shell (row 4) front profile changes. Intake vents (low front) and shoulder-bay vents (lateral) unaffected.
+
 ## 7. Open questions / conflicts (not edited in others' files)
 - **O-T1 (Electronics, coordination):** adopt the 48 V intermediate rail with DCM3623TA5N53B4T00; Torso hosts the DCM on the power distribution board or the brain tray? Mass 0.024 [UNVERIFIED for variant] stays in the brain line; who books the 47718-232 choke; 24 V VL source (O-E3); BMS→safety MCU CAN FD message set; e-stop = FET-open vs contactor (O-E6).
 - **O-T2 (Actuators/Arbiter):** waist_pitch 116 N·m < 188 N·m need with T5 payload → TBM2G-08508A, +0.19 kg.
