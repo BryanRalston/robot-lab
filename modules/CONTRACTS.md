@@ -27,8 +27,8 @@ Sources used: `v3/analysis/results/v3_checks.md` and `v3.json` (per-joint rows, 
 | covers (M3; Arbiter placeholder, R-017) | 1.86 kg | 1.384 kg paper (PA12 MJF 1.5 mm panels, 50 % limb coverage [EST] + EPP 0.36); **1.622 kg credited** (R-021) | ≤ 1.20 kg (R-015 M3) NOT MET; A10 |
 | brain (M4; Arbiter placeholder, R-017) | 1.80 kg | 1.044 kg paper (T5000 0.280 + Gauntlet AGX301 0.266 + DCM3623 0.024 cited; 0.474 [EST]); **1.216 kg credited** (R-021) | ≤ 1.50 kg (R-015 M4) MET; A11 |
 | battery 20S5P 1620 Wh | 7.96 kg | 8.75 kg | 8.75 kg |
-| Arbiter reserve | 1.2 kg | **+0.375 kg credible (66.125 vs 66.5); +1.609 paper (R-023, `arbiter/mass_rollup_official.json`)** | ≥ +0.30 kg credible (met; 0.642 after A15 tube hold release) |
-| **robot** | 63.79 kg | **paper 64.891 / credible 66.125 kg (R-023, official rollup = single source of truth)** | **≤ 66.5 kg hard (R-017); credible 65.858 after A15** |
+| Arbiter reserve | 1.2 kg | **+0.037 kg credible (66.463 vs 66.5); +1.271 paper (R-024, `arbiter/mass_rollup_official.json`)** | ≥ +0.30 kg credible (WAIVED to ≥ 0 until end of round 13, R-024; 0.304 after A15 tube hold release) |
+| **robot** | 63.79 kg | **paper 65.229 / credible 66.463 kg (R-024, official rollup = single source of truth)** | **≤ 66.5 kg hard (R-017); credible 66.196 after A15** |
 
 ### R1.2 Leg actuator contract (R-004, R-005, R-006, R-008)
 | joint | need peak N·m | need RMS N·m | need speed rad/s | selection (Actuators) | avail peak | max mass kg |
@@ -126,4 +126,4 @@ Owns: pelvis-to-foot kinematics, thigh/shank/foot structure, knee/ankle linkages
 | Hands | 4.2 kg both (`v3.json` hands) | not separately budgeted (TBD) | wrist flange, tendon routing, tactile bus |
 | Head (incl. neck structure, sensors) | 1.6 kg | in 40 W sensors line | neck flange, cameras |
 | Brain (compute) | 1.8 kg | 120 W | bus master, sensors, safety |
-| Arbiter reserve | 1.2 kg | **+0.375 kg credible (66.125 vs 66.5); +1.609 paper (R-023, `arbiter/mass_rollup_official.json`)** | ≥ +0.30 kg credible (met; 0.642 after A15 tube hold release) |
+| Arbiter reserve | 1.2 kg | **+0.037 kg credible (66.463 vs 66.5); +1.271 paper (R-024, `arbiter/mass_rollup_official.json`)** | ≥ +0.30 kg credible (WAIVED to ≥ 0 until end of round 13, R-024; 0.304 after A15 tube hold release) |

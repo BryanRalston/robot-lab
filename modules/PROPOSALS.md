@@ -239,4 +239,4 @@ Any change to CONTRACTS.md or TARGETS.md, or to another module's files, starts h
      - Replace the trunnion cheeks, pins and centre plate with 2 clevises at y ±45, each with a 10.75 + 2 × 0.6 mm slot, PTFE thrust washers and a ø12 pin.
      - Raise the trunnion to z 450.
   3. Instep lug inner face moves 5.0 mm outboard (y 52.5 → 57.5). The pin gets 5 mm longer.
-- Status: open.
+- Status: **ACCEPTED (R-024)**, +0.138 credited ×1.0; QA1 rod end wear part every 4 250 h until rating/bench (A22). Legs 15c602d +0.200 also accepted. Credible 66.463, reserve 0.037 (floor waived to end of round 13).

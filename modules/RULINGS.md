@@ -365,3 +365,43 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
 | A12 | Arbiter | itemise "all other lines" (carried) | audit trail | round 9 |
 
 - Needs Bryan: nothing. All calls are within approved targets.
+
+### R-024: on the v4 audit fixes — Legs 15c602d (L37–L40, +0.200) + Actuators 67b0b13 / P-018 (D59–D62, +0.138); reserve recovery plan
+- Date: 2026-10-14. Responds to: Robot Lab v4 model-fidelity audit 9447a9d (`model/JOINT_AUDIT.md`: 4 BUILDABLE / **2 FAIL** / 26 PLACEHOLDER). Arbiter check: `arbiter/mass_rollup_official.py` (+ `.json`, `MASS_ROLLUP_OFFICIAL.md`). Targets unchanged (T2 ≤ 66.5, T5 20 kg). Reserve floor ≥ 0.30 credible unchanged.
+- **Verification (Arbiter read of the commits):**
+  - Audit FAIL 1, knee: twin-body inner trunnion bosses overlap (1257 mm³). D59 merged twin housing, −0.0013/leg. **Real function fix**, mass-neutral. ✓
+  - Audit FAIL 2, ankle_roll: screw bodies tilt 1.8° out of plane at ±18° roll on sagittal-only trunnions; bottom eye misalignment 19.6° > GE 12 C α 10°. D60/D61 + L38: axial GE 12 C top eye in shank clevises, QA1 MGF12T-class 27° PTFE bottom rod end (demand 20.8°), spacer, anti-rotation key, trunnion z 410→450, instep outrigger because the lugs sit outside the 100 mm foot. **Real function fix** (the joint could not move through its ruled ±18° range). Mass justified by line items; trunnion pins retired (−0.052/leg) offset the new eyes/pins. Actuators lines are actuator parts only; Legs lines are clevis/outrigger/pin only — no double count found. ✓
+  - L39 hip yaw/roll hard stops (+0.090/leg [EST]): audit listed no mechanical stops on these joints; T8/safety requires them. **Real safety fix.** Impact energies 0.07 J / 0.76 J vs bumper 1.2 J / 4 J. ✓
+  - L37/D62 hip-body 0.3 mm: was a hand note, not a measurement; model measures ≥ 3.0 mm. Correction accepted; the clamp step (−0.021/leg) and boss trim (−0.021/leg) are savings. ✓
+  - L40 clevis cheek rounding −0.024/leg from real dims. ✓
+  - Audit rerun: 6 BUILDABLE / 0 FAIL, 0 standing clashes.
+- **1. Legs 15c602d +0.200 both legs: ACCEPTED**, credited ×1.0 as an addition (additions are not discounted; hip-stop parts [EST], Legs to replace with sized parts in G2).
+- **2. P-018 Actuators +0.138 both legs: ACCEPTED**, credited ×1.0. Conditions: QA1 rod end is a wear part every 4 250 h until a supplier dynamic rating or bench test (G5) — same access rule as the R-022 A8 eyes; the +0.010 head and key [EST] are replaced by catalog mass at G1.
+- **Official rollup (regenerated):** paper **65.229 kg** (reserve 1.271); credible **66.463 kg — MET vs ≤ 66.5 (reserve +0.037), BELOW the 0.30 floor.**
+- **3. Floor waiver (temporary):** the 0.30 floor is the Arbiter's own margin rule, not a target. Waived to ≥ 0.0 credible **until end of round 13**. No new mass may be added to the robot during the waiver without an offsetting credited cut.
+- **4. Margin plan (ranked by likelihood):**
+
+| rank | source | credible gain | likelihood | owner | deadline |
+|---|---|---|---|---|---|
+| 1 | Release the 0.267 tube-doubler hold if Grok Build job 6 (A15) passes | 0.267 → reserve 0.304 | likely (doublers are a stiffening add; GB measured the full-wall fallback) | RL Legs → GB | next GB slot / round 12 |
+| 2 | Brain M4 [EST] parts → cited parts (cold plate, tray, lid, MCU, NVMe, filter, standoffs; now 0.474 at ×0.5) | up to 0.172 (penalty removed; more if parts lighter) | likely, catalog work only | Arbiter (A18) | round 12 |
+| 3 | Covers M3 CAD panel layout (coverage/wall now [EST]; credited 1.622 vs paper 1.384) | up to 0.238 | medium — needs real panel areas | Arbiter (A19) | round 13 |
+| 4 | A12 itemise "all other lines" (47.739 credible, derived) | unknown; may find credit or debit | low-medium; not quick, so not done this round (no numbers invented) | Arbiter (A12) | round 13 |
+| 5 | Other modules' budgets (torso/arms/hands unstaffed placeholders) | — | last resort | Robot Lab to staff | — |
+
+  - Expected: rank 1 alone restores 0.304; ranks 1+2 ≈ 0.48.
+- **5. Contingency if job 6 fails:** the tube fallback (full 1.9 mm wall) is already inside the 0.267 hold, so credible stays 66.463 (≤ 66.5). Then ranks 2+3 must deliver ≥ 0.263 by end of round 13. If they do not, the Arbiter cuts EPP pads/cover coverage (covers line) and brain tray/lid to restore 0.30, and reports the trade.
+- **Worst case:** credible 66.463 ≤ 66.5 with the tube fallback covered. Residual unquantified risk: foot-collar fallback (r50 or 4 mm) mass not computed (R-023) — A20. If it exceeds +0.037 before ranks 1–3 land, credible would exceed 66.5 and that goes to Bryan.
+- Actions:
+
+| # | owner | action | effect | deadline |
+|---|---|---|---|---|
+| A15 | RL Legs → Grok Build | job 6 structure re-check r2 (carried) | releases 0.267 | next GB slot |
+| A18 | Arbiter | brain M4: replace [EST] lines with cited parts | up to 0.172 | round 12 |
+| A19 | Arbiter | covers M3: CAD panel layout from model_v4 hulls | up to 0.238 | round 13 |
+| A20 | RL Legs | compute foot-collar fallback mass (r50 / 4 mm) | closes unquantified risk | with A15 |
+| A21 | RL Legs | hip yaw/roll stop brackets + bumpers sized from catalog PU parts | replaces [EST] | G2 |
+| A22 | RL Actuators | QA1 MGF12T dynamic rating (supplier) or bench plan; catalog mass for head/key | T9, G1 | G5 |
+| A12 | Arbiter | itemise all other lines (carried) | audit trail | round 13 |
+
+- Needs Bryan: nothing now. Within approved targets; escalates only if A20 pushes credible over 66.5.

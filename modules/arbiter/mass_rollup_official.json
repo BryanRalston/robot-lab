@@ -1,5 +1,5 @@
 {
- "status": "OFFICIAL single source of truth (R-022, updated R-023). Module rollups must reconcile to this file line by line; any module figure that differs must cite the line and the ruling that changes it.",
+ "status": "OFFICIAL single source of truth (R-022, updated R-024). Module rollups must reconcile to this file line by line; any module figure that differs must cite the line and the ruling that changes it.",
  "limit_kg": 66.5,
  "reserve_target_kg": 0.3,
  "lines": [
@@ -60,6 +60,22 @@
    "source": "Actuators 71f3c3e LINKAGE_TABLE"
   },
   {
+   "line": "Legs v4 audit fixes L37-L40 (clamp step, ankle clevises+outrigger, hip yaw/roll stops, clevis trim)",
+   "paper_kg": 0.2,
+   "credible_kg": 0.2,
+   "evidence": "model_v4 geometry; hip-stop bumper/bracket [EST]",
+   "credit_rule": "addition x1.0 (R-024)",
+   "source": "Legs 15c602d, r8/model_v4_fix_mass.json"
+  },
+  {
+   "line": "Actuators v4 audit fixes D59-D62 (knee twin housing, ankle GE top eye + QA1 PTFE bottom rod end, hip body trim)",
+   "paper_kg": 0.138,
+   "credible_kg": 0.138,
+   "evidence": "STEP/cad_mass; QA1 head +0.010 and rod key [EST]",
+   "credit_rule": "addition x1.0 (R-024)",
+   "source": "Actuators 67b0b13 P-018, v4_deltas.json"
+  },
+  {
    "line": "battery 20S5P P45B",
    "paper_kg": 8.75,
    "credible_kg": 8.75,
@@ -76,14 +92,14 @@
    "source": "derived"
   }
  ],
- "paper_kg": 64.891,
- "credible_kg": 66.125,
- "credible_reserve_kg": 0.375,
- "paper_reserve_kg": 1.609,
+ "paper_kg": 65.229,
+ "credible_kg": 66.463,
+ "credible_reserve_kg": 0.037,
+ "paper_reserve_kg": 1.271,
  "pending": {
   "A1prime_structure_FEA": "VOID (R-023): GB FEA failed the r5 hand-checked parts; replaced by L36 fixes",
   "tube_hold_kg": 0.267,
-  "credible_if_GB_r2_passes": 65.858,
+  "credible_if_GB_r2_passes": 66.196,
   "risk_unquantified": "foot collar OD (fallback r50 or 4 mm, mass not computed); clamp/tongue/clevis convergence at h<=2"
  },
  "reconciliation": {
