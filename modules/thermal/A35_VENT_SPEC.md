@@ -8,6 +8,8 @@ Context: R-030 P-026 (no closed PC over hip_pitch or knee; louvred ≥ 30 % or C
 | knee (L) | 42.1 (36.7 + 5.4) | 20.4 | 74.6 K | 1.77 | 60.8 K, R 1.44 (h 12) | **9.8 W/m²K** | **≥ 15 W/m²K** |
 h is per unit CAD housing area × fin factor 2 (same basis as `actuators/size.py`). At target h 15 the case runs about +50 K and the winding about 106 °C, which leaves room for +15 K if drives end up on the housings (P-027 says off-housing). The closed-PC R1 case was equivalent to h ≈ 8, which is what failed.
 
+**D68 revision (2026-10-14):** re-solved with temperature-dependent R and Kt (`d68_rerun.py`). The minimum effective h is now **10.8 W/m²K (hip_pitch) / 10.3 (knee) for winding ≤ 155 °C**, and **12.8 / 12.3 to stay under a 130 °C advisory trip**. These were 10.2 / 9.8 at the old 130 °C constant-R basis. The **target h ≥ 15 W/m²K and all vent geometry below are unchanged**: at h 15 the windings run below the 120–130 °C derate trip.
+
 ## 2. Vent geometry (per joint, per leg)
 - **Open area:** the air through the cavity may rise ≤ 15 K at 43 W, so 2.9 L/s. Driving velocity is ~1.0 m/s walking (thigh swing adds up to ~2 m/s, not credited); C_d 0.6 [EST].
   - **Inlet ≥ 50 cm², and ≥ 30 % of the panel area over the housing.**

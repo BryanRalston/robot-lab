@@ -2,6 +2,16 @@
 Owner: RL Thermal (2ae2d096). Script: `thermal/r1_budget.py` → `thermal/results/r1_budget.json`. Every number below reproduces from it.
 Scope: steady-state dissipation per component at ambient 25 °C and 35 °C, with the limbs open and covered by PC 1.5 mm panels (R-027; trimmed set R-029: front/outboard fairings, P-022 knee cap, P-023 hip skirt, P-025 ankle boot). It also checks the thigh-clamp bondline limit of ≤ 60 °C (`legs/BOND_SPEC.md`). This is a lumped hand-calc network, not FEA or CFD, so **G3 thermal stays NOT MET**.
 
+## Revision D68 (2026-10-14, Actuators ded9c2d): leg joint margins with temperature-dependent R and Kt vs a 155 °C limit
+Script `thermal/d68_rerun.py`. Copper is re-solved at the winding temperature: P(T) = P25·R(T)/R25·(Kt25/Kt(T))², R(T) = R25·(234.5+T)/259.5, Kt25 = Kt155/0.89. This replaces the constant ×1.4. Windings (sizing.json): hip_yaw/hip_roll A, hip_pitch/knee/ankle D. Network and losses otherwise as §3. The limit is now **155 °C (TBM2G rated)**, with an **advisory derate trip at 120–130 °C**. The HD η stays at 0.75 on hip_yaw/roll, which is conservative vs D68's 0.84.
+| joint (worst side) | open 25 °C | open 35 °C | covered 25 °C | covered 35 °C | verdict vs 155 °C |
+|---|---|---|---|---|---|
+| R hip_pitch | 121 | 138 | runaway (>155) | runaway | **open PASS (17 K margin), above advisory trip at 35 °C; covered FAIL** |
+| L knee | 116 | 133 | runaway (>155) | runaway | **open PASS (22 K), covered FAIL** |
+| L ankle | 74 | 86 | 104 | 118 | PASS both |
+| hip_roll / hip_yaw | ≤ 46 | ≤ 57 | ≤ 52 | ≤ 64 | PASS both |
+With R tracking temperature, closed PC covers over hip_pitch/knee push the windings into thermal runaway, not just over the limit. So P-026 (no closed PC) is now firmer. Open-air margins are larger than R0's 130 °C basis suggested, but at 35 °C hip_pitch and knee sit above the 120–130 °C advisory trip, so Controls would derate during sustained carry unless the A35 vents reach h ≥ 15. The bondline verdict is unchanged: the case is still about +60 K, which fails 60 °C without the P-027 thermal break. Arm hold: see `O-A2_ARM_HOLD.md` (D68 revision).
+
 ## 1. Inputs and sources
 | input | value | source |
 |---|---|---|

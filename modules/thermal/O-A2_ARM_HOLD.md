@@ -1,4 +1,19 @@
-# O-A2: arm hold transient for the 20 kg two-hand carry (RL Thermal, 2026-10-14)
+# O-A2: arm hold transient — **REVISED D68 (see top section; sections below it are the superseded R0 basis)**
+
+## D68 revision (2026-10-14, Actuators ded9c2d): temperature-dependent R and Kt, 155 °C limit
+Script `thermal/d68_rerun.py` → `results/d68_rerun.json`. Windings per Arms docs: shoulder TBM2G-07608**C**, elbow TBM2G-05013**C**. Hot Kt 0.096 / 0.061 N·m/Arms (Kt25 = Kt155/0.89, linear in T). R_LL155 0.477 / 0.690 Ω, R(T) = R25·(234.5+T)/259.5. P = 1.5·I²·R_LL. Gear η 0.84 (D68; both joints hold near the CSG rated torque, so no part-load penalty). Sensitivity η 0.76 (part load ×0.9). Thermal network and masses unchanged from R0 below. Ambient 40 °C, walking airflow.
+
+| joint | P at 40 °C | steady winding | **min to +100 K (140 °C)** | **min to 155 °C** | under 10 min? |
+|---|---|---|---|---|---|
+| shoulder_pitch 61.3 N·m, η 0.84 | 23.7 W | 126 °C (h nom), 112 °C (h +30 %), 159 °C (h −30 %) | **never** at h nom/+30 %; 72 min at h −30 % | **never** at h nom; 143 min at h −30 % | **No** |
+| shoulder_pitch, η 0.76 | 28.9 W | 165 °C (h nom) | 42 min (33–133 over h ±30 %) | 72 min (43–never) | No |
+| **elbow 40.1 N·m, η 0.84** | 36.3 W | **thermal runaway** (no steady state; R rises faster than heat is shed) | **4.9 min** (4.9–5.0 over h ±30 %) | **6.0 min** | **Yes** |
+| elbow, η 0.76 | 44.3 W | runaway | 3.4 min | 4.0 min | Yes |
+
+Verdict is unchanged. The elbow at 40 N·m is a short-time hold only: about 5 min to 140 °C and 6 min to 155 °C, with runaway beyond that. P-028 (elbow ≤ 15 N·m) stays required. The shoulder passes against 155 °C but sits at 126 °C steady, so the advisory derate trip (120–130 °C, P-029) would act during long holds at nominal h. Controls trip suggestion for the elbow: allow 40 N·m for ≤ 3 min (reaching ~120 °C), then derate to ≤ 28 N·m.
+
+---
+# R0 (superseded):  for the 20 kg two-hand carry (RL Thermal, 2026-10-14)
 Script: `thermal/oa2_arm_hold.py` → `thermal/results/oa2_arm_hold.json`. Lumped hand calc only, no CFD. Assigned to Arms as O-A2; feeds P-028/A39 (hold-time limit) and P-029/A40 (Controls winding model).
 
 ## Answer (40 °C ambient, walking airflow h = 12 W/m²K, continuous hold, minutes until the winding has risen 100 K)
