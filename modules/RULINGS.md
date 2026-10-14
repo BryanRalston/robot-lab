@@ -744,3 +744,9 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
 - D76 (pitch and yaw side by side, yaw on CSF-11-100): saves 49 mm against the 40 mm needed, so it is **adopted** and the R-055 forearm-lengthening fallback is **closed**. Conditions: Arms confirms the full forearm stack fits with D76 (9 mm margin); ID accepts a local ~116 mm wrist fairing; G3 checks yaw peak and fatigue at its 1.24x margin. Mass -0.08 counts at **half credit (-0.04)** until CAD-measured.
 - D77: there will be **no shoulder-pitch clutch**; the cited options are 1.6 and 4.0 kg. A forward-fall **arm tuck becomes the permanent strategy**, and the hands-first brace is not allowed. T-031 must show forward-fall pitch torque <= the rated limit with tuck. If it fails, the issue comes back to me.
 - Reserve ~0.40.
+
+## R-058 (2026-10-14) Wrist fairing; T-030 gate (Actuators D76 note, Controls d43f14a)
+- The ID oval wrist fairing (~124x70–76 mm, z +20..+98) is **accepted**, +0.02 kg for the pair (estimate, at the cap). It's better than a longer forearm. Functional costs: (a) narrow-space grasp is accepted as a limitation, since it's not a TARGETS item. (b) Tuck clearance to the torso and thigh **must be shown** in the G2 clash sweep and the T-031 tuck pose (>=10 mm). If that fails, it comes back to me.
+- T-030 gate is accepted: 7.05 kN tucked AND tucked-while-carrying, load released before the tuck, reach side-only. Arms or Actuators confirm the 0.06 m shoulder-cap lever.
+- **Risk flagged:** the untuned smoke test put ~98% of the energy into the shoulder and the pad bottomed out. The side-fall pass depends on the crouch/hip-first controller, not on the pad. G4 stays open until a tuned T-030 passes. If tuning can't get shoulder share to <=0.40, it comes back to me for a hardware change.
+- Reserve ~0.38.
