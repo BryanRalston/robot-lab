@@ -10,6 +10,8 @@ h is per unit CAD housing area × fin factor 2 (same basis as `actuators/size.py
 
 **D68 revision (2026-10-14):** re-solved with temperature-dependent R and Kt (`d68_rerun.py`). The minimum effective h is now **10.8 W/m²K (hip_pitch) / 10.3 (knee) for winding ≤ 155 °C**, and **12.8 / 12.3 to stay under a 130 °C advisory trip**. These were 10.2 / 9.8 at the old 130 °C constant-R basis. The **target h ≥ 15 W/m²K and all vent geometry below are unchanged**: at h 15 the windings run below the 120–130 °C derate trip.
 
+**D69 note (2026-10-14):** knee = 2× 08513D + the shank path (`D69_KNEE_CHECK.md`). The finned tibia spreader and the lower shank must stay **uncovered, in free stream**. The knee drives mount on the spreader. Knee housing vent numbers are unchanged; with them the knee runs at ~90 °C. Design target is now ≤ 120 °C (derate trip 130, abs 155).
+
 ## 2. Vent geometry (per joint, per leg)
 - **Open area:** the air through the cavity may rise ≤ 15 K at 43 W, so 2.9 L/s. Driving velocity is ~1.0 m/s walking (thigh swing adds up to ~2 m/s, not credited); C_d 0.6 [EST].
   - **Inlet ≥ 50 cm², and ≥ 30 % of the panel area over the housing.**
