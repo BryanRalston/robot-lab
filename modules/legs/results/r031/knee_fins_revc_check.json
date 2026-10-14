@@ -1,0 +1,235 @@
+{
+ "fin_mass_kg": 0.06054908175542184,
+ "rows": [
+  {
+   "knee": 0,
+   "closest": [
+    [
+     5.07,
+     "L_knee trunnion bracket top plate (thigh) [EST]"
+    ],
+    [
+     9.71,
+     "L_knee trunnion cheek +y [EST]"
+    ],
+    [
+     9.71,
+     "L_knee trunnion cheek -y [EST]"
+    ],
+    [
+     41.29,
+     "L_knee trunnion bracket strut to femur [EST]"
+    ]
+   ],
+   "kneecap_mm": 208.5,
+   "max_outside_thigh_fairing_mm": 4.5
+  },
+  {
+   "knee": 15,
+   "closest": [
+    [
+     6.55,
+     "L_knee trunnion bracket top plate (thigh) [EST]"
+    ],
+    [
+     10.5,
+     "L_knee trunnion cheek +y [EST]"
+    ],
+    [
+     10.5,
+     "L_knee trunnion cheek -y [EST]"
+    ],
+    [
+     40.92,
+     "L_knee trunnion bracket strut to femur [EST]"
+    ]
+   ],
+   "kneecap_mm": 210.0,
+   "max_outside_thigh_fairing_mm": 3.9
+  },
+  {
+   "knee": 30,
+   "closest": [
+    [
+     7.86,
+     "L_knee trunnion bracket top plate (thigh) [EST]"
+    ],
+    [
+     11.17,
+     "L_knee trunnion cheek +y [EST]"
+    ],
+    [
+     11.17,
+     "L_knee trunnion cheek -y [EST]"
+    ],
+    [
+     40.53,
+     "L_knee trunnion bracket strut to femur [EST]"
+    ]
+   ],
+   "kneecap_mm": 211.4,
+   "max_outside_thigh_fairing_mm": 4.0
+  },
+  {
+   "knee": 45,
+   "closest": [
+    [
+     8.91,
+     "L_knee trunnion bracket top plate (thigh) [EST]"
+    ],
+    [
+     11.67,
+     "L_knee trunnion cheek +y [EST]"
+    ],
+    [
+     11.67,
+     "L_knee trunnion cheek -y [EST]"
+    ],
+    [
+     40.17,
+     "L_knee trunnion bracket strut to femur [EST]"
+    ]
+   ],
+   "kneecap_mm": 212.3,
+   "max_outside_thigh_fairing_mm": 4.4
+  },
+  {
+   "knee": 60,
+   "closest": [
+    [
+     9.58,
+     "L_knee trunnion bracket top plate (thigh) [EST]"
+    ],
+    [
+     11.98,
+     "L_knee trunnion cheek +y [EST]"
+    ],
+    [
+     11.98,
+     "L_knee trunnion cheek -y [EST]"
+    ],
+    [
+     39.93,
+     "L_knee trunnion bracket strut to femur [EST]"
+    ]
+   ],
+   "kneecap_mm": 212.8,
+   "max_outside_thigh_fairing_mm": 4.6
+  },
+  {
+   "knee": 75,
+   "closest": [
+    [
+     9.79,
+     "L_knee trunnion bracket top plate (thigh) [EST]"
+    ],
+    [
+     12.08,
+     "L_knee trunnion cheek +y [EST]"
+    ],
+    [
+     12.08,
+     "L_knee trunnion cheek -y [EST]"
+    ],
+    [
+     39.85,
+     "L_knee trunnion bracket strut to femur [EST]"
+    ]
+   ],
+   "kneecap_mm": 213.0,
+   "max_outside_thigh_fairing_mm": 4.7
+  },
+  {
+   "knee": 90,
+   "closest": [
+    [
+     9.45,
+     "L_knee trunnion bracket top plate (thigh) [EST]"
+    ],
+    [
+     11.92,
+     "L_knee trunnion cheek +y [EST]"
+    ],
+    [
+     11.92,
+     "L_knee trunnion cheek -y [EST]"
+    ],
+    [
+     39.98,
+     "L_knee trunnion bracket strut to femur [EST]"
+    ]
+   ],
+   "kneecap_mm": 212.7,
+   "max_outside_thigh_fairing_mm": 4.5
+  },
+  {
+   "knee": 105,
+   "closest": [
+    [
+     8.52,
+     "L_knee trunnion bracket top plate (thigh) [EST]"
+    ],
+    [
+     11.48,
+     "L_knee trunnion cheek +y [EST]"
+    ],
+    [
+     11.48,
+     "L_knee trunnion cheek -y [EST]"
+    ],
+    [
+     40.31,
+     "L_knee trunnion bracket strut to femur [EST]"
+    ]
+   ],
+   "kneecap_mm": 211.9,
+   "max_outside_thigh_fairing_mm": 4.2
+  },
+  {
+   "knee": 120,
+   "closest": [
+    [
+     7.04,
+     "L_knee trunnion bracket top plate (thigh) [EST]"
+    ],
+    [
+     10.75,
+     "L_knee trunnion cheek +y [EST]"
+    ],
+    [
+     10.75,
+     "L_knee trunnion cheek -y [EST]"
+    ],
+    [
+     40.78,
+     "L_knee trunnion bracket strut to femur [EST]"
+    ]
+   ],
+   "kneecap_mm": 210.6,
+   "max_outside_thigh_fairing_mm": 3.7
+  },
+  {
+   "knee": 135,
+   "closest": [
+    [
+     5.13,
+     "L_knee trunnion bracket top plate (thigh) [EST]"
+    ],
+    [
+     9.75,
+     "L_knee trunnion cheek +y [EST]"
+    ],
+    [
+     9.75,
+     "L_knee trunnion cheek -y [EST]"
+    ],
+    [
+     41.28,
+     "L_knee trunnion bracket strut to femur [EST]"
+    ]
+   ],
+   "kneecap_mm": 208.5,
+   "max_outside_thigh_fairing_mm": 4.4
+  }
+ ]
+}

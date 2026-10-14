@@ -252,3 +252,20 @@
   - Wire length to the knee housing: 65 mm near / 157 mm far straight, 240 mm L-route upper bound. The housing pivot only changes this by ±1 mm.
   - Femur mount: 2 G10-lined band clamps, with low preload so hoop stress ≤ 16 MPa [EST]. No holes in the 1.6 mm wall.
 - L52 (R-069) Ankle cross in 7075, pocketed (Robot Lab confirmed). FEA brief: grokbuild/ankle_cross_fea_brief.md, queued after L47-SO. Hand-model estimate −0.084 kg robot.
+- L53 (R-077) Knee fins: converge on Actuators rev C (`actuators/cad/knee_twin_housing_finned_revc.step`, 6b86723). We built no further fin CAD; L50's own fin CAD is superseded as the reference.
+  - **Mass:** rev C minus D59, with 6061 at 2.70 g/cm³, gives **0.0605 kg/knee**, confirming Actuators. That is −0.0485/knee and −0.097 robot vs our 0.109.
+  - **Clash, fins only, knee 0–135** (knee_fins_revc_check.py):
+    - trunnion bracket top plate [EST]: min 5.07 mm (at knee 0/135);
+    - trunnion cheeks: 9.7 mm;
+    - knee cap keep-out: ≥ 208 mm;
+    - no other part within 39 mm.
+    - Rev C stops at the ±92 planes, so it fits our L48 envelope with nothing on the outer flanks.
+  - **v5 thigh fairing:** fins reach up to **4.7 mm beyond** the thigh keep-out hull (which is hardware + 5). The A35 grille over the housing must therefore sit at least 5 mm further out locally, or the grille opening must clear the fins by at least 5 mm. This is an ID change.
+  - D69C remains the thermal baseline until Thermal and Controls pass rev C at h = 8.
+- L54 (R-075, ID C2) Deleting the foot TOP shell: **accept with conditions.** Basis: model_v4 foot l.204–216, V5_COVER_SET, COVER_TRIMS_R069.
+  - The top shell (PC, over the instep lugs and outrigger) carries no ground contact, impact or wear function. Those sit on the foot box sole skin (3.5 mm 7075, fea_r5) and the structure.
+  - **Conditions:**
+    - (1) The ankle boot hem re-anchors to the foot box through the existing M3 web inserts (keep the 4 inserts).
+    - (2) The boot covers the instep rod ends and pins down to the foot top (debris and snag).
+    - (3) Break edges R2 on the outrigger and lug ends that would be exposed.
+  - **Existing gap, independent of C2:** no sole pad, toe bumper or heel bumper is defined or booked anywhere in the model, CONTRACTS or our requirements. The ground still contacts bare 7075. A sole pad line is needed for wear and impact whether or not C2 is taken.
