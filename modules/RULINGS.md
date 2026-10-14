@@ -818,3 +818,10 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
 - Reserve stays ~0.12, so the **R-066 mass-down pass is triggered**. Robot Lab runs it across modules (cited or measured only) before R13 closes, with a target of reserve >=0.30 (at least 0.18 recovered).
 - First candidate: **L47 shape optimisation** (topology/FEA on the bryan PC) to the R-031 <=58 MPa rule plus G3 fatigue. The lever almost doubled, and a 30–40% cut would recover ~0.13–0.17.
 - The freeze on additions >0.005 continues.
+
+## R-070 (2026-10-14) Rev B standing hold; T-031 tuck; wrist open frame
+- R-062 condition (3) is **met** (Controls 2e2d593): the worst standing carry hold reaches 103.8 C at x1.1, h 8 and fin efficiency 0.7, so **no fan is needed**. Rev B is **closed for the thermal design** (G5 bench still applies). New item: Controls sets a **software pick-pose limit** for deep squats (torque/time, using the same thermal model) before G4.
+- T-031 forward tuck: the primary is **arms straight down, roll +5° (76 mm clearance)**, forward falls only; side falls keep R5. Arms confirms it. It's marginal (needs the chest to slow the torso at <=38 g), so T-031 has to show it with real chest stiffness. If it fails, remedy (b) preload gets an R-058 contact waiver with defined pads, and (c) is evaluated only as an add-on with its mass coming to me. Diagonals stay a gate at <=369 N·m in every mode.
+- Pad gate 293.7 J is accepted.
+- Wrist open-frame palm half is **accepted at -0.036 (half credit)**. Conditions: continuous steel-coil sheaths (or a guard strip if PTFE), openings <=10 mm with radiused edges, lower edge z>=+10. The fairing nets to +0.043.
+- Reserve ~0.16 (waiver; the mass-down pass continues, needing >=0.14 more).
