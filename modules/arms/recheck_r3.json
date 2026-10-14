@@ -1,0 +1,47 @@
+{
+ "P042_pose": {
+  "sp": -60,
+  "el": -110,
+  "elbow": 7.09,
+  "shoulder_pitch": 46.87,
+  "shoulder_roll": 0.0,
+  "hand_x_fwd": 0.321,
+  "hand_z_above_waist_pitch": 0.415
+ },
+ "band_edge_sp-60_el-100": {
+  "sp": -60,
+  "el": -100,
+  "elbow": 13.96,
+  "shoulder_pitch": 53.75,
+  "shoulder_roll": 0.0,
+  "hand_x_fwd": 0.38,
+  "hand_z_above_waist_pitch": 0.399
+ },
+ "band_edge_sp-45_el-115": {
+  "sp": -45,
+  "el": -115,
+  "elbow": 13.96,
+  "shoulder_pitch": 46.45,
+  "shoulder_roll": 0.0,
+  "hand_x_fwd": 0.332,
+  "hand_z_above_waist_pitch": 0.337
+ },
+ "R1_carry": {
+  "sp": -30,
+  "el": -60,
+  "elbow": 40.82,
+  "shoulder_pitch": 63.79,
+  "shoulder_roll": 0.0,
+  "hand_x_fwd": 0.5,
+  "hand_z_above_waist_pitch": -0.04
+ },
+ "reach": {
+  "sp": -90,
+  "el": 0,
+  "elbow": 40.82,
+  "shoulder_pitch": 86.76,
+  "shoulder_roll": 0.0,
+  "hand_x_fwd": 0.65,
+  "hand_z_above_waist_pitch": 0.22
+ }
+}

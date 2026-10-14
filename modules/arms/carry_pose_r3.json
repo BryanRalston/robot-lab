@@ -1,7 +1,7 @@
 {
  "model": "sim/v3/humanoid_v3.xml",
  "payload_kg_per_hand": 10.0,
- "rule": "elbow<=15 N\u00b7m (R-030 A39), hand_x>=0.20 m [EST clearance]",
+ "rule": "elbow<=15 N\u00b7m (R-030 A39 / P-042), hand_x>=0.20 m [EST clearance]",
  "r1_carry_ref": {
   "sp": -30,
   "el": -60,

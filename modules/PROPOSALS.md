@@ -320,6 +320,9 @@ Any change to CONTRACTS.md or TARGETS.md, or to another module's files, starts h
   - T5 passes: needs are far below the selections, wrist 7.4 N·m is unchanged, and elbow ≤ 15 holds across the band.
   - **Risk:** the load sits 0.32 m forward at chest height. The Legs carry model (`legs/scenarios.py`) uses a box 0.25 m ahead of the waist axis with a 0.25 rad trunk lean. Legs/Controls must re-check the ankle margin (R-014: 1.31×) with x = 0.32.
   - **Risk:** the sim arm is 3.59 kg/side light (O-A1). The band keeps ≥ 8 N·m elbow headroom.
+- Re-check with the catalog inertials (`arms/recheck_r3.json`, O-A1 file `arm_inertials_r3.json`):
+  - pose: elbow **7.09**, shoulder **46.87** N·m (shoulder ≈ +53 K)
+  - band edges: elbow 13.96 N·m (≤ 15, OK), shoulder ≤ 53.75 (≈ +70 K)
 - Asks:
   - **Controls:** adopt the pose as the carry primitive, plus limits (b)/(c) in P-043.
   - **Legs/Controls:** confirm the COM at x +0.32 / z +0.415.

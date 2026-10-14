@@ -1,0 +1,45 @@
+{
+ "T_carry_Nm": 1.26,
+ "T_load_Nm": 7.4,
+ "T_free_Nm": 0.86,
+ "duty": [
+  {
+   "frac": 0.01,
+   "F_N": 294.0,
+   "speed": 1.0,
+   "basis": "contract peak 14.7 N\u00b7m (1.5x need) events [EST frequency]"
+  },
+  {
+   "frac": 0.1,
+   "F_N": 148.0,
+   "speed": 0.3,
+   "basis": "manipulating 10 kg, worst static wrist 7.4 N\u00b7m"
+  },
+  {
+   "frac": 0.2,
+   "F_N": 25.2,
+   "speed": 0.02,
+   "basis": "P-042 carry hold, corrective motion only"
+  },
+  {
+   "frac": 0.39,
+   "F_N": 20.0,
+   "speed": 0.3,
+   "basis": "unloaded manipulation (floor 20 N preload/friction as Actuators)"
+  },
+  {
+   "frac": 0.3,
+   "F_N": 20.0,
+   "speed": 0.02,
+   "basis": "idle / walking, arm quasi-static"
+  }
+ ],
+ "Fm_N": 128.3,
+ "n_mean_rpm": 375.7,
+ "L10_h": {
+  "1.2": 112646,
+  "1.5": 57675,
+  "2.0": 24332
+ },
+ "target_h": 14600
+}

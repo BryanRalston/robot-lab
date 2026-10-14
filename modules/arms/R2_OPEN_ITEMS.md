@@ -88,3 +88,65 @@ Arms + hands now total **19.24 kg vs the 19.08 allowance (+0.156 over)**. Arms a
 - Consequences: a loaded six-finger simultaneous close is power-limited to ≈ 40 W and takes ≈ 2–3× longer than 0.74 s [EST]. A no-load close (low torque) and a static grip (copper-only) stay inside the cap, but static grip current needs the DCX 22 S terminal resistance.
 - T4 ≤ 1 s close is **at risk under load** at 40 W. Unloaded, it is unaffected.
 - If T4 must hold under load, the fallback is a larger converter (RP60-class, not cited).
+
+## R3 update 2: P-027 credit, wrist duty, O-A1 inertials, O-A3 fit, side fall
+**Mass line (arms + hands, both sides):** 19.084 allowance. Changes:
+- −2 × 0.666 for the P-027 / D67 wrist pair (0.884/side, Elmo drives off-arm)
+- +0.156 for the hand node + RP40-11024SFR
+- **= 17.908 kg, 1.176 under the allowance**
+
+Per-side catalog total 8.957 kg (`arm_inertials_r3.json`), of which 1.52 sits in the torso wall.
+
+**Wrist drives off-arm:** the 2 Elmo Gold Twitter drives for the wrist pair (and every arm drive) stay booked in the Electronics/Actuators drive line (D66), mounted in the torso shoulder bay. Electronics confirms the phase-lead routing.
+
+**Wrist duty for P-027 L10** (`wrist_duty_r3.py` → `.json`):
+- Forces come from Arms load cases at screw = T / 0.025 / 2.
+- Time fractions are an [EST] mission profile, since there is no task spec:
+
+| share | force | speed | case |
+|---|---|---|---|
+| 1 % | 294 N | 1.0 | contract peak |
+| 10 % | 148 N | 0.3 | 10 kg manipulation, 7.4 N·m |
+| 20 % | 25.2 N | 0.02 | P-042 carry hold, 1.26 N·m |
+| 39 % | 20 N | 0.3 | unloaded manipulation |
+| 30 % | 20 N | 0.02 | idle |
+
+- Result: Fm 128.3 N, mean 376 rpm.
+- **L10 at fw 1.2: 112.6 kh. At fw 1.5: 57.7 kh. At fw 2.0: 24.3 kh.** All pass 14.6 kh.
+- Arms recommends **fw 1.5** for contact/impact in manipulation. BNK1004 passes at 3.95×, so the BNK1404 fallback isn't needed.
+
+**O-A1 (closed on Arms' side):** `arm_inertials_r3.json` (script `arm_inertials_r3.py`) gives the catalog mass, COM and full inertia per sim body:
+
+| body | mass (kg) |
+|---|---|
+| shoulderP | 1.39 |
+| upper_arm | 1.16 |
+| forearm | 4.415 |
+| hand | 0.472 |
+| torso add at the shoulder (shoulder_pitch actuator) | 1.52 |
+
+Masses are cited. Placements, radii and lengths are [EST]. Recheck (`recheck_r3.py`):
+- reach: shoulder 86.8, elbow 40.8 N·m → shoulder need 130 vs 167 avail, 1.28×
+- shoulder_yaw and elbow statics rise ≈ 0.7 N·m
+
+**O-A3 forearm fit (D68 lengths): SHORTFALL.** Bore is Ø66 × 177 mm (model_v4).
+- Tier 1, 6 × DCX22S+GPX22HP with ENX22 EASY INT: 70.9 + 1 mm, plus spool ≈ 10 [EST] → **82 mm**. The ring of 6 × Ø22 needs ID 70 at 1 mm gaps, so it **fails at Ø66**.
+- Tier 2, 5 × DCX16S+GPX16LN 3-stage with ENX16: 60.7 + 1 + 10 → **72 mm**. Fits in diameter (ID 46.9).
+- The two hand tiers take **154 of 177 mm**, leaving 23 mm.
+- Wrist pair (D67): 2 × Ø56 cans coaxial with the screws at r 25 reach r 53 > 33. Even side by side they need about Ø112. The screw shafts are 110 mm long. **They do not fit in any remaining space.**
+- Hand node 70 × 45: it fits only axially, as a chord at ≤ 24 mm offset, and the 23 mm left over is too short for 70.
+- RP40: dimensions are not in the repo (not cited).
+- **Total axial need is ≥ 154 + 110 (wrist screws) + 70 (node) ≈ 334 mm against 177: about 157 mm short**, plus the diameter fails.
+
+Options for R4, which need ID (shell) and Arbiter input:
+1. Forearm ID ≥ 72 and the hand tiers stretched into the elbow-adjacent zone, with the wrist pair moved to the upper arm, driving through push rods across the elbow. This needs geometry.
+2. Wrist pitch/yaw as compact rotary units at the wrist (v4 audit placeholder "micro strain-wave").
+3. Hand node and RP40 moved to the upper arm or the palm back.
+
+Until then O-A3 is OPEN/FAIL.
+
+**Side fall (Torso bd02c23):** the bulkhead sees 690 N·m (11.5 kN at 60 mm). It is not clutch-limited: the 300 N·m shoulder_roll clutch caps only the roll gear. On the arm side, 690 N·m enters as a moment on the shoulder_pitch output bearing (v3.py line 99). If any of it reaches the pitch gear as torque, it is above the CSG-25-100 ratchet torque of 650 (momentary 369, parts.py). **Ask Actuators:**
+- the shoulder_pitch output crossed-roller static moment rating vs 690 N·m (fs ≥ 1 per v3.py)
+- whether shoulder_pitch also needs a slip clutch (≤ 300 N·m)
+
+The arm-side flange stays 8 × M8 12.9 on BC 80 (Torso accepted).

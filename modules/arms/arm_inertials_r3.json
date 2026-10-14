@@ -1,0 +1,258 @@
+{
+ "torso (re-split, Torso & Power)": {
+  "mass": 1.52,
+  "pos": [
+   0.0,
+   0.17,
+   0.22
+  ],
+  "fullinertia": [
+   0.001812,
+   0.001751,
+   0.001812,
+   0.0,
+   0.0,
+   0.0
+  ],
+  "parts": [
+   {
+    "name": "shoulder_pitch actuator TBM2G-07608C+CSG-25-100 (housing in torso wall)",
+    "mass": 1.52,
+    "pos": [
+     0,
+     0.17,
+     0.22
+    ],
+    "src": "CONTRACTS \u00a71a"
+   }
+  ]
+ },
+ "L_shoulderP": {
+  "mass": 1.39,
+  "pos": [
+   0.0,
+   0.0857,
+   -0.0178
+  ],
+  "fullinertia": [
+   0.001208,
+   0.00138,
+   0.001512,
+   0.0,
+   0.0,
+   0.000107
+  ],
+  "parts": [
+   {
+    "name": "shoulder_roll actuator TBM2G-06813C+CSG-25-100+clutch",
+    "mass": 1.24,
+    "pos": [
+     0,
+     0.09,
+     -0.02
+    ],
+    "src": "CONTRACTS \u00a71a"
+   },
+   {
+    "name": "roll bracket / output flange [EST]",
+    "mass": 0.15,
+    "pos": [
+     0,
+     0.05,
+     0
+    ],
+    "src": "\u00a73 arms struct split EST"
+   }
+  ]
+ },
+ "L_upper_arm": {
+  "mass": 1.16,
+  "pos": [
+   0.0,
+   0.0,
+   -0.1256
+  ],
+  "fullinertia": [
+   0.003092,
+   0.003092,
+   0.00062,
+   0.0,
+   0.0,
+   0.0
+  ],
+  "parts": [
+   {
+    "name": "shoulder_yaw actuator TBM2G-06008C+CSG-17-100",
+    "mass": 0.81,
+    "pos": [
+     0,
+     0,
+     -0.1
+    ],
+    "src": "CONTRACTS \u00a71a"
+   },
+   {
+    "name": "upper arm tube 7075 + elbow clevis [EST]",
+    "mass": 0.35,
+    "pos": [
+     0,
+     0,
+     -0.185
+    ],
+    "src": "\u00a73 arms struct split EST"
+   }
+  ]
+ },
+ "L_forearm": {
+  "mass": 4.415,
+  "pos": [
+   0.0,
+   0.0,
+   -0.1129
+  ],
+  "fullinertia": [
+   0.027632,
+   0.027349,
+   0.002426,
+   0.0,
+   0.0,
+   0.0
+  ],
+  "parts": [
+   {
+    "name": "elbow actuator TBM2G-05013C+CSG-20-100",
+    "mass": 0.9,
+    "pos": [
+     0,
+     0,
+     0.0
+    ],
+    "src": "CONTRACTS \u00a71a"
+   },
+   {
+    "name": "6x flexor DCX22S+GPX22HP (tier 1)",
+    "mass": 1.0379999999999998,
+    "pos": [
+     0,
+     0,
+     -0.08
+    ],
+    "src": "v3.py hand_one / parts.py"
+   },
+   {
+    "name": "5x small DCX16S+GPX16LN (tier 2)",
+    "mass": 0.265,
+    "pos": [
+     0,
+     0,
+     -0.16
+    ],
+    "src": "v3.py hand_one"
+   },
+   {
+    "name": "11x spool/mount allowance",
+    "mass": 0.125,
+    "pos": [
+     0,
+     0,
+     -0.12
+    ],
+    "src": "v3.py hand_one"
+   },
+   {
+    "name": "11x tendon/sheath allowance 0.025",
+    "mass": 0.275,
+    "pos": [
+     0,
+     0,
+     -0.15
+    ],
+    "src": "v3.py hand_one"
+   },
+   {
+    "name": "wrist pitch/yaw pair (D67, drives off-arm)",
+    "mass": 0.884,
+    "pos": [
+     0,
+     0,
+     -0.17
+    ],
+    "src": "actuators/results/wrist_p027.json"
+   },
+   {
+    "name": "wrist_roll actuator TBM2G-05008C+CSG-14-100",
+    "mass": 0.55,
+    "pos": [
+     0,
+     0,
+     -0.21
+    ],
+    "src": "CONTRACTS \u00a71a"
+   },
+   {
+    "name": "forearm shell [EST]",
+    "mass": 0.3,
+    "pos": [
+     0,
+     0,
+     -0.12
+    ],
+    "src": "\u00a73 arms struct split EST"
+   },
+   {
+    "name": "hand node + RP40-11024SFR/P-HC",
+    "mass": 0.078,
+    "pos": [
+     0,
+     0,
+     -0.19
+    ],
+    "src": "electronics \u00a710.4/10.5"
+   }
+  ]
+ },
+ "L_hand": {
+  "mass": 0.472,
+  "pos": [
+   0.0,
+   0.0,
+   -0.0954
+  ],
+  "fullinertia": [
+   0.000946,
+   0.000946,
+   0.000378,
+   0.0,
+   0.0,
+   0.0
+  ],
+  "parts": [
+   {
+    "name": "fingers/palm structure + misc (v3 0.35+0.05)",
+    "mass": 0.4,
+    "pos": [
+     0,
+     0,
+     -0.1
+    ],
+    "src": "v3.py hand_one"
+   },
+   {
+    "name": "palm 7075 delta (R-027)",
+    "mass": 0.072,
+    "pos": [
+     0,
+     0,
+     -0.07
+    ],
+    "src": "R-027"
+   }
+  ]
+ },
+ "_meta": {
+  "per_side_total_kg": 8.957,
+  "moving_arm_kg": 7.437,
+  "sim_v3_arm_kg": 5.953,
+  "note": "Left side; mirror y for right. torso entry is mass ADDED to the torso body at the shoulder (Torso & Power re-split). All positions/r/L [EST]; masses cited per part. Apply as <inertial pos=... mass=... fullinertia=.../> on sim/v3 bodies."
+ }
+}
