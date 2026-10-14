@@ -560,3 +560,13 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
   1. The hip lever fix, capped at +0.25 kg before switching to steel.
   2. The torso overrun. It gets no credit or booking until it's itemized. It must come in at **≤0.80 kg net** to keep the 0.30 kg floor. Torso should go after the lighter pre-charge and the ±0.2 kg estimates first.
 - **Repo:** stash@{0} was dropped with Actuators' OK. It's backed up at refs/backup/stash-actuators-d59-d62. A32 moves to Arms & Hands.
+
+## R-035 (2026-10-14) P-027 credit, torso line, arm fit, hand power
+- **P-027 closed (Arms 7f71f86).** The credit is −1.332 kg, cited ×1.0. D65 left out the encoders. Credible mass is 65.179 kg, reserve 1.321 kg.
+- **P-042 carry pose accepted** (sp −60 / el −110, elbow ≤13.96 N·m, 20 kg carry passes). Arms owns the hold-time limit.
+- **Torso line (8c26b7f).** Booked at 5.026 kg. That's Torso's 5.024 itemization with the duct fan at the cited 0.042 Sunon (R-032). The separate P-045 clamp (0.150), R-033 disconnect (0.232) and Thor fan (0.042) bookings move into this line, so nothing is counted twice. Net new mass is +0.202 kg, which gives a credible total of about 65.381 kg and a reserve of about 1.12 kg.
+  - All structure is estimated, so it's booked in full and has to be confirmed by CAD before G2.
+  - If O-T8 fails, the fallback of 2× HS100 0R75 (+0.09 kg) is pre-approved.
+- **Remaining queue:** the hip lever fix (≤0.25 kg before steel), then P-040, P-041 and P-046 to P-050 once each is sized.
+- **O-A3 forearm fit.** Don't enlarge the 66×177 mm forearm envelope. Move the hand board out of the forearm, into the upper arm or the torso shoulder bay next to the drives. Arms leads, with Actuators and ID, and must show a clash check and wire routing through the wrist ROM (A42).
+- **T4 hand close ≤1 s under load.** The 40 W continuous hand cap stays. A peak of up to 80 W for ≤1 s is allowed if Electronics confirms the supply, Thermal confirms the duty, and Arms shows by sim that T4 passes (A43). T4 stays at risk until then.
