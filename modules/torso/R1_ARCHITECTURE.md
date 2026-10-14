@@ -1,0 +1,68 @@
+# RL Torso & Power — R1 architecture (2026-10-14)
+Owner: RL Torso & Power (067740e6). Check script: `r1_torso.py` → `r1_torso.json`, figure `R1_torso_power.png`.
+Scope: pelvis, torso frame, waist joints (selection by RL Actuators), battery pack, BMS, power distribution/protection, runtime.
+Basis: CONTRACTS R1.1/R1.3/R1.4/§1a/§1c/§3, official rollup (R-027), `actuators/results/sizing.md`, `arms/R1_ARCHITECTURE.md`, `electronics/R1_ARCHITECTURE.md` (1e33c96). [EST] = estimate, ×0.5 evidence.
+
+![R1 torso & power](R1_torso_power.png)
+
+## 1. Chassis structure
+- **Torso:** CFRP 2.0 mm monocoque shell (v3 used 3 mm; 2 mm proposed with local inserts) carrying a machined 7075 **shoulder bulkhead** (two 8 × M8 12.9 shoulder mounts, CONTRACTS §1c) and a 7075 **waist ring** bolted to the waist_pitch output. Pack slides into rails in the lower chest from the back (swappable, T7), latch + 2 guide pins + blind-mate connector.
+- **Pelvis:** machined 7075 box: waist_yaw housing on top, 2 × hip bracket 8 × M5 12.9 below (§1c, hip y ±130 mm), hip_pitch twin-screw trunnion brackets (out of Legs scope, P-007 note) on the front/back walls.
+- **Load paths:** arms → shoulder bulkhead → shell → waist ring → waist_pitch → waist_yaw → pelvis → hip brackets → legs. Pack mass goes rails → shell bottom flange → waist ring (not through the shell skin). Fall loads (T8): shoulder side impact into bulkhead (300 N·m shoulder_roll clutch caps arm moment); torso/pelvis shells are outer skin (no covers, R-021).
+- **Mass (paper, all [EST] until CAD):** shell 1.705 + bulkhead 0.45 + waist ring 0.25 + pack rails/latch 0.20 + pelvis 1.45 + power distribution (busbars, branch fuses, 5 V aux, PCB) 0.25 = **4.305 kg** vs v3 allocation pelvis 1.6 + torso 2.8 = 4.40 kg (−0.095). No FEA this round.
+
+## 2. Waist joints (DOF 2: yaw + pitch, T3 unchanged)
+| joint | v3 / contract need | R1 load case (static, [EST] geometry) | need 1.5× | v3 selection avail | status |
+|---|---|---|---|---|---|
+| waist_yaw | 60 N·m, 2 rad/s | turning/arm reaction, not simulated | 60 (keep) | TBM2G-06008A + CSG-17-100, 70 | OK, keep |
+| waist_pitch | 115.4 N·m, 2 rad/s | 10 kg at full reach, lean 30°: **125.5**; 20 kg carry lean 15°: 112.8 | **188** | TBM2G-06808A + CSG-25-100, **116** | **FAILS** |
+Model: sim torso 18.762 kg @ 0.169 m (`humanoid_v3.xml`), catalog arms 9.54 kg/side (arms R1), shoulder 0.30 m above axis, payload 0.30 m (waist carry) / 0.60 m (reach). The v3 115.4 need had no payload case (T5 was not checked in v3).
+Proposal to RL Actuators (to file as P-0xx): waist_pitch motor → **TBM2G-08508A** on the same CSG-25-100 (= hip_roll selection, 204 N·m avail, 1.56 vs 1.37 kg, **+0.19 kg**). Alternative: lower the T5 reach case lean to ≤ 15° (Controls/Arbiter call).
+
+## 3. Battery pack (per CONTRACTS R1.3, R-010 — unchanged)
+- Cell **Molicel INR-21700-P45B** (4.5 Ah typ, 3.6 V, 16.2 Wh, ≤ 70 g, 45 A cont; datasheet in `v3/PARTS.md`), screened ≥ 4400 mAh at 0.2C.
+- **20S5P, 100 cells: 68.0 / 72.0 / 84.0 V (min/nom/max), 22.5 Ah, 1620 Wh typical / 1584 Wh binned.** Cell current 12 A at 60 A cont, 20 A at 100 A/2 s (≤ 45 A rating).
+- Mass **8.75 kg** (= rollup line): cells 7.00, busbars/tabs 0.25, holders+foam 0.30, CFRP/6061 enclosure 0.75, BMS+FET board+fuse+connector 0.30, gap filler 0.15 [EST except cells].
+
+## 4. BMS, protection, rails (real parts)
+| function | part | note |
+|---|---|---|
+| cell monitor | 2 × **TI BQ79616-Q1** (16S each, used 10S+10S, daisy-chain) | cell V, temps, passive balance |
+| host / SOC | TI MSP430/C2000-class MCU [part TBD] → CAN FD to safety MCU (Electronics §4) | |
+| current sense | **TI INA229** on a low-side 100 µΩ shunt (Isabellenhütte BVR family) | low side because INA229 CM max 85 V < 90 V clamp |
+| pack switch | back-to-back N-FETs, 6 + 6 × **Infineon IPT059N15N3** (150 V, TOLL), driven by **TI BQ76200** high-side driver with pre-charge path (47 Ω [EST]) | 150 V parts ≥ 1.6 × 90 V clamp; ≈ 2 mΩ total → 0.2 W at 9.8 A |
+| main fuse | **Littelfuse L50S125** (125 A, R1.3) | DC interrupt rating vs pack short-circuit current to verify (O-T4) |
+| regen | BMS regen-charge limit 30 A; chopper/clamp ≤ 90 V (R1.3; part = O-E6 with Electronics) | |
+| motor bus | 68–84 V direct to every Elmo Gold Twitter VP+ (10–95 V) | |
+| **brain rail (changed)** | **48 V intermediate rail: Vicor DCM3623TA5N53B4T00, 43–154 V → 48 V, 240 W** (+ choke 47718-232) | replaces booked DCM3623x75H26C2 (36–75 V in, cannot take 84 V / 90 V clamp; finding by RL Electronics). AGX301 takes 36–60 V. Lead time 52 wk (T10 risk); second-source idea: a 48 V brick in Vicor BCM/ PRM family or TI LM5185-class flyback [not verified] |
+| drive logic VL / 24 V | 48 V → 24 V POL off the 48 V rail, or single-supply from VP+ (Electronics O-E3) | |
+| head 12 V | RECOM RP40-11012SFR/P-HC from pack (R-026), unchanged | |
+| always-on 5 V aux | **TI LM5164** (6–100 V, 1 A sync buck) from pack → BMS host, e-stop logic, wake | 100 V abs vs 90 V clamp |
+| e-stop | Electronics §5: STO star from TMS570 (SS1 default, Cat 0 on button), then BMS FETs open (acts as main contactor; no electromechanical contactor booked — O-T3) | |
+
+## 5. Runtime vs T7 (CONTRACTS R1.3 + R-025 + torso adds)
+Torso adds 1.5 W [EST] (BMS 1.0, FETs 0.2, distribution 0.3). Usable 90 % [EST, R-010].
+| case | W | h | target |
+|---|---|---|---|
+| walk 1.0 m/s (rating speed, R-010), typical | 704.9 | **2.07** | ≥ 2 h MET |
+| walk 1.0 m/s, binned 1584 Wh | 704.9 | **2.02** | MET (thin, 7.9 W under the 712.8 W pass line) |
+| walk 1.2 m/s, typical | 847.5 | 1.72 | tracked, NOT MET |
+| mixed 50 % walk 1.0 / 50 % stand (stand 294 W [EST]) | 499.4 | **2.92** | **≥ 4 h NOT MET** |
+The 48 V DCM swap is ~power-neutral (both ~92 % class; to confirm from datasheet, O-E7).
+
+## 6. Mass line for the rollup
+| line | paper kg | credible kg | note |
+|---|---|---|---|
+| torso structure + pelvis + power distribution | 4.305 | 4.353 | vs 4.40 v3 inside "all other lines"; saving 0.095 ×0.5 credit |
+| battery 20S5P | 8.750 | 8.750 | unchanged |
+| waist actuators (Actuators line) | 2.40 → 2.59 | | +0.19 if the waist_pitch motor change lands |
+Thermal (1.0 kg in the v3 torso allocation) is RL Thermal's; harness/covers stay with Actuators/Arbiter lines.
+
+## 7. Open questions / conflicts (not edited in others' files)
+- **O-T1 (Electronics, coordination):** adopt the 48 V intermediate rail with DCM3623TA5N53B4T00; Torso hosts the DCM on the power distribution board or the brain tray? Mass 0.024 [UNVERIFIED for variant] stays in the brain line; who books the 47718-232 choke; 24 V VL source (O-E3); BMS→safety MCU CAN FD message set; e-stop = FET-open vs contactor (O-E6).
+- **O-T2 (Actuators/Arbiter):** waist_pitch 116 N·m < 188 N·m need with T5 payload → TBM2G-08508A, +0.19 kg.
+- **O-T3 (Electronics/Arbiter):** no mechanical contactor; FETs as disconnect needs a safety argument (welded-FET detection via BQ76200 diagnostics).
+- **O-T4:** L50S125 DC breaking capacity at 84 V and pack prospective short-circuit current (100 cells, ~15 mΩ/cell) to be verified.
+- **O-T5 (Arbiter):** T7 4 h mixed is not met (2.92 h). Options: re-rate mixed duty, 20S6P (breaks T2), or idle-power cuts (compute cap). Ruling requested.
+- **O-T6:** usable 90 % at 3.4 V/cell floor still [EST] (R-010); read P45B discharge curve at ~2 A/cell.
+- **O-T7 (Legs/Controls):** sim torso 18.762 kg should be re-split (pack 8.75 in chest) when the sim is updated.

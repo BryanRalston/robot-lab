@@ -1,0 +1,54 @@
+{
+ "pack": {
+  "S": 20,
+  "P": 5,
+  "cells": 100,
+  "Vmin": 68.0,
+  "Vnom": 72.0,
+  "Vmax": 84.0,
+  "Ah": 22.5,
+  "Wh": 1620.0,
+  "Wh_binned": 1584.0000000000002,
+  "I_cell_60A": 12.0,
+  "I_cell_100A": 20.0,
+  "kg": 8.75
+ },
+ "pack_mass": {
+  "cells 100 x 0.070 (datasheet max)": 7.0,
+  "busbars/tabs [EST]": 0.25,
+  "cell holders + foam [EST]": 0.3,
+  "enclosure CFRP 1.5 mm + 6061 caps/latch [EST]": 0.75,
+  "BMS + FET/precharge board + fuse + connector [EST]": 0.3,
+  "gap filler [EST]": 0.15
+ },
+ "struct": {
+  "torso shell CFRP 2.0 mm, 0.55 m2 [EST]": 1.705,
+  "shoulder bulkhead 7075 [EST]": 0.45,
+  "waist ring 7075 [EST]": 0.25,
+  "pack rails + latch [EST]": 0.2,
+  "pelvis 7075 machined [EST]": 1.45,
+  "power distribution board, busbars, branch fuses, 5 V aux [EST]": 0.25
+ },
+ "struct_kg": 4.305,
+ "waist_pitch_static_Nm": {
+  "stand": 18.7,
+  "lean 30": 59.8,
+  "carry 20 kg upright": 77.6,
+  "carry 20 kg lean 15": 112.8,
+  "10 kg reach lean 30": 125.5
+ },
+ "waist_pitch_need_Nm": 188.2,
+ "P_add_W": {
+  "BMS + host always-on [EST]": 1.0,
+  "FET conduction 2 mOhm x 9.8^2": 0.2,
+  "distribution/fuses [EST]": 0.3
+ },
+ "P_walk10_W": 704.9,
+ "P_mixed_W": 499.4,
+ "runtime_h": {
+  "walk1.0 typical": 2.07,
+  "walk1.0 binned": 2.02,
+  "walk1.2 typical": 1.72,
+  "mixed 50/50 typical": 2.92
+ }
+}
