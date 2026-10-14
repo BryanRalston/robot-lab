@@ -7,11 +7,12 @@
   "stall timers + per-flexor cap logic (R-080)": 1.8,
   "EtherCAT SYNC0 ISR + PDO copy (on-chip ESC)": 4.0,
   "mailbox/CoE, ladder/OT, tactile, TMP117, housekeeping": 6.0,
+  "R-089 rail sum limit (2 rails x 10 kHz x 60) + stagger scheduler (1 kHz x 200)": 1.4,
   "ISR entry/exit + cache/flash stalls (10 kHz frame ISR + 1 kHz)": 4.4
  },
- "total_Mcyc": 59.3,
- "util_pct": 82.36111111111111,
- "margin_pct": 17.638888888888893,
+ "total_Mcyc": 60.7,
+ "util_pct": 84.30555555555556,
+ "margin_pct": 15.694444444444445,
  "electronics_rescaled_pct": 52.083333333333336,
  "biss": {
   "t_read_us": 8.65,
@@ -60,13 +61,13 @@
   "drv_ilim_A": 1.9
  },
  "r083_144MHz": {
-  "util_pct": 41.18055555555556,
-  "margin_pct": 58.81944444444444,
+  "util_pct": 42.15277777777778,
+  "margin_pct": 57.84722222222223,
   "step": 71,
   "sclk_MHz": 4.9921875,
-  "adc_div": 5,
-  "fadci_MHz": 28.8,
-  "t_conv_us": 0.625,
+  "adc_div": 6,
+  "fadci_MHz": 24.0,
+  "t_conv_us": 0.75,
   "pwm_counts_edge": 7200.0,
   "pwm_counts_center": 3600.0
  }

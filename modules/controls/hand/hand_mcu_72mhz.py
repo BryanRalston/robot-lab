@@ -11,6 +11,7 @@ rows = {  # name: (count, rate Hz, cycles each, tag)
  'stall timers + per-flexor cap logic (R-080)': (6, 10e3, 30, 'EST'),
  'EtherCAT SYNC0 ISR + PDO copy (on-chip ESC)': (1, 1e3, 4000, 'REPO 1 kHz DC; EST 4000 cyc'),
  'mailbox/CoE, ladder/OT, tactile, TMP117, housekeeping': (1, 1, 6e6, 'EST 6 Mcyc/s'),
+ 'R-089 rail sum limit (2 rails x 10 kHz x 60) + stagger scheduler (1 kHz x 200)': (1, 1, 1.4e6, 'EST'),
  'ISR entry/exit + cache/flash stalls (10 kHz frame ISR + 1 kHz)': (1, 11e3, 400, 'EST'),
 }
 budget = {k: n*r*c/1e6 for k, (n, r, c, _) in rows.items()}
@@ -53,7 +54,7 @@ print(json.dumps(out, indent=1)); json.dump(out, open('hand_mcu_72mhz.json', 'w'
 # ---- R-083: adopted 144/144/144 MHz, PWM 20 kHz (72 MHz analysis above kept as fallback)
 f144 = 144e6
 step144 = int(2*biss_clk*1024/f144)               # floor so SCLK stays <= 5 MHz
-adc_div = next(d for d in range(1, 33) if f144/d <= 30e6)
+adc_div = 6                                       # Electronics §18.2l ÷6 (24 MHz); ÷5 = 28.8 MHz also legal
 out144 = dict(util_pct=100*tot*1e6/f144, margin_pct=100*(1-tot*1e6/f144), step=step144,
   sclk_MHz=f144*step144/1024/2/1e6, adc_div=adc_div, fadci_MHz=f144/adc_div/1e6,
   t_conv_us=(2+12+4)/(f144/adc_div)*1e6, pwm_counts_edge=f144/20e3, pwm_counts_center=f144/2/20e3)

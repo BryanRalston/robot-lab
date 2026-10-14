@@ -3,15 +3,71 @@ Script `hand_mcu_72mhz.py` → `hand_mcu_72mhz.json`. Tags: **[REPO]** = robot-l
 
 ## ADOPTED (R-083): 144/144/144 MHz, 20 kHz PWM — PASS
 R-083 lifted the 72 MHz limit; Electronics runs the XMC4800 at 144/144/144 MHz with 20 kHz PWM [REPO, Electronics]. The 72 MHz analysis below is kept as the **fallback** (82 %, still fits).
-- **CPU:** the same 59.3 Mcyc/s conservative count gives **41 %, a 59 % margin** (Electronics' counts give 26 %). FW-E14 bench pass is ≤ 70 %, measured with DWT CYCCNT.
+- **CPU:** the conservative count is 60.7 Mcyc/s including the R-089 rail limiter (+1.4), giving **42 %, a 58 % margin** (Electronics' counts give 26 %). FW-E14 bench pass is ≤ 70 %, measured with DWT CYCCNT.
 - **BiSS-C (USIC SSC, fPERIPH 144):**
   - Fractional divider STEP = floor(2 × 5 MHz × 1024 / 144 MHz) = **71**, PDIV = 0, so SCLK = 144 × 71/1024/2 = **4.99 MHz ≤ 5 MHz** (rounded down on purpose).
   - Read time stays 8.65 µs; 4 × 8.65 = 34.6 µs in the 100 µs frame.
-- **VADC:** the prescaler divides fPERIPH by **5**, giving fADCI = **28.8 MHz ≤ 30 MHz** [DS limit]. Divide-by-4 would give 36 MHz, which exceeds the limit. About 0.63 µs per conversion [EST].
+- **VADC:** the prescaler divides fPERIPH by **6**, giving fADCI = **24 MHz ≤ 30 MHz** [DS limit] (Electronics §18.2l). Divide-by-5 (28.8 MHz) is also legal; divide-by-4 (36 MHz) exceeds the limit. About 0.75 µs per conversion [EST].
 - **PWM 20 kHz (confirmed by Electronics):** fCCU 144 gives 7200 counts edge-aligned (12.8 bit) or 3600 centre-aligned (11.8 bit). This is unchanged from the fallback.
 - **POSIF:** unchanged, because fCCU was already 144. The margin is 15–27× against the 0.945 µs minimum state.
 - **EtherCAT:** fit a **single PHY**, since the hand is the last device on each arm line (harness.py l.56/64–65). Electronics' rule is binding: **nothing may be added after the hand**, because port 1 is not populated. Adding anything there would need a second PHY (+0.26 W, ~110 mm²).
 - **AO power:** reverting the 72 MHz trim costs about +0.29 W. The AO budget is Electronics' to close under R-083; it is not checked here.
+
+**R-089 status:** 144 MHz is the default. 72/72/144 is the fallback, used only if Thermal finds the board > 90 °C. **FW-E14 ≤ 70 % is binding.** At 72 MHz the conservative count is 84 %, so the fallback **must** also take fallbacks 1 and 2 (DCX16 current loops at 5 kHz, BiSS at 5 kHz): 49.7 Mcyc/s, **69 %**.
+
+## Per-rail summed-current limit and flexor stagger (Electronics §18.2l item 4, R-089, R-097)
+- **Rails** [REPO hand_close_r4]: rail A = F1–F3 + S1, S2; rail B = F4–F6 + S3–S5. Logic is on AO, not on rail A.
+- **Limit:** I_rail = Σ D_i × I_IPROPI,i / 0.95 [η EST]. Every sample, all achievable currents on that rail are scaled by one factor so that **I_rail ≤ 1.50 A** (R-097 binding). The scaling is applied to the achievable current min(setpoint, (V − Kt·ω)/R), not only to the setpoint. At speed the setpoint is saturated, so scaling only the setpoint does not reduce rail current (first sim build showed 2.4 A).
+- **Loop rate: 10 kHz, not "20 kHz".** Electronics wrote "20 kHz loop"; PWM is 20 kHz and the current loop (and this limiter) runs at 10 kHz.
+- **Is 10 kHz fast enough against the RP40 hiccup (~2.5 A, 150 % OLP)?** Yes:
+  - With the setpoint held, the rail current between two samples changes only through back-EMF build-up. Worst case is 1.66 A × Kt × (Kt·1.66/J) / V × 100 µs = **6 mA per sample**.
+  - Setpoint steps are made by the loop itself, after the limiter, so they cannot overshoot.
+  - Inside one sample, the DRV8874 cycle-by-cycle chop at 1.915 A bounds each bridge.
+  - Sim peak is 1.505–1.517 A instantaneous and ≤ 1.50 A at 1 ms, which is 1.0 A below hiccup.
+  - Without the limiter, a simultaneous close reaches **5.4 A** and hiccups the RP40.
+  - The RP40 OLP response time is not in the repo; it is [DS, to cite].
+- **Stagger (R-097):** at most one flexor per rail starts at a time. **Default offset 50 ms, hard maximum 150 ms** (200 ms fails the T4 ≤ 1 s close). Holds may overlap. Implemented as a 1 kHz scheduler.
+- **Current hierarchy:**
+  - Clamp **1.66 A** (pending the Arbiter correcting R-089, which says 1.08 A; both are documented in the cap section). The Arms R8b/R-081 basis is the η_max 0.65 sheet, and the loaded close needs ~1.7 A.
+  - Firmware trip **1.80 A × 3 samples**.
+  - DRV8874 hardware chop **1.915 A** (R_IPROPI 3.83 kΩ, VREF 3.3 V, A_IPROPI 450 µA/A, per Electronics' TI DS citation). The firmware trip sits just below the chop.
+  - Rail sum **1.50 A**.
+- **CPU cost:** 2 rails × 10 kHz × 60 cyc + 1 kHz × 200 = **1.4 Mcyc/s**, already in both budgets.
+
+**Close time** (`rail_stagger_sim.py` → `rail_stagger_sim.json`; Arms hand_close_r4 physics, η 0.65, friction 1.3, contact ramp to 30 N, small drives holding at I_nom):
+
+| case (1.50 A/rail) | rail A full close | rail B full close | rail peak at 1 ms |
+|---|---|---|---|
+| simultaneous, no limiter | 0.621 s | 0.621 s | **5.3–5.4 A → hiccup** |
+| simultaneous, limiter only | 0.661 | 0.668 | 1.50 |
+| stagger 20 ms (Electronics) | 0.685 | 0.690 | 1.50 |
+| **stagger 50 ms (R-097 default)** | **0.723** | **0.724** | **1.50** |
+| stagger 50 ms, hot R × 1.5 | 0.732 | 0.735 | 1.50 |
+| stagger 150 ms (R-097 maximum) | 0.922 | 0.922 | 1.50 |
+| stagger 150 ms, hot R × 1.5 | 0.930 | 0.931 | 1.50 |
+
+- **Verdict: T4 ≤ 1 s is met** at the 50 ms default (0.72–0.74 s, 0.26 s margin) and at the 150 ms maximum (0.93 s hot, 0.07 s margin).
+- It does **not** meet the old A43 0.64–0.68 s figure: 50 ms costs about +60 ms against limiter-only. Under R-097 that figure is a sim result, not the requirement. If Arms needs ≤ 0.68 s, the only way is the limiter with no stagger (0.66–0.67 s); 20 ms just misses.
+- **G5:** verify the **hot** close (windings hot, ladder B active) at 50 ms and 150 ms. Pass: ≤ 1 s with no RP40 hiccup.
+
+**Bench test T-029 (new item):** command all of rail A to close at the same time, then all of rail B, to a 30 N grip, with the firmware limiter and stagger active. **Pass = no RP40 hiccup, and rail current ≤ 1.67 A at 1 ms resolution** (measure on the RP40 output with a current probe). Repeat with the windings hot.
+
+## Datasheet figures to re-read and cite before G1 (R-089)
+- **Cited in the repo by Electronics:**
+  - DRV8874-Q1 eq. 3, A_IPROPI 450 µA/A
+  - RP40 OLP 150 % hiccup
+  - XMC4800 Table 33 currents
+  - ENX22 4 MHz, 62.5 ns min state
+- **[UNVERIFIED], from memory, must be cited:**
+  - XMC4800 RM: USIC SSC max baud fPERIPH/2, fractional divider formula
+  - POSIF/CCU4 input synchroniser + 3/5/7 filter
+  - POSIF LPF options
+  - VADC fADCI ≤ 30 MHz and conversion cycles
+  - ECAT clock source independent of fCPU
+  - GPDMA channel count
+  - flash wait states vs fCPU
+  - RP40 OLP response time
+  - all cycle counts [EST] until the FW-E14 DWT measurement
 
 ## FALLBACK: 72/72/144 MHz analysis (R-078)
 ### Inputs
@@ -86,7 +142,7 @@ Constants [REPO arms/A42_A43_R4, R7_ROUND]: Kt 18.4 mN·m/A, I0 35.9 mA, GPX22HP
 
 **The η table above is kept as the rationale for G5 calibration.**
 
-**ADOPTED cap (Arms R8b + Controls):**
+**ADOPTED cap (Arms R8b + Controls; R-089 still reads 1.08 A, so an Arbiter correction is pending. Both are documented: 1.08 A is the η = 1 bound, 1.66 A is the η_max 0.65 datasheet bound plus the G5 per-assembly calibration):**
 - **Clamp: 1.66 A per flexor.** The basis is the maxon GPX 22 HP 103:1 sheet, η_max 0.65, cited in `arms/hand_close_r4.py` l.4 [REPO, DS] as the datasheet upper bound. At η 0.65 this gives **500 N**.
 - The loaded close needs about 1.7 A transient (A43 sim, T4 0.64–0.68 s [REPO]), so a 1.08 A clamp would block the close.
 - Residual risk: if the as-built η is above 0.65 (static or back-driven), 1.66 A could give up to 770 N at η = 1. The **G5 per-assembly calibration below closes this risk.** Materials already designs the sheath and end stops for a 775 N proof [REPO TENDON_SHEATH].
