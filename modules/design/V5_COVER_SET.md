@@ -21,6 +21,9 @@ Hull areas now come from the final `legs/results/v5/ENVELOPES_FOR_ID.md`: knee_c
 
 **Knee cap vs thigh fairing clearance (Legs):** no overlap from 0 to 135°. Minimum keep-out gap is **10.2 mm at 135°** (22 mm from 0 to 105°). After the D69 ø85 knee housing (+4.5 mm radial) it is **≈ 5.7 mm [EST]**, still above the 3 mm PC flex gap. Recheck after the D69 re-CAD.
 
+## Shoulder impact pad (R-042, P-051 proposed): see `SHOULDER_PAD.md`
+40 mm EPP 80 g/L pad, about 109 cm² per side, in a sewn sleeve on the shoulder bulkhead. **0.100 kg for the pair, at the R-042 cap (0.10, booked separately)**, about 22.6 % less force. Arm shells stay deferred.
+
 ## A29 panel layout and mould list (owner: Industrial Design per R-029)
 Status: layout from Legs keep-out hulls + model_v4 dims, **not yet measured on v4 CAD** (areas [EST]). Delta check: itemized `modules/design/cover_set_v5.json` = **−0.124 kg vs booked (−0.184 CF thigh): PASS**; P-022 +20 % flagged.
 
@@ -47,7 +50,7 @@ R-030 P-026: no closed PC over hip-pitch or knee. The knee cap, hip skirt and th
 - Draft to be done when A35 lands.
 
 ## Option: untrimmed set (`python3 cover_set_v5.py --untrimmed` → `cover_set_v5_untrimmed.json`)
-Full-wrap shin/thigh fairings (0.70 hull), foot shell 0.40, upper-arm (ø95×260) + forearm (ø85×250) shells + shoulder caps as placeholders. P-020 1.073 m² → 2.012 kg (+0.855 vs booked) + P-022…P-025 0.383 → **+1.238 kg**. Rejected by R-029 against the 1.329 kg reserve / 0.30 floor; kept for reference only.
+Full-wrap shin/thigh fairings (0.70 hull), foot shell 0.40, upper-arm (ø95×260) + forearm (ø85×250) shells + shoulder caps as placeholders. P-020 1.073 m² → 2.012 kg (+0.855 vs booked) + P-022…P-025 0.383 → **+1.255 kg** (recomputed on the final Legs hulls; was +1.238). Rejected by R-029 against the 1.329 kg reserve / 0.30 floor; kept for reference only.
 
 ## Clearance assumptions
 - Leg keep-outs: Legs `legs/results/v5/envelopes.json` (hull areas snapshotted into `cover_set_v5.py`) (fairings_v5.py, model_v4 swept, convex hull + 5 mm; **uncommitted Legs WIP, not yet confirmed by Legs**). Shin: ankle pitch −45…+40 × roll ±18; thigh: hip pitch −105…+40 (incl. −74.6 sit) × knee 0–135; skirt: yaw −35/+45, roll −12/+15.

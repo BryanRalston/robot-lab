@@ -1,0 +1,53 @@
+{
+ "P": "P-051 (proposed; R-042 assigns none)",
+ "E_total_J": 637,
+ "E_shoulder_cap_J": 220.0,
+ "s_30mm": 24.0,
+ "s_40mm": 31.0,
+ "F_30mm_kN": 9.17,
+ "F_40mm_kN": 7.1,
+ "M_bearing_30_Nm": 550,
+ "M_bearing_40_Nm": 426,
+ "force_reduction": 0.226,
+ "foams": {
+  "EPP 45 g/L": {
+   "rho": 45,
+   "plateau_MPa": 0.3,
+   "area_cm2": 237,
+   "kg_per_pad": 0.0426
+  },
+  "EPP 60 g/L": {
+   "rho": 60,
+   "plateau_MPa": 0.45,
+   "area_cm2": 158,
+   "kg_per_pad": 0.0378
+  },
+  "EPP 80 g/L": {
+   "rho": 80,
+   "plateau_MPa": 0.65,
+   "area_cm2": 109,
+   "kg_per_pad": 0.0349
+  },
+  "EVA 100 (closed cell)": {
+   "rho": 100,
+   "plateau_MPa": 0.55,
+   "area_cm2": 129,
+   "kg_per_pad": 0.0516
+  },
+  "PORON-class PU 240": {
+   "rho": 240,
+   "plateau_MPa": 0.5,
+   "area_cm2": 142,
+   "kg_per_pad": 0.1363
+  }
+ },
+ "pick": "EPP 80 g/L",
+ "kg_foam": 0.0349,
+ "kg_sleeve": 0.009,
+ "kg_carrier": 0.006,
+ "kg_per_side": 0.0499,
+ "kg_pair": 0.1,
+ "cap_pair": 0.1,
+ "pass_cap": true,
+ "measured": false
+}
