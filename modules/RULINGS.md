@@ -782,3 +782,9 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
 - D-A is **adopted provisionally**: a 7075-T6 plate 62x62x1.0 with integral 0.8 mm lips and 4xM4 tabs, core bonded with DP490, replacing the saddle, band and posts. Pair 0.0856 (calc), so the saving against the 0.127 booking counts at half credit: **booked 0.106**. It moves to the calc value once CAD-measured. Conditions: Arms confirms the roll-housing outboard face is flat, solid, >=ø88 and tappable. If not, D-B (0.108–0.116) comes back to me. G5 adds a bond shear test after crush.
 - Rev B fins: Actuators confirms the 0.0703 m2 is extra fin area, which meets R-062 condition (1). Thermal and Controls drop any x2 factor that stood in for fins. Actuators merges its own act-work commits to main (its files only, rebased).
 - Reserve ~0.30, at the floor.
+
+## R-064 (2026-10-14) Thermal R059 (7f2fa7d/bf16f41)
+- D76 wrist fairing: vents aren't required, but the ID 20% slots are **adopted** (back and palm halves, along the forearm, off the grip face) to protect the encoder, cables and grease.
+- The shoulder EPP face passes (48/55 C), so no gap is needed.
+- A43 at 4.3 W: **thermal condition met** (>=33 K to the 110 C cutoff). It closes again, pending only the Arms CAD fit.
+- Ladder: **no change.** T4 is 30 N peak / 22 N sustained (R-055), and a sustained ~24 N exceeds that. The tuned 55 C first step stays. A continuous 30 N grip is not a requirement.
