@@ -350,6 +350,30 @@ Moulded PC shrouds / terminal boots (IP2X) on: HS100 clamp resistor terminals, L
 ### 21.4 T-031
 Delivered (`T031_chest_contact.md`, 138a3a0); +0.078 kg Arbiter request pending.
 
+## 22. R-079 (recorded) and touch-protection redo
+**R-079:**
+- Chest pad accepted at +0.078 kg; fuse item closed.
+- The Arbiter booked +0.21 (connectors) and +0.04 (16 mm² link) conservatively until cited masses arrive.
+- Projected total ~0.13 kg over 66.5 → **pocketing FEA high priority**. `FEA_SPEC_torso_pocketing.md` is completed (software, material, BCs, mesh, pass criteria, deliverables): **ready to run** on Bryan's PC.
+
+**Connectors (replaces SurLok; coordinated with Electronics' audit, MR30/XT30U drive tees and AS150U pack main at 500 V DC):**
+| interface | part | rating | mass (cited) |
+|---|---|---|---|
+| pack main **and** rail blind-mate (one connector) | **Anderson SBS75X** pair (genderless, 2 power + 4 aux, brown 96 V key code), on a floating rail mount with guide pins | UL 110 A / CSA 75 A on 6 AWG, wire 1.3–13.3 mm² (10 mm² OK), 600 V AC/DC, **IP20 finger-proof (IEC 60529, UL 1977 §10.2)**, hot-plug, 10 000 cycles (Anderson SBS datasheet) | housing **22 g each** (PEI-Genesis SBS75XBLK-BK) → **0.044**; power contacts 1339G-series 4 × ~5 g [EST] = 0.020 |
+| aux pins | the same SBS75X aux positions for pre-charge sense / HVIL / FAULT_N loop | 20 A, mate-last break-first | in housing |
+| PDB → limb buses | **no bulkhead connectors**. Bolted/soldered PDB terminals inside an IP2X enclosure (shell + PC covers), with grommeted pass-throughs. Serviceability at Electronics' drive tees | IP2X by enclosure | covers in shrouds below |
+| shrouds / covers (clamp, contactor, fuse, busbars, PDB) | moulded PC | IP2X | [EST] 0.025 |
+- **Main link stays 10 mm²**: SBS75X takes up to 13.3 mm², which releases the +0.04 harness booking.
+- **AS150U:** Electronics' pack-main choice has no cited IP2X rating. Torso proposes SBS75X for the pack/rail interface; Electronics to confirm or cite AS150U finger-safety.
+- **O-T12 closed:** SBS75X is a genderless panel/PCB-capable, hot-plug, finger-proof connector, used with a floating mount + guide pins for blind mating [the float mount is EST design].
+- **Net vs the +0.25 booked:** cited 0.044; with [EST] contacts 0.020 and covers 0.025 → **0.089 kg**. **Net −0.161 kg** (−0.206 counting the cited part only).
+
+**T-031 rev 2** (`T031_chest_contact_r2.md`):
+- Face 98 × 98 mm, ceiling 22.35 kN (≤ 23); band 17.7–22.3 kN at 0°, 16.6–20.8 kN at 15°.
+- Stroke 62 mm, thickness 88 mm, core 0.061 kg.
+- Backing: CF/Al-honeycomb sandwich 0.070 kg, 24 MN/m (45× the pad), SF ≈ 2 at 1.5× load.
+- Total 0.131 → **+0.053 vs 0.078 accepted → Arbiter request**. Alternative: back the pad on a stiff pack-enclosure cap (O-T14).
+
 ## 7. Open questions / conflicts (not edited in others' files)
 - **O-T1 (Electronics, coordination):** adopt the 48 V intermediate rail with DCM3623TA5N53B4T00; Torso hosts the DCM on the power distribution board or the brain tray? Mass 0.024 [UNVERIFIED for variant] stays in the brain line; who books the 47718-232 choke; 24 V VL source (O-E3); BMS→safety MCU CAN FD message set; e-stop = FET-open vs contactor (O-E6).
 - **O-T2 (Actuators/Arbiter):** waist_pitch 116 N·m < 188 N·m need with T5 payload → TBM2G-08508A, +0.19 kg.
@@ -359,7 +383,9 @@ Delivered (`T031_chest_contact.md`, 138a3a0); +0.078 kg Arbiter request pending.
 - **O-T6:** usable 90 % at 3.4 V/cell floor still [EST] (R-010); read P45B discharge curve at ~2 A/cell.
 - **O-T8:** clamp: read HS200/HS100 overload curve for 400 J, cite comparator, gate driver, thermal cutout, sum drive bus capacitance for pre-charge; HS200 mass (0.475) vs Electronics estimate.
 - **O-T9 (Electronics/Arbiter):** interlock exception for cell-at-risk faults.
-- **O-T12:** cited IPXXB blind-mate pack connector ≥ 100 A, plus cited connector masses.
+- O-T12 CLOSED (§22).
+- **O-T14:** pack enclosure front as the T-031 backing.
+- **O-T12 (old):** cited IPXXB blind-mate pack connector ≥ 100 A, plus cited connector masses.
 - **O-T13:** verify IEC 60664-1 table values; reinforced isolator parts.
 - **O-T11:** T-031 pad stroke at 25° obliquity (68 mm needed vs 53 mm).
 - **O-T10:** Sunon PF40281B1 static-pressure curve vs ~20 Pa vents+fins; fan PWM schedule.
