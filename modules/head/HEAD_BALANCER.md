@@ -30,16 +30,19 @@ The head and neck are 1.137 kg (head 0.647, neck yoke 0.490) out of 63.8 kg in t
 | Neck pitch actuator | Dynamixel **XM430-W350-R** | same | $333.39 | same |
 | (Alt. pitch, rejected) | XM540-W270-R | 10.6 Nm, 165 g; only needed for the balance duty, which is rejected | $494.39 (out of stock) | https://www.robotis.us/dynamixel-xm540-w270-r/ |
 | Stereo camera (none chosen in the repo; the v1 plan only lists "2.3 MP global-shutter stereo") | Stereolabs **ZED X Mini**, 2.2 mm (ZED-311210) | 2×1920×1200 @60, global shutter, IMU, IP67, GMSL2, 94×32×37 mm, 150 g | $549 | https://www.stereolabs.com/store/products/zed-x-mini-stereo-camera |
-| Yaw bearing | 6806-2RS 30×42×7 | carries head radial/moment load (servo axial limit is 20 N) | [EST] $8 | — |
-| Pitch idler | 6800-2RS 10×19×5 | opposite cheek | [EST] $4 | — |
-| 48→12 V converter | isolated DC-DC brick, ~30 W | servo bus | [EST] $60 | — |
+| Yaw bearing | 6806-2RS 30×42×7, 26 g | carries head radial/moment load (servo axial limit is 20 N) | $9.95 | see BOM.md |
+| Pitch idler | 6800-2RS 10×19×5, 5 g | opposite cheek | $2.99 | see BOM.md |
+| 68–84 V → 12 V converter | RECOM RP40-11012SFR/P (43–160 V in, 12 V 3.33 A, 43 g w/ heatsink) | servo bus; servo current limit 1.5 A each | $137.93 | https://recom-power.com/pdf/Powerline_DC-DC/RP40-FR.pdf |
 | Head shell | CF prepreg 1.2 mm, laid up on a **machined aluminium mould** (no 3D printing; replaces PA12) | ~0.18 kg | [EST] $400 mould + $60/part | — |
 | Neck yoke, shaft | 7075-T6 machined | — | [EST] $180 | — |
 | Head deck | 6061 3 mm sheet, waterjet + bend, pocketed | — | [EST] $40 | — |
 
-**Sizing (gaze duty):** gravity hold at pitch is 0.647×9.81×0.096 = 0.61 Nm against 4.1 Nm stall (6.7×) and 0.82 Nm continuous (1.34× continuous margin, so the continuous margin is thin). **Flag:** add a ~0.5 Nm torsion-spring gravity compensator at the pitch axis (makeable, ~10 g) for ≥3× continuous margin. Speed: 276°/s no-load is fine for tracking and stabilization (walking torso pitch rate is <60°/s) but slower than human saccades (~500°/s). Backlash of 15′ = 0.25° camera jitter, which the ZED's IMU and visual odometry absorb. **Flags:** the ZED X Mini needs a GMSL2 capture path on the brain carrier (Thor carrier support is not verified); the servo bus needs 12 V, hence the DC-DC.
+**Sizing (gaze duty):** gravity hold at pitch is 0.647×9.81×0.096 = 0.61 Nm against 4.1 Nm stall (6.7×) and 0.82 Nm continuous (1.34× continuous margin, so the continuous margin is thin). **Flag:** add a ~0.5 Nm torsion-spring gravity compensator at the pitch axis (makeable, ~10 g) for ≥3× continuous margin. Speed: 276°/s no-load is fine for tracking and stabilization (walking torso pitch rate is <60°/s) but slower than human saccades (~500°/s). Backlash of 15′ = 0.25° camera jitter, which the ZED's IMU and visual odometry absorb. **Flags:** the ZED X Mini needs a GMSL2 capture path on the brain carrier (Thor carrier support is not verified); the servo bus needs 12 V from the 68–84 V pack (R1.3), hence the RP40-11012 (not a 48 V part). The servos talk on the AGX301 carrier's RS485 port, not EtherCAT.
+
+**GMSL2 path (R-025 A11):** the AGX301 has no native GMSL2. Use a Connect Tech JCB022 (MAX9296A) or JCB009 (MAX96792A) on the 16-lane MIPI expansion connector, +0.045 kg booked in the brain area. ZED driver support on the CTI board is still open; the fallback is a ZED Link card.
 
 ## Head line (own line, not in "all other")
+**A23 update:** the cited total is **0.817 kg** (catalog 0.388, calc 0.179, EST 0.250); full table in BOM.md. The table below is the original P-019 estimate.
 | Part | kg | Basis |
 |---|---|---|
 | 2× XM430-W350-R | 0.164 | catalog |

@@ -248,3 +248,11 @@ Any change to CONTRACTS.md or TARGETS.md, or to another module's files, starts h
 - Power: +4.4 W [EST] if the camera isn't in the 699 W budget; runtime −0.6 %, so 2 h stays met at 1.0 m/s.
 - Requests: Legs updates the sim neck (mass, armature 0.0005, ctrlrange 4.1 Nm); the A11 brain check covers the GMSL2 input.
 - Status: **ACCEPTED (R-025)**. Head line 0.810 paper (BOM incl. spring) / 1.178 credited; basis removed 2.692 (v3 head 1.6 + 2 neck actuators) → −1.514 credible. +4.4 W booked; T7 stays met (703.4 W). AGX301 needs a JCB022/JCB009 GMSL board (+0.045). Credible 64.995, reserve 1.505.
+
+#### P-019 addendum (A23, Robot Lab, 2026-10-14): cited masses for RL Arbiter
+- Bearings now catalog: 6806-2RS 0.026 + 6800-2RS 0.005 = **0.031** (was 0.027 EST, +0.004).
+- Converter fixed for the 68–84 V bus: **RECOM RP40-11012SFR/P**, 43–160 V → 12 V/3.33 A, **0.043** with heatsink, catalog (was 0.040 EST, +0.003). Servo current limit 1.5 A each.
+- Shell material cited (ACP 5.8 oz 2×2 RTS prepreg); mass stays calc 0.179. Yoke/deck stock is cited (7075-T651 plate / 7075-T6 sheet), but the machined masses stay [EST] 0.110/0.070. Spring (Lee Spring LTL series) and harness stay [EST].
+- Line total **0.817 kg** (+0.007): catalog 0.388, calc 0.179, [EST] 0.250 → cited/calc share 69.4 %.
+- R-021 credit recomputed: saving 2.692 − 0.817 = 1.875; credited 1.875×0.694 + 1.875×0.306×0.5 = 1.588 → **credited head + neck 1.104 kg (was 1.178; −0.074 credible)**. Paper +0.007.
+- The neck servos use the AGX301 RS485, so no added mass. The JCB022/JCB009 +0.045 is unchanged in the brain area (R-025 §4).
