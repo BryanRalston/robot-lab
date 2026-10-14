@@ -1,0 +1,40 @@
+{
+ "items": {
+  "clevis": {
+   "fix": "bridge extended 16 mm forward over the cheeks only (|y| 21..35, z 40..62) + R6 on the 4 cheek/bridge re-entrant edges",
+   "box": "h4: 3BW+screw 549.7 -> 147 MPa (SF 0.915 -> 3.42), fall 233 -> 62, pulse Goodman (147) 1.69; baseline h4 reproduced GB exactly",
+   "dkg_leg": 0.0278
+  },
+  "clamp": {
+   "fix": "arm depth 30 -> 34 mm, flush with the 34 mm ring (removes the arm-top/ring step corner), R1.5 root lines kept",
+   "box": "h3 relative: 182.0 -> 137.6 MPa (-24%); scaled to GB h1.5 207.75 -> 157 MPa, rev Goodman 0.52x 1.47 -> 1.95 (scaled, pending GB h1.5)",
+   "dkg_leg": 0.0202
+  },
+  "tongue": {
+   "fix": "neck widened 50 -> 55 mm (tangent to the hub OD, neck runs up to the pivot centre line): removes the neck-top/hub notch at x\u00b19.8; add anaerobic retaining compound (Loctite 648-class) to the 60 MPa fit",
+   "box": "h4: fault 643 -> 340 MPa (mech-only SF 1.48), press+fault 574 -> 234 (SF 2.15), press+design 283 -> 209 (SF 2.41). Bore opening under fault not re-checked (needs contact): pending GB",
+   "dkg_leg": 0.0275
+  },
+  "foot": {
+   "fix": "integral 7075 doubler collar around the steel flange, r 30.2..45, 3 mm, 2.5 mm outer chamfer, R1.5 root; break steel flange OD bottom edge 0.5x45",
+   "box": "box h5 half model OOM (13k tets with 2 steel bodies): not verified. Hand: flange-edge 2 mm stress 443.8 x (6/9)^2 = 197 MPa SF 2.55 [hand]; collar OD at r45 pending GB",
+   "dkg_leg": 0.029
+  },
+  "tubes": {
+   "fix": "bonded internal 7075 doubler sleeves 0.5 mm x 100 mm at femur and tibia mid-span (DP490, same prep as BOND_SPEC)",
+   "box": "hand: GB wall sweep exponent ~1.35 -> effective 1.7 mm: femur SF 1.07 -> ~1.72, tibia 1.03 -> ~1.65 if fully bonded [hand, pending GB]",
+   "dkg_leg": 0.0416
+  },
+  "hip_ring": {
+   "fix": "none: artifact + obsolete. GB analysed hip_ring() = CRBH \u00f896/\u00f880 ring that L21 (O17) replaced by the \u00f835 tongue; 912/870 MPa came from tensile bore traction on a bonded model. Not in the rollup",
+   "box": "n/a",
+   "dkg_leg": 0.0
+  }
+ },
+ "delta_leg": 0.1461,
+ "delta_both": 0.292,
+ "M2_old": 4.822,
+ "M2_new": 5.114,
+ "M2_incl_bolts_bumper": 5.154,
+ "reserve": 0.45
+}

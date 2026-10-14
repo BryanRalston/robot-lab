@@ -1,0 +1,85 @@
+{
+ "part": "clevis",
+ "h_mm": 4.0,
+ "mass_al_kg": 0.2624,
+ "pin": "\u00d816",
+ "note": "Half clevis. \u00d816 steel pin tied in the hole. Support is the femur bore surface (\u00d850 at x=18), not the bridge tip. Pin loaded in the cheek gap. Bridge ears pocketed.",
+ "cases": {
+  "fall_6BW": {
+   "vm_max": 62.41834312678245,
+   "vm_p999": 40.43351034814039,
+   "vm_p99": 22.975930128093342,
+   "vm_p50": 2.971479366700352,
+   "at_mm": [
+    7.35,
+    22.82,
+    41.0
+   ],
+   "umax_mm": 0.014628609392303735,
+   "n_elem": 5155,
+   "SF_yield_max": 8.059,
+   "SF_yield_p999": 12.44,
+   "goodman_pulse_p999": 6.154,
+   "goodman_rev_0p52_p999": 7.562,
+   "goodman_pulse_max": 3.987,
+   "goodman_rev_0p52_max": 4.899,
+   "vm_max_2mm_off": 40.89730115014648,
+   "SF_yield_2mm_off": 12.299,
+   "goodman_pulse_2mm_off": 6.084,
+   "goodman_rev_0p52_2mm_off": 7.477,
+   "cg_iters": 729,
+   "converged": true
+  },
+  "bw3_plus_screw": {
+   "vm_max": 147.1000881616389,
+   "vm_p999": 95.28886283978868,
+   "vm_p99": 54.14692505650981,
+   "vm_p50": 7.002827292686749,
+   "at_mm": [
+    7.35,
+    22.82,
+    41.0
+   ],
+   "umax_mm": 0.034474957576479656,
+   "n_elem": 5155,
+   "SF_yield_max": 3.419,
+   "SF_yield_p999": 5.279,
+   "goodman_pulse_p999": 2.611,
+   "goodman_rev_0p52_p999": 3.209,
+   "goodman_pulse_max": 1.692,
+   "goodman_rev_0p52_max": 2.079,
+   "vm_max_2mm_off": 96.38186954977424,
+   "SF_yield_2mm_off": 5.219,
+   "goodman_pulse_2mm_off": 2.582,
+   "goodman_rev_0p52_2mm_off": 3.172,
+   "cg_iters": 729,
+   "converged": true
+  },
+  "op_grf_plus_screw": {
+   "vm_max": 132.4722765177055,
+   "vm_p999": 85.81322244553847,
+   "vm_p99": 48.762488984974226,
+   "vm_p50": 6.306457631096014,
+   "at_mm": [
+    7.35,
+    22.82,
+    41.0
+   ],
+   "umax_mm": 0.031046725872720365,
+   "n_elem": 5155,
+   "SF_yield_max": 3.797,
+   "SF_yield_p999": 5.862,
+   "goodman_pulse_p999": 2.9,
+   "goodman_rev_0p52_p999": 3.563,
+   "goodman_pulse_max": 1.878,
+   "goodman_rev_0p52_max": 2.308,
+   "vm_max_2mm_off": 86.79753923915995,
+   "SF_yield_2mm_off": 5.795,
+   "goodman_pulse_2mm_off": 2.867,
+   "goodman_rev_0p52_2mm_off": 3.523,
+   "cg_iters": 729,
+   "converged": true
+  }
+ },
+ "r8_fillet_mm": 6.0
+}

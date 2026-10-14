@@ -160,3 +160,11 @@
     - femur tube (ø50, |y| ≤ 25): 33.5 − 25 = 8.5 mm axial only where the tube is within r ≤ 27 of the pivot. In our layout it isn't (the tongue neck sits there), so it's radial ≥ 25 mm as for the collar.
   - The lever is thigh-mounted, so tongue, femur, collar and bumper co-rotate with it. Those clearances don't change across −105…+40. Only the pelvis-side stop and the rods move relative to it, and those are covered above.
   - Open check (not verifiable without the v2 STEP): the G2 arm slabs reach r ≈ 61 at the ears (r 50 + ear boss). If the arms are clocked toward the femur axis, they overlap the collar radius band (52–86) at |y| 33.5+ against the collar |y| ≤ 32: 1.5 mm, below the 10 mm minimum. Require the arm clocking to be ≥ 30° off the femur axis, or verify it on `cad/hip_pitch_lever_B_v2.step`.
+- L36 (r8, GB 48a9da0 structure FEA) fixes. Safety over mass, within the 0.45 kg reserve. Results in results/r8/structure_fixes_r8.json and r8/*.json (box re-solves via fea_r8.py on GB's fea_r5 loaders; the clevis h4 baseline reproduced GB's numbers exactly).
+  - Clevis: +16 mm bridge pad over the cheeks + R6. Box h4 3BW+screw 549.7 → 147 MPa (SF 3.42, pulse Goodman 1.69). +0.028 kg/leg.
+  - Clamp: arm depth 30 → 34, flush with the ring. Box h3 −24%, scaled rev Goodman 1.47 → ~1.95 (pending GB). +0.020/leg.
+  - Femur tongue: 55 mm tangent neck + retaining compound. Box h4 press+fault 574 → 234 MPa (SF 2.15); fault-only 1.48; bore opening pending GB contact. +0.028/leg.
+  - Foot: doubler collar r 30.2–45 × 3 mm. The box OOMed at h5, so hand only: SF ~2.55 at the flange edge, collar OD pending GB. +0.029/leg.
+  - Tubes: bonded internal 0.5 × 100 mm doublers at mid-span. Hand SF ~1.65–1.72, pending GB. +0.042/leg (vs +0.175 for a full 1.9 mm wall).
+  - Hip ring: artifact (tensile bonded bore traction) and obsolete geometry (ø80 CRBH, replaced by the ø35 tongue in L21). No change.
+  - Total +0.146 kg/leg, **+0.292 kg both legs**. M2 4.822 → **5.114 kg** (5.154 incl. bolts/bumper), within the +0.45 reserve. The Arbiter should note it exceeds the old 4.85 cap. Re-check brief: grokbuild/structure_fea_r2.md. Hardware note: Actuators a64816e caps the hip bore corner at R0.6 (not R1.0), which affects the lever, not the tongue (shaft-in-tongue fit); noted for L34.

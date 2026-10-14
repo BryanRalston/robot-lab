@@ -1,0 +1,60 @@
+{
+ "part": "thigh_clamp",
+ "h_mm": 3.0,
+ "fillet_mm": 1.5,
+ "mass_kg": 0.2577,
+ "note": "Half model, uy=0 on y=0, bore fixed. One eye carries 4542 N; symmetry is both screws. Fatigue is 0.52x fully reversed on the peak, per the brief.",
+ "cases": {
+  "screw_4542": {
+   "vm_max": 137.628233254897,
+   "vm_p999": 108.89191641715931,
+   "vm_p99": 76.02735731591575,
+   "vm_p50": 8.905141590599037,
+   "at_mm": [
+    1.57,
+    28.33,
+    -16.12
+   ],
+   "umax_mm": 0.08112165430342333,
+   "n_elem": 9527,
+   "SF_yield_max": 3.655,
+   "SF_yield_p999": 4.619,
+   "goodman_pulse_p999": 2.285,
+   "goodman_rev_0p52_p999": 2.808,
+   "goodman_pulse_max": 1.808,
+   "goodman_rev_0p52_max": 2.222,
+   "vm_max_2mm_off": 137.25243972917153,
+   "SF_yield_2mm_off": 3.665,
+   "goodman_pulse_2mm_off": 1.813,
+   "goodman_rev_0p52_2mm_off": 2.228,
+   "cg_iters": 236,
+   "converged": true
+  },
+  "walk_0p52": {
+   "vm_max": 71.5666812925408,
+   "vm_p999": 56.62379653692896,
+   "vm_p99": 39.5342258042709,
+   "vm_p50": 4.630673627107364,
+   "at_mm": [
+    1.57,
+    28.33,
+    -16.12
+   ],
+   "umax_mm": 0.042183260237784126,
+   "n_elem": 9527,
+   "SF_yield_max": 7.028,
+   "SF_yield_p999": 8.883,
+   "goodman_pulse_p999": 4.394,
+   "goodman_rev_0p52_p999": 5.4,
+   "goodman_pulse_max": 3.477,
+   "goodman_rev_0p52_max": 4.273,
+   "vm_max_2mm_off": 71.37126865917386,
+   "SF_yield_2mm_off": 7.048,
+   "goodman_pulse_2mm_off": 3.486,
+   "goodman_rev_0p52_2mm_off": 4.284,
+   "cg_iters": 236,
+   "converged": true
+  }
+ },
+ "r8_fillet_mm": 34.0
+}
