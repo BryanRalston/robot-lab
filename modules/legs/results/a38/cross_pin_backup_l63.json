@@ -1,0 +1,33 @@
+{
+ "current_L22": {
+  "pins": "2x \u00f86 through",
+  "pin_tau": 261.7,
+  "SF_pin": 2.27,
+  "tube_bearing": 1027.8,
+  "SF_bearing": 0.7,
+  "collar_e_over_D": 1.42,
+  "collar_tearout": 112.1,
+  "SF_tearout": 2.94,
+  "tube_net": 190.8,
+  "SF_net": 2.52,
+  "walk_fatigue_hole": 85.4,
+  "SF_fatigue": 1.87,
+  "pin_mass_leg_kg": 0.0273
+ },
+ "proposed_L63": {
+  "pins": "8x \u00f87 radial",
+  "pin_tau": 96.1,
+  "SF_pin": 6.18,
+  "tube_bearing": 440.5,
+  "SF_bearing": 1.63,
+  "collar_e_over_D": 1.21,
+  "collar_tearout": 61.7,
+  "SF_tearout": 5.35,
+  "tube_net": 253.5,
+  "SF_net": 1.89,
+  "walk_fatigue_hole": 113.5,
+  "SF_fatigue": 1.41,
+  "pin_mass_leg_kg": 0.024,
+  "mass_delta_robot_kg": -0.0066
+ }
+}

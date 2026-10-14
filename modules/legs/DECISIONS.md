@@ -308,3 +308,4 @@ ULTEM 4001 bushes ø9/21×20 (k 0.26 SABIC TDS) + 3 mm washers with 10 % pads, �
 - 7663, 93 A, 1.17 g/cc: https://www.ciac-srl.com/en/articolo/508163/lastra-comp-7163-gemma (Vibram distributor page, not a lot certificate).
 
 - 2026-10-14 L62 (R-111): thin-wall ULTEM 4001 knee trunnion bush alternate — ø12 pin, ø12/15.4×15 (1.7 wall), 14.0 MPa, 10.07 K/W worn joint, boss protrusion 9 mm, +0.030 kg robot (−0.044 vs L61, +0.026 vs pre-L61 0.004) [EST]. ø9 fallback +0.040. Adopt only if Materials qualifies bond ≥80 °C; L61 stays booked.
+- L63 (R-110 backup) A38 cross pins at 29.6 kN: L22 2×ø6 through pins FAIL 1.2 tube bearing (SF 0.70; the sleeve isn't in the load path). Proposed 8×ø7 radial pins in 2 rows: bearing SF 1.63, shear 6.18, tear-out 5.35, net 1.89, fatigue 1.41 [EST, FEA owed]. Mass −0.0066 robot before retention; book 0. results/a38/CROSS_PIN_BACKUP.md.
