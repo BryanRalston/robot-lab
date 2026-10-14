@@ -500,3 +500,30 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
   - P-029 (Controls): winding temperature model for each joint, with derating that trips at about 120 °C (A40).
   - P-030 (Electronics + Torso): ducted chest air for Thor at about 21 CFM (2× 40 mm blowers, about 3 W, about 40 g), chest vents and a fin stack. The brain DC-DC goes on the cold plate or in the duct. The pack stays out of the exhaust (A41). The +0.04 kg blower estimate is booked in full.
 - Any of these that adds net mass, or more than 5 W, comes back to the arbiter with numbers.
+
+## R-031 (2026-10-14) Numbering fix, Electronics R1.1, STO, Arms R2, T&R R1 fatigue, Materials R1, Torso R1
+1. **Numbering.** Arms already holds P-026 and P-027 in PROPOSALS.md, so R-030's Thermal items are renumbered: P-026→P-040 (louvred or CF covers), P-027→P-041 (thermal breaks), P-028→P-042 (carry pose), P-029→P-043 (winding temp derate), P-030→P-044 (Thor ducted air). The action numbers A35–A41 stay as they are.
+2. **A34 closed.** Elmo Gold Twitter R70/100 is cited (MAN-G-TWI 2.011 §4.4 Table 3, 10–95 V, 70 A continuous). Sizing stays on 49.5 A RMS. **Vicor DCM3623TA5N53B4T00** is cited at 24.0 g (datasheet Rev 1.2), so it's credited at ×1.0.
+3. **P-045 regen clamp (Torso & Power, with Electronics).** The clamp is required. It switches on at 88 V and off at 86 V, the absolute bus ceiling is 92 V, and it must absorb a pulse of at least 4.5 kW / 400 J. It's booked at 0.15 kg in full until the parts are cited. The 90 V regen point is allowed only with the clamp fitted.
+4. **A33 closed.** STO is booked at 0.218 kg (Actuators D66) plus 0.013 kg of connectors, 0.231 kg in full. That replaces R-028's 0.14 kg hold.
+5. **P-026 (Arms ROM cut) approved.** Evidence: v4 clash-free ranges, every T5 load case sits inside the new range, and T3 DoF is unchanged. **P-027** (wrist pair ≤0.90 kg per side) gets credit only once Actuators cite the parts.
+6. **Hip pitch lever fatigue (T&R 8daecff) is a hard fail and the top priority.** Fix it to a walk-load hot-spot amplitude of ≤58 MPa, with converged FEA and Goodman checked against the corrected 87 MPa Se. Try a bigger 7075 section first. Switch to steel only if the section grows by more than +0.25 kg. The mass limit is not relaxed. The fix is funded in this order:
+   1. the reserve above the 0.30 kg floor
+   2. the 7050-T7451 femur (approved, 0 g, better fatigue)
+   3. printed small cover parts and the palm hybrid (credited at half until measured)
+   4. P-027 wrist savings once cited
+   
+   Legs fixes P-046 to P-050:
+   - P-046: redo the clevis and clamp Goodman checks at 87 MPa (the clevis is currently about 1.03; it needs ≥1.5 after the fix)
+   - P-047: thicken the femur and tibia tube wall outside the doubler, or extend the sleeve, to SF ≥1.5
+   - P-048: femur tongue A16 dowel plus a bore-opening check
+   - P-049: FEA on the new foot collar edge
+   - P-050: per-lot DP490 bond coupon test, added to G5
+7. **3D printing (Bryan, in my chat 2026-10-14: "I dont see why we would ban it?")** is allowed when strength, heat and wear analysis supports it. R-027 §2 and A31 are reopened, so the brain lid may be printed if it passes those checks.
+8. **Galvanic isolation** of CF and Ti from 7075 is required at every joint (Materials).
+9. **A22.** Actuators to cite a rated replacement for the QA1.
+10. **Torso R1.**
+   - **O-T5:** cutting idle power is allowed. Re-rating the 4 h mixed-work duty changes an approved target, so it needs Bryan's own words, and 2.92 h is tracked as failing until then. 20S6P is not approved.
+   - **O-T2:** the waist swap to TBM2G-08508A + CSG-25-100 (+0.19 kg in full) is approved once the torque margin is cited.
+   - **O-T3:** a FET-only disconnect is not accepted without a written single-fault safety case. The contactor stays until that case exists.
+11. **A12 (arbiter).** The official rollup will be recomputed with R-028 to R-031. The credible reserve in MASS_ROLLUP_OFFICIAL (0.037 vs 1.329) disagrees with itself and has to be reconciled. Until that's done, no new mass credit goes to anyone.
