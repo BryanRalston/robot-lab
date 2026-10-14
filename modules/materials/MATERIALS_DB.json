@@ -22,6 +22,8 @@
   "ARPRO_GEN": "https://www.arpro.com/getContentAsset/7f7244c4-2514-4162-8cb3-440185f6f206/1771ac74-d775-4539-b7e3-0cbf0ab84455/typical-physical-properties-of-arpro-black-and-on-site-expansion-v08.pdf?language=en-GB",
   "EPP_RATE_T": "https://www.sciencedirect.com/science/article/pii/S2352492819313911 (EPP 30 g/L, rate 1e-3..100/s, -30..60 C)",
   "EPP_PMC": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7825443/ (Materials 14:249, EPP 20-220 g/L static/temperature)",
+  "ULTEM_PP": "https://www.professionalplastics.com/professionalplastics/content/downloads/Ultem1000.pdf (Ultem 1000 stock shape TDS)",
+  "ULTEM_PL": "https://www.protolabs.com/media/1014801/ultem-1000-im.pdf (SABIC Ultem 1000 datasheet; tensile creep curves ASTM D2990 to 120 h at 21/80/121/176 C)",
   "R027": "modules/RULINGS.md R-027 (PALSUN/LEXAN, Toray 3900, Easy Composites XC110 citations)"
  },
  "materials": [
@@ -349,6 +351,35 @@
     "EPP_PMC"
    ],
    "notes": "ISO 844 at 5 mm/min. Densification strain, multi-hit plateau loss, insert pull-out and max service temperature NOT in sources."
+  },
+  {
+   "id": "PEI1000",
+   "name": "PEI Ultem 1000 (unfilled)",
+   "used_in": "A37 rev B sleeves/flange lands (recommended)",
+   "density_g_cc": 1.28,
+   "E_GPa": 3.45,
+   "yield_MPa": null,
+   "UTS_MPa": 114,
+   "fatigue_MPa": null,
+   "elongation_pct": 80,
+   "T_max_mech_C": 171,
+   "toughness": null,
+   "other": {
+    "compr_MPa_10pct_def": 152,
+    "compr_modulus_MPa": 3310,
+    "shear_MPa": 103,
+    "k_W_mK": 0.12,
+    "CTE_um_mK": 56,
+    "HDT_1.82MPa_C": 204,
+    "Tg_C": 215,
+    "creep_tested_points": "tensile creep 120 h at 80 C/41 MPa, 121 C/14 and 28 MPa (curves only, ULTEM_PL)"
+   },
+   "cost_hint": null,
+   "sources": [
+    "ULTEM_PP",
+    "ULTEM_PL"
+   ],
+   "notes": "Continuous service 171 C unloaded. Compressive creep at 98 C not tabulated."
   },
   {
    "id": "EPP",

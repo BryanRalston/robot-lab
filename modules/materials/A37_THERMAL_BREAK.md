@@ -1,62 +1,58 @@
-# A37: thermal-break material at the motor-to-collar joints (R-030 / P-027 thermal; with Legs A38)
-RL Materials, 2026-10-14. Properties and sources are in `MATERIALS_DB.md` (G10FR4, PEEK, PEI added). [EST] = estimate.
-**Numbering clash:** RULINGS R-030 uses "P-027" for this thermal break, but PROPOSALS.md P-027 is the Arms wrist downsize. The Arbiter should renumber one of them.
+# A37 rev B: hip_pitch motor-to-collar thermal break (RL Materials, 2026-10-14)
+**Rev B replaces rev A** (G10, f7d4230). RL Thermal (6cf74d2) requires a total thermal resistance R_break ≥ 20 K/W, counting every path in parallel. Rev A's full-face washers sat in parallel with the pin path, which gave about 4.6 K/W, so **rev A is withdrawn**. Data is in `MATERIALS_DB.md` (PEI1000). [EST] marks an estimate. Numbering clash: R-030 calls this P-027, but P-027 is already the Arms wrist item. The Arbiter should renumber.
 
-## Joint and loads used (repo)
-- The hip_pitch screw body hangs on the clamp collar through an SKF GE 12 E eye in a 7075 body eye. The ø12×28 42CrMo4 pin sits in two clamp-arm tines, each 8 mm thick (model_v4 l.154–156; CONTRACTS/PROPOSALS D46).
-- The metal heat path is: can → eye → pin → tines → collar → DP490 bond.
-- Max force is 4 542 N per body (clamp_review.py). Fault and proof force is 13.1 kN for both bodies, so 6 550 N per body (BOND_SPEC §5).
-- Temperatures: case is 98 °C worst (Thermal R1_BUDGET, 35 °C covered). The bond limit is ≤ 60 °C.
-- Legs must confirm whether any *bolted* motor/lever-to-collar flange exists. In the current model the only contact is the pinned eye (and the hip_pitch lever cheeks if they bolt to the collar). → input L1.
+## Basis
+- Loads: 4 542 N per body when walking (clamp_review.py), 6 550 N per body at fault/proof (BOND_SPEC §5).
+- Case temperature: checked at 98 °C, the worst case.
+- Geometry: Ø12 pin through 2 tines, 8 mm each.
+- **The axial load on the eye is unknown (Legs L4).**
 
-## Concept
-Put an insulating flanged sleeve in each tine bore: ID 12 (pin H7/g6), OD 16, wall 2 mm, length 8 mm, with a 1 mm flange facing the eye.
-- The pin is loaded in **bearing** on the sleeve. No bolt preload passes through the polymer, which removes the preload-creep risk.
-- Wherever a bolted flange must be insulated, use **Ti-6Al-4V compression-limiter bushings** through the insulator so that preload goes metal-to-metal. Ti k = 6.8 W/m·K vs 7075 130 (MIF). The insulator then only takes shear and bearing.
+## PEI Ultem 1000 (ULTEM_PP, ULTEM_PL)
+- Compressive strength 152 MPa (10 % deformation), compressive modulus 3.31 GPa, shear strength 103 MPa.
+- Thermal: k 0.12 W/m·K, CTE 56 µm/m·K, Tg 215 °C.
+- Creep: SABIC publishes only tensile creep curves, up to 120 h, at 80 °C/41 MPa and 121 °C/14–28 MPa. There is no compressive creep data at 98 °C.
+- **Rule used:** sustained or cyclic stress ≤ 28 MPa (the highest level SABIC characterised at 121 °C); short fault stress ≤ 76 MPa (0.5 × 152 [EST]). Confirm both with a G5 creep test.
 
-## Comparison (room-temperature cited values; hot values not available)
-| property | G10/FR4 | PEEK unfilled… 30CF | PEI | source |
-|---|---|---|---|---|
-| compressive, MPa | flatwise 414–483, **edgewise 172–241** | 120–300 | 140–180 | G10_CC/GUND, MIF |
-| shear, MPa | 148 punch | 50–100 | — | GUND, MIF |
-| k, W/m·K | 0.29 through-plane | 0.25 (unfilled) … 0.93 (CF) | 0.18–0.23 | RAX, MIF |
-| CTE, µm/m·K (Al 23) | 13–18 in-plane | 15–52 | 20–53 | RAX, MIF |
-| temp limit | temp index 130–140 °C | Tg 240, HDT 160–300 | Tg 210, HDT 200–210 | CC/GUND, MIF |
-| density | 1.85 | 1.3–1.5 | 1.3–1.5 | CC, MIF |
-| creep at 100 °C under load | **not verified** | **not verified** | **not verified** | need supplier curves |
+## Option A (recommended): PEI tine sleeve OD20/ID12 × 8 mm + 2 mm flange with 15 % contact lands
+- **Pin bearing on the sleeve bore** (96 mm² per tine):
+  - walking 23.7 MPa, within the 28 MPa creep rule;
+  - fault 34.1 MPa, **SF 2.2 hot** (4.5 at room temperature).
+- **4 mm wall:** bearing on the 7075 at OD20 is 20.5 MPa. OK.
+- **CTE:** PEI grows about 48 µm more than the 7075 bore on diameter from 25 to 98 °C. Use a line-to-line/slip fit with a DP490 film; no press fit.
+- **Lands** (15 % of the OD20/ID12 face = 30 mm² per face):
+  - capacity: 0.84 kN sustained, 2.3 kN fault;
+  - if the axial load is ≤ 10 % of radial, SF is 1.9 sustained / 3.5 fault. **This depends on L4.**
+  - Use 3 × 120° pads, a ≥ 0.3 mm air gap elsewhere, and a ±0.05 mm land tolerance.
+  - PEI sliding on the steel inner-ring face has no wear data; bench-test it in G5.
+- **Mass for 8 sleeves:**
+  - PEI +20.9 g;
+  - bore growing from 12 to 20 mm removes 7075, −36.2 g;
+  - tines widened +8 mm, +34.5 g [EST];
+  - rev A washers dropped, −2 g;
+  - **net ≈ +17 g [EST].**
 
-## Checks (worst case: 6 550 N fault, 98 °C)
-- Bearing per tine = 6 550 / 2 / (12 × 8) = **34.1 MPa** (23.7 MPa at max walk force).
-- G10, radial loading of a sleeve = edgewise. Lower bound 172 MPa gives SF 5.0 at room temperature. With a 0.5 hot/creep knock-down [EST] it is **SF 2.5**.
-- PEEK unfilled at 120 MPa gives SF 3.5 at room temperature, **1.76** knocked down. CF-PEEK at up to 300 MPa gives higher strength but k rises to 0.93 (×3.7 heat leak).
-- PEI at 140 MPa gives SF 4.1 at room temperature, 2.05 knocked down. Its mechanical limit is 170 °C (MIF), which is fine.
-- Shear-out of the 2 mm flange is not loaded (the pin is axially retained by circlip).
-- Thermal resistance per tine sleeve is R = ln(16/12)/(2πkL).
-  - Pin path across both tines (L = 16 mm): G10 **9.9 K/W**, PEEK 11.5, PEI 12.5–16, CF-PEEK 3.1.
-  - The flange faces add more resistance in series.
-  - Whether this is enough depends on the heat flow to the collar, which Thermal must supply (input T1).
-- CTE / fit loss over 25→98 °C:
-  - G10 in a 7075 bore: (23 − 15) × 10⁻⁶ × 16 mm × 73 K ≈ **9 µm diametral loosening**.
-  - PEEK unfilled (~50) tightens by 31 µm, then relaxes by creep and is loose when cold.
-  - → **Bond the sleeve with DP490 (≤ 60 °C side) or retain it with the flange plus a press of 0.01–0.02 mm.** G10 is preferred because its CTE is closest to the steel pin (13, MIF 4140) and to Al.
-- Preload loss (bolted variant only): with Ti limiters the insulator sees no preload. Without limiters, preload loss in polymer at 98 °C is **not quantified**, and that design is not acceptable until creep data exists.
+## Option B (not recommended): insulated bearing outer ring, PEI 22/26 × 7 mm
+- Bearing on one sleeve (154 mm²) is 29.5 MPa walking, **above the 28 MPa creep rule**, and 42.5 MPa at fault (SF 1.8).
+- The 2 mm polymer seat would let the spherical plain bearing's outer ring ovalise, so SKF liner-life data no longer applies.
+- Thermal resistance ≈ 19 K/W, which misses 20.
+- **Ceramic coating:** 0.2–0.3 mm gives < 1 K/W. Rejected.
+- Mass ≈ +21 g [EST].
+
+## Lever-cheek bolts (if bolted, L1): ≥ 60 K/W each
+- A PEI washer in the preload path would see 10.4 kN on 81 mm² = 128 MPa. It would creep and lose preload. **Not allowed.**
+- **Fix:** a Ti-6Al-4V compression limiter OD8.5/ID6.4 carries the preload (433 MPa vs 910 MPa yield, SF 2.1).
+  - Each mm of length adds 6.1 K/W, so it needs L ≥ 10 mm.
+  - PEI is used only as an unloaded spacer beside it, with a ≥ 0.3 mm air gap at the faces.
+  - ≈ +1 g per bolt [EST].
 
 ## Recommendation
-- **G10/FR4 (NEMA LI-1 G10 or FR4, EPGC 202) flanged sleeves**: 2.0 mm wall, OD16/ID12 × 8 mm, plus a 1.0 mm flange. Machine from convolute or wound tube or from plate with the load edgewise.
-  - Margin: SF 5.0 at room temperature, SF ≈ 2.5 at fault + 98 °C after a 0.5 [EST] knock-down. The knock-down must be replaced by data (G5 bench creep, 100 h at 34 MPa / 100 °C).
-  - Add a G10 1 mm thrust washer at each eye face, replacing metal contact there. Note DECISIONS L-173 already uses PTFE washers at the ankle.
-  - Ti-6Al-4V compression-limiter bushings wherever a bolted flange is insulated.
-- Backup: PEI if a machinable, lower-k part is wanted (equal strength margin, k 0.2). Don't use CF-PEEK: it is too conductive for a thermal break.
-- **Mass, 8 sleeves (2 tines × 2 bodies × 2 legs):**
-  - G10: 5.63 cm³ × 1.85 = **+10.4 g**.
-  - The tine bore grows from 12 to 16 mm, removing 7075: 5.63 × 2.81 = −15.8 g.
-  - The tines need +2 mm of material around the larger bore, ≈ +18 g [EST].
-  - Thrust washers: +2 g.
-  - **Net ≈ +15 g both legs [EST]**. Legs books the final figure under A38.
+**Option A.**
+- Margins: SF 2.2 on pin bearing at fault/98 °C; walking stress within the creep rule; land SF 1.9/3.5 subject to L4.
+- Mass ≈ +17 g for both legs, plus ≈ 1 g per cheek bolt [EST].
+- Gates: Legs FEA of the Ø20 tine; G5 PEI compressive creep at 25 MPa/100 °C for 100 h; land wear; J-T1.
 
-## Inputs needed from Legs (A38) / Thermal
-- L1: the full list of metal contacts between hip_pitch and knee motor/lever and the collar. Are there bolted flanges, and are the lever cheeks bolted to the collar? This decides whether Ti limiters are needed.
-- L2: tine edge distance at a ø16 bore and an FEA re-check of the tines (bore growth).
-- L3: pin retention method (circlip) and whether a sleeved pin is acceptable for G2 clearance.
-- T1 (Thermal): heat flow can → collar and the required R (K/W) so the bondline reaches ≤ 60 °C at 35 °C ambient. The sleeve alone gives about 10 K/W. A conjugate check is J-T1.
-- Bench (G5): G10 sleeve creep at 34 MPa / 100 °C for 100 h, and the collar thermocouple.
+## Asks for Legs (A38)
+- **L1:** Are the cheeks bolted to the collar? Bolt count and size?
+- **L2:** Recheck the Ø20 tine bore: edge distance, the +8 mm tine clearance over the full hip ROM, and FEA at 6.55 kN per body.
+- **L3:** Pin retention with the flanged sleeve, and flange clearance to the GE 12 E inner ring.
+- **L4:** Axial load on the eye at walking and at fault.

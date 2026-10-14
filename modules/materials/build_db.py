@@ -21,6 +21,8 @@ S={
  "ARPRO_GEN":"https://www.arpro.com/getContentAsset/7f7244c4-2514-4162-8cb3-440185f6f206/1771ac74-d775-4539-b7e3-0cbf0ab84455/typical-physical-properties-of-arpro-black-and-on-site-expansion-v08.pdf?language=en-GB",
  "EPP_RATE_T":"https://www.sciencedirect.com/science/article/pii/S2352492819313911 (EPP 30 g/L, rate 1e-3..100/s, -30..60 C)",
  "EPP_PMC":"https://pmc.ncbi.nlm.nih.gov/articles/PMC7825443/ (Materials 14:249, EPP 20-220 g/L static/temperature)",
+ "ULTEM_PP":"https://www.professionalplastics.com/professionalplastics/content/downloads/Ultem1000.pdf (Ultem 1000 stock shape TDS)",
+ "ULTEM_PL":"https://www.protolabs.com/media/1014801/ultem-1000-im.pdf (SABIC Ultem 1000 datasheet; tensile creep curves ASTM D2990 to 120 h at 21/80/121/176 C)",
  "R027":"modules/RULINGS.md R-027 (PALSUN/LEXAN, Toray 3900, Easy Composites XC110 citations)",
 }
 def M(id,name,where,rho=None,E=None,ys=None,uts=None,fat=None,elong=None,tmax=None,other=None,cost=None,src=(),notes=""):
@@ -53,6 +55,10 @@ DB=[
  M("EPP80","EPP 80 g/L (ARPRO 5170)","R-042 shoulder pads; cover fall pads (grade TBC)",0.080,None,None,None,None,None,None,
    {"sigma_25pct_kPa":500,"sigma_50pct_kPa":700,"sigma_75pct_kPa":1600,"compression_set_25pct_22h_pct":11,"rate_factor_100s":"1.45-1.57 (30 g/L foam)","T60C_vs_RT":"~-50% (30 g/L foam)","T-30C_vs_RT":"~+110%"},None,["ARPRO5170","ARPRO_GEN","EPP_RATE_T","EPP_PMC"],
    "ISO 844 at 5 mm/min. Densification strain, multi-hit plateau loss, insert pull-out and max service temperature NOT in sources."),
+ M("PEI1000","PEI Ultem 1000 (unfilled)","A37 rev B sleeves/flange lands (recommended)",1.28,3.45,None,114,None,80,171,
+   {"compr_MPa_10pct_def":152,"compr_modulus_MPa":3310,"shear_MPa":103,"k_W_mK":0.12,"CTE_um_mK":56,"HDT_1.82MPa_C":204,"Tg_C":215,
+    "creep_tested_points":"tensile creep 120 h at 80 C/41 MPa, 121 C/14 and 28 MPa (curves only, ULTEM_PL)"},None,["ULTEM_PP","ULTEM_PL"],
+   "Continuous service 171 C unloaded. Compressive creep at 98 C not tabulated."),
  M("EPP","EPP foam (cover pads, grade unspecified)","cover fall pads 0.36 kg",None,None,None,None,None,None,None,{},None,[],"Use EPP80 row if 80 g/L is chosen."),
  M("PU90A","PU 90A bumpers","hip hard stops",None,None,None,None,None,None,None,{},None,[],"No datasheet [UNKNOWN]."),
  M("TPUNYLON","TPU-coated nylon fabric","ankle boots (V5), R-042 pad sleeve (0.03 m2, 9 g)",None,None,None,None,None,None,None,{},None,[],"[UNKNOWN]"),
