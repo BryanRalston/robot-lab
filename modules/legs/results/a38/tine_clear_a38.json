@@ -1,0 +1,226 @@
+{
+ "-107.3": [
+  [
+   0.0,
+   "+y i",
+   "L_hip_pitch screw +y eye stub \u00f812 [EST]"
+  ],
+  [
+   0.0,
+   "+y o",
+   "L_hip_pitch screw +y eye stub \u00f812 [EST]"
+  ],
+  [
+   0.0,
+   "-y i",
+   "L_hip_pitch screw -y eye stub \u00f812 [EST]"
+  ],
+  [
+   0.0,
+   "-y o",
+   "L_hip_pitch screw -y eye stub \u00f812 [EST]"
+  ],
+  [
+   4.0,
+   "+y i",
+   "L_hip_pitch screw +y eye stub flange \u00f830 [EST]"
+  ],
+  [
+   4.0,
+   "+y o",
+   "L_hip_pitch screw +y eye stub flange \u00f830 [EST]"
+  ]
+ ],
+ "-90": [
+  [
+   0.0,
+   "+y i",
+   "L_hip_pitch screw +y eye stub \u00f812 [EST]"
+  ],
+  [
+   0.0,
+   "+y o",
+   "L_hip_pitch screw +y eye stub \u00f812 [EST]"
+  ],
+  [
+   0.0,
+   "-y i",
+   "L_hip_pitch screw -y eye stub \u00f812 [EST]"
+  ],
+  [
+   0.0,
+   "-y o",
+   "L_hip_pitch screw -y eye stub \u00f812 [EST]"
+  ],
+  [
+   4.0,
+   "+y i",
+   "L_hip_pitch screw +y eye stub flange \u00f830 [EST]"
+  ],
+  [
+   4.0,
+   "+y o",
+   "L_hip_pitch screw +y eye stub flange \u00f830 [EST]"
+  ]
+ ],
+ "-60": [
+  [
+   0.0,
+   "+y i",
+   "L_hip_pitch screw +y eye stub \u00f812 [EST]"
+  ],
+  [
+   0.0,
+   "+y o",
+   "L_hip_pitch screw +y eye stub \u00f812 [EST]"
+  ],
+  [
+   0.0,
+   "-y i",
+   "L_hip_pitch screw -y eye stub \u00f812 [EST]"
+  ],
+  [
+   0.0,
+   "-y o",
+   "L_hip_pitch screw -y eye stub \u00f812 [EST]"
+  ],
+  [
+   4.0,
+   "+y i",
+   "L_hip_pitch screw +y eye stub flange \u00f830 [EST]"
+  ],
+  [
+   4.0,
+   "+y o",
+   "L_hip_pitch screw +y eye stub flange \u00f830 [EST]"
+  ]
+ ],
+ "-30": [
+  [
+   0.0,
+   "+y i",
+   "L_hip_pitch screw +y eye stub \u00f812 [EST]"
+  ],
+  [
+   0.0,
+   "+y o",
+   "L_hip_pitch screw +y eye stub \u00f812 [EST]"
+  ],
+  [
+   0.0,
+   "-y i",
+   "L_hip_pitch screw -y eye stub \u00f812 [EST]"
+  ],
+  [
+   0.0,
+   "-y o",
+   "L_hip_pitch screw -y eye stub \u00f812 [EST]"
+  ],
+  [
+   4.0,
+   "+y i",
+   "L_hip_pitch screw +y eye stub flange \u00f830 [EST]"
+  ],
+  [
+   4.0,
+   "+y o",
+   "L_hip_pitch screw +y eye stub flange \u00f830 [EST]"
+  ]
+ ],
+ "0": [
+  [
+   0.0,
+   "+y i",
+   "L_hip_pitch screw +y eye stub \u00f812 [EST]"
+  ],
+  [
+   0.0,
+   "+y o",
+   "L_hip_pitch screw +y eye stub \u00f812 [EST]"
+  ],
+  [
+   0.0,
+   "-y i",
+   "L_hip_pitch screw -y eye stub \u00f812 [EST]"
+  ],
+  [
+   0.0,
+   "-y o",
+   "L_hip_pitch screw -y eye stub \u00f812 [EST]"
+  ],
+  [
+   4.0,
+   "+y i",
+   "L_hip_pitch screw +y eye stub flange \u00f830 [EST]"
+  ],
+  [
+   4.0,
+   "+y o",
+   "L_hip_pitch screw +y eye stub flange \u00f830 [EST]"
+  ]
+ ],
+ "20": [
+  [
+   0.0,
+   "+y i",
+   "L_hip_pitch screw +y eye stub \u00f812 [EST]"
+  ],
+  [
+   0.0,
+   "+y o",
+   "L_hip_pitch screw +y eye stub \u00f812 [EST]"
+  ],
+  [
+   0.0,
+   "-y i",
+   "L_hip_pitch screw -y eye stub \u00f812 [EST]"
+  ],
+  [
+   0.0,
+   "-y o",
+   "L_hip_pitch screw -y eye stub \u00f812 [EST]"
+  ],
+  [
+   4.0,
+   "+y i",
+   "L_hip_pitch screw +y eye stub flange \u00f830 [EST]"
+  ],
+  [
+   4.0,
+   "+y o",
+   "L_hip_pitch screw +y eye stub flange \u00f830 [EST]"
+  ]
+ ],
+ "40": [
+  [
+   0.0,
+   "+y i",
+   "L_hip_pitch screw +y eye stub \u00f812 [EST]"
+  ],
+  [
+   0.0,
+   "+y o",
+   "L_hip_pitch screw +y eye stub \u00f812 [EST]"
+  ],
+  [
+   0.0,
+   "-y i",
+   "L_hip_pitch screw -y eye stub \u00f812 [EST]"
+  ],
+  [
+   0.0,
+   "-y o",
+   "L_hip_pitch screw -y eye stub \u00f812 [EST]"
+  ],
+  [
+   4.0,
+   "+y i",
+   "L_hip_pitch screw +y eye stub flange \u00f830 [EST]"
+  ],
+  [
+   4.0,
+   "+y o",
+   "L_hip_pitch screw +y eye stub flange \u00f830 [EST]"
+  ]
+ ]
+}

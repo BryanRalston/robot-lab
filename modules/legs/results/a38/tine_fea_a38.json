@@ -1,0 +1,293 @@
+{
+ "basis": "A38 L2: hip clamp-eye tine with the A37 rev B PEI sleeve (bore 20) - light 2D plane-stress FEA (scikit-fem, Q2 quads,\nO-grid mapped mesh, no gmsh). Tine = 7075-T6 plate t 8, width W 30 (x), hole centre at e from the free end, root (fixed) at Lr 24\non the other side. Load 6550 N/body fault (BOND_SPEC 5) shared by 2 tines -> 3275 N/tine; 4542 N/body walk -> 2271 N/tine.\nBore loading: cosine radial pressure over the loaded half (pin/sleeve bearing). Two directions: toward the free end (tension\nlug, worst) and toward the root. Reports peak von Mises and net-section/bearing hand values. Plane stress through-thickness uniform\n=> no pin bending/peaking (EST, real peak higher by ~1.1-1.3).",
+ "rows": [
+  {
+   "case": "as-is \u00f812 e12",
+   "D": 12,
+   "e": 12,
+   "load": "fault",
+   "F_N": 3275,
+   "dir": "to free end",
+   "vm_peak": 192.0,
+   "at": [
+    5.9,
+    1.2
+   ],
+   "net_section_MPa": 22.7,
+   "shear_out_MPa": 26.2,
+   "bearing_MPa": 34.1,
+   "e_over_D": 1.0,
+   "lig_mm": 6.0
+  },
+  {
+   "case": "as-is \u00f812 e12",
+   "D": 12,
+   "e": 12,
+   "load": "fault",
+   "F_N": 3275,
+   "dir": "to root",
+   "vm_peak": 98.5,
+   "at": [
+    0.0,
+    -6.1
+   ],
+   "net_section_MPa": 22.7,
+   "shear_out_MPa": 26.2,
+   "bearing_MPa": 34.1,
+   "e_over_D": 1.0,
+   "lig_mm": 6.0
+  },
+  {
+   "case": "as-is \u00f812 e12",
+   "D": 12,
+   "e": 12,
+   "load": "walk",
+   "F_N": 2271,
+   "dir": "to free end",
+   "vm_peak": 133.1,
+   "at": [
+    5.9,
+    1.2
+   ],
+   "net_section_MPa": 15.8,
+   "shear_out_MPa": 18.2,
+   "bearing_MPa": 23.7,
+   "e_over_D": 1.0,
+   "lig_mm": 6.0
+  },
+  {
+   "case": "as-is \u00f812 e12",
+   "D": 12,
+   "e": 12,
+   "load": "walk",
+   "F_N": 2271,
+   "dir": "to root",
+   "vm_peak": 68.3,
+   "at": [
+    0.0,
+    -6.1
+   ],
+   "net_section_MPa": 15.8,
+   "shear_out_MPa": 18.2,
+   "bearing_MPa": 23.7,
+   "e_over_D": 1.0,
+   "lig_mm": 6.0
+  },
+  {
+   "case": "rev B \u00f820 in current tine e12",
+   "D": 20,
+   "e": 12,
+   "load": "fault",
+   "F_N": 3275,
+   "dir": "to free end",
+   "vm_peak": 974.2,
+   "at": [
+    0.1,
+    12.0
+   ],
+   "net_section_MPa": 40.9,
+   "shear_out_MPa": 40.9,
+   "bearing_MPa": 20.5,
+   "e_over_D": 0.6,
+   "lig_mm": 2.0
+  },
+  {
+   "case": "rev B \u00f820 in current tine e12",
+   "D": 20,
+   "e": 12,
+   "load": "fault",
+   "F_N": 3275,
+   "dir": "to root",
+   "vm_peak": 97.6,
+   "at": [
+    -0.1,
+    -10.1
+   ],
+   "net_section_MPa": 40.9,
+   "shear_out_MPa": 40.9,
+   "bearing_MPa": 20.5,
+   "e_over_D": 0.6,
+   "lig_mm": 2.0
+  },
+  {
+   "case": "rev B \u00f820 in current tine e12",
+   "D": 20,
+   "e": 12,
+   "load": "walk",
+   "F_N": 2271,
+   "dir": "to free end",
+   "vm_peak": 675.5,
+   "at": [
+    -0.1,
+    12.0
+   ],
+   "net_section_MPa": 28.4,
+   "shear_out_MPa": 28.4,
+   "bearing_MPa": 14.2,
+   "e_over_D": 0.6,
+   "lig_mm": 2.0
+  },
+  {
+   "case": "rev B \u00f820 in current tine e12",
+   "D": 20,
+   "e": 12,
+   "load": "walk",
+   "F_N": 2271,
+   "dir": "to root",
+   "vm_peak": 67.7,
+   "at": [
+    -0.1,
+    -10.1
+   ],
+   "net_section_MPa": 28.4,
+   "shear_out_MPa": 28.4,
+   "bearing_MPa": 14.2,
+   "e_over_D": 0.6,
+   "lig_mm": 2.0
+  },
+  {
+   "case": "\u00f820 e16 (+4)",
+   "D": 20,
+   "e": 16,
+   "load": "fault",
+   "F_N": 3275,
+   "dir": "to free end",
+   "vm_peak": 232.0,
+   "at": [
+    -9.9,
+    1.0
+   ],
+   "net_section_MPa": 40.9,
+   "shear_out_MPa": 22.7,
+   "bearing_MPa": 20.5,
+   "e_over_D": 0.8,
+   "lig_mm": 6.0
+  },
+  {
+   "case": "\u00f820 e16 (+4)",
+   "D": 20,
+   "e": 16,
+   "load": "fault",
+   "F_N": 3275,
+   "dir": "to root",
+   "vm_peak": 95.9,
+   "at": [
+    -0.1,
+    -10.1
+   ],
+   "net_section_MPa": 40.9,
+   "shear_out_MPa": 22.7,
+   "bearing_MPa": 20.5,
+   "e_over_D": 0.8,
+   "lig_mm": 6.0
+  },
+  {
+   "case": "\u00f820 e16 (+4)",
+   "D": 20,
+   "e": 16,
+   "load": "walk",
+   "F_N": 2271,
+   "dir": "to free end",
+   "vm_peak": 160.9,
+   "at": [
+    -9.9,
+    1.0
+   ],
+   "net_section_MPa": 28.4,
+   "shear_out_MPa": 15.8,
+   "bearing_MPa": 14.2,
+   "e_over_D": 0.8,
+   "lig_mm": 6.0
+  },
+  {
+   "case": "\u00f820 e16 (+4)",
+   "D": 20,
+   "e": 16,
+   "load": "walk",
+   "F_N": 2271,
+   "dir": "to root",
+   "vm_peak": 66.5,
+   "at": [
+    -0.1,
+    -10.1
+   ],
+   "net_section_MPa": 28.4,
+   "shear_out_MPa": 15.8,
+   "bearing_MPa": 14.2,
+   "e_over_D": 0.8,
+   "lig_mm": 6.0
+  },
+  {
+   "case": "\u00f820 e20 (+8, Materials)",
+   "D": 20,
+   "e": 20,
+   "load": "fault",
+   "F_N": 3275,
+   "dir": "to free end",
+   "vm_peak": 185.2,
+   "at": [
+    -10.0,
+    0.1
+   ],
+   "net_section_MPa": 40.9,
+   "shear_out_MPa": 15.7,
+   "bearing_MPa": 20.5,
+   "e_over_D": 1.0,
+   "lig_mm": 10.0
+  },
+  {
+   "case": "\u00f820 e20 (+8, Materials)",
+   "D": 20,
+   "e": 20,
+   "load": "fault",
+   "F_N": 3275,
+   "dir": "to root",
+   "vm_peak": 94.3,
+   "at": [
+    -0.1,
+    -10.1
+   ],
+   "net_section_MPa": 40.9,
+   "shear_out_MPa": 15.7,
+   "bearing_MPa": 20.5,
+   "e_over_D": 1.0,
+   "lig_mm": 10.0
+  },
+  {
+   "case": "\u00f820 e20 (+8, Materials)",
+   "D": 20,
+   "e": 20,
+   "load": "walk",
+   "F_N": 2271,
+   "dir": "to free end",
+   "vm_peak": 128.4,
+   "at": [
+    -10.0,
+    0.1
+   ],
+   "net_section_MPa": 28.4,
+   "shear_out_MPa": 10.9,
+   "bearing_MPa": 14.2,
+   "e_over_D": 1.0,
+   "lig_mm": 10.0
+  },
+  {
+   "case": "\u00f820 e20 (+8, Materials)",
+   "D": 20,
+   "e": 20,
+   "load": "walk",
+   "F_N": 2271,
+   "dir": "to root",
+   "vm_peak": 65.4,
+   "at": [
+    -0.1,
+    -10.1
+   ],
+   "net_section_MPa": 28.4,
+   "shear_out_MPa": 10.9,
+   "bearing_MPa": 14.2,
+   "e_over_D": 1.0,
+   "lig_mm": 10.0
+  }
+ ]
+}

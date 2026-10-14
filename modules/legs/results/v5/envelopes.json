@@ -126,9 +126,10 @@
   "knee_housing_fins": {
    "frame": "L_thigh",
    "desc": "knee twin housing (D85 re-CAD) with axial fins, Thermal 9b9e169 option C; housing pivots on the thigh trunnion x-130 z770 (thigh frame), swings with the screw",
-   "region": "housing front (+x) and rear (-x) faces between the trunnion cheeks; fins max radial: front 12 mm / rear 28 mm near the trunnion end, up to ~37 mm (diagonals) - 54 mm (front/rear) at mid-length; none on the outer +-y flanks (trunnion cheeks, 0 gap) or near rod exits",
-   "fairing": "thigh fairing must be OPEN (grille/no cover) over the housing front and rear faces + fins + 5 mm swing allowance; no exhaust onto the thigh collar bondline",
-   "source": "results/r031/knee_fin_envelope.json (knee_fin_sweep.py)"
+   "region": "Thermal D69C (b785697/ceaf729) signed-off layout: 12 axial 6061 fins 25 x 1.0 mm on the REAR sector 120-240 deg only (6 per tube), z 9..103 of the housing (start 9 mm from the trunnion end for the bracket top plate); front and +-y sides bare",
+   "fairing": "A35 venting binding: thigh fairing grille over the housing rear (fins) + front; no closed cover; knee cap (P-022) never closes over the fins (>=153 mm apart)",
+   "source": "results/r031/knee_fins_d69c_T1_b9_r6nf_finsonly.json (knee_fins_d69c.py)",
+   "clearance": "fins min 9.7 mm (trunnion bracket top plate [EST], knee 0/135), 12.9 mm to the knee rods; fins >= 9.5 mm inside the v5 thigh fairing hull at all knee 0-135; knee cap keep-out >= 153 mm"
   }
  },
  "knee_cap_vs_thigh_gap": {

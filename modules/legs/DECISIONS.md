@@ -236,3 +236,19 @@
   - Both bodies include the 2 lever halves (cheeks, arms, ears, bore relief) and the 2 integral ø12 pin stubs. Neither includes the TLA3520 needle bushes, the ø35 shaft, the GE12 eyes or the yoke bolts; those stay in their own lines.
   - L47's +0.118 used the wrong baseline. Its "0.405 G2" was our own in-memory body: the G2-as-briefed loft (Actuators lever_r031 b25/d30, 0.3318, `cad/hip_pitch_lever_r031_b25_d30.step`) plus our web disc, saved as `legs/cad/hip_pitch_lever_r031_mw_b25_d30.step`. It was never a booked or built part, so +0.118 is withdrawn.
   - Arbiter R-056's conservative +0.43 is correct, and no credit is due.
+- L49 (A38 / R-053, A37 rev B) Thermal break at the clamp-eye tines (results/a38/A38_LEGS_REPLY.md).
+  - Tine: e = 20 with a rounded end R15 at the ø20 sleeve bore. FEA: 185 MPa fault / 128 MPa walk, the same as today's ø12 tine; e12 with ø20 fails at 974 MPa.
+  - Tines and pin unchanged in y. Flange lands are 0.85 mm high, inside ø17. Retention seats on PEI only.
+  - Lever cheeks are not bolted to the collar, so no Ti limiters are needed.
+  - Open for Thermal: the parallel path through rod, lever, shaft and femur is not broken.
+  - Net +0.011 kg against the booked +0.017.
+- L50 (Thermal D69C b785697/ceaf729) Knee fins as signed off: 12 rear fins, 25 × 1.0 mm, z 9–103 of the housing, front and sides bare.
+  - Measured 0.0738 kg/knee (CAD, 6061 at 2.70): −0.035/knee and **−0.071 robot vs our 0.109 layout**. Fin area 0.061 m², at or above the 0.05 needed.
+  - Clearances: fins ≥ 9.7 mm to the trunnion top plate [EST], ≥ 12.9 mm to the rods, ≥ 9.5 mm inside the v5 thigh fairing, ≥ 153 mm from the knee cap.
+  - Actuators' knee_twin_housing_finned_revb.step put fins on the ±y flanks (bbox 184 → 204.8 mm, +10.4 per side, into the trunnion cheeks). That conflict is resolved by the bare sides.
+- L51 (R-062) Knee drives on the femur rear: plate box 26 × 52 × 104 (drives 35 × 30 × 14.4 [MAN-G-TWI] on 6061 plate and standoffs), z 688–792, thigh frame.
+  - Clearance: ≥ 6.3 mm to the hip screw body over the hip and knee ranges, with the finned housing included. Inside the fairing by ≥ 58 mm.
+  - Excluded positions: lower (z 638) is 1.0 mm from the collar; z 800 hits our knee bracket strut [EST]; the front is outside the fairing by 10.9 mm; lateral hits the hip screw.
+  - Wire length to the knee housing: 65 mm near / 157 mm far straight, 240 mm L-route upper bound. The housing pivot only changes this by ±1 mm.
+  - Femur mount: 2 G10-lined band clamps, with low preload so hoop stress ≤ 16 MPa [EST]. No holes in the 1.6 mm wall.
+- L52 (R-069) Ankle cross in 7075, pocketed (Robot Lab confirmed). FEA brief: grokbuild/ankle_cross_fea_brief.md, queued after L47-SO. Hand-model estimate −0.084 kg robot.

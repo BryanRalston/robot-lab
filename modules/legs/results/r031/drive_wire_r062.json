@@ -1,0 +1,98 @@
+[
+ {
+  "knee": 0,
+  "side": 1,
+  "centroid": [
+   -120.8,
+   130.0,
+   747.5
+  ],
+  "near_mm": 65.0,
+  "far_mm": 156.6,
+  "Lroute_far_mm": 239.5
+ },
+ {
+  "knee": 0,
+  "side": -1,
+  "centroid": [
+   -120.8,
+   130.0,
+   747.5
+  ],
+  "near_mm": 65.0,
+  "far_mm": 156.6,
+  "Lroute_far_mm": 239.5
+ },
+ {
+  "knee": 45,
+  "side": 1,
+  "centroid": [
+   -122.6,
+   130.0,
+   746.9
+  ],
+  "near_mm": 64.5,
+  "far_mm": 156.9,
+  "Lroute_far_mm": 241.0
+ },
+ {
+  "knee": 45,
+  "side": -1,
+  "centroid": [
+   -122.6,
+   130.0,
+   746.9
+  ],
+  "near_mm": 64.5,
+  "far_mm": 156.9,
+  "Lroute_far_mm": 241.0
+ },
+ {
+  "knee": 90,
+  "side": 1,
+  "centroid": [
+   -122.9,
+   130.0,
+   746.8
+  ],
+  "near_mm": 64.4,
+  "far_mm": 156.9,
+  "Lroute_far_mm": 241.3
+ },
+ {
+  "knee": 90,
+  "side": -1,
+  "centroid": [
+   -122.9,
+   130.0,
+   746.8
+  ],
+  "near_mm": 64.4,
+  "far_mm": 156.9,
+  "Lroute_far_mm": 241.3
+ },
+ {
+  "knee": 135,
+  "side": 1,
+  "centroid": [
+   -120.8,
+   130.0,
+   747.5
+  ],
+  "near_mm": 65.0,
+  "far_mm": 156.6,
+  "Lroute_far_mm": 239.5
+ },
+ {
+  "knee": 135,
+  "side": -1,
+  "centroid": [
+   -120.8,
+   130.0,
+   747.5
+  ],
+  "near_mm": 65.0,
+  "far_mm": 156.6,
+  "Lroute_far_mm": 239.5
+ }
+]

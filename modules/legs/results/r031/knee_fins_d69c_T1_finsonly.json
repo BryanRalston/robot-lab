@@ -1,0 +1,458 @@
+{
+ "T_mm": 1.0,
+ "n_fins": 21,
+ "fins": [
+  {
+   "tube": -45,
+   "ang": 128.6,
+   "h": 25
+  },
+  {
+   "tube": -45,
+   "ang": 145.7,
+   "h": 25
+  },
+  {
+   "tube": -45,
+   "ang": 162.9,
+   "h": 25
+  },
+  {
+   "tube": -45,
+   "ang": 180.0,
+   "h": 25
+  },
+  {
+   "tube": -45,
+   "ang": 197.1,
+   "h": 25
+  },
+  {
+   "tube": -45,
+   "ang": 214.3,
+   "h": 25
+  },
+  {
+   "tube": -45,
+   "ang": 231.4,
+   "h": 25
+  },
+  {
+   "tube": 45,
+   "ang": 128.6,
+   "h": 25
+  },
+  {
+   "tube": 45,
+   "ang": 145.7,
+   "h": 25
+  },
+  {
+   "tube": 45,
+   "ang": 162.9,
+   "h": 25
+  },
+  {
+   "tube": 45,
+   "ang": 180.0,
+   "h": 25
+  },
+  {
+   "tube": 45,
+   "ang": 197.1,
+   "h": 25
+  },
+  {
+   "tube": 45,
+   "ang": 214.3,
+   "h": 25
+  },
+  {
+   "tube": 45,
+   "ang": 231.4,
+   "h": 25
+  },
+  {
+   "tube": -45,
+   "ang": 337.5,
+   "h": 9
+  },
+  {
+   "tube": -45,
+   "ang": 352.5,
+   "h": 9
+  },
+  {
+   "tube": -45,
+   "ang": 7.5,
+   "h": 9
+  },
+  {
+   "tube": -45,
+   "ang": 22.5,
+   "h": 9
+  },
+  {
+   "tube": 45,
+   "ang": 340.0,
+   "h": 9
+  },
+  {
+   "tube": 45,
+   "ang": 0.0,
+   "h": 9
+  },
+  {
+   "tube": 45,
+   "ang": 20.0,
+   "h": 9
+  }
+ ],
+ "added_volume_mm3": 40355,
+ "mass_kg_per_knee": 0.109,
+ "fin_area_both_faces_m2": 0.0834,
+ "step": "cad/knee_twin_housing_fins_d69c_T1.step",
+ "sweep": [
+  {
+   "knee": 0,
+   "closest": [
+    [
+     2.9,
+     "L_knee trunnion bracket top plate (thigh) [EST]"
+    ],
+    [
+     9.4,
+     "L_knee trunnion cheek +y [EST]"
+    ],
+    [
+     9.4,
+     "L_knee trunnion cheek -y [EST]"
+    ],
+    [
+     12.86,
+     "L_knee screw +y RV12 roller-screw rod \u00f812"
+    ],
+    [
+     12.86,
+     "L_knee screw -y RV12 roller-screw rod \u00f812"
+    ]
+   ],
+   "to_kneecap_keepout": 153.5,
+   "verts_outside_thigh_fairing_keepout": {
+    "n_out": 72,
+    "max_out_mm": 4.4
+   },
+   "n_verts": 1008
+  },
+  {
+   "knee": 15,
+   "closest": [
+    [
+     4.64,
+     "L_knee trunnion bracket top plate (thigh) [EST]"
+    ],
+    [
+     10.17,
+     "L_knee trunnion cheek +y [EST]"
+    ],
+    [
+     10.17,
+     "L_knee trunnion cheek -y [EST]"
+    ],
+    [
+     12.86,
+     "L_knee screw +y RV12 roller-screw rod \u00f812"
+    ],
+    [
+     12.86,
+     "L_knee screw -y RV12 roller-screw rod \u00f812"
+    ]
+   ],
+   "to_kneecap_keepout": 153.5,
+   "verts_outside_thigh_fairing_keepout": {
+    "n_out": 72,
+    "max_out_mm": 3.9
+   },
+   "n_verts": 1008
+  },
+  {
+   "knee": 30,
+   "closest": [
+    [
+     6.17,
+     "L_knee trunnion bracket top plate (thigh) [EST]"
+    ],
+    [
+     10.81,
+     "L_knee trunnion cheek +y [EST]"
+    ],
+    [
+     10.81,
+     "L_knee trunnion cheek -y [EST]"
+    ],
+    [
+     12.86,
+     "L_knee screw +y RV12 roller-screw rod \u00f812"
+    ],
+    [
+     12.86,
+     "L_knee screw -y RV12 roller-screw rod \u00f812"
+    ]
+   ],
+   "to_kneecap_keepout": 153.6,
+   "verts_outside_thigh_fairing_keepout": {
+    "n_out": 81,
+    "max_out_mm": 3.8
+   },
+   "n_verts": 1008
+  },
+  {
+   "knee": 45,
+   "closest": [
+    [
+     7.39,
+     "L_knee trunnion bracket top plate (thigh) [EST]"
+    ],
+    [
+     11.3,
+     "L_knee trunnion cheek +y [EST]"
+    ],
+    [
+     11.3,
+     "L_knee trunnion cheek -y [EST]"
+    ],
+    [
+     12.86,
+     "L_knee screw +y RV12 roller-screw rod \u00f812"
+    ],
+    [
+     12.86,
+     "L_knee screw -y RV12 roller-screw rod \u00f812"
+    ]
+   ],
+   "to_kneecap_keepout": 153.3,
+   "verts_outside_thigh_fairing_keepout": {
+    "n_out": 99,
+    "max_out_mm": 4.0
+   },
+   "n_verts": 1008
+  },
+  {
+   "knee": 60,
+   "closest": [
+    [
+     8.18,
+     "L_knee trunnion bracket top plate (thigh) [EST]"
+    ],
+    [
+     11.61,
+     "L_knee trunnion cheek +y [EST]"
+    ],
+    [
+     11.61,
+     "L_knee trunnion cheek -y [EST]"
+    ],
+    [
+     12.86,
+     "L_knee screw +y RV12 roller-screw rod \u00f812"
+    ],
+    [
+     12.86,
+     "L_knee screw -y RV12 roller-screw rod \u00f812"
+    ]
+   ],
+   "to_kneecap_keepout": 153.1,
+   "verts_outside_thigh_fairing_keepout": {
+    "n_out": 108,
+    "max_out_mm": 4.2
+   },
+   "n_verts": 1008
+  },
+  {
+   "knee": 75,
+   "closest": [
+    [
+     8.42,
+     "L_knee trunnion bracket top plate (thigh) [EST]"
+    ],
+    [
+     11.7,
+     "L_knee trunnion cheek +y [EST]"
+    ],
+    [
+     11.7,
+     "L_knee trunnion cheek -y [EST]"
+    ],
+    [
+     12.86,
+     "L_knee screw +y RV12 roller-screw rod \u00f812"
+    ],
+    [
+     12.86,
+     "L_knee screw -y RV12 roller-screw rod \u00f812"
+    ]
+   ],
+   "to_kneecap_keepout": 153.1,
+   "verts_outside_thigh_fairing_keepout": {
+    "n_out": 114,
+    "max_out_mm": 4.2
+   },
+   "n_verts": 1008
+  },
+  {
+   "knee": 90,
+   "closest": [
+    [
+     8.02,
+     "L_knee trunnion bracket top plate (thigh) [EST]"
+    ],
+    [
+     11.55,
+     "L_knee trunnion cheek +y [EST]"
+    ],
+    [
+     11.55,
+     "L_knee trunnion cheek -y [EST]"
+    ],
+    [
+     12.86,
+     "L_knee screw +y RV12 roller-screw rod \u00f812"
+    ],
+    [
+     12.86,
+     "L_knee screw -y RV12 roller-screw rod \u00f812"
+    ]
+   ],
+   "to_kneecap_keepout": 153.2,
+   "verts_outside_thigh_fairing_keepout": {
+    "n_out": 108,
+    "max_out_mm": 4.1
+   },
+   "n_verts": 1008
+  },
+  {
+   "knee": 105,
+   "closest": [
+    [
+     6.94,
+     "L_knee trunnion bracket top plate (thigh) [EST]"
+    ],
+    [
+     11.12,
+     "L_knee trunnion cheek +y [EST]"
+    ],
+    [
+     11.12,
+     "L_knee trunnion cheek -y [EST]"
+    ],
+    [
+     12.86,
+     "L_knee screw +y RV12 roller-screw rod \u00f812"
+    ],
+    [
+     12.86,
+     "L_knee screw -y RV12 roller-screw rod \u00f812"
+    ]
+   ],
+   "to_kneecap_keepout": 153.5,
+   "verts_outside_thigh_fairing_keepout": {
+    "n_out": 99,
+    "max_out_mm": 3.9
+   },
+   "n_verts": 1008
+  },
+  {
+   "knee": 120,
+   "closest": [
+    [
+     5.21,
+     "L_knee trunnion bracket top plate (thigh) [EST]"
+    ],
+    [
+     10.42,
+     "L_knee trunnion cheek +y [EST]"
+    ],
+    [
+     10.42,
+     "L_knee trunnion cheek -y [EST]"
+    ],
+    [
+     12.86,
+     "L_knee screw +y RV12 roller-screw rod \u00f812"
+    ],
+    [
+     12.86,
+     "L_knee screw -y RV12 roller-screw rod \u00f812"
+    ]
+   ],
+   "to_kneecap_keepout": 153.5,
+   "verts_outside_thigh_fairing_keepout": {
+    "n_out": 72,
+    "max_out_mm": 3.7
+   },
+   "n_verts": 1008
+  },
+  {
+   "knee": 135,
+   "closest": [
+    [
+     2.98,
+     "L_knee trunnion bracket top plate (thigh) [EST]"
+    ],
+    [
+     9.44,
+     "L_knee trunnion cheek +y [EST]"
+    ],
+    [
+     9.44,
+     "L_knee trunnion cheek -y [EST]"
+    ],
+    [
+     12.86,
+     "L_knee screw +y RV12 roller-screw rod \u00f812"
+    ],
+    [
+     12.86,
+     "L_knee screw -y RV12 roller-screw rod \u00f812"
+    ]
+   ],
+   "to_kneecap_keepout": 153.5,
+   "verts_outside_thigh_fairing_keepout": {
+    "n_out": 72,
+    "max_out_mm": 4.4
+   },
+   "n_verts": 1008
+  },
+  {
+   "knee": 135,
+   "closest": [
+    [
+     2.98,
+     "L_knee trunnion bracket top plate (thigh) [EST]"
+    ],
+    [
+     9.44,
+     "L_knee trunnion cheek +y [EST]"
+    ],
+    [
+     9.44,
+     "L_knee trunnion cheek -y [EST]"
+    ],
+    [
+     12.86,
+     "L_knee screw +y RV12 roller-screw rod \u00f812"
+    ],
+    [
+     12.86,
+     "L_knee screw -y RV12 roller-screw rod \u00f812"
+    ]
+   ],
+   "to_kneecap_keepout": 153.5,
+   "verts_outside_thigh_fairing_keepout": {
+    "n_out": 72,
+    "max_out_mm": 4.4
+   },
+   "n_verts": 1008
+  }
+ ]
+}

@@ -34,3 +34,9 @@ Source: `legs/fairings_v5.py` (model_v4 swept, left leg; mirror y for the right)
 - **Knee saddle and lower-shank no-cover zone: withdrawn.** The shin can be covered again (keep-out unchanged).
 - **New no-cover zone: knee housing fins** (thigh frame, housing on the trunnion at x −130, z 770). The thigh fairing must be open (grille) over the housing's front and rear faces plus fins plus 5 mm. No fins on the outer ±y flanks.
 - The knee cap vs thigh fairing gap is unchanged: the finned housing stays ≥ 110 mm from the knee cap keep-out.
+
+## Update 2026-10-14 (Thermal D69C fins signed off, A35 venting binding)
+- The knee housing fins are 12 fins of 25 mm on the rear only, front and sides bare. They sit at least 9.5 mm inside the v5 thigh fairing envelope at every knee angle, so the fairing shape doesn't change.
+- The thigh fairing must have a grille over the knee housing (rear fins and front). A closed cover is not allowed (A35).
+- The knee cap (P-022) stays at least 153 mm from the fins, so it never closes over them.
+- Knee drive plate (R-062, proposed): on the femur rear, z 688–792, inside the fairing (58 mm margin). It needs an air inlet low on the rear grille and an outlet high on the thigh rear panel.
