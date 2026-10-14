@@ -312,3 +312,32 @@ All safety frames: counter + CRC (E2E-style). Rates are [EST].
   - Mass [EST]: 2 × (AMC1311 + divider + isolated supply) on the safety board ≈ 0.005 kg, inside the existing rt_safety_mcu 0.040 [EST] allowance.
   - Checks: **before pre-charge** (drive-side bus must be ≈ 0 V with the disconnect open; otherwise weld/short → no close), and **after every open** (bus must decay per the bus-capacitance RC; otherwise latched fault, no restart). Both channels must agree within tolerance [EST ±2 V].
 - **Internal cell short detection** (self-discharge/imbalance trend) is a **soft warning** (BMS_WARN), not a hard-fault trigger.
+
+## 14. A43 (R-035): 80 W hand burst on top of 40 W continuous
+**Hand board location: moving from forearm to upper arm or shoulder bay (A42), TBD.**
+1. **RP40-11024SFR cannot do it.** RP40-FR datasheet [DS]: Over Load Protection **150 % typ., hiccup mode**; SCP continuous, auto recovery; max capacitive load 1300 µF (24 V part); 32 g bare / 43 g with heat-sink. 150 % = 60 W is a *typical* trip, not a guaranteed rating. **80 W puts it into hiccup** (output collapses and restarts), so the hand loses power mid-grip. **Max guaranteed burst: 40 W (its rating). Do not plan on 60 W.**
+2. **24 V-side storage (supercap/bulk) — not recommended.** The burst needs 40 J extra (40 W × 1 s). Allowing 24 → 18 V droop: C = 2E/(V1²−V2²) = 80/252 = **0.32 F at ≥ 24 V**. Electrolytics: not credible (hundreds of grams). Supercap: a ≥ 9-cell series stack with balancing **plus** a current-limited charger/ideal-diode stage, because the RP40 allows only 1300 µF of direct capacitive load and would hiccup charging 0.32 F. Mass [EST] 0.05–0.10 kg per hand with charger. No part cited, more parts, cycle-life and temperature limits. Rejected unless mass forces it.
+3. **Recommended: RECOM RP100H-11024SRW** (RP100H-RW datasheet REV 4/2020) [DS]: input **43–160 V**, **24 V / 4.2 A (101 W)**, 90 %, max capacitive load 1750 µF, OLP 150 % typ. hiccup (110 Vin), SCP continuous auto-recovery, trim −20/+10 %, EN50155; half brick **61.0 × 57.9 × 12.7 mm, 105 g** (24.13 mm / **157 g with heat-sink**). This gives **80 W continuous, so an 80 W burst of unlimited duration within thermal limits** (baseplate-cooled). The 68–84 V bus, 90 V regen and 92 V ceiling are inside 43–160 V.
+   - Mass delta per hand vs RP40/P-HC 0.043: **+0.062 (bare, plate-mounted to the structure) or +0.114 (with heat-sink)** → **+0.124 / +0.228 kg both** → Arms books it via the Arbiter (new mass under R-024).
+   - Size favours the **shoulder bay** location (A42) over the forearm.
+   - **Input filter:** the RP40 note-9 filter does not transfer. The RP100H datasheet's own EMC/transient filter recommendation must be read and cited before purchase (open, O-E11). Keep the 90 V-standoff TVS logic: standoff ≥ 84 V, clamp < 160 V.
+4. **Wrist harness at 3.3 A (80 W / 24 V):** the current model hand feed is SiF 0.5 mm² (`harness.md`). If the converter sits in the shoulder bay with the hand board, the 24 V run is shoulder → hand board (location TBD). If the motors stay in the forearm, the board-to-motor leads become the long run instead (Arms to define). For a 24 V pair of ~1.9 m [EST route+loops] in 0.5 mm²: R = 2 × 1.72e-8 × 1.9 / 0.5e-6 = 0.13 Ω → **0.43 V drop (1.8 %) at 3.3 A**; I²R = 1.4 W over 3.8 m of conductor. Heating at 1.67 A continuous is ¼ of that. SiF 0.5 mm² is adequate [ampacity from the Lapp table not re-read: EST]. Going to 0.75 mm² costs +3 g/m per conductor and is only needed if the run is > 3 m.
+
+## 15. R-036 (3b50c3c): 4.20 V/cell, BMS regen acceptance a hard requirement (G5 T-027). Can the P-045 clamp absorb the top-of-charge window anyway?
+**Method.** Actuators' regen model traces (`actuators/results/regen_sim_trace_walk_1p0/1p2.npz`; `regen_core.py`: PB = Σ signed joint electrical power + p_other, i.e. the **net DC-bus power with full sharing between joints and the compute/sensor loads**). If the BMS refuses charge, the clamp only sees the **negative part of PB**; every regenerating joint first feeds the other joints and the ~140 W of compute/sensors on the same bus.
+| gait (steady window) | net bus mean | clamp mean (neg. part) | clamp peak | pulses | max / mean pulse energy | duty |
+|---|---|---|---|---|---|---|
+| walk 1.0 m/s (5.2 s) | +609 W | **4.2 W** | 221 W | 2.1 /s | 2.6 J / 2.0 J | 3.4 % |
+| walk 1.2 m/s (5.0 s) | +710 W | **3.6 W** | 202 W | 2.2 /s | 2.1 J / 1.6 J | 2.4 % |
+**5-min top-of-charge window (Torso):** 4.2 W × 300 s = **1.26 kJ** total, in ~640 pulses of ≤ 2.6 J.
+- Bus capacitance alone (Elmo single-supply rule ≥ rated I × 20 µF ≈ 1 mF per drive, ×32 ≈ 32 mF [EST]) stores ½C(88² − 84²) = **11 J** between pack-max and clamp-ON. **Each ≤ 2.6 J pulse is absorbed by the caps; the clamp fires rarely**, and the energy it eventually burns averages ≤ 4.2 W.
+| | HS100 1R5 F (booked) | 2× HS100 0R75 series (pre-approved fallback, +0.09) |
+|---|---|---|
+| R / ON power at 88 V | 1.5 Ω / 5.16 kW | 1.5 Ω / 5.16 kW (2.58 kW each) |
+| continuous: free air / std heatsink [DS] | 30 W / 100 W | 60 W / 200 W |
+| thermal capacity [DS] | 76.7 J/°C | 153.4 J/°C |
+| 5-min window, adiabatic rise (1.26 kJ) | **16 K** | **8 K** |
+| steady state at 4.2 W | ≪ free-air rating (14 % of 30 W) | ≪ |
+| per-event pulse (2.6 J gait / 400 J fault) | 0.03 K / 5.2 K | 0.02 K / 2.6 K (each sees half) |
+**Result: the booked HS100 1R5 absorbs the full 5-min top-of-charge window with large margin, even with the BMS refusing charge.** The 2× 0R75 fallback is not needed for this case; it stays only as the O-T8 fallback for the 400 J / 78 ms fault pulse.
+**Caveats:** the traces are nominal walking only. Stairs-down, sit-down, braking from speed and arm lowering are not in the regen model. Bound for those [EST]: descending 18 cm steps at 0.5 step/s gives 65 × 9.81 × 0.18 × 0.5 = **57 W gross**, below the ~140 W compute/sensor load on the same bus, so net bus power stays positive in steady descent. Short transients (sit-down ≤ 319 J CoM drop) are inside the 400 J design event. **O-T8 (pulse curve) is still needed for the 400 J fault event, before G3.** T-027 (BMS acceptance) stays the primary measure; the clamp is the backstop and does not need to stop the robot during the top-of-charge window.
