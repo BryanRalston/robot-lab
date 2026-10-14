@@ -518,4 +518,9 @@ class HumanoidWalk(mjx_env.MjxEnv):
             'rew_torque_per_step': jp.nan_to_num(torque_r),
             'fell': done,
         }
+        # EvalWrapper inserts metrics['reward'] before step. The episode scan
+        # requires the same metric keys on the way out.
+        for key, value in state.metrics.items():
+            if key not in metrics:
+                metrics[key] = value
         return state.replace(data=data, obs=obs, reward=reward, done=done, metrics=metrics, info=info)
