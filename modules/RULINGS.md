@@ -1014,3 +1014,8 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
 - Conditions: the face is finished (clear coat or texture); Torso and Materials confirm it survives handling, UV and abrasion as an outer surface; and Controls checks T-031 with the skin at x~+0.147.
 - Mass: ring +0.015 (EST addition, full); CF shell removed -0.045 at half credit, -0.0225. Net -0.0075, replacing the R-093 +0.058, so **-0.066** here.
 - Reserve ~**-0.34**.
+
+## R-095 (2026-10-14) Sternum skin finish (Materials)
+- **2K aliphatic PU UV clear coat** with UV absorbers over the scuffed face, 50-100 um DFT, matte or satin, kept clear of the pad edge and crush zone. **+0.008** booked (upper est). Before G1, cite a clear-coat datasheet; Torso puts the callout on the drawing. A 0.25 mm TPU/PC film is an allowed alternative.
+- Visual plus tap-test inspection after any chest impact; the pad cartridge is replaced on impact.
+- Reserve ~-0.35.
