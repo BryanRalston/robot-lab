@@ -592,3 +592,8 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
 - **Regen check (Electronics 605cb1a), accepted.** The booked HS100 1R5 absorbs the full top-of-charge window even when the BMS refuses regen. O-T8 (400 J fault pulse) is still due before G3. Stair-descent regen gets checked against measured traces in G5 (T-028).
 - **A43 hand PSU.** The RP40 can't burst to 80 W. The RP100H-11024SRW is accepted in principle. Its mass is booked in full at the chosen variant once Arms picks it. Until then, +0.228 kg is held, because that's the upper bound.
 - **Net this ruling:** −0.120 − 0.010 + 0.228 hold = +0.098 kg. Credible total is about 65.48 kg, with a reserve of about 1.02 kg.
+
+## R-038 (2026-10-14) Thermal A43 answer (c8ce472), knee spreader
+- **Hand power.** The R-035 80 W condition is unmet on the RP40. The lightest option that meets ≥80 W peak wins: 2× RP40 per hand (+0.086 kg for both hands) or the RP100H. The R-037 hold drops from 0.228 to 0.086 kg once Arms and Electronics confirm the 2× RP40 burst. Per-motor current caps and the ≤52 W / ≤1 s / 5 s duty apply until then. T4 is still at risk.
+- **Shoulder caps.** The corrected shoulder caps are adopted (10 min cap only up to 62 N·m).
+- **Knee spreader.** The finned shank spreader adds +0.09 kg per knee, booked +0.18 kg in full unless Actuators shows it's already inside D69's +0.47. Credible weight is about 65.66 kg, leaving about 0.84 kg of reserve.
