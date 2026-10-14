@@ -27,3 +27,8 @@ Applies to every production lever (100 % proof), plus one destructive qualificat
 6. Qualification part only: continue to rupture or 2 × design. Record the yield onset (0.2 % strain at the rosette) and confirm SF_yield ≥ 1.5 against the measured Sy of the lot.
 
 **Records.** Serial number, material cert (7075-T6 or T651 plate, Sy ≥ 503 MPa), load–deflection curves and photos. The test goes into G5 bench week W2 (BENCH_TEST_PLAN.md §7).
+
+**Status (O13b, D58).**
+- The FEA basis above (h 4, SF 1.51) is **not converged**. O13's finest mesh reached 490 MPa, SF 1.03.
+- Do not release this procedure for parts until the v2 lever (G2/G3, `GROKBUILD_lever_fea_v2.md`) passes the converged SF ≥ 1.5 check.
+- Move the strain rosettes to the converged hot spot, and set the predicted deflection and strain from the v2 results.

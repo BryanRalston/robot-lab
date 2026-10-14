@@ -385,3 +385,16 @@ Retention at 1.2 m/s:
 - O13: lever FEA (Grok Build).
 - O20a/O20b: run the plans.
 - O23: eye wear part. Confirm G_h with a bench wear test, run in the O20 rig with the eye loaded at 2.4 kN alternating.
+
+## D58 (O13b) hip_pitch lever v2: box study stopped, Grok Build brief issued
+- New `hp_lever_fea_v2.py`:
+  - The bore clamp is gone. The bearing reaction is a cosine pressure on each needle bore, and the yoke face |y| = 13.5 carries the pitch torque.
+  - Gmsh Ball local refinement at the hot spots, P2 elements.
+  - Fault cases on both sides, 21 cases in total.
+- B1 trial (cheek RO 28, R3 junction fillet, bore pocket +5 mm with an R5 end torus), h 4 / local 2:
+  - Peak 583 MPa at sym φ+60, 581 / 575 MPa in the fault cases. Mass 0.2883 kg. **Rejected.**
+  - The undercut thins the arm root.
+- The O13 hot spot is a real 90° re-entrant corner where the arm root overlaps the bore end. The fix has to be topological: an end cap with a filleted pocket (G2), or a flange-mounted root (G3).
+- Not feasible on the box: about 1.1 GB free, and the 64k-dof run already used 865 MB. Brief: `results/GROKBUILD_lever_fea_v2.md` (geometry G2/G3, mesh plan to 0.7 mm or a submodel, three stress measures, pass criteria).
+- O13 stays open. The mass line is unchanged at 0.2492 kg each. The −0.245 kg credit stays gated.
+- Envelope: D25's 41 mm figure belongs to the CRBH hub. With the needle cheeks it is already 29.5 mm, and G2 would make it 24.5 mm. Legs needs to confirm.
