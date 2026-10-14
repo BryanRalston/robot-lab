@@ -2,8 +2,9 @@
  "source": "modules/arbiter/mass_rollup_official.json (R-022)",
  "harness": {
   "official_kg": 1.2864,
-  "actuators_model_kg": 1.2864425549002014,
-  "delta_kg": 4.255490020144137e-05
+  "actuators_model_kg": 1.3924676255608095,
+  "delta_kg": 0.10606762556080951,
+  "note": "A25 (D64): +0.106 vs official 1.2864; STO star 0.122 (0.137 incl. sleeving) vs R-028 A33 hold 0.14"
  },
  "linkage_both_legs": {
   "official_kg": 2.3262,
@@ -11,11 +12,16 @@
   "delta_kg": -4.403342124170706e-05
  },
  "note": "Robot total: read official credible_kg; add these deltas only after an Arbiter ruling.",
- "actuator_delta_total_kg": -1.47852104026569e-06,
+ "actuator_delta_total_kg": 0.1060235921395678,
  "official_credible_kg": 66.054,
  "v4_audit_fixes_pending": {
   "both_legs_kg": 0.138,
   "source": "results/v4_deltas.json",
   "status": "pending Arbiter ruling (P-018); not in the official rollup"
+ },
+ "wrist_pair_pending": {
+  "both_arms_kg": -1.371,
+  "source": "results/wrist_r1.json",
+  "status": "pending Arbiter (Arms contract row 1.55/side)"
  }
 }

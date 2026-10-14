@@ -248,21 +248,21 @@
    "bend_ratio": null
   },
   {
-   "item": "compute 24 V feed",
+   "item": "compute 48 V feed (A25: DCM3623TA5N53B4 43-154 V -> 48 V; 120 W -> 2.5 A)",
    "n": 1,
    "route_m": 0.037,
    "loops_m": 0,
    "len_m": 0.037,
    "joints": [],
-   "mm2": 1.0,
-   "lapp_art": "0050001",
-   "gpm": 15,
+   "mm2": 0.25,
+   "lapp_art": "0047001",
+   "gpm": 5.4,
    "cond": 2,
-   "kg": 0.0011040000000000002,
-   "I_rms": 6.0,
-   "I_pk": 8.0,
-   "dV_pct": 0.014893176470588236,
-   "dT_K": 15.767798522000255,
+   "kg": 0.00039744,
+   "I_rms": 2.5,
+   "I_pk": 4.0,
+   "dV_pct": 0.029786352941176472,
+   "dT_K": 14.40771063779263,
    "bend_r_mm": null,
    "bend_ratio": null
   },
@@ -308,8 +308,8 @@
    "item": "ECAT leg branch -> foot F/T",
    "n": 2,
    "route_m": 1.797,
-   "loops_m": 1.002,
-   "len_m": 3.439,
+   "loops_m": 0.993,
+   "len_m": 3.431,
    "joints": [
     "waist yaw",
     "waist pitch",
@@ -321,7 +321,7 @@
    ],
    "cable": "Belden MachFlex MRTA2P26S",
    "gpm": 25.9,
-   "kg": 0.1781491819121371,
+   "kg": 0.17770618244139585,
    "bend_r_mm": 35,
    "bend_ratio": 8.333333333333332
   },
@@ -345,25 +345,23 @@
    "bend_ratio": 8.095238095238095
   },
   {
-   "item": "ECAT waist+neck+head",
+   "item": "ECAT waist only (A25: neck left EtherCAT)",
    "n": 1,
-   "route_m": 0.524,
-   "loops_m": 0.443,
-   "len_m": 1.368,
+   "route_m": 0.302,
+   "loops_m": 0.201,
+   "len_m": 0.663,
    "joints": [
-    "neck yaw",
-    "neck pitch",
     "waist yaw"
    ],
    "cable": "Belden MachFlex MRTA2P26S",
    "gpm": 25.9,
-   "kg": 0.03542123664127772,
-   "bend_r_mm": 34.0,
-   "bend_ratio": 8.095238095238095
+   "kg": 0.01717808298694283,
+   "bend_r_mm": 48.0,
+   "bend_ratio": 11.428571428571429
   },
   {
-   "item": "head cameras data (2 x quad, completeness)",
-   "n": 2,
+   "item": "RS-485 FD (2 pairs, MachFlex quad reused) AGX301 -> neck Dynamixels (A25)",
+   "n": 1,
    "route_m": 0.222,
    "loops_m": 0.242,
    "len_m": 0.464,
@@ -373,7 +371,7 @@
    ],
    "cable": "Belden MachFlex MRTA2P26S",
    "gpm": 25.9,
-   "kg": 0.024054307308669788,
+   "kg": 0.012027153654334894,
    "bend_r_mm": 34.0,
    "bend_ratio": 8.095238095238095
   },
@@ -389,6 +387,76 @@
    "kg": 0.006475,
    "bend_r_mm": null,
    "bend_ratio": null
+  },
+  {
+   "item": "GMSL2 coax JCB022 MATE-AX -> FAKRA -> ZED X Mini (PoC) (A25)",
+   "n": 1,
+   "route_m": 0.222,
+   "loops_m": 0.242,
+   "len_m": 0.564,
+   "joints": [
+    "neck yaw",
+    "neck pitch"
+   ],
+   "cable": "coax",
+   "gpm": 6.5,
+   "kg": 0.0036683976352577924,
+   "bend_r_mm": 34.0,
+   "bend_ratio": 18.478260869565215
+  },
+  {
+   "item": "STO 2-wire star, legs branch (A25; 0.25 mm2 SiF, SILI-E in loops, 7 drive taps)",
+   "n": 4,
+   "route_m": 1.544,
+   "loops_m": 0.869,
+   "len_m": 2.974,
+   "joints": [
+    "waist yaw",
+    "waist pitch",
+    "hip yaw",
+    "hip roll",
+    "hip pitch",
+    "knee"
+   ],
+   "cable": "SiF 0.25",
+   "gpm": 5.4,
+   "kg": 0.06110273859894848,
+   "bend_r_mm": 45,
+   "bend_ratio": 23.68421052631579
+  },
+  {
+   "item": "STO 2-wire star, arms branch (A25; 0.25 mm2 SiF, SILI-E in loops, 7 drive taps)",
+   "n": 4,
+   "route_m": 0.995,
+   "loops_m": 1.163,
+   "len_m": 2.718,
+   "joints": [
+    "shoulder pitch",
+    "shoulder roll",
+    "shoulder yaw",
+    "elbow",
+    "wrist roll"
+   ],
+   "cable": "SiF 0.25",
+   "gpm": 5.4,
+   "kg": 0.05451234418011123,
+   "bend_r_mm": 34.0,
+   "bend_ratio": 17.894736842105264
+  },
+  {
+   "item": "STO 2-wire star, waist branch (A25; 0.25 mm2 SiF, SILI-E in loops, 2 drive taps)",
+   "n": 2,
+   "route_m": 0.302,
+   "loops_m": 0.201,
+   "len_m": 0.663,
+   "joints": [
+    "waist yaw"
+   ],
+   "cable": "SiF 0.25",
+   "gpm": 5.4,
+   "kg": 0.006801628026350791,
+   "bend_r_mm": 48.0,
+   "bend_ratio": 25.263157894736842
   },
   {
    "item": "motor phase leads (34 drives, 3 x 0.5 mm2 x 0.06 m)",
@@ -409,8 +477,8 @@
    "kg": 0.033048
   }
  ],
- "power_wire_kg": 0.5149629240312832,
- "ecat_kg": 0.39496792855818247,
+ "power_wire_kg": 0.5142563640312832,
+ "ecat_kg": 0.36425462177877144,
  "connectors": {
   "parts": {
    "XT60 pair (Amass XT60, 30 A)": {
@@ -441,15 +509,31 @@
   },
   "kg": 0.24731999999999998
  },
- "sleeving_kg": 0.10919170231073587,
+ "sleeving_kg": 0.12055153131008674,
  "ecat_junction_kg": 0.02,
- "total_kg": 1.2864425549002014,
+ "total_kg": 1.3924676255608095,
  "R4_model_kg": 0.821,
  "R018_credited_kg": 1.344,
  "contract": 2.0,
  "worst_dV_pct": 0.7828447039212263,
- "worst_dT_K": 15.767798522000255,
+ "worst_dT_K": 14.40771063779263,
  "min_bend_ratio": 8.095238095238095,
- "ecat_loop_m": 5.257,
- "flex_fallback_ecat_kg": 0.1740067
+ "a25_extra_kg": 0.12608510844066828,
+ "sto_kg": 0.1224167108054105,
+ "sto_with_sleeve_kg": 0.13710671610205977,
+ "coax": {
+  "part": "HUBER+SUHNER ENVIROFLEX_178 (RG178 class, 50 ohm, 1.84 mm)",
+  "gpm": 6.5,
+  "od": 1.84,
+  "bend_dyn": 30.0,
+  "a": 1.4067,
+  "b": 0.2229,
+  "len_m": 0.564,
+  "loss_dB_3GHz": 1.7513191912480264,
+  "loss_dB_1p5GHz": 1.160260016370813,
+  "PoC_loop_ohm": 0.44950799999999996,
+  "neck_r_mm": 34.0
+ },
+ "ecat_loop_m": 4.755,
+ "flex_fallback_ecat_kg": 0.15739050000000002
 }

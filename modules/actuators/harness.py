@@ -9,7 +9,7 @@ Routes: joint/part coordinates from v3/cad/model.py (P, CHAINS, pack/compute bou
 Gauge: smallest SiF size meeting the per-segment voltage-drop budget at peak (series leg segments sum <= 2 % of 68 V) and conductor rise <= 30 K at rms (2x bundle factor); fixed-size runs use their listed size as a floor."""
 import json, os, math
 H=os.path.dirname(os.path.abspath(__file__)); ROOT=os.path.abspath(f'{H}/../..')
-S=json.load(open(f'{H}/results/sizing.json')); CAB={r['joint']:r for r in json.load(open(f'{ROOT}/v3/cad/out/cables.json'))['joints']}
+S=json.load(open(f'{H}/results/sizing.json')); CAB={r['joint']:r for r in json.load(open(f'{H}/results/v3_cables.json'))['joints']}
 V=68.0; RHO_CU=1.72e-8 * 1.0
 # Lapp OELFLEX HEAT 180 SiF: mm2 -> (weight g/m, OD mm, article no. black)  [datasheet]
 SIF={4.0:(50,4.2,'0053001'),2.5:(32,3.4,'0052001'),1.5:(20,2.8,'0051001'),1.0:(15,2.5,'0050001'),0.75:(12,2.4,'0049001'),0.5:(9,2.1,'0048001'),0.25:(5.4,1.9,'0047001')}
@@ -48,15 +48,20 @@ P.append(('hand 24 V from wrist DC/DC',2,path(WRI,HAND),('wrist roll',),0.5,2,0.
 P.append(('waist drives feed',1,path(PACK_BOT,WAIST),('waist yaw',),1.0,2,1.5,6.0))
 P.append(('neck/head bus',1,path(PACK_TOP,NECK,HEAD),('neck yaw','neck pitch'),0.75,2,1.0,4.0))
 P.append(('waist/neck pigtails (4)',4,PIG,(),0.5,2,1.0,4.0))
-P.append(('compute 24 V feed',1,path(PACK_TOP,COMPUTE),(),1.0,2,6.0,8.0))
+P.append(('compute 48 V feed (A25: DCM3623TA5N53B4 43-154 V -> 48 V; 120 W -> 2.5 A)',1,path(PACK_TOP,COMPUTE),(),0.25,2,2.5,4.0))
 P.append(('BMS->fuse->contactor->bus bar',1,0.30,(),4.0,2,I_leg_rms*2,I_leg_pk*2))
 P.append(('e-stop loop (back button, completeness)',1,2*path(PACK_TOP,(-100,0,1450)),(),0.25,2,0.1,0.1))
 E=[]  # EtherCAT line topology per branch from torso junction at compute; frames return on the same quad
 E.append(('ECAT leg branch -> foot F/T',2,path(COMPUTE,WAIST,HIPY,HIPR,HIPP,KNEE,ANK),legJ1+('hip pitch','knee','ankle (pitch+roll)'),8))
 E.append(('ECAT arm branch -> hand/tactile',2,path(COMPUTE,SHP,SHR,ELB,WRI,HAND),armJ+('wrist roll',),8))
-E.append(('ECAT waist+neck+head',1,path(COMPUTE,NECK,HEAD)+path(COMPUTE,WAIST),('neck yaw','neck pitch','waist yaw'),5))
-E.append(('head cameras data (2 x quad, completeness)',2,path(COMPUTE,NECK,HEAD),('neck yaw','neck pitch'),0))
+E.append(('ECAT waist only (A25: neck left EtherCAT)',1,path(COMPUTE,WAIST),('waist yaw',),2))
+E.append(('RS-485 FD (2 pairs, MachFlex quad reused) AGX301 -> neck Dynamixels (A25)',1,path(COMPUTE,NECK,HEAD),('neck yaw','neck pitch'),0))
 E.append(('IMU (torso, completeness)',1,0.25,(),0))
+# A25 extra cables: (name, n, L route, joints, g/m in run, g/m in loops, extra m)
+COAX=dict(part='HUBER+SUHNER ENVIROFLEX_178 (RG178 class, 50 ohm, 1.84 mm)',gpm=6.5,od=1.84,bend_dyn=30.0,a=1.4067,b=0.2229)   # datasheet: 0.65 kg/100 m; att = a f^0.5 + b f dB/m (f GHz); dynamic bend >= 30 mm
+X=[('GMSL2 coax JCB022 MATE-AX -> FAKRA -> ZED X Mini (PoC) (A25)',1,path(COMPUTE,NECK,HEAD),('neck yaw','neck pitch'),COAX['gpm'],COAX['gpm'],0.10)]
+STO_BR=[('legs',2,path(COMPUTE,WAIST,HIPY,HIPR,HIPP,KNEE,ANK_DRV),legJ1+('hip pitch','knee'),7),('arms',2,path(COMPUTE,SHP,SHR,ELB,WRI),armJ+('wrist roll',),7),('waist',1,path(COMPUTE,WAIST),('waist yaw',),2)]
+for nm,n,L0,js,nd in STO_BR: X.append((f'STO 2-wire star, {nm} branch (A25; 0.25 mm2 SiF, SILI-E in loops, {nd} drive taps)',2*n,L0,js,SIF[0.25][0],SILI.get(0.25,SIF[0.25][:2])[0],nd*PIG))
 local=[('motor phase leads (34 drives, 3 x 0.5 mm2 x 0.06 m)',34,0.06,0.5,3),('encoder/thermistor leads (34, 3 x 0.25 mm2 x 0.06 m)',34,0.06,0.25,3)]
 # connectors: (each pair kg, n, evidence)
 CON={'XT60 pair (Amass XT60, 30 A)':(0.0078,4,'7.8 g/pair distributor listing (Alise Ops)'),
@@ -85,11 +90,18 @@ for nm,n,L0,js,npig in E:
     rows.append(dict(item=nm,n=n,route_m=round(L0,3),loops_m=round(lp,3),len_m=round(L,3),joints=list(js),cable=ECAT['part'],gpm=ECAT['gpm'],kg=m,bend_r_mm=rb,bend_ratio=(rb/ECAT['od'] if rb else None)))
     ecat+=m; loop_len_e=0
 ecat_loop=sum(r['n']*r['loops_m'] for r in rows if 'cable' in r)
+xtra=0
+for nm,n,L0,js,g,gl,ex in X:
+    lp=loops(*js); m=n*(L0*g+lp*gl+ex*g)/1000; rb=min([CAB[j]['r_min_mm'] for j in js],default=None)
+    rows.append(dict(item=nm,n=n,route_m=round(L0,3),loops_m=round(lp,3),len_m=round(L0+lp+ex,3),joints=list(js),cable='coax' if 'coax' in nm else 'SiF 0.25',gpm=g,kg=m,bend_r_mm=rb,bend_ratio=(rb/(COAX['od'] if 'coax' in nm else 1.9) if rb else None))); xtra+=m
+coax_row=[r for r in rows if 'coax' in r['item']][0]; COAX['len_m']=coax_row['len_m']; COAX['loss_dB_3GHz']=coax_row['len_m']*(COAX['a']*3**0.5+COAX['b']*3); COAX['loss_dB_1p5GHz']=coax_row['len_m']*(COAX['a']*1.5**0.5+COAX['b']*1.5)
+COAX['PoC_loop_ohm']=coax_row['len_m']*(747+50)/1000; COAX['neck_r_mm']=coax_row['bend_r_mm']
+sto_kg=sum(r['kg'] for r in rows if r['item'].startswith('STO'))
 for nm,n,L,a,c in local: m=n*L*c*SIF[a][0]/1000; rows.append(dict(item=nm,n=n,len_m=L,mm2=a,cond=c,gpm=SIF[a][0],kg=m)); wire+=m
 con=sum(v[0]*v[1] for v in CON.values())
 junction=0.020   # EtherCAT 4-port junction PCB in torso [EST]
-sleeve=0.12*(wire+ecat)
-total=wire+ecat+con+sleeve+junction
+sleeve=0.12*(wire+ecat+xtra)
+total=wire+ecat+xtra+con+sleeve+junction
 flex_fallback=ecat_loop*(ECAT_FLEX['gpm']-ECAT['gpm'])/1000
 worst=[r for r in rows if r.get('bend_ratio')]
 FLEX_TAG=FLEX
@@ -97,7 +109,7 @@ out=dict(cables=dict(power='Lapp OELFLEX HEAT 180 SiF',ecat=ECAT,ecat_flex_ref=E
    power_wire_kg=wire,ecat_kg=ecat,connectors=dict(parts={k:dict(each_kg=v[0],n=v[1],evidence=v[2]) for k,v in CON.items()},kg=con),
    sleeving_kg=sleeve,ecat_junction_kg=junction,total_kg=total,R4_model_kg=0.821,R018_credited_kg=1.344,contract=2.00,
    worst_dV_pct=max(r.get('dV_pct',0) for r in rows),worst_dT_K=max(r.get('dT_K',0) for r in rows),
-   min_bend_ratio=min(r['bend_ratio'] for r in worst),ecat_loop_m=ecat_loop,flex_fallback_ecat_kg=flex_fallback)
+   min_bend_ratio=min(r['bend_ratio'] for r in worst),a25_extra_kg=xtra,sto_kg=sto_kg,sto_with_sleeve_kg=1.12*sto_kg,coax=COAX,ecat_loop_m=ecat_loop,flex_fallback_ecat_kg=flex_fallback)
 json.dump(out,open(f'{H}/results/harness.json','w'),indent=1)
 L=['# Harness mass model R5 (O16, R-018 A2): datasheet g/m + routed lengths','',
  '`harness.py` → `harness.json`. Bus 20S 68–84 V, star from pack/BMS; EtherCAT line per branch from a torso junction. Coordinates from `v3/cad/model.py`; service-loop radii from `v3/cad/out/cables.json`.','',

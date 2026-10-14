@@ -72,3 +72,5 @@ Joint ranges: from the v3 MJCF, `sim/v3/humanoid_v3.xml` (CONTRACTS "Range of mo
 | skf_ge12c.html (Acorn listing of the SKF data; SKF product page https://www.skf.com/products/plain-bearings/spherical-plain-bearings-rod-ends/radial/productid-GE%2012%20C) | SKF GE 12 C, maintenance-free steel/PTFE sintered bronze | C 11.4 kN, C0 28.5 kN, K 100, dk 18, α 10°, 0.016 kg, $17.20 each |
 | TME product pages (https://www.tme.eu/en/details/ghr-04v-s/…, …/bm04b-ghs-tbt/…, https://www.tme.com/us/en-us/details/sshl-002t-p0.2/…) | JST GHR-04V-S, BM04B-GHS-TBT, SSHL-002T-P0.2 | weights 0.079 g, 0.221 g (gross), 0.021 g |
 | GAM-GEC listings (https://gam-gec.com/product/ghr-04v-s/, …/bm04b-ghs-tbt/) | same | 0.08 g, 0.16 g |
+| hs_enviroflex_178.pdf | HUBER+SUHNER ENVIROFLEX_178 (RG178 class, 50 Ω, ø1.84): 6.5 g/m, att = 1.4067√f + 0.2229 f dB/m, dynamic bend ≥ 30 mm (A25 GMSL2 coax) | https://www.rf-microwave.com/resources/products_attachments/68eb7bf34ba47.pdf |
+| thk_bnk_lmsystems.html | THK BNK miniature ball screws: BNK1004-2.5 ø10 lead 4, Ca 2.1 / C0a 2.7 kN, nut ø26 (wrist, D65) | https://lmsystems.nl/en/ball-screws/miniature-bnk/ |

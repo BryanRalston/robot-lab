@@ -1,0 +1,33 @@
+{
+ "F_pk_N": 1017.8760197630929,
+ "F_cont_N": 282.7433388230814,
+ "need_per_axis_N": 221.99999999999997,
+ "SF_per_axis": 4.585027116049969,
+ "need_pitch_plus_yaw_N": 443.99999999999994,
+ "SF_simultaneous": 2.2925135580249845,
+ "rms_N": 148.0,
+ "SF_rms": 1.9104279650208202,
+ "rpm_axis": 2250.0000000000005,
+ "rpm_pitch_plus_yaw": 4500.000000000001,
+ "rpm_rule_95pct": true,
+ "L10_h_EST": 84644.54227785124,
+ "unit_kg": {
+  "housing_7075": 0.0789,
+  "motor_TBM2G05008": 0.111,
+  "screw_shaft_\u00f810x110": 0.0678,
+  "nut_BNK1004": 0.06,
+  "support_bearings_2x7000": 0.038,
+  "hub": 0.016,
+  "fasteners": 0.0236,
+  "rod_end_GE_misc": 0.037
+ },
+ "pair_kg": 0.8646382628187393,
+ "old_pair_kg": 1.55,
+ "delta_per_side_kg": -0.6853617371812607,
+ "delta_both_kg": -1.3707234743625214,
+ "cost": {
+  "BNK1004_EST_usd": "150-250 each [EST, no public THK price]",
+  "RV12x4_EST_usd": "no public price (SOURCES row 32); planetary roller screws typically several x a miniature ball screw [EST]"
+ },
+ "note": "nut mass, rod end/misc [EST]; housing from cad_mass.linear_body geometry scaled to \u00f856 can / \u00f832 nut section"
+}

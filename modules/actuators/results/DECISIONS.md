@@ -467,3 +467,43 @@ Retention at 1.2 m/s:
 
   - No change needed. Keep the edge distance at 12 or more, and fillet the tine root at R3 or more.
 - **Instep lugs: keep Legs' outboard position** (outrigger, +0.031 kg/leg). Moving them inboard would erode the 2.15 mm head clearance (D60). The lug face has to stay at least 12.5 mm from the eye mid-plane, so inboard is not better.
+
+## D64 (A25, Electronics 1e33c96 §7.3) Harness: neck-crossing conductors owned by M3
+- `harness.py` now reads `results/v3_cables.json`, a copy of `v3/cad/out/cables.json` at a98ba03. R-029 (da6a72f) deleted `v3/cad/out`.
+
+| Item | Change | kg |
+|---|---|---|
+| 1 | Delete "head cameras data 2× quad" | −0.0241 |
+| 1 | Add one GMSL2 coax, HUBER+SUHNER ENVIROFLEX_178 (RG178 class, 50 Ω, ø1.84, 6.5 g/m), 0.564 m | +0.0037 |
+| 2+3 | ECAT run cut to the waist only (2 taps), 0.0172; RS-485 FD reuses the MachFlex quad to the head, 0.0120. Was 0.0354 | −0.0062 |
+| 2 | Neck/head 0.75 mm² pair kept | 0 |
+| 4 | STO 2-wire star, 0.25 mm² SiF (SILI-E in the loops). Legs 0.0611, arms 0.0545, waist 0.0068. 0.137 incl. 12 % sleeving, vs R-028 A33 hold 0.14 | +0.1224 |
+| 5 | Compute feed 24 → 48 V: 2.5 A rms / 4 A pk → 0.25 mm² SiF, ΔV 0.04 %, ΔT 14 K | −0.0007 |
+| — | Sleeving on the above | +0.0114 |
+
+- **Coax link check:**
+  - Loss over 0.564 m: 1.75 dB at 3 GHz (GMSL2 6 Gbps Nyquist) and 1.16 dB at 1.5 GHz. That is far inside a GMSL2 automotive channel; the budget is sized for about 15 m of coax [EST, ADI channel spec not cited].
+  - PoC loop resistance 0.45 Ω.
+  - Neck drum r 34 mm, above the 30 mm dynamic bend minimum. The datasheet rates repeated bending at 20 mm for only 30 000 cycles, so add the coax to the O20a clock-spring cycle test.
+- **Net harness: 1.2864 → 1.3925 kg (+0.106).**
+- **Elmo:** MAN-G-TWI v2.011 (installation guide, Table 3 "R Type") is in `datasheets/`.
+  - R70/100: Ic 70 A amplitude / **49.5 A rms**, 10–95 V (85 nominal), 5.6 kW.
+  - R50/100: 50 A / 35.3 A rms, 95 V max, 4.0 kW.
+  - The values used (49.5 A rms, 95 V) are confirmed. No correction.
+
+## D65 (Arms R1, e1032af) Wrist differential pair downsize
+- Needs per Arms R1, arm r 25 mm unchanged:
+  - pitch 11.1 and yaw 11.1 N·m (1.5 × 7.4), 6 rad/s
+  - RMS 7.4 N·m hold
+- **Motor:** keep TBM2G-05008, the smallest TBM2G: Tp 0.72, Tmc 0.20 / 0.27 N·m, 0.111 kg.
+- **Screw:** RV12x4 → **THK BNK1004-2.5** (ø10, lead 4, Ca 2.1 kN).
+  - Per-screw peak 1018 N: 4.6× per axis, 2.3× with pitch and yaw at peak together.
+  - Continuous 283 N vs 148 N RMS: 1.9×.
+  - 4500 rpm with pitch + yaw together, within 95 % of 4900 rated.
+  - L10 about 85 kh [EST duty].
+- **Rejected:** BNK0810 (lead 10) fails RMS at 0.76× and simultaneous peak at 0.92×.
+- **Mass:** pair 0.865 kg/side, vs 1.55 contract and ≤ 0.90 Arms target. **−0.685 kg/side, −1.371 kg both arms.**
+  - Housing from the linear_body geometry (ø56 can, ø32 nut section).
+  - Nut and rod-end/misc masses are [EST].
+- **Cost:** BNK1004 about $150–250 [EST]; the RV12 price is not public. Net saving likely but not quantified.
+- Pending Arbiter.
