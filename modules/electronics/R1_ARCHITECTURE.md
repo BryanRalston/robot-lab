@@ -10,7 +10,7 @@ Evidence labels: **[DS]** datasheet/manual read (source given), **[REPO]** alrea
    - input max 75 V < pack 84 V max (and < 90 V regen clamp, R1.3);
    - output 24 V < Gauntlet AGX301 input **+36 to +60 V DC** [DS: connecttech.com AGX301 product page, "Input Power", 6-pin Mini-Fit Jr.].
 2. **Harness "compute 24 V feed"** (`actuators/results/harness.md`) should be a 48 V feed (AGX301 needs 36–60 V). Gauge 1.0 mm² still suffices (lower current); mass unchanged.
-3. **Elmo "Gold Twitter R70/100" (R1.4, `actuators/results/sizing.md`: 49.5 A rms, 95 V max, 22.2 g)** is not in Table 1 of the install guide on file (`actuators/datasheets/elmo_gold_twitter_install_guide.txt`, MAN-G-TWI Ver 2.011), which lists 100 V models 1/100…25/100 only. The family limits that *are* in that table: 85 V nominal, **95 V max**, 10 V min supply; 22.2 g (EtherCAT, no heatsink), 43.2 g with heatsink. The R-variant current/thermal figures are **[UNVERIFIED]** until the R70/100 / R50/100 datasheet is put in `actuators/datasheets/` (Actuators action, flagged here).
+3. ~~Elmo R70/100 not in the install guide~~ **CORRECTED (R1.1, see §9.1):** the guide on file *does* list it in §4.4 Table 3 "R Type Models Technical Data". My R1 grep only read Table 1. R70/100: 10–95 V supply, 85 V nominal, 49.5 A rms / 70 A amplitude continuous, 5.6 kW.
 4. **Voltage margin:** regen clamp 90 V vs drive 95 V absolute max = 5 V (5.6 %). Acceptable only with a hard clamp (brake chopper / TVS) that is verified on the G5 bench, see §6.
 
 ## 1. Power architecture
@@ -118,9 +118,54 @@ Net: −0.024 + coax (TBD) + STO ~+0.14 [EST] + head reduction (TBD).
 | O-E2 | Elmo MAN-G-Board Level Modules ch. 9 STO + FMEDA → PL/SIL claim | Electronics | safety hard constraint |
 | O-E3 | drive VL: single-supply S/H variant vs 24 V PoL | Electronics + Actuators | G1 |
 | O-E4 | hand bus interface (one EtherCAT slave per hand) | Electronics + Arms & Hands | G1 |
-| O-E5 | Elmo R70/100, R50/100 datasheet on file | Actuators | G1, drive current |
+| O-E5 | ~~Elmo R70/100 datasheet~~ CLOSED R1.1: on file, Table 3; R-type peak current not tabulated | Actuators | G1 |
 | O-E6 | regen clamp part (≤ 90 V, 5 V under drive abs max) + contactor/pre-charge | Electronics + Torso & Power | safety |
-| O-E7 | DCM3623TA5N53B4 mass/efficiency read from datasheet; lead time 52 wk | Electronics | T2 evidence, T10 |
+| O-E7 | DCM3623TA5N53B4 mass CLOSED R1.1 (24.0 g, datasheet); efficiency values not readable in the PDF text; lead time 52 wk | Electronics | T2 evidence, T10 |
 | O-E8 | IMU, foot F/T, e-stop, radio e-stop parts cited | Electronics | G1 |
 
 Sources fetched this round (2026-10-14): Connect Tech AGX301 product page; Connect Tech GMSL2 Plus (JCB022) page; CTI THOR-38.4.0 and THOR_38.2.1 release notes; Stereolabs help center article 8527024569 and forum threads 9953/10961/11115; Vicor DCM3623x75H26C2 and DCM3623xA5N53B4 datasheets/product pages; repo `actuators/datasheets/elmo_gold_twitter_install_guide.txt`.
+
+## 9. R1.1 addendum (2026-10-14, after R-028: A34, Vicor mass, regen clamp, A33 STO wiring)
+
+### 9.1 A34: Elmo Gold Twitter R70/100. Verified, keep it
+- **The repo copy has it:** `actuators/datasheets/elmo_gold_twitter_install_guide.txt` (MAN-G-TWI Ver 2.011) §4.4 **Table 3 "R Type Models Technical Data"**, column R70/100: min 10 V, **nominal 85 V, max 95 V**, **5.6 kW** max continuous electrical output, efficiency > 99 % at rated power, output up to 96 % of bus, **70 A** amplitude sinusoidal/DC continuous, **49.5 A** sinusoidal continuous RMS (Ic). R50/100: 10/85/95 V, 4.0 kW, 50 A / 35.3 A rms. [DS]
+- **Elmo's own site agrees:** product page https://www.elmomc.com/product/gold-twitter/ ("Ultra high current: up to 80A/80V, 70A/100V, 35A/200V"; "100VDC: 10VDC–95VDC"; the same R-type table) [DS, fetched via search 2026-10-14]. Ordering code G-TWIR70/100EES is listed by distributor e-motionsupply (secondary).
+- **Gaps (not invented):** Table 3 has **no peak-current row** for R types (Tables 1–2 give "2 × Ic" for standard models; do not assume it carries over). Sizing must use 49.5 A rms continuous, as `sizing.md` already does ("no peak credit taken"). The R-type mass is in Elmo's spec as 18–22 g; 22.2 g is the EtherCAT version without heatsink (§4.1). The drive is a PCB-mount part; heatsinking at 49.5 A has to be checked by Thermal.
+- **Suitability:** 68–84 V pack sits inside 10–95 V. The 90 V regen design point leaves 5 V under absolute max. That is acceptable only with the clamp in §9.3. **A34: proposed CLOSE, no drive swap.**
+
+### 9.2 Vicor DCM3623TA5N53B4T00 mass (closes the R-028 half-credit condition)
+Official datasheet DCM3623xA5N53B4yzz_ds.pdf **Rev 1.2, 03/2024**, vicorpower.com: "**Weight 24.0 g [0.85 oz]**" (mechanical table and page-1 summary). Same value as booked, so **0.024 kg can be credited ×1.0**. Efficiency rows come out as "NaN" in the PDF text extraction, so I am not quoting an efficiency (open; read from the plotted curves or ask Vicor).
+
+### 9.3 Regen: 90 V peak vs 95 V drive max, clamp proposal, bus ceiling
+**Physics of the problem.** With the pack connected, regen goes into the pack: the modeled mean regen is 245 W at 1.2 m/s (`actuators/results/regen_sim.json`), about 3 A into a 20S5P pack, which is negligible. The bus only climbs toward 95 V when the pack **cannot accept charge**: contactor or BMS charge-FET open (fault, e-stop sequencing), or a full pack (84 V) whose BMS stops charge. The drives have no internal shunt. The Elmo guide (§10.2.3) requires a supply "with sufficient internal capacitance and shunt regulator to handle power flow in both directions", or else the drive over-voltage set by command XP[1] (the guide's 60 V-model example is XP[1]=38). So a bus clamp is mandatory, not optional.
+
+**Proposed thresholds:**
+| level | value | basis |
+|---|---|---|
+| pack max (normal) | 84.0 V | 20S × 4.2 V (R1.3) |
+| chopper ON | **88 V** | 4 V above pack max, so it never fires on a healthy pack |
+| chopper OFF (hysteresis) | **86 V** | [EST] |
+| regen design value | 90 V (R1.3) | clamp must hold the bus ≤ 90 V at the design pulse |
+| drive OV trip (XP[1]) | **92 V** | 3 V under the 95 V max; 100 V-model XP[1] range to be confirmed with Elmo [UNVERIFIED] |
+| **bus ceiling (absolute)** | **92 V** | nothing on the bus may be rated < 100 V. RP40 (160 V), DCM TA5N53B4 (154 V) and SMDJ90A (90 V standoff) are OK. The SMDJ90A starts conducting near 100 V (breakdown above standoff), so it is not the clamp. |
+
+**Design pulse [EST, to be replaced by the G5 bench]:** peak power 4.5 kW = 2 legs × 2.25 kW peak electrical per limb (R1.3 peak values taken as regen bound). Energy per event ≤ 400 J: kinetic ½·65·1.2² = 47 J, plus a full CoM drop of 0.5 m, 65·9.81·0.5 = 319 J, all assumed regenerated (upper bound).
+→ resistor R ≤ 88² / 4500 = **1.72 Ω** (51 A at 88 V); pulse energy 400 J; continuous rating sized for repeated stop events, ≥ 200 W [EST].
+
+**Catalog shunt checked and REJECTED: Roboteq SR5K100V25R** (datasheet Version 1.0, 2 June 2024): presets are only 20/25/30/35/40/60/80/100 V or AUTO (≈ 5 V above the voltage read at power-up). 80 V clips a healthy 84 V pack, 100 V is above the 95 V drive max, and AUTO set at 70 V power-up clips at about 75 V. It also has 1.0 ms sampling, 200 W continuous / 2.5 Ω, and weighs **0.54 kg**. Not suitable.
+**Proposal: custom chopper on the power-distribution board (Torso & Power):** hardware comparator (no firmware in the loop), 88/86 V, a ≥ 150 V MOSFET (100 V parts leave too little margin over a 92 V ceiling plus ringing), and a pulse-rated resistor ≤ 1.72 Ω / ≥ 400 J pulse / ≥ 200 W continuous with a thermal cutout, reporting to the safety MCU. Specific MOSFET and resistor part numbers are **not yet cited** (O-E6 stays open). Mass [EST] 0.10–0.15 kg, **not booked** until parts are cited; this is new mass under R-024.
+Interlock: the BMS must not open the charge path while drives are enabled, except through SS1 → STO first (§5).
+
+### 9.4 A33: STO wiring itemized per drive branch (proposal to Actuators)
+Elmo STO interface [DS, MAN-G-TWI Table 9]: MAIN connector pin 12 STO1, 13 STO_RET, 14 STO2. Opto-isolated, 5 V logic, or 24 V PLC through 1 kΩ series per input (Figs 37/38). **3 conductors per drive**: STO1, STO2 and STO_RET; the return must not be shared with power return. Proposed: SiF 0.25 mm² (5.4 g/m, harness model cable) ×3 per branch, run alongside each EtherCAT branch, daisy-chained along the branch with a tee at each drive. Lengths are the routed EtherCAT branch lengths in `actuators/results/harness.md`.
+
+| branch | n | length m (= ECAT branch) | drives | trunk kg (3 × 5.4 g/m) | tees kg (drives × 0.08 m × 3 × 5.4 g/m) |
+|---|---|---|---|---|---|
+| leg | 2 | 3.439 | 7 each | 0.111 | 0.018 |
+| arm | 2 | 2.913 | 7 each | 0.094 | 0.018 |
+| waist (+ neck segment kept, conservative) | 1 | 1.368 | 2 (+ waist IMU none) | 0.022 | 0.003 |
+| torso: safety MCU → junction | 1 | 0.25 [EST] | — | 0.004 | — |
+| **total** | | **14.3 m** | 30 per this count (harness says 34; Actuators reconcile) | **0.231** | **0.039** |
+
+**STO wiring ≈ 0.270 kg** (datasheet g/m × routed length; route lengths per harness model). This replaces my R1 rough estimate of +0.14 kg, which assumed 2 conductors. Connector pins: if each drive tee uses a JST-GH 4-pin (harness model part, 0.384 g/pair), add 30–34 × 0.384 g ≈ 0.013 kg. Alternative to cut mass: carry STO on spare pairs if the drive carrier PCB connector allows it; not counted.
+Electrical check: STO input current per drive is not in the extract read, so the rail driver current is open. The R1.1 total load is 34 drives in parallel per channel.
