@@ -750,3 +750,9 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
 - T-030 gate is accepted: 7.05 kN tucked AND tucked-while-carrying, load released before the tuck, reach side-only. Arms or Actuators confirm the 0.06 m shoulder-cap lever.
 - **Risk flagged:** the untuned smoke test put ~98% of the energy into the shoulder and the pad bottomed out. The side-fall pass depends on the crouch/hip-first controller, not on the pad. G4 stays open until a tuned T-030 passes. If tuning can't get shoulder share to <=0.40, it comes back to me for a hardware change.
 - Reserve ~0.38.
+
+## R-059 (2026-10-14) Pad R5, wrist fairing mass (ID cd5e88c)
+- Pad R5 is **accepted**: core-size plate, compression into the roll housing, 3 mm PC saddle with bonded band + 2xM4, pair 0.097, single-use. The off-centre failure of the wide plate is resolved by removing the bending path. Conditions: T-030 logs impact points and counts hits outside the core footprint as a fail; a G5 drop test on the cartridge; the 1.5 mm vent clearance holds after crush (CAD of the crushed state).
+- Trims are booked at -0.117 (half credit).
+- Wrist fairing: the measured-design estimate is **+0.079 pair** (replacing R-058's +0.02, so the delta is +0.059). It's **accepted** with conditions: wide axis parallel to the chest in the tuck (the facing-torso orientation clashes by -15.4 mm and is forbidden); an Arms hand-sweep check at the wrist limits; Thermal rules on wrist venting.
+- Reserve ~0.32, just above the 0.30 floor. Additions >0.02 need an offset again.
