@@ -297,3 +297,7 @@ Supersedes the R-099 "D 6 mm frame" pick. Chosen: 3 mm firm Vibram sheet (7373 T
 Cheeks moved 3.0 mm outward (+y/−y). The 1.5 mm trial gave only 2.33 mm. Top plate raised 1.5 mm in z. Min clearance over knee 0–135°: cheeks 3.04 mm, top plate 3.54 mm (≥ 3 ✓). Rev B fins untrimmed. Pin span +6 mm, mass ≈ +1 g/knee [EST]. knee_bracket_move_l60.py (DY=3.0, DZ=1.5).
 ## L61 — Trunnion thermal break, 2026-10-14
 A bolted bracket break at ≥ 30 K/W is infeasible (slip and separation vs the 8.66 kN couple). Proposed: PEI trunnion-pin bushes ø9/13 × 12 + thrust washers, 43.8 K/W, +0.012 kg robot [EST] (FLAG: +3.7 g over Thermal's +8.6 g). See results/a38/TRUNNION_BREAK.md.
+## L61 rev (R-106), 2026-10-14
+PTFE-filled PEI bushes ø11/21×16 + 3 mm washers (15 % pads), hardened ground greased pin, boss ø26 grown outward. 14.4 MPa design, 31.9 K/W (k 0.231 cited; L61 used a wrong k of 0.12). Boss ≥ 9 mm from fins. +0.055 kg robot (FLAG, booked in full). PEEK HPV dropped (k 0.82).
+## L59 note: sole Shore data (web only)
+TOP85 compound = 85 ± 3 Shore A, density 1.15 (Vibram compound table: https://www.leffler.com.au/vibram-techdata/ and the Vibram 2021 aftermarket catalogue https://www.magmaonline.com.ar/wp-content/uploads/2024/05/VIBRAM-CATALOGO-2021-EN.pdf). Note: 7373 is listed only at 1.0–1.8 mm (Flli Chiesa, orthopaedie-schuhbedarf). The earlier 3 mm listing is unconfirmed. 7663 comes in 2–6 mm, "medium hardness", no Shore value published. The sole needs Materials' sample test, or a stack of two 1.5 mm 7373 layers.

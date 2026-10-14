@@ -1,0 +1,58 @@
+{
+ "rows": [
+  {
+   "knee": 0,
+   "L_knee trunnion cheek -y [EST] boss": 9.0,
+   "L_knee trunnion cheek +y [EST] boss": 9.0
+  },
+  {
+   "knee": 15,
+   "L_knee trunnion cheek -y [EST] boss": 9.0,
+   "L_knee trunnion cheek +y [EST] boss": 9.0
+  },
+  {
+   "knee": 30,
+   "L_knee trunnion cheek -y [EST] boss": 9.0,
+   "L_knee trunnion cheek +y [EST] boss": 9.0
+  },
+  {
+   "knee": 45,
+   "L_knee trunnion cheek -y [EST] boss": 9.0,
+   "L_knee trunnion cheek +y [EST] boss": 9.0
+  },
+  {
+   "knee": 60,
+   "L_knee trunnion cheek -y [EST] boss": 9.0,
+   "L_knee trunnion cheek +y [EST] boss": 9.0
+  },
+  {
+   "knee": 75,
+   "L_knee trunnion cheek -y [EST] boss": 9.0,
+   "L_knee trunnion cheek +y [EST] boss": 9.0
+  },
+  {
+   "knee": 90,
+   "L_knee trunnion cheek -y [EST] boss": 9.0,
+   "L_knee trunnion cheek +y [EST] boss": 9.0
+  },
+  {
+   "knee": 105,
+   "L_knee trunnion cheek -y [EST] boss": 9.0,
+   "L_knee trunnion cheek +y [EST] boss": 9.0
+  },
+  {
+   "knee": 120,
+   "L_knee trunnion cheek -y [EST] boss": 9.0,
+   "L_knee trunnion cheek +y [EST] boss": 9.0
+  },
+  {
+   "knee": 135,
+   "L_knee trunnion cheek -y [EST] boss": 9.0,
+   "L_knee trunnion cheek +y [EST] boss": 9.0
+  }
+ ],
+ "mins": {
+  "L_knee trunnion cheek -y [EST] boss": 9.0,
+  "L_knee trunnion cheek +y [EST] boss": 9.0
+ }
+}
