@@ -929,3 +929,8 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
 - **New requirement: sole pad plus toe/heel bumpers** (wear and impact; bare 7075 isn't allowed on the ground). Legs and Materials propose the part and its mass, booked in full.
 - **Elbow software cap <=69 N·m is accepted** (Controls verifies). **Flexor stall-tension cap <=500 N is accepted** if T4 grip of >=22 N is still met. The doubler removal is confirmed.
 - Reserve ~**-0.23**, before the sole pad.
+
+## R-082 (2026-10-14) Forearm margin (Actuators 86b93d7)
+- The 5 mm spool has no source (Marlow >=8×d), so there's **no spool change** (fatigue). D76 lowering is done.
+- To get the >=2 mm margin, **the forearm cap is raised from 15 to 17 mm** (270 to 287). Arms reports no TARGETS reach number and T5 passes. Arms re-checks the elbow P-042 hold and Controls re-runs reach and tuck. The extra ~2 mm extension (~+0.005 est) is booked in full when Arms reports it.
+- CSG-14 is counted once (+0.080, R-076). D77 is closed with no clutch, pending T-031. The R-066 +0.142 stands.
