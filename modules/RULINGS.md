@@ -977,3 +977,8 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
 - **Sheath SF 2.97** is accepted.
 - **Chest backing:** Torso's +0.053 stays booked until Materials and Torso pick the lighter passing option (Materials' land plus 7075 rib, +0.030, would release 0.023).
 - Reserve ~**-0.37** (on estimates).
+
+## R-088 (2026-10-14) Chest backing (Torso ed6fe55)
+- Adopted: Materials' 7075 bulkhead land plus rib (+0.030, cited, SF 2.54). The pad total is 0.091 against 0.131, so **-0.040** released (cited). O-T14 is rejected (>=0.38 kg, SF 1.18).
+- The sternum skin moves **37 mm forward**. ID reshapes the chest, and Controls re-checks T-031 geometry and tuck B clearances with the new chest front.
+- Reserve ~-0.33.
