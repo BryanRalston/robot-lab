@@ -65,7 +65,7 @@ That totals ≈ 0.253 kg for both arms. Harness ROM used: shoulder_yaw 300°, wr
 **O-A2: answered by Thermal (`thermal/O-A2_ARM_HOLD.md`, f4e6dfb) and addressed by P-042** (renumbered from P-028, R-031).
 - At the R1 carry pose, the elbow at 40.1 N·m reaches +100 K in about 3.6 min (two-node), and the shoulder at 61.3 N·m sits at a steady +91 K.
 - The P-042 chest-carry pose is sp −60°, el −110°. It gives elbow 6.95 N·m (+6.7 K) and shoulder 43.45 N·m (+46 K), so the hold is **unlimited**.
-- Above 15 N·m on the elbow: ≤ 2 min at 40 N·m, then ≤ 28 N·m (Thermal interim). Above 55 N·m static on the shoulder: ≤ 10 min. Both are [EST] until the G5 bench measures τ_w.
+- Above 15 N·m on the elbow: ≤ 3 min at 40 N·m, then ≤ 28 N·m (Thermal 7675c8b: 155 °C in 6.0 min at 40.1 N·m). Above 55 N·m static on the shoulder: ≤ 10 min. Both are [EST] until the G5 bench measures τ_w.
 
 **O-A4: closed by Electronics** (`electronics/R1_ARCHITECTURE.md` §10, f4e839c).
 - Clock-spring loops, not slip rings.

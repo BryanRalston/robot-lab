@@ -312,9 +312,13 @@ Any change to CONTRACTS.md or TARGETS.md, or to another module's files, starts h
   - At the band edge (50.2 N·m) the shoulder is +61 K.
 - **Hold-time limit:**
   - (a) Inside the P-042 band: **unlimited** (steady state within limits on Thermal's numbers).
-  - (b) Elbow > 15 N·m (pick-up or reach): follow Thermal's interim limit, **≤ 2 min at up to 40 N·m, then derate to ≤ 28 N·m (T_c130 continuous)**. The two-node τ_w ≈ 2.3 min. Arms adds that pick-up and set-down transitions must reach the band within 30 s.
-  - (c) Shoulder_pitch > 55 N·m static: ≤ 10 min [conservative, Arms]. This is set by the 61.3 N·m case being 1 K over the 130 °C basis at steady state.
-  - (b) and (c) use Thermal's [EST] winding capacitance and are replaced by the G5 bench τ_w (elbow thermistor at 40 N·m). Controls implements them in the P-043 I²t model.
+  - (b) Elbow > 15 N·m (pick-up or reach), per Thermal 7675c8b (D68 T-dependent R/Kt, 155 °C motor limit): at 40.1 N·m the elbow runs away and reaches 155 °C in 6.0 min (4.0 min at η 0.76). **Limit: ≤ 3 min at up to 40 N·m, then ≤ 28 N·m.** Arms adds that pick-up and set-down transitions must reach the band within 30 s.
+  - (c) Shoulder_pitch: at 61.3 N·m it settles at 126 °C, inside the 120–130 °C derate band (P-043). In the P-042 band (≤ 53.75 N·m catalog) it runs well below that. **Static shoulder > 55 N·m: ≤ 10 min [conservative, Arms]**, or until the P-043 derate trips, whichever comes first.
+  - (b) and (c) still rest on [EST] capacitance. The G5 bench elbow thermistor test replaces them.
+- **Elbow solution (explicit):**
+  1. **Primary: the P-042 15 N·m pose.** It adds 0 kg and 0 W, and the hold is unlimited (catalog recheck: elbow 7.09 N·m).
+  2. **Option evaluated: a power-off brake / hold mode on the elbow.** A spring-applied brake would carry the static hold with zero copper. The repo has no cited brake for the TBM2G-05013/CSG-20 frame, so its mass and envelope are **unknown, not invented**. It also lengthens the 81 mm elbow housing inside a forearm that is already short (O-A3 shortfall). A hold mode without a brake does not help: a CSG-20 is backdrivable, so holding still costs copper. **Not proposed now.** Revisit only if Controls cannot guarantee the pose, with a cited brake part (Actuators).
+  3. **Fallback named by Thermal:** a 2× continuous elbow, i.e. a TBM2G-06013-class frame or CSG-20-160. Mass not booked.
 - Impact on contracts: mass 0. Power: carry arm copper ≈ 194.6 → ≈ 42 W for both arms [EST scaling]. Carry bus draw is ≈ 830 W vs Thermal R1's 984 W [EST].
 - Impact on targets:
   - T5 passes: needs are far below the selections, wrist 7.4 N·m is unchanged, and elbow ≤ 15 holds across the band.
