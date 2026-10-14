@@ -1,0 +1,71 @@
+{
+ "forearm_r082": {
+  "L_mm_cover": [
+   250,
+   267
+  ],
+  "forearm_bone_mm": [
+   270,
+   287
+  ],
+  "kg_pair": [
+   0.22,
+   0.234
+  ],
+  "delta_kg_pair": 0.014,
+  "proportion": 0.957,
+  "signoff": "0.96 acceptable Optimus-class"
+ },
+ "knee_drive_panel_merged": {
+  "ruling": "R-087",
+  "material": "PA12 1.5 mm (rho 1.01 g/cm3)",
+  "planform_cm2_side": 221.0,
+  "inlet_open_cm2": 52.0,
+  "outlet_open_cm2": 63.0,
+  "inlet_open_frac": 0.588,
+  "outlet_open_frac": 0.475,
+  "items_g_side": {
+   "outer_skin": 16.06,
+   "pocket_walls_80x60x15": 6.36,
+   "ip2x_baffle": 3.94,
+   "m25_bosses_x4": 3.23,
+   "captive_m25_x4": 4.8,
+   "stiff_ribs": 0.91
+  },
+  "kg_side": 0.0353,
+  "kg_pair": 0.071,
+  "vs_separate": {
+   "id_pc_panels": 0.082,
+   "electronics_covers": 0.0418,
+   "sum": 0.124,
+   "merged": 0.071,
+   "saving": 0.053
+  },
+  "vs_R087_booked": {
+   "booked": 0.04,
+   "merged": 0.071,
+   "delta": 0.031,
+   "flag": "merged > booked; reconcile with Arbiter"
+  },
+  "features": {
+   "tool_removal": "4x M2.5 captive screws into tabs on Legs 2x G10-lined band clamps; tool required; no snap-only (Electronics C1)",
+   "legs_flag": "TAB POSITIONS need Legs confirmation; no holes in 1.6 mm femur wall",
+   "ip2x": "IEC 60529 finger 12 mm x 80 mm: no straight path to solder points; inner face >=8 mm from live OR labyrinth baffle; vent slots <=10 mm wide",
+   "clearance": ">=3 mm to drive tops and cable exits; cable exits at bottom edge of pocket",
+   "a35": "inlet 52 cm2 low (>=50, >=30%), outlet 63 cm2 high (>=60, >=35%)",
+   "pocket": "integral 80x60x15 mm over 26x52x104 drive box (R-062 / L51, z 688-792)"
+  }
+ },
+ "sternum_plate_p052": {
+  "P": "P-052",
+  "ruling": "R-088",
+  "kg": 0.058,
+  "items_g": {
+   "face_120x120": 25.92,
+   "blend_15mm": 24.08,
+   "captive_x4": 8.0
+  },
+  "geometry": "120x120 mm, 37 mm proud (x~+0.147), 15 mm blend, 3 mm gap to pad",
+  "torso_backing_not_included_kg": 0.03
+ }
+}

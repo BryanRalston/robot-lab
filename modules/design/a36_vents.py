@@ -22,8 +22,8 @@ skirt_d=-J['hip_pitch']['outlet_open_cm2']*1e-4*0.30+0.004  # fabric removed + h
 # R-062 knee drives on femur rear (Legs L51): plate 26x52x104 at z 688-792, >=58 mm inside fairing.
 # Electronics: inlet low on rear grille, outlet high on thigh rear. A35 rules apply to this bay.
 # Local rear panels are NEW (baseline thigh fairing is front+outboard only).
-drv_in_panel=132.0   # cm2: ~120x110 mm rear grille over drive bay [EST]
-drv_out_panel=180.0  # cm2: ~150x120 mm high rear thigh panel [EST]
+drv_in_panel=88.0  # low zone of merged 221 cm2 panel [EST]   # cm2: ~120x110 mm rear grille over drive bay [EST]
+drv_out_panel=133.0  # high zone  # cm2: ~150x120 mm high rear thigh panel [EST]
 J['knee_drive_bay']=dict(
   panel_inlet_cm2=drv_in_panel, panel_outlet_cm2=drv_out_panel,
   inlet='low on the rear grille over the femur-rear drive plate (z ~688-740), axial/horizontal slots >=3 mm, angled into walk flow',
@@ -34,8 +34,13 @@ J['knee_drive_bay']=dict(
   note='adds rear panel mass (baseline had no rear); open-area credit below')
 # Mass of NEW rear panels (PC 1.5) net of openings; rib 15 %
 drv_in_rm=J['knee_drive_bay']['inlet_open_cm2']; drv_out_rm=J['knee_drive_bay']['outlet_open_cm2']
-drv_add=((drv_in_panel-drv_in_rm)+(drv_out_panel-drv_out_rm))*(1+RIB)*1e-4*PCA  # remaining solid + ribs
+# R-087: merged into PA12 thigh-rear panel (knee_drive_panel.py); not double-counted as PC
+try:
+  _kdp=json.load(open(os.path.join(H,'knee_drive_panel.json'))); drv_add=_kdp['kg_side']
+except Exception:
+  drv_add=((drv_in_panel-drv_in_rm)+(drv_out_panel-drv_out_rm))*(1+RIB)*1e-4*PCA
 J['knee_fin_grille_note']='NO local bulge: Legs withdrew rev C (R-079/R-081); rev B stays. A bulge (~5 mm) is PENDING Legs rev B envelope check if fins again exceed the v5 thigh fairing hull.'
+J['knee_drive_bay']['merged_r087']='PA12 thigh-rear panel (knee_drive_panel.json) replaces separate PC rear panels + Electronics 41.8 g covers; mass in pair_kg.drive_bay_rear'
 out=dict(joints=J,thermal_430_check=f'ID panel over housing: knee ~{round(knee_panel)} cm2, hip ~{hip_panel:.0f} cm2 vs Thermal 430 [EST]; ours smaller (front+outboard only, rear open), so % rules govern; open areas still >= 50/60',
  per_side_kg=dict(thigh=round(thigh_d,4),knee_cap=round(cap_d,4),hip_skirt=round(skirt_d,4),drive_bay_rear=round(drv_add,4)),
  pair_kg=dict(thigh=round(2*thigh_d,3),knee_cap=round(2*cap_d,3),hip_skirt=round(2*skirt_d,3),drive_bay_rear=round(2*drv_add,3),total=round(2*(thigh_d+cap_d+skirt_d+drv_add),3)),

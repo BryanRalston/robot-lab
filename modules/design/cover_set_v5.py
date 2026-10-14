@@ -21,7 +21,7 @@ rows=[
  ('thigh fairing (2 halves)','P-020','PC 1.5 (CF allowed)',A('thigh_fairing')*FF,2,2),
  ('foot upper shell','P-020','PC 1.5',A('foot_upper')*FT,1,2),
  ('upper-arm shell (2 halves)','P-020','PC 1.5',3.1416*0.095*0.26*0.85,2,2),
- ('forearm shell (2 halves)','P-020','PC 1.5',3.1416*0.085*0.265*0.85,2,2),  # Arms R8 / R-076: forearm 270->285 (+15 mm); cover L 250->265; structural shell OD70, cover placeholder OD85
+ ('forearm shell (2 halves)','P-020','PC 1.5',3.1416*0.085*0.267*0.85,2,2),  # R-082: forearm 270->287 (+17 mm); cover L 250->267; shell OD70, cover placeholder OD85
  ('shoulder cap','P-020','PC 1.5',0.030,1,2),
  ('knee cap','P-022 (new)','PC 1.5',A('knee_cap')*FK,1,2),
  ('hip skirt (flexible)','P-023 (new)','TPU-nylon fabric + PC rim strip',A('hip_skirt')*FS,1,2),

@@ -40,9 +40,9 @@
    "panel": "forearm shell (2 halves)",
    "P": "P-020",
    "material": "PC 1.5",
-   "area_m2_side": 0.0601,
+   "area_m2_side": 0.0606,
    "panels": 4,
-   "kg": 0.233,
+   "kg": 0.234,
    "cf_kg": null
   },
   {
@@ -102,14 +102,14 @@
   }
  ],
  "totals": {
-  "P-020": 2.013,
+  "P-020": 2.014,
   "P-022 (new)": 0.139,
   "P-023 (new)": 0.12,
   "P-024 (new)": 0.055,
   "P-025 (new)": 0.098
  },
  "booked_P020_skin_kg": 1.157,
- "delta_vs_booked_kg": 1.267,
+ "delta_vs_booked_kg": 1.269,
  "measured": false,
- "pc_area_m2": 1.074
+ "pc_area_m2": 1.075
 }

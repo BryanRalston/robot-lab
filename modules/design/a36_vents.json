@@ -18,16 +18,18 @@
    "outlet_open_frac": 0.409
   },
   "knee_drive_bay": {
-   "panel_inlet_cm2": 132.0,
-   "panel_outlet_cm2": 180.0,
+   "panel_inlet_cm2": 88.0,
+   "panel_outlet_cm2": 133.0,
    "inlet": "low on the rear grille over the femur-rear drive plate (z ~688-740), axial/horizontal slots >=3 mm, angled into walk flow",
-   "inlet_open_cm2": 50,
-   "inlet_open_frac": 0.379,
+   "inlet_open_cm2": 52.0,
+   "inlet_open_frac": 0.568,
    "outlet": "high on the thigh rear panel (z ~760-792 / popliteal upper), slots >=3 mm, >=35 % open",
-   "outlet_open_cm2": 63,
-   "outlet_open_frac": 0.35,
+   "outlet_open_cm2": 63.0,
+   "outlet_open_frac": 0.451,
    "standoff": "drives inside fairing >=58 mm (Legs L51); cover inner face clears drive bodies by >=8 mm (A35 fin rule applied to hot parts)",
-   "note": "adds rear panel mass (baseline had no rear); open-area credit below"
+   "note": "adds rear panel mass (baseline had no rear); open-area credit below",
+   "merged_r087": "PA12 thigh-rear panel (knee_drive_panel.json) replaces separate PC rear panels + Electronics 41.8 g covers; mass in pair_kg.drive_bay_rear",
+   "merged_panel": "knee_drive_panel.json"
   },
   "knee_fin_grille_note": "NO local bulge: Legs withdrew rev C (R-079/R-081); rev B stays. A bulge (~5 mm) is PENDING Legs rev B envelope check if fins again exceed the v5 thigh fairing hull."
  },
@@ -36,14 +38,14 @@
   "thigh": -0.0131,
   "knee_cap": -0.0167,
   "hip_skirt": 0.0019,
-  "drive_bay_rear": 0.0412
+  "drive_bay_rear": 0.0353
  },
  "pair_kg": {
   "thigh": -0.026,
   "knee_cap": -0.033,
   "hip_skirt": 0.004,
-  "drive_bay_rear": 0.082,
-  "total": 0.027
+  "drive_bay_rear": 0.071,
+  "total": 0.016
  },
  "knee_cap_clearance": "Legs 6f53d77: finned housing >= 110 mm from knee-cap keep-out; cap top edge stays <= z 555; no reshape needed for fins; cap gets 30 % louvres + inlet lip"
 }

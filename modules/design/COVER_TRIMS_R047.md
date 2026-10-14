@@ -20,3 +20,10 @@ Scripts: `cover_trims_r047.py` → `cover_trims_r047.json` (reads `a36_vents.jso
 **Knee fin grille:** no local bulge. Rev C withdrawn (R-079/R-081); rev B stays. A ~5 mm bulge is **pending Legs' rev B envelope check** if fins again exceed the v5 thigh fairing hull.
 
 Not included (Arbiter decision): shin add-back, deferred until D69 rev B verified; louvred CF +0.198 preferred (R-054).
+
+## R-082 / R-087 / R-088 (cover deltas)
+| item | kg | note |
+|---|---|---|
+| Forearm cover +17 mm (R-082) | **+0.014** pair | booked R-087; proportion 0.96 signed off |
+| Merged PA12 knee-drive / thigh-rear (R-087) | **+0.071** pair | replaces +0.082 PC + 0.0418 Elec; vs booked +0.040 → +0.031 FLAG |
+| P-052 sternum plate (R-088) | **+0.058** | Torso land+rib +0.030 separate |
