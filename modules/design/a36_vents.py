@@ -11,14 +11,14 @@ J['knee']=dict(panel_cm2=round(knee_panel),inlet='front-lower thigh fairing over
   inlet_open_cm2=round(max(50,0.30*knee_panel)),outlet='rear (popliteal) high: thigh fairing has no rear panel -> free outlet, rear 25 mm fins in free air (>= 60 cm2 trivially)',outlet_open_cm2='open (no panel)',
   standoff='front fins 9 mm -> fairing inner face at r 59.5 from housing axis (fin tip + 8): local bulge +12 mm vs the R1 keep-out (housing + 5)')
 J['hip_pitch']=dict(panel_cm2=hip_panel,inlet='front-lower thigh fairing below the P-023 skirt line, axial slots',inlet_open_cm2=round(max(50,0.30*hip_panel)),
-  outlet='rear-upper/outboard at skirt hem: laser-cut slotted band in the skirt fabric (slots 3x20 mm), routed outboard of the thigh-clamp collar (collar uncovered)',outlet_open_cm2=60,outlet_band_cm2=round(60/0.35))
+  outlet='rear-upper/outboard at skirt hem: laser-cut slotted band in the skirt fabric (slots 3x20 mm), routed outboard of the thigh-clamp collar (collar uncovered)',outlet_open_cm2=70,outlet_band_cm2=171,outlet_open_frac=round(70/171,3))
 # masses per side
 knee_rm=J['knee']['inlet_open_cm2']; hip_rm=J['hip_pitch']['inlet_open_cm2']
 cap_area=363; cap_rm=round(max(50,0.30*cap_area))              # knee cap louvres (R-030 >=30 %, A35 inlet path)
 bulge_add=2*(110+150)*12/1e2                                     # cm2 side walls of +12 mm bulge
 thigh_d=(-(knee_rm+hip_rm)*(1-RIB)+bulge_add)*1e-4*PCA
 cap_d=-cap_rm*(1-RIB)*1e-4*PCA
-skirt_d=-J['hip_pitch']['outlet_band_cm2']*0.35*1e-4*0.30+0.004  # fabric removed + hem stiffener ring to hold exhaust open
+skirt_d=-J['hip_pitch']['outlet_open_cm2']*1e-4*0.30+0.004  # fabric removed + hem stiffener ring to hold exhaust open
 out=dict(joints=J,thermal_430_check=f'ID panel over housing: knee ~{round(knee_panel)} cm2, hip ~{hip_panel:.0f} cm2 vs Thermal 430 [EST]; ours smaller (front+outboard only, rear open), so % rules govern; open areas still >= 50/60',
  per_side_kg=dict(thigh=round(thigh_d,4),knee_cap=round(cap_d,4),hip_skirt=round(skirt_d,4)),
  pair_kg=dict(thigh=round(2*thigh_d,3),knee_cap=round(2*cap_d,3),hip_skirt=round(2*skirt_d,3),total=round(2*(thigh_d+cap_d+skirt_d),3)),

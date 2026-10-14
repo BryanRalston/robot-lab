@@ -1,7 +1,28 @@
-# Shoulder impact pad (R-068): R7, one design: roll-output mount + Materials D-A doubler, RL Industrial Design, 2026-10-14
+# Shoulder impact pad: R8, core bonded to the integral link boss, RL Industrial Design, 2026-10-14
 **P-number: P-051 (proposed). R-042 approves the pad and its cap but assigns no P-number; the highest P on main is P-050.** Numbers come from `shoulder_pad.py` → `shoulder_pad.json`. All [EST] until Materials confirms the foam data and Controls runs T-030.
 
-## R7 (R-068): CURRENT DESIGN. Core frozen by Materials (48f55c3 Part 5), not re-sized
+## R8 (Arms R7 550ab88): CURRENT DESIGN. Integral link boss replaces the D-A doubler
+- **Why:** the roll-yaw link face is only 60 × 50 (78 mm diagonal), too small for D-A. Arms proposes a solid 7075-T6 link with an integral 62 × 62 × 10 boss, 4 × M4 × 8 tapped, +0.024/side [EST]. **The boss replaces the D-A doubler**: the core is bonded straight to the boss face (−15.5 g/side), net ≈ +0.0085/side vs R7.
+- **Bond:** 15° shear 2.37 kN → 0.62 MPa on the footprint; DP490 (23 MPa) SF 37; core shear SF 3.8 (Materials, residual-after-crush test at G5). Prep the machined 7075 boss face per `legs/BOND_SPEC.md` (grit-blast, solvent, primer).
+- **Lips/guides:** not needed when bonded (Materials Part 4: lips only locate; the bond carries shear). A 62 boss leaves no wall for a pocket around a 61.8 core, so **locate with a bonding jig**. A 0.5 mm rim would need a 64 × 64 boss (+7 g).
+- **Pad centre on the CRBH 6013 plane** (axial offset e ≤ 10 mm, target 0; Arms s0 2.45 at 0, 1.98 at 10 mm, 1.25 at 40 mm). **Contact band** z ±15 mm about the centre: 15.9 mm margin to the core edges; T-030 smoke fore-aft centroid −10/−12 mm: 19 mm margin in x. Abduction clears to 90° roll; interim soft limit ≤ 135° pending the bryan-PC sweep.
+
+**Option A (recommended for mass): direct bond, EPP face with integral skin (no sleeve)**
+| item (per side) | kg |
+|---|---|
+| core_61p8x61p8x60 | 0.0165 |
+| bond_DP490 | 0.0005 |
+| spreader_Al_0p5 | 0.0052 |
+| EPP80_face_6mm_integral_skin | 0.0018 |
+| link_boss_7075_Arms_EST | 0.024 |
+| **per side** | **0.048** |
+| **pair** | **0.096** (booked 0.092 → **+0.004**; cap 0.100 → −0.004) |
+
+**Service flag (A):** replacing a spent cartridge means debonding the core from the arm link, re-prepping and re-bonding (24 h cure). That's a field-service burden. **Option B:** replaceable 0.5 mm 7075 tray (lips + tabs on the boss M4) + sleeve = **0.1162 pair, over the cap by 0.016**; tray tabs OK (0.5 mm tabs: bearing 307 MPa (SF 1.56 vs 480), tear-out 154 MPa (SF 2.1 vs 330)). **Arbiter/Bryan pick:** A (0.096, service burden) or B (0.116, needs a +0.016 offset, e.g. from R-069).
+
+**FEA case (bryan PC, updated):** solid 7075 link with integral boss + bonded core pressure patch 61.8², pad centre at e = 0 and e = 10 mm; 9.17 kN at 15° (8.86 normal + 2.37 tangential, applied axial along the roll axis = worst for CRBH P0, and downward); arm tuck self-weight; fixed at the shoulder_P bracket through the CRBH 6013 (stiffness element). Pass: link/boss ≤ 480/1.5 MPa, bond-line ≤ 23/3 MPa, CRBH s0 ≥ 2.0, deflection ≤ 1 mm at the pad, M4 no slip.
+
+## R7 (R-068), superseded by R8. Core frozen by Materials (48f55c3 Part 5), not re-sized
 **Core:** 4.5 pcf, 61.8 × 61.8 × 60, pre-crushed, ±3 % lot cert. **Peak 9.15 kN** (upper bound × 1.30) ≤ 9.17; **293 J at 15° on the floor** (× 0.93, lower bound × 1.10) ≥ 292; 315 J at 0°. Standout **67.5 mm** (doubler 1.0 + core 60 + spreader 0.5 + EPP 6).
 
 ### Mount decision: ROLL OUTPUT (R6 location) carrying Materials' D-A doubler

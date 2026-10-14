@@ -1,0 +1,43 @@
+{
+ "geometry": {
+  "pad_centre": "on the CRBH 6013 plane (axial offset e <= 10 mm, target 0; Arms s0 2.45 @0, 1.98 @10 mm)",
+  "contact_band": "z +-15 mm about the pad centre: 15.9 mm margin to the 61.8 core edges; T-030 fore-aft centroid -10/-12 mm (smoke): 19 mm margin in x",
+  "abduction": "clear to 90 deg roll (Arms); interim soft limit <= 135 deg pending bryan-PC sweep"
+ },
+ "bond": {
+  "shear_15deg_kN": 2.37,
+  "bond_shear_MPa": 0.62,
+  "DP490_SF": 37.0,
+  "core_shear_SF": 3.8,
+  "prep": "machined 7075 boss face: grit-blast + solvent + primer per legs/BOND_SPEC.md; bonding jig locates the core (no lips needed: bond carries shear, Materials Part 4)"
+ },
+ "lips": "not needed when bonded (Materials Part 4: lips only locate); a 62 boss leaves no wall for a pocket around a 61.8 core -> locate with a jig; 0.5 mm locating rim would need a 64x64 boss (+7 g)",
+ "option_A_direct_bond": {
+  "items": {
+   "core_61p8x61p8x60": 0.0165,
+   "bond_DP490": 0.0005,
+   "spreader_Al_0p5": 0.0052,
+   "EPP80_face_6mm_integral_skin": 0.0018,
+   "link_boss_7075_Arms_EST": 0.024
+  },
+  "kg_side": 0.048,
+  "kg_pair": 0.096,
+  "service": "cartridge replacement = debond core from the arm link (heat ~ >100 C [EST] / scrape) + re-prep + re-bond 24 h cure: field service burden"
+ },
+ "option_B_replaceable_tray": {
+  "items": {
+   "core_61p8x61p8x60": 0.0165,
+   "bond_DP490": 0.0005,
+   "spreader_Al_0p5": 0.0052,
+   "EPP80_face_6mm_integral_skin": 0.0018,
+   "link_boss_7075_Arms_EST": 0.024,
+   "replaceable_tray_7075_0p5_with_lips_tabs": 0.0076,
+   "sleeve_TPU_film": 0.0025
+  },
+  "kg_side": 0.0581,
+  "kg_pair": 0.1162,
+  "tray_check": "0.5 mm tabs: bearing 307 MPa (SF 1.56 vs 480), tear-out 154 MPa (SF 2.1 vs 330)"
+ },
+ "booked": 0.092,
+ "cap": 0.1
+}

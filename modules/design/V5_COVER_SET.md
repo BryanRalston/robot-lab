@@ -22,7 +22,7 @@ Hull areas now come from the final `legs/results/v5/ENVELOPES_FOR_ID.md`: knee_c
 **Knee cap vs thigh fairing clearance (Legs):** no overlap from 0 to 135°. Minimum keep-out gap is **10.2 mm at 135°** (22 mm from 0 to 105°). After the D69 ø85 knee housing (+4.5 mm radial) it is **≈ 5.7 mm [EST]**, still above the 3 mm PC flex gap. Recheck after the D69 re-CAD.
 
 ## Shoulder impact pad (R-042, P-051 proposed): see `SHOULDER_PAD.md`
-R2: 40 mm EPP failed against the real crush curve (Materials). R7 (R-068): one design: roll-output mount + Materials D-A doubler, frozen 61.8×61.8×60 core. **0.084 kg pair** (booked 0.100), 9.15 kN peak, 293 J at 15°, 67.5 mm standout. Arm shells stay deferred.
+R2: 40 mm EPP failed against the real crush curve (Materials). R8 (Arms R7): core bonded to the integral 7075 link boss (D-A dropped), pad centre on the CRBH 6013 plane. **0.096 kg pair incl. boss** (booked 0.092, cap 0.100); replaceable-tray option 0.1162. Arm shells stay deferred.
 
 ## R-059 / R-060 decisions (recorded)
 - Pad R5 accepted (R-059), then R-060: the mount counts inside the cap, a 7075 doubler is required, the pad is booked 0.127 → R6 above at 0.100. Lot-tested cores ±5 % + G5 rate factor; 15° impact limit.
@@ -70,7 +70,7 @@ Basis: Actuators D76 (pitch CSG-14-100 + yaw CSF-11-100 units side by side, axia
   | **total** | **-0.0337** |
 
   Pair -0.067 → fairing 0.123 pair, +0.012 vs a plain ø70 shell. The open-frame item went from −0.0185 to −0.017/side with ≤ 10 mm openings (about 55 % open instead of 60 %).
-- **Arms ACCEPTED the open-frame palm half on these conditions:** (1) flexor tendons stay in **steel-coil sheaths** (Materials TENDON_SHEATH.md) continuously through the open zone; (2) frame openings **≤ 10 mm with radiused edges**, no snag at pitch ±60 / yaw ±30; (3) frame members keep the **z ≥ +10** lower edge; (4) if the sheath ends up plain PTFE, add a 1 mm PC guard strip 15 × 140 mm over the tendon bundle: **contingency +0.0025/side, +0.005 pair**.
+- **Arms ACCEPTED the open-frame palm half on these conditions:** (1) flexor tendons stay in **steel-coil sheaths** (Materials TENDON_SHEATH.md) continuously through the open zone; (2) frame openings **≤ 10 mm with radiused edges**, no snag at pitch ±60 / yaw ±30; (3) frame members keep the **z ≥ +10** lower edge; (4) if the sheath ends up plain PTFE, add a 1 mm PC guard strip 15 × 140 mm over the tendon bundle: **contingency +0.0025/side, +0.005 pair**, **only if CAD shows a gap** between the sheath and the frame (not booked otherwise).
 - **Verdict: ACCEPTABLE WITH CONDITIONS:** (1) Arms confirms the tuck orientation (wide axis parallel to the chest), otherwise a −15.4 mm clash; (2) Arms hand-sweep check ≥ 5 mm at yaw ±30° / pitch ±60°; (3) Thermal confirms the venting need; (4) +0.079 pair is booked with the arm shells at Arms R2 (ruling needed, > 0.02).
 
 ## R-047 offsets
@@ -99,10 +99,11 @@ Not measured yet. Measuring trimmed panel areas needs the build123d model_v4 reb
 Rules per joint per leg: inlet ≥ 50 cm² and ≥ 30 % of the panel over the housing; outlet ≥ 60 cm² and ≥ 35 %; fin tips ≥ 8 mm from the cover's inner face (never < 5); slots ≥ 3 mm, no mesh < 2 mm; low-front in → axial along the cans (louvres aligned with the fins) → out high-rear/outboard.
 | joint | inlet | open cm² | outlet | standoff |
 |---|---|---|---|---|
-| hip_pitch | front-lower thigh fairing below the P-023 skirt line, axial slots | 75 (30 % of ~250) | rear-upper/outboard at skirt hem: laser-cut slotted band in the skirt fabric (slots 3x20 mm), routed outboard of the thigh-clamp collar (collar uncovered); band 171 cm² at 35 % = 60 cm² | ≥ 8 mm from the screw/can, in the existing keep-out (+5) plus the 3 mm flex gap = 8 |
+| hip_pitch | front-lower thigh fairing below the P-023 skirt line, axial slots | 75 (30 % of ~250) | rear-upper/outboard at skirt hem: laser-cut slotted band in the skirt fabric (slots 3x20 mm), routed outboard of the thigh-clamp collar (collar uncovered); band 171 cm² at **41 % = 70 cm²** (Thermal a8811f5: raised from 60, which was 3 % short) | ≥ 8 mm from the screw/can, in the existing keep-out (+5) plus the 3 mm flex gap = 8 |
 | knee | front-lower thigh fairing over the housing (axial slots 3-4 mm, aligned with front 9 mm fins) + knee cap louvres as ram entry | 84 (30 % of ~280) + knee cap 109 | rear (popliteal) high: thigh fairing has no rear panel -> free outlet, rear 25 mm fins in free air (>= 60 cm2 trivially) | front fins 9 mm -> fairing inner face at r 59.5 from housing axis (fin tip + 8): local bulge +12 mm vs the R1 keep-out (housing + 5) |
 - **Thigh-clamp collar stays uncovered**; the hip exhaust leaves at the skirt hem rear-outboard, outboard of the collar.
 - **Knee cap (P-022):** the rear 25 mm and front 9 mm fins are on the knee housing at thigh z ≈ 770, ≥ 110 mm from the knee-cap keep-out (Legs 6f53d77). The cap never closes over them, so no reshape is needed for fins. The cap gets 30 % louvres plus an inlet lip; its top edge stays ≤ z 555.
+- **Thermal a8811f5:** knee PASS (slots in line with the fins). Hip exhaust raised to ≥ 70 cm² open; skirt fabric removed ~0.0003 more per side (negligible). R-069 item E is now computed on the fabric net of the 70 cm² exhaust (−0.045).
 - **Panel-area check vs Thermal's ~430 cm²:** ours is ~280 (knee) / ~250 (hip), since the fairing is front + outboard only and the rear is open. The % rules govern; open areas still meet ≥ 50/60. Thermal to confirm the rear-open outlet counts.
 - **Mass (pair):** thigh -0.026 (slots minus the +12 mm fin bulge), knee cap -0.033, hip skirt **+0.004 (ADDED: hem stiffener ring holding the exhaust open)**; total **-0.055**. **R-047 item 1 goes from −0.154 to -0.055 (+0.099 less saving: FLAG).**
 

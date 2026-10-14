@@ -13,21 +13,22 @@
    "inlet": "front-lower thigh fairing below the P-023 skirt line, axial slots",
    "inlet_open_cm2": 75,
    "outlet": "rear-upper/outboard at skirt hem: laser-cut slotted band in the skirt fabric (slots 3x20 mm), routed outboard of the thigh-clamp collar (collar uncovered)",
-   "outlet_open_cm2": 60,
-   "outlet_band_cm2": 171
+   "outlet_open_cm2": 70,
+   "outlet_band_cm2": 171,
+   "outlet_open_frac": 0.409
   }
  },
  "thermal_430_check": "ID panel over housing: knee ~280 cm2, hip ~250 cm2 vs Thermal 430 [EST]; ours smaller (front+outboard only, rear open), so % rules govern; open areas still >= 50/60",
  "per_side_kg": {
   "thigh": -0.0131,
   "knee_cap": -0.0167,
-  "hip_skirt": 0.0022
+  "hip_skirt": 0.0019
  },
  "pair_kg": {
   "thigh": -0.026,
   "knee_cap": -0.033,
   "hip_skirt": 0.004,
-  "total": -0.055
+  "total": -0.056
  },
  "knee_cap_clearance": "Legs 6f53d77: finned housing >= 110 mm from knee-cap keep-out; cap top edge stays <= z 555; no reshape needed for fins; cap gets 30 % louvres + inlet lip"
 }
