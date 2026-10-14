@@ -30,3 +30,26 @@ Basis is the same as the shoulder pad (R042 Parts 3–6):
 - The **CF shell** must not take the load in bending: the bare shell is damaged at ~1–1.5 kN, ~10 mm [Torso EST]. The pad must seat on a backed bulkhead or frame, **not on the unsupported 2 mm panel**. That needs a Torso check.
 - **Damping:** plastic crush with essentially no elastic rebound. The rebound energy is ≈ the elastic part, F²/(2k) = 24 400²/(2 × 135 × 10⁶) ≈ 2.2 J vs 1 020 J absorbed (< 0.3 %). Model it as a **plateau with no rebound**. If a spring + damper is mandatory, use k_eq ≈ 0.58 MN/m with ζ ≈ 1.0 (Torso proxy). A linear spring under-absorbs by 2×, so prefer the plateau.
 - At 25° the 15.1 kN floor needs 67 mm → 94 mm core. Keep the Controls gate at ≤ 15° (Torso O-T11).
+
+
+## R-080: backing for the chest pad (with Torso geometry, sim_torso_body_r1 / R1_ARCHITECTURE)
+**Geometry:**
+- The 7075 shoulder bulkhead is a 12 mm transverse web with a 120 mm tall section. Its envelope is x ±0.05, y ±0.15, z 0.16–0.28 (sim box 0.10 × 0.30 × 0.12 at z 0.22), with shoulder bosses at y ±0.165 and 8 × M8.
+- It is the only machined metal structure behind the sternum. The pack is lower, in the chest bay.
+
+**Proposal:**
+- **Seat the pad on a machined 101 × 101 land on the bulkhead front face, centred about z +0.21.**
+- The pad sits inside the shell, behind a breakaway chest panel, as Torso suggested.
+- The pad stack is 78 mm core + 1 mm face + 2 mm shell. That needs **≥ 81 mm from the bulkhead front (x +0.05) to the outer chest skin, i.e. skin at x ≥ +0.131**. Torso and ID to confirm the chest depth. If it falls short, the pad protrudes by the difference.
+
+**Checks [hand calc, 7075-T6 Sy 503 MPa from MATERIALS_DB; FEA required]:**
+- **Bearing:** 24.4 kN / 0.0102 m² = **2.4 MPa** on 7075. Trivial, SF > 100. The 1 mm CF face spreads it.
+- **Web bending, the governing case:** load is normal to the 12 mm web, conservatively taken as simply supported at the shell side walls (y ±0.15, span 0.30), so M = PL/4 = 1.83 kN·m.
+  - Bare web (120 × 12, Z 2.88 cm³): **635 MPa, FAILS** (SF 0.79).
+  - **Add an integral 7075 rib on the back face, 60 deep × 6 thick across the 0.30 span (T-section):** I ≈ 4.99 × 10⁵ mm⁴, Z ≈ 8.5 cm³ → **216 MPa, SF 2.33**.
+  - Rib mass 0.30 × 0.060 × 0.006 × 2 810 = **+0.030 kg**.
+  - Inertial loading is distributed (pack, pelvis and legs react through the shell/waist ring), so the real moment is lower. FEA may trim the rib.
+- **Reaction into the shell:** 12.2 kN per side at the bulkhead-to-shell joint. Over a 120 mm × 20 mm bonded land that is ≈ 5 MPa shear [EST], vs DP490 overlap shear ~ 25–30 MPa (3M TDS in repo).
+  - **The path from the shell down to the waist ring for 24.4 kN forward must be added to Torso's FEA** (FEA_SPEC_torso_pocketing load cases). **Bulkhead pocketing must not remove the rib zone or the land.**
+- **Mass:** pad 0.077–0.078 + rib 0.030 = **≈ 0.108 kg, full credit**. The chest panel over the pad becomes a breakaway panel (no change in mass [EST]).
+- Alternative, if the depth is insufficient: a separate 7075 sternum strut from the bulkhead to the waist ring takes the pad lower. It is heavier (≈ 0.06–0.08 kg [EST]) and not recommended.

@@ -56,3 +56,27 @@
 - **L2:** Recheck the Ø20 tine bore: edge distance, the +8 mm tine clearance over the full hip ROM, and FEA at 6.55 kN per body.
 - **L3:** Pin retention with the flanged sleeve, and flange clearance to the GE 12 E inner ring.
 - **L4:** Axial load on the eye at walking and at fault.
+
+---
+# Rev C (2026-10-14): Legs A38 reply (985200d) accepted with one correction
+- **L1, parallel path:** the hip lever cheeks bolt to the hip-roll output bracket (pelvis side), not to the collar.
+  - **The cheek Ti limiters are dropped (0 g).** The limiter rule still applies to any future bolt from the body/motor to the clamp arm or collar.
+  - **Open for Thermal:** the rod → lever-end eye → lever pin → hip lever → needles → ø35 shaft → femur path is unbroken metal. Legs estimates ≈ 40 K/W, which in parallel with ≥ 20 K/W gives ≈ 13 K/W total. Its heat source is screw/nut friction, not the motor case. Thermal must decide whether it counts against the 20 K/W.
+  - Harness/encoder P-clips that land on the thigh must be polymer or PEI-lined (note for Electronics).
+- **Flange pads vs the GE 12 C, cited from the SKF product page (GE 12 C):**
+  - Inner-ring raceway (sphere) **dk = 18 mm**; B 10 / C 7; tilt 10°.
+  - **Shaft abutment diameter d_a = 13.5 min / 15 max mm.**
+  - dk is the sphere diameter, not the flat side-face diameter. SKF's shaft abutment limit is **d_a ≤ 15 mm**. **Correction: the pads must sit within ø12.6–15** (bore chamfer r1 0.3), not ø12–17.
+  - Annulus ø12.6–15 is 52 mm². **3 × 120° pads totalling 30 mm² (58 %) still fit.** Above ø15 the pad could touch the sphere or the outer ring at tilt.
+- **Pad stress (30 mm², per the rule ≤ 28 MPa sustained / ≤ 76 MPa fault):**
+  - Walking lateral ≈ 20 N: 0.7 MPa.
+  - Misalignment friction 0.33 kN: 11 MPa (transient).
+  - **Combined fault 0.82 kN: 27.3 MPa.** SF 2.8 vs 76, and 5.6 vs PEI compressive 152 MPa (MIFPEI/ULTEM). This **confirms the Legs SF ≥ 2.5**.
+  - The sustained case is below 28 MPa even if the full 0.82 kN were sustained.
+  - Caveat: if 2.3 kN ever reaches the pads alone, that is 77 MPa, which exceeds the 76 fault limit. Keep the pads at **≥ 30 mm² and preferably 36 mm²** (2.3 kN → 64 MPa, SF 1.2). The G5 bench test must confirm the 0.82 kN combined bound.
+- **Pin retention on PEI only:** the head/ring carries only the axial ≤ 0.82 kN, with 0.3 mm play and **no clamp preload**.
+  - On the sleeve end (≈ ø12–16 contact, ≈ 88 mm²) that is ≤ 9.3 MPa fault, and ≈ 0 sustained.
+  - Creep is OK because there is no preload to relax. **Rule: the retaining ring must not be shimmed to zero play** (that would create creep preload). A 1 mm PEI washer is also OK.
+  - Keep the ≥ 0.3 mm air gap to 7075.
+- **Tines e20 rounded:** a Legs item, accepted as is.
+- **Mass: net +10.6 g robot, accepted** (+0.011 vs the +0.017 booked, 0.006 to return to reserve).

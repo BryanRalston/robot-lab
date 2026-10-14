@@ -50,3 +50,34 @@ Inputs:
   - **Arms/Actuators:** RFQ to Fort Wayne Metals / Asahi Intecc / Heraeus for a flat-wire 316 coil, OD ≤ 2.5, ID ≥ 1.6, with PTFE liner ID 1.3. They must state the min bend radius (need ≤ 35 mm), compression at 775 N, and turn-separation life. Book about 94 g both hands [EST], vs the earlier 26 g/hand plain PTFE: **+42 g both**.
   - **Actuators:** the termination/splice derating for the SF at stall.
   - **G5:** capstan friction test, and a 775 N proof on a 37.6 mm bend (sheath + tendon).
+
+
+## Rev C (2026-10-14): 500 N firmware-capped stall, spool D/d and splice derating
+**Cited derating factors:**
+- **Bend over pin/spool:** E ≈ 1 − 0.5/√(D/d) (BR Ropes, "D/d ratio: rope bending loss", fixed-pin estimate for synthetic rope; no HMPE-specific test table was found):
+  - D/d 10 → **0.84**; D/d 5 → **0.78**; the sheath bend R 37.6 (D/d 75) → 0.94.
+  - Marlow recommends a sheave diameter ≥ 8× rope diameter for braided ropes, so **a 5 mm spool (5×) is below Marlow's minimum**.
+  - Fatigue: doubling D/d roughly triples bend-fatigue life (Marlow via sail-world), so going from 10 to 5 mm costs about ⅔ of the life.
+- **Splice:** a correctly made Brummel retains **80–90 %** (ropeandline, HMPE 12-plait). A Jimmy Green/Marlow test shows ≥ 80 %, with one Brummel failing at −12 %. ISO 2307 allows −10 % for splice breaks. **Use 0.80.**
+- No LIROS-specific D-Pro splice figure was found.
+
+| case (MBL 1 913 N, LIROS) | effective strength | SF at 500 N | SF at 775 N |
+|---|---|---|---|
+| straight | 1 913 | **3.83** | 2.47 |
+| splice only (0.80) | 1 530 | 3.06 | 1.97 |
+| spool 10 mm only (0.84) | 1 611 | 3.22 | 2.08 |
+| spool 5 mm only (0.78) | 1 484 | 2.97 | 1.92 |
+| **splice on a 10 mm spool (0.80 × 0.84)** | 1 289 | **2.58** | 1.66 |
+| **splice on a 5 mm spool (0.80 × 0.78)** | 1 187 | **2.37** | 1.53 |
+
+- Recommendation:
+  - Keep the 10 mm spool if at all possible.
+  - Terminate the splice off the spool, with ≥ 1.5 dead wraps so the capstan takes the load before the splice.
+  - **With the 500 N firmware cap and the splice away from the spool, SF ≥ 2.97 on either spool.**
+  - G5: break-test 3 assemblies on the real spool.
+
+**Sheath at 500 N, custom coil OD 2.5 / ID 1.6 [EST, rev B method]:**
+- Coil stress 500 / 2.51 mm² = **199 MPa** (vs 310 at 775 N), well clear of the coil-wire yield [EST].
+- Lost motion per 0.2 m: ideal 0.20 mm; **≈ 1.0 mm with ×5 coil compliance**. At the 30 N working load it is ≤ 0.06 mm.
+- Tendon stretch at 500 N ≈ 0.65 % [EST, linear from < 1 % working stretch] → **≈ 1.3 mm per 0.2 m**.
+- **Total ≈ 2.3 mm at stall** (cap 500 N), ≈ 0.1 mm at working load.
