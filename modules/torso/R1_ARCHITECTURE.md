@@ -366,13 +366,48 @@ Delivered (`T031_chest_contact.md`, 138a3a0); +0.078 kg Arbiter request pending.
 - **Main link stays 10 mm²**: SBS75X takes up to 13.3 mm², which releases the +0.04 harness booking.
 - **AS150U:** Electronics' pack-main choice has no cited IP2X rating. Torso proposes SBS75X for the pack/rail interface; Electronics to confirm or cite AS150U finger-safety.
 - **O-T12 closed:** SBS75X is a genderless panel/PCB-capable, hot-plug, finger-proof connector, used with a floating mount + guide pins for blind mating [the float mount is EST design].
-- **Net vs the +0.25 booked:** cited 0.044; with [EST] contacts 0.020 and covers 0.025 → **0.089 kg**. **Net −0.161 kg** (−0.206 counting the cited part only).
+- **Net vs the +0.25 booked:** cited 0.044; with [EST] contacts 0.020 and covers 0.025 → **0.089 kg**. ~~Net −0.161 kg~~ **Corrected per R-084: touch protection totals 0.175 kg (incl. Electronics' 0.086 guards), so the net is +0.005 kg vs the 0.25 booking.**
 
 **T-031 rev 2** (`T031_chest_contact_r2.md`):
 - Face 98 × 98 mm, ceiling 22.35 kN (≤ 23); band 17.7–22.3 kN at 0°, 16.6–20.8 kN at 15°.
 - Stroke 62 mm, thickness 88 mm, core 0.061 kg.
 - Backing: CF/Al-honeycomb sandwich 0.070 kg, 24 MN/m (45× the pad), SF ≈ 2 at 1.5× load.
 - Total 0.131 → **+0.053 vs 0.078 accepted → Arbiter request**. Alternative: back the pad on a stiff pack-enclosure cap (O-T14).
+
+## 23. R-084 and O-T14
+**R-084 recorded:**
+- O-T12 closed with the SBS75X; main link stays 10 mm².
+- Touch protection 0.175 kg combined with Electronics' 0.086 guards → **net +0.005 kg vs 0.25** (§22 corrected).
+- Chest backing +0.053 accepted.
+
+**Part update (Electronics §18.2h, da124ae):** **Anderson PSBS75X** chemical-resistant PBT/PC housing (−40 °C), same 110 A / 600 V / IP20. Aux positions carry pre-charge sense and the FAULT_N loop.
+- **Mass citation:** Anderson's own catalogue/datasheet publishes **no mass** (SBS datasheet checked).
+- Distributor-cited: SBS75X PC housing **22 g** (PEI-Genesis SBS75XBLK-BK); contact **1339G3 3.81 g** each (Xecor, 0.268 oz per pair-pack).
+- PSBS75X: same moulding in PBT/PC (density ~1.25 vs 1.20) → ~23 g [EST].
+- For 10 mm² the contact is **1339G5** (8 AWG); its mass is not found, ~4.5 g [EST].
+- **Pair:** 2 × 23 + 4 × 4.5 + 8 aux ~0.5 = **≈ 68 g** vs Electronics' 82 g clone figure. Delta vs AS150U 41.4 g: **+0.027 kg (vs +0.041 provisional, −0.014)**. Anderson-published mass is still missing.
+
+**Bus-bar run needing an IP2X sleeve (Electronics §18.2f item 5), from the torso layout [EST until CAD]:**
+| run | length per pole |
+|---|---|
+| pack connector (pack-bay front/top) → PDB | ~0.10 m |
+| PDB → contactor | ~0.06 m |
+| PDB → clamp (bulkhead, exhaust side) | ~0.17 m |
+| fuse | **inside the pack enclosure** (pack line, IP2X by enclosure), no external run |
+Total ≈ **0.33 m per pole, ≈ 0.66 m of sleeved bus (+ and −)**.
+
+**O-T14 (pad backed on a stiffened pack-enclosure front): REJECTED; keep the 0.070 kg sandwich.**
+- The pack front (CFRP 1.5 mm enclosure, §3) spans 0.22 m between rails.
+- At 33.5 kN with a 98 mm patch: M = P(L/4 − c/8) = 1.43 kN·m.
+- 7075 face 3 mm × 120 mm + ribs (cell gap limits rib depth to ~25–30 mm):
+  | ribs | σ | SF | k | mass |
+  |---|---|---|---|---|
+  | 2 × 5 × 25 mm | 704 MPa | 0.71 | 13.6 MN/m | 0.38 kg |
+  | 3 × 6 × 25 mm | 426 MPa | 1.18 | 20 MN/m | 0.50 kg |
+  | 2 × 5 × 30 mm | 511 MPa | 0.99 | 22 MN/m | 0.41 kg |
+- No rib layout reaches **SF ≥ 2** inside the depth available, and every one is ≥ 5× heavier than the sandwich. Stiffness (≥ 13.6 MN/m vs ≥ 5.3 needed) would pass.
+- Cell intrusion: deflections of 1–3 mm need a ≥ 5 mm gap plus margin. SAE J2464 / UN 38.3 give crush/impact tests for packs/cells but no enclosure intrusion allowance (not fetched) → keep cells unloaded by design.
+- **Net vs 0.053: no change** (the sandwich stays; rails/bulkhead path unchanged).
 
 ## 7. Open questions / conflicts (not edited in others' files)
 - **O-T1 (Electronics, coordination):** adopt the 48 V intermediate rail with DCM3623TA5N53B4T00; Torso hosts the DCM on the power distribution board or the brain tray? Mass 0.024 [UNVERIFIED for variant] stays in the brain line; who books the 47718-232 choke; 24 V VL source (O-E3); BMS→safety MCU CAN FD message set; e-stop = FET-open vs contactor (O-E6).
@@ -384,7 +419,7 @@ Delivered (`T031_chest_contact.md`, 138a3a0); +0.078 kg Arbiter request pending.
 - **O-T8:** clamp: read HS200/HS100 overload curve for 400 J, cite comparator, gate driver, thermal cutout, sum drive bus capacitance for pre-charge; HS200 mass (0.475) vs Electronics estimate.
 - **O-T9 (Electronics/Arbiter):** interlock exception for cell-at-risk faults.
 - O-T12 CLOSED (§22).
-- **O-T14:** pack enclosure front as the T-031 backing.
+- O-T14 CLOSED: rejected, sandwich kept (§23).
 - **O-T12 (old):** cited IPXXB blind-mate pack connector ≥ 100 A, plus cited connector masses.
 - **O-T13:** verify IEC 60664-1 table values; reinforced isolator parts.
 - **O-T11:** T-031 pad stroke at 25° obliquity (68 mm needed vs 53 mm).
