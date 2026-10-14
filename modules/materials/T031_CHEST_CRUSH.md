@@ -53,3 +53,26 @@ Basis is the same as the shoulder pad (R042 Parts 3–6):
   - **The path from the shell down to the waist ring for 24.4 kN forward must be added to Torso's FEA** (FEA_SPEC_torso_pocketing load cases). **Bulkhead pocketing must not remove the rib zone or the land.**
 - **Mass:** pad 0.077–0.078 + rib 0.030 = **≈ 0.108 kg, full credit**. The chest panel over the pad becomes a breakaway panel (no change in mass [EST]).
 - Alternative, if the depth is insufficient: a separate 7075 sternum strut from the bulkhead to the waist ring takes the pad lower. It is heavier (≈ 0.06–0.08 kg [EST]) and not recommended.
+
+## Land stiffness check (Torso ed6fe55: ceiling 22.35 kN, skin x ≈ +0.147, need k_land ≥ 5.3 MN/m)
+Inputs:
+- 7075-T6 E = 71.7 GPa, G ≈ 26.9 GPa (MATERIALS_DB, MIF/ASM).
+- Section: 12 × 120 web + 60 × 6 rib, I = 4.99 × 10⁵ mm⁴ (above), so EI = 35.8 kN·m². Span L = 0.30 m, point load (conservative vs the 101 mm patch).
+
+| term | formula | k |
+|---|---|---|
+| bending, simply supported | 48 EI / L³ | **63.6 MN/m** |
+| bending, fixed-fixed (bound) | 192 EI / L³ | 254 MN/m |
+| shear (A ≈ 1 800 mm², κ 0.5) | 4 κ G A / L | ≈ 320 MN/m |
+| SS bending + shear | series | **53 MN/m** |
+| local land bearing (2.4 MPa on 12 mm 7075) | ≈ rigid | > 10 GN/m |
+| bulkhead-shell bond (DP490, G ≈ 0.5 GPa [EST], 0.2 mm, 120 × 20 mm per side, 2 sides) | 2 G A / t | ≈ 12 GN/m (negligible) |
+| shell side walls in shear carrying 2 × 11.2 kN to the waist ring [EST: CF G ≈ 19 GPa quasi-iso, t 2 mm, depth 0.15 m, 0.2 m run] | 2 G t h / l | ≈ 57 MN/m |
+| **total (SS + shell walls), series** | | **≈ 27 MN/m** |
+
+- **Result: PASS, ≈ 5× the 5.3 MN/m requirement.** It is ≈ 10× with bending alone. The fixed-fixed bound only adds margin.
+- The rib does not need to be deeper. Strength still governs: at the 22.35 kN ceiling, M = 1.68 kN·m → **197 MPa, SF 2.55**.
+- A shallower rib was considered and rejected:
+  - 45 × 6 would still pass stiffness (I ≈ 2.7 × 10⁵ mm⁴ [EST] → k_SS ≈ 34 MN/m) but gives SF ≈ 1.6.
+  - **So keep 60 × 6, +0.030 kg.**
+- The shell-wall term uses [EST] CF values. FEA job (Torso pocketing, 24.4/22.35 kN forward case) to confirm.
