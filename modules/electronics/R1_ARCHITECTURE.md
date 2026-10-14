@@ -1021,6 +1021,15 @@ No failing connector was found among the cited parts, so **no mass change**. XT6
   - Würth fallback: 0.
   - **= +0.014 kg booked, or +0.026 kg with foot F/T.**
 
+
+### 18.2j Thermal bee2448 results (recorded 2026-10-14)
+- **Torso EtherCAT junction:**
+  - Worst case on the brain tray is 63–66 °C. That is over the 749014012 limits (0–70 °C part, ≤ 60 °C R-083 condition).
+  - **Decision:** the junction stays on the brain tray, and **Würth 7490140142 becomes the primary part** (−40…+85 °C, 4000 Vrms, 2×MOPP at 250 Vrms, Cl 5 / Cr 8 mm). Margin ≥ 19 K.
+  - 749014012 is dropped. Mass is unchanged at ≤ 6 g each [DWG] ×5. **Before G1:** cite or weigh the mass.
+- **AO supplies:** rule: **one RP06-11012SRAW per shoulder bay, never two in the same bay.** Thermal: bay air ≤ 55 °C, case ≈ 65 °C (RP06 rated −40…+105 °C with derating).
+- **Mass:** no change. The electronics total from §18.2i stands at **+0.014 kg booked (+0.026 kg with foot F/T)**.
+
 ### 18.2 Checked and not counted
 - **STM32H7 drop:** never booked as a separate mass. The hand board was booked as a board lump (Arms), and Thermal A43C already assumed it dropped. **Saving 0.**
 - **`hand 24 V from wrist DC/DC` row (0.0128 kg):** 0.5 → 0.25 passes (0.6 K), but R-047 put the RP40s in the shoulder bay, so this row's route is stale. Actuators should re-book the row first. **Not counted.**
