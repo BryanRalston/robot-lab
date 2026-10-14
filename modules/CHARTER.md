@@ -1,6 +1,7 @@
 # Robot Lab module program (started 2026-10-13)
 Goal: an Optimus-class humanoid that would actually work if manufactured. Baseline: v3 in /workspace/robot-lab/v3 (DESIGN, PARTS, REVISIONS, dashboard.json, cad/, analysis/), sim in sim/v3.
 Coordinator: Robot Lab (9598b055). Phase 1 agents: Actuators, Legs, Arbiter.
+Owners added 2026-10-14: RL Arms & Hands (8cae84bd), RL Materials (89a94197), RL Torso & Power (067740e6), RL Controls (c5cee5de), RL Electronics (4066f15e), RL Thermal (2ae2d096), RL Test & Reliability (e8f75580), RL Industrial Design (51504f48).
 
 ## Rules
 - Each module owns its folder in modules/<name>/: SPEC.md, checks, CAD, results.
