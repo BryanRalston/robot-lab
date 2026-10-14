@@ -879,6 +879,48 @@ No failing connector was found among the cited parts, so **no mass change**. XT6
 - **DCM liner:** the cold-plate TIM path is unchanged. The liner is on the tray, not under the cold plate. The cold plate must be tied to the 48 V domain, not to accessible metal.
 - **XMC4800 at 72 MHz** is accepted on condition that Controls confirms timing. The single PHY applies only where the hand is truly end-of-line.
 
+
+### 18.2f R-079 (urgent): IP2X touch-guard inventory for bus-voltage points (Electronics owns it)
+**Rule.**
+- IP2X (IEC 60529): the jointed test finger, Ø12 mm × 80 mm, must not reach bus-live parts.
+- A part enclosed by a cover that **needs a tool to remove** (torso power bay, brain tray, shoulder bays, actuator housings, pack case) is guarded by that cover, which is already booked by its owner, so it adds **0 g**. This is conditional on Covers/Torso/Arms confirming that every such cover is tool-only. That confirmation is item C1.
+- Conformal coat is **not** counted as a touch barrier.
+
+**Cited materials.**
+- Techflex Shrinkflex H2N 2:1 polyolefin (techflex.com sizing chart, kg/100 m):
+  - H2N0.19 (5.0 mm): 8.9 g/m
+  - H2N0.25 (6.4 mm): 15.5 g/m
+  - H2N0.38 (9.5 mm): 19.5 g/m
+  - H2N0.50 (12.7 mm): 22.6 g/m
+  - H2N1.00 (25.7 mm): 55.7 g/m
+  - Dielectric 500 V/mil, SG 1.35
+- PA12 covers: ρ 1.01 g/cm³ (RHO_PA12 as in `arbiter/a3_size.py`), 1.5 mm wall.
+
+| # | exposed bus point | count | guard | cited basis | g |
+|---|---|---|---|---|---|
+| 1 | Pack cell/BMS terminals | – | pack case (Torso) | enclosure, C1 | 0 |
+| 2 | AS150U pack main (front) | 1 pair | built-in shroud **IP40** | Amass AS150U spec "防护等级 IP40" | 0 |
+| 3 | AS150U solder-cup backs | 2 halves × 2 poles × 25 mm | H2N0.38 | 19.5 g/m | 2.0 |
+| 4 | Contactor LEV100A4ANG main terminals | 2 | boot from H2N1.00, 40 mm each | 55.7 g/m | 4.5 |
+| 5 | Fuse / bus bar exposed run | 0.10 m [length EST, Torso layout] | H2N0.50 sleeve | 22.6 g/m | 2.3 |
+| 6 | P-045 clamp: HS100 resistor lugs | 2 × 30 mm | H2N0.25 | 15.5 g/m | 0.9 |
+| 7 | P-045 clamp MOSFETs/board, DCM/RP40/RP03 pins, AMC1311 boards | – | torso power bay / brain tray (lined, §18.2e) / shoulder bays | enclosure, C1 | 0 |
+| 8 | Elmo drive power solder points (bus +/−) | 32 × 2 × 25 mm | H2N0.25 | 15.5 g/m | 24.8 |
+| 9 | Elmo drive bodies in actuator housings / pelvis / shoulder | 28 | housing | enclosure, C1 | 0 |
+| 10 | Knee drives on femur-rear plate (R-062, no-cover thigh zone, Legs 985200d) | 2 plates | PA12 cover 80 × 60 × 15 mm, 1.5 mm wall (13 800 mm² × 1.5 mm × 1.01) | computed from drawing | 41.8 |
+| 11 | MR30 drive tees (32) | – | **integrated wire covers** on the MR30 halves (K&A listing: "integrated wire covers"); mass already in the 1.41 g/half | Amass MR30 | 0 |
+| 12 | XT30U (8) solder-cup backs | 8 pairs × 2 halves × 2 × 15 mm | H2N0.19 | 8.9 g/m | 4.3 |
+| 13 | XT60 (4) solder-cup backs | 4 × 2 × 2 × 20 mm | H2N0.25 | 15.5 g/m | 5.0 |
+| | **IP2X total** | | | | **≈ 0.086 kg** |
+
+**Against the +0.25 kg conservative booking:** the guards total 0.086 kg. **Credit back ≈ 0.164 kg**, which turns the R-079 −0.13 kg position to about **+0.03 kg** before §18.2e.
+
+**Conditions.**
+- **C1:** tool-only removal of every enclosure counted as the barrier (Covers, Torso, Arms, Legs).
+- The bus-bar length is Torso's [EST].
+- Re-check items 10 and 8 against final Legs/Actuators drive mounting.
+- The R-078 boundary mass (§18.2e, +0.054 kg) is separate and booked in full.
+
 ### 18.2 Checked and not counted
 - **STM32H7 drop:** never booked as a separate mass. The hand board was booked as a board lump (Arms), and Thermal A43C already assumed it dropped. **Saving 0.**
 - **`hand 24 V from wrist DC/DC` row (0.0128 kg):** 0.5 → 0.25 passes (0.6 K), but R-047 put the RP40s in the shoulder bay, so this row's route is stale. Actuators should re-book the row first. **Not counted.**
