@@ -1,6 +1,34 @@
 # T-030 brief: A44 side-fall push-fall batch (Grok Build, **bryan PC ff639f5a only, never DESKTOP-B115PVV**)
 Owner: RL Controls. Gate for R-042 (A44 provisional). CPU only, MuJoCo ≥3.1, numpy. No jax, no training. Expected wall time is a few minutes per batch: smoke runs take about 0.2–0.6 s each on the box.
 
+## 00000. Materials 48f55c3 update (2026-10-14). **Gate batches supersede §0000**
+Core model: **7.31–9.17 kN at 0° (×0.93 at 15°), stroke up to 43.2 mm**. Pre-crush plus a lot cert with **no initial peak above 1.05× plateau** are mandatory.
+
+Hand estimate (CRBH 7013 A, C0 27.7 kN, Dpw 85 mm [EST], M = F × 0.06):
+
+| case | F | energy (× 43.2 mm) | M N·m | fs radial | vs gate |
+|---|---|---|---|---|---|
+| floor 7.31 kN, 0° | 7.31 kN | 315.8 J | 439 | 1.57 | pass |
+| **floor at 15° (×0.93)** | 6.80 kN | **293.7 J** | 408 | 1.69 | **≥ 292 J: pass (+0.6 %, thin)** |
+| ceiling 9.17 kN, 0° | 9.17 kN | 396 J | 550 | 1.25 | at the limit |
+| 1.05× initial peak on 7.31 | 7.68 kN | — | 461 | 1.50 | pass |
+| **1.05× initial peak on 9.17** | **9.63 kN** | — | **578** | **1.19** | **FAIL 9.17 kN / 550 N·m** |
+| 2.2× spike (fault, un-pre-crushed) | 16.1–20.2 kN | — | 965–1210 | 0.71–0.57 | fail (fault case) |
+
+**Flag:** a cert allowing 1.05× initial peak is only compatible with the 550 N·m limit if the plateau ceiling is ≤ 9.17/1.05 = **8.73 kN**, or if the peak is defined as including the initial peak. Materials/Arbiter should decide which.
+
+Batches (replace the §0000 gate lines; directions L,R,LB,LF):
+```
+python $F --pad hc --hc-plateau 7310 --hc-stroke 0.0432 --dirs L,R,LB,LF --out $O/t030_hc7310_gate_tuck.jsonl                 # GATE
+python $F --pad hc --hc-plateau 7310 --hc-stroke 0.0432 --dirs L,R,LB,LF --carry --out $O/t030_hc7310_gate_carry.jsonl         # GATE
+python $F --pad hc --hc-plateau 7310 --hc-stroke 0.0432 --dirs L,R,LB,LF --spike 1.05 --out $O/t030_hc7310_peak105.jsonl       # GATE (1.05x initial peak)
+python $F --pad hc --hc-plateau 9170 --hc-stroke 0.0432 --dirs L,R,LB,LF --out $O/t030_hc9170_peak.jsonl                       # GATE (peak load)
+python $F --pad hc --hc-plateau 9170 --hc-stroke 0.0432 --dirs L,R,LB,LF --spike 1.05 --out $O/t030_hc9170_peak105.jsonl       # GATE (expected to fail, see flag)
+python $F --pad hc --hc-plateau 7310 --hc-stroke 0.0432 --spike 2.2 --out $O/t030_FAULT_hc7310_spike22.jsonl                   # FAULT, non-gating
+python $F --pad hc --hc-plateau 9170 --hc-stroke 0.0432 --spike 2.2 --out $O/t030_FAULT_hc9170_spike22.jsonl                   # FAULT, non-gating
+```
+The 2.2× runs in §000 are relabelled **fault cases (non-gating)**. T-031 batches use `--hc-plateau 7310 --hc-stroke 0.0432` (the pad doesn't drive the forward-fall result).
+
 ## 0000. R-065 update (2026-10-14). Supersedes earlier gates where they differ
 - **Pad energy gate: ≥ 292 J at worst case AND at the 15° limit** (≥ 10 % over 265 J).
   - Capacity = F_low × 0.93 × stroke. At 6.95 kN that requires **stroke ≥ 292 / (6.95 kN × 0.93) = 45.2 mm** (44.3 mm if the 0.93 is normalised to the 0.98 head-on ratio).

@@ -37,7 +37,7 @@ python $F --dirs F,LF,RF --tuck preload --out $O/t031_b_preload.jsonl
 python $F --dirs F,LF,RF --tuck R5 --forearm-crush-N 2400 --out $O/t031_c_crush.jsonl
 python $F --dirs F,LF,RF --tuck R5      --out $O/t031_R5_ref.jsonl
 ```
-(all with `--pad hc --hc-plateau 6950 --hc-stroke 0.045`.)
+(all with `--pad hc --hc-plateau 7310 --hc-stroke 0.0432`, per Materials 48f55c3.)
 - Pass: `gear_pitch_max` ≤ 369 N·m in every run. Stop at the first remedy that passes, but run its carry variant too.
 - **Box smoke** (one 80 N·s run each, untuned, **not results**): F/A 417, F/preload 269, F/crush 1281, F+LF+RF/B 1566 N·m. That's noisy and the controller is untuned, so the PC batch decides.
 
