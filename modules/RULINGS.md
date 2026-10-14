@@ -660,3 +660,9 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
   - Temporary waiver until the end of round 13. The **A40 knee rerun is blocking**.
   - D69 hardware must be resized from the planned torque, not the failing WBC trace.
   - New additions over 0.02 kg are frozen again until the reserve is back above 0.30.
+
+## R-044 (2026-10-14) Knee heat path (Thermal 9b9e169 vs Actuators fbe0def)
+- Rejected: the femur graphite-strap heat path. It fails at h 12 and adds +5–8 K to the thigh bondline, which is already failing.
+- Adopted: fins on the knee housing, about 0.05 kg per knee (≤0.10 kg for the robot), to the relaxed 1.05 K/W requirement for the 120 °C target. These replace the strap and the 0.12 kg-per-knee tibia spreader. The fallback is a small fan, which comes back to the arbiter.
+- Actuators must restate D69's net mass with fins (A46). Until then the booking stays at +0.83 (conservative). The A40 rerun still sets the final motor sizing.
+- Legs and Actuators must run the fin clash sweep across the knee ROM (A47).
