@@ -1,3 +1,4 @@
+# SUPERSEDED (R-062): 0.025 m2 is the pre-rev-B fin area. Rev B adds 0.0703 m2 of fin area over the bare housing, measured from CAD; see knee_fins_revb.py (fbd762b).
 """R-043 / A46: smallest knee motor + heat path keeping the winding <= 120 C at 35 C. Controls' model (winding_model.py,
 same 2-node run loop as knee_id_r1.py) on Legs ID traces walk_1p2_r7 (ref_ds25) and r4 carry_20kg_1p0 (carry torque x1.10
 [EST] margin for the P-042x0.32 regen). Drives (2x Elmo, p_drv chart) ON the housing node (Thermal 9b9e169 basis).
