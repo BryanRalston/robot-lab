@@ -1002,3 +1002,9 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
 
 ## R-092 (2026-10-14) Hand board thermal (Thermal 55c80c1)
 - R-089 is closed: the board at 144 MHz is 86.4 C (<=90). The MCU/H-bridge gap pad to the shell boss is adopted (board ~81 C), **+0.004** booked. A G5 board thermocouple is added. Reserve ~-0.36.
+
+## R-093 (2026-10-14) ID 629dbed
+- **Knee-bay merged PA12 panel pair 0.071** is booked against 0.082 already carried (Electronics 0.042 moved into ID by R-091, plus ID +0.040 net). That makes it **-0.011**, est at half credit, so **-0.006**. It is not +0.031: the 0.042 is already in the ledger.
+- **Sternum plate P-052: +0.058** in full (needed by the R-088 37 mm chest move). ID checks whether the chest pad 1 mm CF face can serve as the sternum skin, to cut that, and gets credit when it is measured.
+- Forearm cover +0.014 is unchanged.
+- Reserve ~**-0.41** (on estimates).
