@@ -836,3 +836,14 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
 - **Option (b) adopted:** 9.17 kN is the **absolute peak force, including any initial peak**, at upper lot bound x rate factor. Option (a) (a plateau cap of 8.73 kN) is rejected, because the narrower band would break the 292 J gate at 15°.
 - Enforcement: the pre-crush is mandatory, and the lot cert (R-068) measures **peak including initial**. Any coupon with an initial peak above 1.00x its plateau, or an upper-bound peak x1.30 above 9.17 kN, is a **lot reject**. Materials writes this into the part spec.
 - T-030 gates on peak <=9.17 kN as defined here. The 1.05x initial peak is a fault case and doesn't gate.
+
+## R-073 (2026-10-14) Batch: Electronics 61bf21b/9355e36, Legs b260071, ID 0dad225
+- **Encoders:** 2 flexors on POSIF and 4 on ENX22 EASY INT Absolute (BiSS-C) **meets R-061**, provided the XMC4800 BiSS-C master is shown in firmware and on the bench (G5). The **ENX22 is rated 100 C**, while derated flexor windings reach ~94 C (R-051), so Thermal and Arms must show the encoder-end temperature <=90 C in every case or tighten the ladder. Open item.
+- **Leads:** B-config 0.109 against 0.087 booked, so **+0.022 is booked** (required function: 2 rails, return, always-on feed, enable, NTC).
+- **R-055 fixes:** the always-on 12 V MCU feed is accepted. On RP40 CTRL, **keep isolation**: the optocoupler is adopted (+0.001). Ground tying is rejected.
+- **A43:** stays closed (R-064).
+- **MR30 tees:** **-0.025, cited**, accepted. Because there is no positive latch, every connector needs a positively retaining strain-relief clip, and a **G5 vibration + pull/fall retention test** is added. The 8 unidentified XT30U go to Actuators to identify. The electronics total is now -0.077 firm + -0.012 pending the Torso fuse I²t.
+- **Pad:** the **roll-output mount is adopted** (fixes the -8.5 to -41 mm overlap). Doubler pair 0.084 calc, booked **0.092** at half credit. Run the single FEA case on the bryan PC. If the link face isn't flat or solid, the ribbed doubler (0.105) comes back to me.
+- **Wrist open-frame:** -0.067 at half credit gives -0.034 (was -0.036), +0.002. The +0.005 guard contingency is not booked.
+- **Legs:** (1) L47 shape-opt and (2) the pocketed 7075 ankle cross (with FEA and anti-galling) are **approved to pursue**; credit only on FEA/CAD. (3) **The knee-fin cut is rejected** unless Controls/Thermal re-verify the carry x1.1 case at the reduced area, because the margin at fin efficiency 0.7 is already thin. The femur and tibia walls aren't pursued.
+- Reserve ~0.23 (waiver; >=0.07 still needed, expected from L47 opt).
