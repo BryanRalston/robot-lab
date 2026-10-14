@@ -91,3 +91,33 @@ Expected outputs:
 - forward-fall pitch-gear torque with tuck (≤ CSG-25 rated / 369 momentary)
 
 Gate: M ≤ 550 N·m (D71 7013 A), forward-fall pitch torque ≤ 369 N·m (R-057).
+
+## 5. Industrial Design checks (cd5e88c: shoulder pad R5, wrist fairing)
+**(1) Roll housing under the 8.94 kN pad load (62 × 62 mm saddle, 2.33 MPa):**
+- The housing is 7075-T6 with a **2.0 mm wall** (`actuators/cad_mass.py` WALL), OD ≈ 84 (§1b).
+- As a bare ring (w = 8.94 kN / 62 mm = 144 N/mm, M ≈ 0.318·w·r = 1 925 N·mm/mm), σ = 6M/t² ≈ 2.9 GPa. **The 2 mm wall alone FAILS.**
+- The saddle must bear only over the stiff axial zones, the stator bond land and the CRBH bearing seat, or the cap needs its own load ring into the shoulder_P bracket.
+- **Not accepted as is.** Needs G3 FEA.
+
+**(2) 66.5 mm pad stack at y +0.30 vs upper arm (sim/v3 capsule r 40, from the roll origin y 0.282 z 0.18):**
+- Pad volume y 0.267–0.333, z 0.163–0.268. **It overlaps the upper arm at every roll angle:** −7.5 mm at 0°, −22 mm at 45°, −40 mm at ≥ 90°.
+- The pad must start above the arm's sweep (bottom edge ≥ z +0.19 at y ≤ 0.34), or be mounted on the roll output. **CAD/ID to re-place.**
+- The A44 tuck is unaffected (the arm is adducted below the pad).
+
+**(3) Tuck with the 124 mm wrist width:**
+- At the R5 tuck (sp −20, sy −60) the wrist centre sits only 67 mm from the torso box, and the forearm 8.7 mm.
+- **New tuck: shoulder_roll −5, shoulder_yaw −60, shoulder_pitch −30, elbow −110.** Forearm gap 28.0 mm. Wrist centre 89.8 mm from the torso, so 27.8 mm clear even with the 62 mm half-width facing the chest.
+- Wrist roll is set so that the width lies parallel to the chest face. Controls to adopt.
+
+**(4) Hand sweep vs wrist fairing:**
+- With the sphere rule (fork/cross r ≤ 24.5) and the palm ≥ 27 mm from the pivot, the palm's highest point over pitch ±60 × yaw ±30 is ≈ z +5 above the pivot. Hand-computed from the palm top corners; confirm in the bryan-PC sweep.
+- So the fairing lower edge must sit at **z ≥ +10** (≥ 5 mm gap) over |y| ≤ 62, and stay outside r 24.5 + 5 near the pivot.
+
+## 6. Electronics §16.7 (8f4bad8)
+- **Board radial fit (66 %, LQFP corner r 29.74/30, stack 12.4):** accepted on paper. A light 2D placement check is in Electronics' numbers; the CAD fit goes in the bryan-PC Job 1.
+- **Axial:** 12.4 vs 13 gains 0.6 mm. **The forearm stack is still −13.9 mm (§1)**, so the board-in-upper-arm step (a) is still needed unless the spool and D76 steps find 14 mm.
+- **Elbow crossing if the board stays in the forearm:** 4 power (+A, −A, +B, −B) + 2 enable, 6 conductors. Elbow loop 0.144 m (Electronics). SiF/SILI-E 0.25 mm² OD ≈ 1.7 has bend r/OD ≥ 24 on the harness drums. **OK.**
+- **If step (a) moves the board to the upper arm,** the crossing becomes about 22 motor + 6 × ENX lines, about 50 conductors. That is a heavier loop; the drum fill was not checked.
+- **Local motor leads:** ring (81.9 mm) → board at the distal end ≈ 0.10 m + pigtails, so **≈ 0.15 m confirmed** (board in the forearm).
+- **ENX22:** the part choice is **ENX 22 EASY INT**. Its output type (TTL vs line driver) is **not cited** in the repo; D68 has its length only. Electronics: please confirm from the maxon sheet. The XMC4800 quadrature is OK with either.
+- **Mass:** motor-lead booking 0.404 → 0.130 kg both, **−0.274 in the harness line** (not the arms line). The arms line is unchanged.
