@@ -16,8 +16,8 @@ Two distinct limits — both real; do not collapse them:
 
 - P-042 carry (elbow 14.51 N·m after forearm +15 mm) is well inside both (pose rule ≤ 15 N·m; vs 69: margin **4.76×**).
 - Full-reach 10 kg (0.665 m): static 42.41 N·m. With R1 α = 20 rad/s² [EST] inertial ≈ 31.1 N·m → total ≈ 73.5 > 69.
-- **R-085:** keep 10 kg payload; when payload > 8.5 kg **and** reach is near full, scale arm acceleration to **≤ 87 % of the R1 profile**, blended smoothly with reach (no step). See `elbow_accel_limit.py`.
-- At exactly 87 % after +15 mm forearm: total ≈ 69.5 N·m (≈ 0.5 N·m over 69 on the hand estimate). Flag for G5 / a slightly lower scale if measured high; the ruling is implemented as 87 %.
+- **R-085:** keep 10 kg payload; when payload > 8.5 kg **and** reach is near full, scale arm acceleration to **≤ 84 % of the R1 profile (R-102; 0.85 overshoots 69 Nm at 287 mm forearm)**, blended smoothly with reach (no step). See `elbow_accel_limit.py`.
+- At 287 mm forearm: static 42.62 + inertial 31.06. Scale 0.85 → 69.02 > 69; **implemented 0.84 → 68.71 Nm**. Time +9.1% on accel-limited segments (was +7.2% at 0.87). Flag to Arbiter (R-102 asked 0.85).
 
 ## Config files
 - `soft_limits.json` — numeric soft stops and elbow caps
@@ -29,3 +29,8 @@ Two distinct limits — both real; do not collapse them:
 - O-T5 A3 pick/place = 6 s each [EST]. If ≈ 2 s of each is full-reach 10 kg accel-limited, +0.14 s per phase → +0.28 s on T-A pick+place.
 - T-A cycle 52 s → **+0.5 %**; T-D (16 picks) → +2.2 s on 307 s ≈ **+0.7 %**. Carry-walk and stand phases unchanged (P-042 elbow 14.5 N·m, no accel cap).
 - **Verdict: timing still acceptable** at the [EST] O-T5 fidelity; no cycle-time target is broken. Revisit when the RL pick policy has measured timings.
+
+## R-102 elbow scale (2026-10-14)
+- Forearm 287 mm (Arms R10 EXT 17): static **42.62**, R1 inertial **31.06**.
+- 0.87 → 69.64; **0.85 → 69.02 > 69**; **0.84 → 68.71** (margin 0.29). Config uses **0.84**.
+- O-T5: time scale 1/√0.84 ≈ **+9.1%** on accel-limited segments. T-A pick+place ≈ +0.36 s on 52 s (**+0.7%**); T-D ≈ +2.9 s on 307 s (**+0.9%**). Still acceptable [EST].

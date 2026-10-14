@@ -18,7 +18,7 @@ P.add_argument('--knee',type=float,default=1.2,help='FALL-mode knee target rad [
 P.add_argument('--hc-plateau',type=float,default=9170.0,help='honeycomb plateau N: gate batch 7050; R4 x1.0 6880, x1.3 8940')
 P.add_argument('--pad-model',default='curve',choices=['curve','plateau'],help='curve: ARPRO 5170 x1.45 (Materials 5f8f149, default); plateau: ID d80df32 constant force (contrast only)')
 P.add_argument('--arm',default='tuck',choices=['tuck'],help='R-057: tuck is permanent for every fall; reach/brace removed, no clutch credit')
-P.add_argument('--tuck',default='R5',choices=['R5','A','B','D','preload'],help='R-065 T-031: R5 (Arms), A/B/D inside-chest-outline candidates (tuck_search.py), preload = R5 + adduction/pitch bias into chest')
+P.add_argument('--tuck',default='B',choices=['R5','A','B','D','preload'],help='R-065 T-031: R5 (Arms), A/B/D inside-chest-outline candidates (tuck_search.py), preload = R5 + adduction/pitch bias into chest')
 P.add_argument('--preload-Nm',type=float,default=30.0,help='preload torque for --tuck preload [EST]')
 P.add_argument('--forearm-crush-N',type=float,default=0.0,help='T-031(c): forearm crush element plateau N (0 = none)')
 P.add_argument('--forearm-crush-stroke',type=float,default=0.030,help='forearm element stroke m [EST]')
@@ -37,6 +37,10 @@ P.add_argument('--pad-e',type=float,default=0.010,help='Arms R7: pad centre offs
 P.add_argument('--out',default=None); P.add_argument('--smoke',action='store_true')
 P.add_argument('--no-fallmode',action='store_true',help='baseline: keep standing PD through the fall')
 A=P.parse_args()
+# R-102 per-direction tuck table
+_FC=os.path.join(HERE,'fall_config.json')
+FALL_CFG=json.load(open(_FC)) if os.path.isfile(_FC) else {}
+PER_DIR=FALL_CFG.get('per_direction_tuck',{})
 # pad law. 30 mm: v3 fall_model s=0.7t+3=24 mm, F_p chosen = gate 9.17 kN (bottom-out => E_sh>220 J).
 # 40 mm: Industrial Design SHOULDER_PAD.md (d80df32): s=31 mm, F_p=7.10 kN (109 cm2 x 0.65 MPa EPP80 [EST]).
 PAD={'30':dict(t=0.030,s=0.024,Fp=9170.0,face=0.105),'40':dict(t=0.040,s=0.031,Fp=7100.0,face=0.105),
@@ -77,19 +81,28 @@ def pad_law(c):
     if A.pad_model=='curve': return float(np.interp(c/PAD['t'],EPS,SIG))*1.45*A.area_cm2*1e-4 + (KD*(c-0.95*PAD['t']) if c>0.95*PAD['t'] else 0.)
     F=PAD['Fp']*min(c/RAMP,1.0)*ANGF[0]*(A.spike if (A.pad=='hc' and c<=RAMP) else 1.0)
     return F+KD*(c-PAD['s']) if c>PAD['s'] else F
-TUCKS=dict(R5=(-5,-60,-20,-110),A=(0,0,0,0),B=(5,0,0,0),D=(5,-30,10,-20),preload=(-5,-60,-20,-110))   # deg; A/B/D from tuck_search.py, Arms to confirm
-def fall_targets(q,side,side_only=True):  # side=+1 falling to robot's left (+y)
-    q=q.copy(); S='l' if side>0 else 'r'; O='r' if side>0 else 'l'
+TUCKS=dict(R5=(-5,-60,-20,-110),A=(0,0,0,0),B=(5,0,0,0),D=(5,-30,10,-20),preload=(-5,-60,-20,-110))   # R5 retired for side (R10); kept for contrast
+def _pose_for_dir(dirn):
+    # R-102/R10 per-direction table; default tuck B
+    pd=PER_DIR.get(dirn) or PER_DIR.get('B') or dict(roll=5,yaw=0,pitch=0,elbow=0,waist_yaw=0)
+    if A.tuck=='preload': return dict(roll=-5,yaw=-60,pitch=-20,elbow=-110,waist_yaw=0)
+    if A.tuck in ('A','D','R5') and dirn in ('F','LF','RF'):
+        r,y,p,e=TUCKS[A.tuck]; return dict(roll=r,yaw=y,pitch=p,elbow=e,waist_yaw=0)
+    return dict(roll=pd.get('roll',5),yaw=pd.get('yaw',0),pitch=pd.get('pitch',0),elbow=pd.get('elbow',0),waist_yaw=pd.get('waist_yaw',0))
+def fall_targets(q,side,side_only=True,dirn='L'):  # side=+1 falling to robot's left (+y)
+    q=q.copy(); S='l' if side>0 else 'r'; O='r' if side>0 else 'l'; pose=_pose_for_dir(dirn)
     for s in 'lr':
         q[m.jnt_qposadr[m.joint(f'{s}_hip_pitch').id]]=-A.knee/2-0.1; q[m.jnt_qposadr[m.joint(f'{s}_knee').id]]=A.knee; q[m.jnt_qposadr[m.joint(f'{s}_ankle_pitch').id]]=-0.6
     if side_only:   # hip-first lean, side falls only
-        rl=m.jnt_range[m.joint(f'{S}_hip_roll').id]; q[m.jnt_qposadr[m.joint(f'{S}_hip_roll').id]]=rl[1] if side>0 else rl[0]   # pelvis toward fall side (hip-first)
+        rl=m.jnt_range[m.joint(f'{S}_hip_roll').id]; q[m.jnt_qposadr[m.joint(f'{S}_hip_roll').id]]=rl[1] if side>0 else rl[0]
         rl=m.jnt_range[m.joint(f'{O}_hip_roll').id]; q[m.jnt_qposadr[m.joint(f'{O}_hip_roll').id]]=rl[1] if side>0 else rl[0]
         q[m.jnt_qposadr[m.joint('waist_pitch').id]]=0.5
-    if True:   # R-057 permanent tuck, both arms on forward falls
-        D=math.radians
-        for SS,sg in ((('l',1),('r',-1)) if not side_only else ((S,side),)):
-            for j,v in zip(('shoulder_roll','shoulder_yaw','shoulder_pitch','elbow'),TUCKS[A.tuck]): q[m.jnt_qposadr[m.joint(f'{SS}_{j}').id]]=D(v)*(sg if j in ('shoulder_roll','shoulder_yaw') else 1)   # Arms R5 tuck, 8.6 mm clear (R mirrored)
+    # waist yaw toward fall shoulder (R-102 diagonals)
+    q[m.jnt_qposadr[m.joint('waist_yaw').id]]=math.radians(pose['waist_yaw'])
+    D=math.radians; tuck=(pose['roll'],pose['yaw'],pose['pitch'],pose['elbow'])
+    for SS,sg in ((('l',1),('r',-1)) if not side_only else ((S,side),)):
+        for j,v in zip(('shoulder_roll','shoulder_yaw','shoulder_pitch','elbow'),tuck):
+            q[m.jnt_qposadr[m.joint(f'{SS}_{j}').id]]=D(v)*(sg if j in ('shoulder_roll','shoulder_yaw') else 1)
     return q
 DIRS={'L':(0,1.),'R':(0,-1.),'LB':(-0.7071,0.7071),'LF':(0.7071,0.7071),'RF':(0.7071,-0.7071),'F':(1.,0.)}
 LEG=lambda S: np.linalg.norm(d.xpos[m.body(S+'_thigh').id]-d.xpos[m.body(S+'_foot').id])
@@ -109,7 +122,7 @@ def run(dirn,J,rng):
             pitch=math.degrees(math.atan2(-d.xmat[1][6],d.xmat[1][8])); cpx=e[0]+d.qvel[0]*math.sqrt(com[2]/9.81)
             if t>1.0 and t_det is None and (abs(roll)>10 or abs(cp)>0.20 or abs(pitch)>10 or abs(cpx)>0.25): t_det=t; com_trig=com[2]; leg0=0.5*(LEG('L')+LEG('R'))
             if t_det is not None and t>=t_det+A.latency and not A.no_fallmode: t_fm=t; t_rel=t+(A.release_s if A.carry else 0.)
-            if t_rel is not None and t>=t_rel and qt is not FT: FT=fall_targets(q0,side,not fwd); qt=FT
+            if t_rel is not None and t>=t_rel and qt is not FT: FT=fall_targets(q0,side,not fwd,dirn); qt=FT
         else:
             tau=kp*(qt[qa]-d.qpos[qa])-kd*d.qvel[va]
             if A.tuck=='preload':

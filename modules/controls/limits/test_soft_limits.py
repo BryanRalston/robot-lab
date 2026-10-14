@@ -13,14 +13,14 @@ def test_elbow_cap():
 
 def test_r085_blend():
     assert accel_scale(0.40, 10.0) == 1.0
-    assert abs(accel_scale(0.665, 10.0) - 0.87) < 1e-9
+    assert abs(accel_scale(0.667, 10.0) - 0.84) < 1e-9
     assert accel_scale(0.665, 8.0) == 1.0
     mid = accel_scale(0.58, 10.0)
-    assert 0.87 < mid < 1.0
+    assert 0.84 < mid < 1.0
     # after +15 mm forearm hand estimate
-    tot = elbow_total_est(42.41, 31.09, 0.665, 10.0)
-    assert tot < 70.0  # ~69.5
-    assert alpha_limit(0.665, 10.0) == ALPHA_R1 * 0.87
+    tot = elbow_total_est(42.62, 31.06, 0.667, 10.0)
+    assert tot <= 69.0  # 0.84 -> 68.71
+    assert abs(alpha_limit(0.667, 10.0) - ALPHA_R1 * 0.84) < 1e-9
 
 if __name__ == '__main__':
     test_roll_soft(); test_elbow_cap(); test_r085_blend(); print('ok')

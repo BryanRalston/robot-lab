@@ -1,10 +1,11 @@
 {
- "chest_front_mm": 110.0,
+ "chest_front_mm": 147.0,
+ "forearm_ext_mm": 17,
  "R5_tuck": {
-  "front_x_mm": 271.8,
+  "front_x_mm": 276.9,
   "clear_mm": 8.6
  },
- "n_ok": 165,
+ "n_ok": 167,
  "candidates": [
   {
    "roll": 20,
@@ -103,7 +104,7 @@
    "clear_mm": 89.1
   }
  ],
- "adducted_n": 175,
+ "adducted_n": 184,
  "adducted": [
   {
    "roll": 5,
@@ -186,20 +187,20 @@
    "clear_mm": 57.5
   },
   {
+   "roll": 5,
+   "yaw": -45,
+   "pitch": 0,
+   "elbow": -20,
+   "front_x_mm": 146.7,
+   "clear_mm": 50.6
+  },
+  {
    "roll": -5,
    "yaw": -60,
    "pitch": 0,
    "elbow": 0,
    "front_x_mm": 45.2,
    "clear_mm": 29.5
-  },
-  {
-   "roll": -5,
-   "yaw": -45,
-   "pitch": 0,
-   "elbow": 0,
-   "front_x_mm": 41.7,
-   "clear_mm": 23.2
   }
  ],
  "crouched_check": {
@@ -223,16 +224,6 @@
    "front_x_mm": 38.0,
    "clear_mm": 76.4
   },
-  "C": {
-   "pose": [
-    0,
-    0,
-    20,
-    -45
-   ],
-   "front_x_mm": 89.4,
-   "clear_mm": 59.0
-  },
   "D": {
    "pose": [
     5,
@@ -240,7 +231,7 @@
     10,
     -20
    ],
-   "front_x_mm": 36.6,
+   "front_x_mm": 38.8,
    "clear_mm": 74.1
   },
   "R5": {
@@ -250,8 +241,137 @@
     -20,
     -110
    ],
-   "front_x_mm": 271.8,
+   "front_x_mm": 276.9,
    "clear_mm": 8.6
   }
- }
+ },
+ "per_direction_r102": {
+  "L": {
+   "roll": 5,
+   "yaw": 0,
+   "pitch": 0,
+   "elbow": 0,
+   "waist_yaw": 0,
+   "az": 90,
+   "pad_angle_deg": 10.0,
+   "margin_15": 5.0,
+   "clear_mm": 76.4,
+   "tau_fall_est_Nm": 350.6,
+   "ok": true,
+   "note": "tuck B side; R5 retired"
+  },
+  "R": {
+   "roll": 5,
+   "yaw": 0,
+   "pitch": 0,
+   "elbow": 0,
+   "waist_yaw": 0,
+   "az": -90,
+   "pad_angle_deg": 10.0,
+   "margin_15": 5.0,
+   "clear_mm": 76.4,
+   "tau_fall_est_Nm": 350.6,
+   "ok": true,
+   "note": "tuck B side mirror"
+  },
+  "F": {
+   "roll": 5,
+   "yaw": 0,
+   "pitch": 0,
+   "elbow": 0,
+   "waist_yaw": 0,
+   "az": 0,
+   "pad_angle_deg": 90.4,
+   "margin_15": -75.4,
+   "clear_mm": 76.4,
+   "tau_fall_est_Nm": 350.6,
+   "ok": false,
+   "note": "chest pad primary"
+  },
+  "LF": {
+   "roll": 5,
+   "yaw": 0,
+   "pitch": 0,
+   "elbow": 0,
+   "waist_yaw": -45,
+   "az": 45,
+   "pad_angle_deg": 10.0,
+   "margin_15": 5.0,
+   "clear_mm": 47.2,
+   "tau_fall_est_Nm": 350.6,
+   "ok": true,
+   "note": "B + waist yaw -45"
+  },
+  "LB": {
+   "roll": 5,
+   "yaw": 0,
+   "pitch": 0,
+   "elbow": 0,
+   "waist_yaw": 45,
+   "az": 135,
+   "pad_angle_deg": 10.0,
+   "margin_15": 5.0,
+   "clear_mm": 76.4,
+   "tau_fall_est_Nm": 350.6,
+   "ok": true,
+   "note": "B + waist yaw +45"
+  },
+  "RF": {
+   "roll": 5,
+   "yaw": 0,
+   "pitch": 0,
+   "elbow": 0,
+   "waist_yaw": 45,
+   "az": -45,
+   "pad_angle_deg": 180.0,
+   "margin_15": -165.0,
+   "clear_mm": 76.4,
+   "tau_fall_est_Nm": 350.6,
+   "ok": false,
+   "note": "B + waist yaw +45 mirror"
+  },
+  "RB": {
+   "roll": 5,
+   "yaw": 0,
+   "pitch": 0,
+   "elbow": 0,
+   "waist_yaw": -45,
+   "az": -135,
+   "pad_angle_deg": 180.0,
+   "margin_15": -165.0,
+   "clear_mm": 47.2,
+   "tau_fall_est_Nm": 350.6,
+   "ok": false,
+   "note": "B + waist yaw -45 mirror"
+  },
+  "LB_fallback": {
+   "roll": -15,
+   "yaw": 30,
+   "pitch": 30,
+   "elbow": -75,
+   "waist_yaw": 0,
+   "az": 135,
+   "pad_angle_deg": 14.5,
+   "margin_15": 0.5,
+   "clear_mm": 22.0,
+   "tau_fall_est_Nm": 283.2,
+   "ok": true,
+   "note": "arm-only if waist slow"
+  },
+  "LF_wy30": {
+   "waist_yaw": -30,
+   "pad_angle_deg": 18.0,
+   "margin_15": -3.0,
+   "ok": false,
+   "note": "partial waist if 45 too slow"
+  },
+  "LB_wy30": {
+   "waist_yaw": 30,
+   "pad_angle_deg": 18.0,
+   "margin_15": -3.0,
+   "ok": false,
+   "note": "partial waist if 45 too slow"
+  }
+ },
+ "R5_retired": true
 }

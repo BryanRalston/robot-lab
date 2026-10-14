@@ -1,6 +1,11 @@
 # T-031 brief: forward fall with permanent tuck B vs shoulder-pitch gear + chest ≤ 38 g
 Grok Build, **bryan PC ff639f5a only, never DESKTOP-B115PVV**. CPU MuJoCo on sim/v3. Same script and setup as T-030 (`T030_BRIEF.md` §5): `modules/controls/fall/t030_pushfall.py --dirs F`.
 
+## R-102 / R10 tuck (side & diagonal shared with T-030)
+- Side falls use **tuck B** (R5 retired). Forward stays B. Diagonals: B + waist yaw ±45° (see `fall_config.json`).
+- Tuck B τ fall ≈ **351 N·m EST** at forearm 287 mm (5% vs 369). Script logs gear peak each run.
+- LB waist-slow fallback: arm pose pitch/roll/yaw/elbow = +30/−15/+30/−75 (14.5°, ~283 N·m).
+
 ## R-088 / chest rev 2 / Arms R7 (2026-10-14). **Supersedes R-070 chest numbers**
 ### Chest pad (Torso `T031_chest_contact_r2.md`, Materials superseded)
 - **Face 98 × 98 mm**, HexWeb CR III 5052 4.5 pcf, pre-crushed, lot-certified (R-072: no initial peak > 1.00× plateau).

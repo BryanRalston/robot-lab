@@ -1,6 +1,22 @@
 # T-030 brief: A44 side-fall push-fall batch (Grok Build, **bryan PC ff639f5a only, never DESKTOP-B115PVV**)
 Owner: RL Controls. Gate for R-042 (A44 provisional). CPU only, MuJoCo ≥3.1, numpy. No jax, no training. Expected wall time is a few minutes per batch: smoke runs take about 0.2–0.6 s each on the box.
 
+## 0000000. R-102 / Arms R10 (2026-10-14). **Per-direction tuck; R5 retired for side**
+Config: `fall/fall_config.json`, table `fall/tuck_per_dir_r102.json`, search `tuck_search.py`.
+
+| dir | pose | waist yaw | pad∠ (Arms method, crouch FK) | margin vs 15° | τ fall EST | ok |
+|---|---|---|---|---|---|---|
+| L/R | **tuck B** (+5/0/0/0) | 0 | **5.0°** (tip-FK ~10°) | +10° | **351** ≤369 | PASS |
+| F | tuck B | 0 | n/a (chest pad) | — | 351 | PASS |
+| LF | B | **−45°** | **5.0°** (wy −30 → 15.8°) | +10° | 351 | PASS if wy ready |
+| LB | B | **+45°** | **5.0°** | +10° | 351 | PASS if wy ready |
+| RF/RB | B | +45 / −45 | 5.0° (mirror) | +10° | 351 | PASS if wy ready |
+| LB fallback | +30/−15/+30/−75 (sp/sr/sy/el) | 0 | 14.5° | +0.5° | 283 | if waist too slow |
+
+- **R5 retired for side falls** (fails R-065 projection/clearance). Side = tuck B.
+- **Waist yaw timing:** 45° at CONTRACTS 2 rad/s needs **≥ 0.39 s**. Smoke detect→impact ≈ 0.73–0.90 s → 45° fits if commanded at fall-mode entry. If impact comes first: partial wy −30 → 15.8° (over gate). **LF if waist too slow: flag Materials/Arbiter; no wedge** (R10). LB has arm-only fallback.
+- Log `shoulder_pitch_gear_peak_Nm` (gate 369; B @287 ≈ 351 EST). `WBC_COP_M = 16 mm` provisional in `controller_config.json` (sole hardness not ruled).
+
 ## 000000. R-072 + Arms R7 + R-076 (2026-10-14). **Gate batches supersede §00000**
 ### R-072 pad peak (Arbiter; Materials 953cd46)
 - **9.17 kN is the absolute pad peak, including any initial peak** (option b). Lot cert rejects any coupon with initial peak > **1.00×** its plateau, or upper-bound×1.30 > 9.17 kN.
