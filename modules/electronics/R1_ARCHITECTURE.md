@@ -589,3 +589,42 @@ Recorded: rail A = F1–F3 + S1, S2 + hand logic; rail B = F4–F6 + S3–S5. Si
 - **No saving on bus, STO or EtherCAT:** these are line runs that continue down to the ankle drives, so moving the knee tee upward does not shorten them.
 - **Mass freeze:** this exceeds the R-043 freeze threshold (0.02 kg). It needs an Arbiter booking against R-062 (an R-062 consequence, not discretionary).
 - **Open:** Legs CAD for the actual drive-to-motor distance. Each 0.05 m changes the result by about ±0.013 kg/leg.
+
+## 18. R-069 mass-down pass: electronics and harness (2026-10-14)
+
+**Rules applied.**
+- Baseline = what `actuators/harness.py` / `harness.json` (total 1.984 kg at this commit) or `arbiter/a3_size.py` actually books.
+- Replacement wire mass = Lapp ÖLFLEX HEAT 180 SiF datasheet g/m (runs) and Stäubli SILI-E (clock-spring loops), the same tables already in `harness.py`.
+- Ratings use `harness.py`'s own rule: ΔT ≤ 30 K at the booked I_rms (bundle ×2, h 10 W/m²K), and ΔV at the booked I_pk within the per-run budget.
+- Savings include the 12 % sleeving that `harness.py` applies to wire mass.
+- STO wiring and the R-038 separate RP40 rails are untouched.
+
+### 18.1 Ranked candidates
+| # | item (harness.py row) | baseline | new | ΔT / ΔV at booked I | cited saving kg | risk |
+|---|---|---|---|---|---|---|
+| 1 | Drive bus tees, 40 × XT30U pairs (`CON`, 3.6 g/pair AMOV listing) | 0.144 | soldered + heat-shrunk splices into a harness section per drive, ~0.5 g each [EST] | n/a | **0.124 (conditional)** | HIGH: no field swap of a drive without re-splicing; the replacement mass is an estimate. Arbiter/Actuators decision. |
+| 2 | Leg drive bus pigtails, 16 × 2 × 0.08 m (`P` row, floor a_min 1.0) | SiF 1.0 mm², 0.0384 | SiF 0.5 mm² | 16.7 K / 0.10 % (4 A rms, 12 A pk) | 0.0172 | Low. XT30U takes 0.5 mm². |
+| 3 | BMS → fuse → contactor → bus bar, 2 × 0.30 m (floor 4.0) | SiF 4.0, 0.030 | SiF 2.5 | 24.7 K / 0.40 % (13.8 A rms, 66 A pk) | 0.0121 | MEDIUM: pack-side fault current before the fuse; fuse I²t must be checked against 2.5 mm² (Torso). |
+| 4 | Arm drive pigtails, 14 × 2 × 0.08 m | SiF 0.5, 0.0202 | SiF 0.25 | 5.2 K / 0.08 % | 0.0090 | Low |
+| 5 | Arm elbow → wrist, 2 × 0.466 m (incl. elbow loop) | SiF 0.5 / SILI-E 0.5, 0.0165 | 0.25 / SILI-E 0.25 | 1.1 K / 0.25 % (budget 0.6) | 0.0079 | Low-med: thinner core in the elbow clock-spring (cycle test O20a covers it) |
+| 6 | Neck/head bus, 0.501 m (floor 0.75) | 0.012 | SiF 0.25 / SILI-E 0.25 | 2.3 K / 0.41 % | 0.0079 | Low-med: neck loop flex, same as #5 |
+| 7 | Waist drives feed, 0.31 m (floor 1.0) | 0.0097 | 0.25 | 5.2 K / 0.38 % (1.5 A rms, 6 A pk [booked EST]) | 0.0075 | MEDIUM: the 6 A waist peak is itself an estimate; take 0.5 mm² (saving ≈ 0.004) if Actuators can't confirm it |
+| 8 | Waist/neck pigtails, 4 × 2 × 0.08 m | 0.5, 0.0058 | 0.25 | 2.3 K / 0.06 % | 0.0026 | Low |
+| | **Wire subtotal (#2–#8)** | | | | **0.0642** | |
+| | **With #1** | | | | **≈ 0.188** | |
+
+### 18.2 Checked and not counted
+- **STM32H7 drop:** never booked as a separate mass. The hand board was booked as a board lump (Arms), and Thermal A43C already assumed it dropped. **Saving 0.**
+- **`hand 24 V from wrist DC/DC` row (0.0128 kg):** 0.5 → 0.25 passes (0.6 K), but R-047 put the RP40s in the shoulder bay, so this row's route is stale. Actuators should re-book the row first. **Not counted.**
+- **P-045 clamp:** 0.145 sum vs 0.150 booked, but the 0.030 board part is a Torso [EST]. **Not counted.**
+- **A41 fan:** 0.042 vs 0.040 booked, so it is over, not under.
+- **TMS570 0.040, NVMe, DCM filter/heatsink (a3_size):** all [EST]; no cited replacement.
+- **Local phase leads (32 × 3 × 0.5 mm²):** already fail the rule at the knee (§17), so there is no reduction available.
+- **JST-GH pairs (0.384 g):** already the lightest cited option.
+- **Merged boards:** the XMC4800 merge (§16.7) removed the STM32H7 and LAN9252, but neither was booked separately (see the STM32H7 drop above). No other merge has a cited booked mass.
+- **Shorter runs:** none without Legs/Torso CAD. The trunk runs are set by the Manhattan routing rule.
+
+### 18.3 Result
+- **Cited wire savings: 0.064 kg.** Low/medium risk, ratings kept, STO and R-038 untouched.
+- **Target ≥ 0.18:** reached only if the Arbiter accepts #1 (soldered drive tees, +0.124 conditional, replacement mass [EST]); the total is then ≈ 0.188 kg.
+- Without #1, electronics/harness alone cannot meet the target on cited data.
