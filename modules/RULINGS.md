@@ -1060,3 +1060,10 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
 ## R-103 (2026-10-14) Chest pad crush acceptance (Torso f5cd400)
 - Accepted at +0.000. Every honeycomb lot gets a coupon crush test; a lot is accepted only with a 0 deg plateau of 19.5-22.3 kN. That gives at least 10% stroke margin (<=56.4 of 62 mm) and stays under the 22.35 kN ceiling. The 95 mm core fallback (+0.005) is taken only if lot yield forces it.
 - R-095 callout confirmed. The sternum ledger follows R-093/R-098/R-095. Torso reconciles its +0.028 sternum net against that ledger; there is no new booking.
+
+## R-104 (2026-10-14) Legs ccb1418, Arms dc204d6
+- Sole (L59): adopt a 3 mm Vibram frame sole of 60A or harder (7373 TOP85, alt 7663), 20 mm perimeter with toe/heel lips, 0.098 kg for the robot. Credit -0.088 [CALC] at half = **-0.044**. Gates: Materials Shore test; walk CoP margin of at least 8 mm with the 16 mm CoP inset. Fallback is the SP 67A 6 mm frame.
+- L60 fin clearance: **+0.002**.
+- L61: the bolted break is rejected (slips). Adopt PEI bushes on the trunnion pins at 43.8 K/W, **+0.004** over R-101. Materials must confirm PEI bearing stress and creep under the 8.66 kN couple before G1.
+- Arms: elbow full-reach scale 0.84 (supersedes 0.85 in R-102). R5 side pose retired; diagonals use tuck B plus waist yaw toward the falling shoulder, pending Controls timing. Pad wedge rejected.
+- Reserve ~-0.55.
