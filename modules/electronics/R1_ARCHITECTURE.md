@@ -229,3 +229,65 @@ Source: Elmo **Command Reference for Gold Line Drives, MAN-G-CR Ver. 1.406** (pu
 - **So the trip can only be lowered.** Our 92 V setting is allowed only if the factory WI[35] for G-TWIR70/100 and R50/100 is ≥ 92 V. **The numeric WI[35] for 100 V models is not in any public Elmo document found** (the install guide gives 95 V max supply only, and the Twitter power-supply note gives only the 40 V single-supply example, XP[1]=40, with shunt-on 2–3 V below the OV trip, which matches our 88 V on / 92 V trip).
 - **Workaround that needs no vendor answer:** read WI[35] on the first bench drive (G5) and record it. If WI[35] < 92 V, set XP[1] = WI[35] and lower the clamp to WI[35] − 3 V (still ≥ 4 V above the 84 V pack only if WI[35] ≥ 91 V; otherwise re-plan the P-045 clamp thresholds).
 - Support question for Bryan to send if wanted (draft in the Electronics report): open item O-E9.
+
+## 13. Replies to RL Torso & Power (8a24475 / bd02c23) after R-032 (b018941)
+Recorded R-032: Sunon PF40281B1 accepted **0.042 kg / 6.12 W in full in T7** (3.7 W PWM credit only after J-T2 CFD + measured flow); DCM on the Thor cold plate; pack sealed from exhaust; STO inside Actuators' 1.4959 kg harness (the 0.231 booking is void); duct = P-044, clamp = P-045.
+
+### 13.1 P-045 clamp: is 200 W continuous needed? No. Resistor downsized.
+**When the clamp fires.** Only when the pack cannot accept charge. Walking is net discharge (703 W at 1.0 m/s, R1.3); regen arrives as pulses with a 245 W mean at 1.2 m/s (`actuators/results/regen_sim.json`) on a pack that is discharging. A connected pack absorbs them. The clamp therefore fires in two cases:
+- (a) **Pack disconnected** (fault, e-stop, O-T9 exception). The drives are STO'd in the same sequence (§13.2), so the energy is one bounded event: ≤ 400 J [EST, R1.1 §9.3: kinetic 47 J + full CoM drop 319 J].
+- (b) **Pack full at 84 V** and the BMS refuses charge. This is the only case that could make the clamp dissipate the 245 W mean for minutes, which is where 200 W came from. **Remove it by rule, not by resistor:** (i) operational charge limit ≤ 4.15 V/cell (83.0 V) [EST, standard practice, costs ~1–2 % capacity — Torso to quantify against T7]; (ii) the BMS must accept regen pulses at any SOC ≤ the 84 V limit (no charge-FET block for regen; cell OV protection stays). After (i)+(ii), case (b) does not occur in normal use.
+**Repetitive need [EST]:** worst plausible = one 400 J event per 10 s (repeated e-stop/fault cycling) → **40 W average**, and normally ≈ 0.
+
+**Smaller resistor: Arcol/Ohmite HS100 1R5 F** (HS range datasheet, Ohmite/Arcol "HS Aluminium Housed Resistors", DigiKey-hosted PDF; Arcol "Heatsink Range Technical Information"): [DS]
+| HS100 | value |
+|---|---|
+| power on std heatsink (995 cm² × 3 mm Al) / free air @25 °C | 100 W / 30 W |
+| resistance range | R01–70K (1.5 Ω inside) |
+| limiting element voltage | 1900 V |
+| mass mounted (approx.) | 115 g (tech-info sheet unit weight 90 g) |
+| thermal capacity | **76.7 J/°C** |
+| overload (Arcol) | 10× rating for 1 s, 5× for 5 s, 2× for 3 min; max hot-spot 220 °C |
+- Pulse: 88²/1.5 = 5.16 kW, 400 J in 78 ms. Adiabatic rise = 400 / 76.7 = **5.2 K per event** (wire-to-body heat spreading inside 78 ms is not guaranteed; that is why the overload curve matters). 5.16 kW = 52× rating at 78 ms is **off the tabulated points** (10× for 1 s = 1 kJ). I could not read the overload-vs-duration curve (it is a graph image) → **O-T8 stays open: read the curve or ask Arcol**. Energy-wise, 400 J < the 1 kJ of the 10×/1 s point.
+- Continuous: 40 W [EST] repetitive > 30 W free air, so it **needs a small plate**: bolting to the shoulder bulkhead (7075, exhaust side, per Torso) gives far more than the datasheet's 995 cm² reference [EST]. Fine.
+- (HS50 1R5 is 32 g / 19.8 J/°C → 20 K per 400 J event, but only 14 W free air. Kept as fallback if the curve allows.)
+**Clamp mass:** HS100 0.115 + 2× IPT059N15N3 / comparator / gate driver / board 0.030 [Torso EST] = **0.145 kg ≤ 0.15 booked (P-045). No Arbiter escalation for the clamp itself.**
+**Not clamp mass:** TE LEV100A4ANG contactor (0.20 [EST], mass not read) + HS50 47R pre-charge (0.032 datasheet) + BSC520N15NS3 = **≈ 0.23 kg of pack-disconnect hardware, Torso's line.** It is new mass under R-024 → **goes to the Arbiter as a Torso item.** Electronics supports the contactor on safety grounds (two diverse disconnects, §13.2).
+
+### 13.2 O-T9 interlock exception: ACCEPTED with this sequence
+Cell-at-risk faults (cell OV/UV/OT, internal short; external short is handled by the FETs/fuse regardless):
+1. t = 0: the BMS raises a **hard-fault line (hardwired, dual-channel)** to the TMS570 **and** sends the CAN FD fault frame.
+2. The TMS570 asserts **STO1+STO2 on all 32 drives at once (Cat 0)**; no SS1 wait. Robot falls (covered by T8 pads).
+3. The BMS opens the BQ76200 FET pair at the same time (it does not wait for STO confirmation). The contactor opens once current is < 5 A (Torso §13.2).
+4. **The clamp must be powered from the drive side of the disconnect** (comparator + gate supply derived from the DC bus, not from the pack side or the 48 V rail), so it keeps working after the pack is gone. It absorbs any back-EMF/regen energy from STO'd but still-moving joints (≤ 400 J [EST]). Bus capacitance (Elmo: ≥ rated current × 20 µF per drive for single-supply use, MAN-G-TWI §10.2.4.2) holds the rest.
+5. Latch: no automatic restart; restart requires fault clear, then a manual reset, then pre-charge, then contactor close.
+6. Verification on the G5 bench: open the pack at peak regen, measure bus peak ≤ 90 V and drive OV trip (WI[36]) not reached.
+Normal (non-cell) faults keep the standard rule: SS1, then STO confirmed, then open.
+
+### 13.3 O-T10: fan operating point (Sunon PF40281B1 P-Q curve)
+Datasheet performance curve (Sunon PF40281B1-000U-F99 spec, page 5, read from the graph, ±1 CFM): ~1.95 inH₂O at 0 CFM, ~1.0 at 10–15 CFM, ~0.85 at 18 CFM, ~0 at 25 CFM.
+System: Torso's 20 Pa (0.080 inH₂O) at 24.4 CFM, quadratic. Intersection: **≈ 24 CFM at ≈ 0.08 inH₂O (≈ 20 Pa)**, i.e. the fan sits on the steep low-pressure end. ΔT_air = 134 W / (ρ c_p Q) ≈ **10 K**. Using the datasheet minimum free-air flow (21.9 CFM) as a tolerance proxy: ≈ 21.5 CFM → **11 K**. Robustness: even if fins + filter push the drop to 0.5 inH₂O (~125 Pa), the curve still gives ≈ 20 CFM (≈ 12 K). **O-T10: PASS on datasheet curve [graph read]**; J-T2 CFD and a measured flow remain needed for the 3.7 W PWM credit (R-032).
+
+### 13.4 Choke and DCM location
+- **DCM3623TA5N53B4T00: on the Thor cold plate** with TIM (R-032), downstream of the fan. Mass 0.024 ×1.0 (R-031), brain line.
+- **Vicor 47718-232 choke** (2.26 mH, 8 A, 40 mΩ, 26.5 × 26.0 × 9.5 mm, through-hole [distributor listings of the Vicor datasheet]): **mass not published** (an LCSC "gross weight 1 g" is a shipping field; not credible for a 26 mm toroid). **Book it in the brain line inside the existing `dcm_filter_heatsink` 0.030 [EST]**, on the brain tray next to the DCM input. Owner of the mass: Electronics/brain line (not Torso).
+
+### 13.5 O-E3: drive logic supply. No separate 24 V supply needed
+Elmo MAN-G-TWI §10.2.4 / 10.2.4.2 [DS]: for **G-TWIXXX/YYYZZS or H** models, VL accepts **12–95 V** and "a single power supply can be used to power both the main and control within the range of 12 to 95VDC" (VL+ connected internally). Conditions: supply capacitance > drive rated current × 20 µF; VL− to PR on the integration board via a ground plane. Our ordering code **G-TWIR70/100EES** ends in **S**, so it matches this variant [confirm the suffix at order; R50/100 likewise]. **Proposal: single-supply from VP+ (68–84 V, ceiling 92 V < 95 V).** No 24 V VL converter, no mass; logic power < 4 W/drive at 24 V-equivalent [DS §4.5] stays in the drive-overhead line. Consequence: drive logic drops when the pack disconnects. That is acceptable (STO already asserted; absolute encoders, AksIM-2).
+Open: the per-drive bus capacitance (70 A × 20 µF = 1400 µF for R70/100 if "rated current" means the 70 A amplitude; 990 µF at 49.5 A rms) has to sit on the drive carrier boards. Mass/volume for Actuators/Torso → **O-E10**.
+
+### 13.6 TRACO TSR 1-48120WI check
+Datasheet (tracopower.com/tsr1wi-datasheet) [DS]: **input 17–72 VDC (48 V nominal)**, 12 V out, 93 % at 24 Vin. **It does not cover the 68–84 V pack or the 92 V ceiling.** Torso's design feeds it from the **48 V DCM rail** (§13.2 there), and on that rail it is fine: DCM output 48 V nominal, trim max 52.8 V [DS DCM]. **Rule: the TSR must never be connected to the pack bus**; label its net "48V_BRAIN only". The fan's 0.51 A fits its 1 A.
+
+### 13.7 BMS → safety controller (TMS570) messages (CAN FD, plus hardwired)
+| ID / channel | content | rate | consumer |
+|---|---|---|---|
+| **hardwired dual-channel FAULT_N** | cell-at-risk hard fault (OV/UV/OT/short) | asynchronous, < 1 ms [EST] | TMS570 → immediate STO (§13.2) |
+| BMS_STATUS | state (sleep/precharge/ready/fault), FET + contactor state & feedback, pre-charge done, interlock request | 100 Hz | TMS570, Thor |
+| BMS_PACK | pack V, current, SOC, SOH, max charge/discharge current limits (for regen acceptance) | 100 Hz | TMS570, Controls power limiter |
+| BMS_CELLS_SUMMARY | min/max cell V + index, min/max temp + index | 10 Hz | TMS570, Thor log |
+| BMS_WARN | soft warnings (approaching limits, contactor coil, imbalance) | on change + 1 Hz | Thor |
+| BMS_HEARTBEAT | rolling counter + CRC | 100 Hz; TMS570 → SS1 if 3 missed [EST] | TMS570 |
+| TMS570 → BMS: SAFE_CMD | request open (after STO confirmed), allow close (post-reset), drives-enabled flag | 100 Hz + event | BMS (enforces the §13.2 interlock) |
+| clamp → TMS570 (digital) | clamp active, resistor over-temp | event | TMS570 → SS1 / log |
+All safety frames: counter + CRC (E2E-style). Rates are [EST].
