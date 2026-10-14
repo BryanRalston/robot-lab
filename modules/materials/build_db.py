@@ -26,6 +26,12 @@ S={
  "HEX_CRIII":"https://www.hexcel.com/wp-content/uploads/2025/12/HexWeb_CRIII_DataSheet.pdf (HexWeb CR III Table I, 5052)",
  "HEX_ATTR":"https://www.hexcel.com/wp-content/uploads/2026/01/HexWebHoneycombAttributesandProperties.pdf (crush method; dynamic up to +30%)",
  "PLASCORE_XR1":"http://plascore.com/wp-content/uploads/dlm_uploads/2025/08/PLA_PAMG-XR1-5052_2023-06-02.pdf (bare compressive only; density tol +-10%) [curl timed out from box; content via search index]",
+ "HC_ANGLE_PMC":"https://pmc.ncbi.nlm.nih.gov/articles/PMC10419603/ (Al honeycomb plateau vs load angle: 0.98/0.93/0.73 at 0/15/25 deg)",
+ "HONG2008":"https://www.osti.gov/biblio/921555 (Hong et al., Int J Plasticity 24(1) 2008, 5052-H38 dynamic inclined 15 deg)",
+ "PEM_IUTB":"https://www.pemnet.com/eu/products/product-finder/iutb-m4/ (M4 insert in PC: 1710 N pull-out, 5.9 N m torque-out, min hole depth 8.91 mm)",
+ "ZEUS_BEND":"https://www.zeusinc.com/resources/summary-material-properties/bend-radius/ (PTFE Industrial wall bend radius table)",
+ "ZEUS_PEEK":"https://www.zeusinc.com/wp-content/uploads/2024/06/PEEK-Extrusions-V2R2.pdf (PEEK extruded tubing sizes)",
+ "OPTINOVA_PEEK":"https://optinova.com/app/uploads/2022/09/optinova-peek-tubing.pdf (PEEK tube min bend radius <50 mm)",
  "R027":"modules/RULINGS.md R-027 (PALSUN/LEXAN, Toray 3900, Easy Composites XC110 citations)",
 }
 def M(id,name,where,rho=None,E=None,ys=None,uts=None,fat=None,elong=None,tmax=None,other=None,cost=None,src=(),notes=""):
@@ -66,6 +72,10 @@ DB=[
    {"stab_compr_typ_MPa":2.07,"stab_compr_min_MPa":1.48,"crush_typ_MPa":0.896,"crush_min":"not published","dynamic_factor":"up to 1.30 (Hexcel)","density_tol":"+-10% (Plascore)"},None,["HEX_CRIII","HEX_ATTR","PLASCORE_XR1"],"Values at 0.625 in thick, room temperature, static."),
  M("HC5052_4.5","5052 Al honeycomb 4.5 pcf 1/8 (HexWeb CR III)","R-049 alternative",0.072,None,None,None,None,None,None,
    {"stab_compr_typ_MPa":3.93,"stab_compr_min_MPa":2.79,"crush_typ_MPa":1.79,"dynamic_factor":"up to 1.30"},None,["HEX_CRIII","HEX_ATTR"]),
+ M("PTFE_TUBE","PTFE tubing (Zeus Industrial wall)","tendon sheath candidate (TENDON_SHEATH.md)","2.1-2.3 (bulk)",None,None,"13-25",None,None,260,
+   {"bend_R_1/32ID_x0.015wall_mm":8.4,"bend_R_1/16ID_x0.030wall_mm":17.5,"flex_modulus_GPa":"0.4-1.3"},None,["ZEUS_BEND","MIFPTFE"],"No compressionless reinforcement: lost motion under tendon load."),
+ M("PEEK_TUBE","PEEK extruded tubing (Zeus/Optinova)","tendon sheath candidate",None,"4.0 (unfilled lower bound)",None,"95-118 (Optinova)",None,None,260,
+   {"sizes":"Zeus 0.080 ID x 0.125 OD in (2.03x3.18 mm)","bend_R":"<50 mm (Optinova, 1/16-1/8 in OD)"},None,["ZEUS_PEEK","OPTINOVA_PEEK","MIFPEEK"]),
  M("EPP","EPP foam (cover pads, grade unspecified)","cover fall pads 0.36 kg",None,None,None,None,None,None,None,{},None,[],"Use EPP80 row if 80 g/L is chosen."),
  M("PU90A","PU 90A bumpers","hip hard stops",None,None,None,None,None,None,None,{},None,[],"No datasheet [UNKNOWN]."),
  M("TPUNYLON","TPU-coated nylon fabric","ankle boots (V5), R-042 pad sleeve (0.03 m2, 9 g)",None,None,None,None,None,None,None,{},None,[],"[UNKNOWN]"),

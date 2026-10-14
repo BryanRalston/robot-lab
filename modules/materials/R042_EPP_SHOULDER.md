@@ -107,3 +107,43 @@ Notes:
 - **Arms (shoulder):** envelope for about 75 mm lateral build-up at the shoulder roll face, mounting through existing bulkhead holes, and arm-tuck clearance.
 - **Controls (T-030):** model a constant 7.05–9.17 kN plateau (rate band), stroke ≤ 41 mm (0.72 × 57), and confirm the contact-point scatter against a 63 mm face.
 - **Test (G5):** drop tower at 3–4 m/s on 4.5 pcf pre-crushed cores to measure the rate factor and stroke efficiency.
+
+---
+# Part 3: follow-ups for Controls (T-030) and Arms (shoulder-cap mount), 2026-10-14
+
+## A1. Crush strength vs off-axis load angle (Controls)
+- **Hexcel** (HEX_ATTR): "crush strength … decreases with increasing angle loading from the thickness". The brochure has no curve.
+- **Al honeycomb, wedge tests** (HC_ANGLE_PMC, quasi-static): normalised out-of-plane plateau **0.98 at 0°, 0.93 at 15°, 0.73 at 25°**. The peak falls from 1.80 to 1.04 MPa at 15° on non-pre-crushed specimens. The plateau stays flat at 15° and degrades beyond it.
+- **5052-H38 dynamic, 15° inclined** (HONG2008, Int J Plasticity 2008): normal crush strength rises with impact velocity and shear strength stays about constant. The normalised trend is similar for 0°, 30° and 90° in-plane orientation. The tabulated values are paywalled and not extracted.
+- Combined compression-shear (scientific.net KEM.626.127 abstract): the normal plateau falls more steeply at 30–45°. No numbers were taken from it.
+- **Angle limit recommendation: ≤ 15° (plateau ≥ 0.93).** Energy at 25° is about 0.73× the 0° value. Controls should keep the shoulder impact vector within 15° of the core axis, or the core has to be resized by 1/0.73.
+
+## A2. Pre-crush spike and the rate/scatter basis (Controls)
+- **Spike:** Hexcel says the core "is often precrushed slightly to remove the compressive peak". Stabilized strength is 2.2× crush at 4.5 pcf, so an un-pre-crushed core would spike to about 2.2× plateau. **A pre-crushed core has no initial spike.** Specify a pre-crush of about 2–3 mm [EST] and check each lot on a quasi-static press (no peak above the plateau).
+- **Basis correction (supersedes Part 2 sizing):**
+  - The Hexcel crush values are **typical**, with no published minimum.
+  - Hexcel states that "for all other [densities ≥ 3 pcf], crush strength values [vary] by ±15 %" (HEX_ATTR).
+  - The dynamic factor is "as much as 30 % higher" than the typical static value.
+- **The 7.05–9.17 kN band in Part 2 is not enough.** At 4.5 pcf the full band is 1.79 × 0.85 × 1.0 = **1.52 MPa** to 1.79 × 1.15 × 1.30 = **2.68 MPa**, a ratio of 1.76. At 39.4 cm² that is **6.0–10.6 kN**, which fails ≤ 9.17.
+- Resize options [EST]:
+  | basis | σ band MPa | area for 9.17 kN | stroke for 265 J | core (0.72 t) | core g/side |
+  |---|---|---|---|---|---|
+  | datasheet only (±15 %, ×1.0–1.30) | 1.52–2.68 | 34.2 cm² | 51 mm | **71 mm** | 17.5 |
+  | **lot crush test ±5 % + drop test rate 1.10–1.30** | 1.87–2.47 [EST] | 37.1 cm² | 38 mm | **53 mm** | 14.2 |
+- **Recommendation:** buy 4.5 pcf pre-crushed with lot acceptance testing (sample crush within ±5 % of target), and measure the rate factor on the G5 drop tower. Then the core is about 61 × 61 × 53–58 mm. Without lot testing it needs **71 mm**, and the pad comes out about 90 mm proud (Arms envelope).
+- **Controls should model a band, not a single value:** 6.95–9.17 kN (lot-tested case) with stroke ≤ 38–42 mm.
+
+## B1. Mount on the shoulder-cap shell (Arms)
+- **The cap shell material in the repo** is a placeholder (V5_COVER_SET "shoulder caps as placeholders"). The cover-set default is thermoformed PC 1.5 mm (P-020, R-027).
+- **Inserts in that shell will not work.** The PEM IUTB-M4 brass insert in PC has **1 710 N pull-out and 5.9 N·m torque-out**, but needs a **≥ 8.91 mm deep hole** (PEM_IUTB). A 1.5 mm shell can't host it without a ≥ 9 mm boss.
+- **Load path:**
+  - The crush force (≤ 9.17 kN) is **compressive, toward the roll housing**.
+  - On the 80 × 100 mm spreader, the bearing pressure on PC is 9 170 / 8 000 = 1.15 MPa. That's fine only if the shell is **backed solid** by structure.
+  - Unbacked, a 1.5 mm PC shell spanning to the housing will not carry 9 kN in bending. That would need FEA, and I expect a fail [EST].
+  - Tangential load at the 15° angle limit is 9.17 × tan 15° = **2.46 kN** shear. PC inserts can't carry it.
+- **Recommendation: local 7075 doubler/bracket (cradle) between the cartridge and the roll housing**, carrying compression and shear straight to metal.
+  - 4 × M4 into the bracket gives about 615 N shear per screw at 15°. Easy for steel M4 [EST: bolt grade capacity not cited].
+  - The PC cap shell becomes cosmetic, with a cut-out for the cartridge face.
+  - Retention against rebound and the strap is light. PEM IUTB-M4 in a PC boss (1 710 N cited) is acceptable for retention only.
+  - Doubler mass [EST]: 2 mm 7075 cradle about 80 × 100 plus flanges ≈ 50 cm³?? Too heavy. Use a **1.5 mm 7075 ring frame with 4 legs to the housing, about 12–15 g/side [EST]**, sized by Arms FEA.
+  - Mass is about +25–30 g per pair on top of the cartridge, so the ≤ 0.100 kg pair cap will be tight. The Arbiter must rule on whether the mount bracket counts inside the pad cap.
