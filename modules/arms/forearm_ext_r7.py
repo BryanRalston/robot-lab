@@ -1,7 +1,7 @@
-"""R-076: forearm +EXT mm (board in forearm, CSG-14 yaw). Static torques with 10 kg/hand (R1 load model) before/after.
+"""R-076/R-082: forearm +EXT mm (board in forearm, CSG-14 yaw). Static torques with 10 kg/hand (R1 load model) before/after.
 Extension mass: 7075 tube OD70/ID66 (model_v4 forearm shell) x EXT, rho 2.81 g/cm3 (ASM 7075-T6) + sheaths/leads [EST]."""
 import mujoco,numpy as np,json,os
-EXT=0.015; RHO=2810; A=np.pi/4*(0.070**2-0.066**2); M_EXT=A*EXT*RHO+0.001
+EXT=0.017; RHO=2810; A=np.pi/4*(0.070**2-0.066**2); M_EXT=A*EXT*RHO+0.001
 H=os.path.dirname(os.path.abspath(__file__)); X=os.path.join(H,'../../sim/v3/humanoid_v3.xml')
 def build(ext):
     m=mujoco.MjModel.from_xml_path(X)

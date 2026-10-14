@@ -1,6 +1,6 @@
 {
- "EXT_mm": 15.0,
- "M_EXT_kg_side": 0.019,
+ "EXT_mm": 17.0,
+ "M_EXT_kg_side": 0.0214,
  "P042": {
   "before": {
    "elbow": 13.96,
@@ -8,12 +8,12 @@
    "reach_x": 0.222
   },
   "after": {
-   "elbow": 14.51,
-   "shoulder_pitch": 30.24,
-   "reach_x": 0.227
+   "elbow": 14.58,
+   "shoulder_pitch": 30.31,
+   "reach_x": 0.228
   },
-  "d_elbow": 0.55,
-  "d_shoulder": 0.57
+  "d_elbow": 0.62,
+  "d_shoulder": 0.64
  },
  "R1_carry": {
   "before": {
@@ -22,12 +22,12 @@
    "reach_x": 0.5
   },
   "after": {
-   "elbow": 42.41,
-   "shoulder_pitch": 65.41,
-   "reach_x": 0.515
+   "elbow": 42.62,
+   "shoulder_pitch": 65.63,
+   "reach_x": 0.517
   },
-  "d_elbow": 1.59,
-  "d_shoulder": 1.62
+  "d_elbow": 1.8,
+  "d_shoulder": 1.84
  },
  "reach_horiz": {
   "before": {
@@ -36,12 +36,12 @@
    "reach_x": 0.65
   },
   "after": {
-   "elbow": 42.41,
-   "shoulder_pitch": 88.41,
-   "reach_x": 0.665
+   "elbow": 42.62,
+   "shoulder_pitch": 88.63,
+   "reach_x": 0.667
   },
-  "d_elbow": 1.59,
-  "d_shoulder": 1.65
+  "d_elbow": 1.8,
+  "d_shoulder": 1.87
  },
  "reach_elbow90": {
   "before": {

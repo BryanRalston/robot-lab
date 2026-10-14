@@ -60,3 +60,24 @@ P-042 elbow stays ≤ 15, so the hold limit is unchanged (unlimited at ~15 N·m,
 - If the D76 −0.04 half credit (R-057) was booked, it is superseded by the R-076 CSG-14 figure and should not be counted twice.
 - Harness −0.274 stays uncredited (R-061).
 - **This replaces the R7 "+0.177".**
+
+## 6. R-082 update: forearm 287 mm (+17)
+- `model_v4.py` forearm = 287.
+- Need 14.9 (trim c) → **margin 2.1 mm.** With the spool trim it would be +7.1. Per R-082, no further savings hunt.
+- **Extension mass:** 6.41 cm³ × 17/15 × 2.81 + 0.001 = **0.0214 kg/side**, i.e. +0.0024/side (+0.005 pair) beyond R8.
+  - Pair total: 0.043, against 0.038 in R8.
+  - Arms delta +0.165 → **+0.170, line 18.139 kg.**
+
+**Torques at 287 (`forearm_ext_r7.json`, EXT 0.017):**
+- P-042 elbow 13.96 → **14.58 N·m ≤ 15 ✓.** Margin 0.42; hold unlimited (unchanged).
+- Full reach (0.667 m), 10 kg: elbow static 40.14 + 1.80 = 41.9 (R1 basis). Inertial R1 29.7 × lever (0.387 / 0.370) = 31.1, so the **peak is ≈ 73.0 N·m > the 69 N·m software cap.**
+  - Note: at 270 it was already 69.8 > 69, so this is not new to the extension.
+  - **Controls must cap the arm acceleration at full reach with 10 kg to ≤ 87 % of the R1 profile** (inertial allowance 69 − 41.9 = 27.1 N·m), or limit payload at full reach to ≈ 8.5 kg [EST, linear].
+  - The static 41.9 is under the cap ✓.
+- shoulder_pitch: static +1.87. 1.5× margin 167 / (1.5 × 84.1) = 1.32.
+
+## 7. R-081 stall cap ≤ 500 N with ladder B (T4 ≥ 22 N)
+- **500 N tendon** = (500 × 0.004 / (0.0184 × 103 × 0.65)) + 0.036 = **1.66 A at η 0.65.** That is the 1.67 A firmware cap, so the cap and the A43 close sim (0.64–0.68 s at ~1.7 A) are consistent. At η 1.0, 500 N needs only 1.09 A, so the firmware must cap tension by current at η_min [EST 0.65].
+- **Continuous grip is set by ladder B, not by the stall cap.** 0.70 A steady (walk) → Thermal R073 grip **22.1 / 23.9 N ≥ 22 ✓**, with 0.1 N margin on the worse case.
+  - Check: (0.70 − 0.036) × 0.0184 × 103 × 0.65 / 0.004 = 204 N tendon. At the hold_30N ratio (217 N ↔ 30 N) that gives ≈ 28 N; Thermal's 22.1 includes their friction and efficiency.
+  - **The 500 N cap does not bind T4.** The 22 N is margin-thin and rests on the G5 encoder-cap thermocouple test.
