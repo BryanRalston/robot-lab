@@ -1019,3 +1019,12 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
 - **2K aliphatic PU UV clear coat** with UV absorbers over the scuffed face, 50-100 um DFT, matte or satin, kept clear of the pad edge and crush zone. **+0.008** booked (upper est). Before G1, cite a clear-coat datasheet; Torso puts the callout on the drawing. A 0.25 mm TPU/PC film is an allowed alternative.
 - Visual plus tap-test inspection after any chest impact; the pad cartridge is replaced on impact.
 - Reserve ~-0.35.
+
+## R-096 (2026-10-14) Knee carry limit revised (Controls, 3db7e04)
+- R-081 10/10 and 40%/30 min do not hold the 120 C limit at h 8 (121.9 / 125.3 C). Revised default: **<=40% duty with continuous carry bouts <=5 min** (112.3 C). 8 on/10 off (118.5 C) is too tight on margin and is not adopted.
+- Unloaded rest means the load is set down; holding the load counts as carry time.
+- The model remaining-time limit (0.9 margin) runs alongside and governs; the 130 C derate is the backstop. Carry and pick share one thermal state. A G5 hot-start test confirms.
+
+## R-097 (2026-10-14) Hand T4 loaded-close basis (Arms, e438303)
+- Basis: **30 N peak with each worst case taken alone** (passes, slowest 0.79 s) **plus 22 N sustained with all worst cases combined** (passes, 0.80 s). Stacking all worst cases at 30 N is outside the basis. 1.50 A/rail stands, with no upsizing.
+- Stagger: 50 ms default, never more than 150 ms. G5 verifies the hot close.
