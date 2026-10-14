@@ -9,7 +9,7 @@ Hot start = steady 64.4 N·m loaded stand. Files: `carry_limit.py`, `carry_limit
 `CarryGovernor` = min of
 1. **R-096 rule** (`R096Rule`; `R081Rule` is an alias, R-081 10 on/10 off OR 40 % retired): ≤40 % carry over any rolling
    30 min **AND** each continuous carry bout ≤5 min. *Carry* = load held, walking or standing; *unloaded* = load set down.
-   A bout ends only after ≥60 s set down (`min_gap`); shorter breaks keep the bout timer running.
+   A bout ends only after ≥120 s set down (`min_gap`, Arbiter R-100); shorter breaks keep the bout timer running.
 2. **Model remaining time** (`CarryLimiter`): forward prediction from the live winding/housing estimate to 120 °C at the
    P-042 cycle-equivalent load (RMS torque + mean iron loss), ×0.9 margin. Reported to the planner as `remaining()` s.
 3. Torque backstop: `WindingModel` derate 130→145 °C, trip 150 °C.
@@ -48,5 +48,5 @@ Steady 5 on / 7.5 off (40 %): **112.3 °C**. Worst compliant arrangement = burst
 | break g between bouts | 2 s | 10 s | 30 s | 60 s | 120 s | 180 s | 300 s |
 |---|---|---|---|---|---|---|---|
 | peak Tw °C | 125.1 | 124.0 | 121.6 | **119.1** | 116.4 | 113.9 | 112.3 |
-Hence `min_gap` 60 s: R-096 holds ≤120 °C in its worst arrangement (119.1 °C, 0.9 K margin). The model remaining-time limit
+**R-100: `min_gap` = 120 s** set down → worst compliant peak **116.4 °C** (3.6 K margin). 60 s (119.1 °C) rejected; relax only after G5 hot-start data. The model remaining-time limit
 (0.9 margin) still governs and the 130 °C derate is the backstop. 8 on / 10 off was not adopted.

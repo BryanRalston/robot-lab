@@ -11,13 +11,15 @@ for _ in range(3000): g.step(84.4, 0.1, 0.0, True)               # 300 s bout (w
 assert g.rule.remaining() < 1e-6
 for _ in range(300): g.step(0.0, 0.1, 0.0, False)                 # 30 s break: bout not reset
 assert g.rule.remaining() < 1e-6
-for _ in range(300): g.step(0.0, 0.1, 0.0, False)                 # 60 s set down: bout reset, duty 420 s left
+for _ in range(300): g.step(0.0, 0.1, 0.0, False)                 # 60 s set down: still NOT reset (R-100)
+assert g.rule.remaining() < 1e-6
+for _ in range(600): g.step(0.0, 0.1, 0.0, False)                 # 120 s set down: bout reset, duty 420 s left
 assert abs(g.rule.remaining() - 300) < 1
 r = C.R096Rule()                                                   # standing holding the load counts as carry
 for _ in range(3000): r.step(True, 0.1)
-for _ in range(600): r.step(False, 0.1)
+for _ in range(1200): r.step(False, 0.1)
 for _ in range(3000): r.step(True, 0.1)
-for _ in range(600): r.step(False, 0.1)
+for _ in range(1200): r.step(False, 0.1)
 assert abs(r.remaining() - 120) < 2, r.remaining()                # duty cap: 720 - 600
 # shared state: hot carry blocks a pick that the table would allow
 th2 = C.KneeThermal(Tw=118.0, Th=100.0); assert not th2.pick_ok(150, P.allowed_dwell(150))

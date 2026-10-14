@@ -70,8 +70,9 @@ class R096Rule:
     <= MAX_BOUT s. 'Carrying' = load held (walking OR standing holding the load); unloaded = load set down.
     A bout ends only after >= MIN_GAP s unloaded; shorter breaks do not reset the bout timer (Controls: with 2-30 s
     breaks a compliant 5/5/2 min burst reaches 121.6-125.1 C; with MIN_GAP 60 s worst compliant = 119.1 C, h 8 x1.1).
+    Arbiter R-100: MIN_GAP default 120 s set down (worst compliant 116.4 C); 60 s rejected; relax only after G5 hot-start data.
     remaining() = min(bout left, duty left) (window-expiry credit not counted: conservative)."""
-    def __init__(self, max_bout=300.0, duty=0.40, window=1800.0, min_gap=60.0, dt_bin=1.0):
+    def __init__(self, max_bout=300.0, duty=0.40, window=1800.0, min_gap=120.0, dt_bin=1.0):
         self.bout, self.duty, self.win, self.gap, self.db = max_bout, duty, window, min_gap, dt_bin
         self.bins = np.zeros(int(window / dt_bin)); self.i = 0; self.acc = 0.0
         self.run = 0.0; self.idle = 0.0
@@ -79,7 +80,7 @@ class R096Rule:
         if load_held: self.run += dt; self.idle = 0.0
         else:
             self.idle += dt
-            if self.idle >= self.gap: self.run = 0.0
+            if self.idle >= self.gap - 1e-6: self.run = 0.0
         self.acc += dt
         while self.acc >= self.db:
             self.acc -= self.db; self.i = (self.i + 1) % len(self.bins); self.bins[self.i] = 0.0
