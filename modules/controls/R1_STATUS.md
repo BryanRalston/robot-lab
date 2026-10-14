@@ -49,3 +49,27 @@ Owner: RL Controls. Took handoff of `modules/legs/wbc/` and the RL walk work (`m
 - **Not propagated to the RL MJX models** (job 4 inputs). Folded into the make_model regen after job 4. `eval_box.py` reads sim/v3 directly, so future scoring sees the new arms.
 - P-042 carry primitive + P-043 hold limits: `controls/thermal/winding_model.py` (`CARRY_POSE`, `CARRY_BAND`, `HoldLimiter`).
 - Carry static balance (`controls/carry/carry_balance_r1.py`, 65 + 20 kg, feet flat): payload (0.32, 0, 0.415) at the P-042 pose puts the COM 107 mm ahead of the ankle (toe margin 73 mm, ankle 44.6 N·m/leg static) vs 92 mm / 88 mm for Legs' (0.25, 0, 0.10). With Legs' −0.25 rad waist lean-back it is 63 mm (toe margin 117 mm). Static is fine; the dynamic margin (R-014 ankle 1.31× at 1.0 m/s) needs a carry plan regen at the new payload position (Legs/Controls, light WBC run after the plan exists).
+
+## A40 knee on Legs ID plans (2026-10-14, `controls/thermal/knee_id_r1.py` → `knee_id_r1.json`)
+35 °C, open housing, drives off housing, Thermal 26412c7 limits; each plan looped for 60 min; iron loss from the plan's own knee speed. τ_cont at 130 °C: 07613D 83.2, D69 141.2 N·m. Winding °C at 60 min, L/R (minutes to 120 / 130 °C):
+
+| trace | knee RMS N·m | 2× 07613D | D69 |
+|---|---|---|---|
+| walk 1.2 ID r7 ref_ds25 (RL reference) | 74.6 / 73.4 | 115.5 / 113.2 | 63.7 / 63.2 |
+| walk 1.2 ID r4 | 74.5 / 73.2 | 115.2 / 112.6 | 63.7 / 63.1 |
+| walk 1.2 ID r2 plan (WBC source) | 77.9 / 76.9 | 123.3 / 120.9 (45 / 54 min) | 65.5 / 64.9 |
+| carry 20 kg 1.0 ID r4 (R-014, payload 0.25 m) | 78.1 / 75.5 | 123.0 / 116.4 (45 / –) | 65.1 / 63.5 |
+| carry 20 kg ID r2 plan (WBC carry source) | 84.4 / 82.3 | **143.0 / 137.2 (23 / 32 min to 130)** | 70.8 / 69.5 |
+| WBC r6 closed-loop 1.2 (earlier) | 105 / 108 | runaway (120 at 7–9 min) | 89 / 92 |
+
+Recommendation: the representative 1.2 m/s trace is **walk_1p2_r7 (ref_ds25)**, the reference RL trains on, with r4 agreeing within 0.5 K. The 20 kg carry trace is **r4 carry_20kg_1p0**, the R-014 basis. Re-generate it at the P-042 payload position (x 0.32 / z 0.415), which will raise knee torque. The WBC r6 trace comes from a failing controller (falls, knee saturation) and is an upper bound, not a duty cycle.
+- **07613D:** meets the ≤120 °C target on the walk with only 4.5–7 K margin. It fails the target on the r4 carry (L 123 °C) and on the r2 carry plan, which reaches the 130 °C derate at 32 min. It also rests on [EST] Cw/Rwh, no cover penalty, and ideal ID tracking.
+- **D69:** about 50–55 K of margin everywhere.
+- **D69 is needed** for the 20 kg carry and for a robust 1.2 m/s walk under the 120 °C design target. 07613D is only acceptable if the carry duty is time-limited or Thermal accepts operation inside the derate band.
+
+## O-T5 walk/stand split
+**No task simulation exists in the repo.** Controls has no measured or simulated walk/stand time split, so the 20/80 split stays [EST]; I have not produced one. Proposed derivation:
+1. Define 3–5 reference tasks with Torso/Robot Lab: tote transfer AMR→conveyor at 5/10/20 m spacing, shelf pick, sit-to-stand.
+2. Use public time-motion sources for station layouts, e.g. Agility/GXO videos, timed by frame.
+3. Run a light task-level timeline (walk segments at 1.0 m/s from distances; stand/manipulate from the P-042 pick/place cycle times) to get the walk fraction per task.
+4. Replace it with logged sim/hardware duty once the RL policy can do the tasks.

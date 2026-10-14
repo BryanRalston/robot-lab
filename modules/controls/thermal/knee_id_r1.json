@@ -1,0 +1,204 @@
+{
+ "walk 1.2 ID r7 ref_ds25 (RL reference)": {
+  "file": "r7/ref_ds25/walk_1p2_r7.npz",
+  "note": "make_model REF_DIR; DS 25 %",
+  "07613D": {
+   "L": {
+    "rms": 74.6,
+    "iron_W": 4.47,
+    "Tw60": 115.5,
+    "t120": null,
+    "t130": null,
+    "t150": null
+   },
+   "R": {
+    "rms": 73.4,
+    "iron_W": 4.54,
+    "Tw60": 113.2,
+    "t120": null,
+    "t130": null,
+    "t150": null
+   }
+  },
+  "D69": {
+   "L": {
+    "rms": 74.6,
+    "iron_W": 5.61,
+    "Tw60": 63.7,
+    "t120": null,
+    "t130": null,
+    "t150": null
+   },
+   "R": {
+    "rms": 73.4,
+    "iron_W": 5.69,
+    "Tw60": 63.2,
+    "t120": null,
+    "t130": null,
+    "t150": null
+   }
+  }
+ },
+ "walk 1.2 ID r4": {
+  "file": "r4/walk_1p2.npz",
+  "note": "latest r4 sizing set",
+  "07613D": {
+   "L": {
+    "rms": 74.5,
+    "iron_W": 4.6,
+    "Tw60": 115.2,
+    "t120": null,
+    "t130": null,
+    "t150": null
+   },
+   "R": {
+    "rms": 73.2,
+    "iron_W": 4.66,
+    "Tw60": 112.6,
+    "t120": null,
+    "t130": null,
+    "t150": null
+   }
+  },
+  "D69": {
+   "L": {
+    "rms": 74.5,
+    "iron_W": 5.78,
+    "Tw60": 63.7,
+    "t120": null,
+    "t130": null,
+    "t150": null
+   },
+   "R": {
+    "rms": 73.2,
+    "iron_W": 5.85,
+    "Tw60": 63.1,
+    "t120": null,
+    "t130": null,
+    "t150": null
+   }
+  }
+ },
+ "walk 1.2 ID r2 plan (WBC slice source)": {
+  "file": "r2/walk_1p2_r2.npz",
+  "note": "plan tracked by WBC r6",
+  "07613D": {
+   "L": {
+    "rms": 77.9,
+    "iron_W": 4.22,
+    "Tw60": 123.3,
+    "t120": 44.6,
+    "t130": null,
+    "t150": null
+   },
+   "R": {
+    "rms": 76.9,
+    "iron_W": 4.26,
+    "Tw60": 120.9,
+    "t120": 53.5,
+    "t130": null,
+    "t150": null
+   }
+  },
+  "D69": {
+   "L": {
+    "rms": 77.9,
+    "iron_W": 5.3,
+    "Tw60": 65.5,
+    "t120": null,
+    "t130": null,
+    "t150": null
+   },
+   "R": {
+    "rms": 76.9,
+    "iron_W": 5.35,
+    "Tw60": 64.9,
+    "t120": null,
+    "t130": null,
+    "t150": null
+   }
+  }
+ },
+ "carry 20 kg 1.0 ID r4": {
+  "file": "r4/carry_20kg_1p0.npz",
+  "note": "payload 0.25 m, R-014",
+  "07613D": {
+   "L": {
+    "rms": 78.1,
+    "iron_W": 4.0,
+    "Tw60": 123.0,
+    "t120": 45.0,
+    "t130": null,
+    "t150": null
+   },
+   "R": {
+    "rms": 75.5,
+    "iron_W": 4.04,
+    "Tw60": 116.4,
+    "t120": null,
+    "t130": null,
+    "t150": null
+   }
+  },
+  "D69": {
+   "L": {
+    "rms": 78.1,
+    "iron_W": 5.02,
+    "Tw60": 65.1,
+    "t120": null,
+    "t130": null,
+    "t150": null
+   },
+   "R": {
+    "rms": 75.5,
+    "iron_W": 5.08,
+    "Tw60": 63.5,
+    "t120": null,
+    "t130": null,
+    "t150": null
+   }
+  }
+ },
+ "carry 20 kg ID r2 plan (WBC carry source)": {
+  "file": "r2/carry_20kg_r2.npz",
+  "note": "plan tracked by WBC carry",
+  "07613D": {
+   "L": {
+    "rms": 84.4,
+    "iron_W": 4.68,
+    "Tw60": 143.0,
+    "t120": 23.0,
+    "t130": 31.7,
+    "t150": null
+   },
+   "R": {
+    "rms": 82.3,
+    "iron_W": 4.76,
+    "Tw60": 137.2,
+    "t120": 26.4,
+    "t130": 38.5,
+    "t150": null
+   }
+  },
+  "D69": {
+   "L": {
+    "rms": 84.4,
+    "iron_W": 5.87,
+    "Tw60": 70.8,
+    "t120": null,
+    "t130": null,
+    "t150": null
+   },
+   "R": {
+    "rms": 82.3,
+    "iron_W": 5.98,
+    "Tw60": 69.5,
+    "t120": null,
+    "t130": null,
+    "t150": null
+   }
+  }
+ },
+ "tau_cont_130_07613D": 83.2,
+ "tau_cont_130_D69": 141.2
+}
