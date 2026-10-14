@@ -800,3 +800,9 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
 - Knee drives go on the thigh shell above the knee, on a 6061 plate with G10/PEEK standoffs and no metal path to the fins. **Adopted.** Hip bay rejected (+0.15–0.17/leg). Booked **+0.142** (estimate; it moves to the measured value at CAD). Required by R-062: drives on the housing leave only 3.7 K carry margin, which isn't acceptable.
 - Legs confirms the thigh volume, clash and fairing fit.
 - Reserve is ~0.16, **below the 0.30 floor. A waiver runs to the end of R13**, tied to the hip-lever reconciliation (R-056 booked at +0.43 conservative vs Legs +0.118). If the reconciled lever doesn't restore >=0.30, Robot Lab runs a mass-down pass across modules (cited or measured items only) before R13 closes. **Freeze:** no additions >0.005 until the reserve is >=0.30.
+
+## R-067 (2026-10-14) Cover vents to the real A35 spec; pad R6 (ID 6f842b0)
+- Cover items 1–3 rebooked: -0.145 full, **-0.073 at half credit** (was -0.117), so **+0.044** against the reserve. Vents go over the housings only, and the hem stiffener is included.
+- Pad R6: the mount on the roll output (doubler, 4xM4 into the output flange) is **accepted in principle**. The load path through the roll bearing must pass the bryan-PC FEA (doubler, flange, bearing, with combined roll-bearing loads). But **275 J at minimum strength fails R-065's >=292 J** at worst case and 15°, so R6 isn't accepted for energy. ID and Materials have to reach 292 J (longer crush or a tighter lot bound) with peak <=9.17 kN. Booking: the R-063 0.106 is not 0.127, so the credit to 0.100 is -0.006, provisional on the energy fix.
+- Wrist open-frame palm half -0.071: credit (**-0.036 half**) only once Arms accepts it (grip-face stiffness, cable protection).
+- Reserve ~0.12 (R-066 waiver and freeze continue).
