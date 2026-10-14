@@ -33,3 +33,18 @@ Results:
 - Resistance: 63.8 K/W per side, **31.9 K/W joint** (≥ 30 ✓, small margin). No metal path: pin–bush–boss only. Bolts must not bridge the pin to the cheek; use a PEI-washered retaining clip.
 - Fit: boss to finned rev B housing ≥ 9.0 mm over knee 0–135°. Cheeks are 3.04 mm and the top plate 3.54 mm (L60), unchanged. The 10 mm outward boss growth has not been checked against the thigh shell or the ID envelope (ID to confirm).
 - **Mass: +27.5 g/knee, +0.055 kg robot [EST, ρ 1.4 g/cc assumed]**. That is +0.043 over L61's +0.012 and +0.051 over the +0.004 booked. FLAG: book in full; reserve is about −0.58 → about −0.63.
+
+## R-106 final per Materials 8fdce97: ULTEM 4001 (supersedes the ø11 design above)
+k = 0.26 W/mK (ISO 8302) and density 1.33, from the SABIC ULTEM 4001 EMEA TDS: https://www.lookpolymers.com/polymer_SABIC-Innovative-Plastics-ULTEM-4001-PEI-Europe-Africa-Middle-East.php
+The same values appear at https://buypolymers.demgy.com/storage/media/857/27---ULTEM%C2%AE-4001.pdf. The Americas TDS cited by Materials leaves k blank.
+**Design:**
+- Pin: ø9 hardened steel, ≥ HRC 50, ground Ra ≤ 0.4, greased.
+- Bush: ULTEM 4001, ø9/21 × 20 per side (6 mm wall). R is computed on the worn wall of 5.8 mm, i.e. after the 0.2 mm radial wear allowance.
+- Thrust washer: 3 mm ULTEM 4001, 10 % pad contact.
+- Cheek boss: ø26 × 20, grown outward only.
+Results:
+- Pressure: 14.0 MPa design, 9.3 MPa walk (≤ 14.6 ✓). Width is 20/12 = 1.67× L61.
+- Resistance (worn): 66.1 K/W per side, **33.1 K/W joint** ✓. With 15 % washer pads it drops to 30.6 K/W, so 10 % pads are the spec.
+- No metal path through the joint.
+- Fit: the boss radius is 13 mm, as in knee_boss_clear_r106 (≥ 9.0 mm to the finned housing over knee 0–135°), and the extra length is outward only. Cheeks 3.04 mm and top plate 3.54 mm are unchanged. The outward growth of 14 mm past the cheek has not been checked against the thigh shell or the ID envelope.
+- **Mass: +37.2 g/knee, +0.074 kg robot** [EST: hand volumes, cited densities]. That is +0.070 over the +0.004 booked. Book in full.

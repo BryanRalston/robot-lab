@@ -301,3 +301,8 @@ A bolted bracket break at ≥ 30 K/W is infeasible (slip and separation vs the 8
 PTFE-filled PEI bushes ø11/21×16 + 3 mm washers (15 % pads), hardened ground greased pin, boss ø26 grown outward. 14.4 MPa design, 31.9 K/W (k 0.231 cited; L61 used a wrong k of 0.12). Boss ≥ 9 mm from fins. +0.055 kg robot (FLAG, booked in full). PEEK HPV dropped (k 0.82).
 ## L59 note: sole Shore data (web only)
 TOP85 compound = 85 ± 3 Shore A, density 1.15 (Vibram compound table: https://www.leffler.com.au/vibram-techdata/ and the Vibram 2021 aftermarket catalogue https://www.magmaonline.com.ar/wp-content/uploads/2024/05/VIBRAM-CATALOGO-2021-EN.pdf). Note: 7373 is listed only at 1.0–1.8 mm (Flli Chiesa, orthopaedie-schuhbedarf). The earlier 3 mm listing is unconfirmed. 7663 comes in 2–6 mm, "medium hardness", no Shore value published. The sole needs Materials' sample test, or a stack of two 1.5 mm 7373 layers.
+## L61 final (R-106 + Materials 8fdce97), 2026-10-14
+ULTEM 4001 bushes ø9/21×20 (k 0.26 SABIC TDS) + 3 mm washers with 10 % pads, ø9 HRC50 ground greased pin, boss ø26×20 grown outward. 14.0 MPa design. 33.1 K/W after the 0.2 mm wear allowance. +0.074 kg robot (FLAG, booked in full). Supersedes the ø11 R-106 rev.
+## L59 Shore sources (accepted)
+- 7373 TOP85, 85±3 A: Vibram US repair catalogue 2015 (Materials cite) and leffler.com.au/vibram-techdata. Sold in 3 mm: https://www.leffler.com.au/vibram-7373-tequilgemma-flint-91x58-18mm/ (Vibram AU distributor, lists 1/1.5/1.8/3/6 mm) and subaru-ec.com product_id=88. Caveat: a subaru-ec 3 mm cut-piece page (product_id=3956) lists 75A. Still ≥ 60A.
+- 7663, 93 A, 1.17 g/cc: https://www.ciac-srl.com/en/articolo/508163/lastra-comp-7163-gemma (Vibram distributor page, not a lot certificate).
