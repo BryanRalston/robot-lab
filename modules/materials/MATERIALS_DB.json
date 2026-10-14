@@ -13,6 +13,11 @@
   "DP490_A": "https://multimedia.3m.com/mws/media/2409614O/3m-scotch-weld-epoxy-adhesive-dp490.pdf (via modules/legs/BOND_SPEC.md)",
   "DP490_B": "https://multimedia.3m.com/mws/media/82790O/dp490-scotch-weld-tm-adhesive.pdf (via BOND_SPEC.md)",
   "SKF_GE12C": "modules/actuators/datasheets/skf_ge12c.html (SKF https://www.skf.com/products/plain-bearings/spherical-plain-bearings-rod-ends/radial/productid-GE%2012%20C)",
+  "G10_CC": "https://currentcomposites.com/wp-content/uploads/2024/10/TSD-MIL-I-24768_27_G10_FR4.pdf (Current Composites FR-4/G10 TDS)",
+  "G10_GUND": "https://thegundcompany.com/wp-content/uploads/2024/03/NEMA-FR4-Glass-Epoxy-Laminate-by-The-Gund-Co.pdf (Gund NEMA FR4)",
+  "G10_RAX": "https://www.raxpanel.com/fiberglass-reinforced-sheet/fr4-fiberglass-sheet/ (k through-plane, CTE in-plane)",
+  "MIFPEEK": "https://www.makeitfrom.com/material-properties/Polyetheretherketone-PEEK",
+  "MIFPEI": "https://www.makeitfrom.com/material-properties/Polyetherimide-PEI",
   "R027": "modules/RULINGS.md R-027 (PALSUN/LEXAN, Toray 3900, Easy Composites XC110 citations)"
  },
  "materials": [
@@ -234,6 +239,82 @@
     "DP490_B"
    ],
    "notes": "Fatigue, creep, humid-aged not verified."
+  },
+  {
+   "id": "G10FR4",
+   "name": "G10/FR4 glass-epoxy (NEMA LI-1, EPGC 201/202)",
+   "used_in": "A37 thermal-break sleeves (proposed)",
+   "density_g_cc": 1.85,
+   "E_GPa": "18-20 (flex)",
+   "yield_MPa": null,
+   "UTS_MPa": "276-345 tensile LW",
+   "fatigue_MPa": null,
+   "elongation_pct": null,
+   "T_max_mech_C": "130-140 (temp index)",
+   "toughness": null,
+   "other": {
+    "compr_flatwise_MPa": "414-483",
+    "compr_edgewise_MPa": "172-241",
+    "shear_punch_MPa": 148,
+    "k_through_W_mK": 0.29,
+    "CTE_inplane_um_mK": "13-18"
+   },
+   "cost_hint": null,
+   "sources": [
+    "G10_CC",
+    "G10_GUND",
+    "G10_RAX"
+   ],
+   "notes": "Creep under sustained bearing at temperature not verified."
+  },
+  {
+   "id": "PEEK",
+   "name": "PEEK (unfilled .. 30% CF)",
+   "used_in": "A37 candidate",
+   "density_g_cc": "1.3-1.5",
+   "E_GPa": "4.0-24",
+   "yield_MPa": null,
+   "UTS_MPa": "97-200",
+   "fatigue_MPa": null,
+   "elongation_pct": "1.6-43",
+   "T_max_mech_C": 330,
+   "toughness": null,
+   "other": {
+    "compr_MPa": "120-300",
+    "shear_MPa": "50-100",
+    "Tg_C": 240,
+    "k_W_mK": "0.25-0.93",
+    "CTE_um_mK": "15-52"
+   },
+   "cost_hint": null,
+   "sources": [
+    "MIFPEEK"
+   ],
+   "notes": "Range spans unfilled to 30CF; grade-specific + creep data needed (Victrex TDS)."
+  },
+  {
+   "id": "PEI",
+   "name": "PEI (Ultem class, unfilled/30GF)",
+   "used_in": "A37 candidate",
+   "density_g_cc": "1.3-1.5",
+   "E_GPa": "3.4-5.6",
+   "yield_MPa": null,
+   "UTS_MPa": "110-160",
+   "fatigue_MPa": null,
+   "elongation_pct": "3-34",
+   "T_max_mech_C": 170,
+   "toughness": null,
+   "other": {
+    "compr_MPa": "140-180",
+    "Tg_C": 210,
+    "k_W_mK": "0.18-0.23",
+    "CTE_um_mK": "20-53"
+   },
+   "cost_hint": null,
+   "sources": [
+    "MIFPEI"
+   ],
+   "notes": ""
   },
   {
    "id": "EPP",
