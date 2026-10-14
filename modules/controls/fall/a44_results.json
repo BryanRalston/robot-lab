@@ -1,0 +1,98 @@
+{
+ "cases": [
+  {
+   "case": "baseline v3.json",
+   "m": 63.7948951910714,
+   "zc": 0.98,
+   "share": 0.45,
+   "E_sh_J": 275.99011352456495,
+   "F_N": 11500,
+   "M_Nm": 690.0,
+   "fs_axial": 1.3,
+   "fs_radial": 1.0,
+   "pass_550": false,
+   "note": "reproduces 690 N*m"
+  },
+  {
+   "case": "baseline @ R-039 mass",
+   "m": 66.21,
+   "zc": 0.98,
+   "share": 0.45,
+   "E_sh_J": 286.4383641,
+   "F_N": 11935,
+   "M_Nm": 716.1,
+   "fs_axial": 1.25,
+   "fs_radial": 0.96,
+   "pass_550": false,
+   "note": "same fall, current credible mass"
+  },
+  {
+   "case": "S1 crouch only",
+   "m": 66.21,
+   "zc": 0.78,
+   "share": 0.45,
+   "E_sh_J": 227.9815551,
+   "F_N": 9499,
+   "M_Nm": 570.0,
+   "fs_axial": 1.57,
+   "fs_radial": 1.21,
+   "pass_550": false,
+   "note": "knee drop of 0.20 m before impact [EST achievable]"
+  },
+  {
+   "case": "S2 hip-first only",
+   "m": 66.21,
+   "zc": 0.98,
+   "share": 0.35,
+   "E_sh_J": 222.78539429999998,
+   "F_N": 9283,
+   "M_Nm": 557.0,
+   "fs_axial": 1.61,
+   "fs_radial": 1.24,
+   "pass_550": false,
+   "note": "tuck+lean so hip pad takes 65 % [EST]"
+  },
+  {
+   "case": "S3 crouch 0.15 + hip-first 0.40 (proposed)",
+   "m": 66.21,
+   "zc": 0.83,
+   "share": 0.4,
+   "E_sh_J": 215.6406732,
+   "F_N": 8985,
+   "M_Nm": 539.1,
+   "fs_axial": 1.66,
+   "fs_radial": 1.28,
+   "pass_550": true,
+   "note": "combined [EST]"
+  },
+  {
+   "case": "S3 sensitivity: share 0.45 (hip-first fails)",
+   "m": 66.21,
+   "zc": 0.83,
+   "share": 0.45,
+   "E_sh_J": 242.59575734999999,
+   "F_N": 10108,
+   "M_Nm": 606.5,
+   "fs_axial": 1.48,
+   "fs_radial": 1.14,
+   "pass_550": false,
+   "note": ""
+  },
+  {
+   "case": "S3 sensitivity: crouch only 0.08 m",
+   "m": 66.21,
+   "zc": 0.9,
+   "share": 0.4,
+   "E_sh_J": 233.827236,
+   "F_N": 9743,
+   "M_Nm": 584.6,
+   "fs_axial": 1.54,
+   "fs_radial": 1.18,
+   "pass_550": false,
+   "note": ""
+  }
+ ],
+ "share_max_for_550_no_crouch": 0.346,
+ "share_max_for_550_crouch_015": 0.408,
+ "M_pure_moment_fs1_Nm": 1177
+}
