@@ -459,6 +459,15 @@ Torso frame = waist_pitch origin; x forward, y left, z up. Layout [EST until CAD
 - **Final skin x:** land face +0.056 + core 0.088 + 1 mm CF face → +0.145; + 3 mm gap → +0.148; + PC plate 1.5 mm → **x ≈ +0.150** (base shell +0.11 → **40 mm proud** vs ID's 37 mm; ID either takes 40 mm or lets the gap go to 0 → +0.147).
 - **PC plate [EST]:** thermoformed PC 1.5 mm (covers spec, 1.20 g/cm³), 120 × 120 mm face + ~37 mm sidewalls with 15 mm blend ≈ 0.0144 + 0.48 × 0.037 ≈ 0.032 m² → **≈ 0.058 kg**. It replaces a 120 × 120 cut-out of the 2 mm CF shell (≈ 0.045 kg) → **net ≈ +0.013 kg** [EST].
 
+- **R-093 update (supersedes the PC plate, gap and skin x above):**
+  - **Skin:** the pad face is the skin at **x ≈ +0.147, 37 mm proud**, no crush gap.
+  - **Bezel:** 1.5 mm PC bezel ring (~15 g) on the same 4 × M4 inserts. The pad is bonded to the land; the bezel is the secondary hold.
+  - **Flange:** overlap ≤ 4 mm, unclamped, on a 1 mm compliant gasket stand-off. The centre 90 × 90 mm stays free.
+  - **Edges:** closed with a seal that is not bonded to the core walls.
+  - **Face film:** 0.3–0.5 mm TPU/PC (~5 g).
+  - **Service rule:** replace the pad if a dent is > 1 mm deep or it shows any crush.
+  - **Mass:** net sternum ≈ **+0.020 kg**; delta vs ab432da ≈ **−0.038 kg**.
+
 ## 7. Open questions / conflicts (not edited in others' files)
 - **O-T1 (Electronics, coordination):** adopt the 48 V intermediate rail with DCM3623TA5N53B4T00; Torso hosts the DCM on the power distribution board or the brain tray? Mass 0.024 [UNVERIFIED for variant] stays in the brain line; who books the 47718-232 choke; 24 V VL source (O-E3); BMS→safety MCU CAN FD message set; e-stop = FET-open vs contactor (O-E6).
 - **O-T2 (Actuators/Arbiter):** waist_pitch 116 N·m < 188 N·m need with T5 payload → TBM2G-08508A, +0.19 kg.
