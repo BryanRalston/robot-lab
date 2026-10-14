@@ -694,3 +694,8 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
 - The EPP 40 mm pad **fails** R-039(b): ~1,140 N·m at SF 0.60. It is rejected as the side-fall energy path. Thicker EPP (83–120 mm) is rejected on package and ID grounds. The CRBH 10020 bearing is rejected (+1.45 kg).
 - **Adopted path:** a constant-force crush element (Al honeycomb or crush tube) sized for 265 J at <=9.17 kN plateau (stroke ~29 mm plus 30% margin), replaceable after a fall. It must fit the <=0.100 kg pair cap *including* the backing; the 0.116 PC backing is not accepted. Materials and Arms deliver a cited honeycomb grade and the full pad-pair mass. Credit for the strike roll-clutch slip (T-030) counts only once T-030 shows it; it is not a design basis.
 - The side-fall mode stays **provisional** (R-042). G4 and G5 remain open on T-030 plus the crush-element spec. The pad stays booked at 0.100.
+
+## R-050 (2026-10-14) ID cover trims (76cc0ef)
+- Trims are calculated estimates, so **half credit**: louvres -0.142 (pending Thermal A35 pattern), 1.2 mm PC panels -0.064 (pending A15 dent check), PA12 rim strips -0.013. Booked **-0.110 provisional**. If A35 or A15 fails, that item's credit is reversed. They move to full credit when measured.
+- Shoulder pad -0.005 is **held** until the 265 J re-check (R-049). The ID R2 5052 honeycomb cartridge is accepted as the R-049 candidate, subject to that re-check and the Materials grade citation.
+- Reserve is ~0.33 provisional, above the floor. The waiver stays active until A35 and A15 close. The no-additions freeze is lifted back to the R-043 rule (additions >0.02 need a ruling).
