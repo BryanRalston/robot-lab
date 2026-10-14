@@ -25,7 +25,11 @@ P=dict(hip_y=130,hip_z=920,knee_z=500,ankle_z=80,pelvis_bot=1126,pelvis_top=1230
 JOINTS={}   # name -> dict(seg, parent_seg, point, axis, range, ...)
 PARENT={}   # seg -> (joint, parent seg)
 POSE={}
-from palm_7075 import palm as _palm7075   # A32
+try:
+    from palm_7075 import palm as _palm7075   # A32 (modules/model/palm_7075.py)
+except ImportError as _e:   # guard so audit_v4 still runs if the palm module is missing
+    import warnings; warnings.warn(f'palm_7075 unavailable ({_e}); using 32x86x90 envelope box [EST]')
+    def _palm7075(c): return cq.Workplane('XY').box(32,86,90).translate(c).val()
 def joint(name,parent,child,pt,ax): JOINTS[name]=dict(parent=parent,child=child,pt=pt,ax=ax); PARENT[child]=(name,parent)
 def chain(seg):
     out=[]
