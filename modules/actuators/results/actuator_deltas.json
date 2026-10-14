@@ -20,8 +20,12 @@
   "status": "pending Arbiter ruling (P-018); not in the official rollup"
  },
  "wrist_pair_pending": {
-  "both_arms_kg": -1.371,
-  "source": "results/wrist_r1.json",
-  "status": "pending Arbiter (Arms contract row 1.55/side)"
+  "D67": "credited -0.666/side (-1.332) by Arms 7f71f86 / R-035",
+  "D70_rotary_side_kg": 0.671,
+  "D70_delta_vs_D67_both_kg": -0.425,
+  "D72_wrist_leads_both_kg": 0.488,
+  "net_both_kg": 0.063,
+  "status": "pending Arbiter",
+  "src": "results/d70_wrist.json"
  }
 }

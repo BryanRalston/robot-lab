@@ -1,0 +1,73 @@
+{
+ "option_a_pushrod": {
+  "rod_kg": 0.05178915489442774,
+  "Pcr_N": 3014.499121695815,
+  "need_N": 294.0,
+  "side_kg": 1.0075783097888555,
+  "backlash": "rod-end radial play not published (QA1/SKF) - not found; 4 joints in series per axis",
+  "SF_buckle": 10.253398373115017
+ },
+ "option_b_rotary": {
+  "T_out_motor_pk": 50.4,
+  "T_out_gear_rep": 36.0,
+  "need_pk": 14.7,
+  "SF_pk": 2.4489795918367347,
+  "rpm_in_6rads": 5729.5779513082325,
+  "T_motor_30pct": 0.06299999999999999,
+  "T_motor_hold_7p4": 0.10571428571428572,
+  "SF_hold_cont": 1.8918918918918919,
+  "I_pk_A": 5.25,
+  "I_hold_A": 2.642857142857143,
+  "unit_kg": {
+   "motor_TBM2G05008": 0.111,
+   "CSG14_100_set": 0.09,
+   "out_bearing_CRBH258A": 0.05,
+   "encoder_AksIM2_MB022": 0.0097,
+   "housing_7075_EST": 0.06,
+   "fasteners_EST": 0.015
+  },
+  "axis_kg": 0.3357,
+  "side_kg": 0.6714
+ },
+ "shoulder_bearing": {
+  "CRBH6013A": {
+   "C0": 24300,
+   "Dpw_EST": 0.075,
+   "fs_moment_plus_axial": 1.0358056265984654,
+   "P0r_N": 23460.0,
+   "fs_if_force_radial": 0.8127090301003345
+  },
+  "CRBH7013A": {
+   "C0": 27700,
+   "Dpw_EST": 0.085,
+   "fs_moment_plus_axial": 1.3007568642616432,
+   "P0r_N": 21295.294117647056,
+   "fs_if_force_radial": 0.998727465535525
+  },
+  "CRBH8016A": {
+   "C0": 43400,
+   "Dpw_EST": 0.1,
+   "fs_moment_plus_axial": 2.3011664899257687,
+   "P0r_N": 18860.0,
+   "fs_if_force_radial": 1.715415019762846
+  }
+ },
+ "wrist_leads": {
+  "L_m": 1.7,
+  "gpm_per_motor": 63.7,
+  "wire_kg": 0.21658000000000002,
+  "connectors_kg": 0.001536,
+  "sleeve_12pct_EST": 0.0259896,
+  "side_kg": 0.24410560000000006,
+  "dV_pk_V": 1.7233103999999997,
+  "dV_pct_68V": 2.5342799999999994,
+  "ecat_sto_taps": "2 drive tees move forearm -> shoulder bay: EtherCAT branch unchanged (still runs to hand), STO tee pigtails 2x3x0.08 m SiF 0.25 relocate, ~0 kg net"
+ },
+ "mass": {
+  "D67_side": 0.884,
+  "D70_side": 0.6714,
+  "delta_vs_D67_side": -0.2126,
+  "leads_side": 0.24410560000000006,
+  "net_both": 0.0630112000000001
+ }
+}

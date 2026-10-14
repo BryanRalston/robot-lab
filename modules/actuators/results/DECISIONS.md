@@ -541,6 +541,7 @@ Retention at 1.2 m/s:
   - At fw 1.5: 13.4 kh. FAIL.
   - At 294 N continuous and full speed: 0.8 kh.
   - **Accepted at fw 1.2. This is sensitive to the duty profile.** O-A2 duty data is needed to close.
+  - **Update (Arms 7f71f86, `arms/wrist_duty_r3.json`):** fw 1.5 with the R3 duty gives **L10 57.7 kh. PASS.** Credit is **−0.666 kg/side (−1.332 both)**, closed in R-035. The hardware is superseded by D70 (O-A3 fit).
 - **Alternative:** BNK1404-3 (ø14 lead 4, Ca 4.2 kN, same ø26 nut) gives 8× the L10 (107 kh at fw 1.5), but it adds 0.130 kg per side and fails 0.90.
 - **Mass per side:**
   - Mechanical 0.865 (D65).
@@ -597,3 +598,40 @@ Retention at 1.2 m/s:
 - **Cost:** TBM2G list prices are not public. Both frames sit in the same ~$0.9–1.5k [EST] band, so the delta is unquantified.
 - **Mass:** +0.47 kg. Needs Arbiter funding under R-031 §11, since no credit is available until A12; it could come from P-027 wrist savings (−1.371) once credited.
 - **Also:** specify thermal-device code `A` (PT1000) on all TBM2G (THERMAL_DATA_PACK §2).
+
+## D70 (Arms O-A3, D67 fit fail) Wrist: compact rotary units at the wrist (`d70_wrist_rotary.py` → `results/d70_wrist.json`)
+- **(a) Push rods (D67 pair moved to the elbow/upper arm): REJECTED.**
+  - 2× ø8×1 steel tube rods, 0.30 m: Euler Pcr 3.0 kN vs 294 N, 10×. Each rod is 0.052 kg.
+  - Side mass 0.884 + 0.104 rods + 4 rod ends 0.02 [EST] = **1.01 kg. FAILS 0.90.**
+  - Backlash: 4 rod joints per axis; rod-end play is not published (not found).
+- **(b) Rotary, per axis: TBM2G-05008C + Harmonic Drive CSG-14-100 component set + IKO CRBH 258 A + AksIM-2 MB022. CHOSEN.**
+  - Gear: HD Table 3 rated 10, repeated peak **36 (2.45× vs 14.7)**, average 14, momentary 70 N·m. Set 0.09 kg (catalog weight table).
+  - CSF-11-100 has a repeated peak of 11 N·m, below 14.7, so it fails.
+  - Motor: Tp 0.72 gives 50 N·m at the output (η 0.70 [EST]), so the gear limits.
+  - Speed: 6 rad/s is 5730 rpm input, within 8500 rpm (grease max) and 8000 rpm (motor).
+  - 30 % torque needs 0.063 N·m.
+  - Hold 7.4 N·m needs 0.106 N·m vs Tmc2 0.20 (1.9×). Current 2.6 A hold, 5.3 A peak (hot Kt 0.040).
+  - **Mass 0.336/axis, 0.671 kg/side. PASS.** That is −0.213/side vs D67. Housing 0.06 and fasteners 0.015 are [EST].
+  - The forearm bore is now free of wrist drives. Envelope: TBM2G-050 frame + CSG-14 at the wrist [EST]. CAD is needed.
+  - Cost: HD, TBM2G and IKO prices are not public (SOURCES row 32).
+
+## D71 (Torso bd02c23 / Arms R2) shoulder_pitch output bearing vs 690 N·m side fall
+- The bearing is IKO CRBH 6013 A (v3.json bearing map; C0 24.3 kN, IKO CAT-57151 dims table). P0r = Fr + 2M/Dpw + 0.44Fa (IKO eq. 2). Dpw is taken as (d+D)/2 [EST].
+- With the 11.5 kN impact axial (lateral fall along the pitch axis): P0r 23.5 kN, **fs 1.04. Passes v3's fs ≥ 1 with no margin.**
+- If the force is radial: fs 0.81. FAIL.
+- **Change: CRBH 8016 A** (C0 43.4 kN, 0.74 vs 0.33 kg, **+0.41 kg/side**). fs is 2.30 axial and 1.72 radial.
+  - CRBH 7013 A (+0.05 kg) gives fs 1.30 axial and 1.00 radial. That is the minimum if the mass is refused.
+- **Pitch slip clutch: not needed for the side fall.** The 690 N·m acts about the roll/x axis and is carried as bearing moment, not as pitch-gear torque, so the CSG-25 ratchet (650) is not loaded.
+- **A pitch-axis fall component (forward fall) is not quantified.** Torso/Arms should supply it. If it is above 369 N·m (CSG-25 momentary), add a ≤300 N·m clutch like roll.
+
+## D72 (Electronics R1 §10.6, 4b85cc8) Wrist motor leads, shoulder bay → wrist (D70 motors at the wrist, 1.7 m/side)
+- Per motor:
+  - Phase: 3× Lapp SiF 0.25 mm², twisted (5.4 g/m each).
+  - Encoder: Belden MRTA2P26S 2×2 shielded + 2× SiF 0.25 for 5 V/GND.
+  - Thermistor: 2× SiF 0.25.
+  - Total 63.7 g/m.
+- ΔV at 5.3 A peak is 1.7 V (2.5 % of 68 V, above the 2 % leg-series budget; acceptable for a 0.2 N·m motor). Going to 0.5 mm² phases adds 0.037 kg/side.
+- **0.244 kg/side** (wire 0.217 + sleeving 12 % [EST] + JST-GH). That is 0.488 both arms, vs Electronics' 0.15 estimate.
+- The EtherCAT and STO tees for the 2 wrist drives move to the shoulder bay: ~0 kg net.
+- Booked in actuator_deltas.json `wrist_pair_pending`: D70 −0.425 + D72 +0.488 = **+0.063 kg both, pending Arbiter**. The D67 −1.332 credit stands.
+- Not yet merged into the harness.py totals.
