@@ -47,3 +47,20 @@ Closed covers fail (Actuators), so the **knee must be vented to A35** (louvres �
 - If carry +10 % open is a design case, use the 0.070 m² layout, which keeps ≥ 15 K margin under the 120 °C target. Book 0.11 kg/knee.
 - The minimum is 0.05 m² net, booked at 0.09 kg/knee.
 - Either way the Legs 0.05 kg booking must rise.
+
+## Rev C check (Actuators 6b86723, R-069; drives OFF the housing per R-066)
+Geometry from `actuators/r069_knee_fins_revc.py` / `cad/knee_twin_housing_finned_revc.step`, per knee, both housings (x ±45): 12 rear × 17 mm + 7 front × 9 mm, 1.0 mm thick 6061, 42 mm axial length, pitch 6.6 mm at r 41 (gap 5.6 mm). Mass 0.0605 kg/knee (CAD).
+- **0.0459 m² is GROSS.** It is the CAD surface-area delta of the union: fin faces + tips, with the root footprint already removed (my hand sum of faces + tips is 0.0465). It is **not efficiency-weighted**.
+- **Fin efficiency** (1.0 mm 6061): 17 mm fin η 0.986 (h 12) / 0.988 (h 10); 9 mm fin 0.996. **Effective area = 0.0453 m² (h 12) / 0.0454 (h 10)**, which is −1.3 %.
+- **Winding temperatures**, from Actuators' `r069_knee_fin_trim.json` (Controls winding model, 2× 07613D, drives off, 60 min), interpolated to A_eff:
+
+| case | h 12 open / vented | h 10 open / vented |
+|---|---|---|
+| walk 1.2 m/s | 87.0 / 79.9 | 94.1 / 85.5 |
+| carry r4 × 1.10 | **104.5** / 94.6 | **114.7** / 102.4 |
+| P-042 carry | 89.2 / 81.8 | 96.7 / 87.7 |
+
+**Verdict:**
+- Rev C **PASSES the 120 °C target and the 130 °C trip in every case**, at h 12 and at h 10, drives off. The η correction costs ≈ 0.1–0.2 K, so Actuators' 0.045 m² bound (104.6 / 114.9) stands.
+- **Caveat:** at h 10, carry open is 114.7 °C, above Actuators' own ≤ 110 °C trim criterion (5 K short) but still 5 K under 120. Vented it is 102 °C. **The knee stays vented (A35/A36).**
+- **If the drives go back onto the housing, rev C is not acceptable:** 119 °C at h 12 and 129–133 °C at h 10 (Actuators). R-066 off-housing mounting is a condition.
