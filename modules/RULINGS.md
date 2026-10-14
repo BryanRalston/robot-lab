@@ -788,3 +788,10 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
 - The shoulder EPP face passes (48/55 C), so no gap is needed.
 - A43 at 4.3 W: **thermal condition met** (>=33 K to the 110 C cutoff). It closes again, pending only the Arms CAD fit.
 - Ladder: **no change.** T4 is 30 N peak / 22 N sustained (R-055), and a sustained ~24 N exceeds that. The tuned 55 C first step stays. A continuous 30 N grip is not a requirement.
+
+## R-065 (2026-10-14) T-030 worst case; T-031 forward fall (Controls 2422c87)
+- Pad: the worst-case core gives 264 J at 0° and 251 J at 15°, against 265 J, so it **fails the design point**. Required: **>=10% energy margin at worst case at the 15° limit (>=292 J)**. ID and Materials lengthen the usable stroke (core ~+5 mm, about 42 mm crush at 6.95 kN) and/or tighten the lot lower bound. Peak stays <=9.17 kN / 550 N·m. Pre-crush and lot test are **mandatory** (the 2.2x start spike). The mass delta comes to me (expected under 0.005).
+- Reach and clutch credit removed: accepted.
+- Forward fall (T-031): the R5 tuck is expected to fail (~510 vs 369 N·m), and 8.6 mm clearance breaks R-058's 10 mm. Order of remedies: (1) **a tuck with the forearm and hand inside the chest outline** (zero mass), as the primary; (2) the forearm preloaded against the chest (intentional contact, defined contact pads); (3) a forearm crush element, last, with its mass coming to me. T-031 runs (1) first.
+- **Diagonal falls:** T-030 and T-031 add diagonal cases. Shoulder-pitch gear torque must be <=369 N·m momentary (CSG-25-100) in every fall mode. The 438 N·m smoke result is a warning.
+- G4 stays open.
