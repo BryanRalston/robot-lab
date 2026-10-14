@@ -1,0 +1,116 @@
+{
+ "shin_fairing": {
+  "frame": "L_shank",
+  "poses": 35,
+  "offset_mm": 5.0,
+  "bbox_min": [
+   -20.0,
+   38.4,
+   145.0
+  ],
+  "bbox_max": [
+   135.4,
+   221.6,
+   472.5
+  ],
+  "volume_cm3": 5263.0,
+  "area_cm2": 1750.8,
+  "stl": "results/v5/shin_fairing_keepout.stl",
+  "note": ""
+ },
+ "ankle_boot": {
+  "frame": "L_shank",
+  "poses": 35,
+  "offset_mm": 5.0,
+  "bbox_min": [
+   -79.3,
+   46.8,
+   -37.4
+  ],
+  "bbox_max": [
+   118.8,
+   213.2,
+   175.0
+  ],
+  "volume_cm3": 3850.6,
+  "area_cm2": 1258.3,
+  "stl": "results/v5/ankle_boot_keepout.stl",
+  "note": "flexible TPU-nylon boot over rod ends / instep lugs; z<=170 in shank frame; excludes the foot box"
+ },
+ "thigh_fairing": {
+  "frame": "L_thigh",
+  "poses": 16,
+  "offset_mm": 5.0,
+  "bbox_min": [
+   -181.1,
+   15.0,
+   555.0
+  ],
+  "bbox_max": [
+   72.0,
+   245.0,
+   885.0
+  ],
+  "volume_cm3": 10834.6,
+  "area_cm2": 2633.2,
+  "stl": "results/v5/thigh_fairing_keepout.stl",
+  "note": ""
+ },
+ "knee_cap": {
+  "frame": "L_thigh",
+  "poses": 10,
+  "offset_mm": 5.0,
+  "bbox_min": [
+   -114.4,
+   35.0,
+   385.6
+  ],
+  "bbox_max": [
+   100.8,
+   225.0,
+   554.5
+  ],
+  "volume_cm3": 3665.4,
+  "area_cm2": 1211.1,
+  "stl": "results/v5/knee_cap_keepout.stl",
+  "note": "shank-side knee lever + rod ends swept 0-135 in the thigh frame; cap (shank-mounted) must stay outside the thigh fairing and inside this keep-out complement"
+ },
+ "hip_skirt": {
+  "frame": "pelvis",
+  "poses": 36,
+  "offset_mm": 5.0,
+  "bbox_min": [
+   -258.9,
+   -188.8,
+   815.0
+  ],
+  "bbox_max": [
+   433.7,
+   505.3,
+   1126.4
+  ],
+  "volume_cm3": 85271.0,
+  "area_cm2": 11317.2,
+  "stl": "results/v5/hip_skirt_keepout.stl",
+  "note": ""
+ },
+ "foot_upper": {
+  "frame": "L_foot",
+  "poses": 1,
+  "offset_mm": 5.0,
+  "bbox_min": [
+   -65.0,
+   52.5,
+   13.0
+  ],
+  "bbox_max": [
+   185.0,
+   207.5,
+   113.0
+  ],
+  "volume_cm3": 2313.2,
+  "area_cm2": 1055.2,
+  "stl": "results/v5/foot_upper_keepout.stl",
+  "note": "upper shell over the 240x100x18 box; sole contact patch unchanged"
+ }
+}
