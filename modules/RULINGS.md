@@ -1034,3 +1034,11 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
 - The R-095 clear coat (+0.008) and the TPU film are alternatives; the film is credited out only with a cited mass once the clear coat is confirmed.
 - Service rule recorded: a dent >1 mm or any crush means replace the pad.
 - Reserve ~-0.41.
+
+## R-099 (2026-10-14) Legs d81dcba plus Materials A37 notes
+- Knee fins rev B measured at 0.0932 kg/knee: **-0.032** at full credit (measured).
+- Lever-eye sleeve: **not adopted** (does not fit the 26x12 ear; a redesign would add +0.057). Not booked. Thermal quantifies the unbroken trunnion-bracket-to-femur path before any further knee heat-path change.
+- A38 rev D tine: **+0.008** booked in full (+1.3 g if the root stays 30 wide). The collar must measure 8 K/W or less at J-T1/G5.
+- Sole pad (R-081): Vibram Gumlite 6 mm plus PU 60A corner bumpers, **+0.186** [CALC] booked in full. Adhesives per Materials: neoprene cement with a pocket/edge lip for the sole; bumpers use flexible PU/acrylic adhesive or mechanical retention; DP490 rejected.
+- ID panel tabs: **+0.004**.
+- Net +0.166. Reserve ~-0.58.
