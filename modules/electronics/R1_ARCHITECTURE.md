@@ -1004,11 +1004,22 @@ No failing connector was found among the cited parts, so **no mass change**. XT6
   - The AS150U's IP40 is cited, but its mated/unmated status is unknown, and "DC 500V" is a withstand figure, not a rating.
 - **Mass delta ≈ +0.041 kg** (82 − 41.4 g) **[clone-kit figure, NOT an Anderson citation]**. Anderson's catalogue mass must be cited before booking (vendor question for Bryan), or the part weighed on receipt. Book +0.041 kg provisionally.
 
-**§18.2h mass summary.**
+**§18.2h mass summary (superseded by §18.2i: SBS75X is Torso's line, so the electronics total is +0.014, or +0.026 with foot F/T).**
 - STO supply: +0.014 (cited).
 - SBS75X: +0.041 (provisional; Anderson mass not cited).
 - Würth fallback: 0.
 - Foot F/T: +0.012 (if confirmed).
+
+
+### 18.2i Arbiter R-086 (recorded 2026-10-14)
+- **STO buffers** (RP06-11005SRAW + 10 × SOT-23 high-side switches) are booked at **+0.014 kg**. **G1 blocker:** cite the STO input current from Elmo's Gold Board Level Modules Hardware Manual, Ch. 9.
+- **Würth 7490140142** fallback is accepted. **Before G1**, cite or weigh its mass.
+- **SBS75X** is selected over AS150U. Its +0.041 kg sits in **Torso's 0.089 line (R-084, Torso-owned)** and is **not** an electronics item. It is removed from the §18.2h total.
+- **Corrected §18.2h electronics total:**
+  - STO supply: +0.014 kg (booked).
+  - Foot F/T SELV: +0.012 kg, only if confirmed.
+  - Würth fallback: 0.
+  - **= +0.014 kg booked, or +0.026 kg with foot F/T.**
 
 ### 18.2 Checked and not counted
 - **STM32H7 drop:** never booked as a separate mass. The hand board was booked as a board lump (Arms), and Thermal A43C already assumed it dropped. **Saving 0.**
