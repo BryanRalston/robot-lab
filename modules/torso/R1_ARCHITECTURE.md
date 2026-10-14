@@ -285,11 +285,31 @@ Shoulder-bay inlet: **top edge at z ≤ +0.155**. Panel 100 × 50 mm spans z +0.
 ### 18.4 O-T5 power column
 Torso-side file `OT5_power_torso.md` (not edited in Controls' file). Runtime (typical / binned): T-A 3.83 / 3.75 h, T-B 3.32 / 3.25, T-C 2.84 / 2.78, T-D 3.92 / 3.83, **T-E 4.66 / 4.55 (only one ≥ 4 h)**.
 
+## 19. R-071 (for the Arbiter): 2.5 mm² battery link vs fuse L50S125. **FAIL**
+Sources:
+- Littelfuse L50S datasheet (https://www.littelfuse.com/assetdocs/l50s-datasheet?assetguid=0b19c43c-f077-47b9-8fbc-bfe1d93a5592): L50S125 500 VAC / **450 VDC**, interrupting **20 kA DC**, melting I²t **1,290 A²s**, total clearing I²t **5,150 A²s at 20 kA / 450 VDC**.
+- Molicel P45B: DCR < 15 mΩ (10 s), 13.5 mΩ DC at 50 % SoC.
+- k factors for copper (IEC 60364-4-43 / -5-54 adiabatic): PVC 115, XLPE/EPR 143.
+- Copper ρ 0.0172 Ω·mm²/m.
+**(a) Fault I²t vs conductor withstand:** k²S² = 115² × 2.5² = **82,656 A²s** (PVC), 127,806 (XLPE), against fuse clearing **5,150 A²s** → **PASS ×16** at high fault current.
+**(b) Prospective fault:** pack 20 × 15 mΩ / 5 = 60 mΩ, plus 1 m of 2.5 mm² (6.9 mΩ), plus FETs/contactor/busbars ~5 mΩ [EST] → **I_f ≈ 84 / 0.072 ≈ 1.17 kA (9.4 × In)**.
+- The conductor withstands this for 82,656 / 1.17k² = **60 ms** (PVC) / 93 ms (XLPE).
+- At 9.4 × In the fuse is not in its current-limiting region. Clearing time must be read from the L50S125 time-current curve (graph, not read). High-speed fuses at ~10 × In are typically ≤ 20 ms [EST], so the result is **conditional on the curve**.
+**(c) Ampacity and overload coordination:**
+- 2.5 mm² continuous rating ≈ 24–32 A for PVC (IEC 60364-5-52 [EST range]), ~40–50 A for silicone.
+- 60 A continuous (R1.3 contract): **FAIL** (≥ 1.2–2.5 × overloaded).
+- 100 A for 2 s: I²t 20,000 < 82,656 → PASS adiabatically.
+- 2 h walking mean 712 W / 72 V = **9.9 A: PASS**.
+- **Overload coordination** (I_b ≤ I_n ≤ I_z): the 125 A fuse cannot protect a ~30 A conductor. A 40–125 A overload (e.g. a stalled limb) would cook the link before the fuse acts → **FAIL**.
+**Verdict: FAIL for the main battery link.** 2.5 mm² is acceptable only for a branch with its own ≤ 30 A fuse. The main link needs **≥ 10 mm² for 60 A continuous** (≈ 0.09 kg/m copper vs 0.022 kg/m for 2.5 mm²) [IEC 60364-5-52 EST], or the contract continuous current has to drop.
+**O-T4 closed:** 84 V DC ≤ 450 VDC rating, and 1.17 kA prospective ≤ 20 kA DC interrupting (Littelfuse datasheet). Clearing time at 1.17 kA is still to read from the curve (moved to O-T8).
+**Mass-down asks:** Arbiter ≥ 0.08 kg; Robot Lab ≥ 0.18 kg. Torso cited so far −0.0225 kg (§18.1), or −0.0825 with the EV100 +1.5 W ruling. That meets neither firm; with the EV100 it meets the Arbiter's 0.08.
+
 ## 7. Open questions / conflicts (not edited in others' files)
 - **O-T1 (Electronics, coordination):** adopt the 48 V intermediate rail with DCM3623TA5N53B4T00; Torso hosts the DCM on the power distribution board or the brain tray? Mass 0.024 [UNVERIFIED for variant] stays in the brain line; who books the 47718-232 choke; 24 V VL source (O-E3); BMS→safety MCU CAN FD message set; e-stop = FET-open vs contactor (O-E6).
 - **O-T2 (Actuators/Arbiter):** waist_pitch 116 N·m < 188 N·m need with T5 payload → TBM2G-08508A, +0.19 kg.
 - **O-T3 (Electronics/Arbiter):** no mechanical contactor; FETs as disconnect needs a safety argument (welded-FET detection via BQ76200 diagnostics).
-- **O-T4:** L50S125 DC breaking capacity at 84 V and pack prospective short-circuit current (100 cells, ~15 mΩ/cell) to be verified.
+- **O-T4 CLOSED (§19):** L50S125 DC breaking capacity at 84 V and pack prospective short-circuit current (100 cells, ~15 mΩ/cell) to be verified.
 - **O-T5 (Arbiter):** T7 4 h mixed is not met (2.92 h). Options: re-rate mixed duty, 20S6P (breaks T2), or idle-power cuts (compute cap). Ruling requested.
 - **O-T6:** usable 90 % at 3.4 V/cell floor still [EST] (R-010); read P45B discharge curve at ~2 A/cell.
 - **O-T8:** clamp: read HS200/HS100 overload curve for 400 J, cite comparator, gate driver, thermal cutout, sum drive bus capacitance for pre-charge; HS200 mass (0.475) vs Electronics estimate.
