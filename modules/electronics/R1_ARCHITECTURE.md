@@ -921,6 +921,27 @@ No failing connector was found among the cited parts, so **no mass change**. XT6
 - Re-check items 10 and 8 against final Legs/Actuators drive mounting.
 - The R-078 boundary mass (§18.2e, +0.054 kg) is separate and booked in full.
 
+
+### 18.2g AO supply up-rated: RP03 → RECOM RP06-11012SRAW (after Thermal: AO ≈ 2.9 W hot)
+**Need.** Thermal puts AO at ≈ 2.5 W + 0.39 W (ISOW7741, §18.2e) ≈ 2.9 W hot per hand. The R-077 80 % derate means the rating must be ≥ 3.7 W. The RP03 (3 W) fails, and §18.2d's 2.24/2.37 W figures are superseded.
+
+**Chosen: RECOM RP06-11012SRAW**, ×2 (one per arm, shoulder bay). Cited from the RECOM RP06-RAW datasheet (recom-power.com/pdf/Powerline_DC-DC/RP06-RAW.pdf) and the product page:
+- **Input 36–160 VDC continuous, 4:1, 200 VDC for 1 s.** This covers 43–92 V with 68 V of headroom at the 92 V ceiling. It is the same input as the RP03-RAW.
+- 12 V / 500 mA = **6 W**, 84.5 % efficiency, 130 µF max capacitive load.
+- **3 kVAC/1 min, "Insulation Grade: reinforced"**. EN 62368-1 / UL 62368-1, EN 50155.
+- −40 to +105 °C with derating; more than 85 °C without derating.
+- DIP24, **31.8 × 20.3 × 10.6 mm**, **14 g typ.** It has the same package, pinout family and remote On/Off (positive) as the RP03.
+- OLP hiccup at 150 %, UVLO, OVP, SCP.
+
+**Derate check.** 2.9 W / 6 W = 48 % (the limit at 80 % is 4.8 W), leaving 1.9 W of margin. That covers a mid-line hand, a second PHY with ISOW (+0.61 W), or the 144 MHz MCU. So the end-of-line and 72 MHz conditions in §18.2d/e are no longer power-driven. They stay only as Controls' timing items.
+
+**Other families checked.**
+- The RP08 and other RECOM 2:1/4:1 lines mostly top out at 72–75 V input (e.g. 18–75 V), which is below the 92 V ceiling, so they were rejected.
+- The RP06-RAW is the direct drop-in, so other vendors are not needed.
+
+**Mass.** 2 × 14 g = 28 g, against 2 × 14 g booked (R-076). **Net 0.000 kg.** Footprint is unchanged.
+**Thermal.** Dissipation at 2.9 W out and 84.5 % efficiency is ≈ 0.53 W per converter, against ≈ 0.53 W for an RP03 at the same load. The shoulder bay is unchanged against Thermal's 2.9 W case.
+
 ### 18.2 Checked and not counted
 - **STM32H7 drop:** never booked as a separate mass. The hand board was booked as a board lump (Arms), and Thermal A43C already assumed it dropped. **Saving 0.**
 - **`hand 24 V from wrist DC/DC` row (0.0128 kg):** 0.5 → 0.25 passes (0.6 K), but R-047 put the RP40s in the shoulder bay, so this row's route is stale. Actuators should re-book the row first. **Not counted.**
