@@ -1,5 +1,5 @@
 {
- "status": "OFFICIAL single source of truth (R-022, updated R-026). Module rollups must reconcile to this file line by line; any module figure that differs must cite the line and the ruling that changes it.",
+ "status": "OFFICIAL single source of truth (R-022, updated R-027). Module rollups must reconcile to this file line by line; any module figure that differs must cite the line and the ruling that changes it.",
  "limit_kg": 66.5,
  "reserve_target_kg": 0.3,
  "lines": [
@@ -36,12 +36,20 @@
    "source": "Actuators 71f3c3e D53, harness.json"
   },
   {
-   "line": "covers M3 (Arbiter)",
-   "paper_kg": 1.384,
-   "credible_kg": 1.622,
-   "evidence": "HP PA12 density cited; 1.5 mm wall + 50 % coverage [EST]",
-   "credit_rule": "saving vs 1.86 x0.5 (rests on [EST])",
-   "source": "R-021, a3_size.json"
+   "line": "covers M3 (Arbiter): thermoformed PC 1.5 mm, 50 % limb coverage + EPP (R-027; replaces PA12 MJF)",
+   "paper_kg": 1.567,
+   "credible_kg": 1.713,
+   "evidence": "PC 1.20 g/cc Palram/SABIC TDS; 1.5 mm heavy-gauge thermoform; coverage + EPP [EST]",
+   "credit_rule": "saving vs 1.86 x0.5 (R-021 rule)",
+   "source": "R-027, a28_covers_palm.json"
+  },
+  {
+   "line": "hands: palm PA12 skin -> machined 7075 1.5 mm (R-027)",
+   "paper_kg": 0.144,
+   "credible_kg": 0.144,
+   "evidence": "model_v4 palm envelope 32x86x90; wall [EST]",
+   "credit_rule": "addition x1.0",
+   "source": "R-027, a28_covers_palm.json"
   },
   {
    "line": "brain M4 (Arbiter)",
@@ -77,8 +85,8 @@
   },
   {
    "line": "head + neck (P-019; 2x XM430-W350-R, ZED X Mini, CF shell)",
-   "paper_kg": 0.817,
-   "credible_kg": 1.1039,
+   "paper_kg": 0.8329,
+   "credible_kg": 1.1198,
    "evidence": "catalog/calc 0.567, [EST] 0.250 (modules/head/BOM.md)",
    "credit_rule": "replaces v3 basis 2.692 (head 1.6 + 2 neck actuators); saving cited share x1.0, [EST] share x0.5 (R-025/R-026)",
    "source": "a88c2d8 P-019; A23 6e75636 (R-026)"
@@ -108,22 +116,22 @@
    "source": "derived"
   }
  ],
- "paper_kg": 63.399,
- "credible_kg": 64.92,
- "credible_reserve_kg": 1.58,
+ "paper_kg": 63.742,
+ "credible_kg": 65.171,
+ "credible_reserve_kg": 1.329,
  "head_basis_removed_kg": 2.6921,
- "paper_reserve_kg": 3.101,
+ "paper_reserve_kg": 2.758,
  "pending": {
   "A1prime_structure_FEA": "VOID (R-023): GB FEA failed the r5 hand-checked parts; replaced by L36 fixes",
   "tube_hold_kg": 0.267,
-  "credible_if_GB_r2_passes": 64.653,
+  "credible_if_GB_r2_passes": 64.904,
   "risk_unquantified": "foot collar OD (fallback r50 or 4 mm, mass not computed); clamp/tongue/clevis convergence at h<=2"
  },
  "reconciliation": {
   "actuators_r6": 66.85259852147897,
   "arbiter_R021": 66.069,
   "actuators_missing_R021_brain": -0.584,
-  "actuators_missing_R021_covers": -0.238,
+  "actuators_missing_R021_covers": -0.003,
   "both_missing_legs_r6_bumper_bolts": 0.022,
   "R021_missing_harness_A9": -0.038,
   "R021_missing_linkage": 0.0002

@@ -257,3 +257,13 @@ Any change to CONTRACTS.md or TARGETS.md, or to another module's files, starts h
 - R-021 credit recomputed: saving 2.692 − 0.817 = 1.875; credited 1.875×0.694 + 1.875×0.306×0.5 = 1.588 → **credited head + neck 1.104 kg (was 1.178; −0.074 credible)**. Paper +0.007.
 - The neck servos use the AGX301 RS485, so no added mass. The JCB022/JCB009 +0.045 is unchanged in the brain area (R-025 §4).
 - Status: **ACCEPTED (R-026), A23 closed.** Credited head + neck 1.104 (−0.074) confirmed; converter verified vs RP40-FR datasheet. Conditions: order RP40-11012SFR/P-HC (43 g heat-sink variant); add the note-9 input filter (A27). Credible 64.920, reserve 1.580.
+
+### P-020: Robot Lab v5 cover set (104c9ad, `design/V5_POLISH_PLAN.md`): replace the PA12 MJF covers M3 line with a CF set
+- Claimed: +0.2 to +0.5 kg net, replacing 1.384 paper / 1.622 credited.
+- Status: **ACCEPTED IN PART (R-027).** The PA12 line is replaced, but by **thermoformed PC 1.5 mm** (weighted score near-tie, PC wins on cost and fall toughness): 1.567 paper / 1.713 credited (+0.091 credited). CF is allowed panel by panel at ≤ the PC panel mass. Extra V5 coverage (skirt, bellows, boots, knee caps) needs separate P-numbers. "No 3D printing" is recorded as a crew preference, not a Bryan rule.
+
+### P-021: Robot Lab v5 plan item 7: PA12 hand palm → machined 7075 (104c9ad)
+- Status: **ACCEPTED (R-027)**, +0.144 kg both hands (×1.0, upper bound from the model_v4 palm envelope); A32 refines it with CAD.
+
+### A27 (a61995b, Robot Lab): RP40 /P-HC + note-9 input filter + XM430 current limit
+- Status: **BOOKED and CLOSED (R-027).** Head 0.817 → 0.833 paper (+0.016 ×1.0). Obsolete Rubycon BXF needs an equivalent before purchase (A28).

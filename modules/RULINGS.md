@@ -439,3 +439,35 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
 - **Official rollup (regenerated):** paper **63.399 kg** (reserve 3.101); credible **64.920 kg — MET vs ≤ 66.5, reserve 1.580 ≥ 0.30 floor** (64.653 if A15 releases the tube hold).
 - Actions: A23 closed. A24, A25, A26, A12 unchanged (round 13). New: A27 Robot Lab (head) — add the RP40 input filter (note 9) and fix the part number to /P-HC in `head/BOM.md`, round 13.
 - Needs Bryan: nothing. All within approved targets.
+
+### R-027: A27 input filter booked + closed; "no 3D printing" provenance; P-020 cover set (PA12 MJF → thermoformed PC); P-021 PA12 palm → machined 7075
+- Date: 2026-10-14. Inputs: Robot Lab a61995b (A27, `head/BOM.md`), 104c9ad (`design/V5_POLISH_PLAN.md`). Arbiter check: `arbiter/a28_covers_palm.py` (+ `.json`), `arbiter/mass_rollup_official.py`. Targets unchanged (T2 ≤ 66.5, T5 20 kg); no authority wording changed.
+- **1. A27 booked and CLOSED.** RP40-11012SFR/P-HC specified; note-9 filter added: 3× 68 µF/200 V caps 0.0105 [EST] + 2× SMDJ90A 0.0004 catalog + carrier PCB 0.005 [EST] = **+0.0159**. Additions count in full (×1.0), so the head line goes **0.817 → 0.833 paper, 1.104 → 1.120 credited**. TVS 90 V standoff > 84 V pack max and 146 V clamp < 160 V RP40 max: checked, OK. XM430 1.5 A current limit (addr 38) is a required firmware setting. **The Rubycon 200BXF68MEFC12.5X20 is listed obsolete / not for new designs: an equivalent (68 µF, ≥ 160 V, 105 °C, radial ≤ 12.5×20 mm, ripple ≥ BXF) must be selected and cited before purchase → A28 (Robot Lab, head).**
+- **2. Where "no 3D printing" comes from: a crew rule, not a Bryan rule.** It is not in CHARTER.md, TARGETS.md or CONTRACTS.md, and no Bryan statement in the repo sets it. The first appearance is Robot Lab's head study (a88c2d8, 2026-10-14 13:16, "no 3D printing; replaces PA12"), then 104c9ad ("Nothing is 3D-printed", "3D-printed: not allowed"). The only Bryan-related fact is `research/open_source_starting_points.md` / `research/NOTES.md`: "Bryan has no printer" — a sourcing note that lists print services as an option, not a ban. **This ruling treats it as a Robot Lab crew design preference.** PA12 MJF covers and the PA12 palm do not violate any Bryan rule; they are replaced below on their own merits (crew preference + score), not as a violation. If Bryan wants it as a hard rule, it must come from him.
+- **3. P-020 cover set: PA12 MJF line REPLACED (not added to). Winner: thermoformed PC 1.5 mm, not CF.** Same basis as R-021: 1.285 m² limb area × 50 % coverage [EST] + EPP pads 0.360 [EST]; credit = saving vs 1.86 ×0.5.
+
+| option | ρ (source) | wall (source) | paper kg | credited kg | Δ credited vs PA12 1.622 | fall | cost [EST] | score |
+|---|---|---|---|---|---|---|---|---|
+| **thermoformed PC sheet** | 1.20 g/cm³ (Palram PALSUN TDS; SABIC LEXAN ISO 1183) | 1.5 mm, heavy-gauge thermoform 1.5 mm+ (Select Plastics guide); draw ≤ 3:1 (LEXAN forming guide) | 1.567 | 1.713 | +0.091 | ductile, dents not cracks (PALSUN 130 J E50 at 3 mm) | ~$1.3k (tooling-board moulds) | **+0.0030** |
+| injection-moulded PC/ABS | ~1.15 [EST] | 1.5 mm [EST] | 1.518 | 1.689 | +0.067 | tough | ~$24k (≈8 hard tools) — wrong for qty 1–2 | +0.0018 |
+| CF prepreg 2×2 twill, 4 × 0.25 mm | 1.55 (Toray 3900 TDS laminate 1.51–1.54; twill sheet TDS 1.55 ±0.05; conservative vs Easy Composites XC110 1.152) | 1.0 mm = 4 plies × 0.25 mm consolidated (Easy Composites XC110/XC130 210 g) | 1.426 | 1.643 | +0.021 | edge cracking on impact | ~$3.8k (machined Al moulds, repo head basis $400/mould) | −0.0001 |
+| formed 5052 Al 0.8 mm | 2.68 | 0.8 mm [EST] (Protolabs machined nominal ≥ 1.02 mm would be heavier) | 1.788 | 1.824 | +0.202 | permanent dents | ~$2.4k | −0.0037 |
+
+  - Score = −Δcredited/66.5 × 0.15 (T2) + fall Δ [EST] × 0.13 (T8) × 0.5. All |score| < 0.01 (a near-tie under the TARGETS rule), so cost and fall toughness break it: **thermoformed PC** (cheapest, toughest, +0.091 kg). The covers are not structural; the EPP pads carry the T8 fall energy, so a ductile skin that dents is preferred over a brittle one. Robot Lab's "+0.2 to +0.5 kg" assumed ρ≈1.55 at 1.0 mm **plus** more coverage; at the same 50 % basis CF is only +0.04 paper. CF at the V5 75 % coverage would be 1.924 paper (+0.54).
+  - **CF is allowed panel by panel** (e.g. the gold thigh/shin fairings for looks or stiffness) if that panel's own mass is no more than its PC version. The extra V5 coverage (hip skirt, waist bellows, ankle boots, knee caps, wider shin fairings) is **not booked here**: each needs its own sized P-number, paid from the reserve.
+  - Cost figures are [EST] apart from the cited material sources; a cost spreadsheet is A30.
+- **4. P-021 palm: PA12 → machined 7075, booked +0.144 kg (both hands, ×1.0).** Basis: model_v4 palm envelope 32 × 86 × 90 mm ("7075 skeleton + PA12", `model/model_v4.py` l.261). The skeleton is unchanged; the PA12 skin at 1.5 mm (0.0405 kg/hand, PA12 1.01) becomes 7075 at 1.5 mm (0.1127 kg/hand, 2.81) → **+0.072 per hand**. Wall kept at 1.5 mm (Protolabs: features ≥ 0.51 mm, nominal ≥ 1.02 mm). It's an upper bound with no openings (6061 would be +0.069/hand). The Hands owner may credit the openings back with CAD.
+- **Also flagged:** the brain lid (R-021, 0.079 kg) is still "PA12 MJF 1.5 mm". Under the crew preference it should become thermoformed PC or 7075 sheet (≤ +0.02 kg as PC) → A31.
+- **Official rollup (regenerated):** paper **63.742 kg** (reserve 2.758); credible **65.171 kg — MET vs ≤ 66.5, reserve 1.329 ≥ 0.30 floor** (64.904 if A15 releases the tube hold). Δ vs R-026: head +0.016, covers +0.183 paper / +0.091 credited, palm +0.144.
+- Actions:
+
+| # | owner | action | releases | deadline |
+|---|---|---|---|---|
+| A27 | Robot Lab (head) | — **CLOSED** (R-027) | — | — |
+| A28 | Robot Lab (head) | pick and cite an in-production equivalent to the obsolete Rubycon 200BXF68 (68 µF, ≥ 160 V, 105 °C, radial ≤ 12.5×20) with its mass; update `head/BOM.md` | purchase gate | before purchase / round 13 |
+| A29 | Arbiter (placeholder; Torso when staffed) + Legs (envelopes) | PC cover panel layout on the v4 CAD: measured areas replace the 50 % coverage [EST]; mould list | up to the ×0.5 credit on covers | round 13 |
+| A30 | Robot Lab | cost sheet for the cover set (sheet, moulds, forming quotes), replacing [EST] costs | T10 tracking | round 13 |
+| A31 | Arbiter (placeholder; Brain when staffed) | brain lid PA12 MJF → PC or 7075 sheet; book the delta | crew preference | round 13 |
+| A32 | Robot Lab → Hands agent | machined 7075 palm CAD with openings; replaces the +0.144 upper bound | credit for the openings | when Hands is staffed |
+
+- Needs Bryan: **nothing for mass.** Optional: whether "no 3D printing" should be a real project rule. Today it is only a crew preference.

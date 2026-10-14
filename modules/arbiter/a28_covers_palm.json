@@ -1,0 +1,95 @@
+{
+ "ruling": "R-027",
+ "coverage_basis": {
+  "area_m2": 1.285,
+  "fraction": 0.5,
+  "epp_kg": 0.36
+ },
+ "options": [
+  {
+   "option": "Thermoformed PC sheet 1.5 mm (vacuum-formed on machined tooling-board/Al moulds)",
+   "density_kg_m3": 1200,
+   "density_src": "1.20 g/cc ASTM D792, Palram PALSUN TDS; SABIC LEXAN 1.20 ISO 1183",
+   "wall_mm": 1.5,
+   "wall_src": "heavy-gauge thermoforming 1.5 mm+ (Select Plastics ABS thermoforming guide); draw <=3:1 (LEXAN forming guide)",
+   "shell_kg": 1.157,
+   "fasteners_kg": 0.05,
+   "epp_kg": 0.36,
+   "paper_kg": 1.567,
+   "credited_kg": 1.713,
+   "d_paper_vs_PA12": 0.183,
+   "d_cred_vs_PA12": 0.091,
+   "fall_note": "ductile; 130 J falling-weight E50 at 3 mm (PALSUN TDS); dents rather than cracks",
+   "cost_usd_EST": 1300,
+   "score": 0.00304
+  },
+  {
+   "option": "Injection-moulded PC/ABS 1.5 mm",
+   "density_kg_m3": 1150,
+   "density_src": "PC/ABS ~1.15 g/cc [EST, typical grades]",
+   "wall_mm": 1.5,
+   "wall_src": "1.5 mm typical moulded wall [EST]",
+   "shell_kg": 1.108,
+   "fasteners_kg": 0.05,
+   "epp_kg": 0.36,
+   "paper_kg": 1.518,
+   "credited_kg": 1.689,
+   "d_paper_vs_PA12": 0.134,
+   "d_cred_vs_PA12": 0.067,
+   "fall_note": "tough; but ~8 hard tools [EST $3k each] for qty 1-2 robots",
+   "cost_usd_EST": 24000,
+   "score": 0.0018
+  },
+  {
+   "option": "CF prepreg 2x2 twill, 4 plies x 0.25 mm on machined Al moulds",
+   "density_kg_m3": 1550,
+   "density_src": "1.51-1.54 g/cc laminate, Toray 3900 TDS (toraycma.com/wp-content/uploads/3900-Prepreg-System.pdf); 1.55 +-0.05 twill sheet TDS (cnccarbonfiber.com); conservative vs Easy Composites XC110 1.152",
+   "wall_mm": 1.0,
+   "wall_src": "4 x 0.25 mm consolidated ply (Easy Composites XC110/XC130 210 g 2x2 twill); 3 plies (0.75 mm) judged too thin for edge impact [EST]",
+   "shell_kg": 0.996,
+   "fasteners_kg": 0.07,
+   "epp_kg": 0.36,
+   "paper_kg": 1.426,
+   "credited_kg": 1.643,
+   "d_paper_vs_PA12": 0.042,
+   "d_cred_vs_PA12": 0.021,
+   "fall_note": "brittle edge cracking on impact; panels replaceable",
+   "cost_usd_EST": 3800,
+   "score": -5e-05
+  },
+  {
+   "option": "Formed 5052 Al sheet 0.8 mm",
+   "density_kg_m3": 2680,
+   "density_src": "5052 2.68 g/cc (handbook)",
+   "wall_mm": 0.8,
+   "wall_src": "0.8 mm formed sheet [EST]; Protolabs machined min nominal 1.02 mm would be heavier",
+   "shell_kg": 1.378,
+   "fasteners_kg": 0.05,
+   "epp_kg": 0.36,
+   "paper_kg": 1.788,
+   "credited_kg": 1.824,
+   "d_paper_vs_PA12": 0.404,
+   "d_cred_vs_PA12": 0.202,
+   "fall_note": "permanent dents on every fall; sharp edges",
+   "cost_usd_EST": 2400,
+   "score": -0.00371
+  }
+ ],
+ "winner": "Thermoformed PC sheet 1.5 mm (vacuum-formed on machined tooling-board/Al moulds)",
+ "cf_at_75pct_coverage_paper": 1.924,
+ "palm": {
+  "envelope_mm": [
+   32,
+   86,
+   90
+  ],
+  "skin_area_m2": 0.02674,
+  "wall_mm": 1.5,
+  "pa12_kg_per_hand": 0.0405,
+  "al7075_kg_per_hand": 0.1127,
+  "al6061_kg_per_hand": 0.1083,
+  "delta_per_hand": 0.0722,
+  "delta_both": 0.144,
+  "basis": "skin = envelope surface x wall (upper bound: no openings); [EST] geometry, x1.0 as an addition"
+ }
+}

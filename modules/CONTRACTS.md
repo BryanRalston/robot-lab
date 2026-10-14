@@ -24,10 +24,10 @@ Sources used: `v3/analysis/results/v3_checks.md` and `v3.json` (per-joint rows, 
 | leg structure, both legs (incl. thigh clamp, instep lugs; R-015 M2) | 5.40 kg | 5.154 kg design (Legs r8 L36: 5.114 + bolts/bumper 0.04; FEA fixes); credited 5.421 incl. 0.267 tube hold (R-023) | ≤ 5.154 kg (R-023, raised from 4.87 for safety fixes, reserve-funded); + r6 bumper/bolts 0.022 + A14 stops/panels 0.069; tube hold released on GB r2 (A15); A1' void |
 | leg linkages, both legs (R-015) | — | 2.527 kg (`actuators/results/LINKAGE_TABLE.json` 33a7186: incl. lever B, hip bearings 0.628, rod ends 0.300 [EST], 6 trunnion pairs) + thigh clamp 0.20 [EST] | 2.53 kg line, hip pivot bearing owned by Actuators (R-016); inside actuator all-in ceiling |
 | harness (M3; owner RL Actuators, R-017) | 2.00 kg | 1.286 kg datasheet/listing model (71f3c3e); **1.286 kg credited** (R-022: JST-GH published weights ×1.0) | ≤ 1.46 kg met; A9 closed |
-| covers (M3; Arbiter placeholder, R-017) | 1.86 kg | 1.384 kg paper (PA12 MJF 1.5 mm panels, 50 % limb coverage [EST] + EPP 0.36); **1.622 kg credited** (R-021) | ≤ 1.20 kg (R-015 M3) NOT MET; A10 |
+| covers (M3; Arbiter placeholder, R-017) | 1.86 kg | 1.567 kg paper (**thermoformed PC 1.5 mm** panels, 50 % limb coverage [EST] + EPP 0.36; replaces PA12 MJF, R-027); **1.713 kg credited** | ≤ 1.20 kg (R-015 M3) NOT MET; A29 |
 | brain (M4; Arbiter placeholder, R-017) | 1.80 kg | 1.044 kg paper (T5000 0.280 + Gauntlet AGX301 0.266 + DCM3623 0.024 cited; 0.474 [EST]); **1.216 kg credited** (R-021) | ≤ 1.50 kg (R-015 M4) MET; + GMSL2 board JCB022 0.045 (R-025 A11: AGX301 has no native GMSL2) → 1.261 credited; A11 |
 | battery 20S5P 1620 Wh | 7.96 kg | 8.75 kg | 8.75 kg |
-| Arbiter reserve | 1.2 kg | **+1.505 kg credible (64.995 vs 66.5); +3.108 paper (R-025, `arbiter/mass_rollup_official.json`)** | ≥ +0.30 kg credible (WAIVED to ≥ 0 until end of round 13, R-024; 0.304 after A15 tube hold release) |
+| Arbiter reserve | 1.2 kg | **+1.329 kg credible (65.171 vs 66.5); +2.758 paper (R-027, `arbiter/mass_rollup_official.json`)** | ≥ +0.30 kg credible (WAIVED to ≥ 0 until end of round 13, R-024; 0.304 after A15 tube hold release) |
 | **robot** | 63.79 kg | **paper 63.392 / credible 64.995 kg (R-025, official rollup = single source of truth)** | **≤ 66.5 kg hard (R-017); credible 64.728 after A15** |
 
 ### R1.2 Leg actuator contract (R-004, R-005, R-006, R-008)
@@ -123,7 +123,7 @@ Owns: pelvis-to-foot kinematics, thigh/shank/foot structure, knee/ankle linkages
 |---|---|---|---|
 | Torso (pelvis, torso frame, waist actuators, battery, harness, covers, thermal) | pelvis 1.6 + torso 2.8 + harness 2.0 + covers 1.86 + thermal 1.0 + battery 7.96 = 17.2 kg (+ waist actuators 2.40 kg in §1) | battery supplier: 1474 Wh, 622 W walking | shoulder mounts 8×M8, hip mounts 8×M5, pack swap, BMS, e-stop |
 | Arms (structure) | 1.6 kg | ~3.6 W copper (arm rows ×2) | shoulder/elbow/wrist flanges, payload case T5 |
-| Hands | 4.2 kg both (`v3.json` hands) | not separately budgeted (TBD) | wrist flange, tendon routing, tactile bus |
+| Hands | 4.2 kg both (`v3.json` hands); palm PA12 skin → machined 7075 +0.144 both (R-027) | not separately budgeted (TBD) | wrist flange, tendon routing, tactile bus |
 | Head (incl. neck structure, sensors) | 1.6 kg + neck actuators 2 × 0.546 → **head + neck line 0.817 paper / 1.104 credited (R-026, A23)** | in 40 W sensors line; P-019 +4.4 W [EST] booked in R1.3 | neck flange, cameras; ZED X Mini GMSL2 → JCB022 on AGX301 MIPI expansion; Dynamixel RS485 from AGX301; 12 V from 68–84 V bus via RECOM RP40-11012SFR/P-HC (43–160 V in, 40 W; servos limited 1.5 A each; ZED on PoC; R-026) |
 | Brain (compute) | 1.8 kg | 120 W | bus master, sensors, safety |
-| Arbiter reserve | 1.2 kg | **+1.505 kg credible (64.995 vs 66.5); +3.108 paper (R-025, `arbiter/mass_rollup_official.json`)** | ≥ +0.30 kg credible (WAIVED to ≥ 0 until end of round 13, R-024; 0.304 after A15 tube hold release) |
+| Arbiter reserve | 1.2 kg | **+1.329 kg credible (65.171 vs 66.5); +2.758 paper (R-027, `arbiter/mass_rollup_official.json`)** | ≥ +0.30 kg credible (WAIVED to ≥ 0 until end of round 13, R-024; 0.304 after A15 tube hold release) |
