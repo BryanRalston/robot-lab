@@ -47,13 +47,33 @@ lines=[  # name, paper, credible, evidence, credit rule, source
 # totals
 cred=R020_CRED-(1.80-a3['brain_credited'])-(1.86-COV_C)+PALM-(1.324-h['total_kg'])+lk['linkage_delta']+(hip['mass_both_legs']-0.04)+(M2_CRED-5.418)+AROLL+PANEL+V4L+V4A-(HEAD_BASIS-HEAD_CRED)+JCB
 paper=R020_PAPER-(1.80-a3['brain_paper'])-(1.86-COV_P)+PALM-(1.296-h['total_kg'])+lk['linkage_delta']+(hip['mass_both_legs']-0.04)+(M2_PAPER-4.862)+AROLL+PANEL+V4L+V4A-(HEAD_BASIS-HEAD_PAPER)+JCB
+# R-030/R-031 (A12 recompute, 2026-10-14). Harness line above is Actuators A25/D66 itemized 1.4959 (3718e93/68cb6eb), which ALREADY
+# contains STO 0.218 (+sleeve): R-031 §4 STO 0.231 is NOT added separately (replaces R-028 0.14 hold). Vicor DCM3623TA5N53B4T00 24.0 g
+# cited x1.0 (R-031 §2) = same mass/credit as the a3 cited DCM -> brain line unchanged.
+ADDS=[('covers trimmed set v5 incl. P-022..P-025 (R-030, f651270)',0.236,'cover_set_v5.json; panel areas [EST] pending CAD','addition x1.0 (R-030); re-rule if >10 % high','R-030'),
+ ('Thor cooling: 1x Sunon fan (P-044, R-032 replaces 0.04 blower est.)',0.042,'R-032 b018941; T7 power +6.12 W','addition x1.0','R-032'),
+ ('regen clamp P-045 (Torso & Power + Electronics)',0.150,'Electronics R1.1 1d70018; parts not cited','addition x1.0 until cited (R-031 §3)','R-031 §3')]
+for n,m,e,r,src in ADDS: lines.append((n,m,m,e,r,src)); cred+=m; paper+=m
 ep=sum(l[1] for l in lines); ec=sum(l[2] for l in lines)
 lines.append(('all other lines (DERIVED: leg actuators+linkage, torso, arms, hands, thermal, pelvis; head+neck removed R-025; v3 basis + R-015..R-020 credits)',paper-ep,cred-ec,'see RULINGS R-015..R-020','as ruled there; to be itemised (A12)','derived'))
-out=dict(status='OFFICIAL single source of truth (R-022, updated R-027). Module rollups must reconcile to this file line by line; any module figure that differs must cite the line and the ruling that changes it.',
+# A12: itemise the derived bucket against the v3 basis it came from (v3.json); residual = R-015..R-020 actuator/linkage/structure credits
+VM=v3['mass']; vs=VM['struct']; NECK=HEAD_BASIS-vs['head']
+A12={'v3 actuators excl. neck (legs, waist, arms)':VM['actuators']-NECK,'v3 hands':VM['hands'],'v3 pelvis':vs['pelvis'],'v3 torso':vs['torso'],'v3 arm structure':vs['arms'],'v3 thermal':vs['thermal']}
+_b=sum(A12.values()); A12={k:round(v,3) for k,v in A12.items()}
+A12['residual paper (R-015..R-020 credits, v3->current deltas)']=round((paper-ep)-_b,3); A12['residual credible']=round((cred-ec)-_b,3)
+A12['note']='Torso R1 (e13fe6c) paper 4.305 [EST] vs v3 pelvis+torso 4.40; not booked (all [EST], saving x0.5 = -0.048 once CAD)'
+WRIST=-1.371  # D65/P-027 TBM2G-05008 + THK BNK1004-2.5, 0.865 kg/side cited; x1.0 but pending Arms R2 cross-check
+PEND=dict(P027_wrist_kg=WRIST, P027_status='cited (D65) x1.0, pending Arms R2 cross-check; NOT in headline',
+  credible_with_P027=round(cred+WRIST,3), paper_with_P027=round(paper+WRIST,3), reserve_with_P027=round(66.5-cred-WRIST,3),
+  waist_OT2_kg=0.19, waist_OT2_status='pending: Torso R1 gives 204 vs 188 N.m but no datasheet citation for margin (R-031 §10)',
+  printed_parts_palm_hybrid_kg='-0.2 to -0.3 (Materials R1 eede209; x0.5 once measured)', femur_7050_kg=0.0,
+  hip_lever_fix_kg='+0 to +0.25 (7075 section; steel if >0.25) R-031 §6', P046_P050_legs='unquantified', P041_thermal_breaks='unquantified (A38)',
+  P040_louvres='unquantified (A36)', cf_shin_thigh_option_kg='-0.110 vs PC (0.126 vs 0.236) once Legs envelopes on main')
+out=dict(status='OFFICIAL single source of truth (R-022, updated R-031 A12). Module rollups must reconcile to this file line by line; any module figure that differs must cite the line and the ruling that changes it.',
  limit_kg=66.5, reserve_target_kg=0.30,
  lines=[dict(line=n,paper_kg=round(p,4),credible_kg=round(c,4),evidence=e,credit_rule=r,source=s) for n,p,c,e,r,s in lines],
  paper_kg=round(paper,3), credible_kg=round(cred,3), credible_reserve_kg=round(66.5-cred,3), head_basis_removed_kg=round(HEAD_BASIS,4), paper_reserve_kg=round(66.5-paper,3),
- pending=dict(A1prime_structure_FEA='VOID (R-023): GB FEA failed the r5 hand-checked parts; replaced by L36 fixes', tube_hold_kg=TUBE_HOLD, credible_if_GB_r2_passes=round(cred-TUBE_HOLD,3), risk_unquantified='foot collar OD (fallback r50 or 4 mm, mass not computed); clamp/tongue/clevis convergence at h<=2'),
+ a12_all_other_itemised=A12, pending_items=PEND, pending=dict(A1prime_structure_FEA='VOID (R-023): GB FEA failed the r5 hand-checked parts; replaced by L36 fixes', tube_hold_kg=TUBE_HOLD, credible_if_GB_r2_passes=round(cred-TUBE_HOLD,3), risk_unquantified='foot collar OD (fallback r50 or 4 mm, mass not computed); clamp/tongue/clevis convergence at h<=2'),
  reconciliation=dict(actuators_r6=lk['robot'], arbiter_R021=a3['credible'],
    actuators_missing_R021_brain=round(-(1.80-a3['brain_credited']),3), actuators_missing_R021_covers=round(-(1.86-COV_C)+PALM,3),
    both_missing_legs_r6_bumper_bolts=round(hip['mass_both_legs']-0.04,3), R021_missing_harness_A9=round(h['total_kg']-1.324,3), R021_missing_linkage=round(lk['linkage_delta'],4)))

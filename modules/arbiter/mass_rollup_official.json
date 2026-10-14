@@ -1,5 +1,5 @@
 {
- "status": "OFFICIAL single source of truth (R-022, updated R-027). Module rollups must reconcile to this file line by line; any module figure that differs must cite the line and the ruling that changes it.",
+ "status": "OFFICIAL single source of truth (R-022, updated R-031 A12). Module rollups must reconcile to this file line by line; any module figure that differs must cite the line and the ruling that changes it.",
  "limit_kg": 66.5,
  "reserve_target_kg": 0.3,
  "lines": [
@@ -29,8 +29,8 @@
   },
   {
    "line": "harness M3 (Actuators)",
-   "paper_kg": 1.2864,
-   "credible_kg": 1.2864,
+   "paper_kg": 1.4959,
+   "credible_kg": 1.4959,
    "evidence": "Belden MachFlex datasheet g/m x routed lengths; connectors distributor listings; JST-GH TME/GAM published weights (+-0.06 g/pair); sleeving 12 % [EST] already at par",
    "credit_rule": "datasheet/listing x1.0 (R-020 \u00a76); sleeving no credit gained",
    "source": "Actuators 71f3c3e D53, harness.json"
@@ -108,6 +108,30 @@
    "source": "CONTRACTS R1.1"
   },
   {
+   "line": "covers trimmed set v5 incl. P-022..P-025 (R-030, f651270)",
+   "paper_kg": 0.236,
+   "credible_kg": 0.236,
+   "evidence": "cover_set_v5.json; panel areas [EST] pending CAD",
+   "credit_rule": "addition x1.0 (R-030); re-rule if >10 % high",
+   "source": "R-030"
+  },
+  {
+   "line": "Thor cooling: 1x Sunon fan (P-044, R-032 replaces 0.04 blower est.)",
+   "paper_kg": 0.042,
+   "credible_kg": 0.042,
+   "evidence": "R-032 b018941; T7 power +6.12 W",
+   "credit_rule": "addition x1.0",
+   "source": "R-032"
+  },
+  {
+   "line": "regen clamp P-045 (Torso & Power + Electronics)",
+   "paper_kg": 0.15,
+   "credible_kg": 0.15,
+   "evidence": "Electronics R1.1 1d70018; parts not cited",
+   "credit_rule": "addition x1.0 until cited (R-031 \u00a73)",
+   "source": "R-031 \u00a73"
+  },
+  {
    "line": "all other lines (DERIVED: leg actuators+linkage, torso, arms, hands, thermal, pelvis; head+neck removed R-025; v3 basis + R-015..R-020 credits)",
    "paper_kg": 44.4899,
    "credible_kg": 45.0469,
@@ -116,15 +140,42 @@
    "source": "derived"
   }
  ],
- "paper_kg": 63.742,
- "credible_kg": 65.171,
- "credible_reserve_kg": 1.329,
+ "paper_kg": 64.38,
+ "credible_kg": 65.809,
+ "credible_reserve_kg": 0.691,
  "head_basis_removed_kg": 2.6921,
- "paper_reserve_kg": 2.758,
+ "paper_reserve_kg": 2.12,
+ "a12_all_other_itemised": {
+  "v3 actuators excl. neck (legs, waist, arms)": 30.874,
+  "v3 hands": 4.206,
+  "v3 pelvis": 1.6,
+  "v3 torso": 2.8,
+  "v3 arm structure": 1.6,
+  "v3 thermal": 1.0,
+  "residual paper (R-015..R-020 credits, v3->current deltas)": 2.41,
+  "residual credible": 2.967,
+  "note": "Torso R1 (e13fe6c) paper 4.305 [EST] vs v3 pelvis+torso 4.40; not booked (all [EST], saving x0.5 = -0.048 once CAD)"
+ },
+ "pending_items": {
+  "P027_wrist_kg": -1.371,
+  "P027_status": "cited (D65) x1.0, pending Arms R2 cross-check; NOT in headline",
+  "credible_with_P027": 64.438,
+  "paper_with_P027": 63.009,
+  "reserve_with_P027": 2.062,
+  "waist_OT2_kg": 0.19,
+  "waist_OT2_status": "pending: Torso R1 gives 204 vs 188 N.m but no datasheet citation for margin (R-031 \u00a710)",
+  "printed_parts_palm_hybrid_kg": "-0.2 to -0.3 (Materials R1 eede209; x0.5 once measured)",
+  "femur_7050_kg": 0.0,
+  "hip_lever_fix_kg": "+0 to +0.25 (7075 section; steel if >0.25) R-031 \u00a76",
+  "P046_P050_legs": "unquantified",
+  "P041_thermal_breaks": "unquantified (A38)",
+  "P040_louvres": "unquantified (A36)",
+  "cf_shin_thigh_option_kg": "-0.110 vs PC (0.126 vs 0.236) once Legs envelopes on main"
+ },
  "pending": {
   "A1prime_structure_FEA": "VOID (R-023): GB FEA failed the r5 hand-checked parts; replaced by L36 fixes",
   "tube_hold_kg": 0.267,
-  "credible_if_GB_r2_passes": 64.904,
+  "credible_if_GB_r2_passes": 65.542,
   "risk_unquantified": "foot collar OD (fallback r50 or 4 mm, mass not computed); clamp/tongue/clevis convergence at h<=2"
  },
  "reconciliation": {
@@ -133,7 +184,7 @@
   "actuators_missing_R021_brain": -0.584,
   "actuators_missing_R021_covers": -0.003,
   "both_missing_legs_r6_bumper_bolts": 0.022,
-  "R021_missing_harness_A9": -0.038,
+  "R021_missing_harness_A9": 0.172,
   "R021_missing_linkage": 0.0002
  }
 }
