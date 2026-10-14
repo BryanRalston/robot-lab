@@ -47,3 +47,6 @@ Required shoulder share for ≤550: ≤0.346 with no crouch, ≤0.408 with a 0.1
 - The margin is thin. A cheap extra lever is a **thicker shoulder pad** (40 mm → s 31 mm → −23 % force at the same energy). Torso/Arms decide the mass/packaging. Not booked.
 - **Heavy verification (bryan PC, Grok Interface brief, not run on the box):** a MuJoCo sim/v3 side-push fall batch with the S3 FALL-mode script, contact force at the shoulder pad geom, 50 pushes × 3 directions. Output: peak shoulder pad force and share. Gate: F ≤ 9.17 kN (M ≤ 550).
 - A pitch-axis (forward) fall component is still unquantified (D71 last line).
+
+## Update 2026-10-14 (after R-042, ID d80df32, Materials 5f8f149)
+The constant-force pad model used above is **superseded for EPP**. With the ARPRO 5170 curve ×1.45, the S3 shoulder energy of 216–220 J gives **~19 kN, ~1150 N·m, radial SF 0.60** on the 40 mm/109 cm² pad. That fails 550. See `T030_BRIEF.md` §2 and `epp_pad_estimate.py`. The 539 N·m above holds only for an ideal constant-force crush element (honeycomb or crush tube).
