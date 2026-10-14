@@ -41,3 +41,11 @@ Owner: RL Controls. Took handoff of `modules/legs/wbc/` and the RL walk work (`m
 - Drives off housings (P-027); knee drives on the shank saddle (D69).
 - 1.2 m/s 60 min: every leg joint is ≤ 115 °C. hip_pitch 113/115 is the closest to the target; with drives on the housing it would be 134/136.
 - P-042 carry pose and P-043 hold limits are wired into `thermal/winding_model.py`.
+
+## Arms inertials + P-042 carry (2026-10-14)
+- `sim/v3/humanoid_v3.xml`: applied `arms/arm_inertials_r3.json` (a618ce0) to L/R shoulderP, upper_arm, forearm and hand (mass, COM, fullinertia; right side mirrored in y, ixy/iyz sign flipped). The 2 × 1.52 kg shoulder_pitch actuators are merged into the torso body by parallel axis: 18.762 → 21.802 kg, no separate body, so nothing is counted twice inside the sim.
+  - Sim total 63.467 → **69.475 kg** (arm 7.437 kg/side moving). The sim torso 18.762 is still the v3 lump, not Torso's re-split (O-T7; bd02c23 has no sim numbers). When Torso re-splits, the 3.04 kg at the shoulders must come out of the lump. Until then the sim overstates mass vs the official rollup (credible ~65.2 kg). gait_lib/eval_box/make_model rescale to 65 kg anyway.
+  - This was a direct XML edit; `sim/v3/gen_v3.py` will overwrite it unless the same data is put there.
+- **Not propagated to the RL MJX models** (job 4 inputs). Folded into the make_model regen after job 4. `eval_box.py` reads sim/v3 directly, so future scoring sees the new arms.
+- P-042 carry primitive + P-043 hold limits: `controls/thermal/winding_model.py` (`CARRY_POSE`, `CARRY_BAND`, `HoldLimiter`).
+- Carry static balance (`controls/carry/carry_balance_r1.py`, 65 + 20 kg, feet flat): payload (0.32, 0, 0.415) at the P-042 pose puts the COM 107 mm ahead of the ankle (toe margin 73 mm, ankle 44.6 N·m/leg static) vs 92 mm / 88 mm for Legs' (0.25, 0, 0.10). With Legs' −0.25 rad waist lean-back it is 63 mm (toe margin 117 mm). Static is fine; the dynamic margin (R-014 ankle 1.31× at 1.0 m/s) needs a carry plan regen at the new payload position (Legs/Controls, light WBC run after the plan exists).
