@@ -1,6 +1,13 @@
 # Shoulder impact pad (R-042): R2 honeycomb cartridge, RL Industrial Design, 2026-10-14
 **P-number: P-051 (proposed). R-042 approves the pad and its cap but assigns no P-number; the highest P on main is P-050.** Numbers come from `shoulder_pad.py` → `shoulder_pad.json`. All [EST] until Materials confirms the foam data and Controls runs T-030.
 
+## R3 (Controls 03fc980): design energy 265 J, not 220. Re-sized
+- Peak force fixed at 8.3 kN design → 9.13 kN (548 N·m ≤ 550), so the **area stays 84 cm²**. Stroke 265/8.3 = 31.9 mm → **honeycomb 44 mm** (was 37).
+- Plain (b2) at 265 J = 0.103 kg pair (+0.003 over the cap). **R3 pick: 5052 honeycomb 3.1 pcf, 80 w × 105 h mm (84 cm²) × 44 mm, EPP face 10 → 6 mm, 0.5 mm Al spreader, PC backing, sleeve: 0.1004 kg pair, i.e. AT the 0.10 cap with zero margin.** Stack 58 mm from the bulkhead (+3 vs R2; Controls: width OK, about 1° more lean).
+- Coverage: Controls says contact lands at or slightly above the centre, and 10–15 mm below it when leaning hip-first. A 105 mm tall pad with its centre 5 mm below the shoulder axis keeps the ±15 mm contact band ≥ 37 mm inside the top/bottom edges. The spreader carries an off-centre load into the core. OK.
+- (b1) 4.5 pcf (0.067) rejected now: its 68 mm square pad leaves only about 19 mm edge margin with the offset contact.
+- **Arbiter:** item 4 of R-047 moves from −0.005 to **0.000**. If Materials' cited 3.1 pcf crush strength comes in below about 0.90 MPa, the pair goes over 0.10 → re-rule (2.3 pcf fallback 0.130, +0.030; R-047 total still −0.19 / −0.095 half-credit). Other options at 265 J: EPP (a) 143 mm, 0.160; hybrid (d) 0.111; 3003 3.1 pcf 0.111.
+
 ## R2 re-size (Materials 5f8f149, `materials/R042_EPP_SHOULDER.md`): R1 40 mm EPP 80 FAILS
 R1 assumed a constant 0.65 MPa crush. On the real ARPRO 5170 curve (0.50/0.70/1.60 MPa at 25/50/75 %, rate ×1.45) 220 J peaks at about 19.5 kN → **≈ 1.17 kN·m vs 550 allowed**. Re-sized in `shoulder_pad.py` → `shoulder_pad.json`.
 Requirement: 220 J at peak F ≤ 550/0.060 = **9.17 kN**. EPP: force checked at RT × rate, stroke at hot (40 °C pad face, ×0.70) × rate, up to 65 % strain. Honeycomb: pre-crushed, constant crush, stroke 0.72 t, rate ×1.10, designed at 8.3 kN → 9.13 kN peak (548 N·m). All masses include the PC backing (8 g, Materials), sleeve and 5 mm air gap to the 69 °C bulkhead in the stack. Honeycomb crush strengths are [EST] catalog-class values: **Materials to cite**.

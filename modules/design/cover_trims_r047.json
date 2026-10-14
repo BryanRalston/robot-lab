@@ -17,12 +17,12 @@
   },
   {
    "item": "shoulder pad R2 (5052 HC 3.1 pcf cartridge) vs R-042 booked 0.10",
-   "kg": -0.005,
+   "kg": 0.0,
    "evidence": "shoulder_pad.json; HC crush strength to be cited by Materials"
   }
  ],
- "total_kg": -0.224,
- "total_half_credit_kg": -0.112,
+ "total_kg": -0.219,
+ "total_half_credit_kg": -0.11,
  "target_kg": -0.08,
  "meets_target_full": true,
  "meets_target_half_credit": true,

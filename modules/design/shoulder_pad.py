@@ -6,7 +6,7 @@ Honeycomb: constant crush stress, stroke = 0.72 t, rate x1.10, temp ~0, pre-crus
 Crush strengths are [EST] HexWeb/Plascore 5052 1/4" cell class values; Materials to cite."""
 import json,os,numpy as np
 H=os.path.dirname(os.path.abspath(__file__))
-E=220.0; FMAX=550/0.060; RATE=1.45; HOT=0.70; EPS_LIM=0.65
+E=265.0; FMAX=550/0.060; RATE=1.45; HOT=0.70; EPS_LIM=0.65
 eps=np.array([0,0.25,0.50,0.75]); sig=np.array([0,0.50,0.70,1.60])*1e6
 def s(e): return np.interp(e,eps,sig)
 def w(e):  # J/m3 to strain e
@@ -18,7 +18,7 @@ def epp(E_J,rho=80,F=FMAX):
 BACK=0.008; SLEEVE=0.30  # kg PC backing (Materials); sleeve kg/m2
 def sleeve(A,t): return SLEEVE*(A+4*np.sqrt(A)*t)
 opts={}
-for name,EJ in (('a_EPP80_220J',220),('c_EPP80_80J',80)):
+for name,EJ in (('a_EPP80_265J',265),('c_EPP80_80J',80)):
     r=epp(EJ); A=r['area_cm2']/1e4; t=r['t_mm']/1e3
     per=r['foam_kg']+BACK+sleeve(A,t)
     opts[name]=dict(r,E_J=EJ,peak_kN=round(FMAX/1e3,2),M_Nm=550,kg_side=round(per,4),kg_pair=round(2*per,3),stack_mm=r['t_mm']+5+2,single_use='>50 % strain')
@@ -31,10 +31,14 @@ for k,(rho,sc) in HC.items():
     per=hc+skin+spread+BACK*min(1,A/0.0109)+sleeve(A,t+0.012)
     opts['b_HC '+k]=dict(area_cm2=round(A*1e4),t_mm=round(t*1e3),hc_kg=round(hc,4),kg_side=round(per,4),kg_pair=round(2*per,3),peak_kN=round(FD*1.10/1e3,2),M_Nm=round(FD*1.10*0.06),stack_mm=round(t*1e3)+10+1+2+5,single_use='yes (replaceable cartridge)')
 # d hybrid: honeycomb 3.1 pcf core sized for 200 J + 15 mm EPP outer taking first ~20 J below FD
-A=FD/(0.90e6*1.10); t2=(200/FD)/0.72
+A=FD/(0.90e6*1.10); t2=(245/FD)/0.72
 per=A*t2*50+A*0.015*80+A*1e-3*2700*0.5+BACK+sleeve(A,t2+0.017)
 opts['d_hybrid HC3.1 + 15 mm EPP']=dict(area_cm2=round(A*1e4),t_mm=round(t2*1e3)+15,kg_side=round(per,4),kg_pair=round(2*per,3),peak_kN=round(FD*1.1/1e3,2),M_Nm=round(FD*1.1*0.06),stack_mm=round(t2*1e3)+15+1+2+5,single_use='HC yes; EPP multi-hit')
+# b2 R3 (Controls 03fc980: 265 J; contact at/above centre, 10-15 mm below when hip-first): 3.1 pcf, 84 cm2 as 80 w x 105 h, centre 5 mm low; EPP face 6 mm
+A=FD/(0.90e6*1.10)
+per=A*t*50+A*0.006*80+A*1e-3*2700*0.5+BACK+sleeve(A,t+0.008)
+opts['b2_R3 HC 3.1 pcf 80x105, 6 mm EPP face']=dict(area_cm2=round(A*1e4),footprint_mm='80 w x 105 h, centre 5 mm below shoulder axis',t_mm=round(t*1e3),kg_side=round(per,4),kg_pair=round(2*per,3),peak_kN=round(FD*1.1/1e3,2),M_Nm=round(FD*1.1*0.06),stack_mm=round(t*1e3)+6+1+2+5,coverage='contact band +15/-15 mm about centre stays >= 37 mm inside top/bottom edges (52.5 mm half-height)',single_use='yes')
 out=dict(P='P-051 (proposed)',E_J=E,F_allow_kN=round(FMAX/1e3,2),cap_pair_kg=0.10,options=opts,
- r1_40mm_EPP='FAIL: ~19.5 kN, ~1.17 kN·m (Materials)',pick='b_HC 5052 3.1 pcf (50)',measured=False)
+ r1_40mm_EPP='FAIL: ~19.5 kN, ~1.17 kN·m (Materials)',pick='b2_R3 HC 3.1 pcf 80x105, 6 mm EPP face',measured=False)
 json.dump(out,open(os.path.join(H,'shoulder_pad.json'),'w'),indent=1)
 for k,v in opts.items(): print(k,v)

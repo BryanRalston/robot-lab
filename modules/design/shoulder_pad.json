@@ -1,19 +1,19 @@
 {
  "P": "P-051 (proposed)",
- "E_J": 220.0,
+ "E_J": 265.0,
  "F_allow_kN": 9.17,
  "cap_pair_kg": 0.1,
  "options": {
-  "a_EPP80_220J": {
+  "a_EPP80_265J": {
    "area_cm2": 51,
-   "t_mm": 119,
-   "foam_kg": 0.0484,
-   "E_J": 220,
+   "t_mm": 143,
+   "foam_kg": 0.0583,
+   "E_J": 265,
    "peak_kN": 9.17,
    "M_Nm": 550,
-   "kg_side": 0.0681,
-   "kg_pair": 0.136,
-   "stack_mm": 126,
+   "kg_side": 0.0801,
+   "kg_pair": 0.16,
+   "stack_mm": 150,
    "single_use": ">50 % strain"
   },
   "c_EPP80_80J": {
@@ -30,71 +30,83 @@
   },
   "b_HC 5052 1.6 pcf (26 kg/m3)": {
    "area_cm2": 243,
-   "t_mm": 37,
-   "hc_kg": 0.0233,
-   "kg_side": 0.1001,
-   "kg_pair": 0.2,
+   "t_mm": 44,
+   "hc_kg": 0.0281,
+   "kg_side": 0.1062,
+   "kg_pair": 0.212,
    "peak_kN": 9.13,
    "M_Nm": 548,
-   "stack_mm": 55,
+   "stack_mm": 62,
    "single_use": "yes (replaceable cartridge)"
   },
   "b_HC 5052 2.3 pcf (37)": {
    "area_cm2": 122,
-   "t_mm": 37,
-   "hc_kg": 0.0166,
-   "kg_side": 0.0609,
-   "kg_pair": 0.122,
+   "t_mm": 44,
+   "hc_kg": 0.02,
+   "kg_side": 0.0652,
+   "kg_pair": 0.13,
    "peak_kN": 9.13,
    "M_Nm": 548,
-   "stack_mm": 55,
+   "stack_mm": 62,
    "single_use": "yes (replaceable cartridge)"
   },
   "b_HC 5052 3.1 pcf (50)": {
    "area_cm2": 84,
-   "t_mm": 37,
-   "hc_kg": 0.0154,
-   "kg_side": 0.0475,
-   "kg_pair": 0.095,
-   "peak_kN": 9.13,
-   "M_Nm": 548,
-   "stack_mm": 55,
-   "single_use": "yes (replaceable cartridge)"
-  },
-  "b_HC 5052 4.5 pcf (72)": {
-   "area_cm2": 46,
-   "t_mm": 37,
-   "hc_kg": 0.0121,
-   "kg_side": 0.0306,
-   "kg_pair": 0.061,
-   "peak_kN": 9.13,
-   "M_Nm": 548,
-   "stack_mm": 55,
-   "single_use": "yes (replaceable cartridge)"
-  },
-  "b_HC 3003 3.1 pcf (50)": {
-   "area_cm2": 91,
-   "t_mm": 37,
-   "hc_kg": 0.0167,
-   "kg_side": 0.0513,
-   "kg_pair": 0.103,
-   "peak_kN": 9.13,
-   "M_Nm": 548,
-   "stack_mm": 55,
-   "single_use": "yes (replaceable cartridge)"
-  },
-  "d_hybrid HC3.1 + 15 mm EPP": {
-   "area_cm2": 84,
-   "t_mm": 48,
+   "t_mm": 44,
+   "hc_kg": 0.0186,
    "kg_side": 0.0515,
    "kg_pair": 0.103,
    "peak_kN": 9.13,
    "M_Nm": 548,
-   "stack_mm": 56,
+   "stack_mm": 62,
+   "single_use": "yes (replaceable cartridge)"
+  },
+  "b_HC 5052 4.5 pcf (72)": {
+   "area_cm2": 46,
+   "t_mm": 44,
+   "hc_kg": 0.0146,
+   "kg_side": 0.0337,
+   "kg_pair": 0.067,
+   "peak_kN": 9.13,
+   "M_Nm": 548,
+   "stack_mm": 62,
+   "single_use": "yes (replaceable cartridge)"
+  },
+  "b_HC 3003 3.1 pcf (50)": {
+   "area_cm2": 91,
+   "t_mm": 44,
+   "hc_kg": 0.0202,
+   "kg_side": 0.0555,
+   "kg_pair": 0.111,
+   "peak_kN": 9.13,
+   "M_Nm": 548,
+   "stack_mm": 62,
+   "single_use": "yes (replaceable cartridge)"
+  },
+  "d_hybrid HC3.1 + 15 mm EPP": {
+   "area_cm2": 84,
+   "t_mm": 56,
+   "kg_side": 0.0555,
+   "kg_pair": 0.111,
+   "peak_kN": 9.13,
+   "M_Nm": 548,
+   "stack_mm": 64,
    "single_use": "HC yes; EPP multi-hit"
+  },
+  "b2_R3 HC 3.1 pcf 80x105, 6 mm EPP face": {
+   "area_cm2": 84,
+   "footprint_mm": "80 w x 105 h, centre 5 mm below shoulder axis",
+   "t_mm": 44,
+   "kg_side": 0.0502,
+   "kg_pair": 0.1,
+   "peak_kN": 9.13,
+   "M_Nm": 548,
+   "stack_mm": 58,
+   "coverage": "contact band +15/-15 mm about centre stays >= 37 mm inside top/bottom edges (52.5 mm half-height)",
+   "single_use": "yes"
   }
  },
  "r1_40mm_EPP": "FAIL: ~19.5 kN, ~1.17 kN\u00b7m (Materials)",
- "pick": "b_HC 5052 3.1 pcf (50)",
+ "pick": "b2_R3 HC 3.1 pcf 80x105, 6 mm EPP face",
  "measured": false
 }

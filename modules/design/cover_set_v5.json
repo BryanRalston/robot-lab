@@ -60,7 +60,7 @@
    "material": "Al honeycomb + EPP 80 + PC backing",
    "area_m2_side": 0.0084,
    "panels": 2,
-   "kg": 0.095,
+   "kg": 0.1,
    "cf_kg": null,
    "note": "booked separately at R-042 cap 0.10; not in the P-020/P-022..25 delta"
   }

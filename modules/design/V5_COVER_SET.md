@@ -22,7 +22,7 @@ Hull areas now come from the final `legs/results/v5/ENVELOPES_FOR_ID.md`: knee_c
 **Knee cap vs thigh fairing clearance (Legs):** no overlap from 0 to 135°. Minimum keep-out gap is **10.2 mm at 135°** (22 mm from 0 to 105°). After the D69 ø85 knee housing (+4.5 mm radial) it is **≈ 5.7 mm [EST]**, still above the 3 mm PC flex gap. Recheck after the D69 re-CAD.
 
 ## Shoulder impact pad (R-042, P-051 proposed): see `SHOULDER_PAD.md`
-R2: 40 mm EPP failed against the real crush curve (Materials). Now a 5052 honeycomb 3.1 pcf cartridge, 84 cm² × 37 mm, with a 10 mm EPP face. **0.095 kg pair (cap 0.10)**, 548 N·m peak, 55 mm stack. Arm shells stay deferred.
+R2: 40 mm EPP failed against the real crush curve (Materials). R3 (265 J, Controls 03fc980): 5052 honeycomb 3.1 pcf cartridge, 80 × 105 mm × 44 mm, 6 mm EPP face. **0.100 kg pair, at the cap with zero margin**, 548 N·m peak, 58 mm stack. Arm shells stay deferred.
 
 ## Forearm / wrist envelope note (Actuators D73, bc18aae, `cad/wrist_place_d73.step`). Arm shells deferred
 - Wrist roll unit is **OD 90 × 42 mm**, wider than the Ø70 forearm → the future forearm shell needs a **local bulge to ≥ Ø100** (90 + 2 × 5 mm keep-out) over 42 mm + 2 × 5 mm, faired into Ø70 with ≤ 3:1 draw (split-line at the bulge).
@@ -30,7 +30,7 @@ R2: 40 mm EPP failed against the real crush curve (Materials). Now a 5052 honeyc
 - No mass booked; arm shells return as a P-020 change at Arms R2 (freeze R-047: no additions until reserve ≥ 0.30).
 
 ## R-047 offsets
-See `COVER_TRIMS_R047.md`: −0.224 kg itemized (−0.112 at half-credit).
+See `COVER_TRIMS_R047.md`: −0.219 kg itemized (−0.110 at half-credit; pad item now 0.000).
 
 ## A29 panel layout and mould list (owner: Industrial Design per R-029)
 Status: layout from Legs keep-out hulls + model_v4 dims, **not yet measured on v4 CAD** (areas [EST]). Delta check: itemized `modules/design/cover_set_v5.json` = **−0.124 kg vs booked (−0.184 CF thigh): PASS**; P-022 +20 % flagged.
