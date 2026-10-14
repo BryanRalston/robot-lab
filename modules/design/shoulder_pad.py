@@ -38,7 +38,19 @@ opts['d_hybrid HC3.1 + 15 mm EPP']=dict(area_cm2=round(A*1e4),t_mm=round(t2*1e3)
 A=FD/(0.90e6*1.10)
 per=A*t*50+A*0.006*80+A*1e-3*2700*0.5+BACK+sleeve(A,t+0.008)
 opts['b2_R3 HC 3.1 pcf 80x105, 6 mm EPP face']=dict(area_cm2=round(A*1e4),footprint_mm='80 w x 105 h, centre 5 mm below shoulder axis',t_mm=round(t*1e3),kg_side=round(per,4),kg_pair=round(2*per,3),peak_kN=round(FD*1.1/1e3,2),M_Nm=round(FD*1.1*0.06),stack_mm=round(t*1e3)+6+1+2+5,coverage='contact band +15/-15 mm about centre stays >= 37 mm inside top/bottom edges (52.5 mm half-height)',single_use='yes')
+# R4 (Materials 8a3cc66, R-049): HexWeb CR III 5052 4.5 pcf crush 1.79 MPa (cited), dynamic factor up to 1.30; EPP face in series (no energy, no peak credit)
+SC=1.79e6; DYN=1.30; a=0.062; tc=0.057; EFF=0.72
+A4=a*a; Fpk=SC*DYN*A4; Est=SC*A4*EFF*tc
+items4=dict(core_HC_4p5pcf=A4*tc*72, spreader_Al_0p5mm_80x100_ribbed=0.080*0.100*0.5e-3*2700,
+ side_guides_4_PC_corner_posts=0.004, backing_PC_1p5_62x62_with_M4_inserts=A4*1.5e-3*1200,
+ EPP80_face_6mm_80x100=0.080*0.100*0.006*80, sleeve_TPU_nylon_face_only=0.005, low_e_foil_and_4_standoffs=0.001)
+per4=sum(items4.values())
+opts['R4 HC 4.5 pcf 62x62x57 cartridge']=dict(area_cm2=round(A4*1e4,1),core_mm='62 x 62 x 57 (pre-crushed)',peak_kN_x1p3=round(Fpk/1e3,2),M_Nm_x1p3=round(Fpk*0.06),pass_peak=Fpk<=FMAX,
+ E_J_x1p0=round(Est),pass_energy=Est>=E,face_plate_mm='80 w x 100 h, centre 5 mm below shoulder axis',
+ coverage='contact band +-15 mm: >= 35 mm inside plate top/bottom edges; contact centre stays <= 15 mm off core centre (16 mm inside core edge)',
+ thermal='>= 5 mm air gap vented top + bottom, low-e foil on bulkhead (pad face ~47-50 C, Thermal)',
+ mass_items_kg_side={k:round(v,4) for k,v in items4.items()},kg_side=round(per4,4),kg_pair=round(2*per4,3),stack_mm=1.5+57+0.5+6+5,single_use='yes')
 out=dict(P='P-051 (proposed)',E_J=E,F_allow_kN=round(FMAX/1e3,2),cap_pair_kg=0.10,options=opts,
- r1_40mm_EPP='FAIL: ~19.5 kN, ~1.17 kN·m (Materials)',pick='b2_R3 HC 3.1 pcf 80x105, 6 mm EPP face',measured=False)
+ r1_40mm_EPP='FAIL: ~19.5 kN, ~1.17 kN·m (Materials)',pick='R4 HC 4.5 pcf 62x62x57 cartridge',measured=False)
 json.dump(out,open(os.path.join(H,'shoulder_pad.json'),'w'),indent=1)
 for k,v in opts.items(): print(k,v)

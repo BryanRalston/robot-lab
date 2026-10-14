@@ -104,9 +104,34 @@
    "stack_mm": 58,
    "coverage": "contact band +15/-15 mm about centre stays >= 37 mm inside top/bottom edges (52.5 mm half-height)",
    "single_use": "yes"
+  },
+  "R4 HC 4.5 pcf 62x62x57 cartridge": {
+   "area_cm2": 38.4,
+   "core_mm": "62 x 62 x 57 (pre-crushed)",
+   "peak_kN_x1p3": 8.94,
+   "M_Nm_x1p3": 537,
+   "pass_peak": true,
+   "E_J_x1p0": 282,
+   "pass_energy": true,
+   "face_plate_mm": "80 w x 100 h, centre 5 mm below shoulder axis",
+   "coverage": "contact band +-15 mm: >= 35 mm inside plate top/bottom edges; contact centre stays <= 15 mm off core centre (16 mm inside core edge)",
+   "thermal": ">= 5 mm air gap vented top + bottom, low-e foil on bulkhead (pad face ~47-50 C, Thermal)",
+   "mass_items_kg_side": {
+    "core_HC_4p5pcf": 0.0158,
+    "spreader_Al_0p5mm_80x100_ribbed": 0.0108,
+    "side_guides_4_PC_corner_posts": 0.004,
+    "backing_PC_1p5_62x62_with_M4_inserts": 0.0069,
+    "EPP80_face_6mm_80x100": 0.0038,
+    "sleeve_TPU_nylon_face_only": 0.005,
+    "low_e_foil_and_4_standoffs": 0.001
+   },
+   "kg_side": 0.0473,
+   "kg_pair": 0.095,
+   "stack_mm": 70.0,
+   "single_use": "yes"
   }
  },
  "r1_40mm_EPP": "FAIL: ~19.5 kN, ~1.17 kN\u00b7m (Materials)",
- "pick": "b2_R3 HC 3.1 pcf 80x105, 6 mm EPP face",
+ "pick": "R4 HC 4.5 pcf 62x62x57 cartridge",
  "measured": false
 }

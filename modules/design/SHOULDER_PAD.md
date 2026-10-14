@@ -1,7 +1,30 @@
-# Shoulder impact pad (R-042): R2 honeycomb cartridge, RL Industrial Design, 2026-10-14
+# Shoulder impact pad (R-042): R4 honeycomb cartridge, RL Industrial Design, 2026-10-14
 **P-number: P-051 (proposed). R-042 approves the pad and its cap but assigns no P-number; the highest P on main is P-050.** Numbers come from `shoulder_pad.py` → `shoulder_pad.json`. All [EST] until Materials confirms the foam data and Controls runs T-030.
 
-## R3 (Controls 03fc980): design energy 265 J, not 220. Re-sized
+## R4 (Materials 8a3cc66, R-049): CURRENT DESIGN
+R3 fails R-049 against the cited HexWeb CR III data (3.1 pcf 0.896 MPa, ×1.30 dynamic → 9.79 kN; 239 J at ×1.0). The EPP face is in series and gets no energy or peak credit.
+- **Core: 5052 HexWeb CR III 4.5 pcf (1.79 MPa cited), pre-crushed, 62 × 62 × 57 mm** (63 × 63 gives 9.24 kN at ×1.3, over the limit).
+  - **Peak at ×1.30: 8.94 kN = 537 N·m ≤ 9.17 kN / 550: PASS.**
+  - **Energy at ×1.0: 1.79 MPa × 38.4 cm² × 0.72 × 57 mm = 282 J ≥ 265: PASS.**
+- Cartridge: PC backing (62 × 62, M4 inserts) → core in 4 PC corner-post side guides → **Al 0.5 mm ribbed spreader / face plate 80 w × 100 h**, centre 5 mm below the shoulder axis → 6 mm EPP 80 cosmetic face → face sleeve. Replaceable, single-use.
+- Coverage (Controls ±15 mm contact band): ≥ 35 mm inside the plate top/bottom edges; the contact centre stays ≤ 15 mm off the core centre (16 mm inside the core edge). **Open: spreader bending check for a 15 mm off-centre load on a 0.5 mm ribbed plate** (Materials/ID; go to 0.8 mm, +0.0065/side, if it fails).
+- Thermal: ≥ 5 mm air gap vented top and bottom, low-e foil on the bulkhead, pad face about 47–50 °C (Thermal). Stack 70 mm from the bulkhead (+12 vs R3).
+
+| item (per side) | kg |
+|---|---|
+| HC 4.5 pcf core 62×62×57 | 0.0158 |
+| Al 0.5 mm ribbed spreader 80×100 | 0.0108 |
+| 4 PC corner-post side guides | 0.0040 |
+| PC 1.5 backing 62×62 + M4 inserts | 0.0069 |
+| EPP 80 face 6 mm 80×100 | 0.0038 |
+| face sleeve TPU-nylon | 0.0050 |
+| low-e foil + 4 standoffs | 0.0010 |
+| **per side** | **0.0473** |
+| **pair** | **0.095 (cap 0.10, −0.005)** |
+
+Materials estimated about 0.068 pair; the difference is the enlarged face plate (needed for the edge margin), the face sleeve and the foil/standoffs. R-047 item 4 = **−0.005**.
+
+## R3 (Controls 03fc980), superseded: design energy 265 J, not 220. Re-sized
 - Peak force fixed at 8.3 kN design → 9.13 kN (548 N·m ≤ 550), so the **area stays 84 cm²**. Stroke 265/8.3 = 31.9 mm → **honeycomb 44 mm** (was 37).
 - Plain (b2) at 265 J = 0.103 kg pair (+0.003 over the cap). **R3 pick: 5052 honeycomb 3.1 pcf, 80 w × 105 h mm (84 cm²) × 44 mm, EPP face 10 → 6 mm, 0.5 mm Al spreader, PC backing, sleeve: 0.1004 kg pair, i.e. AT the 0.10 cap with zero margin.** Stack 58 mm from the bulkhead (+3 vs R2; Controls: width OK, about 1° more lean).
 - Coverage: Controls says contact lands at or slightly above the centre, and 10–15 mm below it when leaning hip-first. A 105 mm tall pad with its centre 5 mm below the shoulder axis keeps the ±15 mm contact band ≥ 37 mm inside the top/bottom edges. The spreader carries an off-centre load into the core. OK.

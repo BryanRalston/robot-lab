@@ -16,8 +16,8 @@
    "evidence": "calc: 0.040 kg pair x (1 - 1.01*1.2/(1.20*1.5)); no-printing is a crew preference, not a Bryan rule (R-027 item 2)"
   },
   {
-   "item": "shoulder pad R2 (5052 HC 3.1 pcf cartridge) vs R-042 booked 0.10",
-   "kg": 0.0,
+   "item": "shoulder pad R4 (5052 HC 4.5 pcf cartridge) vs R-042 booked 0.10",
+   "kg": -0.005,
    "evidence": "shoulder_pad.json; HC crush strength to be cited by Materials"
   }
  ],
@@ -30,8 +30,8 @@
   "note": "Legs 6f53d77 withdrew the shin no-cover zone; NOT in baseline (R-047 freeze); Arbiter decision"
  },
  "thigh_grille_kg": -0.0116,
- "total_kg": -0.231,
- "total_half_credit_kg": -0.116,
+ "total_kg": -0.236,
+ "total_half_credit_kg": -0.118,
  "target_kg": -0.08,
  "meets_target_full": true,
  "meets_target_half_credit": true,

@@ -25,7 +25,7 @@ rim=2*0.020; d3=-rim*(1-(1.01*1.2)/(1.20*1.5))
 items.append(dict(item='hip-skirt rim strips PC 1.5 -> printed PA12 MJF 1.2 mm',kg=round(d3,3),evidence='calc: 0.040 kg pair x (1 - 1.01*1.2/(1.20*1.5)); no-printing is a crew preference, not a Bryan rule (R-027 item 2)'))
 # 4 shoulder pad vs R-042 booking
 sp=json.load(open(os.path.join(H,'shoulder_pad.json'))); pk=sp['options'][sp['pick']]['kg_pair']
-items.append(dict(item='shoulder pad R2 (5052 HC 3.1 pcf cartridge) vs R-042 booked 0.10',kg=round(pk-0.10,3),evidence='shoulder_pad.json; HC crush strength to be cited by Materials'))
+items.append(dict(item='shoulder pad R4 (5052 HC 4.5 pcf cartridge) vs R-042 booked 0.10',kg=round(pk-0.10,3),evidence='shoulder_pad.json; HC crush strength to be cited by Materials'))
 sh=0.45*0.17508; add=dict()
 for k,ar in (('PC',1.8),('CF',1.55)):
     add[k]=round(2*(sh*ar+2*0.004),3); add[k+'_louvred']=round(2*(sh*ar*(1-OPEN*(1-RIB))+2*0.004),3)

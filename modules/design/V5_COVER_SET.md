@@ -22,7 +22,7 @@ Hull areas now come from the final `legs/results/v5/ENVELOPES_FOR_ID.md`: knee_c
 **Knee cap vs thigh fairing clearance (Legs):** no overlap from 0 to 135°. Minimum keep-out gap is **10.2 mm at 135°** (22 mm from 0 to 105°). After the D69 ø85 knee housing (+4.5 mm radial) it is **≈ 5.7 mm [EST]**, still above the 3 mm PC flex gap. Recheck after the D69 re-CAD.
 
 ## Shoulder impact pad (R-042, P-051 proposed): see `SHOULDER_PAD.md`
-R2: 40 mm EPP failed against the real crush curve (Materials). R3 (265 J, Controls 03fc980): 5052 honeycomb 3.1 pcf cartridge, 80 × 105 mm × 44 mm, 6 mm EPP face. **0.100 kg pair, at the cap with zero margin**, 548 N·m peak, 58 mm stack. Arm shells stay deferred.
+R2: 40 mm EPP failed against the real crush curve (Materials). R4 (Materials 8a3cc66 / R-049): 5052 HC 4.5 pcf 62×62×57 pre-crushed cartridge, Al spreader 80×100, side guides, 6 mm EPP face. **0.095 kg pair** (cap 0.10), 8.94 kN at ×1.3 (537 N·m), 282 J at ×1.0, 70 mm stack. Arm shells stay deferred.
 
 ## Legs 6f53d77 / Thermal 9b9e169 update: shin zone withdrawn, knee-housing grille
 - **Knee saddle / lower-shank no-cover zone withdrawn.** Under the R-047 freeze the **shin fairing stays out of the baseline** and is an **optional add-back for an Arbiter decision** (front + outboard 0.45 × 1751 cm² = 0.079 m²/side, 4 panels, +4 tools):
@@ -43,7 +43,7 @@ R2: 40 mm EPP failed against the real crush curve (Materials). R3 (265 J, Contro
 - No mass booked; arm shells return as a P-020 change at Arms R2 (freeze R-047: no additions until reserve ≥ 0.30).
 
 ## R-047 offsets
-See `COVER_TRIMS_R047.md`: −0.231 kg itemized (−0.116 at half-credit; pad item 0.000; grille included).
+See `COVER_TRIMS_R047.md`: −0.236 kg itemized (−0.118 at half-credit; pad item −0.005; grille included).
 
 ## A29 panel layout and mould list (owner: Industrial Design per R-029)
 Status: layout from Legs keep-out hulls + model_v4 dims, **not yet measured on v4 CAD** (areas [EST]). Delta check: itemized `modules/design/cover_set_v5.json` = **−0.124 kg vs booked (−0.184 CF thigh): PASS**; P-022 +20 % flagged.
