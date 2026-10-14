@@ -101,6 +101,39 @@ Spec (Electronics): hardware comparator ON 88 V / OFF 86 V; bus ≤ 90 V at the 
 The Arbiter is ruling on **O-T5** (4 h mixed), **O-T2** (waist_pitch), **O-T3** (FET vs contactor disconnect; §8 now adds the contactor). Robot Lab leans to re-rating the mixed duty and cutting idle power.
 Idle-power available in torso/BMS: BMS always-on 1.0 → 0.3 W (sleep host, BQ79616 low-power mode) [EST]; contactor coil 5.5 W while closed (LEV100 datasheet) → economizer/PWM hold ~1.5 W [EST]; FET losses at stand ~0.05 W; blowers 3 W → speed to Thor load. **Torso/BMS savings ≈ 5–6 W**, but the contactor itself adds 5.5 W unless economized. For 4 h mixed, P_mixed must fall from ~500 W to ≤ 365 W (−135 W); the real levers are compute cap (120 W) and drive idle overhead (30 × 3.3 W ≈ 99 W), not torso.
 
+## 13. R-031 items (2026-10-14)
+### 13.1 O-T2 waist_pitch margin (approved on citation)
+Requirement: static 125.5 N·m (10 kg at 0.60 m reach, 30° lean; T5 one-hand case) from `r1_torso.py` (inputs: sim torso 18.762 kg @ 0.169 m, `sim/v3/humanoid_v3.xml`; arms 9.54 kg/side catalog, `arms/R2_OPEN_ITEMS.md` O-A1; shoulder z 0.30 [EST]). Need = 1.5 × 125.5 = **188.2 N·m** (CONTRACTS §0 margin rule). Selection TBM2G-08508A + CSG-25-100 = **204 N·m** available (`actuators/results/sizing.md`, hip_roll row; CSG-25-100 repeated peak 204, `v3/PARTS.md`). **Margin 204/188.2 = 1.08 on need, 1.63× on the static requirement.** Mass 1.56 vs 1.37 kg (+0.19, Actuators line). Speed 2 rad/s need vs 3.6 rad/s (hip_roll ω30).
+### 13.2 O-T3: contactor chosen over FET-only
+Choice: **keep the TE KILOVAC LEV100A4ANG contactor (900 VDC, 100 A, §8) in series with the BQ76200 FET pair.** Why: two diverse disconnects (electromechanical + semiconductor) make the pack disconnect single-fault tolerant without a diagnostic-coverage argument; a FET-only case needs failed-short detection (V_DS test pulses), redundant FET banks and a proven reaction time, i.e. an FMEDA we cannot evidence this round. FETs open first (fast, arc-free); contactor opens after current < 5 A [EST] to avoid DC arcing. Welded-contactor detection: bus voltage after open + pre-charge sense; failed-short FET detection: BQ76200 V_DS check at each close. Mass +0.20 [EST], coil 5.5 W → PWM economizer to ~1.5 W [EST].
+### 13.3 Regen clamp = **P-045**, shared with RL Electronics (§8 parts unchanged).
+### 13.4 A41 Thor duct (Electronics §11, f4e839c): our side
+- Load 134 W, 24.3 CFM at ΔT 10 K; fan **Sunon PF40281B1-000U-S99** (40×40×28, 24.9 CFM, 6.12 W, 42 g, PWM) per Electronics, Arbiter to rule; replaces the P-030 2 × 40 mm blower estimate (3 W → 6.12 W, 40 → 42 g).
+- **Fan supply:** **TRACO TSR 1-48120WI** (17–72 V in, 12 V, 1 A, 93 %, SIP-3) from the 48 V rail — https://www.tracopower.com/tsr1wi-datasheet . Fan 0.51 A ≤ 1 A. Mass ~4 g [EST].
+- **Fan tach → TMS570 safety MCU** (fan-fail → Thor throttle, then SS1 if Thor over-temp).
+- **Vents:** Q = 0.0115 m³/s. Free-area velocity ≤ 2.5 m/s → **46 cm² free area each**; perforated/louvred grille ~50 % open → **~95 cm² gross each (e.g. 120 × 80 mm)**. Δp ≈ K·½ρv² with K ≈ 2.5 → ~9 Pa per vent, ~20 Pa both + fins [EST]; the fan's static-pressure curve must cover this (O-T10). Guard: holes ≤ 3 mm or louvre + stainless mesh (finger-safe IP2X; louvres angled down for splash, IPX4 aim).
+- **Placement:** intake low on the chest front (below the sternum line, above the pack bay lid); exhaust high on the upper back between the shoulder bulkheads. Air path: intake → fan → Thor cold-plate fins (DCM3623 on the same plate) → exhaust. **Sealed partition** (CFRP 1 mm, gasketed) between duct and the pack bay; HS200 clamp resistor on the exhaust side.
+- **Mass:** partition CFRP 0.06 m² × 1 mm 0.093 + duct walls PC 1 mm 0.04 m² 0.048 + converter 0.004 + fan Δ 0.002 = **+0.147 kg** on top of the P-030 0.040.
+### 13.5 O-T5: duty re-rate and idle cuts
+Evidence: no humanoid maker publishes a walk/stand split. Closest published data: Agility Digit, tote moving at GXO (AMR → conveyor), **~4 h battery with autonomous docking** (Agility via Humanoids Daily, https://www.humanoidsdaily.com/news/agility-robotics-upgrades-digit-humanoid-with-longer-runtime-amr-integration-and-enhanced-safety-features ; DEPLOY registry https://registry.deploy.report/deployments/digit-gxo-georgia-warehouse). The workflow is station-based with short walks; the "50 % walking" mixed case is therefore pessimistic. Proposed re-rate: **≥ 4 h at 20 % walking / 80 % stand-manipulate**, with ≥ 2 h continuous walking unchanged (hard). The 20 % share is [EST], to be replaced by Controls' task-sim time split.
+Idle cuts: BMS sleep 1.0 → 0.3 W; contactor economizer 5.5 → 1.5 W; compute cap during stand −40 W (T5000 modes 40–130 W, R-021) [EST]. Torso adds now: BMS 0.3 + FET 0.2 + distribution 0.3 + contactor 1.5 + fan 6.12 = 8.4 W.
+| case | W | h (1620 Wh × 0.9) | target |
+|---|---|---|---|
+| walk 1.0 m/s, typical | 711.8 | **2.05** | MET |
+| walk 1.0 m/s, binned 1584 Wh | 711.8 | **2.00** | MET by 1.0 W (pass line 712.8 W) — **no margin; fan 6.12 W ate it** |
+| stand/manipulate (294 − 40 cap + 8.4) | 262.4 | 5.56 | |
+| mixed 25/75 | 374.8 | 3.89 | NOT MET |
+| **mixed 20/80 (proposed rating)** | 352.3 | **4.14** | MET |
+Risk: walking binned runtime sits on the pass line. If the Arbiter books the 6.12 W fan as-is, either a lower-power fan curve (PWM at walking-load Thor power) or the G5 regen evidence is needed.
+
+## 14. Mass line (updated, R-031)
+| line | paper kg |
+|---|---|
+| §11 torso line | 5.240 |
+| A41 duct, partition, fan converter (§13.4) | +0.147 |
+| **torso line** | **5.387** (contactor kept, §13.2) |
+| battery | 8.750 |
+
 ## 7. Open questions / conflicts (not edited in others' files)
 - **O-T1 (Electronics, coordination):** adopt the 48 V intermediate rail with DCM3623TA5N53B4T00; Torso hosts the DCM on the power distribution board or the brain tray? Mass 0.024 [UNVERIFIED for variant] stays in the brain line; who books the 47718-232 choke; 24 V VL source (O-E3); BMS→safety MCU CAN FD message set; e-stop = FET-open vs contactor (O-E6).
 - **O-T2 (Actuators/Arbiter):** waist_pitch 116 N·m < 188 N·m need with T5 payload → TBM2G-08508A, +0.19 kg.
@@ -110,4 +143,6 @@ Idle-power available in torso/BMS: BMS always-on 1.0 → 0.3 W (sleep host, BQ79
 - **O-T6:** usable 90 % at 3.4 V/cell floor still [EST] (R-010); read P45B discharge curve at ~2 A/cell.
 - **O-T8:** clamp: read HS200/HS100 overload curve for 400 J, cite comparator, gate driver, thermal cutout, sum drive bus capacitance for pre-charge; HS200 mass (0.475) vs Electronics estimate.
 - **O-T9 (Electronics/Arbiter):** interlock exception for cell-at-risk faults.
+- **O-T10:** Sunon PF40281B1 static-pressure curve vs ~20 Pa vents+fins; fan PWM schedule.
+- O-T2 approved on citation (§13.1); O-T3 → contactor (§13.2); O-T5 re-rate proposed (§13.5).
 - **O-T7 (Legs/Controls):** sim torso 18.762 kg should be re-split (pack 8.75 in chest) when the sim is updated.
