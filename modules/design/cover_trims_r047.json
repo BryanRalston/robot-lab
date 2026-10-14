@@ -16,16 +16,15 @@
    "evidence": "calc 0.040 x (1-1.01*1.2/(1.20*1.5))"
   },
   {
-   "item": "shoulder pad R6 vs R-060 booked 0.127",
-   "kg": -0.027,
-   "evidence": "pad_r6.json"
+   "item": "shoulder pad R7 vs R-068 booked 0.100",
+   "kg": -0.016,
+   "evidence": "pad_r7.json"
   }
  ],
- "total_kg": -0.172,
- "total_half_credit_kg": -0.086,
- "booked_R059_half": -0.117,
- "shortfall_vs_booked_half": 0.031,
- "wrist_trims_available_pair": -0.071,
+ "total_kg": -0.161,
+ "total_half_credit_kg": -0.081,
+ "booked_R067_half": -0.073,
+ "wrist_trims_available_pair": -0.067,
  "shin_addback_option": {
   "PC": 0.3,
   "PC_louvred": 0.227,

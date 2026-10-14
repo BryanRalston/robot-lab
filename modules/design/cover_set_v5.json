@@ -55,14 +55,14 @@
    "cf_kg": null
   },
   {
-   "panel": "shoulder impact pad R6: roll-output mount, 7075 doubler, HC 4.5 pcf 60.9x60.9x55",
+   "panel": "shoulder impact pad R7: roll-output mount, D-A doubler, HC 4.5 pcf 61.8x61.8x60",
    "P": "P-051 (proposed)",
    "material": "Al honeycomb + 7075 doubler + EPP face",
    "area_m2_side": 0.0037,
    "panels": 2,
-   "kg": 0.1,
+   "kg": 0.084,
    "cf_kg": null,
-   "note": "booked separately, R-060 0.127; not in the P-020/P-022..25 delta"
+   "note": "booked separately, R-068 0.100; not in the P-020/P-022..25 delta"
   }
  ],
  "totals": {

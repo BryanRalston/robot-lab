@@ -9,11 +9,10 @@ Scripts: `cover_trims_r047.py` → `cover_trims_r047.json` (reads `a36_vents.jso
 | 3 | Hip-skirt rim strips → printed PA12 1.2 mm | **−0.013** | calc |
 | | **Items 1–3** | **−0.145 → −0.073 half credit** | **shortfall +0.044 vs the booked −0.117 (FLAG)**: the A35 layout opens only over the housings, not 30 % everywhere |
 
-## Offsets that cover the shortfall
+## Status after R-067 (trims rebooked at −0.073 half credit)
 | item | Δ kg | basis |
 |---|---|---|
-| Shoulder pad R6 0.100 vs R-060 booked 0.127 | **−0.027** (full: an assembly estimate, itemized) | `pad_r6.json` |
-| Wrist fairing trims vs R-059 +0.079 | **−0.071 → −0.036 half credit** | `wrist_trims.json` |
-| **Net vs current bookings** | **+0.044 − 0.027 − 0.036 = −0.019** | still an offset, but small |
+| Shoulder pad R7 0.084 vs R-068 booked 0.100 | **-0.016** | `pad_r7.json` |
+| Wrist fairing trims vs R-059 +0.079 | **-0.067 → -0.034 half credit** (Arms accepted the open frame; PTFE guard contingency +0.005) | `wrist_trims.json` |
 
 Not included (Arbiter decision): shin add-back, deferred until D69 rev B verified; louvred CF +0.198 preferred (R-054).

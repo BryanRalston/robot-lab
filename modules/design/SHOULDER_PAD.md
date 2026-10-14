@@ -1,7 +1,42 @@
-# Shoulder impact pad (R-042/R-054/R-060): R6, roll-output mount + 7075 doubler, RL Industrial Design, 2026-10-14
+# Shoulder impact pad (R-068): R7, one design: roll-output mount + Materials D-A doubler, RL Industrial Design, 2026-10-14
 **P-number: P-051 (proposed). R-042 approves the pad and its cap but assigns no P-number; the highest P on main is P-050.** Numbers come from `shoulder_pad.py` → `shoulder_pad.json`. All [EST] until Materials confirms the foam data and Controls runs T-030.
 
-## R6 (R-060, Arms c64ab91 R6 §5): CURRENT DESIGN
+## R7 (R-068): CURRENT DESIGN. Core frozen by Materials (48f55c3 Part 5), not re-sized
+**Core:** 4.5 pcf, 61.8 × 61.8 × 60, pre-crushed, ±3 % lot cert. **Peak 9.15 kN** (upper bound × 1.30) ≤ 9.17; **293 J at 15° on the floor** (× 0.93, lower bound × 1.10) ≥ 292; 315 J at 0°. Standout **67.5 mm** (doubler 1.0 + core 60 + spreader 0.5 + EPP 6).
+
+### Mount decision: ROLL OUTPUT (R6 location) carrying Materials' D-A doubler
+| criterion | D-A on the housing face (fixed, at the R5 location y 0.267–0.335, z 0.163–0.268) | R6 roll output (on the roll-yaw link lateral face, moves with roll) |
+|---|---|---|
+| upper arm, all roll angles (sim/v3 capsule r 40 from y 0.282, z 0.18) | **overlaps −8.5 … −41 mm** (Arms −7.5…−40 at 66.5, +1 mm at 67.5). Raising to z ≥ +0.19 takes it off the housing face, so D-A can't be both | **no overlap**: the pad rides on the arm |
+| abduction | clears | pad rotates with the arm; at 90° it faces up, outboard of the cap. **Arms to confirm vs head/cap at max abduction** |
+| A44 tuck (roll −5, pitch −30) | fixed pad above the adducted arm; lateral-most surface may become the arm → out-of-footprint risk | pad is on the arm's lateral face, which **is** the lateral-most surface; not between arm and torso (27.8 mm tuck clearance unaffected) |
+| vent inlet z +0.14 | ~1.6 mm (Materials) | pad on the arm, outboard of the bay vents; does not cover them. **Re-check in crushed-state CAD (R-059)** |
+| contact band ±15 mm (Controls) | covered only if the arm doesn't reach the ground first | centred by construction (pad on the contact face) |
+| load path | axial into the housing face, but the bare 2 mm ring fails (Arms), so it needs a stiff end face | 9.17 kN lateral → link → roll output → roll bearing (radial; small moment if the pad is centred on the roll axis) → shoulder_P bracket; bare housing ring not loaded |
+**Pick: roll output.** It is the only option that clears the upper arm at every roll angle without leaving the seat, and it covers the band by construction. Materials' **D-A plate (15.5 g) fits it** if the roll-yaw link lateral face is flat and solid over the 87.4 mm diagonal; otherwise the R6 ribbed doubler (25.7 g → pair 0.105, over the cap).
+
+| item (per side) | kg |
+|---|---|
+| core_4p5pcf_61p8x61p8x60 | 0.0165 |
+| doubler_7075_DA_plate1p0_lips0p8_tabs | 0.0155 |
+| bond_film_DP490 | 0.0005 |
+| spreader_Al_0p5 | 0.0052 |
+| EPP80_face_6mm | 0.0018 |
+| sleeve_TPU_film | 0.0025 |
+| **per side** | **0.042** |
+| **pair** | **0.084 (booked 0.100 → -0.016)** (Materials 0.087 with their 4 g sleeve) |
+
+### Single doubler FEA case (bryan PC)
+- **Model:** roll-yaw link (actual CAD) + D-A 7075-T6 plate (1.0 mm base, 0.8 × 6 mm lips, 4 tabs 8 × 10 × 1.5) + 4 × M4 class 8.8 (preload 2 kN each) + bonded core as a uniform pressure patch 61.8 × 61.8, + roll output and roll bearing (CRBH) as a spring/bearing element; fixed at the shoulder_P bracket.
+- **Load:** peak 9.17 kN at 15°: normal 8.86 kN (2.32 MPa on the footprint) + tangential 2.37 kN, applied **downward (hip-first lean)**, plus arm self-weight at the tuck (roll −5, pitch −30, elbow −110) and the roll gear held (brake/backdrive torque off).
+- **Outputs/pass:** plate and link von Mises ≤ 480/1.5 MPa; M4 shear ≤ 0.6 × 640 MPa and no slip/separation; roll bearing combined radial + moment ≤ the CRBH static rating / 1.5 (R-067); link deflection ≤ 1 mm at the pad.
+
+### Must confirm
+- **Arms/Actuators (D1–D3):** a flat, solid lateral face on the roll-yaw link ≥ 87.4 mm diagonal with 4 × M4 × 8; abduction sweep vs head/cap with the 67.5 mm pad; the roll bearing rating for the case above.
+- **Materials:** D-A on the link face (alloy unknown) and the bonded-core residual shear (G5); OK with the 2.5 g film sleeve.
+- **Controls:** the 15° limit holds across the roll ROM, since the pad orientation moves with roll (Materials D1).
+
+## R6 (R-060, Arms c64ab91 R6 §5), superseded by R7
 - **Decision: mount on the ROLL OUTPUT** (the upper-arm lateral face at shoulder height), not on the cap.
   - Raising the cap pad to bottom ≥ z +0.19 would technically keep the band inside the core (10 mm below / 21 mm above), but the upper arm would then sit only ≈ 11 mm inboard of the pad face. A 10–15° hip-first lean could land on the arm, which is an out-of-footprint hit (an R-059 fail).
   - On the roll output the pad moves with the arm: no overlap at any roll angle (Arms' −7.5…−40 mm overlap is gone), and the band stays centred.

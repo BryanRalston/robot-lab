@@ -22,7 +22,7 @@ Hull areas now come from the final `legs/results/v5/ENVELOPES_FOR_ID.md`: knee_c
 **Knee cap vs thigh fairing clearance (Legs):** no overlap from 0 to 135°. Minimum keep-out gap is **10.2 mm at 135°** (22 mm from 0 to 105°). After the D69 ø85 knee housing (+4.5 mm radial) it is **≈ 5.7 mm [EST]**, still above the 3 mm PC flex gap. Recheck after the D69 re-CAD.
 
 ## Shoulder impact pad (R-042, P-051 proposed): see `SHOULDER_PAD.md`
-R2: 40 mm EPP failed against the real crush curve (Materials). R6 (R-060): roll-output mount, 7075 doubler replaces the PC saddle, lot-tested 4.5 pcf core 60.9×60.9×55. **0.1 kg pair** (booked 0.127), 9.16 kN / 550 N·m, 275 J min. Arm shells stay deferred.
+R2: 40 mm EPP failed against the real crush curve (Materials). R7 (R-068): one design: roll-output mount + Materials D-A doubler, frozen 61.8×61.8×60 core. **0.084 kg pair** (booked 0.100), 9.15 kN peak, 293 J at 15°, 67.5 mm standout. Arm shells stay deferred.
 
 ## R-059 / R-060 decisions (recorded)
 - Pad R5 accepted (R-059), then R-060: the mount counts inside the cap, a 7075 doubler is required, the pad is booked 0.127 → R6 above at 0.100. Lot-tested cores ±5 % + G5 rate factor; 15° impact limit.
@@ -66,14 +66,15 @@ Basis: Actuators D76 (pitch CSG-14-100 + yaw CSF-11-100 units side by side, axia
   | 1.2 mm PC on the y-flats (low draw, 2 x 54 x 96 mm) | -0.0037 |
   | dorsal motor slots 20 % (3 mm slots, 2 rows/unit) | -0.0024 |
   | shorter blends 25->15 mm (elbow) and 20->12 mm (cuff); cuff edge held at z >= +10 over |y|<=62 (Arms sweep) | -0.0106 |
-  | palm-side half as open frame (40 % of area kept, 6 mm rims) | -0.0185 |
-  | **total** | **-0.0353** |
+  | palm-side half as open frame (Arms-accepted: openings <=10 mm radiused, 4 mm members, ~55 % open) | -0.017 |
+  | **total** | **-0.0337** |
 
-  Pair -0.071 → fairing 0.119 pair, **+0.008 vs a plain ø70 shell (booked +0.079 → -0.071)**. The palm-side open frame exposes tendons to grasped objects; Arms to accept, or drop that item (−0.037 pair).
+  Pair -0.067 → fairing 0.123 pair, +0.012 vs a plain ø70 shell. The open-frame item went from −0.0185 to −0.017/side with ≤ 10 mm openings (about 55 % open instead of 60 %).
+- **Arms ACCEPTED the open-frame palm half on these conditions:** (1) flexor tendons stay in **steel-coil sheaths** (Materials TENDON_SHEATH.md) continuously through the open zone; (2) frame openings **≤ 10 mm with radiused edges**, no snag at pitch ±60 / yaw ±30; (3) frame members keep the **z ≥ +10** lower edge; (4) if the sheath ends up plain PTFE, add a 1 mm PC guard strip 15 × 140 mm over the tendon bundle: **contingency +0.0025/side, +0.005 pair**.
 - **Verdict: ACCEPTABLE WITH CONDITIONS:** (1) Arms confirms the tuck orientation (wide axis parallel to the chest), otherwise a −15.4 mm clash; (2) Arms hand-sweep check ≥ 5 mm at yaw ±30° / pitch ±60°; (3) Thermal confirms the venting need; (4) +0.079 pair is booked with the arm shells at Arms R2 (ruling needed, > 0.02).
 
 ## R-047 offsets
-See `COVER_TRIMS_R047.md` (rev A36/R6): cover items −0.145 (−0.073 half credit, **+0.044 short of the booked −0.117**), covered by pad R6 −0.027 and wrist trims −0.036 half credit → net −0.019.
+See `COVER_TRIMS_R047.md`. R-067 rebooked the trims at −0.073 (half credit). Pad R7 −0.016 vs its 0.100 booking; wrist trims −0.067 pair (−0.034 half credit).
 
 ## A29 panel layout and mould list (owner: Industrial Design per R-029)
 Status: layout from Legs keep-out hulls + model_v4 dims, **not yet measured on v4 CAD** (areas [EST]). Delta check: itemized `modules/design/cover_set_v5.json` = **−0.124 kg vs booked (−0.184 CF thigh): PASS**; P-022 +20 % flagged.

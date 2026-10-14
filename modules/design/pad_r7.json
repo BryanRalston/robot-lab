@@ -1,0 +1,23 @@
+{
+ "core": "61.8x61.8x60 4.5 pcf, pre-crushed, lot cert +-3 % (R-068)",
+ "peak_kN": 9.15,
+ "pass_peak": true,
+ "E_15deg_floor_J": 293,
+ "pass_292": true,
+ "E_0deg_floor_J": 315,
+ "standout_mm": 67.5,
+ "mount": "roll output (R6 location) with Materials D-A flat doubler bonded to the core, 4x M4 tabs into the roll-yaw link lateral face",
+ "mass_items_kg_side": {
+  "core_4p5pcf_61p8x61p8x60": 0.0165,
+  "doubler_7075_DA_plate1p0_lips0p8_tabs": 0.0155,
+  "bond_film_DP490": 0.0005,
+  "spreader_Al_0p5": 0.0052,
+  "EPP80_face_6mm": 0.0018,
+  "sleeve_TPU_film": 0.0025
+ },
+ "kg_side": 0.042,
+ "kg_pair": 0.084,
+ "booked": 0.1,
+ "delta": -0.016,
+ "note": "Materials sleeve 4.0 g -> TPU film 2.5 g; if the link face is not flat/solid >= 88 mm diagonal, use the R6 ribbed doubler (25.7 g/side) -> pair 0.105 (over)"
+}
