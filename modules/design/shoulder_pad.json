@@ -129,9 +129,49 @@
    "kg_pair": 0.095,
    "stack_mm": 70.0,
    "single_use": "yes"
+  },
+  "R5 shoulder-cap mount, HC 4.5 pcf 62x62x57": {
+   "mount": "conformal PC saddle on roll housing outboard face (y ~ +0.30), retained by bonded aramid band + 2 bonded M4 inserts (bulkhead M8 holes not used); load path: ground -> EPP -> plate -> core -> saddle -> roll housing (compression, 2.33 MPa bearing) -> shoulder structure; shoulder-cap cover (deferred) carries no load",
+   "peak_kN_x1p3": 8.94,
+   "M_Nm": 537,
+   "E_J_x1p0": 282,
+   "coverage": "core centre 4 mm above contact-band centre (clears vent inlet at z +0.14 by ~1.5 mm): band +-15 mm stays 12 mm (bottom) / 20 mm (top) inside core edges",
+   "stack_mm": 66.5,
+   "plate_check": {
+    "R4 80x100 plate, 19 mm overhang, t 0.5 mm": {
+     "M_Nm_per_m": 202,
+     "sigma_MPa": 4844,
+     "SF": 0.057
+    },
+    "R4 80x100 plate, 19 mm overhang, t 0.8 mm": {
+     "M_Nm_per_m": 202,
+     "sigma_MPa": 1892,
+     "SF": 0.145
+    },
+    "flat 6061 needed for 19 mm overhang": {
+     "t_mm": 2.1,
+     "kg_side": 0.0453
+    },
+    "R5 core-sized 62x62 plate (no overhang)": {
+     "note": "load passes straight through plate into core; plate is in pure compression (2.33 MPa), no bending; 15 mm resultant offset -> core crush tilt, guided by side posts",
+     "SF": "n/a (compression 2.33 MPa << 275)"
+    }
+   },
+   "mass_items_kg_side": {
+    "core_HC_4p5pcf_62x62x57": 0.0158,
+    "face_plate_Al_0p5_62x62": 0.0052,
+    "side_guides_4_PC_posts": 0.004,
+    "PC_saddle_3mm_conformal_to_roll_housing_62x62": 0.0138,
+    "bonded_aramid_band_plus_2_M4_bonded_inserts": 0.004,
+    "EPP80_face_6mm_62x62_chamfered": 0.0018,
+    "face_sleeve": 0.004
+   },
+   "kg_side": 0.0486,
+   "kg_pair": 0.097,
+   "single_use": "yes"
   }
  },
  "r1_40mm_EPP": "FAIL: ~19.5 kN, ~1.17 kN\u00b7m (Materials)",
- "pick": "R4 HC 4.5 pcf 62x62x57 cartridge",
+ "pick": "R5 shoulder-cap mount, HC 4.5 pcf 62x62x57",
  "measured": false
 }

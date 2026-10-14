@@ -50,7 +50,27 @@ opts['R4 HC 4.5 pcf 62x62x57 cartridge']=dict(area_cm2=round(A4*1e4,1),core_mm='
  coverage='contact band +-15 mm: >= 35 mm inside plate top/bottom edges; contact centre stays <= 15 mm off core centre (16 mm inside core edge)',
  thermal='>= 5 mm air gap vented top + bottom, low-e foil on bulkhead (pad face ~47-50 C, Thermal)',
  mass_items_kg_side={k:round(v,4) for k,v in items4.items()},kg_side=round(per4,4),kg_pair=round(2*per4,3),stack_mm=1.5+57+0.5+6+5,single_use='yes')
+# R5 (Arms: bulkhead face not viable; mount on shoulder cap outboard of roll housing, y ~ +0.30). Same 4.5 pcf core 62x62x57 (R4/R-054).
+# Face-plate off-centre check: flat ground loads the whole face; EPP face mean p = F/A_plate. Overhang beyond core edge acts as cantilever.
+SY=275e6   # 6061-T6 yield
+def plate_check(L,t,p):           # cantilever strip, per m width
+    M=p*L**2/2; Z=t**2/6; return M,M/Z
+pR4=Fpk/(0.080*0.100)              # 1.12 MPa mean on 80x100 plate
+chk={}
+for t in (0.5e-3,0.8e-3):
+    M,sg=plate_check(0.019,t,pR4); chk[f'R4 80x100 plate, 19 mm overhang, t {t*1e3:.1f} mm']=dict(M_Nm_per_m=round(M),sigma_MPa=round(sg/1e6),SF=round(SY/sg,3))
+t_req=(6*plate_check(0.019,1,pR4)[0]/SY)**0.5
+chk['flat 6061 needed for 19 mm overhang']=dict(t_mm=round(t_req*1e3,2),kg_side=round(0.08*0.1*t_req*2700,4))
+chk['R5 core-sized 62x62 plate (no overhang)']=dict(note='load passes straight through plate into core; plate is in pure compression (2.33 MPa), no bending; 15 mm resultant offset -> core crush tilt, guided by side posts',SF='n/a (compression 2.33 MPa << 275)')
+items5=dict(core_HC_4p5pcf_62x62x57=A4*tc*72, face_plate_Al_0p5_62x62=A4*0.5e-3*2700, side_guides_4_PC_posts=0.004,
+ PC_saddle_3mm_conformal_to_roll_housing_62x62=A4*3e-3*1200, bonded_aramid_band_plus_2_M4_bonded_inserts=0.004,
+ EPP80_face_6mm_62x62_chamfered=A4*0.006*80, face_sleeve=0.004)
+per5=sum(items5.values())
+opts['R5 shoulder-cap mount, HC 4.5 pcf 62x62x57']=dict(mount='conformal PC saddle on roll housing outboard face (y ~ +0.30), retained by bonded aramid band + 2 bonded M4 inserts (bulkhead M8 holes not used); load path: ground -> EPP -> plate -> core -> saddle -> roll housing (compression, 2.33 MPa bearing) -> shoulder structure; shoulder-cap cover (deferred) carries no load',
+ peak_kN_x1p3=round(Fpk/1e3,2),M_Nm=round(Fpk*0.06),E_J_x1p0=round(Est),
+ coverage='core centre 4 mm above contact-band centre (clears vent inlet at z +0.14 by ~1.5 mm): band +-15 mm stays 12 mm (bottom) / 20 mm (top) inside core edges',
+ stack_mm=3+57+0.5+6,plate_check=chk,mass_items_kg_side={k:round(v,4) for k,v in items5.items()},kg_side=round(per5,4),kg_pair=round(2*per5,3),single_use='yes')
 out=dict(P='P-051 (proposed)',E_J=E,F_allow_kN=round(FMAX/1e3,2),cap_pair_kg=0.10,options=opts,
- r1_40mm_EPP='FAIL: ~19.5 kN, ~1.17 kN·m (Materials)',pick='R4 HC 4.5 pcf 62x62x57 cartridge',measured=False)
+ r1_40mm_EPP='FAIL: ~19.5 kN, ~1.17 kN·m (Materials)',pick='R5 shoulder-cap mount, HC 4.5 pcf 62x62x57',measured=False)
 json.dump(out,open(os.path.join(H,'shoulder_pad.json'),'w'),indent=1)
 for k,v in opts.items(): print(k,v)
