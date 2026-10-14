@@ -952,3 +952,10 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
 - **Chest backing: +0.053 accepted in full** (CF/Al-honeycomb sandwich, 0.070; pad 98x98x88 core 0.061; total 0.131), because it's needed for T-031. **Pursue O-T14** (stiffened pack-enclosure front) to net it back to zero, with credit when it's measured.
 - The torso pocketing FEA spec is complete, queued via Robot Lab on the bryan PC.
 - Reserve ~**-0.28** (on estimates). The FEA mass-down results are now critical.
+
+## R-085 (2026-10-14) Arms f9eba88
+- **Forearm 287 is adopted**, with a 2.1 mm margin. D76 at z +26.5 is binding. Extension **+0.005** booked (the arms line is 18.139).
+- **Elbow at full reach with 10 kg (~73 vs the 69 cap):** **keep the 10 kg payload**. Controls caps arm acceleration at full reach with >8.5 kg to <=87% of the R1 profile, so the elbow stays <=69 N·m. Controls confirms the cap and that task timing is still acceptable. Reducing the payload is rejected.
+- **Flexor cap of 1.67 A is consistent with the 500 N limit**, accepted.
+- **T4 grip of 22.1 vs 22 N** passes, but by only 0.1 N. G5 measures it with the encoder-cap thermocouple. If it falls below 22, the remedy is a friction proof (<=1.0) or Arms recovery, not a T4 waiver.
+- Reserve ~-0.29.
