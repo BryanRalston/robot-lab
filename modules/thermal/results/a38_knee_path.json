@@ -1,0 +1,674 @@
+{
+ "h12|knee case 95C (carry)|Rtr2.5|rod58|A35 h15|Rc8": {
+  "femur_knee_end": 69.0,
+  "bond": 51.7,
+  "bond_no_knee": 50.4,
+  "knee_add_K": 1.3,
+  "Q_femur_W": 10.4
+ },
+ "h12|knee case 95C (carry)|Rtr2.5|rod58|A35 h15|Rc14": {
+  "femur_knee_end": 69.4,
+  "bond": 54.1,
+  "bond_no_knee": 56.9,
+  "knee_add_K": -2.8,
+  "Q_femur_W": 10.2
+ },
+ "h12|knee case 95C (carry)|Rtr2.5|rod58|vents short|Rc8": {
+  "femur_knee_end": 69.3,
+  "bond": 53.4,
+  "bond_no_knee": 54.3,
+  "knee_add_K": -0.9,
+  "Q_femur_W": 10.3
+ },
+ "h12|knee case 95C (carry)|Rtr2.5|rod58|vents short|Rc14": {
+  "femur_knee_end": 69.8,
+  "bond": 56.0,
+  "bond_no_knee": 62.4,
+  "knee_add_K": -6.5,
+  "Q_femur_W": 10.1
+ },
+ "h12|knee case 95C (carry)|Rtr2.5|rod85|A35 h15|Rc8": {
+  "femur_knee_end": 68.9,
+  "bond": 51.3,
+  "bond_no_knee": 49.3,
+  "knee_add_K": 2.0,
+  "Q_femur_W": 10.4
+ },
+ "h12|knee case 95C (carry)|Rtr2.5|rod85|A35 h15|Rc14": {
+  "femur_knee_end": 69.4,
+  "bond": 53.7,
+  "bond_no_knee": 55.6,
+  "knee_add_K": -2.0,
+  "Q_femur_W": 10.3
+ },
+ "h12|knee case 95C (carry)|Rtr2.5|rod85|vents short|Rc8": {
+  "femur_knee_end": 69.2,
+  "bond": 52.8,
+  "bond_no_knee": 52.9,
+  "knee_add_K": -0.1,
+  "Q_femur_W": 10.3
+ },
+ "h12|knee case 95C (carry)|Rtr2.5|rod85|vents short|Rc14": {
+  "femur_knee_end": 69.7,
+  "bond": 55.4,
+  "bond_no_knee": 60.8,
+  "knee_add_K": -5.5,
+  "Q_femur_W": 10.1
+ },
+ "h12|knee case 95C (carry)|Rtr5.0|rod58|A35 h15|Rc8": {
+  "femur_knee_end": 59.2,
+  "bond": 48.7,
+  "bond_no_knee": 50.4,
+  "knee_add_K": -1.7,
+  "Q_femur_W": 7.2
+ },
+ "h12|knee case 95C (carry)|Rtr5.0|rod58|A35 h15|Rc14": {
+  "femur_knee_end": 59.7,
+  "bond": 50.7,
+  "bond_no_knee": 56.9,
+  "knee_add_K": -6.2,
+  "Q_femur_W": 7.1
+ },
+ "h12|knee case 95C (carry)|Rtr5.0|rod58|vents short|Rc8": {
+  "femur_knee_end": 59.6,
+  "bond": 50.3,
+  "bond_no_knee": 54.3,
+  "knee_add_K": -4.0,
+  "Q_femur_W": 7.1
+ },
+ "h12|knee case 95C (carry)|Rtr5.0|rod58|vents short|Rc14": {
+  "femur_knee_end": 60.2,
+  "bond": 52.6,
+  "bond_no_knee": 62.4,
+  "knee_add_K": -9.9,
+  "Q_femur_W": 7.0
+ },
+ "h12|knee case 95C (carry)|Rtr5.0|rod85|A35 h15|Rc8": {
+  "femur_knee_end": 59.1,
+  "bond": 48.2,
+  "bond_no_knee": 49.3,
+  "knee_add_K": -1.1,
+  "Q_femur_W": 7.2
+ },
+ "h12|knee case 95C (carry)|Rtr5.0|rod85|A35 h15|Rc14": {
+  "femur_knee_end": 59.6,
+  "bond": 50.1,
+  "bond_no_knee": 55.6,
+  "knee_add_K": -5.5,
+  "Q_femur_W": 7.1
+ },
+ "h12|knee case 95C (carry)|Rtr5.0|rod85|vents short|Rc8": {
+  "femur_knee_end": 59.5,
+  "bond": 49.7,
+  "bond_no_knee": 52.9,
+  "knee_add_K": -3.2,
+  "Q_femur_W": 7.1
+ },
+ "h12|knee case 95C (carry)|Rtr5.0|rod85|vents short|Rc14": {
+  "femur_knee_end": 60.0,
+  "bond": 51.9,
+  "bond_no_knee": 60.8,
+  "knee_add_K": -9.0,
+  "Q_femur_W": 7.0
+ },
+ "h12|knee case 95C (carry)|Rtr30.0|rod58|A35 h15|Rc8": {
+  "femur_knee_end": 42.9,
+  "bond": 43.6,
+  "bond_no_knee": 50.4,
+  "knee_add_K": -6.9,
+  "Q_femur_W": 1.7
+ },
+ "h12|knee case 95C (carry)|Rtr30.0|rod58|A35 h15|Rc14": {
+  "femur_knee_end": 43.3,
+  "bond": 44.9,
+  "bond_no_knee": 56.9,
+  "knee_add_K": -12.0,
+  "Q_femur_W": 1.7
+ },
+ "h12|knee case 95C (carry)|Rtr30.0|rod58|vents short|Rc8": {
+  "femur_knee_end": 43.5,
+  "bond": 45.3,
+  "bond_no_knee": 54.3,
+  "knee_add_K": -9.0,
+  "Q_femur_W": 1.7
+ },
+ "h12|knee case 95C (carry)|Rtr30.0|rod58|vents short|Rc14": {
+  "femur_knee_end": 44.0,
+  "bond": 46.8,
+  "bond_no_knee": 62.4,
+  "knee_add_K": -15.6,
+  "Q_femur_W": 1.7
+ },
+ "h12|knee case 95C (carry)|Rtr30.0|rod85|A35 h15|Rc8": {
+  "femur_knee_end": 42.7,
+  "bond": 43.0,
+  "bond_no_knee": 49.3,
+  "knee_add_K": -6.3,
+  "Q_femur_W": 1.7
+ },
+ "h12|knee case 95C (carry)|Rtr30.0|rod85|A35 h15|Rc14": {
+  "femur_knee_end": 43.1,
+  "bond": 44.2,
+  "bond_no_knee": 55.6,
+  "knee_add_K": -11.4,
+  "Q_femur_W": 1.7
+ },
+ "h12|knee case 95C (carry)|Rtr30.0|rod85|vents short|Rc8": {
+  "femur_knee_end": 43.2,
+  "bond": 44.6,
+  "bond_no_knee": 52.9,
+  "knee_add_K": -8.4,
+  "Q_femur_W": 1.7
+ },
+ "h12|knee case 95C (carry)|Rtr30.0|rod85|vents short|Rc14": {
+  "femur_knee_end": 43.7,
+  "bond": 46.0,
+  "bond_no_knee": 60.8,
+  "knee_add_K": -14.8,
+  "Q_femur_W": 1.7
+ },
+ "h12|knee case 85C (walk)|Rtr2.5|rod58|A35 h15|Rc8": {
+  "femur_knee_end": 63.5,
+  "bond": 50.0,
+  "bond_no_knee": 50.4,
+  "knee_add_K": -0.4,
+  "Q_femur_W": 8.6
+ },
+ "h12|knee case 85C (walk)|Rtr2.5|rod58|A35 h15|Rc14": {
+  "femur_knee_end": 63.9,
+  "bond": 52.2,
+  "bond_no_knee": 56.9,
+  "knee_add_K": -4.7,
+  "Q_femur_W": 8.4
+ },
+ "h12|knee case 85C (walk)|Rtr2.5|rod58|vents short|Rc8": {
+  "femur_knee_end": 63.8,
+  "bond": 51.7,
+  "bond_no_knee": 54.3,
+  "knee_add_K": -2.6,
+  "Q_femur_W": 8.5
+ },
+ "h12|knee case 85C (walk)|Rtr2.5|rod58|vents short|Rc14": {
+  "femur_knee_end": 64.3,
+  "bond": 54.0,
+  "bond_no_knee": 62.4,
+  "knee_add_K": -8.4,
+  "Q_femur_W": 8.3
+ },
+ "h12|knee case 85C (walk)|Rtr2.5|rod85|A35 h15|Rc8": {
+  "femur_knee_end": 63.5,
+  "bond": 49.6,
+  "bond_no_knee": 49.3,
+  "knee_add_K": 0.2,
+  "Q_femur_W": 8.6
+ },
+ "h12|knee case 85C (walk)|Rtr2.5|rod85|A35 h15|Rc14": {
+  "femur_knee_end": 63.8,
+  "bond": 51.7,
+  "bond_no_knee": 55.6,
+  "knee_add_K": -4.0,
+  "Q_femur_W": 8.5
+ },
+ "h12|knee case 85C (walk)|Rtr2.5|rod85|vents short|Rc8": {
+  "femur_knee_end": 63.7,
+  "bond": 51.1,
+  "bond_no_knee": 52.9,
+  "knee_add_K": -1.9,
+  "Q_femur_W": 8.5
+ },
+ "h12|knee case 85C (walk)|Rtr2.5|rod85|vents short|Rc14": {
+  "femur_knee_end": 64.2,
+  "bond": 53.4,
+  "bond_no_knee": 60.8,
+  "knee_add_K": -7.5,
+  "Q_femur_W": 8.3
+ },
+ "h12|knee case 85C (walk)|Rtr5.0|rod58|A35 h15|Rc8": {
+  "femur_knee_end": 55.5,
+  "bond": 47.5,
+  "bond_no_knee": 50.4,
+  "knee_add_K": -2.9,
+  "Q_femur_W": 5.9
+ },
+ "h12|knee case 85C (walk)|Rtr5.0|rod58|A35 h15|Rc14": {
+  "femur_knee_end": 55.9,
+  "bond": 49.3,
+  "bond_no_knee": 56.9,
+  "knee_add_K": -7.6,
+  "Q_femur_W": 5.8
+ },
+ "h12|knee case 85C (walk)|Rtr5.0|rod58|vents short|Rc8": {
+  "femur_knee_end": 55.9,
+  "bond": 49.2,
+  "bond_no_knee": 54.3,
+  "knee_add_K": -5.1,
+  "Q_femur_W": 5.8
+ },
+ "h12|knee case 85C (walk)|Rtr5.0|rod58|vents short|Rc14": {
+  "femur_knee_end": 56.4,
+  "bond": 51.2,
+  "bond_no_knee": 62.4,
+  "knee_add_K": -11.2,
+  "Q_femur_W": 5.7
+ },
+ "h12|knee case 85C (walk)|Rtr5.0|rod85|A35 h15|Rc8": {
+  "femur_knee_end": 55.3,
+  "bond": 47.0,
+  "bond_no_knee": 49.3,
+  "knee_add_K": -2.3,
+  "Q_femur_W": 5.9
+ },
+ "h12|knee case 85C (walk)|Rtr5.0|rod85|A35 h15|Rc14": {
+  "femur_knee_end": 55.8,
+  "bond": 48.8,
+  "bond_no_knee": 55.6,
+  "knee_add_K": -6.9,
+  "Q_femur_W": 5.8
+ },
+ "h12|knee case 85C (walk)|Rtr5.0|rod85|vents short|Rc8": {
+  "femur_knee_end": 55.7,
+  "bond": 48.5,
+  "bond_no_knee": 52.9,
+  "knee_add_K": -4.4,
+  "Q_femur_W": 5.9
+ },
+ "h12|knee case 85C (walk)|Rtr5.0|rod85|vents short|Rc14": {
+  "femur_knee_end": 56.2,
+  "bond": 50.5,
+  "bond_no_knee": 60.8,
+  "knee_add_K": -10.3,
+  "Q_femur_W": 5.8
+ },
+ "h12|knee case 85C (walk)|Rtr30.0|rod58|A35 h15|Rc8": {
+  "femur_knee_end": 42.0,
+  "bond": 43.3,
+  "bond_no_knee": 50.4,
+  "knee_add_K": -7.1,
+  "Q_femur_W": 1.4
+ },
+ "h12|knee case 85C (walk)|Rtr30.0|rod58|A35 h15|Rc14": {
+  "femur_knee_end": 42.4,
+  "bond": 44.5,
+  "bond_no_knee": 56.9,
+  "knee_add_K": -12.4,
+  "Q_femur_W": 1.4
+ },
+ "h12|knee case 85C (walk)|Rtr30.0|rod58|vents short|Rc8": {
+  "femur_knee_end": 42.6,
+  "bond": 45.0,
+  "bond_no_knee": 54.3,
+  "knee_add_K": -9.3,
+  "Q_femur_W": 1.4
+ },
+ "h12|knee case 85C (walk)|Rtr30.0|rod58|vents short|Rc14": {
+  "femur_knee_end": 43.1,
+  "bond": 46.5,
+  "bond_no_knee": 62.4,
+  "knee_add_K": -15.9,
+  "Q_femur_W": 1.4
+ },
+ "h12|knee case 85C (walk)|Rtr30.0|rod85|A35 h15|Rc8": {
+  "femur_knee_end": 41.8,
+  "bond": 42.7,
+  "bond_no_knee": 49.3,
+  "knee_add_K": -6.6,
+  "Q_femur_W": 1.4
+ },
+ "h12|knee case 85C (walk)|Rtr30.0|rod85|A35 h15|Rc14": {
+  "femur_knee_end": 42.2,
+  "bond": 43.9,
+  "bond_no_knee": 55.6,
+  "knee_add_K": -11.8,
+  "Q_femur_W": 1.4
+ },
+ "h12|knee case 85C (walk)|Rtr30.0|rod85|vents short|Rc8": {
+  "femur_knee_end": 42.3,
+  "bond": 44.3,
+  "bond_no_knee": 52.9,
+  "knee_add_K": -8.7,
+  "Q_femur_W": 1.4
+ },
+ "h12|knee case 85C (walk)|Rtr30.0|rod85|vents short|Rc14": {
+  "femur_knee_end": 42.8,
+  "bond": 45.7,
+  "bond_no_knee": 60.8,
+  "knee_add_K": -15.1,
+  "Q_femur_W": 1.4
+ },
+ "h20|knee case 95C (carry)|Rtr2.5|rod58|A35 h15|Rc8": {
+  "femur_knee_end": 65.9,
+  "bond": 47.9,
+  "bond_no_knee": 50.4,
+  "knee_add_K": -2.6,
+  "Q_femur_W": 11.7
+ },
+ "h20|knee case 95C (carry)|Rtr2.5|rod58|A35 h15|Rc14": {
+  "femur_knee_end": 66.1,
+  "bond": 49.4,
+  "bond_no_knee": 56.9,
+  "knee_add_K": -7.5,
+  "Q_femur_W": 11.6
+ },
+ "h20|knee case 95C (carry)|Rtr2.5|rod58|vents short|Rc8": {
+  "femur_knee_end": 66.1,
+  "bond": 49.3,
+  "bond_no_knee": 54.3,
+  "knee_add_K": -5.0,
+  "Q_femur_W": 11.6
+ },
+ "h20|knee case 95C (carry)|Rtr2.5|rod58|vents short|Rc14": {
+  "femur_knee_end": 66.3,
+  "bond": 51.0,
+  "bond_no_knee": 62.4,
+  "knee_add_K": -11.4,
+  "Q_femur_W": 11.5
+ },
+ "h20|knee case 95C (carry)|Rtr2.5|rod85|A35 h15|Rc8": {
+  "femur_knee_end": 65.8,
+  "bond": 47.4,
+  "bond_no_knee": 49.3,
+  "knee_add_K": -1.9,
+  "Q_femur_W": 11.7
+ },
+ "h20|knee case 95C (carry)|Rtr2.5|rod85|A35 h15|Rc14": {
+  "femur_knee_end": 66.0,
+  "bond": 49.0,
+  "bond_no_knee": 55.6,
+  "knee_add_K": -6.7,
+  "Q_femur_W": 11.6
+ },
+ "h20|knee case 95C (carry)|Rtr2.5|rod85|vents short|Rc8": {
+  "femur_knee_end": 66.0,
+  "bond": 48.7,
+  "bond_no_knee": 52.9,
+  "knee_add_K": -4.2,
+  "Q_femur_W": 11.6
+ },
+ "h20|knee case 95C (carry)|Rtr2.5|rod85|vents short|Rc14": {
+  "femur_knee_end": 66.2,
+  "bond": 50.4,
+  "bond_no_knee": 60.8,
+  "knee_add_K": -10.4,
+  "Q_femur_W": 11.5
+ },
+ "h20|knee case 95C (carry)|Rtr5.0|rod58|A35 h15|Rc8": {
+  "femur_knee_end": 56.1,
+  "bond": 45.5,
+  "bond_no_knee": 50.4,
+  "knee_add_K": -4.9,
+  "Q_femur_W": 7.8
+ },
+ "h20|knee case 95C (carry)|Rtr5.0|rod58|A35 h15|Rc14": {
+  "femur_knee_end": 56.4,
+  "bond": 46.8,
+  "bond_no_knee": 56.9,
+  "knee_add_K": -10.1,
+  "Q_femur_W": 7.7
+ },
+ "h20|knee case 95C (carry)|Rtr5.0|rod58|vents short|Rc8": {
+  "femur_knee_end": 56.4,
+  "bond": 47.0,
+  "bond_no_knee": 54.3,
+  "knee_add_K": -7.3,
+  "Q_femur_W": 7.7
+ },
+ "h20|knee case 95C (carry)|Rtr5.0|rod58|vents short|Rc14": {
+  "femur_knee_end": 56.7,
+  "bond": 48.5,
+  "bond_no_knee": 62.4,
+  "knee_add_K": -14.0,
+  "Q_femur_W": 7.7
+ },
+ "h20|knee case 95C (carry)|Rtr5.0|rod85|A35 h15|Rc8": {
+  "femur_knee_end": 56.1,
+  "bond": 45.1,
+  "bond_no_knee": 49.3,
+  "knee_add_K": -4.3,
+  "Q_femur_W": 7.8
+ },
+ "h20|knee case 95C (carry)|Rtr5.0|rod85|A35 h15|Rc14": {
+  "femur_knee_end": 56.3,
+  "bond": 46.3,
+  "bond_no_knee": 55.6,
+  "knee_add_K": -9.3,
+  "Q_femur_W": 7.7
+ },
+ "h20|knee case 95C (carry)|Rtr5.0|rod85|vents short|Rc8": {
+  "femur_knee_end": 56.3,
+  "bond": 46.4,
+  "bond_no_knee": 52.9,
+  "knee_add_K": -6.5,
+  "Q_femur_W": 7.7
+ },
+ "h20|knee case 95C (carry)|Rtr5.0|rod85|vents short|Rc14": {
+  "femur_knee_end": 56.6,
+  "bond": 47.8,
+  "bond_no_knee": 60.8,
+  "knee_add_K": -13.0,
+  "Q_femur_W": 7.7
+ },
+ "h20|knee case 95C (carry)|Rtr30.0|rod58|A35 h15|Rc8": {
+  "femur_knee_end": 41.2,
+  "bond": 41.9,
+  "bond_no_knee": 50.4,
+  "knee_add_K": -8.5,
+  "Q_femur_W": 1.8
+ },
+ "h20|knee case 95C (carry)|Rtr30.0|rod58|A35 h15|Rc14": {
+  "femur_knee_end": 41.4,
+  "bond": 42.8,
+  "bond_no_knee": 56.9,
+  "knee_add_K": -14.1,
+  "Q_femur_W": 1.8
+ },
+ "h20|knee case 95C (carry)|Rtr30.0|rod58|vents short|Rc8": {
+  "femur_knee_end": 41.6,
+  "bond": 43.4,
+  "bond_no_knee": 54.3,
+  "knee_add_K": -10.9,
+  "Q_femur_W": 1.8
+ },
+ "h20|knee case 95C (carry)|Rtr30.0|rod58|vents short|Rc14": {
+  "femur_knee_end": 41.8,
+  "bond": 44.5,
+  "bond_no_knee": 62.4,
+  "knee_add_K": -17.9,
+  "Q_femur_W": 1.8
+ },
+ "h20|knee case 95C (carry)|Rtr30.0|rod85|A35 h15|Rc8": {
+  "femur_knee_end": 41.0,
+  "bond": 41.4,
+  "bond_no_knee": 49.3,
+  "knee_add_K": -7.9,
+  "Q_femur_W": 1.8
+ },
+ "h20|knee case 95C (carry)|Rtr30.0|rod85|A35 h15|Rc14": {
+  "femur_knee_end": 41.3,
+  "bond": 42.3,
+  "bond_no_knee": 55.6,
+  "knee_add_K": -13.4,
+  "Q_femur_W": 1.8
+ },
+ "h20|knee case 95C (carry)|Rtr30.0|rod85|vents short|Rc8": {
+  "femur_knee_end": 41.4,
+  "bond": 42.8,
+  "bond_no_knee": 52.9,
+  "knee_add_K": -10.2,
+  "Q_femur_W": 1.8
+ },
+ "h20|knee case 95C (carry)|Rtr30.0|rod85|vents short|Rc14": {
+  "femur_knee_end": 41.7,
+  "bond": 43.8,
+  "bond_no_knee": 60.8,
+  "knee_add_K": -17.1,
+  "Q_femur_W": 1.8
+ },
+ "h20|knee case 85C (walk)|Rtr2.5|rod58|A35 h15|Rc8": {
+  "femur_knee_end": 60.9,
+  "bond": 46.7,
+  "bond_no_knee": 50.4,
+  "knee_add_K": -3.8,
+  "Q_femur_W": 9.7
+ },
+ "h20|knee case 85C (walk)|Rtr2.5|rod58|A35 h15|Rc14": {
+  "femur_knee_end": 61.1,
+  "bond": 48.1,
+  "bond_no_knee": 56.9,
+  "knee_add_K": -8.8,
+  "Q_femur_W": 9.6
+ },
+ "h20|knee case 85C (walk)|Rtr2.5|rod58|vents short|Rc8": {
+  "femur_knee_end": 61.1,
+  "bond": 48.1,
+  "bond_no_knee": 54.3,
+  "knee_add_K": -6.2,
+  "Q_femur_W": 9.6
+ },
+ "h20|knee case 85C (walk)|Rtr2.5|rod58|vents short|Rc14": {
+  "femur_knee_end": 61.3,
+  "bond": 49.7,
+  "bond_no_knee": 62.4,
+  "knee_add_K": -12.7,
+  "Q_femur_W": 9.5
+ },
+ "h20|knee case 85C (walk)|Rtr2.5|rod85|A35 h15|Rc8": {
+  "femur_knee_end": 60.8,
+  "bond": 46.2,
+  "bond_no_knee": 49.3,
+  "knee_add_K": -3.1,
+  "Q_femur_W": 9.7
+ },
+ "h20|knee case 85C (walk)|Rtr2.5|rod85|A35 h15|Rc14": {
+  "femur_knee_end": 61.0,
+  "bond": 47.6,
+  "bond_no_knee": 55.6,
+  "knee_add_K": -8.0,
+  "Q_femur_W": 9.6
+ },
+ "h20|knee case 85C (walk)|Rtr2.5|rod85|vents short|Rc8": {
+  "femur_knee_end": 61.0,
+  "bond": 47.5,
+  "bond_no_knee": 52.9,
+  "knee_add_K": -5.4,
+  "Q_femur_W": 9.6
+ },
+ "h20|knee case 85C (walk)|Rtr2.5|rod85|vents short|Rc14": {
+  "femur_knee_end": 61.2,
+  "bond": 49.1,
+  "bond_no_knee": 60.8,
+  "knee_add_K": -11.8,
+  "Q_femur_W": 9.5
+ },
+ "h20|knee case 85C (walk)|Rtr5.0|rod58|A35 h15|Rc8": {
+  "femur_knee_end": 52.8,
+  "bond": 44.7,
+  "bond_no_knee": 50.4,
+  "knee_add_K": -5.7,
+  "Q_femur_W": 6.4
+ },
+ "h20|knee case 85C (walk)|Rtr5.0|rod58|A35 h15|Rc14": {
+  "femur_knee_end": 53.0,
+  "bond": 45.9,
+  "bond_no_knee": 56.9,
+  "knee_add_K": -11.0,
+  "Q_femur_W": 6.4
+ },
+ "h20|knee case 85C (walk)|Rtr5.0|rod58|vents short|Rc8": {
+  "femur_knee_end": 53.1,
+  "bond": 46.2,
+  "bond_no_knee": 54.3,
+  "knee_add_K": -8.1,
+  "Q_femur_W": 6.4
+ },
+ "h20|knee case 85C (walk)|Rtr5.0|rod58|vents short|Rc14": {
+  "femur_knee_end": 53.4,
+  "bond": 47.6,
+  "bond_no_knee": 62.4,
+  "knee_add_K": -14.9,
+  "Q_femur_W": 6.3
+ },
+ "h20|knee case 85C (walk)|Rtr5.0|rod85|A35 h15|Rc8": {
+  "femur_knee_end": 52.7,
+  "bond": 44.3,
+  "bond_no_knee": 49.3,
+  "knee_add_K": -5.1,
+  "Q_femur_W": 6.5
+ },
+ "h20|knee case 85C (walk)|Rtr5.0|rod85|A35 h15|Rc14": {
+  "femur_knee_end": 52.9,
+  "bond": 45.4,
+  "bond_no_knee": 55.6,
+  "knee_add_K": -10.2,
+  "Q_femur_W": 6.4
+ },
+ "h20|knee case 85C (walk)|Rtr5.0|rod85|vents short|Rc8": {
+  "femur_knee_end": 53.0,
+  "bond": 45.6,
+  "bond_no_knee": 52.9,
+  "knee_add_K": -7.4,
+  "Q_femur_W": 6.4
+ },
+ "h20|knee case 85C (walk)|Rtr5.0|rod85|vents short|Rc14": {
+  "femur_knee_end": 53.2,
+  "bond": 46.9,
+  "bond_no_knee": 60.8,
+  "knee_add_K": -13.9,
+  "Q_femur_W": 6.4
+ },
+ "h20|knee case 85C (walk)|Rtr30.0|rod58|A35 h15|Rc8": {
+  "femur_knee_end": 40.4,
+  "bond": 41.8,
+  "bond_no_knee": 50.4,
+  "knee_add_K": -8.7,
+  "Q_femur_W": 1.5
+ },
+ "h20|knee case 85C (walk)|Rtr30.0|rod58|A35 h15|Rc14": {
+  "femur_knee_end": 40.6,
+  "bond": 42.6,
+  "bond_no_knee": 56.9,
+  "knee_add_K": -14.3,
+  "Q_femur_W": 1.5
+ },
+ "h20|knee case 85C (walk)|Rtr30.0|rod58|vents short|Rc8": {
+  "femur_knee_end": 40.8,
+  "bond": 43.2,
+  "bond_no_knee": 54.3,
+  "knee_add_K": -11.1,
+  "Q_femur_W": 1.5
+ },
+ "h20|knee case 85C (walk)|Rtr30.0|rod58|vents short|Rc14": {
+  "femur_knee_end": 41.1,
+  "bond": 44.3,
+  "bond_no_knee": 62.4,
+  "knee_add_K": -18.2,
+  "Q_femur_W": 1.5
+ },
+ "h20|knee case 85C (walk)|Rtr30.0|rod85|A35 h15|Rc8": {
+  "femur_knee_end": 40.3,
+  "bond": 41.3,
+  "bond_no_knee": 49.3,
+  "knee_add_K": -8.1,
+  "Q_femur_W": 1.5
+ },
+ "h20|knee case 85C (walk)|Rtr30.0|rod85|A35 h15|Rc14": {
+  "femur_knee_end": 40.5,
+  "bond": 42.1,
+  "bond_no_knee": 55.6,
+  "knee_add_K": -13.6,
+  "Q_femur_W": 1.5
+ },
+ "h20|knee case 85C (walk)|Rtr30.0|rod85|vents short|Rc8": {
+  "femur_knee_end": 40.6,
+  "bond": 42.6,
+  "bond_no_knee": 52.9,
+  "knee_add_K": -10.3,
+  "Q_femur_W": 1.5
+ },
+ "h20|knee case 85C (walk)|Rtr30.0|rod85|vents short|Rc14": {
+  "femur_knee_end": 40.9,
+  "bond": 43.6,
+  "bond_no_knee": 60.8,
+  "knee_add_K": -17.3,
+  "Q_femur_W": 1.5
+ }
+}
