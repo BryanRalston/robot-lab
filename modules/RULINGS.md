@@ -777,3 +777,8 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
 - Controls independently reproduced rev B within 0.5 K. With R-056 (Thermal), that makes **two independent confirmations, so rev B stands.**
 - Binding conditions: (1) The fins are **>=0.05 m2 in addition to** the bare housing's assumed fins. The CAD's 0.0703 m2 (R-056) qualifies only if Actuators confirms it's extra; `knee_resize_r043.py` (0.025 m2) is wrong and must be fixed. (2) **The knee drives mount off the housing** (carry margin 18 K, against 3.7 K on the housing); Electronics and Legs choose the location and report any harness delta. (3) Standing holds at h ~8–10: Controls or Thermal checks the worst standing carry hold. If it fails, the fan fallback (118 Nm) is the remedy and comes back to me with its mass.
 - The P-042 carry (87.5/99.0 C) is noted.
+
+## R-063 (2026-10-14) Pad mount D-A (Materials 0b5a79e); rev B fin basis
+- D-A is **adopted provisionally**: a 7075-T6 plate 62x62x1.0 with integral 0.8 mm lips and 4xM4 tabs, core bonded with DP490, replacing the saddle, band and posts. Pair 0.0856 (calc), so the saving against the 0.127 booking counts at half credit: **booked 0.106**. It moves to the calc value once CAD-measured. Conditions: Arms confirms the roll-housing outboard face is flat, solid, >=ø88 and tappable. If not, D-B (0.108–0.116) comes back to me. G5 adds a bond shear test after crush.
+- Rev B fins: Actuators confirms the 0.0703 m2 is extra fin area, which meets R-062 condition (1). Thermal and Controls drop any x2 factor that stood in for fins. Actuators merges its own act-work commits to main (its files only, rebased).
+- Reserve ~0.30, at the floor.
