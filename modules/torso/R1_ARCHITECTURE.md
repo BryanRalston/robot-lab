@@ -200,6 +200,41 @@ The earlier ~0.99 kg figure assumed the HS200 clamp (0.475 + board); the HS100 r
 - Arms accepted y ±0.170 and 8 × M8 on a BC80 bolt circle.
 - sim/v3 not edited.
 
+## 16. R1.4 (R-035 38c3fe7, R-036 3b50c3c)
+**Recorded.**
+- **R-035:** torso line booked at **5.026 kg**. That is the 5.024 itemization with the Sunon fan at its cited 0.042 kg. It absorbs the P-045, R-033 and Thor-fan bookings, so nothing is counted twice. The 2 × HS100 0R75 fallback is pre-approved (+0.09 kg).
+- **R-036:** charge voltage is **4.20 V/cell**. BMS regen acceptance at any SoC is a hard requirement (G5 T-027). The cell OV threshold must be cited from Molicel before G1. The 2 h walk margin is +1.0 W, so any new continuous load over 1 W must be offset or go back to the Arbiter.
+
+### 16.1 Second-channel protector: 2 × TI BQ77216 (stacked 10S + 10S)
+Datasheet: https://www.ti.com/lit/ds/symlink/bq77216.pdf . Per IC: 3–16S, independent per-cell OV/UV/open-wire, OT/UT with NTC, fixed delays, functional-safety-capable, 85 V max, I_CC 2 µA typ / 3.5 µA max, OV options include 4.225 / 4.25 V.
+- **Variant:** OV 4.25 V (see 16.3), UV 2.5 V class option.
+- **Wiring:** each IC's COUT/DOUT (open-drain) → level shift (opto, TI E2E stacking guidance / TIDA-00108) → wired-OR into **FAULT_N channel 2**, independent of the BQ79616 NFAULT (channel 1) and of the host MCU.
+- **Power:** < 0.001 W plus level-shift bias ~0.01 W [EST].
+
+### 16.2 BMS host MCU: NXP S32K344 + TI BQ79600-Q1 bridge
+- **S32K344** (lockstep Cortex-M7, ISO 26262 up to ASIL D, 6 × FlexCAN all CAN FD, 6 × LPSPI). Datasheet: https://www.nxp.com/docs/en/data-sheet/S32K3xx.pdf
+- **BQ79600-Q1** SPI/UART ↔ BQ7961x daisy-chain bridge, functional-safety-compliant, ring architecture, wakes the host on a fault. Datasheet: https://www.ti.com/lit/ds/symlink/bq79600-q1.pdf
+- The host computes SoC/SoH, charge/discharge/regen current limits and the drive-side bus-voltage plausibility check (welded contactor / shorted FET, §15.5). It sends CAN FD to the TMS570 (Electronics §13.7 set).
+- **Power [EST; run currents not read]:** S32K344 at reduced clock ~0.3 W; BQ79600 ~0.05 W; 2 × BQ79616 duty-cycled scan (10 Hz, sleep between) ~0.1 W each. **BMS total ≈ 0.56 W** against the 0.3 W booked in §13.5: **+0.26 W**.
+- **Offset:** none needed. Margin **+1.0 − 0.26 = +0.74 W ≥ 0** (P_walk 712.06 W ≤ 712.8 W pass line). If the measured S32K344 current is higher, the offset is the contactor economizer setpoint (1.5 W → 1.0 W [EST, LEV100 drop-out 1.2 V on the 12 V coil]).
+
+### 16.3 Citations
+- **LEV100A4ANG mass: 190 g (6.7 oz)**, from the TE datasheet "KILOVAC LEV100 Series 900 Vdc Contactor", Physical Data: https://www.farnell.com/datasheets/693620.pdf (and the TE catalog section). It replaces the 0.20 [EST] → disconnect 0.222 kg, **torso line −0.010 kg → 5.016 kg** (paper; R-035 booking 5.026 stays until the Arbiter re-books).
+- **Molicel P45B** (product data sheet v1.4, https://www.molicel.com/wp-content/uploads/INR21700P45B_1.4_Product-Data-Sheet-of-INR-21700-P45B-80109.pdf ; detailed spec "Cell Specifications of INR-21700-P45B"):
+  - charge voltage 4.2 V, **end-of-charge voltage 4.20 ± 0.05 V**;
+  - standard charge 4.5 A, **max charge 13.5 A** (70 °C cut-off) → 67.5 A pack, so 30 A regen acceptance is inside the rating;
+  - minimum capacity 4300 mAh (v1.4).
+  - **No cell OV threshold is published.** OV is set at **4.25 V** (BQ77216 option, the top of the ±0.05 V end-of-charge tolerance). Molicel's written confirmation is still needed before G1 (R-036).
+  - Note: v1.4 minimum capacity is 4300 mAh, so the ≥ 4400 mAh binning (R-010) stays a supplier screening requirement.
+
+### 16.4 Deltas
+| item | power | mass |
+|---|---|---|
+| BQ77216 × 2 + level shift | +0.01 W | in BMS board 0.30 (pack line) |
+| S32K344 + BQ79600 + duty-cycled BQ79616 vs 0.3 W booked | +0.25 W | in BMS board |
+| LEV100 cited 190 g vs 200 [EST] | — | −0.010 kg (torso 5.016 paper) |
+| **walk 1.0 m/s binned margin** | **+0.74 W** (was +1.0) | |
+
 ## 7. Open questions / conflicts (not edited in others' files)
 - **O-T1 (Electronics, coordination):** adopt the 48 V intermediate rail with DCM3623TA5N53B4T00; Torso hosts the DCM on the power distribution board or the brain tray? Mass 0.024 [UNVERIFIED for variant] stays in the brain line; who books the 47718-232 choke; 24 V VL source (O-E3); BMS→safety MCU CAN FD message set; e-stop = FET-open vs contactor (O-E6).
 - **O-T2 (Actuators/Arbiter):** waist_pitch 116 N·m < 188 N·m need with T5 payload → TBM2G-08508A, +0.19 kg.
