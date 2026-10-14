@@ -1,0 +1,26 @@
+{
+ "tag": "b35_d40",
+ "b": 35.0,
+ "d0": 40.0,
+ "d1": 21.3,
+ "RJ": 5.0,
+ "fillet": "none + bore-end relief torus R5 (pocket to |y|=38.5)",
+ "mass_kg": 0.45775928974970553,
+ "valid": true,
+ "env_ymax_r34": 59.44619569118327,
+ "eye_min_mm": 0.0,
+ "rod_min_mm": 1.0731778836001882,
+ "femur_min_mm": 0.0,
+ "femur_min_at": -17.299999999999997,
+ "arm_femur_angle_deg": {
+  "-107.3": 78.0201510046547,
+  "40.0": 57.676497917460225
+ },
+ "pass": {
+  "envelope": false,
+  "eye": false,
+  "rod": true,
+  "femur": false,
+  "angle": true
+ }
+}

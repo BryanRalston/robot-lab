@@ -635,3 +635,16 @@ Retention at 1.2 m/s:
 - The EtherCAT and STO tees for the 2 wrist drives move to the shoulder bay: ~0 kg net.
 - Booked in actuator_deltas.json `wrist_pair_pending`: D70 −0.425 + D72 +0.488 = **+0.063 kg both, pending Arbiter**. The D67 −1.332 credit stands.
 - Not yet merged into the harness.py totals.
+
+## D71 update (Arbiter: D71 = CRBH 7013 A) Dpw is cited
+- The IKO CAT-57151 crossed-roller section defines the pitch circle diameter as **Dpw ≒ (d+D)/2** (eq. 2 legend, `datasheets/iko_crb_catalog.txt` lines 299–303 and 593–598). It is IKO's own definition, not our estimate. The catalog publishes no roller diameter or separate Dpw.
+- CRBH 7013 A: d 70, D 100, B 13, da 76, Da 94, C0 27.7 kN, 0.38 kg. Dpw = 85.
+- **fs = 1.30 (axial 11.5 kN + 690 N·m) and 1.00 (radial).** D71 is unchanged.
+- **Bounding check** with the shoulder diameters (Dpw 76…94): axial fs 1.19–1.40, radial fs 0.93–1.06.
+- The radial case is still at fs 1.0 with no margin. The forward-fall pitch component is still unquantified (Torso/Arms).
+
+## D69 addendum (R-031 lever check + knee strap): see results/LEVER_R031_AND_KNEE_STRAP.md
+- The added conductance needed is corrected to 0.69 W/K (Thermal).
+- The heat sink moves to the femur, because the housing pivots only 5.7–12.6° about the thigh trunnion.
+- Strap: TAI GFTS, 2 large sections, ≥ 1.32 W/K, 0.12 kg per knee [EST], $2–10k per knee, flex life untested.
+- D69 total is now about +0.83 kg robot.
