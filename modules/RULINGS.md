@@ -678,3 +678,8 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
 - Option (B), the hand board in the forearm, is **adopted provisionally** with the RP40 converters at the board, for +0.000 kg. The +0.077 variant with the RP40s left in the bay is not approved because it would breach the floor. Electronics must give the board dimensions, and Arms confirms the fit within the 13.2 mm spare bore length and the R4 two-tier pack. If it doesn't fit, it comes back to me.
 - D73 wrist links: +0.0158 kg is approved, under the 0.02 kg freeze cap. The reserve is about 0.30, exactly at the floor. Every further addition needs an offsetting saving.
 - The harness stays booked at 1.9841 kg.
+
+## R-047 (2026-10-14) A43 amended: RP40s stay in the shoulder bay
+- Correction to R-046: the RP40s **stay in the shoulder bay** (R-041 thermal basis). The converters-at-board variant is withdrawn.
+- (B) is **booked at +0.077 kg** for both arms (24 V pair from the bay to the forearm). It is conditional on: (1) RL Thermal confirming the 2–4 W board in the forearm without a bulkhead, and (2) Arms CAD-fitting the ø60×12–13 stack in the 13.2 mm slot. If either fails, it returns to me. (A) stays rejected.
+- Reserve is now about 0.22, **below the 0.30 floor**. A short waiver runs to the end of round 13. Robot Lab coordinates at least 0.08 kg of offsets, cited or measured: candidates are the A47 measured fins (the 0.65 kg booking is the top of its range) and cover trims. The freeze is tightened: no additions until the reserve is back to at least 0.30.
