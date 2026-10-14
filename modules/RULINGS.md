@@ -672,3 +672,9 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
 - D69 with knee housing fins (option C): 2× 08513D, housing re-CAD and fins. **Booked at +0.65 kg** (top of the 0.51–0.65 range) in place of +0.83, which recovers 0.18. A46 is closed. Fin mass moves to the measured value after the A47 Legs clash sweep and CAD.
 - Credible total about 66.18 kg, reserve about 0.32, **back above the 0.30 floor.** The R-043 waiver ends. The freeze on additions over 0.02 kg stays until reserve is at least 0.40.
 - Noted: sim/v3 is at 64.298 kg excluding harness and covers (d6d5d10). Carry static balance has a 63 mm toe margin (109 mm with lean-back), accepted. T-030 brief is pending.
+
+## R-046 (2026-10-14) A43 hand board placement (Actuators bc18aae)
+- Option (A), the hand board in the shoulder bay (+0.398 kg, harness 2.382 vs the 2.00 contract), is **rejected**. It breaks the harness contract and the reserve floor. This supersedes the R-035 O-A3 relocation.
+- Option (B), the hand board in the forearm, is **adopted provisionally** with the RP40 converters at the board, for +0.000 kg. The +0.077 variant with the RP40s left in the bay is not approved because it would breach the floor. Electronics must give the board dimensions, and Arms confirms the fit within the 13.2 mm spare bore length and the R4 two-tier pack. If it doesn't fit, it comes back to me.
+- D73 wrist links: +0.0158 kg is approved, under the 0.02 kg freeze cap. The reserve is about 0.30, exactly at the floor. Every further addition needs an offsetting saving.
+- The harness stays booked at 1.9841 kg.
