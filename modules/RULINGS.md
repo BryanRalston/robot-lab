@@ -772,3 +772,8 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
 - The two R-055 assumptions (MCU supply isn't switched with the hand rails; RP40 remote-off uses the existing line) must be verified against the power tree and pinout before G1.
 - Stack 12.4/12.5 mm fits on paper; Arms CAD confirms.
 - Reserve ~0.28 (the floor tolerance from R-060 continues).
+
+## R-062 (2026-10-14) D69 rev B, Controls reproduction (fee4ed2)
+- Controls independently reproduced rev B within 0.5 K. With R-056 (Thermal), that makes **two independent confirmations, so rev B stands.**
+- Binding conditions: (1) The fins are **>=0.05 m2 in addition to** the bare housing's assumed fins. The CAD's 0.0703 m2 (R-056) qualifies only if Actuators confirms it's extra; `knee_resize_r043.py` (0.025 m2) is wrong and must be fixed. (2) **The knee drives mount off the housing** (carry margin 18 K, against 3.7 K on the housing); Electronics and Legs choose the location and report any harness delta. (3) Standing holds at h ~8–10: Controls or Thermal checks the worst standing carry hold. If it fails, the fan fallback (118 Nm) is the remedy and comes back to me with its mass.
+- The P-042 carry (87.5/99.0 C) is noted.
