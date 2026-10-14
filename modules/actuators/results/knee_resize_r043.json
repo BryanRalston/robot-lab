@@ -1,4 +1,43 @@
 {
+ "TBM2G-07613D + fins_cad": {
+  "dmass_per_knee": 0.093,
+  "Kt_hot": 0.081,
+  "Km": 0.201,
+  "tau_cont130": 107.1,
+  "cases": {
+   "walk_1p2_r7/open": {
+    "rms": 74.6,
+    "Tw60": 89.2,
+    "t120": null
+   },
+   "walk_1p2_r7/vented": {
+    "rms": 74.6,
+    "Tw60": 81.8,
+    "t120": null
+   },
+   "walk_1p2_r7/closed": {
+    "rms": 74.6,
+    "Tw60": 129.3,
+    "t120": 15.4
+   },
+   "carry_20kg_1p0_r4 x1.10/open": {
+    "rms": 85.9,
+    "Tw60": 106.4,
+    "t120": null
+   },
+   "carry_20kg_1p0_r4 x1.10/vented": {
+    "rms": 85.9,
+    "Tw60": 96.3,
+    "t120": null
+   },
+   "carry_20kg_1p0_r4 x1.10/closed": {
+    "rms": 85.9,
+    "Tw60": 148.6,
+    "t120": 9.1
+   }
+  },
+  "pass_open_vented": true
+ },
  "TBM2G-07613D + none": {
   "dmass_per_knee": 0.0,
   "Kt_hot": 0.081,

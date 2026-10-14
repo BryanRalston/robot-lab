@@ -1,0 +1,13 @@
+{
+ "pitch_deg": 9.22,
+ "front_span_deg": 27.7,
+ "rear_span_deg": 60.0,
+ "n_fins": 42,
+ "t_mm": 1.0,
+ "L_mm": 42.0,
+ "front_h": 9.0,
+ "rear_h": 25.0,
+ "added_area_m2": 0.0703,
+ "fin_mass_kg_per_knee": 0.0932,
+ "valid": true
+}

@@ -704,3 +704,22 @@ Retention at 1.2 m/s:
   - The housing's free distance to non-mated parts is **10.5–13.6 mm to the knee trunnion bracket top plate (thigh) [EST part] on one face**. Everything else is ≥ 50 mm: tibia 50.5 at 135°, hip_pitch body 60, bracket strut 58, femur 81.
   - So **no 20 mm fins on the bracket-facing sector** (≤ 9 mm there, for 1 mm clearance). The lost area goes onto the other faces, which have ≥ 50 mm of room, using 25 mm fins.
   - The v5 fairing envelopes are not in model_v4. **Legs to confirm.**
+
+## D69 rev B fins as built (Thermal D69C b785697 layout, Legs L48 envelope); R-031 lever release candidate
+- **Fins (`knee_fins_revb.py` → `cad/knee_twin_housing_finned_revb.step`, valid solid):** these sit on the existing D59 twin housing (07613D, can r41, z 1–43). Per can:
+  - 14 rear fins × 25 mm, centred on 180° (span ±60°), against the L48 limit of 28.3.
+  - 7 front fins × 9 mm (span ±27.7°), against the limit of 12.
+  - All 1.0 mm thick, 6.6 mm root pitch, 5.6 mm root gap.
+  - No fins on the ±y sides.
+- **Measured: added area 0.0703 m² per knee, 6061 fin mass 0.0932 kg per knee, 0.186 kg robot.** Thermal estimated 0.070 m² and about 0.11 kg; Arbiter R-052 booked +0.24, so this is **−0.054 kg** against that booking.
+- **Temperatures (`knee_resize_r043.py`, fins_cad):** continuous 107 N·m at 130 °C.
+  - walk_1p2_r7: **89.2 °C open**, 81.8 vented.
+  - carry r4 +10 %: **106.4 °C open**, 96.3 vented.
+  - Thermal's independent prediction was 88 / 105, so it is reproduced within 1.4 K.
+  - Closed covers: 129 / 149, which fails, so the knee stays vented or uncovered.
+- **Edge fins:** the outer rear fins sit exactly on the 120° and 240° sector boundaries, where the 60–120° side is limited to 0 mm by the RV12 rod at knee 135°. Legs to confirm, or drop to 13 rear fins (area 0.0682 m², still passes).
+- **Hip lever L47 release candidate:** `cad/hip_pitch_lever_r031_mw_b30_d36_RC.step` (copy of Legs' STEP; 2 valid solids, 155,055 mm³).
+  - **Measured 0.464 kg per lever** (7075 0.420 + steel pins 0.044, hp_lever_fea_v2 rule).
+  - That is +0.215 per lever versus the 0.2491 booked in LINKAGE_TABLE, and +0.132 versus the G2-as-briefed loft (0.332).
+  - **Legs' +0.118 kg robot is not reproduced. My measurement gives +0.26 to +0.43 kg robot, depending on the baseline.** This needs reconciling.
+  - The fatigue check (≤ 58 MPa at 2030 N per pin) is not run on the box (gmsh can't load, and converged dofs need about 4 GB). See brief `results/GROKBUILD_lever_fea_r031.md` (G3).

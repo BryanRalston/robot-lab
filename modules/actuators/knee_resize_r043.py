@@ -11,12 +11,14 @@ sys.path.insert(0, f'{R}/modules/controls/thermal'); import winding_model as W
 base = W.load_params(knee='07613D')['knee']; mot = W.MOT_CACHE
 sel = json.load(open(f'{R}/modules/actuators/results/sizing.json'))['sel']['knee']
 TR = {'walk_1p2_r7': ('r7/ref_ds25/walk_1p2_r7.npz', 1.0), 'carry_20kg_1p0_r4 x1.10': ('r4/carry_20kg_1p0.npz', 1.10)}
+FIN_A = {'fins': 0.025, 'fins_cad': json.load(open(f'{H}/results/knee_fins_revb.json'))['added_area_m2']}
+FIN_M = {'fins': 0.05, 'fins_cad': json.load(open(f'{H}/results/knee_fins_revb.json'))['fin_mass_kg_per_knee']}
 def cand(mw, path):
     M = mot[mw[:11]]
     p = W._p(M, mw, 2, sel['ratio'], sel['eta'], sel['area_cad'], sel['housing_cad'] * (int(mw[6:9]) / 76), sel['T_out'])
     dm = 2 * (M['mass'] - mot['TBM2G-07613']['mass']) + sel['housing_cad'] * (int(mw[6:9]) / 76 - 1)
-    G0 = 1 / p['Rha']; p['Rha_open'] = 1 / (G0 + 12 * 0.025) if path == 'fins' else (1 / (40 * W.FINS * sel['area_cad']) if path == 'fan' else p['Rha'])
-    p['h_scale'] = 1.0; return p, dm + (0.05 if path == 'fins' else 0.02 if path == 'fan' else 0)
+    G0 = 1 / p['Rha']; p['Rha_open'] = 1 / (G0 + 12 * FIN_A[path]) if path in FIN_A else (1 / (40 * W.FINS * sel['area_cad']) if path == 'fan' else p['Rha'])
+    p['h_scale'] = 1.0; return p, dm + (FIN_M.get(path, 0.02 if path == 'fan' else 0))
 def run(p, tau, om, dt, case, T=3600.0, DT=0.01):
     Rha = p['Rha_open'] * (12 / 15 if case == 'vented' else 1); ta_air = W.T_AMB + (35 if case == 'closed' else 0)
     idx = np.arange(0, len(tau), max(1, int(round(DT / dt)))); tq, w = tau[idx], om[idx]
@@ -26,7 +28,7 @@ def run(p, tau, om, dt, case, T=3600.0, DT=0.01):
         Tw += DT * (q - qwh) / p['Cw']; Th += DT * (qwh + pdr[i] - (Th - ta_air) / Rha) / p['Ch']
         if t120 is None and Tw >= 120: t120 = round(k * DT / 60, 1)
     return dict(rms=round(float(np.sqrt(np.mean(tq ** 2))), 1), Tw60=round(Tw, 1), t120=t120)
-C = [('TBM2G-07613D', 'none'), ('TBM2G-07613D', 'fins'), ('TBM2G-07613D', 'fan'), ('TBM2G-09408D', 'fins'), ('TBM2G-08513D', 'fins')]
+C = [('TBM2G-07613D', 'fins_cad'), ('TBM2G-07613D', 'none'), ('TBM2G-07613D', 'fins'), ('TBM2G-07613D', 'fan'), ('TBM2G-09408D', 'fins'), ('TBM2G-08513D', 'fins')]
 out = {}
 for mw, path in C:
     p, dm = cand(mw, path); key = f'{mw} + {path}'
