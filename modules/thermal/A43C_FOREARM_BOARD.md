@@ -51,3 +51,26 @@ Transient model `a43c_board.py` → `results/a43c_board.json`, run for 4 h:
 - **Fault response:** it trips only on a ladder or sensor fault. On trip the H-bridge Tj is ≈ 122 °C, which is still < 125 °C. The 125 °C parts keep 15 K.
 - **Murata NCP15 range:** confirm ≥ 125 °C, as Electronics flagged.
 - **Tighter option:** if margin to Tj is wanted, 105 °C also works and sits 9 K above the top step.
+
+## Update: Electronics §16.7 (8f4bad8) — XMC4800 board, 4.3 W hot; Arms grip fix (R-059 round)
+Board: XMC4800 0.45 W typ / 0.90 W worst, plus DP83822HF ×2 (< 0.22 W each) ⇒ **3.6 W typ / 4.3 W hot**.
+Rerun `a43c_board.py <Rm>` at 4.3 W with the adopted ladder 55/70/80/88 °C → 0.84/0.70/0.50/0.35/0 A. Results: `results/a43c_board_4p3W_Rm8.0.json` (loose mount) and `results/a43c_board_4p3W_Rm4.0.json` (Arms fix: flexors clamped to the shell with paste, 0.5 mm, 0.92 A case).
+MCU Tj = board + 0.9 W × RthJB ≈ 10 K/W (LQFP-144 with board copper [EST]; RthJA 22.5 is not used because the board is hotter than the air).
+
+| case | shell | flexor winding (125) | step held | board | MCU Tj | H-bridge Tj | margin to NTC 110 / parts 125 |
+|---|---|---|---|---|---|---|---|
+| walk, loose (Rm 8) | 60.3 | 95 | 0.70 A | 69 | 78 | 81 | 41 / 44 K |
+| still, loose | 68.7 | 102 | 0.50 A | 77 | 86 | 90 | 33 / 35 K |
+| **walk, clamped (Arms fix)** | 59.7 | **84** | 0.70 A | 68 | 77 | 81 | 42 / 44 K |
+| **still, clamped** | 70.2 | **95** | 0.50 A | 76 | 85 | 91 | 34 / 34 K |
+| no derate, still (fault reference) | 122–128 | 181–215 FAIL | — | 131–137 | 140–146 | 143–149 | NTC trips |
+
+**Findings**
+- **4.3 W changes nothing material** (+0.5 K shell vs 4 W). All junctions are ≤ 91 °C, the 110 °C NTC keeps ≥ 33 K, and the 125 °C parts keep ≥ 34 K.
+- **The Arms clamp fix cools the windings by 8–11 K, but the shell does not change.** Shell temperature is set by total forearm heat vs the shell-to-air path, not by the mounting.
+- So with I²t at 0.84 A and friction ≤ 1.2 (30 N at 0.88 A), the ladder still steps to **0.70 A once the shell reaches 55 °C**: about **24 N at friction 1.2**.
+  - Shell time constant ≈ 15 min walking: a 30 N hold lasts ≈ 10–15 min from cold before the first step.
+  - **30 N truly continuous at 35 °C needs either a 60 °C first step** (winding still ≤ 100 °C clamped; this costs NTC margin, not limits) **or more forearm skin area/vents.**
+- The I²t at 0.84 A RMS remains the motor guard; the ladder is the board/shell guard.
+
+**Shoulder bay (RP40s only):** 3.6 W continuous / 9 W peak per side vs the 8.9 W continuous used in the A43 update. Bay air ≈ **40 °C walking / ≈ 48–53 °C still air** (scaled), so ≥ 7 K margin to the 60 °C RP40 derate. d4cca06 holds with more margin.

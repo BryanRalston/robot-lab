@@ -1,0 +1,84 @@
+{
+ "walk": {
+  "no_derate": {
+   "shell_end": 80.8,
+   "shell_max_last30min": 80.8,
+   "wind_max": 132.9,
+   "I_end": 0.952,
+   "board": 89.4,
+   "Tj_hbridge": 101.6,
+   "levels": [
+    0
+   ],
+   "Tj_MCU_RthJB10": 98.4
+  },
+  "ladder_tuned": {
+   "shell_end": 59.7,
+   "shell_max_last30min": 59.7,
+   "wind_max": 84.1,
+   "I_end": 0.7,
+   "board": 68.3,
+   "Tj_hbridge": 80.5,
+   "levels": [
+    0,
+    1
+   ],
+   "Tj_MCU_RthJB10": 77.3
+  },
+  "ladder_tuned_I0.88_fric1.2": {
+   "shell_end": 59.7,
+   "shell_max_last30min": 59.7,
+   "wind_max": 84.1,
+   "I_end": 0.7,
+   "board": 68.3,
+   "Tj_hbridge": 78.7,
+   "levels": [
+    0,
+    1
+   ],
+   "Tj_MCU_RthJB10": 77.3
+  }
+ },
+ "still": {
+  "no_derate": {
+   "shell_end": 121.9,
+   "shell_max_last30min": 121.9,
+   "wind_max": 180.8,
+   "I_end": 0.952,
+   "board": 130.5,
+   "Tj_hbridge": 142.8,
+   "levels": [
+    0
+   ],
+   "Tj_MCU_RthJB10": 139.5
+  },
+  "ladder_tuned": {
+   "shell_end": 67.6,
+   "shell_max_last30min": 70.2,
+   "wind_max": 94.5,
+   "I_end": 0.5,
+   "board": 76.2,
+   "Tj_hbridge": 91.0,
+   "levels": [
+    0,
+    1,
+    2
+   ],
+   "Tj_MCU_RthJB10": 85.2
+  },
+  "ladder_tuned_I0.88_fric1.2": {
+   "shell_end": 67.6,
+   "shell_max_last30min": 70.2,
+   "wind_max": 94.5,
+   "I_end": 0.5,
+   "board": 76.2,
+   "Tj_hbridge": 89.2,
+   "levels": [
+    0,
+    1,
+    2
+   ],
+   "Tj_MCU_RthJB10": 85.2
+  }
+ }
+}

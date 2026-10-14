@@ -1,0 +1,57 @@
+{
+ "wrist P3W open0 walk": {
+  "cavity": 56.6,
+  "housing": 72.1,
+  "winding": 76.6
+ },
+ "wrist P3W open0 still": {
+  "cavity": 61.6,
+  "housing": 80.7,
+  "winding": 85.2
+ },
+ "wrist P3W open0.2 walk": {
+  "cavity": 37.0,
+  "housing": 66.6,
+  "winding": 71.1
+ },
+ "wrist P3W open0.2 still": {
+  "cavity": 40.4,
+  "housing": 74.8,
+  "winding": 79.3
+ },
+ "wrist P6W open0 walk": {
+  "cavity": 65.6,
+  "housing": 87.6,
+  "winding": 96.6
+ },
+ "wrist P6W open0 still": {
+  "cavity": 70.6,
+  "housing": 96.2,
+  "winding": 105.2
+ },
+ "wrist P6W open0.2 walk": {
+  "cavity": 37.8,
+  "housing": 79.9,
+  "winding": 88.9
+ },
+ "wrist P6W open0.2 still": {
+  "cavity": 42.2,
+  "housing": 88.3,
+  "winding": 97.3
+ },
+ "roll carry": {
+  "housing": 50.5,
+  "EPP_inner": 48.2,
+  "EPP_outer": 40.3
+ },
+ "roll P-042": {
+  "housing": 46.0,
+  "EPP_inner": 44.4,
+  "EPP_outer": 38.7
+ },
+ "roll carry still air": {
+  "housing": 57.5,
+  "EPP_inner": 54.8,
+  "EPP_outer": 45.4
+ }
+}
