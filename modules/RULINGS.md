@@ -909,3 +909,14 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
 - **Fuse item is closed** (L50S125 clears <=6 ms; 10 mm² withstands ~966 ms).
 - **Bus touch protection:** the requirement stands (R-076), but the SurLok 1000 V set (+0.21 EST) is oversized for a 92 V bus. Torso and Electronics come back with the **lightest cited IP2X (finger-safe) parts rated >=100 V DC**: touch-safe housings or boots and shrouds on existing parts, plus 10 mm² unless the >=100 A pack connector forces larger. Until then, **+0.21 and +0.04 (16 mm²) are booked conservatively in full**, and they get replaced when cited masses arrive.
 - **Mass status:** the reserve is ~**-0.13** (projected over the 66.5 kg hard limit on estimates). The freeze holds, and the **mass-down pass is now mandatory**: L47 opt, torso and housing pocketing FEA, hybrid palm, the touch-protection redo and the pending trims C1/F1/G. The target is unchanged. If FEA results can't restore >=0 by the end of R13, it goes to Bryan.
+
+## R-080 (2026-10-14) Arms R8 delta (009b865), Materials f14c29c/f80b890
+- **Arms delta booked:** forearm +0.038 (cited density, full); boss +0.048 (EST, addition, full); D76 -0.04 credit removed (CSG-14 supersedes it, +0.04); fairing -0.036 vs R-059 at half credit, -0.018. CSG-14 and clamps were already booked in R-076. **The doubler +0.031 is NOT booked:** pad R8 tray B (R-079) replaced the D-A doubler with the integral boss. Arms confirms it's removed, or justifies why it stays. Net **+0.108**.
+- **Forearm margin of +0.1 mm isn't acceptable.** **D76 lowered 1.5 mm (Actuators) is binding**, and the cited 5 mm spool is wanted, targeting >=2 mm margin. The 15 mm cap holds.
+- **Elbow 75.5 vs 76 rated (1.01x) is too thin.** Either a cited rating with >=1.1x margin, or a software torque cap at the elbow <=69 N·m (with Controls checking that P-042 still passes).
+- **20 kg carry is P-042 only.** That's accepted as an operating limit and recorded in limits; the -30/-60 pose is barred under 20 kg.
+- **Pad link face:** the hand calc is noted; credit waits on FEA.
+- **Materials:** pad -4.4 g pending (FEA job 1 + link face). PA12 knee cap -16 g counts only after a kneel-fall test, and trim B is dropped. **Silpoly on D+E: -0.0065 at half, so -0.003 booked.**
+- **Chest pad** (0.077, already booked in R-079 as 0.078) **must seat on a backed bulkhead.** Torso designs the backing, and any mass is booked.
+- **Hand sheaths: custom 316 flat-wire coil + PTFE, +0.042 booked in full.** It's a G1 RFQ item (Fort Wayne / Asahi / Heraeus).
+- Reserve ~**-0.28** (on estimates). The mass-down pass is mandatory per R-079. FEA results due: L47, torso pocketing, housing pocketing, palm, ankle cross, plus the touch-protection redo.
