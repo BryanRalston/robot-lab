@@ -1,5 +1,7 @@
 # V5 polish plan: compact, covered, Optimus-style (Robot Lab, 2026-10-14)
 
+**Owner: RL Industrial Design (from 2026-10-14, Round 1). Cover material superseded by R-027: thermoformed PC 1.5 mm (P-020); CF per panel only if no heavier; extra coverage needs own P-numbers. Current draft: `V5_COVER_SET.md`.**
+
 Goal (Bryan): make every section more concise and polished, like Tesla Optimus Gen 3. **Rule: covers and packaging only, or
 changes that each owning module signs off.** No change may alter actuator sizing, linkage geometry, FEA'd parts or the
 rollup without a P-number to the Arbiter. Covers are **CF/GF prepreg or wet layup on machined (aluminium/tooling-board) moulds,
