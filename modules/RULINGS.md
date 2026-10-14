@@ -982,3 +982,7 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
 - Adopted: Materials' 7075 bulkhead land plus rib (+0.030, cited, SF 2.54). The pad total is 0.091 against 0.131, so **-0.040** released (cited). O-T14 is rejected (>=0.38 kg, SF 1.18).
 - The sternum skin moves **37 mm forward**. ID reshapes the chest, and Controls re-checks T-031 geometry and tuck B clearances with the new chest front.
 - Reserve ~-0.33.
+
+## R-089 (2026-10-14) Hand MCU clock, flexor cap (Controls 2615b7c)
+- R-078 condition met: the XMC4800 at 72 MHz fits (82% worst case). Since the RP06 (R-083) removed the power limit, **the default is the 144 MHz CPU clock** for timing margin (+0.29 W, ~3.2 of 6 W). Thermal and Arms confirm the hand board stays <=90 C with the +0.29 W (cutoff 110 C). 72 MHz is the fallback only if it doesn't. The FW-E14 bench pass (<=70% measured) is binding, and the DCX16/BiSS 5 kHz fallbacks are kept. The single PHY is valid (end-of-line, per harness.py). **The recalled datasheet figures must be re-read and cited before G1.**
+- **Flexor current cap: 1.08 A** (worst case at eta=1 gives 500 N). It supersedes 1.66/1.67 A. Grip of 22.1 N sustained / 30 N peak at 0.952 A is unaffected.
