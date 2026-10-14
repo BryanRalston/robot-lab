@@ -806,3 +806,9 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
 - Pad R6: the mount on the roll output (doubler, 4xM4 into the output flange) is **accepted in principle**. The load path through the roll bearing must pass the bryan-PC FEA (doubler, flange, bearing, with combined roll-bearing loads). But **275 J at minimum strength fails R-065's >=292 J** at worst case and 15°, so R6 isn't accepted for energy. ID and Materials have to reach 292 J (longer crush or a tighter lot bound) with peak <=9.17 kN. Booking: the R-063 0.106 is not 0.127, so the credit to 0.100 is -0.006, provisional on the energy fix.
 - Wrist open-frame palm half -0.071: credit (**-0.036 half**) only once Arms accepts it (grip-face stiffness, cable protection).
 - Reserve ~0.12 (R-066 waiver and freeze continue).
+
+## R-068 (2026-10-14) Pad core spec frozen (Materials 48f55c3)
+- **Core adopted:** 4.5 pcf 61.8x61.8x60, with a ±3% lot crush cert (>=3 coupons, mean 1.736–1.844 MPa, no initial peak). Band 7.31–9.17 kN, 292 J at 15° (meets R-065), 316 J at 0°, peak 9.17 kN at the upper bound x1.30. Pre-crush, bond, single-use replacement and the 15° limit are mandatory in the part spec.
+- **One pad design:** this core is used with **one** mount. ID's R6 roll-output mount and Materials' D-A housing-face mount must converge. ID and Arms pick the mount from the clearance data: R6's 11 mm upper-arm concern against the 67.5 mm standout. Doubler FEA on the bryan PC goes ahead for the chosen mount.
+- Mass booked **0.100** until the unified design is measured (Materials' D-A figure is 0.087).
+- Freeze conditions: G5 rate factor measured within 1.10–1.30, and the 0.72 usable-stroke fraction verified.
