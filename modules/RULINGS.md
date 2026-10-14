@@ -1112,3 +1112,6 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
 ## R-115 (2026-10-14) A38 backup pins (Legs L63, 504082f)
 - The L22 2x6 mm through pins fail tube bearing at the 29.6 kN fault (SF 0.70); the backup was invalid. Adopt **L63**: 8 radial 42CrMo4 pins, 7x10 mm, 2 rows of 4, press-fit and cover-retained (bearing SF 1.63, net section 1.89). Booked **0** (-0.0066 at half credit, offset by retention up to +0.004).
 - G3 gate: 3D FEA must confirm walking fatigue SF >=1.4 (1.41 is an estimate) and press-fit hoop stress in the collar.
+
+## R-116 (2026-10-14) Trunnion bore (Actuators 46436e5, D80)
+- Adopt a 12 mm bore with the housing trunnion boss grown from 20 to 23 mm, outward only and 7 mm deep (fatigue ratio 1.65, static SF >=3.6). **+0.008** in full. Slip or bonded pin fit, no press fit. This closes the L62 condition. Reserve ~-0.64.
