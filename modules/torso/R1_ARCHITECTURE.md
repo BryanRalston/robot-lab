@@ -235,6 +235,38 @@ Datasheet: https://www.ti.com/lit/ds/symlink/bq77216.pdf . Per IC: 3–16S, inde
 | LEV100 cited 190 g vs 200 [EST] | — | −0.010 kg (torso 5.016 paper) |
 | **walk 1.0 m/s binned margin** | **+0.74 W** (was +1.0) | |
 
+## 17. R1.5: shoulder bays for RL Arms & Hands (440c7a8 §A42.4), plus records
+### 17.1 Mounting face: on the bulkhead, no added mass
+- Each side has an **outboard-facing pad on the 12 mm 7075 bulkhead**, machined flat, **≥ 80 cm² (e.g. 100 × 80 mm)**, below and inboard of the 120 mm shoulder boss.
+- The hand node (70 × 45 mm), 2 × RP40, 2 filters and the D70 wrist drives strap to it through a ≤ 1 mm, ≥ 3 W/mK gap pad, with M4 inserts on a 20 mm grid [EST].
+- The pad is already inside the bulkhead envelope (0.60 kg). **The 6061 bracket (+0.032 kg/side) is not needed.**
+- **Bracket temperature sensor:** an NTC (or a TMP-class IC) bonded at the pad centre, wired to the hand board (Arms' derate 90 °C / off 100 °C). A Ø6 × 3 mm pocket is reserved.
+### 17.2 Heat load and bulkhead spreading [EST]
+- Arms' commit gives rail powers, not losses. Estimated bay dissipation per side:
+  - board logic 4 W;
+  - 2 × RP40 losses at the ~25 W combined hand holding load, about 3.4 W;
+  - 2 × D70 Elmo idle overhead about 6.6 W (3.3 W each);
+  - **≈ 14 W continuous**, ~25 W at close bursts.
+- **Spreading:** 7075-T6 k ≈ 130 W/m·K, section 120 × 12 mm, 0.10 m to the centre: R ≈ 0.53 K/W → 7 K across the bulkhead at 14 W.
+- **Sinking:** bulkhead heat capacity 0.60 kg × 960 J/kg·K ≈ 576 J/K (τ ≈ 13 min). With bay-vent convection (h ≈ 10 W/m²K on ≈ 0.07 m² exposed) → ≈ 0.7 W/K. Both bays (28 W) give a steady rise of ≈ 39 K, so **≈ 79 °C at 40 °C ambient**: below the 90 °C derate, thin.
+- **Clamp:** one 400 J event adds +0.7 K (negligible). The 40 W repetitive fault-cycling case would push the bulkhead past 90 °C within minutes, so the clamp's resistor over-temperature cutout and the bay derate cover it. Normal clamp duty is about 0 W.
+- **Rule:** if bay sensors read > 80 °C in walking tests, add a 40 mm duct branch from the Thor fan (Thermal to rule).
+### 17.3 Vents (per bay, away from the Thor exhaust)
+- **Inlet:** louvred shell panel on the lateral chest side, **y ±0.165, z ≈ +0.14 (below the shoulder line), 100 × 50 mm gross ≈ 50 cm² at 50 % open = 25 cm² free**.
+- **Outlet:** shoulder-cap top-lateral, **y ±0.15, z ≈ +0.31, same size, 25 cm² free**.
+- The Thor exhaust is upper back centre (|y| < 0.06), so the bay outlets sit ≥ 90 mm laterally from it and face up/out. The louvres point down at the inlet and up/out at the outlet (splash).
+- Mass: the vents replace shell area (net ≈ 0); louvre inserts +0.010 kg/side [EST]. That is inside the shell's estimate tolerance, not booked.
+### 17.4 Motor-lead pass-through
+- 22 × SiF 0.25 mm² (OD ≈ 1.3 mm [EST]) → bundle ≈ 29 mm² copper+jacket. At 40 % fill that is a **Ø12 mm bundle → Ø16 mm hole with a snap-in nylon panel grommet** (Ø12 ID class; part to cite with the harness, Actuators).
+- **Location:** in the bulkhead web, **75 mm below the shoulder axis**, outside the 120 mm boss.
+  - Ligament to the nearest M8 hole on the 80 mm bolt circle: 75 − 40 − 4.5 − 8 = **22.5 mm ≥ 2d (18 mm)**, so the bolt circle and preload area are untouched.
+  - Net-section loss there is 16/120 = 13 %, in a region at well under half the boss bending stress [EST]; FEA later (no FEA this round).
+- The leads then run inside the shoulder_pitch hollow/service loop per Arms' D72 routing.
+### 17.5 Records
+- **O-T7 closed:** Controls applied `sim_torso_body_r1.json` (cd241d3).
+- **BUS_SENSE_STATUS** (Electronics 413d80f): drive-side bus sense frame. Rule: the BMS host closes the FETs, and then the contactor, **only after a passing pre-check that agrees between both channels, within 30 ms** of the close command. Otherwise it aborts and latches the fault.
+- **O-T5 plan (Controls):** 3–5 reference tasks are timed into a task timeline. That timeline will replace the 20/80 [EST] duty used in §13.5 for the mixed-runtime rating.
+
 ## 7. Open questions / conflicts (not edited in others' files)
 - **O-T1 (Electronics, coordination):** adopt the 48 V intermediate rail with DCM3623TA5N53B4T00; Torso hosts the DCM on the power distribution board or the brain tray? Mass 0.024 [UNVERIFIED for variant] stays in the brain line; who books the 47718-232 choke; 24 V VL source (O-E3); BMS→safety MCU CAN FD message set; e-stop = FET-open vs contactor (O-E6).
 - **O-T2 (Actuators/Arbiter):** waist_pitch 116 N·m < 188 N·m need with T5 payload → TBM2G-08508A, +0.19 kg.
