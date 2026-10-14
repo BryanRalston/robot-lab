@@ -32,3 +32,4 @@ One line per image: date, file, module, what changed.
 - 2026-10-14 RL Torso & Power R1: power tree (20S5P + 48 V brain rail DCM3623TA5N53B4), waist_pitch load vs avail, runtime vs T7 → 2026-10-14_torso_R1_power.png
 - 2026-10-14 RL Torso & Power R1.3: power tree with clamp P-045, contactor, fan rail; runtime vs 4.15 V charge cap → 2026-10-14_torso_R1-3_power.png
 - 2026-10-14 legs: v5 fairing keep-outs + knee saddle no-cover zone → media/progress/2026-10-14_legs_v5_keepouts.png (legs/results/v5)
+- 2026-10-14 arms A42: forearm two-tier hand-drive pack in the unchanged Ø66 bore + wrist sphere-rule fork fix — 2026-10-14_arms_A42_forearm_wrist.png (modules/arms/A42_A43_R4.md)

@@ -1,0 +1,19 @@
+{
+ "tierA": {
+  "parts": "4 flexor + 1 small",
+  "min_wall_clear_mm": 0.0,
+  "min_pair_clear_mm": 1.5,
+  "length_mm": 81.9
+ },
+ "tierB": {
+  "parts": "2 flexor + 4 small",
+  "min_wall_clear_mm": 0.0,
+  "min_pair_clear_mm": 3.15,
+  "length_mm": 81.9
+ },
+ "total_mm": 163.8,
+ "bore_len_mm": 177,
+ "spare_mm": 13.2,
+ "tendon_pass": "tier A tendons pass tier B through 4 gaps/centre (tier B centre free \u00d8 ~20); 11 x \u00d82.5 sheaths",
+ "wrist_drives": "none in forearm (D70 rotary at wrist); hand node + 2x RP40 in torso shoulder bay"
+}

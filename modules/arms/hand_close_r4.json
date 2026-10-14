@@ -1,0 +1,132 @@
+{
+ "rails": {
+  "nominal": {
+   "A": {
+    "P_per_flexor_W": 10.85,
+    "P_small_W": 3.45,
+    "logic_W": 4.0,
+    "t_close_s": 0.644,
+    "peak_flexor_W": 11.0,
+    "peak_flexor_A": 1.71,
+    "rail_peak_W": 40.4,
+    "rail_bus_A": 1.685,
+    "ok": true
+   },
+   "B": {
+    "P_per_flexor_W": 11.61,
+    "P_small_W": 5.17,
+    "logic_W": 0.0,
+    "t_close_s": 0.64,
+    "peak_flexor_W": 11.76,
+    "peak_flexor_A": 1.77,
+    "rail_peak_W": 40.5,
+    "rail_bus_A": 1.686,
+    "ok": true
+   }
+  },
+  "eta0.50": {
+   "A": {
+    "P_per_flexor_W": 10.85,
+    "P_small_W": 3.45,
+    "logic_W": 4.0,
+    "t_close_s": 0.683,
+    "peak_flexor_W": 11.0,
+    "peak_flexor_A": 1.71,
+    "rail_peak_W": 40.4,
+    "rail_bus_A": 1.685,
+    "ok": true
+   },
+   "B": {
+    "P_per_flexor_W": 11.61,
+    "P_small_W": 5.17,
+    "logic_W": 0.0,
+    "t_close_s": 0.671,
+    "peak_flexor_W": 11.76,
+    "peak_flexor_A": 1.77,
+    "rail_peak_W": 40.5,
+    "rail_bus_A": 1.686,
+    "ok": true
+   }
+  },
+  "hotR_x1.5": {
+   "A": {
+    "P_per_flexor_W": 10.85,
+    "P_small_W": 3.45,
+    "logic_W": 4.0,
+    "t_close_s": 0.655,
+    "peak_flexor_W": 10.95,
+    "peak_flexor_A": 1.4,
+    "rail_peak_W": 40.3,
+    "rail_bus_A": 1.679,
+    "ok": true
+   },
+   "B": {
+    "P_per_flexor_W": 11.61,
+    "P_small_W": 5.17,
+    "logic_W": 0.0,
+    "t_close_s": 0.651,
+    "peak_flexor_W": 11.71,
+    "peak_flexor_A": 1.45,
+    "rail_peak_W": 40.3,
+    "rail_bus_A": 1.68,
+    "ok": true
+   }
+  },
+  "fric_x1.6": {
+   "A": {
+    "P_per_flexor_W": 10.85,
+    "P_small_W": 3.45,
+    "logic_W": 4.0,
+    "t_close_s": 0.669,
+    "peak_flexor_W": 11.0,
+    "peak_flexor_A": 1.71,
+    "rail_peak_W": 40.4,
+    "rail_bus_A": 1.685,
+    "ok": true
+   },
+   "B": {
+    "P_per_flexor_W": 11.61,
+    "P_small_W": 5.17,
+    "logic_W": 0.0,
+    "t_close_s": 0.66,
+    "peak_flexor_W": 11.76,
+    "peak_flexor_A": 1.77,
+    "rail_peak_W": 40.5,
+    "rail_bus_A": 1.686,
+    "ok": true
+   }
+  }
+ },
+ "hold_30N_fric1.0": {
+  "i_per_flexor_A": 0.741,
+  "I_nom_A": 0.869,
+  "ratio": 0.85,
+  "rail_A_W": 13.5,
+  "rail_B_W": 11.2
+ },
+ "hold_30N_fric1.3": {
+  "i_per_flexor_A": 0.952,
+  "I_nom_A": 0.869,
+  "ratio": 1.1,
+  "rail_A_W": 17.5,
+  "rail_B_W": 15.2
+ },
+ "motor_to_rail": {
+  "A": [
+   "F1 thumb flex",
+   "F2 index flex",
+   "F3 middle flex",
+   "S1 thumb rotation",
+   "S2 thumb abduction",
+   "board logic"
+  ],
+  "B": [
+   "F4 ring flex",
+   "F5 little flex",
+   "F6 index MCP flex",
+   "S3 index abduction",
+   "S4 ring/little abduction",
+   "S5 spare/wrist-side"
+  ]
+ }
+}

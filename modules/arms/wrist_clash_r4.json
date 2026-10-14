@@ -1,0 +1,27 @@
+{
+ "current": {
+  "cheek": "30x6x26 at |y|14..20, z -7..19",
+  "palm_top_z": -15,
+  "gap_P026": 0.0,
+  "worst_P026": [
+   -60.0,
+   -30.0
+  ],
+  "gap_pm40_pm25": 0.0
+ },
+ "fix": {
+  "cheek": "20x6x20 at |y|14..20 (pin bosses), all fork/cross parts inside r 24.5 of pivot",
+  "palm_top_z": -27,
+  "drop_mm": 12,
+  "sampled_min_gap_P026_mm": 4.91,
+  "sphere_rule": "palm >= 27 mm from pivot, fork <= 24.5 mm: >= 2.5 mm for ANY pitch/yaw"
+ },
+ "consequences": {
+  "hand_length_mm": 12,
+  "wrist_static_Nm": 8.58,
+  "wrist_need_Nm": 12.87,
+  "contract_need_Nm": 14.7,
+  "D70_repeated_peak_Nm": 36
+ },
+ "constraint_for_D70": "no wrist drive housing may sit inside the palm swept region (radius >= 27 mm from pivot, |y|<=43 band); D70 units must ride on the roll output above the pivot (z >= +27) or outboard |y| >= 45; CAD by Actuators/ID"
+}
