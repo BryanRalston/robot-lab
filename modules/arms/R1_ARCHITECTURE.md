@@ -78,6 +78,6 @@ Result: **on budget (0.00 kg) at credible evidence; −1.30 kg potential** (woul
 - O-A5 Hand drive electronics/bus.
 - Speed needs are [EST, v2]; no arm motion sim exists.
 
-R3 (P-028): carry is done in chest-carry pose sp −60°/el −110° (elbow 6.95, shoulder 43.45 N·m); see `carry_pose_r3.json`, which supersedes the R1 carry pose for thermal.
+R3 (P-042, renumbered from P-028 by R-031): carry is done in chest-carry pose sp −60°/el −110° (elbow 6.95, shoulder 43.45 N·m); see `carry_pose_r3.json`, which supersedes the R1 carry pose for thermal.
 
 Artifacts: `arm_loads_r1.py`, `arm_loads_r1.json`, `plot_r1.py`, `R1_arm_layout_torque.png` (copy: `media/progress/2026-10-14_arms_R1_layout_torque.png`).

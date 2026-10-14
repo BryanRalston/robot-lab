@@ -61,5 +61,30 @@ That totals ≈ 0.253 kg for both arms. Harness ROM used: shoulder_yaw 300°, wr
 | O-A4 | harness mass inside 1.286 line (closed); loop-vs-slip-ring + STO open | Electronics |
 | O-A5 | architecture per Electronics R1; node part, DC/DC, tactile bus open | Electronics |
 
-## R3 update (2026-10-14): A39 / P-028, carry pose
-O-A2 is addressed in part by **P-028**. The chest-carry pose is sp −60°, el −110°: elbow 6.95 N·m, shoulder_pitch 43.45 N·m at 10 kg/hand (`carry_pose_r3.json`). Scaled Thermal steady ΔT: elbow ≈ 6.7 K, shoulder ≈ 45 K, so the pose has no time limit. A static hold with elbow > 15 N·m is limited to ≤ 30 s, then a 5 min cool-off [CONSERVATIVE ASSUMPTION pending Thermal J-T3]. The open question for Thermal is now J-T3 (transient), not the steady state.
+## R3 update (2026-10-14): P-042 carry pose (A39), Thermal O-A2, Electronics §10
+**O-A2: answered by Thermal (`thermal/O-A2_ARM_HOLD.md`, f4e6dfb) and addressed by P-042** (renumbered from P-028, R-031).
+- At the R1 carry pose, the elbow at 40.1 N·m reaches +100 K in about 3.6 min (two-node), and the shoulder at 61.3 N·m sits at a steady +91 K.
+- The P-042 chest-carry pose is sp −60°, el −110°. It gives elbow 6.95 N·m (+6.7 K) and shoulder 43.45 N·m (+46 K), so the hold is **unlimited**.
+- Above 15 N·m on the elbow: ≤ 2 min at 40 N·m, then ≤ 28 N·m (Thermal interim). Above 55 N·m static on the shoulder: ≤ 10 min. Both are [EST] until the G5 bench measures τ_w.
+
+**O-A4: closed by Electronics** (`electronics/R1_ARCHITECTURE.md` §10, f4e839c).
+- Clock-spring loops, not slip rings.
+- STO 0.085 kg, inside the 1.496 kg harness (Actuators D66).
+- The P-026 elbow loop is 0.144 m.
+
+**O-A5: hand electronics booked into the arms line** (Electronics §10.4–10.5; both items are [EST]/[DS], ×1.0 once cited).
+| item | per hand | both |
+|---|---|---|
+| hand node 70 × 45 mm, 2–4 W | 0.035 | 0.070 [EST] |
+| wrist converter RECOM RP40-11024SFR, /P-HC with heat sink (43–160 V → 24 V / 1.666 A) | 0.043 | 0.086 [DS family, R-026] |
+| note-9 input filter | not massed by Electronics | TBD |
+| **added** | **0.078** | **0.156** |
+Arms + hands now total **19.24 kg vs the 19.08 allowance (+0.156 over)**. Arms asks the Arbiter to book it, offset by P-027 (−1.30 once Actuators cite parts).
+
+**Hand peak current (Electronics' 1.67 A question):** the repo cannot confirm ≤ 1.67 A.
+- `v3/analysis/parts.py` holds only DCX 22 S T_cont 15.3 mNm, 66 g, Rth 23 K/W, and DCX 16 S 5.2 mNm. There is no Kt, terminal resistance, nominal or stall current, and the v3 datasheet PDFs are error pages.
+- A power bound from v3 data: a full close (30 mm tendon, Ø8 spool, 0.74 s) means the spool turns at 10.1 rad/s, so the motor turns at 1 124 rad/s (111:1). At T_cont that is ≈ 17 W mechanical per flexor, and 6 flexors closing at once is ≈ 103 W mechanical. That is well above the 40 W converter.
+- **Decision: the hand node caps total motor current at 1.67 A (40 W) in firmware.**
+- Consequences: a loaded six-finger simultaneous close is power-limited to ≈ 40 W and takes ≈ 2–3× longer than 0.74 s [EST]. A no-load close (low torque) and a static grip (copper-only) stay inside the cap, but static grip current needs the DCX 22 S terminal resistance.
+- T4 ≤ 1 s close is **at risk under load** at 40 W. Unloaded, it is unaffected.
+- If T4 must hold under load, the fallback is a larger converter (RP60-class, not cited).

@@ -21,7 +21,7 @@ ok=[r for r in rows if r['elbow']<=15.0]
 cand=[r for r in ok if r['hand_x_fwd']>=0.20]
 best=min(cand,key=lambda r:(r['shoulder_pitch'],-r['hand_z_above_waist_pitch'])) if cand else None
 ref=load(-30,-60)
-json.dump(dict(model='sim/v3/humanoid_v3.xml',payload_kg_per_hand=PAY,rule='elbow<=15 N·m (R-030 A39), hand_x>=0.20 m [EST clearance]',
+json.dump(dict(model='sim/v3/humanoid_v3.xml',payload_kg_per_hand=PAY,rule='elbow<=15 N·m (R-030 A39 / P-042), hand_x>=0.20 m [EST clearance]',
                r1_carry_ref=ref,selected=best,n_ok=len(ok),grid=rows),open(os.path.join(H,'carry_pose_r3.json'),'w'),indent=1)
 print('ref',ref); print('best',best)
 for r in sorted(cand,key=lambda r:r['shoulder_pitch'])[:8]: print(r)
