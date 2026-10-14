@@ -208,6 +208,11 @@ Function: 11 brushed/BLDC hand drives (T4: ≥ 11 actuated DoF), current sense, 
 **RECOM RP40-11024SFR** [DS: RP40-FR datasheet, recom-power.com, same family as the head RP40-11012SFR accepted in R-026]: **input 43–160 V**, output **24 V / 1666 mA (40 W)**, efficiency **90 %**, max capacitive load 1300 µF. Bus fit: 68–84 V normal, 90 V regen and 92 V ceiling are all inside the continuous range (R-026 also checked the family's 170 V/1 s surge and UVLO 43 on / 40 off). Mass: R-026 cites the RP40 family at 32 g bare / 43 g with heat-sink (/P-HC). It needs the same note-9 input filter as the head (3 × 68 µF/200 V + 2 × SMDJ90A; Rubycon BXF obsolete, see A28).
 **Check needed:** harness-model hand feed peak is 2.0 A at 24 V = 48 W > 40 W rated. Either Arms confirms the hand peak ≤ 1.67 A, or the hand node limits total motor current in firmware (recommended), or a larger part is cited. Placement: forearm, beside the hand node, with the cover/forearm shell as heat path (Thermal).
 
+### 10.6 Updates (2026-10-14, per RL Arms & Hands)
+- **Hand-node firmware caps total hand motor current at 1.67 A** (40 W = RP40-11024SFR rating). Consequence (Arms): a six-finger loaded close is ~2–3× slower than 0.74 s; T4 (≤ 1 s close) is flagged to the Arbiter by Arms.
+- **Booked in the arms line:** hand node 0.035 [EST] + RP40 0.043 (with heat-sink) per hand.
+- **Interface item (harness M3, Actuators):** the wrist-pair drives sit in the **torso shoulder bay**, so their motor phase + encoder leads run shoulder bay → shoulder (3 loops) → elbow → forearm, instead of the 0.06 m local leads in the harness model. Rough size [EST]: per side 2 motors × 3 phases × ~1.7 m × 9 g/m (SiF 0.5) ≈ 0.092 kg + encoder/thermistor 2 × 3 × 1.7 m × 5.4 g/m ≈ 0.055 kg → **≈ 0.15 kg/side, ≈ 0.29 kg both [EST]**. These are PWM phase leads in the arm next to EtherCAT, so they need to be shielded or twisted (EMC); Actuators to route/rate them in harness.py.
+
 ## 11. A41 (R-030 / P-030, with Torso & Power): Thor ducted air cooling
 
 **Heat load:** Thor 120 W + brain DCM ≈ 13.9 W (Thermal `R1_BUDGET.md`, η 0.92 [EST]) = 134 W. **Air needed** (energy balance, ρ 1.16 kg/m³, c_p 1007 J/kgK): **24.3 CFM at 10 K air rise, 16.2 CFM at 15 K**.
@@ -291,3 +296,19 @@ Datasheet (tracopower.com/tsr1wi-datasheet) [DS]: **input 17–72 VDC (48 V nomi
 | TMS570 → BMS: SAFE_CMD | request open (after STO confirmed), allow close (post-reset), drives-enabled flag | 100 Hz + event | BMS (enforces the §13.2 interlock) |
 | clamp → TMS570 (digital) | clamp active, resistor over-temp | event | TMS570 → SS1 / log |
 All safety frames: counter + CRC (E2E-style). Rates are [EST].
+
+### 13.8 Changelog: Arbiter R-033 (73d1984)
+- Contactor + pre-charge **+0.232 kg approved** (Torso line). A cited contactor mass is needed before G1.
+- **HS100 1R5 clamp accepted** at the 0.15 booking (P-045). Fallback if O-T8 fails: 2× HS100 0R75 in series, +0.09 kg.
+- 4.15 V/cell charge limit adopted. **Electronics now supports Torso's alternative** (Torso 8c26b7f §15): charge to 4.20 V **plus** BMS accepts regen at any SoC; 1.94 h walk, 49–81 Wh lost under the 4.15 V cap. Molicel to confirm the regen pulse acceptance at 4.20 V. Sent to the Arbiter.
+- O-T9 sequence accepted (§13.2).
+- G5 tests: **T-025** read WI[35] on the first drive; **T-026** clamp pulse test. **O-T8** (HS100 overload curve) is due before G3.
+
+### 13.9 Additions to §13.7: fault channels and contactor/FET weld detection
+- **TI BQ79616 has one hardware fault line.** The dual-channel FAULT_N needs a second, independent channel: **Torso picks the second-channel protector IC and the BMS host MCU.**
+- **Electronics owns a drive-side bus voltage sense** for welded-contactor / shorted-FET detection (the LEV100A4ANG has no aux contact, and the BQ76200 cannot detect a shorted FET). It is 2 independent channels, each a resistive divider (84–92 V → < 2 V) into a **TI AMC1311** reinforced isolated amplifier → TMS570 ADC.
+  - AMC1311 (ti.com product page / datasheet Rev. C) [DS]: 2 V high-impedance input, fixed gain 1, differential output; reinforced isolation 5000 V rms (UL1577) / 7000 V pk (VDE 0884-17), 1500 V rms working; gain error ±1 % max (AMC1311B ±0.2 %); missing high-side supply indication; −40…+125 °C; SOIC-8 DWV 5.85 × 11.5 mm. TI lists AMC0311D as the newer drop-in.
+  - Each channel needs an isolated high-side supply (e.g. a small isolated DC/DC module; part to cite) [EST].
+  - Mass [EST]: 2 × (AMC1311 + divider + isolated supply) on the safety board ≈ 0.005 kg, inside the existing rt_safety_mcu 0.040 [EST] allowance.
+  - Checks: **before pre-charge** (drive-side bus must be ≈ 0 V with the disconnect open; otherwise weld/short → no close), and **after every open** (bus must decay per the bus-capacitance RC; otherwise latched fault, no restart). Both channels must agree within tolerance [EST ±2 V].
+- **Internal cell short detection** (self-discharge/imbalance trend) is a **soft warning** (BMS_WARN), not a hard-fault trigger.
