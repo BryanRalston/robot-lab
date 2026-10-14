@@ -991,3 +991,11 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
 - **The flexor cap returns to 1.66 A**, superseding R-089's 1.08 A. Basis: the cited maxon GPX 22 HP 103:1 eta_max of 0.65 holds tendon <=500 N, and 1.08 A breaks the T4 loaded close (~1.7 A transient). Adopted scheme: cap 1.66 A, trip ~1.80 A for 3 samples, a 0.5 s stall timer to <=0.84 A, and DRV8874 ILIM ~1.9 A. **Binding G5: tension-per-amp on every assembly (including back-driven), with a calibrated per-hand cap if any eta >0.65.** Sheath SF stays >1.9 even at a 770 N fault.
 - **A37 rev D** (PEI eye-pin sleeve plus 22/12 tine sleeve, closing the knee break to >=20 K/W): **booked at +0.028** (supersedes +0.011, so +0.017 here). It drops to +0.019 if J-T1 measures R_col <=8 K/W. The knee lever eye's +8.6 g gets booked once Legs confirms it.
 - Reserve ~-0.35.
+
+## R-091 (2026-10-14) Electronics 5289f3c, Controls flexor
+- **Flexor cap 1.66 A** was already re-ruled in R-090 (Controls' scheme, trip under the 1.915 A chop).
+- **Per-rail summed limit 1.50 A plus flexor closing stagger** is adopted to protect the RP40. **Conflict:** a single loaded close needs ~1.7 A transient for T4 (0.64-0.68 s). Arms re-runs T4 timing at 1.50 A/rail. **If T4 fails, Electronics upsizes the hand rail converter** (mass booked in full). There is no T4 waiver. The T-029 bench test is binding.
+- **IP2X ledger re-run:** the knee covers merge into ID's fairing panel. ID's +0.040 net (R-087) already covers the panel beyond the 0.042 covers, so the merge is **mass-neutral**: Electronics' -0.042 moves to ID's line, and the earlier half-credit result stands. No change.
+- Würth junction at ~50 C is closed thermally; the mass still needs citing. Hand always-on at 144 MHz is 3.19 W (53% of RP06), OK.
+- **Bus-bar sleeve: +0.013** in full. Foot F/T +0.012 is still pending.
+- Reserve ~-0.36.
