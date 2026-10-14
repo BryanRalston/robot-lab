@@ -1,0 +1,33 @@
+{
+ "pos": {
+  "fin_vol_in_pad_prism_mm3": 0.0,
+  "min_dist_fin_to_pad_prism_mm": 14.38,
+  "fin_vol_in_40mm_cheek_prism_mm3": 0.0,
+  "min_dist_fin_to_40mm_cheek_mm": 5.72,
+  "fin_vol_outboard_plane_mm3": 713.6,
+  "outboard_bb_y_z": [
+   26.6,
+   42.2,
+   1.0,
+   43.0
+  ]
+ },
+ "neg": {
+  "fin_vol_in_pad_prism_mm3": 0.0,
+  "min_dist_fin_to_pad_prism_mm": 14.38,
+  "fin_vol_in_40mm_cheek_prism_mm3": 0.0,
+  "min_dist_fin_to_40mm_cheek_mm": 5.72,
+  "fin_vol_outboard_plane_mm3": 713.6,
+  "outboard_bb_y_z": [
+   26.6,
+   42.2,
+   1.0,
+   43.0
+  ]
+ },
+ "clip_option": {
+  "d_area_m2": -0.0029,
+  "d_mass_kg_per_knee": -0.0039,
+  "note": "area change includes the new cut end faces"
+ }
+}
