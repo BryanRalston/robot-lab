@@ -213,3 +213,47 @@ The 0.5 mm Al spreader sits on the **impact side** (under the EPP face) and spre
 - **D3:** clearance for 6 mm lips and tabs within the cap shell.
 - **ID:** replace the saddle, band and posts with D-A. Bond the core to the doubler. Update shoulder_pad.json to 42.8 g/side.
 - **Test (G5):** residual shear of the crushed core bond, which confirms SF 3.7.
+
+---
+# Part 5: core resize for R-065 (≥ 292 J at 15°, peak ≤ 9.17 kN), 2026-10-14
+Basis:
+- HexWeb CR III 5052 4.5 pcf, 1/8″ cell, crush 1.79 MPa typical (HEX_CRIII).
+- Rate factor 1.10–1.30 [EST band until the G5 drop test; Hexcel says "up to 30 %"].
+- Off-axis plateau ×0.93 at 15° (HC_ANGLE_PMC).
+- Usable stroke 0.72 × core height [ID assumption].
+- Peak is governed at 0° on the lot upper bound × 1.30.
+- Energy is governed at 15° on the lot lower bound × 1.10.
+
+| lot cert | σ_lo = 1.79·(1−x)·1.10 | σ_hi = 1.79·(1+x)·1.30 | area for 9.17 kN | F_floor 0° | F 15° (×0.93) | stroke for 292 J | **core h = s/0.72** |
+|---|---|---|---|---|---|---|---|
+| ±5 % | 1.871 MPa | 2.444 MPa | 37.5 cm² | 7.02 kN | 6.53 kN | 44.7 mm | **62 mm** |
+| **±3 % (recommended)** | **1.910** | **2.397** | **38.3 cm² (61.8 × 61.8)** | **7.31 kN** | **6.80 kN** | **42.9 mm** | **60 mm** |
+
+- Check of the 45 mm figure in the brief: 292 / (6.95 × 0.93) = 45.2 mm holds at a 6.95 kN floor. With the ±3 % cert the floor rises to 7.31 kN, so 42.9 mm is enough.
+- Results with the ±3 % cert and a 60 mm core:
+  - Peak 38.3 × 2.397 = **9.17 kN** at 0°, rate 1.30, lot upper bound.
+  - Energy at 15° and the floor: 6.80 × 42.9 = **292 J**.
+  - At 0° and the floor: 7.31 × 43.2 = 316 J.
+- Controls should model the band **7.31–9.17 kN at 0°**, stroke ≤ 43.2 mm (0.72 × 60), and ×0.93 at 15°.
+- **Mass:** core volume 38.3 × 6.0 = 230 cm³ × 72 kg/m³ = 16.5 g vs 15.8 g → **+0.7 g/side, +1.4 g pair → 87.0 g pair** (D-A bonded; vs 85.6). With ±5 % and 62 mm: +2.4 g pair → 88.0 g. Both are under 0.100 kg.
+- **Standout** from the housing face: doubler 1.0 + core 60 + spreader 0.5 + EPP 6 = **67.5 mm**.
+  - That is +3 mm vs D-A at 57 mm (64.5) and +1 mm vs ID R5 (66.5).
+  - Plus the 5 mm vented air gap if measured from the bulkhead (R5 quoted 70 → about 71).
+  - Arms must re-confirm the arm gap (≈ 32 mm at roll −5°) with +1 mm vs R5.
+- **Vents:** the footprint stays 61.8 × 61.8 (was 62 × 62). Only the outboard (y) height grows, so the z edges don't move.
+  - Inlet z +0.14: the R5 figure of about 1.5 mm clearance holds, +0.1 mm from the smaller footprint.
+  - Outlet z +0.31: unchanged vs R5.
+  - Thermal: the air gap is unchanged.
+
+## PART SPEC: shoulder crush cartridge (mandatory items)
+1. **Core:** 5052 aluminium honeycomb, 4.5 pcf, 1/8″ cell (HexWeb CR III or AMS C7438 equivalent, e.g. PAMG-XR1), T-direction loading, 61.8 × 61.8 × 60 mm.
+2. **Pre-crush: MANDATORY**, 2–3 mm in T at the supplier or in house before assembly, to remove the stabilized-compression peak (HEX_ATTR: pre-crush "remove[s] the compressive peak"; stabilized/crush = 2.2× at 4.5 pcf).
+3. **Lot crush certificate: MANDATORY.**
+   - Per lot, ≥ 3 coupons cut from the same block, quasi-static crush per Hexcel method (≥ 0.625″ thick, fixed plates).
+   - Mean crush must be within **±3 % of 1.79 MPa** (1.736–1.844 MPa).
+   - **No initial peak above 1.05 × plateau** on the pre-crushed coupons.
+   - A lot that fails is rejected.
+4. **Rate factor:** the G5 drop tower at 3–4 m/s must confirm 1.10 ≤ k ≤ 1.30 before freeze. If it doesn't, re-size.
+5. **Bond:** core bonded to the 7075-T6 doubler (DP490, sandblasted, BOND_SPEC prep). Doubler per Part 4 D-A.
+6. **Single use:** replace the cartridge after any impact that crushes the core more than 2 mm beyond the pre-crush.
+7. **Orientation:** impact within 15° of the core axis (Controls). Beyond 25° the energy capacity falls to about ×0.73.
