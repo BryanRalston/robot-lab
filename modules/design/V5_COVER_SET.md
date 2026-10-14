@@ -4,7 +4,7 @@ Owner: RL Industrial Design (also owns `V5_POLISH_PLAN.md` from this round). Bas
 ## Baseline: trimmed set (R-029/R-030; final Legs envelopes c44da58/fa47eec; `cover_set_v5.json`, measured: false)
 Hull areas now come from the final `legs/results/v5/ENVELOPES_FOR_ID.md`: knee_cap 3422→1211, hip_skirt 11317→2987, foot_upper 1927→1055 cm². Rigid panels are front + outboard = **0.45 × hull** (Legs range 0.4–0.5). Knee cap 0.30 × hull and skirt fabric 0.40 × hull [EST].
 
-**No-cover zones (Thermal D69, Legs):** knee saddle (tibia, z 320–415, r ≤ 47, fins rear/sides, free air, no exhaust onto the tibia collar) and lower shank z 136–415. **The shin fairing is deleted**: nothing below the knee cap. Ankle boot only below z 170. This also sets the A36 vent scope: no shin vents, and the knee cap must not duct air onto the saddle.
+**No-cover zones (Thermal D69, Legs):** knee saddle (tibia, z 320–415, r ≤ 47, fins rear/sides, free air, no exhaust onto the tibia collar) and lower shank z 136–415. **The shin fairing is deleted** (the zone was later withdrawn by Legs 6f53d77; the shin is now an optional add-back, see below). Ankle boot only below z 170. This also sets the A36 vent scope: no shin vents, and the knee cap must not duct air onto the saddle.
 
 | panel | P | material | skin m²/side | panels | kg (PC) | kg if CF | Δ vs booked | mount |
 |---|---|---|---|---|---|---|---|---|
@@ -24,13 +24,26 @@ Hull areas now come from the final `legs/results/v5/ENVELOPES_FOR_ID.md`: knee_c
 ## Shoulder impact pad (R-042, P-051 proposed): see `SHOULDER_PAD.md`
 R2: 40 mm EPP failed against the real crush curve (Materials). R3 (265 J, Controls 03fc980): 5052 honeycomb 3.1 pcf cartridge, 80 × 105 mm × 44 mm, 6 mm EPP face. **0.100 kg pair, at the cap with zero margin**, 548 N·m peak, 58 mm stack. Arm shells stay deferred.
 
+## Legs 6f53d77 / Thermal 9b9e169 update: shin zone withdrawn, knee-housing grille
+- **Knee saddle / lower-shank no-cover zone withdrawn.** Under the R-047 freeze the **shin fairing stays out of the baseline** and is an **optional add-back for an Arbiter decision** (front + outboard 0.45 × 1751 cm² = 0.079 m²/side, 4 panels, +4 tools):
+
+  | shin add-back | pair kg |
+  |---|---|
+  | PC 1.5 | +0.300 |
+  | PC 1.5 louvred 30 % | +0.227 |
+  | CF 1.0 | +0.260 |
+  | CF 1.0 louvred 30 % | +0.198 |
+
+- **New no-cover zone: knee housing fins** (thigh frame, trunnion x −130, z 770). The thigh fairing gets a **grille over the housing front face: 115 × 110 mm/side [EST]** (ø85 + fins 2 × 10 + 2 × 5 mm), 60 % open, merged into the P-026 louvre field where they overlap. The rear face is already open (the fairing is front + outboard only); no fins on the ±y flanks, so no side grille.
+- **Thigh fairing pair mass: 0.443 → 0.322 kg** (louvres 30 % + grille, cut slots, 15 % rib allowance). R-047 item 1 goes from −0.142 to **−0.154** (grille −0.012). The knee cap gap is unchanged (housing ≥ 110 mm from the knee cap keep-out).
+
 ## Forearm / wrist envelope note (Actuators D73, bc18aae, `cad/wrist_place_d73.step`). Arm shells deferred
 - Wrist roll unit is **OD 90 × 42 mm**, wider than the Ø70 forearm → the future forearm shell needs a **local bulge to ≥ Ø100** (90 + 2 × 5 mm keep-out) over 42 mm + 2 × 5 mm, faired into Ø70 with ≤ 3:1 draw (split-line at the bulge).
 - Two **Ø56 × 54 mm cans at z +28 to about +140** (wrist frame): the shell's local keep-out is Ø66 per can + 3 mm flex gap; check whether the two cans side by side exceed the Ø70 section (likely an oval section there).
 - No mass booked; arm shells return as a P-020 change at Arms R2 (freeze R-047: no additions until reserve ≥ 0.30).
 
 ## R-047 offsets
-See `COVER_TRIMS_R047.md`: −0.219 kg itemized (−0.110 at half-credit; pad item now 0.000).
+See `COVER_TRIMS_R047.md`: −0.231 kg itemized (−0.116 at half-credit; pad item 0.000; grille included).
 
 ## A29 panel layout and mould list (owner: Industrial Design per R-029)
 Status: layout from Legs keep-out hulls + model_v4 dims, **not yet measured on v4 CAD** (areas [EST]). Delta check: itemized `modules/design/cover_set_v5.json` = **−0.124 kg vs booked (−0.184 CF thigh): PASS**; P-022 +20 % flagged.
