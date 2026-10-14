@@ -26,9 +26,14 @@ P.add_argument('--hc-stroke',type=float,default=0.038,help='usable stroke m (Mat
 P.add_argument('--spike',type=float,default=1.0,help='start-spike factor over the first 2 mm (2.2 = un-pre-crushed core sensitivity)')
 P.add_argument('--area-cm2',type=float,default=109.0)
 P.add_argument('--carry',action='store_true',help='P-042 20 kg carry: release load first, then tuck')
-P.add_argument('--release-s',type=float,default=0.05,help='hook release time s [EST, Arms to confirm]')
-P.add_argument('--chest-k',type=float,default=0.0,help='R-070 T-031: chest/torso shell contact stiffness N/m on all torso geoms (MuJoCo solref -k,-b); 0 = sim/v3 default (rigid-ish, NOT real). Torso/Materials value missing')
-P.add_argument('--chest-zeta',type=float,default=0.3,help='damping ratio for --chest-k (b = 2 zeta sqrt(k m_torso)) [EST]')
+P.add_argument('--release-s',type=float,default=0.22,help='hook release time s (Arms R7: 0.12-0.22; default worst 0.22)')
+P.add_argument('--chest-k',type=float,default=0.0,help='T-031 spring proxy: chest contact stiffness N/m on torso geoms (solref); 0 = off. Rev2 proxy k_eq 0.53e6, zeta 1.0')
+P.add_argument('--chest-zeta',type=float,default=1.0,help='damping ratio for --chest-k (rev2 proxy zeta 1.0)')
+P.add_argument('--chest-plateau',type=float,default=0.0,help='T-031 chest crush pad plateau N (rev2: floor 16600@15deg / 17700@0deg; ceiling 22350). 0 = off')
+P.add_argument('--chest-stroke',type=float,default=0.062,help='chest pad usable stroke m before densification (rev2: 62 mm; FAIL if exceeded)')
+P.add_argument('--chest-standout',type=float,default=0.037,help='R-088: chest-pad outer face forward of sim/v3 torso front (0.11) in m')
+P.add_argument('--pad-lever',type=float,default=0.064,help='Arms R7: pad centre to shoulder_pitch bearing lever m (was 0.06)')
+P.add_argument('--pad-e',type=float,default=0.010,help='Arms R7: pad centre offset from roll-bearing plane m (e<=0.010, s0>=2)')
 P.add_argument('--out',default=None); P.add_argument('--smoke',action='store_true')
 P.add_argument('--no-fallmode',action='store_true',help='baseline: keep standing PD through the fall')
 A=P.parse_args()
@@ -38,8 +43,11 @@ PAD={'30':dict(t=0.030,s=0.024,Fp=9170.0,face=0.105),'40':dict(t=0.040,s=0.031,F
      'hc':dict(t=0.0635,s=A.hc_stroke,Fp=A.hc_plateau,face=0.080,faceh=0.100,core=0.062)}[A.pad]   # R4: stack 57 core+0.5 plate+6 EPP [ID]; stroke 0.72x57=41.0 mm; plate 80w x 100h
 PAD.setdefault('faceh',PAD['face']); PAD.setdefault('core',PAD['face'])
 if A.pad=='hc': A.pad_model='honeycomb'
-RAMP=0.002; KD=2.0e6; MU=0.8; ARM=0.06; C0=27700.0; DPW=0.085; GATE_F=9170.0; GATE_M=9170.0*0.06
-PATCH=PAD['face']; PAD_Y=0.13 if A.pad=='hc' else 0.152; PAD_Z=-0.005 if A.pad=='hc' else 0.0   # pad centre lateral of shoulder-pitch joint: upper-arm offset 0.112 + capsule r 0.04 (sim/v3 geometry)
+RAMP=0.002; KD=2.0e6; MU=0.8; ARM=A.pad_lever; C0=27700.0; DPW=0.085; GATE_F=9170.0; GATE_M=9170.0*ARM
+# Roll bearing CRBH 6013 A (Arms R7): C0 24.3 kN, dp~75 mm; s0 = C0/P0, pass >=2
+C0_ROLL=24300.0; DPW_ROLL=0.075; PAD_E=A.pad_e
+PATCH=PAD['face']; PAD_Y=0.06 if A.pad=='hc' else 0.152; PAD_Z=0.0   # Arms R7: pad on roll-yaw link (upper_arm); ~link half-width + boss [EST]
+CHEST_FACE=0.11+A.chest_standout  # R-088: old torso half-x 0.11 + 37 mm standout
 m=mujoco.MjModel.from_xml_path(os.path.join(ROOT,'sim','v3','humanoid_v3.xml')); d=mujoco.MjData(m); dt=m.opt.timestep
 if A.chest_k>0:   # R-070: real chest stiffness on torso contact geoms
     _tb=m.body('torso').id; _b=2*A.chest_zeta*math.sqrt(A.chest_k*m.body_subtreemass[_tb])
@@ -57,9 +65,9 @@ if A.forearm_crush_N>0:
     for g in ('l_forearm','r_forearm','l_hand','r_hand'): m.geom_contype[m.geom(g).id]=0; m.geom_conaffinity[m.geom(g).id]=0
 q0=nominal()
 GRID=[(gx,gz) for gx in np.linspace(-PAD['face']/2,PAD['face']/2,3) for gz in np.linspace(-PAD['faceh']/2,PAD['faceh']/2,3)]
-def pad_points(side):   # world points of the outer pad face (undeformed) and outward normal
-    b=m.body(('L' if side>0 else 'R')+'_shoulderP').id; R=d.xmat[b].reshape(3,3); c=d.xpos[b]
-    n=R@np.array([0,side,0.]); pts=[c+R@np.array([gx,side*(PAD_Y+PAD['t']),PAD_Z+gz]) for gx,gz in GRID]; return b,pts,n   # hc: shoulder-cap shell base ~y+0.30 torso frame (Arms R5 7f0ff7a) = 0.13 outboard of pitch joint
+def pad_points(side):   # Arms R7: pad on roll-yaw link (upper_arm); crush axis = body ±y
+    b=m.body(('L' if side>0 else 'R')+'_upper_arm').id; R=d.xmat[b].reshape(3,3); c=d.xpos[b]
+    n=R@np.array([0,side,0.]); pts=[c+R@np.array([gx,side*(PAD_Y+PAD['t']),PAD_Z+gz]) for gx,gz in GRID]; return b,pts,n
 EPS=np.array([0,.25,.5,.75,.95]); SIG=np.array([0,.5,.7,1.6,2.32])*1e6   # ARPRO 5170 (R042_EPP_SHOULDER.md); >75 % extrapolated [EST]
 ANG_T=[0,15,25]; ANG_R=[0.98,0.93,0.73]   # Materials fd46ad8 plateau ratio vs off-axis angle; normalised to 0 deg; >25 deg held + flagged unknown
 ANGF=[1.0]
@@ -87,7 +95,7 @@ DIRS={'L':(0,1.),'R':(0,-1.),'LB':(-0.7071,0.7071),'LF':(0.7071,0.7071),'RF':(0.
 LEG=lambda S: np.linalg.norm(d.xpos[m.body(S+'_thigh').id]-d.xpos[m.body(S+'_foot').id])
 def run(dirn,J,rng):
     nominal(); qt=q0.copy(); push=np.array([*DIRS[dirn],0.])*J/0.1; side=1 if DIRS[dirn][1]>=0 else -1; fwd=dirn in ('F','LF','RF') and A.dirs.startswith('F')
-    t_det=None; t_rel=None; fc_max=0.; ang_unknown=False; tau_g=0.; FT=None; leg0=leg1=None; Warm=0.; ang0=None; angpk=None; bypass=False; t_fm=None; t_imp=None; com_trig=None; com_imp=None; Wsh=0.; Woth=0.; Fpk=0.; cmax=0.; cen=np.zeros(2); cw=0.; prev_c={}; chest_g=0.; _na=max(1,round(0.002/dt)); _vb=collections.deque(maxlen=_na+1)
+    t_det=None; t_rel=None; fc_max=0.; ang_unknown=False; tau_g=0.; FT=None; leg0=leg1=None; Warm=0.; ang0=None; angpk=None; bypass=False; t_fm=None; t_imp=None; com_trig=None; com_imp=None; Wsh=0.; Woth=0.; Fpk=0.; cmax=0.; cen=np.zeros(2); cw=0.; prev_c={}; chest_g=0.; _na=max(1,round(0.002/dt)); _vb=collections.deque(maxlen=_na+1); hand_thigh_min=1e9; outside_core=0; chest_cmax=0.; chest_ang0=None; chest_angpk=None; chest_Fpk=0.; chest_bottomed=False; chest_ang_fail=False; m_eff=None; first_contact=None
     E0=None; T=4.0 if not A.smoke else 2.5; f6=np.zeros(6)
     for k in range(int(T/dt)):
         t=d.time; com=d.subtree_com[1].copy()
@@ -123,7 +131,7 @@ def run(dirn,J,rng):
 
                     d.xfrc_applied[b,:3]+=[ft[0],ft[1],F]; d.xfrc_applied[b,3:]+=np.cross(p-d.xipos[b],[ft[0],ft[1],F])
                     Wsh+=F*max(-vel[2],0)*dt; Ftot+=F; cmax=max(cmax,c); cen+=F*np.array(GRID[i]); cw+=F
-                    if t_imp is None: t_imp=t; com_imp=com[2]; leg1=0.5*(LEG('L')+LEG('R'))
+                    if t_imp is None: t_imp=t; com_imp=com[2]; leg1=0.5*(LEG('L')+LEG('R')); first_contact='shoulder_pad'
         if Ftot>0:
             _,_,nn=pad_points(1 if DIRS[dirn][1]>0 else -1); a=round(math.degrees(math.acos(max(-1,min(1,-nn[2])))),1)   # pad normal vs straight-down: off-axis angle
             if ang0 is None: ang0=a
@@ -138,6 +146,38 @@ def run(dirn,J,rng):
                     if c>0:
                         Fc=A.forearm_crush_N/3*min(c/RAMP,1.0)+(KD*(c-T) if c>T else 0.)
                         d.xfrc_applied[bb,2]+=Fc; d.xfrc_applied[bb,3:]+=np.cross(p-d.xipos[bb],[0,0,Fc]); fc_max=max(fc_max,c)
+        # T-031 chest crush pad (Materials/Torso rev2 / R-088): plateau on torso, outer face CHEST_FACE forward, no rebound
+        if A.chest_plateau > 0:
+            tb=m.body('torso').id; Rt=d.xmat[tb].reshape(3,3); ct=d.xpos[tb]; nx=Rt[:,0]  # torso +x = chest forward
+            # 3x3 patch on pad face (98 mm); standout from body origin along +x
+            CGRID=[(gy,gz) for gy in np.linspace(-0.049,0.049,3) for gz in np.linspace(-0.049,0.049,3)]
+            Fctot=0.; cang=None
+            for gy,gz in CGRID:
+                p=ct+nx*CHEST_FACE+Rt[:,1]*gy+Rt[:,2]*gz; c=-p[2]
+                if c>0:
+                    # angle: pad crush axis is -nx (into chest); vs ground +z → angle between -nx and -z = angle(nx, z)? force into ground is along -z from pad; pad normal outward = +nx
+                    # off-axis = angle between pad outward (+nx) and groundward (-z)
+                    cang=math.degrees(math.acos(max(-1,min(1,float(np.dot(nx,[0,0,-1]))))))
+                    ang_scale=float(np.interp(cang,[0,15,25],[1.0,0.93,0.73]))
+                    Fp=A.chest_plateau*ang_scale
+                    F=Fp/9*min(c/RAMP,1.0)+(KD*(c-A.chest_stroke) if c>A.chest_stroke else 0.)
+                    d.xfrc_applied[tb,2]+=F; d.xfrc_applied[tb,3:]+=np.cross(p-d.xipos[tb],[0,0,F])
+                    Fctot+=F; chest_cmax=max(chest_cmax,c)
+                    if c>A.chest_stroke: chest_bottomed=True
+                    if t_imp is None: t_imp=t; com_imp=com[2]; leg1=0.5*(LEG('L')+LEG('R')); first_contact='chest_pad'
+            if Fctot>0:
+                if chest_ang0 is None: chest_ang0=cang
+                if Fctot>=chest_Fpk: chest_angpk=cang
+                chest_Fpk=max(chest_Fpk,Fctot)
+                if cang is not None and cang>15: chest_ang_fail=True
+                if m_eff is None and chest_g>1: m_eff=chest_Fpk/(chest_g*9.81)
+        # hand-to-thigh clearance (both sides) over the fall
+        for hs,ts in (('L_hand','L_thigh'),('R_hand','R_thigh'),('L_hand','R_thigh'),('R_hand','L_thigh')):
+            hand_thigh_min=min(hand_thigh_min, float(np.linalg.norm(d.xpos[m.body(hs).id]-d.xpos[m.body(ts).id])) - 0.043 - 0.06)  # hand half-y + thigh capsule r [EST]
+        # impacts outside pad core footprint (centroid beyond core/2)
+        if cw>0 and A.pad=='hc':
+            core_h=PAD.get('core',PAD['face'])
+            if max(abs(cen[0]/cw), abs(cen[1]/cw)) > core_h/2: outside_core=1
         for i in range(d.ncon):   # positive (compressive) work of all other ground contacts except feet
             cn=d.contact[i]; gs={cn.geom1,cn.geom2}
             if floor not in gs or gs&set(footg): continue
@@ -146,7 +186,7 @@ def run(dirn,J,rng):
             vel=v[3:]+np.cross(v[:3],cn.pos-d.xpos[bb]); Woth+=f6[0]*max(-vel[2],0)*dt
             if Fpad_now>0 and m.body(bb).name in ('torso','L_upper_arm','R_upper_arm','L_shoulderP','R_shoulderP'): bypass=True   # shoulder structure grounds while element loaded = hit outside face
             if Ftot>0 and m.body(bb).name in ('torso','L_upper_arm','R_upper_arm','L_shoulderP','R_shoulderP'): bypass=True   # shoulder structure touches ground while element loaded = hit outside face
-            if t_imp is None: t_imp=t; com_imp=com[2]; leg1=0.5*(LEG('L')+LEG('R'))
+            if t_imp is None: t_imp=t; com_imp=com[2]; leg1=0.5*(LEG('L')+LEG('R')); first_contact=m.body(bb).name
         ia=ai(('l' if side>0 else 'r')+'_shoulder_roll'); pw=d.ctrl[ia]*d.qvel[va[ia]]
         if t_fm is not None and pw<0: Warm+=-pw*dt
         mujoco.mj_step(m,d)
@@ -158,13 +198,16 @@ def run(dirn,J,rng):
                 jd=m.jnt_dofadr[m.joint(s_+'_shoulder_pitch').id]; tg=abs(d.qfrc_actuator[jd]-m.dof_armature[jd]*d.qacc[jd]+d.qfrc_constraint[jd]); tau_g=max(tau_g,tg)
     share=Wsh/(Wsh+Woth) if Wsh+Woth>0 else None; M=Fpk*ARM
     fs_rad=C0/(Fpk+2*M/DPW) if Fpk>0 else None; fs_ax=C0/(2*M/DPW+0.44*Fpk) if Fpk>0 else None
+    # CRBH 6013 roll bearing static SF: Fr~Fpk, M=Fpk*e, P0=Fr+2M/dp+0.44Fa (Fa~0 head-on)
+    Mroll=Fpk*PAD_E; P0=Fpk+2*Mroll/DPW_ROLL if Fpk>0 else None; s0=C0_ROLL/P0 if P0 else None
+    if m_eff is None and chest_Fpk>0 and chest_g>1: m_eff=chest_Fpk/(chest_g*9.81)
     crouch=(com_trig-com_imp) if (com_trig is not None and com_imp is not None) else None
-    return dict(chest_k=A.chest_k,torso_peak_g=round(chest_g,1),forearm_crush_max_mm=round(fc_max*1e3,1),tuck=A.tuck,shoulder_pitch_gear_peak_Nm=round(tau_g,1),angle_beyond_25_unknown=ang_unknown,spike=A.spike,hc_stroke_mm=A.hc_stroke*1e3,t_release=t_rel,carry=A.carry,arm_used='tuck',dir=dirn,J=round(J,1),pad_mm=A.pad,fell=bool(t_imp is not None),t_detect=t_det,t_fallmode=t_fm,t_impact=t_imp,
+    return dict(chest_k=A.chest_k,chest_plateau=A.chest_plateau,chest_stroke_mm=A.chest_stroke*1e3,chest_crush_max_mm=round(chest_cmax*1e3,1),chest_bottomed=chest_bottomed,chest_impact_angle_deg=chest_ang0,chest_peak_angle_deg=chest_angpk,chest_angle_gt15=chest_ang_fail,chest_peak_N=round(chest_Fpk),m_eff_kg=None if m_eff is None else round(m_eff,2),torso_peak_g=round(chest_g,1),forearm_crush_max_mm=round(fc_max*1e3,1),tuck=A.tuck,shoulder_pitch_gear_peak_Nm=round(tau_g,1),CRBH_s0=None if s0 is None else round(s0,2),CRBH_s0_pass=bool(s0 is not None and s0>=2.0),hand_thigh_min_m=None if hand_thigh_min>1e8 else round(hand_thigh_min,4),outside_core=bool(outside_core),first_contact=first_contact,pad_lever_m=ARM,angle_beyond_25_unknown=ang_unknown,spike=A.spike,hc_stroke_mm=A.hc_stroke*1e3,t_release=t_rel,carry=A.carry,arm_used='tuck',dir=dirn,J=round(J,1),pad_mm=A.pad,fell=bool(t_imp is not None),t_detect=t_det,t_fallmode=t_fm,t_impact=t_imp,
         crouch_at_impact_m=(leg0-leg1) if (leg0 and leg1) else None,com_drop_at_impact_m=crouch,E_sh_J=round(Wsh,1),E_other_J=round(Woth,1),shoulder_share=share,pad_peak_N=round(Fpk),pad_crush_max_mm=round(cmax*1e3,1),
         bottomed=(cmax>0.75*PAD['t']) if A.pad_model=='curve' else (cmax>PAD['s']),beyond_data_unknown=bool(A.pad_model=='curve' and cmax>0.75*PAD['t']),impact_angle_deg=ang0,peak_angle_deg=angpk,bypass_contact=bypass,pad_model=A.pad_model,arm=A.arm,W_arm_backdrive_J=round(Warm,1),M_bearing_Nm=round(M,1),fs_radial=fs_rad,fs_axial=fs_ax,contact_centroid_mm=(cen/cw*1e3).round(1).tolist() if cw>0 else None)
 JD=lambda o: o.item() if hasattr(o,"item") else str(o)
 rng=np.random.default_rng(A.seed); J0,J1=map(float,A.impulse.split(','))
-dirs=['L'] if A.smoke else A.dirs.split(','); n=1 if A.smoke else A.runs; R=[]
+dirs=[A.dirs.split(',')[0]] if A.smoke else A.dirs.split(','); n=1 if A.smoke else A.runs; R=[]
 fo=open(A.out,'w') if A.out else None
 if fo: os.makedirs(os.path.dirname(os.path.abspath(A.out)),exist_ok=True)
 t0=time.time()
@@ -181,6 +224,13 @@ if ok:
       angle_p95=float(np.percentile([r['impact_angle_deg'] or 0 for r in ok],95)),centroid_abs_p95_mm=float(np.percentile([max(map(abs,r['contact_centroid_mm'] or [0,0])) for r in ok],95)))
     S.update(gear_pitch_max=max(r['shoulder_pitch_gear_peak_Nm'] for r in ok),angle_unknown=sum(r['angle_beyond_25_unknown'] for r in ok))
     Ecap=PAD['Fp']*0.93*PAD['s'] if A.pad=='hc' else None; S.update(E_cap_worst15_J=Ecap,E_cap_gate_ok=bool(Ecap is None or Ecap>=292.0))
-    if A.dirs.startswith('F'): S['PASS']=bool(S['gear_pitch_max']<=369.0)
-    else: S['PASS']=bool(S['gear_pitch_max']<=369.0 and S['E_cap_gate_ok'] and S['angle_p95']<=15.0 and S['angle_unknown']==0 and S['share_p95']<=0.40 and S['M_max']<=GATE_M and S['F_max']<=GATE_F and S['crouch_min']>=0.15 and S['bottomed']==0 and S['bypass']==0 and S['unknown']==0 and S['centroid_abs_p95_mm']<=(15.0 if A.pad=='hc' else PAD['face']*500))
+    S.update(CRBH_s0_min=min((r['CRBH_s0'] or 99) for r in ok), outside_core_n=sum(r['outside_core'] for r in ok),
+             hand_thigh_min_m=min((r['hand_thigh_min_m'] or 99) for r in ok),
+             torso_peak_g_max=max(r['torso_peak_g'] for r in ok),
+             chest_bottomed_n=sum(1 for r in ok if r.get('chest_bottomed')),
+             chest_angle_gt15_n=sum(1 for r in ok if r.get('chest_angle_gt15')),
+             chest_crush_max_mm=max(r.get('chest_crush_max_mm') or 0 for r in ok))
+    if A.dirs.startswith('F'):
+        S['PASS']=bool(S['gear_pitch_max']<=369.0 and S.get('torso_peak_g_max',0)<=38.0 and S.get('chest_bottomed_n',0)==0 and S.get('chest_angle_gt15_n',0)==0)
+    else: S['PASS']=bool(S['gear_pitch_max']<=369.0 and S['E_cap_gate_ok'] and S['angle_p95']<=15.0 and S['angle_unknown']==0 and S['share_p95']<=0.40 and S['M_max']<=GATE_M and S['F_max']<=GATE_F and S['crouch_min']>=0.15 and S['bottomed']==0 and S['bypass']==0 and S['unknown']==0 and S['centroid_abs_p95_mm']<=(15.0 if A.pad=='hc' else PAD['face']*500) and S.get('CRBH_s0_min',99)>=2.0)
 print(json.dumps(S,default=JD)); fo and fo.write(json.dumps(S,default=JD)+'\n')

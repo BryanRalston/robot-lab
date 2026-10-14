@@ -1,0 +1,57 @@
+{
+ "note": "forearm +15 mm hand body_pos; chest front R-088 0.147 m; light sensitivity only",
+ "results": {
+  "A": {
+   "pose": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "front_x_mm": 38.0,
+   "behind_new_chest_mm": 109.0,
+   "clear_mm": 57.5,
+   "ok_front": true,
+   "ok_clear": true
+  },
+  "B": {
+   "pose": [
+    5,
+    0,
+    0,
+    0
+   ],
+   "front_x_mm": 38.0,
+   "behind_new_chest_mm": 109.0,
+   "clear_mm": 76.4,
+   "ok_front": true,
+   "ok_clear": true
+  },
+  "D": {
+   "pose": [
+    5,
+    -30,
+    10,
+    -20
+   ],
+   "front_x_mm": 38.5,
+   "behind_new_chest_mm": 108.5,
+   "clear_mm": 74.1,
+   "ok_front": true,
+   "ok_clear": true
+  },
+  "R5": {
+   "pose": [
+    -5,
+    -60,
+    -20,
+    -110
+   ],
+   "front_x_mm": 276.3,
+   "behind_new_chest_mm": -129.3,
+   "clear_mm": 8.6,
+   "ok_front": false,
+   "ok_clear": false
+  }
+ }
+}

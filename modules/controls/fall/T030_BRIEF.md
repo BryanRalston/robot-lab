@@ -1,6 +1,55 @@
 # T-030 brief: A44 side-fall push-fall batch (Grok Build, **bryan PC ff639f5a only, never DESKTOP-B115PVV**)
 Owner: RL Controls. Gate for R-042 (A44 provisional). CPU only, MuJoCo ≥3.1, numpy. No jax, no training. Expected wall time is a few minutes per batch: smoke runs take about 0.2–0.6 s each on the box.
 
+## 000000. R-072 + Arms R7 + R-076 (2026-10-14). **Gate batches supersede §00000**
+### R-072 pad peak (Arbiter; Materials 953cd46)
+- **9.17 kN is the absolute pad peak, including any initial peak** (option b). Lot cert rejects any coupon with initial peak > **1.00×** its plateau, or upper-bound×1.30 > 9.17 kN.
+- **Gate T-030 on peak ≤ 9.17 kN absolute** (→ M = F × 0.064 ≤ 587 N·m at the new lever; vs CRBH 7013 A 550 N·m gate at the old 0.06 m lever — see lever note). Pitch-bearing gate kept as **F ≤ 9.17 kN** and **fs radial ≥ 1.25** at the lever in use.
+- **`--spike 1.05` batches are fault-only (non-gating).** Pre-crush remains mandatory; 2.2× spike stays fault-only.
+
+Hand estimate with **Arms R7 lever 0.064 m** to the shoulder_pitch bearing (pad on roll-yaw link):
+
+| case | F | M = F×0.064 | vs 550 N·m @0.06 | notes |
+|---|---|---|---|---|
+| floor 7.31 kN, 0° | 7.31 | 468 | pass | |
+| floor 15° (×0.93) | 6.80 | 435 | pass | E = 293.7 J ≥ 292 (+0.6 %, thin) |
+| ceiling 9.17 kN | 9.17 | **587** | **over 550 at old 0.06; pitch moment rises with lever** | F gate still 9.17; flag to Actuators/Arms |
+| 1.05× on 9.17 (fault) | 9.63 | 616 | fault-only | lot rejects >1.00× |
+
+**Roll bearing (CRBH 6013 A, C0 24.3 kN):** e ≤ 0.010 m from pad centre to roll-bearing plane; log `CRBH_s0` (pass ≥ 2).
+
+### Arms R7 geometry / timing
+- **Pad mount:** roll-yaw link (upper_arm), not the shoulder-cap housing. Script `pad_points` uses `L/R_upper_arm`. Lever to pitch bearing **0.064 m**; e ≤ **0.010 m**.
+- **Forward tuck = B (+5/0/0/0)** confirmed (96 mm behind old chest front; forearm 133 mm to torso; fairing 35 mm to pelvis; hand ~50 mm to thigh). Pitch −30 tuck **withdrawn**.
+- **Hook release 0.12–0.22 s** (not 50 ms). `--release-s` default **0.22** (worst).
+- **Logged outputs (pass tables):** `shoulder_pitch_gear_peak_Nm`, `CRBH_s0` (+ pass ≥2), `hand_thigh_min_m`, `outside_core` count.
+- **Interim soft limit:** shoulder_roll ≤ **135°** (`limits/soft_limits.json`), pending head sweep.
+- **Forearm +15 mm (R-076/R8):** re-run reach and `tuck_search` when Arms lengthens the forearm (up to +15 mm → ~285–287 mm). Sensitivity note below.
+
+### R-076 pad crush-axis vs ground (pad on roll-yaw link)
+FK tip ~85° toward impact, crouch, pad normal = upper_arm ±y:
+
+| pose | dir | off-axis deg | vs 15° | note |
+|---|---|---|---|---|
+| **B** | side L/R | **~10** | **PASS (+5°)** | roll +5° is the offset |
+| **B** | F | ~90 | n/a (chest pad) | shoulder pad not the forward stop |
+| **B** | LF/LB/RF | **~63** | **FAIL** | needs roll offset or pad-face wedge ~50–60° |
+| **R5** | side L/R | **~62** | **FAIL** | yaw −60° rotates pad off lateral |
+| **R5** | F / diag | 37–120 | FAIL | R5 not for pad-on-link forward |
+
+**Fix if side/diag exceeds 15°:** for pure side, set fall-side roll ≈ **−5°** (zeros B side angle). Diagonals need a commanded roll that aligns the pad with the impact plane, or a fixed pad-face wedge; R5 yaw must be reduced for side falls with the link-mounted pad (or keep a housing-cap mount for side only — not the R7 baseline).
+
+### Gate batches (R-072)
+```
+python $F --pad hc --hc-plateau 7310 --hc-stroke 0.0432 --dirs L,R,LB,LF --out $O/t030_hc7310_gate_tuck.jsonl                 # GATE
+python $F --pad hc --hc-plateau 7310 --hc-stroke 0.0432 --dirs L,R,LB,LF --carry --out $O/t030_hc7310_gate_carry.jsonl         # GATE
+python $F --pad hc --hc-plateau 9170 --hc-stroke 0.0432 --dirs L,R,LB,LF --out $O/t030_hc9170_peak.jsonl                       # GATE (absolute peak)
+python $F --pad hc --hc-plateau 7310 --hc-stroke 0.0432 --dirs L,R,LB,LF --spike 1.05 --out $O/t030_FAULT_hc7310_peak105.jsonl # FAULT
+python $F --pad hc --hc-plateau 9170 --hc-stroke 0.0432 --dirs L,R,LB,LF --spike 1.05 --out $O/t030_FAULT_hc9170_peak105.jsonl # FAULT
+python $F --pad hc --hc-plateau 7310 --hc-stroke 0.0432 --spike 2.2 --out $O/t030_FAULT_hc7310_spike22.jsonl                   # FAULT
+python $F --pad hc --hc-plateau 9170 --hc-stroke 0.0432 --spike 2.2 --out $O/t030_FAULT_hc9170_spike22.jsonl                   # FAULT
+```
+
 ## 00000. Materials 48f55c3 update (2026-10-14). **Gate batches supersede §0000**
 Core model: **7.31–9.17 kN at 0° (×0.93 at 15°), stroke up to 43.2 mm**. Pre-crush plus a lot cert with **no initial peak above 1.05× plateau** are mandatory.
 

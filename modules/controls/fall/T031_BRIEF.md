@@ -1,5 +1,40 @@
-# T-031 brief: forward fall with permanent R5 arm tuck vs shoulder-pitch gear rating (R-057 / D77)
+# T-031 brief: forward fall with permanent tuck B vs shoulder-pitch gear + chest ≤ 38 g
 Grok Build, **bryan PC ff639f5a only, never DESKTOP-B115PVV**. CPU MuJoCo on sim/v3. Same script and setup as T-030 (`T030_BRIEF.md` §5): `modules/controls/fall/t030_pushfall.py --dirs F`.
+
+## R-088 / chest rev 2 / Arms R7 (2026-10-14). **Supersedes R-070 chest numbers**
+### Chest pad (Torso `T031_chest_contact_r2.md`, Materials superseded)
+- **Face 98 × 98 mm**, HexWeb CR III 5052 4.5 pcf, pre-crushed, lot-certified (R-072: no initial peak > 1.00× plateau).
+- **Plateau:** 17.7–22.3 kN at 0°; **16.6–20.8 kN at 15°**. Ceiling **22.35 kN** → **35.6 g at 64 kg** (34.8 g at 65.4 kg) if full mass loads the pad.
+- **Stroke need at 15° floor (16.6 kN):** **62 mm** → core thickness **88 mm** (Torso used 70 % usable). Materials' earlier 78 mm / 56 mm usable was for the pre-rev2 area — **rev2 deepens the core; usable stroke = 62 mm by design. Gate FAIL if crush > 62 mm (densification).**
+- **R-088:** chest front / pad outer face **+37 mm** forward of sim/v3 torso box front (half-x 0.11). Script: `--chest-standout 0.037`. Most of the 88 mm core sits inboard of the old skin line.
+- **Backing** rigid ~24 MN/m (negligible vs pad). Spring proxy only if needed: **k_eq 0.53 MN/m, ζ ≈ 1.0**. Prefer `--chest-plateau`.
+- **Validity:** pad must seat on a backed bulkhead/pack face (Torso O-T14), not the bare 2 mm CF shell (fails at ~1–1.5 kN).
+- Log: `chest_crush_max_mm`, `chest_bottomed`, `chest_impact_angle_deg`, `chest_angle_gt15`, `torso_peak_g`, `m_eff_kg` (F/(g·peak_g); ~64 kg body at 22.35 kN is ~39 g if whole mass loads — effective mass matters).
+
+### Arms R7 / R-070 tuck
+- **Primary = tuck B (+5/0/0/0)** confirmed in sim/v3: behind chest, forearm ~133 mm to torso, fairing 35 mm to pelvis, hand ~50 mm to thigh. Pitch −30 withdrawn.
+- With R-088 +37 mm chest front: behind-chest margin **~96 → ~133 mm**. Forearm lengthening to **~287 mm** (R8 +15 mm): re-run `tuck_search` / reach (sensitivity below).
+- Forward tuck B pitch-gear **~343 N·m EST** vs 369 (7 % margin, crude) — T-031 measures.
+- **Remedy (b) contact pads:** Arms says **not needed with tuck B**, but **(b) stays as the R-070 waiver fallback** if 38 g fails.
+- Hook release **0.12–0.22 s**. Soft abduction limit roll ≤ **135°**.
+
+### PC batches (bryan PC ff639f5a only)
+```
+F=modules/controls/fall/t030_pushfall.py; O=modules/controls/fall/results
+# bare shell (expected FAIL): spring proxy of unsupported CF
+python $F --dirs F,LF,RF --tuck B --chest-k 46000 --chest-zeta 0.02 --out $O/t031_bare_shell.jsonl
+# rev2 plateau floor (stroke / bottom-out check) — use 15° floor 16.6 kN
+python $F --dirs F,LF,RF --tuck B --chest-plateau 16600 --chest-stroke 0.062 --out $O/t031_rev2_floor15.jsonl
+python $F --dirs F,LF,RF --tuck B --chest-plateau 17700 --chest-stroke 0.062 --out $O/t031_rev2_floor0.jsonl
+# rev2 ceiling (peak g vs 38)
+python $F --dirs F,LF,RF --tuck B --chest-plateau 22350 --chest-stroke 0.062 --out $O/t031_rev2_ceil.jsonl
+python $F --dirs F,LF,RF --tuck B --chest-plateau 22350 --chest-stroke 0.062 --carry --out $O/t031_rev2_ceil_carry.jsonl
+# spring proxy comparison
+python $F --dirs F,LF,RF --tuck B --chest-k 5.3e5 --chest-zeta 1.0 --out $O/t031_spring_proxy.jsonl
+# (b) only if 38 g fails and waiver+pads defined
+python $F --dirs F,LF,RF --tuck preload --chest-plateau 22350 --chest-stroke 0.062 --out $O/t031_b_preload.jsonl
+```
+Pass: `torso_peak_g` ≤ 38, `gear_pitch_max` ≤ 369, `chest_bottomed` = 0, `chest_angle_gt15` = 0, diagonals ≤ 369.
 
 ## R-070 update (2026-10-14): primary = tuck B, gate = chest ≤ 38 g with real chest stiffness
 - **Primary forward tuck: B = arms straight down, roll +5° / yaw 0 / pitch 0 / elbow 0** (76.4 mm clearance crouched). Forward falls only; side falls keep R5. Arms confirms B with model_v4 and real covers.

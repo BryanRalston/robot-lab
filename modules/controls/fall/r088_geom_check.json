@@ -1,0 +1,26 @@
+{
+ "chest_front_m": 0.147,
+ "clearances_0": {
+  "hand_torso_x_mm": 0.0,
+  "behind_chest_mm": 147.0,
+  "hand_thigh_m": 0.096,
+  "forearm_torso_m": 0.1667,
+  "chest_front_m": 0.147
+ },
+ "clearances_p15": {
+  "hand_torso_x_mm": 0.0,
+  "behind_chest_mm": 147.0,
+  "hand_thigh_m": 0.0955,
+  "forearm_torso_m": 0.1667,
+  "chest_front_m": 0.147
+ },
+ "first_contact_order": [
+  "L_knee",
+  "R_knee",
+  "chest_pad",
+  "L_hand",
+  "R_hand",
+  "head"
+ ],
+ "chest_impact_angle_deg": 5.0
+}

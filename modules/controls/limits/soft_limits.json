@@ -1,0 +1,15 @@
+{
+  "shoulder_roll_abduction_deg": 135,
+  "shoulder_roll_note": "Interim soft limit pending Arms head-sweep (pad on roll-yaw link). MJCF hard range unchanged.",
+  "elbow_torque_hard_cap_Nm": 69,
+  "elbow_torque_hard_cap_source": "R-080 / R-085",
+  "elbow_thermal_short_Nm": 40,
+  "elbow_thermal_short_s": 180,
+  "elbow_thermal_continuous_Nm": 28,
+  "elbow_thermal_source": "Thermal O-A2 / P-043; R1 carry pose static 40.1 Nm",
+  "elbow_pose_P042_max_Nm": 15,
+  "R085_payload_thresh_kg": 8.5,
+  "R085_accel_scale_at_full_reach": 0.87,
+  "R085_full_reach_m": 0.665,
+  "R085_blend_start_reach_m": 0.50
+}
