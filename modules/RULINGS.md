@@ -637,3 +637,15 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
   - Net with the heatsink drop is −0.104 kg.
   - Credible total is about 66.05 kg, with a reserve of about 0.45 kg.
 - J-T2 chest CFD has to include the shoulder bays. T4 moves from at-risk to pending sim (A43 sim part, Arms).
+
+## R-042 (2026-10-14) A44 side-fall strategy (Controls c6fbb85)
+- The side fall at 66.21 kg puts 716 N·m on the shoulder bearing. That gives the CRBH 7013 A a safety factor of 0.96 with no strategy in place, which is not acceptable on its own.
+- Fall mode adopted: knee drop of at least 0.15 m, fall-side arm tuck, then a hip-first lean. Estimated load is 539 N·m, for SF 1.28 radial and 1.66 axial. R-039(b) counts as **provisionally met**. Two G4 items gate it:
+  - T-030: a push-fall batch on the bryan PC. It must confirm a shoulder share of 0.40 or less and that the crouch is reached in time.
+  - T-031: G3 must confirm the roller pitch diameter, 85 mm at present. Actuators cites it.
+- The margin is only 2% and rests on two estimates, so the **40 mm shoulder pad is approved** to give a margin that doesn't depend on either one (about 23% less force).
+  - ID integrates it into the shoulder cover with Materials.
+  - Cap: 0.10 kg for the pair, booked in full. That brings the reserve to about 0.35 kg.
+  - If the pad comes in over 0.10, it returns to the arbiter.
+- If T-030 fails even with the pad, the 8016 upgrade path in R-039(c) applies.
+- The A40 knee rerun is still pending.
