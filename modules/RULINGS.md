@@ -1050,3 +1050,9 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
 - Adopt a PEI/Ti-limiter break of >=30 K/W in the knee trunnion-to-femur path (Legs): **+0.009** booked in full. This supersedes the R-099 Thermal hold. The lever-eye sleeve and ear redesign stay rejected.
 - With the 22 mm tine break and the A35 vents, the bond stays <=60 C at a collar resistance of 8 K/W. J-T1 and the G5 collar thermocouple are the gate: if collar R is 14 K/W, the bond reaches 62 C or more, the design fails, and it comes back for a ruling.
 - Reserve ~-0.59.
+
+## R-102 (2026-10-14) Controls 92f2cea / 397f469
+- Shoulder pad angle (R-076): fix it in control first, at zero mass. For R5 side falls, command fall-side roll about -5 deg and cut yaw until the angle is <=15 deg. For tuck B diagonals, command roll/yaw per fall direction. A pad-face wedge (Arms/Materials) only if sim cannot meet 15 deg.
+- Elbow accel scale drops to **0.85** at full reach with >8.5 kg (estimated 69.5 Nm vs the 69 cap). G5 may restore 0.87 with measured torque.
+- Chest stroke: zero margin at the soft foam lot is not accepted. Torso must show >=10% stroke margin, either by incoming-inspection minimum stiffness or added stroke, with any mass booked.
+- Sole pad hardness: not ruled yet. Legs proposes the lightest option giving >=8 mm walk CoP margin (64-70A at +0.094/foot is the reference). Nothing booked until then.
