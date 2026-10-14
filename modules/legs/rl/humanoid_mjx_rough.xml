@@ -201,11 +201,11 @@
             </body>
           </body>
           <body name="neckY" pos="0 0 0.295">
-            <inertial pos="0 0.0004 0.075" mass="0.499263" diaginertia="0.000417751 0.000244537 0.000417751"/>
-            <joint name="neck_yaw" range="-1.39626 1.39626" armature="0.079" damping="0.5" frictionloss="0.3"/>
+            <inertial pos="0 0.0004 0.075" mass="0.355598" diaginertia="0.000295482 0.000173214 0.000295482"/>
+            <joint name="neck_yaw" range="-1.39626 1.39626" armature="0.0005" damping="0.5" frictionloss="0.3"/>
             <body name="head" pos="0 0 0.075">
-              <inertial pos="0.0456 0 0.0848" mass="0.659231" diaginertia="0.0024148 0.00284274 0.00347446"/>
-              <joint name="neck_pitch" range="-0.698132 0.698132" armature="0.079" damping="0.5" frictionloss="0.3" axis="0 1 0"/>
+              <inertial pos="0.0456 0 0.0848" mass="0.469715" diaginertia="0.00172195 0.00202762 0.00247594"/>
+              <joint name="neck_pitch" range="-0.698132 0.698132" armature="0.0005" damping="0.5" frictionloss="0.3" axis="0 1 0"/>
               <geom name="head" size="0.1" pos="0.01 0 0.08"/>
             </body>
           </body>
@@ -257,8 +257,8 @@
     <general name="r_wrist_roll" joint="r_wrist_roll" ctrlrange="-36 36"/>
     <general name="r_wrist_pitch" joint="r_wrist_pitch" ctrlrange="-48 48"/>
     <general name="r_wrist_yaw" joint="r_wrist_yaw" ctrlrange="-48 48"/>
-    <general name="neck_yaw" joint="neck_yaw" ctrlrange="-36 36"/>
-    <general name="neck_pitch" joint="neck_pitch" ctrlrange="-36 36"/>
+    <general name="neck_yaw" joint="neck_yaw" ctrlrange="-4.1 4.1"/>
+    <general name="neck_pitch" joint="neck_pitch" ctrlrange="-4.1 4.1"/>
   </actuator>
 
   <sensor>
