@@ -1074,3 +1074,7 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
 ## R-106 (2026-10-14) Materials on R-104
 - Sole Shore: no physical test is possible in the design phase (Bryan is not building). Legs/Materials ask the supplier for certified durometer data before G1. If none is available, the item moves to G5 (RL Test & Reliability) and the SP 67A frame stays the drawing alternate. Not routed to Bryan now.
 - Trunnion bush: plain Ultem 1000 is rejected (about 20 MPa allowable vs 23.4). Preferred: widen the bush >=1.6x (<=14.6 MPa) in a bearing-grade PEI, which keeps the thermal resistance. Materials confirms wear in that grade. If wear fails, use PEEK 450FC30 class, with Thermal rechecking the 43.8 K/W path first. Legs gives the mass delta, booked in full.
+
+## R-107 (2026-10-14) Trunnion bush grade (Materials)
+- Adopt SABIC Ultem 4001 (PTFE-lubricated PEI): width >=1.6x (<=14.6 MPa), hardened and ground 9 mm pin (>=HRC 50, Ra <=0.4 um), greased at assembly. Before G1: cite the SABIC wear factor and PV (about 0.04 MPa m/s), and Thermal confirms 43.8 K/W. If either fails, fall back to 450FC30.
+- Sole Shore: published data only, with no vendor contact; otherwise it is a G5 item (R-106 clarified).
