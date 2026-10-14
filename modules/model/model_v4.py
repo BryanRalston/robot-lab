@@ -267,13 +267,15 @@ def build_upper():
         for j,l in enumerate([38,30,24]):
             add(S(f'thumb phalanx{j+1}'),S('hand'),cyl(17-2*j,l,'x',c=(16+l/2+sum([38,30,24][:j]),ya-s*30,wz-70)),est=True,asm=S('hand'))
     joint('neck_yaw','torso','neckY',(0,0,tt+20),(0,0,1)); joint('neck_pitch','neckY','head',(0,0,tt+70),(0,1,0))
-    sw('neck_yaw','torso','z',(0,0,tt+12),60,40)
-    add('neck yoke','neckY',box(70,80,6,(0,0,tt+38)).fuse(box(40,6,40,(0,37,tt+60))).fuse(box(40,6,40,(0,-37,tt+60))),est=True,asm='neck')
-    sw('neck_pitch','head','y',(0,0,tt+70),50,60)
+    # Head/neck v5-tweak (modules/head/HEAD_BALANCER.md, P-019): 2x Dynamixel XM430-W350-R (28.5x46.5x34, 82 g) on 12 V RS485,
+    # ZED X Mini (94x32x37, 150 g). Shell = CF prepreg layup on a machined mould (no 3D printing). Brackets 7075 machined [EST].
+    add('neck_yaw servo Dynamixel XM430-W350-R (on torso top, horn up)','torso',box(46.5,34,28.5,(0,0,tt+14.5)),'actuator',asm='neck')
+    add('neck yoke 7075 machined','neckY',box(70,80,6,(0,0,tt+31.75)).fuse(box(40,6,46,(0,37,tt+56))).fuse(box(40,6,46,(0,-37,tt+56))),est=True,asm='neck')
+    add('neck_pitch servo Dynamixel XM430-W350-R','neckY',box(34,46.5,28.5,(0,-10.75,tt+52)),'actuator',asm='neck')
     hc=(10,0,tt+170)
-    add('head shell PA12/CF','head',cq.Workplane('XY').sphere(95).translate(hc).cut(cq.Workplane('XY').sphere(92).translate(hc)).cut(cq.Workplane('XY').box(120,120,60).translate((0,0,tt+70))),est=True,asm='head')
-    add('head neck mount deck','head',box(130,130,6,(0,0,tt+103)).fuse(box(60,30,30,(0,0,tt+88))),est=True,asm='head')
-    add('stereo camera','head',box(28,120,30,(88,0,tt+170)),'sensor',est=True,asm='head')
+    add('head shell CF prepreg layup 1.2 mm','head',cq.Workplane('XY').sphere(95).translate(hc).cut(cq.Workplane('XY').sphere(93.8).translate(hc)).cut(cq.Workplane('XY').box(120,120,60).translate((0,0,tt+70))),est=True,asm='head')
+    add('head neck mount deck 6061 sheet','head',box(130,130,3,(0,0,tt+103)).fuse(box(60,68,26,(0,0,tt+89))),est=True,asm='head')
+    add('stereo camera ZED X Mini','head',box(37,94,32,(85.3,0,tt+170)),'sensor',asm='head')
 def build(pose=None):
     PARTS.clear(); JOINTS.clear(); PARENT.clear(); POSE.clear(); POSE.update(pose or {})
     build_upper(); build_leg(1); build_leg(-1)

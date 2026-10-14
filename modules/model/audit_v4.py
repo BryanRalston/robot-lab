@@ -112,6 +112,14 @@ for k,ax,att in (('waist_yaw','z','housing on pelvis deck; output -> waist yoke 
           f'strain-wave (CSG-class) rotary actuator OD{od[0]} x L{od[1]} [EST]' if od[0] else 'remote micro strain-wave drive + push rods [EST]',att+' [EST]',
           'hard-stop lug on housing [EST]; set at the clash-free limit below','PLACEHOLDER',['v3/cad/model.py layout (catalog envelopes)'],'No module has engineered this joint.',
           keys=(k,'wrist pitch','wrist pitch/yaw') if k.startswith('wrist_p') or k.startswith('wrist_y') else (k,))
+# neck: catalog servos placed per modules/head/HEAD_BALANCER.md (P-019); overrides the generic placeholder row
+J[:]=[j for j in J if j.get('joint',j.get('name')) not in ('neck_yaw','neck_pitch')]
+joint('neck_yaw','neck','servo horn + 6806-2RS (30x42x7) ring in a machined collar around the horn [EST]','z','Dynamixel XM430-W350-R (4.1 Nm stall, 46 rpm, 12 V RS485)',
+      'servo bolted on torso top deck, horn -> neck yoke [yoke 7075 EST]','servo extended-position limit + yoke lug [EST]','PLACEHOLDER',['modules/head/HEAD_BALANCER.md'],
+      'Catalog servo placed (Robot Lab P-019). Gravity hold 0.61 Nm vs 4.1 stall (6.7x). Brackets [EST]; not module-reviewed.',keys=('neck_yaw',))
+joint('neck_pitch','neck','servo horn + idler 6800-2RS on opposite cheek','y','Dynamixel XM430-W350-R (4.1 Nm stall, 46 rpm, 12 V RS485)',
+      'servo on neck yoke, horn -> head deck [EST]','servo limit +-40 + deck lug [EST]','PLACEHOLDER',['modules/head/HEAD_BALANCER.md'],
+      'Catalog servo placed (Robot Lab P-019). Brackets [EST]; not module-reviewed.',keys=('neck_pitch',))
 for f in ['finger1','finger2','finger3','finger4','thumb']:
     for i in (1,2,3):
         J.append(dict(joint=f'{f}_j{i}',region='hand',bearing='pin joint [EST]',axis='y (flexion)' if f!='thumb' else 'z [EST]',actuation='Dyneema tendon from forearm drive (v3 hand) [EST]',

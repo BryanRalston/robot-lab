@@ -1,0 +1,88 @@
+{
+ "robot_mass_model": 63.794,
+ "head_mass": 0.647,
+ "head_com_arm_m": 0.09628291644938888,
+ "I_eff_pitch": 0.0877879488,
+ "head_com_x_travel_m": 0.10901677860283704,
+ "robot_com_shift_mm": 1.1056503081173084,
+ "gravity_moment_swing_Nm": 0.6919371249667089,
+ "robot_com_lateral_shift_mm_yaw80": 0.9109000877408464,
+ "lean_cases": [
+  {
+   "lean_deg": 10,
+   "neck0": {
+    "waist_pitch": -4.571743181834082,
+    "l_hip_pitch": -4.75445548221777,
+    "neck_pitch": -0.3784922801572235
+   },
+   "neck_counter40": {
+    "waist_pitch": -4.1747857416745315,
+    "l_hip_pitch": -4.754455482217769,
+    "neck_pitch": 0.018465160002326703
+   },
+   "waist_reduction_pct": 8.6828464410877,
+   "hip_reduction_pct": 1.8680970366049665e-14
+  },
+  {
+   "lean_deg": 20,
+   "neck0": {
+    "waist_pitch": -8.675217282501807,
+    "l_hip_pitch": -8.38733161039715,
+    "neck_pitch": -0.45605787190820446
+   },
+   "neck_counter40": {
+    "waist_pitch": -8.307045228331578,
+    "l_hip_pitch": -8.38733161039715,
+    "neck_pitch": -0.08788581773797499
+   },
+   "waist_reduction_pct": 4.243951963172653,
+   "hip_reduction_pct": 0.0
+  },
+  {
+   "lean_deg": 30,
+   "neck0": {
+    "waist_pitch": -12.515099295912481,
+    "l_hip_pitch": -11.956375080612114,
+    "neck_pitch": -0.5197663759976735
+   },
+   "neck_counter40": {
+    "waist_pitch": -12.186899349293483,
+    "l_hip_pitch": -11.956375080612116,
+    "neck_pitch": -0.19156642937867774
+   },
+   "waist_reduction_pct": 2.6224318230234926,
+   "hip_reduction_pct": -1.4856984892358436e-14
+  }
+ ],
+ "XM540-W270": {
+  "gravity_hold_Nm": 0.6111144105084227,
+  "max_alpha_rad_s2": 113.78424631208124,
+  "peak_reaction_Nm": 10.6,
+  "max_ang_momentum_Nms": 0.2757939750237969,
+  "time_to_wmax_s": 0.027610084483692086,
+  "deg_used_to_wmax": 2.4849076035322875,
+  "hold_margin_x": 17.345360897611993,
+  "rated_cont_Nm": 2.12
+ },
+ "XM430-W350": {
+  "gravity_hold_Nm": 0.6111144105084227,
+  "max_alpha_rad_s2": 39.742192831501455,
+  "peak_reaction_Nm": 4.1,
+  "max_ang_momentum_Nms": 0.42288409503648855,
+  "time_to_wmax_s": 0.1212089316744015,
+  "deg_used_to_wmax": 16.726832571067405,
+  "hold_margin_x": 6.709054686812186,
+  "rated_cont_Nm": 0.82
+ },
+ "push_ang_momentum_Nms": 25.27,
+ "head_share_of_push_momentum_pct": 1.0913888999754526,
+ "peak_hip_waist_limits_Nm": {
+  "hip_pitch": 167,
+  "waist_pitch": 116
+ },
+ "dyn_reduction_upper_bound_pct": {
+  "hip_pitch": 6.347305389221557,
+  "waist_pitch": 9.137931034482758,
+  "note": "only for <=~0.15 s until the neck hits its +-40 deg stop, then it reverses; zero net impulse over a cycle"
+ }
+}

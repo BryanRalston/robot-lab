@@ -240,3 +240,10 @@ Any change to CONTRACTS.md or TARGETS.md, or to another module's files, starts h
      - Raise the trunnion to z 450.
   3. Instep lug inner face moves 5.0 mm outboard (y 52.5 → 57.5). The pin gets 5 mm longer.
 - Status: **ACCEPTED (R-024)**, +0.138 credited ×1.0; QA1 rod end wear part every 4 250 h until rating/bench (A22). Legs 15c602d +0.200 also accepted. Credible 66.463, reserve 0.037 (floor waived to end of round 13).
+
+### P-019: Robot Lab head/neck own line (modules/head/HEAD_BALANCER.md)
+- Head as balance actuator: studied and **rejected** (<1 % peak hip/waist torque; ≤3.5 % transient). The neck is designed for gaze and stabilization.
+- New line "head + neck": **0.800 kg** (0.314 catalog, 0.179 calc, 0.307 [EST]); 2× Dynamixel XM430-W350-R, ZED X Mini, CF shell (replaces PA12), 7075 yoke.
+- **Mass delta claimed: 0.000 kg** (R-024). Ask: move head + neck out of "all other lines" as its own line, at 0.800 kg. If the A12 itemization shows the basis carried the sim's 1.137 kg, credit −0.337 kg; if it carried less than 0.800, the difference must be offset (proposed offset: the A19 cover-panel cut).
+- Power: +4.4 W [EST] if the camera isn't in the 699 W budget; runtime −0.6 %, so 2 h stays met at 1.0 m/s.
+- Requests: Legs updates the sim neck (mass, armature 0.0005, ctrlrange 4.1 Nm); the A11 brain check covers the GMSL2 input.

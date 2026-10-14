@@ -21,4 +21,4 @@ sit hip-90 knee120 []
 deep squat hip-100 knee135 []
 stance ankle -45 + roll 18 []
 ankle +40 roll -18 []
-t 419
+t 291
