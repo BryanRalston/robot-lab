@@ -221,3 +221,11 @@ Function: 11 brushed/BLDC hand drives (T4: ≥ 11 actuated DoF), current sense, 
 
 **Duct routing:** intake low on the chest front (V5 vents) → filter mesh → fan → across the Thor cold-plate fin stack (130 × 200 bay) → over the **DCM3623 mounted on the same cold plate with TIM** (downstream of Thor is acceptable: 14 W ChiP; datasheet thermal limits to be read) → exhaust **high, at the upper back/shoulder line, ducted away from the pack**. The pack bay (below the compute bay, z 1333–1477 vs compute 1485–1525 in the v3 layout) stays sealed with a closed partition; the exhaust never crosses it.
 **DC-DC placement:** on the Thor cold plate (preferred, one TIM/heat path, no extra bracket) rather than free in the duct.
+
+## 12. Drive over-voltage trip (XP[1]) range, 100 V Gold Twitter (2026-10-14, after R-031)
+Source: Elmo **Command Reference for Gold Line Drives, MAN-G-CR Ver. 1.406** (public copy, pk-rus.ru/fileadmin/download/man-g-cr.pdf), sections XP[], WI[], BV. [DS]
+- **XP[1]** "Defines the overvoltage threshold in volts. Can only be reduced from the default value (BV)". Default WI[35], values **0 to WI[35]**.
+- **WI[35]** "overvoltage maximum threshold", range **0 to < BV**. It is factory-burnt per drive. **WI[36]** reads back the actual threshold (≤ WI[35]). BV is the burnt-in label bus voltage. Actual bus voltage reads via AN[6].
+- **So the trip can only be lowered.** Our 92 V setting is allowed only if the factory WI[35] for G-TWIR70/100 and R50/100 is ≥ 92 V. **The numeric WI[35] for 100 V models is not in any public Elmo document found** (the install guide gives 95 V max supply only, and the Twitter power-supply note gives only the 40 V single-supply example, XP[1]=40, with shunt-on 2–3 V below the OV trip, which matches our 88 V on / 92 V trip).
+- **Workaround that needs no vendor answer:** read WI[35] on the first bench drive (G5) and record it. If WI[35] < 92 V, set XP[1] = WI[35] and lower the clamp to WI[35] − 3 V (still ≥ 4 V above the 84 V pack only if WI[35] ≥ 91 V; otherwise re-plan the P-045 clamp thresholds).
+- Support question for Bryan to send if wanted (draft in the Electronics report): open item O-E9.
