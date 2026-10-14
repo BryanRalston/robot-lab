@@ -1082,3 +1082,6 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
 ## R-108 (2026-10-14) Materials 8fdce97
 - L61 Ultem 4001 bush confirmed (SABIC TDS: PV 1.9 vs 0.04). Binding: >=0.2 mm radial wear allowance, width >=1.6x, hardened and ground pin. Creep at 95 C is a G5 test; Thermal assumes PEI-class conductivity.
 - Sole: 7373 TOP85 at 85+/-3 A (Vibram catalogue) satisfies the hardness gate as a published citation; only the 3 mm thickness availability is left to confirm before G1. 7663 (reseller data) is the alternate only.
+
+## R-109 (2026-10-14) Fall pose (Controls 0bf0228)
+- Elbow 0.84 confirmed (R-104). Diagonal falls: waist yaw +/-45 deg is commanded at fall-mode entry (binding); +/-30 deg is not allowed. Gate: a tuned-waist diagonal sim must show <=15 deg on LF before G4. If LF is late, it comes back to Arbiter with Materials (no wedge).
