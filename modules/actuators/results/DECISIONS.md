@@ -447,3 +447,23 @@ Retention at 1.2 m/s:
 - I couldn't reproduce the audit's 0.3 mm. It's a hand note in `audit_v4.py`, not a measurement.
 - Envelope trim anyway: the unused trunnion bosses are removed from the hip body (it mounts on the axial eye, P-014). That saves −0.010 kg each.
 - Net actuator delta for D59–D62: **+0.069 kg/leg, +0.138 kg both legs** (`results/v4_deltas.json`). Pending P-018.
+
+## D63 (Legs L37–L40 reply) Ankle top clevis fit, tine ligament, instep lugs
+- **Fit: yes, with one correction to the numbers.** 10.75 mm is the QA1 *bottom* rod-end head width. The top lug carries a GE 12 C (B 10, C 7) in a 10 mm lug.
+  - Stack in the 11.95 slot: inner ring 10 + 2 × 0.8 mm PTFE-faced steel thrust washers. The washers bear on the inner ring only. Total 11.6, so 0.35 mm axial float.
+  - Relieve the lug body to 8.0 mm (C 7 + 0.5 per side) so it can't touch the washers. Rim clearance is then 1.0 mm per side, which allows 3.8° of tilt or spin about the lug edge (r 15).
+  - Need: 2.8° combined, i.e. 0.73 mm at r 15. Margin 0.27 mm.
+  - Spin ≤ 3.8° keeps the bottom misalignment ≤ 23.4°, vs the 27° rating.
+  - The lug mass change is negligible (−0.002 kg/leg, not booked).
+- **Tine ligament: passes.** Tines are 7075-T6, 6 thick × 30 wide, ø12 hole, 12 mm from the pin centre to the tine end (ligament 6 mm).
+  - Max actuator force per screw: 323.8 N·m / 0.073 / 2 = 2218 N (motor-peak limited; the roll case is 2212 N). That's 1109 N per tine.
+
+| Check | Stress (MPa) | SF |
+|---|---|---|
+| Bearing | 15.4 | 21.8 vs 1.5·Sy |
+| Tear-out (2 shear planes, 6 × 6) | 15.4 | 18.8 vs 0.577·Sy |
+| Net section | 10.3 | — |
+| Net section peak (pin-lug Kt 3.5) | 35.9 | 14 on yield, 3.5 on fatigue (127 MPa) |
+
+  - No change needed. Keep the edge distance at 12 or more, and fillet the tine root at R3 or more.
+- **Instep lugs: keep Legs' outboard position** (outrigger, +0.031 kg/leg). Moving them inboard would erode the 2.15 mm head clearance (D60). The lug face has to stay at least 12.5 mm from the eye mid-plane, so inboard is not better.
