@@ -1,0 +1,57 @@
+{
+ "budget_Mcyc": {
+  "current PI loops (brushed DC, PH/EN, IPROPI on VADC; no FOC)": 27.5,
+  "position loops (6 flexors)": 4.8,
+  "BiSS-C frame handling (4 ENX22 Abs, USIC SSC+FIFO/DMA; parse, CRC6, unwrap)": 10.0,
+  "POSIF/CCU4 count read + unwrap (2 ENX22 inc)": 0.8,
+  "stall timers + per-flexor cap logic (R-080)": 1.8,
+  "EtherCAT SYNC0 ISR + PDO copy (on-chip ESC)": 4.0,
+  "mailbox/CoE, ladder/OT, tactile, TMP117, housekeeping": 6.0,
+  "ISR entry/exit + cache/flash stalls (10 kHz frame ISR + 1 kHz)": 4.4
+ },
+ "total_Mcyc": 59.3,
+ "util_pct": 82.36111111111111,
+ "margin_pct": 17.638888888888893,
+ "electronics_rescaled_pct": 52.083333333333336,
+ "biss": {
+  "t_read_us": 8.65,
+  "serial_4_us": 34.6,
+  "frame_us": 100,
+  "step": 142,
+  "sclk_MHz": 4.9921875
+ },
+ "posif": {
+  "edge_rate_kHz": 846.5066666666667,
+  "filt_ns": {
+   "3": 34.72222222222222,
+   "5": 48.611111111111114,
+   "7": 62.5
+  },
+  "margin_x": {
+   "3": 27.216,
+   "5": 19.439999999999998,
+   "7": 15.12
+  },
+  "ccu_clk_per_edge": 170.1108870967742,
+  "wrap_ms_16bit": 77.41935483870968
+ },
+ "pwm_20k": {
+  "edge_aligned_counts": 7200.0,
+  "center_aligned_counts": 3600.0
+ },
+ "vadc": {
+  "fadci_MHz": 24.0,
+  "t_conv_us": 0.75
+ },
+ "cap": {
+  "I_cap_ideal_A": 1.091197593921486,
+  "I_cap_eta065_A": 1.659434759879209,
+  "T_1p67_ideal": 774.2365799999999,
+  "T_1p08_ideal": 494.69458,
+  "T_1p08_eta": 321.55147700000003,
+  "grip_ladderB_sustained_N": 22.058823529411764,
+  "grip_ladderB_top_N": 26.47058823529412,
+  "peak30N_needs_A": 0.952,
+  "grip_at_cap_N": 34.03361344537816
+ }
+}
