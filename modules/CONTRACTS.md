@@ -21,14 +21,14 @@ Sources used: `v3/analysis/results/v3_checks.md` and `v3.json` (per-joint rows, 
 | item | rev 0 | now (P-005 actual) | binding target after recovery |
 |---|---|---|---|
 | leg actuators, both legs (all-in incl. linkage, hip pivot bearings, rod ends; R-015 M1) | 15.36 kg | 18.63 kg all-in (16.79 incl. 0.609 linkage + 0.477 table delta − 0.084 Legs-owned lugs + 1.032 unmassed + 0.409 hip lever B; R-015) | ≤ 17.63 kg all-in; M1 closed at −0.278 (R-018: 1.3× re-size heavier, housing −0.40 was a double count); linkage line 2.25 kg (ce469c4) |
-| leg structure, both legs (incl. thigh clamp, instep lugs; R-015 M2) | 5.40 kg | 4.862 kg design (Legs r5: 4.822 + bolts/bumper 0.04; ø35 tongue, bonded clamp + sleeve/pins); credited 5.418 (R-020) | ≤ 4.87 kg (R-020); r6 bumper/bolts +0.022 → 4.884 accepted (R-022, reserve-funded); full credit on Grok Build FEA (A1') |
+| leg structure, both legs (incl. thigh clamp, instep lugs; R-015 M2) | 5.40 kg | 5.154 kg design (Legs r8 L36: 5.114 + bolts/bumper 0.04; FEA fixes); credited 5.421 incl. 0.267 tube hold (R-023) | ≤ 5.154 kg (R-023, raised from 4.87 for safety fixes, reserve-funded); + r6 bumper/bolts 0.022 + A14 stops/panels 0.069; tube hold released on GB r2 (A15); A1' void |
 | leg linkages, both legs (R-015) | — | 2.527 kg (`actuators/results/LINKAGE_TABLE.json` 33a7186: incl. lever B, hip bearings 0.628, rod ends 0.300 [EST], 6 trunnion pairs) + thigh clamp 0.20 [EST] | 2.53 kg line, hip pivot bearing owned by Actuators (R-016); inside actuator all-in ceiling |
 | harness (M3; owner RL Actuators, R-017) | 2.00 kg | 1.286 kg datasheet/listing model (71f3c3e); **1.286 kg credited** (R-022: JST-GH published weights ×1.0) | ≤ 1.46 kg met; A9 closed |
 | covers (M3; Arbiter placeholder, R-017) | 1.86 kg | 1.384 kg paper (PA12 MJF 1.5 mm panels, 50 % limb coverage [EST] + EPP 0.36); **1.622 kg credited** (R-021) | ≤ 1.20 kg (R-015 M3) NOT MET; A10 |
 | brain (M4; Arbiter placeholder, R-017) | 1.80 kg | 1.044 kg paper (T5000 0.280 + Gauntlet AGX301 0.266 + DCM3623 0.024 cited; 0.474 [EST]); **1.216 kg credited** (R-021) | ≤ 1.50 kg (R-015 M4) MET; A11 |
 | battery 20S5P 1620 Wh | 7.96 kg | 8.75 kg | 8.75 kg |
-| Arbiter reserve | 1.2 kg | **+0.446 kg credible (66.054 vs 66.5); +1.969 paper (R-022, `arbiter/mass_rollup_official.json`)** | ≥ +0.30 kg credible (met; 1.04 after A1' FEA) |
-| **robot** | 63.79 kg | **paper 64.531 / credible 66.054 kg (R-022, official rollup = single source of truth)** | **≤ 66.5 kg hard (R-017); credible 65.458 after A1' FEA** |
+| Arbiter reserve | 1.2 kg | **+0.375 kg credible (66.125 vs 66.5); +1.609 paper (R-023, `arbiter/mass_rollup_official.json`)** | ≥ +0.30 kg credible (met; 0.642 after A15 tube hold release) |
+| **robot** | 63.79 kg | **paper 64.891 / credible 66.125 kg (R-023, official rollup = single source of truth)** | **≤ 66.5 kg hard (R-017); credible 65.858 after A15** |
 
 ### R1.2 Leg actuator contract (R-004, R-005, R-006, R-008)
 | joint | need peak N·m | need RMS N·m | need speed rad/s | selection (Actuators) | avail peak | max mass kg |
@@ -126,4 +126,4 @@ Owns: pelvis-to-foot kinematics, thigh/shank/foot structure, knee/ankle linkages
 | Hands | 4.2 kg both (`v3.json` hands) | not separately budgeted (TBD) | wrist flange, tendon routing, tactile bus |
 | Head (incl. neck structure, sensors) | 1.6 kg | in 40 W sensors line | neck flange, cameras |
 | Brain (compute) | 1.8 kg | 120 W | bus master, sensors, safety |
-| Arbiter reserve | 1.2 kg | **+0.446 kg credible (66.054 vs 66.5); +1.969 paper (R-022, `arbiter/mass_rollup_official.json`)** | ≥ +0.30 kg credible (met; 1.04 after A1' FEA) |
+| Arbiter reserve | 1.2 kg | **+0.375 kg credible (66.125 vs 66.5); +1.609 paper (R-023, `arbiter/mass_rollup_official.json`)** | ≥ +0.30 kg credible (met; 0.642 after A15 tube hold release) |

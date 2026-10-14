@@ -217,3 +217,7 @@ Any change to CONTRACTS.md or TARGETS.md, or to another module's files, starts h
 ### P-016: Actuators round 6 (71f3c3e): A8 eye wear part, A9 JST-GH weights, A5 ankle stroke/L10, rollup 66.853 (logged by Arbiter; no P-number filed)
 - Date: 2026-10-13. Proposer: Actuators (D52–D55).
 - Status: **ruled R-022**. A8 GE 12 C wear part every 5 250 h accepted with access conditions. A9 harness 1.286 credited ×1.0. A5 2.9 mm not adequate, so ankle_roll is limited to ±18° (margin 10.9 mm). The 66.853 rollup is superseded by the official rollup, credible 66.054.
+
+### P-017: Legs r8 L36 structure FEA fixes (f480ed2) + A14 stops/panels (4f772c6) (logged by Arbiter; no P-number filed)
+- Change: M2 4.822 → 5.114 kg (5.154 incl. bolts/bumper), +0.292 both legs: clevis pad, clamp arm 34 mm, 55 mm tangent tongue neck + retaining compound, foot doubler collar, bonded tube doublers. Hip ring retired. A14: ankle_roll ±18° stops 0.033, thigh pin panels 0.018/leg.
+- Status: **ruled R-023**. Accepted (safety over the 4.87 sub-cap, reserve-funded). A1' −0.596 void; 0.267 tube hold until GB r2 (A15). A14 credited ×1.0. Credible 66.125, reserve 0.375.

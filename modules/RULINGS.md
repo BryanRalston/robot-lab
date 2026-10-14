@@ -342,3 +342,26 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
 | O23 | RL Actuators | GE 12 C bench wear test (O20 rig) | confirms 5 250 h | before G5 |
 
 - Needs Bryan: nothing. All calls are within approved targets.
+
+### R-023: on Legs r8 L36 structure FEA fixes (f480ed2) + Legs A14 (4f772c6): M2 5.154, A1' voided, A14 additions
+- Date: 2026-10-14. Proposers: Legs (L36, `results/r8/structure_fixes_r8.json`, `r8/*.json`, `grokbuild/structure_fea_r2.md`; A14 `results/r7/a14.json`). Inputs: Grok Build 48a9da0 `STRUCTURE_FEA_REPORT.md`. Arbiter check: `arbiter/mass_rollup_official.py` (+ `.json`). Targets unchanged (T2 ≤ 66.5, T5 20 kg).
+- **Verification of the FEA claims (Arbiter read of the result JSONs):**
+  - Clevis: `clevis_h4_f0` 3BW+screw 549.7 MPa (SF 0.915) → `clevis_h4_f6_pad16` 147.1 MPa (SF 3.42), fall 233 → 62 ✓. Mass 0.2345 → 0.2624 = +0.028/leg ✓. h4 only; convergence not shown.
+  - Clamp: `clamp_h3_f12` 182.0 → `f34` 137.6 MPa (−24 %) ✓, +0.020/leg ✓. Rev Goodman ~1.95 is **scaled, not solved** (GB h1.5 baseline 1.472 failed).
+  - Femur tongue: `tongue_h4_f0` combined_fault 574.1 (SF 0.876) → `f1` 234.3 (SF 2.15); fault-only 340.0 (SF 1.48, below 1.5) ✓ as stated. +0.0275/leg ✓. Bore opening under fault **not checked**.
+  - Foot collar (+0.029/leg) and tube doublers (+0.042/leg): **hand only**, no solve (box OOM). Not verified.
+  - **Hip-ring artifact claim: CONFIRMED.** GB report: 912/870 MPa cases are a bonded model with a tensile bore traction carrying 192 N·m across a 13 mm bearing (not contact); the compressive 12.4 kN case is SF 2.0. The part is the ø80 CRBH ring that L21 (R-020, O17) replaced with the ø35 tongue, and it is not in the rollup. Retired; no re-run needed. Note: its compressive neck Goodman (1.21) would have failed, so the claim rests on obsolescence, not only on the artifact.
+- **1. M2 5.114 kg (5.154 with bolts/bumper allowance), +0.292 both legs: ACCEPTED.** Safety fixes beat the old 4.87 sub-cap (T8 is hard; the sub-cap is not). Funded from the reserve. Weighted cost (0.292/66.5)×0.15 ≈ 0.0007 ≪ 0.01.
+- **2. A1' −0.596 credit: VOID.** It was the ×0.5 hold on the r5 hand-checked reductions. GB FEA failed those parts (clevis, tongue, clamp root, foot toe, tube dent), so the reductions are not released; the fixed design replaces them. Credible M2 = 5.154 paper (fixes as additions ×1.0) **+ 0.267 hold** for the hand-only tube doublers (fallback = GB-measured full 1.9 mm wall, +0.175/leg, minus doubler 0.042/leg) = **5.421**. The hold is released when GB r2 passes the doublers. Foot-collar fallback (r50 or 4 mm) has no computed mass: unquantified risk, covered by the reserve.
+- **3. A14 additions credited ×1.0:** ankle_roll stops 0.033 (both legs) + thigh pin access panels 2 × 0.0179 = 0.036 → **+0.069**. Paper geometry only; PA12-CF and fastener layout [EST]. Push re-run with the stop: roll peak 19.9° (1.9° pad/soft overtravel, 8.7 mm clearance left), CoP inside sole. R-022 A5 and A8(b) closed on paper; CAD check stays in G2.
+- **Official rollup (regenerated):** paper **64.891 kg** (reserve 1.609); credible **66.125 kg, MET vs ≤ 66.5, reserve +0.375 (≥ 0.30 met)**. If GB r2 passes the tube doublers: 65.858 (reserve 0.642). If the tube fallback is needed, the hold already covers it. Fix: the rollup script now reads Actuators' `mass_rollup_r6.json` from 71f3c3e (they removed it in 2d81b29); no numbers changed.
+- Actions:
+
+| # | owner | action | effect | deadline |
+|---|---|---|---|---|
+| A15 | RL Legs → Grok Build | structure FEA re-check r2 (`structure_fea_r2.md` items 1–5): h-convergence; clamp at h1.5; tongue bore opening under fault (size dowel/70 MPa fit if it opens); foot collar OD; tube doubler + DP490 bond | releases the 0.267 tube hold; closes G3 structure | next GB slot |
+| A16 | RL Legs | tongue fault-only SF 1.48 < 1.5: show margin at converged mesh or add the dowel | T8 | with A15 |
+| A17 | RL Legs | clevis pad vs knee-tongue clearance over full knee flexion; G2 arm clocking ≥ 30° off the femur axis (L35 open check) | G2 | round 9 |
+| A12 | Arbiter | itemise "all other lines" (carried) | audit trail | round 9 |
+
+- Needs Bryan: nothing. All calls are within approved targets.

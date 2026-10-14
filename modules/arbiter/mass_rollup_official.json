@@ -1,15 +1,23 @@
 {
- "status": "OFFICIAL single source of truth (R-022). Module rollups must reconcile to this file line by line; any module figure that differs must cite the line and the ruling that changes it.",
+ "status": "OFFICIAL single source of truth (R-022, updated R-023). Module rollups must reconcile to this file line by line; any module figure that differs must cite the line and the ruling that changes it.",
  "limit_kg": 66.5,
  "reserve_target_kg": 0.3,
  "lines": [
   {
-   "line": "leg structure M2 (Legs r5 design)",
-   "paper_kg": 4.862,
-   "credible_kg": 5.418,
-   "evidence": "scikit-fem foot+clamp FEA; tubes/tongue/clamp sleeve hand checks",
-   "credit_rule": "reductions on hand checks x0.5, FEA x1.0, additions x1.0 (R-019/R-020)",
-   "source": "R-020 \u00a74-5"
+   "line": "leg structure M2 (Legs r8 design, L36 FEA fixes)",
+   "paper_kg": 5.154,
+   "credible_kg": 5.421,
+   "evidence": "GB 48a9da0 FEA on r5 base; box re-solves clevis/clamp/tongue (r8/*.json); foot+tube fixes hand only",
+   "credit_rule": "fixes = additions x1.0; A1' -0.596 VOID; +0.267 hold until GB r2 confirms tube doublers (R-023)",
+   "source": "Legs f480ed2 L36, structure_fixes_r8.json"
+  },
+  {
+   "line": "Legs A14 adds: ankle_roll stops (both) + thigh pin access panels (2)",
+   "paper_kg": 0.0688,
+   "credible_kg": 0.0688,
+   "evidence": "paper geometry only (a14.json)",
+   "credit_rule": "addition x1.0 (R-023)",
+   "source": "Legs 4f772c6 A14"
   },
   {
    "line": "leg structure r6 add: hip-stop bumper + collar bolts over 0.04 allowance",
@@ -68,13 +76,15 @@
    "source": "derived"
   }
  ],
- "paper_kg": 64.531,
- "credible_kg": 66.054,
- "credible_reserve_kg": 0.446,
- "paper_reserve_kg": 1.969,
+ "paper_kg": 64.891,
+ "credible_kg": 66.125,
+ "credible_reserve_kg": 0.375,
+ "paper_reserve_kg": 1.609,
  "pending": {
-  "A1prime_structure_FEA": -0.596,
-  "credible_if_A1prime": 65.458
+  "A1prime_structure_FEA": "VOID (R-023): GB FEA failed the r5 hand-checked parts; replaced by L36 fixes",
+  "tube_hold_kg": 0.267,
+  "credible_if_GB_r2_passes": 65.858,
+  "risk_unquantified": "foot collar OD (fallback r50 or 4 mm, mass not computed); clamp/tongue/clevis convergence at h<=2"
  },
  "reconciliation": {
   "actuators_r6": 66.85259852147897,
