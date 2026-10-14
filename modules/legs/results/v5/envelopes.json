@@ -80,17 +80,17 @@
   "poses": 36,
   "offset_mm": 5.0,
   "bbox_min": [
-   -258.9,
-   -188.8,
-   815.0
+   -143.2,
+   -18.8,
+   793.4
   ],
   "bbox_max": [
-   433.7,
-   505.3,
+   152.7,
+   282.7,
    1126.4
   ],
-  "volume_cm3": 85271.0,
-  "area_cm2": 11317.2,
+  "volume_cm3": 13817.7,
+  "area_cm2": 2986.8,
   "stl": "results/v5/hip_skirt_keepout.stl",
   "note": ""
  },

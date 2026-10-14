@@ -42,13 +42,15 @@ def offset_hull(P,d):
     dirs=np.array([v for v in itertools.product((-1,0,1),repeat=3) if any(v)],float); dirs/=np.linalg.norm(dirs,axis=1)[:,None]
     Q=(V[:,None,:]+d*dirs[None]).reshape(-1,3); h2=ConvexHull(Q)
     return trimesh.Trimesh(Q,h2.simplices).convex_hull,h
-res={}
-sel=sys.argv[1:] or list(ENV)
-for n in sel:
-    e=ENV[n]; P=collect(n,e); mesh,h=offset_hull(P,OFF)
-    mesh.export(os.path.join(OUT,f'{n}_keepout.stl'))
-    b=mesh.bounds; res[n]=dict(frame=e['frame'],poses=len(e['poses']),offset_mm=OFF,bbox_min=np.round(b[0],1).tolist(),bbox_max=np.round(b[1],1).tolist(),
-        volume_cm3=round(mesh.volume/1e3,1),area_cm2=round(mesh.area/1e2,1),stl=f'results/v5/{n}_keepout.stl',note=e.get('note',''))
-    np.save(os.path.join(OUT,f'{n}_pts.npy'),P[ConvexHull(P).vertices].astype(np.float32))
-    j=os.path.join(OUT,'envelopes.json'); old=json.load(open(j)) if os.path.exists(j) else {}
-    old.update({n:res[n]}); json.dump(old,open(j,'w'),indent=1); print(n,res[n],flush=True)
+def main():
+    res={}
+    sel=sys.argv[1:] or list(ENV)
+    for n in sel:
+        e=ENV[n]; P=collect(n,e); mesh,h=offset_hull(P,OFF)
+        mesh.export(os.path.join(OUT,f'{n}_keepout.stl'))
+        b=mesh.bounds; res[n]=dict(frame=e['frame'],poses=len(e['poses']),offset_mm=OFF,bbox_min=np.round(b[0],1).tolist(),bbox_max=np.round(b[1],1).tolist(),
+            volume_cm3=round(mesh.volume/1e3,1),area_cm2=round(mesh.area/1e2,1),stl=f'results/v5/{n}_keepout.stl',note=e.get('note',''))
+        np.save(os.path.join(OUT,f'{n}_pts.npy'),P[ConvexHull(P).vertices].astype(np.float32))
+        j=os.path.join(OUT,'envelopes.json'); old=json.load(open(j)) if os.path.exists(j) else {}
+        old.update({n:res[n]}); json.dump(old,open(j,'w'),indent=1); print(n,res[n],flush=True)
+if __name__=='__main__': main()
