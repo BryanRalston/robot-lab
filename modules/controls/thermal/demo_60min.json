@@ -1,0 +1,142 @@
+{
+ "copper+iron+drive": {
+  "l_hip_yaw": {
+   "Tw60": 47.7,
+   "Th60": 40.7,
+   "t120_min": null
+  },
+  "l_hip_roll": {
+   "Tw60": 80.8,
+   "Th60": 57.8,
+   "t120_min": null
+  },
+  "l_hip_pitch": {
+   "Tw60": 134.1,
+   "Th60": 110.8,
+   "t120_min": 28.5
+  },
+  "l_knee": {
+   "Tw60": 103.2,
+   "Th60": 79.2,
+   "t120_min": null
+  },
+  "l_ankle_pitch": {
+   "Tw60": 118.2,
+   "Th60": 96.1,
+   "t120_min": null
+  },
+  "l_ankle_roll": {
+   "Tw60": 48.7,
+   "Th60": 45.8,
+   "t120_min": null
+  },
+  "r_hip_yaw": {
+   "Tw60": 45.8,
+   "Th60": 39.8,
+   "t120_min": null
+  },
+  "r_hip_roll": {
+   "Tw60": 78.3,
+   "Th60": 56.7,
+   "t120_min": null
+  },
+  "r_hip_pitch": {
+   "Tw60": 136.1,
+   "Th60": 112.4,
+   "t120_min": 26.9
+  },
+  "r_knee": {
+   "Tw60": 107.7,
+   "Th60": 82.2,
+   "t120_min": null
+  },
+  "r_ankle_pitch": {
+   "Tw60": 119.2,
+   "Th60": 97.2,
+   "t120_min": null
+  },
+  "r_ankle_roll": {
+   "Tw60": 42.2,
+   "Th60": 40.9,
+   "t120_min": null
+  }
+ },
+ "copper+iron (as knee_thermal.py)": {
+  "l_hip_yaw": {
+   "Tw60": 47.0,
+   "Th60": 40.0,
+   "t120_min": null
+  },
+  "l_hip_roll": {
+   "Tw60": 78.5,
+   "Th60": 55.7,
+   "t120_min": null
+  },
+  "l_hip_pitch": {
+   "Tw60": 112.9,
+   "Th60": 90.8,
+   "t120_min": null
+  },
+  "l_knee": {
+   "Tw60": 88.8,
+   "Th60": 65.7,
+   "t120_min": null
+  },
+  "l_ankle_pitch": {
+   "Tw60": 106.0,
+   "Th60": 84.5,
+   "t120_min": null
+  },
+  "l_ankle_roll": {
+   "Tw60": 44.7,
+   "Th60": 41.9,
+   "t120_min": null
+  },
+  "r_hip_yaw": {
+   "Tw60": 45.2,
+   "Th60": 39.2,
+   "t120_min": null
+  },
+  "r_hip_roll": {
+   "Tw60": 75.9,
+   "Th60": 54.5,
+   "t120_min": null
+  },
+  "r_hip_pitch": {
+   "Tw60": 114.6,
+   "Th60": 92.1,
+   "t120_min": null
+  },
+  "r_knee": {
+   "Tw60": 92.3,
+   "Th60": 67.8,
+   "t120_min": null
+  },
+  "r_ankle_pitch": {
+   "Tw60": 106.4,
+   "Th60": 85.0,
+   "t120_min": null
+  },
+  "r_ankle_roll": {
+   "Tw60": 39.6,
+   "Th60": 38.3,
+   "t120_min": null
+  }
+ },
+ "hold_shoulder_pitch": {
+  "T": 61.0,
+  "Tw30": 132.7,
+  "t_min": {
+   "120": 12.1
+  }
+ },
+ "hold_elbow": {
+  "T": 40.0,
+  "Tw30": 468.7,
+  "t_min": {
+   "120": 0.7,
+   "140": 1.0,
+   "155": 1.3
+  }
+ }
+}

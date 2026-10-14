@@ -22,7 +22,8 @@ Owner: RL Controls. Took handoff of `modules/legs/wbc/` and the RL walk work (`m
 2. RL curriculum to the gate: raise command distribution to 1.2–1.3 m/s, add fall-rate < 1 % and sole-edge (CoP margin) penalty terms, keep CONTRACTS R1.2 torque/velocity limits in the MJX model. RL retrain is queued after jobs 4 (RL train), 5 (lever FEA), 6 (structure r2), via Grok Interface; no job is started by Controls.
 3. WBC as fallback/teacher: implement contact-gated unloading (the `WBC_GATE` path already in controller.py) and a reference with ≥ 10 % double support; allow sagittal step shortening via timing, not length; raise lateral step cap with an ankle-roll-aware CoP constraint.
 4. Push recovery: add stepping-strategy (capture point) to WBC and push curriculum to 60 N·s lateral in RL.
-5. Report knee saturation to Actuators/Legs as a contract risk (1.2 m/s needs margin above 258 Nm or a gait with less knee flexion).
+5. **RL retrain gait with lower knee torque** (Robot Lab, 2026-10-14): reward/penalty on knee RMS and peak torque (target knee RMS ≤ τ_cont, D69 141 N·m at 130 °C; WBC r6 cruise is 105–108 N·m RMS), straighter-knee stance and a reference with longer double support. Add the A40 winding model (`controls/thermal/`) as the torque clip and a Tw > 120 °C penalty. Also watch hip_pitch: with drive loss it hits 120 °C at about 27–29 min of 1.2 m/s cruise.
+6. Report knee saturation to Actuators/Legs as a contract risk (1.2 m/s needs margin above 258 Nm or a gait with less knee flexion).
 
 ## Neck change (P-019 / A26): 2× Dynamixel XM430-W350-R, 4.1 Nm peak
 - `sim/v3/humanoid_v3.xml` already carries the P-019 neck in Robot Lab's working tree (uncommitted, not mine; masses 0.349/0.461 kg, armature 0.0005, ctrlrange ±4.1 Nm). Left for Robot Lab to commit.

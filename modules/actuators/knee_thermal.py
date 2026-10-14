@@ -5,7 +5,8 @@ same Cw/Ch/Rwh/Rha conventions) on the WBC 1.2 m/s cruise trace looped 60 min at
 import os, sys, json, math, copy, numpy as np
 H = os.path.dirname(os.path.abspath(__file__)); R = os.path.abspath(f'{H}/../..')
 sys.path.insert(0, f'{R}/modules/controls/thermal'); import winding_model as W
-P0 = W.load_params(); mot = json.load(open(f'{R}/v3/analysis/tbm2g.json'))
+P0 = W.load_params(knee='07613D');  # Controls A40 v2: default knee is now D69, base case needs 07613D
+mot = json.load(open(f'{R}/v3/analysis/tbm2g.json'))
 fe = json.load(open(f'{H}/results/iron_loss.json'))['TBM2G-07613D']
 lg = np.load(f'{R}/modules/legs/results/walk_1p2.npz'); va = lg['va']
 def iron_W(p, a, b):   # mean iron loss per joint (both motors), from knee joint speed trace
