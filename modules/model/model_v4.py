@@ -20,7 +20,7 @@ P=dict(hip_y=130,hip_z=920,knee_z=500,ankle_z=80,pelvis_bot=1126,pelvis_top=1230
        knee_dy=45,     # Actuators cad_mass.lever(dy=45) for knee_lever_r47p5
        ankle_dy=45, ankle_lever=73, ankle_tx=90, ankle_tz=450,   # D60: trunnion z 410 -> 450
        ankle_ez=20,   # v3 layout + L23 r73
-       upper_arm=300, forearm=270)
+       upper_arm=300, forearm=285)   # R-076: +15 mm (board in forearm, CSG-14 yaw; arms R8)
 # ---------------- kinematics ----------------
 JOINTS={}   # name -> dict(seg, parent_seg, point, axis, range, ...)
 PARENT={}   # seg -> (joint, parent seg)
