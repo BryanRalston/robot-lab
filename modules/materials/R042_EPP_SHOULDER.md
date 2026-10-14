@@ -145,5 +145,5 @@ Notes:
   - 4 × M4 into the bracket gives about 615 N shear per screw at 15°. Easy for steel M4 [EST: bolt grade capacity not cited].
   - The PC cap shell becomes cosmetic, with a cut-out for the cartridge face.
   - Retention against rebound and the strap is light. PEM IUTB-M4 in a PC boss (1 710 N cited) is acceptable for retention only.
-  - Doubler mass [EST]: 2 mm 7075 cradle about 80 × 100 plus flanges ≈ 50 cm³?? Too heavy. Use a **1.5 mm 7075 ring frame with 4 legs to the housing, about 12–15 g/side [EST]**, sized by Arms FEA.
+  - Doubler mass [EST]: a full 2 mm 7075 cradle would be too heavy; use a **1.5 mm 7075 ring frame with 4 legs to the housing, about 12–15 g/side [EST]**, sized by Arms FEA.
   - Mass is about +25–30 g per pair on top of the cartridge, so the ≤ 0.100 kg pair cap will be tight. The Arbiter must rule on whether the mount bracket counts inside the pad cap.
