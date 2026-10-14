@@ -597,3 +597,22 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
 - **Hand power.** The R-035 80 W condition is unmet on the RP40. The lightest option that meets ≥80 W peak wins: 2× RP40 per hand (+0.086 kg for both hands) or the RP100H. The R-037 hold drops from 0.228 to 0.086 kg once Arms and Electronics confirm the 2× RP40 burst. Per-motor current caps and the ≤52 W / ≤1 s / 5 s duty apply until then. T4 is still at risk.
 - **Shoulder caps.** The corrected shoulder caps are adopted (10 min cap only up to 62 N·m).
 - **Knee spreader.** The finned shank spreader adds +0.09 kg per knee, booked +0.18 kg in full unless Actuators shows it's already inside D69's +0.47. Credible weight is about 65.66 kg, leaving about 0.84 kg of reserve.
+
+## R-039 (2026-10-14) Mass recount; D70/D72 wrist; D71 shoulder bearing
+- **The knee D69 stays provisionally booked at +0.65 kg** (R-034 +0.47 plus R-038 +0.18, so there's no new delta). It can be released down once A40 is re-run against the planned torque (71–76 N·m RMS). No knee hardware gets frozen before that.
+- **Booked in full:**
+  - Legs R-031 fatigue fixes: +0.33 (the hip lever slab is +0.09, so no steel is needed)
+  - P-041 thermal breaks: +0.02
+  - D70 wrist: −0.425, with housing estimated, so this saving counts at half for the estimated share until CAD confirms it
+  - D72 leads: +0.488, which takes the harness to 1.984 kg, inside the 2.00 kg contract
+  - Treated conservatively, the arms net comes to +0.063 and is booked at +0.10.
+- **D71 shoulder-pitch bearing: CRBH 7013 A (+0.10 kg) is adopted.** CRBH 8016 A (+0.82) doesn't fit the budget. The 6013 is rejected because its radial safety factor is 0.81.
+  - The 7013 has a 1.00 radial safety factor on an estimated roller size, which is the minimum. So:
+    - (a) Actuators must cite the roller dimensions before G3.
+    - (b) Controls must show a side-fall strategy that brings the shoulder load to ≤550 N·m (A44), which gives a radial safety factor of at least 1.25.
+    - (c) If A40 or the hand-power hold frees ≥0.6 kg, the upgrade to 8016 is pre-approved.
+- **Recount:** the R-038 total of about 65.66, plus 0.33, 0.02, 0.10 and 0.10, gives about **66.21 kg credible**. That leaves a reserve of about 0.29, just under the 0.30 floor.
+  - Releasing the hand-PSU hold to 2× RP40 (−0.142) brings it to about 66.07, with a reserve of about 0.43.
+  - So **A43 (confirm the 2× RP40 burst) is now blocking**, and so is the A40 knee re-run.
+  - No new additions are booked until one of them lands.
+- The palm credit of −0.120 is already in (R-037). The palm_7075 import is fixed (dd5f70f).
