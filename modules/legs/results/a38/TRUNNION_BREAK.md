@@ -48,3 +48,14 @@ Results:
 - No metal path through the joint.
 - Fit: the boss radius is 13 mm, as in knee_boss_clear_r106 (≥ 9.0 mm to the finned housing over knee 0–135°), and the extra length is outward only. Cheeks 3.04 mm and top plate 3.54 mm are unchanged. The outward growth of 14 mm past the cheek has not been checked against the thigh shell or the ID envelope.
 - **Mass: +37.2 g/knee, +0.074 kg robot** [EST: hand volumes, cited densities]. That is +0.070 over the +0.004 booked. Book in full.
+
+## L62 (R-111): thin-wall ULTEM 4001 bush, ALTERNATE to L61 [EST hand calc: knee_trunnion_bush_l62.py → results/r031/knee_trunnion_bush_l62.json]
+Status: adopted only if Materials qualifies a bond rated ≥ 80 °C. **L61 stays booked until then.**
+Criteria: R_joint ≥ 10 K/W on the worn wall (t − 0.2), p_design ≤ 14.6 MPa, 3 mm ULTEM thrust washer with 10 % pads and a PEI-washered clip (no metal path), hardened ground greased pin (≥ HRC 50, Ra ≤ 0.4), Al boss = bush OD + 5, grown outward only. Same model and cited k 0.26 / ρ 1.33 as R-106 final (that model reproduces L61 at 33.1 K/W, 37.2 g/knee).
+**Lightest (chosen):**
+- Pin ø12, bush ULTEM 4001 ø12/15.4 × 15 per side (1.7 mm wall, 1.5 mm worn), boss ø20.4 × 15, **outward protrusion 9 mm** past the 6 mm cheek (L61: 14 mm).
+- p 14.0 MPa design / 9.3 walk ✓. R worn 20.1 K/W per side, **10.07 K/W joint** ✓ (thin margin; t 1.8 gives ~10.6, +~0.5 g [EST]).
+- Mass **+15.1 g/knee, +0.030 kg robot**: −0.044 vs L61 (+0.074), +0.026 vs the +0.004 booked before L61.
+- Fin clearance: boss radius 10.2 < L61's 13 → ≥ 9.0 mm clearance to the finned housing retained (≥ 3 ✓). Cheeks/top plate L60 unchanged.
+- Caveat: ø12 pin needs the mating trunnion bore at ø12 (from ø9). If that bore is not mine to change, the ø9 fallback is ø9/12.4 × 20, boss ø17.4, protrusion 14 mm, 14.0 MPa, 10.1 K/W, +19.9 g/knee, +0.040 kg robot (−0.034 vs L61, +0.036 vs pre-L61).
+- Open: thigh shell / ID envelope check of the protrusion; Materials bond ≥ 80 °C.

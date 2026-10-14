@@ -306,3 +306,5 @@ ULTEM 4001 bushes ø9/21×20 (k 0.26 SABIC TDS) + 3 mm washers with 10 % pads, �
 ## L59 Shore sources (accepted)
 - 7373 TOP85, 85±3 A: Vibram US repair catalogue 2015 (Materials cite) and leffler.com.au/vibram-techdata. Sold in 3 mm: https://www.leffler.com.au/vibram-7373-tequilgemma-flint-91x58-18mm/ (Vibram AU distributor, lists 1/1.5/1.8/3/6 mm) and subaru-ec.com product_id=88. Caveat: a subaru-ec 3 mm cut-piece page (product_id=3956) lists 75A. Still ≥ 60A.
 - 7663, 93 A, 1.17 g/cc: https://www.ciac-srl.com/en/articolo/508163/lastra-comp-7163-gemma (Vibram distributor page, not a lot certificate).
+
+- 2026-10-14 L62 (R-111): thin-wall ULTEM 4001 knee trunnion bush alternate — ø12 pin, ø12/15.4×15 (1.7 wall), 14.0 MPa, 10.07 K/W worn joint, boss protrusion 9 mm, +0.030 kg robot (−0.044 vs L61, +0.026 vs pre-L61 0.004) [EST]. ø9 fallback +0.040. Adopt only if Materials qualifies bond ≥80 °C; L61 stays booked.
