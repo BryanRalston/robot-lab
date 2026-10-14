@@ -1,0 +1,250 @@
+{
+ "reach_horizontal_10kg": {
+  "pose_deg": {
+   "shoulder_pitch": -90
+  },
+  "payload_kg": 10.0,
+  "point": [
+   0.65,
+   0.282,
+   1.5
+  ],
+  "joints": {
+   "shoulder_pitch": {
+    "static": 82.24,
+    "inertial": 110.7,
+    "total": 192.94
+   },
+   "shoulder_roll": {
+    "static": 0.0,
+    "inertial": 95.13,
+    "total": 95.13
+   },
+   "shoulder_yaw": {
+    "static": 0.05,
+    "inertial": 2.81,
+    "total": 2.86
+   },
+   "elbow": {
+    "static": 40.14,
+    "inertial": 29.7,
+    "total": 69.84
+   },
+   "wrist_roll": {
+    "static": 0.01,
+    "inertial": 1.59,
+    "total": 1.6
+   },
+   "wrist_pitch": {
+    "static": 7.4,
+    "inertial": 1.32,
+    "total": 8.71
+   },
+   "wrist_yaw": {
+    "static": 0.0,
+    "inertial": 1.32,
+    "total": 1.32
+   }
+  }
+ },
+ "carry_waist_10kg_per_hand": {
+  "pose_deg": {
+   "shoulder_pitch": -30,
+   "elbow": -60
+  },
+  "payload_kg": 10.0,
+  "point": [
+   0.5,
+   0.282,
+   1.24
+  ],
+  "joints": {
+   "shoulder_pitch": {
+    "static": 61.25,
+    "inertial": 86.13,
+    "total": 147.38
+   },
+   "shoulder_roll": {
+    "static": 0.04,
+    "inertial": 53.13,
+    "total": 53.17
+   },
+   "shoulder_yaw": {
+    "static": 0.02,
+    "inertial": 23.52,
+    "total": 23.54
+   },
+   "elbow": {
+    "static": 40.14,
+    "inertial": 29.7,
+    "total": 69.84
+   },
+   "wrist_roll": {
+    "static": 0.01,
+    "inertial": 1.59,
+    "total": 1.6
+   },
+   "wrist_pitch": {
+    "static": 7.4,
+    "inertial": 1.32,
+    "total": 8.71
+   },
+   "wrist_yaw": {
+    "static": 0.0,
+    "inertial": 1.32,
+    "total": 1.32
+   }
+  }
+ },
+ "reach_horizontal_noload": {
+  "pose_deg": {
+   "shoulder_pitch": -90
+  },
+  "payload_kg": 0.0,
+  "point": [
+   0.65,
+   0.282,
+   1.5
+  ],
+  "joints": {
+   "shoulder_pitch": {
+    "static": 18.48,
+    "inertial": 26.2,
+    "total": 44.68
+   },
+   "shoulder_roll": {
+    "static": 0.0,
+    "inertial": 20.71,
+    "total": 20.71
+   },
+   "shoulder_yaw": {
+    "static": 0.05,
+    "inertial": 2.81,
+    "total": 2.86
+   },
+   "elbow": {
+    "static": 5.8,
+    "inertial": 5.2,
+    "total": 11.0
+   },
+   "wrist_roll": {
+    "static": 0.01,
+    "inertial": 1.59,
+    "total": 1.6
+   },
+   "wrist_pitch": {
+    "static": 0.53,
+    "inertial": 0.34,
+    "total": 0.86
+   },
+   "wrist_yaw": {
+    "static": 0.0,
+    "inertial": 0.34,
+    "total": 0.34
+   }
+  }
+ },
+ "yaw_upperarm_fwd_elbow90_10kg": {
+  "pose_deg": {
+   "shoulder_pitch": -90,
+   "shoulder_yaw": 90,
+   "elbow": -90
+  },
+  "payload_kg": 10.0,
+  "point": [
+   0.3,
+   0.632,
+   1.5
+  ],
+  "joints": {
+   "shoulder_pitch": {
+    "static": 42.08,
+    "inertial": 34.0,
+    "total": 76.08
+   },
+   "shoulder_roll": {
+    "static": 0.0,
+    "inertial": 52.55,
+    "total": 52.55
+   },
+   "shoulder_yaw": {
+    "static": 40.14,
+    "inertial": 30.4,
+    "total": 70.54
+   },
+   "elbow": {
+    "static": 0.0,
+    "inertial": 29.7,
+    "total": 29.7
+   },
+   "wrist_roll": {
+    "static": 0.02,
+    "inertial": 1.59,
+    "total": 1.62
+   },
+   "wrist_pitch": {
+    "static": 0.0,
+    "inertial": 1.32,
+    "total": 1.32
+   },
+   "wrist_yaw": {
+    "static": 7.4,
+    "inertial": 1.32,
+    "total": 8.72
+   }
+  }
+ },
+ "side_abduct_90_10kg": {
+  "pose_deg": {
+   "shoulder_roll": 90
+  },
+  "payload_kg": 10.0,
+  "point": [
+   0.0,
+   0.892,
+   1.46
+  ],
+  "joints": {
+   "shoulder_pitch": {
+    "static": 0.09,
+    "inertial": 9.43,
+    "total": 9.53
+   },
+   "shoulder_roll": {
+    "static": 75.98,
+    "inertial": 95.13,
+    "total": 171.12
+   },
+   "shoulder_yaw": {
+    "static": 0.02,
+    "inertial": 2.81,
+    "total": 2.84
+   },
+   "elbow": {
+    "static": 0.0,
+    "inertial": 29.7,
+    "total": 29.7
+   },
+   "wrist_roll": {
+    "static": 0.02,
+    "inertial": 1.59,
+    "total": 1.62
+   },
+   "wrist_pitch": {
+    "static": 0.0,
+    "inertial": 1.32,
+    "total": 1.32
+   },
+   "wrist_yaw": {
+    "static": 7.4,
+    "inertial": 1.32,
+    "total": 8.72
+   }
+  }
+ },
+ "_meta": {
+  "xml": "sim/v3/humanoid_v3.xml",
+  "alpha_rad_s2_EST": 20.0,
+  "sim_arm_mass_one_side_kg": 5.953
+ }
+}
