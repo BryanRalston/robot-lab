@@ -699,3 +699,4 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
 - Trims are calculated estimates, so **half credit**: louvres -0.142 (pending Thermal A35 pattern), 1.2 mm PC panels -0.064 (pending A15 dent check), PA12 rim strips -0.013. Booked **-0.110 provisional**. If A35 or A15 fails, that item's credit is reversed. They move to full credit when measured.
 - Shoulder pad -0.005 is **held** until the 265 J re-check (R-049). The ID R2 5052 honeycomb cartridge is accepted as the R-049 candidate, subject to that re-check and the Materials grade citation.
 - Reserve is ~0.33 provisional, above the floor. The waiver stays active until A35 and A15 close. The no-additions freeze is lifted back to the R-043 rule (additions >0.02 need a ruling).
+
