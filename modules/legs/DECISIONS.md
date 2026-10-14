@@ -269,3 +269,24 @@
     - (2) The boot covers the instep rod ends and pins down to the foot top (debris and snag).
     - (3) Break edges R2 on the outrigger and lug ends that would be exposed.
   - **Existing gap, independent of C2:** no sole pad, toe bumper or heel bumper is defined or booked anywhere in the model, CONTRACTS or our requirements. The ground still contacts bare 7075. A sole pad line is needed for wear and impact whether or not C2 is taken.
+- L53 update (2026-10-14): **rev C withdrawn** (Controls a5e14ff fails carry; Thermal f2da3ab keeps rev B). The rev C numbers above are superseded.
+- L55 (rev B, Actuators cad/knee_twin_housing_finned_revb.step) Measured fin mass 0.0932 kg/knee (rev B minus D59, 6061 at 2.70) = −0.0158/knee, **−0.032 robot vs 0.109**.
+  - Clash, fins only, knee 0–135 (knee_fins_revc_check.py REV=revb):
+    - trunnion cheeks [EST] min 1.62 mm (knee 0; 1.88 at 135);
+    - top plate [EST] min 2.04 mm;
+    - knee cap ≥ 208 mm.
+  - The overhang beyond ±92 is 4 fin pieces, 2 per side: local y 26.6–33.5 (10.4 mm out) and 37.8–42.2 (4.4 mm out), z 1–43. Alone they reach 1.84 mm to the cheeks (knee 0/135) and ≥ 11.0 mm to the top plate. **No trim is required** (≥ 1 mm). The 1.62 binding point is an in-plane fin, not an overhang.
+  - We will move our EST cheeks and top plate to get ≥ 3 mm instead of trimming the fins.
+  - v5 thigh fairing: fins are up to 4.7 mm outside the keep-out hull (overhang fins stay inside, −2.7). The A35 grille needs a **local bulge of 5 mm** over the housing.
+- L56 (A37 rev D, Thermal bee2448) Thermal fix:
+  - (1) Tine ø22 PEI, e = 22, R16 end (W32). 2D FEA at 3275 N/tine: **180 MPa fault / 125 MPa walk** (ø20 e20 W30: 185/128). The eye-stub flange clearance drops 4.0 → **2.0 mm** (the lug envelope is axisymmetric, R20 → 22).
+    - Mass vs L49: 7075 tines +8.8 g robot at full-height W32 (+2.3 g if the root stays 30 wide), PEI 22/12 sleeves +5.4 g.
+  - (2) Lever-end eye sleeve: the ear (ø26 × 12, single cantilever) can't take a ø20 bore. A ligament of 3 mm and e/D 0.65 fail. Needs ear OD ≥ 40 (e/D 1.0) × 16 long, grown inward (|y| 46–62) so the rod-eye position is unchanged.
+    - The outer 4 mm at OD40 faces the rod start (r 15–20) at only 0.5 mm axially, so it must step to ≤ ø30 there or the washer stack gains +0.5 mm, to keep rod sweep ≥ 1.0.
+    - ≈ +29 g/lever [hand], **+0.057 robot. Busts the freeze**, and it's an Actuators part, so they own it. A 14 mm pin changes the GE12 eye, which is also Actuators'.
+  - (3) Knee: yes, it is an unbroken path to the femur. It runs **directly via the knee trunnion bracket strut/top plate to the femur**, and also via rod → knee lever → pin → clevis. The lever-eye fix alone would not break it.
+    - Femur fin attenuation over about 160 mm to the collar is 0.19–0.28 (D69B §2). Thermal must quantify before adding +8.6 g.
+- L57 (R-081) Sole pad spec: results/r081/SOLE_PAD_SPEC.md. Vibram Gumlite 6 mm 47A plus PU 60A corner bumpers, 0.093 kg/foot, **0.186 robot (computed)**, +6 mm height.
+- L58 (ID 629dbed) Rear panel tabs on the drive band clamps at the 80×60 pocket corners: thigh frame (x −38 tip, y 100/160, z 700/780). Tabs 29.5 × 8 × 2 mm from the band (x −8.5) to x −38.
+  - Clearance: ≥ 10.4 mm to the hip screw −y body over the hip range (knee_drive_bay_r062.py → results/r031/knee_drive_tabs_r062.json). Drive plate narrowed to y 106–154, so the tabs clear the drives by 2 mm.
+  - Mass: integrated as extended clamp ears, ≈ 0.5 g each [EST] = **+0.004 robot**. Separate 6061 tabs would be +0.010.

@@ -8,7 +8,7 @@ import numpy as np, json, sys
 from skfem import MeshQuad, ElementQuad2, ElementVector, Basis, FacetBasis, asm, LinearForm, condense, solve
 from skfem.models.elasticity import linear_elasticity, lame_parameters
 E,NU,t=71700.,0.33,8.0
-def mesh(D,e,W=30.,Lr=24.,nr=24,nth=128):
+def mesh(D,e,W=float(__import__('os').environ.get('W',30)),Lr=24.,nr=24,nth=128):
     # rectangle x in [-W/2,W/2], z in [-Lr,e]; hole r=D/2 at origin. O-grid: ray from hole to boundary.
     th=np.linspace(0,2*np.pi,nth+1)[:-1]; pts=[]
     def bnd(a):
@@ -45,11 +45,12 @@ def run(D,e,F,dirn):
     pk=float(vm[far].max()); j=np.unravel_index(np.argmax(np.where(far,vm,0)),vm.shape)
     return pk,[round(float(X[0][j]),1),round(float(X[1][j]),1)]
 out=[]
-for D,e,tag in ((12,12,'as-is ø12 e12'),(20,12,'rev B ø20 in current tine e12'),(20,16,'ø20 e16 (+4)'),(20,20,'ø20 e20 (+8, Materials)')):
+CASES=json.loads(__import__('os').environ.get('CASES','null')) or [(12,12,'as-is ø12 e12'),(20,12,'rev B ø20 in current tine e12'),(20,16,'ø20 e16 (+4)'),(20,20,'ø20 e20 (+8, Materials)')]
+for D,e,tag in CASES:
     for F,lc in ((3275,'fault'),(2271,'walk')):
         for dn in (1,-1):
             pk,at=run(D,e,F,dn)
             out.append(dict(case=tag,D=D,e=e,load=lc,F_N=F,dir='to free end' if dn>0 else 'to root',vm_peak=round(pk,1),at=at,
-                 net_section_MPa=round(F/((30-D)*t),1),shear_out_MPa=round(F/(2*(e-D/2*0.7)*t),1),bearing_MPa=round(F/(D*t),1),e_over_D=round(e/D,2),lig_mm=e-D/2))
+                 net_section_MPa=round(F/((float(__import__('os').environ.get('W',30))-D)*t),1),shear_out_MPa=round(F/(2*(e-D/2*0.7)*t),1),bearing_MPa=round(F/(D*t),1),e_over_D=round(e/D,2),lig_mm=e-D/2))
             print(out[-1],flush=True)
-json.dump(dict(basis=__doc__,rows=out),open('results/a38/tine_fea_a38.json','w'),indent=1)
+json.dump(dict(basis=__doc__,rows=out),open(__import__('os').environ.get('OUT','results/a38/tine_fea_a38.json'),'w'),indent=1)

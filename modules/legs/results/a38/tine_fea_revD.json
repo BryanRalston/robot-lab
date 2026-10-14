@@ -1,0 +1,77 @@
+{
+ "basis": "A38 L2: hip clamp-eye tine with the A37 rev B PEI sleeve (bore 20) - light 2D plane-stress FEA (scikit-fem, Q2 quads,\nO-grid mapped mesh, no gmsh). Tine = 7075-T6 plate t 8, width W 30 (x), hole centre at e from the free end, root (fixed) at Lr 24\non the other side. Load 6550 N/body fault (BOND_SPEC 5) shared by 2 tines -> 3275 N/tine; 4542 N/body walk -> 2271 N/tine.\nBore loading: cosine radial pressure over the loaded half (pin/sleeve bearing). Two directions: toward the free end (tension\nlug, worst) and toward the root. Reports peak von Mises and net-section/bearing hand values. Plane stress through-thickness uniform\n=> no pin bending/peaking (EST, real peak higher by ~1.1-1.3).",
+ "rows": [
+  {
+   "case": "revD \u00f822 e22 R16 (W32)",
+   "D": 22,
+   "e": 22,
+   "load": "fault",
+   "F_N": 3275,
+   "dir": "to free end",
+   "vm_peak": 180.0,
+   "at": [
+    -11.0,
+    -0.1
+   ],
+   "net_section_MPa": 40.9,
+   "shear_out_MPa": 14.3,
+   "bearing_MPa": 18.6,
+   "e_over_D": 1.0,
+   "lig_mm": 11.0
+  },
+  {
+   "case": "revD \u00f822 e22 R16 (W32)",
+   "D": 22,
+   "e": 22,
+   "load": "fault",
+   "F_N": 3275,
+   "dir": "to root",
+   "vm_peak": 88.9,
+   "at": [
+    0.1,
+    -11.1
+   ],
+   "net_section_MPa": 40.9,
+   "shear_out_MPa": 14.3,
+   "bearing_MPa": 18.6,
+   "e_over_D": 1.0,
+   "lig_mm": 11.0
+  },
+  {
+   "case": "revD \u00f822 e22 R16 (W32)",
+   "D": 22,
+   "e": 22,
+   "load": "walk",
+   "F_N": 2271,
+   "dir": "to free end",
+   "vm_peak": 124.8,
+   "at": [
+    -11.0,
+    -0.1
+   ],
+   "net_section_MPa": 28.4,
+   "shear_out_MPa": 9.9,
+   "bearing_MPa": 12.9,
+   "e_over_D": 1.0,
+   "lig_mm": 11.0
+  },
+  {
+   "case": "revD \u00f822 e22 R16 (W32)",
+   "D": 22,
+   "e": 22,
+   "load": "walk",
+   "F_N": 2271,
+   "dir": "to root",
+   "vm_peak": 61.7,
+   "at": [
+    0.1,
+    -11.1
+   ],
+   "net_section_MPa": 28.4,
+   "shear_out_MPa": 9.9,
+   "bearing_MPa": 12.9,
+   "e_over_D": 1.0,
+   "lig_mm": 11.0
+  }
+ ]
+}

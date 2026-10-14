@@ -5,8 +5,9 @@ import os,sys,json,numpy as np
 HERE=os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0,os.path.join(HERE,'../model'))
 import cadquery as cq, trimesh, model_v4 as M
 from scipy.spatial import ConvexHull
-A=os.path.join(HERE,'../actuators/cad'); H0=cq.importers.importStep(f'{A}/knee_twin_housing.step').val(); RC=cq.importers.importStep(f'{A}/knee_twin_housing_finned_revc.step').val()
-FIN=RC.cut(H0); print('fin vol',FIN.Volume(),'mass',FIN.Volume()*2.70e-6,flush=True)
+A=os.path.join(HERE,'../actuators/cad'); H0=cq.importers.importStep(f'{A}/knee_twin_housing.step').val(); RC=cq.importers.importStep(f"{A}/knee_twin_housing_finned_{os.environ.get('REV','revc')}.step").val()
+FIN=RC.cut(H0); OH=FIN.intersect(cq.Workplane('XY').box(400,400,400).cut(cq.Workplane('XY').box(184,400,400)).val()) ;print('overhang vol',OH.Volume(),flush=True); print('fin vol',FIN.Volume(),'mass',FIN.Volume()*2.70e-6,flush=True)
+FIN=OH if os.environ.get('OHONLY') else FIN
 _st=M.step; M.step=lambda n: FIN if n=='knee_twin_housing' else _st(n)
 KC=np.asarray(trimesh.load(f'{HERE}/results/v5/knee_cap_keepout.stl').vertices); TF=ConvexHull(np.asarray(trimesh.load(f'{HERE}/results/v5/thigh_fairing_keepout.stl').vertices)).equations
 SKIP=('knee twin housing','knee trunnion pin','RV12 roller-screw body')
@@ -22,4 +23,4 @@ for ang in range(0,136,15):
     near.sort(); vs,_=F.tessellate(1.0); V=np.array([[v.x,v.y,v.z] for v in vs])
     dk=float(np.min(np.linalg.norm(KC[None,::2,:]-V[::4,None,:],axis=2))); out=float((V@TF[:,:3].T+TF[:,3]).max(1).max())
     rows.append(dict(knee=ang,closest=near[:4],kneecap_mm=round(dk,1),max_outside_thigh_fairing_mm=round(out,1))); print(rows[-1],flush=True)
-json.dump(dict(fin_mass_kg=FIN.Volume()*2.70e-6,rows=rows),open(f'{HERE}/results/r031/knee_fins_revc_check.json','w'),indent=1)
+json.dump(dict(fin_mass_kg=FIN.Volume()*2.70e-6,rows=rows),open(f"{HERE}/results/r031/knee_fins_{os.environ.get('REV','revc')}_check"+('_oh' if os.environ.get('OHONLY') else '')+".json",'w'),indent=1)

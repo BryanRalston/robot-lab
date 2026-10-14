@@ -1,0 +1,74 @@
+{
+ "T1_y100_z700": {
+  "cand": {
+   "seg": "thigh",
+   "size": [
+    29.5,
+    8,
+    3
+   ],
+   "c": [
+    -23.25,
+    100,
+    700
+   ]
+  },
+  "min": 10.4,
+  "lim": "L_hip_pitch screw -y body (hip_pitch_body_x1) @{'L_hip_pitch': -107.3}",
+  "max_outside_thigh_fairing_mm": -68.0
+ },
+ "T2_y160_z780": {
+  "cand": {
+   "seg": "thigh",
+   "size": [
+    29.5,
+    8,
+    3
+   ],
+   "c": [
+    -23.25,
+    160,
+    780
+   ]
+  },
+  "min": 21.7,
+  "lim": "L_palm 7075-T6 machined shell 1.5 mm w/ openings (P-021/A32, palm_7075.py) @{'L_hip_roll': 45}",
+  "max_outside_thigh_fairing_mm": -58.2
+ },
+ "T3_y110_z684": {
+  "cand": {
+   "seg": "thigh",
+   "size": [
+    29.5,
+    8,
+    3
+   ],
+   "c": [
+    -23.25,
+    110,
+    684
+   ]
+  },
+  "min": 8.4,
+  "lim": "L_hip_pitch screw -y body (hip_pitch_body_x1) @{'L_hip_yaw': -35, 'R_hip_yaw': -35}",
+  "max_outside_thigh_fairing_mm": -66.6
+ },
+ "T4_y150_z796": {
+  "cand": {
+   "seg": "thigh",
+   "size": [
+    29.5,
+    8,
+    3
+   ],
+   "c": [
+    -23.25,
+    150,
+    796
+   ]
+  },
+  "min": 3.3,
+  "lim": "L_palm 7075-T6 machined shell 1.5 mm w/ openings (P-021/A32, palm_7075.py) @{'L_hip_roll': 45}",
+  "max_outside_thigh_fairing_mm": -58.3
+ }
+}
