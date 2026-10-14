@@ -56,13 +56,13 @@ Basis is the same as the shoulder pad (R042 Parts 3–6):
 
 ## Land stiffness check (Torso ed6fe55: ceiling 22.35 kN, skin x ≈ +0.147, need k_land ≥ 5.3 MN/m)
 Inputs:
-- 7075-T6 E = 71.7 GPa, G ≈ 26.9 GPa (MATERIALS_DB, MIF/ASM).
-- Section: 12 × 120 web + 60 × 6 rib, I = 4.99 × 10⁵ mm⁴ (above), so EI = 35.8 kN·m². Span L = 0.30 m, point load (conservative vs the 101 mm patch).
+- 7075-T6 E = 70 GPa (MATERIALS_DB AL7075T6), G ≈ 26.3 GPa [E/2(1+ν), ν 0.33].
+- Section: 12 × 120 web + 60 × 6 rib, I = 4.99 × 10⁵ mm⁴ (above), so EI = 34.9 kN·m². Span L = 0.30 m, point load (conservative vs the 101 mm patch).
 
 | term | formula | k |
 |---|---|---|
-| bending, simply supported | 48 EI / L³ | **63.6 MN/m** |
-| bending, fixed-fixed (bound) | 192 EI / L³ | 254 MN/m |
+| bending, simply supported | 48 EI / L³ | **62.1 MN/m** |
+| bending, fixed-fixed (bound) | 192 EI / L³ | 248 MN/m |
 | shear (A ≈ 1 800 mm², κ 0.5) | 4 κ G A / L | ≈ 320 MN/m |
 | SS bending + shear | series | **53 MN/m** |
 | local land bearing (2.4 MPa on 12 mm 7075) | ≈ rigid | > 10 GN/m |
