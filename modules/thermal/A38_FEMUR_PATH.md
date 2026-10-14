@@ -82,16 +82,16 @@ Script `a38_knee_path.py` → `results/a38_knee_path.json`. The collar add is ta
 
 | R_tr (housing → femur) | G_p W/K | winding vs no femur path, h 12 / h 10 |
 |---|---|---|
-| 2.5 (unbroken, good contact) | 0.185 | −6.3 / −7.4 K |
-| 5 (unbroken, typical) | 0.127 | −4.5 / −5.3 K |
-| 10 | 0.078 | −2.8 / −3.4 K |
+| 2.5 (unbroken, good contact) | 0.185 | −6.2 / −7.4 K |
+| 5 (unbroken, typical) | 0.127 | −4.4 / −5.2 K |
+| 10 | 0.078 | −2.8 / −3.3 K |
 | **30 (recommended break)** | 0.030 | −1.1 / −1.3 K |
 | ∞ | 0 | 0 |
 
-**Net effect of the ≥ 30 K/W break vs the unbroken knee: winding +3.4 to +6.1 K.**
+**Net effect of the ≥ 30 K/W break vs the unbroken knee: winding +3.3 to +6.1 K.**
 - On rev B (P-042 carry × 1.1, drives off; Controls h 12 pass case), the knee goes up by that amount.
 - It must stay ≤ 120 °C: check against Controls' h 12 number. If Controls' h 12 result is within ~6 K of 120 °C, the break costs that margin. In that case either:
   - accept R_tr ≈ 10 K/W (bond +≈ 4 K, winding +2.4–4 K), or
   - rely on the R-077 carry limit.
 - The femur heat path is not a credited knee cooling path in any Actuators/Controls model so far. Their numbers already assume no femur path, so **their pass/fail results are unchanged by the break.**
-- What the break removes is up to 4.5–7.4 K of uncredited benefit.
+- What the break removes is up to 4.4–7.4 K of uncredited benefit.
