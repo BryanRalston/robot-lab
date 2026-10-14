@@ -756,3 +756,9 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
 - Trims are booked at -0.117 (half credit).
 - Wrist fairing: the measured-design estimate is **+0.079 pair** (replacing R-058's +0.02, so the delta is +0.059). It's **accepted** with conditions: wide axis parallel to the chest in the tuck (the facing-torso orientation clashes by -15.4 mm and is forbidden); an Arms hand-sweep check at the wrist limits; Thermal rules on wrist venting.
 - Reserve ~0.32, just above the 0.30 floor. Additions >0.02 need an offset again.
+
+## R-060 (2026-10-14) Pad core scatter + mount doubler (Materials fd46ad8)
+- Datasheet-only 4.5 pcf gives a 6.0–10.6 kN band, which fails. **Required:** lot-tested cores (crush within ±5%, with a cert per lot) **and** a measured rate factor (G5) before the cores count as qualified. The core is sized ~61x61x53–58 within that spec. If lot testing isn't available, the ~71 mm core comes back to me.
+- Impact angle limit is 15° from the core axis. T-030 counts hits beyond it as a fail.
+- **The mount counts.** The 0.100 cap covers the whole pad assembly, mount included. The 7075 doubler is required because the PC cap can't carry the load. The pair is booked at **0.127** (0.097 + 0.030 estimate). ID and Materials should make the doubler *replace* the 3 mm PC saddle and report the net.
+- Reserve ~0.29, **0.01 under the floor**. That's tolerated until the hip-lever reconciliation (R-056), which is booked at the conservative +0.43. If it lands with no credit, an offset is due within a round.
