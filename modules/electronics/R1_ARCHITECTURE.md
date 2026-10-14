@@ -705,6 +705,30 @@ Recorded: rail A = F1–F3 + S1, S2 + hand logic; rail B = F4–F6 + S3–S5. Si
 | | **Wire subtotal (#2–#8)** | | | | **0.0642** | |
 | | **With #1** | | | | **≈ 0.188** | |
 
+
+### 18.1a R-071 follow-up: mixed plan for the 40 XT30U drive tees (replaces candidate #1)
+
+**Serviceability.**
+- No doc marks any Elmo drive as non-replaceable, so all **32 Elmo drive tees are serviceable**. They keep a pluggable connector.
+- `harness.py` books XT30U × (32 + 8). The extra 8 are not identified anywhere in the repo (they are not drives, and the 2 neck Dynamixels are not Elmo). They are the only candidates for splices, if Actuators confirms they are bus trunk junctions.
+
+**Rating basis.** The connector carries the drive's **bus** current, not the motor phase current. The 49.5 A figure is G-TWI phase current. The booked bus tee figures (`harness.py` `P` pigtail rows) are 4 A rms / 12 A pk for the legs (worst case), 1.5 / 5 A for the arms, and 1 / 4 A for the waist and neck.
+
+| branch type | count | baseline (XT30U pair 3.6 g, AMOV listing in harness.py) | new part | cited mass | rating vs need | saving kg |
+|---|---|---|---|---|---|---|
+| Elmo drive tees (serviceable) | 32 | 0.1152 | Amass MR30 pair (MR30-M + MR30-FB, 2 of 3 pins used, or both poles paralleled on 2+1) | 2 × 1.41 g = 2.82 g (TME MR30-M "gross weight 1.41 g", taken for both halves; conservative vs 1.0–1.2 g retail listings) | 15 A rated / 30 A momentary, 1000 cycles, −20…120 °C (Amass MR30 spec V1.2) ≥ 4 A rms / 12 A pk | **0.0250** |
+| Unidentified tees (possible trunk junctions) | 8 | 0.0288 | TE PIDG 320559 butt splice × 2 poles (22–16 AWG; M7928/5 crimp, apply to A-620 Class 3) | 2 × 1.48 g = 2.96 g (TE product page) | fits ≤ 1.42 mm² only; 2.5 mm² trunks need 320562, mass not cited | 0.0051 **not credited** (8 not identified; a butt splice is in-line only, and a 3-way tee needs a different part) |
+
+**Result.**
+- **+0.025 kg cited** (MR30 at the drive tees).
+- The splices barely apply: at most 0.005 kg, and not credited.
+- R-069 electronics total: 0.064 (wire, of which 0.012 battery link pending Torso I²t) + 0.025 = **0.089 kg**. Firm: 0.077 kg.
+- Former candidate #1 (−0.124) is withdrawn.
+
+**Risks.**
+- MR30 is a hobby-grade connector, the same class as the booked XT30U. It has no positive latch, so it needs a strain-relief clip or tie-down at each drive (mass inside the 12 % sleeving allowance).
+- Mating cycles drop from XT30U's to 1000. That is adequate for service swaps.
+
 ### 18.2 Checked and not counted
 - **STM32H7 drop:** never booked as a separate mass. The hand board was booked as a board lump (Arms), and Thermal A43C already assumed it dropped. **Saving 0.**
 - **`hand 24 V from wrist DC/DC` row (0.0128 kg):** 0.5 → 0.25 passes (0.6 K), but R-047 put the RP40s in the shoulder bay, so this row's route is stale. Actuators should re-book the row first. **Not counted.**
