@@ -1,0 +1,36 @@
+{
+ "Rha": {
+  "cad eta1 h12": 0.84,
+  "cad eta0.7 h12": 1.067,
+  "cad eta1 h15 vented": 0.672
+ },
+ "tau_cont130": {
+  "cad eta1 h12": 99.6,
+  "cad eta0.7 h12": 92.4,
+  "cad eta1 h15 vented": 106.2
+ },
+ "walk_1p2_r7": {
+  "drive_off": {
+   "cad eta1 h12": 88.4,
+   "cad eta0.7 h12": 98.5,
+   "cad eta1 h15 vented": 81.0
+  },
+  "drive_on": {
+   "cad eta1 h12": 100.4,
+   "cad eta0.7 h12": 114.1,
+   "cad eta1 h15 vented": 90.4
+  }
+ },
+ "carry r4 1.0 x1.10": {
+  "drive_off": {
+   "cad eta1 h12": 106.5,
+   "cad eta0.7 h12": 121.0,
+   "cad eta1 h15 vented": 96.1
+  },
+  "drive_on": {
+   "cad eta1 h12": 121.8,
+   "cad eta0.7 h12": 141.2,
+   "cad eta1 h15 vented": 108.1
+  }
+ }
+}

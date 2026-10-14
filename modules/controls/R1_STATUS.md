@@ -86,10 +86,40 @@ Own path: `controls/thermal/knee_revB_check.py` (my vectorized 2-node loop, wind
 | fan h40: 118 N·m, 77 / 90 °C | 118.4, 76.9 / 89.7 | <0.5 |
 
 **Reproduced within 0.5 K**, provided that A_f = 0.05 m² per knee, η 1, and drive loss goes into the housing (their conservative case).
-- **Discrepancy in the script:** `knee_resize_r043.py` line 18 uses 12 × **0.025** m², and its docstring says +0.025 m². At 0.025 m² my model gives τ_cont 94, walk 110, carry ×1.1 136 °C (drive on). Actuators must state which area is real; the claims only match 0.05.
+- **Correction (2026-10-14, Actuators):** the 0.025 m² file (`knee_resize_r043.py` on main) was the superseded pre-rev-B sizing, not rev B. Rev B as built is `knee_fins_revb.py` on branch act-work (fbd762b), 0.0703 m². See the next section. Original note: `knee_resize_r043.py` line 18 uses 12 × **0.025** m², and its docstring says +0.025 m². At 0.025 m² my model gives τ_cont 94, walk 110, carry ×1.1 136 °C (drive on). Actuators must state which area is real; the claims only match 0.05.
 - **Fin coefficient h = 12 W/m²K:** sensible for walking. Laminar flat plate at 1 m/s, 0.1 m chord gives h ≈ 12. Standing still it is natural convection plus radiation, about 8–10 [EST], so a standing hold is worse. The base Rha already includes a ×2 fin factor on the housing; the new 0.05 m² must be in addition to that, not overlap it.
 - **Fin efficiency:** 1.5 mm × 20 mm Al fins (Thermal option C) give η ≈ 0.99 (m = √(2h/kt) ≈ 9.8 /m, mL 0.2), so η 1 is fine. η 0.7 (taller or thinner fins, or steel) gives carry ×1.1 126.7 °C, a fail.
 - **'Vented'** = h 15 everywhere (A35 target), base housing plus fins, the same as their Rha × 12/15. It is not a measured value.
 - **Margin:** with drive loss on the housing, carry ×1.1 open is 116.3 °C, a 3.7 K margin (< 5 K). With drives off the housing (Thermal 26412c7 / P-027) it is 102 °C (18 K). So rev B passes only if the knee drives stay off the housing, or vents are guaranteed.
 - **Regenerated P-042 carry** (`legs/results/p042/carry_20kg_1p0.npz`: scenarios.py with CARRY_POS 0.32,0,0.415 and CARRY_ARMS −60°/−110°; current sim/v3 masses, model mass as built; knee pk 161 / RMS 76.4 N·m): rev B is 87.5 °C drive off / 99.0 °C drive on. Bare 07613D is 119.4 / 142.1.
 - The P-042 position does **not** raise knee RMS vs r4 (76.4 vs 75.7–77.8), because the arms are tucked and the waist leans back. r4 ×1.10 (85.6 RMS) stays the conservative carry case.
+
+## R-062 condition (3): rev B as built (fbd762b, act-work, read-only review) and the standing hold
+**Review of fbd762b.** CadQuery fins on `cad/knee_twin_housing.step`: per motor 7 front fins × 9 mm and 14 rear × 25 mm, axial over the 42 mm can, 6.6 mm root pitch (5.6 mm gap). Added area A1 − A0 = 0.0703 m², 0.0932 kg/knee.
+- The fins are **1.0 mm thick in the script** (`T = 1.0`), not 1.5 mm as stated.
+- Fin efficiency for 25 × 1.0 mm 6061 (k ≈ 167): m = √(2h/kt) ≈ 9.8–10.9 /m at h 8–10, mL ≈ 0.25–0.27, so **η ≈ 0.98**. η 0.7 is a pessimistic bound.
+- A 5.6 mm gap on 25 mm fins is near the low end for natural convection (boundary layers start to merge), so h 8 standing is the appropriate check.
+
+**Model change:** G_ha = h·(A_bare + η·A_fin) with A_bare = sizing area_cad 0.0289 m². The size.py ×2 factor stood in for fins and is **dropped** when the CAD fins are added. At h 12 this gives Rha 0.840 K/W (vs 0.773 for my earlier ×2 + 0.05 reading).
+
+**Rev B as built, moving (h 12, `knee_revB_cad.py` → `knee_revB_cad.json`), 60 min °C:**
+| case | τ_cont 130 | walk_1p2_r7 drive off / on | carry r4 ×1.10 drive off / on |
+|---|---|---|---|
+| η 1.0, open | 99.6 | **88.4** / 100.4 | **106.5** / 121.8 |
+| η 0.7, open | 92.4 | 98.5 / 114.1 | 121.0 / 141.2 |
+| η 1.0, vented h 15 | 106.2 | 81.0 / 90.4 | 96.1 / 108.1 |
+Actuators (fbd762b): walk 89.2 / carry ×1.1 106.4 open. **Reproduced within 0.8 K** (drives off).
+
+**Standing hold (`knee_hold_r1.py` → `knee_hold_r1.json`).** Worst standing knee torque in the 20 kg carry plans is at t = 0 (double support, plan crouch): **r2 carry_20kg_r2 L knee 64.4 N·m at 66.6° flexion**. p042 regen 58.5 and r4 59.8 are lower. The hold is constant torque, so there is no iron loss; drives are off the housing; 35 °C.
+
+| hold N·m | h | η | Rha K/W | Tw 60 min °C | steady °C | vs 120 / 130 |
+|---|---|---|---|---|---|---|
+| 64.4 | 8 | 1.0 | 1.260 | 78.9 | 79.4 | −40.6 / −50.6 |
+| 64.4 | 8 | 0.7 | 1.601 | 87.7 | 89.4 | −30.6 / −40.6 |
+| 64.4 | 10 | 1.0 | 1.008 | 72.2 | 72.4 | −47.6 / −57.6 |
+| 64.4 | 10 | 0.7 | 1.281 | 79.4 | 80.0 | −40.0 / −50.0 |
+| 70.8 (×1.10) | 8 | 0.7 | 1.601 | 101.2 | 103.8 | −16.2 / −26.2 |
+
+**Verdict: the standing hold passes in every case** (worst 103.8 °C steady, 16 K under the target). The fan fallback is not needed for the hold. The only fail is moving carry ×1.1 at η 0.7 (121 °C), which is unrealistic for these fins (η ≈ 0.98).
+- Fan fallback, if ever needed: τ_cont 118 N·m (R-052 check). Mass in the repo: Actuators DECISIONS 0.02 kg + 1–2 W [EST] per knee; the only cited fan is the Sunon PF40281B1 at 42 g / 6.12 W (Electronics f4e839c).
+- Caveat: a deeper crouch than the plan (e.g. squatting to pick) raises knee torque. That is a separate pick-pose limit for P-043.
