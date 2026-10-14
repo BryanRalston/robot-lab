@@ -3,7 +3,7 @@ Source: `legs/fairings_v5.py` (model_v4 swept, left leg; mirror y for the right)
 
 | envelope | frame | swept range | poses | bbox min → max (mm) | area cm² | status |
 |---|---|---|---|---|---|---|
-| shin_fairing | L_shank | ankle pitch −45…+40 × roll ±18 | 35 | (−20, 38, 145) → (135, 222, 473) | 1751 | **restricted: lower shank and saddle uncovered** (Thermal 26412c7) |
+| shin_fairing | L_shank | ankle pitch −45…+40 × roll ±18 | 35 | (−20, 38, 145) → (135, 222, 473) | 1751 | **restored** (tibia saddle dropped, Thermal 9b9e169) |
 | ankle_boot | L_shank | same | 35 | (−79, 47, −37) → (119, 213, 175) | 1258 | final (boot top z ≤ 170) |
 | thigh_fairing | L_thigh | hip pitch −105/−74.6/0/+40 × knee 0–135 | 16 | (−181, 15, 555) → (72, 245, 885) | 2633 | final |
 | knee_cap | L_thigh | knee 0–135 (shank parts r ≤ 110 about the knee axis) | 10 | (−114, 35, 386) → (101, 225, 555) | 1211 | final |
@@ -29,3 +29,8 @@ Source: `legs/fairings_v5.py` (model_v4 swept, left leg; mirror y for the right)
 - **Ankle boot:** drawstring at z ≤ 170. Elastic hem on the foot shell.
 - **Foot shell:** foot box side faces, M3 inserts into the webs. Instep lugs sit outboard on the outrigger; the shell covers them.
 - **Hip skirt:** pelvis skin flange at z 1126 (rim). Elastic hem to the thigh fairing top at z 885.
+
+## Update 2026-10-14 (Thermal 9b9e169): saddle dropped, no-cover zone moves to the thigh
+- **Knee saddle and lower-shank no-cover zone: withdrawn.** The shin can be covered again (keep-out unchanged).
+- **New no-cover zone: knee housing fins** (thigh frame, housing on the trunnion at x −130, z 770). The thigh fairing must be open (grille) over the housing's front and rear faces plus fins plus 5 mm. No fins on the outer ±y flanks.
+- The knee cap vs thigh fairing gap is unchanged: the finned housing stays ≥ 110 mm from the knee cap keep-out.

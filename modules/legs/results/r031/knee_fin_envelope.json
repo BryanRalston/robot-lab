@@ -1,0 +1,98 @@
+{
+ "basis": "D69/D85 knee housing fin envelope (Thermal 9b9e169 option C). Light OCC sweep.\nFor knee 0..135 (screw stroke follows the linkage), sample the knee twin housing outer surface (tessellation vertices, rigid -> same\nordering every pose) and take the min point-to-solid distance to every neighbour: shank/tibia parts, thigh parts outside the knee\nactuator asm (trunnion cheeks, bracket, clevis, femur), knee screws/rods are part of the moving set but RV12 rods/eyes are checked,\nthe right leg, and the knee-cap keep-out (STL vertices, thigh frame = world for knee-only poses). Point-to-solid distance is a LOWER\nbound on the free radial fin height along the normal (conservative). Sectors are about the housing screw axis (PCA of the +y knee rod).\nFree fin height per sector = min over poses - 3 mm margin. Output results/r031/knee_fin_envelope.json",
+ "poses": [
+  0,
+  15,
+  30,
+  45,
+  60,
+  75,
+  90,
+  105,
+  120,
+  135,
+  135
+ ],
+ "axis_world_at_0": [
+  -0.378,
+  0.0,
+  0.926
+ ],
+ "sector_ref": "0 deg = +x(world fwd) projected normal to screw axis, ccw about axis",
+ "sectors": {
+  "000-030": {
+   "min_clear_mm": 15.0,
+   "fin_h_max_mm": 12.0,
+   "limiter": "L_knee trunnion bracket top plate (thigh) [EST] @135",
+   "n": 21
+  },
+  "030-060": {
+   "min_clear_mm": 10.6,
+   "fin_h_max_mm": 7.6,
+   "limiter": "L_knee trunnion bracket top plate (thigh) [EST] @135",
+   "n": 106
+  },
+  "060-090": {
+   "min_clear_mm": 1.0,
+   "fin_h_max_mm": 0.0,
+   "limiter": "L_knee screw +y RV12 roller-screw rod \u00f812 @135",
+   "n": 385
+  },
+  "090-120": {
+   "min_clear_mm": 1.0,
+   "fin_h_max_mm": 0.0,
+   "limiter": "L_knee screw +y RV12 roller-screw rod \u00f812 @135",
+   "n": 401
+  },
+  "120-150": {
+   "min_clear_mm": 32.7,
+   "fin_h_max_mm": 29.7,
+   "limiter": "L_knee trunnion bracket top plate (thigh) [EST] @135",
+   "n": 106
+  },
+  "150-180": {
+   "min_clear_mm": 31.3,
+   "fin_h_max_mm": 28.3,
+   "limiter": "L_knee trunnion bracket top plate (thigh) [EST] @135",
+   "n": 22
+  },
+  "180-210": {
+   "min_clear_mm": 31.3,
+   "fin_h_max_mm": 28.3,
+   "limiter": "L_knee trunnion bracket top plate (thigh) [EST] @135",
+   "n": 24
+  },
+  "210-240": {
+   "min_clear_mm": 33.4,
+   "fin_h_max_mm": 30.4,
+   "limiter": "L_knee trunnion bracket top plate (thigh) [EST] @135",
+   "n": 114
+  },
+  "240-270": {
+   "min_clear_mm": 1.0,
+   "fin_h_max_mm": 0.0,
+   "limiter": "L_knee screw -y RV12 roller-screw rod \u00f812 @135",
+   "n": 388
+  },
+  "270-300": {
+   "min_clear_mm": 1.0,
+   "fin_h_max_mm": 0.0,
+   "limiter": "L_knee screw -y RV12 roller-screw rod \u00f812 @135",
+   "n": 384
+  },
+  "300-330": {
+   "min_clear_mm": 10.6,
+   "fin_h_max_mm": 7.6,
+   "limiter": "L_knee trunnion bracket top plate (thigh) [EST] @135",
+   "n": 111
+  },
+  "330-360": {
+   "min_clear_mm": 15.0,
+   "fin_h_max_mm": 12.0,
+   "limiter": "L_knee trunnion bracket top plate (thigh) [EST] @135",
+   "n": 23
+  }
+ },
+ "overall_min_mm": 1.0,
+ "housing_to_kneecap_keepout_min_mm": 150.6
+}

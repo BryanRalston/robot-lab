@@ -1,0 +1,306 @@
+{
+ "-107.3": [
+  [
+   0.0,
+   0.0,
+   "L_femur tongue neck (55 mm, L36)"
+  ],
+  [
+   0.0,
+   0.0,
+   "L_femur tongue \u00f855x27 (\u00f835 press-fit bore)"
+  ],
+  [
+   1.0,
+   0.0,
+   "L_hip_pitch screw +y RV12 roller-screw rod \u00f812"
+  ],
+  [
+   1.0,
+   0.0,
+   "L_hip_pitch screw -y RV12 roller-screw rod \u00f812"
+  ],
+  [
+   30.0,
+   0.0,
+   "L_femur tube 7050-T7451 \u00f850x1.2 (R-031; P-047 wall 1.6 pending FEA)"
+  ],
+  [
+   30.62,
+   0.0,
+   "L_palm 7075-T6 machined shell 1.5 mm w/ openings (P-021/A32, palm_7075.py)"
+  ],
+  [
+   66.64,
+   0.0,
+   "L_thumb phalanx1 [EST]"
+  ],
+  [
+   87.19,
+   0.0,
+   "L_thumb phalanx2 [EST]"
+  ]
+ ],
+ "-90": [
+  [
+   0.0,
+   0.0,
+   "L_femur tongue neck (55 mm, L36)"
+  ],
+  [
+   0.0,
+   0.0,
+   "L_femur tongue \u00f855x27 (\u00f835 press-fit bore)"
+  ],
+  [
+   1.0,
+   0.0,
+   "L_hip_pitch screw +y RV12 roller-screw rod \u00f812"
+  ],
+  [
+   1.0,
+   0.0,
+   "L_hip_pitch screw -y RV12 roller-screw rod \u00f812"
+  ],
+  [
+   30.0,
+   0.0,
+   "L_femur tube 7050-T7451 \u00f850x1.2 (R-031; P-047 wall 1.6 pending FEA)"
+  ],
+  [
+   30.62,
+   0.0,
+   "L_palm 7075-T6 machined shell 1.5 mm w/ openings (P-021/A32, palm_7075.py)"
+  ],
+  [
+   66.64,
+   0.0,
+   "L_thumb phalanx1 [EST]"
+  ],
+  [
+   87.19,
+   0.0,
+   "L_thumb phalanx2 [EST]"
+  ]
+ ],
+ "-60": [
+  [
+   0.0,
+   0.0,
+   "L_femur tongue neck (55 mm, L36)"
+  ],
+  [
+   0.0,
+   0.0,
+   "L_femur tongue \u00f855x27 (\u00f835 press-fit bore)"
+  ],
+  [
+   1.0,
+   0.0,
+   "L_hip_pitch screw +y RV12 roller-screw rod \u00f812"
+  ],
+  [
+   1.0,
+   0.0,
+   "L_hip_pitch screw -y RV12 roller-screw rod \u00f812"
+  ],
+  [
+   30.0,
+   0.0,
+   "L_femur tube 7050-T7451 \u00f850x1.2 (R-031; P-047 wall 1.6 pending FEA)"
+  ],
+  [
+   30.62,
+   0.0,
+   "L_palm 7075-T6 machined shell 1.5 mm w/ openings (P-021/A32, palm_7075.py)"
+  ],
+  [
+   66.64,
+   0.0,
+   "L_thumb phalanx1 [EST]"
+  ],
+  [
+   87.19,
+   0.0,
+   "L_thumb phalanx2 [EST]"
+  ]
+ ],
+ "-30": [
+  [
+   0.0,
+   0.0,
+   "L_femur tongue neck (55 mm, L36)"
+  ],
+  [
+   0.0,
+   0.0,
+   "L_femur tongue \u00f855x27 (\u00f835 press-fit bore)"
+  ],
+  [
+   1.0,
+   0.0,
+   "L_hip_pitch screw +y RV12 roller-screw rod \u00f812"
+  ],
+  [
+   1.0,
+   0.0,
+   "L_hip_pitch screw -y RV12 roller-screw rod \u00f812"
+  ],
+  [
+   30.0,
+   0.0,
+   "L_femur tube 7050-T7451 \u00f850x1.2 (R-031; P-047 wall 1.6 pending FEA)"
+  ],
+  [
+   30.62,
+   0.0,
+   "L_palm 7075-T6 machined shell 1.5 mm w/ openings (P-021/A32, palm_7075.py)"
+  ],
+  [
+   66.64,
+   0.0,
+   "L_thumb phalanx1 [EST]"
+  ],
+  [
+   87.19,
+   0.0,
+   "L_thumb phalanx2 [EST]"
+  ]
+ ],
+ "0": [
+  [
+   0.0,
+   0.0,
+   "L_femur tongue neck (55 mm, L36)"
+  ],
+  [
+   0.0,
+   0.0,
+   "L_femur tongue \u00f855x27 (\u00f835 press-fit bore)"
+  ],
+  [
+   1.0,
+   0.0,
+   "L_hip_pitch screw +y RV12 roller-screw rod \u00f812"
+  ],
+  [
+   1.0,
+   0.0,
+   "L_hip_pitch screw -y RV12 roller-screw rod \u00f812"
+  ],
+  [
+   30.0,
+   0.0,
+   "L_femur tube 7050-T7451 \u00f850x1.2 (R-031; P-047 wall 1.6 pending FEA)"
+  ],
+  [
+   30.62,
+   0.0,
+   "L_palm 7075-T6 machined shell 1.5 mm w/ openings (P-021/A32, palm_7075.py)"
+  ],
+  [
+   66.64,
+   0.0,
+   "L_thumb phalanx1 [EST]"
+  ],
+  [
+   87.19,
+   0.0,
+   "L_thumb phalanx2 [EST]"
+  ]
+ ],
+ "20": [
+  [
+   0.0,
+   0.0,
+   "L_femur tongue neck (55 mm, L36)"
+  ],
+  [
+   0.0,
+   0.0,
+   "L_femur tongue \u00f855x27 (\u00f835 press-fit bore)"
+  ],
+  [
+   1.0,
+   0.0,
+   "L_hip_pitch screw +y RV12 roller-screw rod \u00f812"
+  ],
+  [
+   1.0,
+   0.0,
+   "L_hip_pitch screw -y RV12 roller-screw rod \u00f812"
+  ],
+  [
+   24.26,
+   0.0,
+   "L_femur tube 7050-T7451 \u00f850x1.2 (R-031; P-047 wall 1.6 pending FEA)"
+  ],
+  [
+   30.62,
+   0.0,
+   "L_palm 7075-T6 machined shell 1.5 mm w/ openings (P-021/A32, palm_7075.py)"
+  ],
+  [
+   45.23,
+   0.0,
+   "L_knee trunnion bracket top plate (thigh) [EST]"
+  ],
+  [
+   66.64,
+   0.0,
+   "L_thumb phalanx1 [EST]"
+  ],
+  [
+   87.19,
+   0.0,
+   "L_thumb phalanx2 [EST]"
+  ]
+ ],
+ "40": [
+  [
+   0.0,
+   0.0,
+   "L_femur tongue neck (55 mm, L36)"
+  ],
+  [
+   0.0,
+   0.0,
+   "L_femur tongue \u00f855x27 (\u00f835 press-fit bore)"
+  ],
+  [
+   1.0,
+   0.0,
+   "L_hip_pitch screw +y RV12 roller-screw rod \u00f812"
+  ],
+  [
+   1.0,
+   0.0,
+   "L_hip_pitch screw -y RV12 roller-screw rod \u00f812"
+  ],
+  [
+   17.58,
+   0.0,
+   "L_femur tube 7050-T7451 \u00f850x1.2 (R-031; P-047 wall 1.6 pending FEA)"
+  ],
+  [
+   30.62,
+   0.0,
+   "L_palm 7075-T6 machined shell 1.5 mm w/ openings (P-021/A32, palm_7075.py)"
+  ],
+  [
+   46.87,
+   0.0,
+   "L_knee trunnion bracket strut to femur [EST]"
+  ],
+  [
+   66.64,
+   0.0,
+   "L_thumb phalanx1 [EST]"
+  ],
+  [
+   87.19,
+   0.0,
+   "L_thumb phalanx2 [EST]"
+  ]
+ ]
+}

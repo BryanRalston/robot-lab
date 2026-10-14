@@ -13,7 +13,7 @@ Hand checks only (box light-work rule). Converged FEA goes to T&R on the bryan P
   - Material: 7075-T6, with 17-4PH H1025 as the fallback.
 - **Pick: 7075-T6, b 30, d0 36 (d1 19), R8 cap/arm blends.**
   - Hand amplitude 26.3 MPa at Kt 2.0. If the notch Kt of 6.6 survived, it would be 86.8 MPa, which fails.
-  - Δmass +0.09 kg robot (2 levers).
+  - Δmass +0.09 kg robot (2 levers) [hand EST]. **Superseded by L47 CAD: +0.118 kg robot (merged web, R8 built), fallback +0.242.**
 - Fallback if FEA shows the notch remains: b 35, d0 40.
   - 57.4 MPa even at Kt 6.6.
   - +0.18 kg robot, which is < 0.25, so **steel is not needed**.
@@ -54,7 +54,7 @@ A16 ø6 dowel through the tongue and tube (42CrMo4, +0.005/leg). Bore-opening co
 ## Mass (Legs R-031)
 | item | robot kg |
 |---|---|
-| lever pick (Actuators part, our spec) | +0.09 (fallback +0.18) |
+| lever pick (Actuators part, our spec) | +0.118 CAD, L47 (fallback +0.242) |
 | P-046 | +0.08 |
 | P-047 | +0.15 |
 | P-048 | +0.01 |

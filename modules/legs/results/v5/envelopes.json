@@ -17,7 +17,7 @@
   "area_cm2": 1750.8,
   "stl": "results/v5/shin_fairing_keepout.stl",
   "note": "",
-  "status": "RESTRICTED (Thermal 26412c7 / D69): the shank from the tibia collar to the knee must stay uncovered. Only the knee-region cap (knee_cap) remains; this hull is kept for reference."
+  "status": "RESTORED: tibia saddle dropped (Thermal 9b9e169); shin may be covered again (keep-out unchanged)"
  },
  "ankle_boot": {
   "frame": "L_shank",
@@ -115,22 +115,6 @@
   "note": "upper shell over the 240x100x18 box; sole contact patch unchanged"
  },
  "no_cover_zones": {
-  "knee_saddle": {
-   "frame": "L_shank",
-   "desc": "6061 finned clamp-on saddle (knee heat spreader + knee drive mount)",
-   "tibia_axis_xy": [
-    14,
-    130
-   ],
-   "z": [
-    320,
-    415
-   ],
-   "r_max_mm": 47,
-   "fins": "10 axial, 95x20x1.5-2, rear/side sector x<=14+..., none at x>36.5 (ankle screw bodies swept x>=45.6 at z320-400, >=39.4 at z400-420)",
-   "front_wall_x_max": 39.5,
-   "free_air": "required (no cover, exhaust must not wash the tibia collar)"
-  },
   "lower_shank": {
    "frame": "L_shank",
    "z": [
@@ -138,12 +122,20 @@
     415
    ],
    "desc": "bare tibia, uncovered per Thermal; the ankle boot top stays at z<=170"
+  },
+  "knee_housing_fins": {
+   "frame": "L_thigh",
+   "desc": "knee twin housing (D85 re-CAD) with axial fins, Thermal 9b9e169 option C; housing pivots on the thigh trunnion x-130 z770 (thigh frame), swings with the screw",
+   "region": "housing front (+x) and rear (-x) faces between the trunnion cheeks; fins max radial: front 12 mm / rear 28 mm near the trunnion end, up to ~37 mm (diagonals) - 54 mm (front/rear) at mid-length; none on the outer +-y flanks (trunnion cheeks, 0 gap) or near rod exits",
+   "fairing": "thigh fairing must be OPEN (grille/no cover) over the housing front and rear faces + fins + 5 mm swing allowance; no exhaust onto the thigh collar bondline",
+   "source": "results/r031/knee_fin_envelope.json (knee_fin_sweep.py)"
   }
  },
  "knee_cap_vs_thigh_gap": {
   "file": "results/v5/knee_cap_vs_thigh_gap.json",
   "min_gap_mm": 10.2,
   "at_knee_deg": 135,
-  "note": "between the two hull+5 keep-outs (hardware-to-hardware ~20 mm); 22 mm from 0 to 105 deg, set by the thigh fairing lower edge z555. D69 \u00f885 housing (+4.5 mm radial) -> ~5.7 mm keep-out gap / ~15.7 hardware [EST, no re-CAD]"
+  "note": "between the two hull+5 keep-outs (hardware-to-hardware ~20 mm); 22 mm from 0 to 105 deg, set by the thigh fairing lower edge z555. D69 \u00f885 housing (+4.5 mm radial) -> ~5.7 mm keep-out gap / ~15.7 hardware [EST, no re-CAD]",
+  "note_fins": "Finned housing: housing to knee-cap keep-out >=150.6 mm over 0-135 (sweep); fins <=30 mm leave >=110 mm. Knee-cap vs thigh-fairing gap unchanged (10.2 mm keep-out at 135; ~5.7 est. with D69 housing)."
  }
 }

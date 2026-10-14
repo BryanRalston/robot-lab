@@ -1,0 +1,13 @@
+{
+ "tag": "b30_d36",
+ "b": 30.0,
+ "d0": 36.0,
+ "d1": 19.0,
+ "fillet": "R8 on 4 web/arm edges",
+ "valid": true,
+ "solids": 2,
+ "mass_kg": 0.4642,
+ "ymax_r27": 54.04,
+ "ymax_r34": 57.74,
+ "step": "cad/hip_pitch_lever_r031_mw_b30_d36.step"
+}

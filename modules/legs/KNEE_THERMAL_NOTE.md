@@ -1,4 +1,18 @@
+> **SUPERSEDED 2026-10-14 (L48):** the tibia saddle (and the femur spreader/strap, Actuators fbe0def) are dropped per Thermal 9b9e169. Heat path = axial fins on the knee twin housing (D85). See §0.
+
 # Legs knee thermal note: D69 saddle, P-041 breaks, A40 gait suggestions (2026-10-14)
+
+## 0. Current (L48): housing fins, fin envelope (knee_fin_sweep.py -> results/r031/knee_fin_envelope.json)
+- Sweep: knee 0-135 in 15 deg steps (screw stroke follows the linkage), housing surface vertices vs tibia/shank, thigh, trunnion cheeks and bracket, rods, right leg and knee-cap keep-out. Point-to-solid distance is used, which is conservative. Margin 3 mm.
+- Allowed fin radial height (about the screw axis, 0 deg = front):
+  - Front, 330-030: 12 mm at the trunnion end, 54-56 mm mid-length.
+  - Diagonals 030-060 and 300-330: 7.6 mm at the trunnion end, 40 mm mid.
+  - Rear, 150-210: 28 mm at the trunnion end, 57 mm mid. Rear diagonals 120-150 and 210-240: 28-30 mm at the end, 37 mm mid.
+  - Outer +-y flanks, 060-120 and 240-300: none. The trunnion cheeks sit at 0 gap and the rods exit there.
+  - Every trunnion-end limit is our knee trunnion bracket top plate [EST] at 135 deg. It can be reshaped if Actuators needs more height there.
+  - Tibia, knee cap (>=150 mm), the other leg and the rods away from their exits never limit.
+- Caveat: tessellation is coarse (2 mm tolerance; vertices concentrate at edges), so treat these as screening values. Actuators should re-check with the D85 CAD.
+- Mass: fins 0.05 kg/knee [Thermal EST] (growth to 0.12). The knee is now +0.164 motor + 0.04 housing + 0.05 fins = **+0.254 kg/knee, +0.508 robot** (was +0.64), i.e. -0.13 kg robot (up to +0.00 at the 0.12 growth).
 
 ## 1. D69 + Thermal 26412c7: clamp-on 6061 finned saddle (replaces the bolted pad)
 - **Placement** (shank frame, model_v4):

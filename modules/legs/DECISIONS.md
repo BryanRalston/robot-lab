@@ -215,3 +215,16 @@
   - The lower shank stays uncovered. +0.32 kg/knee.
   - KNEE_THERMAL_NOTE.md. P-041 G10 bushes at the hip_pitch clamp eyes, +0.024 kg [EST]; not yet in model_v4.
 - L46 (Materials Q) The ankle cross has no FEA and no pocketed CAD. model_v4 l.194 is a solid 30×46×30 Ti box; the 120 g booking (35 % pocketing) is unverified. It's added as a candidate to the next T&R FEA batch.
+- L47 (R-031 / Actuators fbe0def) hip_pitch lever: **b30/d36 picked**, with the merged web and R8 blends. Basis: lever_l35_r031.py and lever_l35_model.py → results/r031/.
+  - CAD: Actuators' G2 arms plus our full-depth web disc (r 30, |y| 33.5–38.5). The R8 blend built on both sections (4 web/arm edges); the solid is valid. STEP files: cad/hip_pitch_lever_r031_mw_b30_d36.step and _b35_d40.step. These are for checking, not release.
+  - Mass per lever with the web: G2 0.405, b30/d36 0.464, b35/d40 0.527 kg. **Δ robot +0.118 (pick), +0.242 (fallback)**, which confirms Actuators' +0.123 / +0.252 to within the web. Our +0.09 hand estimate was low.
+  - model_v4 sweep, hip_pitch −107.3…+40, lever swapped in (min distance to non-mate thigh parts):
+    - femur tube: stock 17.6 mm, **b30/d36 11.0**, b35/d40 7.4, all at +40°. Everything is ≥ 26 mm at −107.3…0.
+    - Tongue/neck: 0 mm distance with 0 overlap volume (the cheek face and tongue face are coplanar at |y| 13.5). It's identical with the stock lever: a modelled thrust face, not a clash.
+    - Hip rods: 1.0 at all angles, identical to stock (the eye-region proxy). Rod sweep is from Actuators: 1.94 (pick) / 1.07 (fallback).
+  - Envelope: max |y| inside r ≤ 27 is 50.2 (G2) / 54.0 / 56.4, and inside r 34 it's 54.9 / 57.7 / 59.5. So the L35 "|y| ≤ 38.5" figure covered only the cap: the arm roots already exceeded it on G2. In the assembly the pick's +3.8 mm moves nothing into contact (results above). L35 is restated as "no contact with ≥ 10 mm to the femur tube over the range". The pick meets that at 11.0 mm; the fallback (7.4) does not.
+  - Fatigue amplitude is the hand estimate of about 26 MPa (allowable 58). T&R's converged FEA must confirm it.
+- L48 (Thermal 9b9e169) **Tibia saddle dropped** (L45 superseded), and Actuators' femur spreader/strap is not adopted. The knee heat path is axial fins on the knee twin housing (D85 re-CAD).
+  - Fin envelope: knee_fin_sweep.py → results/r031/knee_fin_envelope.json. Values: front 12 mm and rear 28 mm at the trunnion end, 37–57 mm at mid-length, none on the ±y flanks. KNEE_THERMAL_NOTE §0 has the details.
+  - Mass booking: saddle removed. Knee is +0.254 kg/knee (+0.508 robot) with 0.05 fins [Thermal EST], −0.13 kg robot versus L45.
+  - Industrial Design: the shin is coverable again. The no-cover zone moves to the thigh, over the housing's front and rear. The knee cap vs thigh gap is unchanged (housing ≥ 150 mm from the knee-cap keep-out).
