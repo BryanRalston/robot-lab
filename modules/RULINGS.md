@@ -1078,3 +1078,7 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
 ## R-107 (2026-10-14) Trunnion bush grade (Materials)
 - Adopt SABIC Ultem 4001 (PTFE-lubricated PEI): width >=1.6x (<=14.6 MPa), hardened and ground 9 mm pin (>=HRC 50, Ra <=0.4 um), greased at assembly. Before G1: cite the SABIC wear factor and PV (about 0.04 MPa m/s), and Thermal confirms 43.8 K/W. If either fails, fall back to 450FC30.
 - Sole Shore: published data only, with no vendor contact; otherwise it is a G5 item (R-106 clarified).
+
+## R-108 (2026-10-14) Materials 8fdce97
+- L61 Ultem 4001 bush confirmed (SABIC TDS: PV 1.9 vs 0.04). Binding: >=0.2 mm radial wear allowance, width >=1.6x, hardened and ground pin. Creep at 95 C is a G5 test; Thermal assumes PEI-class conductivity.
+- Sole: 7373 TOP85 at 85+/-3 A (Vibram catalogue) satisfies the hardness gate as a published citation; only the 3 mm thickness availability is left to confirm before G1. 7663 (reseller data) is the alternate only.
