@@ -95,3 +95,33 @@ Script `a38_knee_path.py` → `results/a38_knee_path.json`. The collar add is ta
   - rely on the R-077 carry limit.
 - The femur heat path is not a credited knee cooling path in any Actuators/Controls model so far. Their numbers already assume no femur path, so **their pass/fail results are unchanged by the break.**
 - What the break removes is up to 4.4–7.4 K of uncredited benefit.
+
+### R-110: bond temperature vs trunnion break value (no lever-eye sleeve, ø22 tine break)
+**Setup:**
+- Hip side: tine ø22 ≈ 26 K/W in parallel with the rod path 58 K/W, giving 18.0 K/W.
+- Knee add: θ_knee-end × 0.28, the h 12 attenuation, conservative (no collar-sink credit).
+- Knee case ΔT: 60 K at design, 68 K with vents short.
+- Script `a38_r110.py` → `results/a38_r110.json`.
+
+| trunnion joint R (K/W) | A35 design, R_col 8 | A35 design, R_col 14 | vents short, R_col 8 | **vents short, R_col 14 (worst)** | worst ≤ 70 °C? |
+|---|---|---|---|---|---|
+| unbroken, good contact 2.5 | 59.4 | 65.9 | 64.5 | **72.7** | **NO** |
+| unbroken, typical 5 | 56.6 | 63.1 | 61.3 | **69.4** | yes, 0.6 K (not defensible: unbroken spans 2.5–5) |
+| **10** | 54.2 | 60.7 | 58.6 | **66.7** | **YES, 3.3 K** |
+| 15 | 53.1 | 59.6 | 57.4 | 65.5 | yes, 4.5 K |
+| 33 (Legs L61 bush) | 51.8 | 58.3 | 55.8 | 64.0 | yes, 6.0 K |
+
+**Smallest acceptable: a ≥ 10 K/W joint.**
+- "None" fails at good contact (72.7 °C) and only scrapes by at 5 K/W.
+- Going from 10 to 33 K/W buys only 2.7 K at the bond.
+- The design-point bond (≤ 60 °C) is met at R_col 8 for every option. At R_col 14 it needs ≥ 15 K/W. The 70 °C worst-case rule is what governs.
+
+**Example 10 K/W joint [EST, Legs to size]:**
+- 1 mm G10/PEI washers under the bracket strut and top-plate feet (≈ 2–3 cm² contact);
+- Ti limiters at the bolts, no full bush;
+- **≈ +0.02–0.03 kg robot ⇒ saving ≈ 0.045–0.055 kg vs L61 (+0.074).**
+- If Legs can show ≥ 5 K/W measured contact with no parts at all, the saving is 0.074 kg, but with only 0.6 K margin. Not recommended.
+
+**Winding addendum:**
+- A 10 K/W joint costs the knee winding **+1.6 to +4.6 K** vs unbroken (2.5–5 K/W); L61 33 K/W costs +3.3 to +6.1 K.
+- Credited Actuators/Controls knee results are unchanged, since no model credits the femur path.

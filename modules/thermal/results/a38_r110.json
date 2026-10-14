@@ -1,0 +1,32 @@
+{
+ "unbroken 2.5": {
+  "A35 design|Rc8": 59.4,
+  "A35 design|Rc14": 65.9,
+  "vents short|Rc8": 64.5,
+  "vents short|Rc14": 72.7
+ },
+ "unbroken/5": {
+  "A35 design|Rc8": 56.6,
+  "A35 design|Rc14": 63.1,
+  "vents short|Rc8": 61.3,
+  "vents short|Rc14": 69.4
+ },
+ "10": {
+  "A35 design|Rc8": 54.2,
+  "A35 design|Rc14": 60.7,
+  "vents short|Rc8": 58.6,
+  "vents short|Rc14": 66.7
+ },
+ "15": {
+  "A35 design|Rc8": 53.1,
+  "A35 design|Rc14": 59.6,
+  "vents short|Rc8": 57.4,
+  "vents short|Rc14": 65.5
+ },
+ "33 (L61)": {
+  "A35 design|Rc8": 51.8,
+  "A35 design|Rc14": 58.3,
+  "vents short|Rc8": 55.8,
+  "vents short|Rc14": 64.0
+ }
+}
