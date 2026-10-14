@@ -1045,3 +1045,8 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
 
 ## R-100 (2026-10-14) Carry bout reset (Controls a0dd5de)
 - A bout resets only after **>=120 s with the load set down** (worst compliant peak 116.4 C). 60 s is rejected (0.9 K margin is too thin before G5 validation). The model limit still governs.
+
+## R-101 (2026-10-14) Knee trunnion heat break (Thermal ec50e4e)
+- Adopt a PEI/Ti-limiter break of >=30 K/W in the knee trunnion-to-femur path (Legs): **+0.009** booked in full. This supersedes the R-099 Thermal hold. The lever-eye sleeve and ear redesign stay rejected.
+- With the 22 mm tine break and the A35 vents, the bond stays <=60 C at a collar resistance of 8 K/W. J-T1 and the G5 collar thermocouple are the gate: if collar R is 14 K/W, the bond reaches 62 C or more, the design fails, and it comes back for a ruling.
+- Reserve ~-0.59.
