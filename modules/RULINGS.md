@@ -1067,3 +1067,6 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
 - L61: the bolted break is rejected (slips). Adopt PEI bushes on the trunnion pins at 43.8 K/W, **+0.004** over R-101. Materials must confirm PEI bearing stress and creep under the 8.66 kN couple before G1.
 - Arms: elbow full-reach scale 0.84 (supersedes 0.85 in R-102). R5 side pose retired; diagonals use tuck B plus waist yaw toward the falling shoulder, pending Controls timing. Pad wedge rejected.
 - Reserve ~-0.55.
+
+## R-105 (2026-10-14) PEI bush conditions (Legs L61, Thermal)
+- The R-104 +0.004 (total 0.013) already covers the +0.012; no rebook. Binding: no metal bypass at the pins (axial faces and retainers go through PEI or a 0.3 mm air gap). Materials confirms Ultem creep at 23.4 MPa and 90-95 C before G1.
