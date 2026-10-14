@@ -428,3 +428,36 @@ Recorded: rail A = F1–F3 + S1, S2 + hand logic; rail B = F4–F6 + S3–S5. Si
 - Mass/area: < 1 g, ~20 mm² [EST].
 
 **RP40 derating above 60 °C (RP40-FR datasheet REV 8/2020, page PD-6, "Derating Graph", chamber, natural convection 0.1 m/s):** **graph only, no table.** For **RP40-2415SFR (bare)**: 100 % output to **60 °C**, linear to **0 % at 105 °C** (≈ 2.2 %/K; e.g. ~78 % at 70 °C, ~56 % at 80 °C, ~33 % at 90 °C, read from the graph). For **-HC**: 100 % to 65 °C, 0 % at 105 °C. Environmental table: operating −40…+60 °C without derating, to +105 °C with derating; max case +105 °C; thermal impedance 10.8 K/W bare / 10.3 K/W with heat-sink (natural convection 0.1 m/s). **Datasheet note 8: the graphs are valid only for the part numbers shown (RP40-2415SFR); the RP40-11024SFR curve is not published, so RECOM techsupport must confirm it.** For our design: the shoulder-bay ambient must stay ≤ 60 °C for full 40 W per converter, or the per-rail cap must derate along this curve. Thermal's strapped case of ~71 °C (35 °C ambient) is below the 105 °C case limit.
+
+### 16.6 R-051 ruling applied: latching HW OT cutoff, reset by rail power cycle, MCU fault flag, NTC rating, RECOM curve
+
+**Ruling (R-051):** The HW OT cutoff is LATCHING ONLY. The hysteresis option in §16.5 is removed. The only reset is a power cycle of hand rails A and B (RP40-11024SFR/P). The XMC4300 commands that power cycle, and only after the MCU NTC reading is below 70 °C. The MCU must be able to read a fault flag.
+
+**NTC rating:** The Murata NCP15WF104F03RC is rated −40 to +125 °C (Murata product page "Operating Temperature Range −40℃ to 125℃"; NCP15 spec sheet, pim.murata.com SPEC_NCP15, row NCP15WF104F03RC "-40 to +125"). That meets the ≥125 °C requirement, so the part is retained. Note: above 125 °C Murata requires voltage/temperature derating. Our divider bias is ≤3.3 V across 100k + 100k, well below the 5 V max, and the trip is at ~110 °C.
+
+**Latch implementation (LM2903B-Q1, both channels; no added ICs):**
+- **Channel A (trip + latch):**
+  - Inputs: the NTC/100k divider and the 110 °C reference.
+  - Positive feedback: a 1 MΩ resistor from the open-collector output to the reference node, with a BAS16 (or 1N4148WS, 150 °C) in series. The diode is oriented so feedback acts only once the output is LOW.
+  - Effect: after a trip, the release threshold moves to a divider voltage the NTC cannot reach at or above −40 °C. The output stays LOW until the 3V3_HAND logic rail (derived from rail A) collapses.
+  - Power-on reset: a 100 nF capacitor on the reference node sets the comparator's power-up state. It starts un-tripped and only latches on a genuine over-temperature.
+- **Output OT_N:** open-collector, with a 10 kΩ pull-up to 3V3_HAND.
+  - **Driver enables:** OT_N gates all 11 DRV8874-Q1 nSLEEP/EN lines through a series 100 Ω on each enable, plus a BAT54 (125 °C+ AEC-Q101) per line from the enable to OT_N. A LOW OT_N clamps every enable LOW regardless of the MCU.
+  - **MCU fault flag:** channel B is a non-inverting buffer of OT_N (threshold 1.65 V). Its open-collector output OT_FLAG_N has a 10 kΩ pull-up to the XMC4300 VDDP and goes to a GPIO with interrupt. The MCU can therefore read the latch state without loading the latch node.
+- **Reset path:**
+  1. The XMC4300 reads the NTC through its ADC (separate sense NTC, same part).
+  2. When it reads below 70 °C, it drives HAND_RAIL_EN low for ≥200 ms.
+  3. That pulls the RP40 A/B CTRL/remote-off pins through the existing shoulder-bay control line.
+  4. Then it re-enables the rails.
+  - The MCU sits on the XMC4300 logic supply, which is not cut by the hand rails, so it survives the cycle.
+- **Firmware:** the MCU cannot clear the latch any other way. There is no reset pin by design.
+- **Parts and mass:** all parts are rated ≥125 °C (LM2903B-Q1 −40 to 125 °C; 0402 thick-film resistors at 155 °C; X7R capacitors at 125 °C; BAS16/BAT54 at 150 °C). Added parts versus §16.5: 1 diode, 11 BAT54, ~14 resistors, 1 capacitor. That is <0.001 kg, well inside the R-043 0.02 kg freeze.
+- **Verification (T-029 bench):**
+  - Heat-gun trip at 110 ±3 °C.
+  - Confirm no release when cooling to −40 °C equivalent (divider substitution).
+  - Confirm release only on a rail cycle.
+  - Confirm OT_FLAG_N is read correctly.
+
+**Ladder:** The 55/70/80/88 °C → 0.84/0.70/0.50/0.35/0 A ladder stays mandatory as written in §16.5. Tuning it is contingent on the Arms grip check (grip force at each derate step). It is not tuned until Arms reports.
+
+**RECOM curve:** The §16.5 derating (full power to 60 °C, zero at 105 °C) comes from the RP40-2415SFR graph only. Confirming the 11024SFR curve needs a vendor answer. A draft question for Bryan to send to RECOM is held off-repo. Nobody contacts RECOM from the agents. This stays open as O-E13 until RECOM answers.
