@@ -734,3 +734,8 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
 - Net +0.006 is **accepted** (inside the 0.02 cap).
 - **Forearm blocker:** still 40 mm over after the Arms repack. Decision: **D73 compaction first**, owned by Actuators with Arms, time-boxed to Arms R6. If D73 can't recover >=40 mm, the **fallback is a forearm lengthened by <=40 mm** (270 to 310 mm). That needs: ID proportion sign-off, Controls reach/inertia re-run, and an Arms mass delta (its own ruling). D74 at ø90 is rejected for the ø70 forearm.
 - Hand board fit conditions accepted (axial connectors, >=ø21 centre hole, <=12.5 mm stack); Electronics designs to them. This closes the A43 fit condition, provisionally until CAD.
+
+## R-056 (2026-10-14) D69 rev B verified; hip lever L47 (Actuators fbd762b)
+- D69 rev B: CAD-measured fins are 0.0703 m2, 0.0932 kg/knee, **booked +0.186** (was +0.24). Thermal's independent prediction of 88/105 C matches Actuators' 89.2/106.4 C within 1.4 K, so **R-052 condition 1 is met**. Still open: the trunnion-face fins <=9 mm and the Legs v5 fairing check (A47), plus the G5 bench test. Rev B is no longer at risk of reverting.
+- Hip lever L47: measured 0.464 kg/lever by Actuators against Legs' +0.118. Until they reconcile, the **conservative value is booked: +0.43 kg robot**. Actuators and Legs reconcile on one CAD body and report a single measured number; credit comes back at full value if it's lower. The G3 fatigue check (Grok Build) must run before G3 can close.
+- Reserve is ~0.36 (0.30 floor). The shin fairing stays deferred, and additions >0.02 need a ruling.
