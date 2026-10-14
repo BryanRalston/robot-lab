@@ -10,13 +10,13 @@
    "shoulder_pitch": -0.6,
    "elbow": -1.2
   },
-  "sim_mass_unscaled": 69.475,
+  "sim_mass_unscaled": 64.298,
   "total_kg": 85.0,
-  "com_x_from_ankle_m": 0.0919,
-  "toe_margin_mm": 88.1,
-  "heel_margin_mm": 151.9,
-  "ankle_static_Nm_per_leg": 38.3,
-  "ankle_peak_ratio": 8.46
+  "com_x_from_ankle_m": 0.1005,
+  "toe_margin_mm": 79.5,
+  "heel_margin_mm": 160.5,
+  "ankle_static_Nm_per_leg": 41.9,
+  "ankle_peak_ratio": 7.73
  },
  {
   "payload_pos": [
@@ -29,13 +29,13 @@
    "shoulder_pitch": -0.6,
    "elbow": -1.2
   },
-  "sim_mass_unscaled": 69.475,
+  "sim_mass_unscaled": 64.298,
   "total_kg": 85.0,
-  "com_x_from_ankle_m": 0.0707,
-  "toe_margin_mm": 109.3,
-  "heel_margin_mm": 130.7,
-  "ankle_static_Nm_per_leg": 29.5,
-  "ankle_peak_ratio": 10.99
+  "com_x_from_ankle_m": 0.0804,
+  "toe_margin_mm": 99.6,
+  "heel_margin_mm": 140.4,
+  "ankle_static_Nm_per_leg": 33.5,
+  "ankle_peak_ratio": 9.66
  },
  {
   "payload_pos": [
@@ -48,13 +48,13 @@
    "shoulder_pitch": -1.0471975511965976,
    "elbow": -1.9198621771937625
   },
-  "sim_mass_unscaled": 69.475,
+  "sim_mass_unscaled": 64.298,
   "total_kg": 85.0,
-  "com_x_from_ankle_m": 0.107,
-  "toe_margin_mm": 73.0,
-  "heel_margin_mm": 167.0,
-  "ankle_static_Nm_per_leg": 44.6,
-  "ankle_peak_ratio": 7.26
+  "com_x_from_ankle_m": 0.1166,
+  "toe_margin_mm": 63.4,
+  "heel_margin_mm": 176.6,
+  "ankle_static_Nm_per_leg": 48.6,
+  "ankle_peak_ratio": 6.66
  },
  {
   "payload_pos": [
@@ -67,12 +67,12 @@
    "shoulder_pitch": -1.0471975511965976,
    "elbow": -1.9198621771937625
   },
-  "sim_mass_unscaled": 69.475,
+  "sim_mass_unscaled": 64.298,
   "total_kg": 85.0,
-  "com_x_from_ankle_m": 0.0626,
-  "toe_margin_mm": 117.4,
-  "heel_margin_mm": 122.6,
-  "ankle_static_Nm_per_leg": 26.1,
-  "ankle_peak_ratio": 12.41
+  "com_x_from_ankle_m": 0.0713,
+  "toe_margin_mm": 108.7,
+  "heel_margin_mm": 131.3,
+  "ankle_static_Nm_per_leg": 29.7,
+  "ankle_peak_ratio": 10.89
  }
 ]
