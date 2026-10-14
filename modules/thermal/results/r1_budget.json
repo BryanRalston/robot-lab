@@ -1,0 +1,199 @@
+{
+ "gait": "legs/results/r4/carry_20kg_1p0.npz",
+ "window_s": [
+  1.7850000000000001,
+  6.995
+ ],
+ "EST": {
+  "h_air": 12.0,
+  "fins": 2.0,
+  "rcu_hot": 1.4,
+  "h_cover_in": 4.0,
+  "h_cover_out": 12.0,
+  "cover_area_x": 1.5,
+  "f_covered": 0.5,
+  "dcm_eta": 0.92,
+  "rp40_load_W": 12.0,
+  "thor_W": 120.0,
+  "sensors_W": 40.0,
+  "drive_idle_W": 3.3,
+  "n_drives": 26,
+  "bms_W": 3.0,
+  "eta_rot": 0.75
+ },
+ "legs": [
+  {
+   "joint": "L_hip_yaw",
+   "motors": 1,
+   "copper_W": 5.07984746568923,
+   "iron_W": 0.031255808867891394,
+   "drive_cond_W": 0.5247081798954409,
+   "dT_wind_open": 13.56409700828754,
+   "dT_wind_cov": 16.786688415037446,
+   "dT_case_open": 5.639534961812339,
+   "dT_case_cov": 8.862126368562247,
+   "dT_cover_skin": 1.611295703374954,
+   "dT_cavity": 5.2367110359686
+  },
+  {
+   "joint": "L_hip_roll",
+   "motors": 1,
+   "copper_W": 11.58905157476445,
+   "iron_W": 0.16115003296782587,
+   "drive_cond_W": 1.1824942800126617,
+   "dT_wind_open": 25.7800502342184,
+   "dT_wind_cov": 32.84286652601335,
+   "dT_case_open": 12.359928510641168,
+   "dT_case_cov": 19.42274480243612,
+   "dT_cover_skin": 3.5314081458974758,
+   "dT_cavity": 11.477076474166797
+  },
+  {
+   "joint": "L_hip_pitch",
+   "motors": 2,
+   "copper_W": 36.001228366374505,
+   "iron_W": 5.646094945142378,
+   "drive_cond_W": 9.264305073206486,
+   "dT_wind_open": 80.07663914739683,
+   "dT_wind_cov": 114.41718623543055,
+   "dT_case_open": 60.09595740405898,
+   "dT_case_cov": 94.4365044920927,
+   "dT_cover_skin": 17.170273544016855,
+   "dT_cavity": 55.80338901805477
+  },
+  {
+   "joint": "L_knee",
+   "motors": 2,
+   "copper_W": 36.749199893804146,
+   "iron_W": 5.411160393578864,
+   "drive_cond_W": 9.355083549309956,
+   "dT_wind_open": 81.23206177961373,
+   "dT_wind_cov": 115.99563654450083,
+   "dT_case_open": 60.836255838552425,
+   "dT_case_cov": 95.59983060343953,
+   "dT_cover_skin": 17.38178738244355,
+   "dT_cavity": 56.49080899294154
+  },
+  {
+   "joint": "L_ankle_pitch",
+   "motors": 2,
+   "copper_W": 14.990549951611987,
+   "iron_W": 7.207540058007249,
+   "drive_cond_W": 4.4785495156172015,
+   "dT_wind_open": 51.886160191577055,
+   "dT_wind_cov": 75.05947700766757,
+   "dT_case_open": 40.55330442815839,
+   "dT_case_cov": 63.72662124424891,
+   "dT_cover_skin": 11.586658408045254,
+   "dT_cavity": 37.65663982614708
+  },
+  {
+   "joint": "R_hip_yaw",
+   "motors": 1,
+   "copper_W": 5.552533060412496,
+   "iron_W": 0.024960012077439815,
+   "drive_cond_W": 0.5535556173099363,
+   "dT_wind_open": 14.816095893367754,
+   "dT_wind_cov": 18.33274979001019,
+   "dT_case_open": 6.15414431912426,
+   "dT_case_cov": 9.670798215766695,
+   "dT_cover_skin": 1.7583269483212172,
+   "dT_cavity": 5.714562582043956
+  },
+  {
+   "joint": "R_hip_roll",
+   "motors": 1,
+   "copper_W": 10.8097155737188,
+   "iron_W": 0.16028432283087174,
+   "drive_cond_W": 1.1403774334425334,
+   "dT_wind_open": 24.056892173326037,
+   "dT_wind_cov": 30.65074448130299,
+   "dT_case_open": 11.539241538959669,
+   "dT_case_cov": 18.13309384693662,
+   "dT_cover_skin": 3.296926153988476,
+   "dT_cavity": 10.715010000462549
+  },
+  {
+   "joint": "R_hip_pitch",
+   "motors": 2,
+   "copper_W": 37.97265970001523,
+   "iron_W": 5.422288396121983,
+   "drive_cond_W": 9.590401285295103,
+   "dT_wind_open": 83.69255867853497,
+   "dT_wind_cov": 119.47412013283584,
+   "dT_case_open": 62.61773254502651,
+   "dT_case_cov": 98.39929399932738,
+   "dT_cover_skin": 17.89078072715043,
+   "dT_cavity": 58.14503736323891
+  },
+  {
+   "joint": "R_knee",
+   "motors": 2,
+   "copper_W": 33.64791450147812,
+   "iron_W": 5.502393231486458,
+   "drive_cond_W": 8.920430225589223,
+   "dT_wind_open": 75.16742423110509,
+   "dT_wind_cov": 107.44904233555351,
+   "dT_case_open": 56.49283168278473,
+   "dT_case_cov": 88.77444978723315,
+   "dT_cover_skin": 16.14080905222421,
+   "dT_cavity": 52.457629419728676
+  },
+  {
+   "joint": "R_ankle_pitch",
+   "motors": 2,
+   "copper_W": 13.204560620450014,
+   "iron_W": 7.099442279435153,
+   "drive_cond_W": 4.19612647137583,
+   "dT_wind_open": 47.075677470459425,
+   "dT_wind_cov": 68.27169440840183,
+   "dT_case_open": 37.09302964139921,
+   "dT_case_cov": 58.28904657934162,
+   "dT_cover_skin": 10.598008468971203,
+   "dT_cavity": 34.443527524156416
+  }
+ ],
+ "arms": [
+  {
+   "joint": "shoulder_pitch",
+   "per_arm_copper_W": 38.0553729271678,
+   "drive_cond_W": 5.612610706138577,
+   "dT_wind": 90.1660615594737
+  },
+  {
+   "joint": "elbow",
+   "per_arm_copper_W": 59.22400687421508,
+   "drive_cond_W": 5.819176450871888,
+   "dT_wind": 222.82772557902345
+  }
+ ],
+ "budget": {
+  "leg_copper": 205.59726070831897,
+  "leg_iron": 36.66656948051612,
+  "leg_drive_cond": 49.20603163105437,
+  "drive_idle": 85.8,
+  "arm_hold_copper": 194.55875960276575,
+  "arm_drive_cond": 22.86357431402093,
+  "neck_waist_other_copper": 8.0,
+  "thor": 120.0,
+  "sensors": 40.0,
+  "dcm_loss": 13.91304347826086,
+  "rp40_loss": 1.2596685082872936,
+  "pack_I2R": 11.21557342034967,
+  "bms": 3.0
+ },
+ "pack_I2R_eod": 16.823360130524506,
+ "total_heat_W": 792.0804811435739,
+ "P_bus_W": 984.3909505466879,
+ "I_pack_A": 13.672096535370665,
+ "pack": {
+  "R_K_per_W": 1.2623712381337104,
+  "tau_h": 3.068263426019435,
+  "dT_2h": 8.594217244908863,
+  "dT_2h_eod": 11.984480572687437
+ },
+ "thor": {
+  "dT_natural": 306.1224489795918,
+  "fan_cfm_10K": 21.083402916469232
+ }
+}
