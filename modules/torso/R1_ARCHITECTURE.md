@@ -447,6 +447,18 @@ Torso frame = waist_pitch origin; x forward, y left, z up. Layout [EST until CAD
 
 **Sternum items, same layout:** T-031 pad on Materials' bulkhead land at z ≈ +0.22, shell skin x ≈ +0.147 (≈ 37 mm local bulge, ID). The board (x ≤ +0.08) sits behind and below the land with no conflict.
 
+### 25.1 P-052 for RL Industrial Design: sternum pad, inserts, skin
+- **Land** (Materials, on the 12 mm bulkhead front face x = +0.050): 101 × 101 mm, face at x = +0.056, centred (y, z) = (0, +0.220). The integral 60 × 6 mm back rib runs horizontally on the rear face at z +0.217…+0.223.
+- **Pad footprint:** 98 × 98 mm, **centre (x, y, z) = (+0.100, 0, +0.220)** (mid-thickness of the 88 mm core); faces y −0.049…+0.049, z +0.171…+0.269, x +0.056…+0.144.
+- **4 × M4 captive inserts** (bulkhead, from the front) at **(y, z) = (±0.040, +0.180) and (±0.040, +0.260)**, x = +0.056 face.
+  - Edge distance to the land edge 10.5 mm ≥ 2d (8 mm).
+  - Rib clearance 37 mm (rib at z 0.217–0.223).
+  - Shoulder 80 mm bolt circles (centres y ±0.170, nearest bolt y ±0.130): ≥ 90 mm away.
+  - Lead grommets (y ±0.170, z +0.145): ≥ 135 mm away. Partition ECAT grommet is on the partition, not the bulkhead.
+  - The pad core gets 12 × 12 mm corner notches for the retention-frame screws [EST].
+- **Final skin x:** land face +0.056 + core 0.088 + 1 mm CF face → +0.145; + 3 mm gap → +0.148; + PC plate 1.5 mm → **x ≈ +0.150** (base shell +0.11 → **40 mm proud** vs ID's 37 mm; ID either takes 40 mm or lets the gap go to 0 → +0.147).
+- **PC plate [EST]:** thermoformed PC 1.5 mm (covers spec, 1.20 g/cm³), 120 × 120 mm face + ~37 mm sidewalls with 15 mm blend ≈ 0.0144 + 0.48 × 0.037 ≈ 0.032 m² → **≈ 0.058 kg**. It replaces a 120 × 120 cut-out of the 2 mm CF shell (≈ 0.045 kg) → **net ≈ +0.013 kg** [EST].
+
 ## 7. Open questions / conflicts (not edited in others' files)
 - **O-T1 (Electronics, coordination):** adopt the 48 V intermediate rail with DCM3623TA5N53B4T00; Torso hosts the DCM on the power distribution board or the brain tray? Mass 0.024 [UNVERIFIED for variant] stays in the brain line; who books the 47718-232 choke; 24 V VL source (O-E3); BMS→safety MCU CAN FD message set; e-stop = FET-open vs contactor (O-E6).
 - **O-T2 (Actuators/Arbiter):** waist_pitch 116 N·m < 188 N·m need with T5 payload → TBM2G-08508A, +0.19 kg.
