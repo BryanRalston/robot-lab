@@ -1,0 +1,104 @@
+{
+ "rows": [
+  {
+   "panel": "shin fairing (2 halves)",
+   "P": "P-020",
+   "material": "PC 1.5 (CF allowed)",
+   "area_m2_side": 0.1226,
+   "panels": 4,
+   "kg": 0.457,
+   "cf_kg": 0.396
+  },
+  {
+   "panel": "thigh fairing (2 halves)",
+   "P": "P-020",
+   "material": "PC 1.5 (CF allowed)",
+   "area_m2_side": 0.1843,
+   "panels": 4,
+   "kg": 0.68,
+   "cf_kg": 0.587
+  },
+  {
+   "panel": "foot upper shell",
+   "P": "P-020",
+   "material": "PC 1.5",
+   "area_m2_side": 0.0771,
+   "panels": 2,
+   "kg": 0.285,
+   "cf_kg": null
+  },
+  {
+   "panel": "upper-arm shell (2 halves)",
+   "P": "P-020",
+   "material": "PC 1.5",
+   "area_m2_side": 0.066,
+   "panels": 4,
+   "kg": 0.253,
+   "cf_kg": null
+  },
+  {
+   "panel": "forearm shell (2 halves)",
+   "P": "P-020",
+   "material": "PC 1.5",
+   "area_m2_side": 0.0567,
+   "panels": 4,
+   "kg": 0.22,
+   "cf_kg": null
+  },
+  {
+   "panel": "shoulder cap",
+   "P": "P-020",
+   "material": "PC 1.5",
+   "area_m2_side": 0.03,
+   "panels": 2,
+   "kg": 0.116,
+   "cf_kg": null
+  },
+  {
+   "panel": "knee cap",
+   "P": "P-022 (new)",
+   "material": "PC 1.5",
+   "area_m2_side": 0.03,
+   "panels": 2,
+   "kg": 0.116,
+   "cf_kg": null
+  },
+  {
+   "panel": "hip skirt (flexible)",
+   "P": "P-023 (new)",
+   "material": "TPU-nylon fabric + PC rim strip",
+   "area_m2_side": 0.11,
+   "panels": 2,
+   "kg": 0.114,
+   "cf_kg": null
+  },
+  {
+   "panel": "waist bellows band",
+   "P": "P-024 (new)",
+   "material": "TPE bellows",
+   "area_m2_side": 0.0848,
+   "panels": 1,
+   "kg": 0.055,
+   "cf_kg": null
+  },
+  {
+   "panel": "ankle boot (flexible)",
+   "P": "P-025 (new)",
+   "material": "TPU-nylon fabric, zip",
+   "area_m2_side": 0.1007,
+   "panels": 2,
+   "kg": 0.098,
+   "cf_kg": null
+  }
+ ],
+ "totals": {
+  "P-020": 2.012,
+  "P-022 (new)": 0.116,
+  "P-023 (new)": 0.114,
+  "P-024 (new)": 0.055,
+  "P-025 (new)": 0.098
+ },
+ "booked_P020_skin_kg": 1.157,
+ "delta_vs_booked_kg": 1.238,
+ "pc_area_m2": 1.073
+}
