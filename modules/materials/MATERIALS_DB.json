@@ -42,6 +42,13 @@
   "VIB_TOP85_US": "https://us.vibram.com/on/demandware.static/-/Sites-VibramUS-Library/default/dw453a87e0/pdfs/vibram-shoe-repair-catalog-june-2015.pdf (7373 Protania, TOP85, 85+-3 Shore A)",
   "VIB_TOP85_LEF": "https://www.leffler.com.au/vibram-techdata/ (TOP 85: 1.15 g/cc, 85+-3 A, <100 mm3, >16 MPa, >450%)",
   "VIB_7663_CIAC": "https://www.ciac-srl.com/en/articolo/508163/lastra-comp-7163-gemma (7163/7663 Gemma: 1.17 g/cc, 93 Shore A, 180 mm3 DIN 53516)",
+  "ULTEM4001_EMEA": "https://www.lookpolymers.com/polymer_SABIC-Innovative-Plastics-ULTEM-4001-PEI-Europe-Africa-Middle-East.php (k 0.26 W/mK, ISO 8302)",
+  "VIB_7373_3MM": "https://www.subaru-ec.com/products/detail.php?product_id=3956 (7373 3 mm sheet, 75 Shore A listing)",
+  "EA9396": "https://www.conro.com/downloads/Manuals/Loctite-EA-9396-AERO-Epoxy-Paste-Adhesive-A-B-1USQ-Kit-TDS.pdf ; Tg: https://www.gluespec.com/Materials/SpecSheet/6b9cd73c-bc72-4e4b-ac15-20a777c6b4ca (EA 9396.6MD)",
+  "EA9394": "https://datasheets.tdx.henkel.com/LOCTITE-EA-9394-AERO-en_US.pdf",
+  "EC9323": "https://multimedia.3m.com/mws/media/820935O/3m-scotch-weld-9323-b-a.pdf ; service range: https://www.viba.nl/media/files/tds/tds0001188.pdf",
+  "DP420": "https://multimedia.3m.com/mws/media/2365743O/3m-scotch-weld-epoxy-adhesive-dp420-black.pdf",
+  "DP460": "https://multimedia.3m.com/mws/media/2365880O/3m-scotch-weld-epoxy-adhesive-dp460-off-white.pdf ; https://bac-online.com/content/PDF/DP460-TDS.pdf",
   "R027": "modules/RULINGS.md R-027 (PALSUN/LEXAN, Toray 3900, Easy Composites XC110 citations)"
  },
  "materials": [
@@ -635,13 +642,14 @@
     "RTI_mech_C": 170,
     "taber_mg_1000cy": 2,
     "compressive_MPa": null,
-    "k_W_mK": null
+    "k_W_mK": "0.26 (ISO 8302, SABIC EMEA TDS)"
    },
    "cost_hint": null,
    "sources": [
-    "ULTEM4001"
+    "ULTEM4001",
+    "ULTEM4001_EMEA"
    ],
-   "notes": "Compressive strength and thermal conductivity NOT on SABIC TDS. K/COF are RT SABIC-method values at PV 0.07 MPa m/s; 90-95 C wear and creep untested [EST]."
+   "notes": "Compressive strength NOT on SABIC TDS; k from EMEA TDS (Americas TDS leaves it blank). K/COF are RT SABIC-method values at PV 0.07 MPa m/s; 90-95 C wear and creep untested [EST]."
   },
   {
    "id": "VIB7373",
@@ -662,9 +670,10 @@
    "cost_hint": null,
    "sources": [
     "VIB_TOP85_US",
-    "VIB_TOP85_LEF"
+    "VIB_TOP85_LEF",
+    "VIB_7373_3MM"
    ],
-   "notes": "Passes >=60A gate. Vibram lists 7373 at 1-1.8 mm; 3 mm per JP reseller (subaru-ec.com) - confirm thickness."
+   "notes": "Passes >=60A gate. Vibram lists 7373 at 1-1.8 mm; 3 mm sheet listed at 75 Shore A by subaru-ec.com product_id=3956 (still >=60A); confirm thickness and hardness by supplier cert."
   },
   {
    "id": "VIB7663",
@@ -687,6 +696,128 @@
     "VIB_7663_CIAC"
    ],
    "notes": "Passes >=60A gate. Reseller (CIAC, Vibram distributor) value; not supplier lot cert."
+  },
+  {
+   "id": "EA9396",
+   "name": "Henkel Loctite EA 9396 AERO epoxy",
+   "used_in": "R-110 candidate: A38 femur collar bond (replaces DP490)",
+   "density_g_cc": null,
+   "E_GPa": 2.75,
+   "yield_MPa": null,
+   "UTS_MPa": null,
+   "fatigue_MPa": null,
+   "elongation_pct": 3.4,
+   "T_max_mech_C": null,
+   "toughness": null,
+   "other": {
+    "LS_25C_MPa": "24.1 (RT cure) / 27.6 (30 min 82C)",
+    "LS_82C_MPa": "22.0 / 22.8",
+    "LS_149C_MPa": "12.4 / 13.1",
+    "LS_177C_MPa": "8.3",
+    "Tg_dry_C": "64 (5 d RT) / 112 (1 h 82C, 9396.6MD TDS)",
+    "k_W_mK": "0.147 (9396.6MD)"
+   },
+   "cost_hint": null,
+   "sources": [
+    "EA9396"
+   ],
+   "notes": "LS on PAA 2024-T3 bare. Tg is for the 9396.6MD variant; wet Tg not published. Post-cure >=1 h 82C mandatory for >=80C service."
+  },
+  {
+   "id": "EA9394",
+   "name": "Henkel Loctite EA 9394 AERO epoxy",
+   "used_in": "R-110 candidate (rejected)",
+   "density_g_cc": null,
+   "E_GPa": 4.24,
+   "yield_MPa": null,
+   "UTS_MPa": null,
+   "fatigue_MPa": null,
+   "elongation_pct": 1.66,
+   "T_max_mech_C": null,
+   "toughness": null,
+   "other": {
+    "LS_25C_MPa": 28.9,
+    "LS_82C_MPa": 20.7,
+    "LS_93C_MPa": 20.0,
+    "LS_121C_MPa": 15.8,
+    "Tg_dry_C": 78,
+    "Tg_wet_C": 68
+   },
+   "cost_hint": null,
+   "sources": [
+    "EA9394"
+   ],
+   "notes": "RT cure 5 d. Tg 78/68 wet is below 80C service: rejected."
+  },
+  {
+   "id": "EC9323",
+   "name": "3M Scotch-Weld EC-9323 B/A epoxy",
+   "used_in": "R-110 candidate (rejected)",
+   "density_g_cc": null,
+   "E_GPa": null,
+   "yield_MPa": null,
+   "UTS_MPa": null,
+   "fatigue_MPa": null,
+   "elongation_pct": null,
+   "T_max_mech_C": null,
+   "toughness": null,
+   "other": {
+    "OLS_23C_MPa": 36,
+    "OLS_80C_MPa": 22,
+    "OLS_120C_MPa": 4,
+    "OLS_CFRP_23C_MPa": 28,
+    "service_C": "-55 to 82"
+   },
+   "cost_hint": null,
+   "sources": [
+    "EC9323"
+   ],
+   "notes": "Cliff between 80 and 120C; 82C service ceiling gives no margin."
+  },
+  {
+   "id": "DP420",
+   "name": "3M Scotch-Weld DP420 epoxy",
+   "used_in": "R-110 candidate (rejected)",
+   "density_g_cc": null,
+   "E_GPa": 1.87,
+   "yield_MPa": null,
+   "UTS_MPa": null,
+   "fatigue_MPa": null,
+   "elongation_pct": null,
+   "T_max_mech_C": null,
+   "toughness": null,
+   "other": {
+    "OLS_82C_MPa": 2.7,
+    "OLS_49C_MPa": 12.9,
+    "Tg_C": 81
+   },
+   "cost_hint": null,
+   "sources": [
+    "DP420"
+   ],
+   "notes": "10% retention at 82C: rejected."
+  },
+  {
+   "id": "DP460",
+   "name": "3M Scotch-Weld DP460 epoxy",
+   "used_in": "R-110 candidate (rejected)",
+   "density_g_cc": null,
+   "E_GPa": null,
+   "yield_MPa": null,
+   "UTS_MPa": null,
+   "fatigue_MPa": null,
+   "elongation_pct": null,
+   "T_max_mech_C": null,
+   "toughness": null,
+   "other": {
+    "OLS_23C_MPa": 24,
+    "OLS_82C_psi": "700-1400 (15-60 min soak, legacy TDS)"
+   },
+   "cost_hint": null,
+   "sources": [
+    "DP460"
+   ],
+   "notes": "Low hot strength; Tg not on current TDS: rejected."
   },
   {
    "id": "BRG_STEEL",
