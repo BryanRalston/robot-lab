@@ -1108,3 +1108,7 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
 - Dropping the break is still not accepted: the 80 C bond allowable is short-term lap shear, not a creep rating (Materials). Book **L62 with a 1.8 mm wall** (Ultem 4001, 12 mm pin, ~10.6 K/W after wear): +0.031, replacing L61 +0.070, so **-0.039**. Actuators must accept opening the trunnion bore to 12 mm; otherwise use the 9 mm fallback (+0.040).
 - G5 test added: EA 9396 lap coupons with our prep, 1000 h at 80 C at >=3.3 MPa. The 2x6 mm pins stay as the backup until it passes (L63 FEA pending).
 - Reserve ~-0.63.
+
+## R-115 (2026-10-14) A38 backup pins (Legs L63, 504082f)
+- The L22 2x6 mm through pins fail tube bearing at the 29.6 kN fault (SF 0.70); the backup was invalid. Adopt **L63**: 8 radial 42CrMo4 pins, 7x10 mm, 2 rows of 4, press-fit and cover-retained (bearing SF 1.63, net section 1.89). Booked **0** (-0.0066 at half credit, offset by retention up to +0.004).
+- G3 gate: 3D FEA must confirm walking fatigue SF >=1.4 (1.41 is an estimate) and press-fit hoop stress in the collar.
