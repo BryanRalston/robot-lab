@@ -2,3 +2,6 @@
 __pycache__/
 shots/
 .venv/
+modules/legs/rl/logs/
+modules/legs/rl/checkpoints/
+modules/legs/rl/**/*.log
