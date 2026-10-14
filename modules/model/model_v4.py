@@ -25,6 +25,7 @@ P=dict(hip_y=130,hip_z=920,knee_z=500,ankle_z=80,pelvis_bot=1126,pelvis_top=1230
 JOINTS={}   # name -> dict(seg, parent_seg, point, axis, range, ...)
 PARENT={}   # seg -> (joint, parent seg)
 POSE={}
+from palm_7075 import palm as _palm7075   # A32
 def joint(name,parent,child,pt,ax): JOINTS[name]=dict(parent=parent,child=child,pt=pt,ax=ax); PARENT[child]=(name,parent)
 def chain(seg):
     out=[]
@@ -187,7 +188,7 @@ def build_leg(s):
     add(S('ankle trunnion bracket top plate (shank)'),S('shank'),box(P['ankle_tx']+40-40,180,8,((P['ankle_tx']+40+40)/2,y,atz+46)),est=True,asm=S('an_br'))
     add(S('ankle trunnion bracket strut to tibia'),S('shank'),box(16,30,60,(38,y,atz+20)),est=True,asm=S('an_br'))
     for sy in (-1,1):   # D60: two clevises at y±45 (slot 10.75+2x0.6 = 11.95, PTFE thrust washers, ø12 pin) for the axial top eye
-        for k in (-1,1): add(S(f'ankle top clevis tine {"+" if sy>0 else "-"}y{"o" if k>0 else "i"} (D60)'),S('shank'),box(30,6,58,(P['ankle_tx'],y+sy*(P['ankle_dy']+k*8.975),atz+17)),asm=S('an_br'))
+        for k in (-1,1): add(S(f'ankle top clevis tine {"+" if sy>0 else "-"}y{"o" if k>0 else "i"} 7075-T6 6x30 e12 rootR3 (D60/D63)'),S('shank'),box(30,6,58,(P['ankle_tx'],y+sy*(P['ankle_dy']+k*8.975),atz+17)),asm=S('an_br'))
         add(S(f'ankle top clevis pin ø12 {"+" if sy>0 else "-"}y (D60)'),S('shank'),cyl(12,24,'y',c=(P['ankle_tx'],y+sy*P['ankle_dy'],atz)),'bearing',asm=S('an_br'))
     # ankle cross (universal): pitch pins in fork (y), roll pins in foot lugs (x); ±18° roll stop blocks on the cross (A14)
     add(S('ankle cross Ti-6Al-4V'),S('ankX'),box(30,46,30,(0,y,az)),asm=S('ank_x'))
@@ -258,7 +259,7 @@ def build_upper():
         add(S('wrist pitch/yaw cross (2x micro strain-wave drive in forearm, push rods)'),S('wP'),box(22,22,22,(0,ya,wz)),est=True,asm=S('wrist'))
         add(S('wrist roll output fork'),S('wR'),box(40,40,6,(0,ya,wz+20)).fuse(box(30,6,26,(0,ya+17,wz+6))).fuse(box(30,6,26,(0,ya-17,wz+6))),est=True,asm=S('wrist'))
         add(S('wrist pitch pin ø6'),S('wP'),cyl(6,40,'y',c=(0,ya,wz)),'bearing',est=True,asm=S('wrist'))
-        add(S('palm (7075 skeleton + PA12)'),S('hand'),box(32,86,90,(0,ya,wz-60)),est=True,asm=S('hand'))
+        add(S('palm 7075-T6 machined shell 1.5 mm w/ openings (P-021/A32, palm_7075.py)'),S('hand'),_palm7075((0,ya,wz-60)),asm=S('hand'))
         add(S('palm wrist lug'),S('hand'),box(24,12,26,(0,ya,wz-8)),est=True,asm=S('hand'))
         for i,dy in enumerate([-30,-10,10,30]):
             zc=wz-105

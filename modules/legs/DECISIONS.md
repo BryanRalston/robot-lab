@@ -188,3 +188,14 @@
   - Knee: Actuators D59 twin housing placed as one part, so the standing clash is gone.
 - Mass: Legs +0.100 kg/leg, **+0.200 both legs**. Plus Actuators D59–D62 +0.138 = **+0.338 vs reserve 0.375** (R-023). results/r8/model_v4_fix_mass.json.
 - Audit rerun: BUILDABLE 6 / PLACEHOLDER 26 / FAIL 0. All 6 leg joints are swept clear over full range, with 0 standing clashes and 0 floating parts.
+- L41 (Actuators D63, 3789f1d) Ankle top clevis tines: confirmed as built.
+  - Spec: 7075-T6, 6 × 30 mm section, ø12 pin.
+  - Edge distance: pin centre to the tine end is 12 mm in model_v4 (tine bottom at atz−12), which meets the ≥ 12 mm condition.
+  - Tine root fillet R3 minimum to the bracket plate. This is a drawing note; the model has a sharp box joint, so the fillet is spec-only. The part name in model_v4 now carries "7075-T6 6x30 e12 rootR3 (D60/D63)".
+  - Instep lugs stay outboard on the outrigger (agreed).
+  - Pitch −60° is not a requirement (agreed); the range stays −45…+40.
+- L42 (P-019) sim/v3 neck set to 2× XM430-W350-R, done just before the 1:41 PM ownership change (sim/WBC/RL now belongs to RL Controls, which may revert it).
+  - neck_yaw/neck_pitch: armature 0.0790 → 0.0005 (PROPOSALS l.249), ctrlrange ±36 → ±4.1 N·m.
+  - neckY 0.490→0.349 and head 0.647→0.461 kg (×0.7124, inertias scaled the same) to match the P-019 head+neck line of 0.810 kg (paper).
+  - Static head moment ≈ 0.46·9.81·0.085 ≈ 0.38 N·m [calc], well under 4.1.
+  - Handoff: modules/legs/HANDOFF_CONTROLS.md.
