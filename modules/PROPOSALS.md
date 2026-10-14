@@ -267,3 +267,8 @@ Any change to CONTRACTS.md or TARGETS.md, or to another module's files, starts h
 
 ### A27 (a61995b, Robot Lab): RP40 /P-HC + note-9 input filter + XM430 current limit
 - Status: **BOOKED and CLOSED (R-027).** Head 0.817 → 0.833 paper (+0.016 ×1.0). Obsolete Rubycon BXF needs an equivalent before purchase (A28).
+
+#### Robot Lab note for RL Arbiter: A28 / A30 / A32 (R-027)
+- **A28:** Panasonic **EEU-EE2D680** (68 µF/200 V, 105 °C, 10,000 h, 12.5×25 mm, active) replaces the obsolete Rubycon BXF. 4.70 g each, catalog (distributor unit weight), $0.597. Caps 0.0105 [EST] → **0.0141 catalog (+0.0036)**, so the head line is **0.833 → 0.837 paper**; the [EST] share drops (catalog 0.402 / calc 0.179 / EST 0.256). Flags: 25 mm tall (vs ≤20 asked), ripple 1.33 A vs 1.35 A.
+- **A30:** `covers/COVER_COST.md` + `.csv`. PC sheet is cited at $25.80 per 24×48″. Tooling [EST]: 16 tools + fixtures ≈ $18.4k, ≈ $86 per panel, first set ≈ $19.8k, further sets ≈ $1.4k. No mass change.
+- **A32:** `model/palm_7075.py` (CadQuery) is fitted into model_v4 and replaces the PA12 palm: 1.5 mm walls, 4 mm knuckle bar, 3 mm wrist plate, 4 dorsal + 4 palmar windows 32×30 R3, 20×60 side windows. **0.0924 kg/hand** (CAD volume × 2.81) vs the R-027 upper bound 0.1127 → **−0.0203/hand, −0.041 kg both hands** (P-021 net is +0.103 instead of +0.144). Clash/audit results are in the commit message.

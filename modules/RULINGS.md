@@ -471,3 +471,10 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
 | A32 | Robot Lab → Hands agent | machined 7075 palm CAD with openings; replaces the +0.144 upper bound | credit for the openings | when Hands is staffed |
 
 - Needs Bryan: **nothing for mass.** Optional: whether "no 3D printing" should be a real project rule. Today it is only a crew preference.
+
+## R-028 (2026-10-14) A11 / A24, raised by RL Electronics R1 (1e33c96)
+- A11 CLOSED. The booked DCM3623x75H26C2 (36–75 V in, 24 V out) can't take the 68–84 V pack or feed the AGX301 (36–60 V), so it's rejected. Replaced by DCM3623TA5N53B4T00 (43–154 V in, 48 V out, 240 W). The harness compute feed is now 48 V. The 0.024 kg converter mass is credited at half until the variant's datasheet mass is cited. GMSL2 is JCB022 only. The TMS570LC4357 stays inside the 0.040 estimate (credited at half).
+- A24 CLOSED WITH CONDITION. THOR-38.4.0 BSP support for ZED X and JCB022 on AGX301 is accepted. ZED X Mini isn't named, so the hardware test plan (G5) must include a first-unit stream and depth test (new item T-024). No mass change.
+- New actions:
+  - A33 (Actuators): add STO wiring to the harness model. A +0.14 kg estimate is held in the rollup, credited at half until itemized.
+  - A34 (Electronics): get a cited source for Elmo R70/100 integration, or swap the drive.
