@@ -272,3 +272,25 @@ Any change to CONTRACTS.md or TARGETS.md, or to another module's files, starts h
 - **A28:** Panasonic **EEU-EE2D680** (68 µF/200 V, 105 °C, 10,000 h, 12.5×25 mm, active) replaces the obsolete Rubycon BXF. 4.70 g each, catalog (distributor unit weight), $0.597. Caps 0.0105 [EST] → **0.0141 catalog (+0.0036)**, so the head line is **0.833 → 0.837 paper**; the [EST] share drops (catalog 0.402 / calc 0.179 / EST 0.256). Flags: 25 mm tall (vs ≤20 asked), ripple 1.33 A vs 1.35 A.
 - **A30:** `covers/COVER_COST.md` + `.csv`. PC sheet is cited at $25.80 per 24×48″. Tooling [EST]: 16 tools + fixtures ≈ $18.4k, ≈ $86 per panel, first set ≈ $19.8k, further sets ≈ $1.4k. No mass change.
 - **A32:** `model/palm_7075.py` (CadQuery) is fitted into model_v4 and replaces the PA12 palm: 1.5 mm walls, 4 mm knuckle bar, 3 mm wrist plate, 4 dorsal + 4 palmar windows 32×30 R3, 20×60 side windows. **0.0924 kg/hand** (CAD volume × 2.81) vs the R-027 upper bound 0.1127 → **−0.0203/hand, −0.041 kg both hands** (P-021 net is +0.103 instead of +0.144). Clash/audit results are in the commit message.
+
+### P-026: Arms & Hands: arm ROM cut to the clash-free/usable range (elbow −125…0, wrist_pitch ±60, wrist_yaw ±30)
+- Date: 2026-10-14
+- Module / proposer: Arms & Hands / RL Arms & Hands (R2)
+- Affected owners: Arbiter (ruling), Actuators (hard stops, harness loop lengths), Controls (joint limits), Electronics (harness ROM in `actuators/results/harness.md`)
+- Change: required ROM in `sim/v3/humanoid_v3.xml` / `model/JOINT_AUDIT.md`: elbow −140…0 → **−125…0**; wrist_pitch ±70 → **±60**; wrist_yaw ±40 → **±30**. Shoulder_roll is unchanged here (−15…180 required vs −5…175 clash-free; geometry fix, R2+).
+- Evidence: v4 audit sweep (`model/JOINT_AUDIT.md`, `audit_v4.py`): elbow clear −115…0 (clash at −120°: upper-arm tube × forearm shell); wrist_pitch clear ±40 (±45: roll fork × palm); wrist_yaw clear ±25 (±30: fork × palm). All of these are [EST] placeholder geometry. Load cases in `arms/R1_ARCHITECTURE.md` (T5 reach/carry) use elbow ≥ −90° and wrist 0°. No target names an arm ROM: T3 counts DoF only.
+- Impact on contracts: mass 0. Power 0. Harness loop length goes down (elbow 140 → 125°, wrist pitch 140 → 120°, yaw 80 → 60° in the harness ROM list), so harness mass falls slightly [not computed]. Torque/speed unchanged.
+- Impact on targets: T3 unchanged (DoF kept). T4/T5 no change: all load cases are inside the new range. The cut ROM is still wider than the current clash-free range, so R2+ geometry has to free up elbow −125 and wrist ±60/±30. Hard stops sit at the new limits.
+- Asks: **Arbiter**: rule on the cut ROM against T3/T4/T5. **Controls**: agree that no manipulation primitive needs elbow < −125°, wrist_pitch > 60° or wrist_yaw > 30°.
+- Status: OPEN
+
+### P-027: Arms & Hands: wrist pitch/yaw differential screw pair downsize, ≤ 0.90 kg/side (was 1.55)
+- Date: 2026-10-14
+- Module / proposer: Arms & Hands / RL Arms & Hands (R2)
+- Affected owners: Actuators (selection, citations), Arbiter (mass credit)
+- Change: CONTRACTS §1a wrist_pitch max mass 1.55 → **≤ 0.90 kg/side** (pair, shared with wrist_yaw). Need peak stays at the v3 contract value of 14.7 N·m (pitch) and 8.9 N·m (yaw). R1 sim-based need is 11.1 N·m for both. Speed need is 6 rad/s [EST v2].
+- Evidence: `arms/arm_loads_r1.json`: max static wrist load 7.4 N·m (10 kg at the hand-box centre, sim/v3 geometry) → need 11.1 at 1.5×. The v3 selection (2× TBM2G-05008C + RV12x4, 25 mm arm) gives 48 N·m, 4.3× need, 30.1 rad/s. Per screw at the 25 mm arm: 14.7 N·m / 0.025 m / 2 = **294 N axial** (pitch, both screws in phase).
+- Impact on contracts: mass up to −0.65 kg/side, **−1.30 kg both** (paper). **No credit until Actuators cite parts** (credit ×0 now, ×1.0 on datasheet). Envelope is the same or smaller. Power is negligible (v3 copper 0.0 W).
+- Impact on targets: T2 +1.30 kg reserve if it lands (weight 0.15). T9: Actuators must show the new screw L10 ≥ 14 600 h at arm duty.
+- Asks: **Actuators**: cite a motor + screw (or ball-screw / micro strain-wave) pair meeting ≥ 14.7 N·m peak, ≥ 6 rad/s at 30 % torque, ≤ 0.90 kg/side all-in incl. encoders/drive, with screw C_a and L10. **Arbiter**: credit on citation.
+- Status: OPEN
