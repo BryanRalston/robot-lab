@@ -1070,3 +1070,7 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
 
 ## R-105 (2026-10-14) PEI bush conditions (Legs L61, Thermal)
 - The R-104 +0.004 (total 0.013) already covers the +0.012; no rebook. Binding: no metal bypass at the pins (axial faces and retainers go through PEI or a 0.3 mm air gap). Materials confirms Ultem creep at 23.4 MPa and 90-95 C before G1.
+
+## R-106 (2026-10-14) Materials on R-104
+- Sole Shore: no physical test is possible in the design phase (Bryan is not building). Legs/Materials ask the supplier for certified durometer data before G1. If none is available, the item moves to G5 (RL Test & Reliability) and the SP 67A frame stays the drawing alternate. Not routed to Bryan now.
+- Trunnion bush: plain Ultem 1000 is rejected (about 20 MPa allowable vs 23.4). Preferred: widen the bush >=1.6x (<=14.6 MPa) in a bearing-grade PEI, which keeps the thermal resistance. Materials confirms wear in that grade. If wear fails, use PEEK 450FC30 class, with Thermal rechecking the 43.8 K/W path first. Legs gives the mass delta, booked in full.
