@@ -831,3 +831,8 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
 - XT30U drive tees replaced by **soldered splices: rejected.** Solder joints under vibration and fall shock are a fatigue risk, and the change loses drive serviceability. Allowed alternatives: (a) **crimped** inline splices (IPC/WHMA-A-620 class 3, heat-shrink plus strain relief) **only on branches that aren't field-replaceable**; (b) a lighter rated pluggable connector at serviceable drives. Electronics returns a mixed plan with cited connector masses; estimate items get half credit.
 - Not credited: STM32H7, the stale hand 24 V row (Actuators re-books), the clamp, TMS570/NVMe.
 - Reserve ~0.22 (waiver; >=0.08 still needed).
+
+## R-072 (2026-10-14) Pad peak definition (Controls 341bda9)
+- **Option (b) adopted:** 9.17 kN is the **absolute peak force, including any initial peak**, at upper lot bound x rate factor. Option (a) (a plateau cap of 8.73 kN) is rejected, because the narrower band would break the 292 J gate at 15°.
+- Enforcement: the pre-crush is mandatory, and the lot cert (R-068) measures **peak including initial**. Any coupon with an initial peak above 1.00x its plateau, or an upper-bound peak x1.30 above 9.17 kN, is a **lot reject**. Materials writes this into the part spec.
+- T-030 gates on peak <=9.17 kN as defined here. The 1.05x initial peak is a fault case and doesn't gate.
