@@ -1,6 +1,38 @@
 # T-030 brief: A44 side-fall push-fall batch (Grok Build, **bryan PC ff639f5a only, never DESKTOP-B115PVV**)
 Owner: RL Controls. Gate for R-042 (A44 provisional). CPU only, MuJoCo ≥3.1, numpy. No jax, no training. Expected wall time is a few minutes per batch: smoke runs take about 0.2–0.6 s each on the box.
 
+## 000. R-057 + Materials fd46ad8 update (2026-10-14). **Supersedes §00 and §0 where they differ**
+- **Reach mode and all clutch-slip credit removed (R-057, D77: no shoulder clutch).** The R5 tuck is permanent for every fall, and hands-first braces are not allowed. `--arm` now accepts only `tuck`. Forward falls move to **T-031** (`T031_BRIEF.md`).
+- **Honeycomb (Materials R042_EPP_SHOULDER.md Part 3):**
+  - Lot-tested, pre-crushed 2–3 mm cores give no start spike (assumed). Modelled band: **6.95–9.17 kN, 38–42 mm stroke**. The datasheet band (6.0–10.6 kN) fails.
+  - Off-axis plateau ratio: 0.98 at 0°, 0.93 at 15°, 0.73 at 25°. The script scales the plateau by ratio(θ)/0.98, interpolated linearly. Above 25° it holds 0.73 and flags `angle_beyond_25_unknown` (= fail).
+  - **Angle limit: p95 `impact_angle_deg` ≤ 15°** (pass criterion).
+- **Hand estimate** (CRBH 7013 A, M = F × 0.06):
+
+| case | F | stroke | energy | vs 265 J | M N·m | fs radial |
+|---|---|---|---|---|---|---|
+| **gate: 6.95 kN, 38 mm** | 6.95 kN | 38 | **264 J** | **−0.4 %: marginal, technically 1 J short** | 417 | 1.66 |
+| gate at 15° off-axis (×0.93/0.98) | 6.60 kN | 38 | 251 J | −5 %: fails the design point | 396 | 1.74 |
+| peak: 9.17 kN, 42 mm | 9.17 kN | 42 | 385 J | ×1.45 | 550 | 1.25 |
+| un-pre-crushed, 2.2× start spike, 6.95 kN | 15.3 kN | n/a | n/a | n/a | 917 | 0.75: **FAIL** |
+| un-pre-crushed, 2.2× spike, 9.17 kN | 20.2 kN | n/a | n/a | n/a | 1210 | 0.57: **FAIL** |
+
+  - **Plainly:** the worst-case lot-tested cartridge stores 264 J. That's 1 J below the 265 J design point at 0°, and 14 J below at the 15° angle limit. The design point is not met with margin in the worst corner. The 220 J A44 nominal is still covered (×1.20).
+  - Pre-crush plus the lot check are mandatory: a start spike breaks the bearing limit regardless of the controller.
+- **Batches (replace §6 primary):**
+```
+python $F --pad hc --hc-plateau 6950 --hc-stroke 0.038 --out $O/t030_hc6950_s38_tuck.jsonl          # GATE (worst case)
+python $F --pad hc --hc-plateau 6950 --hc-stroke 0.038 --carry --out $O/t030_hc6950_s38_tuck_carry.jsonl   # GATE (carry)
+python $F --pad hc --hc-plateau 9170 --hc-stroke 0.042 --out $O/t030_hc9170_s42_tuck.jsonl          # peak load
+python $F --pad hc --hc-plateau 6950 --hc-stroke 0.038 --spike 2.2 --out $O/t030_hc6950_spike22.jsonl  # sensitivity: un-pre-crushed
+python $F --pad hc --hc-plateau 9170 --hc-stroke 0.042 --spike 2.2 --out $O/t030_hc9170_spike22.jsonl  # sensitivity
+```
+  - The `--arm reach` lines in §6 are void. The EPP contrast and no-fall-mode baseline stay.
+  - **Gate (R-057/R-058/R-059):** hc6950_s38 tuck AND carry pass all of: stroke ≤ 38 mm, peak ≤ 9.17 kN, p95 angle ≤ 15°, 0 angle-unknown, p95 |centroid| ≤ 15 mm (the core footprint, R-059), 0 bypass, share p95 ≤ 0.40, crouch ≥ 0.15 m.
+  - The spike batches are reported, not gating.
+- New log fields: `shoulder_pitch_gear_peak_Nm` (|motor − armature·q̈ + limit-constraint| on both shoulder-pitch DOFs), `hc_stroke_mm`, `spike`, `angle_beyond_25_unknown`.
+- **Box smoke** (single untuned run per config, not results): side and LB runs run end to end. One LB run logged 438 N·m shoulder-pitch gear peak with no pad contact. That's a hint that side/diagonal falls also need the pitch torque checked. T-031 covers it on forward falls, and the T-030 summary must also report `gear_pitch_max` against 369.
+
 ## 00. R-054 update (2026-10-14): ID pad R4 + Arms R5 tuck. **Supersedes §0 geometry**
 - **Element = ID R4 cartridge (329a79a, accepted R-054):**
   - Core: HexWeb CR III 4.5 pcf, pre-crushed, 62 × 62 × 57 mm, 38.4 cm². Usable stroke = 0.72 × 57 = **41.0 mm**.
