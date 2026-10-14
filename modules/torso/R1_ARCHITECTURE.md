@@ -305,6 +305,31 @@ Sources:
 **O-T4 closed:** 84 V DC ≤ 450 VDC rating, and 1.17 kA prospective ≤ 20 kA DC interrupting (Littelfuse datasheet). Clearing time at 1.17 kA is still to read from the curve (moved to O-T8).
 **Mass-down asks:** Arbiter ≥ 0.08 kg; Robot Lab ≥ 0.18 kg. Torso cited so far −0.0225 kg (§18.1), or −0.0825 with the EV100 +1.5 W ruling. That meets neither firm; with the EV100 it meets the Arbiter's 0.08.
 
+## 20. R-074 follow-ups, T-031, SELV note
+**R-074 recorded:**
+- The main battery link stays ≥ 10 mm²; 2.5 mm² only on branches fused at ≤ 30 A.
+- −0.0225 kg accepted: HS25 47R pre-charge and the LEV100 at its cited 190 g are applied. **Torso line 5.026 → 5.0035 kg.**
+- Pocketing FEA approved, queued on Bryan's PC after Legs' L47 and the pad case.
+
+**EV100: dropped.** Its datasheet coil is already economized: average hold 0.25 A at 12 V = **3.0 W** (0.15 A at 24 V = 3.6 W), no lower-hold variant listed (https://www.evwest.com/support/ev100-specsheet.pdf). Net +1.5 W over the 1.5 W booking > the +0.74 W margin. No cited path, so LEV100A4ANG + economizer stays.
+
+**Fuse clearing at ~1.17 kA:** from the L50S time-current curves (datasheet p.5, https://catalogue2.pss-electrocomponents.com/catalogue/473/L50S125.V.pdf), read from the graph:
+- The 125 A curve's knee is at ~700 A / ~5 ms. At 1.17 kA, **pre-arc ≈ 3 ms**. Total clearing ≲ 6 ms [EST ×2 for arcing at 84 V DC].
+- Conductor adiabatic withstand at 1.17 kA:
+  | conductor | withstand | margin vs 6 ms |
+  |---|---|---|
+  | 10 mm² PVC | 115² × 10² / 1.17k² = **966 ms** | ×160 |
+  | 2.5 mm² PVC | **60 ms** | ×10 |
+  | 2.5 mm² XLPE | **93 ms** | ×15 |
+- **Caveat:** below ~700 A (e.g. a higher-resistance fault) the 125 A fuse sits on its vertical segment, 0.06–5 s. 2.5 mm² at 650 A withstands only 0.2 s, so it is protected only with its own ≤ 30 A fuse (R-074 rule). 10 mm² at 650 A withstands 3.1 s: OK down to ~600 A. **O-T8 fuse-clearing item CLOSED** for the 10 mm² main link.
+
+**T-031 chest contact:** `T031_chest_contact.md`.
+- Bare 2 mm CF shell k ≈ 46 kN/m, ζ 0.02, damage at ≤ ~10 mm / 1–1.5 kN [EST]: **FAIL**.
+- Fix: HexWeb CR III 5052 4.5 pcf pad 100 × 105 × 76 mm. Plateau 20.7–24.4 kN over 53 mm (≤ 15°).
+- **+0.078 kg → Arbiter request** (freeze).
+
+**SELV:** the pack bus is **not SELV**. It runs 68–84 V, up to 92 V in regen (> 60 V DC SELV limit). Insulation, touch protection, connectors and service rules must be treated as hazardous-voltage. Sent to the Arbiter by Materials for R-075.
+
 ## 7. Open questions / conflicts (not edited in others' files)
 - **O-T1 (Electronics, coordination):** adopt the 48 V intermediate rail with DCM3623TA5N53B4T00; Torso hosts the DCM on the power distribution board or the brain tray? Mass 0.024 [UNVERIFIED for variant] stays in the brain line; who books the 47718-232 choke; 24 V VL source (O-E3); BMS→safety MCU CAN FD message set; e-stop = FET-open vs contactor (O-E6).
 - **O-T2 (Actuators/Arbiter):** waist_pitch 116 N·m < 188 N·m need with T5 payload → TBM2G-08508A, +0.19 kg.
@@ -314,6 +339,7 @@ Sources:
 - **O-T6:** usable 90 % at 3.4 V/cell floor still [EST] (R-010); read P45B discharge curve at ~2 A/cell.
 - **O-T8:** clamp: read HS200/HS100 overload curve for 400 J, cite comparator, gate driver, thermal cutout, sum drive bus capacitance for pre-charge; HS200 mass (0.475) vs Electronics estimate.
 - **O-T9 (Electronics/Arbiter):** interlock exception for cell-at-risk faults.
+- **O-T11:** T-031 pad stroke at 25° obliquity (68 mm needed vs 53 mm).
 - **O-T10:** Sunon PF40281B1 static-pressure curve vs ~20 Pa vents+fins; fan PWM schedule.
 - O-T2 approved on citation (§13.1); O-T3 → contactor (§13.2); O-T5 re-rate proposed (§13.5).
 - O-T7: file delivered (§15.7); Controls to merge.
