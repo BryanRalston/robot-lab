@@ -551,3 +551,12 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
   - T-025: read WI[35] on the first bench drive. If it's below 91 V, P-045 thresholds are re-planned with Torso & Power.
   - T-026: measured clamp pulse test at 4.5 kW / 400 J.
 - No 24 V logic supply is needed (Elmo S-variant). No mass change.
+
+## R-034 (2026-10-14) Knee thermal fix D69 (f205f7b), funding order
+- **Approved.** The current knee goes past 120 °C in 7–8.5 minutes, which is a hard fail. The D69 fix (twin TBM2G-08513D plus a heat path into the shank) holds 87–91 °C for 60 minutes at 1.2 m/s and 35 °C. It is booked at +0.47 kg in full.
+- **Budget:** credible weight is 65.809 + 0.232 (R-033) + 0.47 = 66.511 kg. That is 0.011 kg over the 66.5 kg limit **until P-027 (wrist, −1.371) is credited**. With P-027 it is 65.140 kg, which leaves a 1.36 kg reserve.
+- P-027's cross-check against Arms R2 is now **blocking**. If it hasn't closed by the end of round 13, the arbiter will re-rule.
+- **Funding queue after P-027:**
+  1. The hip lever fix, capped at +0.25 kg before switching to steel.
+  2. The torso overrun. It gets no credit or booking until it's itemized. It must come in at **≤0.80 kg net** to keep the 0.30 kg floor. Torso should go after the lighter pre-charge and the ±0.2 kg estimates first.
+- **Repo:** stash@{0} was dropped with Actuators' OK. It's backed up at refs/backup/stash-actuators-d59-d62. A32 moves to Arms & Hands.
