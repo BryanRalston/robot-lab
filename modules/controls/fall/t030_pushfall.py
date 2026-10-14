@@ -9,11 +9,12 @@ Outputs one JSON line per run + summary. Usage:
 import mujoco, numpy as np, json, argparse, os, math, time
 HERE=os.path.dirname(os.path.abspath(__file__)); ROOT=os.path.abspath(os.path.join(HERE,'..','..','..'))
 P=argparse.ArgumentParser()
-P.add_argument('--pad',type=int,default=30,choices=[30,40]); P.add_argument('--runs',type=int,default=50)
+P.add_argument('--pad',default='hc',choices=['hc','30','40'],help='hc = 5052 honeycomb crush element (R-049, Materials 8a3cc66), primary'); P.add_argument('--runs',type=int,default=50)
 P.add_argument('--dirs',default='L,R,LB'); P.add_argument('--seed',type=int,default=0)
 P.add_argument('--impulse',default='40,80',help='push impulse range N*s (60 N*s worst case per A44 margin note)')
 P.add_argument('--latency',type=float,default=0.05,help='fall-detect latency s [EST]')
 P.add_argument('--knee',type=float,default=1.2,help='FALL-mode knee target rad [EST, tune on PC]')
+P.add_argument('--hc-plateau',type=float,default=9170.0,help='honeycomb plateau N (Materials range 7050-9170)')
 P.add_argument('--pad-model',default='curve',choices=['curve','plateau'],help='curve: ARPRO 5170 x1.45 (Materials 5f8f149, default); plateau: ID d80df32 constant force (contrast only)')
 P.add_argument('--arm',default='tuck',choices=['tuck','reach'],help='tuck (A44) or staged reach: fall-side arm abducted, hand/forearm lands first, shoulder_roll backdrives at its torque limit')
 P.add_argument('--area-cm2',type=float,default=109.0)
@@ -22,9 +23,11 @@ P.add_argument('--no-fallmode',action='store_true',help='baseline: keep standing
 A=P.parse_args()
 # pad law. 30 mm: v3 fall_model s=0.7t+3=24 mm, F_p chosen = gate 9.17 kN (bottom-out => E_sh>220 J).
 # 40 mm: Industrial Design SHOULDER_PAD.md (d80df32): s=31 mm, F_p=7.10 kN (109 cm2 x 0.65 MPa EPP80 [EST]).
-PAD={30:dict(t=0.030,s=0.024,Fp=9170.0),40:dict(t=0.040,s=0.031,Fp=7100.0)}[A.pad]
-RAMP=0.002; KD=2.0e6; MU=0.8; ARM=0.06; C0=27700.0; DPW=0.085; GATE_F=9170.0; GATE_M=550.0
-PATCH=0.105; PAD_Y=0.152   # pad centre lateral of shoulder-pitch joint: upper-arm offset 0.112 + capsule r 0.04 (sim/v3 geometry)
+PAD={'30':dict(t=0.030,s=0.024,Fp=9170.0,face=0.105),'40':dict(t=0.040,s=0.031,Fp=7100.0,face=0.105),
+     'hc':dict(t=0.057,s=0.041,Fp=A.hc_plateau,face=0.063)}[A.pad]   # hc: 63x63x57 mm 4.5 pcf pre-crushed 5052, stroke 41 mm
+if A.pad=='hc': A.pad_model='honeycomb'
+RAMP=0.002; KD=2.0e6; MU=0.8; ARM=0.06; C0=27700.0; DPW=0.085; GATE_F=9170.0; GATE_M=9170.0*0.06
+PATCH=PAD['face']; PAD_Y=0.152   # pad centre lateral of shoulder-pitch joint: upper-arm offset 0.112 + capsule r 0.04 (sim/v3 geometry)
 m=mujoco.MjModel.from_xml_path(os.path.join(ROOT,'sim','v3','humanoid_v3.xml')); d=mujoco.MjData(m); dt=m.opt.timestep
 names=[m.actuator(i).name for i in range(m.nu)]; jid=m.actuator_trnid[:,0]; qa=m.jnt_qposadr[jid]; va=m.jnt_dofadr[jid]; lim=m.actuator_ctrlrange[:,1]
 ai=lambda n:names.index(n); kp=np.clip(lim*3,30,600); kd=0.04*kp; MASS=m.body_subtreemass[1]
@@ -42,6 +45,7 @@ def pad_points(side):   # world points of the outer pad face (undeformed) and ou
 EPS=np.array([0,.25,.5,.75,.95]); SIG=np.array([0,.5,.7,1.6,2.32])*1e6   # ARPRO 5170 (R042_EPP_SHOULDER.md); >75 % extrapolated [EST]
 def pad_law(c):
     if c<=0: return 0.0
+    if A.pad_model=='curve' and c/PAD['t']>0.75: return float(SIG[3])*1.45*A.area_cm2*1e-4   # beyond ARPRO data: run flagged UNKNOWN, force held (not extrapolated)
     if A.pad_model=='curve': return float(np.interp(c/PAD['t'],EPS,SIG))*1.45*A.area_cm2*1e-4 + (KD*(c-0.95*PAD['t']) if c>0.95*PAD['t'] else 0.)
     F=PAD['Fp']*min(c/RAMP,1.0)
     return F+KD*(c-PAD['s']) if c>PAD['s'] else F
@@ -61,7 +65,7 @@ DIRS={'L':(0,1.),'R':(0,-1.),'LB':(-0.7071,0.7071)}
 LEG=lambda S: np.linalg.norm(d.xpos[m.body(S+'_thigh').id]-d.xpos[m.body(S+'_foot').id])
 def run(dirn,J,rng):
     nominal(); qt=q0.copy(); push=np.array([*DIRS[dirn],0.])*J/0.1; side=1 if DIRS[dirn][1]>0 else -1
-    t_det=None; leg0=leg1=None; Warm=0.; t_fm=None; t_imp=None; com_trig=None; com_imp=None; Wsh=0.; Woth=0.; Fpk=0.; cmax=0.; cen=np.zeros(2); cw=0.; prev_c={}
+    t_det=None; leg0=leg1=None; Warm=0.; ang0=None; angpk=None; bypass=False; t_fm=None; t_imp=None; com_trig=None; com_imp=None; Wsh=0.; Woth=0.; Fpk=0.; cmax=0.; cen=np.zeros(2); cw=0.; prev_c={}
     E0=None; T=4.0 if not A.smoke else 2.5; f6=np.zeros(6)
     for k in range(int(T/dt)):
         t=d.time; com=d.subtree_com[1].copy()
@@ -89,13 +93,19 @@ def run(dirn,J,rng):
                     d.xfrc_applied[b,:3]+=[ft[0],ft[1],F]; d.xfrc_applied[b,3:]+=np.cross(p-d.xipos[b],[ft[0],ft[1],F])
                     Wsh+=F*max(-vel[2],0)*dt; Ftot+=F; cmax=max(cmax,c); cen+=F*np.array(GRID[i]); cw+=F
                     if t_imp is None: t_imp=t; com_imp=com[2]; leg1=0.5*(LEG('L')+LEG('R'))
-        Fpk=max(Fpk,Ftot)
+        if Ftot>0:
+            _,_,nn=pad_points(1 if DIRS[dirn][1]>0 else -1); a=round(math.degrees(math.acos(max(-1,min(1,-nn[2])))),1)   # pad normal vs straight-down: off-axis angle
+            if ang0 is None: ang0=a
+            if Ftot>=Fpk: angpk=a
+        Fpk=max(Fpk,Ftot); Fpad_now=Ftot
         for i in range(d.ncon):   # positive (compressive) work of all other ground contacts except feet
             cn=d.contact[i]; gs={cn.geom1,cn.geom2}
             if floor not in gs or gs&set(footg): continue
             mujoco.mj_contactForce(m,d,i,f6); og=(gs-{floor}).pop(); bb=m.geom_bodyid[og]
             v=np.zeros(6); mujoco.mj_objectVelocity(m,d,mujoco.mjtObj.mjOBJ_BODY,bb,v,0)
             vel=v[3:]+np.cross(v[:3],cn.pos-d.xpos[bb]); Woth+=f6[0]*max(-vel[2],0)*dt
+            if Fpad_now>0 and m.body(bb).name in ('torso','L_upper_arm','R_upper_arm','L_shoulderP','R_shoulderP'): bypass=True   # shoulder structure grounds while element loaded = hit outside face
+            if Ftot>0 and m.body(bb).name in ('torso','L_upper_arm','R_upper_arm','L_shoulderP','R_shoulderP'): bypass=True   # shoulder structure touches ground while element loaded = hit outside face
             if t_imp is None: t_imp=t; com_imp=com[2]; leg1=0.5*(LEG('L')+LEG('R'))
         ia=ai(('l' if side>0 else 'r')+'_shoulder_roll'); pw=d.ctrl[ia]*d.qvel[va[ia]]
         if t_fm is not None and pw<0: Warm+=-pw*dt
@@ -105,7 +115,7 @@ def run(dirn,J,rng):
     crouch=(com_trig-com_imp) if (com_trig is not None and com_imp is not None) else None
     return dict(dir=dirn,J=round(J,1),pad_mm=A.pad,fell=bool(t_imp is not None),t_detect=t_det,t_fallmode=t_fm,t_impact=t_imp,
         crouch_at_impact_m=(leg0-leg1) if (leg0 and leg1) else None,com_drop_at_impact_m=crouch,E_sh_J=round(Wsh,1),E_other_J=round(Woth,1),shoulder_share=share,pad_peak_N=round(Fpk),pad_crush_max_mm=round(cmax*1e3,1),
-        bottomed=cmax>(0.95*PAD['t'] if A.pad_model=='curve' else PAD['s']),pad_model=A.pad_model,arm=A.arm,W_arm_backdrive_J=round(Warm,1),M_bearing_Nm=round(M,1),fs_radial=fs_rad,fs_axial=fs_ax,contact_centroid_mm=(cen/cw*1e3).round(1).tolist() if cw>0 else None)
+        bottomed=(cmax>0.75*PAD['t']) if A.pad_model=='curve' else (cmax>PAD['s']),beyond_data_unknown=bool(A.pad_model=='curve' and cmax>0.75*PAD['t']),impact_angle_deg=ang0,peak_angle_deg=angpk,bypass_contact=bypass,pad_model=A.pad_model,arm=A.arm,W_arm_backdrive_J=round(Warm,1),M_bearing_Nm=round(M,1),fs_radial=fs_rad,fs_axial=fs_ax,contact_centroid_mm=(cen/cw*1e3).round(1).tolist() if cw>0 else None)
 JD=lambda o: o.item() if hasattr(o,"item") else str(o)
 rng=np.random.default_rng(A.seed); J0,J1=map(float,A.impulse.split(','))
 dirs=['L'] if A.smoke else A.dirs.split(','); n=1 if A.smoke else A.runs; R=[]
@@ -121,5 +131,7 @@ S=dict(summary=True,pad_mm=A.pad,runs=len(R),fell=len(ok),wall_s=round(time.time
 if ok:
     S.update(share_p95=float(np.percentile([r['shoulder_share'] for r in ok],95)),M_max=max(r['M_bearing_Nm'] for r in ok),
       crouch_min=min((r['crouch_at_impact_m'] or 0) for r in ok),bottomed=sum(r['bottomed'] for r in ok),fs_radial_min=min(r['fs_radial'] or 99 for r in ok))
-    S['PASS']=bool(S['share_p95']<=0.40 and S['M_max']<=GATE_M and S['crouch_min']>=0.15 and S['bottomed']==0)
+    S.update(stroke_max_mm=max(r['pad_crush_max_mm'] for r in ok),F_max=max(r['pad_peak_N'] for r in ok),bypass=sum(r['bypass_contact'] for r in ok),unknown=sum(r['beyond_data_unknown'] for r in ok),
+      angle_p95=float(np.percentile([r['impact_angle_deg'] or 0 for r in ok],95)),centroid_abs_p95_mm=float(np.percentile([max(map(abs,r['contact_centroid_mm'] or [0,0])) for r in ok],95)))
+    S['PASS']=bool(S['share_p95']<=0.40 and S['M_max']<=GATE_M and S['F_max']<=GATE_F and S['crouch_min']>=0.15 and S['bottomed']==0 and S['bypass']==0 and S['unknown']==0 and S['centroid_abs_p95_mm']<=PAD['face']*500)
 print(json.dumps(S,default=JD)); fo and fo.write(json.dumps(S,default=JD)+'\n')
