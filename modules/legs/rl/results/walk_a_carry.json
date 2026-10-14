@@ -1,0 +1,29 @@
+{
+  "seconds_ran": 1.08,
+  "fell_at_s": 0.54,
+  "fall_why": "airborne",
+  "z0": 1.021,
+  "mean_horiz_speed": 0.8699,
+  "mean_forward": 0.7672,
+  "mean_vx_world": 0.8319,
+  "mean_vy_world": -0.0376,
+  "net_x_over_t": 0.8376,
+  "min_z": 0.1933,
+  "min_up": 0.0992,
+  "final_up": 0.2285,
+  "final_horiz_speed": 0.227,
+  "ds_fraction": 0.0926,
+  "flight_fraction": 0.5741,
+  "ankle_roll_peak_rad": [
+    0.2919,
+    0.3144
+  ],
+  "ankle_roll_peak_deg": [
+    16.72,
+    18.02
+  ],
+  "pass": false,
+  "gate": "20 kg torso payload at (0.25, 0, 0.10), command 0.8 m/s, 20 s, mean horizontal speed >= 0.8, no fall",
+  "payload_kg": 20.0,
+  "policy": "policy_walk_a.npz"
+}

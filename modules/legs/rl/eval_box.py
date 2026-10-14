@@ -293,7 +293,9 @@ def run_episode(m, policy, gains, ref, cmd, seconds, mode, payload_frac,
                 fell, fall_why = float(d.time), 'airborne'
             elif d.qpos[2] > z0 + 0.22:
                 fell, fall_why = float(d.time), 'jumped'
-        if renderer is not None and 2.0 <= t <= 8.0 and k % 3 == 0 and fell is None:
+        # Walk clip: every 3rd control step from the start through 8 s, and
+        # 0.5 s past a fall so an early fall still produces a GIF.
+        if renderer is not None and t <= 8.0 and k % 3 == 0 and (fell is None or t <= fell + 0.5):
             renderer.update_scene(d, camera=record_cam(d))
             frames.append(renderer.render().copy())
         last = action
@@ -365,6 +367,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--policy', required=True)
     ap.add_argument('--gif', action='store_true')
+    ap.add_argument('--tag', default='', help='prefix for results JSON and the GIF, so policies do not overwrite each other')
     args = ap.parse_args()
     os.makedirs(OUT_DIR, exist_ok=True)
     gains = np.load(os.path.join(HERE, 'gains.npz'))
@@ -445,20 +448,24 @@ def main():
             out['legs'] = s['legs']
         return out
 
+    prefix = (args.tag + '_') if args.tag else ''
+    policy_name = os.path.basename(args.policy)
     walk_out = slim(walk, keep_legs=True)
-    with open(os.path.join(OUT_DIR, 'walk.json'), 'w', encoding='utf-8') as f:
-        json.dump(walk_out, f, indent=2)
-    with open(os.path.join(OUT_DIR, 'push_lateral.json'), 'w', encoding='utf-8') as f:
-        json.dump(slim(lat), f, indent=2)
-    with open(os.path.join(OUT_DIR, 'push_forward.json'), 'w', encoding='utf-8') as f:
-        json.dump(slim(fwd), f, indent=2)
-    with open(os.path.join(OUT_DIR, 'carry.json'), 'w', encoding='utf-8') as f:
-        json.dump(slim(carry), f, indent=2)
-    print('wrote', OUT_DIR, flush=True)
+    written = [
+        ('walk.json', walk_out),
+        ('push_lateral.json', slim(lat)),
+        ('push_forward.json', slim(fwd)),
+        ('carry.json', slim(carry)),
+    ]
+    for name, payload in written:
+        payload['policy'] = policy_name
+        with open(os.path.join(OUT_DIR, prefix + name), 'w', encoding='utf-8') as f:
+            json.dump(payload, f, indent=2)
+    print('wrote', OUT_DIR, prefix or '(no tag)', flush=True)
 
     if frames:
         import imageio.v2 as imageio
-        gif_path = os.path.join(HERE, 'walk.gif')
+        gif_path = os.path.join(HERE, prefix + 'walk.gif')
         imageio.mimsave(gif_path, frames, duration=3 * CTRL_DT, loop=0)
         print('gif', gif_path, 'frames', len(frames), flush=True)
     elif args.gif:

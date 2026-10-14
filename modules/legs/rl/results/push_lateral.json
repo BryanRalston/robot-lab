@@ -1,0 +1,30 @@
+{
+  "seconds_ran": 5.72,
+  "fell_at_s": 5.2,
+  "fall_why": "pelvis",
+  "z0": 1.021,
+  "mean_horiz_speed": 1.2315,
+  "mean_forward": 1.1671,
+  "mean_vx_world": 0.6571,
+  "mean_vy_world": 0.4937,
+  "net_x_over_t": 0.6585,
+  "min_z": 0.1757,
+  "min_up": -0.0383,
+  "final_up": -0.0383,
+  "final_horiz_speed": 0.4658,
+  "ds_fraction": 0.2028,
+  "flight_fraction": 0.0874,
+  "ankle_roll_peak_rad": [
+    0.248,
+    0.1864
+  ],
+  "ankle_roll_peak_deg": [
+    14.21,
+    10.68
+  ],
+  "pass": false,
+  "note": "fell during the 2 s recovery window",
+  "gate": "300 N * 0.2 s = 60 N\u00b7s along +Y on the torso at t=4 during a 1.2 m/s walk; no fall through t=6",
+  "push_Ns": 60.0,
+  "policy": "policy_carry.npz"
+}
