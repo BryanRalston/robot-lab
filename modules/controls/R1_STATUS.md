@@ -18,8 +18,8 @@ Owner: RL Controls. Took handoff of `modules/legs/wbc/` and the RL walk work (`m
 4. **RL is under-commanded and unscored.** walk_a/walk_b were trained/evaluated at ~0.6–0.7 m/s mean command with 12.5 % falls; no CPU replay against the eval_box gates yet, so nothing counts toward G4.
 
 ## Plan
-1. Score walk_a and walk_b on the CPU gates with `rl/eval_box.py` (box needs jax installed; light) and publish `controls/results/r1_rl_gates.json`. Then score each job 4 checkpoint as it is pushed.
-2. RL curriculum to the gate: raise command distribution to 1.2–1.3 m/s, add fall-rate < 1 % and sole-edge (CoP margin) penalty terms, keep CONTRACTS R1.2 torque/velocity limits in the MJX model. Brief job 5 only after job 4 finishes.
+1. Score walk_a, walk_b and job 4 checkpoints on the CPU gates with `rl/eval_box.py` **on the bryan PC via Grok Build** (`controls/SCORING_BRIEF.md`). Not on the box: the box froze from low RAM (crew rule 2026-10-14), so no jax and no sims there. No scores exist yet.
+2. RL curriculum to the gate: raise command distribution to 1.2–1.3 m/s, add fall-rate < 1 % and sole-edge (CoP margin) penalty terms, keep CONTRACTS R1.2 torque/velocity limits in the MJX model. RL retrain is queued after jobs 4 (RL train), 5 (lever FEA), 6 (structure r2), via Grok Interface; no job is started by Controls.
 3. WBC as fallback/teacher: implement contact-gated unloading (the `WBC_GATE` path already in controller.py) and a reference with ≥ 10 % double support; allow sagittal step shortening via timing, not length; raise lateral step cap with an ankle-roll-aware CoP constraint.
 4. Push recovery: add stepping-strategy (capture point) to WBC and push curriculum to 60 N·s lateral in RL.
 5. Report knee saturation to Actuators/Legs as a contract risk (1.2 m/s needs margin above 258 Nm or a gait with less knee flexion).
@@ -28,3 +28,9 @@ Owner: RL Controls. Took handoff of `modules/legs/wbc/` and the RL walk work (`m
 - `sim/v3/humanoid_v3.xml` already carries the P-019 neck in Robot Lab's working tree (uncommitted, not mine; masses 0.349/0.461 kg, armature 0.0005, ctrlrange ±4.1 Nm). Left for Robot Lab to commit.
 - **Legs-owned files, minimal edit (this commit):** `modules/legs/rl/humanoid_mjx.xml` and `humanoid_mjx_rough.xml` neck bodies set to the same values times the existing mass scale (0.499263/0.490 = 1.01891): neckY 0.3556 kg, head 0.4697 kg, inertias scaled, armature 0.079 → 0.0005, neck ctrlrange ±36 → ±4.1 Nm. Model mass 65.0 → 64.668 kg.
 - Not regenerated: `make_model.py` outputs (`gains.npz`, `ref_cycle.npz`) and the 65 kg renormalization, to avoid changing inputs mid job 4. Regenerate after job 4 completes. Checkpoints walk_a/walk_b were trained on the old neck (±36 Nm); expect negligible effect (head gravity torque < 1 Nm) but re-score.
+
+## Decisions (Robot Lab, 2026-10-14)
+- Scoring and all heavy work (training, sims) run on the bryan PC via Grok Interface; never DESKTOP-B115PVV; box is light work only.
+- Queue is sequential: job 4 → 5 → 6 → RL retrain + scoring.
+- RL Controls owns `make_model.py` regeneration after job 4 finishes (not before).
+- sim/v3 neck (A26) is on main via Legs 8a03242; the MJX neck edit is in eac9a46.
