@@ -547,3 +547,45 @@ Recorded: rail A = F1–F3 + S1, S2 + hand logic; rail B = F4–F6 + S3–S5. Si
 - Encoder resolution choice (Arms).
 - O-E13 RECOM.
 - O-E12 **closed** by the DP83822HF.
+
+## 17. R-062: knee Elmo drives off the finned knee housing (mount location and harness delta)
+
+**Count.** The knee is 2 × TBM2G-07613D + 2 × RV12x5 (`sizing.json` sel.knee, nmot 2), and `harness.py` counts 2 knee drives per leg. So this moves **2 drives per leg (4 per robot)**, not 1 per leg. All figures below are per leg for 2 drives.
+
+### 17.1 Location: thigh shell just above the knee housing (recommended)
+- **Heat:** off the housing, so the knee fins lose the drive load (R-062 condition 2: margin 3.7 K on the housing vs 18 K off it). Mount the drives on a small 6061 plate (~1.5 mm) standing off the femur tube/thigh shell with G10 or PEEK spacers, so there is no metal path back to the finned housing. Each G-TWI has a flat base heatsink face and 2 mounting holes; the plate is the heat spreader. At 8.8 A rms per drive, the dissipation is small and spread over the plate area.
+- **Phase run:** shortest option, about 0.20 m extra per motor [EST: L48 places the housing ≥150 mm from the knee-cap keep-out, plus routing ×1.15; Legs to confirm with CAD]. No joint is crossed, because the motors are thigh-side, so there is no extra clock-spring loop and no extra EMI loop area across the hip.
+- **EtherCAT, bus, STO:** these run as a line down the thigh (hip_pitch → knee → ankle; `harness.py`). The drives just tee in a little higher on the same trunk, keeping the same 0.08 m pigtails.
+- **Hip/pelvis bay (rejected):** about 0.42 m × 1.15 + a hip-pitch clock-spring loop ≈ 0.6–0.7 m extra per conductor. That is 6 phase conductors at up to ~42 A peak, crossing the hip_pitch drum, for about 2.5–3× the mass (≈ 0.15–0.17 kg/leg). It is the worst option for EMI and loss, and it competes with the hip drives already in the bay.
+
+### 17.2 Phase gauge
+- **Current:** I_rms 8.8 A per motor (sizing.json, carry rms ≈ 9.5 A from 77.5 N·m). Peak ≈ 345 N·m / (59.69 × 0.8455 × 2) / Kt 0.081 ≈ **42 A** at full knee capability (gait peak 178 N·m ≈ 22 A). The G-TWI R70/100 is 49.5 A.
+- **Gauge rule:** this uses the `harness.py` rule (ΔT ≤ 30 K at rms, bundle factor 2, h 10 W/m²K) at 9.5 A:
+  - 0.5 mm² → 94 K (fail)
+  - 1.0 mm² → 40 K (fail)
+  - **1.5 mm² (≈16 AWG) → 24 K (pass)**
+- **Mass:** Lapp ÖLFLEX HEAT 180 SiF 1.5 mm² is **20 g/m** (datasheet, including the silicone jacket). That is 13.4 g/m of copper (1.5 mm² × 8.96 g/cm³) plus about 6.6 g/m of jacket. The 42 A peak only lasts seconds; ΔV over 0.26 m is negligible.
+- **Pigtails:** the existing 0.06 m local phase pigtails are booked at 0.5 mm², which fails the same rule. This section re-books them at 1.5 mm².
+
+### 17.3 Signal leads
+- **Encoders:** RLS AksIM-2 (Actuators SPEC; 2 per joint: motor + output). BiSS-C/SSI RS-422 = **6 conductors** (MA±, SLO±, +5 V, GND). Per leg that is 3 leads (2 motor encoders, 1 knee output encoder), each lengthened about 0.20 m.
+- **Encoder cable:** uses the D72 precedent, Belden MRTA2P26S 2×2×26 AWG shielded (25.9 g/m) + 2 × SiF 0.25 mm² (5.4 g/m) = 36.7 g/m.
+- **PT1000:** 2 × SiF 0.25 mm² per motor.
+
+### 17.4 Harness delta per leg (L_extra = 0.20 m [EST])
+| conductor | gauge | count × extra m | g/m | kg |
+|---|---|---|---|---|
+| motor phase (2 motors × 3) | SiF 1.5 mm² | 6 × 0.20 = 1.20 m | 20 | 0.0240 |
+| encoder (3 leads × 6 cond) | MRTA2P26S + 2× SiF 0.25 | 3 × 0.20 = 0.60 m | 36.7 | 0.0220 |
+| PT1000 (2 motors × 2) | SiF 0.25 mm² | 4 × 0.20 = 0.80 m | 5.4 | 0.0043 |
+| pigtail re-gauge 0.5 → 1.5 mm² | | 6 × 0.06 = 0.36 m | +11 | 0.0040 |
+| bus / STO / EtherCAT | | tee moves up the same trunk | | 0.0000 |
+| subtotal | | | | 0.0543 |
+| sleeving 12 % (harness.py rule) | | | | 0.0065 |
+| drive plate + isolating standoffs [EST] | | | | 0.010 |
+| **net per leg** | | | | **≈ +0.071** |
+
+- **Robot total:** ≈ **+0.142 kg** (wire only ≈ +0.122 kg).
+- **No saving on bus, STO or EtherCAT:** these are line runs that continue down to the ankle drives, so moving the knee tee upward does not shorten them.
+- **Mass freeze:** this exceeds the R-043 freeze threshold (0.02 kg). It needs an Arbiter booking against R-062 (an R-062 consequence, not discretionary).
+- **Open:** Legs CAD for the actual drive-to-motor distance. Each 0.05 m changes the result by about ±0.013 kg/leg.
