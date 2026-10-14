@@ -65,37 +65,36 @@ class CarryLimiter:
             dw, dh = self.th._d(Tw, Th, self.th.heat(rest_tau, 0.0, Tw)); Tw += 10 * dw; Th += 10 * dh; t += 10
         return np.inf
 
-class R081Rule:
-    """Arbiter R-081 / Thermal interim rule (enforced default, P-042 carry x1.1): a carry bout may run <= BOUT s; after a
-    bout that reached BOUT, >= REST s unloaded before the next; OR keep carry time <= DUTY of any rolling WINDOW s.
-    Planner reports carrying (load in hands) each tick. Unloaded = load set down (knee ~idle, NOT the 64.4 N·m loaded
-    stand: with loaded rest the rule does not hold 120 C, see CARRY_LIMIT.md). Parameters configurable (tighter: BOUT 480)."""
-    def __init__(self, bout=600.0, rest=600.0, duty=0.40, window=1800.0, dt_bin=1.0):
-        self.bout, self.rest, self.duty, self.win, self.db = bout, rest, duty, window, dt_bin
-        self.bins = np.zeros(int(window / dt_bin)); self.i = 0; self.acc = 0.0; self.cur = 0.0
-        self.run = 0.0; self.rest_left = 0.0
-    def step(self, carrying, dt):
-        if carrying: self.run += dt; self.cur += dt
+class R096Rule:
+    """Arbiter R-096 (replaces R-081 10/10 OR 40 %): carry <= DUTY of any rolling WINDOW s AND each continuous carry bout
+    <= MAX_BOUT s. 'Carrying' = load held (walking OR standing holding the load); unloaded = load set down.
+    A bout ends only after >= MIN_GAP s unloaded; shorter breaks do not reset the bout timer (Controls: with 2-30 s
+    breaks a compliant 5/5/2 min burst reaches 121.6-125.1 C; with MIN_GAP 60 s worst compliant = 119.1 C, h 8 x1.1).
+    remaining() = min(bout left, duty left) (window-expiry credit not counted: conservative)."""
+    def __init__(self, max_bout=300.0, duty=0.40, window=1800.0, min_gap=60.0, dt_bin=1.0):
+        self.bout, self.duty, self.win, self.gap, self.db = max_bout, duty, window, min_gap, dt_bin
+        self.bins = np.zeros(int(window / dt_bin)); self.i = 0; self.acc = 0.0
+        self.run = 0.0; self.idle = 0.0
+    def step(self, load_held, dt):
+        if load_held: self.run += dt; self.idle = 0.0
         else:
-            if self.run >= self.bout: self.rest_left = self.rest
-            self.run = 0.0; self.rest_left = max(0.0, self.rest_left - dt)
+            self.idle += dt
+            if self.idle >= self.gap: self.run = 0.0
         self.acc += dt
         while self.acc >= self.db:
             self.acc -= self.db; self.i = (self.i + 1) % len(self.bins); self.bins[self.i] = 0.0
-        self.bins[self.i] += dt if carrying else 0.0
+        if load_held: self.bins[self.i] += dt
     def window_carry(self): return float(self.bins.sum())
     def remaining(self):
-        """Seconds of carry allowed now under the rule (either branch)."""
-        if self.rest_left > 0.0: return 0.0
-        a = max(0.0, self.bout - self.run)                      # 10-on/10-off branch
-        b = max(0.0, self.duty * self.win - self.window_carry())  # rolling-duty branch (conservative: no window expiry credit)
-        return max(a, b)
+        return max(0.0, min(self.bout - self.run, self.duty * self.win - self.window_carry()))
+
+R081Rule = R096Rule   # legacy name; R-081 defaults (10/10 OR 40 %) retired by R-096
 
 class CarryGovernor:
-    """Enforced: remaining = min(R-081 rule, model remaining at h); torque backstop = WindingModel derate (130->145)."""
+    """Enforced: remaining = min(R-096 rule, model remaining at h); torque backstop = WindingModel derate (130->145)."""
     def __init__(self, thermal, scale=1.1, rule=None):
-        self.th = thermal; self.model = CarryLimiter(thermal, scale); self.rule = rule or R081Rule()
-    def step(self, tau, dt, omega=0.0, carrying=False):
-        self.th.step(tau, dt, omega); self.rule.step(carrying, dt)
+        self.th = thermal; self.model = CarryLimiter(thermal, scale); self.rule = rule or R096Rule()
+    def step(self, tau, dt, omega=0.0, load_held=False):
+        self.th.step(tau, dt, omega); self.rule.step(load_held, dt)
     def remaining(self): return min(self.rule.remaining(), self.model.remaining())
     def allow(self, min_bout=10.0): return self.remaining() >= min_bout

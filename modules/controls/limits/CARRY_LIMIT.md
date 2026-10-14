@@ -1,4 +1,4 @@
-# Knee carry duty limit (R-079, R-081) — RL Controls
+# Knee carry duty limit (R-079, R-081, R-096) — RL Controls
 
 Basis: A40 winding model, D69 rev B as built (0.0703 m² fins), **h 8 still air, η_f 0.7**, 35 °C, drives off housing,
 winding target ≤120 °C. Profile: P-042 `carry_20kg_1p0` (1.0 m/s), worst knee, copper + iron loss, ×1.0 and ×1.1.
@@ -7,7 +7,9 @@ Hot start = steady 64.4 N·m loaded stand. Files: `carry_limit.py`, `carry_limit
 
 ## Enforced (default)
 `CarryGovernor` = min of
-1. **R-081 rule (Thermal interim):** ≤10 min continuous carry, then ≥10 min *unloaded*; OR ≤40 % carry over a rolling 30 min (`R081Rule`, parameters configurable).
+1. **R-096 rule** (`R096Rule`; `R081Rule` is an alias, R-081 10 on/10 off OR 40 % retired): ≤40 % carry over any rolling
+   30 min **AND** each continuous carry bout ≤5 min. *Carry* = load held, walking or standing; *unloaded* = load set down.
+   A bout ends only after ≥60 s set down (`min_gap`); shorter breaks keep the bout timer running.
 2. **Model remaining time** (`CarryLimiter`): forward prediction from the live winding/housing estimate to 120 °C at the
    P-042 cycle-equivalent load (RMS torque + mean iron loss), ×0.9 margin. Reported to the planner as `remaining()` s.
 3. Torque backstop: `WindingModel` derate 130→145 °C, trip 150 °C.
@@ -40,3 +42,11 @@ from hot already exceeds 120 °C at 8.9 min. Tighter numbers that do hold (idle 
 40 % with bouts ≤5 min (5/7.5) → 112.3 °C; 4/6 → 110.0 °C. With a *loaded* rest nothing at 40 % holds (5/7.5 → 126.0;
 5/10 → 122.8): the rest must be load-down. The rule is kept as enforced default (R-081); the model limit runs alongside and
 in practice cuts the first hot bout to ~8 min (0.9 × 8.9) and later bouts as the state requires.
+
+## R-096 check (h 8, η 0.7, ×1.1, hot start, 3 h, unloaded rest)
+Steady 5 on / 7.5 off (40 %): **112.3 °C**. Worst compliant arrangement = burst 5 on / g / 5 on / g / 2 on, then rest out the window:
+| break g between bouts | 2 s | 10 s | 30 s | 60 s | 120 s | 180 s | 300 s |
+|---|---|---|---|---|---|---|---|
+| peak Tw °C | 125.1 | 124.0 | 121.6 | **119.1** | 116.4 | 113.9 | 112.3 |
+Hence `min_gap` 60 s: R-096 holds ≤120 °C in its worst arrangement (119.1 °C, 0.9 K margin). The model remaining-time limit
+(0.9 margin) still governs and the 130 °C derate is the backstop. 8 on / 10 off was not adopted.
