@@ -920,3 +920,12 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
 - **Chest pad** (0.077, already booked in R-079 as 0.078) **must seat on a backed bulkhead.** Torso designs the backing, and any mass is booked.
 - **Hand sheaths: custom 316 flat-wire coil + PTFE, +0.042 booked in full.** It's a G1 RFQ item (Fort Wayne / Asahi / Heraeus).
 - Reserve ~**-0.28** (on estimates). The mass-down pass is mandatory per R-079. FEA results due: L47, torso pocketing, housing pocketing, palm, ankle cross, plus the touch-protection redo.
+
+## R-081 (2026-10-14) Knee fins, A38 rev B, foot C2, carry limits
+- **Knee fins: rev B (0.0703 m²) stays, and the D69C -0.019 credit is WITHDRAWN.** Rev C (measured 0.0605) failed (Controls a5e14ff), so its CAD mass isn't creditable. D69C's sign-off relied on a walking h that R-079 and Thermal f2da3ab show isn't a defensible floor, and cutting fin area worsens the binding carry limit. No knee fin trim unless a G5-measured h >=12 reopens it.
+- **Interim knee carry limit (Thermal f2da3ab) is adopted:** for P-042 carry x1.1, <=10 min continuous then >=10 min unloaded, or <=40% duty over 30 min, with the 120 C derate as the guard. Controls implements it. The G5 heated rev B housing h test runs at 0.5-2 m/s, and the limit lifts if h >=12. The blower (+25-35 g, 1-1.5 W) is the fallback only.
+- **A38 rev B:** +0.011 vs +0.017 booked, so **-0.003** (half credit), FEA at 185 MPa fault.
+- **C2 is accepted** (foot top shell deleted), provided the boot re-anchors through the 4 existing inserts, extends over the instep rod ends, and has R2 edges on the exposed outrigger and lugs. **-0.13 est at half credit, so -0.065.**
+- **New requirement: sole pad plus toe/heel bumpers** (wear and impact; bare 7075 isn't allowed on the ground). Legs and Materials propose the part and its mass, booked in full.
+- **Elbow software cap <=69 N·m is accepted** (Controls verifies). **Flexor stall-tension cap <=500 N is accepted** if T4 grip of >=22 N is still met. The doubler removal is confirmed.
+- Reserve ~**-0.23**, before the sole pad.
