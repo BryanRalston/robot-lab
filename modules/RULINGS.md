@@ -986,3 +986,8 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
 ## R-089 (2026-10-14) Hand MCU clock, flexor cap (Controls 2615b7c)
 - R-078 condition met: the XMC4800 at 72 MHz fits (82% worst case). Since the RP06 (R-083) removed the power limit, **the default is the 144 MHz CPU clock** for timing margin (+0.29 W, ~3.2 of 6 W). Thermal and Arms confirm the hand board stays <=90 C with the +0.29 W (cutoff 110 C). 72 MHz is the fallback only if it doesn't. The FW-E14 bench pass (<=70% measured) is binding, and the DCX16/BiSS 5 kHz fallbacks are kept. The single PHY is valid (end-of-line, per harness.py). **The recalled datasheet figures must be re-read and cited before G1.**
 - **Flexor current cap: 1.08 A** (worst case at eta=1 gives 500 N). It supersedes 1.66/1.67 A. Grip of 22.1 N sustained / 30 N peak at 0.952 A is unaffected.
+
+## R-090 (2026-10-14) Flexor cap re-ruled; A37 rev D
+- **The flexor cap returns to 1.66 A**, superseding R-089's 1.08 A. Basis: the cited maxon GPX 22 HP 103:1 eta_max of 0.65 holds tendon <=500 N, and 1.08 A breaks the T4 loaded close (~1.7 A transient). Adopted scheme: cap 1.66 A, trip ~1.80 A for 3 samples, a 0.5 s stall timer to <=0.84 A, and DRV8874 ILIM ~1.9 A. **Binding G5: tension-per-amp on every assembly (including back-driven), with a calibrated per-hand cap if any eta >0.65.** Sheath SF stays >1.9 even at a 770 N fault.
+- **A37 rev D** (PEI eye-pin sleeve plus 22/12 tine sleeve, closing the knee break to >=20 K/W): **booked at +0.028** (supersedes +0.011, so +0.017 here). It drops to +0.019 if J-T1 measures R_col <=8 K/W. The knee lever eye's +8.6 g gets booked once Legs confirms it.
+- Reserve ~-0.35.
