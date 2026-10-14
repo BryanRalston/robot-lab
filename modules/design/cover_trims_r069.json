@@ -1,0 +1,74 @@
+{
+ "items": [
+  {
+   "item": "A  CF 1.0 mm (4x0.25 twill) on the louvred thigh FRONT half (outboard stays PC 1.2: CF 1.55 kg/m2 > PC 1.2 1.44)",
+   "kg": -0.026,
+   "calc": "front skin 0.187 x (1-1.55/1.80); R-027 densities; R-054 prefers CF",
+   "risk": "cost ~+$0.8k Al tools (2 L/R fronts); edge cracking on impact (R-027) -> radiused/hemmed slot edges",
+   "recommend": "YES"
+  },
+  {
+   "item": "B  knee cap PC 1.5 -> 1.2 mm",
+   "kg": -0.02,
+   "calc": "0.098 x 0.3/1.5",
+   "risk": "2.5:1 draw -> post-form min ~0.7 mm at corners; knee is a fall-contact zone (dent/crack); EPP pad behind it?",
+   "recommend": "NO (fall zone) unless Materials dent check passes"
+  },
+  {
+   "item": "C1 foot top shell 1.2 -> 1.0 mm",
+   "kg": -0.023,
+   "calc": "0.137 x 0.2/1.2",
+   "risk": "low draw (<=1.5:1) OK; foot is a kick/stub zone: dents; EPP-backed",
+   "recommend": "YES (with dent check)"
+  },
+  {
+   "item": "C2 foot top shell DELETED (alternative to C1)",
+   "kg": -0.153,
+   "calc": "0.137 + 4 inserts",
+   "risk": "instep lugs/outrigger exposed (snag, debris, looks); Legs to accept; mould M5-M6 deleted (-$2.3k)",
+   "recommend": "OPTION for the Arbiter"
+  },
+  {
+   "item": "D  ankle boot: TPU-coated 210D nylon 0.30 -> silicone-coated 70D ripstop ~0.10 kg/m2",
+   "kg": -0.04,
+   "calc": "0.201 m2 x 0.20 kg/m2 [EST: needs supplier TDS]",
+   "risk": "abrasion at the ankle; becomes a wear part (inspect at the 4,250 h rod-end service)",
+   "recommend": "YES"
+  },
+  {
+   "item": "E  hip skirt fabric 0.30 -> 0.10 kg/m2 (same ripstop); PC rim + hem ring kept",
+   "kg": -0.048,
+   "calc": "0.239 m2 x 0.20 kg/m2 [EST]",
+   "risk": "flutter/pinch at the hip; the exhaust slots band needs the hem ring (kept)",
+   "recommend": "YES"
+  },
+  {
+   "item": "F1 waist bellows P-024 TPE -> thin TPU-film convoluted boot 0.3 kg/m2",
+   "kg": -0.025,
+   "calc": "0.0848 m2 x 0.30 kg/m2 [EST]",
+   "risk": "fatigue at waist yaw/pitch; needs a cycle test",
+   "recommend": "YES"
+  },
+  {
+   "item": "F2 waist bellows P-024 DELETED (alternative to F1)",
+   "kg": -0.055,
+   "calc": "cover_set_v5.json P-024",
+   "risk": "waist yoke/pinch points exposed (Optimus look lost); finger-pinch hazard at waist pitch",
+   "recommend": "OPTION"
+  },
+  {
+   "item": "G  fasteners: 2 of 4 bonded inserts per rigid panel -> moulded snap hooks (8 panels)",
+   "kg": -0.032,
+   "calc": "8 panels x 2 x 2 g [EST]",
+   "risk": "retention after a fall; panels may pop off (that is acceptable as a fuse, but lost parts)",
+   "recommend": "YES"
+  }
+ ],
+ "recommended_total_kg": -0.194,
+ "recommended_half_credit_kg": -0.097,
+ "options_extra": {
+  "C2_instead_of_C1": -0.13,
+  "F2_instead_of_F1": -0.03,
+  "B_if_dent_check_passes": -0.02
+ }
+}
