@@ -131,6 +131,7 @@
    "single_use": "yes"
   },
   "R5 shoulder-cap mount, HC 4.5 pcf 62x62x57": {
+   "area_cm2": 38.4,
    "mount": "conformal PC saddle on roll housing outboard face (y ~ +0.30), retained by bonded aramid band + 2 bonded M4 inserts (bulkhead M8 holes not used); load path: ground -> EPP -> plate -> core -> saddle -> roll housing (compression, 2.33 MPa bearing) -> shoulder structure; shoulder-cap cover (deferred) carries no load",
    "peak_kN_x1p3": 8.94,
    "M_Nm": 537,

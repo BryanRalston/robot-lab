@@ -36,7 +36,7 @@ for n,p,m,a,k,s in rows:
     out.append(dict(panel=n,P=p,material=m,area_m2_side=round(a,4),panels=k*s,kg=round(kg,3),cf_kg=round(s*(a*CF+k*INS),3) if 'CF' in m else None))
     tot[p]=tot.get(p,0)+kg
 sp=json.load(open(os.path.join(H,'shoulder_pad.json')))
-out.append(dict(panel='shoulder impact pad: 5052 HC 3.1 pcf cartridge + 10 mm EPP (R-042 R2)',P='P-051 (proposed)',material='Al honeycomb + EPP 80 + PC backing',area_m2_side=round(sp['options'][sp['pick']]['area_cm2']/1e4,4),panels=2,kg=sp['options'][sp['pick']]['kg_pair'],cf_kg=None,note='booked separately at R-042 cap 0.10; not in the P-020/P-022..25 delta'))
+out.append(dict(panel='shoulder impact pad R5: 5052 HC 4.5 pcf 62x62x57 cartridge on roll-housing saddle',P='P-051 (proposed)',material='Al honeycomb + Al plate + EPP 80 face + PC saddle',area_m2_side=round(sp['options'][sp['pick']]['area_cm2']/1e4,4),panels=2,kg=sp['options'][sp['pick']]['kg_pair'],cf_kg=None,note='booked separately, R-054 0.100; not in the P-020/P-022..25 delta'))
 json.dump(dict(rows=out,totals={k:round(v,3) for k,v in tot.items()},booked_P020_skin_kg=1.157,delta_vs_booked_kg=round(sum(tot.values())-1.157,3),measured=False,pc_area_m2=round(sum(r['area_m2_side']*(2) for r in out if r['P']=='P-020'),3)),open(os.path.join(H,'cover_set_v5.json' if TRIM else 'cover_set_v5_untrimmed.json'),'w'),indent=1)
 for r in out: print(r)
 print({k:round(v,3) for k,v in tot.items()})

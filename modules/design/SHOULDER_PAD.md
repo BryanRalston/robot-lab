@@ -1,7 +1,27 @@
-# Shoulder impact pad (R-042): R4 honeycomb cartridge, RL Industrial Design, 2026-10-14
+# Shoulder impact pad (R-042/R-054): R5, shoulder-cap mount, RL Industrial Design, 2026-10-14
 **P-number: P-051 (proposed). R-042 approves the pad and its cap but assigns no P-number; the highest P on main is P-050.** Numbers come from `shoulder_pad.py` → `shoulder_pad.json`. All [EST] until Materials confirms the foam data and Controls runs T-030.
 
-## R4 (Materials 8a3cc66, R-049): CURRENT DESIGN
+## R5: relocated to the shoulder cap (Arms: R4 on the bulkhead face covers the ø96 shoulder-pitch housing and flange, so not viable). CURRENT DESIGN
+R-054 accepted R4 at 0.100 (booked). Same core: **5052 HexWeb CR III 4.5 pcf, pre-crushed, 62 × 62 × 57 → 8.94 kN at ×1.3 (537 N·m) / 282 J at ×1.0: PASS.**
+- **Location:** outboard of the shoulder roll housing, y ≈ +0.30 (Arms: abduction clears, arm gap about 32 mm at roll −5°, A44 tuck clears the torso by 8.6 mm). **Arms to re-confirm with the R5 stack of 66.5 mm** (saddle 3 + core 57 + plate 0.5 + EPP 6).
+- **Minimal carrier (shells deferred):** 3 mm PC conformal saddle on the roll-housing outer face, retained by a bonded aramid band + 2 bonded M4 inserts of its own (the bulkhead's 8 × M8 are taken). **Load path:** ground → EPP → plate → core → saddle → **roll housing (2.33 MPa bearing, compression)** → shoulder structure. The future cosmetic cap carries no load. **Arms to confirm the roll housing takes 8.94 kN lateral in bearing over 62 × 62.**
+- **Vent inlet z +0.14:** core centre moved 4 mm up → about 1.5 mm clear (was 2.5 mm overlap). **Coverage:** ±15 mm contact band stays 12 mm (bottom) / 20 mm (top) inside the core edges.
+- **Off-centre face-plate check (R4 80 × 100 plate, 8.94 kN):** under a flat-ground hit the EPP loads the whole plate (1.12 MPa mean). The 19 mm overhang beyond the core is a cantilever, M ≈ 202 N·m/m: 0.5 mm σ ≈ 4.8 GPa (SF 0.06) **FAIL**; 0.8 mm σ ≈ 1.9 GPa (SF 0.15) **FAIL**, so **the +0.008 for 0.8 mm does not fix it**; a flat plate would need 2.1 mm 6061 (+0.035/side). **Fix: plate and EPP face cut to the 62 × 62 core**, so the plate is in pure compression (2.33 MPa) with no bending; an off-centre resultant only tilts the crush, held by the side posts. Coverage comes from placing the core on the band.
+- Thermal: the pad is now off the 69 °C bulkhead; **Thermal to give the roll-housing surface temperature** (R4's gap/foil dropped unless needed, +0.001).
+
+| item (per side) | kg |
+|---|---|
+| HC 4.5 pcf core 62×62×57 | 0.0158 |
+| Al 0.5 mm face plate 62×62 | 0.0052 |
+| 4 PC side-guide posts | 0.0040 |
+| PC 3 mm conformal saddle (replaces backing) | 0.0138 |
+| bonded aramid band + 2 bonded M4 inserts | 0.0040 |
+| EPP 80 face 6 mm 62×62 | 0.0018 |
+| face sleeve | 0.0040 |
+| **per side** | **0.0486** |
+| **pair** | **0.097 (R-054 booked 0.100 → −0.003)** |
+
+## R4 (Materials 8a3cc66, R-049), superseded by R5
 R3 fails R-049 against the cited HexWeb CR III data (3.1 pcf 0.896 MPa, ×1.30 dynamic → 9.79 kN; 239 J at ×1.0). The EPP face is in series and gets no energy or peak credit.
 - **Core: 5052 HexWeb CR III 4.5 pcf (1.79 MPa cited), pre-crushed, 62 × 62 × 57 mm** (63 × 63 gives 9.24 kN at ×1.3, over the limit).
   - **Peak at ×1.30: 8.94 kN = 537 N·m ≤ 9.17 kN / 550: PASS.**

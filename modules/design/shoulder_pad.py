@@ -66,7 +66,7 @@ items5=dict(core_HC_4p5pcf_62x62x57=A4*tc*72, face_plate_Al_0p5_62x62=A4*0.5e-3*
  PC_saddle_3mm_conformal_to_roll_housing_62x62=A4*3e-3*1200, bonded_aramid_band_plus_2_M4_bonded_inserts=0.004,
  EPP80_face_6mm_62x62_chamfered=A4*0.006*80, face_sleeve=0.004)
 per5=sum(items5.values())
-opts['R5 shoulder-cap mount, HC 4.5 pcf 62x62x57']=dict(mount='conformal PC saddle on roll housing outboard face (y ~ +0.30), retained by bonded aramid band + 2 bonded M4 inserts (bulkhead M8 holes not used); load path: ground -> EPP -> plate -> core -> saddle -> roll housing (compression, 2.33 MPa bearing) -> shoulder structure; shoulder-cap cover (deferred) carries no load',
+opts['R5 shoulder-cap mount, HC 4.5 pcf 62x62x57']=dict(area_cm2=round(A4*1e4,1),mount='conformal PC saddle on roll housing outboard face (y ~ +0.30), retained by bonded aramid band + 2 bonded M4 inserts (bulkhead M8 holes not used); load path: ground -> EPP -> plate -> core -> saddle -> roll housing (compression, 2.33 MPa bearing) -> shoulder structure; shoulder-cap cover (deferred) carries no load',
  peak_kN_x1p3=round(Fpk/1e3,2),M_Nm=round(Fpk*0.06),E_J_x1p0=round(Est),
  coverage='core centre 4 mm above contact-band centre (clears vent inlet at z +0.14 by ~1.5 mm): band +-15 mm stays 12 mm (bottom) / 20 mm (top) inside core edges',
  stack_mm=3+57+0.5+6,plate_check=chk,mass_items_kg_side={k:round(v,4) for k,v in items5.items()},kg_side=round(per5,4),kg_pair=round(2*per5,3),single_use='yes')
