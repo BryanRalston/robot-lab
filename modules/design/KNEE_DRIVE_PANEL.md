@@ -33,8 +33,8 @@ R-087: ID's drive-bay rear panels (+0.082 EST) overlapped Electronics' 41.8 g PA
 
 ## IP2X and tool removal
 1. **Tool required:** 4× M2.5 **captive** screws into tabs on Legs' two G10-lined band clamps. No snap-only retention (Electronics enclosure condition C1).
-2. **No femur holes:** tabs on the band clamps only. **Legs must confirm tab positions.**
+2. **No femur holes:** tabs on the band clamps only. **Legs L58 confirmed:** tips at x−38, y100/160, z700/780; bosses align PASS.
 3. **IP2X (IEC 60529):** jointed test finger Ø12 × 80 mm has no straight path to solder points. Inner face ≥ 8 mm from live parts **or** labyrinth baffle in front of terminals; vent slots ≤ 10 mm wide.
 
-## Fin grille
-No local bulge (rev B stays). Bulge pending Legs' rev B envelope check.
+## Fin grille / L55 bulge
+**+12.7 mm** local bulge adopted (see `KNEE_BULGE_L61.md`). Legs L58 tab bosses locked at x−38, y100/160, z700/780.

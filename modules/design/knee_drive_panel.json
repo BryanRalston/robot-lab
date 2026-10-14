@@ -4,8 +4,6 @@
  "planform_cm2_side": 221.0,
  "inlet_open_cm2": 52.0,
  "outlet_open_cm2": 63.0,
- "inlet_open_frac": 0.588,
- "outlet_open_frac": 0.475,
  "items_g_side": {
   "outer_skin": 16.06,
   "pocket_walls_80x60x15": 6.36,
@@ -17,24 +15,72 @@
  "kg_side": 0.0353,
  "kg_pair": 0.071,
  "vs_separate": {
-  "id_pc_panels": 0.082,
-  "electronics_covers": 0.0418,
   "sum": 0.124,
   "merged": 0.071,
   "saving": 0.053
  },
- "vs_R087_booked": {
-  "booked": 0.04,
-  "merged": 0.071,
-  "delta": 0.031,
-  "flag": "merged > booked; reconcile with Arbiter"
+ "legs_L58_tabs": {
+  "tips_xyz": [
+   [
+    -38,
+    100,
+    700
+   ],
+   [
+    -38,
+    160,
+    780
+   ],
+   [
+    -38,
+    100,
+    780
+   ],
+   [
+    -38,
+    160,
+    700
+   ]
+  ],
+  "size_mm": [
+   29.5,
+   8,
+   2
+  ],
+  "band_x": -8.5,
+  "bosses": [
+   {
+    "x": -38,
+    "y": 100,
+    "z": 700,
+    "thread": "M2.5"
+   },
+   {
+    "x": -38,
+    "y": 100,
+    "z": 780,
+    "thread": "M2.5"
+   },
+   {
+    "x": -38,
+    "y": 160,
+    "z": 700,
+    "thread": "M2.5"
+   },
+   {
+    "x": -38,
+    "y": 160,
+    "z": 780,
+    "thread": "M2.5"
+   }
+  ],
+  "alignment": "PASS: panel M2.5 bosses at tab tips; pocket corners y100/160 z700/780",
+  "legs_mass_tabs": "+0.004 robot (integrated clamp ears, Legs L58)"
  },
  "features": {
-  "tool_removal": "4x M2.5 captive screws into tabs on Legs 2x G10-lined band clamps; tool required; no snap-only (Electronics C1)",
-  "legs_flag": "TAB POSITIONS need Legs confirmation; no holes in 1.6 mm femur wall",
-  "ip2x": "IEC 60529 finger 12 mm x 80 mm: no straight path to solder points; inner face >=8 mm from live OR labyrinth baffle; vent slots <=10 mm wide",
-  "clearance": ">=3 mm to drive tops and cable exits; cable exits at bottom edge of pocket",
-  "a35": "inlet 52 cm2 low (>=50, >=30%), outlet 63 cm2 high (>=60, >=35%)",
-  "pocket": "integral 80x60x15 mm over 26x52x104 drive box (R-062 / L51, z 688-792)"
+  "tool_removal": "4x M2.5 captive screws into Legs L58 tabs on G10 band clamps; tool required",
+  "ip2x": "baffle + slots <=10 mm; inner face >=8 mm from live parts",
+  "a35": "inlet 52 / outlet 63 cm2",
+  "pocket": "80x60x15 over 26x52x104 drive box z 688-792"
  }
 }

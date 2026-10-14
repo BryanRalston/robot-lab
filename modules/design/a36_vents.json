@@ -6,7 +6,9 @@
    "inlet_open_cm2": 84,
    "outlet": "rear (popliteal) high: thigh fairing has no rear panel -> free outlet, rear 25 mm fins in free air (>= 60 cm2 trivially)",
    "outlet_open_cm2": "open (no panel)",
-   "standoff": "front fins 9 mm -> fairing inner face at r 59.5 from housing axis (fin tip + 8): local bulge +12 mm vs the R1 keep-out (housing + 5)"
+   "standoff": "front fins 9 mm -> fairing inner face at r 59.5 from housing axis (fin tip + 8): local bulge +12 mm vs the R1 keep-out (housing + 5)",
+   "envelope_bulge_mm": 12.7,
+   "envelope_bulge_kg_pair": 0.021
   },
   "hip_pitch": {
    "panel_cm2": 250.0,
@@ -21,31 +23,30 @@
    "panel_inlet_cm2": 88.0,
    "panel_outlet_cm2": 133.0,
    "inlet": "low on the rear grille over the femur-rear drive plate (z ~688-740), axial/horizontal slots >=3 mm, angled into walk flow",
-   "inlet_open_cm2": 52.0,
+   "inlet_open_cm2": 50,
    "inlet_open_frac": 0.568,
    "outlet": "high on the thigh rear panel (z ~760-792 / popliteal upper), slots >=3 mm, >=35 % open",
-   "outlet_open_cm2": 63.0,
+   "outlet_open_cm2": 60,
    "outlet_open_frac": 0.451,
    "standoff": "drives inside fairing >=58 mm (Legs L51); cover inner face clears drive bodies by >=8 mm (A35 fin rule applied to hot parts)",
    "note": "adds rear panel mass (baseline had no rear); open-area credit below",
-   "merged_r087": "PA12 thigh-rear panel (knee_drive_panel.json) replaces separate PC rear panels + Electronics 41.8 g covers; mass in pair_kg.drive_bay_rear",
-   "merged_panel": "knee_drive_panel.json"
+   "merged_r087": "PA12 thigh-rear panel (knee_drive_panel.json) replaces separate PC rear panels + Electronics 41.8 g covers; mass in pair_kg.drive_bay_rear"
   },
-  "knee_fin_grille_note": "NO local bulge: Legs withdrew rev C (R-079/R-081); rev B stays. A bulge (~5 mm) is PENDING Legs rev B envelope check if fins again exceed the v5 thigh fairing hull."
+  "knee_fin_grille_note": "ADOPTED local +12.7 mm bulge on knee-housing grille (Legs L55: fins 4.7 mm past keep-out; A35 needs >=8 mm to inner face so 4.7+8=12.7). Legs 5 mm alone leaves only 0.3 mm. Vents unchanged. Mass +0.021 kg pair."
  },
  "thermal_430_check": "ID panel over housing: knee ~280 cm2, hip ~250 cm2 vs Thermal 430 [EST]; ours smaller (front+outboard only, rear open), so % rules govern; open areas still >= 50/60",
  "per_side_kg": {
-  "thigh": -0.0131,
+  "thigh": -0.0028,
   "knee_cap": -0.0167,
   "hip_skirt": 0.0019,
   "drive_bay_rear": 0.0353
  },
  "pair_kg": {
-  "thigh": -0.026,
+  "thigh": -0.006,
   "knee_cap": -0.033,
   "hip_skirt": 0.004,
   "drive_bay_rear": 0.071,
-  "total": 0.016
+  "total": 0.035
  },
  "knee_cap_clearance": "Legs 6f53d77: finned housing >= 110 mm from knee-cap keep-out; cap top edge stays <= z 555; no reshape needed for fins; cap gets 30 % louvres + inlet lip"
 }

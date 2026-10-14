@@ -17,6 +17,11 @@ knee_rm=J['knee']['inlet_open_cm2']; hip_rm=J['hip_pitch']['inlet_open_cm2']
 cap_area=363; cap_rm=round(max(50,0.30*cap_area))              # knee cap louvres (R-030 >=30 %, A35 inlet path)
 bulge_add=2*(110+150)*12/1e2                                     # cm2 side walls of +12 mm bulge
 thigh_d=(-(knee_rm+hip_rm)*(1-RIB)+bulge_add)*1e-4*PCA
+# Legs L55: rev B fins 4.7 mm past keep-out. Legs asked +5 mm; A35 needs tip>=8 mm from inner face
+# -> adopt local +12.7 mm blister (5 mm alone leaves only 0.3 mm clear).
+env_bulge_mm=12.7
+env_bulge_kg_side=2*(115+110)*env_bulge_mm/100*1e-4*PCA
+thigh_d=thigh_d+env_bulge_kg_side
 cap_d=-cap_rm*(1-RIB)*1e-4*PCA
 skirt_d=-J['hip_pitch']['outlet_open_cm2']*1e-4*0.30+0.004  # fabric removed + hem stiffener ring to hold exhaust open
 # R-062 knee drives on femur rear (Legs L51): plate 26x52x104 at z 688-792, >=58 mm inside fairing.
@@ -39,7 +44,9 @@ try:
   _kdp=json.load(open(os.path.join(H,'knee_drive_panel.json'))); drv_add=_kdp['kg_side']
 except Exception:
   drv_add=((drv_in_panel-drv_in_rm)+(drv_out_panel-drv_out_rm))*(1+RIB)*1e-4*PCA
-J['knee_fin_grille_note']='NO local bulge: Legs withdrew rev C (R-079/R-081); rev B stays. A bulge (~5 mm) is PENDING Legs rev B envelope check if fins again exceed the v5 thigh fairing hull.'
+J['knee_fin_grille_note']=('ADOPTED local +12.7 mm bulge on knee-housing grille (Legs L55: fins 4.7 mm past keep-out; ''A35 needs >=8 mm to inner face so 4.7+8=12.7). Legs 5 mm alone leaves only 0.3 mm. ''Vents unchanged. Mass +%.3f kg pair.'%(2*env_bulge_kg_side))
+J['knee']['envelope_bulge_mm']=env_bulge_mm
+J['knee']['envelope_bulge_kg_pair']=round(2*env_bulge_kg_side,3)
 J['knee_drive_bay']['merged_r087']='PA12 thigh-rear panel (knee_drive_panel.json) replaces separate PC rear panels + Electronics 41.8 g covers; mass in pair_kg.drive_bay_rear'
 out=dict(joints=J,thermal_430_check=f'ID panel over housing: knee ~{round(knee_panel)} cm2, hip ~{hip_panel:.0f} cm2 vs Thermal 430 [EST]; ours smaller (front+outboard only, rear open), so % rules govern; open areas still >= 50/60',
  per_side_kg=dict(thigh=round(thigh_d,4),knee_cap=round(cap_d,4),hip_skirt=round(skirt_d,4),drive_bay_rear=round(drv_add,4)),

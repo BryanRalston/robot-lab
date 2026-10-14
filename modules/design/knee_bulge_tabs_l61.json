@@ -1,0 +1,187 @@
+{
+ "grille_bulge": {
+  "source": "Legs L55 / d81dcba: rev B fins up to 4.7 mm past v5 thigh keep-out",
+  "legs_request_mm": 5.0,
+  "clearance_if_5mm": 0.3,
+  "a35_rule_mm": 8.0,
+  "bulge_for_a35_mm": 12.7,
+  "adopted_mm": 12.7,
+  "reason": "5 mm clears the envelope (0.3 mm) but fails A35 fin tip >=8 mm from cover inner face; adopt 12.7 mm",
+  "mass_5mm_kg_pair": 0.008,
+  "mass_adopted_12p7_kg_pair": 0.021,
+  "mass_adopted_kg_side": 0.0103,
+  "vents": "A35 open areas unchanged (slots move with the blister; inlet/outlet cm2 same)"
+ },
+ "tab_alignment": {
+  "source": "Legs L58",
+  "tips": [
+   {
+    "x": -38,
+    "y": 100,
+    "z": 700
+   },
+   {
+    "x": -38,
+    "y": 160,
+    "z": 780
+   },
+   {
+    "x": -38,
+    "y": 100,
+    "z": 780
+   },
+   {
+    "x": -38,
+    "y": 160,
+    "z": 700
+   }
+  ],
+  "tab_size_mm": [
+   29.5,
+   8,
+   2
+  ],
+  "band_x": -8.5,
+  "panel_bosses": [
+   {
+    "x": -38,
+    "y": 100,
+    "z": 700,
+    "thread": "M2.5"
+   },
+   {
+    "x": -38,
+    "y": 100,
+    "z": 780,
+    "thread": "M2.5"
+   },
+   {
+    "x": -38,
+    "y": 160,
+    "z": 700,
+    "thread": "M2.5"
+   },
+   {
+    "x": -38,
+    "y": 160,
+    "z": 780,
+    "thread": "M2.5"
+   }
+  ],
+  "pocket_corners": "y 100/160, z 700/780 (60 x 80 mm span matches 80x60 cover over drive box)",
+  "alignment": "PASS \u2014 bosses on panel inner face at tab tips; screw axis +x into tab",
+  "legs_clearance": ">=10.4 mm to hip screw (knee_drive_tabs_r062.json); drives clear by 2 mm"
+ },
+ "l61_boss_clearance": {
+  "boss": "\u00f826 x 20 mm ULTEM 4001, 14 mm proud of cheek (L61 final / 8908089)",
+  "fin_clearance_mm": 9.0,
+  "fin_source": "knee_boss_clear_r106.json mins 9.0 over knee 0-135\u00b0",
+  "thigh_shell": {
+   "method": "EST hand: cheek outer ~55 mm local after L60 DY=3; boss tip +14 \u2192 69; old keep-out ~60",
+   "clash_mm_EST": 9.0,
+   "through_flexion": "fin clearance holds 9 mm all angles; shell clash is pose-independent (boss on thigh-side cheek, fixed in thigh frame)",
+   "verdict": "CLASH ~9 mm EST into outboard thigh fairing keep-out"
+  },
+  "grille": "Front/rear +12.7 mm housing grille bulge does not cover \u00b1y cheek bosses",
+  "fix": {
+   "preferred": "open window ~40x30 mm per cheek in outboard fairing (0 g); \u00b1y flanks already fin-free (L48/L55)",
+   "alt_blister_mm": 12.0,
+   "alt_blister_kg_robot": 0.012,
+   "adopted": "open window 40x30 per cheek, 0 kg",
+   "adopted_kg": 0.0
+  }
+ },
+ "tpu_film_p052": {
+  "face_mm": [
+   98,
+   98
+  ],
+  "area_m2": 0.009604,
+  "recommended": {
+   "cite": "DoonX 0.3 mm clear TPU (ASTM D792 SG 1.20)",
+   "rho": 1.2,
+   "t_mm": 0.4,
+   "mass_g": 4.61,
+   "mass_kg": 0.0046,
+   "range_0p3_to_0p5_g": [
+    3.46,
+    5.76
+   ]
+  },
+  "covestro_alt": {
+   "cite": "Platilon U 4201 AU \u03c1 1.15",
+   "t_mm": 0.4,
+   "mass_g": 4.42
+  },
+  "table": [
+   {
+    "cite": "DoonX 0.3 mm clear TPU film",
+    "t_mm": 0.3,
+    "rho": 1.2,
+    "mass_g": 3.46,
+    "mass_kg": 0.0035
+   },
+   {
+    "cite": "DoonX 0.3 mm clear TPU film",
+    "t_mm": 0.4,
+    "rho": 1.2,
+    "mass_g": 4.61,
+    "mass_kg": 0.0046
+   },
+   {
+    "cite": "DoonX 0.3 mm clear TPU film",
+    "t_mm": 0.5,
+    "rho": 1.2,
+    "mass_g": 5.76,
+    "mass_kg": 0.0058
+   },
+   {
+    "cite": "Covestro Platilon U 4201 AU",
+    "t_mm": 0.3,
+    "rho": 1.15,
+    "mass_g": 3.31,
+    "mass_kg": 0.0033
+   },
+   {
+    "cite": "Covestro Platilon U 4201 AU",
+    "t_mm": 0.4,
+    "rho": 1.15,
+    "mass_g": 4.42,
+    "mass_kg": 0.0044
+   },
+   {
+    "cite": "Covestro Platilon U 4201 AU",
+    "t_mm": 0.5,
+    "rho": 1.15,
+    "mass_g": 5.52,
+    "mass_kg": 0.0055
+   },
+   {
+    "cite": "BondaBand FPA-87-B aliphatic TPU",
+    "t_mm": 0.3,
+    "rho": 1.13,
+    "mass_g": 3.26,
+    "mass_kg": 0.0033
+   },
+   {
+    "cite": "BondaBand FPA-87-B aliphatic TPU",
+    "t_mm": 0.4,
+    "rho": 1.13,
+    "mass_g": 4.34,
+    "mass_kg": 0.0043
+   },
+   {
+    "cite": "BondaBand FPA-87-B aliphatic TPU",
+    "t_mm": 0.5,
+    "rho": 1.13,
+    "mass_g": 5.43,
+    "mass_kg": 0.0054
+   }
+  ],
+  "urls": [
+   "https://www.doonx.com/products/0-3mm-clear-tpu-film",
+   "https://solutions.covestro.com/en/products/platilon/platilon-u-4201-au_000000000000805921",
+   "https://www.bondaband.com/uploads/bond-sub/datasheets-and-downloads/spec-sheet-fpa-87-b-pdf.pdf"
+  ]
+ }
+}

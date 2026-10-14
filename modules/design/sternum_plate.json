@@ -72,5 +72,28 @@
   "7075 land+rib +0.030 (Torso)",
   "pad core + 1 mm CF face (chest pad line)",
   "structural epoxy"
- ]
+ ],
+ "tpu_film_cited": {
+  "face_mm": [
+   98,
+   98
+  ],
+  "area_m2": 0.009604,
+  "density_g_cm3": 1.2,
+  "density_source": "DoonX 0.3 mm clear TPU film, specific gravity 1.20 g/cm3 ASTM D792",
+  "url": "https://www.doonx.com/products/0-3mm-clear-tpu-film",
+  "alt_covestro": {
+   "rho": 1.15,
+   "product": "Platilon U 4201 AU",
+   "url": "https://solutions.covestro.com/en/products/platilon/platilon-u-4201-au_000000000000805921"
+  },
+  "mass_g_at_mm": {
+   "0.3": 3.46,
+   "0.4": 4.61,
+   "0.5": 5.76
+  },
+  "recommended_g": 4.61,
+  "recommended_t_mm": 0.4,
+  "note": "R-098: cite film mass; 0.3-0.5 mm band = 3.46-5.76 g at rho 1.20"
+ }
 }
