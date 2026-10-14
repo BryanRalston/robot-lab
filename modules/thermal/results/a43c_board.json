@@ -1,0 +1,77 @@
+{
+ "walk": {
+  "no_derate": {
+   "shell_end": 83.2,
+   "shell_max_last30min": 83.2,
+   "wind_max": 159.4,
+   "I_end": 0.952,
+   "board": 91.2,
+   "Tj_hbridge": 103.5,
+   "levels": [
+    0
+   ]
+  },
+  "ladder_60_80_90": {
+   "shell_end": 59.8,
+   "shell_max_last30min": 59.8,
+   "wind_max": 94.2,
+   "I_end": 0.7,
+   "board": 67.8,
+   "Tj_hbridge": 80.1,
+   "levels": [
+    0,
+    1
+   ]
+  },
+  "ladder_tuned": {
+   "shell_end": 59.8,
+   "shell_max_last30min": 59.8,
+   "wind_max": 94.2,
+   "I_end": 0.7,
+   "board": 67.8,
+   "Tj_hbridge": 80.1,
+   "levels": [
+    0,
+    1
+   ]
+  }
+ },
+ "still": {
+  "no_derate": {
+   "shell_end": 127.1,
+   "shell_max_last30min": 127.1,
+   "wind_max": 213.6,
+   "I_end": 0.952,
+   "board": 135.1,
+   "Tj_hbridge": 147.3,
+   "levels": [
+    0
+   ]
+  },
+  "ladder_60_80_90": {
+   "shell_end": 79.7,
+   "shell_max_last30min": 79.7,
+   "wind_max": 116.4,
+   "I_end": 0.7,
+   "board": 87.7,
+   "Tj_hbridge": 99.9,
+   "levels": [
+    0,
+    1
+   ]
+  },
+  "ladder_tuned": {
+   "shell_end": 70.3,
+   "shell_max_last30min": 70.3,
+   "wind_max": 103.9,
+   "I_end": 0.5,
+   "board": 78.3,
+   "Tj_hbridge": 90.5,
+   "levels": [
+    0,
+    1,
+    2
+   ]
+  }
+ }
+}
