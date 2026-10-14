@@ -1,0 +1,91 @@
+{
+ "part": "hip_ring",
+ "h_mm": 2.0,
+ "mass_kg": 0.2254,
+ "n_solids": 1,
+ "F_physical_N": 10062.5,
+ "M_Nmm": 192000.0,
+ "note": "OD 96, bore 80, L 25, neck 50x25 from z=-66 to -44 (one solid, 0.225 kg). Seat |y|<=6.5. physical = radial cosine of 2*4542+1.5*66.5*g plus a calibrated couple of 192 N\u00b7m. brief_12p4 is the r4 lumped radial load (moment added as M/D = 2.4 kN). stacked applies 12.4 kN and 192 N\u00b7m together and double-counts the moment. Neck end fixed.",
+ "couple_scale_N": {
+  "physical_10kN_192Nm": 29977.60024337737,
+  "brief_12p4kN_only": 0.0,
+  "stacked_12p4kN_plus_192Nm": 29977.60024337737
+ },
+ "cases": {
+  "physical_10kN_192Nm": {
+   "vm_max": 911.7082622090445,
+   "vm_p999": 499.3272842131307,
+   "vm_p99": 432.8364802370437,
+   "vm_p50": 101.78999080470511,
+   "at_mm": [
+    19.56,
+    -11.67,
+    -43.39
+   ],
+   "umax_mm": 1.575966345482859,
+   "n_elem": 45420,
+   "SF_yield_max": 0.552,
+   "SF_yield_p999": 1.007,
+   "goodman_pulse_p999": 0.498,
+   "goodman_rev_0p52_p999": 0.612,
+   "goodman_pulse_max": 0.273,
+   "goodman_rev_0p52_max": 0.335,
+   "vm_max_2mm_off": 777.254547581162,
+   "SF_yield_2mm_off": 0.647,
+   "goodman_pulse_2mm_off": 0.32,
+   "goodman_rev_0p52_2mm_off": 0.393,
+   "cg_iters": 988,
+   "converged": true
+  },
+  "brief_12p4kN_only": {
+   "vm_max": 251.93594778442613,
+   "vm_p999": 179.63585669199907,
+   "vm_p99": 116.23079534305748,
+   "vm_p50": 20.878026544137143,
+   "at_mm": [
+    -19.37,
+    -9.59,
+    -43.41
+   ],
+   "umax_mm": 0.25193920033254186,
+   "n_elem": 45420,
+   "SF_yield_max": 1.997,
+   "SF_yield_p999": 2.8,
+   "goodman_pulse_p999": 1.385,
+   "goodman_rev_0p52_p999": 1.702,
+   "goodman_pulse_max": 0.988,
+   "goodman_rev_0p52_max": 1.214,
+   "vm_max_2mm_off": 230.08991989715105,
+   "SF_yield_2mm_off": 2.186,
+   "goodman_pulse_2mm_off": 1.081,
+   "goodman_rev_0p52_2mm_off": 1.329,
+   "cg_iters": 989,
+   "converged": true
+  },
+  "stacked_12p4kN_plus_192Nm": {
+   "vm_max": 870.4756236468808,
+   "vm_p999": 489.1666333695069,
+   "vm_p99": 424.27725526529684,
+   "vm_p50": 100.14150893751045,
+   "at_mm": [
+    19.56,
+    -11.67,
+    -43.39
+   ],
+   "umax_mm": 1.52849847638005,
+   "n_elem": 45420,
+   "SF_yield_max": 0.578,
+   "SF_yield_p999": 1.028,
+   "goodman_pulse_p999": 0.509,
+   "goodman_rev_0p52_p999": 0.625,
+   "goodman_pulse_max": 0.286,
+   "goodman_rev_0p52_max": 0.351,
+   "vm_max_2mm_off": 731.0232231568781,
+   "SF_yield_2mm_off": 0.688,
+   "goodman_pulse_2mm_off": 0.34,
+   "goodman_rev_0p52_2mm_off": 0.418,
+   "cg_iters": 989,
+   "converged": true
+  }
+ }
+}

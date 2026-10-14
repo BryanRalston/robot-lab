@@ -1,0 +1,72 @@
+{
+ "part": "ktongue",
+ "h_mm": 2.0,
+ "mass_al_kg": 0.234,
+ "pin": "\u00d816",
+ "note": "v3 knee tongue, lever removed, \u00d816 pin. Bottom face (z=-50) fixed. Pin ends loaded in double shear. Pocket leaves a 12 mm ligament.",
+ "cases": {
+  "fall_6BW": {
+   "vm_max": 31.34639715696535,
+   "vm_p999": 21.227507697708035,
+   "vm_p99": 11.874497576285664,
+   "vm_p50": 2.3145215115430453,
+   "at_mm": [
+    -1.83,
+    19.47,
+    -8.19
+   ],
+   "umax_mm": 0.008585252717077583,
+   "n_elem": 44674,
+   "SF_yield_max": 16.047,
+   "SF_yield_p999": 23.696,
+   "goodman_pulse_p999": 11.722,
+   "goodman_rev_0p52_p999": 14.404,
+   "goodman_pulse_max": 7.938,
+   "goodman_rev_0p52_max": 9.755,
+   "cg_iters": 429,
+   "converged": true
+  },
+  "bw3_plus_screw": {
+   "vm_max": 73.87344095261099,
+   "vm_p999": 50.02645211910512,
+   "vm_p99": 27.98439613809858,
+   "vm_p50": 5.454587567415244,
+   "at_mm": [
+    -1.83,
+    19.47,
+    -8.19
+   ],
+   "umax_mm": 0.02023269712574757,
+   "n_elem": 44674,
+   "SF_yield_max": 6.809,
+   "SF_yield_p999": 10.055,
+   "goodman_pulse_p999": 4.974,
+   "goodman_rev_0p52_p999": 6.112,
+   "goodman_pulse_max": 3.368,
+   "goodman_rev_0p52_max": 4.139,
+   "cg_iters": 429,
+   "converged": true
+  },
+  "op_grf_plus_screw": {
+   "vm_max": 66.52737615248682,
+   "vm_p999": 45.051760887027555,
+   "vm_p99": 25.201593756486833,
+   "vm_p50": 4.91217674682984,
+   "at_mm": [
+    -1.83,
+    19.47,
+    -8.19
+   ],
+   "umax_mm": 0.018220733120083592,
+   "n_elem": 44674,
+   "SF_yield_max": 7.561,
+   "SF_yield_p999": 11.165,
+   "goodman_pulse_p999": 5.523,
+   "goodman_rev_0p52_p999": 6.787,
+   "goodman_pulse_max": 3.74,
+   "goodman_rev_0p52_max": 4.596,
+   "cg_iters": 429,
+   "converged": true
+  }
+ }
+}

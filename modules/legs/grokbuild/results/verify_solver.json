@@ -1,0 +1,28 @@
+{
+ "cantilever": {
+  "dtip_mm": 0.5556530028871379,
+  "d_ref_mm": 0.5578800557880056,
+  "d_err": 0.00399199232480529,
+  "sigma_band_MPa": 40.919185168706825,
+  "sigma_ref_MPa": 48.0,
+  "s_err": 0.14751697565194113,
+  "tets": 439,
+  "dofs": 3012,
+  "iters": 192,
+  "converged": true,
+  "tip_area": 100.00000000000021
+ },
+ "lame": {
+  "vm_bore_median": 167.02725197206684,
+  "vm_bore_mean": 166.38313210674585,
+  "hoop_hand": 141.7,
+  "tets": 4095,
+  "iters": 103,
+  "converged": true,
+  "n_bore": 680,
+  "vm_ref": 179.3903286133341,
+  "vm_err": 0.06891718598673842
+ },
+ "ok": true,
+ "vm_ref": 179.3903286133341
+}

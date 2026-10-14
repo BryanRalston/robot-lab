@@ -1,0 +1,136 @@
+{
+ "cantilever": {
+  "tip_uz_mm": -0.555263649484398,
+  "target_mm": 0.5623319386331939,
+  "bend_mm": 0.5578800557880056,
+  "shear_mm": 0.004451882845188285,
+  "error_pct": 1.2569602868327345,
+  "area_mm2": 99.99999999999999,
+  "cg_iters": 159,
+  "converged": true,
+  "elements": 64,
+  "dofs": 2475
+ },
+ "femur": {
+  "part": "femur",
+  "Rin": 23.8,
+  "Rout": 25.0,
+  "A_mm2": 183.97166579421813,
+  "I_mm4": 54797.80037346585,
+  "elements": 576,
+  "dofs": 21384,
+  "cases": {
+   "bw3": {
+    "F_N": 1957.095,
+    "M_Nmm": 234851.4,
+    "area_mm2": 184.0,
+    "resultant_Fz": -1957.1,
+    "vm_band_max": 110.05187789437088,
+    "vm_band_p99": 109.87835241073621,
+    "hand_MPa": 117.78256194066617,
+    "SF_band_max": 4.571,
+    "cg_iters": 1962,
+    "converged": true
+   },
+   "fall": {
+    "F_N": 3914.19,
+    "M_Nmm": 469702.8,
+    "area_mm2": 184.0,
+    "resultant_Fz": -3914.2,
+    "vm_band_max": 220.1037557891814,
+    "vm_band_p99": 219.75670482172882,
+    "hand_MPa": 235.56512388133234,
+    "SF_band_max": 2.285,
+    "cg_iters": 1962,
+    "converged": true
+   },
+   "dent_bw3": {
+    "F_N": 1957.095,
+    "patch_mm2": 349.1,
+    "vm_max": 234.64656412717116,
+    "SF": 2.144,
+    "cg_iters": 1313,
+    "converged": true,
+    "note": "both ends fixed, patch |z-L/2|<8 mm and |\u03b8|<18\u00b0 on the OD, force +x"
+   },
+   "dent_fall": {
+    "F_N": 3914.19,
+    "patch_mm2": 349.1,
+    "vm_max": 469.29312825516297,
+    "SF": 1.072,
+    "cg_iters": 1313,
+    "converged": true,
+    "note": "both ends fixed, patch |z-L/2|<8 mm and |\u03b8|<18\u00b0 on the OD, force +x"
+   },
+   "axial_buckling": {
+    "sigma_cr_MPa": 738.7339209433047,
+    "classical_MPa": 2156.685041767836,
+    "ratio": 0.34253212992925663,
+    "ntheta": 36,
+    "nz": 16,
+    "L_mm": 80.0
+   }
+  }
+ },
+ "tibia": {
+  "part": "tibia",
+  "Rin": 21.3,
+  "Rout": 22.5,
+  "A_mm2": 165.12210987267935,
+  "I_mm4": 39626.82953779498,
+  "elements": 576,
+  "dofs": 21384,
+  "cases": {
+   "bw3": {
+    "F_N": 1957.095,
+    "M_Nmm": 195709.5,
+    "area_mm2": 165.1,
+    "resultant_Fz": -1957.1,
+    "vm_band_max": 115.39804221625872,
+    "vm_band_p99": 115.24759722602838,
+    "hand_MPa": 122.97570233134941,
+    "SF_band_max": 4.359,
+    "cg_iters": 1802,
+    "converged": true
+   },
+   "fall": {
+    "F_N": 3914.19,
+    "M_Nmm": 391419.0,
+    "area_mm2": 165.1,
+    "resultant_Fz": -3914.2,
+    "vm_band_max": 230.79608443256933,
+    "vm_band_p99": 230.4951944519589,
+    "hand_MPa": 245.95140466269882,
+    "SF_band_max": 2.179,
+    "cg_iters": 1802,
+    "converged": true
+   },
+   "dent_bw3": {
+    "F_N": 1957.095,
+    "patch_mm2": 314.2,
+    "vm_max": 243.88801907114956,
+    "SF": 2.062,
+    "cg_iters": 1169,
+    "converged": true,
+    "note": "both ends fixed, patch |z-L/2|<8 mm and |\u03b8|<18\u00b0 on the OD, force +x"
+   },
+   "dent_fall": {
+    "F_N": 3914.19,
+    "patch_mm2": 314.2,
+    "vm_max": 487.7760381410626,
+    "SF": 1.031,
+    "cg_iters": 1169,
+    "converged": true,
+    "note": "both ends fixed, patch |z-L/2|<8 mm and |\u03b8|<18\u00b0 on the OD, force +x"
+   },
+   "axial_buckling": {
+    "sigma_cr_MPa": 805.4141573441585,
+    "classical_MPa": 2402.8819643440734,
+    "ratio": 0.3351867338036375,
+    "ntheta": 36,
+    "nz": 16,
+    "L_mm": 80.0
+   }
+  }
+ }
+}

@@ -1,0 +1,72 @@
+{
+ "part": "clevis",
+ "h_mm": 2.0,
+ "mass_al_kg": 0.2345,
+ "pin": "\u00d816",
+ "note": "Half clevis. \u00d816 steel pin tied in the hole. Support is the femur bore surface (\u00d850 at x=18), not the bridge tip. Pin loaded in the cheek gap. Bridge ears pocketed.",
+ "cases": {
+  "fall_6BW": {
+   "vm_max": 338.9907236225168,
+   "vm_p999": 152.25844577367408,
+   "vm_p99": 56.54696916101179,
+   "vm_p50": 3.4211290808518116,
+   "at_mm": [
+    2.71,
+    21.5,
+    40.46
+   ],
+   "umax_mm": 0.10427193612504121,
+   "n_elem": 25987,
+   "SF_yield_max": 1.484,
+   "SF_yield_p999": 3.304,
+   "goodman_pulse_p999": 1.634,
+   "goodman_rev_0p52_p999": 2.008,
+   "goodman_pulse_max": 0.734,
+   "goodman_rev_0p52_max": 0.902,
+   "cg_iters": 1355,
+   "converged": true
+  },
+  "bw3_plus_screw": {
+   "vm_max": 798.892806711412,
+   "vm_p999": 358.8245005342909,
+   "vm_p99": 133.2631359978559,
+   "vm_p50": 8.062507977349098,
+   "at_mm": [
+    2.71,
+    21.5,
+    40.46
+   ],
+   "umax_mm": 0.24573563200198856,
+   "n_elem": 25987,
+   "SF_yield_max": 0.63,
+   "SF_yield_p999": 1.402,
+   "goodman_pulse_p999": 0.693,
+   "goodman_rev_0p52_p999": 0.852,
+   "goodman_pulse_max": 0.311,
+   "goodman_rev_0p52_max": 0.383,
+   "cg_iters": 1355,
+   "converged": true
+  },
+  "op_grf_plus_screw": {
+   "vm_max": 719.4499345398145,
+   "vm_p999": 323.14255586237766,
+   "vm_p99": 120.01128770293066,
+   "vm_p50": 7.260762380124485,
+   "at_mm": [
+    2.71,
+    21.5,
+    40.46
+   ],
+   "umax_mm": 0.22129938193549104,
+   "n_elem": 25987,
+   "SF_yield_max": 0.699,
+   "SF_yield_p999": 1.557,
+   "goodman_pulse_p999": 0.77,
+   "goodman_rev_0p52_p999": 0.946,
+   "goodman_pulse_max": 0.346,
+   "goodman_rev_0p52_max": 0.425,
+   "cg_iters": 1355,
+   "converged": true
+  }
+ }
+}

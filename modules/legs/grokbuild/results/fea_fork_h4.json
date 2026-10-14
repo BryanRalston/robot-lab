@@ -1,0 +1,72 @@
+{
+ "part": "fork",
+ "h_mm": 4.0,
+ "mass_al_kg": 0.1581,
+ "pin": "\u00d812",
+ "note": "Half v3 ankle fork. 4 mm walls, 20 mm cap, \u00d812 pin at mid-slot, cap pocketed. Top face fixed. op adds the 66.5 kg carry screw T/73 mm.",
+ "cases": {
+  "fall_6BW": {
+   "vm_max": 65.24296321976236,
+   "vm_p999": 64.46019653835458,
+   "vm_p99": 35.95524428317288,
+   "vm_p50": 2.338676315843704,
+   "at_mm": [
+    -2.63,
+    19.0,
+    18.08
+   ],
+   "umax_mm": 0.01965331247295354,
+   "n_elem": 2881,
+   "SF_yield_max": 7.71,
+   "SF_yield_p999": 7.803,
+   "goodman_pulse_p999": 3.86,
+   "goodman_rev_0p52_p999": 4.744,
+   "goodman_pulse_max": 3.814,
+   "goodman_rev_0p52_max": 4.687,
+   "cg_iters": 239,
+   "converged": true
+  },
+  "bw3": {
+   "vm_max": 32.621481609880625,
+   "vm_p999": 32.23009826917637,
+   "vm_p99": 17.977622141586323,
+   "vm_p50": 1.1693381579216953,
+   "at_mm": [
+    -2.63,
+    19.0,
+    18.08
+   ],
+   "umax_mm": 0.009826656236476399,
+   "n_elem": 2881,
+   "SF_yield_max": 15.419,
+   "SF_yield_p999": 15.607,
+   "goodman_pulse_p999": 7.72,
+   "goodman_rev_0p52_p999": 9.487,
+   "goodman_pulse_max": 7.628,
+   "goodman_rev_0p52_max": 9.373,
+   "cg_iters": 239,
+   "converged": true
+  },
+  "op_carry_screw": {
+   "vm_max": 72.47416587197938,
+   "vm_p999": 71.6046412595495,
+   "vm_p99": 39.940343135072894,
+   "vm_p50": 2.5978834631468426,
+   "at_mm": [
+    -2.63,
+    19.0,
+    18.08
+   ],
+   "umax_mm": 0.021831587006569696,
+   "n_elem": 2881,
+   "SF_yield_max": 6.94,
+   "SF_yield_p999": 7.025,
+   "goodman_pulse_p999": 3.475,
+   "goodman_rev_0p52_p999": 4.27,
+   "goodman_pulse_max": 3.433,
+   "goodman_rev_0p52_max": 4.219,
+   "cg_iters": 239,
+   "converged": true
+  }
+ }
+}

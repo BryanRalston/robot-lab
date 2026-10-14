@@ -1,0 +1,57 @@
+{
+ "material": {
+  "E": 71700.0,
+  "nu": 0.33
+ },
+ "cases": {
+  "thin_ss_k4": {
+   "a": 100.0,
+   "b": 100.0,
+   "t": 1.0,
+   "nx": 32,
+   "lam": 26.26725914816915,
+   "sigma_cr": 26.26725914816915,
+   "sigma_k4": 26.47105209135177,
+   "k_fea": 3.9692051615509154,
+   "nodes": 1089,
+   "elements": 1024,
+   "modes": [
+    26.26725914816915,
+    41.26358715473097,
+    73.97852636739736,
+    105.29098407481116
+   ]
+  },
+  "bay16": {
+   "a": 28.0,
+   "b": 28.0,
+   "t": 3.5,
+   "nx": 16,
+   "sigma_cr_ss": 3631.6702366123163,
+   "sigma_k4": 4136.101889273714,
+   "k_fea": 3.5121670924311066,
+   "nodes": 289,
+   "shear": "full",
+   "note": "b/t=8. Full 2x2 shear. Kirchhoff k=4 is an upper reference; Mindlin is slightly lower.",
+   "sigma_cr_clamped": 8182.173879172627
+  },
+  "bay24": {
+   "a": 28.0,
+   "b": 28.0,
+   "t": 3.5,
+   "nx": 24,
+   "sigma_cr_ss": 3537.224108113226,
+   "sigma_k4": 4136.101889273714,
+   "k_fea": 3.420828792720434,
+   "nodes": 625,
+   "shear": "full",
+   "note": "b/t=8. Full 2x2 shear. Kirchhoff k=4 is an upper reference; Mindlin is slightly lower.",
+   "sigma_cr_clamped": 7912.423046395286
+  },
+  "thin_ss_biaxial": {
+   "sigma_cr": 13.146916616819487,
+   "sigma_k2": 13.235526045675885,
+   "ratio": 0.993305182691598
+  }
+ }
+}
