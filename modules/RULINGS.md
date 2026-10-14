@@ -966,3 +966,14 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
 - **SBS75X +0.041 is NOT booked: it's a double count.** The SBS75X pair is already inside Torso's 0.089 (R-084, 22 g/housing cited by Torso). Electronics and Torso agree which ledger owns it (Torso). The selection over the AS150U is agreed (600 V, IP20 both halves, mate-last aux).
 - Foot F/T +0.012 is still pending confirmation.
 - Reserve ~-0.30.
+
+## R-087 (2026-10-14) ID 32c57a1, Thermal bee2448, Materials c859e43
+- **Touch protection:** settled in R-084 (0.175 electrical, Torso + Electronics). ID's -0.144 is a double count, so **no credit**. **ID standoff ribs** (hot-surface touch, ISO 13732-1, 48 C) are a separate addition, **+0.020** in full. G5 skin thermocouples and a standoff ΔT bench test are required.
+- **Knee drive-bay inlet/outlet panels, +0.082 EST:** these overlap the 41.8 g PA12 knee-drive covers in Electronics' 0.086. ID and Electronics merge them into one part. **+0.040 net** booked in full until it's reconciled.
+- **Forearm cover: +0.014** in full. C2 -0.065, pad B +0.024 and PA12 B (gated) are unchanged.
+- **Würth junction:** Thermal finds 63-66 C at the brain tray, so it fails. **Move the junction to the duct intake side (~50 C)** as the preferred fix, or use the 7490140142 (85 C).
+- **A38 thermal break** (about 15 vs >=20 K/W): adopt Thermal's PEI eye-pin sleeve plus the 26 K/W tine break. Legs books the mass. **A37 parallel rod path (~40 K/W, unbroken):** Thermal rules.
+- **A37: -0.006 measured**, full credit.
+- **Sheath SF 2.97** is accepted.
+- **Chest backing:** Torso's +0.053 stays booked until Materials and Torso pick the lighter passing option (Materials' land plus 7075 rib, +0.030, would release 0.023).
+- Reserve ~**-0.37** (on estimates).
