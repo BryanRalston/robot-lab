@@ -58,6 +58,9 @@ KNEE_FIN_A, KNEE_FIN_H = 0.05, 12.0   # superseded rev B paper fins (m2 wetted, 
 # As-built D69 rev B (Actuators fbd762b, R-062/R-070): 2x 07613D + 0.0703 m2 CAD fins; housing-air G = h*(A_bare + eta_f*A_fin),
 # size.py x2 'fins' factor DROPPED; still air h 8, eta_f 0.7 (conservative, Controls 2e2d593); drives off housing.
 REVB_A_FIN, REVB_H, REVB_ETA = 0.0703, 8.0, 0.7
+# R-069 rev C candidate (Actuators r069_knee_fins_revc.py, 6b86723): 0.0459 m2 added fins (14 front x 9 mm + 24 rear x 17 mm, t 1.0 mm),
+# same G = h*(A_bare + eta_f*A_fin) convention; option only (knee='revC'), NOT the default. Controls knee_revC_check.py.
+REVC_A_FIN = 0.0459
 KNEE_D69 = dict(   # superseded by D69 rev B (4366d32); kept for history
     motor='TBM2G-08513D', rha_scale=0.5)   # D69: 2x 08513D + shank path Rha x0.5 [EST]
 
@@ -88,7 +91,7 @@ MOT_CACHE = {}
 
 
 def load_params(root=ROOT, knee='revB', h=REVB_H, eta_f=REVB_ETA):
-    """knee='revB' (DEFAULT since R-070: as built fbd762b, 0.0703 m2 fins, x2 dropped, h/eta_f args),
+    """knee='revC' (R-069 candidate option, 0.0459 m2 fins, same convention as revB). knee='revB' (DEFAULT since R-070: as built fbd762b, 0.0703 m2 fins, x2 dropped, h/eta_f args),
     knee='07613D_fins' (default, D69 rev B 4366d32 / R-044: 2x 07613D + 0.05 m2 housing fins at h 12, eta_f 1),
     '07613D' (bare, as sized; actuators/knee_thermal.py base case) or 'D69' (superseded 2x 08513D + shank path)."""
     sel = json.load(open(os.path.join(root, 'modules/actuators/results/sizing.json')))['sel']
@@ -101,10 +104,10 @@ def load_params(root=ROOT, knee='revB', h=REVB_H, eta_f=REVB_ETA):
         P[j] = _p(mot[mw[:11]], mw, s['nmot'], s['ratio'], s['eta'], area, mh, s['T_out'],
                   [] if s['area_cad'] else ['ankle_roll area = ankle_pitch area (cnt 0 in sizing)'])
         P[j]['Km25'] = s['Km']   # sizing.json value (07613D 0.201, D15 typo fix)
-    if knee == 'revB':
-        k = P['knee']; a_bare = 1.0 / (k['Rha'] * H_AIR * FINS)
-        k['Rha'] = 1.0 / (h * (a_bare + eta_f * REVB_A_FIN))
-        k['est'] = k['est'] + [f'D69 rev B as built: A_bare {a_bare:.4f} + {eta_f} x 0.0703 m2 fins, h {h} [EST h, eta_f]']
+    if knee in ('revB', 'revC'):
+        k = P['knee']; a_bare = 1.0 / (k['Rha'] * H_AIR * FINS); af = REVB_A_FIN if knee == 'revB' else REVC_A_FIN
+        k['Rha'] = 1.0 / (h * (a_bare + eta_f * af))
+        k['est'] = k['est'] + [f'D69 {knee}: A_bare {a_bare:.4f} + {eta_f} x {af} m2 fins, h {h} [EST h, eta_f]']
     if knee == '07613D_fins':
         P['knee']['Rha'] = 1.0 / (1.0 / P['knee']['Rha'] + KNEE_FIN_H * KNEE_FIN_A)
         P['knee']['est'] = P['knee']['est'] + ['D69 rev B fins 0.05 m2 x h 12, fin efficiency 1 [EST]']
