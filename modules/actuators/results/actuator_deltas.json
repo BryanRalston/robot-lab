@@ -29,5 +29,12 @@
   "src": "results/d70_wrist.json",
   "D72_status": "merged into harness.py (harness total 1.4959 -> 1.9841, +0.4882)",
   "harness_total_kg": 1.9840943079530156
+ },
+ "pending_frozen_R043": {
+  "D73_wrist_links_both_kg": 0.0158,
+  "A43_optA_board_in_bay_net_kg": 0.398,
+  "A43_optB_board_in_forearm_kg": "0.000 (converters in forearm) or +0.077 (24 V feed from bay RP40s)",
+  "harness_booked_kg": 1.9841,
+  "note": "not in totals; Robot Lab R-043 freeze on additions > 0.02 kg; Arbiter R-045 to choose A/B"
  }
 }

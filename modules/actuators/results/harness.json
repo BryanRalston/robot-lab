@@ -563,5 +563,16 @@
   "neck_r_mm": 34.0
  },
  "ecat_loop_m": 4.755,
- "flex_fallback_ecat_kg": 0.15739050000000002
+ "flex_fallback_ecat_kg": 0.15739050000000002,
+ "pending_A43": {
+  "loops_m": 0.91100350403119,
+  "run_m": 0.7889964959688099,
+  "A_bare_side_kg": 0.18392213062018245,
+  "A_remove_hand_24V_kg": -0.012800546116650732,
+  "A_net_bare_kg": 0.3550437151237142,
+  "A_net_sleeved_kg": 0.39764896093855995,
+  "B_converters_in_forearm_kg": 0.0,
+  "B_24V_feed_bay_to_forearm_sleeved_kg": 0.076608,
+  "status": "pending, frozen (R-043); Arbiter R-045 to choose"
+ }
 }

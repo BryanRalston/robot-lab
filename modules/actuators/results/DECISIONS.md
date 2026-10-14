@@ -648,3 +648,28 @@ Retention at 1.2 m/s:
 - The heat sink moves to the femur, because the housing pivots only 5.7–12.6° about the thigh trunnion.
 - Strap: TAI GFTS, 2 large sections, ≥ 1.32 W/K, 0.12 kg per knee [EST], $2–10k per knee, flex life untested.
 - D69 total is now about +0.83 kg robot.
+
+## D73 (Arms A42 440c7a8) Wrist pitch/yaw unit placement: above the pivot (`wrist_place_d73.py`, `cad/wrist_place_d73.step`)
+- The D70 units (Ø56 × 54 [EST envelope]) ride on the roll output at z ≥ +28 (pitch axis at z 56; the yaw unit is stacked above it, z 86–140). Each drives its joint through one 7075 link (6 × 3, 56 mm, 2 × Ø3 pins). The fork cheeks are r 24.5, and the palm swept zone stays clear.
+- **Outboard (|y| ≥ 45) is rejected:** the wrist would be 198 mm wide.
+- **Links: 7.9 g per side, 15.8 g both. Pending/frozen (R-043), not booked.**
+- **Backlash:** ISO 286 H7/g6 at Ø3 gives 2–18 µm per pin, so ≤ 36 µm per link, which is **≤ 0.08°** at the 25 mm crank. This excludes CSG-14 lost motion.
+- **Flag for ID:** the stack adds about 112 mm of wrist segment above the pivot. This needs a check against the forearm (163.8/177 used).
+
+## D74 (Arms A42.3) Hollow wrist roll: Harmonic Drive SHG-20-100-2SH (or -2UH)
+- Bore **Ø21** (Illus. 14.3 / 14.1).
+- **Torque:** rep peak 107, avg 64, rated 52, momentary 191 N·m (Table 13.1).
+- **Size and mass:** 2SH is OD 90, L 42, 0.89 kg; 2UH is OD 95, L 51.5, 1.38 kg.
+- SHG-14 has only a Ø14 bore and fails the ≥ 21 requirement.
+- **Motor:** not selected. A hollow frameless motor with rotor ID ≥ 21 is needed. The TBM2G rotor ID was not checked (not found here).
+- **Sheath minimum bend radius (Ø2.5 PTFE-lined, A32):** the product is not named in the arms files or v3 (only the LIROS D-Pro 1 mm tendon). The bend radius is **not found**. Materials/Arms must name a product.
+
+## D75 (A43, Arbiter R-045 2461a14) Hand-board location options, pending/frozen
+- **(A) Board in the shoulder bay** (Electronics §16.4(3) acac380):
+  - 22 × 0.25 mm² per side, 1.7 m, SILI-E 4.5 g/m in the 0.911 m of arm loops and SiF 5.4 g/m elsewhere. That is 0.184 kg per side bare.
+  - Removing the hand 24 V loop saves −0.013.
+  - **Net +0.398 kg both arms, sleeved.**
+- **(B) Board in the forearm:** the short leads and the 24 V loop are unchanged, so **0.000**. If the RP40s stay in the bay (R-038), a 24 V pair must run bay → forearm: **+0.077 kg**.
+  - Board fit in the forearm: the R4 pack leaves 13.2 mm axial spare in the Ø66 bore. **The board dimensions are not in the repo**, so fit is unconfirmed. The envelope is a disc ≤ Ø65 × ≤ 13 mm.
+- **Drum fill (A):** a 10–11 mm bundle on the shoulder drums (r 40.5–53). Per-conductor bend r/OD ≥ 24 (SILI-E 0.25 at 1.7 mm OD). The drum width/depth is not in the model, so **fill is not verified**.
+- Harness booked total is unchanged at **1.9841 kg**. If (A) were booked: 2.382, **breaking the 2.00 kg contract by 0.382**.

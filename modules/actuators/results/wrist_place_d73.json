@@ -1,0 +1,11 @@
+{
+ "unit_axis_z_mm": 56.0,
+ "link_len_mm": 56.0,
+ "link_kg": 0.00283248,
+ "pin_kg": 0.0005548838024402972,
+ "per_side_kg": 0.00788449520976119,
+ "both_kg": 0.01576899041952238,
+ "backlash_per_link_max_deg": 0.08250592249883854,
+ "backlash_basis": "ISO 286-2 H7/g6 \u00d83 (published fit limits), 2 pins in series; gear: CSG-14 lost motion not added",
+ "rejected_outboard_width_mm": 198.0
+}

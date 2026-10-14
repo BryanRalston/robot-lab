@@ -112,6 +112,18 @@ WL=1.7
 for side in ('L','R'):
     m=2*WL*(7*SIF[0.25][0]+ECAT['gpm'])/1000; rows.append(dict(item=f'D72 wrist motor leads {side} (2 motors: phase/encoder/thermistor)',n=2,len_m=WL,gpm=7*SIF[0.25][0]+ECAT['gpm'],kg=m)); xtra+=m
 con+=4*2*0.000384
+# A43 / R-045 (Arbiter 2461a14): hand-board location options, PENDING/FROZEN (R-043), NOT in totals.
+# (A) board in shoulder bay: Electronics R1 §16.4(3) acac380: 22 conductors/side (11 maxon brushed, twisted pairs), SiF 0.25 (5.4 g/m) in runs,
+#     SILI-E 0.25 (4.5 g/m) inside the arm clock-spring loops, 1.7 m/conductor, no encoders; replaces the hand 24 V wrist loop.
+# (B) board stays in forearm (Arms R4 two-tier pack): short leads unchanged; 24 V wrist loop kept. RP40s are in the bay (R-038) so a
+#     24 V pair bay -> forearm SiF 0.5 x 1.9 m/side is needed (Electronics §324 sizing) unless the converters return to the forearm.
+_h24kg=sum(r['kg'] for r in rows if r.get('item','').startswith('hand 24 V'))
+_lp=loops(*armJ); _run=max(1.7-_lp,0)
+_A_side=22*(_run*SIF[0.25][0]+_lp*SILI.get(0.25,SIF[0.25][:2])[0])/1000
+_A_net=2*_A_side-_h24kg
+_B_feed=2*2*1.9*SIF[0.5][0]/1000
+PENDING_A43=dict(loops_m=_lp,run_m=_run,A_bare_side_kg=_A_side,A_remove_hand_24V_kg=-_h24kg,A_net_bare_kg=_A_net,A_net_sleeved_kg=1.12*_A_net,
+  B_converters_in_forearm_kg=0.0,B_24V_feed_bay_to_forearm_sleeved_kg=1.12*_B_feed,status='pending, frozen (R-043); Arbiter R-045 to choose')
 junction=0.020   # EtherCAT 4-port junction PCB in torso [EST]
 sleeve=0.12*(wire+ecat+xtra)
 total=wire+ecat+xtra+con+sleeve+junction
@@ -122,7 +134,7 @@ out=dict(cables=dict(power='Lapp OELFLEX HEAT 180 SiF',ecat=ECAT,ecat_flex_ref=E
    power_wire_kg=wire,ecat_kg=ecat,connectors=dict(parts={k:dict(each_kg=v[0],n=v[1],evidence=v[2]) for k,v in CON.items()},kg=con),
    sleeving_kg=sleeve,ecat_junction_kg=junction,total_kg=total,R4_model_kg=0.821,R018_credited_kg=1.344,contract=2.00,
    worst_dV_pct=max(r.get('dV_pct',0) for r in rows),worst_dT_K=max(r.get('dT_K',0) for r in rows),
-   min_bend_ratio=min(r['bend_ratio'] for r in worst),a25_extra_kg=xtra,sto_kg=sto_kg,sto_with_sleeve_kg=1.12*sto_kg,coax=COAX,ecat_loop_m=ecat_loop,flex_fallback_ecat_kg=flex_fallback)
+   min_bend_ratio=min(r['bend_ratio'] for r in worst),a25_extra_kg=xtra,sto_kg=sto_kg,sto_with_sleeve_kg=1.12*sto_kg,coax=COAX,ecat_loop_m=ecat_loop,flex_fallback_ecat_kg=flex_fallback,pending_A43=PENDING_A43)
 json.dump(out,open(f'{H}/results/harness.json','w'),indent=1)
 L=['# Harness mass model R5 (O16, R-018 A2): datasheet g/m + routed lengths','',
  '`harness.py` → `harness.json`. Bus 20S 68–84 V, star from pack/BMS; EtherCAT line per branch from a torso junction. Coordinates from `v3/cad/model.py`; service-loop radii from `v3/cad/out/cables.json`.','',
