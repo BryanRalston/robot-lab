@@ -403,3 +403,28 @@ Recorded: rail A = F1–F3 + S1, S2 + hand logic; rail B = F4–F6 + S3–S5. Si
 - **Mass:** 22 × 1.7 m × 5.4 g/m = **0.202 kg/side, 0.404 kg both** (bare; sleeving +12 % [EST] → 0.452). Using SILI-E in the loop portions (~0.9 m of loops at 4.5 g/m) saves ~0.02 kg/side.
 - **Bundle:** 22 × ~1.9 mm OD [SiF 0.25 datasheet OD] ≈ 10–11 mm bundle; the shoulder clock-spring drums must take it (r_wrap/OD fine for single cores). EMC: twist each motor pair (PWM leads next to EtherCAT).
 - **Encoders:** if maxon ENX encoders are fitted, each adds 4–6 conductors (+50 to +100 % mass). **Recommend no motor encoders**: tendon position from motor-current/back-EMF estimation plus joint sensing at the fingers (Arms decision).
+
+### 16.5 Hand board in the forearm; thermal derate, 125 °C parts, hardware OT cutoff (R-046/R-047, Thermal A43C 64b6af8, R-051)
+**Layout (Arbiter R-046/R-047):** hand board in the **forearm**; 2× RP40-11024SFR + **one shared O-E11 filter** in the shoulder bay (R-041 conditions stand). Round 2-board stack **ø60 × 12–13 mm [EST]**.
+
+**Thermal A43C (board-only, 64b6af8):** with the shell derate ladder, shell ≤ 90 °C (walking 59.8 °C, still air 79.7 °C), board 68/88 °C, H-bridge Tj ≤ 80/100 °C. Without the derate, still air **fails** (board 135 °C, Tj 147 °C). **Derate ladder adopted (mandatory per R-051, verified by G5 T-029):** shell sensor (TMP117, §16.3 part) on the hand board pressed against the shell. Thresholds **55 / 70 / 80 / 88 °C → flexor current 0.84 / 0.70 / 0.50 / 0.35 / 0 A** (step ≥ 88 °C → 0), 5 K hysteresis on the way down.
+
+**125 °C-rated parts (board reaches 88 °C in still air; 125 °C grade gives ≥ 37 K margin):**
+| function | part | temp grade | source |
+|---|---|---|---|
+| EtherCAT slave | **Infineon XMC4300-F100K256-AA** (XMC4300F100K256AAXQMA1): Cortex-M4 144 MHz with integrated EtherCAT node, 256 kB flash, 128 kB RAM, 2× CAN, 2× 12-bit ADC, LQFP-100 | **−40…125 °C** (Infineon product page; Infineon NPI 2016 "125 °C ambient") | [DS]. One distributor (Rutronik) lists T(A)max 85 °C in its parameter table while its text says 125 °C; the Infineon page governs, confirm in the datasheet at order. |
+| (rejected) LAN9252 | Microchip LAN9252TV/ML | **−40…105 °C max**, and only in QFN with an external 1.2 V regulator + 2.5 V magnetics; LAN9252I = −40…85 | Microchip product page / datasheet |
+| MCU (if kept separate) | **STM32H725VGT3 / STM32H735VGT3** ("3" suffix) | **−40…125 °C ambient, 140 °C junction** | ST eStore (STM32H725VGT3: −40…125, LQFP-100); ST STM32H72x/73x training deck |
+| Note | With XMC4300 as the EtherCAT node and controller, the STM32H7 can be **dropped** (XMC4300 has CCU timers for PWM and 2 ADCs; 11 current loops at hand rates are within an M4 at 144 MHz [EST]). Saves one IC + area on the ø60 stack. | | |
+| H-bridges ×11 | **TI DRV8874-Q1** (4.5–37 V, 6 A peak, integrated current sense IPROPI, HTSSOP) | **AEC-Q100 grade 1: TA −40…125 °C, TJ −40…150 °C** | TI datasheet Rev. B |
+| EtherCAT PHYs ×2 (XMC4300 needs external PHYs) | 125 °C-rated 100BASE-TX PHY, candidate **TI DP83822** (automotive/HF variant) | **[UNVERIFIED: check that the variant is rated 125 °C]** | open, O-E12 |
+| Passives | MLCC **X7R (−55…125 °C)** or X8R/C0G; no Y5V/X5R; electrolytics excluded from the hand board (MLCC bulk only, within the 1300 µF RP40 limit on the supply side) | X7R = 125 °C class | EIA class II code definition |
+
+**Hardware over-temperature cutoff (R-051), independent of the MCU:**
+- Sensor: **Murata NCP15WF104F03RC** 100 kΩ NTC, 0402 (Murata NCP series; temp range **[UNVERIFIED in the extract read: confirm ≥ 125 °C]**), placed between the H-bridge rows on the board.
+- Comparator: **TI LM2903B-Q1** dual comparator (TI datasheet Rev. M: **AEC-Q100 grade 1, −40…125 °C**, 2–36 V supply, ±4 mV max offset over temperature, open-collector, 1 µs response) [DS].
+- Circuit: NTC + precision divider sets the trip at **≈ 110 °C board**. Comparator A has positive-feedback **hysteresis ≈ 10 K** (re-enables at ≈ 100 °C). Its open-collector output pulls down the **nSLEEP/EN of all 11 DRV8874-Q1** through a wired-AND line, so the MCU cannot override it. Comparator B is a latch option (SR via the second channel; reset only by power cycle or MCU-independent reset line) if the Arbiter prefers latching. Default: **latching** (safer; the derate ladder should keep the board well below 110 °C, so a trip means something is wrong).
+- Status: the trip line is also read by the MCU and reported over EtherCAT.
+- Mass/area: < 1 g, ~20 mm² [EST].
+
+**RP40 derating above 60 °C (RP40-FR datasheet REV 8/2020, page PD-6, "Derating Graph", chamber, natural convection 0.1 m/s):** **graph only, no table.** For **RP40-2415SFR (bare)**: 100 % output to **60 °C**, linear to **0 % at 105 °C** (≈ 2.2 %/K; e.g. ~78 % at 70 °C, ~56 % at 80 °C, ~33 % at 90 °C, read from the graph). For **-HC**: 100 % to 65 °C, 0 % at 105 °C. Environmental table: operating −40…+60 °C without derating, to +105 °C with derating; max case +105 °C; thermal impedance 10.8 K/W bare / 10.3 K/W with heat-sink (natural convection 0.1 m/s). **Datasheet note 8: the graphs are valid only for the part numbers shown (RP40-2415SFR); the RP40-11024SFR curve is not published, so RECOM techsupport must confirm it.** For our design: the shoulder-bay ambient must stay ≤ 60 °C for full 40 W per converter, or the per-rail cap must derate along this curve. Thermal's strapped case of ~71 °C (35 °C ambient) is below the 105 °C case limit.
