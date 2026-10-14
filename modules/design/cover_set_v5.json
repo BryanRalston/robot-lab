@@ -73,5 +73,7 @@
  },
  "booked_P020_skin_kg": 1.157,
  "delta_vs_booked_kg": 0.236,
- "pc_area_m2": 0.539
+ "pc_area_m2": 0.539,
+ "measured": false,
+ "measurement_note": "areas [EST]; CAD measurement pending on Bryan PC (heavy), R-030 >10% trigger"
 }

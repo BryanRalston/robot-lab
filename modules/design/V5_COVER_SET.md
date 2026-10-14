@@ -36,6 +36,15 @@ Status: layout from Legs keep-out hulls + model_v4 dims, **not yet measured on v
 
 Rigid thermoform tools: **12** (vs 16 [EST] in COVER_COST.md; A30 cost sheet to be updated) + 1 strip tool + 1 bellows mould; 2 sewing patterns. Trim fixtures: one per rigid tool (12). Next: measure panel areas on model_v4 CAD and confirm draw ratios; re-run `cover_set_v5.py` with measured areas.
 
+## Area measurement status (R-030)
+Not measured yet. Measuring trimmed panel areas needs the build123d model_v4 rebuild plus the Legs keep-out STLs (not on main), which is a heavy CAD job. Route it to Bryan's PC. Until then `cover_set_v5.json` areas stay [EST] (`measured: false`). Re-rule trigger: any panel measuring > 10 % over its estimate.
+
+## A36 / P-026 vent panels (stub, waiting on Thermal A35)
+R-030 P-026: no closed PC over hip-pitch or knee. The knee cap, hip skirt and thigh panels must be louvred (≥ 30 % open area) or made of CF/aluminium. Thermal's A35 per-joint open-area and airflow spec is **not on main** yet; only `thermal/R1_BUDGET.md` recommends ≥ 30 % louvred/perforated panels.
+- Expected direction: louvres in PC remove material, so mass goes down (≈ −30 % on the affected panels: thigh 0.490, knee cap 0.116 → ≈ −0.18 kg [EST]), minus the rim/rib stiffening at the louvres (≈ +0.03 [EST]). Al 0.8 mm instead of PC would be heavier (+49 % per m²): **flag to the Arbiter if chosen.**
+- The hip skirt is fabric (P-023); a mesh insert at the hip-pitch zone meets the intent with no mass change [EST].
+- Draft to be done when A35 lands.
+
 ## Option: untrimmed set (`python3 cover_set_v5.py --untrimmed` → `cover_set_v5_untrimmed.json`)
 Full-wrap shin/thigh fairings (0.70 hull), foot shell 0.40, upper-arm (ø95×260) + forearm (ø85×250) shells + shoulder caps as placeholders. P-020 1.073 m² → 2.012 kg (+0.855 vs booked) + P-022…P-025 0.383 → **+1.238 kg**. Rejected by R-029 against the 1.329 kg reserve / 0.30 floor; kept for reference only.
 
