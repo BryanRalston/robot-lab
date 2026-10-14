@@ -1,0 +1,28 @@
+# R1 top-level FMEA — RL Test & Reliability (2026-10-14)
+Scale 1–10 (S severity, O occurrence, D detection: 10 = undetectable before field). RPN = S×O×D. Basis: repo files cited; hand checks in `r1_checks.json`, review in `R1_FEA_REVIEW.md`.
+
+| ID | Item | Function | Failure mode | Effect | Cause | S | O | D | RPN | Current controls | Recommended action | Owner |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| F01 | Hip pitch lever (7075) | transmit 454 N·m twin-screw torque to thigh | fatigue crack at bore-lip/arm-root corner | leg collapse, fall | re-entrant corner singularity; walk amplitude 153–219 MPa vs Se 87 (`hp_lever_fea_O13_REPORT.md`, R1_FEA_REVIEW §1) | 10 | 8 | 6 | **480** | proof test (yield only), O13 open, G2 brief | add walk fatigue criterion to G2; consider steel/thicker section; strain-gauge fatigue test | actuators |
+| F02 | Femur tube 1.2 mm wall | carry leg loads | dent/buckle outside 100 mm doubler | leg collapse | SF 1.07/1.03 at base wall (`legs/results/r8/structure_fixes_r8.json`) | 10 | 6 | 6 | **360** | hand calc; 0.267 kg hold (R-023) | GB r2 (A15) must locate dent vs sleeve; else full 1.9 mm wall | legs |
+| F03 | Leg clevis/clamp | knee/thigh joint structure | fatigue at R6/R1.5 fillets | joint failure | Goodman used raw Se 159 (→1.03 corrected) | 9 | 6 | 6 | **324** | h4 box solve, scaled Goodman | converged solve + corrected Se; proof test 13.1 kN (A7) | legs |
+| F04 | Femur tongue fit | hold ø35 hip shaft | bore opens / shaft walks under fault | hip pitch loss | fault SF 1.48, fit not contact-checked | 9 | 5 | 6 | 270 | Loctite 648, A16 | add dowel; contact FEA | legs |
+| F05 | Ankle QA1 rod end / GE 12 C eyes | ankle spherical joints | PTFE liner wear → play | gait degradation, impact | C [EST], G_h 8 523 h < T9 (`actuators/results/ankle_v4.json`) | 6 | 7 | 5 | 210 | wear-part 4 250/5 250 h (R-022/R-024) | supplier rating or bench (A22, O23); play check in maintenance | actuators |
+| F06 | Roller screws RV12x4 / hip screws | linear actuation | spalling, L10 shortfall at new levers | joint torque loss | screw L10 at new levers not re-run (TARGETS G3, O4) | 8 | 4 | 6 | 192 | ankle L10 544 000 h ok | re-run O4 for hip/knee | actuators |
+| F07 | Battery pack (Molicel P45B) | 68–84 V supply | thermal runaway / cell imbalance | fire, total loss | abuse, fall impact on torso | 10 | 2 | 7 | 140 | datasheet only (`actuators/datasheets/molicel_p45b.pdf`); no torso owner yet | pack BMS spec, crush/fall test, venting path | torso/power |
+| F08 | Actuator motors/drives | torque | over-temperature | derate, fall | lumped thermal ΔT 66 K carry (TARGETS G3) | 7 | 5 | 5 | 175 | lumped model; bench plan (`BENCH_TEST_PLAN.md`) | winding-sensor derate in firmware; bench thermal run W1 | thermal/actuators |
+| F09 | Flex harness (Stäubli/Lapp, Belden EtherCAT) | power + comms through joints | conductor fatigue break | joint/bus loss → fall | flex cycles at hip/knee loops | 8 | 4 | 5 | 160 | O20a/O20b test plans | run flex tests; EtherCAT loss → safe-stop | electronics |
+| F10 | Head 12 V converter / input filter | head power | capacitor obsolete/surge damage | vision loss | 200BXF68 obsolete (A28); 90 V clamp (`head/BOM.md`) | 6 | 4 | 4 | 96 | SMDJ90A TVS, RP40-HC | A28 replacement cap; surge test | head/electronics |
+| F11 | Hip yaw/roll hard stops | limit overtravel | bumper bracket fails | joint overtravel, harness tear | [EST] brackets (L39, A21) | 7 | 4 | 5 | 140 | soft limits required | size catalog PU + bracket calc | legs |
+| F12 | Whole-body controller / push recovery | balance | fall on push/slip | damage, injury | sim-only validation (`legs/results/r7/*push_recover*`) | 9 | 6 | 4 | 216 | MuJoCo push tests, ankle-roll stop | hardware-in-loop tests; fall-detect + safe-crouch; e-stop | controls |
+| F13 | Arms/hands (tendon 11-DoF) | grasp 10 kg | tendon creep/break | drop object | `arms/R1_ARCHITECTURE.md` architecture only | 6 | 6 | 6 | 216 | none yet | tendon life test, tension monitoring | arms |
+| F14 | Wrist actuator pair (4.3× oversized) | wrist motion | downsizing overshoots | wrist stall | proposed downsize (`arms/R1_ARCHITECTURE.md`) | 5 | 4 | 4 | 80 | load calc arm_loads_r1 | keep ≥1.5× on 10 kg reach after downsize | arms |
+| F15 | PC cover panels 1.5 mm | protect / fall | crack at fall | sharp edges, exposed parts | no wall/rib fall check (A10/A29) | 5 | 5 | 5 | 125 | — | fall drop test of panel | covers |
+| F16 | Bonded joints (DP490) | tube/doubler/clamp bonds | disbond | structure loss | prep variability (`legs/BOND_SPEC.md`) | 9 | 4 | 7 | 252 | BOND_SPEC, witness marks (A7) | lap-shear coupons per lot; proof load every leg | legs/materials |
+| F17 | 7075 material lots | strength | low Sy / SCC | margin loss | lot variance; 7075-T6 SCC in humid env | 8 | 3 | 5 | 120 | cert per lot (PROOF_TEST) | specify T7351 where SF allows; anodise | materials |
+| F18 | Mass budget | T2 ≤ 66.5 kg | overrun → actuator margin loss | weaker gait/carry | reserve 0.037–0.375 kg (`arbiter/MASS_ROLLUP_OFFICIAL.md`) | 6 | 6 | 3 | 108 | Arbiter rollup | fatigue fixes (F01–F03) will add mass — budget now | arbiter |
+
+## Top 5 by RPN
+1. F01 hip lever fatigue 480 · 2. F02 femur/tibia tube 360 · 3. F03 clevis/clamp fatigue 324 · 4. F04 tongue fit 270 · 5. F16 DP490 bonds 252 (then F12/F13 216).
+
+Note: torso/power, thermal, electronics, controls rows are lower-evidence — those modules have little repo content yet (unstaffed, CHARTER.md).
