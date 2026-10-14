@@ -1,0 +1,83 @@
+{
+ "tau_cont130": {
+  "bare h12": 83.2,
+  "fins 0.05 eta1 h12 (revB brief)": 102.1,
+  "fins 0.025 eta1 h12 (script)": 94.1,
+  "fins 0.05 eta0.7 h12": 97.6,
+  "fins 0.05 eta1 h15 (vented)": 108.6,
+  "fins 0.025 eta1 h15 (vented)": 100.9,
+  "fan h40 base": 118.4
+ },
+ "Rha": {
+  "bare h12": 1.443,
+  "fins 0.05 eta1 h12 (revB brief)": 0.773,
+  "fins 0.025 eta1 h12 (script)": 1.007,
+  "fins 0.05 eta0.7 h12": 0.898,
+  "fins 0.05 eta1 h15 (vented)": 0.619,
+  "fins 0.025 eta1 h15 (vented)": 0.806,
+  "fan h40 base": 0.433
+ },
+ "walk_1p2_r7": {
+  "rms": 74.3,
+  "drive_off": {
+   "bare h12": 115.5,
+   "fins 0.05 eta1 h12 (revB brief)": 85.4,
+   "fins 0.025 eta1 h12 (script)": 95.8,
+   "fins 0.05 eta0.7 h12": 90.9,
+   "fins 0.05 eta1 h15 (vented)": 78.7,
+   "fins 0.025 eta1 h15 (vented)": 86.8,
+   "fan h40 base": 71.0
+  },
+  "drive_on_housing": {
+   "bare h12": 137.1,
+   "fins 0.05 eta1 h12 (revB brief)": 96.4,
+   "fins 0.025 eta1 h12 (script)": 110.4,
+   "fins 0.05 eta0.7 h12": 103.8,
+   "fins 0.05 eta1 h15 (vented)": 87.4,
+   "fins 0.025 eta1 h15 (vented)": 98.3,
+   "fan h40 base": 76.9
+  }
+ },
+ "carry r4 1.0 x1.10": {
+  "rms": 85.6,
+  "drive_off": {
+   "bare h12": 145.7,
+   "fins 0.05 eta1 h12 (revB brief)": 102.3,
+   "fins 0.025 eta1 h12 (script)": 117.1,
+   "fins 0.05 eta0.7 h12": 110.2,
+   "fins 0.05 eta1 h15 (vented)": 93.0,
+   "fins 0.025 eta1 h15 (vented)": 104.3,
+   "fan h40 base": 82.3
+  },
+  "drive_on_housing": {
+   "bare h12": 174.1,
+   "fins 0.05 eta1 h12 (revB brief)": 116.3,
+   "fins 0.025 eta1 h12 (script)": 136.0,
+   "fins 0.05 eta0.7 h12": 126.7,
+   "fins 0.05 eta1 h15 (vented)": 103.9,
+   "fins 0.025 eta1 h15 (vented)": 119.0,
+   "fan h40 base": 89.7
+  }
+ },
+ "carry P-042 x0.32 (Controls regen)": {
+  "rms": 76.4,
+  "drive_off": {
+   "bare h12": 119.4,
+   "fins 0.05 eta1 h12 (revB brief)": 87.5,
+   "fins 0.025 eta1 h12 (script)": 98.5,
+   "fins 0.05 eta0.7 h12": 93.4,
+   "fins 0.05 eta1 h15 (vented)": 80.5,
+   "fins 0.025 eta1 h15 (vented)": 89.0,
+   "fan h40 base": 72.4
+  },
+  "drive_on_housing": {
+   "bare h12": 142.1,
+   "fins 0.05 eta1 h12 (revB brief)": 99.0,
+   "fins 0.025 eta1 h12 (script)": 113.8,
+   "fins 0.05 eta0.7 h12": 106.9,
+   "fins 0.05 eta1 h15 (vented)": 89.5,
+   "fins 0.025 eta1 h15 (vented)": 101.0,
+   "fan h40 base": 78.6
+  }
+ }
+}

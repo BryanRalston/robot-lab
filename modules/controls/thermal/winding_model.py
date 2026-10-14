@@ -54,7 +54,9 @@ UPPER_SPEC = {
 }
 DRIVE_ON_HOUSING = {}   # joint -> True to put the Elmo loss into the housing node (sensitivity); default off (P-027, D69)
 TAU_CONT_AT = 130.0     # °C winding at which the continuous rating is evaluated (derate end value)
-KNEE_D69 = dict(motor='TBM2G-08513D', rha_scale=0.5)   # D69: 2x 08513D + shank path Rha x0.5 [EST]
+KNEE_FIN_A, KNEE_FIN_H = 0.05, 12.0   # D69 rev B housing fins (m2 wetted, W/m2K) [EST]
+KNEE_D69 = dict(   # superseded by D69 rev B (4366d32); kept for history
+    motor='TBM2G-08513D', rha_scale=0.5)   # D69: 2x 08513D + shank path Rha x0.5 [EST]
 
 
 def _iron(model_w):
@@ -82,8 +84,9 @@ def _p(M, model_w, n, ratio, eta, area, m_house, t_out, extra_est=()):
 MOT_CACHE = {}
 
 
-def load_params(root=ROOT, knee='D69'):
-    """knee='D69' (default, Actuators D69) or '07613D' (as sized; used by actuators/knee_thermal.py base case)."""
+def load_params(root=ROOT, knee='07613D_fins'):
+    """knee='07613D_fins' (default, D69 rev B 4366d32 / R-044: 2x 07613D + 0.05 m2 housing fins at h 12, eta_f 1),
+    '07613D' (bare, as sized; actuators/knee_thermal.py base case) or 'D69' (superseded 2x 08513D + shank path)."""
     sel = json.load(open(os.path.join(root, 'modules/actuators/results/sizing.json')))['sel']
     mot = json.load(open(os.path.join(root, 'v3/analysis/tbm2g.json'))); MOT_CACHE.update(mot)
     P = {}
@@ -94,6 +97,9 @@ def load_params(root=ROOT, knee='D69'):
         P[j] = _p(mot[mw[:11]], mw, s['nmot'], s['ratio'], s['eta'], area, mh, s['T_out'],
                   [] if s['area_cad'] else ['ankle_roll area = ankle_pitch area (cnt 0 in sizing)'])
         P[j]['Km25'] = s['Km']   # sizing.json value (07613D 0.201, D15 typo fix)
+    if knee == '07613D_fins':
+        P['knee']['Rha'] = 1.0 / (1.0 / P['knee']['Rha'] + KNEE_FIN_H * KNEE_FIN_A)
+        P['knee']['est'] = P['knee']['est'] + ['D69 rev B fins 0.05 m2 x h 12, fin efficiency 1 [EST]']
     if knee == 'D69':
         mw = KNEE_D69['motor']; M = mot[mw[:11]]; s = sel['knee']
         k = _p(M, mw, 2, s['ratio'], s['eta'], s['area_cad'], s['housing_cad'], s['T_out'],

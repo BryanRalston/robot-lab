@@ -86,9 +86,9 @@ def com_height(r):
     return r.com()[2]
 
 def sc_walk(carry=0.0,v=1.2,Tstep=0.45,name='walk_1p2',arm=0.0,yaw=0.0,ds=0.2,pel_z=None,swing_h=0.07):
-    m=load(carry,(0.25,0.0,0.10)); r=Robot(m)
+    m=load(carry,tuple(float(x) for x in os.environ.get('CARRY_POS','0.25,0.0,0.10').split(','))); r=Robot(m)   # CARRY_POS env: Controls P-042 rerun (default unchanged)
     if carry:   # box held close in front of the chest (payload rigid on torso, 0.25 m ahead of the waist axis), trunk leaned back 0.25 rad at the waist
-        r.set_arms(-0.6,-1.2); r.q[m.jnt_qposadr[m.joint('waist_pitch').id]]=-0.25
+        r.set_arms(*(float(x) for x in os.environ.get('CARRY_ARMS','-0.6,-1.2').split(','))); r.q[m.jnt_qposadr[m.joint('waist_pitch').id]]=-0.25
     zc=com_height(r); L=v*Tstep
     lens=[0.25*L,0.5*L,0.75*L]+[L]*10+[0.75*L,0.5*L]
     steps=[]; x=0; side='r'

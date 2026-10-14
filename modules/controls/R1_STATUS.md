@@ -73,3 +73,23 @@ Recommendation: the representative 1.2 m/s trace is **walk_1p2_r7 (ref_ds25)**, 
 2. Use public time-motion sources for station layouts, e.g. Agility/GXO videos, timed by frame.
 3. Run a light task-level timeline (walk segments at 1.0 m/s from distances; stand/manipulate from the P-042 pick/place cycle times) to get the walk fraction per task.
 4. Replace it with logged sim/hardware duty once the RL policy can do the tasks.
+
+## R-052: independent check of D69 rev B (Actuators 4366d32): 2× 07613D + housing fins
+Own path: `controls/thermal/knee_revB_check.py` (my vectorized 2-node loop, winding_model params; not knee_resize_r043.py) → `knee_revB_check.json`. Fins: Rha = 1/(1/Rha_base + h·η·A_f), Rha_base 1.443 K/W. 35 °C, 60 min looped. The winding_model default knee is now `07613D_fins` (A 0.05 m², h 12, η 1); the 08513D D69 is kept only as history.
+
+| claim (Actuators) | mine | Δ |
+|---|---|---|
+| τ_cont at 130 °C: 102 N·m | 102.1 | 0.1 |
+| walk_1p2_r7: 96 °C | 96.4 (drive loss on housing) / 85.4 (drive off) | +0.4 |
+| carry r4 ×1.10 open: 116 °C | 116.3 / 102.3 | +0.3 |
+| carry r4 ×1.10 vented: 104 °C | 103.9 / 93.0 | −0.1 |
+| fan h40: 118 N·m, 77 / 90 °C | 118.4, 76.9 / 89.7 | <0.5 |
+
+**Reproduced within 0.5 K**, provided that A_f = 0.05 m² per knee, η 1, and drive loss goes into the housing (their conservative case).
+- **Discrepancy in the script:** `knee_resize_r043.py` line 18 uses 12 × **0.025** m², and its docstring says +0.025 m². At 0.025 m² my model gives τ_cont 94, walk 110, carry ×1.1 136 °C (drive on). Actuators must state which area is real; the claims only match 0.05.
+- **Fin coefficient h = 12 W/m²K:** sensible for walking. Laminar flat plate at 1 m/s, 0.1 m chord gives h ≈ 12. Standing still it is natural convection plus radiation, about 8–10 [EST], so a standing hold is worse. The base Rha already includes a ×2 fin factor on the housing; the new 0.05 m² must be in addition to that, not overlap it.
+- **Fin efficiency:** 1.5 mm × 20 mm Al fins (Thermal option C) give η ≈ 0.99 (m = √(2h/kt) ≈ 9.8 /m, mL 0.2), so η 1 is fine. η 0.7 (taller or thinner fins, or steel) gives carry ×1.1 126.7 °C, a fail.
+- **'Vented'** = h 15 everywhere (A35 target), base housing plus fins, the same as their Rha × 12/15. It is not a measured value.
+- **Margin:** with drive loss on the housing, carry ×1.1 open is 116.3 °C, a 3.7 K margin (< 5 K). With drives off the housing (Thermal 26412c7 / P-027) it is 102 °C (18 K). So rev B passes only if the knee drives stay off the housing, or vents are guaranteed.
+- **Regenerated P-042 carry** (`legs/results/p042/carry_20kg_1p0.npz`: scenarios.py with CARRY_POS 0.32,0,0.415 and CARRY_ARMS −60°/−110°; current sim/v3 masses, model mass as built; knee pk 161 / RMS 76.4 N·m): rev B is 87.5 °C drive off / 99.0 °C drive on. Bare 07613D is 119.4 / 142.1.
+- The P-042 position does **not** raise knee RMS vs r4 (76.4 vs 75.7–77.8), because the arms are tucked and the waist leans back. r4 ×1.10 (85.6 RMS) stays the conservative carry case.
