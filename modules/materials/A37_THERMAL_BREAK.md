@@ -80,3 +80,47 @@
   - Keep the ≥ 0.3 mm air gap to 7075.
 - **Tines e20 rounded:** a Legs item, accepted as is.
 - **Mass: net +10.6 g robot, accepted** (+0.011 vs the +0.017 booked, 0.006 to return to reserve).
+
+---
+# Rev D (2026-10-14): Thermal A38 (bee2448). The rod path counts (55–60 K/W, total ≈ 15 K/W, FAIL)
+**Material:** PEI Ultem 1000 is confirmed for both items, on the same basis as rev B (MIFPEI/ULTEM_PP/ULTEM_PL).
+- Rules: ≤ 28 MPa sustained, ≤ 76 MPa fault at ≈ 98 °C, G5 creep test.
+- k ≈ 0.22 W/m·K.
+
+## Item 1: lever-end GE12 eye, PEI sleeve 20/12 with flange lands, ≥ 0.3 mm face air gap
+- **Load:** the RV12 screw is a two-force member with spherical eyes at both ends (Legs A38 L4). The lever-end pin carries the **same axial screw force as the clamp eye: 4 542 N walking, 6 550 N fault per body** (clamp_review.py / BOND_SPEC §5).
+- **Bearing on PEI** (pin ø12, projected area = 12 × total PEI length in the lever cheeks):
+  - With 2 × 8 mm (as at the tines): 192 mm² → **23.7 MPa walking (≤ 28 OK), 34.1 MPa fault (SF 2.2 vs 76)**.
+  - **Requirement: total cheek/eye PEI bearing length ≥ 16 mm.**
+  - At 2 × 6 mm it would be 31.5 MPa walking, which **fails the creep rule**. Then use OD 20 with longer bosses, or an ID 14 pin.
+- Outer bearing on 7075 at ø20 × 16: 14.2 MPa walking, trivial.
+- **Flange lands:** same rule as rev C. Pads within the SKF shaft abutment d_a ≤ 15 (ø12.6–15), ≥ 30 mm² (36 preferred), axial ≤ 0.82 kN → 27 MPa. The retaining ring must not be shimmed to zero play.
+- **Mass [EST]:** 2 sleeves × 2.6 g (rev B 20.9 g / 8) − 7075 removed (ø12→20 bore, 16 mm) 0.9 g = **+4.3 g per lever eye**. Thermal's estimate was +3 g.
+  - **One hip lever eye per leg → +8.6 g robot.**
+  - Legs: if the knee lever eye also has an unbroken path to the femur bond, add it too.
+- The alternative (a liner on the TLA3520 shaft seat) is **rejected**. It sits in the needle load path and creep there would cost bearing preload.
+
+## Item 2: tine sleeve OD 22 / ID 12 (5 mm wall), tine bore ø22
+- Pin bearing on PEI is unchanged (ID 12, 16 mm): **23.7 / 34.1 MPa**, SF 2.2 at fault, walking within 28.
+- PEI wall 5 mm: hoop/compression across the wall is lower than with the 4 mm wall (the load spreads to ø22). Outer bearing on 7075 is 4 542 / (22 × 16) = **12.9 MPa** walking, 18.6 MPa fault.
+- Lands as in rev C, unchanged.
+- **Sleeve mass:** 20.9 × (22² − 12²)/(20² − 12²) = 27.8 g → **+6.9 g robot** (8 sleeves).
+- **Tines at ø22 [EST, Legs to confirm in CAD/FEA]:** keep e/D 1.0, so **e = 22, rounded end R16**.
+  - Bore removal −1.2 g; +2 mm tine length × 30 mm × 8 mm × 8 tines ≈ +2.7 g → **+1.5 g robot**.
+  - The ligament and peak stress should match the e20/ø20 result (185 MPa fault) if e/D is kept. That has not been verified.
+- **Item 2 can be dropped if J-T1/G5 measures R_col ≤ 8 K/W** (Thermal A38). Then the sleeves revert to 20/12 and the tines to e20/ø20.
+
+## Legs must recheck
+1. ø22 bore: edge distance e22/R16 (2D FEA as in tine_fea_a38.py at 3 275 N/tine fault), and clearance to the eye-stub flange (rev C clearance was 4.0 mm at R20; at R22 it drops to ≈ 2 mm [EST]).
+2. Lever eye: cheek/boss thickness gives ≥ 16 mm total PEI bearing; edge distance at a ø20 bore in the hip lever; the RV12 sweep clearance (≥ 1.0 mm, l47 brief, today 1.94 mm) with any boss growth; retention per rev C.
+3. Whether the knee lever eye is a second parallel path.
+
+## Mass vs the +11 g (rev C, +10.6 g)
+| item | g robot |
+|---|---|
+| rev C net | +10.6 |
+| item 1: lever-eye PEI sleeves, 2 eyes | +8.6 |
+| item 2: sleeves 22/12 | +6.9 |
+| item 2: tines e22/ø22 | +1.5 |
+| **rev D net** | **+27.6 g (+17.0 g over rev C; +10.6 over R-053's +17 booking)** |
+| if item 2 is dropped (R_col ≤ 8 measured) | +19.2 g |
