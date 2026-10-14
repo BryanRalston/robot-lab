@@ -167,5 +167,57 @@ Elmo STO interface [DS, MAN-G-TWI Table 9]: MAIN connector pin 12 STO1, 13 STO_R
 | torso: safety MCU → junction | 1 | 0.25 [EST] | — | 0.004 | — |
 | **total** | | **14.3 m** | 30 per this count (harness says 34; Actuators reconcile) | **0.231** | **0.039** |
 
-**STO wiring ≈ 0.270 kg** (datasheet g/m × routed length; route lengths per harness model). This replaces my R1 rough estimate of +0.14 kg, which assumed 2 conductors. Connector pins: if each drive tee uses a JST-GH 4-pin (harness model part, 0.384 g/pair), add 30–34 × 0.384 g ≈ 0.013 kg. Alternative to cut mass: carry STO on spare pairs if the drive carrier PCB connector allows it; not counted.
+**SUPERSEDED (A25 closed by Actuators, 3718e93 / 68cb6eb): accepted Actuators D66 = 0.218 kg bare (~0.243 sleeved), 32 Elmo drives (8/leg, 7/arm, 2 waist). My 0.270 double-counted the tee pigtails and wrongly included the 1.368 m neck segment (neck is Dynamixel, no STO).** Original estimate: STO wiring ≈ 0.270 kg (datasheet g/m × routed length; route lengths per harness model). This replaces my R1 rough estimate of +0.14 kg, which assumed 2 conductors. Connector pins: if each drive tee uses a JST-GH 4-pin (harness model part, 0.384 g/pair), add 30–34 × 0.384 g ≈ 0.013 kg. Alternative to cut mass: carry STO on spare pairs if the drive carrier PCB connector allows it; not counted.
 Electrical check: STO input current per drive is not in the extract read, so the rail driver current is open. The R1.1 total load is 34 drives in parallel per channel.
+
+## 10. Arms & Hands interface answers (2026-10-14, after P-026)
+
+### 10.1 Wrist roll ±170° and shoulder yaw ±150°: clock-spring, not slip ring
+- **Belden MRTA2P26S** datasheet (`actuators/datasheets/belden_mrta2p26s.pdf`): "±90° bending: min. 8 million cycles (bending radius 7.5D)"; "Vertical torsion test ±180°/m: min. 8 million cycles; horizontal torsion test ±90°/m: min. 8 million cycles"; 25.9 kg/km. [DS]
+- **±180°/m does not cover a straight torsion run.** ±170° of pure twist at ±180°/m needs ≥ 170/180 = **0.94 m** of free twisting cable per joint, which a wrist doesn't have. (Shoulder yaw ±150° needs 0.83 m.)
+- **A flat clock-spring (spiral) loop turns rotation into bending.** The harness model already assumes this (`harness.py` loop = r_wrap × ROM + 50 mm). At the wrist, r_wrap 34 mm / OD 4.2 mm = **8.1 D ≥ 7.5 D** (the datasheet bending condition); at shoulder yaw, 40.5 mm = 9.6 D. The datasheet's 8e6 cycles is for ±90° bending at 7.5D, and a spiral's per-cycle bending amplitude is not the same test. So the **O20a clock-spring cycle test stays mandatory** before claiming T9 life. [EST that the spiral is within rating]
+- **Slip ring: not recommended.** The ROM is bounded (no continuous rotation needed), and a slip ring in EtherCAT + 68–84 V power + STO adds contact noise on 100 Mbit/s and a wear part. Decision: **clock-spring at wrist roll and shoulder yaw**; revisit only if Arms wants continuous wrist rotation.
+
+### 10.2 STO 3-wire, arm branch (7 Elmo drives/side)
+From Actuators D66 (`actuators/results/harness.md`, row "STO 3-wire daisy chain, arms branch", 0.25 mm² SiF, SILI-E in loops, 7 drive tees × 0.08 m): 2.833 m routed per side, **0.085 kg both arms bare → 0.0425 kg per side** (sleeved ≈ +12 % [EST] per the harness rule). This is already inside Actuators' A25/A33 closure (harness 1.496), so no new mass.
+
+### 10.3 Arm loop lengths re-run with P-026 ROM
+Formula and r_wrap from `harness.py` / `v3/cad/out/cables.json` (loop = r_wrap × ROM + 0.05 m).
+| joint | r_wrap mm | ROM old → P-026 ° | loop old m | loop new m |
+|---|---|---|---|---|
+| shoulder pitch | 53 | 240 → 240 | 0.272 | 0.272 |
+| shoulder roll | 50.5 | 195 → 195 (P-026 unchanged) | 0.222 | 0.222 |
+| shoulder yaw | 40.5 | 300 → 300 | 0.262 | 0.262 |
+| elbow | 43 | 140 → **125** | 0.155 | **0.144** |
+| wrist roll | 34 | 340 → 340 | 0.252 | 0.252 |
+Wrist pitch/yaw ROM (±60/±30) do not appear in any harness crossing: the arm runs end at the wrist roll / hand feed, and the pitch/yaw differential sits distal. **Change: −0.011 m per crossing run at the elbow.** Runs crossing the elbow per side: power 0.5 mm² (9 g/m) + MachFlex (25.9) + STO 3 × 5.4 (16.2) = 51.1 g/m, so **−0.0012 kg both arms**. Negligible; not worth a rollup change.
+
+### 10.4 Hand node (one board per hand)
+Function: 11 brushed/BLDC hand drives (T4: ≥ 11 actuated DoF), current sense, one EtherCAT slave, tactile hub. **All parts below are candidates; specs [UNVERIFIED] unless marked [DS].**
+| block | candidate | note |
+|---|---|---|
+| EtherCAT slave | Microchip **LAN9252** (2-port EtherCAT slave controller with SPI host interface) | 2 ports allow pass-through if needed; specs not re-read this round |
+| MCU | ST STM32H7-class (SPI to LAN9252, 11 PWM/current loops) | [UNVERIFIED] |
+| H-bridges | 6× TI DRV8874-class single H-bridge with integrated current sense (flexors) + 5× smaller (or 3× dual) for the small drives | depends on Arms motor choice; current-sense integrated in the bridge saves shunts |
+| tactile bus | **SPI, one chip-select per finger (5) + palm** from the MCU; fingertip ADC/taxel IC per finger | SPI over ≤ 0.3 m tendon-side flex is fine at a few MHz; I²C rejected (capacitance over flex, address limits); CAN FD only if the fingers get their own MCUs |
+| logic rail | 24 V → 3.3 V buck on board | |
+**Size [EST]:** 70 × 45 mm, 6-layer, double-sided. **Mass [EST]:** PCB + parts 0.020 kg, connectors 0.010 kg, conformal coat/standoffs 0.005 kg → **≈ 0.035 kg per hand**. **Power [EST]:** logic + EtherCAT ≈ 2 W; bridge losses scale with the hand motor current (Arms to supply the duty), so ≈ 2–4 W per hand total at the harness-model hand feed of 0.5 A rms at 24 V (12 W in).
+**Location:** in the **forearm, proximal to the wrist pitch/yaw**, next to the hand motors (tendon hand, motors in the forearm per T4/Gen-3 style), so only the tendon bundle and the tactile flex cross the wrist pitch/yaw. EtherCAT + 24 V + STO arrive across wrist roll. **Mass booking:** this falls inside the hands line or arm electronics — Arms & Hands to book; not yet in the rollup.
+
+### 10.5 Wrist 24 V converter
+**RECOM RP40-11024SFR** [DS: RP40-FR datasheet, recom-power.com, same family as the head RP40-11012SFR accepted in R-026]: **input 43–160 V**, output **24 V / 1666 mA (40 W)**, efficiency **90 %**, max capacitive load 1300 µF. Bus fit: 68–84 V normal, 90 V regen and 92 V ceiling are all inside the continuous range (R-026 also checked the family's 170 V/1 s surge and UVLO 43 on / 40 off). Mass: R-026 cites the RP40 family at 32 g bare / 43 g with heat-sink (/P-HC). It needs the same note-9 input filter as the head (3 × 68 µF/200 V + 2 × SMDJ90A; Rubycon BXF obsolete, see A28).
+**Check needed:** harness-model hand feed peak is 2.0 A at 24 V = 48 W > 40 W rated. Either Arms confirms the hand peak ≤ 1.67 A, or the hand node limits total motor current in firmware (recommended), or a larger part is cited. Placement: forearm, beside the hand node, with the cover/forearm shell as heat path (Thermal).
+
+## 11. A41 (R-030 / P-030, with Torso & Power): Thor ducted air cooling
+
+**Heat load:** Thor 120 W + brain DCM ≈ 13.9 W (Thermal `R1_BUDGET.md`, η 0.92 [EST]) = 134 W. **Air needed** (energy balance, ρ 1.16 kg/m³, c_p 1007 J/kgK): **24.3 CFM at 10 K air rise, 16.2 CFM at 15 K**.
+
+**P-030's "2× 40 mm blowers, 21 CFM, ~3 W, ~40 g" does not match the catalog parts.** Delta **BFB0412HHA-A** (40×40×10 mm blower) is **3.0 CFM**, 140.5 Pa, 0.96 W, 12.25 g (DigiKey listing of the Delta datasheet) [DS secondary], so 2 × gives 6 CFM, about ¼ of the need. A 40 mm blower cannot do it.
+
+**Proposal: one Sunon PF40281B1-000U-S99** (40 × 40 × 28 mm axial, 12 V, 4-wire FG + PWM), Sunon spec D04092350G (DigiKey-hosted Sunon PDF, F99 variant has identical ratings): **24.9 CFM (min 21.9)** free air, static pressure 1.95 inH₂O (min 1.20), rated **6.12 W** (max 7.05 W), 17 600 rpm, **42 g**, 70 000 h L10 at 40 °C, 56–58.8 dB(A). [DS]
+- Budget check: **mass 0.042 kg vs +0.040 booked → +0.002 kg over**; **power 6.12 W rated vs 5 W cap → over**. With PWM speed control the fan laws (flow ∝ rpm, power ∝ rpm³) give ≈ 3.7 W at 85 % speed [EST]. But the duct operating point (flow at the system pressure drop) is not known until J-T2 CFD/bench, and free-air CFM is an upper bound. **Both exceed the A41 budget on datasheet values, so this goes back to the Arbiter.**
+- Alternative inside budget: heat pipes to an aluminium chest spreader (Thermal's option). Mass not estimated here.
+- Fan supply: 12 V from the 48 V rail through a small buck (part to cite with Torso & Power). The fan's FG (tach) goes to the safety MCU: fan stall leads to Thor power-mode cap, then a controlled stop.
+
+**Duct routing:** intake low on the chest front (V5 vents) → filter mesh → fan → across the Thor cold-plate fin stack (130 × 200 bay) → over the **DCM3623 mounted on the same cold plate with TIM** (downstream of Thor is acceptable: 14 W ChiP; datasheet thermal limits to be read) → exhaust **high, at the upper back/shoulder line, ducted away from the pack**. The pack bay (below the compute bay, z 1333–1477 vs compute 1485–1525 in the v3 layout) stays sealed with a closed partition; the exhaust never crosses it.
+**DC-DC placement:** on the Thor cold plate (preferred, one TIM/heat path, no extra bracket) rather than free in the duct.
