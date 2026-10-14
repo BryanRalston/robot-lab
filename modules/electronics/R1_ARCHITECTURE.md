@@ -942,6 +942,74 @@ No failing connector was found among the cited parts, so **no mass change**. XT6
 **Mass.** 2 × 14 g = 28 g, against 2 × 14 g booked (R-076). **Net 0.000 kg.** Footprint is unchanged.
 **Thermal.** Dissipation at 2.9 W out and 84.5 % efficiency is ≈ 0.53 W per converter, against ≈ 0.53 W for an RP03 at the same load. The shoulder bay is unchanged against Thermal's 2.9 W case.
 
+
+### 18.2h Arbiter R-083 + Torso 1f3a99b (pack-main connector), 2026-10-14
+**Rulings recorded.**
+- IP2X guards: credited at half (−0.062 kg). **C1 is binding.**
+- Isolation: booked +0.054 kg.
+- Foot F/T SELV: +0.012 kg if Legs/Actuators confirm.
+- **RP06-11012SRAW adopted.** The 72 MHz and end-of-line restrictions are lifted (timing still goes to Controls).
+
+**(1) Würth 749014012: must sit at ≤ 60 °C** (Thermal is checking). Ready fallback: **Würth 7490140142** WE-LAN 10/100 Base-T, 1 port (Würth DS 7490140142):
+- 4000 Vrms/1 min
+- "Fulfils IEC 60601 requirements for **2×MOPP** for working voltage up to 250 Vrms" (2×MOPP = double/reinforced level)
+- Cl 5 mm / Cr 8 mm, cURus E535145 (UL 60601-1)
+- **−40 to +85 °C**
+- Mass is not in the DS, so it is taken as the same [DWG] envelope as 749014012 (≤ 6 g each, 5 off). **Δ mass 0 against the booking.**
+- Also seen, not chosen: Bourns SM13100EL, 4000 Vrms, −40…85 °C, but "supplemental insulation" only per the Bourns release.
+
+**(2) Elmo STO input current: NOT FOUND in the public guides.**
+- What the guides do say:
+  - MAN-G-TWIIG §4.6: "STO: 5V Logic Level, Opto isolated from the Control section". STO1/STO2 share STO_RET.
+  - The Gold Board Level Modules Hardware Manual, Ch. 9, holds the STO details. That chapter's text was not retrievable.
+  - The installation guide also says the control supply must be "separated from hazardous live voltages using reinforced or double insulation". This supports the R-078 design.
+- **Buffer design (sized without the current):**
+  - Assume ≤ 10 mA per STO opto input [EST, typical 5 V opto LED + series R]. That gives 32 drives × 2 = 64 inputs = 0.64 A.
+  - Bus-side 5 V STO supply: **RECOM RP06-11005SRAW** ×1 (RP06-RAW DS: 36–160 V, 5 V/1.2 A, 6 W, reinforced 3 kVAC, 14 g). At the 80 % derate (0.96 A) this covers 0.64 A with 50 % margin.
+  - Losing the supply asserts STO (torque off), so it fails safe.
+  - Each of the 10 ISOW7740F outputs drives one high-side P-MOSFET (SOT-23, Nexperia PMV48XP class, −20 V/3.5 A) feeding one STO line of a branch (≤ 16 inputs, 160 mA).
+  - SOT-23 mass is [DWG]: 2.9 × 1.3 × 1.0 mm × 2 g/cm³ ≈ 0.008 g, ×10 ≈ 0.0001 kg.
+  - The ISOW7740F integrated supply is now used only for the isolator, not for the load.
+  - **Mass +0.014 kg** (RP06-11005SRAW). It replaces nothing.
+- **Open:** cite Ch. 9 of the Gold Board Level Modules manual (STO input current and voltage window) before G1. If the input current is > 10 mA, re-check the RP06-11005 (≤ 0.96 A derated, i.e. ≤ 15 mA per input).
+
+**(3) Pack main: AS150U vs Anderson SBS75X (Torso 1f3a99b)**
+- **AS150U citation, quoted exactly.** Amass AS150U spec (product spec sheet, kkhobby.biz/guide/AS150U_M_spec.pdf; same text in the LCSC copy):
+  - "防护等级 GB/T4208 IP40" (degree of protection, GB/T 4208, IP40).
+  - "耐电压 UL1977 DC 500V"
+  - "额定电流 UL1977 主铜件：70A 8# 信号针：1A 24#"
+  - "爬电距离 GB/T2900.18 4mm"
+  - "插拔寿命 GB/T5095.1 100 times"
+  - "使用温度 -20℃ to 120℃"
+  - "2+4 满足智能电池使用需求" (2 power + 4 signal pins)
+- GB/T 4208 is the Chinese adoption of IEC 60529, so **the IP40 citation stands**. Two caveats:
+  1. The spec does not say whether IP40 applies mated or unmated. The **pack (live) side must be the shrouded female half**, to be verified on a sample with the IEC 60529 test finger.
+  2. "DC 500V" is listed as withstand voltage (耐电压), not as a rated working voltage. That still clears the ≥ 100 V criterion, but Torso's "no cited finger-safe rating" objection is only partly wrong.
+
+| | AS150U pair | SBS75X pair (Anderson) |
+|---|---|---|
+| voltage | DC 500 V withstand (Amass) | **600 V AC/DC rated**, 2200 VAC DWV (Anderson SBS DS) |
+| current | 70 A main, 140 A 1 min | 110 A (UL, 6 AWG), 75 A CSA/TÜV |
+| finger safe | IP40, GB/T 4208 (mated/unmated not stated) | **IP20, "Touch Safe … per IEC 60950"**, genderless, so both halves are finger-proof (Anderson product page) |
+| aux / sense | 4 signal pins, 1 A (24 AWG) | up to 4 aux, 20 A, **mate-last/break-first** (good for pre-charge sense and the fault loop) |
+| mating cycles | 100 | 10 000 |
+| temp | −20…120 °C | PC −20…105 °C; CR PBT version (PSBS75X) −40…120 °C |
+| mass | **41.4 g/pair** (harness.py, Rotorama listing) | **not published by Anderson**. Only a clone kit listing (Tufgo, 1.45 oz = 41 g per half); 2 halves ≈ 82 g + 2 aux pairs [not cited] |
+| wire | 8 AWG | 16–6 AWG (Torso 10 mm²) |
+
+- **Verdict: adopt the SBS75X (CR/PBT, PSBS75X).**
+  - It is the only option with a manufacturer-stated finger-safe rating on **both** halves (genderless) and a rated 600 V.
+  - Its aux contacts are mate-last/break-first, which pre-charge sense and the fault loop need.
+  - Its 10 000 mating cycles suit a swappable pack; the AS150U's 100 cycles are a real weakness.
+  - The AS150U's IP40 is cited, but its mated/unmated status is unknown, and "DC 500V" is a withstand figure, not a rating.
+- **Mass delta ≈ +0.041 kg** (82 − 41.4 g) **[clone-kit figure, NOT an Anderson citation]**. Anderson's catalogue mass must be cited before booking (vendor question for Bryan), or the part weighed on receipt. Book +0.041 kg provisionally.
+
+**§18.2h mass summary.**
+- STO supply: +0.014 (cited).
+- SBS75X: +0.041 (provisional; Anderson mass not cited).
+- Würth fallback: 0.
+- Foot F/T: +0.012 (if confirmed).
+
 ### 18.2 Checked and not counted
 - **STM32H7 drop:** never booked as a separate mass. The hand board was booked as a board lump (Arms), and Thermal A43C already assumed it dropped. **Saving 0.**
 - **`hand 24 V from wrist DC/DC` row (0.0128 kg):** 0.5 → 0.25 passes (0.6 K), but R-047 put the RP40s in the shoulder bay, so this row's route is stale. Actuators should re-book the row first. **Not counted.**
