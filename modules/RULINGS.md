@@ -649,3 +649,14 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
   - If the pad comes in over 0.10, it returns to the arbiter.
 - If T-030 fails even with the pad, the 8016 upgrade path in R-039(c) applies.
 - The A40 knee rerun is still pending.
+
+## R-043 (2026-10-14) Arms R4, D69 growth, shoulder bearing bounds, P-051 pad
+- **A42 is provisionally closed (Arms 440c7a8).** The wrist reaches the full P-026 ±60/±30 through a geometry change, so no ROM amendment is needed. CAD has to confirm the lug clearance, which lifts the G2 block pending CAD. The forearm envelope is unchanged.
+- **A43 sim passes.** The hand closes in 0.64–0.68 s with each rail at ≤40 W, so T4 close passes. The 30 N continuous grip is still at risk from sheath friction. New G5 test T-032: measure sheath friction, which must be <1.2.
+- **Arms mass line is 17.890 kg.** The +0.060 for the filters is already inside the R-041 0.146 hold, so nothing is counted twice.
+- **D70 and D71 stay as ruled in R-039.** D70's −0.426 is credited at half on its estimated housing share until CAD confirms it. D71 stays the CRBH 7013 A at +0.10. With IKO's bounds (radial 0.93–1.06 without a strategy), the R-042 fall mode plus the P-051 pad give an estimated radial safety factor of at least 1.4, so the 8016 is not needed unless T-030 fails. Torso and Arms must still supply the forward-fall pitch load (A45).
+- **P-051 is accepted at 0.100 kg** (EPP 80, −22.6% force). The EPP 60 fallback at 0.106 is pre-approved.
+- **D69 knee grew to +0.83 kg** (graphite femur straps) against the 0.65 booked. That's +0.18, plus +0.033 on the hip lever (0.123 vs 0.09). The credible total is about 66.36 kg, leaving a 0.14 reserve, **below the 0.30 floor**.
+  - Temporary waiver until the end of round 13. The **A40 knee rerun is blocking**.
+  - D69 hardware must be resized from the planned torque, not the failing WBC trace.
+  - New additions over 0.02 kg are frozen again until the reserve is back above 0.30.
