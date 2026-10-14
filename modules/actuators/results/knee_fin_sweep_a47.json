@@ -1,0 +1,233 @@
+{
+ "fin_h_mm": 20,
+ "rows": [
+  {
+   "knee": {
+    "L_knee": 0.0
+   },
+   "closest": [
+    [
+     10.5,
+     "L_knee trunnion bracket top plate (thigh) [EST]"
+    ]
+   ]
+  },
+  {
+   "knee": {
+    "L_knee": 15.0
+   },
+   "closest": [
+    [
+     11.5,
+     "L_knee trunnion bracket top plate (thigh) [EST]"
+    ]
+   ]
+  },
+  {
+   "knee": {
+    "L_knee": 30.0
+   },
+   "closest": [
+    [
+     12.4,
+     "L_knee trunnion bracket top plate (thigh) [EST]"
+    ]
+   ]
+  },
+  {
+   "knee": {
+    "L_knee": 45.0
+   },
+   "closest": [
+    [
+     13.1,
+     "L_knee trunnion bracket top plate (thigh) [EST]"
+    ]
+   ]
+  },
+  {
+   "knee": {
+    "L_knee": 60.0
+   },
+   "closest": [
+    [
+     13.5,
+     "L_knee trunnion bracket top plate (thigh) [EST]"
+    ]
+   ]
+  },
+  {
+   "knee": {
+    "L_knee": 75.0
+   },
+   "closest": [
+    [
+     13.6,
+     "L_knee trunnion bracket top plate (thigh) [EST]"
+    ]
+   ]
+  },
+  {
+   "knee": {
+    "L_knee": 90.0
+   },
+   "closest": [
+    [
+     13.4,
+     "L_knee trunnion bracket top plate (thigh) [EST]"
+    ]
+   ]
+  },
+  {
+   "knee": {
+    "L_knee": 105.0
+   },
+   "closest": [
+    [
+     12.8,
+     "L_knee trunnion bracket top plate (thigh) [EST]"
+    ]
+   ]
+  },
+  {
+   "knee": {
+    "L_knee": 120.0
+   },
+   "closest": [
+    [
+     11.8,
+     "L_knee trunnion bracket top plate (thigh) [EST]"
+    ],
+    [
+     97.9,
+     "L_tibia tube 7075 \u00f845x1.2"
+    ]
+   ]
+  },
+  {
+   "knee": {
+    "L_knee": 135.0
+   },
+   "closest": [
+    [
+     10.6,
+     "L_knee trunnion bracket top plate (thigh) [EST]"
+    ],
+    [
+     50.5,
+     "L_tibia tube 7075 \u00f845x1.2"
+    ],
+    [
+     51.7,
+     "L_tibia internal doubler sleeve 0.5x100 (r8)"
+    ],
+    [
+     123.6,
+     "L_ankle screw +y RV12 roller-screw rod \u00f812"
+    ]
+   ]
+  },
+  {
+   "knee": {
+    "L_knee": 0.0,
+    "L_hip_pitch": -105.0
+   },
+   "closest": [
+    [
+     10.5,
+     "L_knee trunnion bracket top plate (thigh) [EST]"
+    ],
+    [
+     58.3,
+     "L_knee trunnion bracket strut to femur [EST]"
+    ],
+    [
+     91.3,
+     "L_hip_pitch screw +y RV12 roller-screw rod \u00f812"
+    ],
+    [
+     91.3,
+     "L_hip_pitch screw -y RV12 roller-screw rod \u00f812"
+    ]
+   ]
+  },
+  {
+   "knee": {
+    "L_knee": 0.0,
+    "L_hip_pitch": 40.0
+   },
+   "closest": [
+    [
+     10.5,
+     "L_knee trunnion bracket top plate (thigh) [EST]"
+    ],
+    [
+     60.2,
+     "L_hip_pitch screw +y body (hip_pitch_body_x1)"
+    ],
+    [
+     60.2,
+     "L_hip_pitch screw -y body (hip_pitch_body_x1)"
+    ],
+    [
+     80.6,
+     "L_femur tube 7050-T7451 \u00f850x1.2 (R-031; P-047 wall 1.6 pending FEA)"
+    ]
+   ]
+  },
+  {
+   "knee": {
+    "L_knee": 135.0,
+    "L_hip_pitch": -105.0
+   },
+   "closest": [
+    [
+     10.6,
+     "L_knee trunnion bracket top plate (thigh) [EST]"
+    ],
+    [
+     50.5,
+     "L_tibia tube 7075 \u00f845x1.2"
+    ],
+    [
+     51.7,
+     "L_tibia internal doubler sleeve 0.5x100 (r8)"
+    ],
+    [
+     58.3,
+     "L_knee trunnion bracket strut to femur [EST]"
+    ]
+   ]
+  },
+  {
+   "knee": {
+    "L_knee": 135.0,
+    "L_hip_pitch": 40.0
+   },
+   "closest": [
+    [
+     10.6,
+     "L_knee trunnion bracket top plate (thigh) [EST]"
+    ],
+    [
+     50.5,
+     "L_tibia tube 7075 \u00f845x1.2"
+    ],
+    [
+     60.2,
+     "L_hip_pitch screw +y body (hip_pitch_body_x1)"
+    ],
+    [
+     60.2,
+     "L_hip_pitch screw -y body (hip_pitch_body_x1)"
+    ]
+   ]
+  }
+ ],
+ "worst": [
+  10.5,
+  "{'L_knee': 0.0, 'L_hip_pitch': -105.0}",
+  "L_knee trunnion bracket top plate (thigh) [EST]"
+ ],
+ "fin_clash": true
+}

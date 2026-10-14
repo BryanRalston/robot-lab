@@ -673,3 +673,34 @@ Retention at 1.2 m/s:
   - Board fit in the forearm: the R4 pack leaves 13.2 mm axial spare in the Ø66 bore. **The board dimensions are not in the repo**, so fit is unconfirmed. The envelope is a disc ≤ Ø65 × ≤ 13 mm.
 - **Drum fill (A):** a 10–11 mm bundle on the shoulder drums (r 40.5–53). Per-conductor bend r/OD ≥ 24 (SILI-E 0.25 at 1.7 mm OD). The drum width/depth is not in the model, so **fill is not verified**.
 - Harness booked total is unchanged at **1.9841 kg**. If (A) were booked: 2.382, **breaking the 2.00 kg contract by 0.382**.
+
+## D69 rev B (R-043 / Arbiter A46–A47): keep 2× TBM2G-07613D, add 0.05 m² of axial housing fins. −0.47 kg vs the +0.65 booked
+- **Script:** `knee_resize_r043.py`, which uses Controls' winding_model 2-node loop as in knee_id_r1.py.
+  - Traces: Legs ID walk_1p2_r7 (ref_ds25) and r4 carry_20kg_1p0. **Carry torque ×1.10 [EST]** as margin for the P-042×0.32 regen.
+  - 2× Elmo drive loss goes into the housing node (Thermal 9b9e169). 35 °C, 60 min. Worse knee of L/R.
+  - Cases: open (h 12), vented (A35, h 15), and closed cover (+35 K on the air side).
+- **Candidates:** all are datasheet TBM2G frames with hot Kt ≤ 0.085, so the 7565 rpm envelope is kept.
+  - 08508D was dropped: Km 0.203, which is no gain over 0.201.
+  - 07626D was dropped: hot Kt 0.156, so back-EMF doubles and it fails the 68 V envelope.
+
+| Option | Δkg per knee | τ_cont at 130 °C | walk open / vented | carry ×1.1 open / vented | closed (walk / carry) | Pass ≤ 120 |
+|---|---|---|---|---|---|---|
+| 07613D, no change | 0 | 83 | 137 / 120 | 174 / 149 | 180 / 221 | no |
+| 07613D + fins 0.025 m² (Thermal C) | 0.05 | 94 | 110 / 98 | 136 / 119 | 152 / 181 | no (carry open) |
+| **07613D + fins 0.05 m²** | **0.09 [EST, interpolated from Thermal 0.05 / 0.12 kg]** | **102** | **96 / 87** | **116 / 104** | — | **yes** |
+| 07613D + fins 0.07 m² | 0.12 | 107 | 89 / 82 | 107 / 96 | — | yes |
+| 07613D + fan, h 40 (Thermal D) | 0.02 + 1–2 W | 118 | 77 / 72 | 90 / 83 | 116 / 130 | yes (moving part, stall sensor, power) |
+| 09408D + fins 0.025 | 0.24 (motor 2 × 0.053 + housing scaled ×94/76 [EST]) | 122 | 95 / 85 | 110 / 98 | 133 / 150 | yes |
+| 08513D + fins 0.025 (old D69 motor) | 0.256 | 128 | 83 / 76 | 95 / 86 | 121 / 135 | yes |
+
+- **Selected: 2× 07613D (unchanged) + about 12 axial 6061 fins × 20 mm × 101 mm (+0.05 m² wetted). +0.09 kg per knee, +0.18 kg robot [EST].**
+  - **A46 net D69 = +0.18 kg robot, replacing +0.65 (and the earlier +0.83). That returns −0.47 kg to the reserve.**
+  - It is the lightest passive option that passes. The fan is lighter (+0.04 robot) but adds a moving part and 2–4 W, so it stays the fallback.
+- **Dropped:** the 08513D swap, the ø85 housing re-CAD, the shank spreader, the femur spreader and the GFTS strap.
+- **Closed covers fail every passive option,** so the knee stays uncovered or vented (P-026, A35).
+- **Drives:** the 2× Elmo drives go on the housing, inside the analysis basis.
+- **Carry margin:** 4 K. If Legs' regenerated carry shows knee RMS more than 10 % above r4, re-run. The step-up is 0.07 m² of fins (+0.03 kg per knee).
+- **A47 fin clash sweep (`knee_fin_sweep_a47.py`, model_v4, L_knee 0–135° in 15° steps with the screw stroke following, plus the hip_pitch −105/+40 corners):**
+  - The housing's free distance to non-mated parts is **10.5–13.6 mm to the knee trunnion bracket top plate (thigh) [EST part] on one face**. Everything else is ≥ 50 mm: tibia 50.5 at 135°, hip_pitch body 60, bracket strut 58, femur 81.
+  - So **no 20 mm fins on the bracket-facing sector** (≤ 9 mm there, for 1 mm clearance). The lost area goes onto the other faces, which have ≥ 50 mm of room, using 25 mm fins.
+  - The v5 fairing envelopes are not in model_v4. **Legs to confirm.**

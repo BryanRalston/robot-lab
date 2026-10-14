@@ -1,0 +1,197 @@
+{
+ "TBM2G-07613D + none": {
+  "dmass_per_knee": 0.0,
+  "Kt_hot": 0.081,
+  "Km": 0.201,
+  "tau_cont130": 83.2,
+  "cases": {
+   "walk_1p2_r7/open": {
+    "rms": 74.6,
+    "Tw60": 137.1,
+    "t120": 26.1
+   },
+   "walk_1p2_r7/vented": {
+    "rms": 74.6,
+    "Tw60": 119.5,
+    "t120": null
+   },
+   "walk_1p2_r7/closed": {
+    "rms": 74.6,
+    "Tw60": 180.1,
+    "t120": 13.1
+   },
+   "carry_20kg_1p0_r4 x1.10/open": {
+    "rms": 85.9,
+    "Tw60": 174.1,
+    "t120": 14.1
+   },
+   "carry_20kg_1p0_r4 x1.10/vented": {
+    "rms": 85.9,
+    "Tw60": 148.8,
+    "t120": 16.4
+   },
+   "carry_20kg_1p0_r4 x1.10/closed": {
+    "rms": 85.9,
+    "Tw60": 220.7,
+    "t120": 9.1
+   }
+  },
+  "pass_open_vented": false
+ },
+ "TBM2G-07613D + fins": {
+  "dmass_per_knee": 0.05,
+  "Kt_hot": 0.081,
+  "Km": 0.201,
+  "tau_cont130": 94.1,
+  "cases": {
+   "walk_1p2_r7/open": {
+    "rms": 74.6,
+    "Tw60": 110.4,
+    "t120": null
+   },
+   "walk_1p2_r7/vented": {
+    "rms": 74.6,
+    "Tw60": 98.3,
+    "t120": null
+   },
+   "walk_1p2_r7/closed": {
+    "rms": 74.6,
+    "Tw60": 152.2,
+    "t120": 13.4
+   },
+   "carry_20kg_1p0_r4 x1.10/open": {
+    "rms": 85.9,
+    "Tw60": 136.0,
+    "t120": 19.2
+   },
+   "carry_20kg_1p0_r4 x1.10/vented": {
+    "rms": 85.9,
+    "Tw60": 119.0,
+    "t120": null
+   },
+   "carry_20kg_1p0_r4 x1.10/closed": {
+    "rms": 85.9,
+    "Tw60": 180.5,
+    "t120": 9.1
+   }
+  },
+  "pass_open_vented": false
+ },
+ "TBM2G-07613D + fan": {
+  "dmass_per_knee": 0.02,
+  "Kt_hot": 0.081,
+  "Km": 0.201,
+  "tau_cont130": 118.4,
+  "cases": {
+   "walk_1p2_r7/open": {
+    "rms": 74.6,
+    "Tw60": 76.9,
+    "t120": null
+   },
+   "walk_1p2_r7/vented": {
+    "rms": 74.6,
+    "Tw60": 72.2,
+    "t120": null
+   },
+   "walk_1p2_r7/closed": {
+    "rms": 74.6,
+    "Tw60": 116.0,
+    "t120": null
+   },
+   "carry_20kg_1p0_r4 x1.10/open": {
+    "rms": 85.9,
+    "Tw60": 89.7,
+    "t120": null
+   },
+   "carry_20kg_1p0_r4 x1.10/vented": {
+    "rms": 85.9,
+    "Tw60": 83.4,
+    "t120": null
+   },
+   "carry_20kg_1p0_r4 x1.10/closed": {
+    "rms": 85.9,
+    "Tw60": 130.4,
+    "t120": 9.7
+   }
+  },
+  "pass_open_vented": true
+ },
+ "TBM2G-09408D + fins": {
+  "dmass_per_knee": 0.24,
+  "Kt_hot": 0.056,
+  "Km": 0.263,
+  "tau_cont130": 122.0,
+  "cases": {
+   "walk_1p2_r7/open": {
+    "rms": 74.6,
+    "Tw60": 94.8,
+    "t120": null
+   },
+   "walk_1p2_r7/vented": {
+    "rms": 74.6,
+    "Tw60": 85.3,
+    "t120": null
+   },
+   "walk_1p2_r7/closed": {
+    "rms": 74.6,
+    "Tw60": 133.2,
+    "t120": 24.2
+   },
+   "carry_20kg_1p0_r4 x1.10/open": {
+    "rms": 85.9,
+    "Tw60": 110.3,
+    "t120": null
+   },
+   "carry_20kg_1p0_r4 x1.10/vented": {
+    "rms": 85.9,
+    "Tw60": 98.0,
+    "t120": null
+   },
+   "carry_20kg_1p0_r4 x1.10/closed": {
+    "rms": 85.9,
+    "Tw60": 150.1,
+    "t120": 16.4
+   }
+  },
+  "pass_open_vented": true
+ },
+ "TBM2G-08513D + fins": {
+  "dmass_per_knee": 0.256,
+  "Kt_hot": 0.085,
+  "Km": 0.271,
+  "tau_cont130": 127.5,
+  "cases": {
+   "walk_1p2_r7/open": {
+    "rms": 74.6,
+    "Tw60": 83.2,
+    "t120": null
+   },
+   "walk_1p2_r7/vented": {
+    "rms": 74.6,
+    "Tw60": 75.8,
+    "t120": null
+   },
+   "walk_1p2_r7/closed": {
+    "rms": 74.6,
+    "Tw60": 121.3,
+    "t120": 46.1
+   },
+   "carry_20kg_1p0_r4 x1.10/open": {
+    "rms": 85.9,
+    "Tw60": 95.1,
+    "t120": null
+   },
+   "carry_20kg_1p0_r4 x1.10/vented": {
+    "rms": 85.9,
+    "Tw60": 85.6,
+    "t120": null
+   },
+   "carry_20kg_1p0_r4 x1.10/closed": {
+    "rms": 85.9,
+    "Tw60": 134.5,
+    "t120": 23.3
+   }
+  },
+  "pass_open_vented": true
+ }
+}
