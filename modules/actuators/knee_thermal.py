@@ -1,4 +1,4 @@
-"""D68 knee thermal fix check (light, numpy). Reuses RL Controls A40 2-node model (controls/thermal/winding_model.py,
+"""D69 knee thermal fix check (light, numpy). Reuses RL Controls A40 2-node model (controls/thermal/winding_model.py,
 same Cw/Ch/Rwh/Rha conventions) on the WBC 1.2 m/s cruise trace looped 60 min at 35 C, and adds TBM2G iron loss
 (iron_loss.json fit, motor speed from legs walk_1p2 knee velocity). Options: base, (a) 2x TBM2G-08513D,
 (b) conductive shank path Rha x0.5 [EST], (d) forced air h 12->40 W/m2K [EST], (a)+(d).  -> results/knee_thermal.json"""

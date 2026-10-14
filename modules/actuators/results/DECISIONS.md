@@ -573,3 +573,27 @@ Retention at 1.2 m/s:
 - Ratio 80/100 at the lowest published speed of 500 r/min: about **84 % at 25 °C** (about 74 % at 0 °C).
 - Below rated torque, multiply by Fig. 9: about 0.9 at 0.5 Trated and about 0.44 at 0.1 Trated.
 - **Efficiency at stall / 0 r/min (true hold) and back-driving efficiency: not found** in the HD catalog. For hold copper loss, Thermal should take the motor torque as T_out/(N·η), with η ≤ 0.84 as the conservative bound [EST].
+
+## D69 (Controls A40 / Robot Lab) Knee thermal fix: 2× TBM2G-08513D + conductive shank heat path
+- **Problem:** with the 1.2 m/s WBC cruise looped at 35 °C (`knee_thermal.py`, the Controls A40 2-node model plus iron loss of 4.6 W per joint), the current 2× 07613D knee reaches 120 °C at **7.4–8.5 min** and runs away (τ_cont 83 vs RMS 105–108 N·m).
+
+| Option | τ_cont N·m | To 120 °C | Tw at 60 min | Δmass per knee | Verdict |
+|---|---|---|---|---|---|
+| (a) 2× TBM2G-08513D | 113 | 37–51 min | 122–128 °C | motor +0.164 (2 × (0.403 − 0.321), datasheet); housing ø85 stator vs ø76 +0.04 [EST] | not enough alone |
+| (b) conductive path into shank, Rha ×0.5 [EST] | 104 | 9.6–12 min | 140–149 °C | strap/gap pad +0.03 [EST] | not enough alone |
+| (c) more lever/screw ratio | — | — | — | — | **infeasible:** motor is at 7565 rpm vs the 7600 cap at the 13.3 rad/s stairs need. The 1.3× ratio needed puts it over Nmax 8000 |
+| (d) forced air, h 12 → 40 [EST], Sunon PF40281B1 42 g / 6.12 W (Electronics f4e839c) | 118 | never | 110–116 °C | +0.042 fan + duct [EST] | marginal; fails once Thermal's +35 K cover penalty is added; adds a fan failure mode |
+| **(a)+(b)** | **141** | **never** | **87–91 °C** (Tss ≈ 92–95) | **≈ +0.23 per knee, +0.47 robot [part EST]** | **selected** |
+| (a)+(d) | 161 | never | 74–76 °C | ≈ +0.25 per knee | fallback if (b) can't reach Rha/2 |
+
+- **Why (a)+(b):**
+  - The 08513D has a similar hot Kt to the 07613D (0.085 vs 0.081 N·m/A), so the voltage envelope and rpm hardly change. ω30 drops by about 5 %, roughly 16.0 → 15.2 vs the 13.3 need [scaled]; `size.py` envelope re-run pending.
+  - Km goes 0.201 → 0.271 (−45 % copper loss) and Rth 1.85 → 1.80.
+  - It is passive, with no fan, and keeps 30 K of margin to the derate at 35 °C.
+- **Interfaces:**
+  - Legs: knee twin housing stator bore ø76 → ø85 frame (D59 merged housing re-CAD; centre web check still open per T&R #8), plus a bolted conductive pad face to the shank.
+  - Thermal: confirm a shank path that halves Rha (≥ 1.2 W/K added conductance) and the covered case.
+  - Electronics: knee drives chassis-mount to the housing (about 7 W each, over the 5.5 W flat-heatsink limit).
+- **Cost:** TBM2G list prices are not public. Both frames sit in the same ~$0.9–1.5k [EST] band, so the delta is unquantified.
+- **Mass:** +0.47 kg. Needs Arbiter funding under R-031 §11, since no credit is available until A12; it could come from P-027 wrist savings (−1.371) once credited.
+- **Also:** specify thermal-device code `A` (PT1000) on all TBM2G (THERMAL_DATA_PACK §2).

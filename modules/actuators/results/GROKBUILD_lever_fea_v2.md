@@ -88,3 +88,16 @@ Convergence passes when (a) or (b) changes by less than 5% over the last two ref
   - Report the cap-to-shaft-end gap (≥ 0.5 mm per side).
 - Proof-test strain-gauge locations, updated to the converged hot spot
 - **If G2 fails:** increase d0 in 2 mm steps (about 4 g/mm) up to 36. If it still fails, increase b to 28.
+
+
+## AMENDMENT 1 (2026-10-14, RL Actuators): T&R 8daecff fatigue finding, which this brief did NOT cover
+The fatigue criterion above (allowable 127 MPa, duty = 0.5 × peak at R ≈ 0) is **superseded**. It is unconservative on three counts:
+- Se: 127 → **87 MPa** (T&R: 159 × 0.75 machined × 0.9 size × 0.814 at 99 % reliability; R-031 §6).
+- Load: walk 1.2 m/s hip_pitch peak is 203 N·m, which is 0.447 × the 454.2 N·m design peak (`legs/results/walk_1p2.json`).
+- Ratio: the walk load is **fully reversed (R = −1)**, not R ≈ 0.
+
+**New pass criterion 2:** hot-spot von Mises amplitude at 0.447 × the design pin load (2030 N per pin) ≤ **Se/1.5 = 58 MPa**. That is about a ≤ 130 MPa peak at the design load. Report it at the converged level.
+- The G2 geometry as briefed (target SF_yield 1.5, peak about 335 MPa) would give about 150 MPa amplitude, so **it will fail this criterion**.
+- Per R-031 §6, **Legs owns the fix (P-046..P-050)**: a bigger 7075 section first, and steel only if 7075 grows by more than +0.25 kg.
+- The "If G2 fails" growth steps (d0 to 36, b to 28) are unlikely to close a 2.6× gap. Legs should provide the section family to sweep.
+- Optional: a finite-life case with a cited S-N curve and shot-peen.
