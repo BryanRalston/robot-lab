@@ -42,3 +42,19 @@ Option A, sensitivity: even if the bulkhead reaches 85 °C (h −50 %, shoulder 
 ## 4. Open
 - Bulkhead geometry/temperature is [EST] until Torso CAD exists; J-T2 (chest CFD) should include the shoulder bays.
 - The continuous hand duty profile from Arms is still TBD. This sign-off covers the worst case, 2 × 40 W continuous.
+
+## Update (R-047/R-051, Electronics 10107a7): shoulder-bay air vs the RP40 bare derating (full to 60 °C, 0 at 105 °C)
+The hand board has moved to the forearm (A43C), so the bay heat is the 2× RP40 losses only: 8.9 W at 40 W/rail continuous.
+Most of that goes into the bulkhead through the option-A pad; ≈ 2 W [EST] convects directly to the bay air. The bulkhead is ~69 °C, and is bulkhead-to-bay-air h 10 × 0.02 m² [EST].
+Bay air balance: ṁc_p(T − 35) = 0.2(T_bulkhead − T) + 2.
+
+| case | vent flow (≥ 25 cm² in/out, out of the Thor exhaust) | bulkhead | bay air | margin to 60 °C | RP40 rating |
+|---|---|---|---|---|---|
+| **walking** | ram 0.6 L/s (0.69 W/K) | 69 °C | **≈ 45 °C** | **15 K** | full 40 W/rail |
+| **still air** | chimney ≈ 0.2 L/s (0.23 W/K) | ≈ 69–80 °C (outer h drops) | **≈ 56–61 °C** | **+4 to −1 K** | ≥ 98 % (bare curve 2.2 %/K) |
+
+- **Walking: confirmed ≤ 60 °C.**
+- **Still air: marginal.** Sustained 2× 40 W in still air can sit up to ~1 K into the derating region, which costs ≤ 2 % output. In practice this is moot: a 30 N hold draws 11–18 W/rail, and the forearm ladder caps flexor current.
+- **Bay vent sensor:** derate the per-rail cap along the RECOM curve above 60 °C bay air. A TMP/NTC in the bay may replace the 90/100 °C bracket NTC rule above.
+- The case is still ≈ 71 °C vs the 105 °C limit, so the d4cca06 sign-off holds.
+- The RP40-11024SFR derating curve itself is unpublished (datasheet note 8); RECOM must confirm it.

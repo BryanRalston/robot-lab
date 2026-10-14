@@ -23,3 +23,31 @@ Transient model `a43c_board.py` → `results/a43c_board.json`, run for 4 h:
 - H-bridge self-heating is small: 0.27 W per bridge at 0.952 A gives about +12 K. Junctions stay ≤ 100 °C with the ladder.
 - **Part grade: 125 °C (industrial −40…125 / AEC-Q100 Grade 1)** for the MCU, LAN9252, H-bridges and passives. With the ladder the board runs at 88 °C, which is only 17 K from a 105 °C rating, and a derate or sensor fault in still air takes the board to 135 °C. 105 °C parts are not recommended.
 - Bench G5: thermocouples on the shell, board and one flexor case at the 30 N hold, walking and in still air.
+
+## Update: Electronics 10107a7 §16.5 board (XMC4300, DRV8874-Q1, X7R, HW NTC cutoff ~110 °C)
+**STM32H7:** Electronics lists it as optional (STM32H725/735VGT3 if kept). **Thermal assumes it is dropped**. If it is kept, add about 0.5–0.8 W (25 °C) to 1.2 W (125 °C leakage) [EST], which still fits inside the 4 W total.
+
+**Power budget**, typ / hot at 85–125 °C. [EST] values come from the XMC4000/DP83822/DRV8874 datasheet class figures and must be confirmed against the XMC4300 datasheet IDD table:
+
+| item | typ | hot |
+|---|---|---|
+| XMC4300 at 144 MHz, EtherCAT active | 0.33 W | 0.6 W (leakage roughly doubles from 85 to 125 °C) |
+| 2× EtherCAT PHY (DP83822 class) | 0.4 W | 0.45 W |
+| buck/LDO losses + TMP117/NTC/comparator | 0.3 W | 0.35 W |
+| 11× DRV8874-Q1 quiescent + 20 kHz switching | 0.9 W | 1.0 W |
+| H-bridge conduction, 6 flexors at 0.952 A (0.70 A) | 1.6 W | (0.9 W) |
+| **total at the 30 N hold** | **≈ 3.5 W** | **≈ 4.0 W** (≈ 3.3 W at 0.70 A) |
+
+- **≤ 4 W, so the board power is unchanged and no rerun is needed.**
+- The 4 W case in `results/a43c_board.json` stands.
+- With the adopted ladder (55/70/80/88 → 0.84/0.70/0.50/0.35/0 A, = the tuned case):
+  - walking: shell 59.8 °C, board 68 °C;
+  - still air: shell 70.3 °C, board 78 °C;
+  - H-bridge Tj ≤ 91 °C.
+
+**HW NTC cutoff at 110 °C board (latching, 10 K hysteresis): placement is sensible.**
+- **Normal margin:** 32 K above the normal still-air board (78 °C).
+- **Top-step margin:** 14 K above the board at the top ladder step (shell 88 + 4 W × 2 K/W ≈ 96 °C).
+- **Fault response:** it trips only on a ladder or sensor fault. On trip the H-bridge Tj is ≈ 122 °C, which is still < 125 °C. The 125 °C parts keep 15 K.
+- **Murata NCP15 range:** confirm ≥ 125 °C, as Electronics flagged.
+- **Tighter option:** if margin to Tj is wanted, 105 °C also works and sits 9 K above the top step.
