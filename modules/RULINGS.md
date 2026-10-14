@@ -812,3 +812,9 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
 - **One pad design:** this core is used with **one** mount. ID's R6 roll-output mount and Materials' D-A housing-face mount must converge. ID and Arms pick the mount from the clearance data: R6's 11 mm upper-arm concern against the 67.5 mm standout. Doubler FEA on the bryan PC goes ahead for the chosen mount.
 - Mass booked **0.100** until the unified design is measured (Materials' D-A figure is 0.087).
 - Freeze conditions: G5 rate factor measured within 1.10–1.30, and the 0.72 usable-stroke fraction verified.
+
+## R-069 (2026-10-14) Hip lever L47 reconciled (Legs 536a451)
+- L47 measured on one body: 0.4642 kg per lever, **+0.430 robot** against the 0.2491 baseline. R-056's booking is confirmed, so there's no credit. Legs' +0.118 is withdrawn.
+- Reserve stays ~0.12, so the **R-066 mass-down pass is triggered**. Robot Lab runs it across modules (cited or measured only) before R13 closes, with a target of reserve >=0.30 (at least 0.18 recovered).
+- First candidate: **L47 shape optimisation** (topology/FEA on the bryan PC) to the R-031 <=58 MPa rule plus G3 fatigue. The lever almost doubled, and a 30–40% cut would recover ~0.13–0.17.
+- The freeze on additions >0.005 continues.
