@@ -91,12 +91,12 @@
    "cf_kg": null
   },
   {
-   "panel": "shoulder impact pad 40 mm EPP 80 + sleeve (R-042)",
+   "panel": "shoulder impact pad: 5052 HC 3.1 pcf cartridge + 10 mm EPP (R-042 R2)",
    "P": "P-051 (proposed)",
-   "material": "EPP 80 g/L + TPU-nylon sleeve",
-   "area_m2_side": 0.0109,
+   "material": "Al honeycomb + EPP 80 + PC backing",
+   "area_m2_side": 0.0084,
    "panels": 2,
-   "kg": 0.1,
+   "kg": 0.095,
    "cf_kg": null,
    "note": "booked separately at R-042 cap 0.10; not in the P-020/P-022..25 delta"
   }

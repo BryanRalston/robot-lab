@@ -1,6 +1,27 @@
-# Shoulder impact pad, 40 mm (R-042), RL Industrial Design, 2026-10-14
+# Shoulder impact pad (R-042): R2 honeycomb cartridge, RL Industrial Design, 2026-10-14
 **P-number: P-051 (proposed). R-042 approves the pad and its cap but assigns no P-number; the highest P on main is P-050.** Numbers come from `shoulder_pad.py` → `shoulder_pad.json`. All [EST] until Materials confirms the foam data and Controls runs T-030.
 
+## R2 re-size (Materials 5f8f149, `materials/R042_EPP_SHOULDER.md`): R1 40 mm EPP 80 FAILS
+R1 assumed a constant 0.65 MPa crush. On the real ARPRO 5170 curve (0.50/0.70/1.60 MPa at 25/50/75 %, rate ×1.45) 220 J peaks at about 19.5 kN → **≈ 1.17 kN·m vs 550 allowed**. Re-sized in `shoulder_pad.py` → `shoulder_pad.json`.
+Requirement: 220 J at peak F ≤ 550/0.060 = **9.17 kN**. EPP: force checked at RT × rate, stroke at hot (40 °C pad face, ×0.70) × rate, up to 65 % strain. Honeycomb: pre-crushed, constant crush, stroke 0.72 t, rate ×1.10, designed at 8.3 kN → 9.13 kN peak (548 N·m). All masses include the PC backing (8 g, Materials), sleeve and 5 mm air gap to the 69 °C bulkhead in the stack. Honeycomb crush strengths are [EST] catalog-class values: **Materials to cite**.
+
+| option | element | area cm² | thick mm | stack from bulkhead mm | pair kg | vs 0.10 cap | peak / moment | notes |
+|---|---|---|---|---|---|---|---|---|
+| R1 | EPP 80, 40 mm | 109 | 40 | 47 | 0.116 | +0.016 | ~19.5 kN / 1.17 kN·m | **FAIL** |
+| (a) | EPP 80 | 51 | **119** | 126 | 0.136 | +0.036 | 9.17 / 550 | passes but +80 mm proud per side (shoulder width +160 mm): unacceptable envelope; single-use > 50 % strain |
+| (b1) | 5052 HC 4.5 pcf + 10 mm EPP + 0.5 mm Al spreader | 46 | 37 (+10) | 55 | **0.061** | −0.039 | 9.13 / 548 | lightest; small footprint (~68 mm sq), weak to oblique hits > ~15° |
+| **(b2)** | **5052 HC 3.1 pcf + 10 mm EPP + spreader** | **84** | **37 (+10)** | **55** | **0.095** | **−0.005** | **9.13 / 548** | **recommended**: ~92 mm sq covers the tuck contact; replaceable cartridge after a hard fall |
+| (b3) | 5052 HC 2.3 pcf | 122 | 37 | 55 | 0.122 | +0.022 | 9.13 / 548 | over cap |
+| (b4) | 5052 HC 1.6 pcf | 243 | 37 | 55 | 0.200 | +0.100 | 9.13 / 548 | over cap |
+| (b5) | 3003 HC 3.1 pcf | 91 | 37 | 55 | 0.103 | +0.003 | 9.13 / 548 | marginal over |
+| (c) | EPP 80 for 80 J (Controls cut) | 51 | 43 | 50 | 0.062 | −0.038 | 9.17 / 550 | needs Controls to cut shoulder energy 220 → 80 J (−64 %); not credible from A44 today |
+| (d) | HC 3.1 core (200 J) + 15 mm EPP | 84 | 48 | 56 | 0.103 | +0.003 | 9.13 / 548 | EPP outer is multi-hit for small knocks; marginal over |
+
+**Recommendation: (b2) 5052 honeycomb 3.1 pcf, 84 cm² × 37 mm, pre-crushed, in a replaceable cartridge (PC backing, 0.5 mm Al spreader, 10 mm EPP 80 cosmetic face, sewn sleeve), 0.095 kg pair (−0.005 vs cap).** Peak 9.13 kN = 548 N·m: it meets 550 with the only margin being the 10 % design factor. (b1) is the fallback if mass is tight and Controls confirms near-normal impact. Envelope: 55 mm proud of the bulkhead vs 47 mm in R1 (+8 mm per side).
+- **Arbiter re-rule: not needed** if (b2) holds ≤ 0.10. It needs an Arbiter note that the pad is **single-use** (cartridge swap after a hard fall, T8 "replaceable pads"), and Materials must cite the honeycomb crush strength. If the cited 3.1 pcf crush strength is below about 0.85 MPa the area grows and the pair goes over 0.10 → re-rule.
+- **Controls energy cut: not needed** for (b). Only option (c) needs it. Controls still has to confirm in T-030 that shoulder energy ≤ 220 J and that the impact is within about 15° of the pad axis.
+
+## R1 analysis (superseded, kept for record)
 ## Basis (Controls A44, `controls/fall/A44_side_fall.md`)
 - Side fall from standing at 66.21 kg: E = m·g·0.98 = **637 J**. With the A44 strategy (knee drop, arm tuck, hip-first lean), shoulder energy is capped at **220 J**.
 - Constant-force crush over s = 0.7·t + 3 mm (v3 `fall_model`). Bearing moment = F × 60 mm.

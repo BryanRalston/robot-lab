@@ -22,7 +22,7 @@ Hull areas now come from the final `legs/results/v5/ENVELOPES_FOR_ID.md`: knee_c
 **Knee cap vs thigh fairing clearance (Legs):** no overlap from 0 to 135°. Minimum keep-out gap is **10.2 mm at 135°** (22 mm from 0 to 105°). After the D69 ø85 knee housing (+4.5 mm radial) it is **≈ 5.7 mm [EST]**, still above the 3 mm PC flex gap. Recheck after the D69 re-CAD.
 
 ## Shoulder impact pad (R-042, P-051 proposed): see `SHOULDER_PAD.md`
-40 mm EPP 80 g/L pad, about 109 cm² per side, in a sewn sleeve on the shoulder bulkhead. **0.100 kg for the pair, at the R-042 cap (0.10, booked separately)**, about 22.6 % less force. Arm shells stay deferred.
+R2: 40 mm EPP failed against the real crush curve (Materials). Now a 5052 honeycomb 3.1 pcf cartridge, 84 cm² × 37 mm, with a 10 mm EPP face. **0.095 kg pair (cap 0.10)**, 548 N·m peak, 55 mm stack. Arm shells stay deferred.
 
 ## A29 panel layout and mould list (owner: Industrial Design per R-029)
 Status: layout from Legs keep-out hulls + model_v4 dims, **not yet measured on v4 CAD** (areas [EST]). Delta check: itemized `modules/design/cover_set_v5.json` = **−0.124 kg vs booked (−0.184 CF thigh): PASS**; P-022 +20 % flagged.
