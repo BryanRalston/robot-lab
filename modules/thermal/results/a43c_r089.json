@@ -1,0 +1,62 @@
+{
+ "Pb4.3|walk": {
+  "Te": 75.4,
+  "Te_cl": 64.8,
+  "Tw": 88.9,
+  "Ts": 58.1,
+  "I_sust": 0.7,
+  "board_Rbs2": 66.7,
+  "board_clamped_Rbs0.8": 61.5,
+  "MCU_Tj_unclamped": 78.7
+ },
+ "Pb4.3|still": {
+  "Te": 93.0,
+  "Te_cl": 83.4,
+  "Tw": 102.2,
+  "Ts": 76.4,
+  "I_sust": 0.7,
+  "board_Rbs2": 85.0,
+  "board_clamped_Rbs0.8": 79.8,
+  "MCU_Tj_unclamped": 97.0
+ },
+ "Pb4.6|walk": {
+  "Te": 75.3,
+  "Te_cl": 65.2,
+  "Tw": 88.8,
+  "Ts": 58.5,
+  "I_sust": 0.7,
+  "board_Rbs2": 67.7,
+  "board_clamped_Rbs0.8": 62.2,
+  "MCU_Tj_unclamped": 79.7
+ },
+ "Pb4.6|still": {
+  "Te": 93.8,
+  "Te_cl": 84.1,
+  "Tw": 103.1,
+  "Ts": 77.2,
+  "I_sust": 0.7,
+  "board_Rbs2": 86.4,
+  "board_clamped_Rbs0.8": 80.9,
+  "MCU_Tj_unclamped": 98.4
+ },
+ "Pb4.15|walk": {
+  "Te": 75.4,
+  "Te_cl": 64.6,
+  "Tw": 88.9,
+  "Ts": 57.9,
+  "I_sust": 0.7,
+  "board_Rbs2": 66.2,
+  "board_clamped_Rbs0.8": 61.2,
+  "MCU_Tj_unclamped": 78.2
+ },
+ "Pb4.15|still": {
+  "Te": 92.6,
+  "Te_cl": 83.0,
+  "Tw": 101.8,
+  "Ts": 76.1,
+  "I_sust": 0.7,
+  "board_Rbs2": 84.4,
+  "board_clamped_Rbs0.8": 79.4,
+  "MCU_Tj_unclamped": 96.4
+ }
+}

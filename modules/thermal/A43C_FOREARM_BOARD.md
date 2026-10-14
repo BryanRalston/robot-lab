@@ -74,3 +74,30 @@ MCU Tj = board + 0.9 W × RthJB ≈ 10 K/W (LQFP-144 with board copper [EST]; Rt
 - The I²t at 0.84 A RMS remains the motor guard; the ladder is the board/shell guard.
 
 **Shoulder bay (RP40s only):** 3.6 W continuous / 9 W peak per side vs the 8.9 W continuous used in the A43 update. Bay air ≈ **40 °C walking / ≈ 48–53 °C still air** (scaled), so ≥ 7 K margin to the 60 °C RP40 derate. d4cca06 holds with more margin.
+
+## Update R-089 (Arms & Hands): XMC4800 at 144 MHz, 4.6 W hot; forearm 287 mm
+**Setup:**
+- Forearm skin area scaled 270 → 287 mm (Ø70): shell → air 1.32 K/W walking, **2.26 K/W still air**.
+- Ladder B (R-076): 55/82/88 °C → 0.84/0.70/0.50/0 A.
+- Flexors and ENX caps clamped to the shell.
+- 30 N hold from cold, 4 h, peaks.
+- Board → shell 2 K/W as mounted, or 0.8 K/W with a gap pad to a shell boss [EST].
+- MCU Tj = board + 1.2 W × 10 K/W.
+
+Model: `r073_encoder.py` basis; results in `results/a43c_r089.json`.
+
+| board power | env | shell peak | board (as mounted / clamped) | MCU Tj | ENX cap (clamped) | flexor winding | sustained |
+|---|---|---|---|---|---|---|---|
+| 4.3 W (prior) | still | 76.4 | 85.0 / 79.8 | 97 | 83.4 | 102 | 0.70 A, ≥ 22 N |
+| **4.6 W (144 MHz)** | **still** | **77.2** | **86.4 / 80.9** | **98** | **84.1** | 103 | 0.70 A, ≥ 22 N |
+| 4.6 W | walk | 58.5 | 67.7 / 62.2 | 80 | 65.2 | 89 | 0.70 A |
+| ≈ 4.15 W (72–96 MHz [EST −0.15 to −0.45 W]) | still | 76.1 | 84.4 / 79.4 | 96 | 83.0 | 102 | 0.70 A |
+
+**Verdict:**
+- **YES: at 144 MHz the board stays ≤ 90 °C (86.4 °C, 3.6 K margin) and the encoders stay ≤ 90 °C (84.1 °C, 5.9 K margin)** in still air at 35 °C.
+- The longer forearm's extra skin area offsets most of the +0.29 W.
+- Margins: MCU Tj 98 °C vs 125 °C parts, and ≥ 23 K below the 110 °C NTC.
+- **Neither a board clamp nor a lower clock is required.**
+  - **Recommended anyway: a gap pad from the MCU/H-bridge area to a shell boss.** It takes the board to 81 °C (9 K margin) for ≈ 1–2 g.
+  - A lower clock (72–96 MHz) buys only ≈ 2 K.
+  - The 3.6 K unclamped margin is thin against the [EST] board → shell resistance.
