@@ -1,0 +1,41 @@
+{
+ "P_W": {
+  "walk": 712.1,
+  "carry-walk": 772.1,
+  "stand": 262.7,
+  "pick/place": 309.9,
+  "idle": 252.7
+ },
+ "tasks": {
+  "T-A 5 m tote": {
+   "cycle_s": 52,
+   "mean_W": 380.4,
+   "h_typ": 3.83,
+   "h_binned": 3.75
+  },
+  "T-B 10 m tote": {
+   "cycle_s": 62,
+   "mean_W": 438.7,
+   "h_typ": 3.32,
+   "h_binned": 3.25
+  },
+  "T-C 20 m tote": {
+   "cycle_s": 82,
+   "mean_W": 512.7,
+   "h_typ": 2.84,
+   "h_binned": 2.78
+  },
+  "T-D shelf pick": {
+   "cycle_s": 307,
+   "mean_W": 372.0,
+   "h_typ": 3.92,
+   "h_binned": 3.83
+  },
+  "T-E kitting": {
+   "cycle_s": 190,
+   "mean_W": 313.0,
+   "h_typ": 4.66,
+   "h_binned": 4.55
+  }
+ }
+}

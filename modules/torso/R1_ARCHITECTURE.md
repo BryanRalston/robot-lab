@@ -267,6 +267,24 @@ Datasheet: https://www.ti.com/lit/ds/symlink/bq77216.pdf . Per IC: 3–16S, inde
 - **BUS_SENSE_STATUS** (Electronics 413d80f): drive-side bus sense frame. Rule: the BMS host closes the FETs, and then the contactor, **only after a passing pre-check that agrees between both channels, within 30 ms** of the close command. Otherwise it aborts and latches the fault.
 - **O-T5 plan (Controls):** 3–5 reference tasks are timed into a task timeline. That timeline will replace the 20/80 [EST] duty used in §13.5 for the mixed-runtime rating.
 
+## 18. R1.6: R-069 mass-down, vents, O-T5 power
+### 18.1 Savings. Cited (datasheet) vs [EST]
+| item | Δ kg | evidence | status |
+|---|---|---|---|
+| LEV100A4ANG 190 g cited vs 0.200 booked | −0.010 | TE datasheet 6.7 oz / 190 g | **cited** |
+| pre-charge HS50 47R → HS25 47R | −0.0125 | Arcol TI008 unit weights 25 → 12.5 g. Pulse: 159 J / 10.7 J·K⁻¹ = 15 K; 150 W peak = 6× rating < the 10× / 1 s point; energy 159 J < 250 J (10 × 25 W × 1 s) | **cited** |
+| contactor LEV100 → **TE KILOVAC EV100** (100 A cont, 750 VDC max switching, economized 12 V coil, 130 g; https://www.evwest.com/support/ev100-specsheet.pdf) | −0.060 | datasheet 130 g vs 190 g | **cited mass, but coil hold 0.25 A × 12 V = 3.0 W** vs 1.5 W [EST] economized LEV100 → **+1.5 W breaks the +0.74 W walk margin**. Arbiter decision (or offset); not counted |
+| PDB / pack-lead gauge | 0 | pack leads sit in the Actuators harness line; no torso-booked copper to resize | none |
+| bulkhead 12 → 11 mm | — | side fall 690 N·m: Z = 0.12 × 0.011² / 6 = 2.42e-6 m³ → 285 MPa, **SF 1.76 < 2.0: fails**. Arms' forward-fall tuck (D71, T-030) does not change the side-fall case | stays 12 mm |
+| pelvis/web pocketing | −0.15…−0.25 [EST] | needs FEA → `FEA_SPEC_torso_pocketing.md` (Bryan's PC) | [EST], not credited |
+**Cited total: −0.0225 kg firm** (−0.0825 if the Arbiter accepts the EV100 +1.5 W), **against the 0.18 target: short.** The torso can't reach 0.18 on citations alone; pocketing after FEA is the main lever.
+### 18.2 Bulkhead thermal with Arms' new losses (0.4 W idle, 3.6 W continuous at 30 N hold, ~9 W for < 0.7 s)
+Both bays 7.2 W continuous → 7.2 / 0.7 W·K⁻¹ ≈ **10 K rise → ~50 °C at 40 °C ambient** (was 79 °C). The 9 W bursts are negligible against 576 J/K (≈ 0.01 K). Lots of margin to the 90 °C derate. Strength is unchanged: 12 mm is needed for side fall.
+### 18.3 Vent fix
+Shoulder-bay inlet: **top edge at z ≤ +0.155**. Panel 100 × 50 mm spans z +0.105…+0.155 at y ±0.165, still 25 cm² free. Note: Arms proposes moving the bay pad to the shoulder-cap shell; Torso keeps the bulkhead pad (no mass) until ID/Arms settle it.
+### 18.4 O-T5 power column
+Torso-side file `OT5_power_torso.md` (not edited in Controls' file). Runtime (typical / binned): T-A 3.83 / 3.75 h, T-B 3.32 / 3.25, T-C 2.84 / 2.78, T-D 3.92 / 3.83, **T-E 4.66 / 4.55 (only one ≥ 4 h)**.
+
 ## 7. Open questions / conflicts (not edited in others' files)
 - **O-T1 (Electronics, coordination):** adopt the 48 V intermediate rail with DCM3623TA5N53B4T00; Torso hosts the DCM on the power distribution board or the brain tray? Mass 0.024 [UNVERIFIED for variant] stays in the brain line; who books the 47718-232 choke; 24 V VL source (O-E3); BMS→safety MCU CAN FD message set; e-stop = FET-open vs contactor (O-E6).
 - **O-T2 (Actuators/Arbiter):** waist_pitch 116 N·m < 188 N·m need with T5 payload → TBM2G-08508A, +0.19 kg.
