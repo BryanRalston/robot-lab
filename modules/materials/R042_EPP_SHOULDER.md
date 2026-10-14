@@ -44,3 +44,66 @@ What would hold 7.10 kN at 220 J:
 - **Controls (T-030):** use the ARPRO 5170 curve × 1.45 rate factor, not a constant 0.65 MPa.
 - **Thermal:** pad-face temperature next to the 69 °C bulkhead.
 - **Test (G5):** drop-tower on EPP 80, 40 mm: peak force, multi-hit recovery (10 and 100 drops), and 0 / 40 °C.
+
+---
+# Part 2: honeycomb crush cartridge (ID R2/R3, binding spec Arbiter R-049) — RL Materials, 2026-10-14
+R-049 requires:
+- 265 J absorbed at a plateau of **≤ 9.17 kN**;
+- about 29 mm stroke plus margin;
+- replaceable;
+- **pair ≤ 0.100 kg** including backing.
+
+The ID design on main is R3 (2af8650): 5052 3.1 pcf, 80 × 105 mm (84 cm²) × 44 mm, 6 mm EPP face, 0.5 mm Al spreader, PC backing, 0.1004 kg pair. The R2 brief (37 mm, 0.095 kg) is superseded by it.
+
+## Cited honeycomb data (HexWeb CR III 5052, 1/8 in cell, typical, static, 0.625 in thick)
+| pcf | stabilized compr. typ / min | **crush typ** | source |
+|---|---|---|---|
+| 3.1 | 300 / 215 psi = 2.07 / 1.48 MPa | **130 psi = 0.896 MPa** | HEX_CRIII |
+| 4.5 | 570 / 405 psi = 3.93 / 2.79 MPa | **260 psi = 1.79 MPa** | HEX_CRIII |
+
+Notes:
+- Hexcel gives a typical value for crush strength but **no minimum**.
+- Density tolerance is ±10 % (Plascore XR1).
+- Plascore PAMG-XR1 publishes bare compressive and shear values only, no crush strength. The Gill PAA-CORE page (403 from the box) is reported to list 145 psi (1.00 MPa) for 3.1 pcf; that is not verified, so it isn't used.
+- **Dynamic factor:** Hexcel says crush strength "increase[s] nonlinearly with impact velocity, … as much as 30 % higher" (HEX_ATTR). No rate curve is published. **The ID assumption of 1.10 is inside the 1.0–1.30 band, but it isn't conservative for peak force.**
+- **0.85 MPa flag:** the 3.1 pcf static typical value of 0.896 is above 0.85, so the pad doesn't grow on that count. But with no published minimum, the typical value could sit lower in the minimum direction.
+- **Pre-crush is mandatory.** Stabilized strength is 2.3× crush at 3.1 pcf and 2.2× at 4.5 pcf. Without pre-crushing, the initial peak would be about 17–19 kN.
+
+## Check of ID R3 (84 cm² × 44 mm, 3.1 pcf, stroke 0.72 t = 31.7 mm [ID assumption; Hexcel gives no stroke efficiency])
+| rate factor | plateau MPa | force kN | ≤ 9.17? | energy at 31.7 mm | ≥ 265 J? |
+|---|---|---|---|---|---|
+| 1.00 | 0.896 | 7.53 | yes | 239 J | **no** |
+| 1.10 (ID) | 0.986 | 8.28 | yes | 262 J | **no (−3 J)** |
+| 1.30 (Hexcel max) | 1.165 | **9.79** | **no (587 N·m)** | 310 J | yes |
+
+**R3 has no design window.** It passes on force only at low rate factors and on energy only at high ones. The ±10 % density tolerance makes this worse.
+- Any honeycomb sized against R-049 has to satisfy F(×1.30) ≤ 9.17 kN **and** E(×1.00) ≥ 265 J.
+- That means stroke ≥ 265 / (9.17 / 1.30) = **37.6 mm**, so thickness ≈ 37.6 / 0.72 = **52 mm** [EST], plus a 5 mm margin → **≈ 57 mm**.
+- Measuring the rate factor on the drop tower (for example 1.15 ± 0.05) would narrow the band and shorten the core to about 45 mm.
+
+## EPP face in series
+- The EPP and the honeycomb carry the same force. The EPP compresses until its stress reaches the honeycomb crush stress, then the core crushes.
+- 3.1 pcf core (1.0–1.17 MPa): EPP 80 reaches that at about 55–62 % strain (ARPRO 5170 curve × rate). A 6 mm face takes about 3.5 mm and ≈ 7 J [EST], with no force spike above the plateau.
+- 4.5 pcf core (2.33 MPa dynamic): EPP 80 would densify (> 75 %) before the core starts, so the face bottoms out. That's fine for force, because it acts as a stiff spacer, but the face adds no energy.
+- **Don't count EPP energy toward the 265 J.** It only adds margin.
+
+## Sizing to R-049 (both satisfy F ≤ 9.17 kN at ×1.30 and E ≥ 265 J at ×1.00)
+| option | core area | core t | core g/side | EPP 6 mm, spreader, PC, sleeve, inserts [EST, scaled from ID R3 by area] | **pair kg [EST]** |
+|---|---|---|---|---|---|
+| 3.1 pcf | 78.7 cm² (≈ 75 × 105) | 57 mm | 22.4 | 30 | **≈ 0.105: over the cap** |
+| **4.5 pcf** | **39.4 cm² (≈ 63 × 63)** | **57 mm** | **16.2** | **≈ 18** | **≈ 0.068 (−32 g margin)** |
+
+- **Recommendation: 5052 4.5 pcf 1/8 in, pre-crushed, ≈ 63 × 63 × 57 mm core** in a replaceable cartridge.
+  - Plateau 7.05 kN at ×1.0 to 9.17 kN at ×1.30. Energy ≥ 265 J at 37.6 mm stroke.
+  - Pair ≈ 0.068 kg [EST]. It's single-use: swap the cartridge after any hit that crushes the core.
+- Trade-offs:
+  - The smaller face reduces contact coverage against the ±15 mm contact scatter (ID R3 needed 80 × 105). A stiffer spreader (1 mm Al, about +4 g/side) can spread the load over a larger face, but crush strength drops with off-axis load (HEX_ATTR), so the cartridge needs side guides.
+  - The 57 mm core plus face, backing and air gap is about 75 mm proud of the shoulder. **Arms/ID envelope check needed.**
+- Fallback if Arms can't take 75 mm: keep R3 geometry, measure the rate factor in a drop test, and re-rule.
+
+## Asks
+- **Arbiter:** R3 fails R-049 across the cited rate band (9.79 kN at ×1.30 / 239 J at ×1.0). Book 4.5 pcf as the candidate at ≈ 0.068 kg pair [EST]. Pad is single-use per hit.
+- **ID:** resize to 4.5 pcf ≈ 63 × 63 × 57 mm with pre-crush, side guides, and an Al spreader. Give the itemised mass.
+- **Arms (shoulder):** envelope for about 75 mm lateral build-up at the shoulder roll face, mounting through existing bulkhead holes, and arm-tuck clearance.
+- **Controls (T-030):** model a constant 7.05–9.17 kN plateau (rate band), stroke ≤ 41 mm (0.72 × 57), and confirm the contact-point scatter against a 63 mm face.
+- **Test (G5):** drop tower at 3–4 m/s on 4.5 pcf pre-crushed cores to measure the rate factor and stroke efficiency.

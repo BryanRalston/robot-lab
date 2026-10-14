@@ -24,6 +24,9 @@
   "EPP_PMC": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7825443/ (Materials 14:249, EPP 20-220 g/L static/temperature)",
   "ULTEM_PP": "https://www.professionalplastics.com/professionalplastics/content/downloads/Ultem1000.pdf (Ultem 1000 stock shape TDS)",
   "ULTEM_PL": "https://www.protolabs.com/media/1014801/ultem-1000-im.pdf (SABIC Ultem 1000 datasheet; tensile creep curves ASTM D2990 to 120 h at 21/80/121/176 C)",
+  "HEX_CRIII": "https://www.hexcel.com/wp-content/uploads/2025/12/HexWeb_CRIII_DataSheet.pdf (HexWeb CR III Table I, 5052)",
+  "HEX_ATTR": "https://www.hexcel.com/wp-content/uploads/2026/01/HexWebHoneycombAttributesandProperties.pdf (crush method; dynamic up to +30%)",
+  "PLASCORE_XR1": "http://plascore.com/wp-content/uploads/dlm_uploads/2025/08/PLA_PAMG-XR1-5052_2023-06-02.pdf (bare compressive only; density tol +-10%) [curl timed out from box; content via search index]",
   "R027": "modules/RULINGS.md R-027 (PALSUN/LEXAN, Toray 3900, Easy Composites XC110 citations)"
  },
  "materials": [
@@ -380,6 +383,59 @@
     "ULTEM_PL"
    ],
    "notes": "Continuous service 171 C unloaded. Compressive creep at 98 C not tabulated."
+  },
+  {
+   "id": "HC5052_3.1",
+   "name": "5052 Al honeycomb 3.1 pcf 1/8 (HexWeb CR III / PAMG-XR1)",
+   "used_in": "R-042/R-049 shoulder crush cartridge (ID R3)",
+   "density_g_cc": 0.05,
+   "E_GPa": null,
+   "yield_MPa": null,
+   "UTS_MPa": null,
+   "fatigue_MPa": null,
+   "elongation_pct": null,
+   "T_max_mech_C": null,
+   "toughness": null,
+   "other": {
+    "stab_compr_typ_MPa": 2.07,
+    "stab_compr_min_MPa": 1.48,
+    "crush_typ_MPa": 0.896,
+    "crush_min": "not published",
+    "dynamic_factor": "up to 1.30 (Hexcel)",
+    "density_tol": "+-10% (Plascore)"
+   },
+   "cost_hint": null,
+   "sources": [
+    "HEX_CRIII",
+    "HEX_ATTR",
+    "PLASCORE_XR1"
+   ],
+   "notes": "Values at 0.625 in thick, room temperature, static."
+  },
+  {
+   "id": "HC5052_4.5",
+   "name": "5052 Al honeycomb 4.5 pcf 1/8 (HexWeb CR III)",
+   "used_in": "R-049 alternative",
+   "density_g_cc": 0.072,
+   "E_GPa": null,
+   "yield_MPa": null,
+   "UTS_MPa": null,
+   "fatigue_MPa": null,
+   "elongation_pct": null,
+   "T_max_mech_C": null,
+   "toughness": null,
+   "other": {
+    "stab_compr_typ_MPa": 3.93,
+    "stab_compr_min_MPa": 2.79,
+    "crush_typ_MPa": 1.79,
+    "dynamic_factor": "up to 1.30"
+   },
+   "cost_hint": null,
+   "sources": [
+    "HEX_CRIII",
+    "HEX_ATTR"
+   ],
+   "notes": ""
   },
   {
    "id": "EPP",

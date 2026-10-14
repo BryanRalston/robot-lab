@@ -23,6 +23,9 @@ S={
  "EPP_PMC":"https://pmc.ncbi.nlm.nih.gov/articles/PMC7825443/ (Materials 14:249, EPP 20-220 g/L static/temperature)",
  "ULTEM_PP":"https://www.professionalplastics.com/professionalplastics/content/downloads/Ultem1000.pdf (Ultem 1000 stock shape TDS)",
  "ULTEM_PL":"https://www.protolabs.com/media/1014801/ultem-1000-im.pdf (SABIC Ultem 1000 datasheet; tensile creep curves ASTM D2990 to 120 h at 21/80/121/176 C)",
+ "HEX_CRIII":"https://www.hexcel.com/wp-content/uploads/2025/12/HexWeb_CRIII_DataSheet.pdf (HexWeb CR III Table I, 5052)",
+ "HEX_ATTR":"https://www.hexcel.com/wp-content/uploads/2026/01/HexWebHoneycombAttributesandProperties.pdf (crush method; dynamic up to +30%)",
+ "PLASCORE_XR1":"http://plascore.com/wp-content/uploads/dlm_uploads/2025/08/PLA_PAMG-XR1-5052_2023-06-02.pdf (bare compressive only; density tol +-10%) [curl timed out from box; content via search index]",
  "R027":"modules/RULINGS.md R-027 (PALSUN/LEXAN, Toray 3900, Easy Composites XC110 citations)",
 }
 def M(id,name,where,rho=None,E=None,ys=None,uts=None,fat=None,elong=None,tmax=None,other=None,cost=None,src=(),notes=""):
@@ -59,6 +62,10 @@ DB=[
    {"compr_MPa_10pct_def":152,"compr_modulus_MPa":3310,"shear_MPa":103,"k_W_mK":0.12,"CTE_um_mK":56,"HDT_1.82MPa_C":204,"Tg_C":215,
     "creep_tested_points":"tensile creep 120 h at 80 C/41 MPa, 121 C/14 and 28 MPa (curves only, ULTEM_PL)"},None,["ULTEM_PP","ULTEM_PL"],
    "Continuous service 171 C unloaded. Compressive creep at 98 C not tabulated."),
+ M("HC5052_3.1","5052 Al honeycomb 3.1 pcf 1/8 (HexWeb CR III / PAMG-XR1)","R-042/R-049 shoulder crush cartridge (ID R3)",0.050,None,None,None,None,None,None,
+   {"stab_compr_typ_MPa":2.07,"stab_compr_min_MPa":1.48,"crush_typ_MPa":0.896,"crush_min":"not published","dynamic_factor":"up to 1.30 (Hexcel)","density_tol":"+-10% (Plascore)"},None,["HEX_CRIII","HEX_ATTR","PLASCORE_XR1"],"Values at 0.625 in thick, room temperature, static."),
+ M("HC5052_4.5","5052 Al honeycomb 4.5 pcf 1/8 (HexWeb CR III)","R-049 alternative",0.072,None,None,None,None,None,None,
+   {"stab_compr_typ_MPa":3.93,"stab_compr_min_MPa":2.79,"crush_typ_MPa":1.79,"dynamic_factor":"up to 1.30"},None,["HEX_CRIII","HEX_ATTR"]),
  M("EPP","EPP foam (cover pads, grade unspecified)","cover fall pads 0.36 kg",None,None,None,None,None,None,None,{},None,[],"Use EPP80 row if 80 g/L is chosen."),
  M("PU90A","PU 90A bumpers","hip hard stops",None,None,None,None,None,None,None,{},None,[],"No datasheet [UNKNOWN]."),
  M("TPUNYLON","TPU-coated nylon fabric","ankle boots (V5), R-042 pad sleeve (0.03 m2, 9 g)",None,None,None,None,None,None,None,{},None,[],"[UNKNOWN]"),
