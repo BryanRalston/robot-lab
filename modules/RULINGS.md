@@ -934,3 +934,14 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
 - The 5 mm spool has no source (Marlow >=8×d), so there's **no spool change** (fatigue). D76 lowering is done.
 - To get the >=2 mm margin, **the forearm cap is raised from 15 to 17 mm** (270 to 287). Arms reports no TARGETS reach number and T5 passes. Arms re-checks the elbow P-042 hold and Controls re-runs reach and tuck. The extra ~2 mm extension (~+0.005 est) is booked in full when Arms reports it.
 - CSG-14 is counted once (+0.080, R-076). D77 is closed with no clutch, pending T-031. The R-066 +0.142 stands.
+
+## R-083 (2026-10-14) IP2X itemized (7ff4cd7), isolation boundaries (4101f47), RP06 (3027135)
+- **IP2X:** the itemized guards (0.086) replace the 0.21 conservative booking. The difference is mixed cited and estimated, so it gets half credit: **-0.062**. The 16 mm² +0.04 stays until O-T12 (pack-rail finger-safe connector >=100 A) is cited. **Condition C1 is binding:** every enclosure counted as a guard at 0 g must need a tool to remove (Torso, Arms and Legs confirm). Conformal coating doesn't count as a guard.
+- **Isolation boundaries: +0.054 booked in full** (Nomex DCM liner, RP40 mounts, Würth 749014012 x5, ISOW774x, ISO1042). Drive-to-drive links stay in the shared bus domain, and the encoders and PT1000s are bus-domain.
+  - The **Würth part is rated to 70 C**, so Thermal confirms the junction location stays <=60 C worst case, or it gets swapped.
+  - The **Elmo STO input current** gets cited, or buffers are added (mass booked).
+  - MII timing goes to T-029.
+  - Foot F/T on SELV: +0.012, booked if Legs or Controls confirm it.
+- **RP06-11012SRAW x2 is adopted** (6 W, reinforced, -40 to 105 C, 14 g, net 0). The load is about 2.9 W, 48%. The **72 MHz / end-of-line restriction is lifted** (power); Controls' timing check stays open only if the 72 MHz option is used.
+- Rev C fin credit is void (confirmed by Legs).
+- Reserve ~**-0.22** (on estimates).
