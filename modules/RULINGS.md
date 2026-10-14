@@ -1028,3 +1028,9 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
 ## R-097 (2026-10-14) Hand T4 loaded-close basis (Arms, e438303)
 - Basis: **30 N peak with each worst case taken alone** (passes, slowest 0.79 s) **plus 22 N sustained with all worst cases combined** (passes, 0.80 s). Stacking all worst cases at 30 N is outside the basis. 1.50 A/rail stands, with no upsizing.
 - Stagger: 50 ms default, never more than 150 ms. G5 verifies the hot close.
+
+## R-098 (2026-10-14) R-094 credit corrected (ID P-052, 5e70e3f)
+- The R-094 -0.066 credit is withdrawn. The itemized sternum skin package (bezel 0.017, gasket, edge seal, TPU film, blend, captives) is 0.040 [EST], against the 0.058 plate in R-093: -0.018 at half credit (estimate) = **-0.009**. Net correction **+0.057**.
+- The R-095 clear coat (+0.008) and the TPU film are alternatives; the film is credited out only with a cited mass once the clear coat is confirmed.
+- Service rule recorded: a dent >1 mm or any crush means replace the pad.
+- Reserve ~-0.41.
