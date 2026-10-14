@@ -945,3 +945,10 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
 - **RP06-11012SRAW x2 is adopted** (6 W, reinforced, -40 to 105 C, 14 g, net 0). The load is about 2.9 W, 48%. The **72 MHz / end-of-line restriction is lifted** (power); Controls' timing check stays open only if the 72 MHz option is used.
 - Rev C fin credit is void (confirmed by Legs).
 - Reserve ~**-0.22** (on estimates).
+
+## R-084 (2026-10-14) Torso touch protection (1f3a99b), chest backing
+- **O-T12 is closed:** an Anderson SBS75X pair (110 A, 600 V DC, IP20, cited) handles both the pack main and the rail blind-mate. The main link stays at 10 mm², so the +0.04 for 16 mm² is released.
+- **No double count:** the R-079 0.25 booking covered **all** touch protection. Electronics' guards (0.086, R-083) plus Torso's (0.089) make 0.175 total, so the release is 0.075. The cable (-0.04) gets full credit and the rest (-0.035) half credit, so -0.0575 total. R-083 already took -0.062, so this ruling adds **+0.005** (not -0.161).
+- **Chest backing: +0.053 accepted in full** (CF/Al-honeycomb sandwich, 0.070; pad 98x98x88 core 0.061; total 0.131), because it's needed for T-031. **Pursue O-T14** (stiffened pack-enclosure front) to net it back to zero, with credit when it's measured.
+- The torso pocketing FEA spec is complete, queued via Robot Lab on the bryan PC.
+- Reserve ~**-0.28** (on estimates). The FEA mass-down results are now critical.
