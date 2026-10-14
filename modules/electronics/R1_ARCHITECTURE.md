@@ -848,6 +848,37 @@ No failing connector was found among the cited parts, so **no mass change**. XT6
   - RS-422 receiver datasheet
   - the 72 MHz scaling of the worst-case figure (Table 33 gives only typical at 72 MHz)
 
+
+### 18.2e Arbiter R-078: uncited isolation = none; reinforced boundaries designed in (2026-10-14)
+**Domains.**
+- **Bus domain (43–92 V, hazardous by rule):** pack, all 32 Elmo drives with their logic, STO inputs, EtherCAT ports and encoder/PT1000 ports, the drive-to-drive EtherCAT links, and the BMS (S32K344 + BQ79600-Q1).
+- **SELV domain:** 48 V brain rail (Thor, AGX301, fan/TSR), TMS570, hand boards (AO via RP03), head.
+- Every crossing between the two domains must be reinforced (or basic + supplementary).
+- All 32 drives share the bus reference, so **drive-to-drive links stay unisolated**. Only boundary crossings are isolated.
+
+**Mass rule used.** Where a datasheet gives a mass, it is cited. IC and magnetics masses that TI and Würth do not publish are **computed from the datasheet package drawing** (body volume × 2.0 g/cm³ for mould compound plus leadframe, conservative), and are marked [DWG]. Under R-076 G1 wording this is a drawn part with computed mass. Replace with vendor material-content figures when available.
+
+| # | boundary | design | part (citation) | count | mass each | kg |
+|---|---|---|---|---|---|---|
+| 1 | DCM3623 (basic per cTÜVus) → 48 V rail | Supplementary insulation around the whole 48 V domain. 2 layers of Nomex 410 0.13 mm (DuPont TDS: 115 g/m², 28 kV/mm AC rapid rise, so ≈ 3.6 kV per layer; 2 layers per the thin-sheet rule) lining the brain tray base, walls and lid (0.130 × 0.200 base + lid + walls 2 × 0.33 × 0.04 = 0.078 m²). The DCM input/output copper keeps E-PCB-1 reinforced spacing. | DuPont Nomex 410 TDS | 0.078 m² × 2 layers | 115 g/m² | **0.0179** |
+| 2 | RP40 case (1.6 kVDC, treat as basic) → grounded bracket | Each case wrapped on its 5 bracket-facing sides with 2 layers of Nomex 410 0.13 mm, under the existing gap pad/strap. Added ΔT ≈ 0.4 K at ~4 W/case [k 0.1 W/mK EST]. | DuPont Nomex 410 TDS | 4 × 0.0016 m² × 2 | 115 g/m² | **0.0015** |
+| 3a | EtherCAT: Thor/junction (SELV) → 5 drive branches (2 legs, 2 arms, waist) | Reinforced LAN transformer on each junction output port. Standard 1500 Vrms magnetics are basic at best, so they are not used here. | **Würth 749014012** WE-LAN 10/100: "reinforced insulation at 250 Vrms per IEC 62368-1/60601-1", 4000 Vrms, Cl 9 mm / Cr 15 mm, cURus E507007. **0–70 °C only.** Mass not in DS: [DWG] 24.4 × 17.8 × ~10 mm envelope, computed upper bound 6 g | 5 | 6 g [DWG] | **0.030** |
+| 3b | EtherCAT: arm branch → hand board (SELV via RP03) | The hand is end-of-line on the arm branch (`harness.py` "ECAT arm branch → hand/tactile"), so 1 port per hand. The PHY moves to the cable side, powered across the barrier. MII is isolated with digital isolators, because there is no cited reinforced magnetics part rated to 125 °C. | **TI ISOW7741** (reinforced, integrated DC-DC 5 V → 3.3 V 140 mA at 36 %, −40…125 °C) + **ISO7740** + **ISO7742** (reinforced, −55…125 °C; ISO774x DS Rev K). MII 5 fwd / 7 rev covered (3f1r + 4r + 2f2r). | 2 hands × 3 ICs | ≈ 0.45 g [DWG SOIC-16W/20W] | **0.0027** |
+| 4 | STO: TMS570 (SELV) → 5 STO daisy chains (STO1 + STO2 per branch = 10 channels) | Reinforced isolators with integrated bus-side power. Use the **default-low (F) variant**, so loss of isolator power = STO asserted (torque off). STO_RET is on the bus side. | **TI ISOW7740F-class** ×3 (12 ch, 2 spare). F ordering code to confirm. | 3 | ≈ 0.5 g [DWG] | **0.0015** |
+| 5 | BMS CAN FD (pack-referenced) → Thor | ISO1044 is **rejected: TI rates it Basic**. Use **TI ISO1042 (non-B), Reinforced, 5000 Vrms, VIOWM 1060 Vrms, −40…125 °C** (ISO1042 DS Rev F, "ISO1042x Reinforced / ISO1042Bx Basic"). Logic side on the BMS. CAN side powered from SELV 5 V carried in the CAN harness (+2 conductors, inside the existing booking) [check]. | TI ISO1042DW | 1 | ≈ 0.41 g [DWG SOIC-16W] | **0.0004** |
+| 6 | RP40 CTRL | TLP383 ordered as **D4 option** (VDE reinforced); same 0.128 g | Toshiba TLP383 DS | 4 | 0 delta | 0 |
+| 7 | Encoders/PT1000 at drives | Bus-referenced, no SELV contact, so **no isolator is needed**. They are hazardous-live by rule, so their leads and bodies need insulation from accessible metal: SiF silicone single cores sit inside the 12 % sleeve (= supplementary), and the encoder PCBs inside the actuator housings get no exposed metal (Actuators to confirm). | – | – | – | 0 |
+| | **Total booked** | | | | | **≈ 0.054 kg** |
+
+**Conditions and risks.**
+- **AO budget (R-077):** the cable-side PHY on ISOW7741 at 36 % efficiency adds about 0.39 W per hand (0.22 W PHY / 0.36 − 0.22 W). With 72 MHz and a single PHY (end-of-line), AO = 1.98 + 0.39 ≈ **2.37 W ≤ 2.4 W (99 %)**. A mid-line hand would fail. **The hand must stay end-of-line** (tactile on the hand board, not a downstream node).
+- **MII timing across isolators:** ≈ 11 ns per channel. TX_CLK is cable-side, so the TX data round trip is about 25 ns of a 40 ns period (10 ns setup). This is marginal and needs a bench test (T-029).
+- **Würth 749014012 is rated 0–70 °C.** Thermal must confirm the torso junction ambient is ≤ 70 °C. A cited lighter or hotter reinforced part would replace it.
+- **Elmo STO input current is not cited.** Buffers may be needed after the ISOW outputs (≤ 4 mA each); size them from MAN-G-TWI.
+- **Foot F/T at the leg-branch ends:** if it is powered from SELV, add 2 more boundary ports (+0.012 kg [DWG]). If it is bus-powered it stays in the bus domain. The owner must confirm.
+- **DCM liner:** the cold-plate TIM path is unchanged. The liner is on the tray, not under the cold plate. The cold plate must be tied to the 48 V domain, not to accessible metal.
+- **XMC4800 at 72 MHz** is accepted on condition that Controls confirms timing. The single PHY applies only where the hand is truly end-of-line.
+
 ### 18.2 Checked and not counted
 - **STM32H7 drop:** never booked as a separate mass. The hand board was booked as a board lump (Arms), and Thermal A43C already assumed it dropped. **Saving 0.**
 - **`hand 24 V from wrist DC/DC` row (0.0128 kg):** 0.5 → 0.25 passes (0.6 K), but R-047 put the RP40s in the shoulder bay, so this row's route is stale. Actuators should re-book the row first. **Not counted.**
