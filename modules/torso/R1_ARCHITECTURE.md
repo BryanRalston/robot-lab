@@ -134,6 +134,62 @@ Risk: walking binned runtime sits on the pass line. If the Arbiter books the 6.1
 | **torso line** | **5.387** (contactor kept, §13.2) |
 | battery | 8.750 |
 
+## 15. R1.3 (after Electronics §13 a095c0c, R-032, R-033 73d1984, R-034). Script `r13_torso.py` → `r13_torso.json`; figure updated.
+### 15.1 P-045 clamp: HS100 1R5 F (R-033 booked 0.15 kg), bolted to the shoulder bulkhead, exhaust side
+Source: Arcol "Heatsink Range Technical Information" (TI004 overload, TI008 thermal capacity) https://assets.rs-online.com/v1698974646/Datasheets/840dcab3450261b61b91e3aa6789a31d.pdf . Tabulated points: 10× rating for 1 s, 5× for 5 s, 2× for 3 min; HS100 thermal capacity 76.7 J/°C, unit 90 g; HS50 19.78 J/°C, 25 g. The curve itself is a graph with no points below 1 s.
+Pulse: 88²/1.5 = 5.16 kW for 77.5 ms (400 J).
+| part | multiple of rating | allowed: power-law through 1 s/5 s points | allowed: constant energy (1 kJ) | ΔT adiabatic | verdict |
+|---|---|---|---|---|---|
+| HS100 1R5 | 51.6× | 30.1× | 129× | 5.2 K | **OPEN**: inside the energy bound, outside the conservative extrapolation |
+| HS50 1R5 | 103× | 30.1× | 129× | 20 K | OPEN, closer to the limit. **Not a fallback** without written Arcol data |
+| 2 × HS100 0R75 in series | 25.8× | 30.1× | 129× | 2.6 K | PASS on both bounds, +0.09 kg |
+**O-T8 (updated):** comparator, gate driver and thermal cutout still to cite; HS100 stays booked. Ask Arcol for the < 1 s overload point. If it is below 52×, use 2 × HS100 0R75 (+0.09 kg, still inside R-034; see §15.6).
+### 15.2 Charge rule: 4.15 V cap quantified. **Recommendation: do not cap.**
+The P45B datasheet capacity between 4.15 and 4.20 V is not read; 3–5 % [EST] is typical for NMC/NCA 21700 cells.
+| charge limit | usable Wh typ / binned | walk 1.0 typ / binned h | walk 1.2 h | mixed 20/80 h | binned 2 h margin |
+|---|---|---|---|---|---|
+| 4.20 V (current) | 1458 / 1426 | 2.05 / **2.00** | 1.71 | 4.14 | **+1.0 W** (pass line 712.8 W vs 711.8 W) |
+| 4.15 V, −3 % | 1409 / 1378 | 1.98 / 1.94 | 1.65 | 4.00 | **−22.8 W: T7 FAILS** |
+| 4.15 V, −5 % | 1377 / 1346 | 1.94 / 1.89 | 1.61 | 3.91 | **−38.6 W: T7 FAILS** |
+A 4.15 V cap costs 49–81 Wh and 0.07–0.11 h of walking, which breaks T7 hard. Alternative rule: charge to 4.20 V at the dock, and have the BMS accept regen pulses at any SOC, with the cell OV trip set above 4.20 V (e.g. 4.25 V [EST, Molicel confirmation needed]). At 711.8 W the pack leaves the top 4 % in about 5 min, and the clamp covers the rest. Case (b) of Electronics §13.1 then lasts only minutes at < 40 W average.
+### 15.3 Pre-charge (R-033 approved HS50 47R; lighter option, optional)
+Bus capacitance: 32 drives × 990–1400 µF (Elmo §10.2.4.2 rule, O-E10) = 32–45 mF → ½CV² at 84 V = **113–159 J per pre-charge**. That rules out SMD thick-film pulse parts, and linear pre-charge through the IPT059N15N3 (SOA at 80 V without evidence). The BQ76200 pre-charge output only drives a switch; it still needs a resistor.
+**Option: Arcol HS25 47R** (same TI008 table: 10.7 J/°C, 12.5 g) → 159 J gives 15 K. Peak 1.8 A, 150 W = 6× for < 1 s, inside the 10×/1 s point. τ = 47 Ω × 45 mF = 2.1 s, ~10 s to 99 %. **Saves 12.5 g vs the HS50.** Switch is still the BSC520N15NS3 G. Booked mass stays R-033's 0.232 until Arbiter accepts the swap.
+### 15.4 O-T9: Electronics' scheme accepted
+Hardwired dual-channel FAULT_N plus a CAN FD fault frame go to the TMS570. The TMS570 applies STO (Cat 0) to all drives. The BQ76200 FETs open at the same time; the contactor opens once current is < 5 A. The clamp comparator and gate supply are powered from the **drive-side** bus. The fault latches: restart needs fault clear, then manual reset, then pre-charge, then contactor close. Normal faults keep SS1 → STO → open. **G5 test:** open the pack at peak regen; the bus must peak ≤ 90 V without reaching the drive OV trip.
+### 15.5 Records
+- **O-T10 PASS** on the datasheet P-Q curve (≈ 24 CFM at ≈ 20 Pa, ΔT ≈ 10 K); the fan is booked at 6.12 W in full (R-032).
+- DCM3623TA5N53B4T00 sits on the Thor cold plate. The 47718-232 choke goes in the brain line (`dcm_filter_heatsink`), not Torso.
+- **O-E3:** no 24 V supply. Drives run VL single-supply from VP+ ("S" variant, confirm at order).
+- **TSR 1-48120WI goes on the 48V_BRAIN net only** (17–72 V in); it must never connect to the pack bus.
+- **BMS → TMS570 message set (Electronics §13.7) vs part capabilities:**
+  | message | supported by | gap |
+  |---|---|---|
+  | FAULT_N dual channel | BQ79616 NFAULT (one hardware line) | **2nd independent channel missing.** Add an independent secondary cell OV/UV/OT protector or a host-MCU channel with its own measurement (part TBD) |
+  | BMS_PACK V/I/SOC/SOH/limits | V from BQ79616; I from INA229; SOC/SOH/limits computed by host | host MCU still unpicked (§4) |
+  | BMS_STATUS FET/contactor feedback | BQ76200 has no drain-source / failed-short diagnostics; LEV100A4ANG has no auxiliary contact | **add a drive-side bus voltage sense** to the host ADC (detects welded contactor and shorted FET via pack-vs-bus voltage after an open command) |
+  | BMS_CELLS_SUMMARY | BQ79616 cell V and temperature | none |
+  | "internal short" in FAULT_N | not directly measurable | soft detection only (self-discharge/imbalance trend); move it to BMS_WARN |
+  | heartbeat / SAFE_CMD / E2E CRC | host firmware | none (host) |
+### 15.6 Torso mass line and R-034 overrun request
+| item | kg | basis |
+|---|---|---|
+| torso CFRP shell 2 mm | 1.705 | [EST] area × density |
+| shoulder bulkhead 7075 (12 mm, §9) | 0.600 | [EST] (0.45 + 0.15) |
+| waist ring 7075 | 0.250 | [EST] |
+| pack rails + latch | 0.200 | [EST] |
+| pelvis 7075 | 1.450 | [EST] |
+| power distribution board, busbars, branch fuses, 5 V aux | 0.250 | [EST] |
+| duct fans booking (P-030/P-044) | 0.040 | R-030/R-032 |
+| duct partition, walls, TSR 1-48120WI | 0.147 | §13.4 |
+| regen clamp P-045 (HS100 1R5 + FETs/board) | 0.150 | R-033 |
+| pack disconnect: LEV100A4ANG + HS50 47R + BSC520N15NS3 | 0.232 | R-033 (contactor datasheet mass to cite before G1) |
+| **total** | **5.024** | |
+| allocation (pelvis 1.6 + torso 2.8) | 4.400 | CONTRACTS §3 |
+| **net overrun** | **+0.624** | ≤ 0.80 (R-034), margin 0.176 |
+The earlier ~0.99 kg figure assumed the HS200 clamp (0.475 + board); the HS100 recovers 0.33 kg. Optional: HS25 pre-charge −0.0125 → +0.612. If Arcol rejects the HS100 pulse, 2 × HS100 0R75 → +0.714, still ≤ 0.80.
+**Request to Arbiter (R-034):** "RL Torso & Power requests booking the torso line at 5.024 kg, +0.624 kg net over the 4.40 kg allocation (cap 0.80, margin 0.176). Drivers: regen clamp P-045 0.150 and pack disconnect 0.232, both required for safety (R-033); A41 duct and partition 0.187 (R-030/R-032); shoulder bulkhead +0.150 for side-fall SF 2.1 (§9). Structure itself is 0.095 under allocation. All structure masses are [EST] until CAD. The contactor mass is to be cited before G1."
+
 ## 7. Open questions / conflicts (not edited in others' files)
 - **O-T1 (Electronics, coordination):** adopt the 48 V intermediate rail with DCM3623TA5N53B4T00; Torso hosts the DCM on the power distribution board or the brain tray? Mass 0.024 [UNVERIFIED for variant] stays in the brain line; who books the 47718-232 choke; 24 V VL source (O-E3); BMS→safety MCU CAN FD message set; e-stop = FET-open vs contactor (O-E6).
 - **O-T2 (Actuators/Arbiter):** waist_pitch 116 N·m < 188 N·m need with T5 payload → TBM2G-08508A, +0.19 kg.

@@ -1,0 +1,74 @@
+{
+ "runtime": {
+  "4.20 V": {
+   "usable typ Wh": 1458,
+   "usable binned Wh": 1426,
+   "walk1.0 typ h": 2.048,
+   "walk1.0 binned h": 2.003,
+   "walk1.2 typ h": 1.706,
+   "mixed 20/80 typ h": 4.139,
+   "binned 2 h pass line W": 712.8,
+   "binned walk margin W": 1.0
+  },
+  "4.15 V, -3% [EST]": {
+   "usable typ Wh": 1409,
+   "usable binned Wh": 1378,
+   "walk1.0 typ h": 1.98,
+   "walk1.0 binned h": 1.936,
+   "walk1.2 typ h": 1.65,
+   "mixed 20/80 typ h": 4.001,
+   "binned 2 h pass line W": 689.0,
+   "binned walk margin W": -22.8
+  },
+  "4.15 V, -5% [EST]": {
+   "usable typ Wh": 1377,
+   "usable binned Wh": 1346,
+   "walk1.0 typ h": 1.935,
+   "walk1.0 binned h": 1.892,
+   "walk1.2 typ h": 1.612,
+   "mixed 20/80 typ h": 3.909,
+   "binned 2 h pass line W": 673.2,
+   "binned walk margin W": -38.6
+  }
+ },
+ "clamp_pulse": {
+  "P_W": 5163,
+  "t_ms": 77.5,
+  "parts": {
+   "HS100 1R5": {
+    "multiple": 51.6,
+    "allowed_powerlaw": 30.1,
+    "allowed_const_energy": 129.1,
+    "dT_adiabatic_K": 5.2,
+    "g": 90,
+    "verdict": "OPEN (between bounds)"
+   },
+   "HS50 1R5": {
+    "multiple": 103.3,
+    "allowed_powerlaw": 30.1,
+    "allowed_const_energy": 129.1,
+    "dT_adiabatic_K": 20.2,
+    "g": 25,
+    "verdict": "OPEN (between bounds)"
+   },
+   "2x HS100 0R75 series": {
+    "multiple": 25.8,
+    "allowed_powerlaw": 30.1,
+    "allowed_const_energy": 129.1,
+    "dT_adiabatic_K": 2.6,
+    "g": 180,
+    "verdict": "PASS"
+   }
+  }
+ },
+ "mass": {
+  "structure+pelvis+distribution (R1)": 4.305,
+  "shoulder bulkhead 12 mm (\u00a79)": 0.15,
+  "P-030/P-044 duct fans booking": 0.04,
+  "duct partition/walls + TSR (\u00a713.4)": 0.147,
+  "P-045 clamp (HS100 + FETs/board)": 0.145,
+  "contactor LEV100 [EST 0.20] + HS25 47R 0.0125 + BSC520 + driver 0.003": 0.216
+ },
+ "torso_total": 5.003,
+ "vs_alloc": 0.603
+}
