@@ -330,6 +330,26 @@ Sources:
 
 **SELV:** the pack bus is **not SELV**. It runs 68–84 V, up to 92 V in regen (> 60 V DC SELV limit). Insulation, touch protection, connectors and service rules must be treated as hazardous-voltage. Sent to the Arbiter by Materials for R-075.
 
+## 21. R-076 (binding): reinforced isolation, IP2X, 92 V creepage/clearance on the pack/drive bus
+### 21.1 Connectors
+Amphenol SurLok Plus (IC-10 datasheet: https://amphenol-industrial.com/wp-content/uploads/2024/04/surlok-plus-series-ic-10.pdf): touch-proof **IPXXB (IP2X)**, 1000 V DC, IP67 mated, UL94 V-0, ≥ 100 cycles, keyed.
+| interface | part | rating (datasheet) | note |
+|---|---|---|---|
+| pack → PDB main (+/−) | **SurLok Plus 5.7 mm** crimp plug + panel receptacle | 100 A on 16 mm², 120 A on 25 mm², 1000 V DC | The 5.7 mm crimp starts at **16 mm²**, so the main link becomes 16 mm² (≥ 10 mm², R-074): ~+0.04 kg in the harness line (Actuators) [EST length 0.8 m]. 60 A cont / 100 A 2 s inside rating |
+| PDB → limb bus outputs through the bulkhead (2 legs, 2 arms, waist) | **SurLok Plus 3.6 mm** panel receptacles | 50–70 A, 1000 V DC, IPXXB | limb peak 2.25 kW / 68 V = 33 A ≤ 50 A; branches fused per R-074 |
+| pack blind-mate on rails | SurLok Plus 5.7 mm on a ±1.5 mm floating mount [EST] | | SurLok is a latching connector, not blind-mate rated → **O-T12**: cite a true IPXXB blind-mate ≥ 100 A |
+Connector masses are not in the datasheet extract. [EST] ≈ 0.29 kg total, of which ~0.10 replaces existing connector allowances (pack BMS/fuse/connector 0.30, PDB 0.25). **Net ≈ +0.19 kg [EST]: over 0.02 → flagged to the Arbiter**, to be booked only once the masses are cited.
+### 21.2 PCB creepage / clearance for 92 V (IEC 60664-1, PD2, reinforced)
+Working voltage 92 V DC → 100 V row.
+- **Creepage:** Table F.4, PD2, material group III → basic 1.4 mm → **reinforced 2.8 mm** (≈ 1.5 mm with CTI ≥ 600 laminate).
+- **Clearance:** battery system, no mains transients. Basic ≈ 0.2 mm; reinforced takes the next impulse step, ≈ 0.5 mm → **design rule 1.5 mm**.
+- These table values are as recalled; verify against IEC 60664-1 F.2/F.4 before release (**O-T13**).
+- **Rule:** ≥ 2.8 mm creepage and ≥ 1.5 mm clearance between the 92 V bus and SELV nets (CAN, FAULT_N, 5 V aux, 48V_BRAIN). All barrier parts (isolators, optos, DCM) must be reinforced-rated.
+### 21.3 Shrouds
+Moulded PC shrouds / terminal boots (IP2X) on: HS100 clamp resistor terminals, LEV100A4ANG terminals, L50S125 fuse lugs, and busbars (heat-shrink + PC cover). [EST] 4 × 0.005 = **0.020 kg**, at the freeze threshold; booked together with 21.1.
+### 21.4 T-031
+Delivered (`T031_chest_contact.md`, 138a3a0); +0.078 kg Arbiter request pending.
+
 ## 7. Open questions / conflicts (not edited in others' files)
 - **O-T1 (Electronics, coordination):** adopt the 48 V intermediate rail with DCM3623TA5N53B4T00; Torso hosts the DCM on the power distribution board or the brain tray? Mass 0.024 [UNVERIFIED for variant] stays in the brain line; who books the 47718-232 choke; 24 V VL source (O-E3); BMS→safety MCU CAN FD message set; e-stop = FET-open vs contactor (O-E6).
 - **O-T2 (Actuators/Arbiter):** waist_pitch 116 N·m < 188 N·m need with T5 payload → TBM2G-08508A, +0.19 kg.
@@ -339,6 +359,8 @@ Sources:
 - **O-T6:** usable 90 % at 3.4 V/cell floor still [EST] (R-010); read P45B discharge curve at ~2 A/cell.
 - **O-T8:** clamp: read HS200/HS100 overload curve for 400 J, cite comparator, gate driver, thermal cutout, sum drive bus capacitance for pre-charge; HS200 mass (0.475) vs Electronics estimate.
 - **O-T9 (Electronics/Arbiter):** interlock exception for cell-at-risk faults.
+- **O-T12:** cited IPXXB blind-mate pack connector ≥ 100 A, plus cited connector masses.
+- **O-T13:** verify IEC 60664-1 table values; reinforced isolator parts.
 - **O-T11:** T-031 pad stroke at 25° obliquity (68 mm needed vs 53 mm).
 - **O-T10:** Sunon PF40281B1 static-pressure curve vs ~20 Pa vents+fins; fan PWM schedule.
 - O-T2 approved on citation (§13.1); O-T3 → contactor (§13.2); O-T5 re-rate proposed (§13.5).
