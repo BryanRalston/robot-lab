@@ -1,0 +1,1060 @@
+{
+ "generated_by": "modules/model/audit_v4.py",
+ "counts": {
+  "BUILDABLE": 4,
+  "FAIL": 2,
+  "PLACEHOLDER": 26
+ },
+ "missing_mechanism": [],
+ "standing": {
+  "clashes": [
+   [
+    "L_knee screw -y body (knee_body_x1)",
+    "L_knee screw +y body (knee_body_x1)",
+    1256.6
+   ],
+   [
+    "R_knee screw -y body (knee_body_x1)",
+    "R_knee screw +y body (knee_body_x1)",
+    1256.6
+   ]
+  ],
+  "floating": []
+ },
+ "combos": {
+  "sit hip-90 knee120": [
+   [
+    "L_knee screw -y body (knee_body_x1)",
+    "L_knee screw +y body (knee_body_x1)",
+    1256.6
+   ],
+   [
+    "R_knee screw -y body (knee_body_x1)",
+    "R_knee screw +y body (knee_body_x1)",
+    1256.6
+   ]
+  ],
+  "deep squat hip-100 knee135": [
+   [
+    "L_knee screw -y body (knee_body_x1)",
+    "L_knee screw +y body (knee_body_x1)",
+    1256.6
+   ],
+   [
+    "R_knee screw -y body (knee_body_x1)",
+    "R_knee screw +y body (knee_body_x1)",
+    1256.6
+   ]
+  ],
+  "stance ankle -45 + roll 18": [
+   [
+    "L_knee screw -y body (knee_body_x1)",
+    "L_knee screw +y body (knee_body_x1)",
+    1256.6
+   ],
+   [
+    "L_ankle screw -y GE12 C rod-end eye",
+    "L_instep lug r73 -y",
+    211.7
+   ],
+   [
+    "L_ankle screw +y RV12 roller-screw rod \u00f812",
+    "L_instep lug r73 +y",
+    6.4
+   ],
+   [
+    "L_ankle screw +y GE12 C rod-end eye",
+    "L_instep lug r73 +y",
+    61.0
+   ],
+   [
+    "R_knee screw -y body (knee_body_x1)",
+    "R_knee screw +y body (knee_body_x1)",
+    1256.6
+   ]
+  ],
+  "ankle +40 roll -18": [
+   [
+    "L_knee screw -y body (knee_body_x1)",
+    "L_knee screw +y body (knee_body_x1)",
+    1256.6
+   ],
+   [
+    "L_ankle screw -y RV12 roller-screw rod \u00f812",
+    "L_instep lug r73 -y",
+    19.5
+   ],
+   [
+    "L_ankle screw -y GE12 C rod-end eye",
+    "L_instep lug r73 -y",
+    61.0
+   ],
+   [
+    "L_ankle screw +y GE12 C rod-end eye",
+    "L_instep lug r73 +y",
+    211.7
+   ],
+   [
+    "R_knee screw -y body (knee_body_x1)",
+    "R_knee screw +y body (knee_body_x1)",
+    1256.6
+   ]
+  ]
+ },
+ "joints": [
+  {
+   "joint": "hip_yaw",
+   "region": "leg",
+   "bearing": "IKO CRBH 6013 A crossed-roller (inside Actuators hip_yaw_housing)",
+   "axis": "z (vertical) at hip centre +240 mm",
+   "actuation": "TBM2G-06008A + CSG-17-100 (CSG-2A) + CRBH 6013 A (rotary)",
+   "attachment": "housing bolted to pelvis deck [deck EST]; output flange -> yaw yoke plate [EST]",
+   "hard_stop": "internal soft limit; no mechanical stop modelled [EST needed]",
+   "status": "BUILDABLE",
+   "sources": [
+    "actuators/cad/hip_yaw_housing.step",
+    "actuators/results/sizing.json"
+   ],
+   "notes": "Yoke plate/cheek are [EST] brackets.",
+   "model_parts": [
+    "L_hip yaw housing (Actuators STEP, CRBH 6013 A output)"
+   ],
+   "sim_range": [
+    -35,
+    45
+   ],
+   "swept_clear": [
+    -35,
+    45
+   ],
+   "first_clash": [],
+   "arm_leg_contacts": [
+    -35,
+    -30
+   ],
+   "mechanism_present": true,
+   "range_clear": true
+  },
+  {
+   "joint": "hip_roll",
+   "region": "leg",
+   "bearing": "IKO CRBH 6013 A crossed-roller (inside Actuators hip_roll_housing)",
+   "axis": "x (fore-aft) at hip +125 mm",
+   "actuation": "TBM2G-08508A + CSG-25-100 (CSG-2A) + CRBH 6013 A (rotary)",
+   "attachment": "housing back face on yaw-yoke rear cheek; output face -> roll bracket web -> lever hub pads [EST]",
+   "hard_stop": "internal soft limit; mechanical stop not modelled [EST needed]",
+   "status": "BUILDABLE",
+   "sources": [
+    "actuators/cad/hip_roll_housing.step",
+    "actuators/results/sizing.json"
+   ],
+   "notes": "Housing is cantilevered from one cheek (CRBH carries the moment, unverified for this load path).",
+   "model_parts": [
+    "L_hip roll housing (Actuators STEP, CRBH output)"
+   ],
+   "sim_range": [
+    -12,
+    15
+   ],
+   "swept_clear": [
+    -12,
+    15
+   ],
+   "first_clash": [],
+   "arm_leg_contacts": [
+    -12,
+    15
+   ],
+   "mechanism_present": true,
+   "range_clear": true
+  },
+  {
+   "joint": "hip_pitch",
+   "region": "leg",
+   "bearing": "2x IKO TLA3520 Z needle bushes in lever cheeks, hardened shaft \u00f835/30x66 press-fit in femur tongue \u00f855x27 (D32/L21)",
+   "axis": "y (lateral) through hip centre",
+   "actuation": "TBM2G-07613D + 2\u00d7 RV12x4 roller screw, arm 50.0 mm; config B: lever r50 clock 60\u00b0 on roll output, bodies on thigh",
+   "attachment": "body end: axial GE12 C eye on \u00f812 pin in bonded split-collar clamp arm at (x30, z-300, y\u00b169); rod end: GE12 C on lever crossbar",
+   "hard_stop": "PU \u00f825x12 bumper at r80 (A6, hip_stop.json) engages at -104..-105\u00b0 (femur front face); toggle at -114.5\u00b0",
+   "status": "BUILDABLE",
+   "sources": [
+    "legs/results/r2/linkage_study.json",
+    "actuators/cad/hip_pitch_lever_B_needle_sf15.step",
+    "actuators/results/hp_pivot_needle.json",
+    "legs/DECISIONS.md L18 L21 L22 L35"
+   ],
+   "notes": "Pin-to-pin length 257.4-350.9 mm (stroke 93.6); Legs study stroke 86.6 over its -80..+40 bins. Lever strength O13 still OPEN (FEA v2/G2 queued): lever shown is config-B needle hub, not G2. Body-to-collar clearance 0.3 mm at stand (tight).",
+   "model_parts": [
+    "L_hip_pitch lever B needle hub (Actuators STEP; G2 rework queued)",
+    "L_hip_pitch shaft \u00f835/30 x66 hardened",
+    "L_IKO TLA3520 needle bush in",
+    "L_IKO TLA3520 needle bush out",
+    "L_hip_pitch -105\u00b0 PU bumper \u00f825x12 r80 (A6)",
+    "L_hip_pitch bumper arm (bracket web -> bumper) [EST]",
+    "L_clamp arm root -y (depth 34, r8)",
+    "L_clamp arm eye tine -yi [fork form EST]",
+    "L_clamp arm eye tine -yo [fork form EST]",
+    "L_clamp eye pin \u00f812x28 42CrMo4 -y",
+    "L_clamp arm root +y (depth 34, r8)",
+    "L_clamp arm eye tine +yi [fork form EST]",
+    "L_clamp arm eye tine +yo [fork form EST]",
+    "L_clamp eye pin \u00f812x28 42CrMo4 +y",
+    "L_hip_pitch screw -y axial GE12 C eye \u00f830x12 on body end",
+    "L_hip_pitch screw -y eye stub \u00f812 [EST]",
+    "L_hip_pitch screw -y eye stub flange \u00f830 [EST]",
+    "L_hip_pitch screw -y body (hip_pitch_body_x1)",
+    "L_hip_pitch screw -y RV12 roller-screw rod \u00f812",
+    "L_hip_pitch screw -y GE12 C rod-end eye",
+    "L_hip_pitch screw +y axial GE12 C eye \u00f830x12 on body end",
+    "L_hip_pitch screw +y eye stub \u00f812 [EST]",
+    "L_hip_pitch screw +y eye stub flange \u00f830 [EST]",
+    "L_hip_pitch screw +y body (hip_pitch_body_x1)",
+    "L_hip_pitch screw +y RV12 roller-screw rod \u00f812",
+    "L_hip_pitch screw +y GE12 C rod-end eye"
+   ],
+   "sim_range": [
+    -105,
+    40
+   ],
+   "swept_clear": [
+    -105,
+    40
+   ],
+   "first_clash": [],
+   "arm_leg_contacts": [],
+   "mechanism_present": true,
+   "range_clear": true
+  },
+  {
+   "joint": "knee",
+   "region": "leg",
+   "bearing": "\u00f816 pin through clevis cheeks (thigh) + tongue and lever cheeks (shank)",
+   "axis": "y at knee (z 500)",
+   "actuation": "TBM2G-07613D + 2\u00d7 RV12x5 roller screw, arm 47.5 mm; lever r47.5 clock 0\u00b0",
+   "attachment": "trunnion pins on thigh bracket at (x-130, +270) y\u00b145; GE12 C rod ends on the r47.5 crossbar",
+   "hard_stop": "none modelled: extension limit by the screw end-of-stroke; flexion limit = first clash [stop EST needed]",
+   "status": "FAIL",
+   "sources": [
+    "legs/results/r2/linkage_study.json",
+    "actuators/cad/knee_lever_r47p5.step",
+    "actuators/cad/knee_body_x1.step",
+    "actuators/cad_mass.py lever(dy=45)"
+   ],
+   "notes": "FAIL: at dy 45 the inner trunnion bosses of the twin bodies overlap (1257 mm\u00b3; bosses reach \u00b147 from each body axis). Both bodies share one trunnion axis, so the fix is kinematically free: merge the inner bosses into one twin housing, or widen dy past 47 mm plus room for an inner trunnion support (the Actuators lever(dy=45) would change). Pin-to-pin 255.3-343.1 mm (stroke 87.8; Legs study 87.8). Knee trunnion bracket geometry is [EST].",
+   "model_parts": [
+    "L_knee clevis cheeks + bridge (r8: bridge +16, R6)",
+    "L_knee clevis cheek -y",
+    "L_knee clevis cheek +y",
+    "L_knee pin \u00f816 (through clevis + lever cheeks)",
+    "L_knee tongue (shank)",
+    "L_knee tongue neck into tibia",
+    "L_knee lever r47.5 (Actuators STEP)",
+    "L_knee screw -y body (knee_body_x1)",
+    "L_knee screw -y RV12 roller-screw rod \u00f812",
+    "L_knee screw -y GE12 C rod-end eye",
+    "L_knee screw +y body (knee_body_x1)",
+    "L_knee screw +y RV12 roller-screw rod \u00f812",
+    "L_knee screw +y GE12 C rod-end eye",
+    "L_knee trunnion bracket top plate (thigh) [EST]",
+    "L_knee trunnion bracket strut to femur [EST]",
+    "L_knee trunnion cheek -y [EST]",
+    "L_knee trunnion pin \u00f89 -y",
+    "L_knee trunnion cheek +y [EST]",
+    "L_knee trunnion pin \u00f89 +y"
+   ],
+   "sim_range": [
+    0,
+    135
+   ],
+   "swept_clear": [
+    0,
+    135
+   ],
+   "first_clash": [],
+   "arm_leg_contacts": [],
+   "mechanism_present": true
+  },
+  {
+   "joint": "ankle_pitch",
+   "region": "leg",
+   "bearing": "Ti universal cross: \u00f812 pitch pin stubs in shank fork cheeks",
+   "axis": "y at ankle (z 80)",
+   "actuation": "TBM2G-06013D + 2\u00d7 RV12x4 roller screw, arm 73.0 mm (both screws in phase)",
+   "attachment": "trunnion pins \u00f89 at (x90, z410) y\u00b145 on shank bracket [bracket EST]; GE12 C rod ends on instep pins r73 (L23)",
+   "hard_stop": "screw end-of-stroke; no mechanical stop modelled",
+   "status": "BUILDABLE",
+   "sources": [
+    "actuators/results/ankle_stroke_73_r18_p45.json",
+    "legs/DECISIONS.md L23",
+    "actuators/cad/ankle_body_x1.step"
+   ],
+   "notes": "Actuators stroke check: Lmin 262.6 / Lmax 374.3 mm, margin 11.9 mm. Ankle body fins overlap its own trunnion bosses in the Actuators STEP (z 6-36 vs boss z 11-31) - check.",
+   "model_parts": [
+    "L_ankle screw -y body (ankle_body_x1)",
+    "L_ankle screw -y RV12 roller-screw rod \u00f812",
+    "L_ankle screw -y GE12 C rod-end eye",
+    "L_ankle screw +y body (ankle_body_x1)",
+    "L_ankle screw +y RV12 roller-screw rod \u00f812",
+    "L_ankle screw +y GE12 C rod-end eye",
+    "L_ankle cross Ti-6Al-4V",
+    "L_ankle pitch pin stub \u00f812 -y",
+    "L_ankle pitch pin stub \u00f812 +y"
+   ],
+   "sim_range": [
+    -45,
+    40
+   ],
+   "swept_clear": [
+    -45,
+    40
+   ],
+   "first_clash": [],
+   "arm_leg_contacts": [],
+   "mechanism_present": true,
+   "range_clear": true
+  },
+  {
+   "joint": "ankle_roll",
+   "region": "leg",
+   "bearing": "Ti universal cross: \u00f812 roll pin stubs in foot lugs (x axis)",
+   "axis": "x at ankle (z 80)",
+   "actuation": "TBM2G-06013D + 2\u00d7 RV12x4 roller screw, arm 73.0 mm (screws differential)",
+   "attachment": "same two screws; roll = differential stroke",
+   "hard_stop": "\u00b118\u00b0 hard stop: 4 blocks + 2 mm PU on a carrier under the cross, faces at r45 (a14.json) strike foot shoulders [shoulder geometry EST]",
+   "status": "FAIL",
+   "sources": [
+    "legs/results/r7/a14.json",
+    "actuators/results/ankle_stroke_73_r18_p45.json"
+   ],
+   "notes": "FAIL: the screw bodies tilt up to 1.8\u00b0 out of the sagittal plane at \u00b118\u00b0 roll, but their top mounts are y-axis pin trunnions (Actuators trunnion_pins_pair), which only allow sagittal swing. Needs a gimbal (2-axis) trunnion or a spherical GE12 top eye like the hip bodies.",
+   "model_parts": [
+    "L_ankle-roll \u00b118\u00b0 stop block 20x12x10 + 2 mm PU R-y (A14, face r45)",
+    "L_ankle-roll \u00b118\u00b0 stop block 20x12x10 + 2 mm PU R+y (A14, face r45)",
+    "L_ankle-roll \u00b118\u00b0 stop block 20x12x10 + 2 mm PU F-y (A14, face r45)",
+    "L_ankle-roll \u00b118\u00b0 stop block 20x12x10 + 2 mm PU F+y (A14, face r45)",
+    "L_ankle-roll stop carrier under cross [EST]",
+    "L_ankle roll pin stub \u00f812 R",
+    "L_foot roll lug R",
+    "L_ankle roll pin stub \u00f812 F",
+    "L_foot roll lug F"
+   ],
+   "sim_range": [
+    -18,
+    18
+   ],
+   "swept_clear": [
+    -18,
+    18
+   ],
+   "first_clash": [],
+   "arm_leg_contacts": [],
+   "mechanism_present": true
+  },
+  {
+   "joint": "waist_yaw",
+   "region": "upper",
+   "bearing": "crossed-roller bearing (OD 116 [EST])",
+   "axis": "z",
+   "actuation": "strain-wave (CSG-class) rotary actuator OD110 x L70 [EST]",
+   "attachment": "housing on pelvis deck; output -> waist yoke plate [EST]",
+   "hard_stop": "hard-stop lug on housing [EST]; set at the clash-free limit below",
+   "status": "PLACEHOLDER",
+   "sources": [
+    "v3/cad/model.py layout (catalog envelopes)"
+   ],
+   "notes": "No module has engineered this joint.",
+   "model_parts": [
+    "waist_yaw strain-wave housing (motor+CSG) OD110 [EST]",
+    "waist_yaw crossed-roller bearing [EST]",
+    "waist_yaw hard-stop lug [EST]"
+   ],
+   "sim_range": [
+    -90,
+    90
+   ],
+   "swept_clear": [
+    -90,
+    90
+   ],
+   "first_clash": [],
+   "arm_leg_contacts": [
+    -45,
+    -30,
+    -15,
+    15,
+    30,
+    45
+   ],
+   "mechanism_present": true,
+   "range_clear": true
+  },
+  {
+   "joint": "waist_pitch",
+   "region": "upper",
+   "bearing": "crossed-roller bearing (OD 106 [EST])",
+   "axis": "y",
+   "actuation": "strain-wave (CSG-class) rotary actuator OD100 x L110 [EST]",
+   "attachment": "housing on single yoke cheek (-y); output (+y) -> torso floor deck bracket [EST]",
+   "hard_stop": "hard-stop lug on housing [EST]; set at the clash-free limit below",
+   "status": "PLACEHOLDER",
+   "sources": [
+    "v3/cad/model.py layout (catalog envelopes)"
+   ],
+   "notes": "No module has engineered this joint.",
+   "model_parts": [
+    "waist_pitch strain-wave housing (motor+CSG) OD100 [EST]",
+    "waist_pitch crossed-roller bearing [EST]",
+    "waist_pitch hard-stop lug [EST]"
+   ],
+   "sim_range": [
+    -30,
+    60
+   ],
+   "swept_clear": [
+    -30,
+    60
+   ],
+   "first_clash": [],
+   "arm_leg_contacts": [],
+   "mechanism_present": true,
+   "range_clear": true
+  },
+  {
+   "joint": "shoulder_pitch",
+   "region": "upper",
+   "bearing": "crossed-roller bearing (OD 102 [EST])",
+   "axis": "y",
+   "actuation": "strain-wave (CSG-class) rotary actuator OD96 x L80 [EST]",
+   "attachment": "housing through torso side wall; output flange -> roll bracket [EST]",
+   "hard_stop": "hard-stop lug on housing [EST]; set at the clash-free limit below",
+   "status": "PLACEHOLDER",
+   "sources": [
+    "v3/cad/model.py layout (catalog envelopes)"
+   ],
+   "notes": "No module has engineered this joint.",
+   "model_parts": [
+    "L_shoulder_pitch strain-wave housing (motor+CSG) OD96 [EST]",
+    "L_shoulder_pitch crossed-roller bearing [EST]",
+    "L_shoulder_pitch hard-stop lug [EST]"
+   ],
+   "sim_range": [
+    -180,
+    60
+   ],
+   "swept_clear": [
+    -180,
+    60
+   ],
+   "first_clash": [],
+   "arm_leg_contacts": [],
+   "mechanism_present": true,
+   "range_clear": true
+  },
+  {
+   "joint": "shoulder_roll",
+   "region": "upper",
+   "bearing": "crossed-roller bearing (OD 90 [EST])",
+   "axis": "x",
+   "actuation": "strain-wave (CSG-class) rotary actuator OD84 x L80 [EST]",
+   "attachment": "housing on roll bracket; output -> roll-yaw link [EST]",
+   "hard_stop": "hard-stop lug on housing [EST]; set at the clash-free limit below",
+   "status": "PLACEHOLDER",
+   "sources": [
+    "v3/cad/model.py layout (catalog envelopes)"
+   ],
+   "notes": "No module has engineered this joint. Clash-free range -5..175\u00b0 vs -15..180\u00b0 required: hard stop must sit inside the clash-free range.",
+   "model_parts": [
+    "L_shoulder_roll strain-wave housing (motor+CSG) OD84 [EST]",
+    "L_shoulder_roll crossed-roller bearing [EST]",
+    "L_shoulder_roll hard-stop lug [EST]"
+   ],
+   "sim_range": [
+    -15,
+    180
+   ],
+   "swept_clear": [
+    -5,
+    175
+   ],
+   "first_clash": [
+    [
+     -10,
+     [
+      [
+       "pelvis shell 7075 4 mm (open top/bottom)",
+       "L_elbow clevis [EST]"
+      ],
+      [
+       "pelvis shell 7075 4 mm (open top/bottom)",
+       "L_elbow strain-wave housing (motor+CSG) OD72 [EST]"
+      ],
+      [
+       "pelvis shell 7075 4 mm (open top/bottom)",
+       "L_forearm shell (6 tendon drives inside) [EST]"
+      ]
+     ]
+    ],
+    [
+     180,
+     [
+      [
+       "L_shoulder pitch output flange [EST]",
+       "L_roll-yaw link [EST]"
+      ]
+     ]
+    ]
+   ],
+   "arm_leg_contacts": [
+    -15,
+    -10,
+    -5
+   ],
+   "mechanism_present": true,
+   "range_clear": false
+  },
+  {
+   "joint": "shoulder_yaw",
+   "region": "upper",
+   "bearing": "crossed-roller bearing (OD 82 [EST])",
+   "axis": "z",
+   "actuation": "strain-wave (CSG-class) rotary actuator OD76 x L64 [EST]",
+   "attachment": "housing on roll-yaw link; output -> upper-arm tube [EST]",
+   "hard_stop": "hard-stop lug on housing [EST]; set at the clash-free limit below",
+   "status": "PLACEHOLDER",
+   "sources": [
+    "v3/cad/model.py layout (catalog envelopes)"
+   ],
+   "notes": "No module has engineered this joint.",
+   "model_parts": [
+    "L_shoulder_yaw strain-wave housing (motor+CSG) OD76 [EST]",
+    "L_shoulder_yaw crossed-roller bearing [EST]",
+    "L_shoulder_yaw hard-stop lug [EST]"
+   ],
+   "sim_range": [
+    -150,
+    150
+   ],
+   "swept_clear": [
+    -150,
+    150
+   ],
+   "first_clash": [],
+   "arm_leg_contacts": [
+    -90
+   ],
+   "mechanism_present": true,
+   "range_clear": true
+  },
+  {
+   "joint": "elbow",
+   "region": "upper",
+   "bearing": "crossed-roller bearing (OD 78 [EST])",
+   "axis": "y",
+   "actuation": "strain-wave (CSG-class) rotary actuator OD72 x L66 [EST]",
+   "attachment": "housing in forearm; elbow clevis on upper arm [EST]",
+   "hard_stop": "hard-stop lug on housing [EST]; set at the clash-free limit below",
+   "status": "PLACEHOLDER",
+   "sources": [
+    "v3/cad/model.py layout (catalog envelopes)"
+   ],
+   "notes": "No module has engineered this joint. Clash-free range -115..0\u00b0 vs -140..0\u00b0 required: hard stop must sit inside the clash-free range.",
+   "model_parts": [
+    "L_elbow clevis [EST]",
+    "L_elbow strain-wave housing (motor+CSG) OD72 [EST]",
+    "L_elbow crossed-roller bearing [EST]",
+    "L_elbow hard-stop lug [EST]"
+   ],
+   "sim_range": [
+    -140,
+    0
+   ],
+   "swept_clear": [
+    -115,
+    0
+   ],
+   "first_clash": [
+    [
+     -120,
+     [
+      [
+       "L_upper arm tube 7075 \u00f850x2 [EST]",
+       "L_forearm shell (6 tendon drives inside) [EST]"
+      ]
+     ]
+    ]
+   ],
+   "arm_leg_contacts": [],
+   "mechanism_present": true,
+   "range_clear": false
+  },
+  {
+   "joint": "wrist_roll",
+   "region": "upper",
+   "bearing": "crossed-roller bearing (OD 62 [EST])",
+   "axis": "z",
+   "actuation": "strain-wave (CSG-class) rotary actuator OD56 x L34 [EST]",
+   "attachment": "housing in forearm end cap; output -> wrist fork [EST]",
+   "hard_stop": "hard-stop lug on housing [EST]; set at the clash-free limit below",
+   "status": "PLACEHOLDER",
+   "sources": [
+    "v3/cad/model.py layout (catalog envelopes)"
+   ],
+   "notes": "No module has engineered this joint.",
+   "model_parts": [
+    "L_wrist_roll strain-wave housing (motor+CSG) OD56 [EST]",
+    "L_wrist_roll crossed-roller bearing [EST]",
+    "L_wrist_roll hard-stop lug [EST]"
+   ],
+   "sim_range": [
+    -170,
+    170
+   ],
+   "swept_clear": [
+    -170,
+    170
+   ],
+   "first_clash": [],
+   "arm_leg_contacts": [
+    -90
+   ],
+   "mechanism_present": true,
+   "range_clear": true
+  },
+  {
+   "joint": "wrist_pitch",
+   "region": "upper",
+   "bearing": "plain pin/cross pivot [EST]",
+   "axis": "y",
+   "actuation": "remote micro strain-wave drive + push rods [EST]",
+   "attachment": "pin \u00f86 in wrist fork; driven by micro strain-wave drive in forearm via push rods [EST]",
+   "hard_stop": "hard-stop lug on housing [EST]; set at the clash-free limit below",
+   "status": "PLACEHOLDER",
+   "sources": [
+    "v3/cad/model.py layout (catalog envelopes)"
+   ],
+   "notes": "No module has engineered this joint. Clash-free range -40..40\u00b0 vs -70..70\u00b0 required: hard stop must sit inside the clash-free range.",
+   "model_parts": [
+    "L_wrist pitch/yaw cross (2x micro strain-wave drive in forearm, push rods) [EST]",
+    "L_wrist pitch pin \u00f86 [EST]"
+   ],
+   "sim_range": [
+    -70,
+    70
+   ],
+   "swept_clear": [
+    -40,
+    40
+   ],
+   "first_clash": [
+    [
+     -45,
+     [
+      [
+       "L_wrist roll output fork [EST]",
+       "L_palm (7075 skeleton + PA12) [EST]"
+      ]
+     ]
+    ],
+    [
+     45,
+     [
+      [
+       "L_wrist roll output fork [EST]",
+       "L_palm (7075 skeleton + PA12) [EST]"
+      ]
+     ]
+    ]
+   ],
+   "arm_leg_contacts": [],
+   "mechanism_present": true,
+   "range_clear": false
+  },
+  {
+   "joint": "wrist_yaw",
+   "region": "upper",
+   "bearing": "plain pin/cross pivot [EST]",
+   "axis": "x",
+   "actuation": "remote micro strain-wave drive + push rods [EST]",
+   "attachment": "cross pin in palm lug; driven like wrist_pitch [EST]",
+   "hard_stop": "hard-stop lug on housing [EST]; set at the clash-free limit below",
+   "status": "PLACEHOLDER",
+   "sources": [
+    "v3/cad/model.py layout (catalog envelopes)"
+   ],
+   "notes": "No module has engineered this joint. Clash-free range -25..25\u00b0 vs -40..40\u00b0 required: hard stop must sit inside the clash-free range.",
+   "model_parts": [
+    "L_wrist pitch/yaw cross (2x micro strain-wave drive in forearm, push rods) [EST]",
+    "L_wrist pitch pin \u00f86 [EST]"
+   ],
+   "sim_range": [
+    -40,
+    40
+   ],
+   "swept_clear": [
+    -25,
+    25
+   ],
+   "first_clash": [
+    [
+     -30,
+     [
+      [
+       "L_wrist roll output fork [EST]",
+       "L_palm (7075 skeleton + PA12) [EST]"
+      ]
+     ]
+    ],
+    [
+     30,
+     [
+      [
+       "L_wrist roll output fork [EST]",
+       "L_palm (7075 skeleton + PA12) [EST]"
+      ]
+     ]
+    ]
+   ],
+   "arm_leg_contacts": [
+    -30,
+    -25,
+    -20,
+    -15
+   ],
+   "mechanism_present": true,
+   "range_clear": false
+  },
+  {
+   "joint": "neck_yaw",
+   "region": "neck",
+   "bearing": "crossed-roller bearing (OD 66 [EST])",
+   "axis": "z",
+   "actuation": "strain-wave (CSG-class) rotary actuator OD60 x L40 [EST]",
+   "attachment": "housing in torso top; output -> neck yoke [EST]",
+   "hard_stop": "hard-stop lug on housing [EST]; set at the clash-free limit below",
+   "status": "PLACEHOLDER",
+   "sources": [
+    "v3/cad/model.py layout (catalog envelopes)"
+   ],
+   "notes": "No module has engineered this joint.",
+   "model_parts": [
+    "neck_yaw strain-wave housing (motor+CSG) OD60 [EST]",
+    "neck_yaw crossed-roller bearing [EST]",
+    "neck_yaw hard-stop lug [EST]"
+   ],
+   "sim_range": [
+    -80,
+    80
+   ],
+   "swept_clear": [
+    -80,
+    80
+   ],
+   "first_clash": [],
+   "arm_leg_contacts": [],
+   "mechanism_present": true,
+   "range_clear": true
+  },
+  {
+   "joint": "neck_pitch",
+   "region": "neck",
+   "bearing": "crossed-roller bearing (OD 56 [EST])",
+   "axis": "y",
+   "actuation": "strain-wave (CSG-class) rotary actuator OD50 x L60 [EST]",
+   "attachment": "housing in neck yoke; output -> head deck [EST]",
+   "hard_stop": "hard-stop lug on housing [EST]; set at the clash-free limit below",
+   "status": "PLACEHOLDER",
+   "sources": [
+    "v3/cad/model.py layout (catalog envelopes)"
+   ],
+   "notes": "No module has engineered this joint.",
+   "model_parts": [
+    "neck_pitch strain-wave housing (motor+CSG) OD50 [EST]",
+    "neck_pitch crossed-roller bearing [EST]",
+    "neck_pitch hard-stop lug [EST]"
+   ],
+   "sim_range": [
+    -40,
+    40
+   ],
+   "swept_clear": [
+    -40,
+    40
+   ],
+   "first_clash": [],
+   "arm_leg_contacts": [],
+   "mechanism_present": true,
+   "range_clear": true
+  },
+  {
+   "joint": "finger1_j1",
+   "region": "hand",
+   "bearing": "pin joint [EST]",
+   "axis": "y (flexion)",
+   "actuation": "Dyneema tendon from forearm drive (v3 hand) [EST]",
+   "attachment": "tendon over idler [EST]",
+   "hard_stop": "phalanx end faces [EST]",
+   "status": "PLACEHOLDER",
+   "sources": [
+    "v3/cad/model.py build_hand"
+   ],
+   "notes": "Not swept (hand is one rigid body in the model).",
+   "model_parts": [
+    "L_finger1 phalanx1 [EST]"
+   ],
+   "mechanism_present": true
+  },
+  {
+   "joint": "finger1_j2",
+   "region": "hand",
+   "bearing": "pin joint [EST]",
+   "axis": "y (flexion)",
+   "actuation": "Dyneema tendon from forearm drive (v3 hand) [EST]",
+   "attachment": "tendon over idler [EST]",
+   "hard_stop": "phalanx end faces [EST]",
+   "status": "PLACEHOLDER",
+   "sources": [
+    "v3/cad/model.py build_hand"
+   ],
+   "notes": "Not swept (hand is one rigid body in the model).",
+   "model_parts": [
+    "L_finger1 phalanx2 [EST]"
+   ],
+   "mechanism_present": true
+  },
+  {
+   "joint": "finger1_j3",
+   "region": "hand",
+   "bearing": "pin joint [EST]",
+   "axis": "y (flexion)",
+   "actuation": "Dyneema tendon from forearm drive (v3 hand) [EST]",
+   "attachment": "tendon over idler [EST]",
+   "hard_stop": "phalanx end faces [EST]",
+   "status": "PLACEHOLDER",
+   "sources": [
+    "v3/cad/model.py build_hand"
+   ],
+   "notes": "Not swept (hand is one rigid body in the model).",
+   "model_parts": [
+    "L_finger1 phalanx3 [EST]"
+   ],
+   "mechanism_present": true
+  },
+  {
+   "joint": "finger2_j1",
+   "region": "hand",
+   "bearing": "pin joint [EST]",
+   "axis": "y (flexion)",
+   "actuation": "Dyneema tendon from forearm drive (v3 hand) [EST]",
+   "attachment": "tendon over idler [EST]",
+   "hard_stop": "phalanx end faces [EST]",
+   "status": "PLACEHOLDER",
+   "sources": [
+    "v3/cad/model.py build_hand"
+   ],
+   "notes": "Not swept (hand is one rigid body in the model).",
+   "model_parts": [
+    "L_finger2 phalanx1 [EST]"
+   ],
+   "mechanism_present": true
+  },
+  {
+   "joint": "finger2_j2",
+   "region": "hand",
+   "bearing": "pin joint [EST]",
+   "axis": "y (flexion)",
+   "actuation": "Dyneema tendon from forearm drive (v3 hand) [EST]",
+   "attachment": "tendon over idler [EST]",
+   "hard_stop": "phalanx end faces [EST]",
+   "status": "PLACEHOLDER",
+   "sources": [
+    "v3/cad/model.py build_hand"
+   ],
+   "notes": "Not swept (hand is one rigid body in the model).",
+   "model_parts": [
+    "L_finger2 phalanx2 [EST]"
+   ],
+   "mechanism_present": true
+  },
+  {
+   "joint": "finger2_j3",
+   "region": "hand",
+   "bearing": "pin joint [EST]",
+   "axis": "y (flexion)",
+   "actuation": "Dyneema tendon from forearm drive (v3 hand) [EST]",
+   "attachment": "tendon over idler [EST]",
+   "hard_stop": "phalanx end faces [EST]",
+   "status": "PLACEHOLDER",
+   "sources": [
+    "v3/cad/model.py build_hand"
+   ],
+   "notes": "Not swept (hand is one rigid body in the model).",
+   "model_parts": [
+    "L_finger2 phalanx3 [EST]"
+   ],
+   "mechanism_present": true
+  },
+  {
+   "joint": "finger3_j1",
+   "region": "hand",
+   "bearing": "pin joint [EST]",
+   "axis": "y (flexion)",
+   "actuation": "Dyneema tendon from forearm drive (v3 hand) [EST]",
+   "attachment": "tendon over idler [EST]",
+   "hard_stop": "phalanx end faces [EST]",
+   "status": "PLACEHOLDER",
+   "sources": [
+    "v3/cad/model.py build_hand"
+   ],
+   "notes": "Not swept (hand is one rigid body in the model).",
+   "model_parts": [
+    "L_finger3 phalanx1 [EST]"
+   ],
+   "mechanism_present": true
+  },
+  {
+   "joint": "finger3_j2",
+   "region": "hand",
+   "bearing": "pin joint [EST]",
+   "axis": "y (flexion)",
+   "actuation": "Dyneema tendon from forearm drive (v3 hand) [EST]",
+   "attachment": "tendon over idler [EST]",
+   "hard_stop": "phalanx end faces [EST]",
+   "status": "PLACEHOLDER",
+   "sources": [
+    "v3/cad/model.py build_hand"
+   ],
+   "notes": "Not swept (hand is one rigid body in the model).",
+   "model_parts": [
+    "L_finger3 phalanx2 [EST]"
+   ],
+   "mechanism_present": true
+  },
+  {
+   "joint": "finger3_j3",
+   "region": "hand",
+   "bearing": "pin joint [EST]",
+   "axis": "y (flexion)",
+   "actuation": "Dyneema tendon from forearm drive (v3 hand) [EST]",
+   "attachment": "tendon over idler [EST]",
+   "hard_stop": "phalanx end faces [EST]",
+   "status": "PLACEHOLDER",
+   "sources": [
+    "v3/cad/model.py build_hand"
+   ],
+   "notes": "Not swept (hand is one rigid body in the model).",
+   "model_parts": [
+    "L_finger3 phalanx3 [EST]"
+   ],
+   "mechanism_present": true
+  },
+  {
+   "joint": "finger4_j1",
+   "region": "hand",
+   "bearing": "pin joint [EST]",
+   "axis": "y (flexion)",
+   "actuation": "Dyneema tendon from forearm drive (v3 hand) [EST]",
+   "attachment": "tendon over idler [EST]",
+   "hard_stop": "phalanx end faces [EST]",
+   "status": "PLACEHOLDER",
+   "sources": [
+    "v3/cad/model.py build_hand"
+   ],
+   "notes": "Not swept (hand is one rigid body in the model).",
+   "model_parts": [
+    "L_finger4 phalanx1 [EST]"
+   ],
+   "mechanism_present": true
+  },
+  {
+   "joint": "finger4_j2",
+   "region": "hand",
+   "bearing": "pin joint [EST]",
+   "axis": "y (flexion)",
+   "actuation": "Dyneema tendon from forearm drive (v3 hand) [EST]",
+   "attachment": "tendon over idler [EST]",
+   "hard_stop": "phalanx end faces [EST]",
+   "status": "PLACEHOLDER",
+   "sources": [
+    "v3/cad/model.py build_hand"
+   ],
+   "notes": "Not swept (hand is one rigid body in the model).",
+   "model_parts": [
+    "L_finger4 phalanx2 [EST]"
+   ],
+   "mechanism_present": true
+  },
+  {
+   "joint": "finger4_j3",
+   "region": "hand",
+   "bearing": "pin joint [EST]",
+   "axis": "y (flexion)",
+   "actuation": "Dyneema tendon from forearm drive (v3 hand) [EST]",
+   "attachment": "tendon over idler [EST]",
+   "hard_stop": "phalanx end faces [EST]",
+   "status": "PLACEHOLDER",
+   "sources": [
+    "v3/cad/model.py build_hand"
+   ],
+   "notes": "Not swept (hand is one rigid body in the model).",
+   "model_parts": [
+    "L_finger4 phalanx3 [EST]"
+   ],
+   "mechanism_present": true
+  },
+  {
+   "joint": "thumb_j1",
+   "region": "hand",
+   "bearing": "pin joint [EST]",
+   "axis": "z [EST]",
+   "actuation": "Dyneema tendon from forearm drive (v3 hand) [EST]",
+   "attachment": "tendon over idler [EST]",
+   "hard_stop": "phalanx end faces [EST]",
+   "status": "PLACEHOLDER",
+   "sources": [
+    "v3/cad/model.py build_hand"
+   ],
+   "notes": "Not swept (hand is one rigid body in the model).",
+   "model_parts": [
+    "L_thumb phalanx1 [EST]"
+   ],
+   "mechanism_present": true
+  },
+  {
+   "joint": "thumb_j2",
+   "region": "hand",
+   "bearing": "pin joint [EST]",
+   "axis": "z [EST]",
+   "actuation": "Dyneema tendon from forearm drive (v3 hand) [EST]",
+   "attachment": "tendon over idler [EST]",
+   "hard_stop": "phalanx end faces [EST]",
+   "status": "PLACEHOLDER",
+   "sources": [
+    "v3/cad/model.py build_hand"
+   ],
+   "notes": "Not swept (hand is one rigid body in the model).",
+   "model_parts": [
+    "L_thumb phalanx2 [EST]"
+   ],
+   "mechanism_present": true
+  },
+  {
+   "joint": "thumb_j3",
+   "region": "hand",
+   "bearing": "pin joint [EST]",
+   "axis": "z [EST]",
+   "actuation": "Dyneema tendon from forearm drive (v3 hand) [EST]",
+   "attachment": "tendon over idler [EST]",
+   "hard_stop": "phalanx end faces [EST]",
+   "status": "PLACEHOLDER",
+   "sources": [
+    "v3/cad/model.py build_hand"
+   ],
+   "notes": "Not swept (hand is one rigid body in the model).",
+   "model_parts": [
+    "L_thumb phalanx3 [EST]"
+   ],
+   "mechanism_present": true
+  }
+ ],
+ "note": "Leg joints are per side (left listed; right is the mirror). Upper-body/hand joints are per side where applicable."
+}

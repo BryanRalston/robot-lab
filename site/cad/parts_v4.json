@@ -1,0 +1,4155 @@
+[
+{
+"node": "p000",
+"name": "pelvis shell 7075 4 mm (open top/bottom)",
+"seg": "pelvis",
+"group": "structure",
+"est": false,
+"joints": []
+},
+{
+"node": "p001",
+"name": "waist_yaw strain-wave housing (motor+CSG) OD110 [EST]",
+"seg": "pelvis",
+"group": "actuator",
+"est": true,
+"joints": []
+},
+{
+"node": "p002",
+"name": "waist_yaw crossed-roller bearing [EST]",
+"seg": "pelvis",
+"group": "bearing",
+"est": true,
+"joints": []
+},
+{
+"node": "p003",
+"name": "waist_yaw hard-stop lug [EST]",
+"seg": "pelvis",
+"group": "stop",
+"est": true,
+"joints": []
+},
+{
+"node": "p004",
+"name": "waist yaw output yoke plate [EST]",
+"seg": "waistY",
+"group": "structure",
+"est": true,
+"joints": [
+"waist_yaw"
+]
+},
+{
+"node": "p005",
+"name": "waist yoke cheek -y (pitch housing back face) [EST]",
+"seg": "waistY",
+"group": "structure",
+"est": true,
+"joints": [
+"waist_yaw"
+]
+},
+{
+"node": "p006",
+"name": "waist_pitch strain-wave housing (motor+CSG) OD100 [EST]",
+"seg": "waistY",
+"group": "actuator",
+"est": true,
+"joints": [
+"waist_yaw"
+]
+},
+{
+"node": "p007",
+"name": "waist_pitch crossed-roller bearing [EST]",
+"seg": "waistY",
+"group": "bearing",
+"est": true,
+"joints": [
+"waist_yaw"
+]
+},
+{
+"node": "p008",
+"name": "waist_pitch hard-stop lug [EST]",
+"seg": "waistY",
+"group": "stop",
+"est": true,
+"joints": [
+"waist_yaw"
+]
+},
+{
+"node": "p009",
+"name": "torso shell CFRP 3 mm (open bottom)",
+"seg": "torso",
+"group": "structure",
+"est": false,
+"joints": [
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p010",
+"name": "torso waist bracket (on pitch output +y) [EST]",
+"seg": "torso",
+"group": "structure",
+"est": true,
+"joints": [
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p011",
+"name": "battery pack 13S Molicel P45B",
+"seg": "torso",
+"group": "power",
+"est": false,
+"joints": [
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p012",
+"name": "compute bay Jetson AGX Thor",
+"seg": "torso",
+"group": "electronics",
+"est": false,
+"joints": [
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p013",
+"name": "L_shoulder_pitch strain-wave housing (motor+CSG) OD96 [EST]",
+"seg": "torso",
+"group": "actuator",
+"est": true,
+"joints": [
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p014",
+"name": "L_shoulder_pitch crossed-roller bearing [EST]",
+"seg": "torso",
+"group": "bearing",
+"est": true,
+"joints": [
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p015",
+"name": "L_shoulder_pitch hard-stop lug [EST]",
+"seg": "torso",
+"group": "stop",
+"est": true,
+"joints": [
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p016",
+"name": "L_shoulder pitch output flange [EST]",
+"seg": "L_shP",
+"group": "structure",
+"est": true,
+"joints": [
+"L_shoulder_pitch",
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p017",
+"name": "L_shoulder roll bracket [EST]",
+"seg": "L_shP",
+"group": "structure",
+"est": true,
+"joints": [
+"L_shoulder_pitch",
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p018",
+"name": "L_shoulder_roll strain-wave housing (motor+CSG) OD84 [EST]",
+"seg": "L_shP",
+"group": "actuator",
+"est": true,
+"joints": [
+"L_shoulder_pitch",
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p019",
+"name": "L_shoulder_roll crossed-roller bearing [EST]",
+"seg": "L_shP",
+"group": "bearing",
+"est": true,
+"joints": [
+"L_shoulder_pitch",
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p020",
+"name": "L_shoulder_roll hard-stop lug [EST]",
+"seg": "L_shP",
+"group": "stop",
+"est": true,
+"joints": [
+"L_shoulder_pitch",
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p021",
+"name": "L_roll-yaw link [EST]",
+"seg": "L_shR",
+"group": "structure",
+"est": true,
+"joints": [
+"L_shoulder_pitch",
+"L_shoulder_roll",
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p022",
+"name": "L_shoulder_yaw strain-wave housing (motor+CSG) OD76 [EST]",
+"seg": "L_shR",
+"group": "actuator",
+"est": true,
+"joints": [
+"L_shoulder_pitch",
+"L_shoulder_roll",
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p023",
+"name": "L_shoulder_yaw crossed-roller bearing [EST]",
+"seg": "L_shR",
+"group": "bearing",
+"est": true,
+"joints": [
+"L_shoulder_pitch",
+"L_shoulder_roll",
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p024",
+"name": "L_shoulder_yaw hard-stop lug [EST]",
+"seg": "L_shR",
+"group": "stop",
+"est": true,
+"joints": [
+"L_shoulder_pitch",
+"L_shoulder_roll",
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p025",
+"name": "L_upper arm tube 7075 \u00f850x2 [EST]",
+"seg": "L_uarm",
+"group": "structure",
+"est": true,
+"joints": [
+"L_shoulder_pitch",
+"L_shoulder_roll",
+"L_shoulder_yaw",
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p026",
+"name": "L_elbow clevis [EST]",
+"seg": "L_uarm",
+"group": "structure",
+"est": true,
+"joints": [
+"L_shoulder_pitch",
+"L_shoulder_roll",
+"L_shoulder_yaw",
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p027",
+"name": "L_elbow strain-wave housing (motor+CSG) OD72 [EST]",
+"seg": "L_farm",
+"group": "actuator",
+"est": true,
+"joints": [
+"L_elbow",
+"L_shoulder_pitch",
+"L_shoulder_roll",
+"L_shoulder_yaw",
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p028",
+"name": "L_elbow crossed-roller bearing [EST]",
+"seg": "L_farm",
+"group": "bearing",
+"est": true,
+"joints": [
+"L_elbow",
+"L_shoulder_pitch",
+"L_shoulder_roll",
+"L_shoulder_yaw",
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p029",
+"name": "L_elbow hard-stop lug [EST]",
+"seg": "L_farm",
+"group": "stop",
+"est": true,
+"joints": [
+"L_elbow",
+"L_shoulder_pitch",
+"L_shoulder_roll",
+"L_shoulder_yaw",
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p030",
+"name": "L_forearm shell (6 tendon drives inside) [EST]",
+"seg": "L_farm",
+"group": "structure",
+"est": true,
+"joints": [
+"L_elbow",
+"L_shoulder_pitch",
+"L_shoulder_roll",
+"L_shoulder_yaw",
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p031",
+"name": "L_wrist_roll strain-wave housing (motor+CSG) OD56 [EST]",
+"seg": "L_farm",
+"group": "actuator",
+"est": true,
+"joints": [
+"L_elbow",
+"L_shoulder_pitch",
+"L_shoulder_roll",
+"L_shoulder_yaw",
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p032",
+"name": "L_wrist_roll crossed-roller bearing [EST]",
+"seg": "L_farm",
+"group": "bearing",
+"est": true,
+"joints": [
+"L_elbow",
+"L_shoulder_pitch",
+"L_shoulder_roll",
+"L_shoulder_yaw",
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p033",
+"name": "L_wrist_roll hard-stop lug [EST]",
+"seg": "L_farm",
+"group": "stop",
+"est": true,
+"joints": [
+"L_elbow",
+"L_shoulder_pitch",
+"L_shoulder_roll",
+"L_shoulder_yaw",
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p034",
+"name": "L_forearm wrist end cap [EST]",
+"seg": "L_farm",
+"group": "structure",
+"est": true,
+"joints": [
+"L_elbow",
+"L_shoulder_pitch",
+"L_shoulder_roll",
+"L_shoulder_yaw",
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p035",
+"name": "L_wrist pitch/yaw cross (2x micro strain-wave drive in forearm, push rods) [EST]",
+"seg": "L_wP",
+"group": "structure",
+"est": true,
+"joints": [
+"L_elbow",
+"L_shoulder_pitch",
+"L_shoulder_roll",
+"L_shoulder_yaw",
+"L_wrist_pitch",
+"L_wrist_roll",
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p036",
+"name": "L_wrist roll output fork [EST]",
+"seg": "L_wR",
+"group": "structure",
+"est": true,
+"joints": [
+"L_elbow",
+"L_shoulder_pitch",
+"L_shoulder_roll",
+"L_shoulder_yaw",
+"L_wrist_roll",
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p037",
+"name": "L_wrist pitch pin \u00f86 [EST]",
+"seg": "L_wP",
+"group": "bearing",
+"est": true,
+"joints": [
+"L_elbow",
+"L_shoulder_pitch",
+"L_shoulder_roll",
+"L_shoulder_yaw",
+"L_wrist_pitch",
+"L_wrist_roll",
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p038",
+"name": "L_palm (7075 skeleton + PA12) [EST]",
+"seg": "L_hand",
+"group": "structure",
+"est": true,
+"joints": [
+"L_elbow",
+"L_shoulder_pitch",
+"L_shoulder_roll",
+"L_shoulder_yaw",
+"L_wrist_pitch",
+"L_wrist_roll",
+"L_wrist_yaw",
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p039",
+"name": "L_palm wrist lug [EST]",
+"seg": "L_hand",
+"group": "structure",
+"est": true,
+"joints": [
+"L_elbow",
+"L_shoulder_pitch",
+"L_shoulder_roll",
+"L_shoulder_yaw",
+"L_wrist_pitch",
+"L_wrist_roll",
+"L_wrist_yaw",
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p040",
+"name": "L_finger1 phalanx1 [EST]",
+"seg": "L_hand",
+"group": "structure",
+"est": true,
+"joints": [
+"L_elbow",
+"L_shoulder_pitch",
+"L_shoulder_roll",
+"L_shoulder_yaw",
+"L_wrist_pitch",
+"L_wrist_roll",
+"L_wrist_yaw",
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p041",
+"name": "L_finger1 phalanx2 [EST]",
+"seg": "L_hand",
+"group": "structure",
+"est": true,
+"joints": [
+"L_elbow",
+"L_shoulder_pitch",
+"L_shoulder_roll",
+"L_shoulder_yaw",
+"L_wrist_pitch",
+"L_wrist_roll",
+"L_wrist_yaw",
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p042",
+"name": "L_finger1 phalanx3 [EST]",
+"seg": "L_hand",
+"group": "structure",
+"est": true,
+"joints": [
+"L_elbow",
+"L_shoulder_pitch",
+"L_shoulder_roll",
+"L_shoulder_yaw",
+"L_wrist_pitch",
+"L_wrist_roll",
+"L_wrist_yaw",
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p043",
+"name": "L_finger2 phalanx1 [EST]",
+"seg": "L_hand",
+"group": "structure",
+"est": true,
+"joints": [
+"L_elbow",
+"L_shoulder_pitch",
+"L_shoulder_roll",
+"L_shoulder_yaw",
+"L_wrist_pitch",
+"L_wrist_roll",
+"L_wrist_yaw",
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p044",
+"name": "L_finger2 phalanx2 [EST]",
+"seg": "L_hand",
+"group": "structure",
+"est": true,
+"joints": [
+"L_elbow",
+"L_shoulder_pitch",
+"L_shoulder_roll",
+"L_shoulder_yaw",
+"L_wrist_pitch",
+"L_wrist_roll",
+"L_wrist_yaw",
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p045",
+"name": "L_finger2 phalanx3 [EST]",
+"seg": "L_hand",
+"group": "structure",
+"est": true,
+"joints": [
+"L_elbow",
+"L_shoulder_pitch",
+"L_shoulder_roll",
+"L_shoulder_yaw",
+"L_wrist_pitch",
+"L_wrist_roll",
+"L_wrist_yaw",
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p046",
+"name": "L_finger3 phalanx1 [EST]",
+"seg": "L_hand",
+"group": "structure",
+"est": true,
+"joints": [
+"L_elbow",
+"L_shoulder_pitch",
+"L_shoulder_roll",
+"L_shoulder_yaw",
+"L_wrist_pitch",
+"L_wrist_roll",
+"L_wrist_yaw",
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p047",
+"name": "L_finger3 phalanx2 [EST]",
+"seg": "L_hand",
+"group": "structure",
+"est": true,
+"joints": [
+"L_elbow",
+"L_shoulder_pitch",
+"L_shoulder_roll",
+"L_shoulder_yaw",
+"L_wrist_pitch",
+"L_wrist_roll",
+"L_wrist_yaw",
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p048",
+"name": "L_finger3 phalanx3 [EST]",
+"seg": "L_hand",
+"group": "structure",
+"est": true,
+"joints": [
+"L_elbow",
+"L_shoulder_pitch",
+"L_shoulder_roll",
+"L_shoulder_yaw",
+"L_wrist_pitch",
+"L_wrist_roll",
+"L_wrist_yaw",
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p049",
+"name": "L_finger4 phalanx1 [EST]",
+"seg": "L_hand",
+"group": "structure",
+"est": true,
+"joints": [
+"L_elbow",
+"L_shoulder_pitch",
+"L_shoulder_roll",
+"L_shoulder_yaw",
+"L_wrist_pitch",
+"L_wrist_roll",
+"L_wrist_yaw",
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p050",
+"name": "L_finger4 phalanx2 [EST]",
+"seg": "L_hand",
+"group": "structure",
+"est": true,
+"joints": [
+"L_elbow",
+"L_shoulder_pitch",
+"L_shoulder_roll",
+"L_shoulder_yaw",
+"L_wrist_pitch",
+"L_wrist_roll",
+"L_wrist_yaw",
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p051",
+"name": "L_finger4 phalanx3 [EST]",
+"seg": "L_hand",
+"group": "structure",
+"est": true,
+"joints": [
+"L_elbow",
+"L_shoulder_pitch",
+"L_shoulder_roll",
+"L_shoulder_yaw",
+"L_wrist_pitch",
+"L_wrist_roll",
+"L_wrist_yaw",
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p052",
+"name": "L_thumb phalanx1 [EST]",
+"seg": "L_hand",
+"group": "structure",
+"est": true,
+"joints": [
+"L_elbow",
+"L_shoulder_pitch",
+"L_shoulder_roll",
+"L_shoulder_yaw",
+"L_wrist_pitch",
+"L_wrist_roll",
+"L_wrist_yaw",
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p053",
+"name": "L_thumb phalanx2 [EST]",
+"seg": "L_hand",
+"group": "structure",
+"est": true,
+"joints": [
+"L_elbow",
+"L_shoulder_pitch",
+"L_shoulder_roll",
+"L_shoulder_yaw",
+"L_wrist_pitch",
+"L_wrist_roll",
+"L_wrist_yaw",
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p054",
+"name": "L_thumb phalanx3 [EST]",
+"seg": "L_hand",
+"group": "structure",
+"est": true,
+"joints": [
+"L_elbow",
+"L_shoulder_pitch",
+"L_shoulder_roll",
+"L_shoulder_yaw",
+"L_wrist_pitch",
+"L_wrist_roll",
+"L_wrist_yaw",
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p055",
+"name": "R_shoulder_pitch strain-wave housing (motor+CSG) OD96 [EST]",
+"seg": "torso",
+"group": "actuator",
+"est": true,
+"joints": [
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p056",
+"name": "R_shoulder_pitch crossed-roller bearing [EST]",
+"seg": "torso",
+"group": "bearing",
+"est": true,
+"joints": [
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p057",
+"name": "R_shoulder_pitch hard-stop lug [EST]",
+"seg": "torso",
+"group": "stop",
+"est": true,
+"joints": [
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p058",
+"name": "R_shoulder pitch output flange [EST]",
+"seg": "R_shP",
+"group": "structure",
+"est": true,
+"joints": [
+"R_shoulder_pitch",
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p059",
+"name": "R_shoulder roll bracket [EST]",
+"seg": "R_shP",
+"group": "structure",
+"est": true,
+"joints": [
+"R_shoulder_pitch",
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p060",
+"name": "R_shoulder_roll strain-wave housing (motor+CSG) OD84 [EST]",
+"seg": "R_shP",
+"group": "actuator",
+"est": true,
+"joints": [
+"R_shoulder_pitch",
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p061",
+"name": "R_shoulder_roll crossed-roller bearing [EST]",
+"seg": "R_shP",
+"group": "bearing",
+"est": true,
+"joints": [
+"R_shoulder_pitch",
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p062",
+"name": "R_shoulder_roll hard-stop lug [EST]",
+"seg": "R_shP",
+"group": "stop",
+"est": true,
+"joints": [
+"R_shoulder_pitch",
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p063",
+"name": "R_roll-yaw link [EST]",
+"seg": "R_shR",
+"group": "structure",
+"est": true,
+"joints": [
+"R_shoulder_pitch",
+"R_shoulder_roll",
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p064",
+"name": "R_shoulder_yaw strain-wave housing (motor+CSG) OD76 [EST]",
+"seg": "R_shR",
+"group": "actuator",
+"est": true,
+"joints": [
+"R_shoulder_pitch",
+"R_shoulder_roll",
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p065",
+"name": "R_shoulder_yaw crossed-roller bearing [EST]",
+"seg": "R_shR",
+"group": "bearing",
+"est": true,
+"joints": [
+"R_shoulder_pitch",
+"R_shoulder_roll",
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p066",
+"name": "R_shoulder_yaw hard-stop lug [EST]",
+"seg": "R_shR",
+"group": "stop",
+"est": true,
+"joints": [
+"R_shoulder_pitch",
+"R_shoulder_roll",
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p067",
+"name": "R_upper arm tube 7075 \u00f850x2 [EST]",
+"seg": "R_uarm",
+"group": "structure",
+"est": true,
+"joints": [
+"R_shoulder_pitch",
+"R_shoulder_roll",
+"R_shoulder_yaw",
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p068",
+"name": "R_elbow clevis [EST]",
+"seg": "R_uarm",
+"group": "structure",
+"est": true,
+"joints": [
+"R_shoulder_pitch",
+"R_shoulder_roll",
+"R_shoulder_yaw",
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p069",
+"name": "R_elbow strain-wave housing (motor+CSG) OD72 [EST]",
+"seg": "R_farm",
+"group": "actuator",
+"est": true,
+"joints": [
+"R_elbow",
+"R_shoulder_pitch",
+"R_shoulder_roll",
+"R_shoulder_yaw",
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p070",
+"name": "R_elbow crossed-roller bearing [EST]",
+"seg": "R_farm",
+"group": "bearing",
+"est": true,
+"joints": [
+"R_elbow",
+"R_shoulder_pitch",
+"R_shoulder_roll",
+"R_shoulder_yaw",
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p071",
+"name": "R_elbow hard-stop lug [EST]",
+"seg": "R_farm",
+"group": "stop",
+"est": true,
+"joints": [
+"R_elbow",
+"R_shoulder_pitch",
+"R_shoulder_roll",
+"R_shoulder_yaw",
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p072",
+"name": "R_forearm shell (6 tendon drives inside) [EST]",
+"seg": "R_farm",
+"group": "structure",
+"est": true,
+"joints": [
+"R_elbow",
+"R_shoulder_pitch",
+"R_shoulder_roll",
+"R_shoulder_yaw",
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p073",
+"name": "R_wrist_roll strain-wave housing (motor+CSG) OD56 [EST]",
+"seg": "R_farm",
+"group": "actuator",
+"est": true,
+"joints": [
+"R_elbow",
+"R_shoulder_pitch",
+"R_shoulder_roll",
+"R_shoulder_yaw",
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p074",
+"name": "R_wrist_roll crossed-roller bearing [EST]",
+"seg": "R_farm",
+"group": "bearing",
+"est": true,
+"joints": [
+"R_elbow",
+"R_shoulder_pitch",
+"R_shoulder_roll",
+"R_shoulder_yaw",
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p075",
+"name": "R_wrist_roll hard-stop lug [EST]",
+"seg": "R_farm",
+"group": "stop",
+"est": true,
+"joints": [
+"R_elbow",
+"R_shoulder_pitch",
+"R_shoulder_roll",
+"R_shoulder_yaw",
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p076",
+"name": "R_forearm wrist end cap [EST]",
+"seg": "R_farm",
+"group": "structure",
+"est": true,
+"joints": [
+"R_elbow",
+"R_shoulder_pitch",
+"R_shoulder_roll",
+"R_shoulder_yaw",
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p077",
+"name": "R_wrist pitch/yaw cross (2x micro strain-wave drive in forearm, push rods) [EST]",
+"seg": "R_wP",
+"group": "structure",
+"est": true,
+"joints": [
+"R_elbow",
+"R_shoulder_pitch",
+"R_shoulder_roll",
+"R_shoulder_yaw",
+"R_wrist_pitch",
+"R_wrist_roll",
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p078",
+"name": "R_wrist roll output fork [EST]",
+"seg": "R_wR",
+"group": "structure",
+"est": true,
+"joints": [
+"R_elbow",
+"R_shoulder_pitch",
+"R_shoulder_roll",
+"R_shoulder_yaw",
+"R_wrist_roll",
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p079",
+"name": "R_wrist pitch pin \u00f86 [EST]",
+"seg": "R_wP",
+"group": "bearing",
+"est": true,
+"joints": [
+"R_elbow",
+"R_shoulder_pitch",
+"R_shoulder_roll",
+"R_shoulder_yaw",
+"R_wrist_pitch",
+"R_wrist_roll",
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p080",
+"name": "R_palm (7075 skeleton + PA12) [EST]",
+"seg": "R_hand",
+"group": "structure",
+"est": true,
+"joints": [
+"R_elbow",
+"R_shoulder_pitch",
+"R_shoulder_roll",
+"R_shoulder_yaw",
+"R_wrist_pitch",
+"R_wrist_roll",
+"R_wrist_yaw",
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p081",
+"name": "R_palm wrist lug [EST]",
+"seg": "R_hand",
+"group": "structure",
+"est": true,
+"joints": [
+"R_elbow",
+"R_shoulder_pitch",
+"R_shoulder_roll",
+"R_shoulder_yaw",
+"R_wrist_pitch",
+"R_wrist_roll",
+"R_wrist_yaw",
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p082",
+"name": "R_finger1 phalanx1 [EST]",
+"seg": "R_hand",
+"group": "structure",
+"est": true,
+"joints": [
+"R_elbow",
+"R_shoulder_pitch",
+"R_shoulder_roll",
+"R_shoulder_yaw",
+"R_wrist_pitch",
+"R_wrist_roll",
+"R_wrist_yaw",
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p083",
+"name": "R_finger1 phalanx2 [EST]",
+"seg": "R_hand",
+"group": "structure",
+"est": true,
+"joints": [
+"R_elbow",
+"R_shoulder_pitch",
+"R_shoulder_roll",
+"R_shoulder_yaw",
+"R_wrist_pitch",
+"R_wrist_roll",
+"R_wrist_yaw",
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p084",
+"name": "R_finger1 phalanx3 [EST]",
+"seg": "R_hand",
+"group": "structure",
+"est": true,
+"joints": [
+"R_elbow",
+"R_shoulder_pitch",
+"R_shoulder_roll",
+"R_shoulder_yaw",
+"R_wrist_pitch",
+"R_wrist_roll",
+"R_wrist_yaw",
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p085",
+"name": "R_finger2 phalanx1 [EST]",
+"seg": "R_hand",
+"group": "structure",
+"est": true,
+"joints": [
+"R_elbow",
+"R_shoulder_pitch",
+"R_shoulder_roll",
+"R_shoulder_yaw",
+"R_wrist_pitch",
+"R_wrist_roll",
+"R_wrist_yaw",
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p086",
+"name": "R_finger2 phalanx2 [EST]",
+"seg": "R_hand",
+"group": "structure",
+"est": true,
+"joints": [
+"R_elbow",
+"R_shoulder_pitch",
+"R_shoulder_roll",
+"R_shoulder_yaw",
+"R_wrist_pitch",
+"R_wrist_roll",
+"R_wrist_yaw",
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p087",
+"name": "R_finger2 phalanx3 [EST]",
+"seg": "R_hand",
+"group": "structure",
+"est": true,
+"joints": [
+"R_elbow",
+"R_shoulder_pitch",
+"R_shoulder_roll",
+"R_shoulder_yaw",
+"R_wrist_pitch",
+"R_wrist_roll",
+"R_wrist_yaw",
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p088",
+"name": "R_finger3 phalanx1 [EST]",
+"seg": "R_hand",
+"group": "structure",
+"est": true,
+"joints": [
+"R_elbow",
+"R_shoulder_pitch",
+"R_shoulder_roll",
+"R_shoulder_yaw",
+"R_wrist_pitch",
+"R_wrist_roll",
+"R_wrist_yaw",
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p089",
+"name": "R_finger3 phalanx2 [EST]",
+"seg": "R_hand",
+"group": "structure",
+"est": true,
+"joints": [
+"R_elbow",
+"R_shoulder_pitch",
+"R_shoulder_roll",
+"R_shoulder_yaw",
+"R_wrist_pitch",
+"R_wrist_roll",
+"R_wrist_yaw",
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p090",
+"name": "R_finger3 phalanx3 [EST]",
+"seg": "R_hand",
+"group": "structure",
+"est": true,
+"joints": [
+"R_elbow",
+"R_shoulder_pitch",
+"R_shoulder_roll",
+"R_shoulder_yaw",
+"R_wrist_pitch",
+"R_wrist_roll",
+"R_wrist_yaw",
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p091",
+"name": "R_finger4 phalanx1 [EST]",
+"seg": "R_hand",
+"group": "structure",
+"est": true,
+"joints": [
+"R_elbow",
+"R_shoulder_pitch",
+"R_shoulder_roll",
+"R_shoulder_yaw",
+"R_wrist_pitch",
+"R_wrist_roll",
+"R_wrist_yaw",
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p092",
+"name": "R_finger4 phalanx2 [EST]",
+"seg": "R_hand",
+"group": "structure",
+"est": true,
+"joints": [
+"R_elbow",
+"R_shoulder_pitch",
+"R_shoulder_roll",
+"R_shoulder_yaw",
+"R_wrist_pitch",
+"R_wrist_roll",
+"R_wrist_yaw",
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p093",
+"name": "R_finger4 phalanx3 [EST]",
+"seg": "R_hand",
+"group": "structure",
+"est": true,
+"joints": [
+"R_elbow",
+"R_shoulder_pitch",
+"R_shoulder_roll",
+"R_shoulder_yaw",
+"R_wrist_pitch",
+"R_wrist_roll",
+"R_wrist_yaw",
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p094",
+"name": "R_thumb phalanx1 [EST]",
+"seg": "R_hand",
+"group": "structure",
+"est": true,
+"joints": [
+"R_elbow",
+"R_shoulder_pitch",
+"R_shoulder_roll",
+"R_shoulder_yaw",
+"R_wrist_pitch",
+"R_wrist_roll",
+"R_wrist_yaw",
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p095",
+"name": "R_thumb phalanx2 [EST]",
+"seg": "R_hand",
+"group": "structure",
+"est": true,
+"joints": [
+"R_elbow",
+"R_shoulder_pitch",
+"R_shoulder_roll",
+"R_shoulder_yaw",
+"R_wrist_pitch",
+"R_wrist_roll",
+"R_wrist_yaw",
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p096",
+"name": "R_thumb phalanx3 [EST]",
+"seg": "R_hand",
+"group": "structure",
+"est": true,
+"joints": [
+"R_elbow",
+"R_shoulder_pitch",
+"R_shoulder_roll",
+"R_shoulder_yaw",
+"R_wrist_pitch",
+"R_wrist_roll",
+"R_wrist_yaw",
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p097",
+"name": "neck_yaw strain-wave housing (motor+CSG) OD60 [EST]",
+"seg": "torso",
+"group": "actuator",
+"est": true,
+"joints": [
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p098",
+"name": "neck_yaw crossed-roller bearing [EST]",
+"seg": "torso",
+"group": "bearing",
+"est": true,
+"joints": [
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p099",
+"name": "neck_yaw hard-stop lug [EST]",
+"seg": "torso",
+"group": "stop",
+"est": true,
+"joints": [
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p100",
+"name": "neck yoke [EST]",
+"seg": "neckY",
+"group": "structure",
+"est": true,
+"joints": [
+"neck_yaw",
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p101",
+"name": "neck_pitch strain-wave housing (motor+CSG) OD50 [EST]",
+"seg": "head",
+"group": "actuator",
+"est": true,
+"joints": [
+"neck_pitch",
+"neck_yaw",
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p102",
+"name": "neck_pitch crossed-roller bearing [EST]",
+"seg": "head",
+"group": "bearing",
+"est": true,
+"joints": [
+"neck_pitch",
+"neck_yaw",
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p103",
+"name": "neck_pitch hard-stop lug [EST]",
+"seg": "head",
+"group": "stop",
+"est": true,
+"joints": [
+"neck_pitch",
+"neck_yaw",
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p104",
+"name": "head shell PA12/CF [EST]",
+"seg": "head",
+"group": "structure",
+"est": true,
+"joints": [
+"neck_pitch",
+"neck_yaw",
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p105",
+"name": "head neck mount deck [EST]",
+"seg": "head",
+"group": "structure",
+"est": true,
+"joints": [
+"neck_pitch",
+"neck_yaw",
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p106",
+"name": "stereo camera [EST]",
+"seg": "head",
+"group": "sensor",
+"est": true,
+"joints": [
+"neck_pitch",
+"neck_yaw",
+"waist_pitch",
+"waist_yaw"
+]
+},
+{
+"node": "p107",
+"name": "L_hip yaw housing (Actuators STEP, CRBH 6013 A output)",
+"seg": "pelvis",
+"group": "actuator",
+"est": false,
+"joints": []
+},
+{
+"node": "p108",
+"name": "hip yaw + waist mount deck (pelvis) [EST]",
+"seg": "pelvis",
+"group": "structure",
+"est": true,
+"joints": []
+},
+{
+"node": "p109",
+"name": "L_hip yaw output yoke plate [EST]",
+"seg": "L_hipY",
+"group": "structure",
+"est": true,
+"joints": [
+"L_hip_yaw"
+]
+},
+{
+"node": "p110",
+"name": "L_hip yaw yoke rear cheek (roll housing back face) [EST]",
+"seg": "L_hipY",
+"group": "structure",
+"est": true,
+"joints": [
+"L_hip_yaw"
+]
+},
+{
+"node": "p111",
+"name": "L_hip roll housing (Actuators STEP, CRBH output)",
+"seg": "L_hipY",
+"group": "actuator",
+"est": false,
+"joints": [
+"L_hip_yaw"
+]
+},
+{
+"node": "p112",
+"name": "L_roll-output bracket web (on roll output face) [EST]",
+"seg": "L_hipR",
+"group": "structure",
+"est": true,
+"joints": [
+"L_hip_roll",
+"L_hip_yaw"
+]
+},
+{
+"node": "p113",
+"name": "L_roll-output bracket web leg -y (slot |y|<26.5 for tongue neck + femur at deep flexion) [EST]",
+"seg": "L_hipR",
+"group": "structure",
+"est": true,
+"joints": [
+"L_hip_roll",
+"L_hip_yaw"
+]
+},
+{
+"node": "p114",
+"name": "L_roll-output bracket pad -y (bolts to lever cheek top) [EST]",
+"seg": "L_hipR",
+"group": "structure",
+"est": true,
+"joints": [
+"L_hip_roll",
+"L_hip_yaw"
+]
+},
+{
+"node": "p115",
+"name": "L_roll-output bracket web leg +y (slot |y|<26.5 for tongue neck + femur at deep flexion) [EST]",
+"seg": "L_hipR",
+"group": "structure",
+"est": true,
+"joints": [
+"L_hip_roll",
+"L_hip_yaw"
+]
+},
+{
+"node": "p116",
+"name": "L_roll-output bracket pad +y (bolts to lever cheek top) [EST]",
+"seg": "L_hipR",
+"group": "structure",
+"est": true,
+"joints": [
+"L_hip_roll",
+"L_hip_yaw"
+]
+},
+{
+"node": "p117",
+"name": "L_hip_pitch lever B needle hub (Actuators STEP; G2 rework queued)",
+"seg": "L_hipR",
+"group": "linkage",
+"est": false,
+"joints": [
+"L_hip_roll",
+"L_hip_yaw"
+]
+},
+{
+"node": "p118",
+"name": "L_hip_pitch shaft \u00f835/30 x66 hardened",
+"seg": "L_thigh",
+"group": "bearing",
+"est": false,
+"joints": [
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw"
+]
+},
+{
+"node": "p119",
+"name": "L_IKO TLA3520 needle bush in",
+"seg": "L_thigh",
+"group": "bearing",
+"est": false,
+"joints": [
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw"
+]
+},
+{
+"node": "p120",
+"name": "L_IKO TLA3520 needle bush out",
+"seg": "L_thigh",
+"group": "bearing",
+"est": false,
+"joints": [
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw"
+]
+},
+{
+"node": "p121",
+"name": "L_hip_pitch -105\u00b0 PU bumper \u00f825x12 r80 (A6)",
+"seg": "L_hipR",
+"group": "stop",
+"est": false,
+"joints": [
+"L_hip_roll",
+"L_hip_yaw"
+]
+},
+{
+"node": "p122",
+"name": "L_hip_pitch bumper arm (bracket web -> bumper) [EST]",
+"seg": "L_hipR",
+"group": "structure",
+"est": true,
+"joints": [
+"L_hip_roll",
+"L_hip_yaw"
+]
+},
+{
+"node": "p123",
+"name": "L_femur tongue \u00f855x27 (\u00f835 press-fit bore)",
+"seg": "L_thigh",
+"group": "structure",
+"est": false,
+"joints": [
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw"
+]
+},
+{
+"node": "p124",
+"name": "L_femur tongue neck (55 mm, L36)",
+"seg": "L_thigh",
+"group": "structure",
+"est": false,
+"joints": [
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw"
+]
+},
+{
+"node": "p125",
+"name": "L_femur tube 7075 \u00f850x1.2",
+"seg": "L_thigh",
+"group": "structure",
+"est": false,
+"joints": [
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw"
+]
+},
+{
+"node": "p126",
+"name": "L_femur internal doubler sleeve 0.5x100 (r8)",
+"seg": "L_thigh",
+"group": "structure",
+"est": false,
+"joints": [
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw"
+]
+},
+{
+"node": "p127",
+"name": "L_thigh split collar \u00f864 L34 bonded (DP490) + sleeve + 2x \u00f86 pins",
+"seg": "L_thigh",
+"group": "structure",
+"est": false,
+"joints": [
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw"
+]
+},
+{
+"node": "p128",
+"name": "L_clamp arm root -y (depth 34, r8)",
+"seg": "L_thigh",
+"group": "structure",
+"est": false,
+"joints": [
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw"
+]
+},
+{
+"node": "p129",
+"name": "L_clamp arm eye tine -yi [fork form EST]",
+"seg": "L_thigh",
+"group": "structure",
+"est": false,
+"joints": [
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw"
+]
+},
+{
+"node": "p130",
+"name": "L_clamp arm eye tine -yo [fork form EST]",
+"seg": "L_thigh",
+"group": "structure",
+"est": false,
+"joints": [
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw"
+]
+},
+{
+"node": "p131",
+"name": "L_clamp eye pin \u00f812x28 42CrMo4 -y",
+"seg": "L_thigh",
+"group": "bearing",
+"est": false,
+"joints": [
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw"
+]
+},
+{
+"node": "p132",
+"name": "L_clamp arm root +y (depth 34, r8)",
+"seg": "L_thigh",
+"group": "structure",
+"est": false,
+"joints": [
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw"
+]
+},
+{
+"node": "p133",
+"name": "L_clamp arm eye tine +yi [fork form EST]",
+"seg": "L_thigh",
+"group": "structure",
+"est": false,
+"joints": [
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw"
+]
+},
+{
+"node": "p134",
+"name": "L_clamp arm eye tine +yo [fork form EST]",
+"seg": "L_thigh",
+"group": "structure",
+"est": false,
+"joints": [
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw"
+]
+},
+{
+"node": "p135",
+"name": "L_clamp eye pin \u00f812x28 42CrMo4 +y",
+"seg": "L_thigh",
+"group": "bearing",
+"est": false,
+"joints": [
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw"
+]
+},
+{
+"node": "p136",
+"name": "L_hip_pitch screw -y axial GE12 C eye \u00f830x12 on body end",
+"seg": "L_thigh",
+"group": "bearing",
+"est": false,
+"joints": [
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw"
+]
+},
+{
+"node": "p137",
+"name": "L_hip_pitch screw -y eye stub \u00f812 [EST]",
+"seg": "L_thigh",
+"group": "actuator",
+"est": false,
+"joints": [
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw"
+]
+},
+{
+"node": "p138",
+"name": "L_hip_pitch screw -y eye stub flange \u00f830 [EST]",
+"seg": "L_thigh",
+"group": "actuator",
+"est": false,
+"joints": [
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw"
+]
+},
+{
+"node": "p139",
+"name": "L_hip_pitch screw -y body (hip_pitch_body_x1)",
+"seg": "L_thigh",
+"group": "actuator",
+"est": false,
+"joints": [
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw"
+]
+},
+{
+"node": "p140",
+"name": "L_hip_pitch screw -y RV12 roller-screw rod \u00f812",
+"seg": "L_hipR",
+"group": "actuator",
+"est": false,
+"joints": [
+"L_hip_roll",
+"L_hip_yaw"
+]
+},
+{
+"node": "p141",
+"name": "L_hip_pitch screw -y GE12 C rod-end eye",
+"seg": "L_hipR",
+"group": "bearing",
+"est": false,
+"joints": [
+"L_hip_roll",
+"L_hip_yaw"
+]
+},
+{
+"node": "p142",
+"name": "L_hip_pitch screw +y axial GE12 C eye \u00f830x12 on body end",
+"seg": "L_thigh",
+"group": "bearing",
+"est": false,
+"joints": [
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw"
+]
+},
+{
+"node": "p143",
+"name": "L_hip_pitch screw +y eye stub \u00f812 [EST]",
+"seg": "L_thigh",
+"group": "actuator",
+"est": false,
+"joints": [
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw"
+]
+},
+{
+"node": "p144",
+"name": "L_hip_pitch screw +y eye stub flange \u00f830 [EST]",
+"seg": "L_thigh",
+"group": "actuator",
+"est": false,
+"joints": [
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw"
+]
+},
+{
+"node": "p145",
+"name": "L_hip_pitch screw +y body (hip_pitch_body_x1)",
+"seg": "L_thigh",
+"group": "actuator",
+"est": false,
+"joints": [
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw"
+]
+},
+{
+"node": "p146",
+"name": "L_hip_pitch screw +y RV12 roller-screw rod \u00f812",
+"seg": "L_hipR",
+"group": "actuator",
+"est": false,
+"joints": [
+"L_hip_roll",
+"L_hip_yaw"
+]
+},
+{
+"node": "p147",
+"name": "L_hip_pitch screw +y GE12 C rod-end eye",
+"seg": "L_hipR",
+"group": "bearing",
+"est": false,
+"joints": [
+"L_hip_roll",
+"L_hip_yaw"
+]
+},
+{
+"node": "p148",
+"name": "L_knee clevis cheeks + bridge (r8: bridge +16, R6)",
+"seg": "L_thigh",
+"group": "structure",
+"est": false,
+"joints": [
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw"
+]
+},
+{
+"node": "p149",
+"name": "L_knee clevis cheek -y",
+"seg": "L_thigh",
+"group": "structure",
+"est": false,
+"joints": [
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw"
+]
+},
+{
+"node": "p150",
+"name": "L_knee clevis cheek +y",
+"seg": "L_thigh",
+"group": "structure",
+"est": false,
+"joints": [
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw"
+]
+},
+{
+"node": "p151",
+"name": "L_knee pin \u00f816 (through clevis + lever cheeks)",
+"seg": "L_shank",
+"group": "bearing",
+"est": false,
+"joints": [
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw",
+"L_knee"
+]
+},
+{
+"node": "p152",
+"name": "L_knee tongue (shank)",
+"seg": "L_shank",
+"group": "structure",
+"est": false,
+"joints": [
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw",
+"L_knee"
+]
+},
+{
+"node": "p153",
+"name": "L_knee tongue neck into tibia",
+"seg": "L_shank",
+"group": "structure",
+"est": false,
+"joints": [
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw",
+"L_knee"
+]
+},
+{
+"node": "p154",
+"name": "L_knee lever r47.5 (Actuators STEP)",
+"seg": "L_shank",
+"group": "linkage",
+"est": false,
+"joints": [
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw",
+"L_knee"
+]
+},
+{
+"node": "p155",
+"name": "L_knee screw -y body (knee_body_x1)",
+"seg": "L_thigh",
+"group": "actuator",
+"est": false,
+"joints": [
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw"
+]
+},
+{
+"node": "p156",
+"name": "L_knee screw -y RV12 roller-screw rod \u00f812",
+"seg": "L_shank",
+"group": "actuator",
+"est": false,
+"joints": [
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw",
+"L_knee"
+]
+},
+{
+"node": "p157",
+"name": "L_knee screw -y GE12 C rod-end eye",
+"seg": "L_shank",
+"group": "bearing",
+"est": false,
+"joints": [
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw",
+"L_knee"
+]
+},
+{
+"node": "p158",
+"name": "L_knee screw +y body (knee_body_x1)",
+"seg": "L_thigh",
+"group": "actuator",
+"est": false,
+"joints": [
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw"
+]
+},
+{
+"node": "p159",
+"name": "L_knee screw +y RV12 roller-screw rod \u00f812",
+"seg": "L_shank",
+"group": "actuator",
+"est": false,
+"joints": [
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw",
+"L_knee"
+]
+},
+{
+"node": "p160",
+"name": "L_knee screw +y GE12 C rod-end eye",
+"seg": "L_shank",
+"group": "bearing",
+"est": false,
+"joints": [
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw",
+"L_knee"
+]
+},
+{
+"node": "p161",
+"name": "L_knee trunnion bracket top plate (thigh) [EST]",
+"seg": "L_thigh",
+"group": "structure",
+"est": true,
+"joints": [
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw"
+]
+},
+{
+"node": "p162",
+"name": "L_knee trunnion bracket strut to femur [EST]",
+"seg": "L_thigh",
+"group": "structure",
+"est": true,
+"joints": [
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw"
+]
+},
+{
+"node": "p163",
+"name": "L_knee trunnion cheek -y [EST]",
+"seg": "L_thigh",
+"group": "structure",
+"est": true,
+"joints": [
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw"
+]
+},
+{
+"node": "p164",
+"name": "L_knee trunnion pin \u00f89 -y",
+"seg": "L_thigh",
+"group": "bearing",
+"est": false,
+"joints": [
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw"
+]
+},
+{
+"node": "p165",
+"name": "L_knee trunnion cheek +y [EST]",
+"seg": "L_thigh",
+"group": "structure",
+"est": true,
+"joints": [
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw"
+]
+},
+{
+"node": "p166",
+"name": "L_knee trunnion pin \u00f89 +y",
+"seg": "L_thigh",
+"group": "bearing",
+"est": false,
+"joints": [
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw"
+]
+},
+{
+"node": "p167",
+"name": "L_tibia tube 7075 \u00f845x1.2",
+"seg": "L_shank",
+"group": "structure",
+"est": false,
+"joints": [
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw",
+"L_knee"
+]
+},
+{
+"node": "p168",
+"name": "L_tibia internal doubler sleeve 0.5x100 (r8)",
+"seg": "L_shank",
+"group": "structure",
+"est": false,
+"joints": [
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw",
+"L_knee"
+]
+},
+{
+"node": "p169",
+"name": "L_ankle fork bridge",
+"seg": "L_shank",
+"group": "structure",
+"est": false,
+"joints": [
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw",
+"L_knee"
+]
+},
+{
+"node": "p170",
+"name": "L_ankle fork cheek -y",
+"seg": "L_shank",
+"group": "structure",
+"est": false,
+"joints": [
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw",
+"L_knee"
+]
+},
+{
+"node": "p171",
+"name": "L_ankle fork cheek +y",
+"seg": "L_shank",
+"group": "structure",
+"est": false,
+"joints": [
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw",
+"L_knee"
+]
+},
+{
+"node": "p172",
+"name": "L_ankle screw -y body (ankle_body_x1)",
+"seg": "L_shank",
+"group": "actuator",
+"est": false,
+"joints": [
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw",
+"L_knee"
+]
+},
+{
+"node": "p173",
+"name": "L_ankle screw -y RV12 roller-screw rod \u00f812",
+"seg": "L_foot",
+"group": "actuator",
+"est": false,
+"joints": [
+"L_ankle_pitch",
+"L_ankle_roll",
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw",
+"L_knee"
+]
+},
+{
+"node": "p174",
+"name": "L_ankle screw -y GE12 C rod-end eye",
+"seg": "L_foot",
+"group": "bearing",
+"est": false,
+"joints": [
+"L_ankle_pitch",
+"L_ankle_roll",
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw",
+"L_knee"
+]
+},
+{
+"node": "p175",
+"name": "L_ankle screw +y body (ankle_body_x1)",
+"seg": "L_shank",
+"group": "actuator",
+"est": false,
+"joints": [
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw",
+"L_knee"
+]
+},
+{
+"node": "p176",
+"name": "L_ankle screw +y RV12 roller-screw rod \u00f812",
+"seg": "L_foot",
+"group": "actuator",
+"est": false,
+"joints": [
+"L_ankle_pitch",
+"L_ankle_roll",
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw",
+"L_knee"
+]
+},
+{
+"node": "p177",
+"name": "L_ankle screw +y GE12 C rod-end eye",
+"seg": "L_foot",
+"group": "bearing",
+"est": false,
+"joints": [
+"L_ankle_pitch",
+"L_ankle_roll",
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw",
+"L_knee"
+]
+},
+{
+"node": "p178",
+"name": "L_ankle trunnion bracket top plate (shank) [EST]",
+"seg": "L_shank",
+"group": "structure",
+"est": true,
+"joints": [
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw",
+"L_knee"
+]
+},
+{
+"node": "p179",
+"name": "L_ankle trunnion bracket strut to tibia [EST]",
+"seg": "L_shank",
+"group": "structure",
+"est": true,
+"joints": [
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw",
+"L_knee"
+]
+},
+{
+"node": "p180",
+"name": "L_ankle trunnion centre plate 12 mm [EST]",
+"seg": "L_shank",
+"group": "structure",
+"est": true,
+"joints": [
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw",
+"L_knee"
+]
+},
+{
+"node": "p181",
+"name": "L_ankle trunnion cheek -y [EST]",
+"seg": "L_shank",
+"group": "structure",
+"est": true,
+"joints": [
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw",
+"L_knee"
+]
+},
+{
+"node": "p182",
+"name": "L_ankle trunnion pin \u00f89 -y in",
+"seg": "L_shank",
+"group": "bearing",
+"est": false,
+"joints": [
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw",
+"L_knee"
+]
+},
+{
+"node": "p183",
+"name": "L_ankle trunnion pin \u00f89 -y out",
+"seg": "L_shank",
+"group": "bearing",
+"est": false,
+"joints": [
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw",
+"L_knee"
+]
+},
+{
+"node": "p184",
+"name": "L_ankle trunnion cheek +y [EST]",
+"seg": "L_shank",
+"group": "structure",
+"est": true,
+"joints": [
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw",
+"L_knee"
+]
+},
+{
+"node": "p185",
+"name": "L_ankle trunnion pin \u00f89 +y in",
+"seg": "L_shank",
+"group": "bearing",
+"est": false,
+"joints": [
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw",
+"L_knee"
+]
+},
+{
+"node": "p186",
+"name": "L_ankle trunnion pin \u00f89 +y out",
+"seg": "L_shank",
+"group": "bearing",
+"est": false,
+"joints": [
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw",
+"L_knee"
+]
+},
+{
+"node": "p187",
+"name": "L_ankle cross Ti-6Al-4V",
+"seg": "L_ankX",
+"group": "structure",
+"est": false,
+"joints": [
+"L_ankle_pitch",
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw",
+"L_knee"
+]
+},
+{
+"node": "p188",
+"name": "L_ankle pitch pin stub \u00f812 -y",
+"seg": "L_ankX",
+"group": "bearing",
+"est": false,
+"joints": [
+"L_ankle_pitch",
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw",
+"L_knee"
+]
+},
+{
+"node": "p189",
+"name": "L_ankle pitch pin stub \u00f812 +y",
+"seg": "L_ankX",
+"group": "bearing",
+"est": false,
+"joints": [
+"L_ankle_pitch",
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw",
+"L_knee"
+]
+},
+{
+"node": "p190",
+"name": "L_ankle-roll \u00b118\u00b0 stop block 20x12x10 + 2 mm PU R-y (A14, face r45)",
+"seg": "L_ankX",
+"group": "stop",
+"est": false,
+"joints": [
+"L_ankle_pitch",
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw",
+"L_knee"
+]
+},
+{
+"node": "p191",
+"name": "L_ankle-roll \u00b118\u00b0 stop block 20x12x10 + 2 mm PU R+y (A14, face r45)",
+"seg": "L_ankX",
+"group": "stop",
+"est": false,
+"joints": [
+"L_ankle_pitch",
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw",
+"L_knee"
+]
+},
+{
+"node": "p192",
+"name": "L_ankle-roll \u00b118\u00b0 stop block 20x12x10 + 2 mm PU F-y (A14, face r45)",
+"seg": "L_ankX",
+"group": "stop",
+"est": false,
+"joints": [
+"L_ankle_pitch",
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw",
+"L_knee"
+]
+},
+{
+"node": "p193",
+"name": "L_ankle-roll \u00b118\u00b0 stop block 20x12x10 + 2 mm PU F+y (A14, face r45)",
+"seg": "L_ankX",
+"group": "stop",
+"est": false,
+"joints": [
+"L_ankle_pitch",
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw",
+"L_knee"
+]
+},
+{
+"node": "p194",
+"name": "L_ankle-roll stop carrier under cross [EST]",
+"seg": "L_ankX",
+"group": "structure",
+"est": true,
+"joints": [
+"L_ankle_pitch",
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw",
+"L_knee"
+]
+},
+{
+"node": "p195",
+"name": "L_ankle roll pin stub \u00f812 R",
+"seg": "L_foot",
+"group": "bearing",
+"est": false,
+"joints": [
+"L_ankle_pitch",
+"L_ankle_roll",
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw",
+"L_knee"
+]
+},
+{
+"node": "p196",
+"name": "L_foot roll lug R",
+"seg": "L_foot",
+"group": "structure",
+"est": false,
+"joints": [
+"L_ankle_pitch",
+"L_ankle_roll",
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw",
+"L_knee"
+]
+},
+{
+"node": "p197",
+"name": "L_foot roll-stop shoulder R-y [gap 15 mm = 18\u00b0 at r48] [EST]",
+"seg": "L_foot",
+"group": "stop",
+"est": true,
+"joints": [
+"L_ankle_pitch",
+"L_ankle_roll",
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw",
+"L_knee"
+]
+},
+{
+"node": "p198",
+"name": "L_foot roll-stop shoulder R+y [gap 15 mm = 18\u00b0 at r48] [EST]",
+"seg": "L_foot",
+"group": "stop",
+"est": true,
+"joints": [
+"L_ankle_pitch",
+"L_ankle_roll",
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw",
+"L_knee"
+]
+},
+{
+"node": "p199",
+"name": "L_ankle roll pin stub \u00f812 F",
+"seg": "L_foot",
+"group": "bearing",
+"est": false,
+"joints": [
+"L_ankle_pitch",
+"L_ankle_roll",
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw",
+"L_knee"
+]
+},
+{
+"node": "p200",
+"name": "L_foot roll lug F",
+"seg": "L_foot",
+"group": "structure",
+"est": false,
+"joints": [
+"L_ankle_pitch",
+"L_ankle_roll",
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw",
+"L_knee"
+]
+},
+{
+"node": "p201",
+"name": "L_foot roll-stop shoulder F-y [gap 15 mm = 18\u00b0 at r48] [EST]",
+"seg": "L_foot",
+"group": "stop",
+"est": true,
+"joints": [
+"L_ankle_pitch",
+"L_ankle_roll",
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw",
+"L_knee"
+]
+},
+{
+"node": "p202",
+"name": "L_foot roll-stop shoulder F+y [gap 15 mm = 18\u00b0 at r48] [EST]",
+"seg": "L_foot",
+"group": "stop",
+"est": true,
+"joints": [
+"L_ankle_pitch",
+"L_ankle_roll",
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw",
+"L_knee"
+]
+},
+{
+"node": "p203",
+"name": "L_ankle 6-axis F/T sensor",
+"seg": "L_foot",
+"group": "sensor",
+"est": false,
+"joints": [
+"L_ankle_pitch",
+"L_ankle_roll",
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw",
+"L_knee"
+]
+},
+{
+"node": "p204",
+"name": "L_foot closed box 240x130 (3.5 mm skins, 4 webs; width EST)",
+"seg": "L_foot",
+"group": "structure",
+"est": false,
+"joints": [
+"L_ankle_pitch",
+"L_ankle_roll",
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw",
+"L_knee"
+]
+},
+{
+"node": "p205",
+"name": "L_foot toe doubler collar (r8)",
+"seg": "L_foot",
+"group": "structure",
+"est": false,
+"joints": [
+"L_ankle_pitch",
+"L_ankle_roll",
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw",
+"L_knee"
+]
+},
+{
+"node": "p206",
+"name": "L_instep lug r73 -y",
+"seg": "L_foot",
+"group": "structure",
+"est": false,
+"joints": [
+"L_ankle_pitch",
+"L_ankle_roll",
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw",
+"L_knee"
+]
+},
+{
+"node": "p207",
+"name": "L_instep lug r73 +y",
+"seg": "L_foot",
+"group": "structure",
+"est": false,
+"joints": [
+"L_ankle_pitch",
+"L_ankle_roll",
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw",
+"L_knee"
+]
+},
+{
+"node": "p208",
+"name": "L_instep pin \u00f812 -y",
+"seg": "L_foot",
+"group": "bearing",
+"est": false,
+"joints": [
+"L_ankle_pitch",
+"L_ankle_roll",
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw",
+"L_knee"
+]
+},
+{
+"node": "p209",
+"name": "L_instep pin \u00f812 +y",
+"seg": "L_foot",
+"group": "bearing",
+"est": false,
+"joints": [
+"L_ankle_pitch",
+"L_ankle_roll",
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw",
+"L_knee"
+]
+},
+{
+"node": "p210",
+"name": "R_hip yaw housing (Actuators STEP, CRBH 6013 A output)",
+"seg": "pelvis",
+"group": "actuator",
+"est": false,
+"joints": []
+},
+{
+"node": "p211",
+"name": "R_hip yaw output yoke plate [EST]",
+"seg": "R_hipY",
+"group": "structure",
+"est": true,
+"joints": [
+"R_hip_yaw"
+]
+},
+{
+"node": "p212",
+"name": "R_hip yaw yoke rear cheek (roll housing back face) [EST]",
+"seg": "R_hipY",
+"group": "structure",
+"est": true,
+"joints": [
+"R_hip_yaw"
+]
+},
+{
+"node": "p213",
+"name": "R_hip roll housing (Actuators STEP, CRBH output)",
+"seg": "R_hipY",
+"group": "actuator",
+"est": false,
+"joints": [
+"R_hip_yaw"
+]
+},
+{
+"node": "p214",
+"name": "R_roll-output bracket web (on roll output face) [EST]",
+"seg": "R_hipR",
+"group": "structure",
+"est": true,
+"joints": [
+"R_hip_roll",
+"R_hip_yaw"
+]
+},
+{
+"node": "p215",
+"name": "R_roll-output bracket web leg -y (slot |y|<26.5 for tongue neck + femur at deep flexion) [EST]",
+"seg": "R_hipR",
+"group": "structure",
+"est": true,
+"joints": [
+"R_hip_roll",
+"R_hip_yaw"
+]
+},
+{
+"node": "p216",
+"name": "R_roll-output bracket pad -y (bolts to lever cheek top) [EST]",
+"seg": "R_hipR",
+"group": "structure",
+"est": true,
+"joints": [
+"R_hip_roll",
+"R_hip_yaw"
+]
+},
+{
+"node": "p217",
+"name": "R_roll-output bracket web leg +y (slot |y|<26.5 for tongue neck + femur at deep flexion) [EST]",
+"seg": "R_hipR",
+"group": "structure",
+"est": true,
+"joints": [
+"R_hip_roll",
+"R_hip_yaw"
+]
+},
+{
+"node": "p218",
+"name": "R_roll-output bracket pad +y (bolts to lever cheek top) [EST]",
+"seg": "R_hipR",
+"group": "structure",
+"est": true,
+"joints": [
+"R_hip_roll",
+"R_hip_yaw"
+]
+},
+{
+"node": "p219",
+"name": "R_hip_pitch lever B needle hub (Actuators STEP; G2 rework queued)",
+"seg": "R_hipR",
+"group": "linkage",
+"est": false,
+"joints": [
+"R_hip_roll",
+"R_hip_yaw"
+]
+},
+{
+"node": "p220",
+"name": "R_hip_pitch shaft \u00f835/30 x66 hardened",
+"seg": "R_thigh",
+"group": "bearing",
+"est": false,
+"joints": [
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw"
+]
+},
+{
+"node": "p221",
+"name": "R_IKO TLA3520 needle bush out",
+"seg": "R_thigh",
+"group": "bearing",
+"est": false,
+"joints": [
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw"
+]
+},
+{
+"node": "p222",
+"name": "R_IKO TLA3520 needle bush in",
+"seg": "R_thigh",
+"group": "bearing",
+"est": false,
+"joints": [
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw"
+]
+},
+{
+"node": "p223",
+"name": "R_hip_pitch -105\u00b0 PU bumper \u00f825x12 r80 (A6)",
+"seg": "R_hipR",
+"group": "stop",
+"est": false,
+"joints": [
+"R_hip_roll",
+"R_hip_yaw"
+]
+},
+{
+"node": "p224",
+"name": "R_hip_pitch bumper arm (bracket web -> bumper) [EST]",
+"seg": "R_hipR",
+"group": "structure",
+"est": true,
+"joints": [
+"R_hip_roll",
+"R_hip_yaw"
+]
+},
+{
+"node": "p225",
+"name": "R_femur tongue \u00f855x27 (\u00f835 press-fit bore)",
+"seg": "R_thigh",
+"group": "structure",
+"est": false,
+"joints": [
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw"
+]
+},
+{
+"node": "p226",
+"name": "R_femur tongue neck (55 mm, L36)",
+"seg": "R_thigh",
+"group": "structure",
+"est": false,
+"joints": [
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw"
+]
+},
+{
+"node": "p227",
+"name": "R_femur tube 7075 \u00f850x1.2",
+"seg": "R_thigh",
+"group": "structure",
+"est": false,
+"joints": [
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw"
+]
+},
+{
+"node": "p228",
+"name": "R_femur internal doubler sleeve 0.5x100 (r8)",
+"seg": "R_thigh",
+"group": "structure",
+"est": false,
+"joints": [
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw"
+]
+},
+{
+"node": "p229",
+"name": "R_thigh split collar \u00f864 L34 bonded (DP490) + sleeve + 2x \u00f86 pins",
+"seg": "R_thigh",
+"group": "structure",
+"est": false,
+"joints": [
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw"
+]
+},
+{
+"node": "p230",
+"name": "R_clamp arm root -y (depth 34, r8)",
+"seg": "R_thigh",
+"group": "structure",
+"est": false,
+"joints": [
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw"
+]
+},
+{
+"node": "p231",
+"name": "R_clamp arm eye tine -yi [fork form EST]",
+"seg": "R_thigh",
+"group": "structure",
+"est": false,
+"joints": [
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw"
+]
+},
+{
+"node": "p232",
+"name": "R_clamp arm eye tine -yo [fork form EST]",
+"seg": "R_thigh",
+"group": "structure",
+"est": false,
+"joints": [
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw"
+]
+},
+{
+"node": "p233",
+"name": "R_clamp eye pin \u00f812x28 42CrMo4 -y",
+"seg": "R_thigh",
+"group": "bearing",
+"est": false,
+"joints": [
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw"
+]
+},
+{
+"node": "p234",
+"name": "R_clamp arm root +y (depth 34, r8)",
+"seg": "R_thigh",
+"group": "structure",
+"est": false,
+"joints": [
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw"
+]
+},
+{
+"node": "p235",
+"name": "R_clamp arm eye tine +yi [fork form EST]",
+"seg": "R_thigh",
+"group": "structure",
+"est": false,
+"joints": [
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw"
+]
+},
+{
+"node": "p236",
+"name": "R_clamp arm eye tine +yo [fork form EST]",
+"seg": "R_thigh",
+"group": "structure",
+"est": false,
+"joints": [
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw"
+]
+},
+{
+"node": "p237",
+"name": "R_clamp eye pin \u00f812x28 42CrMo4 +y",
+"seg": "R_thigh",
+"group": "bearing",
+"est": false,
+"joints": [
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw"
+]
+},
+{
+"node": "p238",
+"name": "R_hip_pitch screw -y axial GE12 C eye \u00f830x12 on body end",
+"seg": "R_thigh",
+"group": "bearing",
+"est": false,
+"joints": [
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw"
+]
+},
+{
+"node": "p239",
+"name": "R_hip_pitch screw -y eye stub \u00f812 [EST]",
+"seg": "R_thigh",
+"group": "actuator",
+"est": false,
+"joints": [
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw"
+]
+},
+{
+"node": "p240",
+"name": "R_hip_pitch screw -y eye stub flange \u00f830 [EST]",
+"seg": "R_thigh",
+"group": "actuator",
+"est": false,
+"joints": [
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw"
+]
+},
+{
+"node": "p241",
+"name": "R_hip_pitch screw -y body (hip_pitch_body_x1)",
+"seg": "R_thigh",
+"group": "actuator",
+"est": false,
+"joints": [
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw"
+]
+},
+{
+"node": "p242",
+"name": "R_hip_pitch screw -y RV12 roller-screw rod \u00f812",
+"seg": "R_hipR",
+"group": "actuator",
+"est": false,
+"joints": [
+"R_hip_roll",
+"R_hip_yaw"
+]
+},
+{
+"node": "p243",
+"name": "R_hip_pitch screw -y GE12 C rod-end eye",
+"seg": "R_hipR",
+"group": "bearing",
+"est": false,
+"joints": [
+"R_hip_roll",
+"R_hip_yaw"
+]
+},
+{
+"node": "p244",
+"name": "R_hip_pitch screw +y axial GE12 C eye \u00f830x12 on body end",
+"seg": "R_thigh",
+"group": "bearing",
+"est": false,
+"joints": [
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw"
+]
+},
+{
+"node": "p245",
+"name": "R_hip_pitch screw +y eye stub \u00f812 [EST]",
+"seg": "R_thigh",
+"group": "actuator",
+"est": false,
+"joints": [
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw"
+]
+},
+{
+"node": "p246",
+"name": "R_hip_pitch screw +y eye stub flange \u00f830 [EST]",
+"seg": "R_thigh",
+"group": "actuator",
+"est": false,
+"joints": [
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw"
+]
+},
+{
+"node": "p247",
+"name": "R_hip_pitch screw +y body (hip_pitch_body_x1)",
+"seg": "R_thigh",
+"group": "actuator",
+"est": false,
+"joints": [
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw"
+]
+},
+{
+"node": "p248",
+"name": "R_hip_pitch screw +y RV12 roller-screw rod \u00f812",
+"seg": "R_hipR",
+"group": "actuator",
+"est": false,
+"joints": [
+"R_hip_roll",
+"R_hip_yaw"
+]
+},
+{
+"node": "p249",
+"name": "R_hip_pitch screw +y GE12 C rod-end eye",
+"seg": "R_hipR",
+"group": "bearing",
+"est": false,
+"joints": [
+"R_hip_roll",
+"R_hip_yaw"
+]
+},
+{
+"node": "p250",
+"name": "R_knee clevis cheeks + bridge (r8: bridge +16, R6)",
+"seg": "R_thigh",
+"group": "structure",
+"est": false,
+"joints": [
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw"
+]
+},
+{
+"node": "p251",
+"name": "R_knee clevis cheek -y",
+"seg": "R_thigh",
+"group": "structure",
+"est": false,
+"joints": [
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw"
+]
+},
+{
+"node": "p252",
+"name": "R_knee clevis cheek +y",
+"seg": "R_thigh",
+"group": "structure",
+"est": false,
+"joints": [
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw"
+]
+},
+{
+"node": "p253",
+"name": "R_knee pin \u00f816 (through clevis + lever cheeks)",
+"seg": "R_shank",
+"group": "bearing",
+"est": false,
+"joints": [
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw",
+"R_knee"
+]
+},
+{
+"node": "p254",
+"name": "R_knee tongue (shank)",
+"seg": "R_shank",
+"group": "structure",
+"est": false,
+"joints": [
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw",
+"R_knee"
+]
+},
+{
+"node": "p255",
+"name": "R_knee tongue neck into tibia",
+"seg": "R_shank",
+"group": "structure",
+"est": false,
+"joints": [
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw",
+"R_knee"
+]
+},
+{
+"node": "p256",
+"name": "R_knee lever r47.5 (Actuators STEP)",
+"seg": "R_shank",
+"group": "linkage",
+"est": false,
+"joints": [
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw",
+"R_knee"
+]
+},
+{
+"node": "p257",
+"name": "R_knee screw -y body (knee_body_x1)",
+"seg": "R_thigh",
+"group": "actuator",
+"est": false,
+"joints": [
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw"
+]
+},
+{
+"node": "p258",
+"name": "R_knee screw -y RV12 roller-screw rod \u00f812",
+"seg": "R_shank",
+"group": "actuator",
+"est": false,
+"joints": [
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw",
+"R_knee"
+]
+},
+{
+"node": "p259",
+"name": "R_knee screw -y GE12 C rod-end eye",
+"seg": "R_shank",
+"group": "bearing",
+"est": false,
+"joints": [
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw",
+"R_knee"
+]
+},
+{
+"node": "p260",
+"name": "R_knee screw +y body (knee_body_x1)",
+"seg": "R_thigh",
+"group": "actuator",
+"est": false,
+"joints": [
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw"
+]
+},
+{
+"node": "p261",
+"name": "R_knee screw +y RV12 roller-screw rod \u00f812",
+"seg": "R_shank",
+"group": "actuator",
+"est": false,
+"joints": [
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw",
+"R_knee"
+]
+},
+{
+"node": "p262",
+"name": "R_knee screw +y GE12 C rod-end eye",
+"seg": "R_shank",
+"group": "bearing",
+"est": false,
+"joints": [
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw",
+"R_knee"
+]
+},
+{
+"node": "p263",
+"name": "R_knee trunnion bracket top plate (thigh) [EST]",
+"seg": "R_thigh",
+"group": "structure",
+"est": true,
+"joints": [
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw"
+]
+},
+{
+"node": "p264",
+"name": "R_knee trunnion bracket strut to femur [EST]",
+"seg": "R_thigh",
+"group": "structure",
+"est": true,
+"joints": [
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw"
+]
+},
+{
+"node": "p265",
+"name": "R_knee trunnion cheek -y [EST]",
+"seg": "R_thigh",
+"group": "structure",
+"est": true,
+"joints": [
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw"
+]
+},
+{
+"node": "p266",
+"name": "R_knee trunnion pin \u00f89 -y",
+"seg": "R_thigh",
+"group": "bearing",
+"est": false,
+"joints": [
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw"
+]
+},
+{
+"node": "p267",
+"name": "R_knee trunnion cheek +y [EST]",
+"seg": "R_thigh",
+"group": "structure",
+"est": true,
+"joints": [
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw"
+]
+},
+{
+"node": "p268",
+"name": "R_knee trunnion pin \u00f89 +y",
+"seg": "R_thigh",
+"group": "bearing",
+"est": false,
+"joints": [
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw"
+]
+},
+{
+"node": "p269",
+"name": "R_tibia tube 7075 \u00f845x1.2",
+"seg": "R_shank",
+"group": "structure",
+"est": false,
+"joints": [
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw",
+"R_knee"
+]
+},
+{
+"node": "p270",
+"name": "R_tibia internal doubler sleeve 0.5x100 (r8)",
+"seg": "R_shank",
+"group": "structure",
+"est": false,
+"joints": [
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw",
+"R_knee"
+]
+},
+{
+"node": "p271",
+"name": "R_ankle fork bridge",
+"seg": "R_shank",
+"group": "structure",
+"est": false,
+"joints": [
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw",
+"R_knee"
+]
+},
+{
+"node": "p272",
+"name": "R_ankle fork cheek -y",
+"seg": "R_shank",
+"group": "structure",
+"est": false,
+"joints": [
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw",
+"R_knee"
+]
+},
+{
+"node": "p273",
+"name": "R_ankle fork cheek +y",
+"seg": "R_shank",
+"group": "structure",
+"est": false,
+"joints": [
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw",
+"R_knee"
+]
+},
+{
+"node": "p274",
+"name": "R_ankle screw -y body (ankle_body_x1)",
+"seg": "R_shank",
+"group": "actuator",
+"est": false,
+"joints": [
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw",
+"R_knee"
+]
+},
+{
+"node": "p275",
+"name": "R_ankle screw -y RV12 roller-screw rod \u00f812",
+"seg": "R_foot",
+"group": "actuator",
+"est": false,
+"joints": [
+"R_ankle_pitch",
+"R_ankle_roll",
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw",
+"R_knee"
+]
+},
+{
+"node": "p276",
+"name": "R_ankle screw -y GE12 C rod-end eye",
+"seg": "R_foot",
+"group": "bearing",
+"est": false,
+"joints": [
+"R_ankle_pitch",
+"R_ankle_roll",
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw",
+"R_knee"
+]
+},
+{
+"node": "p277",
+"name": "R_ankle screw +y body (ankle_body_x1)",
+"seg": "R_shank",
+"group": "actuator",
+"est": false,
+"joints": [
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw",
+"R_knee"
+]
+},
+{
+"node": "p278",
+"name": "R_ankle screw +y RV12 roller-screw rod \u00f812",
+"seg": "R_foot",
+"group": "actuator",
+"est": false,
+"joints": [
+"R_ankle_pitch",
+"R_ankle_roll",
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw",
+"R_knee"
+]
+},
+{
+"node": "p279",
+"name": "R_ankle screw +y GE12 C rod-end eye",
+"seg": "R_foot",
+"group": "bearing",
+"est": false,
+"joints": [
+"R_ankle_pitch",
+"R_ankle_roll",
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw",
+"R_knee"
+]
+},
+{
+"node": "p280",
+"name": "R_ankle trunnion bracket top plate (shank) [EST]",
+"seg": "R_shank",
+"group": "structure",
+"est": true,
+"joints": [
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw",
+"R_knee"
+]
+},
+{
+"node": "p281",
+"name": "R_ankle trunnion bracket strut to tibia [EST]",
+"seg": "R_shank",
+"group": "structure",
+"est": true,
+"joints": [
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw",
+"R_knee"
+]
+},
+{
+"node": "p282",
+"name": "R_ankle trunnion centre plate 12 mm [EST]",
+"seg": "R_shank",
+"group": "structure",
+"est": true,
+"joints": [
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw",
+"R_knee"
+]
+},
+{
+"node": "p283",
+"name": "R_ankle trunnion cheek -y [EST]",
+"seg": "R_shank",
+"group": "structure",
+"est": true,
+"joints": [
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw",
+"R_knee"
+]
+},
+{
+"node": "p284",
+"name": "R_ankle trunnion pin \u00f89 -y in",
+"seg": "R_shank",
+"group": "bearing",
+"est": false,
+"joints": [
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw",
+"R_knee"
+]
+},
+{
+"node": "p285",
+"name": "R_ankle trunnion pin \u00f89 -y out",
+"seg": "R_shank",
+"group": "bearing",
+"est": false,
+"joints": [
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw",
+"R_knee"
+]
+},
+{
+"node": "p286",
+"name": "R_ankle trunnion cheek +y [EST]",
+"seg": "R_shank",
+"group": "structure",
+"est": true,
+"joints": [
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw",
+"R_knee"
+]
+},
+{
+"node": "p287",
+"name": "R_ankle trunnion pin \u00f89 +y in",
+"seg": "R_shank",
+"group": "bearing",
+"est": false,
+"joints": [
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw",
+"R_knee"
+]
+},
+{
+"node": "p288",
+"name": "R_ankle trunnion pin \u00f89 +y out",
+"seg": "R_shank",
+"group": "bearing",
+"est": false,
+"joints": [
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw",
+"R_knee"
+]
+},
+{
+"node": "p289",
+"name": "R_ankle cross Ti-6Al-4V",
+"seg": "R_ankX",
+"group": "structure",
+"est": false,
+"joints": [
+"R_ankle_pitch",
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw",
+"R_knee"
+]
+},
+{
+"node": "p290",
+"name": "R_ankle pitch pin stub \u00f812 -y",
+"seg": "R_ankX",
+"group": "bearing",
+"est": false,
+"joints": [
+"R_ankle_pitch",
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw",
+"R_knee"
+]
+},
+{
+"node": "p291",
+"name": "R_ankle pitch pin stub \u00f812 +y",
+"seg": "R_ankX",
+"group": "bearing",
+"est": false,
+"joints": [
+"R_ankle_pitch",
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw",
+"R_knee"
+]
+},
+{
+"node": "p292",
+"name": "R_ankle-roll \u00b118\u00b0 stop block 20x12x10 + 2 mm PU R-y (A14, face r45)",
+"seg": "R_ankX",
+"group": "stop",
+"est": false,
+"joints": [
+"R_ankle_pitch",
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw",
+"R_knee"
+]
+},
+{
+"node": "p293",
+"name": "R_ankle-roll \u00b118\u00b0 stop block 20x12x10 + 2 mm PU R+y (A14, face r45)",
+"seg": "R_ankX",
+"group": "stop",
+"est": false,
+"joints": [
+"R_ankle_pitch",
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw",
+"R_knee"
+]
+},
+{
+"node": "p294",
+"name": "R_ankle-roll \u00b118\u00b0 stop block 20x12x10 + 2 mm PU F-y (A14, face r45)",
+"seg": "R_ankX",
+"group": "stop",
+"est": false,
+"joints": [
+"R_ankle_pitch",
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw",
+"R_knee"
+]
+},
+{
+"node": "p295",
+"name": "R_ankle-roll \u00b118\u00b0 stop block 20x12x10 + 2 mm PU F+y (A14, face r45)",
+"seg": "R_ankX",
+"group": "stop",
+"est": false,
+"joints": [
+"R_ankle_pitch",
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw",
+"R_knee"
+]
+},
+{
+"node": "p296",
+"name": "R_ankle-roll stop carrier under cross [EST]",
+"seg": "R_ankX",
+"group": "structure",
+"est": true,
+"joints": [
+"R_ankle_pitch",
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw",
+"R_knee"
+]
+},
+{
+"node": "p297",
+"name": "R_ankle roll pin stub \u00f812 R",
+"seg": "R_foot",
+"group": "bearing",
+"est": false,
+"joints": [
+"R_ankle_pitch",
+"R_ankle_roll",
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw",
+"R_knee"
+]
+},
+{
+"node": "p298",
+"name": "R_foot roll lug R",
+"seg": "R_foot",
+"group": "structure",
+"est": false,
+"joints": [
+"R_ankle_pitch",
+"R_ankle_roll",
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw",
+"R_knee"
+]
+},
+{
+"node": "p299",
+"name": "R_foot roll-stop shoulder R-y [gap 15 mm = 18\u00b0 at r48] [EST]",
+"seg": "R_foot",
+"group": "stop",
+"est": true,
+"joints": [
+"R_ankle_pitch",
+"R_ankle_roll",
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw",
+"R_knee"
+]
+},
+{
+"node": "p300",
+"name": "R_foot roll-stop shoulder R+y [gap 15 mm = 18\u00b0 at r48] [EST]",
+"seg": "R_foot",
+"group": "stop",
+"est": true,
+"joints": [
+"R_ankle_pitch",
+"R_ankle_roll",
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw",
+"R_knee"
+]
+},
+{
+"node": "p301",
+"name": "R_ankle roll pin stub \u00f812 F",
+"seg": "R_foot",
+"group": "bearing",
+"est": false,
+"joints": [
+"R_ankle_pitch",
+"R_ankle_roll",
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw",
+"R_knee"
+]
+},
+{
+"node": "p302",
+"name": "R_foot roll lug F",
+"seg": "R_foot",
+"group": "structure",
+"est": false,
+"joints": [
+"R_ankle_pitch",
+"R_ankle_roll",
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw",
+"R_knee"
+]
+},
+{
+"node": "p303",
+"name": "R_foot roll-stop shoulder F-y [gap 15 mm = 18\u00b0 at r48] [EST]",
+"seg": "R_foot",
+"group": "stop",
+"est": true,
+"joints": [
+"R_ankle_pitch",
+"R_ankle_roll",
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw",
+"R_knee"
+]
+},
+{
+"node": "p304",
+"name": "R_foot roll-stop shoulder F+y [gap 15 mm = 18\u00b0 at r48] [EST]",
+"seg": "R_foot",
+"group": "stop",
+"est": true,
+"joints": [
+"R_ankle_pitch",
+"R_ankle_roll",
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw",
+"R_knee"
+]
+},
+{
+"node": "p305",
+"name": "R_ankle 6-axis F/T sensor",
+"seg": "R_foot",
+"group": "sensor",
+"est": false,
+"joints": [
+"R_ankle_pitch",
+"R_ankle_roll",
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw",
+"R_knee"
+]
+},
+{
+"node": "p306",
+"name": "R_foot closed box 240x130 (3.5 mm skins, 4 webs; width EST)",
+"seg": "R_foot",
+"group": "structure",
+"est": false,
+"joints": [
+"R_ankle_pitch",
+"R_ankle_roll",
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw",
+"R_knee"
+]
+},
+{
+"node": "p307",
+"name": "R_foot toe doubler collar (r8)",
+"seg": "R_foot",
+"group": "structure",
+"est": false,
+"joints": [
+"R_ankle_pitch",
+"R_ankle_roll",
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw",
+"R_knee"
+]
+},
+{
+"node": "p308",
+"name": "R_instep lug r73 -y",
+"seg": "R_foot",
+"group": "structure",
+"est": false,
+"joints": [
+"R_ankle_pitch",
+"R_ankle_roll",
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw",
+"R_knee"
+]
+},
+{
+"node": "p309",
+"name": "R_instep lug r73 +y",
+"seg": "R_foot",
+"group": "structure",
+"est": false,
+"joints": [
+"R_ankle_pitch",
+"R_ankle_roll",
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw",
+"R_knee"
+]
+},
+{
+"node": "p310",
+"name": "R_instep pin \u00f812 -y",
+"seg": "R_foot",
+"group": "bearing",
+"est": false,
+"joints": [
+"R_ankle_pitch",
+"R_ankle_roll",
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw",
+"R_knee"
+]
+},
+{
+"node": "p311",
+"name": "R_instep pin \u00f812 +y",
+"seg": "R_foot",
+"group": "bearing",
+"est": false,
+"joints": [
+"R_ankle_pitch",
+"R_ankle_roll",
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw",
+"R_knee"
+]
+}
+]
