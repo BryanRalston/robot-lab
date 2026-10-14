@@ -888,3 +888,15 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
 - **Reserve note:** fe21311's ~0.32 came before the RP03. The current figure is **~0.22** (R-076 b97c15c), which includes it.
 - **Knee fins:** there is one fin design. The baseline is Thermal/Legs D69C (0.05 m², booked -0.019 at half credit). **Rev C** (0.0459 m², measured 0.0605/knee) is **not booked** because it sits below Thermal's 0.05 m² minimum and hasn't been run at h 8. It can replace D69C only after Thermal and Controls reproduce the h 8 worst standing hold and vented carry x1.1 at <=120 C, with R-066 (drives off the housing) as a binding dependency. If it passes: -0.065 measured, full credit, replacing the D69C credit (no double count). Legs and Actuators agree one CAD.
 - **Hip/ankle housing pocketing** (~0.78 kg of housings) is approved for FEA on the bryan PC, queued via Robot Lab one session at a time. It earns credit only once FEA is done.
+
+## R-078 (2026-10-14) Isolation evidence and the always-on load (Electronics 6502e36/55a349a)
+- **Rule: uncited isolation counts as none.** Design to the worst case and don't wait on vendors.
+  - **DCM3623:** treat it as **basic** insulation and add supplementary insulation so the 48 V rail is SELV. Credit reinforced only if a TA5N53B4-specific cert is cited.
+  - **RP40-FR:** treat the input-to-case path as basic, and the case gets insulated mounting and touch protection.
+  - **Elmo G-TWI (largest item):** treat STO, EtherCAT and encoder ports as **bus-referenced**. Every SELV-side interface gets **reinforced isolation on the SELV side** (isolated EtherCAT PHY/magnetics, STO opto, encoder isolator) unless an Elmo document cites otherwise. Electronics sizes it and books the mass in full.
+  - **BMS CAN FD:** use a reinforced isolated CAN FD transceiver (e.g. TI ISO1042-class, cited).
+  - **TLP383:** order the D4 (VDE reinforced) option.
+  - **E-PCB-1** is adopted. Verify it against a licensed IEC 60664-1 at G1.
+- Vendor confirmations are optional upside, not blockers; Bryan isn't asked.
+- XT60 and LEV100 ratings stay open for G1.
+- **Always-on load:** accept the **XMC4800 at 72 MHz** (~2.24 W, <=2.4 W), provided Controls confirms BiSS-C/POSIF decoding and loop timing at 72 MHz. A single PHY is allowed only where the hand is truly end-of-line. Encoders stay on the always-on rail. The T-029 hot bench measurement is binding.
