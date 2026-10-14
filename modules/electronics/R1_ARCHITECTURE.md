@@ -763,6 +763,53 @@ Recorded: rail A = F1–F3 + S1, S2 + hand logic; rail B = F4–F6 + S3–S5. Si
 - **T-029 addition:** no BiSS-C CRC errors and no POSIF count errors under common-mode stress. Test with the isolated AO ground floating against −Vin, with drives PWM-switching at full bus (43–92 V).
 - **G1 gate item:** the MR30 retention clip must be a cited catalogue part or a drawn part with a computed mass before G1.
 
+
+### 18.2c Arbiter R-076: bus insulation audit (recorded 2026-10-14)
+**Ruling.**
+- RP03 ×2 booked +0.024 kg.
+- Binding: reinforced or double isolation bus (43–92 V) ↔ every SELV rail; IP2X on bus parts; creepage/clearance for 92 V; every bus connector cited ≥ 100 V DC before G1.
+- The forearm board stays in the forearm (Arms lengthens the forearm).
+
+**Connector and part audit (bus side), 100 V DC criterion**
+| part on bus | cited DC rating | source | 100 V |
+|---|---|---|---|
+| Amass MR30 (32 drive tees) | 500 V DC | Amass MR30 spec V1.2 (MR30-M / MR30-FB "额定电压 DC 500V") | PASS |
+| Amass XT30U (8 remaining) | 500 V DC | Amass XT30U-M/F spec V1.2 | PASS |
+| Amass AS150U (pack main) | DC 500 V (withstand, UL1977); creepage 4 mm | Amass AS150U spec | PASS |
+| Amass XT60 (4) | not yet cited | – | OPEN: cite Amass XT60 spec before G1 |
+| TE LEV100A4ANG contactor | not cited in repo | – | OPEN: cite TE datasheet before G1 |
+| Elmo G-TWI R70/100 power pins (PCB-soldered, no connector) | 95 V max bus (drive rating) | Elmo G-TWI product page / MAN-G-TWI | PASS for 92 V ceiling (part, not connector) |
+| Vicor DCM3623TA5N53B4T00 input | 43–154 V | Vicor DS Rev 1.2 | PASS |
+| RP40-11024SFR/P input | 43–160 V | RECOM RP40-FR DS | PASS |
+| RP03-11012/11024SRAW input | 36–160 V (200 V 1 s) | RECOM RP03-RAW DS | PASS |
+| TRACO TSR 1-48120WI | 17–72 V in | TRACO DS | **not on bus**: fed from the DCM 48 V output (§11). Confirmed; it must never be moved to the bus. |
+
+No failing connector was found among the cited parts, so **no mass change**. XT60 and the contactor are open (rating not yet cited), not failed.
+
+**Bus ↔ SELV boundaries**
+| boundary | part | cited isolation | class | flag |
+|---|---|---|---|---|
+| bus → 48 V brain rail | Vicor DCM3623TA5N53B4T00 | 3000 VDC IN-OUT (DS) | cTÜVus cert (DCM3623 series): **"output separated from input by Basic Insulation"**; the DCM Railway TÜV cert says "Reinforced Safeguard" | **FLAG**: confirm which cert lists TA5N53B4 (Bryan/Vicor). If basic only, the 48 V rail is not SELV by isolation, so the TSR fan supply and everything downstream need a second barrier. |
+| bus → hand 24 V rails | RECOM RP40-11024SFR/P ×4 | 3 kVDC/1 min I/P–O/P (110 Vin models), **1.6 kVDC I/P–O/P–case** | **not stated** (UL/IEC 60950-1 cert, class not given) | **FLAG**: class unknown. The case is at 1.6 kV and clamps to the grounded bracket. RECOM must state the class; vendor question goes via Bryan. |
+| bus → AO hand logic | RECOM RP03-RAW ×2 | 3 kVAC/1 min | **reinforced** (DS) | OK |
+| RP40 CTRL (bus side) ↔ AO logic | Toshiba TLP383 ×4 | 5000 Vrms | **reinforced only with option D4** (VDE EN 60747-5-5); the plain part is UL1577 only | Order **TLP383(D4…)**. Same 0.128 g, no mass change. |
+| drive bus sense → TMS570 | TI AMC1311DWV | 7000 VPK, VIOWM 1500 Vrms, creepage/clearance 8.5 mm | **reinforced** (VDE 0884-17) | OK |
+| STO (TMS570, SELV) → Elmo STO inputs | Elmo G-TWI internal STO opto | not cited | unknown | **FLAG**: cite MAN-G-TWI. Elmo drive logic is bus-powered, so the STO, EtherCAT and encoder ports on every drive are referenced to the bus unless Elmo states reinforced isolation. This may be the largest open item: 32 drives. |
+| EtherCAT at drives | Elmo G-TWI magnetics | not cited | unknown | **FLAG**: same as above |
+| BMS (pack-referenced S32K344 + BQ79600-Q1) → CAN FD to Thor | isolated CAN transceiver | not chosen | none yet | **FLAG**: specify a reinforced isolated CAN FD transceiver (e.g. TI ISO1044, not yet cited) at the BMS/torso boundary |
+| encoders, PT1000 at drives | through Elmo drive | not cited | unknown | **FLAG** with STO/EtherCAT |
+
+**PCB rule E-PCB-1 (creepage/clearance, 92 V DC working)**
+- Basis: IEC 60664-1:2020. Working voltage rounded up to 100 V. Pollution degree 2 (enclosed robot, non-condensing). Material group IIIa/b (FR4, CTI ≥ 175). Overvoltage category II.
+- Creepage, Table F.5 (100 V, PD2, IIIa/b): **basic 1.4 mm**, reinforced = 2 × basic = **2.8 mm**. Printed-board values (PD1/PD2 coated, 0.1–0.16 mm) are not used, because coating is not assumed.
+- Clearance, Table F.2: rated impulse **800 V** for ≤ 150 V systems in OVC II gives **0.2 mm** basic at PD2 (PD2 minimum). Reinforced uses the next impulse step, 1500 V, giving **0.5 mm**.
+- **Rule:** bus ↔ SELV is ≥ 3.0 mm creepage and ≥ 1.5 mm clearance (2.8 / 0.5 plus design margin). Bus ↔ bus is functional, ≥ 0.6 mm.
+- Isolator footprints (AMC1311 8.5 mm, RP03/RP40 pin rows) set the barrier. Keep slots, not copper, under all isolator bodies.
+- [Table values from IEC 60664-1; the standard text is not in the repo. Verify against a licensed copy at the G1 design review.]
+- **IP2X:** bus terminals (DCM, RP40/RP03 pins, contactor, AS150U, drive pins) get a finger-safe cover or potting. MR30 and XT30U housings are shrouded. Cover mass is TBD per part.
+
+**Mass change:** none from this audit. The +0.024 kg RP03 was already booked in R-076. The isolated CAN transceiver and IP2X covers are TBD.
+
 ### 18.2 Checked and not counted
 - **STM32H7 drop:** never booked as a separate mass. The hand board was booked as a board lump (Arms), and Thermal A43C already assumed it dropped. **Saving 0.**
 - **`hand 24 V from wrist DC/DC` row (0.0128 kg):** 0.5 → 0.25 passes (0.6 K), but R-047 put the RP40s in the shoulder bay, so this row's route is stale. Actuators should re-book the row first. **Not counted.**
