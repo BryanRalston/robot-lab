@@ -1,12 +1,76 @@
 {
  "P": "P-052",
- "ruling": "R-088",
- "kg": 0.058,
- "items_g": {
-  "face_120x120": 25.92,
-  "blend_15mm": 24.08,
-  "captive_x4": 8.0
+ "ruling": "R-094",
+ "supersedes": "R-093 / R-088 full PC sternum plate (0.058 kg)",
+ "design": "Chest pad 1 mm CF face is the visible sternum skin at x~+0.147 (37 mm proud). Pad bonded to 7075 land with structural epoxy. 1.5 mm PC bezel ring is secondary hold + cosmetic edge; 4 captive M4s into inserts at (y,z)=(+-0.040, +0.180/+0.260). Flange overlaps face <=4 mm with 1 mm stand-off on compliant gasket (no clamping preload); centre 90x90 free. Edge closed by bezel sidewall + foam seal (seal does not bond to core walls). 0.3-0.5 mm TPU film on face; 15 mm blend to shell.",
+ "service_rule": "Visible dent >1 mm deep, or any crush => replace the pad. Crushed face = replace-me indicator.",
+ "geometry": {
+  "pad_centre_xyz": [
+   0.1,
+   0.0,
+   0.22
+  ],
+  "skin_x_approx": 0.147,
+  "inserts_yz": [
+   [
+    0.04,
+    0.18
+   ],
+   [
+    -0.04,
+    0.18
+   ],
+   [
+    0.04,
+    0.26
+   ],
+   [
+    -0.04,
+    0.26
+   ]
+  ],
+  "source": "Torso ab432da \u00a725.1"
  },
- "geometry": "120x120 mm, 37 mm proud (x~+0.147), 15 mm blend, 3 mm gap to pad",
- "torso_backing_not_included_kg": 0.03
+ "items_g": {
+  "bezel_flange_15mm": 11.34,
+  "bezel_sidewall": 5.64,
+  "blend_15mm_to_shell": 7.29,
+  "captive_M4_x4": 10.0,
+  "compliant_gasket_1mm": 0.6,
+  "foam_edge_seal": 0.49,
+  "TPU_film_0p4mm_on_face": 4.61
+ },
+ "bezel_ring_only_kg": 0.017,
+ "id_mass_kg": 0.04,
+ "id_mass_bezel_gasket_seal_film_kg": 0.04,
+ "vs_plate_0p058": {
+  "was": 0.058,
+  "now": 0.04,
+  "delta": -0.018
+ },
+ "vs_cf_shell_removed_0p045": {
+  "cf_shell_removed": 0.045,
+  "id_added": 0.04,
+  "net": -0.005
+ },
+ "r094_ledger": {
+  "ring_booked": 0.015,
+  "cf_shell_half_credit": -0.0225,
+  "replaces_r093_plate": -0.058,
+  "arbiter_net": -0.066,
+  "script_ring": 0.017,
+  "script_id_full": 0.04
+ },
+ "conditions": [
+  "Face finished (clear coat or texture) \u2014 R-094",
+  "Torso/Materials: CF face OK for handling, UV, abrasion as outer skin",
+  "Controls: T-031 with skin at x~+0.147",
+  "No clamping preload (1 mm gasket stand-off)",
+  "Foam edge seal must not bond to honeycomb core walls"
+ ],
+ "not_id_mass": [
+  "7075 land+rib +0.030 (Torso)",
+  "pad core + 1 mm CF face (chest pad line)",
+  "structural epoxy"
+ ]
 }

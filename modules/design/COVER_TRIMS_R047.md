@@ -26,4 +26,4 @@ Not included (Arbiter decision): shin add-back, deferred until D69 rev B verifie
 |---|---|---|
 | Forearm cover +17 mm (R-082) | **+0.014** pair | booked R-087; proportion 0.96 signed off |
 | Merged PA12 knee-drive / thigh-rear (R-087) | **+0.071** pair | replaces +0.082 PC + 0.0418 Elec; vs booked +0.040 → +0.031 FLAG |
-| P-052 sternum plate (R-088) | **+0.058** | Torso land+rib +0.030 separate |
+| P-052 sternum bezel (R-094) | **+0.040** ID (was plate +0.058) | vs CF shell −0.045 → net −0.005; Arbiter −0.066 vs R-093 plate |

@@ -63,6 +63,16 @@
    "kg": 0.1162,
    "cf_kg": null,
    "note": "R-079: option B adopted at 0.116 pair (+0.024 vs 0.092 booking); field rebonding A rejected; not in P-020/P-022..25 delta"
+  },
+  {
+   "panel": "sternum bezel P-052 (R-094): PC ring + gasket + seal + TPU film; pad CF face is skin",
+   "P": "P-052",
+   "material": "PC 1.5 bezel + TPU film",
+   "area_m2_side": 0.0063,
+   "panels": 1,
+   "kg": 0.04,
+   "cf_kg": null,
+   "note": "replaces full plate 0.058; CF shell cut-out -0.045 separate; service: dent>1 mm or crush => replace pad"
   }
  ],
  "totals": {

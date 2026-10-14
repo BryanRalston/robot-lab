@@ -126,8 +126,10 @@ Full-wrap shin/thigh fairings (0.70 hull), foot shell 0.40, upper-arm (ø95×260
 - **No local knee-grille bulge:** rev C withdrawn (R-079/R-081); rev B stays. A ~5 mm bulge is **pending Legs' rev B envelope check**.
 - **Merged PA12 thigh-rear panel** (`knee_drive_panel.py`): one part per side replaces the separate PC rear panels (+0.082) and Electronics §18.2f 41.8 g PA12 drive covers. **0.071 kg pair** (save 0.053 vs 0.124 separate; **+0.031 vs R-087 booked +0.040** — FLAG to reconcile). Inlet **52 cm²** low, outlet **63 cm²** high. Tool-only M2.5 captives into Legs band-clamp tabs; IP2X baffle; see `KNEE_DRIVE_PANEL.md`.
 
-## P-052 sternum plate (R-088)
-- Removable **120 × 120 mm** PC 1.5 mm plate, **37 mm proud** (skin x ≈ +0.147), 15 mm blended transition, 3 mm gap to the chest pad, 4 captive fasteners. **+0.058 kg** ID cover mass (`sternum_plate.py`). 7075 land + rib (+0.030) is **Torso**, not ID. Controls re-checks T-031 / tuck B.
+## P-052 sternum bezel (R-094; was full plate under R-088/R-093)
+- **Pad 1 mm CF face is the visible skin** at x ≈ +0.147 (37 mm proud), bonded to the 7075 land. **PC 1.5 mm bezel ring** (4 captive M4s at (±0.040, +0.180/+0.260)) is the secondary hold and cosmetic edge: ≤ 4 mm flange overlap, 1 mm gasket stand-off (no preload), centre 90×90 free, foam edge seal (not bonded to core), TPU film 0.3–0.5 mm, 15 mm blend.
+- **ID mass 0.040 kg** (bezel + gasket + seal + film + blend + captives) vs old plate **0.058 (−0.018)**. Net vs CF shell removed (~0.045): **−0.005**. See `STERNUM_PLATE.md`.
+- **Service:** visible dent > 1 mm or any crush → replace the pad.
 
 ## Open questions
 1. Legs: confirm envelopes.json as final and commit; knee-cap keep-out complement vs thigh fairing overlap.

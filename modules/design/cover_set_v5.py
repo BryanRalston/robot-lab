@@ -37,6 +37,8 @@ for n,p,m,a,k,s in rows:
     tot[p]=tot.get(p,0)+kg
 r6=json.load(open(os.path.join(H,'pad_r8.json')))
 out.append(dict(panel='shoulder impact pad R8 option B: replaceable 7075 tray on integral boss, HC 4.5 pcf 61.8x61.8x60',P='P-051 (proposed)',material='Al honeycomb + 7075 tray + EPP face',area_m2_side=0.0037,panels=2,kg=r6['option_B_replaceable_tray']['kg_pair'],cf_kg=None,note='R-079: option B adopted at 0.116 pair (+0.024 vs 0.092 booking); field rebonding A rejected; not in P-020/P-022..25 delta'))
+st=json.load(open(os.path.join(H,'sternum_plate.json')))
+out.append(dict(panel='sternum bezel P-052 (R-094): PC ring + gasket + seal + TPU film; pad CF face is skin',P='P-052',material='PC 1.5 bezel + TPU film',area_m2_side=0.0063,panels=1,kg=st['id_mass_kg'],cf_kg=None,note='replaces full plate 0.058; CF shell cut-out -0.045 separate; service: dent>1 mm or crush => replace pad'))
 json.dump(dict(rows=out,totals={k:round(v,3) for k,v in tot.items()},booked_P020_skin_kg=1.157,delta_vs_booked_kg=round(sum(tot.values())-1.157,3),measured=False,pc_area_m2=round(sum(r['area_m2_side']*(2) for r in out if r['P']=='P-020'),3)),open(os.path.join(H,'cover_set_v5.json' if TRIM else 'cover_set_v5_untrimmed.json'),'w'),indent=1)
 for r in out: print(r)
 print({k:round(v,3) for k,v in tot.items()})
