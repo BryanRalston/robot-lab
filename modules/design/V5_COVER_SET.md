@@ -18,6 +18,24 @@ Inserts/rim doublers 4 g per rigid panel included; EPP pads (0.360) unchanged, n
 
 **Mass (trimmed):** P-020 rigid PC skin 0.539 m² → **1.009 kg** vs booked 1.157 (**−0.148**); P-022…P-025 **+0.383**; **net +0.236 kg vs booked** (R-029 holds 0.30). With CF shin + thigh fairings: **+0.126 kg**. Arm shells return as a P-020 change at Arms R2 (untrimmed estimate +0.589 kg).
 
+## A29 panel layout and mould list (owner: Industrial Design per R-029)
+Status: layout from Legs keep-out hulls + model_v4 dims, **not yet measured on v4 CAD** (areas [EST]). Delta check: itemized `modules/design/cover_set_v5.json` = **+0.236 kg ≤ 0.30 cap: PASS** (+0.126 with CF shin/thigh).
+
+| # | panel (per side unless noted) | split / layout | draw [EST] | mould (L/R separate) | process |
+|---|---|---|---|---|---|
+| M1–M2 | shin front piece | front of shank, ankle pitch −45…+40 swept; split on sagittal line to outboard piece | ≤ 2:1 | 2 tools | PC vacuum-form, CNC trim (or CF prepreg on same geometry, Al tool) |
+| M3–M4 | shin outboard piece | lateral face, overlaps front 8 mm at quarter-turn joint | ≤ 1.5:1 | 2 | PC vacuum-form |
+| M5–M6 | thigh front piece | taper 140→105 mm; ends above knee-cap keep-out | ≤ 2:1 | 2 | PC / CF option |
+| M7–M8 | thigh outboard piece | lateral face, clears hip-pitch screw | ≤ 1.5:1 | 2 | PC / CF option |
+| M9–M10 | foot top shell | top of 240×100 box only, hides instep lugs | ≤ 1.5:1 | 2 | PC vacuum-form |
+| M11–M12 | knee cap (P-022) | shank-mounted, sweeps 0–135° outside thigh fairing | ≤ 2.5:1 | 2 | PC vacuum-form |
+| M13 | hip skirt rim strip (P-023) | flat-formed strip, both sides from one tool | ≤ 1:1 | 1 | PC strip former |
+| P1 | hip skirt fabric (P-023) | 2 sewn panels from flat pattern | — | cut pattern | sewn TPU-nylon |
+| M14 | waist bellows (P-024, 1 off) | single band, convolutions over yoke | — | 1 dip/rotational mould, or catalog bellows if one fits ø300 × 90 | TPE |
+| P2 | ankle boot (P-025) | flat pattern + zip | — | cut pattern | sewn TPU-nylon |
+
+Rigid thermoform tools: **12** (vs 16 [EST] in COVER_COST.md; A30 cost sheet to be updated) + 1 strip tool + 1 bellows mould; 2 sewing patterns. Trim fixtures: one per rigid tool (12). Next: measure panel areas on model_v4 CAD and confirm draw ratios; re-run `cover_set_v5.py` with measured areas.
+
 ## Option: untrimmed set (`python3 cover_set_v5.py --untrimmed` → `cover_set_v5_untrimmed.json`)
 Full-wrap shin/thigh fairings (0.70 hull), foot shell 0.40, upper-arm (ø95×260) + forearm (ø85×250) shells + shoulder caps as placeholders. P-020 1.073 m² → 2.012 kg (+0.855 vs booked) + P-022…P-025 0.383 → **+1.238 kg**. Rejected by R-029 against the 1.329 kg reserve / 0.30 floor; kept for reference only.
 
