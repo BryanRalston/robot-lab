@@ -1,0 +1,59 @@
+{
+ "origin_of_plus_0p25": {
+  "booking_kg": 0.25,
+  "breakdown": "R-079: SurLok IP2X EST +0.21 + 16 mm2 main link +0.04",
+  "owners": "Torso (connectors/shrouds) + Electronics (IP2X inventory); NOT Industrial Design covers",
+  "electronics_inventory_kg": 0.086,
+  "electronics_commit": "7ff4cd7",
+  "credit_vs_booking": -0.164,
+  "note": "Electrical finger-safe IP2X is separate from thermal burn protection."
+ },
+ "thermal_limit": {
+  "C": 48.0,
+  "citation": "Thermal R1_BUDGET.md (~48 C plastics, ISO 13732-1 class); IEC 62368-1 TS1-class brief touch used as design target"
+ },
+ "strategy": "A35 vents first (already in cover set); 5 mm PC standoff ribs on hot outer skins; thin liner only if skin still >48 C [EST]",
+ "items": [
+  {
+   "zone": "hip_pitch cover outer skin",
+   "T_C": 53,
+   "limit_C": 48.0,
+   "margin_K": -5.0,
+   "area_m2": 0.05,
+   "standoff_ribs_kg": 0.009,
+   "T_after_standoff_EST": 46,
+   "liner_m2": 0.0,
+   "liner_kg": 0.0,
+   "total_kg": 0.009,
+   "source": "thermal/R1_BUDGET.md table \u00a73",
+   "note": "over hip housing / skirt zone"
+  },
+  {
+   "zone": "knee cover outer skin (thigh fairing + cap)",
+   "T_C": 53,
+   "limit_C": 48.0,
+   "margin_K": -5.0,
+   "area_m2": 0.06,
+   "standoff_ribs_kg": 0.0108,
+   "T_after_standoff_EST": 46,
+   "liner_m2": 0.0,
+   "liner_kg": 0.0,
+   "total_kg": 0.0108,
+   "source": "thermal/R1_BUDGET.md table \u00a73",
+   "note": "P-022 + thigh over knee housing"
+  }
+ ],
+ "total_thermal_touch_kg": 0.02,
+ "vs_plus_0p25": {
+  "electrical_remaining_after_Electronics": 0.086,
+  "thermal_ID_proposal": 0.02,
+  "combined": 0.106,
+  "delta_vs_0p25": -0.144
+ },
+ "needs_measurement": [
+  "cover outer skin thermocouple at hip/knee on G5 carry 35 C (Thermal R1 already asks)",
+  "confirm ISO 13732-1 / IEC 62368 plastic touch threshold with Materials (48 C unverified)",
+  "standoff delta-T (7 K) is [EST] \u2014 J-T1 or bench",
+  "liner areal density citation if liner path needed"
+ ]
+}

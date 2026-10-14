@@ -22,7 +22,7 @@ Hull areas now come from the final `legs/results/v5/ENVELOPES_FOR_ID.md`: knee_c
 **Knee cap vs thigh fairing clearance (Legs):** no overlap from 0 to 135°. Minimum keep-out gap is **10.2 mm at 135°** (22 mm from 0 to 105°). After the D69 ø85 knee housing (+4.5 mm radial) it is **≈ 5.7 mm [EST]**, still above the 3 mm PC flex gap. Recheck after the D69 re-CAD.
 
 ## Shoulder impact pad (R-042, P-051 proposed): see `SHOULDER_PAD.md`
-R2: 40 mm EPP failed against the real crush curve (Materials). R8 (Arms R7): core bonded to the integral 7075 link boss (D-A dropped), pad centre on the CRBH 6013 plane. **0.096 kg pair incl. boss** (booked 0.092, cap 0.100); replaceable-tray option 0.1162. Arm shells stay deferred.
+R2: 40 mm EPP failed against the real crush curve (Materials). **R-079: R8 option B adopted** — replaceable 7075 tray on the integral boss, **0.116 kg pair (+0.024 vs 0.092 booking)**; field rebonding A rejected. Pad centre on the CRBH 6013 plane. Arm shells stay deferred.
 
 ## R-059 / R-060 decisions (recorded)
 - Pad R5 accepted (R-059), then R-060: the mount counts inside the cap, a 7075 doubler is required, the pad is booked 0.127 → R6 above at 0.100. Lot-tested cores ±5 % + G5 rate factor; 15° impact limit.
@@ -108,13 +108,23 @@ Rules per joint per leg: inlet ≥ 50 cm² and ≥ 30 % of the panel over the ho
 - **Mass (pair):** thigh -0.026 (slots minus the +12 mm fin bulge), knee cap -0.033, hip skirt **+0.004 (ADDED: hem stiffener ring holding the exhaust open)**; total **-0.055**. **R-047 item 1 goes from −0.154 to -0.055 (+0.099 less saving: FLAG).**
 
 ## Option: untrimmed set (`python3 cover_set_v5.py --untrimmed` → `cover_set_v5_untrimmed.json`)
-Full-wrap shin/thigh fairings (0.70 hull), foot shell 0.40, upper-arm (ø95×260) + forearm (ø85×250) shells + shoulder caps as placeholders. P-020 1.073 m² → 2.012 kg (+0.855 vs booked) + P-022…P-025 0.383 → **+1.255 kg** (recomputed on the final Legs hulls; was +1.238). Rejected by R-029 against the 1.329 kg reserve / 0.30 floor; kept for reference only.
+Full-wrap shin/thigh fairings (0.70 hull), foot shell 0.40, upper-arm (ø95×260) + forearm (ø85×265, Arms R8 +15 mm) shells + shoulder caps as placeholders. P-020 → **2.013 kg** (+0.856 vs booked) + P-022…P-025 0.383 → **+1.256 kg**. Rejected by R-029 against the 1.329 kg reserve / 0.30 floor; kept for reference only.
 
 ## Clearance assumptions
 - Leg keep-outs: Legs `legs/results/v5/envelopes.json` (hull areas snapshotted into `cover_set_v5.py`) (fairings_v5.py, model_v4 swept, convex hull + 5 mm; **uncommitted Legs WIP, not yet confirmed by Legs**). Shin: ankle pitch −45…+40 × roll ±18; thigh: hip pitch −105…+40 (incl. −74.6 sit) × knee 0–135; skirt: yaw −35/+45, roll −12/+15.
 - Skin fraction 0.45 of final hull (thigh, foot top; range 0.4–0.5; 0.70 untrimmed), knee cap 0.30, skirt 0.40, 0.80 (boot): [EST].
 - Additional 3 mm air gap inside the keep-out for PC flex under fall load [EST]; draw ratio ≤ 3:1 (LEXAN guide) assumed achievable on all rigid panels; panels split at the 3:1 limit.
 - Arm/shoulder: no envelope exists; shells are placeholders (V5 plan row 6).
+
+## Arms R8 forearm cover (R-076 / 009b865)
+- Structural forearm **270 → 285 mm** (+15 mm); shell stays **Ø70**; wrist fairing unchanged.
+- Cover placeholder length **250 → 265 mm** (ø85 × 0.85 wrap): area/side 0.0567 → 0.0601 m²; **+0.006 kg/side, +0.012 kg pair** (`cover_set_v5.py`).
+- **Proportion sign-off:** forearm/upper-arm **0.95** (was 0.90) is **acceptable** for an Optimus-class figure.
+- Foot top shell: baseline still lists it; **R-081 C2 deletes it** (see `COVER_TRIMS_R069.md`).
+
+## Knee fin grille / drive-bay vents (A36)
+- **No local knee-grille bulge:** rev C withdrawn (R-079/R-081); rev B stays. A ~5 mm bulge is **pending Legs' rev B envelope check**.
+- **Knee drive bay (R-062 / L51):** rear inlet low on grille **50 cm² open (38 %)**; high rear outlet **63 cm² open (35 %)**. Meets A35 ≥50/60 and ≥30/35 %. Adds rear-panel mass ≈ **+0.082 pair** [EST] (`a36_vents.json` `knee_drive_bay`).
 
 ## Open questions
 1. Legs: confirm envelopes.json as final and commit; knee-cap keep-out complement vs thigh fairing overlap.

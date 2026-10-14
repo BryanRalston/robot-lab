@@ -1,74 +1,109 @@
 {
  "items": [
   {
-   "item": "A  CF 1.0 mm (4x0.25 twill) on the louvred thigh FRONT half (outboard stays PC 1.2: CF 1.55 kg/m2 > PC 1.2 1.44)",
+   "item": "A  CF 1.0 mm (4x0.25 twill) on the louvred thigh FRONT half (outboard stays PC 1.2)",
    "kg": -0.026,
-   "calc": "front skin 0.187 x (1-1.55/1.80); R-027 densities; R-054 prefers CF",
-   "risk": "cost ~+$0.8k Al tools (2 L/R fronts); edge cracking on impact (R-027) -> radiused/hemmed slot edges",
-   "recommend": "YES"
+   "calc": "front skin 0.187 x (1-1.55/1.80); R-027; Materials slot-edge rules",
+   "risk": "edge cracking -> radiused/hemmed sealed slots",
+   "recommend": "YES",
+   "status": "R-075 booked half credit"
   },
   {
-   "item": "B  knee cap PC 1.5 -> 1.2 mm",
+   "item": "B  knee cap PC 1.5 -> 1.2 mm (DROPPED)",
    "kg": -0.02,
    "calc": "0.098 x 0.3/1.5",
-   "risk": "2.5:1 draw -> post-form min ~0.7 mm at corners; knee is a fall-contact zone (dent/crack); EPP pad behind it?",
-   "recommend": "NO (fall zone) unless Materials dent check passes"
+   "risk": "Materials: FAIL dent at ~0.7 mm post-form corners",
+   "recommend": "NO \u2014 dropped (Materials f14c29c / R-080)",
+   "status": "dropped; replaced by B2"
   },
   {
-   "item": "C1 foot top shell 1.2 -> 1.0 mm",
+   "item": "B2 PA12 1.5 mm knee cap (replaces B; either-or)",
+   "kg": -0.016,
+   "calc": "Materials COVER_TRIMS_REVIEW: 0.098 x (1-1.01/1.20) = -0.016; either-or with B",
+   "risk": "kneel-fall test gate (G5)",
+   "recommend": "YES (test-gated)",
+   "status": "R-080: counts after kneel-fall"
+  },
+  {
+   "item": "C1 foot top shell 1.2 -> 1.0 mm (SUPERSEDED by C2)",
    "kg": -0.023,
    "calc": "0.137 x 0.2/1.2",
-   "risk": "low draw (<=1.5:1) OK; foot is a kick/stub zone: dents; EPP-backed",
-   "recommend": "YES (with dent check)"
+   "risk": "superseded",
+   "recommend": "NO \u2014 superseded by C2 (R-081)",
+   "status": "superseded"
   },
   {
-   "item": "C2 foot top shell DELETED (alternative to C1)",
-   "kg": -0.153,
-   "calc": "0.137 + 4 inserts",
-   "risk": "instep lugs/outrigger exposed (snag, debris, looks); Legs to accept; mould M5-M6 deleted (-$2.3k)",
-   "recommend": "OPTION for the Arbiter"
+   "item": "C2 foot top shell DELETED + boot instep extension",
+   "kg": -0.133,
+   "calc": "shell skin -0.137 (4 M3 inserts KEPT for boot re-anchor) + boot ext 0.050 m2 x 0.071 silpoly = +0.004; net -0.133",
+   "risk": "L54/R-081: re-anchor boot hem through 4 inserts; extend boot over instep rod ends; Legs R2 edges on outrigger/lugs; sole pad separate (Legs/Materials)",
+   "recommend": "YES",
+   "status": "R-081 booked -0.13 est half -> -0.065"
   },
   {
-   "item": "D  ankle boot: TPU-coated 210D nylon 0.30 -> silicone-coated 70D ripstop ~0.10 kg/m2",
-   "kg": -0.04,
-   "calc": "0.201 m2 x 0.20 kg/m2 [EST: needs supplier TDS]",
-   "risk": "abrasion at the ankle; becomes a wear part (inspect at the 4,250 h rod-end service)",
-   "recommend": "YES"
+   "item": "D  ankle boot: TPU 210D 0.30 -> silicone 70D ripstop 0.071 kg/m2",
+   "kg": -0.046,
+   "calc": "0.201 m2 x 0.229 kg/m2 (Materials cited ~71 g/m2)",
+   "risk": "wear part: replaceable; inspect at 4,250 h rod-end service",
+   "recommend": "YES",
+   "status": "R-075 booked; R-080 silpoly delta"
   },
   {
-   "item": "E  hip skirt fabric 0.30 -> 0.10 kg/m2 (same ripstop); PC rim + hem ring kept",
-   "kg": -0.045,
-   "calc": "(0.239 - 2 x 70 cm2 exhaust open, Thermal a8811f5) m2 x 0.20 kg/m2 [EST]",
-   "risk": "flutter/pinch at the hip; the exhaust slots band needs the hem ring (kept)",
-   "recommend": "YES"
+   "item": "E  hip skirt fabric 0.30 -> 0.071 kg/m2; PC rim + hem ring kept",
+   "kg": -0.052,
+   "calc": "(0.239 - 2x70 cm2 exhaust, Thermal a8811f5) m2 x 0.229; was -0.045 at 0.10 assumed",
+   "risk": "flutter/pinch; hem ring kept",
+   "recommend": "YES",
+   "status": "R-079 E updated; R-080 silpoly"
   },
   {
    "item": "F1 waist bellows P-024 TPE -> thin TPU-film convoluted boot 0.3 kg/m2",
    "kg": -0.025,
    "calc": "0.0848 m2 x 0.30 kg/m2 [EST]",
-   "risk": "fatigue at waist yaw/pitch; needs a cycle test",
-   "recommend": "YES"
+   "risk": "fatigue; cycle test gate",
+   "recommend": "YES (test-gated)",
+   "status": "R-075: counts after cycle test"
   },
   {
-   "item": "F2 waist bellows P-024 DELETED (alternative to F1)",
+   "item": "F2 waist bellows P-024 DELETED",
    "kg": -0.055,
    "calc": "cover_set_v5.json P-024",
-   "risk": "waist yoke/pinch points exposed (Optimus look lost); finger-pinch hazard at waist pitch",
-   "recommend": "OPTION"
+   "risk": "ingress/pinch",
+   "recommend": "NO \u2014 rejected (R-075)",
+   "status": "rejected"
   },
   {
-   "item": "G  fasteners: 2 of 4 bonded inserts per rigid panel -> moulded snap hooks (8 panels)",
+   "item": "G  fasteners: 2 of 4 bonded inserts per rigid panel -> moulded snap hooks",
    "kg": -0.032,
-   "calc": "8 panels x 2 x 2 g [EST]",
-   "risk": "retention after a fall; panels may pop off (that is acceptable as a fuse, but lost parts)",
-   "recommend": "YES"
+   "calc": "8 panels x 2 x 2 g [EST] (C2 drops M5-M6: if 6 rigid panels left, -0.024)",
+   "risk": "retention/fall test gate",
+   "recommend": "YES (test-gated)",
+   "status": "R-075: counts after retention/fall"
   }
  ],
- "recommended_total_kg": -0.191,
- "recommended_half_credit_kg": -0.096,
- "options_extra": {
-  "C2_instead_of_C1": -0.13,
-  "F2_instead_of_F1": -0.03,
-  "B_if_dent_check_passes": -0.02
- }
+ "silpoly_kg_m2": 0.071,
+ "pad_R8_option_B": {
+  "kg_pair": 0.1162,
+  "booked_R073": 0.092,
+  "delta_vs_booking": 0.024,
+  "remaining_credit_vs_R073_kg": -0.0044,
+  "note": "Materials f14c29c: -4.4 g remaining vs R-073; R-079 adopts B at +0.024 full"
+ },
+ "booked_ADE_C2_full_kg": -0.257,
+ "booked_half_credit_kg": -0.129,
+ "test_gated_B2_F1_G_full_kg": -0.073,
+ "C2_net": {
+  "shell_skin_deleted_kg": -0.137,
+  "inserts_kept": 4,
+  "boot_extension_m2": 0.05,
+  "boot_extension_kg": 0.004,
+  "net_full_kg": -0.133,
+  "arbiter_R081_half_credit": -0.065
+ },
+ "notes": [
+  "F2 rejected R-075",
+  "B dropped Materials/R-080; B2 PA12 either-or",
+  "C1 superseded by C2 R-081",
+  "sole pad + toe/heel bumpers required separately (R-081, Legs/Materials)"
+ ]
 }

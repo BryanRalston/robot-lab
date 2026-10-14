@@ -21,7 +21,7 @@ rows=[
  ('thigh fairing (2 halves)','P-020','PC 1.5 (CF allowed)',A('thigh_fairing')*FF,2,2),
  ('foot upper shell','P-020','PC 1.5',A('foot_upper')*FT,1,2),
  ('upper-arm shell (2 halves)','P-020','PC 1.5',3.1416*0.095*0.26*0.85,2,2),
- ('forearm shell (2 halves)','P-020','PC 1.5',3.1416*0.085*0.25*0.85,2,2),
+ ('forearm shell (2 halves)','P-020','PC 1.5',3.1416*0.085*0.265*0.85,2,2),  # Arms R8 / R-076: forearm 270->285 (+15 mm); cover L 250->265; structural shell OD70, cover placeholder OD85
  ('shoulder cap','P-020','PC 1.5',0.030,1,2),
  ('knee cap','P-022 (new)','PC 1.5',A('knee_cap')*FK,1,2),
  ('hip skirt (flexible)','P-023 (new)','TPU-nylon fabric + PC rim strip',A('hip_skirt')*FS,1,2),
@@ -36,7 +36,7 @@ for n,p,m,a,k,s in rows:
     out.append(dict(panel=n,P=p,material=m,area_m2_side=round(a,4),panels=k*s,kg=round(kg,3),cf_kg=round(s*(a*CF+k*INS),3) if 'CF' in m else None))
     tot[p]=tot.get(p,0)+kg
 r6=json.load(open(os.path.join(H,'pad_r8.json')))
-out.append(dict(panel='shoulder impact pad R8: core bonded to integral 7075 link boss, HC 4.5 pcf 61.8x61.8x60',P='P-051 (proposed)',material='Al honeycomb + 7075 doubler + EPP face',area_m2_side=0.0037,panels=2,kg=r6['option_A_direct_bond']['kg_pair'],cf_kg=None,note='booked separately, 0.092; not in the P-020/P-022..25 delta'))
+out.append(dict(panel='shoulder impact pad R8 option B: replaceable 7075 tray on integral boss, HC 4.5 pcf 61.8x61.8x60',P='P-051 (proposed)',material='Al honeycomb + 7075 tray + EPP face',area_m2_side=0.0037,panels=2,kg=r6['option_B_replaceable_tray']['kg_pair'],cf_kg=None,note='R-079: option B adopted at 0.116 pair (+0.024 vs 0.092 booking); field rebonding A rejected; not in P-020/P-022..25 delta'))
 json.dump(dict(rows=out,totals={k:round(v,3) for k,v in tot.items()},booked_P020_skin_kg=1.157,delta_vs_booked_kg=round(sum(tot.values())-1.157,3),measured=False,pc_area_m2=round(sum(r['area_m2_side']*(2) for r in out if r['P']=='P-020'),3)),open(os.path.join(H,'cover_set_v5.json' if TRIM else 'cover_set_v5_untrimmed.json'),'w'),indent=1)
 for r in out: print(r)
 print({k:round(v,3) for k,v in tot.items()})

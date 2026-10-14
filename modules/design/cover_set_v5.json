@@ -55,14 +55,14 @@
    "cf_kg": null
   },
   {
-   "panel": "shoulder impact pad R8: core bonded to integral 7075 link boss, HC 4.5 pcf 61.8x61.8x60",
+   "panel": "shoulder impact pad R8 option B: replaceable 7075 tray on integral boss, HC 4.5 pcf 61.8x61.8x60",
    "P": "P-051 (proposed)",
-   "material": "Al honeycomb + 7075 doubler + EPP face",
+   "material": "Al honeycomb + 7075 tray + EPP face",
    "area_m2_side": 0.0037,
    "panels": 2,
-   "kg": 0.096,
+   "kg": 0.1162,
    "cf_kg": null,
-   "note": "booked separately, 0.092; not in the P-020/P-022..25 delta"
+   "note": "R-079: option B adopted at 0.116 pair (+0.024 vs 0.092 booking); field rebonding A rejected; not in P-020/P-022..25 delta"
   }
  ],
  "totals": {

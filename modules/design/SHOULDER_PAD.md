@@ -1,7 +1,29 @@
-# Shoulder impact pad: R8, core bonded to the integral link boss, RL Industrial Design, 2026-10-14
-**P-number: P-051 (proposed). R-042 approves the pad and its cap but assigns no P-number; the highest P on main is P-050.** Numbers come from `shoulder_pad.py` → `shoulder_pad.json`. All [EST] until Materials confirms the foam data and Controls runs T-030.
+# Shoulder impact pad: R8 option B adopted (R-079), RL Industrial Design, 2026-10-14
+**P-number: P-051 (proposed).** **R-079 adopts option B** (replaceable 0.5 mm 7075 tray on Arms' integral 62x62x10 boss): **0.116 kg pair, +0.024 vs the R-073 0.092 booking, full credit.** Field rebonding on the arm link (option A, 0.096 pair) is **rejected** — it puts a structural link at risk on every cartridge swap. Materials remaining credit vs R-073: **-4.4 g** (pending FEA job 1 + link-face qualification). Numbers from `pad_r8.py` -> `pad_r8.json`.
 
-## R8 (Arms R7 550ab88): CURRENT DESIGN. Integral link boss replaces the D-A doubler
+## R8 CURRENT (R-079): option B — replaceable tray
+- **Why:** the roll-yaw link face is only 60 x 50 (78 mm diagonal), too small for D-A. Arms provides a solid 7075-T6 link with an integral 62 x 62 x 10 boss, 4 x M4 x 8 tapped, +0.024/side [EST]. The boss replaces the D-A doubler.
+- **Service:** cartridge swaps in minutes (tray tabs on boss M4); no field rebond.
+- **Pad centre on the CRBH 6013 plane** (e <= 10 mm). Abduction soft limit <= 135 deg.
+
+**Option B (ADOPTED): replaceable 0.5 mm 7075 tray + sleeve**
+| item (per side) | kg |
+|---|---|
+| core_61p8x61p8x60 | 0.0165 |
+| bond_DP490 | 0.0005 |
+| spreader_Al_0p5 | 0.0052 |
+| EPP80_face_6mm_integral_skin | 0.0018 |
+| link_boss_7075_Arms_EST | 0.024 |
+| replaceable_tray_7075_0p5_with_lips_tabs | 0.0076 |
+| sleeve_TPU_film | 0.0025 |
+| **per side** | **0.0581** |
+| **pair** | **0.1162 (booked 0.092 -> +0.024; R-079)** |
+
+**Option A (REJECTED for field service): direct bond** — 0.096 pair; cartridge replacement = debond + re-prep + 24 h cure on the structural link.
+
+**FEA case (bryan PC):** solid 7075 link with integral boss + tray + bonded core pressure patch 61.8^2, pad centre at e = 0 and e = 10 mm; 9.17 kN at 15 deg; pass criteria unchanged (link/boss <= 480/1.5 MPa, bond <= 23/3, CRBH s0 >= 2.0, deflection <= 1 mm, M4 no slip).
+
+## R8 design detail (superseded pick narrative; B is adopted above)
 - **Why:** the roll-yaw link face is only 60 × 50 (78 mm diagonal), too small for D-A. Arms proposes a solid 7075-T6 link with an integral 62 × 62 × 10 boss, 4 × M4 × 8 tapped, +0.024/side [EST]. **The boss replaces the D-A doubler**: the core is bonded straight to the boss face (−15.5 g/side), net ≈ +0.0085/side vs R7.
 - **Bond:** 15° shear 2.37 kN → 0.62 MPa on the footprint; DP490 (23 MPa) SF 37; core shear SF 3.8 (Materials, residual-after-crush test at G5). Prep the machined 7075 boss face per `legs/BOND_SPEC.md` (grit-blast, solvent, primer).
 - **Lips/guides:** not needed when bonded (Materials Part 4: lips only locate; the bond carries shear). A 62 boss leaves no wall for a pocket around a 61.8 core, so **locate with a bonding jig**. A 0.5 mm rim would need a 64 × 64 boss (+7 g).
@@ -18,7 +40,7 @@
 | **per side** | **0.048** |
 | **pair** | **0.096** (booked 0.092 → **+0.004**; cap 0.100 → −0.004) |
 
-**Service flag (A):** replacing a spent cartridge means debonding the core from the arm link, re-prepping and re-bonding (24 h cure). That's a field-service burden. **Option B:** replaceable 0.5 mm 7075 tray (lips + tabs on the boss M4) + sleeve = **0.1162 pair, over the cap by 0.016**; tray tabs OK (0.5 mm tabs: bearing 307 MPa (SF 1.56 vs 480), tear-out 154 MPa (SF 2.1 vs 330)). **Arbiter/Bryan pick:** A (0.096, service burden) or B (0.116, needs a +0.016 offset, e.g. from R-069).
+**Service flag (A):** replacing a spent cartridge means debonding the core from the arm link, re-prepping and re-bonding (24 h cure). That's a field-service burden. **Option B:** replaceable 0.5 mm 7075 tray (lips + tabs on the boss M4) + sleeve = **0.1162 pair, over the cap by 0.016**; tray tabs OK (0.5 mm tabs: bearing 307 MPa (SF 1.56 vs 480), tear-out 154 MPa (SF 2.1 vs 330)). **R-079 pick: B adopted** (+0.024 vs booking). A rejected.
 
 **FEA case (bryan PC, updated):** solid 7075 link with integral boss + bonded core pressure patch 61.8², pad centre at e = 0 and e = 10 mm; 9.17 kN at 15° (8.86 normal + 2.37 tangential, applied axial along the roll axis = worst for CRBH P0, and downward); arm tuck self-weight; fixed at the shoulder_P bracket through the CRBH 6013 (stiffness element). Pass: link/boss ≤ 480/1.5 MPa, bond-line ≤ 23/3 MPa, CRBH s0 ≥ 2.0, deflection ≤ 1 mm at the pad, M4 no slip.
 

@@ -1,18 +1,42 @@
 # R-069 mass-down pass: NEW cover trims beyond R-047 (RL Industrial Design, 2026-10-14)
-Script `cover_trims_r069.py` → `cover_trims_r069.json`. Baseline: trimmed v5 set with the R-047 items already taken (A35 vents, PC 1.2 on thigh outboard + foot top, PA12 rim strips). Areas [EST] (measured: false), so covers count at half credit (R-040). Fabric weights are [EST] pending supplier TDS.
+Script `cover_trims_r069.py` → `cover_trims_r069.json`. Baseline: trimmed v5 set with the R-047 items already taken (A35 vents, PC 1.2 on thigh outboard + foot top, PA12 rim strips). Areas [EST] (measured: false), so covers count at half credit (R-040). Fabric weights from Materials COVER_TRIMS_REVIEW (silicone 70D ripstop ≈ **71 g/m²** finished, RBTR_SILPOLY).
 
-| item | Δ kg pair | calc / citation | risk | recommend |
-|---|---|---|---|---|
-| A  CF 1.0 mm (4x0.25 twill) on the louvred thigh FRONT half (outboard stays PC 1.2: CF 1.55 kg/m2 > PC 1.2 1.44) | **-0.026** | front skin 0.187 x (1-1.55/1.80); R-027 densities; R-054 prefers CF | cost ~+$0.8k Al tools (2 L/R fronts); edge cracking on impact (R-027) -> radiused/hemmed slot edges | YES |
-| B  knee cap PC 1.5 -> 1.2 mm | **-0.02** | 0.098 x 0.3/1.5 | 2.5:1 draw -> post-form min ~0.7 mm at corners; knee is a fall-contact zone (dent/crack); EPP pad behind it? | NO (fall zone) unless Materials dent check passes |
-| C1 foot top shell 1.2 -> 1.0 mm | **-0.023** | 0.137 x 0.2/1.2 | low draw (<=1.5:1) OK; foot is a kick/stub zone: dents; EPP-backed | YES (with dent check) |
-| C2 foot top shell DELETED (alternative to C1) | **-0.153** | 0.137 + 4 inserts | instep lugs/outrigger exposed (snag, debris, looks); Legs to accept; mould M5-M6 deleted (-$2.3k) | OPTION for the Arbiter |
-| D  ankle boot: TPU-coated 210D nylon 0.30 -> silicone-coated 70D ripstop ~0.10 kg/m2 | **-0.04** | 0.201 m2 x 0.20 kg/m2 [EST: needs supplier TDS] | abrasion at the ankle; becomes a wear part (inspect at the 4,250 h rod-end service) | YES |
-| E  hip skirt fabric 0.30 -> 0.10 kg/m2 (same ripstop); PC rim + hem ring kept | **-0.045** | (0.239 - 2 x 70 cm2 exhaust open, Thermal a8811f5) m2 x 0.20 kg/m2 [EST] | flutter/pinch at the hip; the exhaust slots band needs the hem ring (kept) | YES |
-| F1 waist bellows P-024 TPE -> thin TPU-film convoluted boot 0.3 kg/m2 | **-0.025** | 0.0848 m2 x 0.30 kg/m2 [EST] | fatigue at waist yaw/pitch; needs a cycle test | YES |
-| F2 waist bellows P-024 DELETED (alternative to F1) | **-0.055** | cover_set_v5.json P-024 | waist yoke/pinch points exposed (Optimus look lost); finger-pinch hazard at waist pitch | OPTION |
-| G  fasteners: 2 of 4 bonded inserts per rigid panel -> moulded snap hooks (8 panels) | **-0.032** | 8 panels x 2 x 2 g [EST] | retention after a fall; panels may pop off (that is acceptable as a fuse, but lost parts) | YES |
+## Item status (R-075 / R-079 / R-080 / R-081)
 
-**Recommended set (A, C1, D, E, F1, G): -0.191 kg full → -0.096 kg at half credit** (E updated for the 70 cm² hip exhaust, Thermal a8811f5)
-Options for the Arbiter: delete the foot top shell instead of C1 (C2: -0.13 more); delete the bellows instead of F1 (F2: -0.03 more); knee cap 1.2 mm (B: -0.02) only if the Materials dent check passes. Not double-counted with R-047.
-Confirmations needed: Materials (CF slot-edge cracking, 1.0 mm foot dent, fabric TDS, TPU-film bellows fatigue); Legs (foot shell deletion); Controls/Thermal: none.
+| item | Δ kg pair (full) | status | notes |
+|---|---|---|---|
+| A  CF 1.0 mm louvred thigh FRONT | **−0.026** | **booked** half credit (R-075) | Materials slot-edge rules binding |
+| B  knee PC 1.5 → 1.2 | −0.020 | **dropped** (Materials dent FAIL / R-080) | replaced by B2 |
+| **B2 PA12 1.5 mm knee cap** | **−0.016** | **test-gated** (kneel-fall) | either-or with B; Materials/R-080 |
+| C1 foot 1.2 → 1.0 | −0.023 | **superseded by C2** | dent test dropped |
+| **C2 foot top shell DELETED** | **−0.133** | **booked** −0.13 est → **−0.065** half (R-081) | see C2 breakdown |
+| D  ankle boot → silpoly 0.071 | **−0.046** | **booked** half (R-075); silpoly delta R-080 | **replaceable wear part; inspection interval = 4,250 h rod-end service** |
+| E  hip skirt → silpoly 0.071 | **−0.052** | **booked** half (R-075/R-079); was −0.045 at 0.10 assumed | hem ring + 70 cm² exhaust kept |
+| F1 TPU-film bellows | −0.025 | **test-gated** (cycle) | R-075 |
+| F2 delete bellows | −0.055 | **rejected** (R-075 ingress/pinch) | — |
+| G snap hooks | −0.032 | **test-gated** (retention/fall) | R-075; rigid-panel count falls if C2 deletes M5–M6 |
+
+**Booked now (A + D + E + C2): −0.257 full → ≈ −0.129 half credit** (Arbiter figures may round C2 as −0.13/−0.065 and silpoly D+E extra −0.003 at half per R-080).
+**Test-gated upside (B2 + F1 + G): −0.073 full** once `R069_TESTS.md` passes.
+
+## C2 net mass (Legs L54 / R-081)
+| line | kg pair |
+|---|---|
+| Foot top shell skin deleted (PC 1.2, already R-047) | **−0.137** |
+| 4× M3 web inserts **kept** (boot hem re-anchor) | 0 |
+| Boot extension over instep rod ends/pins (~0.025 m²/side silpoly) [EST] | **+0.004** |
+| **Net C2** | **−0.133** (−0.065 at half credit) |
+
+Conditions (binding): (1) boot hem re-anchors through the 4 existing foot-box M3 inserts; (2) boot covers instep rod ends and pins down to the foot top; (3) Legs breaks R2 edges on exposed outrigger and lug ends. **Sole pad + toe/heel bumpers** are a separate R-081 requirement (Legs/Materials; not in this trim).
+
+## R-075 fold-in (Arbiter)
+- **D** must be **replaceable**, with an **inspection interval** (4,250 h rod-end service).
+- **C1, F1, G** (and **B**, now dropped) were test-gated; **C1 is withdrawn** (C2 replaces it). Remaining gates: **B2 kneel-fall**, **F1 cycle**, **G retention/fall** — see `R069_TESTS.md`.
+- **C2** went to Legs → **accepted** R-081.
+- **F2 rejected**.
+
+## Pad / R-079
+Option **B** (replaceable bolted 7075 tray) **adopted** at **+0.024** vs the R-073 0.092 booking (0.116 pair). Field rebonding (option A) **rejected**. Materials remaining pad credit vs R-073: **−4.4 g** (pending FEA job 1 + link face). See `SHOULDER_PAD.md`.
+
+## Confirmations
+Materials: CF slot edges (done in review), kneel-fall (B2), F1 cycle, G retention, fabric TDS cited. Legs: C2 conditions + sole pad proposal. Thermal: drive-bay rear vent open areas in `a36_vents.json` (`knee_drive_bay`).
