@@ -1093,3 +1093,7 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
 
 ## R-111 (2026-10-14) Conditional lighter trunnion break (Thermal 8e2e131)
 - If Materials qualifies a bond rated >=80 C (cited), the trunnion break minimum becomes **>=10 K/W** (70 C worst case at collar R 14 K/W). Legs sizes a thin-wall version of the L61 bush now. The credit is booked only after the bond is cited and the sized mass is known. If the bond is not qualified, L61 stands. J-T1/G5 collar R is still the gate.
+
+## R-112 (2026-10-14) A38 hot bond (Materials 04aa50b)
+- Adopt **Loctite EA 9396 AERO**, mandatory post-cure 1 h at 82 C (Tg 112 C, 80 C service), replacing DP490. The 2x6 mm 42CrMo4 pins stay as the backup; Legs owes FEA on edge distance and the 1.2 mm wall. Gates: J-T1/G5 plus one 80 C hot proof test.
+- Trunnion break: Materials asks to drop it fully. Thermal gives 72.7 C worst case unbroken, only 7.3 K under the bond rating with an estimated SF. **Not accepted.** The R-111 thin break (>=10 K/W, about 70 C worst case) is required. The L61 +0.070 is replaced by the thin-bush mass once Legs sizes it. Dropping the break fully is open only if Thermal shows <=70 C unbroken.
