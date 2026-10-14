@@ -25,3 +25,15 @@ Target: ≥ 0.18 kg back, cited or measured. Densities come from MATERIALS_DB (c
   - **ID:** itemised current panel PC masses so ranks 3–4 can be re-based.
   - **G5:** palm grip test, one PA12 cover fall test.
   - Get the PA12 MJF datasheet (impact, fatigue) into MATERIALS_DB. This is still open.
+
+
+## R-076 reconciliation (2026-10-14)
+- **Pad (rank 1):** R-060 booked 0.127 provisional. R-073 already re-booked the doubler pair at **0.092** (0.084 calc × half credit). R-076 adopts the 61 mm core: **0.0876 calc**.
+  - True net vs 0.127 is −39.4 g, but **−35 g of it is already booked by R-073.**
+  - **Remaining credit: 0.092 → 0.0876 = −4.4 g**, only once FEA job 1 passes and the link face qualifies (then full credit on the calc).
+  - No double count.
+- **Covers (ranks 3–4):** superseded. See COVER_TRIMS_REVIEW, Reconciliation. Remaining upside ≈ −0.015 kg after tests.
+- **Bond pins:** booked −0.004 (R-076).
+- **Tendon sheaths:** a compressionless coil is needed (TENDON_SHEATH rev B), **≈ +42 g both hands vs plain PTFE [EST]**. Add to the ledger as a penalty.
+- **T-031 chest pad: +0.077 kg** (full credit, R-076), T031_CHEST_CRUSH.md.
+- Updated path to the 0.30 reserve floor: hybrid palm (−0.080, FEA + grip test) + pocketed 7075 ankle cross (−0.088, FEA, approved R-073) + pad −0.004 + covers −0.015 ≈ **−0.187**, against penalties of +0.017 (A37) + 0.042 (sheaths) + 0.077 (chest). **Net ≈ −0.05 kg.**

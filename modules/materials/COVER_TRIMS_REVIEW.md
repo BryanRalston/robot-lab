@@ -61,3 +61,17 @@ Sources are in MATERIALS_DB. [EST] = estimate. Each item gets a verdict and its 
 | F1 | −0.025 | test first | 0 until tested |
 | G | −0.032 | yes | −0.032 |
 | **total** | −0.194 (ID rec. set incl. F1) | | **−0.182 full / −0.091 at half credit** |
+
+
+## Reconciliation with Arbiter R-075 (booked) and MASS_DOWN (R-076)
+- R-075 booked A + D + E at half credit: −0.114 full → −0.057.
+  - With the cited 70D silpoly (≈ 71 g/m² vs ID's 0.10), D + E improve by −0.013 full, **−0.0065 at half credit**. Book this once ID updates the fabric line to the cited TDS.
+  - Full credit needs measured areas (R-040).
+- C1, F1, G count only after their tests (R-075). Materials agrees: dent check, cycle test ≥ 10⁶, retention/fall.
+- **MASS_DOWN ranks 3–4 are superseded by these trims to avoid double counting:**
+  - Rank 4 (PC 1.2 on low-draw panels) was already taken by R-047 (thigh outboard + foot top 1.2) and C1 (foot 1.0). **Removed.**
+  - Rank 3 (PA12 small covers): boots and skirt are now fabric, and the rim strips are already PA12 (R-047). **The only remaining candidate is the knee cap.**
+    - PC 1.5 → PA12 1.5: 0.098 × (1 − 1.01/1.20) = **−0.016 full**, impact test needed.
+    - **This is mutually exclusive with B** (PC 1.2, −0.020, which Materials says NO on dent).
+    - Recommendation: knee cap PA12 1.5 (−0.016) instead of B, subject to a G5 kneel-fall test.
+- The net cover upside beyond R-075 is **−0.0065 (fabric TDS) − 0.008 (knee cap PA12 at half credit) ≈ −0.015 kg booked-able after tests**.
