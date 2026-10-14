@@ -12,5 +12,10 @@
  },
  "note": "Robot total: read official credible_kg; add these deltas only after an Arbiter ruling.",
  "actuator_delta_total_kg": -1.47852104026569e-06,
- "official_credible_kg": 66.054
+ "official_credible_kg": 66.054,
+ "v4_audit_fixes_pending": {
+  "both_legs_kg": 0.138,
+  "source": "results/v4_deltas.json",
+  "status": "pending Arbiter ruling (P-018); not in the official rollup"
+ }
 }

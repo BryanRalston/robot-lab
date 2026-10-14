@@ -1,0 +1,17 @@
+{
+ "lines_per_leg": {
+  "hip_pitch body: unused trunnion bosses removed (x2/leg)": -0.02119,
+  "knee twin housing: inner bosses -> shared web (x2 halves/leg)": -0.00129,
+  "ankle body: bosses -> axial top eye lug (x2/leg)": 0.00979,
+  "ankle top eye SKF GE 12 C 0.017 (x2/leg)": 0.034,
+  "ankle top eye pin \u00f812x30 steel (x2/leg)": 0.05327,
+  "ankle trunnion pin pairs retired (-2/leg)": -0.05179,
+  "ankle bottom rod end: high-misalignment PTFE (QA1 MGF12T class) vs GE 12 C rod end, +0.010 [EST] (x2/leg)": 0.02,
+  "ankle bottom spacer \u00f820/12 x4.5 steel (x2/leg)": 0.01421,
+  "ankle rod anti-rotation key + rod flat [EST] (x2/leg)": 0.012
+ },
+ "per_leg_kg": 0.06899198666379189,
+ "both_legs_kg": 0.13798397332758378,
+ "status": "pending Arbiter ruling (P-018); not in the official rollup",
+ "not_included": "Legs-side changes (ankle clevis replacing trunnion cheeks/pins/centre plate, raised bracket +40 mm, instep lug +5 mm outboard) are Legs mass"
+}

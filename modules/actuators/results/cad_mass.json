@@ -12,22 +12,28 @@
   "note": ""
  },
  "hip_pitch_body_x1": {
-  "mass": 0.15310929082912592,
+  "mass": 0.14251584040122095,
   "mat": "7075",
   "group": "housing",
-  "note": ""
+  "note": "v4 D62: unused trunnion bosses removed (axial eye mount)"
  },
  "knee_body_x1": {
-  "mass": 0.15310929082912592,
+  "mass": 0.1524634861004093,
   "mat": "7075",
   "group": "housing",
-  "note": ""
+  "note": "v4 D59: half of knee_twin_housing (outer boss +x, half web to the mid-plane)"
+ },
+ "knee_twin_housing": {
+  "mass": 0.30492698600332463,
+  "mat": "7075",
+  "group": "reference",
+  "note": "v4 D59: one-piece twin housing, = 2 x knee_body_x1"
  },
  "ankle_body_x1": {
-  "mass": 0.18745784639858387,
+  "mass": 0.1923507371459452,
   "mat": "7075",
   "group": "housing",
-  "note": "4 cooling fins (air_fins, v3 thermal choice)"
+  "note": "v4 D60/D61: axial GE 12 C top eye lug, no trunnion bosses; 4 fins"
  },
  "nut_rotor_hub_x1": {
   "mass": 0.015996639818657617,
@@ -74,7 +80,7 @@
   "linear": 0.023600000000000003
  },
  "per_leg": {
-  "housing": 1.6694862721497055,
+  "housing": 1.6567935433311851,
   "linkage": 0.3043038816238781
  }
 }

@@ -28,17 +28,30 @@ def rotary(motor,gear,bear='CRBH 6013 A'):
     stator_land=tube(mod+2*WALL,mod,4).translate((0,0,4))   # stator bond land
     s=body.union(rear).union(seat).union(flange).union(stator_land)
     return s,dict(D=D,L=L)
-def linear_body(motor,fins=0):
-    """One screw unit body: motor can (stator OD) + necked nut housing (nut D1 26 + 2 x 7202 angular-contact pair OD 35) + trunnion bosses."""
+def linear_body(motor,fins=0,bosses='both',web=0.0,eye=False):
+    """One screw unit body: motor can (stator OD) + necked nut housing (nut D1 26 + 2 x 7202 angular-contact pair OD 35) + trunnion bosses.
+    v4 audit (D59-D62): bosses 'both' | 'outer' (local +x only) | 'none'; web>0 = half of a shared centre web to local x=-web (knee twin housing,
+    screw half-spacing 45 -> web to the mid-plane); eye=True = axial GE 12 C eye lug behind the rear cap (centre z -15, bore along local x)."""
     mod,ml=MOT[motor]; D=mod+2*WALL+2; Lm=ml+20                # motor section incl. rotor support bearing + encoder
     Dn=35+2*WALL+2; Ln=36+20                                   # nut section: RV12 nut L1 36 + bearing pair 2 x 10 mm
     m=tube(D,D-2*WALL,Lm).union(disc(D,2.5,idd=D*0.35))
     cone=cq.Workplane('XY').circle(D/2).workplane(offset=6).circle(Dn/2).loft().cut(cq.Workplane('XY').circle(D/2-WALL).workplane(offset=6).circle(Dn/2-WALL).loft()).translate((0,0,Lm))
     n=tube(Dn,Dn-2*WALL,Ln).translate((0,0,Lm+6)).union(disc(Dn,3,idd=14).translate((0,0,Lm+6+Ln-3)))
     s=m.union(cone).union(n)
-    for sgn in (1,-1): s=s.union(cq.Workplane('YZ').circle(10).extrude(6).translate((sgn*(D/2) if sgn>0 else -(D/2)-6,0,Lm/2)))   # trunnion bosses
+    for sgn in ((1,-1) if bosses=='both' else (1,) if bosses=='outer' else ()):
+        s=s.union(cq.Workplane('YZ').circle(10).extrude(7).translate((sgn*(D/2)-1 if sgn>0 else -(D/2)-6,0,Lm/2)))   # trunnion bosses (v4: sunk 1 mm into the can wall so the boss fuses; was tangent -> separate solid)
+    if web:   # shared centre web (rib 6 mm, fore-aft depth 24, over the motor section) + top/bottom flanges 3 mm
+        x0,x1=-web,-(D/2-WALL)
+        s=s.union(cq.Workplane('XY').box(x1-x0,6,Lm).translate(((x0+x1)/2,0,Lm/2)))
+        for zc in (1.5,Lm-1.5): s=s.union(cq.Workplane('XY').box(x1-x0,24,3).translate(((x0+x1)/2,0,zc)))
+    if eye:   # GE 12 C (D 22, C 7) in a 10 mm lug, centre 15 mm behind the rear cap; replaces the trunnion bosses
+        lug=cq.Workplane('YZ').center(0,-15).circle(15).extrude(10).translate((-5,0,0)).union(cq.Workplane('XY').box(10,30,15).translate((0,0,-7.5)))
+        s=s.union(lug.cut(cq.Workplane('YZ').center(0,-15).circle(11).extrude(12).translate((-6,0,0))))
     for k in range(fins): s=s.union(tube(D+16,D-1,3).translate((0,0,6+k*9)))
     return s,dict(D=D,L=Lm+6+Ln)
+def knee_twin(dy=45):
+    h=linear_body('TBM2G-07613',bosses='outer',web=dy)[0]
+    return h.translate((dy,0,0)).union(h.mirror('YZ').translate((-dy,0,0)))
 def hub():   # nut-rotor hub: 7075 sleeve rotor->nut flange (RV12 flange ø46, 6 x M5 per Rollvis p.25); 2.0 mm wall, 14 mm engagement
     s=tube(30.2,26.2,14).union(disc(46,4,idd=26.2))
     for k in range(6):
@@ -60,9 +73,10 @@ def rec(name,s,mat,group,note=''):
     m=kg(s,mat); OUT[name]=dict(mass=m,mat=mat,group=group,note=note); cq.exporters.export(s,f'{H}/cad/{name}.step'); return m
 rec('hip_yaw_housing',rotary('TBM2G-06008','CSG-17-100')[0],'7075','housing')
 rec('hip_roll_housing',rotary('TBM2G-08508','CSG-25-100')[0],'7075','housing')
-rec('hip_pitch_body_x1',linear_body('TBM2G-07613')[0],'7075','housing')
-rec('knee_body_x1',linear_body('TBM2G-07613')[0],'7075','housing')
-rec('ankle_body_x1',linear_body('TBM2G-06013',fins=4)[0],'7075','housing','4 cooling fins (air_fins, v3 thermal choice)')
+rec('hip_pitch_body_x1',linear_body('TBM2G-07613',bosses='none')[0],'7075','housing','v4 D62: unused trunnion bosses removed (axial eye mount)')
+rec('knee_body_x1',linear_body('TBM2G-07613',bosses='outer',web=45)[0],'7075','housing','v4 D59: half of knee_twin_housing (outer boss +x, half web to the mid-plane)')
+rec('knee_twin_housing',knee_twin(),'7075','reference','v4 D59: one-piece twin housing, = 2 x knee_body_x1')
+rec('ankle_body_x1',linear_body('TBM2G-06013',fins=4,bosses='none',eye=True)[0],'7075','housing','v4 D60/D61: axial GE 12 C top eye lug, no trunnion bosses; 4 fins')
 rec('nut_rotor_hub_x1',hub(),'7075','linkage')
 rec('trunnion_pins_pair',pins(),'steel','linkage')
 rec('hip_pitch_lever_r50',lever(50),'7075','linkage','new part (hip_pitch twin screw); Legs to integrate on thigh')

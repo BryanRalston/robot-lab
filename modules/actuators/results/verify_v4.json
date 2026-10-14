@@ -1,0 +1,185 @@
+{
+ "knee0": {
+  "clash": [],
+  "min_body_gap": 0.0
+ },
+ "knee15": {
+  "clash": [],
+  "min_body_gap": 0.0
+ },
+ "knee30": {
+  "clash": [],
+  "min_body_gap": 0.0
+ },
+ "knee45": {
+  "clash": [],
+  "min_body_gap": 0.0
+ },
+ "knee60": {
+  "clash": [],
+  "min_body_gap": 0.0
+ },
+ "knee75": {
+  "clash": [],
+  "min_body_gap": 0.0
+ },
+ "knee90": {
+  "clash": [],
+  "min_body_gap": 0.0
+ },
+ "knee105": {
+  "clash": [],
+  "min_body_gap": 0.0
+ },
+ "knee120": {
+  "clash": [],
+  "min_body_gap": 0.0
+ },
+ "knee135": {
+  "clash": [],
+  "min_body_gap": 0.0
+ },
+ "ankle-45_-18": {
+  "clash": [],
+  "min_body_gap": 15.950681038572831
+ },
+ "ankle-45_0": {
+  "clash": [],
+  "min_body_gap": null
+ },
+ "ankle-45_18": {
+  "clash": [],
+  "min_body_gap": 15.950681038572839
+ },
+ "ankle-20_-18": {
+  "clash": [],
+  "min_body_gap": null
+ },
+ "ankle-20_0": {
+  "clash": [],
+  "min_body_gap": null
+ },
+ "ankle-20_18": {
+  "clash": [],
+  "min_body_gap": null
+ },
+ "ankle0_-18": {
+  "clash": [],
+  "min_body_gap": null
+ },
+ "ankle0_0": {
+  "clash": [],
+  "min_body_gap": null
+ },
+ "ankle0_18": {
+  "clash": [],
+  "min_body_gap": null
+ },
+ "ankle20_-18": {
+  "clash": [],
+  "min_body_gap": null
+ },
+ "ankle20_0": {
+  "clash": [],
+  "min_body_gap": null
+ },
+ "ankle20_18": {
+  "clash": [],
+  "min_body_gap": null
+ },
+ "ankle40_-18": {
+  "clash": [],
+  "min_body_gap": null
+ },
+ "ankle40_0": {
+  "clash": [],
+  "min_body_gap": null
+ },
+ "ankle40_18": {
+  "clash": [],
+  "min_body_gap": null
+ },
+ "hip-105": {
+  "clash": [],
+  "gaps": {
+   "femur tube 7075 \u00f850x1.2": 3.07,
+   "thigh split collar \u00f864 L34 bonded (DP490) + sleeve + 2x \u00f86 pins": 10.68
+  },
+  "min_body_gap": 3.0682726965192657
+ },
+ "hip-90": {
+  "clash": [],
+  "gaps": {
+   "femur tube 7075 \u00f850x1.2": 3.0
+  },
+  "min_body_gap": 3.001409583390977
+ },
+ "hip-75": {
+  "clash": [],
+  "gaps": {
+   "femur tube 7075 \u00f850x1.2": 3.0,
+   "thigh split collar \u00f864 L34 bonded (DP490) + sleeve + 2x \u00f86 pins": 9.25
+  },
+  "min_body_gap": 3.0
+ },
+ "hip-60": {
+  "clash": [],
+  "gaps": {
+   "femur tube 7075 \u00f850x1.2": 3.0,
+   "thigh split collar \u00f864 L34 bonded (DP490) + sleeve + 2x \u00f86 pins": 8.64,
+   "knee screw -y body (knee_body_x1_m)": 58.49,
+   "knee screw +y body (knee_body_x1)": 58.49
+  },
+  "min_body_gap": 3.0
+ },
+ "hip-45": {
+  "clash": [],
+  "gaps": {
+   "femur tube 7075 \u00f850x1.2": 3.0,
+   "thigh split collar \u00f864 L34 bonded (DP490) + sleeve + 2x \u00f86 pins": 8.15
+  },
+  "min_body_gap": 3.0
+ },
+ "hip-30": {
+  "clash": [],
+  "gaps": {
+   "femur tube 7075 \u00f850x1.2": 3.0,
+   "thigh split collar \u00f864 L34 bonded (DP490) + sleeve + 2x \u00f86 pins": 7.83
+  },
+  "min_body_gap": 3.0
+ },
+ "hip-15": {
+  "clash": [],
+  "gaps": {
+   "femur tube 7075 \u00f850x1.2": 3.0,
+   "thigh split collar \u00f864 L34 bonded (DP490) + sleeve + 2x \u00f86 pins": 7.72
+  },
+  "min_body_gap": 3.0
+ },
+ "hip0": {
+  "clash": [],
+  "gaps": {
+   "femur tube 7075 \u00f850x1.2": 3.0,
+   "thigh split collar \u00f864 L34 bonded (DP490) + sleeve + 2x \u00f86 pins": 7.84
+  },
+  "min_body_gap": 3.0
+ },
+ "hip15": {
+  "clash": [],
+  "gaps": {
+   "femur tube 7075 \u00f850x1.2": 3.0,
+   "thigh split collar \u00f864 L34 bonded (DP490) + sleeve + 2x \u00f86 pins": 8.22
+  },
+  "min_body_gap": 3.0000000000000004
+ },
+ "hip30": {
+  "clash": [],
+  "gaps": {
+   "femur tube 7075 \u00f850x1.2": 3.0,
+   "thigh split collar \u00f864 L34 bonded (DP490) + sleeve + 2x \u00f86 pins": 8.86,
+   "knee screw -y body (knee_body_x1_m)": 58.95,
+   "knee screw +y body (knee_body_x1)": 58.95
+  },
+  "min_body_gap": 3.0
+ }
+}

@@ -398,3 +398,52 @@ Retention at 1.2 m/s:
 - Not feasible on the box: about 1.1 GB free, and the 64k-dof run already used 865 MB. Brief: `results/GROKBUILD_lever_fea_v2.md` (geometry G2/G3, mesh plan to 0.7 mm or a submodel, three stress measures, pass criteria).
 - O13 stays open. The mass line is unchanged at 0.2492 kg each. The −0.245 kg credit stays gated.
 - Envelope: D25's 41 mm figure belongs to the CRBH hub. With the needle cheeks it is already 29.5 mm, and G2 would make it 24.5 mm. Legs needs to confirm.
+
+## D59 (v4 audit) Knee: merged twin housing (option a)
+- **Option a: one housing with a shared centre web.** Each half has only its outer boss. A 6 mm web with 3 mm flanges runs over the motor section to the mid-plane.
+  - The two screws sit on one trunnion axis and stay in phase, so this is kinematically free.
+  - The inner bosses were never supported (the bracket has outer cheeks only).
+  - Mass: 0.305 kg vs 2 × 0.153 kg, which is −0.0013 kg/leg.
+  - Model v4 (patched): no clash at knee 0…135° in 15° steps.
+- **Option b, wider spacing (dy 50):**
+  - Kinematics are planar, so lever r47.5, the 95% rpm rule and torque are unchanged.
+  - The crossbar gets longer: σ 192 → 208 MPa, SF 2.62 → 2.42, lever +0.006 kg.
+  - Inner trunnion support plates are needed (Legs, about +0.03 kg).
+  - The leg gets 10 mm wider.
+  - **Rejected.**
+- STEPs: `knee_twin_housing.step` (one piece) and `knee_body_x1.step` (one half; mirror it for the −y screw).
+
+## D60 (v4 audit) Ankle end joints: spherical top eye + high-misalignment bottom rod end
+- **Kinematics (1° grid, pitch −45…+40 × roll ±18):**
+  - The body tilts 1.8° out of plane.
+  - The real problem is at the bottom eye: rod-to-instep-pin misalignment reaches **19.6°**. SKF GE 12 C allows α 10° (SKF product page).
+- **Cardan gimbal at the top: rejected.**
+  - It locks spin to the shank, but the bottom then still needs 19.6° plus spin.
+  - The gimbal ring (about 8 mm/side) doesn't fit between the bodies and the 12 mm centre plate at dy 45.
+- **Spherical top eye + U-joint bottom: rejected.** The top GE would need 15.7°.
+- **Adopted:**
+  - **Top:** axial GE 12 C eye in a lug behind the rear cap, held in a shank clevis with a 0.6 mm side gap. That gap limits spin to ≤ 2.3°, giving a top tilt of 2.8° vs α 10°.
+  - **Bottom:** high-misalignment PTFE rod end, QA1 MGF12T class: ball 22.23, ball width 16, head ø30 × 10.75, 27°, C0r 17.4 kN. Demand is 20.8° including spin, so 6.2° margin.
+  - **Spacer:** 4.5 mm spacer to the lug. Head axial excursion is 10.35 mm, so clearance to the lug face is 2.15 mm over the full grid. The rod-end shank starts above the lug top.
+  - **Anti-rotation:** an internal key against a flat on the rod. The unit is S-P-S, like the hip.
+- **Stroke:** the eye pivot is 36.1 mm further from the body than the old boss pivot, so the trunnion moves up 40 mm (z 410 → 450).
+  - Lmin 301.6 / Lmax 414.2, stroke 112.6, need 287.7.
+  - Margin 13.9 mm (about 12.9 by the Arbiter's method).
+- **Life (SKF G_h method):** C_est 21.5 kN [EST, no maker dynamic rating], gives G_h 8 523 h, below T9 14 600.
+  - **Wear part: replace every 4 250 h.**
+  - Peak load is 0.10 C0r.
+  - Needs a supplier rating or a bench test (G5).
+
+## D61 (v4 audit) Ankle body STEP
+- The bosses that overlapped the fins (fins z 6–36 vs bosses z 11–31) are removed. The axial eye lug is added at z −15.
+- The solid is valid (BRepCheck), single. Mass 0.1875 → 0.192 kg.
+- Separate fix: trunnion bosses were tangent to the can (a separate solid in STEP). They now sink 1 mm into the wall in every body that keeps them.
+
+## D62 (v4 audit) Hip body clearance
+- Model v4 measured the hip_pitch body at **≥ 3.0 mm** to every thigh part over −105…+40° in 15° steps:
+  - femur tube 3.0 mm (lateral, constant)
+  - collar 7.7–10.7 mm
+  - clamp arm root ≥ 8.9 mm
+- I couldn't reproduce the audit's 0.3 mm. It's a hand note in `audit_v4.py`, not a measurement.
+- Envelope trim anyway: the unused trunnion bosses are removed from the hip body (it mounts on the axial eye, P-014). That saves −0.010 kg each.
+- Net actuator delta for D59–D62: **+0.069 kg/leg, +0.138 kg both legs** (`results/v4_deltas.json`). Pending P-018.

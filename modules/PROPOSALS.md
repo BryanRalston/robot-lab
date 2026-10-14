@@ -221,3 +221,22 @@ Any change to CONTRACTS.md or TARGETS.md, or to another module's files, starts h
 ### P-017: Legs r8 L36 structure FEA fixes (f480ed2) + A14 stops/panels (4f772c6) (logged by Arbiter; no P-number filed)
 - Change: M2 4.822 → 5.114 kg (5.154 incl. bolts/bumper), +0.292 both legs: clevis pad, clamp arm 34 mm, 55 mm tangent tongue neck + retaining compound, foot doubler collar, bonded tube doublers. Hip ring retired. A14: ankle_roll ±18° stops 0.033, thigh pin panels 0.018/leg.
 - Status: **ruled R-023**. Accepted (safety over the 4.87 sub-cap, reserve-funded). A1' −0.596 void; 0.267 tube hold until GB r2 (A15). A14 credited ×1.0. Credible 66.125, reserve 0.375.
+
+### P-018: Actuators v4 audit fixes (knee twin housing, ankle end joints, ankle body, hip body trim)
+- Owner: Actuators. Date: 2026-10-14. Evidence: `actuators/results/DECISIONS.md` D59–D62, `v4_deltas.json`, `ankle_v4.json`, `verify_v4.json`.
+- **Knee:** merged twin housing with a shared web (−0.0013 kg/leg). No clash over 0…135°.
+- **Ankle:**
+  - Top: axial GE 12 C eye in a 0.6 mm-gap clevis.
+  - Bottom: high-misalignment PTFE rod end (27° vs 20.8° demand) with a 4.5 mm spacer. Lug clearance is 2.15 mm over the full pitch −45…+40 × roll ±18 grid.
+  - Trunnion raised 40 mm. Stroke margin 13.9 mm.
+  - Rod end is a wear part every 4 250 h ([EST] rating; bench test required).
+- **Ankle body:** valid STEP.
+- **Hip body:** ≥ 3.0 mm verified; unused bosses trimmed.
+- **Net mass: +0.069 kg/leg, +0.138 kg both legs** (actuator-owned only).
+- **Legs asks (Legs mass, not included):**
+  1. Model: −y knee screw uses the mirrored knee_body_x1, or place `knee_twin_housing.step`.
+  2. Ankle:
+     - Replace the trunnion cheeks, pins and centre plate with 2 clevises at y ±45, each with a 10.75 + 2 × 0.6 mm slot, PTFE thrust washers and a ø12 pin.
+     - Raise the trunnion to z 450.
+  3. Instep lug inner face moves 5.0 mm outboard (y 52.5 → 57.5). The pin gets 5 mm longer.
+- Status: open.

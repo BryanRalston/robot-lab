@@ -1,0 +1,59 @@
+{
+ "tz": 450.0,
+ "spin_limit_deg": 2.292442775955887,
+ "top_tilt_max_deg": 2.79120905015776,
+ "top_alpha_GE12C_deg": 10,
+ "bottom_misalign_max_deg": 20.79047947258823,
+ "bottom_alpha_deg": 27.0,
+ "bottom_worst_pose": [
+  -44.0,
+  -18.0,
+  -1
+ ],
+ "head_axial_excursion_mm": 10.349279438804654,
+ "spacer_mm": 4.5,
+ "lug_face_from_midplane_mm": 12.5,
+ "head_to_lug_clearance_mm": 2.150720561195346,
+ "lug_move_outboard_mm": 5.0,
+ "inboard_side": "no lug inboard of the eye (instep lug is single, outboard); inboard sweep 2 x 10.3 mm stays clear of the other screw (90 mm apart)",
+ "Lmin": 301.58875150167574,
+ "Lmax": 414.1701755353029,
+ "stroke": 112.58142403362717,
+ "need_min_len": 287.6864240336272,
+ "margin": 13.902327468048554,
+ "note_need": "O-A5 need 250.7 at boss pivot + 21.1 (boss at Lm/2) + 15 (eye centre behind rear cap) + stroke change",
+ "life": {
+  "C_est_N": 21507.525,
+  "C0r_N": 17373,
+  "cases": {
+   "walk_1p0": {
+    "F_peak": 1734.5595703125,
+    "P_eq": 295.2131698730313,
+    "beta": 25.754514694213867,
+    "Gh": 8721.875721957884
+   },
+   "walk_1p2": {
+    "F_peak": 1681.455322265625,
+    "P_eq": 305.576172773672,
+    "beta": 29.87271499633789,
+    "Gh": 6883.738422970116
+   },
+   "carry_20kg": {
+    "F_peak": 1529.38037109375,
+    "P_eq": 267.9656982780662,
+    "beta": 33.49836730957031,
+    "Gh": 7281.616776176541
+   },
+   "stairs_18cm": {
+    "F_peak": 1208.1846923828125,
+    "P_eq": 268.9655562940475,
+    "beta": 29.86912727355957,
+    "Gh": 16253.848316570735
+   }
+  },
+  "Gh": 8522.589013404347,
+  "T9": 14600,
+  "interval_h": 4250,
+  "F_peak_over_C0r": 0.09984225927085132
+ }
+}
