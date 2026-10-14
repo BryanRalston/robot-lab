@@ -855,3 +855,15 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
 - **EV100 contactor is rejected as specified** (+1.5 W coil exceeds the +0.74 W walk margin). It can come back only with a cited economizer/PWM hold that keeps the added heat inside the margin.
 - **Pelvis/web pocketing is approved for FEA** on the bryan PC (FEA_SPEC_torso_pocketing.md), queued through Robot Lab one session at a time after the pad case. It earns credit only once FEA is done. The bulkhead stays at its current size.
 - Reserve ~0.24 (waiver; >=0.06 still needed: L47 opt + torso pocketing).
+
+## R-075 (2026-10-14) Knee fins, ID trims 363b318, RP40 isolation
+- **Knee fin trim is accepted** (Thermal D69C b785697: carry x1.1 at 104 C vented). **A35 venting is now a binding requirement**; closed or unvented knees are prohibited. Credit is -0.038 est at half credit, so **-0.019** until Legs measures the CAD, then full credit.
+- **ID trims:**
+  - **A** (CF thigh), **D** (silicone ripstop ankle boot, a replaceable wear part with an inspection interval) and **E** (hip skirt fabric) are booked at half credit: -0.114, so **-0.057**.
+  - **C1** (dent check), **F1** (TPU-film bellows cycle test) and **G** (snap hooks, which need a retention/fall test on panels) count only once those tests pass.
+  - **B** stays conditional on its dent check.
+  - **C2** goes to Legs.
+  - **F2 is rejected** (ingress/pinch).
+- **RP40 isolation:** accept **functional isolation** on CTRL (4x TLP383 +0.0006) with a shared return, *provided the pack bus is <=60 V DC SELV*. Torso confirms it; if not, book the RP03. The T-029 bench test must show no common-mode errors on BiSS-C/POSIF. The RP03 is not booked.
+- **MR30 clip:** before G1 it needs a cited part or a drawn clip with a mass.
+- Reserve ~0.32, **back above the 0.30 floor**. The waiver and freeze stay in force to the end of R13; L47, pocketing, C1, F1 and G are upside.
