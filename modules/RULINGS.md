@@ -666,3 +666,9 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
 - Adopted: fins on the knee housing, about 0.05 kg per knee (≤0.10 kg for the robot), to the relaxed 1.05 K/W requirement for the 120 °C target. These replace the strap and the 0.12 kg-per-knee tibia spreader. The fallback is a small fan, which comes back to the arbiter.
 - Actuators must restate D69's net mass with fins (A46). Until then the booking stays at +0.83 (conservative). The A40 rerun still sets the final motor sizing.
 - Legs and Actuators must run the fin clash sweep across the knee ROM (A47).
+
+## R-045 (2026-10-14) A40 rerun (Controls cd241d3), D69 restated (A46)
+- A40 confirms the current knee fails the 20 kg carry (130 °C derate at 32–38 min). On walking it only clears by 4–7 K, and that margin rests on estimates. **The full D69 is kept.** Option (a) alone is rejected because it fails the covered and carry cases.
+- D69 with knee housing fins (option C): 2× 08513D, housing re-CAD and fins. **Booked at +0.65 kg** (top of the 0.51–0.65 range) in place of +0.83, which recovers 0.18. A46 is closed. Fin mass moves to the measured value after the A47 Legs clash sweep and CAD.
+- Credible total about 66.18 kg, reserve about 0.32, **back above the 0.30 floor.** The R-043 waiver ends. The freeze on additions over 0.02 kg stays until reserve is at least 0.40.
+- Noted: sim/v3 is at 64.298 kg excluding harness and covers (d6d5d10). Carry static balance has a 63 mm toe margin (109 mm with lean-back), accepted. T-030 brief is pending.
