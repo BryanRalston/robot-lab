@@ -25,10 +25,10 @@ Sources used: `v3/analysis/results/v3_checks.md` and `v3.json` (per-joint rows, 
 | leg linkages, both legs (R-015) | — | 2.527 kg (`actuators/results/LINKAGE_TABLE.json` 33a7186: incl. lever B, hip bearings 0.628, rod ends 0.300 [EST], 6 trunnion pairs) + thigh clamp 0.20 [EST] | 2.53 kg line, hip pivot bearing owned by Actuators (R-016); inside actuator all-in ceiling |
 | harness (M3; owner RL Actuators, R-017) | 2.00 kg | 1.286 kg datasheet/listing model (71f3c3e); **1.286 kg credited** (R-022: JST-GH published weights ×1.0) | ≤ 1.46 kg met; A9 closed |
 | covers (M3; Arbiter placeholder, R-017) | 1.86 kg | 1.384 kg paper (PA12 MJF 1.5 mm panels, 50 % limb coverage [EST] + EPP 0.36); **1.622 kg credited** (R-021) | ≤ 1.20 kg (R-015 M3) NOT MET; A10 |
-| brain (M4; Arbiter placeholder, R-017) | 1.80 kg | 1.044 kg paper (T5000 0.280 + Gauntlet AGX301 0.266 + DCM3623 0.024 cited; 0.474 [EST]); **1.216 kg credited** (R-021) | ≤ 1.50 kg (R-015 M4) MET; A11 |
+| brain (M4; Arbiter placeholder, R-017) | 1.80 kg | 1.044 kg paper (T5000 0.280 + Gauntlet AGX301 0.266 + DCM3623 0.024 cited; 0.474 [EST]); **1.216 kg credited** (R-021) | ≤ 1.50 kg (R-015 M4) MET; + GMSL2 board JCB022 0.045 (R-025 A11: AGX301 has no native GMSL2) → 1.261 credited; A11 |
 | battery 20S5P 1620 Wh | 7.96 kg | 8.75 kg | 8.75 kg |
-| Arbiter reserve | 1.2 kg | **+0.037 kg credible (66.463 vs 66.5); +1.271 paper (R-024, `arbiter/mass_rollup_official.json`)** | ≥ +0.30 kg credible (WAIVED to ≥ 0 until end of round 13, R-024; 0.304 after A15 tube hold release) |
-| **robot** | 63.79 kg | **paper 65.229 / credible 66.463 kg (R-024, official rollup = single source of truth)** | **≤ 66.5 kg hard (R-017); credible 66.196 after A15** |
+| Arbiter reserve | 1.2 kg | **+1.505 kg credible (64.995 vs 66.5); +3.108 paper (R-025, `arbiter/mass_rollup_official.json`)** | ≥ +0.30 kg credible (WAIVED to ≥ 0 until end of round 13, R-024; 0.304 after A15 tube hold release) |
+| **robot** | 63.79 kg | **paper 63.392 / credible 64.995 kg (R-025, official rollup = single source of truth)** | **≤ 66.5 kg hard (R-017); credible 64.728 after A15** |
 
 ### R1.2 Leg actuator contract (R-004, R-005, R-006, R-008)
 | joint | need peak N·m | need RMS N·m | need speed rad/s | selection (Actuators) | avail peak | max mass kg |
@@ -47,7 +47,7 @@ DC bus 20S 68.0…84.0 V, regen clamp ≤ 90 V, brake chopper, BMS regen-charge 
 |---|---|---|---|---|---|
 | 1.0 m/s (**T7 rating speed, R-010 deviation**) | 783.3 W | **699.0 W** | 614.8 W | 2.09 | 2.04 |
 | 1.2 m/s (T6, tracked) | 963.9 W | **841.6 W** | 719.4 W | 1.73 | 1.69 |
-**T7 pass line (absolute): steady P ≤ usable Wh / 2 h** = 729.0 W (1620 typical), 712.8 W (binned ≥ 4400 mAh), 697.5 W (1550 minimum, fails at 699.0). 2 h rating moves to 1.2 m/s only when the G5 bench shows ≥ 235 W realised regen. Pack 20S5P Molicel P45B, cells binned ≥ 4400 mAh at 0.2C (R-010); usable 90 % is [EST] until checked at the 3.4 V/cell floor; 92 % not accepted. 20S6P breaks T2. Pack: 60 A continuous, 100 A for 2 s, fuse 125 A. Peak electrical per joint: hip_pitch 1.33, knee 1.09, ankle_pitch 0.99 kW; per limb 2.25 kW. R-002 and R-009 power values are void.
+**R-025 (P-019 head): +4.4 W [EST] → 1.0 m/s 703.4 W (2.07 h typical / 2.03 h binned), 1.2 m/s 846.0 W (1.72 h); T7 still met at 1.0 m/s.** **T7 pass line (absolute): steady P ≤ usable Wh / 2 h** = 729.0 W (1620 typical), 712.8 W (binned ≥ 4400 mAh), 697.5 W (1550 minimum, fails at 699.0). 2 h rating moves to 1.2 m/s only when the G5 bench shows ≥ 235 W realised regen. Pack 20S5P Molicel P45B, cells binned ≥ 4400 mAh at 0.2C (R-010); usable 90 % is [EST] until checked at the 3.4 V/cell floor; 92 % not accepted. 20S6P breaks T2. Pack: 60 A continuous, 100 A for 2 s, fuse 125 A. Peak electrical per joint: hip_pitch 1.33, knee 1.09, ankle_pitch 0.99 kW; per limb 2.25 kW. R-002 and R-009 power values are void.
 
 ### R1.4 Drive and field bus (R-008)
 Elmo Gold Twitter R70/100 (legs) / R50/100 (others), EtherCAT, 1 kHz distributed clocks, CSP + torque feed-forward, one line per limb plus torso/neck; master in Brain.
@@ -124,6 +124,6 @@ Owns: pelvis-to-foot kinematics, thigh/shank/foot structure, knee/ankle linkages
 | Torso (pelvis, torso frame, waist actuators, battery, harness, covers, thermal) | pelvis 1.6 + torso 2.8 + harness 2.0 + covers 1.86 + thermal 1.0 + battery 7.96 = 17.2 kg (+ waist actuators 2.40 kg in §1) | battery supplier: 1474 Wh, 622 W walking | shoulder mounts 8×M8, hip mounts 8×M5, pack swap, BMS, e-stop |
 | Arms (structure) | 1.6 kg | ~3.6 W copper (arm rows ×2) | shoulder/elbow/wrist flanges, payload case T5 |
 | Hands | 4.2 kg both (`v3.json` hands) | not separately budgeted (TBD) | wrist flange, tendon routing, tactile bus |
-| Head (incl. neck structure, sensors) | 1.6 kg | in 40 W sensors line | neck flange, cameras |
+| Head (incl. neck structure, sensors) | 1.6 kg + neck actuators 2 × 0.546 → **head + neck line 0.810 paper / 1.178 credited (R-025, P-019)** | in 40 W sensors line; P-019 +4.4 W [EST] booked in R1.3 | neck flange, cameras; ZED X Mini GMSL2 → JCB022 on AGX301 MIPI expansion; Dynamixel RS485 from AGX301; 12 V from 68–84 V bus |
 | Brain (compute) | 1.8 kg | 120 W | bus master, sensors, safety |
-| Arbiter reserve | 1.2 kg | **+0.037 kg credible (66.463 vs 66.5); +1.271 paper (R-024, `arbiter/mass_rollup_official.json`)** | ≥ +0.30 kg credible (WAIVED to ≥ 0 until end of round 13, R-024; 0.304 after A15 tube hold release) |
+| Arbiter reserve | 1.2 kg | **+1.505 kg credible (64.995 vs 66.5); +3.108 paper (R-025, `arbiter/mass_rollup_official.json`)** | ≥ +0.30 kg credible (WAIVED to ≥ 0 until end of round 13, R-024; 0.304 after A15 tube hold release) |

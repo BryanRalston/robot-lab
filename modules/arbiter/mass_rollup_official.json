@@ -1,5 +1,5 @@
 {
- "status": "OFFICIAL single source of truth (R-022, updated R-024). Module rollups must reconcile to this file line by line; any module figure that differs must cite the line and the ruling that changes it.",
+ "status": "OFFICIAL single source of truth (R-022, updated R-025). Module rollups must reconcile to this file line by line; any module figure that differs must cite the line and the ruling that changes it.",
  "limit_kg": 66.5,
  "reserve_target_kg": 0.3,
  "lines": [
@@ -76,6 +76,22 @@
    "source": "Actuators 67b0b13 P-018, v4_deltas.json"
   },
   {
+   "line": "head + neck (P-019; 2x XM430-W350-R, ZED X Mini, CF shell)",
+   "paper_kg": 0.81,
+   "credible_kg": 1.1783,
+   "evidence": "catalog/calc 0.493, [EST] 0.317 (modules/head/BOM.md)",
+   "credit_rule": "replaces v3 basis 2.692 (head 1.6 + 2 neck actuators); saving cited share x1.0, [EST] share x0.5 (R-025)",
+   "source": "a88c2d8 P-019"
+  },
+  {
+   "line": "brain add: GMSL2 camera platform JCB022 (A11)",
+   "paper_kg": 0.045,
+   "credible_kg": 0.045,
+   "evidence": "Connect Tech CTIM-00143 datasheet 45 g",
+   "credit_rule": "datasheet x1.0 (R-025)",
+   "source": "R-025 A11"
+  },
+  {
    "line": "battery 20S5P P45B",
    "paper_kg": 8.75,
    "credible_kg": 8.75,
@@ -84,22 +100,23 @@
    "source": "CONTRACTS R1.1"
   },
   {
-   "line": "all other lines (DERIVED: leg actuators+linkage, torso, arms, hands, head, thermal, pelvis; v3 basis + R-015..R-020 credits)",
-   "paper_kg": 47.182,
-   "credible_kg": 47.739,
+   "line": "all other lines (DERIVED: leg actuators+linkage, torso, arms, hands, thermal, pelvis; head+neck removed R-025; v3 basis + R-015..R-020 credits)",
+   "paper_kg": 44.4899,
+   "credible_kg": 45.0469,
    "evidence": "see RULINGS R-015..R-020",
    "credit_rule": "as ruled there; to be itemised (A12)",
    "source": "derived"
   }
  ],
- "paper_kg": 65.229,
- "credible_kg": 66.463,
- "credible_reserve_kg": 0.037,
- "paper_reserve_kg": 1.271,
+ "paper_kg": 63.392,
+ "credible_kg": 64.995,
+ "credible_reserve_kg": 1.505,
+ "head_basis_removed_kg": 2.6921,
+ "paper_reserve_kg": 3.108,
  "pending": {
   "A1prime_structure_FEA": "VOID (R-023): GB FEA failed the r5 hand-checked parts; replaced by L36 fixes",
   "tube_hold_kg": 0.267,
-  "credible_if_GB_r2_passes": 66.196,
+  "credible_if_GB_r2_passes": 64.728,
   "risk_unquantified": "foot collar OD (fallback r50 or 4 mm, mass not computed); clamp/tongue/clevis convergence at h<=2"
  },
  "reconciliation": {

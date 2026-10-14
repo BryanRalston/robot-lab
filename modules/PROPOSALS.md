@@ -247,3 +247,4 @@ Any change to CONTRACTS.md or TARGETS.md, or to another module's files, starts h
 - **Mass delta claimed: 0.000 kg** (R-024). Ask: move head + neck out of "all other lines" as its own line, at 0.800 kg. If the A12 itemization shows the basis carried the sim's 1.137 kg, credit −0.337 kg; if it carried less than 0.800, the difference must be offset (proposed offset: the A19 cover-panel cut).
 - Power: +4.4 W [EST] if the camera isn't in the 699 W budget; runtime −0.6 %, so 2 h stays met at 1.0 m/s.
 - Requests: Legs updates the sim neck (mass, armature 0.0005, ctrlrange 4.1 Nm); the A11 brain check covers the GMSL2 input.
+- Status: **ACCEPTED (R-025)**. Head line 0.810 paper (BOM incl. spring) / 1.178 credited; basis removed 2.692 (v3 head 1.6 + 2 neck actuators) → −1.514 credible. +4.4 W booked; T7 stays met (703.4 W). AGX301 needs a JCB022/JCB009 GMSL board (+0.045). Credible 64.995, reserve 1.505.
