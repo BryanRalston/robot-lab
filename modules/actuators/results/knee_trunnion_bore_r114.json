@@ -1,0 +1,108 @@
+{
+ "d9_boss20": {
+  "geom_mm": {
+   "radial_wall_to_boss_OD": 5.5,
+   "floor_to_can_cavity": 2.0,
+   "to_stator_OD": 3.0,
+   "to_nut_bearing_section": 30.88,
+   "to_fin_roots": 16.46,
+   "bolt_holes": "none in CAD near the boss"
+  },
+  "stress": {
+   "bearing_MPa": {
+    "max": 67.3,
+    "design": 46.8,
+    "walk": 31.1
+   },
+   "net_MPa": {
+    "max": 55.1,
+    "design": 38.3,
+    "walk": 25.5
+   },
+   "shearout_MPa": {
+    "max": 46.2,
+    "design": 32.1,
+    "walk": 21.4
+   },
+   "SF_static_net_max": 5.01,
+   "SF_shear_max": 3.45,
+   "SF_bearing_max_vs_Sy": 4.1,
+   "fatigue_peak_MPa": 56.1,
+   "Kt_EST": 2.2,
+   "fatigue_ratio_Se": 1.72,
+   "pass_static_1p5": true,
+   "pass_fatigue_1p5": true
+  }
+ },
+ "d12_boss20": {
+  "geom_mm": {
+   "radial_wall_to_boss_OD": 4.0,
+   "floor_to_can_cavity": 2.0,
+   "to_stator_OD": 3.0,
+   "to_nut_bearing_section": 29.78,
+   "to_fin_roots": 15.05,
+   "bolt_holes": "none in CAD near the boss"
+  },
+  "stress": {
+   "bearing_MPa": {
+    "max": 50.5,
+    "design": 35.1,
+    "walk": 23.4
+   },
+   "net_MPa": {
+    "max": 75.7,
+    "design": 52.6,
+    "walk": 35.0
+   },
+   "shearout_MPa": {
+    "max": 56.0,
+    "design": 39.0,
+    "walk": 25.9
+   },
+   "SF_static_net_max": 3.65,
+   "SF_shear_max": 2.84,
+   "SF_bearing_max_vs_Sy": 5.47,
+   "fatigue_peak_MPa": 84.0,
+   "Kt_EST": 2.4,
+   "fatigue_ratio_Se": 1.15,
+   "pass_static_1p5": true,
+   "pass_fatigue_1p5": false
+  }
+ },
+ "d12_boss23": {
+  "geom_mm": {
+   "radial_wall_to_boss_OD": 5.5,
+   "floor_to_can_cavity": 2.0,
+   "to_stator_OD": 3.0,
+   "to_nut_bearing_section": 29.78,
+   "to_fin_roots": 15.05,
+   "bolt_holes": "none in CAD near the boss"
+  },
+  "stress": {
+   "bearing_MPa": {
+    "max": 50.5,
+    "design": 35.1,
+    "walk": 23.4
+   },
+   "net_MPa": {
+    "max": 55.1,
+    "design": 38.3,
+    "walk": 25.5
+   },
+   "shearout_MPa": {
+    "max": 43.9,
+    "design": 30.5,
+    "walk": 20.3
+   },
+   "SF_static_net_max": 5.01,
+   "SF_shear_max": 3.63,
+   "SF_bearing_max_vs_Sy": 5.47,
+   "fatigue_peak_MPa": 58.6,
+   "Kt_EST": 2.3,
+   "fatigue_ratio_Se": 1.65,
+   "pass_static_1p5": true,
+   "pass_fatigue_1p5": true
+  }
+ },
+ "boss23_mass_g_per_knee": 3.83
+}

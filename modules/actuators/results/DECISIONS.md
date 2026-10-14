@@ -783,3 +783,28 @@ Retention at 1.2 m/s:
 - No clutch is fitted. The cited options are 1.6–4.0 kg/side.
 - **Caveat:** this is an estimate with only 8 % margin, pending Controls T-031. If T-031 exceeds 369 N·m, reopen D77.
 - D71 (CRBH 7013 A, conditional on T-030 ≤ 550 N·m) is consistent. 343 N·m is pitch torque through the gear; the bearing moment basis is unchanged.
+
+## D80 (R-114) Knee trunnion bore Ø9 → Ø12 for Legs L62 (`knee_trunnion_bore_r114.py` → `results/knee_trunnion_bore_r114.json`)
+- **CAD (rev B STEP):**
+  - The boss is Ø20 × 7 at x ±85…92, and is backed by the r41 can wall. The bore is modelled blind, 6 mm deep.
+  - Ø12 leaves a **4.0 mm** radial wall (Ø9: 5.5).
+  - The floor to the stator cavity is 2.0 mm (the can wall, the same for both sizes), and the floor to the stator OD is 3.0 mm.
+  - Fin roots are 15.1 mm away and the nut/7202 bearing section 29.8 mm. No bolt holes are near the boss.
+  - **There is no bearing-seat distortion risk** (≥ 29.8 mm away). Use a slip or bonded pin fit, not interference, over the 2 mm can wall above the bonded stator.
+- **Loads per pin** (2 pins share the screw pair; legs TRUNNION_BREAK.md L61, legs DECISIONS l.25):
+  - actuator max 3634 N (7267 / 2);
+  - design 2526 N;
+  - walk 1682 N (fatigue, taken as R = −1, conservative).
+- **6061-T6 (ASM):** Sy 276, Se 96.5 MPa. This is evaluated as asked; cad_mass.py books the housing as 7075, which would be no worse statically.
+- **Lug hand-calc** ignores the can backing, so it is conservative.
+- **Ø12 in the existing Ø20 boss:**
+  - Bearing 50.5 MPa max (Sy/p 5.5).
+  - Net section 75.7 MPa (SF 3.65).
+  - Shear-out SF 2.84.
+  - **Fatigue: Kt 2.4 [EST] × 35.0 = 84 MPa → Se/σ 1.15 < 1.5. FAILS the fatigue margin.**
+- **Ø12 with the boss grown to Ø23 (keeping the 5.5 wall): PASSES.**
+  - Net 55.1 MPa (SF 5.0), shear SF 3.63.
+  - Fatigue 58.6 MPa → **1.65**.
+  - +3.8 g per knee (6061 density; 4.0 g at 7075), +7.7 g robot.
+  - Fin gap ≈ 13 mm.
+- **Ruling proposed:** YES to Ø12, but only with the boss grown Ø20 → Ø23 (outward only, same 7 mm). Its net mass is about −2 g robot vs Legs' Ø9 fallback (+10 g). In the plain Ø20 boss, NO (fatigue 1.15).
