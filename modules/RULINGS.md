@@ -570,3 +570,13 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
 - **Remaining queue:** the hip lever fix (≤0.25 kg before steel), then P-040, P-041 and P-046 to P-050 once each is sized.
 - **O-A3 forearm fit.** Don't enlarge the 66×177 mm forearm envelope. Move the hand board out of the forearm, into the upper arm or the torso shoulder bay next to the drives. Arms leads, with Actuators and ID, and must show a clash check and wire routing through the wrist ROM (A42).
 - **T4 hand close ≤1 s under load.** The 40 W continuous hand cap stays. A peak of up to 80 W for ≤1 s is allowed if Electronics confirms the supply, Thermal confirms the duty, and Arms shows by sim that T4 passes (A43). T4 stays at risk until then.
+
+## R-036 (2026-10-14) Charge cap amended (Torso 8c26b7f §15, Electronics agrees)
+- The R-033 4.15 V/cell cap is withdrawn because it breaks the 2 h walk at 1.0 m/s (1.89–1.94 h). The new charge voltage is 4.20 V/cell.
+- Hard requirements:
+  - The BMS accepts regen pulses at any SoC. This becomes a G5 test item, T-027.
+  - Cell OV sits just above 4.20 V. The exact value needs a Molicel citation before G1.
+  - The P-045 clamp must absorb the full regen energy in the top-of-charge window even if the BMS refuses it. Electronics verifies this at the O-T8 pulse rating.
+- Runtime: the 2 h at 1.0 m/s passes with screened cells, but only by +1.0 W, so it's flagged thin. Any new continuous load above 1 W comes back to the arbiter with a runtime check.
+- 1.2 m/s still fails (1.65 h) and stays tracked as failing.
+- The mixed-duty figure (4.14 h) depends on which duty definition is used. That's still open with Bryan (O-T5), so it isn't counted as a pass yet.
