@@ -1574,6 +1574,42 @@
 },
 {
 "node": "p110",
+"name": "L_hip_yaw stop tab 10x12x70 (L39)",
+"seg": "L_hipY",
+"group": "stop",
+"est": false,
+"joints": [
+"L_hip_yaw"
+]
+},
+{
+"node": "p111",
+"name": "L_hip_yaw stop tab arm 12x40x8 (yoke plate -> tab, L39)",
+"seg": "L_hipY",
+"group": "stop",
+"est": false,
+"joints": [
+"L_hip_yaw"
+]
+},
+{
+"node": "p112",
+"name": "L_hip_yaw PU bumper + bracket -35\u00b0 (L39)",
+"seg": "pelvis",
+"group": "stop",
+"est": false,
+"joints": []
+},
+{
+"node": "p113",
+"name": "L_hip_yaw PU bumper + bracket +45\u00b0 (L39)",
+"seg": "pelvis",
+"group": "stop",
+"est": false,
+"joints": []
+},
+{
+"node": "p114",
 "name": "L_hip yaw yoke rear cheek (roll housing back face) [EST]",
 "seg": "L_hipY",
 "group": "structure",
@@ -1583,7 +1619,7 @@
 ]
 },
 {
-"node": "p111",
+"node": "p115",
 "name": "L_hip roll housing (Actuators STEP, CRBH output)",
 "seg": "L_hipY",
 "group": "actuator",
@@ -1593,7 +1629,38 @@
 ]
 },
 {
-"node": "p112",
+"node": "p116",
+"name": "L_hip_roll stop lug 12x12x26 (L39)",
+"seg": "L_hipR",
+"group": "stop",
+"est": false,
+"joints": [
+"L_hip_roll",
+"L_hip_yaw"
+]
+},
+{
+"node": "p117",
+"name": "L_hip_roll PU bumper block -32\u00b0 (L39)",
+"seg": "L_hipY",
+"group": "stop",
+"est": false,
+"joints": [
+"L_hip_yaw"
+]
+},
+{
+"node": "p118",
+"name": "L_hip_roll PU bumper block +28\u00b0 (L39)",
+"seg": "L_hipY",
+"group": "stop",
+"est": false,
+"joints": [
+"L_hip_yaw"
+]
+},
+{
+"node": "p119",
 "name": "L_roll-output bracket web (on roll output face) [EST]",
 "seg": "L_hipR",
 "group": "structure",
@@ -1604,7 +1671,7 @@
 ]
 },
 {
-"node": "p113",
+"node": "p120",
 "name": "L_roll-output bracket web leg -y (slot |y|<26.5 for tongue neck + femur at deep flexion) [EST]",
 "seg": "L_hipR",
 "group": "structure",
@@ -1615,7 +1682,7 @@
 ]
 },
 {
-"node": "p114",
+"node": "p121",
 "name": "L_roll-output bracket pad -y (bolts to lever cheek top) [EST]",
 "seg": "L_hipR",
 "group": "structure",
@@ -1626,7 +1693,7 @@
 ]
 },
 {
-"node": "p115",
+"node": "p122",
 "name": "L_roll-output bracket web leg +y (slot |y|<26.5 for tongue neck + femur at deep flexion) [EST]",
 "seg": "L_hipR",
 "group": "structure",
@@ -1637,7 +1704,7 @@
 ]
 },
 {
-"node": "p116",
+"node": "p123",
 "name": "L_roll-output bracket pad +y (bolts to lever cheek top) [EST]",
 "seg": "L_hipR",
 "group": "structure",
@@ -1648,7 +1715,7 @@
 ]
 },
 {
-"node": "p117",
+"node": "p124",
 "name": "L_hip_pitch lever B needle hub (Actuators STEP; G2 rework queued)",
 "seg": "L_hipR",
 "group": "linkage",
@@ -1659,7 +1726,7 @@
 ]
 },
 {
-"node": "p118",
+"node": "p125",
 "name": "L_hip_pitch shaft \u00f835/30 x66 hardened",
 "seg": "L_thigh",
 "group": "bearing",
@@ -1671,7 +1738,7 @@
 ]
 },
 {
-"node": "p119",
+"node": "p126",
 "name": "L_IKO TLA3520 needle bush in",
 "seg": "L_thigh",
 "group": "bearing",
@@ -1683,7 +1750,7 @@
 ]
 },
 {
-"node": "p120",
+"node": "p127",
 "name": "L_IKO TLA3520 needle bush out",
 "seg": "L_thigh",
 "group": "bearing",
@@ -1695,7 +1762,7 @@
 ]
 },
 {
-"node": "p121",
+"node": "p128",
 "name": "L_hip_pitch -105\u00b0 PU bumper \u00f825x12 r80 (A6)",
 "seg": "L_hipR",
 "group": "stop",
@@ -1706,7 +1773,7 @@
 ]
 },
 {
-"node": "p122",
+"node": "p129",
 "name": "L_hip_pitch bumper arm (bracket web -> bumper) [EST]",
 "seg": "L_hipR",
 "group": "structure",
@@ -1717,7 +1784,7 @@
 ]
 },
 {
-"node": "p123",
+"node": "p130",
 "name": "L_femur tongue \u00f855x27 (\u00f835 press-fit bore)",
 "seg": "L_thigh",
 "group": "structure",
@@ -1729,7 +1796,7 @@
 ]
 },
 {
-"node": "p124",
+"node": "p131",
 "name": "L_femur tongue neck (55 mm, L36)",
 "seg": "L_thigh",
 "group": "structure",
@@ -1741,7 +1808,7 @@
 ]
 },
 {
-"node": "p125",
+"node": "p132",
 "name": "L_femur tube 7075 \u00f850x1.2",
 "seg": "L_thigh",
 "group": "structure",
@@ -1753,7 +1820,7 @@
 ]
 },
 {
-"node": "p126",
+"node": "p133",
 "name": "L_femur internal doubler sleeve 0.5x100 (r8)",
 "seg": "L_thigh",
 "group": "structure",
@@ -1765,7 +1832,7 @@
 ]
 },
 {
-"node": "p127",
+"node": "p134",
 "name": "L_thigh split collar \u00f864 L34 bonded (DP490) + sleeve + 2x \u00f86 pins",
 "seg": "L_thigh",
 "group": "structure",
@@ -1777,7 +1844,7 @@
 ]
 },
 {
-"node": "p128",
+"node": "p135",
 "name": "L_clamp arm root -y (depth 34, r8)",
 "seg": "L_thigh",
 "group": "structure",
@@ -1789,7 +1856,19 @@
 ]
 },
 {
-"node": "p129",
+"node": "p136",
+"name": "L_clamp arm outer step -y (depth 24 to the tines, L37)",
+"seg": "L_thigh",
+"group": "structure",
+"est": false,
+"joints": [
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw"
+]
+},
+{
+"node": "p137",
 "name": "L_clamp arm eye tine -yi [fork form EST]",
 "seg": "L_thigh",
 "group": "structure",
@@ -1801,7 +1880,7 @@
 ]
 },
 {
-"node": "p130",
+"node": "p138",
 "name": "L_clamp arm eye tine -yo [fork form EST]",
 "seg": "L_thigh",
 "group": "structure",
@@ -1813,7 +1892,7 @@
 ]
 },
 {
-"node": "p131",
+"node": "p139",
 "name": "L_clamp eye pin \u00f812x28 42CrMo4 -y",
 "seg": "L_thigh",
 "group": "bearing",
@@ -1825,7 +1904,7 @@
 ]
 },
 {
-"node": "p132",
+"node": "p140",
 "name": "L_clamp arm root +y (depth 34, r8)",
 "seg": "L_thigh",
 "group": "structure",
@@ -1837,7 +1916,19 @@
 ]
 },
 {
-"node": "p133",
+"node": "p141",
+"name": "L_clamp arm outer step +y (depth 24 to the tines, L37)",
+"seg": "L_thigh",
+"group": "structure",
+"est": false,
+"joints": [
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw"
+]
+},
+{
+"node": "p142",
 "name": "L_clamp arm eye tine +yi [fork form EST]",
 "seg": "L_thigh",
 "group": "structure",
@@ -1849,7 +1940,7 @@
 ]
 },
 {
-"node": "p134",
+"node": "p143",
 "name": "L_clamp arm eye tine +yo [fork form EST]",
 "seg": "L_thigh",
 "group": "structure",
@@ -1861,7 +1952,7 @@
 ]
 },
 {
-"node": "p135",
+"node": "p144",
 "name": "L_clamp eye pin \u00f812x28 42CrMo4 +y",
 "seg": "L_thigh",
 "group": "bearing",
@@ -1873,7 +1964,7 @@
 ]
 },
 {
-"node": "p136",
+"node": "p145",
 "name": "L_hip_pitch screw -y axial GE12 C eye \u00f830x12 on body end",
 "seg": "L_thigh",
 "group": "bearing",
@@ -1885,7 +1976,7 @@
 ]
 },
 {
-"node": "p137",
+"node": "p146",
 "name": "L_hip_pitch screw -y eye stub \u00f812 [EST]",
 "seg": "L_thigh",
 "group": "actuator",
@@ -1897,7 +1988,7 @@
 ]
 },
 {
-"node": "p138",
+"node": "p147",
 "name": "L_hip_pitch screw -y eye stub flange \u00f830 [EST]",
 "seg": "L_thigh",
 "group": "actuator",
@@ -1909,7 +2000,7 @@
 ]
 },
 {
-"node": "p139",
+"node": "p148",
 "name": "L_hip_pitch screw -y body (hip_pitch_body_x1)",
 "seg": "L_thigh",
 "group": "actuator",
@@ -1921,7 +2012,7 @@
 ]
 },
 {
-"node": "p140",
+"node": "p149",
 "name": "L_hip_pitch screw -y RV12 roller-screw rod \u00f812",
 "seg": "L_hipR",
 "group": "actuator",
@@ -1932,7 +2023,7 @@
 ]
 },
 {
-"node": "p141",
+"node": "p150",
 "name": "L_hip_pitch screw -y GE12 C rod-end eye",
 "seg": "L_hipR",
 "group": "bearing",
@@ -1943,7 +2034,7 @@
 ]
 },
 {
-"node": "p142",
+"node": "p151",
 "name": "L_hip_pitch screw +y axial GE12 C eye \u00f830x12 on body end",
 "seg": "L_thigh",
 "group": "bearing",
@@ -1955,7 +2046,7 @@
 ]
 },
 {
-"node": "p143",
+"node": "p152",
 "name": "L_hip_pitch screw +y eye stub \u00f812 [EST]",
 "seg": "L_thigh",
 "group": "actuator",
@@ -1967,7 +2058,7 @@
 ]
 },
 {
-"node": "p144",
+"node": "p153",
 "name": "L_hip_pitch screw +y eye stub flange \u00f830 [EST]",
 "seg": "L_thigh",
 "group": "actuator",
@@ -1979,7 +2070,7 @@
 ]
 },
 {
-"node": "p145",
+"node": "p154",
 "name": "L_hip_pitch screw +y body (hip_pitch_body_x1)",
 "seg": "L_thigh",
 "group": "actuator",
@@ -1991,7 +2082,7 @@
 ]
 },
 {
-"node": "p146",
+"node": "p155",
 "name": "L_hip_pitch screw +y RV12 roller-screw rod \u00f812",
 "seg": "L_hipR",
 "group": "actuator",
@@ -2002,7 +2093,7 @@
 ]
 },
 {
-"node": "p147",
+"node": "p156",
 "name": "L_hip_pitch screw +y GE12 C rod-end eye",
 "seg": "L_hipR",
 "group": "bearing",
@@ -2013,8 +2104,8 @@
 ]
 },
 {
-"node": "p148",
-"name": "L_knee clevis cheeks + bridge (r8: bridge +16, R6)",
+"node": "p157",
+"name": "L_knee clevis bridge 40x70x22 + 16 mm pad over cheeks (fea_r8, L36)",
 "seg": "L_thigh",
 "group": "structure",
 "est": false,
@@ -2025,8 +2116,8 @@
 ]
 },
 {
-"node": "p149",
-"name": "L_knee clevis cheek -y",
+"node": "p158",
+"name": "L_knee clevis cheek -y 46x14x62 (fea_r5/r8)",
 "seg": "L_thigh",
 "group": "structure",
 "est": false,
@@ -2037,8 +2128,8 @@
 ]
 },
 {
-"node": "p150",
-"name": "L_knee clevis cheek +y",
+"node": "p159",
+"name": "L_knee clevis cheek +y 46x14x62 (fea_r5/r8)",
 "seg": "L_thigh",
 "group": "structure",
 "est": false,
@@ -2049,7 +2140,7 @@
 ]
 },
 {
-"node": "p151",
+"node": "p160",
 "name": "L_knee pin \u00f816 (through clevis + lever cheeks)",
 "seg": "L_shank",
 "group": "bearing",
@@ -2062,7 +2153,7 @@
 ]
 },
 {
-"node": "p152",
+"node": "p161",
 "name": "L_knee tongue (shank)",
 "seg": "L_shank",
 "group": "structure",
@@ -2075,7 +2166,7 @@
 ]
 },
 {
-"node": "p153",
+"node": "p162",
 "name": "L_knee tongue neck into tibia",
 "seg": "L_shank",
 "group": "structure",
@@ -2088,7 +2179,7 @@
 ]
 },
 {
-"node": "p154",
+"node": "p163",
 "name": "L_knee lever r47.5 (Actuators STEP)",
 "seg": "L_shank",
 "group": "linkage",
@@ -2101,19 +2192,7 @@
 ]
 },
 {
-"node": "p155",
-"name": "L_knee screw -y body (knee_body_x1)",
-"seg": "L_thigh",
-"group": "actuator",
-"est": false,
-"joints": [
-"L_hip_pitch",
-"L_hip_roll",
-"L_hip_yaw"
-]
-},
-{
-"node": "p156",
+"node": "p164",
 "name": "L_knee screw -y RV12 roller-screw rod \u00f812",
 "seg": "L_shank",
 "group": "actuator",
@@ -2126,7 +2205,7 @@
 ]
 },
 {
-"node": "p157",
+"node": "p165",
 "name": "L_knee screw -y GE12 C rod-end eye",
 "seg": "L_shank",
 "group": "bearing",
@@ -2139,19 +2218,7 @@
 ]
 },
 {
-"node": "p158",
-"name": "L_knee screw +y body (knee_body_x1)",
-"seg": "L_thigh",
-"group": "actuator",
-"est": false,
-"joints": [
-"L_hip_pitch",
-"L_hip_roll",
-"L_hip_yaw"
-]
-},
-{
-"node": "p159",
+"node": "p166",
 "name": "L_knee screw +y RV12 roller-screw rod \u00f812",
 "seg": "L_shank",
 "group": "actuator",
@@ -2164,7 +2231,7 @@
 ]
 },
 {
-"node": "p160",
+"node": "p167",
 "name": "L_knee screw +y GE12 C rod-end eye",
 "seg": "L_shank",
 "group": "bearing",
@@ -2177,7 +2244,19 @@
 ]
 },
 {
-"node": "p161",
+"node": "p168",
+"name": "L_knee twin housing (Actuators D59 STEP, shared centre web)",
+"seg": "L_thigh",
+"group": "actuator",
+"est": false,
+"joints": [
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw"
+]
+},
+{
+"node": "p169",
 "name": "L_knee trunnion bracket top plate (thigh) [EST]",
 "seg": "L_thigh",
 "group": "structure",
@@ -2189,7 +2268,7 @@
 ]
 },
 {
-"node": "p162",
+"node": "p170",
 "name": "L_knee trunnion bracket strut to femur [EST]",
 "seg": "L_thigh",
 "group": "structure",
@@ -2201,7 +2280,7 @@
 ]
 },
 {
-"node": "p163",
+"node": "p171",
 "name": "L_knee trunnion cheek -y [EST]",
 "seg": "L_thigh",
 "group": "structure",
@@ -2213,7 +2292,7 @@
 ]
 },
 {
-"node": "p164",
+"node": "p172",
 "name": "L_knee trunnion pin \u00f89 -y",
 "seg": "L_thigh",
 "group": "bearing",
@@ -2225,7 +2304,7 @@
 ]
 },
 {
-"node": "p165",
+"node": "p173",
 "name": "L_knee trunnion cheek +y [EST]",
 "seg": "L_thigh",
 "group": "structure",
@@ -2237,7 +2316,7 @@
 ]
 },
 {
-"node": "p166",
+"node": "p174",
 "name": "L_knee trunnion pin \u00f89 +y",
 "seg": "L_thigh",
 "group": "bearing",
@@ -2249,7 +2328,7 @@
 ]
 },
 {
-"node": "p167",
+"node": "p175",
 "name": "L_tibia tube 7075 \u00f845x1.2",
 "seg": "L_shank",
 "group": "structure",
@@ -2262,7 +2341,7 @@
 ]
 },
 {
-"node": "p168",
+"node": "p176",
 "name": "L_tibia internal doubler sleeve 0.5x100 (r8)",
 "seg": "L_shank",
 "group": "structure",
@@ -2275,7 +2354,7 @@
 ]
 },
 {
-"node": "p169",
+"node": "p177",
 "name": "L_ankle fork bridge",
 "seg": "L_shank",
 "group": "structure",
@@ -2288,7 +2367,7 @@
 ]
 },
 {
-"node": "p170",
+"node": "p178",
 "name": "L_ankle fork cheek -y",
 "seg": "L_shank",
 "group": "structure",
@@ -2301,7 +2380,7 @@
 ]
 },
 {
-"node": "p171",
+"node": "p179",
 "name": "L_ankle fork cheek +y",
 "seg": "L_shank",
 "group": "structure",
@@ -2314,7 +2393,20 @@
 ]
 },
 {
-"node": "p172",
+"node": "p180",
+"name": "L_ankle screw -y axial GE12 C top eye \u00f830x12 (D60)",
+"seg": "L_shank",
+"group": "bearing",
+"est": false,
+"joints": [
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw",
+"L_knee"
+]
+},
+{
+"node": "p181",
 "name": "L_ankle screw -y body (ankle_body_x1)",
 "seg": "L_shank",
 "group": "actuator",
@@ -2327,7 +2419,7 @@
 ]
 },
 {
-"node": "p173",
+"node": "p182",
 "name": "L_ankle screw -y RV12 roller-screw rod \u00f812",
 "seg": "L_foot",
 "group": "actuator",
@@ -2342,8 +2434,8 @@
 ]
 },
 {
-"node": "p174",
-"name": "L_ankle screw -y GE12 C rod-end eye",
+"node": "p183",
+"name": "L_ankle screw -y QA1 MGF12T 27\u00b0 rod end \u00f830x10.75 (D60)",
 "seg": "L_foot",
 "group": "bearing",
 "est": false,
@@ -2357,7 +2449,20 @@
 ]
 },
 {
-"node": "p175",
+"node": "p184",
+"name": "L_ankle screw +y axial GE12 C top eye \u00f830x12 (D60)",
+"seg": "L_shank",
+"group": "bearing",
+"est": false,
+"joints": [
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw",
+"L_knee"
+]
+},
+{
+"node": "p185",
 "name": "L_ankle screw +y body (ankle_body_x1)",
 "seg": "L_shank",
 "group": "actuator",
@@ -2370,7 +2475,7 @@
 ]
 },
 {
-"node": "p176",
+"node": "p186",
 "name": "L_ankle screw +y RV12 roller-screw rod \u00f812",
 "seg": "L_foot",
 "group": "actuator",
@@ -2385,8 +2490,8 @@
 ]
 },
 {
-"node": "p177",
-"name": "L_ankle screw +y GE12 C rod-end eye",
+"node": "p187",
+"name": "L_ankle screw +y QA1 MGF12T 27\u00b0 rod end \u00f830x10.75 (D60)",
 "seg": "L_foot",
 "group": "bearing",
 "est": false,
@@ -2400,7 +2505,7 @@
 ]
 },
 {
-"node": "p178",
+"node": "p188",
 "name": "L_ankle trunnion bracket top plate (shank) [EST]",
 "seg": "L_shank",
 "group": "structure",
@@ -2413,7 +2518,7 @@
 ]
 },
 {
-"node": "p179",
+"node": "p189",
 "name": "L_ankle trunnion bracket strut to tibia [EST]",
 "seg": "L_shank",
 "group": "structure",
@@ -2426,11 +2531,11 @@
 ]
 },
 {
-"node": "p180",
-"name": "L_ankle trunnion centre plate 12 mm [EST]",
+"node": "p190",
+"name": "L_ankle top clevis tine -yi (D60)",
 "seg": "L_shank",
 "group": "structure",
-"est": true,
+"est": false,
 "joints": [
 "L_hip_pitch",
 "L_hip_roll",
@@ -2439,11 +2544,11 @@
 ]
 },
 {
-"node": "p181",
-"name": "L_ankle trunnion cheek -y [EST]",
+"node": "p191",
+"name": "L_ankle top clevis tine -yo (D60)",
 "seg": "L_shank",
 "group": "structure",
-"est": true,
+"est": false,
 "joints": [
 "L_hip_pitch",
 "L_hip_roll",
@@ -2452,8 +2557,8 @@
 ]
 },
 {
-"node": "p182",
-"name": "L_ankle trunnion pin \u00f89 -y in",
+"node": "p192",
+"name": "L_ankle top clevis pin \u00f812 -y (D60)",
 "seg": "L_shank",
 "group": "bearing",
 "est": false,
@@ -2465,24 +2570,11 @@
 ]
 },
 {
-"node": "p183",
-"name": "L_ankle trunnion pin \u00f89 -y out",
-"seg": "L_shank",
-"group": "bearing",
-"est": false,
-"joints": [
-"L_hip_pitch",
-"L_hip_roll",
-"L_hip_yaw",
-"L_knee"
-]
-},
-{
-"node": "p184",
-"name": "L_ankle trunnion cheek +y [EST]",
+"node": "p193",
+"name": "L_ankle top clevis tine +yi (D60)",
 "seg": "L_shank",
 "group": "structure",
-"est": true,
+"est": false,
 "joints": [
 "L_hip_pitch",
 "L_hip_roll",
@@ -2491,8 +2583,21 @@
 ]
 },
 {
-"node": "p185",
-"name": "L_ankle trunnion pin \u00f89 +y in",
+"node": "p194",
+"name": "L_ankle top clevis tine +yo (D60)",
+"seg": "L_shank",
+"group": "structure",
+"est": false,
+"joints": [
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw",
+"L_knee"
+]
+},
+{
+"node": "p195",
+"name": "L_ankle top clevis pin \u00f812 +y (D60)",
 "seg": "L_shank",
 "group": "bearing",
 "est": false,
@@ -2504,20 +2609,7 @@
 ]
 },
 {
-"node": "p186",
-"name": "L_ankle trunnion pin \u00f89 +y out",
-"seg": "L_shank",
-"group": "bearing",
-"est": false,
-"joints": [
-"L_hip_pitch",
-"L_hip_roll",
-"L_hip_yaw",
-"L_knee"
-]
-},
-{
-"node": "p187",
+"node": "p196",
 "name": "L_ankle cross Ti-6Al-4V",
 "seg": "L_ankX",
 "group": "structure",
@@ -2531,7 +2623,7 @@
 ]
 },
 {
-"node": "p188",
+"node": "p197",
 "name": "L_ankle pitch pin stub \u00f812 -y",
 "seg": "L_ankX",
 "group": "bearing",
@@ -2545,7 +2637,7 @@
 ]
 },
 {
-"node": "p189",
+"node": "p198",
 "name": "L_ankle pitch pin stub \u00f812 +y",
 "seg": "L_ankX",
 "group": "bearing",
@@ -2559,7 +2651,7 @@
 ]
 },
 {
-"node": "p190",
+"node": "p199",
 "name": "L_ankle-roll \u00b118\u00b0 stop block 20x12x10 + 2 mm PU R-y (A14, face r45)",
 "seg": "L_ankX",
 "group": "stop",
@@ -2573,7 +2665,7 @@
 ]
 },
 {
-"node": "p191",
+"node": "p200",
 "name": "L_ankle-roll \u00b118\u00b0 stop block 20x12x10 + 2 mm PU R+y (A14, face r45)",
 "seg": "L_ankX",
 "group": "stop",
@@ -2587,7 +2679,7 @@
 ]
 },
 {
-"node": "p192",
+"node": "p201",
 "name": "L_ankle-roll \u00b118\u00b0 stop block 20x12x10 + 2 mm PU F-y (A14, face r45)",
 "seg": "L_ankX",
 "group": "stop",
@@ -2601,7 +2693,7 @@
 ]
 },
 {
-"node": "p193",
+"node": "p202",
 "name": "L_ankle-roll \u00b118\u00b0 stop block 20x12x10 + 2 mm PU F+y (A14, face r45)",
 "seg": "L_ankX",
 "group": "stop",
@@ -2615,7 +2707,7 @@
 ]
 },
 {
-"node": "p194",
+"node": "p203",
 "name": "L_ankle-roll stop carrier under cross [EST]",
 "seg": "L_ankX",
 "group": "structure",
@@ -2629,7 +2721,7 @@
 ]
 },
 {
-"node": "p195",
+"node": "p204",
 "name": "L_ankle roll pin stub \u00f812 R",
 "seg": "L_foot",
 "group": "bearing",
@@ -2644,7 +2736,7 @@
 ]
 },
 {
-"node": "p196",
+"node": "p205",
 "name": "L_foot roll lug R",
 "seg": "L_foot",
 "group": "structure",
@@ -2659,7 +2751,7 @@
 ]
 },
 {
-"node": "p197",
+"node": "p206",
 "name": "L_foot roll-stop shoulder R-y [gap 15 mm = 18\u00b0 at r48] [EST]",
 "seg": "L_foot",
 "group": "stop",
@@ -2674,7 +2766,7 @@
 ]
 },
 {
-"node": "p198",
+"node": "p207",
 "name": "L_foot roll-stop shoulder R+y [gap 15 mm = 18\u00b0 at r48] [EST]",
 "seg": "L_foot",
 "group": "stop",
@@ -2689,7 +2781,7 @@
 ]
 },
 {
-"node": "p199",
+"node": "p208",
 "name": "L_ankle roll pin stub \u00f812 F",
 "seg": "L_foot",
 "group": "bearing",
@@ -2704,7 +2796,7 @@
 ]
 },
 {
-"node": "p200",
+"node": "p209",
 "name": "L_foot roll lug F",
 "seg": "L_foot",
 "group": "structure",
@@ -2719,7 +2811,7 @@
 ]
 },
 {
-"node": "p201",
+"node": "p210",
 "name": "L_foot roll-stop shoulder F-y [gap 15 mm = 18\u00b0 at r48] [EST]",
 "seg": "L_foot",
 "group": "stop",
@@ -2734,7 +2826,7 @@
 ]
 },
 {
-"node": "p202",
+"node": "p211",
 "name": "L_foot roll-stop shoulder F+y [gap 15 mm = 18\u00b0 at r48] [EST]",
 "seg": "L_foot",
 "group": "stop",
@@ -2749,7 +2841,7 @@
 ]
 },
 {
-"node": "p203",
+"node": "p212",
 "name": "L_ankle 6-axis F/T sensor",
 "seg": "L_foot",
 "group": "sensor",
@@ -2764,8 +2856,8 @@
 ]
 },
 {
-"node": "p204",
-"name": "L_foot closed box 240x130 (3.5 mm skins, 4 webs; width EST)",
+"node": "p213",
+"name": "L_foot closed box 240x100x18 (3.5 mm skins, 4 webs; fea_r5)",
 "seg": "L_foot",
 "group": "structure",
 "est": false,
@@ -2779,8 +2871,8 @@
 ]
 },
 {
-"node": "p205",
-"name": "L_foot toe doubler collar (r8)",
+"node": "p214",
+"name": "L_ankle F/T steel flange OD60/ID22 x8 (fea_r5)",
 "seg": "L_foot",
 "group": "structure",
 "est": false,
@@ -2794,8 +2886,8 @@
 ]
 },
 {
-"node": "p206",
-"name": "L_instep lug r73 -y",
+"node": "p215",
+"name": "L_foot flange doubler collar r30.2-45 x3 (r8, L36)",
 "seg": "L_foot",
 "group": "structure",
 "est": false,
@@ -2809,8 +2901,8 @@
 ]
 },
 {
-"node": "p207",
-"name": "L_instep lug r73 +y",
+"node": "p216",
+"name": "L_instep tower 30x90 to z50 (fea_r5)",
 "seg": "L_foot",
 "group": "structure",
 "est": false,
@@ -2824,8 +2916,53 @@
 ]
 },
 {
-"node": "p208",
-"name": "L_instep pin \u00f812 -y",
+"node": "p217",
+"name": "L_instep outrigger beam 20x145x10 (lugs outside the 100 mm foot, L38)",
+"seg": "L_foot",
+"group": "structure",
+"est": false,
+"joints": [
+"L_ankle_pitch",
+"L_ankle_roll",
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw",
+"L_knee"
+]
+},
+{
+"node": "p218",
+"name": "L_instep lug r73 -y (inner face y57.5, D60/L38)",
+"seg": "L_foot",
+"group": "structure",
+"est": false,
+"joints": [
+"L_ankle_pitch",
+"L_ankle_roll",
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw",
+"L_knee"
+]
+},
+{
+"node": "p219",
+"name": "L_instep lug r73 +y (inner face y57.5, D60/L38)",
+"seg": "L_foot",
+"group": "structure",
+"est": false,
+"joints": [
+"L_ankle_pitch",
+"L_ankle_roll",
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw",
+"L_knee"
+]
+},
+{
+"node": "p220",
+"name": "L_instep pin \u00f812 -y (39-72.5, +5 mm, D60)",
 "seg": "L_foot",
 "group": "bearing",
 "est": false,
@@ -2839,8 +2976,8 @@
 ]
 },
 {
-"node": "p209",
-"name": "L_instep pin \u00f812 +y",
+"node": "p221",
+"name": "L_instep rod-end spacer \u00f816x4.5 -y (ball face y53 -> lug 57.5, D60)",
 "seg": "L_foot",
 "group": "bearing",
 "est": false,
@@ -2854,7 +2991,37 @@
 ]
 },
 {
-"node": "p210",
+"node": "p222",
+"name": "L_instep pin \u00f812 +y (39-72.5, +5 mm, D60)",
+"seg": "L_foot",
+"group": "bearing",
+"est": false,
+"joints": [
+"L_ankle_pitch",
+"L_ankle_roll",
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw",
+"L_knee"
+]
+},
+{
+"node": "p223",
+"name": "L_instep rod-end spacer \u00f816x4.5 +y (ball face y53 -> lug 57.5, D60)",
+"seg": "L_foot",
+"group": "bearing",
+"est": false,
+"joints": [
+"L_ankle_pitch",
+"L_ankle_roll",
+"L_hip_pitch",
+"L_hip_roll",
+"L_hip_yaw",
+"L_knee"
+]
+},
+{
+"node": "p224",
 "name": "R_hip yaw housing (Actuators STEP, CRBH 6013 A output)",
 "seg": "pelvis",
 "group": "actuator",
@@ -2862,7 +3029,7 @@
 "joints": []
 },
 {
-"node": "p211",
+"node": "p225",
 "name": "R_hip yaw output yoke plate [EST]",
 "seg": "R_hipY",
 "group": "structure",
@@ -2872,7 +3039,43 @@
 ]
 },
 {
-"node": "p212",
+"node": "p226",
+"name": "R_hip_yaw stop tab 10x12x70 (L39)",
+"seg": "R_hipY",
+"group": "stop",
+"est": false,
+"joints": [
+"R_hip_yaw"
+]
+},
+{
+"node": "p227",
+"name": "R_hip_yaw stop tab arm 12x40x8 (yoke plate -> tab, L39)",
+"seg": "R_hipY",
+"group": "stop",
+"est": false,
+"joints": [
+"R_hip_yaw"
+]
+},
+{
+"node": "p228",
+"name": "R_hip_yaw PU bumper + bracket -35\u00b0 (L39)",
+"seg": "pelvis",
+"group": "stop",
+"est": false,
+"joints": []
+},
+{
+"node": "p229",
+"name": "R_hip_yaw PU bumper + bracket +45\u00b0 (L39)",
+"seg": "pelvis",
+"group": "stop",
+"est": false,
+"joints": []
+},
+{
+"node": "p230",
 "name": "R_hip yaw yoke rear cheek (roll housing back face) [EST]",
 "seg": "R_hipY",
 "group": "structure",
@@ -2882,7 +3085,7 @@
 ]
 },
 {
-"node": "p213",
+"node": "p231",
 "name": "R_hip roll housing (Actuators STEP, CRBH output)",
 "seg": "R_hipY",
 "group": "actuator",
@@ -2892,7 +3095,38 @@
 ]
 },
 {
-"node": "p214",
+"node": "p232",
+"name": "R_hip_roll stop lug 12x12x26 (L39)",
+"seg": "R_hipR",
+"group": "stop",
+"est": false,
+"joints": [
+"R_hip_roll",
+"R_hip_yaw"
+]
+},
+{
+"node": "p233",
+"name": "R_hip_roll PU bumper block -32\u00b0 (L39)",
+"seg": "R_hipY",
+"group": "stop",
+"est": false,
+"joints": [
+"R_hip_yaw"
+]
+},
+{
+"node": "p234",
+"name": "R_hip_roll PU bumper block +28\u00b0 (L39)",
+"seg": "R_hipY",
+"group": "stop",
+"est": false,
+"joints": [
+"R_hip_yaw"
+]
+},
+{
+"node": "p235",
 "name": "R_roll-output bracket web (on roll output face) [EST]",
 "seg": "R_hipR",
 "group": "structure",
@@ -2903,7 +3137,7 @@
 ]
 },
 {
-"node": "p215",
+"node": "p236",
 "name": "R_roll-output bracket web leg -y (slot |y|<26.5 for tongue neck + femur at deep flexion) [EST]",
 "seg": "R_hipR",
 "group": "structure",
@@ -2914,7 +3148,7 @@
 ]
 },
 {
-"node": "p216",
+"node": "p237",
 "name": "R_roll-output bracket pad -y (bolts to lever cheek top) [EST]",
 "seg": "R_hipR",
 "group": "structure",
@@ -2925,7 +3159,7 @@
 ]
 },
 {
-"node": "p217",
+"node": "p238",
 "name": "R_roll-output bracket web leg +y (slot |y|<26.5 for tongue neck + femur at deep flexion) [EST]",
 "seg": "R_hipR",
 "group": "structure",
@@ -2936,7 +3170,7 @@
 ]
 },
 {
-"node": "p218",
+"node": "p239",
 "name": "R_roll-output bracket pad +y (bolts to lever cheek top) [EST]",
 "seg": "R_hipR",
 "group": "structure",
@@ -2947,7 +3181,7 @@
 ]
 },
 {
-"node": "p219",
+"node": "p240",
 "name": "R_hip_pitch lever B needle hub (Actuators STEP; G2 rework queued)",
 "seg": "R_hipR",
 "group": "linkage",
@@ -2958,7 +3192,7 @@
 ]
 },
 {
-"node": "p220",
+"node": "p241",
 "name": "R_hip_pitch shaft \u00f835/30 x66 hardened",
 "seg": "R_thigh",
 "group": "bearing",
@@ -2970,7 +3204,7 @@
 ]
 },
 {
-"node": "p221",
+"node": "p242",
 "name": "R_IKO TLA3520 needle bush out",
 "seg": "R_thigh",
 "group": "bearing",
@@ -2982,7 +3216,7 @@
 ]
 },
 {
-"node": "p222",
+"node": "p243",
 "name": "R_IKO TLA3520 needle bush in",
 "seg": "R_thigh",
 "group": "bearing",
@@ -2994,7 +3228,7 @@
 ]
 },
 {
-"node": "p223",
+"node": "p244",
 "name": "R_hip_pitch -105\u00b0 PU bumper \u00f825x12 r80 (A6)",
 "seg": "R_hipR",
 "group": "stop",
@@ -3005,7 +3239,7 @@
 ]
 },
 {
-"node": "p224",
+"node": "p245",
 "name": "R_hip_pitch bumper arm (bracket web -> bumper) [EST]",
 "seg": "R_hipR",
 "group": "structure",
@@ -3016,7 +3250,7 @@
 ]
 },
 {
-"node": "p225",
+"node": "p246",
 "name": "R_femur tongue \u00f855x27 (\u00f835 press-fit bore)",
 "seg": "R_thigh",
 "group": "structure",
@@ -3028,7 +3262,7 @@
 ]
 },
 {
-"node": "p226",
+"node": "p247",
 "name": "R_femur tongue neck (55 mm, L36)",
 "seg": "R_thigh",
 "group": "structure",
@@ -3040,7 +3274,7 @@
 ]
 },
 {
-"node": "p227",
+"node": "p248",
 "name": "R_femur tube 7075 \u00f850x1.2",
 "seg": "R_thigh",
 "group": "structure",
@@ -3052,7 +3286,7 @@
 ]
 },
 {
-"node": "p228",
+"node": "p249",
 "name": "R_femur internal doubler sleeve 0.5x100 (r8)",
 "seg": "R_thigh",
 "group": "structure",
@@ -3064,7 +3298,7 @@
 ]
 },
 {
-"node": "p229",
+"node": "p250",
 "name": "R_thigh split collar \u00f864 L34 bonded (DP490) + sleeve + 2x \u00f86 pins",
 "seg": "R_thigh",
 "group": "structure",
@@ -3076,7 +3310,7 @@
 ]
 },
 {
-"node": "p230",
+"node": "p251",
 "name": "R_clamp arm root -y (depth 34, r8)",
 "seg": "R_thigh",
 "group": "structure",
@@ -3088,256 +3322,8 @@
 ]
 },
 {
-"node": "p231",
-"name": "R_clamp arm eye tine -yi [fork form EST]",
-"seg": "R_thigh",
-"group": "structure",
-"est": false,
-"joints": [
-"R_hip_pitch",
-"R_hip_roll",
-"R_hip_yaw"
-]
-},
-{
-"node": "p232",
-"name": "R_clamp arm eye tine -yo [fork form EST]",
-"seg": "R_thigh",
-"group": "structure",
-"est": false,
-"joints": [
-"R_hip_pitch",
-"R_hip_roll",
-"R_hip_yaw"
-]
-},
-{
-"node": "p233",
-"name": "R_clamp eye pin \u00f812x28 42CrMo4 -y",
-"seg": "R_thigh",
-"group": "bearing",
-"est": false,
-"joints": [
-"R_hip_pitch",
-"R_hip_roll",
-"R_hip_yaw"
-]
-},
-{
-"node": "p234",
-"name": "R_clamp arm root +y (depth 34, r8)",
-"seg": "R_thigh",
-"group": "structure",
-"est": false,
-"joints": [
-"R_hip_pitch",
-"R_hip_roll",
-"R_hip_yaw"
-]
-},
-{
-"node": "p235",
-"name": "R_clamp arm eye tine +yi [fork form EST]",
-"seg": "R_thigh",
-"group": "structure",
-"est": false,
-"joints": [
-"R_hip_pitch",
-"R_hip_roll",
-"R_hip_yaw"
-]
-},
-{
-"node": "p236",
-"name": "R_clamp arm eye tine +yo [fork form EST]",
-"seg": "R_thigh",
-"group": "structure",
-"est": false,
-"joints": [
-"R_hip_pitch",
-"R_hip_roll",
-"R_hip_yaw"
-]
-},
-{
-"node": "p237",
-"name": "R_clamp eye pin \u00f812x28 42CrMo4 +y",
-"seg": "R_thigh",
-"group": "bearing",
-"est": false,
-"joints": [
-"R_hip_pitch",
-"R_hip_roll",
-"R_hip_yaw"
-]
-},
-{
-"node": "p238",
-"name": "R_hip_pitch screw -y axial GE12 C eye \u00f830x12 on body end",
-"seg": "R_thigh",
-"group": "bearing",
-"est": false,
-"joints": [
-"R_hip_pitch",
-"R_hip_roll",
-"R_hip_yaw"
-]
-},
-{
-"node": "p239",
-"name": "R_hip_pitch screw -y eye stub \u00f812 [EST]",
-"seg": "R_thigh",
-"group": "actuator",
-"est": false,
-"joints": [
-"R_hip_pitch",
-"R_hip_roll",
-"R_hip_yaw"
-]
-},
-{
-"node": "p240",
-"name": "R_hip_pitch screw -y eye stub flange \u00f830 [EST]",
-"seg": "R_thigh",
-"group": "actuator",
-"est": false,
-"joints": [
-"R_hip_pitch",
-"R_hip_roll",
-"R_hip_yaw"
-]
-},
-{
-"node": "p241",
-"name": "R_hip_pitch screw -y body (hip_pitch_body_x1)",
-"seg": "R_thigh",
-"group": "actuator",
-"est": false,
-"joints": [
-"R_hip_pitch",
-"R_hip_roll",
-"R_hip_yaw"
-]
-},
-{
-"node": "p242",
-"name": "R_hip_pitch screw -y RV12 roller-screw rod \u00f812",
-"seg": "R_hipR",
-"group": "actuator",
-"est": false,
-"joints": [
-"R_hip_roll",
-"R_hip_yaw"
-]
-},
-{
-"node": "p243",
-"name": "R_hip_pitch screw -y GE12 C rod-end eye",
-"seg": "R_hipR",
-"group": "bearing",
-"est": false,
-"joints": [
-"R_hip_roll",
-"R_hip_yaw"
-]
-},
-{
-"node": "p244",
-"name": "R_hip_pitch screw +y axial GE12 C eye \u00f830x12 on body end",
-"seg": "R_thigh",
-"group": "bearing",
-"est": false,
-"joints": [
-"R_hip_pitch",
-"R_hip_roll",
-"R_hip_yaw"
-]
-},
-{
-"node": "p245",
-"name": "R_hip_pitch screw +y eye stub \u00f812 [EST]",
-"seg": "R_thigh",
-"group": "actuator",
-"est": false,
-"joints": [
-"R_hip_pitch",
-"R_hip_roll",
-"R_hip_yaw"
-]
-},
-{
-"node": "p246",
-"name": "R_hip_pitch screw +y eye stub flange \u00f830 [EST]",
-"seg": "R_thigh",
-"group": "actuator",
-"est": false,
-"joints": [
-"R_hip_pitch",
-"R_hip_roll",
-"R_hip_yaw"
-]
-},
-{
-"node": "p247",
-"name": "R_hip_pitch screw +y body (hip_pitch_body_x1)",
-"seg": "R_thigh",
-"group": "actuator",
-"est": false,
-"joints": [
-"R_hip_pitch",
-"R_hip_roll",
-"R_hip_yaw"
-]
-},
-{
-"node": "p248",
-"name": "R_hip_pitch screw +y RV12 roller-screw rod \u00f812",
-"seg": "R_hipR",
-"group": "actuator",
-"est": false,
-"joints": [
-"R_hip_roll",
-"R_hip_yaw"
-]
-},
-{
-"node": "p249",
-"name": "R_hip_pitch screw +y GE12 C rod-end eye",
-"seg": "R_hipR",
-"group": "bearing",
-"est": false,
-"joints": [
-"R_hip_roll",
-"R_hip_yaw"
-]
-},
-{
-"node": "p250",
-"name": "R_knee clevis cheeks + bridge (r8: bridge +16, R6)",
-"seg": "R_thigh",
-"group": "structure",
-"est": false,
-"joints": [
-"R_hip_pitch",
-"R_hip_roll",
-"R_hip_yaw"
-]
-},
-{
-"node": "p251",
-"name": "R_knee clevis cheek -y",
-"seg": "R_thigh",
-"group": "structure",
-"est": false,
-"joints": [
-"R_hip_pitch",
-"R_hip_roll",
-"R_hip_yaw"
-]
-},
-{
 "node": "p252",
-"name": "R_knee clevis cheek +y",
+"name": "R_clamp arm outer step -y (depth 24 to the tines, L37)",
 "seg": "R_thigh",
 "group": "structure",
 "est": false,
@@ -3349,6 +3335,278 @@
 },
 {
 "node": "p253",
+"name": "R_clamp arm eye tine -yi [fork form EST]",
+"seg": "R_thigh",
+"group": "structure",
+"est": false,
+"joints": [
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw"
+]
+},
+{
+"node": "p254",
+"name": "R_clamp arm eye tine -yo [fork form EST]",
+"seg": "R_thigh",
+"group": "structure",
+"est": false,
+"joints": [
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw"
+]
+},
+{
+"node": "p255",
+"name": "R_clamp eye pin \u00f812x28 42CrMo4 -y",
+"seg": "R_thigh",
+"group": "bearing",
+"est": false,
+"joints": [
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw"
+]
+},
+{
+"node": "p256",
+"name": "R_clamp arm root +y (depth 34, r8)",
+"seg": "R_thigh",
+"group": "structure",
+"est": false,
+"joints": [
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw"
+]
+},
+{
+"node": "p257",
+"name": "R_clamp arm outer step +y (depth 24 to the tines, L37)",
+"seg": "R_thigh",
+"group": "structure",
+"est": false,
+"joints": [
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw"
+]
+},
+{
+"node": "p258",
+"name": "R_clamp arm eye tine +yi [fork form EST]",
+"seg": "R_thigh",
+"group": "structure",
+"est": false,
+"joints": [
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw"
+]
+},
+{
+"node": "p259",
+"name": "R_clamp arm eye tine +yo [fork form EST]",
+"seg": "R_thigh",
+"group": "structure",
+"est": false,
+"joints": [
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw"
+]
+},
+{
+"node": "p260",
+"name": "R_clamp eye pin \u00f812x28 42CrMo4 +y",
+"seg": "R_thigh",
+"group": "bearing",
+"est": false,
+"joints": [
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw"
+]
+},
+{
+"node": "p261",
+"name": "R_hip_pitch screw -y axial GE12 C eye \u00f830x12 on body end",
+"seg": "R_thigh",
+"group": "bearing",
+"est": false,
+"joints": [
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw"
+]
+},
+{
+"node": "p262",
+"name": "R_hip_pitch screw -y eye stub \u00f812 [EST]",
+"seg": "R_thigh",
+"group": "actuator",
+"est": false,
+"joints": [
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw"
+]
+},
+{
+"node": "p263",
+"name": "R_hip_pitch screw -y eye stub flange \u00f830 [EST]",
+"seg": "R_thigh",
+"group": "actuator",
+"est": false,
+"joints": [
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw"
+]
+},
+{
+"node": "p264",
+"name": "R_hip_pitch screw -y body (hip_pitch_body_x1)",
+"seg": "R_thigh",
+"group": "actuator",
+"est": false,
+"joints": [
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw"
+]
+},
+{
+"node": "p265",
+"name": "R_hip_pitch screw -y RV12 roller-screw rod \u00f812",
+"seg": "R_hipR",
+"group": "actuator",
+"est": false,
+"joints": [
+"R_hip_roll",
+"R_hip_yaw"
+]
+},
+{
+"node": "p266",
+"name": "R_hip_pitch screw -y GE12 C rod-end eye",
+"seg": "R_hipR",
+"group": "bearing",
+"est": false,
+"joints": [
+"R_hip_roll",
+"R_hip_yaw"
+]
+},
+{
+"node": "p267",
+"name": "R_hip_pitch screw +y axial GE12 C eye \u00f830x12 on body end",
+"seg": "R_thigh",
+"group": "bearing",
+"est": false,
+"joints": [
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw"
+]
+},
+{
+"node": "p268",
+"name": "R_hip_pitch screw +y eye stub \u00f812 [EST]",
+"seg": "R_thigh",
+"group": "actuator",
+"est": false,
+"joints": [
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw"
+]
+},
+{
+"node": "p269",
+"name": "R_hip_pitch screw +y eye stub flange \u00f830 [EST]",
+"seg": "R_thigh",
+"group": "actuator",
+"est": false,
+"joints": [
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw"
+]
+},
+{
+"node": "p270",
+"name": "R_hip_pitch screw +y body (hip_pitch_body_x1)",
+"seg": "R_thigh",
+"group": "actuator",
+"est": false,
+"joints": [
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw"
+]
+},
+{
+"node": "p271",
+"name": "R_hip_pitch screw +y RV12 roller-screw rod \u00f812",
+"seg": "R_hipR",
+"group": "actuator",
+"est": false,
+"joints": [
+"R_hip_roll",
+"R_hip_yaw"
+]
+},
+{
+"node": "p272",
+"name": "R_hip_pitch screw +y GE12 C rod-end eye",
+"seg": "R_hipR",
+"group": "bearing",
+"est": false,
+"joints": [
+"R_hip_roll",
+"R_hip_yaw"
+]
+},
+{
+"node": "p273",
+"name": "R_knee clevis bridge 40x70x22 + 16 mm pad over cheeks (fea_r8, L36)",
+"seg": "R_thigh",
+"group": "structure",
+"est": false,
+"joints": [
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw"
+]
+},
+{
+"node": "p274",
+"name": "R_knee clevis cheek -y 46x14x62 (fea_r5/r8)",
+"seg": "R_thigh",
+"group": "structure",
+"est": false,
+"joints": [
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw"
+]
+},
+{
+"node": "p275",
+"name": "R_knee clevis cheek +y 46x14x62 (fea_r5/r8)",
+"seg": "R_thigh",
+"group": "structure",
+"est": false,
+"joints": [
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw"
+]
+},
+{
+"node": "p276",
 "name": "R_knee pin \u00f816 (through clevis + lever cheeks)",
 "seg": "R_shank",
 "group": "bearing",
@@ -3361,7 +3619,7 @@
 ]
 },
 {
-"node": "p254",
+"node": "p277",
 "name": "R_knee tongue (shank)",
 "seg": "R_shank",
 "group": "structure",
@@ -3374,7 +3632,7 @@
 ]
 },
 {
-"node": "p255",
+"node": "p278",
 "name": "R_knee tongue neck into tibia",
 "seg": "R_shank",
 "group": "structure",
@@ -3387,7 +3645,7 @@
 ]
 },
 {
-"node": "p256",
+"node": "p279",
 "name": "R_knee lever r47.5 (Actuators STEP)",
 "seg": "R_shank",
 "group": "linkage",
@@ -3400,19 +3658,7 @@
 ]
 },
 {
-"node": "p257",
-"name": "R_knee screw -y body (knee_body_x1)",
-"seg": "R_thigh",
-"group": "actuator",
-"est": false,
-"joints": [
-"R_hip_pitch",
-"R_hip_roll",
-"R_hip_yaw"
-]
-},
-{
-"node": "p258",
+"node": "p280",
 "name": "R_knee screw -y RV12 roller-screw rod \u00f812",
 "seg": "R_shank",
 "group": "actuator",
@@ -3425,7 +3671,7 @@
 ]
 },
 {
-"node": "p259",
+"node": "p281",
 "name": "R_knee screw -y GE12 C rod-end eye",
 "seg": "R_shank",
 "group": "bearing",
@@ -3438,19 +3684,7 @@
 ]
 },
 {
-"node": "p260",
-"name": "R_knee screw +y body (knee_body_x1)",
-"seg": "R_thigh",
-"group": "actuator",
-"est": false,
-"joints": [
-"R_hip_pitch",
-"R_hip_roll",
-"R_hip_yaw"
-]
-},
-{
-"node": "p261",
+"node": "p282",
 "name": "R_knee screw +y RV12 roller-screw rod \u00f812",
 "seg": "R_shank",
 "group": "actuator",
@@ -3463,7 +3697,7 @@
 ]
 },
 {
-"node": "p262",
+"node": "p283",
 "name": "R_knee screw +y GE12 C rod-end eye",
 "seg": "R_shank",
 "group": "bearing",
@@ -3476,7 +3710,19 @@
 ]
 },
 {
-"node": "p263",
+"node": "p284",
+"name": "R_knee twin housing (Actuators D59 STEP, shared centre web)",
+"seg": "R_thigh",
+"group": "actuator",
+"est": false,
+"joints": [
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw"
+]
+},
+{
+"node": "p285",
 "name": "R_knee trunnion bracket top plate (thigh) [EST]",
 "seg": "R_thigh",
 "group": "structure",
@@ -3488,7 +3734,7 @@
 ]
 },
 {
-"node": "p264",
+"node": "p286",
 "name": "R_knee trunnion bracket strut to femur [EST]",
 "seg": "R_thigh",
 "group": "structure",
@@ -3500,7 +3746,7 @@
 ]
 },
 {
-"node": "p265",
+"node": "p287",
 "name": "R_knee trunnion cheek -y [EST]",
 "seg": "R_thigh",
 "group": "structure",
@@ -3512,7 +3758,7 @@
 ]
 },
 {
-"node": "p266",
+"node": "p288",
 "name": "R_knee trunnion pin \u00f89 -y",
 "seg": "R_thigh",
 "group": "bearing",
@@ -3524,7 +3770,7 @@
 ]
 },
 {
-"node": "p267",
+"node": "p289",
 "name": "R_knee trunnion cheek +y [EST]",
 "seg": "R_thigh",
 "group": "structure",
@@ -3536,7 +3782,7 @@
 ]
 },
 {
-"node": "p268",
+"node": "p290",
 "name": "R_knee trunnion pin \u00f89 +y",
 "seg": "R_thigh",
 "group": "bearing",
@@ -3548,7 +3794,7 @@
 ]
 },
 {
-"node": "p269",
+"node": "p291",
 "name": "R_tibia tube 7075 \u00f845x1.2",
 "seg": "R_shank",
 "group": "structure",
@@ -3561,7 +3807,7 @@
 ]
 },
 {
-"node": "p270",
+"node": "p292",
 "name": "R_tibia internal doubler sleeve 0.5x100 (r8)",
 "seg": "R_shank",
 "group": "structure",
@@ -3574,7 +3820,7 @@
 ]
 },
 {
-"node": "p271",
+"node": "p293",
 "name": "R_ankle fork bridge",
 "seg": "R_shank",
 "group": "structure",
@@ -3587,7 +3833,7 @@
 ]
 },
 {
-"node": "p272",
+"node": "p294",
 "name": "R_ankle fork cheek -y",
 "seg": "R_shank",
 "group": "structure",
@@ -3600,7 +3846,7 @@
 ]
 },
 {
-"node": "p273",
+"node": "p295",
 "name": "R_ankle fork cheek +y",
 "seg": "R_shank",
 "group": "structure",
@@ -3613,7 +3859,20 @@
 ]
 },
 {
-"node": "p274",
+"node": "p296",
+"name": "R_ankle screw -y axial GE12 C top eye \u00f830x12 (D60)",
+"seg": "R_shank",
+"group": "bearing",
+"est": false,
+"joints": [
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw",
+"R_knee"
+]
+},
+{
+"node": "p297",
 "name": "R_ankle screw -y body (ankle_body_x1)",
 "seg": "R_shank",
 "group": "actuator",
@@ -3626,7 +3885,7 @@
 ]
 },
 {
-"node": "p275",
+"node": "p298",
 "name": "R_ankle screw -y RV12 roller-screw rod \u00f812",
 "seg": "R_foot",
 "group": "actuator",
@@ -3641,8 +3900,8 @@
 ]
 },
 {
-"node": "p276",
-"name": "R_ankle screw -y GE12 C rod-end eye",
+"node": "p299",
+"name": "R_ankle screw -y QA1 MGF12T 27\u00b0 rod end \u00f830x10.75 (D60)",
 "seg": "R_foot",
 "group": "bearing",
 "est": false,
@@ -3656,7 +3915,20 @@
 ]
 },
 {
-"node": "p277",
+"node": "p300",
+"name": "R_ankle screw +y axial GE12 C top eye \u00f830x12 (D60)",
+"seg": "R_shank",
+"group": "bearing",
+"est": false,
+"joints": [
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw",
+"R_knee"
+]
+},
+{
+"node": "p301",
 "name": "R_ankle screw +y body (ankle_body_x1)",
 "seg": "R_shank",
 "group": "actuator",
@@ -3669,7 +3941,7 @@
 ]
 },
 {
-"node": "p278",
+"node": "p302",
 "name": "R_ankle screw +y RV12 roller-screw rod \u00f812",
 "seg": "R_foot",
 "group": "actuator",
@@ -3684,8 +3956,8 @@
 ]
 },
 {
-"node": "p279",
-"name": "R_ankle screw +y GE12 C rod-end eye",
+"node": "p303",
+"name": "R_ankle screw +y QA1 MGF12T 27\u00b0 rod end \u00f830x10.75 (D60)",
 "seg": "R_foot",
 "group": "bearing",
 "est": false,
@@ -3699,7 +3971,7 @@
 ]
 },
 {
-"node": "p280",
+"node": "p304",
 "name": "R_ankle trunnion bracket top plate (shank) [EST]",
 "seg": "R_shank",
 "group": "structure",
@@ -3712,7 +3984,7 @@
 ]
 },
 {
-"node": "p281",
+"node": "p305",
 "name": "R_ankle trunnion bracket strut to tibia [EST]",
 "seg": "R_shank",
 "group": "structure",
@@ -3725,11 +3997,11 @@
 ]
 },
 {
-"node": "p282",
-"name": "R_ankle trunnion centre plate 12 mm [EST]",
+"node": "p306",
+"name": "R_ankle top clevis tine -yi (D60)",
 "seg": "R_shank",
 "group": "structure",
-"est": true,
+"est": false,
 "joints": [
 "R_hip_pitch",
 "R_hip_roll",
@@ -3738,11 +4010,11 @@
 ]
 },
 {
-"node": "p283",
-"name": "R_ankle trunnion cheek -y [EST]",
+"node": "p307",
+"name": "R_ankle top clevis tine -yo (D60)",
 "seg": "R_shank",
 "group": "structure",
-"est": true,
+"est": false,
 "joints": [
 "R_hip_pitch",
 "R_hip_roll",
@@ -3751,8 +4023,8 @@
 ]
 },
 {
-"node": "p284",
-"name": "R_ankle trunnion pin \u00f89 -y in",
+"node": "p308",
+"name": "R_ankle top clevis pin \u00f812 -y (D60)",
 "seg": "R_shank",
 "group": "bearing",
 "est": false,
@@ -3764,24 +4036,11 @@
 ]
 },
 {
-"node": "p285",
-"name": "R_ankle trunnion pin \u00f89 -y out",
-"seg": "R_shank",
-"group": "bearing",
-"est": false,
-"joints": [
-"R_hip_pitch",
-"R_hip_roll",
-"R_hip_yaw",
-"R_knee"
-]
-},
-{
-"node": "p286",
-"name": "R_ankle trunnion cheek +y [EST]",
+"node": "p309",
+"name": "R_ankle top clevis tine +yi (D60)",
 "seg": "R_shank",
 "group": "structure",
-"est": true,
+"est": false,
 "joints": [
 "R_hip_pitch",
 "R_hip_roll",
@@ -3790,8 +4049,21 @@
 ]
 },
 {
-"node": "p287",
-"name": "R_ankle trunnion pin \u00f89 +y in",
+"node": "p310",
+"name": "R_ankle top clevis tine +yo (D60)",
+"seg": "R_shank",
+"group": "structure",
+"est": false,
+"joints": [
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw",
+"R_knee"
+]
+},
+{
+"node": "p311",
+"name": "R_ankle top clevis pin \u00f812 +y (D60)",
 "seg": "R_shank",
 "group": "bearing",
 "est": false,
@@ -3803,20 +4075,7 @@
 ]
 },
 {
-"node": "p288",
-"name": "R_ankle trunnion pin \u00f89 +y out",
-"seg": "R_shank",
-"group": "bearing",
-"est": false,
-"joints": [
-"R_hip_pitch",
-"R_hip_roll",
-"R_hip_yaw",
-"R_knee"
-]
-},
-{
-"node": "p289",
+"node": "p312",
 "name": "R_ankle cross Ti-6Al-4V",
 "seg": "R_ankX",
 "group": "structure",
@@ -3830,7 +4089,7 @@
 ]
 },
 {
-"node": "p290",
+"node": "p313",
 "name": "R_ankle pitch pin stub \u00f812 -y",
 "seg": "R_ankX",
 "group": "bearing",
@@ -3844,7 +4103,7 @@
 ]
 },
 {
-"node": "p291",
+"node": "p314",
 "name": "R_ankle pitch pin stub \u00f812 +y",
 "seg": "R_ankX",
 "group": "bearing",
@@ -3858,7 +4117,7 @@
 ]
 },
 {
-"node": "p292",
+"node": "p315",
 "name": "R_ankle-roll \u00b118\u00b0 stop block 20x12x10 + 2 mm PU R-y (A14, face r45)",
 "seg": "R_ankX",
 "group": "stop",
@@ -3872,7 +4131,7 @@
 ]
 },
 {
-"node": "p293",
+"node": "p316",
 "name": "R_ankle-roll \u00b118\u00b0 stop block 20x12x10 + 2 mm PU R+y (A14, face r45)",
 "seg": "R_ankX",
 "group": "stop",
@@ -3886,7 +4145,7 @@
 ]
 },
 {
-"node": "p294",
+"node": "p317",
 "name": "R_ankle-roll \u00b118\u00b0 stop block 20x12x10 + 2 mm PU F-y (A14, face r45)",
 "seg": "R_ankX",
 "group": "stop",
@@ -3900,7 +4159,7 @@
 ]
 },
 {
-"node": "p295",
+"node": "p318",
 "name": "R_ankle-roll \u00b118\u00b0 stop block 20x12x10 + 2 mm PU F+y (A14, face r45)",
 "seg": "R_ankX",
 "group": "stop",
@@ -3914,7 +4173,7 @@
 ]
 },
 {
-"node": "p296",
+"node": "p319",
 "name": "R_ankle-roll stop carrier under cross [EST]",
 "seg": "R_ankX",
 "group": "structure",
@@ -3928,7 +4187,7 @@
 ]
 },
 {
-"node": "p297",
+"node": "p320",
 "name": "R_ankle roll pin stub \u00f812 R",
 "seg": "R_foot",
 "group": "bearing",
@@ -3943,7 +4202,7 @@
 ]
 },
 {
-"node": "p298",
+"node": "p321",
 "name": "R_foot roll lug R",
 "seg": "R_foot",
 "group": "structure",
@@ -3958,7 +4217,7 @@
 ]
 },
 {
-"node": "p299",
+"node": "p322",
 "name": "R_foot roll-stop shoulder R-y [gap 15 mm = 18\u00b0 at r48] [EST]",
 "seg": "R_foot",
 "group": "stop",
@@ -3973,7 +4232,7 @@
 ]
 },
 {
-"node": "p300",
+"node": "p323",
 "name": "R_foot roll-stop shoulder R+y [gap 15 mm = 18\u00b0 at r48] [EST]",
 "seg": "R_foot",
 "group": "stop",
@@ -3988,7 +4247,7 @@
 ]
 },
 {
-"node": "p301",
+"node": "p324",
 "name": "R_ankle roll pin stub \u00f812 F",
 "seg": "R_foot",
 "group": "bearing",
@@ -4003,7 +4262,7 @@
 ]
 },
 {
-"node": "p302",
+"node": "p325",
 "name": "R_foot roll lug F",
 "seg": "R_foot",
 "group": "structure",
@@ -4018,7 +4277,7 @@
 ]
 },
 {
-"node": "p303",
+"node": "p326",
 "name": "R_foot roll-stop shoulder F-y [gap 15 mm = 18\u00b0 at r48] [EST]",
 "seg": "R_foot",
 "group": "stop",
@@ -4033,7 +4292,7 @@
 ]
 },
 {
-"node": "p304",
+"node": "p327",
 "name": "R_foot roll-stop shoulder F+y [gap 15 mm = 18\u00b0 at r48] [EST]",
 "seg": "R_foot",
 "group": "stop",
@@ -4048,7 +4307,7 @@
 ]
 },
 {
-"node": "p305",
+"node": "p328",
 "name": "R_ankle 6-axis F/T sensor",
 "seg": "R_foot",
 "group": "sensor",
@@ -4063,8 +4322,8 @@
 ]
 },
 {
-"node": "p306",
-"name": "R_foot closed box 240x130 (3.5 mm skins, 4 webs; width EST)",
+"node": "p329",
+"name": "R_foot closed box 240x100x18 (3.5 mm skins, 4 webs; fea_r5)",
 "seg": "R_foot",
 "group": "structure",
 "est": false,
@@ -4078,8 +4337,8 @@
 ]
 },
 {
-"node": "p307",
-"name": "R_foot toe doubler collar (r8)",
+"node": "p330",
+"name": "R_ankle F/T steel flange OD60/ID22 x8 (fea_r5)",
 "seg": "R_foot",
 "group": "structure",
 "est": false,
@@ -4093,8 +4352,8 @@
 ]
 },
 {
-"node": "p308",
-"name": "R_instep lug r73 -y",
+"node": "p331",
+"name": "R_foot flange doubler collar r30.2-45 x3 (r8, L36)",
 "seg": "R_foot",
 "group": "structure",
 "est": false,
@@ -4108,8 +4367,8 @@
 ]
 },
 {
-"node": "p309",
-"name": "R_instep lug r73 +y",
+"node": "p332",
+"name": "R_instep tower 30x90 to z50 (fea_r5)",
 "seg": "R_foot",
 "group": "structure",
 "est": false,
@@ -4123,8 +4382,53 @@
 ]
 },
 {
-"node": "p310",
-"name": "R_instep pin \u00f812 -y",
+"node": "p333",
+"name": "R_instep outrigger beam 20x145x10 (lugs outside the 100 mm foot, L38)",
+"seg": "R_foot",
+"group": "structure",
+"est": false,
+"joints": [
+"R_ankle_pitch",
+"R_ankle_roll",
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw",
+"R_knee"
+]
+},
+{
+"node": "p334",
+"name": "R_instep lug r73 -y (inner face y57.5, D60/L38)",
+"seg": "R_foot",
+"group": "structure",
+"est": false,
+"joints": [
+"R_ankle_pitch",
+"R_ankle_roll",
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw",
+"R_knee"
+]
+},
+{
+"node": "p335",
+"name": "R_instep lug r73 +y (inner face y57.5, D60/L38)",
+"seg": "R_foot",
+"group": "structure",
+"est": false,
+"joints": [
+"R_ankle_pitch",
+"R_ankle_roll",
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw",
+"R_knee"
+]
+},
+{
+"node": "p336",
+"name": "R_instep pin \u00f812 -y (39-72.5, +5 mm, D60)",
 "seg": "R_foot",
 "group": "bearing",
 "est": false,
@@ -4138,8 +4442,38 @@
 ]
 },
 {
-"node": "p311",
-"name": "R_instep pin \u00f812 +y",
+"node": "p337",
+"name": "R_instep rod-end spacer \u00f816x4.5 -y (ball face y53 -> lug 57.5, D60)",
+"seg": "R_foot",
+"group": "bearing",
+"est": false,
+"joints": [
+"R_ankle_pitch",
+"R_ankle_roll",
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw",
+"R_knee"
+]
+},
+{
+"node": "p338",
+"name": "R_instep pin \u00f812 +y (39-72.5, +5 mm, D60)",
+"seg": "R_foot",
+"group": "bearing",
+"est": false,
+"joints": [
+"R_ankle_pitch",
+"R_ankle_roll",
+"R_hip_pitch",
+"R_hip_roll",
+"R_hip_yaw",
+"R_knee"
+]
+},
+{
+"node": "p339",
+"name": "R_instep rod-end spacer \u00f816x4.5 +y (ball face y53 -> lug 57.5, D60)",
 "seg": "R_foot",
 "group": "bearing",
 "est": false,

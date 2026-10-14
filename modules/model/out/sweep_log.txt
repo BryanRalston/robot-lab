@@ -1,11 +1,9 @@
-standing clashes 2
-   ('L_knee screw -y body (knee_body_x1)', 'L_knee screw +y body (knee_body_x1)', 1256.6)
-   ('R_knee screw -y body (knee_body_x1)', 'R_knee screw +y body (knee_body_x1)', 1256.6)
+standing clashes 0
 floating 0
 hip_yaw [-35, 45] (-35, 45) []
 hip_roll [-12, 15] (-12, 15) []
 hip_pitch [-105, 40] (-105, 40) []
-knee [0, 130] (0, 135) [(135, [('L_knee clevis cheek -y', 'L_knee lever r47.5 (Actuators STEP)', 7.7), ('L_knee clevis cheek +y', 'L_knee lever r47.5 (Actuators STEP)', 7.7)])]
+knee [0, 135] (0, 135) []
 ankle_pitch [-45, 40] (-45, 40) []
 ankle_roll [-18, 18] (-18, 18) []
 waist_yaw [-90, 90] (-90, 90) []
@@ -19,8 +17,8 @@ wrist_pitch [-40, 40] (-70, 70) [(-45, [('L_wrist roll output fork [EST]', 'L_pa
 wrist_yaw [-25, 25] (-40, 40) [(-30, [('L_wrist roll output fork [EST]', 'L_palm (7075 skeleton + PA12) [EST]', 39.1)]), (30, [('L_wrist roll output fork [EST]', 'L_palm (7075 skeleton + PA12) [EST]', 39.1)])]
 neck_yaw [-80, 80] (-80, 80) []
 neck_pitch [-40, 40] (-40, 40) []
-sit hip-90 knee120 [('L_knee screw -y body (knee_body_x1)', 'L_knee screw +y body (knee_body_x1)', 1256.6), ('R_knee screw -y body (knee_body_x1)', 'R_knee screw +y body (knee_body_x1)', 1256.6)]
-deep squat hip-100 knee135 [('L_knee clevis cheek -y', 'L_knee lever r47.5 (Actuators STEP)', 7.7), ('L_knee clevis cheek +y', 'L_knee lever r47.5 (Actuators STEP)', 7.7), ('L_knee screw -y body (knee_body_x1)', 'L_knee screw +y body (knee_body_x1)', 1256.6), ('R_knee screw -y body (knee_body_x1)', 'R_knee screw +y body (knee_body_x1)', 1256.6)]
-stance ankle -45 + roll 18 [('L_knee screw -y body (knee_body_x1)', 'L_knee screw +y body (knee_body_x1)', 1256.6), ('L_ankle screw -y GE12 C rod-end eye', 'L_instep lug r73 -y', 211.7), ('L_ankle screw +y RV12 roller-screw rod ø12', 'L_instep lug r73 +y', 6.4), ('L_ankle screw +y GE12 C rod-end eye', 'L_instep lug r73 +y', 61.0), ('R_knee screw -y body (knee_body_x1)', 'R_knee screw +y body (knee_body_x1)', 1256.6)]
-ankle +40 roll -18 [('L_knee screw -y body (knee_body_x1)', 'L_knee screw +y body (knee_body_x1)', 1256.6), ('L_ankle screw -y RV12 roller-screw rod ø12', 'L_instep lug r73 -y', 19.5), ('L_ankle screw -y GE12 C rod-end eye', 'L_instep lug r73 -y', 61.0), ('L_ankle screw +y GE12 C rod-end eye', 'L_instep lug r73 +y', 211.7), ('R_knee screw -y body (knee_body_x1)', 'R_knee screw +y body (knee_body_x1)', 1256.6)]
-t 424
+sit hip-90 knee120 []
+deep squat hip-100 knee135 []
+stance ankle -45 + roll 18 []
+ankle +40 roll -18 []
+t 419

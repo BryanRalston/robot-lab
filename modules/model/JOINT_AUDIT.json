@@ -97,7 +97,7 @@
     "actuators/results/hp_pivot_needle.json",
     "legs/DECISIONS.md L18 L21 L22 L35"
    ],
-   "notes": "Pin-to-pin length 257.4-350.9 mm (stroke 93.6); Legs study stroke 86.6 over its -80..+40 bins. Lever strength O13 still OPEN (FEA v2/G2 queued): lever shown is config-B needle hub, not G2. Body clearance \u2265 3.0 mm to every thigh part (femur tube 3.0, collar > 6) measured over -105\u2026+40 (Actuators D62, Legs L37).",
+   "notes": "Pin-to-pin length 257.4-350.9 mm (stroke 93.6); Legs study stroke 86.6 over its -80..+40 bins. Lever strength O13 still OPEN (FEA v2/G2 queued): lever shown is config-B needle hub, not G2.  Body clearance measured here over -105\u2026+40\u00b0 (15\u00b0 steps): min 3.0 mm, to L_femur tube 7075 \u00f850x1.2 at -75\u00b0 (Actuators D62 / Legs L37 report \u2265 3.0).",
    "model_parts": [
     "L_hip_pitch lever B needle hub (Actuators STEP; G2 rework queued)",
     "L_hip_pitch shaft \u00f835/30 x66 hardened",
@@ -204,7 +204,7 @@
     "legs/DECISIONS.md L23",
     "actuators/cad/ankle_body_x1.step"
    ],
-   "notes": "Actuators stroke check: Lmin 262.6 / Lmax 374.3 mm, margin 11.9 mm. Body bosses removed in D61.",
+   "notes": "Actuators D60 stroke check at trunnion z 450: Lmin 301.6 / Lmax 414.2 mm, margin 13.9 mm. QA1 rod end is a wear part: replace every 4250 h (C rating EST). Body bosses removed in D61.",
    "model_parts": [
     "L_ankle screw -y axial GE12 C top eye \u00f830x12 (D60)",
     "L_ankle screw -y body (ankle_body_x1)",
@@ -291,10 +291,21 @@
     -90,
     90
    ],
-   "swept_clear": null,
+   "swept_clear": [
+    -90,
+    90
+   ],
    "first_clash": [],
-   "arm_leg_contacts": [],
-   "mechanism_present": true
+   "arm_leg_contacts": [
+    -45,
+    -30,
+    -15,
+    15,
+    30,
+    45
+   ],
+   "mechanism_present": true,
+   "range_clear": true
   },
   {
    "joint": "waist_pitch",
@@ -318,10 +329,14 @@
     -30,
     60
    ],
-   "swept_clear": null,
+   "swept_clear": [
+    -30,
+    60
+   ],
    "first_clash": [],
    "arm_leg_contacts": [],
-   "mechanism_present": true
+   "mechanism_present": true,
+   "range_clear": true
   },
   {
    "joint": "shoulder_pitch",
@@ -345,10 +360,14 @@
     -180,
     60
    ],
-   "swept_clear": null,
+   "swept_clear": [
+    -180,
+    60
+   ],
    "first_clash": [],
    "arm_leg_contacts": [],
-   "mechanism_present": true
+   "mechanism_present": true,
+   "range_clear": true
   },
   {
    "joint": "shoulder_roll",
@@ -362,7 +381,7 @@
    "sources": [
     "v3/cad/model.py layout (catalog envelopes)"
    ],
-   "notes": "No module has engineered this joint.",
+   "notes": "No module has engineered this joint. Clash-free range -5..175\u00b0 vs -15..180\u00b0 required: hard stop must sit inside the clash-free range.",
    "model_parts": [
     "L_shoulder_roll strain-wave housing (motor+CSG) OD84 [EST]",
     "L_shoulder_roll crossed-roller bearing [EST]",
@@ -372,10 +391,45 @@
     -15,
     180
    ],
-   "swept_clear": null,
-   "first_clash": [],
-   "arm_leg_contacts": [],
-   "mechanism_present": true
+   "swept_clear": [
+    -5,
+    175
+   ],
+   "first_clash": [
+    [
+     -10,
+     [
+      [
+       "pelvis shell 7075 4 mm (open top/bottom)",
+       "L_elbow clevis [EST]"
+      ],
+      [
+       "pelvis shell 7075 4 mm (open top/bottom)",
+       "L_elbow strain-wave housing (motor+CSG) OD72 [EST]"
+      ],
+      [
+       "pelvis shell 7075 4 mm (open top/bottom)",
+       "L_forearm shell (6 tendon drives inside) [EST]"
+      ]
+     ]
+    ],
+    [
+     180,
+     [
+      [
+       "L_shoulder pitch output flange [EST]",
+       "L_roll-yaw link [EST]"
+      ]
+     ]
+    ]
+   ],
+   "arm_leg_contacts": [
+    -15,
+    -10,
+    -5
+   ],
+   "mechanism_present": true,
+   "range_clear": false
   },
   {
    "joint": "shoulder_yaw",
@@ -399,10 +453,16 @@
     -150,
     150
    ],
-   "swept_clear": null,
+   "swept_clear": [
+    -150,
+    150
+   ],
    "first_clash": [],
-   "arm_leg_contacts": [],
-   "mechanism_present": true
+   "arm_leg_contacts": [
+    -90
+   ],
+   "mechanism_present": true,
+   "range_clear": true
   },
   {
    "joint": "elbow",
@@ -416,7 +476,7 @@
    "sources": [
     "v3/cad/model.py layout (catalog envelopes)"
    ],
-   "notes": "No module has engineered this joint.",
+   "notes": "No module has engineered this joint. Clash-free range -115..0\u00b0 vs -140..0\u00b0 required: hard stop must sit inside the clash-free range.",
    "model_parts": [
     "L_elbow clevis [EST]",
     "L_elbow strain-wave housing (motor+CSG) OD72 [EST]",
@@ -427,10 +487,24 @@
     -140,
     0
    ],
-   "swept_clear": null,
-   "first_clash": [],
+   "swept_clear": [
+    -115,
+    0
+   ],
+   "first_clash": [
+    [
+     -120,
+     [
+      [
+       "L_upper arm tube 7075 \u00f850x2 [EST]",
+       "L_forearm shell (6 tendon drives inside) [EST]"
+      ]
+     ]
+    ]
+   ],
    "arm_leg_contacts": [],
-   "mechanism_present": true
+   "mechanism_present": true,
+   "range_clear": false
   },
   {
    "joint": "wrist_roll",
@@ -454,10 +528,16 @@
     -170,
     170
    ],
-   "swept_clear": null,
+   "swept_clear": [
+    -170,
+    170
+   ],
    "first_clash": [],
-   "arm_leg_contacts": [],
-   "mechanism_present": true
+   "arm_leg_contacts": [
+    -90
+   ],
+   "mechanism_present": true,
+   "range_clear": true
   },
   {
    "joint": "wrist_pitch",
@@ -471,7 +551,7 @@
    "sources": [
     "v3/cad/model.py layout (catalog envelopes)"
    ],
-   "notes": "No module has engineered this joint.",
+   "notes": "No module has engineered this joint. Clash-free range -40..40\u00b0 vs -70..70\u00b0 required: hard stop must sit inside the clash-free range.",
    "model_parts": [
     "L_wrist pitch/yaw cross (2x micro strain-wave drive in forearm, push rods) [EST]",
     "L_wrist pitch pin \u00f86 [EST]"
@@ -480,10 +560,33 @@
     -70,
     70
    ],
-   "swept_clear": null,
-   "first_clash": [],
+   "swept_clear": [
+    -40,
+    40
+   ],
+   "first_clash": [
+    [
+     -45,
+     [
+      [
+       "L_wrist roll output fork [EST]",
+       "L_palm (7075 skeleton + PA12) [EST]"
+      ]
+     ]
+    ],
+    [
+     45,
+     [
+      [
+       "L_wrist roll output fork [EST]",
+       "L_palm (7075 skeleton + PA12) [EST]"
+      ]
+     ]
+    ]
+   ],
    "arm_leg_contacts": [],
-   "mechanism_present": true
+   "mechanism_present": true,
+   "range_clear": false
   },
   {
    "joint": "wrist_yaw",
@@ -497,7 +600,7 @@
    "sources": [
     "v3/cad/model.py layout (catalog envelopes)"
    ],
-   "notes": "No module has engineered this joint.",
+   "notes": "No module has engineered this joint. Clash-free range -25..25\u00b0 vs -40..40\u00b0 required: hard stop must sit inside the clash-free range.",
    "model_parts": [
     "L_wrist pitch/yaw cross (2x micro strain-wave drive in forearm, push rods) [EST]",
     "L_wrist pitch pin \u00f86 [EST]"
@@ -506,10 +609,38 @@
     -40,
     40
    ],
-   "swept_clear": null,
-   "first_clash": [],
-   "arm_leg_contacts": [],
-   "mechanism_present": true
+   "swept_clear": [
+    -25,
+    25
+   ],
+   "first_clash": [
+    [
+     -30,
+     [
+      [
+       "L_wrist roll output fork [EST]",
+       "L_palm (7075 skeleton + PA12) [EST]"
+      ]
+     ]
+    ],
+    [
+     30,
+     [
+      [
+       "L_wrist roll output fork [EST]",
+       "L_palm (7075 skeleton + PA12) [EST]"
+      ]
+     ]
+    ]
+   ],
+   "arm_leg_contacts": [
+    -30,
+    -25,
+    -20,
+    -15
+   ],
+   "mechanism_present": true,
+   "range_clear": false
   },
   {
    "joint": "neck_yaw",
@@ -533,10 +664,14 @@
     -80,
     80
    ],
-   "swept_clear": null,
+   "swept_clear": [
+    -80,
+    80
+   ],
    "first_clash": [],
    "arm_leg_contacts": [],
-   "mechanism_present": true
+   "mechanism_present": true,
+   "range_clear": true
   },
   {
    "joint": "neck_pitch",
@@ -560,10 +695,14 @@
     -40,
     40
    ],
-   "swept_clear": null,
+   "swept_clear": [
+    -40,
+    40
+   ],
    "first_clash": [],
    "arm_leg_contacts": [],
-   "mechanism_present": true
+   "mechanism_present": true,
+   "range_clear": true
   },
   {
    "joint": "finger1_j1",

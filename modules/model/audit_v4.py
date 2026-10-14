@@ -6,7 +6,7 @@ import json,os,re,sys,math,numpy as np
 import model_v4 as M
 H=M.HERE; R=M.ROOT
 SIZ=json.load(open(os.path.join(R,'modules/actuators/results/sizing.json')))['sel']
-LS=M.LS; AST=json.load(open(os.path.join(R,'modules/actuators/results/ankle_stroke_73_r18_p45.json')))
+LS=M.LS; AV4=json.load(open(os.path.join(R,'modules/actuators/results/ankle_v4.json'))); AST=json.load(open(os.path.join(R,'modules/actuators/results/ankle_stroke_73_r18_p45.json')))
 CL=json.load(open(os.path.join(H,'out/clash_v4.json')))
 SIM={'hip_yaw':(-35,45),'hip_roll':(-12,15),'hip_pitch':(-105,40),'knee':(0,135),'ankle_pitch':(-45,40),'ankle_roll':(-18,18),
      'waist_yaw':(-90,90),'waist_pitch':(-30,60),'shoulder_pitch':(-180,60),'shoulder_roll':(-15,180),'shoulder_yaw':(-150,150),'elbow':(-140,0),
@@ -48,6 +48,29 @@ hipB=LS['hip_pitch_B_thigh_mounted']['results'][0]; knS=[r for r in LS['knee']['
 stand=CL['standing']
 knee_boss=[c for c in stand['clashes'] if 'knee screw' in c[0] and 'knee screw' in c[1]]
 # ---------------- legs ----------------
+def hip_clear():
+    """measured min distance from the hip_pitch screw bodies to every other thigh-segment part (own eye pins/tines excluded)."""
+    best=(1e9,'',0)
+    for a in list(range(-105,41,15))+[40]:
+        P=M.build({'L_hip_pitch':a}); B=[p for p in P if p['name'].startswith('L_hip_pitch screw') and 'body (' in p['name']]
+        T=[p for p in P if p['seg']=='L_thigh' and not p['name'].startswith('L_hip_pitch screw') and 'eye pin' not in p['name'] and 'tine' not in p['name']]
+        for b in B:
+            for t in T:
+                d=b['solid'].distance(t['solid'])
+                if d<best[0]: best=(d,t['name'],a)
+    return best
+hipC=hip_clear(); assert hipC[0]>0, hipC
+def _swept(keys):  # any clash in the stand/sweep/combos data touching these parts -> FAIL
+    hits=[c for c in stand['clashes'] if any(k in c[0] or k in c[1] for k in keys)]
+    for v in (CL.get('sweep') or {}).values():
+        for e in (v.get('clashes') if isinstance(v,dict) else []) or []:
+            for c in e['pairs']:
+                if any(k in c[0] or k in c[1] for k in keys): hits.append(c)
+    for v in (CL.get('combos') or {}).values():
+        hits+=[c for c in v if any(k in c[0] or k in c[1] for k in keys)]
+    return hits
+ank_hits=_swept(('ankle screw','instep','QA1','top clevis'))
+ankS='FAIL' if ank_hits else 'BUILDABLE'
 joint('hip_yaw','leg','IKO CRBH 6013 A crossed-roller (inside Actuators hip_yaw_housing)','z (vertical) at hip centre +240 mm',SIZ['hip_yaw']['label']+' (rotary)',
       'housing bolted to pelvis deck [deck EST]; output flange -> yaw yoke plate [EST]','Legs L39: tab 10x12 on the yoke plate at r64 (midline side) strikes 2 PU 90A ø16x10 bumpers under the deck, contact at -35/+45 (swept); hold 70 N·m -> 1.1 kN','BUILDABLE',
       ['actuators/cad/hip_yaw_housing.step','actuators/results/sizing.json'],'Yoke plate/cheek are [EST] brackets.',keys=('hip yaw housing',))
@@ -59,7 +82,7 @@ joint('hip_pitch','leg','2x IKO TLA3520 Z needle bushes in lever cheeks, hardene
       f"body end: axial GE12 C eye on ø12 pin in bonded split-collar clamp arm at (x{hipB['geom']['trunnion_x_mm']}, z{hipB['geom']['trunnion_z_mm']}, y±69); rod end: GE12 C on lever crossbar",
       'PU ø25x12 bumper at r80 (A6, hip_stop.json) engages at -104..-105° (femur front face); toggle at -114.5°','BUILDABLE',
       ['legs/results/r2/linkage_study.json','actuators/cad/hip_pitch_lever_B_needle_sf15.step','actuators/results/hp_pivot_needle.json','legs/DECISIONS.md L18 L21 L22 L35'],
-      f"Pin-to-pin length {hipL[0]:.1f}-{hipL[1]:.1f} mm (stroke {hipL[1]-hipL[0]:.1f}); Legs study stroke {hipB['stroke_mm']:.1f} over its -80..+40 bins. Lever strength O13 still OPEN (FEA v2/G2 queued): lever shown is config-B needle hub, not G2. Body clearance ≥ 3.0 mm to every thigh part (femur tube 3.0, collar > 6) measured over -105…+40 (Actuators D62, Legs L37).",
+      f"Pin-to-pin length {hipL[0]:.1f}-{hipL[1]:.1f} mm (stroke {hipL[1]-hipL[0]:.1f}); Legs study stroke {hipB['stroke_mm']:.1f} over its -80..+40 bins. Lever strength O13 still OPEN (FEA v2/G2 queued): lever shown is config-B needle hub, not G2. "+f" Body clearance measured here over -105…+40° (15° steps): min {hipC[0]:.1f} mm, to {hipC[1]} at {hipC[2]}° (Actuators D62 / Legs L37 report ≥ 3.0).",
       keys=('hip_pitch','TLA3520','lever B','clamp'))
 kstat='FAIL' if knee_boss else 'BUILDABLE'
 joint('knee','leg','ø16 pin through clevis cheeks (thigh) + tongue and lever cheeks (shank)','y at knee (z 500)',SIZ['knee']['label']+f"; lever r47.5 clock {knS['geom']['clock_deg']}°",
@@ -70,11 +93,11 @@ joint('knee','leg','ø16 pin through clevis cheeks (thigh) + tongue and lever ch
       f"Pin-to-pin {knL[0]:.1f}-{knL[1]:.1f} mm (stroke {knL[1]-knL[0]:.1f}; Legs study {knS['stroke_mm']:.1f}). Knee trunnion bracket geometry is [EST].",
       keys=('knee',))
 joint('ankle_pitch','leg','Ti universal cross: ø12 pitch pin stubs in shank fork cheeks','y at ankle (z 80)',SIZ['ankle_pitch']['label']+' (both screws in phase)',
-      'axial GE12 C top eyes in two shank clevises at (x90, z450) y±45, slot 11.95, PTFE washers, ø12 pins (Actuators D60/D61); QA1 MGF12T 27° rod ends + 4.5 mm spacer on instep pins r73, lug inner face y57.5 on an outrigger beam (L23/L38)','screw end-of-stroke; no mechanical stop modelled','BUILDABLE',
+      'axial GE12 C top eyes in two shank clevises at (x90, z450) y±45, slot 11.95, PTFE washers, ø12 pins (Actuators D60/D61); QA1 MGF12T 27° rod ends + 4.5 mm spacer on instep pins r73, lug inner face y57.5 on an outrigger beam (L23/L38)','screw end-of-stroke; no mechanical stop modelled',ankS,
       ['actuators/results/ankle_stroke_73_r18_p45.json','legs/DECISIONS.md L23','actuators/cad/ankle_body_x1.step'],
-      f"Actuators stroke check: Lmin {AST['73mm L_ankle actuator in']['Lmin']} / Lmax {AST['73mm L_ankle actuator in']['Lmax']} mm, margin {AST['73mm L_ankle actuator in']['margin']} mm. Body bosses removed in D61.",keys=('ankle screw','ankle pitch pin','ankle cross'))
+      f"Actuators D60 stroke check at trunnion z {AV4['tz']:.0f}: Lmin {AV4['Lmin']:.1f} / Lmax {AV4['Lmax']:.1f} mm, margin {AV4['margin']:.1f} mm. QA1 rod end is a wear part: replace every {AV4['life']['interval_h']} h (C rating EST). Body bosses removed in D61.",keys=('ankle screw','ankle pitch pin','ankle cross'))
 joint('ankle_roll','leg','Ti universal cross: ø12 roll pin stubs in foot lugs (x axis)','x at ankle (z 80)',SIZ['ankle_pitch']['label']+' (screws differential)',
-      'same two screws; roll = differential stroke','±18° hard stop: 4 blocks + 2 mm PU on a carrier under the cross, faces at r45 (a14.json) strike foot shoulders [shoulder geometry EST]','BUILDABLE',
+      'same two screws; roll = differential stroke','±18° hard stop: 4 blocks + 2 mm PU on a carrier under the cross, faces at r45 (a14.json) strike foot shoulders [shoulder geometry EST]',ankS,
       ['legs/results/r7/a14.json','actuators/results/ankle_stroke_73_r18_p45.json'],
       f"Body tilt {tilt:.1f}° out of plane is taken by the axial GE12 C top eye (α 10°, 0.6 mm clevis gap limits spin to 2.3°) and the QA1 27° bottom rod end (demand 20.8°), Actuators D60. Swept clear on pitch -45…+40 × roll ±18 (Legs L38 grid, out/clash_v4.json); QA1 head-to-lug ≥ 2.15 mm (Actuators hand incl. spin; model 2.75 mm). Pitch -60 is outside the ±45/40 range and clashes (fork cheek x stop carrier [EST], body x top clevis).",
       keys=('ankle-roll','roll pin','roll lug'))
