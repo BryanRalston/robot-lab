@@ -394,7 +394,9 @@ def run_tongue(h):
     fix = _fix(m, ib, lambda x: x[2] < -46.2, 'tongue')
     # pressure cases: internal pressure pushes the bore outward (+e_r). Bin it.
     def pressure(p):
-        fac = m.facets_satisfying(lambda x: (np.abs(np.hypot(x[0], x[2]) - 17.5) < 1.3) & (np.abs(x[1]) < 13.6), boundaries_only=True)
+        # |y| < 13.3 keeps the flat hub ends (y = ±13.5) out of the pressure. Those
+        # faces sit at the bore radius and were taking a radial traction.
+        fac = m.facets_satisfying(lambda x: (np.abs(np.hypot(x[0], x[2]) - 17.5) < 1.3) & (np.abs(x[1]) < 13.3), boundaries_only=True)
         fp = m.p[:, m.facets[:, fac]].mean(1)
         ang = np.arctan2(fp[0], fp[2])
         f = np.zeros(ib.N)
@@ -443,9 +445,14 @@ def run_tongue(h):
         nrm = np.hypot(erx, erz) + 1e-12
         erx, erz = erx / nrm, erz / nrm
         srr = sig[0, 0] * erx ** 2 + sig[2, 2] * erz ** 2 + 2 * sig[0, 2] * erx * erz
+        # e_θ = (−e_z, 0, e_x)
+        stt = sig[0, 0] * erz ** 2 + sig[2, 2] * erx ** 2 - 2 * sig[0, 2] * erx * erz
         p = -srr
+        mid = np.abs(cent[1, bore]) < 8.0
         extra[name] = dict(p_min_MPa=float(p.min()), p_p5_MPa=float(np.percentile(p, 5)), p_median_MPa=float(np.median(p)),
-                           gap_if_p_min_neg=bool(p.min() < 0), n=int(len(bore)))
+                           gap_if_p_min_neg=bool(p.min() < 0), n=int(len(bore)),
+                           hoop_mid_median_MPa=float(np.median(stt[mid])) if np.any(mid) else None,
+                           p_mid_median_MPa=float(np.median(p[mid])) if np.any(mid) else None)
         print(name, 'interface p', extra[name], flush=True)
     cases = {k: v[0] for k, v in solved.items()}
     for k, v in extra.items():
@@ -456,23 +463,30 @@ def sole_contact(m, ib, K, fix, al_elems, sel, Ftarget, tag, kn=2.0e5):
     """Rigid flat ground on `sel`. Penalty kn [N/mm³], flange dofs already in `fix`.
 
     The ground approach is scaled so the upward reaction equals Ftarget. Dofs that go
-    into tension are released and the contact is resolved. Consistent nodal areas that
-    come out negative are lumped onto the positive dofs and scaled back to the facet area.
+    into tension are released and the contact is resolved. Springs sit on the corner
+    nodes only, each with one third of its triangle's area. P2 consistent areas go
+    negative and were producing multi-GPa spikes on tiny dofs.
     """
     from scipy.sparse import diags
     fac = m.facets_satisfying(sel, boundaries_only=True)
     if len(fac) == 0:
         raise RuntimeError(tag + ' contact selector matched nothing')
-    fb = FacetBasis(m, ib.elem, facets=fac)
-    a_vec = np.asarray(asm(LinearForm(lambda v, w: v[2]), fb), dtype=float).ravel()
-    area = float(a_vec.sum())
-    pos = a_vec > 0.0
-    if area <= 1.0 or not np.any(pos):
+    verts = m.facets[:, fac]
+    p0, p1, p2 = m.p[:, verts[0]], m.p[:, verts[1]], m.p[:, verts[2]]
+    area_f = 0.5 * np.linalg.norm(np.cross((p1 - p0).T, (p2 - p0).T), axis=1)
+    area = float(area_f.sum())
+    if area <= 1.0:
         raise RuntimeError('%s contact area %.3f mm^2' % (tag, area))
-    a_lump = np.zeros_like(a_vec)
-    a_lump[pos] = a_vec[pos] * (area / float(a_vec[pos].sum()))
+    a_node = np.zeros(m.p.shape[1])
+    for k in range(3):
+        np.add.at(a_node, verts[k], area_f / 3.0)
+    zd = np.asarray(ib.nodal_dofs[2]).ravel()
+    if zd.size != a_node.size:
+        raise RuntimeError('nodal z-dofs %d vs vertices %d' % (zd.size, a_node.size))
+    a_lump = np.zeros(ib.N)
+    a_lump[zd] = a_node
     a_lump[np.intersect1d(np.flatnonzero(a_lump > 0.0), fix)] = 0.0
-    active = a_lump > 0.0
+    active = a_lump > 1e-6
     delta = 0.02
     u, iters, ok = None, 0, False
     released = 0
@@ -510,6 +524,7 @@ def sole_contact(m, ib, K, fix, al_elems, sel, Ftarget, tag, kn=2.0e5):
     rec['contact'] = dict(
         area_mm2=round(area, 2), Ftarget_N=round(Ftarget, 2), R_N=round(float(react.sum()), 2),
         p_mean_MPa=float(react.sum() / area), p_max_MPa=float(p.max()),
+        p_max_main_MPa=float(p[area_i >= 0.2 * np.median(area_i)].max()),
         p_p95_MPa=float(np.percentile(p, 95)), cop_x_mm=float(np.sum(react * xs) / np.sum(react)),
         n_active=int(idx.size), n_released=int(released), delta_mm=float(delta), kn_N_per_mm3=kn)
     print(tag, 'pressure', {k: (round(v, 3) if isinstance(v, float) else v) for k, v in rec['contact'].items()}, flush=True)
@@ -526,7 +541,8 @@ def run_foot(h):
         print('bolt boolean failed', ex, flush=True)
         full, xy, bolts = foot_al().union(F.cyl_z(30, 18, 26).cut(F.cyl_z(11, 17.5, 26.5))), [], False
     al = foot_al()
-    s = half(full, y1=55, z0=-1, z1=30, x0=-70, x1=190)
+    # z to 55 keeps the instep tower (top face at z = 50). z = 30 cut that face off.
+    s = half(full, y1=55, z0=-1, z1=55, x0=-70, x1=190)
     meta = dict(part='foot', h_mm=h, mass_al_kg=round(al_mass(al), 4), bolts=bolts, bolt_xy_mm=[(round(a, 2), round(b, 2)) for a, b in xy],
                 BW3_N=round(BW3, 2), FALL_N=round(FALL, 2),
                 note='Half foot, uy=0 on y=0. Steel flange OD60/ID22 x 8 mm on the skin, 6xØ5 shanks on BC Ø46 '

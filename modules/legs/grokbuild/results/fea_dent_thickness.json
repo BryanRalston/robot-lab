@@ -1,0 +1,15 @@
+{
+ "note": "Lateral dent of the 80 mm C3D27 stub. Both ends fixed. Patch |z-L/2|<8 mm and |theta|<18 deg on the OD. Force is the fall or 3 BW in +x. Outside diameter fixed, wall grown inward. Mass uses the M2 tube length.",
+ "femur": [
+  {"t_mm": 1.2, "vm_MPa": 469.29, "SF": 1.072, "patch_mm2": 349.1, "mass_one_kg": 0.1543, "added_both_kg": 0.0},
+  {"t_mm": 1.6, "vm_MPa": 318.39, "SF": 1.58, "patch_mm2": 349.1, "mass_one_kg": 0.2041, "added_both_kg": 0.0995},
+  {"t_mm": 2.0, "vm_MPa": 231.36, "SF": 2.174, "patch_mm2": 349.1, "mass_one_kg": 0.253, "added_both_kg": 0.1973},
+  {"t_mm": 2.4, "vm_MPa": 176.03, "SF": 2.858, "patch_mm2": 349.1, "mass_one_kg": 0.3011, "added_both_kg": 0.2935}
+ ],
+ "tibia": [
+  {"t_mm": 1.2, "vm_MPa": 487.78, "SF": 1.031, "patch_mm2": 314.2, "mass_one_kg": 0.1485, "added_both_kg": 0.0},
+  {"t_mm": 1.6, "vm_MPa": 327.22, "SF": 1.537, "patch_mm2": 314.2, "mass_one_kg": 0.1962, "added_both_kg": 0.0954},
+  {"t_mm": 2.0, "vm_MPa": 236.05, "SF": 2.131, "patch_mm2": 314.2, "mass_one_kg": 0.243, "added_both_kg": 0.189},
+  {"t_mm": 2.4, "vm_MPa": 178.69, "SF": 2.815, "patch_mm2": 314.2, "mass_one_kg": 0.2889, "added_both_kg": 0.2807}
+ ]
+}

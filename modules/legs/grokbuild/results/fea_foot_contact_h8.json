@@ -1,0 +1,85 @@
+{
+ "part": "foot_contact",
+ "h_mm": 8.0,
+ "cases": {
+  "fall_toe": {
+   "vm_max": 234.96278351843017,
+   "vm_p999": 177.26214618162956,
+   "vm_p99": 128.2841191344646,
+   "vm_p50": 30.74796255743432,
+   "at_mm": [
+    33.67,
+    1.08,
+    17.25
+   ],
+   "umax_mm": 1.8720367218930123,
+   "n_elem": 4655,
+   "SF_yield_max": 2.141,
+   "SF_yield_p999": 2.838,
+   "goodman_pulse_p999": 1.404,
+   "goodman_rev_0p52_p999": 1.725,
+   "goodman_pulse_max": 1.059,
+   "goodman_rev_0p52_max": 1.301,
+   "vm_max_2mm_off": 209.74134053954998,
+   "SF_yield_2mm_off": 2.398,
+   "goodman_pulse_2mm_off": 1.186,
+   "goodman_rev_0p52_2mm_off": 1.458,
+   "cg_iters": 368,
+   "converged": true,
+   "contact": {
+    "area_mm2": 727.88,
+    "Ftarget_N": 1957.1,
+    "R_N": 1957.09,
+    "p_mean_MPa": 2.6887585965125766,
+    "p_max_MPa": 177.00916926863817,
+    "p_max_main_MPa": 177.00916926863817,
+    "p_p95_MPa": 155.053290162479,
+    "cop_x_mm": 162.1326924692871,
+    "n_active": 4,
+    "n_released": 25,
+    "delta_mm": 1.6100193711006676,
+    "kn_N_per_mm3": 200000.0
+   }
+  },
+  "fall_heel": {
+   "vm_max": 72.61889886625625,
+   "vm_p999": 55.00297026098237,
+   "vm_p99": 36.27123682339331,
+   "vm_p50": 0.8993900529287746,
+   "at_mm": [
+    -42.85,
+    14.91,
+    3.25
+   ],
+   "umax_mm": 0.041763254749970107,
+   "n_elem": 4655,
+   "SF_yield_max": 6.927,
+   "SF_yield_p999": 9.145,
+   "goodman_pulse_p999": 4.524,
+   "goodman_rev_0p52_p999": 5.559,
+   "goodman_pulse_max": 3.427,
+   "goodman_rev_0p52_max": 4.211,
+   "vm_max_2mm_off": 64.05806080217076,
+   "SF_yield_2mm_off": 7.852,
+   "goodman_pulse_2mm_off": 3.884,
+   "goodman_rev_0p52_2mm_off": 4.773,
+   "cg_iters": 407,
+   "converged": true,
+   "contact": {
+    "area_mm2": 706.23,
+    "Ftarget_N": 1957.1,
+    "R_N": 1957.1,
+    "p_mean_MPa": 2.771203301383233,
+    "p_max_MPa": 58.656391363508256,
+    "p_max_main_MPa": 58.656391363508256,
+    "p_p95_MPa": 52.99758677176011,
+    "cop_x_mm": -44.03169597450341,
+    "n_active": 6,
+    "n_released": 21,
+    "delta_mm": 0.03185394791607015,
+    "kn_N_per_mm3": 200000.0
+   }
+  }
+ },
+ "note": "Unilateral penalty on the toe or heel patch. Flange fixed. Ground approach scaled to the half-model fall load. 3 BW is half of this while the active set stays in compression."
+}

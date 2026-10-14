@@ -1,0 +1,218 @@
+{
+ "part": "foot",
+ "h_mm": 8.0,
+ "mass_al_kg": 0.8703,
+ "bolts": true,
+ "bolt_xy_mm": [
+  [
+   21.61,
+   7.87
+  ],
+  [
+   7.87,
+   21.61
+  ],
+  [
+   -14.78,
+   17.62
+  ],
+  [
+   -21.61,
+   -7.87
+  ],
+  [
+   -7.87,
+   -21.61
+  ],
+  [
+   14.78,
+   -17.62
+  ]
+ ],
+ "BW3_N": 1957.1,
+ "FALL_N": 3914.19,
+ "note": "Half foot, uy=0 on y=0. Steel flange OD60/ID22 x 8 mm on the skin, 6x\u00d85 shanks on BC \u00d846 (3 in the half model) tied through the 6 mm pad. Support is the flange top, not a rigid skin disk. Toe patch x>=165, heel patch x<=-45. Carry uses 241.5 N\u00b7m at 66.5 kg and the 73 mm arm.",
+ "top_skin_fall_toe": {
+  "n": 284,
+  "sxx_mean": -47.43498363147907,
+  "sxx_p95": -19.695405707240628,
+  "szz_mean": -0.9950293806321499
+ },
+ "cases": {
+  "fall_toe": {
+   "vm_max": 252.30900447506457,
+   "vm_p999": 189.84310635450245,
+   "vm_p99": 138.17836597683979,
+   "vm_p50": 34.687272887284905,
+   "at_mm": [
+    33.67,
+    1.08,
+    17.25
+   ],
+   "umax_mm": 2.070644330468076,
+   "n_elem": 4655,
+   "SF_yield_max": 1.994,
+   "SF_yield_p999": 2.65,
+   "goodman_pulse_p999": 1.311,
+   "goodman_rev_0p52_p999": 1.611,
+   "goodman_pulse_max": 0.986,
+   "goodman_rev_0p52_max": 1.212,
+   "vm_max_2mm_off": 224.43393198132492,
+   "SF_yield_2mm_off": 2.241,
+   "goodman_pulse_2mm_off": 1.109,
+   "goodman_rev_0p52_2mm_off": 1.362,
+   "cg_iters": 511,
+   "converged": true
+  },
+  "fall_heel": {
+   "vm_max": 67.08297840520977,
+   "vm_p999": 53.3594495210632,
+   "vm_p99": 38.10229725480175,
+   "vm_p50": 1.388725558119126,
+   "at_mm": [
+    -29.08,
+    12.5,
+    16.5
+   ],
+   "umax_mm": 0.0672759007631944,
+   "n_elem": 4655,
+   "SF_yield_max": 7.498,
+   "SF_yield_p999": 9.427,
+   "goodman_pulse_p999": 4.663,
+   "goodman_rev_0p52_p999": 5.73,
+   "goodman_pulse_max": 3.709,
+   "goodman_rev_0p52_max": 4.558,
+   "vm_max_2mm_off": 57.22936358969894,
+   "SF_yield_2mm_off": 8.789,
+   "goodman_pulse_2mm_off": 4.348,
+   "goodman_rev_0p52_2mm_off": 5.343,
+   "cg_iters": 496,
+   "converged": true
+  },
+  "fall_toe_corner": {
+   "vm_max": 252.113401145163,
+   "vm_p999": 189.77551500511265,
+   "vm_p99": 138.1302908463619,
+   "vm_p50": 34.17553998645677,
+   "at_mm": [
+    33.67,
+    1.08,
+    17.25
+   ],
+   "umax_mm": 2.0620019688294113,
+   "n_elem": 4655,
+   "SF_yield_max": 1.995,
+   "SF_yield_p999": 2.65,
+   "goodman_pulse_p999": 1.311,
+   "goodman_rev_0p52_p999": 1.611,
+   "goodman_pulse_max": 0.987,
+   "goodman_rev_0p52_max": 1.213,
+   "vm_max_2mm_off": 224.3333311012799,
+   "SF_yield_2mm_off": 2.242,
+   "goodman_pulse_2mm_off": 1.109,
+   "goodman_rev_0p52_2mm_off": 1.363,
+   "cg_iters": 510,
+   "converged": true
+  },
+  "bw3_toe": {
+   "vm_max": 126.15450223788395,
+   "vm_p999": 94.92155317749864,
+   "vm_p99": 69.08918298864096,
+   "vm_p50": 17.34363644378046,
+   "at_mm": [
+    33.67,
+    1.08,
+    17.25
+   ],
+   "umax_mm": 1.035322165235432,
+   "n_elem": 4655,
+   "SF_yield_max": 3.987,
+   "SF_yield_p999": 5.299,
+   "goodman_pulse_p999": 2.621,
+   "goodman_rev_0p52_p999": 3.221,
+   "goodman_pulse_max": 1.972,
+   "goodman_rev_0p52_max": 2.424,
+   "vm_max_2mm_off": 112.2169659910396,
+   "SF_yield_2mm_off": 4.482,
+   "goodman_pulse_2mm_off": 2.217,
+   "goodman_rev_0p52_2mm_off": 2.725,
+   "cg_iters": 511,
+   "converged": true
+  },
+  "bw3_heel": {
+   "vm_max": 33.54148920265061,
+   "vm_p999": 26.679724760612363,
+   "vm_p99": 19.051148627278195,
+   "vm_p50": 0.6943627789777298,
+   "at_mm": [
+    -29.08,
+    12.5,
+    16.5
+   ],
+   "umax_mm": 0.03363795038187788,
+   "n_elem": 4655,
+   "SF_yield_max": 14.996,
+   "SF_yield_p999": 18.853,
+   "goodman_pulse_p999": 9.327,
+   "goodman_rev_0p52_p999": 11.461,
+   "goodman_pulse_max": 7.419,
+   "goodman_rev_0p52_max": 9.116,
+   "vm_max_2mm_off": 28.6146817948099,
+   "SF_yield_2mm_off": 17.578,
+   "goodman_pulse_2mm_off": 8.696,
+   "goodman_rev_0p52_2mm_off": 10.686,
+   "cg_iters": 496,
+   "converged": true
+  },
+  "op_carry": {
+   "vm_max": 50.228614468324345,
+   "vm_p999": 39.41450053233865,
+   "vm_p99": 27.630287625013352,
+   "vm_p50": 8.092381542483778,
+   "at_mm": [
+    89.96,
+    40.87,
+    17.12
+   ],
+   "umax_mm": 0.40280849429645227,
+   "n_elem": 4655,
+   "SF_yield_max": 10.014,
+   "SF_yield_p999": 12.762,
+   "goodman_pulse_p999": 6.313,
+   "goodman_rev_0p52_p999": 7.758,
+   "goodman_pulse_max": 4.954,
+   "goodman_rev_0p52_max": 6.088,
+   "vm_max_2mm_off": 44.431008065600366,
+   "SF_yield_2mm_off": 11.321,
+   "goodman_pulse_2mm_off": 5.6,
+   "goodman_rev_0p52_2mm_off": 6.882,
+   "cg_iters": 512,
+   "converged": true
+  },
+  "op_need_1p5": {
+   "vm_max": 65.30759810779442,
+   "vm_p999": 51.24701104401608,
+   "vm_p99": 35.92509446881403,
+   "vm_p50": 10.521771446650636,
+   "at_mm": [
+    89.96,
+    40.87,
+    17.12
+   ],
+   "umax_mm": 0.5237344397873254,
+   "n_elem": 4655,
+   "SF_yield_max": 7.702,
+   "SF_yield_p999": 9.815,
+   "goodman_pulse_p999": 4.856,
+   "goodman_rev_0p52_p999": 5.967,
+   "goodman_pulse_max": 3.81,
+   "goodman_rev_0p52_max": 4.682,
+   "vm_max_2mm_off": 57.76950945156462,
+   "SF_yield_2mm_off": 8.707,
+   "goodman_pulse_2mm_off": 4.307,
+   "goodman_rev_0p52_2mm_off": 5.293,
+   "cg_iters": 512,
+   "converged": true
+  }
+ }
+}
