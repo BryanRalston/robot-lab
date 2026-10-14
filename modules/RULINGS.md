@@ -683,3 +683,9 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
 - Correction to R-046: the RP40s **stay in the shoulder bay** (R-041 thermal basis). The converters-at-board variant is withdrawn.
 - (B) is **booked at +0.077 kg** for both arms (24 V pair from the bay to the forearm). It is conditional on: (1) RL Thermal confirming the 2–4 W board in the forearm without a bulkhead, and (2) Arms CAD-fitting the ø60×12–13 stack in the 13.2 mm slot. If either fails, it returns to me. (A) stays rejected.
 - Reserve is now about 0.22, **below the 0.30 floor**. A short waiver runs to the end of round 13. Robot Lab coordinates at least 0.08 kg of offsets, cited or measured: candidates are the A47 measured fins (the 0.65 kg booking is the top of its range) and cover trims. The freeze is tightened: no additions until the reserve is back to at least 0.30.
+
+## R-048 (2026-10-14) A43 thermal condition (Thermal 63ebe7b)
+- Booked config (R-047, RP40s in the shoulder bay with only the hand board in the forearm): **thermal condition met**, board at ~58 C, d4cca06 bay 71 C. The forearm-RP40 layout stays rejected; it fails in still air and at 2x40 W.
+- The T-029 derate ladder (shell sensor, 60/80/90 C steps) is adopted as a G5 requirement anyway, as a guard. Board parts must be rated >=105 C. Electronics is to cite the RECOM >60 C derate.
+- A43 is still open on one condition: the Arms CAD stack fit.
+- Offsets note: D69 is already booked at +0.65 (R-045), not +0.83. Only savings below 0.65 count, and they must be cited or measured. The reserve is ~0.22 until offsets land.
