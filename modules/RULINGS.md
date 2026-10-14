@@ -700,3 +700,11 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
 - Shoulder pad -0.005 is **held** until the 265 J re-check (R-049). The ID R2 5052 honeycomb cartridge is accepted as the R-049 candidate, subject to that re-check and the Materials grade citation.
 - Reserve is ~0.33 provisional, above the floor. The waiver stays active until A35 and A15 close. The no-additions freeze is lifted back to the R-043 rule (additions >0.02 need a ruling).
 
+
+## R-051 (2026-10-14) Correction to R-048 (Thermal 64b6af8) + Electronics 10107a7
+- R-048's "thermal condition met" is **withdrawn**: the 58 C figure was idle-only. With no derate, the 30 N hold fails both walking (flexor 159 C) and in still air (junction 147 C).
+- A43 forearm board: **conditional pass with a mandatory derate**. The T-029 ladder is a safety function (G5 test plan + software spec). Board parts are rated **125 C** (industrial/AEC-Q100 G1), replacing 105 C. An **independent hardware OT cutoff** is required.
+- HW cutoff (Electronics §16.5: NCP15WF104 NTC to LM2903B-Q1, trip ~110 C, pulls all DRV8874 sleep low): **LATCHING** is ruled in. A trip means the software derate already failed, so it must not auto-retry. Reset is a hand-rail power cycle commanded by the MCU only after the NTC reads <70 C, plus a fault flag readable by the MCU. Electronics confirms the NTC is rated >=125 C. The XMC4300 swap for LAN9252 is accepted, and O-E12 (125 C PHYs) stays open.
+- Ladder: Electronics adopted the tuned 55/70/80/88 ladder. It is **conditional on the Arms grip check** (sustained ~22 N, peak 30 N). Arms reports any continuous-hold target above 22 N.
+- RP40: rail caps follow the graph derate (100% to 60 C). The 11024SFR curve needs RECOM confirmation. The shoulder bay must stay <=60 C, or the rail cap is derated in software.
+- G5 bench thermocouples confirm the [EST] resistances.
