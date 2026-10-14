@@ -17,6 +17,10 @@ P.add_argument('--knee',type=float,default=1.2,help='FALL-mode knee target rad [
 P.add_argument('--hc-plateau',type=float,default=9170.0,help='honeycomb plateau N: gate batch 7050; R4 x1.0 6880, x1.3 8940')
 P.add_argument('--pad-model',default='curve',choices=['curve','plateau'],help='curve: ARPRO 5170 x1.45 (Materials 5f8f149, default); plateau: ID d80df32 constant force (contrast only)')
 P.add_argument('--arm',default='tuck',choices=['tuck'],help='R-057: tuck is permanent for every fall; reach/brace removed, no clutch credit')
+P.add_argument('--tuck',default='R5',choices=['R5','A','B','D','preload'],help='R-065 T-031: R5 (Arms), A/B/D inside-chest-outline candidates (tuck_search.py), preload = R5 + adduction/pitch bias into chest')
+P.add_argument('--preload-Nm',type=float,default=30.0,help='preload torque for --tuck preload [EST]')
+P.add_argument('--forearm-crush-N',type=float,default=0.0,help='T-031(c): forearm crush element plateau N (0 = none)')
+P.add_argument('--forearm-crush-stroke',type=float,default=0.030,help='forearm element stroke m [EST]')
 P.add_argument('--hc-stroke',type=float,default=0.038,help='usable stroke m (Materials fd46ad8 lot-tested band 38-42 mm; gate 38)')
 P.add_argument('--spike',type=float,default=1.0,help='start-spike factor over the first 2 mm (2.2 = un-pre-crushed core sensitivity)')
 P.add_argument('--area-cm2',type=float,default=109.0)
@@ -42,6 +46,8 @@ def nominal():
     for s in 'lr':
         for j,v in (('hip_pitch',-0.25),('knee',0.5),('ankle_pitch',-0.25),('elbow',-0.3)): d.qpos[m.jnt_qposadr[m.joint(f'{s}_{j}').id]]=v
     mujoco.mj_forward(m,d); lo=min(d.geom_xpos[g][2]-0.02 for g in footg); d.qpos[2]-=lo-0.0005; mujoco.mj_forward(m,d); return d.qpos.copy()
+if A.forearm_crush_N>0:
+    for g in ('l_forearm','r_forearm','l_hand','r_hand'): m.geom_contype[m.geom(g).id]=0; m.geom_conaffinity[m.geom(g).id]=0
 q0=nominal()
 GRID=[(gx,gz) for gx in np.linspace(-PAD['face']/2,PAD['face']/2,3) for gz in np.linspace(-PAD['faceh']/2,PAD['faceh']/2,3)]
 def pad_points(side):   # world points of the outer pad face (undeformed) and outward normal
@@ -56,6 +62,7 @@ def pad_law(c):
     if A.pad_model=='curve': return float(np.interp(c/PAD['t'],EPS,SIG))*1.45*A.area_cm2*1e-4 + (KD*(c-0.95*PAD['t']) if c>0.95*PAD['t'] else 0.)
     F=PAD['Fp']*min(c/RAMP,1.0)*ANGF[0]*(A.spike if (A.pad=='hc' and c<=RAMP) else 1.0)
     return F+KD*(c-PAD['s']) if c>PAD['s'] else F
+TUCKS=dict(R5=(-5,-60,-20,-110),A=(0,0,0,0),B=(5,0,0,0),D=(5,-30,10,-20),preload=(-5,-60,-20,-110))   # deg; A/B/D from tuck_search.py, Arms to confirm
 def fall_targets(q,side,side_only=True):  # side=+1 falling to robot's left (+y)
     q=q.copy(); S='l' if side>0 else 'r'; O='r' if side>0 else 'l'
     for s in 'lr':
@@ -67,13 +74,13 @@ def fall_targets(q,side,side_only=True):  # side=+1 falling to robot's left (+y)
     if True:   # R-057 permanent tuck, both arms on forward falls
         D=math.radians
         for SS,sg in ((('l',1),('r',-1)) if not side_only else ((S,side),)):
-            for j,v in (('shoulder_roll',D(-5)*sg),('shoulder_yaw',D(-60)*sg),('shoulder_pitch',D(-20)),('elbow',D(-110))): q[m.jnt_qposadr[m.joint(f'{SS}_{j}').id]]=v   # Arms R5 tuck, 8.6 mm clear (R mirrored)
+            for j,v in zip(('shoulder_roll','shoulder_yaw','shoulder_pitch','elbow'),TUCKS[A.tuck]): q[m.jnt_qposadr[m.joint(f'{SS}_{j}').id]]=D(v)*(sg if j in ('shoulder_roll','shoulder_yaw') else 1)   # Arms R5 tuck, 8.6 mm clear (R mirrored)
     return q
-DIRS={'L':(0,1.),'R':(0,-1.),'LB':(-0.7071,0.7071),'F':(1.,0.)}
+DIRS={'L':(0,1.),'R':(0,-1.),'LB':(-0.7071,0.7071),'LF':(0.7071,0.7071),'RF':(0.7071,-0.7071),'F':(1.,0.)}
 LEG=lambda S: np.linalg.norm(d.xpos[m.body(S+'_thigh').id]-d.xpos[m.body(S+'_foot').id])
 def run(dirn,J,rng):
-    nominal(); qt=q0.copy(); push=np.array([*DIRS[dirn],0.])*J/0.1; side=1 if DIRS[dirn][1]>=0 else -1; fwd=dirn=='F'
-    t_det=None; t_rel=None; ang_unknown=False; tau_g=0.; FT=None; leg0=leg1=None; Warm=0.; ang0=None; angpk=None; bypass=False; t_fm=None; t_imp=None; com_trig=None; com_imp=None; Wsh=0.; Woth=0.; Fpk=0.; cmax=0.; cen=np.zeros(2); cw=0.; prev_c={}
+    nominal(); qt=q0.copy(); push=np.array([*DIRS[dirn],0.])*J/0.1; side=1 if DIRS[dirn][1]>=0 else -1; fwd=dirn in ('F','LF','RF') and A.dirs.startswith('F')
+    t_det=None; t_rel=None; fc_max=0.; ang_unknown=False; tau_g=0.; FT=None; leg0=leg1=None; Warm=0.; ang0=None; angpk=None; bypass=False; t_fm=None; t_imp=None; com_trig=None; com_imp=None; Wsh=0.; Woth=0.; Fpk=0.; cmax=0.; cen=np.zeros(2); cw=0.; prev_c={}
     E0=None; T=4.0 if not A.smoke else 2.5; f6=np.zeros(6)
     for k in range(int(T/dt)):
         t=d.time; com=d.subtree_com[1].copy()
@@ -88,7 +95,10 @@ def run(dirn,J,rng):
             if t>1.0 and t_det is None and (abs(roll)>10 or abs(cp)>0.20 or abs(pitch)>10 or abs(cpx)>0.25): t_det=t; com_trig=com[2]; leg0=0.5*(LEG('L')+LEG('R'))
             if t_det is not None and t>=t_det+A.latency and not A.no_fallmode: t_fm=t; t_rel=t+(A.release_s if A.carry else 0.)
             if t_rel is not None and t>=t_rel and qt is not FT: FT=fall_targets(q0,side,not fwd); qt=FT
-        else: tau=kp*(qt[qa]-d.qpos[qa])-kd*d.qvel[va]
+        else:
+            tau=kp*(qt[qa]-d.qpos[qa])-kd*d.qvel[va]
+            if A.tuck=='preload':
+                for s_,sg in (('l',1),('r',-1)): tau[ai(s_+'_shoulder_roll')]-=A.preload_Nm*sg; tau[ai(s_+'_elbow')]-=A.preload_Nm
         d.ctrl[:]=np.clip(tau,-lim,lim); d.xfrc_applied[:]=0
         if 1.0<=t<1.1: d.xfrc_applied[1,:3]=push
         if A.carry and (t_rel is None or t<t_rel):   # P-042 20 kg hook carry: 98 N down per hand until released
@@ -112,6 +122,15 @@ def run(dirn,J,rng):
             if ang0 is None: ang0=a
             if Ftot>=Fpk: angpk=a
         Fpk=max(Fpk,Ftot); Fpad_now=Ftot
+        if A.forearm_crush_N>0:   # T-031(c): constant-force element on the chest-facing (torso +x) side of each forearm; native forearm/hand floor contact disabled
+            tx=d.xmat[m.body('torso').id].reshape(3,3)[:,0]; T=A.forearm_crush_stroke
+            for g in ('l_forearm','r_forearm'):
+                gi=m.geom(g).id; Rg=d.geom_xmat[gi].reshape(3,3); bb=m.geom_bodyid[gi]
+                for e in (-0.8,0,0.8):
+                    p=d.geom_xpos[gi]+Rg[:,2]*m.geom_size[gi][1]*e+tx*(m.geom_size[gi][0]+T); c=-p[2]
+                    if c>0:
+                        Fc=A.forearm_crush_N/3*min(c/RAMP,1.0)+(KD*(c-T) if c>T else 0.)
+                        d.xfrc_applied[bb,2]+=Fc; d.xfrc_applied[bb,3:]+=np.cross(p-d.xipos[bb],[0,0,Fc]); fc_max=max(fc_max,c)
         for i in range(d.ncon):   # positive (compressive) work of all other ground contacts except feet
             cn=d.contact[i]; gs={cn.geom1,cn.geom2}
             if floor not in gs or gs&set(footg): continue
@@ -130,7 +149,7 @@ def run(dirn,J,rng):
     share=Wsh/(Wsh+Woth) if Wsh+Woth>0 else None; M=Fpk*ARM
     fs_rad=C0/(Fpk+2*M/DPW) if Fpk>0 else None; fs_ax=C0/(2*M/DPW+0.44*Fpk) if Fpk>0 else None
     crouch=(com_trig-com_imp) if (com_trig is not None and com_imp is not None) else None
-    return dict(shoulder_pitch_gear_peak_Nm=round(tau_g,1),angle_beyond_25_unknown=ang_unknown,spike=A.spike,hc_stroke_mm=A.hc_stroke*1e3,t_release=t_rel,carry=A.carry,arm_used='tuck',dir=dirn,J=round(J,1),pad_mm=A.pad,fell=bool(t_imp is not None),t_detect=t_det,t_fallmode=t_fm,t_impact=t_imp,
+    return dict(forearm_crush_max_mm=round(fc_max*1e3,1),tuck=A.tuck,shoulder_pitch_gear_peak_Nm=round(tau_g,1),angle_beyond_25_unknown=ang_unknown,spike=A.spike,hc_stroke_mm=A.hc_stroke*1e3,t_release=t_rel,carry=A.carry,arm_used='tuck',dir=dirn,J=round(J,1),pad_mm=A.pad,fell=bool(t_imp is not None),t_detect=t_det,t_fallmode=t_fm,t_impact=t_imp,
         crouch_at_impact_m=(leg0-leg1) if (leg0 and leg1) else None,com_drop_at_impact_m=crouch,E_sh_J=round(Wsh,1),E_other_J=round(Woth,1),shoulder_share=share,pad_peak_N=round(Fpk),pad_crush_max_mm=round(cmax*1e3,1),
         bottomed=(cmax>0.75*PAD['t']) if A.pad_model=='curve' else (cmax>PAD['s']),beyond_data_unknown=bool(A.pad_model=='curve' and cmax>0.75*PAD['t']),impact_angle_deg=ang0,peak_angle_deg=angpk,bypass_contact=bypass,pad_model=A.pad_model,arm=A.arm,W_arm_backdrive_J=round(Warm,1),M_bearing_Nm=round(M,1),fs_radial=fs_rad,fs_axial=fs_ax,contact_centroid_mm=(cen/cw*1e3).round(1).tolist() if cw>0 else None)
 JD=lambda o: o.item() if hasattr(o,"item") else str(o)
@@ -151,6 +170,7 @@ if ok:
     S.update(stroke_max_mm=max(r['pad_crush_max_mm'] for r in ok),F_max=max(r['pad_peak_N'] for r in ok),bypass=sum(r['bypass_contact'] for r in ok),unknown=sum(r['beyond_data_unknown'] for r in ok),
       angle_p95=float(np.percentile([r['impact_angle_deg'] or 0 for r in ok],95)),centroid_abs_p95_mm=float(np.percentile([max(map(abs,r['contact_centroid_mm'] or [0,0])) for r in ok],95)))
     S.update(gear_pitch_max=max(r['shoulder_pitch_gear_peak_Nm'] for r in ok),angle_unknown=sum(r['angle_beyond_25_unknown'] for r in ok))
-    if A.dirs=='F': S['PASS']=bool(S['gear_pitch_max']<=369.0)
-    else: S['PASS']=bool(S['angle_p95']<=15.0 and S['angle_unknown']==0 and S['share_p95']<=0.40 and S['M_max']<=GATE_M and S['F_max']<=GATE_F and S['crouch_min']>=0.15 and S['bottomed']==0 and S['bypass']==0 and S['unknown']==0 and S['centroid_abs_p95_mm']<=(15.0 if A.pad=='hc' else PAD['face']*500))
+    Ecap=PAD['Fp']*0.93*PAD['s'] if A.pad=='hc' else None; S.update(E_cap_worst15_J=Ecap,E_cap_gate_ok=bool(Ecap is None or Ecap>=292.0))
+    if A.dirs.startswith('F'): S['PASS']=bool(S['gear_pitch_max']<=369.0)
+    else: S['PASS']=bool(S['gear_pitch_max']<=369.0 and S['E_cap_gate_ok'] and S['angle_p95']<=15.0 and S['angle_unknown']==0 and S['share_p95']<=0.40 and S['M_max']<=GATE_M and S['F_max']<=GATE_F and S['crouch_min']>=0.15 and S['bottomed']==0 and S['bypass']==0 and S['unknown']==0 and S['centroid_abs_p95_mm']<=(15.0 if A.pad=='hc' else PAD['face']*500))
 print(json.dumps(S,default=JD)); fo and fo.write(json.dumps(S,default=JD)+'\n')

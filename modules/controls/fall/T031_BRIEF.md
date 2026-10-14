@@ -1,6 +1,46 @@
 # T-031 brief: forward fall with permanent R5 arm tuck vs shoulder-pitch gear rating (R-057 / D77)
 Grok Build, **bryan PC ff639f5a only, never DESKTOP-B115PVV**. CPU MuJoCo on sim/v3. Same script and setup as T-030 (`T030_BRIEF.md` §5): `modules/controls/fall/t030_pushfall.py --dirs F`.
 
+## R-065 update (2026-10-14): remedy order (a) → (b) → (c), diagonals, gate ≤ 369 N·m everywhere
+Candidate search: `tuck_search.py` → `tuck_search.json` (sim/v3 FK + mj_geomDistance, standing and FALL-mode crouch).
+- **R5 tuck:** forearm/hand front at torso x 272 mm vs chest front 110 mm (≈ 160 mm proud), clearance 8.6 mm. Fails R-058 and the outline.
+
+### (a) Tuck inside the chest outline (primary, zero mass)
+175 adducted poses (roll ≤ +5°) in a coarse grid pass "front ≤ 110 mm and ≥ 10 mm clear of torso/pelvis/thighs/head". Picks:
+
+| id | roll / yaw / pitch / elbow (deg, L; R mirrors roll & yaw) | front x mm | min clearance mm (crouched) |
+|---|---|---|---|
+| A | 0 / 0 / 0 / 0 (arms straight down at the sides) | 38 | 57.5 |
+| **B** | **+5 / 0 / 0 / 0** | 38 | **76.4** |
+| D | +5 / −30 / +10 / −20 | 37 | 74.1 |
+
+- **Arms must confirm all three** with model_v4 plus the real covers. sim/v3 has no wrist fairing (R-059: wide axis parallel to chest, ~124 × 70–76 mm), no R5 pad cartridge, no carry hardware. Ranges are fine (pitch +60, roll −15…+180 L).
+- **Side-fall conflict:** in a side fall these poses put the hanging forearm/hand lateral of the hip, so it lands under the hip and loads shoulder roll. Use (a) for forward falls only and R5 for side. The diagonal needs whichever passes both, and T-031 must check it.
+- **Hand estimate (a):** the chest lands first, so the arm only sees its own inertia.
+  - Gear torque ≈ ½·m_arm·a·r_com + ½·τ_motor (reflected rotor 0.441 ≈ arm I ≈ 0.43 kg·m² [EST]). m_arm 6.05 kg, r_com ≈ 0.25 m hanging, motor peak ~167.
+  - **≤ 369 needs torso deceleration ≤ ≈ 38 g**, i.e. ≥ ≈ 42 mm of chest stopping distance at 5.6 m/s.
+  - No chest crush element exists, so this **depends on the chest contact** and T-031 measures it. Likely marginal.
+
+### (b) Forearm preload against the chest (intentional contact on defined pads)
+R5 angles plus a commanded adduction/elbow bias (`--tuck preload --preload-Nm 30` [EST]). Ground force on the forearm then goes through the pad into the chest. Gear torque ≈ the preload plus the arm's own inertia share (as in (a)), **estimated ≤ ≈ 200–250 N·m [EST]**. Needs Arms/ID to define the forearm and chest contact pads, and R-058 waived for that intentional contact.
+
+### (c) Forearm crush element (last, mass to Arbiter)
+Gear torque = F_c × 0.15 m lever, so **F_c ≤ 2.46 kN**. The energy it can take is small (2.46 kN × 30 mm ≈ 74 J). On its own it only delays (b): after it bottoms out the forearm rests on the chest. Modelled as `--forearm-crush-N 2400 --forearm-crush-stroke 0.030` (native forearm/hand contacts disabled).
+
+### Batches (bryan PC, in this order; 50 runs × each direction F, LF, RF; impulse 40–80 N·s)
+```
+python $F --dirs F,LF,RF --tuck B       --out $O/t031_a_B.jsonl
+python $F --dirs F,LF,RF --tuck A       --out $O/t031_a_A.jsonl
+python $F --dirs F,LF,RF --tuck D       --out $O/t031_a_D.jsonl
+python $F --dirs F,LF,RF --tuck B --carry --out $O/t031_a_B_carry.jsonl
+python $F --dirs F,LF,RF --tuck preload --out $O/t031_b_preload.jsonl
+python $F --dirs F,LF,RF --tuck R5 --forearm-crush-N 2400 --out $O/t031_c_crush.jsonl
+python $F --dirs F,LF,RF --tuck R5      --out $O/t031_R5_ref.jsonl
+```
+(all with `--pad hc --hc-plateau 6950 --hc-stroke 0.045`.)
+- Pass: `gear_pitch_max` ≤ 369 N·m in every run. Stop at the first remedy that passes, but run its carry variant too.
+- **Box smoke** (one 80 N·s run each, untuned, **not results**): F/A 417, F/preload 269, F/crush 1281, F+LF+RF/B 1566 N·m. That's noisy and the controller is untuned, so the PC batch decides.
+
 ## Rating (limit to show)
 - Shoulder pitch: CSG-25-100 (v3/analysis/parts.py: rated 87, repeated peak 204, **momentary peak 369 N·m**, ratchet 650). One-off fall = momentary.
 - **Pass: max shoulder-pitch gear torque ≤ 369 N·m** in every run. Also report the count above 204 (repeated peak) for life, and above 650 (ratcheting).

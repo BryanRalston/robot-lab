@@ -1,6 +1,22 @@
 # T-030 brief: A44 side-fall push-fall batch (Grok Build, **bryan PC ff639f5a only, never DESKTOP-B115PVV**)
 Owner: RL Controls. Gate for R-042 (A44 provisional). CPU only, MuJoCo ≥3.1, numpy. No jax, no training. Expected wall time is a few minutes per batch: smoke runs take about 0.2–0.6 s each on the box.
 
+## 0000. R-065 update (2026-10-14). Supersedes earlier gates where they differ
+- **Pad energy gate: ≥ 292 J at worst case AND at the 15° limit** (≥ 10 % over 265 J).
+  - Capacity = F_low × 0.93 × stroke. At 6.95 kN that requires **stroke ≥ 292 / (6.95 kN × 0.93) = 45.2 mm** (44.3 mm if the 0.93 is normalised to the 0.98 head-on ratio).
+  - The current 38 mm gives 245.6 J (×0.93), so it fails the gate until ID/Materials' longer core lands.
+  - The stroke is parameterised: `--hc-stroke <m>`. Summary fields: `E_cap_worst15_J`, `E_cap_gate_ok`. Peak stays ≤ 9.17 kN / 550 N·m.
+- **Shoulder-pitch ≤ 369 N·m momentary is now a pass criterion in every mode** (`gear_pitch_max`).
+- **Diagonals added:** LB (rear-left) was already in; LF (front-left) added.
+- **Gate batches (stroke placeholder 0.045 until ID's number lands):**
+```
+python $F --pad hc --hc-plateau 6950 --hc-stroke 0.045 --dirs L,R,LB,LF --out $O/t030_hc6950_gate_tuck.jsonl
+python $F --pad hc --hc-plateau 6950 --hc-stroke 0.045 --dirs L,R,LB,LF --carry --out $O/t030_hc6950_gate_carry.jsonl
+python $F --pad hc --hc-plateau 9170 --hc-stroke 0.045 --dirs L,R,LB,LF --out $O/t030_hc9170_peak_tuck.jsonl
+```
+- The side-fall tuck stays R5. A/B/D (T-031) put the forearm under the hip in a side fall, so they're not used for side falls until T-031 picks a pose.
+- **Box smoke** (single untuned runs, not results): LF with R5 logged 374 N·m on the pitch gear, which is above 369. The diagonal is a real risk.
+
 ## 000. R-057 + Materials fd46ad8 update (2026-10-14). **Supersedes §00 and §0 where they differ**
 - **Reach mode and all clutch-slip credit removed (R-057, D77: no shoulder clutch).** The R5 tuck is permanent for every fall, and hands-first braces are not allowed. `--arm` now accepts only `tuck`. Forward falls move to **T-031** (`T031_BRIEF.md`).
 - **Honeycomb (Materials R042_EPP_SHOULDER.md Part 3):**

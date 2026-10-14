@@ -1,0 +1,257 @@
+{
+ "chest_front_mm": 110.0,
+ "R5_tuck": {
+  "front_x_mm": 271.8,
+  "clear_mm": 8.6
+ },
+ "n_ok": 165,
+ "candidates": [
+  {
+   "roll": 20,
+   "yaw": -60,
+   "pitch": 0,
+   "elbow": 0,
+   "front_x_mm": 45.2,
+   "clear_mm": 89.1
+  },
+  {
+   "roll": 20,
+   "yaw": -60,
+   "pitch": 20,
+   "elbow": 0,
+   "front_x_mm": -72.1,
+   "clear_mm": 89.1
+  },
+  {
+   "roll": 20,
+   "yaw": -60,
+   "pitch": 20,
+   "elbow": -30,
+   "front_x_mm": -63.0,
+   "clear_mm": 89.1
+  },
+  {
+   "roll": 20,
+   "yaw": -60,
+   "pitch": 40,
+   "elbow": 0,
+   "front_x_mm": -168.9,
+   "clear_mm": 89.1
+  },
+  {
+   "roll": 20,
+   "yaw": -60,
+   "pitch": 40,
+   "elbow": -30,
+   "front_x_mm": -161.8,
+   "clear_mm": 89.1
+  },
+  {
+   "roll": 20,
+   "yaw": -60,
+   "pitch": 40,
+   "elbow": -60,
+   "front_x_mm": -150.2,
+   "clear_mm": 89.1
+  },
+  {
+   "roll": 20,
+   "yaw": -60,
+   "pitch": 60,
+   "elbow": 0,
+   "front_x_mm": -240.8,
+   "clear_mm": 89.1
+  },
+  {
+   "roll": 20,
+   "yaw": -60,
+   "pitch": 60,
+   "elbow": -30,
+   "front_x_mm": -236.5,
+   "clear_mm": 89.1
+  },
+  {
+   "roll": 20,
+   "yaw": -60,
+   "pitch": 60,
+   "elbow": -60,
+   "front_x_mm": -224.7,
+   "clear_mm": 89.1
+  },
+  {
+   "roll": 20,
+   "yaw": -60,
+   "pitch": 60,
+   "elbow": -90,
+   "front_x_mm": -208.5,
+   "clear_mm": 89.1
+  },
+  {
+   "roll": 20,
+   "yaw": -30,
+   "pitch": 0,
+   "elbow": 0,
+   "front_x_mm": 38.0,
+   "clear_mm": 89.1
+  },
+  {
+   "roll": 20,
+   "yaw": -30,
+   "pitch": 20,
+   "elbow": 0,
+   "front_x_mm": -72.1,
+   "clear_mm": 89.1
+  }
+ ],
+ "adducted_n": 175,
+ "adducted": [
+  {
+   "roll": 5,
+   "yaw": -60,
+   "pitch": 0,
+   "elbow": 0,
+   "front_x_mm": 45.2,
+   "clear_mm": 76.4
+  },
+  {
+   "roll": 5,
+   "yaw": -45,
+   "pitch": 0,
+   "elbow": 0,
+   "front_x_mm": 41.7,
+   "clear_mm": 76.4
+  },
+  {
+   "roll": 5,
+   "yaw": -30,
+   "pitch": 0,
+   "elbow": 0,
+   "front_x_mm": 38.0,
+   "clear_mm": 76.4
+  },
+  {
+   "roll": 5,
+   "yaw": 0,
+   "pitch": 0,
+   "elbow": 0,
+   "front_x_mm": 38.0,
+   "clear_mm": 76.4
+  },
+  {
+   "roll": 5,
+   "yaw": 30,
+   "pitch": 0,
+   "elbow": 0,
+   "front_x_mm": 38.0,
+   "clear_mm": 76.4
+  },
+  {
+   "roll": 0,
+   "yaw": -60,
+   "pitch": 0,
+   "elbow": 0,
+   "front_x_mm": 45.2,
+   "clear_mm": 57.5
+  },
+  {
+   "roll": 0,
+   "yaw": -45,
+   "pitch": 0,
+   "elbow": 0,
+   "front_x_mm": 41.7,
+   "clear_mm": 57.5
+  },
+  {
+   "roll": 0,
+   "yaw": -30,
+   "pitch": 0,
+   "elbow": 0,
+   "front_x_mm": 38.0,
+   "clear_mm": 57.5
+  },
+  {
+   "roll": 0,
+   "yaw": 0,
+   "pitch": 0,
+   "elbow": 0,
+   "front_x_mm": 38.0,
+   "clear_mm": 57.5
+  },
+  {
+   "roll": 0,
+   "yaw": 30,
+   "pitch": 0,
+   "elbow": 0,
+   "front_x_mm": 38.0,
+   "clear_mm": 57.5
+  },
+  {
+   "roll": -5,
+   "yaw": -60,
+   "pitch": 0,
+   "elbow": 0,
+   "front_x_mm": 45.2,
+   "clear_mm": 29.5
+  },
+  {
+   "roll": -5,
+   "yaw": -45,
+   "pitch": 0,
+   "elbow": 0,
+   "front_x_mm": 41.7,
+   "clear_mm": 23.2
+  }
+ ],
+ "crouched_check": {
+  "A": {
+   "pose": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "front_x_mm": 38.0,
+   "clear_mm": 57.5
+  },
+  "B": {
+   "pose": [
+    5,
+    0,
+    0,
+    0
+   ],
+   "front_x_mm": 38.0,
+   "clear_mm": 76.4
+  },
+  "C": {
+   "pose": [
+    0,
+    0,
+    20,
+    -45
+   ],
+   "front_x_mm": 89.4,
+   "clear_mm": 59.0
+  },
+  "D": {
+   "pose": [
+    5,
+    -30,
+    10,
+    -20
+   ],
+   "front_x_mm": 36.6,
+   "clear_mm": 74.1
+  },
+  "R5": {
+   "pose": [
+    -5,
+    -60,
+    -20,
+    -110
+   ],
+   "front_x_mm": 271.8,
+   "clear_mm": 8.6
+  }
+ }
+}
