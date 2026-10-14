@@ -726,3 +726,11 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
 - Trims: the knee grille is merged into P-026, so the trims total -0.236, booked **-0.118 at half credit** (was -0.110).
 - Shin fairing add-back is **deferred** until D69 rev B is independently verified (R-052 condition 1); about 0.41 of the reserve depends on that. When it's added back, louvred CF (+0.198 pair) is preferred. The shin stays bare in the baseline for now.
 - Reserve is ~0.73 provisional (~0.32 if rev B fails).
+
+## R-055 (2026-10-14) Arms R5 (7f0ff7a)
+- T4 reworded to 30 N peak / 22 N sustained, **accepted** (not a TARGETS change: the hook carry needs ~13.2 N/finger and passes). Ladder: 60/80/90 baseline; the tuned 55/70/80/88 is allowed (still-air ~15 N covers the hook carry).
+- D71 is **accepted as conditional**: 7013 A (+0.05/side) if T-030 gives <=550 N·m, otherwise 8016 A, which comes back to me with its mass.
+- Shoulder-pitch clutch (<=300 N·m) is **not booked** yet; it needs a cited mass. Interim: the fall controller tucks the arms in forward falls (Controls, T-030/T-031). The hands-first brace is not allowed until the clutch is adopted.
+- Net +0.006 is **accepted** (inside the 0.02 cap).
+- **Forearm blocker:** still 40 mm over after the Arms repack. Decision: **D73 compaction first**, owned by Actuators with Arms, time-boxed to Arms R6. If D73 can't recover >=40 mm, the **fallback is a forearm lengthened by <=40 mm** (270 to 310 mm). That needs: ID proportion sign-off, Controls reach/inertia re-run, and an Arms mass delta (its own ruling). D74 at ø90 is rejected for the ø70 forearm.
+- Hand board fit conditions accepted (axial connectors, >=ø21 centre hole, <=12.5 mm stack); Electronics designs to them. This closes the A43 fit condition, provisionally until CAD.
