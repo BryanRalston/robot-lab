@@ -4,6 +4,8 @@ Coordinator: Robot Lab (9598b055). Phase 1 agents: Actuators, Legs, Arbiter.
 Owners added 2026-10-14: RL Arms & Hands (8cae84bd), RL Materials (89a94197), RL Torso & Power (067740e6), RL Controls (c5cee5de), RL Electronics (4066f15e), RL Thermal (2ae2d096), RL Test & Reliability (e8f75580), RL Industrial Design (51504f48).
 
 ## Rules
+
+**MANDATORY: follow [COMMS_RULES.md](COMMS_RULES.md) (Bryan, 2026-10-20) for all bot-to-bot messaging.**
 - Each module owns its folder in modules/<name>/: SPEC.md, checks, CAD, results.
 - CONTRACTS.md is the only source of truth for interfaces and budgets: mass, peak/continuous power, envelope, mounting pattern, bus/data, torque/speed.
 - No module changes another module's files or a contract on its own. It proposes the change in modules/PROPOSALS.md (who, what, why, numbers). If the affected owner disagrees, the Arbiter rules.
