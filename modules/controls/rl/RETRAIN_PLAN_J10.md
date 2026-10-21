@@ -151,3 +151,7 @@ Missing data (marked EST in the sim):
   - Box smoke, job-4 carry policy, 20 s walk: about 46.7 °C peak, ~17 min to 120 °C at that RMS [measured on the box model, not hardware].
   - That is a 20 s run; sustained duty stays governed by CARRY_LIMIT / R-096.
 - 13/13 harness tests.
+
+## 10. Arbiter R-123 (2026-10-21): sim nominal 68.0 kg
+- R-123 (d) chain: reserve −1.470 → credible ≈ 67.97 kg; "Controls should use 68.0 nominal" (RULINGS.md R-123). The DR range stays 65.0–68.5 (R-118).
+- `make_model.py` MASS_TARGET 67.1 → **68.0** (MJX 68.001 kg; stand settles z 1.1495, up 0.999). `eval_box.py` nominal gate is 68.0; the corner gates at 65.0 and 68.5 are unchanged. Supersedes the 67.1 in §8. 13/13 tests pass.

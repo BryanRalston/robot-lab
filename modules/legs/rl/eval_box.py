@@ -112,7 +112,7 @@ def policy_action(obs, weights, mean, std, clip=OBS_CLIP):
     return np.tanh(h[:30])
 
 
-MASS_NOMINAL = 67.1   # Arbiter R-118 (gates); training DR 65.0-68.5
+MASS_NOMINAL = 68.0   # Arbiter R-123 (gates; was 67.1 R-118); training DR 65.0-68.5
 MASS_CORNERS = (65.0, 68.5)   # R-118: walk and P-042 carry are also gated at the DR corners
 P042 = (0.32, 0.0, 0.415)   # R-117 carry gate point, torso frame
 LEGS_PAYLOAD = (0.25, 0.0, 0.10)

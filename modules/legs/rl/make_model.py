@@ -17,7 +17,7 @@ OUT_ROUGH = os.path.join(HERE, 'humanoid_mjx_rough.xml')
 OUT_REF = os.path.join(HERE, 'ref_cycle.npz')
 OUT_GAINS = os.path.join(HERE, 'gains.npz')
 
-MASS_TARGET = 67.1  # Arbiter R-118: sim nominal (robustness setting; T2 limit 66.5 stands)
+MASS_TARGET = 68.0  # Arbiter R-123 (was 67.1, R-118): sim nominal (robustness setting; T2 limit 66.5 stands)
 LIM_R1 = {
     'hip_yaw': 70.0, 'hip_roll': 204.0, 'hip_pitch': 350.0,
     'knee': 258.0, 'ankle_pitch': 311.0, 'ankle_roll': 177.0,
