@@ -74,3 +74,36 @@ def test_wbc_hook():
         def add_nullspace_task(self, name, row, rate, weight): got.append((row.shape, rate))
     s.repulsive_tasks(H())
     assert got and all(g[0] == (m.nv,) and g[1] > 0 for g in got)
+
+def test_panels_follow_thighs_and_id_worst_collides():
+    m, d, s = _mk(); ft = np.zeros(6)
+    def g(**kw):
+        d.qpos[7:] = 0; _set(m, d, **kw); mujoco.mj_kinematics(m, d)
+        return mujoco.mj_geomDistance(m, d, m.geom('ko_panel_l').id, m.geom('ko_panel_r').id, 0.3, ft)
+    assert g() > 0.10
+    assert g(l_hip_pitch=-100, r_hip_pitch=-100, l_hip_roll=-20, r_hip_roll=20) < 0.003  # ID df1e9e3 worst
+    assert g(l_hip_yaw=45, r_hip_yaw=-45) < 0.003
+
+def test_bilateral_soft_limit():
+    r = np.radians
+    ok, q, why = S.bilateral_soft_limit({'l_hip_pitch': r(-100), 'r_hip_pitch': r(-100), 'l_hip_roll': r(-20), 'r_hip_roll': r(20)})
+    assert not ok and min(-q['l_hip_roll'], q['r_hip_roll']) <= 1e-9
+    ok, q, _ = S.bilateral_soft_limit({'l_hip_yaw': r(45), 'r_hip_yaw': r(-45)})
+    assert not ok and np.degrees(q['l_hip_yaw'] - q['r_hip_yaw']) <= 80 + 1e-6
+    assert S.bilateral_soft_limit({'l_hip_pitch': r(-100), 'r_hip_pitch': r(-100), 'l_hip_roll': r(-20)})[0]  # one leg only
+
+def test_leg_rows_stop_bilateral_approach():
+    m, d, s = _mk(); dt = 1e-3
+    legs = s.arm_dofs['legs']
+    for _ in range(1500):
+        qd = np.zeros(m.nv)
+        for sd, sg in (('l', 1), ('r', -1)):
+            qd[m.jnt_dofadr[m.joint(f'{sd}_hip_pitch').id]] = -2.0
+            qd[m.jnt_dofadr[m.joint(f'{sd}_hip_roll').id]] = -1.0 * sg
+        s.filter(np.zeros(m.nv), 'crouch')
+        for row, lb in s.leg_constraint_rows():  # WBC stand-in: min-norm on the hip dofs
+            e = lb - row @ qd; a = row[legs]
+            if e > 0 and a @ a > 1e-12: qd[legs] += a * e / (a @ a)
+        _step(m, d, qd)
+    dmin = min(x for p, x, _ in s.last if p.kind == 'panel')
+    assert dmin >= 0.005  # >= warn

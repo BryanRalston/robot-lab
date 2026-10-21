@@ -171,6 +171,30 @@
       2,
       0
     ],
+    "thigh_panels": {
+      "ref": "ID P-023 rev 8 df1e9e3 (hip_skirt_r8_thigh_panel.stl, convex hull, left leg, standing mm)",
+      "stl": "modules/design/cad/covers/hip_skirt_r8_thigh_panel.stl",
+      "mm": [
+        10,
+        5,
+        3
+      ],
+      "mm_note": "target/warn/trip L<->R panel gap; ID gate fails at < 3 mm",
+      "leg_dofs": [
+        "hip_yaw",
+        "hip_roll",
+        "hip_pitch"
+      ]
+    },
+    "bilateral_soft_limit": {
+      "ref": "ID df1e9e3 smallest fix; backstop to the panel distance pair",
+      "pitch_flex_deg": -35.0,
+      "pitch_note": "ID: pitch <= -40 on both legs; 5 deg margin",
+      "inward_roll_both_max_deg": 0.0,
+      "inward_roll_note": "sim/ID sign: inward (adduction) = l_hip_roll < 0, r_hip_roll > 0. At both pitches <= -35, min(inward_l, inward_r) <= 0 (not both inward)",
+      "toe_out_sum_max_deg": 80.0,
+      "toe_out_note": "toe-out = +l_hip_yaw, -r_hip_yaw; ID fails at both 45 (sum 90); 10 deg margin"
+    },
     "payload": {
       "ref": "P-042 (carry_balance_r1, legs scenarios CARRY_POS)",
       "body": "torso",

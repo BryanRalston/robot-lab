@@ -47,6 +47,17 @@ DEFAULT = dict(
     thresholds_mm=dict(ref='T&R 925d72e', walk=[15, 10, 5], carry=[15, 10, 5], stand=[15, 10, 5],
                        crouch=[20, 15, 10], sit=[20, 15, 10], kneel=[20, 15, 10], lowering=[20, 15, 10]),
     plume_mm=[5, 2, 0],
+    thigh_panels=dict(ref='ID P-023 rev 8 df1e9e3 (hip_skirt_r8_thigh_panel.stl, convex hull, left leg, standing mm)',
+                      stl='modules/design/cad/covers/hip_skirt_r8_thigh_panel.stl', mm=[10, 5, 3],
+                      mm_note='target/warn/trip L<->R panel gap; ID gate fails at < 3 mm',
+                      leg_dofs=['hip_yaw', 'hip_roll', 'hip_pitch']),
+    bilateral_soft_limit=dict(ref='ID df1e9e3 smallest fix; backstop to the panel distance pair',
+                              pitch_flex_deg=-35.0, pitch_note='ID: pitch <= -40 on both legs; 5 deg margin',
+                              inward_roll_both_max_deg=0.0,
+                              inward_roll_note='sim/ID sign: inward (adduction) = l_hip_roll < 0, r_hip_roll > 0. '
+                                               'At both pitches <= -35, min(inward_l, inward_r) <= 0 (not both inward)',
+                              toe_out_sum_max_deg=80.0,
+                              toe_out_note='toe-out = +l_hip_yaw, -r_hip_yaw; ID fails at both 45 (sum 90); 10 deg margin'),
     payload=dict(ref='P-042 (carry_balance_r1, legs scenarios CARRY_POS)', body='torso', pos=[0.32, 0.0, 0.415],
                  size_full=[0.212, 0.274, 0.212],
                  size_note='sim has no payload geom; box sized from the sim inertia (20 kg, diag 0.2/0.15/0.2) [DERIVED]',
@@ -95,6 +106,16 @@ def build_model(cfg=None, xml_text=None):
         g = (f'<geom name="ko_shroud_{side.lower()}" type="mesh" mesh="m_shroud_{side.lower()}" contype="0" conaffinity="0" '
              f'group="5" mass="0"/>' + _box(f'ko_plume_{side.lower()}', plo, phi, THIGH0, sg))
         x = re.sub(rf'(<body name="{side}_thigh"[^>]*>)', lambda mm: mm.group(1) + g, x, count=1)
+    tp = cfg.get('thigh_panels')
+    if tp:
+        import trimesh
+        V = np.asarray(trimesh.load(ROOT / tp['stl']).vertices) / 1000.0
+        for side, sg in (('L', 1), ('R', -1)):
+            vv = ' '.join(f'{a - THIGH0[0]:.4f} {sg * (b - THIGH0[1]):.4f} {c - THIGH0[2]:.4f}' for a, b, c in V)
+            assets += f'<mesh name="m_panel_{side.lower()}" vertex="{vv}"/>'
+            g = (f'<geom name="ko_panel_{side.lower()}" type="mesh" mesh="m_panel_{side.lower()}" contype="0" '
+                 f'conaffinity="0" group="5" mass="0"/>')
+            x = re.sub(rf'(<body name="{side}_thigh"[^>]*>)', lambda mm: mm.group(1) + g, x, count=1)
     if '<asset>' in x: x = x.replace('<asset>', '<asset>' + assets, 1)
     else: x = re.sub(r'(<worldbody>)', lambda mm: f'<asset>{assets}</asset>' + mm.group(1), x, count=1)
     m = mujoco.MjModel.from_xml_string(x)
@@ -145,9 +166,13 @@ class Supervisor:
                 for kd in ('shroud', 'plume'):
                     s.pairs.append(Pair(f'payload:{kd}_{ss}', m.geom('ko_payload').id, m.geom(f'ko_{kd}_{ss}').id,
                                         kd, 'payload'))
+        if s.cfg.get('thigh_panels'):
+            s.pairs.append(Pair('panel_l:panel_r', m.geom('ko_panel_l').id, m.geom('ko_panel_r').id, 'panel', 'legs'))
         s.arm_dofs = {sd: np.array([m.jnt_dofadr[m.joint(f'{sd}_{j}').id] for j in ARM_J]) for sd in 'lr'}
         dt = 1.0 / s.cfg['loop_hz']; pl = s.cfg['plume']
         s.timers = {sd: TransitTimer(dt, pl['transit_max_s'], pl['window_s'], pl['window_frac']) for sd in 'lr'}
+        s.arm_dofs['legs'] = np.array([m.jnt_dofadr[m.joint(f'{sd}_{j}').id] for sd in 'lr'
+                                       for j in s.cfg.get('thigh_panels', {}).get('leg_dofs', [])], int)
         s._jp1 = np.zeros((3, m.nv)); s._jp2 = np.zeros((3, m.nv)); s._ft = np.zeros(6)
         s.last = []; s.events = []; s.mode = 'stand'; s.t = 0.0
 
@@ -156,6 +181,7 @@ class Supervisor:
         mode = mode or s.mode
         if kind == 'chest': return (s.cfg['chest']['margin'],) * 3
         if kind == 'plume': return tuple(v / 1000 for v in s.cfg['plume_mm'])
+        if kind == 'panel': return tuple(v / 1000 for v in s.cfg['thigh_panels']['mm'])
         return tuple(v / 1000 for v in s.cfg['thresholds_mm'][mode])
 
     def distances(s, kin=True):
@@ -202,7 +228,7 @@ class Supervisor:
         for p, dist, row in dl:
             if p.kind == 'plume' and p.side in plume_ok and plume_ok[p.side]: continue  # walk swing transit inside budget
             tg, wn, tr = s.thresholds(p.kind)
-            if p.kind != 'chest' and dist < wn: s.events.append((round(s.t, 3), 'trip' if dist < tr else 'warn', p.name, dist))
+            if p.kind not in ('chest',) and dist < wn: s.events.append((round(s.t, 3), 'trip' if dist < tr else 'warn', p.name, dist))
             if row is not None and p.side != 'payload': act.append((p, dist, row, tg + s.cfg.get('aim_offset', 0.0)))
         for _ in range(s.cfg['passes']):
             hit = False
@@ -217,10 +243,20 @@ class Supervisor:
             if not hit: break
         return qd
 
+    def leg_constraint_rows(s):
+        """Bilateral panel pair as a WBC inequality on the hip dofs: [(row (nv), lower bound on d_dot)]. The arm
+        filter does not move legs; the WBC (or filter(..., legs=True)) applies it."""
+        out = []
+        for p, dist, row in s.last:
+            if p.side != 'legs' or row is None: continue
+            lb = s._lb(dist, s.thresholds('panel')[0])
+            if lb is not None: out.append((row, lb))
+        return out
+
     def repulsive_tasks(s, hook: WBCHook | None = None):
         tasks = []
         for p, dist, row in s.last:
-            if row is None or p.side == 'payload': continue
+            if row is None or p.side in ('payload', 'legs'): continue
             tg = s.thresholds(p.kind)[0] + s.cfg.get('aim_offset', 0.0); di = tg + s.cfg['influence']
             if dist >= di: continue
             rate = s.cfg['repulse_gain'] * (di - dist); w = (di - dist) / s.cfg['influence']
@@ -235,11 +271,28 @@ class Supervisor:
         for k, v in target.items(): s.d.qpos[s.m.jnt_qposadr[s.m.joint(k).id]] = v
         mujoco.mj_kinematics(s.m, s.d); res = []
         for p in s.pairs:
-            if p.kind == 'plume' or p.side == 'payload': continue
+            if p.kind == 'plume' or p.side in ('payload', 'legs'): continue
             dd = mujoco.mj_geomDistance(s.m, s.d, p.arm_geom, p.obs_geom, 1.0, s._ft)
             res.append((dd - s.thresholds(p.kind, mode)[2], p.name))
         s.d.qpos[:] = save; mujoco.mj_kinematics(s.m, s.d)
         w = min(res); return w[0] >= 0, w
+
+def bilateral_soft_limit(q: dict, cfg=None):
+    """Coupled both-leg soft limit (ID df1e9e3 backstop). q: joint name -> rad. Returns (ok, clamped q, reasons).
+    Clamp moves the leg with the smaller violation back to the limit."""
+    c = (cfg or load_cfg())['bilateral_soft_limit']; q = dict(q); why = []
+    deg = lambda n: np.degrees(q.get(n, 0.0))
+    if deg('l_hip_pitch') <= c['pitch_flex_deg'] and deg('r_hip_pitch') <= c['pitch_flex_deg']:
+        il, ir = -deg('l_hip_roll'), deg('r_hip_roll')
+        if min(il, ir) > c['inward_roll_both_max_deg']:
+            why.append('both legs inward roll in flexion')
+            if il <= ir: q['l_hip_roll'] = -np.radians(c['inward_roll_both_max_deg'])
+            else: q['r_hip_roll'] = np.radians(c['inward_roll_both_max_deg'])
+    tl, tr = deg('l_hip_yaw'), -deg('r_hip_yaw')
+    if tl + tr > c['toe_out_sum_max_deg']:
+        why.append('toe-out sum'); ex = tl + tr - c['toe_out_sum_max_deg']
+        q['l_hip_yaw'] = np.radians(tl - ex / 2); q['r_hip_yaw'] = -np.radians(tr - ex / 2)
+    return not why, q, why
 
 def write_config_entry():
     c = json.loads(CFG.read_text())

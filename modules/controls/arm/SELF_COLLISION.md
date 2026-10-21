@@ -89,3 +89,38 @@ POSE_PRONE, KNEEL_W1 and side-fall hip roll +15. Minimum slack 24.2 mm (tuck B, 
 4. The walk policy arm offsets aren't in the repo; walk ranges here are assumed. No retrain (the supervisor is the backstop).
 5. Payload box size is derived from the inertia (no P-042 box drawing); the **hook is PENDING T&R** (no geometry). The CAD hand replaces the sim/v3 hand box when available.
 6. The plume prism is modelled as its bounding box (conservative).
+
+## Bilateral thigh-panel keep-out (ID P-023 rev 8, df1e9e3)
+- **Geometry:** ID's `hip_skirt_r8_thigh_panel.stl`, the convex hull of the R150 arc, φ 35–60, y 60–200. It is a mesh geom on
+  each thigh (right mirrored), so it follows hip yaw, roll and pitch. The hull fills the arc chord, so it is **conservative vs ID's
+  point-cloud gap**: at ID's worst pose (pitch −100, roll −20 both, inward) ID gets 0.1 mm and this model gets −10.2 mm.
+- **Distance pair `panel_l:panel_r`:** target/warn/trip **10 / 5 / 3 mm** (ID's gate fails below 3 mm). The pair acts on the hip
+  dofs of both legs, not the arms. `Supervisor.leg_constraint_rows()` returns (row, lower bound on d_dot) for the WBC to use
+  as an inequality (the same velocity-damping law). The arm filter never moves the legs. A test drives both legs into
+  flexion + adduction with the rows applied: gap ≥ warn.
+- **Sign convention (sim/v3 = ID):** inward (adduction) is `l_hip_roll < 0` and `r_hip_roll > 0`. Toe-out is `+l_hip_yaw` and
+  `−r_hip_yaw`. ID's right leg is the y-mirror of the left.
+- **Coupled soft limit `bilateral_soft_limit()` (backstop):**
+  - (a) when both hip pitches are ≤ −35° (ID's −40 with a 5° margin), the two legs may not both roll inward;
+  - (b) the toe-out sum must stay ≤ 80° (ID fails at 45 + 45; 10° margin).
+  - Clamping moves the leg with the smaller violation, or splits the toe-out excess between the legs.
+- **The rule alone is not sufficient, so the distance pair is the keep-out** (`bilateral_panel_check.json`):
+  - It misses **extension + toe-out** collisions: sim worst −26.9 mm at pitch +27/+32, toe-out 43.5/31 (sum 74.5), right leg
+    inward 10.6. Over ID's mirrored ranges, 589 of 10 000 samples are below trip while the rule passes them.
+  - It also over-blocks: 889 of 20 000 sim samples are blocked but clear.
+
+| check | min L↔R panel gap | ≥ 10 mm target |
+|---|---|---|
+| stand, safe-sit crouch, KNEEL_W1, KNEEL_POSE, POSE_KNEEL, chest-lower start (POSE_HANDS) / end (POSE_PRONE), kneel_hold A–D, sit 0.45 m, fall tuck B knee drop, diagonal tuck B ± waist yaw 45, deep crouch hip −105 | **≥ 120 mm** (distance cap) for all | ✔, and the soft limit passes for all |
+| walk/carry leg ranges [ASSUMED: per leg hip −60…+20, roll ±5, yaw ±10, knee 0–90], 10 000 | **54.9 mm** | ✔ |
+| sim/v3 joint ranges, legs independent, 20 000 | −26.9 mm (0.42 % < 10) | ✗, not a controller pose |
+| ID's mirrored Legs ranges (inward 20, toe-out 45), 10 000 | −66.0 mm (13.3 % < 10) | ✗, not a controller pose |
+- **No controller pose violates the keep-out**, so there is no conflict to report to ID. All controller poses are symmetric
+  with roll = yaw = 0, and waist yaw doesn't move the thighs.
+- **Notes for ID/Legs:**
+  - Extension + toe-out + inward roll also closes the panels in the hull model; ID's 255-pose grid had only pitch ≤ 40.
+    ID should re-check with the real panel surface.
+  - The sim/v3 hip yaw range is −35…45 on BOTH sides, not mirrored, so right toe-out is capped at 35 in sim. Legs to confirm
+    the real right-yaw range.
+- Approximations: the crouch, sit and tuck-B leg angles are approximate [approx in the JSON], but all are roll = yaw = 0, where the
+  gap stays ≥ 120 mm at any pitch tried.

@@ -1,0 +1,157 @@
+{
+ "thresholds_mm": [
+  10.0,
+  5.0,
+  3.0
+ ],
+ "poses": [
+  {
+   "pose": "stand",
+   "gap_mm": 120.0,
+   "ge_target": true,
+   "soft_limit_ok": true
+  },
+  {
+   "pose": "safe-sit crouch (pelvis 0.844, ~hip -0.6/knee 1.2 [approx])",
+   "gap_mm": 120.0,
+   "ge_target": true,
+   "soft_limit_ok": true
+  },
+  {
+   "pose": "KNEEL_W1",
+   "gap_mm": 120.0,
+   "ge_target": true,
+   "soft_limit_ok": true
+  },
+  {
+   "pose": "KNEEL_POSE",
+   "gap_mm": 120.0,
+   "ge_target": true,
+   "soft_limit_ok": true
+  },
+  {
+   "pose": "POSE_KNEEL",
+   "gap_mm": 120.0,
+   "ge_target": true,
+   "soft_limit_ok": true
+  },
+  {
+   "pose": "chest-lower start POSE_HANDS",
+   "gap_mm": 120.0,
+   "ge_target": true,
+   "soft_limit_ok": true
+  },
+  {
+   "pose": "chest-lower end POSE_PRONE",
+   "gap_mm": 120.0,
+   "ge_target": true,
+   "soft_limit_ok": true
+  },
+  {
+   "pose": "kneel_hold A upright",
+   "gap_mm": 120.0,
+   "ge_target": true,
+   "soft_limit_ok": true
+  },
+  {
+   "pose": "kneel_hold B sit-back",
+   "gap_mm": 120.0,
+   "ge_target": true,
+   "soft_limit_ok": true
+  },
+  {
+   "pose": "kneel_hold C hands-knees",
+   "gap_mm": 120.0,
+   "ge_target": true,
+   "soft_limit_ok": true
+  },
+  {
+   "pose": "kneel_hold D forearms-knees",
+   "gap_mm": 120.0,
+   "ge_target": true,
+   "soft_limit_ok": true
+  },
+  {
+   "pose": "sit 0.45 m seat (hip -1.57/knee 1.57 [approx])",
+   "gap_mm": 120.0,
+   "ge_target": true,
+   "soft_limit_ok": true
+  },
+  {
+   "pose": "fall tuck B (knee drop, hip -1.0/knee 1.6 [approx])",
+   "gap_mm": 120.0,
+   "ge_target": true,
+   "soft_limit_ok": true
+  },
+  {
+   "pose": "diagonal tuck B + waist yaw 45",
+   "gap_mm": 120.0,
+   "ge_target": true,
+   "soft_limit_ok": true
+  },
+  {
+   "pose": "diagonal tuck B + waist yaw -45",
+   "gap_mm": 120.0,
+   "ge_target": true,
+   "soft_limit_ok": true
+  },
+  {
+   "pose": "deep crouch hip -105 (sim limit)",
+   "gap_mm": 120.0,
+   "ge_target": true,
+   "soft_limit_ok": true
+  }
+ ],
+ "sweeps": {
+  "sim_v3_joint_ranges_independent": {
+   "n": 20000,
+   "min_mm": -26.9,
+   "worst": {
+    "l_hip_yaw": 43.5,
+    "l_hip_roll": 2.1,
+    "l_hip_pitch": 27.1,
+    "r_hip_yaw": -31.0,
+    "r_hip_roll": 10.6,
+    "r_hip_pitch": 32.3,
+    "l_knee": 90.5,
+    "r_knee": 62.7
+   },
+   "frac_below_target": 0.0042,
+   "trip_but_rule_ok": 29,
+   "rule_blocks_but_clear": 889
+  },
+  "walk_carry_assumed": {
+   "n": 10000,
+   "min_mm": 54.9,
+   "worst": {
+    "l_hip_pitch": 0.6,
+    "r_hip_pitch": -0.6,
+    "l_hip_roll": -4.9,
+    "r_hip_roll": 3.6,
+    "l_hip_yaw": 8.7,
+    "r_hip_yaw": -8.0,
+    "l_knee": 65.3,
+    "r_knee": 12.4
+   },
+   "frac_below_target": 0.0,
+   "trip_but_rule_ok": 0,
+   "rule_blocks_but_clear": 249
+  },
+  "ID_legs_ranges_mirrored": {
+   "n": 10000,
+   "min_mm": -66.0,
+   "worst": {
+    "l_hip_pitch": 27.1,
+    "r_hip_pitch": 27.1,
+    "l_hip_roll": -14.5,
+    "r_hip_roll": 14.5,
+    "l_hip_yaw": 41.7,
+    "r_hip_yaw": -41.7
+   },
+   "frac_below_target": 0.1331,
+   "trip_but_rule_ok": 589,
+   "rule_blocks_but_clear": 1387
+  }
+ },
+ "note": "sim/v3 limits: l_hip_roll -12..15, r_hip_roll -15..12 (inward 12 max each); hip yaw -35..45 on BOTH sides (not mirrored), so right toe-out is limited to 35 in sim. ID used mirrored Legs ranges (inward 20, toe-out 45)."
+}
