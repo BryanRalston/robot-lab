@@ -817,3 +817,7 @@ Retention at 1.2 m/s:
 ## D82 (R-122) Actuators mass-down rows and fastener BOM (`r122_actuators.py`)
 - Row 3 housing pocketing: R-122 basis 0.78 kg is one-of-each; robot is 2.221 kg. Candidate-region estimate −0.316 full (−0.354 with Thermal-gated tube windows), half credit −0.158. Ankle ring fins −0.265 only if Thermal accepts. `results/R122_ACTUATORS.md`.
 - Fastener BOM (`results/FASTENER_BOM.md`): 1234 screws, 2.08 kg steel; 384 non-structural, Ti64 swap −0.091 kg (−0.074 without drive mounts). Flag: legs counted 0.82 vs 0.30 kg booked (+0.5 kg risk).
+
+## D83 (Job 9 c) Knee release body = rev B fins + R-116 boss; material 7075-T6
+- `cad/knee_twin_housing_release_r116.step` (`knee_release_r116.py`): rev B + Ø23 boss + Ø12×6 bore. Rev C (trimmed fins) is withdrawn; it is not a housing rev.
+- 7075-T6 one-piece (cad_mass booking). Fin mass at 7075 is +0.008 kg robot vs the 6061 figure; flagged for the Arbiter, not booked. `results/JOB9_KNEE_GEOMETRY.md`.

@@ -1,0 +1,19 @@
+{
+ "valid": true,
+ "solids": 1,
+ "vol_mm3": 143034,
+ "d_vol_vs_revb_mm3": 6,
+ "mass_7075_kg": 0.4019,
+ "mass_6061_kg": 0.3862,
+ "bbox_x": [
+  -102.38,
+  102.38
+ ],
+ "boss": {
+  "d": 23,
+  "depth_x": "84..92 (85..92 proud + 1 sink)",
+  "bore": 12,
+  "bore_depth": 6,
+  "zc": 21.545
+ }
+}
