@@ -212,3 +212,52 @@ Script: `modules/thermal/r131_rev3_knee_window.py`. Basis as in rev 2: 2 × 6.0 
 - Thermal: **PASS at duty**, conditional on ≥ 0.3 m/s walking flow, the derate for standing and continuous carry, and keeping the foil and bare inner face.
 - Femur bond and shell: PASS.
 - **Outer surface: FAIL (touch and snag) until a guard or touch cap and ID acceptance.**
+
+## Rev 4: R-143 knee fin touch guard (T&R 447aa8e) — 2026-10-21 08:51 EDT
+Script: `modules/thermal/r131_rev4_guard.py`.
+- **Basis:** rev 3 model; 2 × 6.0 W carry, duty 0.6; 35 °C.
+- **Guard:** per T&R spec. PC 1.5 mm, ≥ 10 mm air above the fin tips, ≥ 60 % open slotted face, open at both ends.
+- **Guard geometry:** no Actuators guard CAD exists yet, so I used the T&R geometry.
+- **Effect of the guard:** −15 % channel flow walking, −5 % standing. The guard intercepts 40 % of the fin radiation; how much of that is lost depends on the guard's inner-face ε.
+
+| knee plate (per knee) | UA h 8 basis | UA walk 0.2 / 0.4 m/s | UA standing | drive base at duty: h 8 / walk / standing (°C) | plate + guard mass (g) |
+|---|---|---|---|---|---|
+| rev 3 bare | 0.210 | 0.143 / 0.231 | 0.124 | 64.3 / 62–74 / 77.8 | 47.5 + 0 |
+| rev 3 + guard | **0.189** (T&R 0.183–0.193 confirmed) | 0.118 / 0.197 | 0.110 | 66.7 / 66–79 / **81.4 FAIL** | 47.5 + 18 |
+| **fins 13 → 18 mm** + guard | **0.246** | 0.152 / 0.260 | 0.135 | 60.9 / 60–72 / **75.5** | 58.3 + 20.3 |
+| fins 20 mm + guard | 0.269 | 0.166 / 0.285 | 0.144 | 59.1 / 58–70 / 73.5 | 63.5 + 20.3 |
+| window L 130 mm + guard | 0.246 | 0.127 / 0.212 | 0.122 | 60.9 / 64–77 / 78.2 | 84.7 total |
+| W 60 mm, 10 fins + guard | 0.236 | 0.151 / 0.252 | 0.137 | 61.7 / 60–72 / 74.9 | 77.4 total (needs Legs width) |
+
+Notes on the table:
+- **Minimum to reach UA ≥ 0.21 on the h 8 basis:** fins 15 mm (≈ +4 g).
+- **Physical walking/standing UA** never reaches 0.21 without large growth. The controlling case is standing still under carry: drive base ≤ 80 °C needs fins ≥ 16 mm, and ≤ 75.5 needs 18 mm.
+- **Window length:** a longer window helps little. Channel air heating limits walking UA, and natural-convection h falls as L^-0.25.
+
+**Guard face temperature** (fins ≈ base −1 K; guard heated by fin radiation plus warm channel air; outer face h 10 walking / 4 standing, + 6 radiation):
+
+| guard inner face | walk duty | stand duty | stand carry at derate (base 85) | vs 45 °C (48 − 3) |
+|---|---|---|---|---|
+| black PC, ε 0.9 | 44.1 | **53.0** | **54.8** | **FAIL** standing |
+| **PC with low-ε inner face, ε ≤ 0.1** (vacuum-metallised or Al-foil lined; the outer face stays cover colour, ε 0.9) | 37.6 | 40.0 | 40.3 | **PASS, 5–7 K margin** |
+
+- **Standoff:** keep 10 mm. More standoff lowers the guard temperature only slightly once the inner face is low-ε, and it adds protrusion.
+- **Guard material:** polymer (PC) is preferred to metal. Its contact threshold is higher and its outer face cannot spread fin heat.
+
+**Recommendation (minimum that passes everything):**
+- Fins 18 mm, still 8 at 6 mm pitch.
+- PC guard, low-ε inner face, 10 mm standoff, ≥ 60 % open.
+- UA: 0.246 on the h 8 basis (+17 % over 0.21); physical 0.15–0.26 walking, 0.135 standing.
+- Drive base at duty ≤ 75.5 °C in all cases.
+- Guard face ≤ 40.3 °C, including derate-limited carry.
+
+**Mass:**
+- per knee +10.8 g fins and +2.3 g guard growth, on top of T&R's 18 g guard;
+- robot +0.026 kg over T&R's booked +0.04, so **+0.066 kg** vs rev 3.
+
+**Envelope:** fin tips + 10 mm + 1.5 mm = **29.5 mm beyond the L51 box** (T&R 24.5). The R-143 §2a/§2c sweeps must use this.
+
+**Firmware:**
+- With the low-ε guard, no touch cap is needed. The drive derate (75 → 85 → 90 °C) stays.
+- **Fallback if the guard inner face is black (ε 0.9):** a touch cap with drive base ≤ 58 °C whenever the robot is standing still or in contact modes. That gives a guard face ≤ 45 °C, and it roughly halves the standing carry duty [EST].
+- Femur bond: unchanged, 68.2–69.1 °C.
