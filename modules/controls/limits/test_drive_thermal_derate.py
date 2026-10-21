@@ -284,3 +284,12 @@ def test_prone_lower_guard_speed_and_force():
     assert not g.ok and g.violations[-1][1] == 'chest_force'
     g2 = ProneLowerGuard(); g2.observe(0.5, True, 0.3, 100.0)
     assert not g2.ok and g2.violations[0][1] == 'contact_speed'
+
+
+def test_safe_stop_zmp_k_scoped_to_kneel_mode():
+    import json, os
+    here = os.path.dirname(os.path.abspath(__file__))
+    c = json.load(open(os.path.join(here, '..', 'controller_config.json')))['drive_thermal_derate']
+    assert c['safe_stop_zmp_k'] == [40.0, 12.0]
+    src = open(os.path.join(here, 'kneel_prone_wbc.py')).read()
+    assert 'ZMP_K = (12.0, 7.0)' in src

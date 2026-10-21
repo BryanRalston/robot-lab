@@ -63,6 +63,11 @@
       "ankle_pitch": 8.0,
       "default": 7.0
     },
-    "kneel_enabled": false
+    "kneel_enabled": false,
+    "safe_stop_zmp_k": [
+      40.0,
+      12.0
+    ],
+    "safe_stop_zmp_k_note": "CoM-xy PD gains (kx, dx) applied ONLY in the kneel/safe-stop moves (R-146b). Global WBC balance gains are unchanged (stock kx 2.5; zmp_k unset outside safe-stop)."
   }
 }

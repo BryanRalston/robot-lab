@@ -137,7 +137,7 @@ lowering to prone/chest-pad (or the robot keeps derated torque, i.e. HOLD_DERATE
 | Run | P1a CoM shift | CoM x reached (target 0.14) | P1b toe pivot |
 |---|---|---|---|
 | ZMP_K (12,7), T1A 0.6 | 0.6 s | 0.089 m | falls backward |
-| ZMP_K (40,12), T1A 0.8 (new default) | 0.8 s (target reached ~1.0 s) | 0.136 m | ankle hits −0.79 stop at t≈1.5 s, CoM falls back to −0.01 m, unstable |
+| ZMP_K (40,12), T1A 0.8 (kneel/safe-stop mode only, `safe_stop_zmp_k` in controller_config; global WBC unchanged) | 0.8 s (target reached ~1.0 s) | 0.136 m | ankle hits −0.79 stop at t≈1.5 s, CoM falls back to −0.01 m, unstable |
 | same, FOOT_PITCH 0.3 / 0.15 | 0.8 s | 0.136 m | same failure |
 | same, ANKLE_MIN −1.1 (diagnostic only) | 0.8 s | 0.136 m | CoM stays forward (0.11 m) but knee hits its limit and the feet bounce: unstable |
 

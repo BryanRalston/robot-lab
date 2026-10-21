@@ -33,7 +33,14 @@ T1A = 0.8                  # P1a: flat-foot CoM shift to the toe line (before th
 T1, T2, T3, T4 = 1.0, 0.5, 0.5, 0.6   # T1: P1b pivot + lower
 KP_SOFT = 0.05
 XK = 0.0
-ZMP_K = (40.0, 12.0)
+ZMP_K = (12.0, 7.0)          # fallback only; kneel/safe-stop mode uses controller_config safe_stop_zmp_k
+def _safe_stop_zmp_k():
+    import json
+    try:
+        c = json.load(open(os.path.join(HERE, '..', 'controller_config.json')))['drive_thermal_derate']
+        return tuple(c['safe_stop_zmp_k'])
+    except (OSError, KeyError):
+        return ZMP_K
 POSE_KNEEL = {'hip_pitch': -0.3, 'knee': 1.6, 'ankle_pitch': 0.6, 'waist_pitch': 0.2, 'shoulder_pitch': -1.3}
 POSE_HANDS = {'hip_pitch': -0.9, 'knee': 1.5, 'ankle_pitch': 0.6, 'waist_pitch': 0.4, 'shoulder_pitch': -1.4, 'elbow': 0.3}
 POSE_PRONE = {'hip_pitch': 0.0, 'knee': 0.3, 'ankle_pitch': 0.5, 'waist_pitch': 0.0, 'shoulder_pitch': -0.3, 'elbow': 1.8}
@@ -62,7 +69,7 @@ def run(frames=None, fps=25, tail=1.0):
     m = _model(); d = mujoco.MjData(m)
     ctrl = WalkController(m); ctrl.stand_only = True
     ctrl.initialize(d)
-    ctrl.zmp_k = ZMP_K
+    ctrl.zmp_k = _safe_stop_zmp_k()   # safe-stop mode only; set on this controller instance
     names = list(ctrl.act_name)
     leg = np.array([any(n.endswith(j) for j in LEG) for n in names])
     nominal = ctrl.tau_max.copy(); der = np.where(leg, S.DERATE * nominal, nominal); ctrl.tau_max = der.copy()
