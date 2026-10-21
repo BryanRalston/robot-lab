@@ -326,3 +326,20 @@ Cap: |τ_knee| ≤ min(derate, 50 N·m) at knee ≥ 125° in stop/fall states. D
   - 49 N·m: chest 0.26–0.30 m/s, ≤1.7 kN. Hand plant ≈1.2 kN. FAIL.
   - Details are in kneel_toe_r19_dr_results.json.
 - **Latch:** stays at 82 °C interim per R-151. The final N comes from Thermal's drive model; the earlier 81/82 estimates are superseded.
+
+## Robot Lab CONTRACT: R-146a TUCK knees stay ON, drop LAST (2026-10-21) + D99 stop (63f9a24)
+- **Contract:** in TUCK the knee drives stay enabled through the fall (`fall_mode.knee_fall_torque`): flexion-only damping ramp **90→120°** (B 0→172 N·m·s/rad), clipped to the derate and to **≤ 50 N·m at ≥ 120°**; any MO=0 drops the knees **last** (`DriveDerateSupervisor.mo_off_order`, `knee_drives_on` set on entry to TUCK). Swing-leg tuck is the side-fall default (no hip-roll damping).
+- **Departures, noted:** ramp moved from the ruled 95→125 (then 95→123 for D98) to **90→120** because D99 contact is 130° and the cap starts 10° before it at 120°. B_max raised 60 → **172**: with 60, kneel_tip hit 49.2 J (8/90 > 44.1).
+- **D99 knee stop:** contact 130°, curve 130/0 … 143.6/790 N·m (bottoming 95.8 J), unload ×0.34, armature J(q) table with **0.1 kg·m² at ≥ 130°**. Same 90-case set (3 cases × leans × mass 65/68/68.5 × J ×0.8/1.0/1.2). `knee_stop_d99.py` → `knee_stop_d99_results.json`.
+
+| mode (k ×1.0 / ×1.3 [EST]) | E max per knee (J) | knee speed at 130° max (rad/s) | peak stop τ | knee max | > 44.1 J | > 57 J |
+|---|---|---|---|---|---|---|
+| **contract: knees on (ramp+cap), all else tripped** | **38.5 / 38.1** | 3.80 / 3.80 | 508 / 575 | 138.5° / 137.4° | **0/90** | 0 |
+| contract + other drives holding (derated) | 28.1 / 26.8 | 3.54 | 425 / 474 | 137.1° | 0 | 0 |
+| **knee drive tripped (MO=0), no guarantee** | **81.0 / 79.5** | **6.17** | 662 / 744 | 141.2° | 72 / 69 | 18 / 20 |
+| tripped + short-brake b_m 0.05 [EST] | 4.6 / 4.2 | 0.96 | 166 / 179 | 132.9° | 0 | 0 |
+| tripped + short-brake b_m 0.025 [EST] | 13.0 / 11.7 | 1.47 | 301 / 319 | 135.0° | 0 | 0 |
+
+- Per case (crouch_collapse / forward_fall / kneel_tip) maxima, contract k1.0: 11.0 / 28.5 / 38.5 J.
+- **Answer to Actuators:** with knee drives on (contract), sim max knee speed at 130° is **3.80 rad/s** over the set (vs 5.58 rad/s ≈ 44.1 J gate) — this is a sim result on the 90-case set, not a proof for all falls. With a **tripped knee drive** the speed reaches **6.17 rad/s / 81 J** (18/90 > 57 J), so nothing can be guaranteed there.
+- **Short-brake** (phase short on trip) is **not modelled or specified** anywhere in the repo (Electronics has only a regen chopper/TVS). Estimated as B_sb(q) = 2 · b_m · N(q)², N(q) = 2π·arm(q)/5 mm (D98 linkage), b_m = Kt·Ke/R [EST 0.05 N·m·s/rad/motor] → knee B ≈ 338 (60°) / 127 (123°) / 64 (133°) N·m·s/rad; it would hold ≤ 0.96–1.47 rad/s at contact. Feasibility/current limits are Electronics' call.

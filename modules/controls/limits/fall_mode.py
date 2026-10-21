@@ -17,3 +17,25 @@ def swing_leg_tuck(targets, swing_side):
     if swing_side:
         t[f'{swing_side}_knee'] = SWING_KNEE_RAD; t[f'{swing_side}_hip_pitch'] = SWING_HIP_PITCH_RAD
     return t
+
+
+# Robot Lab CONTRACT (R-146a TUCK): knee drives stay ON through the fall, pre-stop damping ramp 95->123 deg
+# (B 0->60 N.m.s/rad), |tau| <= 50 N.m at >= 123 deg (D98 contact 133 deg), knee drives are the LAST to drop.
+import math as _m, json as _j, os as _o
+_C = _j.load(open(_o.path.join(_o.path.dirname(_o.path.abspath(__file__)), 'soft_limits.json')))['knee_fall_ramp']
+RAMP_START_RAD, RAMP_END_RAD, RAMP_B = _m.radians(_C['start_deg']), _m.radians(_C['end_deg']), _C['B_max_Nms_per_rad']
+KNEE_DROP_LAST = True
+
+
+def knee_fall_torque(q, qdot, derated_lim):
+    """Fall/TUCK knee command: damping on flexion only, ramped, clipped to derate and the stop-zone cap."""
+    from soft_limits import knee_torque_limit
+    B = RAMP_B * min(1.0, max(0.0, (q - RAMP_START_RAD) / (RAMP_END_RAD - RAMP_START_RAD)))
+    tau = -B * max(qdot, 0.0)
+    L = knee_torque_limit(q, 'TUCK', derated_lim)
+    return max(-L, min(L, tau))
+
+
+def mo_off_order(drives):
+    """Drop order for a fall/TUCK MO=0: every non-knee drive first, knees last (contract)."""
+    return [d for d in drives if not d.endswith('knee')] + [d for d in drives if d.endswith('knee')]

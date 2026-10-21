@@ -16,3 +16,17 @@ L39 bumper [EST, T&R rev B]: contact L −12/+15°, R mirrored −15/+12°; k_θ
 - **Swing-leg tuck rule** (`fall_mode.py`, fall/TUCK state): on detect, swing knee → 0.15 rad, hip pitch → 0. Detect at ≤ 29 ms after push; swing foot lands 54–55 ms after detection (vs 301–376 ms without), the foot always first. **No conflict with the 50 N·m knee cap** (it extends the knee, far from 125°). Foot lands faster (1.70 vs 1.40 m/s) — foot/ankle check owed.
 - Contact order everywhere: feet first; S2b: foot then knee pad. Hip-roll motor peak ≤ 102 N·m (derated).
 - Limits: PU curve [EST], no lateral knee pad geom, torso/shoulder impacts not analysed here, falls start from stand/kneel not gait.
+
+## Rev B (2026-10-21): foot force / ankle stop (T&R 8c7ac56) and mid-walk stumble
+**Side-fall set, peak foot contact force / ankle hard-stop hits:** base S1 1027 N / 0, S2b 809 N / 18 (ankle pitch already at its +40° limit in the kneel pose, ≤ 6 N·m limit force — not an impact), S2c 508 N / 0. **Tuck S2c 2708 N** (foot 1.70 m/s) — at/above the top of T&R's 1.2–2.5 kN estimate; no ankle-stop hit. Tuck+damp S2c 2677 N.
+
+**Stumble (owed case)** `stumble_fall.py` → `stumble_fall_results.json`: Legs WBC walk 1.2 m/s (walk_1p2_r2, gait_lib model), push 250/400/550 N × ±y × start 0.8/1.4/2.0 s, applied 0.15 s from the first single-support phase; fall mode on detect (derated PD hold, knee cap). 18 runs per variant, all fall.
+
+| variant | knee-first with foot moving | swing foot speed at contact max | swing knee/thigh speed at contact max | peak foot force | ankle stop hits (max limit force) | typical order (swing leg) |
+|---|---|---|---|---|---|---|
+| base | **0/36 legs** | 2.08 m/s | 2.28 m/s | 1119 N | 5 (ankle pitch −52.5°, 83 N·m; motor 44–54 N·m) | foot → hand |
+| tuck (instant) | 0 | **6.75 m/s** | 0.72 | **2677 N** | 2 (39 N·m) | foot → hand |
+| tuck ramped 0.15 s | 0 | 4.96 | 1.65 | 2192 N | 2 (41 N·m) | foot → hand |
+
+- **S2c (knee first, foot moving) is not reproduced in the stumble set either**: the foot always lands first. T&R's 4.2 m/s relative-speed case did not appear.
+- **The swing-leg tuck in mid-walk is counter-productive**: straightening the swing knee whips the foot into the ground (up to 6.75 m/s, 2.7 kN). Recommend: keep the tuck for standing side falls (S2c, bumper energy) but **not in mid-stride stumbles** until a rate-limited version is tuned; T&R foot/ankle check owed at 2.2–2.7 kN.
