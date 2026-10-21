@@ -2,7 +2,7 @@
 import math
 import pytest
 from drive_thermal_derate import (DerateConfig, DriveIO, DriveDerateSupervisor, curve, combine_min,
-                                  sit_timing_margin, RUN, STOPPING, STOPPED, MF_OVERTEMP, EMCY_OVERTEMP,
+                                  sit_timing_margin, static_hold_ok, friction_hold, RUN, STOPPING, STOPPED, MF_OVERTEMP, EMCY_OVERTEMP,
                                   CROUCH, KNEEL, CONTACT_CONFIRMED, MO_OFF, HOLD_DERATED, TUCK, UnsupportedMoOff)
 
 DT = 0.001
@@ -67,7 +67,7 @@ def to_contact(io, sup):
     ramp(io, sup, 'l_knee', 70, 83.2, rate_K_s=3.0)
     sup.crouch_done(); sup.step(DT)
     assert sup.state == KNEEL
-    sup.set_support(True, True, 0.02)
+    sup.set_support(True, True, 0.02, True)
     run_n(sup, 1)
     assert sup.state == CONTACT_CONFIRMED
     run_n(sup, 60)
@@ -86,7 +86,7 @@ def test_stop_latch_whole_robot_crouch_kneel_contact_mo_off():
     assert io.limit['l_knee'] == 500 and io.limit['r_knee'] == 1000
     sup.crouch_done(); sup.step(DT)
     assert sup.state == KNEEL and kneels == [1] and all(io.mo.values())
-    sup.set_support(True, True, 0.02); run_n(sup, 60)
+    sup.set_support(True, True, 0.02, True); run_n(sup, 60)
     assert sup.state == MO_OFF and not any(io.mo.values())   # every drive off
     assert [s for _, s in sup.log] == [CROUCH, KNEEL, CONTACT_CONFIRMED, MO_OFF]
 
@@ -100,7 +100,8 @@ def test_crouch_ends_on_crouch_s_without_flag():
 
 def test_guard_mo_never_off_without_contact_and_support():
     """MO=0 must never be written unless knee contact AND CoM support AND low speed were confirmed."""
-    for flags in [(False, False, 0.0), (True, False, 0.0), (False, True, 0.0), (True, True, 0.5)]:
+    for flags in [(False, False, 0.0, True), (True, False, 0.0, True), (False, True, 0.0, True), (True, True, 0.5, True),
+                  (True, True, 0.0, False), (True, True, 0.0)]:   # torque above friction / flag missing
         io, sup, _ = make()
         ramp(io, sup, 'l_knee', 70, 83.2, rate_K_s=5.0)
         sup.crouch_done()
@@ -120,9 +121,9 @@ def test_contact_flicker_returns_to_kneel():
     io, sup, _ = make()
     ramp(io, sup, 'l_knee', 70, 83.2, rate_K_s=5.0)
     sup.crouch_done(); sup.step(DT)
-    sup.set_support(True, True, 0.02); run_n(sup, 20)       # 20 ms < confirm_s 50 ms
+    sup.set_support(True, True, 0.02, True); run_n(sup, 20)       # 20 ms < confirm_s 50 ms
     assert sup.state == CONTACT_CONFIRMED and all(io.mo.values())
-    sup.set_support(True, False, 0.02); sup.step(DT)
+    sup.set_support(True, False, 0.02, True); sup.step(DT)
     assert sup.state == KNEEL and all(io.mo.values())
 
 
@@ -225,3 +226,20 @@ def test_sit_timing_numbers():
     assert sit_timing_margin(0.3, 1.2) > 1.5          # plate slope (430684c): 3.3 s for 1 K
     assert sit_timing_margin(1.19, 1.2, t_stop=84.0) < 0   # drive-only bound, 1 K worst-case truncated band
     assert sit_timing_margin(1.19, 1.2) > 0                # 2 K nominal band at 83
+
+
+def test_static_hold_flag_vs_d94_friction():
+    assert friction_hold('l_knee') == 7.0 and friction_hold('r_ankle_pitch') == 8.0 and friction_hold('waist_pitch') == 7.0
+    assert static_hold_ok({'l_knee': 3.0, 'l_hip_pitch': -6.9, 'l_ankle_pitch': 7.9})
+    assert not static_hold_ok({'l_knee': 64.4})            # D94 crouch knee: must never allow MO=0
+    assert not static_hold_ok({'l_knee': 3.0, 'waist_pitch': 7.5})
+    assert not static_hold_ok({})
+
+
+def test_guard_torque_flag_blocks_mo_off_in_supported_contact():
+    io, sup, _ = make()
+    ramp(io, sup, 'l_knee', 70, 83.2, rate_K_s=5.0)
+    sup.crouch_done(); sup.step(DT)
+    sup.set_support(True, True, 0.0, static_hold_ok({'l_knee': 20.0}))
+    run_n(sup, 3000)
+    assert all(io.mo.values()) and sup.state == HOLD_DERATED

@@ -153,6 +153,7 @@ class DriveDerateSupervisor:
       KNEEL: WBC/fall-mode kneels to the knee pads. set_support(knee_contact, com_supported, com_speed) each cycle.
              all flags true (contact, CoM inside knee+toe polygon, speed < support_speed) -> CONTACT_CONFIRMED.
              kneel_timeout_s, or kneel_impossible() -> HOLD_DERATED.
+             'supported' also needs torque_ok: static holding torque < friction hold at every joint (D94).
       CONTACT_CONFIRMED: flags must hold for confirm_s, then MO=0 on all drives -> MO_OFF. Flags lost -> KNEEL.
       HOLD_DERATED: keep MO on at the derated limit (no brake/backdrive hold assumed); first drive trip
                     (MF 0xD000/EMCY 0x4310) -> TUCK (request_tuck()). MO is never commanded off here.
@@ -180,7 +181,7 @@ class DriveDerateSupervisor:
         self._t = getattr(self, '_t', 0.0)
         self._crouch_done = False
         self._kneel_impossible = False
-        self._support = (False, False, math.inf)
+        self._support = (False, False, math.inf, False)
         self._confirm_t = 0.0
 
     # ---- WBC / fall-mode hooks
@@ -193,12 +194,14 @@ class DriveDerateSupervisor:
     def kneel_impossible(self):
         self._kneel_impossible = True
 
-    def set_support(self, knee_contact, com_supported, com_speed):
-        self._support = (bool(knee_contact), bool(com_supported), float(com_speed))
+    def set_support(self, knee_contact, com_supported, com_speed, torque_ok=False):
+        """torque_ok: static holding torque of the settled pose is below the friction hold at EVERY joint
+        (Actuators D94, 7d22c91: no brakes, roller screws backdrive, hold ~7-9 N·m). Use static_hold_ok()."""
+        self._support = (bool(knee_contact), bool(com_supported), float(com_speed), bool(torque_ok))
 
     def supported(self):
-        k, c, v = self._support
-        return k and c and v < self.c.support_speed
+        k, c, v, tq = self._support
+        return k and c and v < self.c.support_speed and tq
 
     def _go(self, state):
         self.state, self._t_state = state, 0.0
@@ -287,6 +290,27 @@ class DriveDerateSupervisor:
     def torque_limits(self):
         """Derated joint torque limits for the WBC (N·m): scale * tau_nominal (tau_nominal = Kt*ratio*I_nom)."""
         return {j: self.scale(j) * t for j, t in self.tau_nominal.items() if j in self.d}
+
+
+# Actuators D94 (7d22c91, results/SAFE_SIT_HOLDING.md): friction hold at the joint with MO=0, N·m [EST there].
+# Hip pitch 7-9 (7 used), knee 7, ankle 8. Every other joint: 7 (the conservative value asked for).
+FRICTION_HOLD_NM = {'hip_pitch': 7.0, 'knee': 7.0, 'ankle_pitch': 8.0}
+FRICTION_HOLD_DEFAULT_NM = 7.0
+
+
+def friction_hold(joint):
+    for k, v in FRICTION_HOLD_NM.items():
+        if joint.endswith(k):
+            return v
+    return FRICTION_HOLD_DEFAULT_NM
+
+
+def static_hold_ok(tau_static, margin=1.0):
+    """tau_static: {joint: N·m} static holding torque of the settled end pose (from the model).
+    True only if |tau| < margin * friction hold at every joint. Empty input -> False."""
+    if not tau_static:
+        return False
+    return all(abs(t) < margin * friction_hold(j) for j, t in tau_static.items())
 
 
 def combine_min(*limit_sets):
