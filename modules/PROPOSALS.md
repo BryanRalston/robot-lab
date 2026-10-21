@@ -380,7 +380,6 @@ All keep R-076 (reinforced isolation, IEC 60664-1 creepage, IP2X), R-074 (main l
 - Impact on targets: none.
 - Evidence: actuators/forearm_roll_torque.py, results/FOREARM_ROLL_TORQUE.md; R-120 (Mx 321 N·m, SF 1.10).
 - Affected owner response: pending
-- Update 2026-10-21 (Controls 0ef2d9e): standoff dropped (needs ~230 mm); liner primary for 20.9 J head-only; body KE 457 J via neck cannot be met by covers (needs 152–457 mm stroke at 3–1 kN) → Head/Controls.
 - Status: open
 
 ### P-053: ID: thigh pin access (L63-R), band and hatches deleted
@@ -416,7 +415,6 @@ All keep R-076 (reinforced isolation, IEC 60664-1 creepage, IP2X), R-074 (main l
 - Impact on targets: none beyond L65.
 - Evidence: legs/femur_dent_l65.py, results/r031/femur_dent_l65.json, BOND_SPEC §3, RULINGS R-135 (b8a2c69).
 - Affected owner response: **Actuators co-signs (2026-10-21).** The collar (ID 50 × 34) and the hip-pitch output side are unchanged; the collar bore still mates the ø50 tube OD; no actuator load or contract value changes. Co-sign stays conditional on the P-152 fallback (JOB9 b3) passing.
-- Update 2026-10-21 (Controls 0ef2d9e): standoff dropped (needs ~230 mm); liner primary for 20.9 J head-only; body KE 457 J via neck cannot be met by covers (needs 152–457 mm stroke at 3–1 kN) → Head/Controls.
 - Status: open
 
 ### P-153: Actuators: heat plates rev 2/3 mass +0.016 kg and knee thigh-shell window (D90, D91; P-055 / R-141, Thermal R131 rev 2)
@@ -472,7 +470,6 @@ All keep R-076 (reinforced isolation, IEC 60664-1 creepage, IP2X), R-074 (main l
 - Evidence: design/cad/covers/thigh_knee_vents.py/.json/.stl; V5_COVER_SET.md P-156 section; Thermal 389f91b; Actuators D94 7d22c91.
 - Rev 4d (Thermal ec7b49d): 1 mm Al-taped PC fin-tip baffle (x −56) closes the chimney; outlet aft/up z 822–860 (30 mm above the grille, H ≈ 0.18 m; the H 0.20 option declined: fairing top / skirt hem); housing-fairing 0.05 mm Al foil (fairing inner face only) + slots, local bulge +2 mm for a 10 mm gap. Mass P-156 +0.039 pair [EST] (knee-venting total +0.020).
 - Affected owner response: pending (Legs CAD ROM + housing extent, Thermal areas, T&R touch/IP2X)
-- Update 2026-10-21 (Controls 0ef2d9e): standoff dropped (needs ~230 mm); liner primary for 20.9 J head-only; body KE 457 J via neck cannot be met by covers (needs 152–457 mm stroke at 3–1 kN) → Head/Controls.
 - Status: open
 
 ### P-157: Legs (R-146, L73): ankle_pitch dorsiflexion ROM row
