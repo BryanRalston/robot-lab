@@ -1,0 +1,68 @@
+{
+ "part": "P-154 knee fin guard (ID)",
+ "params": {
+  "t": 1.5,
+  "win": [
+   100,
+   48
+  ],
+  "wall_out": [
+   104,
+   52
+  ],
+  "flange_w": 4,
+  "proud_outer": 24.5,
+  "fin_h": 13,
+  "inner_face": 23.0,
+  "slot_w": 3.5,
+  "slot_pitch": 6.0,
+  "face_slot_len": 90,
+  "side_slot": [
+   3.5,
+   12,
+   14
+  ],
+  "x_plate": -34.5,
+  "yc": 130,
+  "zc": 740,
+  "fasteners": "4x M2.5 x6 A2-70 pan head, captive, into M2.5 heat-set inserts in the thigh-fairing window frame (non-structural)"
+ },
+ "envelope_thigh_frame": {
+  "x": [
+   -59.0,
+   -34.5
+  ],
+  "y": [
+   104.0,
+   156.0
+  ],
+  "z": [
+   688.0,
+   792.0
+  ]
+ },
+ "fin_tip_to_guard_inner_mm": 10.0,
+ "A35_fin_rule_ge8": true,
+ "open_area_cm2": {
+  "face": 22.1,
+  "sides": 11.8,
+  "total": 33.8,
+  "A35_min_per_bay": 25
+ },
+ "IP2X": "3.5 mm slots: 12 mm test finger cannot enter; fin tips 10 mm behind the inner face (burn: T&R to re-run ISO 13732-1 on the PC outer face)",
+ "kg_side_EST": 0.0195,
+ "kg_pair_EST": 0.039,
+ "confirm": {
+  "Actuators": [
+   "fins unchanged 13 mm and plate face at x -34.5 (L51 26 mm boundary)",
+   "UA re-check with guard (R-143 2b, Thermal)",
+   "plate edge seal vs guard flange stack"
+  ],
+  "Legs": [
+   "window frame inserts (4x M2.5) in the thigh fairing / drive-bay panel",
+   "L51 plate placement y 130 +-24, z 690-790 (no assembly CAD)",
+   "knee lever eye r 47.5 and RV12 rod path; rod clearance 6.6 mm at 141 deg [EST]",
+   "fall/side impact: guard sacrificial, drive bay stays closed (R-143 2c)"
+  ]
+ }
+}

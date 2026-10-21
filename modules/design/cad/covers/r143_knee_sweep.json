@@ -1,0 +1,1334 @@
+{
+ "assumptions": "R-143 + T&R 447aa8e guard: envelope = guard outer face 24.5 proud of the plate (x -59.0), sides at the 100x48 window.\nR-143 (a01b3e6): knee heat-plate rev 3 (Actuators D91 194f615: 100x48 plate, 8 fins 13x1.0 @6.0 pitch, fins out) ROM sweep.\nNo assembly CAD places the plate (Actuators note), so the plate is placed from committed Legs data (thigh frame = world at zero pose):\n - L51 box on the femur rear, z 688-792, 26 deep from the band clamp face x -8.5 -> plate outer face x -34.5; fins to x -47.5;\n   y 130 +-24 (plate W 48), z 690-790 (L 100). Our merged drive-bay rear panel (L58 tabs to x -38) gets the 100x48 window.\n - Knee axis y at (x 0, z 500) (model_v4 knee_z); flexion = +Ry, 1 deg steps 0-145 (Legs sweeps 0-135; 145 is R-143).\n - Moving neighbours: Legs shank keep-out point sets (shin fairing, ankle boot; shank frame), knee lever eye at r 47.5 behind the\n   axis at 0 deg [EST], RV12 rods dia 12 from the housing trunnion (x -130, z 770) to the eye, at y 130 +-22.5 (overlap with the plate in y,\n   so the 2D x-z distance is used: conservative), knee twin housing front fin tips r 42.5+9 about the trunnion (rev B; pivots in place).\n - Hip pitch -105..+40 (Legs poses), 1 deg: plate fins vs hip skirt keep-out points (pelvis frame), hip axis (x 0, z 920).\n - Seated/kneeling: seat plane tangent to the rear-most thigh hardware (housing rear fins x -197 / fairing x -181) at hip 90;\n   kneeling = knee 145 (shank under thigh, covered by the knee sweep).",
+ "knee_min": {
+  "deg": 141,
+  "shank_keepouts": 97.1,
+  "rods": 6.6
+ },
+ "hip_min": {
+  "deg": -105,
+  "hip_skirt": 179.8
+ },
+ "housing_fin_tips_static_mm": 19.5,
+ "seated_fin_above_seat_mm": 138.0,
+ "A35_static_cover_inner_face_to_fins": "n/a: fins pass through a sealed window (no cover over them); window edge seal to plate base",
+ "gate_mm": 3,
+ "knee": [
+  {
+   "deg": 0,
+   "shank_keepouts": 226.6,
+   "rods": 38.5
+  },
+  {
+   "deg": 1,
+   "shank_keepouts": 226.5,
+   "rods": 38.4
+  },
+  {
+   "deg": 2,
+   "shank_keepouts": 226.3,
+   "rods": 38.3
+  },
+  {
+   "deg": 3,
+   "shank_keepouts": 226.2,
+   "rods": 38.2
+  },
+  {
+   "deg": 4,
+   "shank_keepouts": 226.0,
+   "rods": 38.1
+  },
+  {
+   "deg": 5,
+   "shank_keepouts": 225.9,
+   "rods": 38.0
+  },
+  {
+   "deg": 6,
+   "shank_keepouts": 225.7,
+   "rods": 37.9
+  },
+  {
+   "deg": 7,
+   "shank_keepouts": 225.5,
+   "rods": 37.8
+  },
+  {
+   "deg": 8,
+   "shank_keepouts": 225.3,
+   "rods": 37.7
+  },
+  {
+   "deg": 9,
+   "shank_keepouts": 225.1,
+   "rods": 37.6
+  },
+  {
+   "deg": 10,
+   "shank_keepouts": 224.9,
+   "rods": 37.4
+  },
+  {
+   "deg": 11,
+   "shank_keepouts": 224.6,
+   "rods": 37.3
+  },
+  {
+   "deg": 12,
+   "shank_keepouts": 224.4,
+   "rods": 37.1
+  },
+  {
+   "deg": 13,
+   "shank_keepouts": 224.1,
+   "rods": 37.0
+  },
+  {
+   "deg": 14,
+   "shank_keepouts": 223.8,
+   "rods": 36.8
+  },
+  {
+   "deg": 15,
+   "shank_keepouts": 223.6,
+   "rods": 36.7
+  },
+  {
+   "deg": 16,
+   "shank_keepouts": 223.3,
+   "rods": 36.5
+  },
+  {
+   "deg": 17,
+   "shank_keepouts": 223.0,
+   "rods": 36.3
+  },
+  {
+   "deg": 18,
+   "shank_keepouts": 222.7,
+   "rods": 36.2
+  },
+  {
+   "deg": 19,
+   "shank_keepouts": 222.3,
+   "rods": 36.0
+  },
+  {
+   "deg": 20,
+   "shank_keepouts": 222.0,
+   "rods": 35.8
+  },
+  {
+   "deg": 21,
+   "shank_keepouts": 221.6,
+   "rods": 35.6
+  },
+  {
+   "deg": 22,
+   "shank_keepouts": 221.3,
+   "rods": 35.4
+  },
+  {
+   "deg": 23,
+   "shank_keepouts": 220.9,
+   "rods": 35.2
+  },
+  {
+   "deg": 24,
+   "shank_keepouts": 220.5,
+   "rods": 35.0
+  },
+  {
+   "deg": 25,
+   "shank_keepouts": 220.2,
+   "rods": 34.8
+  },
+  {
+   "deg": 26,
+   "shank_keepouts": 219.8,
+   "rods": 34.6
+  },
+  {
+   "deg": 27,
+   "shank_keepouts": 219.4,
+   "rods": 34.3
+  },
+  {
+   "deg": 28,
+   "shank_keepouts": 218.9,
+   "rods": 34.1
+  },
+  {
+   "deg": 29,
+   "shank_keepouts": 218.5,
+   "rods": 33.9
+  },
+  {
+   "deg": 30,
+   "shank_keepouts": 218.1,
+   "rods": 33.6
+  },
+  {
+   "deg": 31,
+   "shank_keepouts": 217.6,
+   "rods": 33.4
+  },
+  {
+   "deg": 32,
+   "shank_keepouts": 217.2,
+   "rods": 33.1
+  },
+  {
+   "deg": 33,
+   "shank_keepouts": 216.7,
+   "rods": 32.9
+  },
+  {
+   "deg": 34,
+   "shank_keepouts": 216.2,
+   "rods": 32.6
+  },
+  {
+   "deg": 35,
+   "shank_keepouts": 215.7,
+   "rods": 32.4
+  },
+  {
+   "deg": 36,
+   "shank_keepouts": 215.2,
+   "rods": 32.1
+  },
+  {
+   "deg": 37,
+   "shank_keepouts": 214.7,
+   "rods": 31.8
+  },
+  {
+   "deg": 38,
+   "shank_keepouts": 214.2,
+   "rods": 31.6
+  },
+  {
+   "deg": 39,
+   "shank_keepouts": 213.7,
+   "rods": 31.3
+  },
+  {
+   "deg": 40,
+   "shank_keepouts": 213.1,
+   "rods": 31.0
+  },
+  {
+   "deg": 41,
+   "shank_keepouts": 212.6,
+   "rods": 30.7
+  },
+  {
+   "deg": 42,
+   "shank_keepouts": 212.0,
+   "rods": 30.4
+  },
+  {
+   "deg": 43,
+   "shank_keepouts": 211.5,
+   "rods": 30.1
+  },
+  {
+   "deg": 44,
+   "shank_keepouts": 210.9,
+   "rods": 29.8
+  },
+  {
+   "deg": 45,
+   "shank_keepouts": 210.3,
+   "rods": 29.5
+  },
+  {
+   "deg": 46,
+   "shank_keepouts": 209.7,
+   "rods": 29.2
+  },
+  {
+   "deg": 47,
+   "shank_keepouts": 209.1,
+   "rods": 28.9
+  },
+  {
+   "deg": 48,
+   "shank_keepouts": 208.5,
+   "rods": 28.6
+  },
+  {
+   "deg": 49,
+   "shank_keepouts": 207.9,
+   "rods": 28.3
+  },
+  {
+   "deg": 50,
+   "shank_keepouts": 207.3,
+   "rods": 28.0
+  },
+  {
+   "deg": 51,
+   "shank_keepouts": 206.7,
+   "rods": 27.7
+  },
+  {
+   "deg": 52,
+   "shank_keepouts": 206.0,
+   "rods": 27.3
+  },
+  {
+   "deg": 53,
+   "shank_keepouts": 205.4,
+   "rods": 27.0
+  },
+  {
+   "deg": 54,
+   "shank_keepouts": 204.7,
+   "rods": 26.7
+  },
+  {
+   "deg": 55,
+   "shank_keepouts": 204.1,
+   "rods": 26.4
+  },
+  {
+   "deg": 56,
+   "shank_keepouts": 203.4,
+   "rods": 26.0
+  },
+  {
+   "deg": 57,
+   "shank_keepouts": 202.7,
+   "rods": 25.7
+  },
+  {
+   "deg": 58,
+   "shank_keepouts": 202.0,
+   "rods": 25.4
+  },
+  {
+   "deg": 59,
+   "shank_keepouts": 201.3,
+   "rods": 25.0
+  },
+  {
+   "deg": 60,
+   "shank_keepouts": 200.6,
+   "rods": 24.7
+  },
+  {
+   "deg": 61,
+   "shank_keepouts": 199.9,
+   "rods": 24.4
+  },
+  {
+   "deg": 62,
+   "shank_keepouts": 199.1,
+   "rods": 24.0
+  },
+  {
+   "deg": 63,
+   "shank_keepouts": 198.4,
+   "rods": 23.7
+  },
+  {
+   "deg": 64,
+   "shank_keepouts": 197.7,
+   "rods": 23.4
+  },
+  {
+   "deg": 65,
+   "shank_keepouts": 196.9,
+   "rods": 23.0
+  },
+  {
+   "deg": 66,
+   "shank_keepouts": 196.2,
+   "rods": 22.7
+  },
+  {
+   "deg": 67,
+   "shank_keepouts": 195.5,
+   "rods": 22.3
+  },
+  {
+   "deg": 68,
+   "shank_keepouts": 194.7,
+   "rods": 22.0
+  },
+  {
+   "deg": 69,
+   "shank_keepouts": 193.9,
+   "rods": 21.7
+  },
+  {
+   "deg": 70,
+   "shank_keepouts": 193.2,
+   "rods": 21.3
+  },
+  {
+   "deg": 71,
+   "shank_keepouts": 192.4,
+   "rods": 21.0
+  },
+  {
+   "deg": 72,
+   "shank_keepouts": 191.6,
+   "rods": 20.7
+  },
+  {
+   "deg": 73,
+   "shank_keepouts": 190.8,
+   "rods": 20.3
+  },
+  {
+   "deg": 74,
+   "shank_keepouts": 190.0,
+   "rods": 20.0
+  },
+  {
+   "deg": 75,
+   "shank_keepouts": 189.2,
+   "rods": 19.7
+  },
+  {
+   "deg": 76,
+   "shank_keepouts": 188.4,
+   "rods": 19.3
+  },
+  {
+   "deg": 77,
+   "shank_keepouts": 187.6,
+   "rods": 19.0
+  },
+  {
+   "deg": 78,
+   "shank_keepouts": 186.8,
+   "rods": 18.7
+  },
+  {
+   "deg": 79,
+   "shank_keepouts": 186.0,
+   "rods": 18.3
+  },
+  {
+   "deg": 80,
+   "shank_keepouts": 185.2,
+   "rods": 18.0
+  },
+  {
+   "deg": 81,
+   "shank_keepouts": 184.4,
+   "rods": 17.7
+  },
+  {
+   "deg": 82,
+   "shank_keepouts": 183.6,
+   "rods": 17.4
+  },
+  {
+   "deg": 83,
+   "shank_keepouts": 182.8,
+   "rods": 17.1
+  },
+  {
+   "deg": 84,
+   "shank_keepouts": 182.0,
+   "rods": 16.8
+  },
+  {
+   "deg": 85,
+   "shank_keepouts": 181.2,
+   "rods": 16.4
+  },
+  {
+   "deg": 86,
+   "shank_keepouts": 180.3,
+   "rods": 16.1
+  },
+  {
+   "deg": 87,
+   "shank_keepouts": 179.5,
+   "rods": 15.8
+  },
+  {
+   "deg": 88,
+   "shank_keepouts": 178.7,
+   "rods": 15.5
+  },
+  {
+   "deg": 89,
+   "shank_keepouts": 177.9,
+   "rods": 15.2
+  },
+  {
+   "deg": 90,
+   "shank_keepouts": 177.1,
+   "rods": 14.9
+  },
+  {
+   "deg": 91,
+   "shank_keepouts": 176.3,
+   "rods": 14.7
+  },
+  {
+   "deg": 92,
+   "shank_keepouts": 175.4,
+   "rods": 14.4
+  },
+  {
+   "deg": 93,
+   "shank_keepouts": 174.6,
+   "rods": 14.1
+  },
+  {
+   "deg": 94,
+   "shank_keepouts": 173.8,
+   "rods": 13.8
+  },
+  {
+   "deg": 95,
+   "shank_keepouts": 173.0,
+   "rods": 13.5
+  },
+  {
+   "deg": 96,
+   "shank_keepouts": 172.2,
+   "rods": 13.3
+  },
+  {
+   "deg": 97,
+   "shank_keepouts": 171.4,
+   "rods": 13.0
+  },
+  {
+   "deg": 98,
+   "shank_keepouts": 170.6,
+   "rods": 12.7
+  },
+  {
+   "deg": 99,
+   "shank_keepouts": 169.8,
+   "rods": 12.5
+  },
+  {
+   "deg": 100,
+   "shank_keepouts": 169.0,
+   "rods": 12.2
+  },
+  {
+   "deg": 101,
+   "shank_keepouts": 168.3,
+   "rods": 12.0
+  },
+  {
+   "deg": 102,
+   "shank_keepouts": 167.5,
+   "rods": 11.8
+  },
+  {
+   "deg": 103,
+   "shank_keepouts": 166.7,
+   "rods": 11.5
+  },
+  {
+   "deg": 104,
+   "shank_keepouts": 166.0,
+   "rods": 11.3
+  },
+  {
+   "deg": 105,
+   "shank_keepouts": 165.2,
+   "rods": 11.1
+  },
+  {
+   "deg": 106,
+   "shank_keepouts": 164.5,
+   "rods": 10.8
+  },
+  {
+   "deg": 107,
+   "shank_keepouts": 163.8,
+   "rods": 10.6
+  },
+  {
+   "deg": 108,
+   "shank_keepouts": 163.0,
+   "rods": 10.4
+  },
+  {
+   "deg": 109,
+   "shank_keepouts": 162.3,
+   "rods": 10.2
+  },
+  {
+   "deg": 110,
+   "shank_keepouts": 161.6,
+   "rods": 10.0
+  },
+  {
+   "deg": 111,
+   "shank_keepouts": 160.9,
+   "rods": 9.8
+  },
+  {
+   "deg": 112,
+   "shank_keepouts": 160.3,
+   "rods": 9.6
+  },
+  {
+   "deg": 113,
+   "shank_keepouts": 159.6,
+   "rods": 9.4
+  },
+  {
+   "deg": 114,
+   "shank_keepouts": 158.9,
+   "rods": 9.3
+  },
+  {
+   "deg": 115,
+   "shank_keepouts": 158.3,
+   "rods": 9.1
+  },
+  {
+   "deg": 116,
+   "shank_keepouts": 157.6,
+   "rods": 8.9
+  },
+  {
+   "deg": 117,
+   "shank_keepouts": 157.0,
+   "rods": 8.8
+  },
+  {
+   "deg": 118,
+   "shank_keepouts": 156.4,
+   "rods": 8.6
+  },
+  {
+   "deg": 119,
+   "shank_keepouts": 155.8,
+   "rods": 8.5
+  },
+  {
+   "deg": 120,
+   "shank_keepouts": 155.2,
+   "rods": 8.3
+  },
+  {
+   "deg": 121,
+   "shank_keepouts": 154.6,
+   "rods": 8.2
+  },
+  {
+   "deg": 122,
+   "shank_keepouts": 154.0,
+   "rods": 8.1
+  },
+  {
+   "deg": 123,
+   "shank_keepouts": 153.5,
+   "rods": 7.9
+  },
+  {
+   "deg": 124,
+   "shank_keepouts": 152.9,
+   "rods": 7.8
+  },
+  {
+   "deg": 125,
+   "shank_keepouts": 151.8,
+   "rods": 7.7
+  },
+  {
+   "deg": 126,
+   "shank_keepouts": 148.4,
+   "rods": 7.6
+  },
+  {
+   "deg": 127,
+   "shank_keepouts": 144.9,
+   "rods": 7.5
+  },
+  {
+   "deg": 128,
+   "shank_keepouts": 141.4,
+   "rods": 7.4
+  },
+  {
+   "deg": 129,
+   "shank_keepouts": 138.0,
+   "rods": 7.3
+  },
+  {
+   "deg": 130,
+   "shank_keepouts": 134.6,
+   "rods": 7.2
+  },
+  {
+   "deg": 131,
+   "shank_keepouts": 131.1,
+   "rods": 7.1
+  },
+  {
+   "deg": 132,
+   "shank_keepouts": 127.7,
+   "rods": 7.1
+  },
+  {
+   "deg": 133,
+   "shank_keepouts": 124.3,
+   "rods": 7.0
+  },
+  {
+   "deg": 134,
+   "shank_keepouts": 121.0,
+   "rods": 6.9
+  },
+  {
+   "deg": 135,
+   "shank_keepouts": 117.6,
+   "rods": 6.9
+  },
+  {
+   "deg": 136,
+   "shank_keepouts": 114.3,
+   "rods": 6.8
+  },
+  {
+   "deg": 137,
+   "shank_keepouts": 111.0,
+   "rods": 6.8
+  },
+  {
+   "deg": 138,
+   "shank_keepouts": 107.5,
+   "rods": 6.7
+  },
+  {
+   "deg": 139,
+   "shank_keepouts": 104.1,
+   "rods": 6.7
+  },
+  {
+   "deg": 140,
+   "shank_keepouts": 100.6,
+   "rods": 6.7
+  },
+  {
+   "deg": 141,
+   "shank_keepouts": 97.1,
+   "rods": 6.6
+  },
+  {
+   "deg": 142,
+   "shank_keepouts": 93.5,
+   "rods": 6.6
+  },
+  {
+   "deg": 143,
+   "shank_keepouts": 89.8,
+   "rods": 6.6
+  },
+  {
+   "deg": 144,
+   "shank_keepouts": 86.2,
+   "rods": 6.6
+  },
+  {
+   "deg": 145,
+   "shank_keepouts": 82.4,
+   "rods": 6.6
+  }
+ ],
+ "hip": [
+  {
+   "deg": -105,
+   "hip_skirt": 179.8
+  },
+  {
+   "deg": -104,
+   "hip_skirt": 183.8
+  },
+  {
+   "deg": -103,
+   "hip_skirt": 187.9
+  },
+  {
+   "deg": -102,
+   "hip_skirt": 191.9
+  },
+  {
+   "deg": -101,
+   "hip_skirt": 196.0
+  },
+  {
+   "deg": -100,
+   "hip_skirt": 200.0
+  },
+  {
+   "deg": -99,
+   "hip_skirt": 204.1
+  },
+  {
+   "deg": -98,
+   "hip_skirt": 208.2
+  },
+  {
+   "deg": -97,
+   "hip_skirt": 212.2
+  },
+  {
+   "deg": -96,
+   "hip_skirt": 216.3
+  },
+  {
+   "deg": -95,
+   "hip_skirt": 220.3
+  },
+  {
+   "deg": -94,
+   "hip_skirt": 224.4
+  },
+  {
+   "deg": -93,
+   "hip_skirt": 228.4
+  },
+  {
+   "deg": -92,
+   "hip_skirt": 232.5
+  },
+  {
+   "deg": -91,
+   "hip_skirt": 236.5
+  },
+  {
+   "deg": -90,
+   "hip_skirt": 240.5
+  },
+  {
+   "deg": -89,
+   "hip_skirt": 242.8
+  },
+  {
+   "deg": -88,
+   "hip_skirt": 245.0
+  },
+  {
+   "deg": -87,
+   "hip_skirt": 247.3
+  },
+  {
+   "deg": -86,
+   "hip_skirt": 249.5
+  },
+  {
+   "deg": -85,
+   "hip_skirt": 251.7
+  },
+  {
+   "deg": -84,
+   "hip_skirt": 253.9
+  },
+  {
+   "deg": -83,
+   "hip_skirt": 256.1
+  },
+  {
+   "deg": -82,
+   "hip_skirt": 258.3
+  },
+  {
+   "deg": -81,
+   "hip_skirt": 260.4
+  },
+  {
+   "deg": -80,
+   "hip_skirt": 262.6
+  },
+  {
+   "deg": -79,
+   "hip_skirt": 264.7
+  },
+  {
+   "deg": -78,
+   "hip_skirt": 266.8
+  },
+  {
+   "deg": -77,
+   "hip_skirt": 268.9
+  },
+  {
+   "deg": -76,
+   "hip_skirt": 270.9
+  },
+  {
+   "deg": -75,
+   "hip_skirt": 273.0
+  },
+  {
+   "deg": -74,
+   "hip_skirt": 275.0
+  },
+  {
+   "deg": -73,
+   "hip_skirt": 277.0
+  },
+  {
+   "deg": -72,
+   "hip_skirt": 279.0
+  },
+  {
+   "deg": -71,
+   "hip_skirt": 280.9
+  },
+  {
+   "deg": -70,
+   "hip_skirt": 282.9
+  },
+  {
+   "deg": -69,
+   "hip_skirt": 284.8
+  },
+  {
+   "deg": -68,
+   "hip_skirt": 286.7
+  },
+  {
+   "deg": -67,
+   "hip_skirt": 288.6
+  },
+  {
+   "deg": -66,
+   "hip_skirt": 290.4
+  },
+  {
+   "deg": -65,
+   "hip_skirt": 292.2
+  },
+  {
+   "deg": -64,
+   "hip_skirt": 294.0
+  },
+  {
+   "deg": -63,
+   "hip_skirt": 295.8
+  },
+  {
+   "deg": -62,
+   "hip_skirt": 297.5
+  },
+  {
+   "deg": -61,
+   "hip_skirt": 299.2
+  },
+  {
+   "deg": -60,
+   "hip_skirt": 300.9
+  },
+  {
+   "deg": -59,
+   "hip_skirt": 302.5
+  },
+  {
+   "deg": -58,
+   "hip_skirt": 304.1
+  },
+  {
+   "deg": -57,
+   "hip_skirt": 305.7
+  },
+  {
+   "deg": -56,
+   "hip_skirt": 307.3
+  },
+  {
+   "deg": -55,
+   "hip_skirt": 308.8
+  },
+  {
+   "deg": -54,
+   "hip_skirt": 310.3
+  },
+  {
+   "deg": -53,
+   "hip_skirt": 311.8
+  },
+  {
+   "deg": -52,
+   "hip_skirt": 313.2
+  },
+  {
+   "deg": -51,
+   "hip_skirt": 314.6
+  },
+  {
+   "deg": -50,
+   "hip_skirt": 316.0
+  },
+  {
+   "deg": -49,
+   "hip_skirt": 317.3
+  },
+  {
+   "deg": -48,
+   "hip_skirt": 318.6
+  },
+  {
+   "deg": -47,
+   "hip_skirt": 319.9
+  },
+  {
+   "deg": -46,
+   "hip_skirt": 321.1
+  },
+  {
+   "deg": -45,
+   "hip_skirt": 322.3
+  },
+  {
+   "deg": -44,
+   "hip_skirt": 323.5
+  },
+  {
+   "deg": -43,
+   "hip_skirt": 324.6
+  },
+  {
+   "deg": -42,
+   "hip_skirt": 325.7
+  },
+  {
+   "deg": -41,
+   "hip_skirt": 326.7
+  },
+  {
+   "deg": -40,
+   "hip_skirt": 327.8
+  },
+  {
+   "deg": -39,
+   "hip_skirt": 328.7
+  },
+  {
+   "deg": -38,
+   "hip_skirt": 329.7
+  },
+  {
+   "deg": -37,
+   "hip_skirt": 330.6
+  },
+  {
+   "deg": -36,
+   "hip_skirt": 331.5
+  },
+  {
+   "deg": -35,
+   "hip_skirt": 332.3
+  },
+  {
+   "deg": -34,
+   "hip_skirt": 333.1
+  },
+  {
+   "deg": -33,
+   "hip_skirt": 333.8
+  },
+  {
+   "deg": -32,
+   "hip_skirt": 334.5
+  },
+  {
+   "deg": -31,
+   "hip_skirt": 335.2
+  },
+  {
+   "deg": -30,
+   "hip_skirt": 335.8
+  },
+  {
+   "deg": -29,
+   "hip_skirt": 336.4
+  },
+  {
+   "deg": -28,
+   "hip_skirt": 337.0
+  },
+  {
+   "deg": -27,
+   "hip_skirt": 337.5
+  },
+  {
+   "deg": -26,
+   "hip_skirt": 338.0
+  },
+  {
+   "deg": -25,
+   "hip_skirt": 338.4
+  },
+  {
+   "deg": -24,
+   "hip_skirt": 338.8
+  },
+  {
+   "deg": -23,
+   "hip_skirt": 339.1
+  },
+  {
+   "deg": -22,
+   "hip_skirt": 339.5
+  },
+  {
+   "deg": -21,
+   "hip_skirt": 339.7
+  },
+  {
+   "deg": -20,
+   "hip_skirt": 340.0
+  },
+  {
+   "deg": -19,
+   "hip_skirt": 340.1
+  },
+  {
+   "deg": -18,
+   "hip_skirt": 340.3
+  },
+  {
+   "deg": -17,
+   "hip_skirt": 340.4
+  },
+  {
+   "deg": -16,
+   "hip_skirt": 340.5
+  },
+  {
+   "deg": -15,
+   "hip_skirt": 340.5
+  },
+  {
+   "deg": -14,
+   "hip_skirt": 340.5
+  },
+  {
+   "deg": -13,
+   "hip_skirt": 340.4
+  },
+  {
+   "deg": -12,
+   "hip_skirt": 340.3
+  },
+  {
+   "deg": -11,
+   "hip_skirt": 340.2
+  },
+  {
+   "deg": -10,
+   "hip_skirt": 340.0
+  },
+  {
+   "deg": -9,
+   "hip_skirt": 339.8
+  },
+  {
+   "deg": -8,
+   "hip_skirt": 339.5
+  },
+  {
+   "deg": -7,
+   "hip_skirt": 339.2
+  },
+  {
+   "deg": -6,
+   "hip_skirt": 338.9
+  },
+  {
+   "deg": -5,
+   "hip_skirt": 338.5
+  },
+  {
+   "deg": -4,
+   "hip_skirt": 338.1
+  },
+  {
+   "deg": -3,
+   "hip_skirt": 337.6
+  },
+  {
+   "deg": -2,
+   "hip_skirt": 337.1
+  },
+  {
+   "deg": -1,
+   "hip_skirt": 336.6
+  },
+  {
+   "deg": 0,
+   "hip_skirt": 336.0
+  },
+  {
+   "deg": 1,
+   "hip_skirt": 335.0
+  },
+  {
+   "deg": 2,
+   "hip_skirt": 333.9
+  },
+  {
+   "deg": 3,
+   "hip_skirt": 332.7
+  },
+  {
+   "deg": 4,
+   "hip_skirt": 331.6
+  },
+  {
+   "deg": 5,
+   "hip_skirt": 330.4
+  },
+  {
+   "deg": 6,
+   "hip_skirt": 329.1
+  },
+  {
+   "deg": 7,
+   "hip_skirt": 327.8
+  },
+  {
+   "deg": 8,
+   "hip_skirt": 326.5
+  },
+  {
+   "deg": 9,
+   "hip_skirt": 325.2
+  },
+  {
+   "deg": 10,
+   "hip_skirt": 323.8
+  },
+  {
+   "deg": 11,
+   "hip_skirt": 322.4
+  },
+  {
+   "deg": 12,
+   "hip_skirt": 320.9
+  },
+  {
+   "deg": 13,
+   "hip_skirt": 319.4
+  },
+  {
+   "deg": 14,
+   "hip_skirt": 317.9
+  },
+  {
+   "deg": 15,
+   "hip_skirt": 316.3
+  },
+  {
+   "deg": 16,
+   "hip_skirt": 314.7
+  },
+  {
+   "deg": 17,
+   "hip_skirt": 313.1
+  },
+  {
+   "deg": 18,
+   "hip_skirt": 311.4
+  },
+  {
+   "deg": 19,
+   "hip_skirt": 309.7
+  },
+  {
+   "deg": 20,
+   "hip_skirt": 308.0
+  },
+  {
+   "deg": 21,
+   "hip_skirt": 306.2
+  },
+  {
+   "deg": 22,
+   "hip_skirt": 304.4
+  },
+  {
+   "deg": 23,
+   "hip_skirt": 302.6
+  },
+  {
+   "deg": 24,
+   "hip_skirt": 300.8
+  },
+  {
+   "deg": 25,
+   "hip_skirt": 298.9
+  },
+  {
+   "deg": 26,
+   "hip_skirt": 297.0
+  },
+  {
+   "deg": 27,
+   "hip_skirt": 295.0
+  },
+  {
+   "deg": 28,
+   "hip_skirt": 293.1
+  },
+  {
+   "deg": 29,
+   "hip_skirt": 291.1
+  },
+  {
+   "deg": 30,
+   "hip_skirt": 289.1
+  },
+  {
+   "deg": 31,
+   "hip_skirt": 287.0
+  },
+  {
+   "deg": 32,
+   "hip_skirt": 285.0
+  },
+  {
+   "deg": 33,
+   "hip_skirt": 282.9
+  },
+  {
+   "deg": 34,
+   "hip_skirt": 280.8
+  },
+  {
+   "deg": 35,
+   "hip_skirt": 278.6
+  },
+  {
+   "deg": 36,
+   "hip_skirt": 276.5
+  },
+  {
+   "deg": 37,
+   "hip_skirt": 274.3
+  },
+  {
+   "deg": 38,
+   "hip_skirt": 272.1
+  },
+  {
+   "deg": 39,
+   "hip_skirt": 269.9
+  },
+  {
+   "deg": 40,
+   "hip_skirt": 267.7
+  }
+ ]
+}

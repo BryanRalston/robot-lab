@@ -146,3 +146,26 @@ The sole pad is under the foot plate; the P-025 ankle boot hem is re-anchored ab
 1. Legs: confirm envelopes.json as final and commit; knee-cap keep-out complement vs thigh fairing overlap.
 2. A29 now owned by Industrial Design (R-029): panel layout + mould list on v4 CAD; measured delta must stay ≤ 0.30 kg.
 3. CF on thigh for looks (shin deleted) (two-tone gold/black) — cost delta vs A30 sheet.
+
+## R-143 knee plate rev 3 + P-154 fin guard: full-ROM sweep (cad/covers/r143_knee_sweep.py/.json, knee_fin_guard.py/.json/.stl)
+- Inputs: Actuators D91 (194f615) knee plate rev 3: 100 × 48 window in the thigh fairing / drive-bay panel, 8 fins 13 mm proud. T&R 447aa8e adds a guard, so the envelope is **24.5 mm proud** (guard outer face x −59.0, thigh frame).
+- No assembly CAD places the plate. It is placed from Legs L51/L58: plate face x −34.5, y 130 ± 24, z 690–790. Knee axis (x 0, z 500); RV12 rods from the housing trunnion (−130, 770) to the lever eye (r 47.5 [EST]); Legs shank keep-out point sets.
+- **Sweep, 1° steps, gate ≥ 3 mm:**
+
+| Check | Min clearance | Where / angle | Result |
+|---|---|---|---|
+| RV12 rods vs guard | **6.6 mm** | knee **141°** [EST] | PASS |
+| Shin fairing / ankle boot keep-outs | 97 mm | knee 0–145° | PASS |
+| Knee housing front fin tips (rev B) | 19.5 mm | static (pivots in place) | PASS |
+| Pelvis underside (z 1126) | 180 mm | hip −105…+40° | PASS |
+| Seated (seat on the rear housing / fairing) | 138 mm | hip 90° | PASS |
+| Kneeling | 6.6 mm (= knee 145°, rods) | — | PASS |
+
+  - Leg-to-leg: the fins face rear (−x) and the guard sides sit at y ≥ 104, so they are not in the inner-thigh plane.
+- **A35:** fin tips to guard inner face **10 mm** (≥ 8); guard open area **33.8 cm²** (22.1 face + 11.8 sides; ≥ 25 per bay); slots 3.5 mm, so IP2X: the 12 mm finger cannot enter.
+- **Trims and mass:**
+  - Drive-bay panel: 100 × 48 window, which removes about 9.7 g PA12 per side.
+  - **P-154 guard:** about 0.0195 kg/side. **Net about +0.020 kg pair [EST]** (guard 0.039, window −0.019).
+  - P-053 / L61 / knee bulge: unchanged.
+- **Actuators to confirm:** fins 13 mm and plate face at x −34.5; Thermal UA re-check with the guard (R-143 2b); plate edge seal vs the guard flange stack.
+- **Legs to confirm:** plate placement (y 130 ± 24, z 690–790); lever eye r 47.5 and rod path (6.6 mm at 141° is [EST], with rods assumed overlapping the plate in y); 4× M2.5 inserts in the window frame; fall/side impact with a sacrificial guard and the bay kept closed (R-143 2c).

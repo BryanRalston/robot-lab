@@ -423,3 +423,14 @@ All keep R-076 (reinforced isolation, IEC 60664-1 creepage, IP2X), R-074 (main l
 - **Interface condition:** the hip pitch/ankle/shoulder plate back faces see ≤50 °C structure, never the hip-pitch housing (85–98 °C), or carry a low-ε shield.
 - **Evidence:** modules/actuators/drive_heat_plates.py, results/drive_heat_plates.json, results/DRIVE_HEAT_PLATES.md rev 3, cad/drive_plate_*.step; Thermal R131_ELMO_MG.md rev 2.
 - **Open:** Thermal verification of rev 3, the R-140 conditions (Controls duty sim), and Electronics confirming the mated plug fits the 7 mm femur gap.
+
+### P-154: ID: knee fin guard (perforated PC over Actuators D91 knee plate rev 3)
+- Date: 2026-10-21
+- Module / proposer: Design / RL Industrial Design
+- Affected owners: Actuators, Legs, Thermal, Test & Reliability, Arbiter
+- Change: thermoformed 1.5 mm PC cap over the 100×48 knee-plate window, 24.5 mm proud, 3.5 mm slots (33.8 cm² open), fin-to-inner-face 10 mm, 4× M2.5 A2 captive into window-frame inserts; drive-bay panel gets the 100×48 window.
+- Impact on contracts: none (no mechanism change); envelope 24.5 mm proud at the femur rear.
+- Impact on targets: mass +0.020 kg pair [EST] (guard 0.039, window −0.019).
+- Evidence: design/cad/covers/knee_fin_guard.py/.json/.stl, r143_knee_sweep.py/.json (min 6.6 mm rods at knee 141° [EST]); V5_COVER_SET.md R-143 section.
+- Affected owner response: pending (Actuators UA with guard; Legs placement/inserts/fall)
+- Status: open

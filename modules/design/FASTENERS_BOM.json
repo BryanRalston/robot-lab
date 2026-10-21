@@ -56,6 +56,14 @@
    "grade": "TBD",
    "structural": false,
    "ti_swap": true
+  },
+  {
+   "where": "P-154 knee fin guard -> thigh-fairing window frame",
+   "size": "M2.5x6 pan head captive",
+   "count": 8,
+   "grade": "A2-70 stainless",
+   "structural": false,
+   "ti_swap": true
   }
  ]
 }
