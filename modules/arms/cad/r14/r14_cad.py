@@ -21,4 +21,4 @@ res=dict(standoff_vol_cm3=round(v(so)/1e3,2),standoff_kg_CALC=round(v(so)*2.81e-
          interference_standoff_housing_cm3=round(v(so.intersect(hous))/1e3,2),interference_pad_housing_cm3=round(v(pad.intersect(hous))/1e3,2))
 json.dump(res,open('r14_cad.json','w'),indent=1); print(res)
 # real housing for ID's shoulder_pad CAD placeholder (same frame as ID geometry.json origin; coaxial with X = roll axis)
-cq.exporters.export(hous,'housing_7013_real_coaxX.stl'); cq.exporters.export(so,'standoff_r14.stl')
+cq.exporters.export(hous,'housing_7013_real_coaxX.stl'); cq.exporters.export(hous,'housing_7013_real_coaxX.step'); cq.exporters.export(so,'standoff_r14.stl')

@@ -126,3 +126,4 @@ Checked against the R-065 criteria with sim/v3:
   - shoulder_P bracket (Arms, to be made)
   - Checks: ≥ 3 mm everywhere through abduction −15…180 × pitch, tuck B, and overhead pitch ≤ −150 / roll ≥ 170.
 - Output: `modules/arms/results/job8b_*`.
+- Job 8b update (2026-10-21): the head/torso cover STEPs now exist: `modules/design/cad/covers/head_shell.step` and `torso_cover.step`. They are faceted, in mm, in the site frame (Y-up), so transform them to the arms frame (X roll axis, Y outboard, Z up) before the clash check. The torso is a coarse 28-triangle envelope, so treat its clearances as indicative. Real housing STEP: `arms/cad/r14/housing_7013_real_coaxX.step`. **Job 8b stays on hold until the Arbiter's placement ruling.**
