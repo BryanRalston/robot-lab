@@ -14,7 +14,7 @@ git log -1 --format='%h %s' ; git log -1 --format='%h' -- sim/v3/humanoid_v3.xml
 cd modules/legs/rl
 export XLA_PYTHON_CLIENT_PREALLOCATE=false MUJOCO_GL=egl RL_RUNS=/root/rl-runs-j10
 ```
-Record both hashes in the report. **If the sim/v3 hash is not 4115f6e, stop and report** (the model changed under the plan). Training inputs (make_model output, R-118 mass, randomize/eval_box) are pinned at **adcdd73**: `git merge-base --is-ancestor adcdd73 HEAD` must succeed, and `git diff adcdd73 HEAD -- modules/legs/rl sim/v3` must be empty except for this brief's own outputs. Use a new `RL_RUNS` dir so job-4 checkpoints are not picked up by `restore`.
+Record both hashes in the report. **If the sim/v3 hash is not 4115f6e, stop and report** (the model changed under the plan). Training inputs (make_model output, R-118 mass, randomize/eval_box, obs clip, knee peak) are pinned at **a66cd8d**: `git merge-base --is-ancestor a66cd8d HEAD` must succeed, and `git diff a66cd8d HEAD -- modules/legs/rl sim/v3` must be empty except for this brief's own outputs. Use a new `RL_RUNS` dir so job-4 checkpoints are not picked up by `restore`.
 
 ## 1. Regenerate the MJX model from the current sim/v3 (CPU, ~1 min)
 ```bash
