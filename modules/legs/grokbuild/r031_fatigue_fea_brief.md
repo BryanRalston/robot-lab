@@ -2,8 +2,8 @@
 Inputs: `legs/R031_FIXES.md`, `legs/hp_lever_family_r031.py`, `actuators/results/GROKBUILD_lever_fea_v2.md` (G2 geometry + Amendment 1), `reliability/R1_FEA_REVIEW.md`, `legs/grokbuild/fea_r5.py` (solver base).
 
 ## Common settings
-- 7075-T6: E 71.7 GPa, Sy 503 MPa. Se = 87 MPa.
-- Pass: hot-spot von Mises amplitude ≤ 58 MPa at the walk load, fully reversed. Also SF_yield ≥ 1.5 at the design load.
+- 7075-T6 (R-123, ca66b9b): Sy 480 MPa, Su 560 MPa, E 70 GPa (ν 0.33). Se = 87 MPa (kept). **Static allowable 320 MPa** (480/1.5) at design/fault; any peak > 320 MPa is a **FAIL** (the 320–335 band is FAIL, not marginal). The earlier 503/572 / 71.7 GPa source is withdrawn and must not be used.
+- Pass: hot-spot von Mises amplitude ≤ 58 MPa at the walk load, fully reversed. Also design/fault peak ≤ 320 MPa (SF_yield ≥ 1.5 on Sy 480).
 - Convergence: h-refine to < 5 % peak change across three levels, with local h ≤ 0.5 mm at the fillets. Also report linearised membrane + bending through the root.
 
 ## Runs
