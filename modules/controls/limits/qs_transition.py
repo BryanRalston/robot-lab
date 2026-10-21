@@ -71,8 +71,18 @@ def run(mass=68.0, pad_tc=0.02, p=P, join_chest=False, elbow_cap=38.0):
             pts = KT.corners(m, d, g, toe_only); key = (g, toe_only)
             if key not in anchors: anchors[key] = [x.copy() for x in pts]
             for pt, p0 in zip(pts, anchors[key]): task(KT.point_jac(m, d, m.geom_bodyid[g], pt), -KC * (pt - p0), W_SUP)
+        if p.get('POSE') and 'CX_POSE' not in p: p = dict(p, CX_POSE=toe_x - p['POSE_MARGIN'])
         cx_feet = 0.5 * (toe_x + heel_x) if not toe_only else toe_x - p['COM_BACK']
-        if ph == 'P1':
+        if ph == 'P1' and p.get('POSE'):   # follow the static-IK reach pose (reach_ik_check) with the CoM over the feet
+            u = min(1.0, t / p['T1']); a5 = 10 * u**3 - 15 * u**4 + 6 * u**5
+            if 'q_p0' not in res: res['q_p0'] = None; q_p0 = d.qpos[s.qadr].copy(); q_p1 = s.target(p['POSE'])
+            for i, n in enumerate(s.names):
+                if any(n.endswith(k) for k in p['POSE']):
+                    jj = np.zeros((1, nv)); jj[0, act[i]] = 1.0; task(jj, 4.0 * (q_p0[i] + (q_p1[i] - q_p0[i]) * a5 - d.qpos[s.qadr[i]]), p.get('W_POSE', 5.0))
+            cxt = com0[0] + (p['CX_POSE'] - com0[0]) * a5
+            task(jc[0:1], KC * (cxt - com[0]), W_COM * 2); task(jc[1:2], -KC * com[1], W_COM)
+            if u >= 1.0: ph = 'P2'; tph['P2'] = t; p = dict(p, COM_BACK=toe_x - p['CX_POSE'], PITCH2=pitch, PITCH_RATE=0.0)
+        elif ph == 'P1':
             u = min(1.0, t / p['T1']); a5 = 10 * u**3 - 15 * u**4 + 6 * u**5
             cx = com0[0] + (toe_x - p['COM_BACK'] - com0[0]) * a5; cz = com0[2] + (p['Z1'] - com0[2]) * a5
             task(jc[0:1], KC * (cx - com[0]), W_COM); task(jc[1:2], -KC * com[1], W_COM); task(jc[2:3], KC * (cz - com[2]), W_COM)
@@ -124,6 +134,7 @@ def run(mass=68.0, pad_tc=0.02, p=P, join_chest=False, elbow_cap=38.0):
             res['fell'] = dict(t=round(t, 3), phase=ph, knee_pads=round(f['knee_pads']), other=round(f['other'])); break
     res.update(phase_t={k: round(v, 3) for k, v in tph.items()}, T_s=round(t, 3), hand_contact_vz_mps=hv, hand_peak_N=[round(x, 1) for x in hpk],
                knee_max_deg=round(math.degrees(kmax), 1), hand_load_end_N=round(fh, 1))
+    res.pop('q_p0', None)
     res['pass_'] = bool(res['fell'] is None and 'P4' in tph and all(v is not None and v <= 0.23 for v in hv) and max(hpk) <= 875 and kmax <= math.radians(120.5))
     if join_chest and res['pass_']:
         r2 = CL.run(sim=s); res['chest'] = {k: r2.get(k) for k in ('chest_contact_speed_mps', 'peak_chest_N', 'head_clear_before_chest_m', 'other_contact_geoms', 't_lower_s')}
