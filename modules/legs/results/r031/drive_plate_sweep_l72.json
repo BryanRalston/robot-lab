@@ -1,0 +1,114 @@
+{
+ "HP1": {
+  "cand": [
+   "pelvis",
+   [
+    84,
+    84
+   ],
+   [
+    -45,
+    88,
+    905
+   ]
+  ],
+  "min": 0.0,
+  "lim": "L_hip_pitch lever B needle hub (Actuators STEP; G2 rework queued) @{}",
+  "near": {
+   "L_roll-output bracket pad -y (bolts to lever cheek top) [EST]": 0.0,
+   "L_hip_pitch lever B needle hub (Actuators STEP; G2 rework queued)": 0.0,
+   "L_IKO TLA3520 needle bush in": 0.0,
+   "L_femur tube 7050-T7451 \u00f850x1.2 (R-031; P-047 wall 1.6 pending FEA)": 0.0,
+   "L_hip_pitch screw -y RV12 roller-screw rod \u00f812": 0.0,
+   "L_hip_pitch screw -y GE12 C rod-end eye": 0.0,
+   "L_femur tongue neck (55 mm, L36)": 0.0,
+   "L_hip_pitch screw +y GE12 C rod-end eye": 0.0
+  }
+ },
+ "HP2": {
+  "cand": [
+   "pelvis",
+   [
+    84,
+    84
+   ],
+   [
+    -45,
+    172,
+    905
+   ]
+  ],
+  "min": 0.0,
+  "lim": "L_hip_pitch lever B needle hub (Actuators STEP; G2 rework queued) @{}",
+  "near": {
+   "L_roll-output bracket pad +y (bolts to lever cheek top) [EST]": 0.0,
+   "L_hip_pitch lever B needle hub (Actuators STEP; G2 rework queued)": 0.0,
+   "L_hip_pitch shaft \u00f835/30 x66 hardened": 0.0,
+   "L_IKO TLA3520 needle bush out": 0.0,
+   "L_femur tube 7050-T7451 \u00f850x1.2 (R-031; P-047 wall 1.6 pending FEA)": 0.0,
+   "L_hip_pitch screw +y RV12 roller-screw rod \u00f812": 0.0,
+   "L_hip_pitch screw +y GE12 C rod-end eye": 0.0,
+   "L_femur tongue neck (55 mm, L36)": 0.0
+  }
+ },
+ "AN1": {
+  "cand": [
+   "L_shank",
+   [
+    56,
+    60
+   ],
+   [
+    -40,
+    130,
+    150
+   ]
+  ],
+  "min": 0.0,
+  "lim": "L_knee twin housing (Actuators D59 STEP, shared centre web) @{'L_knee': 145}",
+  "near": {
+   "L_knee twin housing (Actuators D59 STEP, shared centre web)": 0.0,
+   "L_knee trunnion bracket top plate (thigh) [EST]": 0.0,
+   "L_ankle fork bridge": 8.7,
+   "L_ankle fork cheek -y": 10.7,
+   "L_ankle fork cheek +y": 10.7,
+   "L_foot roll lug R": 11.4,
+   "L_ankle roll pin stub \u00f812 R": 16.4,
+   "L_tibia tube 7075 \u00f845x1.2": 22.2
+  }
+ },
+ "AN2": {
+  "cand": [
+   "L_shank",
+   [
+    56,
+    60
+   ],
+   [
+    -40,
+    130,
+    215
+   ]
+  ],
+  "min": 0.0,
+  "lim": "L_knee twin housing (Actuators D59 STEP, shared centre web) @{'L_knee': 145}",
+  "near": {
+   "L_knee twin housing (Actuators D59 STEP, shared centre web)": 0.0,
+   "L_tibia tube 7075 \u00f845x1.2": 22.2,
+   "R_tibia tube 7075 \u00f845x1.2": 22.2,
+   "L_tibia internal doubler sleeve 0.5x100 (r8)": 23.4,
+   "R_tibia internal doubler sleeve 0.5x100 (r8)": 23.4,
+   "L_ankle fork bridge": 42.9,
+   "L_ankle fork cheek -y": 50.2,
+   "L_ankle fork cheek +y": 50.2
+  }
+ },
+ "_P": {
+  "hip_z": 920,
+  "knee_z": 500,
+  "ankle_z": 80,
+  "hip_y": 130,
+  "pelvis_bot": 1126,
+  "pelvis_top": 1230
+ }
+}

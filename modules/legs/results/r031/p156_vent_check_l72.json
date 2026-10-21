@@ -1,0 +1,155 @@
+{
+ "a_hull_rear_x": {
+  "y104_z643": -94.1,
+  "y104_z690": -135.3,
+  "y104_z740": -168.8,
+  "y104_z792": -180.7,
+  "y104_z837": -157.2,
+  "y130_z643": -94.1,
+  "y130_z690": -135.3,
+  "y130_z740": -168.8,
+  "y130_z792": -180.7,
+  "y130_z837": -157.2,
+  "y156_z643": -94.1,
+  "y156_z690": -135.3,
+  "y156_z740": -168.8,
+  "y156_z792": -180.7,
+  "y156_z837": -157.2
+ },
+ "b_knee_housing": {
+  "L_knee twin housing (Actuators D59 STEP, shared centre web)": [
+   -176.1,
+   -79.4,
+   38.0,
+   222.0,
+   684.9,
+   805.5
+  ],
+  "R_knee twin housing (Actuators D59 STEP, shared centre web)": [
+   -176.1,
+   -79.4,
+   -222.0,
+   -38.0,
+   684.9,
+   805.5
+  ]
+ },
+ "c_nearby_thigh_parts": {
+  "L_knee twin housing (Actuators D59 STEP, shared centre web)": [
+   -176.1,
+   -79.4,
+   38.0,
+   222.0,
+   684.9,
+   805.5
+  ],
+  "L_knee trunnion bracket top plate (thigh) [EST]": [
+   -175.0,
+   -40.0,
+   32.0,
+   228.0,
+   816.0,
+   824.0
+  ],
+  "L_knee trunnion bracket strut to femur [EST]": [
+   -45.0,
+   5.0,
+   110.0,
+   150.0,
+   816.0,
+   824.0
+  ]
+ },
+ "d_rom": [
+  [
+   "V_duct_py",
+   "L_knee trunnion bracket top plate (thigh) [EST]",
+   0.0,
+   "{}"
+  ],
+  [
+   "V_duct_ny",
+   "L_knee trunnion bracket top plate (thigh) [EST]",
+   0.0,
+   "{}"
+  ],
+  [
+   "V_skin",
+   "L_knee trunnion bracket top plate (thigh) [EST]",
+   0.0,
+   "{}"
+  ],
+  [
+   "V_skin",
+   "L_knee twin housing (Actuators D59 STEP, shared centre web)",
+   2.6,
+   "{'L_knee': 145}"
+  ],
+  [
+   "V_skin",
+   "L_tibia tube 7075 \u00f845x1.2",
+   4.7,
+   "{'L_knee': 145}"
+  ],
+  [
+   "V_skin",
+   "L_tibia internal doubler sleeve 0.5x100 (r8)",
+   5.9,
+   "{'L_knee': 145}"
+  ],
+  [
+   "V_duct_py",
+   "L_knee trunnion bracket strut to femur [EST]",
+   6.5,
+   "{}"
+  ],
+  [
+   "V_duct_ny",
+   "L_knee trunnion bracket strut to femur [EST]",
+   6.5,
+   "{}"
+  ],
+  [
+   "V_skin",
+   "L_knee screw -y RV12 roller-screw rod \u00f812",
+   13.0,
+   "{}"
+  ],
+  [
+   "V_skin",
+   "L_knee screw +y RV12 roller-screw rod \u00f812",
+   13.0,
+   "{}"
+  ],
+  [
+   "V_boss0",
+   "L_knee twin housing (Actuators D59 STEP, shared centre web)",
+   13.7,
+   "{'L_knee': 145}"
+  ],
+  [
+   "V_boss1",
+   "L_knee twin housing (Actuators D59 STEP, shared centre web)",
+   13.7,
+   "{'L_knee': 145}"
+  ],
+  [
+   "V_duct_ny",
+   "L_knee screw -y RV12 roller-screw rod \u00f812",
+   13.8,
+   "{'L_knee': 145}"
+  ],
+  [
+   "V_duct_py",
+   "L_knee screw +y RV12 roller-screw rod \u00f812",
+   13.8,
+   "{'L_knee': 145}"
+  ],
+  [
+   "V_boss2",
+   "L_knee twin housing (Actuators D59 STEP, shared centre web)",
+   16.9,
+   "{'L_knee': 60}"
+  ]
+ ]
+}
