@@ -29,6 +29,7 @@
 - Screw max 8.76 kN each; **proof 13.1 kN** (1.5 × 8.76, both screws), plus one-screw fault (8.76 kN one side, 0 other) ×1.5.
 - Roll stop: hold 3933 N per block at r 45 mm (177 N·m), `legs/results/r7/a14.json`; impact energy 5.9 J if unbraked — apply 3933 N static ×1.5 dynamic factor [EST] = 5.9 kN.
 
+- **3,914 N fall/landing case (6 × BW at the toe or heel):** F = 3914.19 N (W 652.365 N × 6). Source: Legs structure FEA 48a9da0, `legs/grokbuild/results/STRUCTURE_FEA_REPORT.md` l.22 (load basis), Fall rows l.106 and l.113 (−3914.2 N); `FALL_N` 3914.19 in `fea_foot_h2.json` / `fea_foot_h8.json`, `F_N` 3914.19 in `fea_tubes.json`. Apply on the toe patch and the heel patch separately (h = 2 mm patches, report l.41). Same SF targets as the other cases. **Not** the 3,933 N roll-stop hold in `results/r7/a14.json`.
 - **Standing-tuck landing (T&R via Robot Lab, 2026-10-21): 2.7 kN** vertical at the ankle, the companion to the 3,914 N landing case. It loads the cross, the DU bushes and the sole, with the same SF targets as the 3,914 N case (262 L/LT, 239 ST, bearing tiers, DU 250 static). Hand check (L86, [EST], 2.7 kN split over 2 roll pins ø12 × 12 engagement): DU liner 9.4 MPa vs 250 → SF 26; 7075 bearing at the ø14 bush OD 8.0 MPa vs 295 (lowest tier) → SF 37; the case is 0.69 × the 3,914 N case, so every 3,914 N SF scales by ×1.45 and it cannot govern. Sole: FEA only.
 
 ## Goal
