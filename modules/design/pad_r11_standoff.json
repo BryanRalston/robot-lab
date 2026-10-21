@@ -1,0 +1,63 @@
+{
+ "part": "Pad stand-off R11 (ARMS-OWNED; ID layout proposal; Arms finalizes roll-output interface/drawing)",
+ "basis": "R-120; R10 FEA bc6ad91; Arms job8 e02c34b; Arms R13 1ee8d73",
+ "geometry": {
+  "roll_flange": "R13 kept: ring OD70/ID44 x5, 8x M4 12.9 PCD62, + 2x dia 6 m6 fitted dowels (was dia 4) or fitted shoulder bolts",
+  "box": "closed square tube 44x44 outer, 2.5 wall, Y 0..23, centred X 0 / Z -15 (Z +7..-37); welded-free: machined from solid with the flange and plate as one part",
+  "plate": "62x62x4 SOLID (no pocket), Y 23..27, centred X 0 / Z -20; 4x M4 tapped on +-24 square through 8 mm bosses; 9 mm overhang beyond box",
+  "pad_centre_Z": -20,
+  "mount_face_Y": 27,
+  "contact_face_Y": 102.3
+ },
+ "loads": {
+  "Fn": 6761,
+  "Fs": 1812,
+  "Mx_down_Nm": 321,
+  "M_axial_e5_Nm": 219
+ },
+ "calibration": {
+  "R10_rib_hand_MPa": 183,
+  "FEA_MPa": 524,
+  "K_stress": 2.86,
+  "K_defl": 37.4
+ },
+ "stress_MPa": {
+  "box_hand": 75,
+  "box_calibrated": 215,
+  "plate_span": 149,
+  "plate_overhang": 25,
+  "limit_0p67Sy": 337,
+  "dowel_tau": 229,
+  "dowel_SF_vs600": 2.62,
+  "flange_bearing": 216,
+  "bearing_SF_vs480": 2.22
+ },
+ "deflection_mm": {
+  "box_rot_hand": 0.017,
+  "box_rot_cal": 0.64,
+  "axial": 0.005,
+  "plate": 0.039,
+  "total_cal": 0.69,
+  "limit": 1.0
+ },
+ "kg_side_CALC": {
+  "roll_flange_R13_OD70_ID44x5_less_8xM4_2xD6": 0.0301,
+  "box_44x44x2.5_H23": 0.0268,
+  "plate_62x62x4_solid_less_4xM4": 0.0428,
+  "M4_bosses_4x_D8x4": 0.0019
+ },
+ "kg_side": 0.102,
+ "kg_pair": 0.204,
+ "vs_R13": {
+  "R13_kg_side": 0.072,
+  "R13_pair_booking_delta": 0.096,
+  "R11_pair_delta_vs_boss": 0.156,
+  "extra_vs_booking_pair": 0.06
+ },
+ "Arms_to_confirm": [
+  "one-piece machined box/flange/plate vs bolted; corner radii R3 at box roots (stress raiser)",
+  "dowels dia 6 m6 (or shoulder bolts) and ring ligament with 8x M4 + 2x dia 6 on PCD62",
+  "box footprint Z +7..-37 vs OD70 ring and CRBH 7013 inner ring; hollow box keeps access to the 8x M4 heads? (box ID 39 inside ring ID 44: M4 heads on PCD62 sit outside box, OK)",
+  "e<=5 stack with 0.6 mm defl; clash vs OD108 housing flange (>=3 mm fore-aft)"
+ ]
+}

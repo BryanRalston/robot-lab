@@ -239,3 +239,14 @@ Foam 0.035 + sleeve 0.009 + inserts/anchor 0.006 = **0.050/side, 0.100 kg pair =
 - Roll flange ring OD 60 / ID 40 × 4 mm on the roll output (bolt pattern TBD Arms) → 2 ribs 5 × 30 mm, Y 0–23, spanning Z 0 to −20 → pad face plate 62 × 62 × 4 (Y 23–27, rear pocketed, 2 mm floor) with 4× M4 tapped bosses on ±24 mm. Tray (0.5 mm) and R10 core 54.8 sq centred unchanged; mount face Y 27 keeps contact Y 102.3.
 - Mass **0.051 kg/side, 0.102 pair [EST]** (plate 0.019, ribs 0.018, flange 0.014); R-120 booked 0.050/side.
 - Arms to confirm: roll-output bolt pattern on CRBH 7013 A; rib/flange sizing under 7.0 kN at 15° (Job 8 add-on); e ≤ 5 mm tolerance stack; clash check (pad + stand-off + 7013 housing through abduction ROM, tuck, cover set); Y datum 27.
+
+## Stand-off R11 layout (Arms-owned; ID proposal) — fixes R10 FEA fail (bc6ad91) / Arms job8 (e02c34b)
+- Cause: two 30×5 ribs took Mx 321 N·m on their weak axis; 2 mm pocket floor. Dowels Ø4 SF 0.87.
+- **R11:** R13 flange kept (OD70/ID44×5, 8×M4 12.9 PCD62) + **2×Ø6 m6 fitted dowels**; **closed box 44×44, 2.5 wall**, Y 0–23, centred X 0 / Z −15; **solid 62×62×4 plate** (no pocket), Y 23–27, centre Z −20, 4×M4 ±24 in Ø8 bosses; R3 root fillets. One machined 7075-T6 part. Mount face Y 27, contact Y 102.3 unchanged.
+- Hand calc (pad_r11_standoff.py), calibrated to R10 FEA: rib hand 183 vs FEA 524 → K 2.86 applied to the box; old-floor cantilever hand ≈1140 vs FEA 1111 (plate method ≈1:1).
+  - Box 75 MPa hand → **215 calibrated** ≤ 337 (0.67 Sy). Plate 149 (span), 25 (overhang).
+  - Deflection **0.69 mm calibrated** (rotation term ×37) ≤ 1.0; plate 0.04.
+  - Dowels Ø6: τ 229 MPa, SF 2.62; flange bearing SF 2.22.
+- Mass **0.102 kg/side, 0.204 pair [CALC]** (flange 0.035, box 0.027, plate 0.042, bosses). vs boss 0.024/side → +0.156 pair; **+0.060 pair over the +0.096 R13 booking**. Arbiter to book.
+- Rerun: fea/job1_pad_r11/CASE.md. CAD: cad/shoulder_pad/ (STL + geometry.json, plain python; housing position is a placeholder for Arms).
+- Trims: COVER_TRIMS_R120.md. Fasteners: FASTENERS_BOM.json.

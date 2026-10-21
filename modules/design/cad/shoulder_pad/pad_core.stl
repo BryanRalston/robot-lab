@@ -1,0 +1,86 @@
+solid pad_core
+ facet normal 0 0 0
+  outer loop
+   vertex -27.400 27.500 -47.400
+   vertex -27.400 27.500 7.400
+   vertex -27.400 102.800 7.400
+  endloop
+ endfacet
+ facet normal 0 0 0
+  outer loop
+   vertex 27.400 27.500 -47.400
+   vertex 27.400 102.800 -47.400
+   vertex 27.400 102.800 7.400
+  endloop
+ endfacet
+ facet normal 0 0 0
+  outer loop
+   vertex -27.400 27.500 -47.400
+   vertex 27.400 27.500 -47.400
+   vertex 27.400 27.500 7.400
+  endloop
+ endfacet
+ facet normal 0 0 0
+  outer loop
+   vertex -27.400 102.800 -47.400
+   vertex -27.400 102.800 7.400
+   vertex 27.400 102.800 7.400
+  endloop
+ endfacet
+ facet normal 0 0 0
+  outer loop
+   vertex -27.400 27.500 -47.400
+   vertex -27.400 102.800 -47.400
+   vertex 27.400 102.800 -47.400
+  endloop
+ endfacet
+ facet normal 0 0 0
+  outer loop
+   vertex -27.400 27.500 7.400
+   vertex 27.400 27.500 7.400
+   vertex 27.400 102.800 7.400
+  endloop
+ endfacet
+ facet normal 0 0 0
+  outer loop
+   vertex -27.400 27.500 -47.400
+   vertex -27.400 102.800 7.400
+   vertex -27.400 102.800 -47.400
+  endloop
+ endfacet
+ facet normal 0 0 0
+  outer loop
+   vertex 27.400 27.500 -47.400
+   vertex 27.400 102.800 7.400
+   vertex 27.400 27.500 7.400
+  endloop
+ endfacet
+ facet normal 0 0 0
+  outer loop
+   vertex -27.400 27.500 -47.400
+   vertex 27.400 27.500 7.400
+   vertex -27.400 27.500 7.400
+  endloop
+ endfacet
+ facet normal 0 0 0
+  outer loop
+   vertex -27.400 102.800 -47.400
+   vertex 27.400 102.800 7.400
+   vertex 27.400 102.800 -47.400
+  endloop
+ endfacet
+ facet normal 0 0 0
+  outer loop
+   vertex -27.400 27.500 -47.400
+   vertex 27.400 102.800 -47.400
+   vertex 27.400 27.500 -47.400
+  endloop
+ endfacet
+ facet normal 0 0 0
+  outer loop
+   vertex -27.400 27.500 7.400
+   vertex 27.400 102.800 7.400
+   vertex -27.400 102.800 7.400
+  endloop
+ endfacet
+endsolid pad_core

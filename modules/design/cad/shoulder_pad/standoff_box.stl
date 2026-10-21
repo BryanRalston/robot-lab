@@ -1,0 +1,86 @@
+solid standoff_box
+ facet normal 0 0 0
+  outer loop
+   vertex -22.000 0.000 -37.000
+   vertex -22.000 0.000 7.000
+   vertex -22.000 23.000 7.000
+  endloop
+ endfacet
+ facet normal 0 0 0
+  outer loop
+   vertex 22.000 0.000 -37.000
+   vertex 22.000 23.000 -37.000
+   vertex 22.000 23.000 7.000
+  endloop
+ endfacet
+ facet normal 0 0 0
+  outer loop
+   vertex -22.000 0.000 -37.000
+   vertex 22.000 0.000 -37.000
+   vertex 22.000 0.000 7.000
+  endloop
+ endfacet
+ facet normal 0 0 0
+  outer loop
+   vertex -22.000 23.000 -37.000
+   vertex -22.000 23.000 7.000
+   vertex 22.000 23.000 7.000
+  endloop
+ endfacet
+ facet normal 0 0 0
+  outer loop
+   vertex -22.000 0.000 -37.000
+   vertex -22.000 23.000 -37.000
+   vertex 22.000 23.000 -37.000
+  endloop
+ endfacet
+ facet normal 0 0 0
+  outer loop
+   vertex -22.000 0.000 7.000
+   vertex 22.000 0.000 7.000
+   vertex 22.000 23.000 7.000
+  endloop
+ endfacet
+ facet normal 0 0 0
+  outer loop
+   vertex -22.000 0.000 -37.000
+   vertex -22.000 23.000 7.000
+   vertex -22.000 23.000 -37.000
+  endloop
+ endfacet
+ facet normal 0 0 0
+  outer loop
+   vertex 22.000 0.000 -37.000
+   vertex 22.000 23.000 7.000
+   vertex 22.000 0.000 7.000
+  endloop
+ endfacet
+ facet normal 0 0 0
+  outer loop
+   vertex -22.000 0.000 -37.000
+   vertex 22.000 0.000 7.000
+   vertex -22.000 0.000 7.000
+  endloop
+ endfacet
+ facet normal 0 0 0
+  outer loop
+   vertex -22.000 23.000 -37.000
+   vertex 22.000 23.000 7.000
+   vertex 22.000 23.000 -37.000
+  endloop
+ endfacet
+ facet normal 0 0 0
+  outer loop
+   vertex -22.000 0.000 -37.000
+   vertex 22.000 23.000 -37.000
+   vertex 22.000 0.000 -37.000
+  endloop
+ endfacet
+ facet normal 0 0 0
+  outer loop
+   vertex -22.000 0.000 7.000
+   vertex 22.000 23.000 7.000
+   vertex -22.000 23.000 7.000
+  endloop
+ endfacet
+endsolid standoff_box

@@ -1,0 +1,86 @@
+solid tray
+ facet normal 0 0 0
+  outer loop
+   vertex -31.000 27.000 -51.000
+   vertex -31.000 27.000 11.000
+   vertex -31.000 27.500 11.000
+  endloop
+ endfacet
+ facet normal 0 0 0
+  outer loop
+   vertex 31.000 27.000 -51.000
+   vertex 31.000 27.500 -51.000
+   vertex 31.000 27.500 11.000
+  endloop
+ endfacet
+ facet normal 0 0 0
+  outer loop
+   vertex -31.000 27.000 -51.000
+   vertex 31.000 27.000 -51.000
+   vertex 31.000 27.000 11.000
+  endloop
+ endfacet
+ facet normal 0 0 0
+  outer loop
+   vertex -31.000 27.500 -51.000
+   vertex -31.000 27.500 11.000
+   vertex 31.000 27.500 11.000
+  endloop
+ endfacet
+ facet normal 0 0 0
+  outer loop
+   vertex -31.000 27.000 -51.000
+   vertex -31.000 27.500 -51.000
+   vertex 31.000 27.500 -51.000
+  endloop
+ endfacet
+ facet normal 0 0 0
+  outer loop
+   vertex -31.000 27.000 11.000
+   vertex 31.000 27.000 11.000
+   vertex 31.000 27.500 11.000
+  endloop
+ endfacet
+ facet normal 0 0 0
+  outer loop
+   vertex -31.000 27.000 -51.000
+   vertex -31.000 27.500 11.000
+   vertex -31.000 27.500 -51.000
+  endloop
+ endfacet
+ facet normal 0 0 0
+  outer loop
+   vertex 31.000 27.000 -51.000
+   vertex 31.000 27.500 11.000
+   vertex 31.000 27.000 11.000
+  endloop
+ endfacet
+ facet normal 0 0 0
+  outer loop
+   vertex -31.000 27.000 -51.000
+   vertex 31.000 27.000 11.000
+   vertex -31.000 27.000 11.000
+  endloop
+ endfacet
+ facet normal 0 0 0
+  outer loop
+   vertex -31.000 27.500 -51.000
+   vertex 31.000 27.500 11.000
+   vertex 31.000 27.500 -51.000
+  endloop
+ endfacet
+ facet normal 0 0 0
+  outer loop
+   vertex -31.000 27.000 -51.000
+   vertex 31.000 27.500 -51.000
+   vertex 31.000 27.000 -51.000
+  endloop
+ endfacet
+ facet normal 0 0 0
+  outer loop
+   vertex -31.000 27.000 11.000
+   vertex 31.000 27.500 11.000
+   vertex -31.000 27.500 11.000
+  endloop
+ endfacet
+endsolid tray
