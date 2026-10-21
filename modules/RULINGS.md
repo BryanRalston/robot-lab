@@ -1293,3 +1293,24 @@ Credible mass ~67.97 kg means a reserve of +0.03 kg against 68.0; the +0.30 rese
 - **Reserve against 68.0: −0.64 kg.** The R-122 best-case plan (−0.58 more beyond current credit) does not close it.
 - **R-124 fails: the credible mass exceeds the conditional 68.0 kg limit.** Thermal's condition was met (93cd74b) and the Actuators and J10 conditions are still pending, but mass alone breaks the limit. The mass is also **above the J10 randomization top (68.5)**, so J10 at a 68.0 nominal no longer represents the robot.
 - Under R-124, **T2 reverts to 66.5 and option C (deeper redesign) opens**. Against 66.5 the reserve is −2.14 kg. This is a target-level decision: **it goes to Bryan through Robot Lab** (C, or a further T2 raise to about 69.0 with a new J10 range, plus Actuators/Thermal re-checks). The R-066 freeze stands, and G4/G5 sign-off is withheld.
+
+### R-125 (c) and amendment (same day): actuator arm/waist fasteners (Actuators D84 d47a4a7), (a2) overlap, 7075 basis items. **This supersedes the R-125 mass chain above.**
+- **D84 accepted: book +0.875 kg at full.**
+  - Counted 1.265 kg (16 units). Booked basis: v3 rotary 0.03/unit × 10 = 0.30, plus D70 0.015 × 6 = 0.09, total 0.39.
+  - What v3's 0.07 covers: `v3/analysis/v3.py` actuator() adds an unlabelled `+0.03+0.04` to rotary mass. No v3 or CONTRACTS text identifies the 0.04 as fasteners. cad_mass (R-123 (c)) books its fastener lines separately from a connector allowance. The 0.04 is therefore not evidenced as hardware, and the +0.475 low case is rejected.
+  - Booked as an ADDITION at full: **+0.875**. A lower G4 CAD count is credited at full when measured. This closes R-123's arm/waist open risk.
+- **(a2) overlap with the Arms BOM, by comparing the FASTENER_BOM files line by line:**
+  - Actuators already excludes the stand-off flange M4. Arms excludes actuator internals.
+  - Both files count the arm-side joints at actuator output flanges. Actuators counts "output flange → customer" M5x16 for each unit. Arms counts "upper-arm link → elbow unit" M5x14 (62.3 g) and "forearm tube → elbow output / wrist node" M4x10 (45.0 g). These are the same joints, so each is booked once, under Actuators.
+  - **(a2) reduced to +0.500 − 0.107 = +0.393 kg.** Every other Arms line (torso M8, housing seat flange, hand, covers, clips, PCBs) is arm-structure-only, with no overlap.
+- **7075 basis:**
+  - G3/G4 briefs and cad_mass now use 480/560/70 and 320. Lever SF on 480: hip 2.00, knee 2.50. **Accepted.**
+  - The h4 needle lever at 332 MPa (PROOF_TEST_hip_lever) is superseded geometry. Actuators' R123_RECHECK reports no live part above 320, and no current BOM or LINKAGE row cites h4, so it stands as superseded. If it is ever revived, it fails 320 and comes back to me.
+  - **T&R `reliability/JOB9_SPEC.md` must change 7075-T6 to Sy 480 / Su 560 / E 70, with a static limit of 320** (single-load-path parts at A-basis/1.5 per R-125 (b)). Owner: T&R, before Job 9 runs. Se 87 is unchanged.
+- **Corrected mass chain:** R-124 ≈ 67.97. (a) W2 +0.184 → 68.154. (a2) +0.393 → 68.547. Row 13 −0.011 → 68.536. (c) +0.875 → **≈ 69.41 kg credible**.
+  - **Reserve against 68.0: −1.41 kg.** Against 66.5: −2.91. That is 0.91 above the J10 randomization top of 68.5.
+  - R-122 on current evidence (−0.74) brings it to about 68.67. The design-phase best case (−1.19) brings it to about 68.22. **Neither reaches 68.0.**
+- **R-124 FAILS.** Credible mass exceeds the conditional 68.0 kg limit even on the full mass-down plan. J10 at a 68.0 nominal and the Actuators/Thermal 68.0 margins (Thermal 93cd74b) no longer represent the robot.
+  - Under R-124, **T2 reverts to 66.5 and option C (deeper redesign) opens**.
+  - The alternative is a further T2 raise to about 69.5 kg, which needs new Actuators/Thermal margins at 69.5 + 20 kg carry and a J10 range extended to ≥ 70.0.
+  - This is a target-level decision for **Bryan, through Robot Lab**. The R-066 freeze stands, and G4/G5 sign-off is withheld.
