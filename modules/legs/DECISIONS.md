@@ -443,3 +443,7 @@ Numbered L84 because L83 already holds the tube local-buckling item. Scripts: kn
   - **A:** twin stacks in r116b lower-rear housing bosses at r60, striking pads on the tongue-neck block. 13.8 kN; boss SF 3.97 / 5.9. **0.36 kg robot.**
   - **B:** single 36×36×48 stack in a housing underside pocket (9 mm floor) at r50, striking the tongue-neck top. 16.6 kN; floor SF 1.31 / 1.96. **0.26 kg robot.** Needs a central sweep.
   - Both pass ≤ 0.49. B is recommended, with A as fallback. The housing changes for Actuators are listed in the study.
+- **L91 addendum (Robot Lab, with Controls accepting): the L90 hip stop is FINAL. The 8g hold is CLEARED.** The angled PU 90A ø16×10 on a ramp bracket, struck by the L39 yaw tab, is booked at **+0.046 kg robot**. The coupled yaw/roll limit **replaces the hip yaw −35..+40 / −40..+35 (L87)**:
+  - **Left leg:** yaw **−18..+28° for roll ≥ −3°**, linear to **−5..+10° at roll −12°**. Roll adduction contact at **−10°**, **−12.3° at full crush**.
+  - **Right leg:** mirrored (yaw −28..+18 → −10..+5; roll contact +10°, +12.3° crushed).
+  - The torque curve for T&R is as in L90.
