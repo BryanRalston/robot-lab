@@ -27,6 +27,19 @@ def build(c):
     P = g["posts"]
     for y in P["y"]:
         al.append(occ.addBox(b["x0"], y-P["w_y"]/2, 0, b["t"], P["w_y"], b["z0"]))
+    bx = g.get("bay_box")   # job 3c: closed sternum/pack-bay torsion box replacing the posts
+    if bx:
+        Y, xf_, xr_, z0_, z1_ = bx["y"], bx["x_front"], bx["x_rear"], bx["z0"], bx["z1"]
+        for sg in (-1, 1):
+            al.append(occ.addBox(xr_, sg*Y - (bx["t_side"] if sg > 0 else 0), z0_, xf_-xr_, bx["t_side"], z1_-z0_))
+        al.append(occ.addBox(xf_-bx["t_web"], -Y, z0_, bx["t_web"], 2*Y, z1_-z0_))
+        al.append(occ.addBox(xr_, -Y, z0_, bx["t_web"], 2*Y, z1_-z0_))
+        al.append(occ.addBox(xr_, -Y, z1_-bx["t_lid"], xf_-xr_, 2*Y, bx["t_lid"]))
+    sb = g.get("sternum_box")   # job 3c: closed sternum box behind the bulkhead (webs + top cap) tied to the bay rear web
+    if sb:
+        for yy in sb["web_y"]:
+            al.append(occ.addBox(sb["x_rear"], yy - sb["t"]/2, b["z0"], b["x0"] - sb["x_rear"] + 0.01, sb["t"], b["height_z"]))
+        al.append(occ.addBox(sb["x_rear"], -b["width_y"]/2, b["z0"] + b["height_z"] - sb["t_cap"], b["x0"] - sb["x_rear"] + 0.01, b["width_y"], sb["t_cap"]))
     bulk, _ = occ.fuse([(3, al[0])], [(3, t) for t in al[1:]])
     cuts = []
     for s in (-1, 1):
@@ -47,6 +60,9 @@ def build(c):
     po = occ.addBox(-pv["depth_x"]/2, -pv["width_y"]/2, pv["z0"], pv["depth_x"], pv["width_y"], pv["height_z"])
     pi_ = occ.addBox(-pv["depth_x"]/2+w, -pv["width_y"]/2+w, pv["z0"]+w, pv["depth_x"]-2*w, pv["width_y"]-2*w, pv["height_z"]-2*w)
     pel, _ = occ.cut([(3, po)], [(3, pi_)])
+    if pv.get("deck_t"):   # waist/hip-yaw deck (model_v4 160 x 364 x 8) on the pelvis top
+        dk = occ.addBox(-pv["deck_x"]/2, -pv["deck_y"]/2, pv["z0"]+pv["height_z"]-pv["deck_t"], pv["deck_x"], pv["deck_y"], pv["deck_t"])
+        pel, _ = occ.fuse(pel, [(3, dk)])
     occ.fragment(bulk + pel, [(3, part)])   # conformal: shared faces -> shared nodes
     occ.synchronize()
     tags = {"bulkhead": [], "partition": [], "pelvis": []}
@@ -336,6 +352,7 @@ def main():
     sets = {
         "fixed": node_set(N, (-B, -B, pv["z0"]-t, B, B, pv["z0"]+t), used),
         "land": node_set(N, (xf-t, -L["size"]/2-t, L["z_c"]-L["size"]/2-t, xf+t, L["size"]/2+t, L["z_c"]+L["size"]/2+t), used),
+        "land_off": node_set(N, (xf-t, -0.5-t, L["z_c"]-0.5-t, xf+t, L["size"]/2+t, L["z_c"]+L["size"]/2+t), used),   # LC1b: 51x51 quadrant patch, centroid offset +25 y / +25 z
         "shoulder_flange_L": node_set(N, (-B, b["width_y"]/2-t, b["z0"]-t, B, B, B), used),
         "pelvis_top": node_set(N, (-B, -B, zt-t, B, B, zt+t), used),
         "partition": node_set(N, (p["x0"]-t, -B, p["z0"]+t, p["x0"]+t, B, B), used),
@@ -350,7 +367,10 @@ def main():
             shared[f"{k}|{m}"] = len(node_sets[k] & node_sets[m])
     def npair(a, b):
         return shared.get(f"{a}|{b}", shared.get(f"{b}|{a}", 0))
-    for a_, b_ in (("posts", "pelvis"), ("posts", "bulkhead"), ("partition", "pelvis"), ("partition", "bulkhead")):
+    pairs = [("posts", "pelvis"), ("posts", "bulkhead"), ("partition", "bulkhead")] + ([] if c["geometry"].get("bay_box") else [("partition", "pelvis")]) + ([("bulkhead", "pelvis")] if c["geometry"].get("bay_box") else [])
+    for a_, b_ in pairs:
+        if not node_sets.get(a_) or not node_sets.get(b_):
+            continue   # part absent in this config (e.g. 3c has no posts)
         if npair(a_, b_) <= 0:
             raise SystemExit(f"disconnected mesh: {a_}-{b_} shared={npair(a_, b_)}")
     masses = {}
@@ -417,6 +437,7 @@ def main():
                 if gp.get("path") == "single" and "allowable" not in gp and Mt["Sy"] > 300:
                     raise SystemExit(f"R-128: single-path {part} needs a per-part allowable")
                 Sy = gp.get("allowable", Mt.get("allowable", Mt["Sy"]))
+                Sy = lc.get("allowables", {}).get(part, Sy)   # per-case (T&R b1fe48f fall/ultimate allowables)
                 st = part_stats(rec, near, part)
                 vm_gate = st["vm_struct"] if st["vm_struct"] else st["vm_max"]
                 sf = Sy/vm_gate if vm_gate else float("inf")
@@ -424,7 +445,7 @@ def main():
                 entry = {"path": gp.get("path"), "allowable": Sy,
                          "vm_max": round(st["vm_max"], 2), "vm_loc_mm": st["vm_loc"],
                          "vm_struct": round(st["vm_struct"], 2), "vm_struct_loc_mm": st["vm_struct_loc"],
-                         "SF": round(sf, 3), "SF_raw": round(sf_raw, 3), "pass": bool(sf >= cr["SF_min"])}
+                         "SF": round(sf, 3), "SF_raw": round(sf_raw, 3), "pass": bool(sf >= lc.get("SF_min", cr["SF_min"]))}
                 if part == "posts":
                     entry["vm_ligament"] = round(st["vm_ligament"], 2)
                     entry["vm_ligament_loc_mm"] = st["vm_ligament_loc"]
@@ -436,7 +457,8 @@ def main():
                 chk[f"SF_{part}"] = entry
             if d["U"]:
                 um = max(d["U"])
-                chk["land_defl"] = {"mm": round(um, 5), "pass": (bool(um <= cr["land_defl_max"]) if name == "LC1_chest_pad" else None)}
+                lim = lc.get("defl_max", cr["land_defl_max"])
+                chk["land_defl"] = {"mm": round(um, 5), "limit_mm": lim, "pass": (bool(um <= lim) if name.startswith("LC1") else None)}
             if d["freq"]:
                 pos = [f for f in d["freq"] if f > 1e-3]
                 f1 = min(pos) if pos else min(d["freq"])

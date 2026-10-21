@@ -20,3 +20,6 @@
 - **Deck contents:** honeycomb block of hexas, crush axis x. LAW28: E11 1034 MPa, G12/G31 483/214 (HEX_CRIII); axial yield curve = lot plateau flat to ε 0.60, ×1.5 at 0.70, steep densification beyond; weak transverse. Land face fixed (/BCS, bonded). Moving rigid plane wall = impactor of mass m at v (/RWALL/PLANE). /TH/RWALL force plus /TH/NODE face displacement. Engine: /RUN 60 ms, /TFILE 10 µs, /ANIM 2 ms.
 - **Validation gap:** the box got HTTP 404 for every GitHub OpenRadioss URL (repo and release assets) and conda-forge has no package, so **no starter/engine run was possible here**. Card formats follow the Radioss block format but are unvalidated. First PC run: check the starter .out for card errors (LAW28 / RWALL field order) before the engine.
 - **Cases** now include `kneel_tip_13p3kN` (Controls fc86721; force-driven, screen only, elastic).
+
+## Cartridge acceptance (T&R b1fe48f)
+Dynamic crush coupon per lot at 5.7 m/s: peak ≤29.0 kN, plateau in the R-102 band, densification strain recorded. Pre-crush inspection per DIAGNOSIS.md §5.

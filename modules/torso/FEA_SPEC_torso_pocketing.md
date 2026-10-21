@@ -39,3 +39,11 @@
 | Torso shell | CFRP 2.0 mm | QI | multi / secondary | skin 300 [EST] |
 | Sternum land inserts, EtherCAT bosses | in the bulkhead / partition | – | carried by the parent | parent |
 - Applied in fea_job3.yaml/.py and fea_job3b.yaml as per-part allowables. The script refuses a single-path metal part without one. Drawings state stock and grain as above; if the drawing fixes grain L, the L value may be used only after the R-128 table is checked.
+
+
+## JOB 3c (supersedes job 3 / 3b gates), bryan PC
+- **Config:** `fea_job3c.yaml` (closed pack-bay torsion box + closed sternum box; model_v4 pelvis + 8 mm deck; partition above the pack).
+- **Loads/gates:** T&R b1fe48f (CHEST_DESIGN_LOAD.md). LC1a/b/c at 29 kN against the fall allowable; LC1u at 43.5 kN, no rupture; buckling ≥ 1.5; land k ≥ 5.3 MN/m (≤ 5.5 mm); mode 1 ≥ 80 Hz; LC2 per R-127. **The 0.05 mm gate and SF ≥ 2 stacking are deleted** (DIAGNOSIS.md §2).
+- **Run:** `python modules/torso/fea_job3.py --cfg modules/torso/fea_job3c.yaml --out modules/torso/fea/job3c`. Mesh 6 mm, then 4 mm for convergence.
+- **Box coarse result:** k 19 MN/m, buckling 4.6 and mode 382 Hz pass; LC2 passes; stress SF 0.56–0.86 at junctions (unconverged); +1.43 kg full. See DIAGNOSIS.md §4.
+- **Pocketing credit: pulled.** P-148/P-149 on hold.

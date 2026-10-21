@@ -368,7 +368,8 @@ All keep R-076 (reinforced isolation, IEC 60664-1 creepage, IP2X), R-074 (main l
 | P-150 | A41 duct walls: mould the duct side walls into the shell/partition instead of separate 1 mm PC walls | duct 0.04 P-030 [EST] | −0.02 [EST] | tooling; Electronics co-owns A41 (R-030), needs their sign-off |
 
 - Considered and rejected: contactor swap (only lighter cited part, EV100, fails the coil-power limit, R-074); fan (Sunon fixed, no cited lighter part at the airflow); bus-bar downsizing below 10 mm² (R-074); DC-DC repackaging (DCM is a sealed module on the cold plate).
-- Total proposed: **−0.25 kg [EST]**, −0.125 at half credit (P-147 corrected to −0.05). P-148 and P-149 are confirmed by FEA job 3 (FEA_SPEC_torso_pocketing.md).
+- Total proposed: **−0.25 kg [EST]**, −0.125 at half credit (P-147 corrected to −0.05)
+- **2026-10-21: job 3 FAILED. P-148 and P-149 are ON HOLD (pocketing credit pulled). P-145/P-146/P-147/P-150 are independent: −0.17 [EST], −0.085 at half.** See torso/DIAGNOSIS.md.. P-148 and P-149 are confirmed by FEA job 3 (FEA_SPEC_torso_pocketing.md).
 - Status: OPEN (Arbiter)
 ### P-055: Actuators: shoulder_roll contract row drops the slip clutch (R-120)
 - Date: 2026-10-21

@@ -543,3 +543,6 @@ Rated on the kitting duty cycle at **4.55 h**; no bigger pack.
 
 ### Sternum stack update (ID 341ef4a, 2026-10-21)
 The core is 116 mm (supersedes 88 and 100). Skin x +0.175, 65 mm proud of the cover. Ribbon L along z. A land socket wall (+0.006 [EST]) and PA66 bezel stand-offs (+0.004 [EST]) are proposed. Head clearance 69.8 mm against 68 needed: PASS. See R146_pack_shock.md §5.
+
+### Pocketing credit pulled (2026-10-21)
+Job 3 FAILED. All pocketing credit is withdrawn. P-148/P-149 are on hold; P-145/146/147/150 are independent and stand. Job 3c (closed boxes, T&R b1fe48f loads) is in DIAGNOSIS.md.
