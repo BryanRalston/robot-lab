@@ -521,3 +521,14 @@ All keep R-076 (reinforced isolation, IEC 60664-1 creepage, IP2X), R-074 (main l
     - 68.9 J at 4.36 kN·m → θ 1.8° (3.2 mm).
   - So the stop engages θ before each range end, or bottoms θ beyond it. The choice and the ROM impact wait for D102c.
 - **Candidate part family (not selected):** ACE TUBUS TA co-polyester profile dampers, e.g. TA43-18: 112 Nm/cycle continuous, 165 emergency, 18 mm stroke, 0.051 kg (ACE TUBUS TA datasheet, acecontrols.co.uk ACE_TUBUS_TA_OPERATING-MOUNTING_EN_21_22_0019). Its force–stroke curve must be checked against the peak torque once D102c sets it.
+
+### P-161: ID: head-first fall protection — crown/brow LD29 25 mm liner, visor recess ≥20 mm + replaceable, CF shell 1.5/2.0 mm; torso standoff evaluated and not recommended (+0.022 kg [EST])
+- Date: 2026-10-21
+- Module / proposer: design / RL Industrial Design
+- Affected owners: head, materials, controls, reliability, arms, arbiter
+- Change: add head liner/visor/laminate spec per modules/design/HEAD_IMPACT_LINER.md; head envelope +27 mm at crown/brow (covers only).
+- Impact on contracts: mass +0.022 kg [EST] on head line; no mechanism/FOV change (Head to confirm brow lip vs FOV).
+- Impact on targets: none computed.
+- Evidence: head_impact_liner.py/.json, head_standoff_check.py/.json; Controls 2975e93, f1663cc. Allowable g open: no published shock rating for ZED X Mini or XM430 (cited).
+- Affected owner response: pending
+- Status: open

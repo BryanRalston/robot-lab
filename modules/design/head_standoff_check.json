@@ -1,0 +1,155 @@
+{
+ "note": "margin mm = head lowest minus candidate lowest along floor normal; +ve = candidate first. Per-run orientation not in l3_headfirst_replay.json (v_world only).",
+ "rows": [
+  {
+   "theta_deg": 60,
+   "chest_pad_face(x147,y1530)": 148.7,
+   "epaulette_E1(x125,y1680,15mm proud of cover)": 54.6,
+   "brow_bumper_B1(x115,y1800) on head": -14.0
+  },
+  {
+   "theta_deg": 65,
+   "chest_pad_face(x147,y1530)": 135.4,
+   "epaulette_E1(x125,y1680,15mm proud of cover)": 52.1,
+   "brow_bumper_B1(x115,y1800) on head": -7.7
+  },
+  {
+   "theta_deg": 70,
+   "chest_pad_face(x147,y1530)": 119.3,
+   "epaulette_E1(x125,y1680,15mm proud of cover)": 47.3,
+   "brow_bumper_B1(x115,y1800) on head": -3.1
+  },
+  {
+   "theta_deg": 75,
+   "chest_pad_face(x147,y1530)": 102.2,
+   "epaulette_E1(x125,y1680,15mm proud of cover)": 42.1,
+   "brow_bumper_B1(x115,y1800) on head": 1.4
+  },
+  {
+   "theta_deg": 80,
+   "chest_pad_face(x147,y1530)": 83.8,
+   "epaulette_E1(x125,y1680,15mm proud of cover)": 36.1,
+   "brow_bumper_B1(x115,y1800) on head": 5.4
+  },
+  {
+   "theta_deg": 85,
+   "chest_pad_face(x147,y1530)": 63.3,
+   "epaulette_E1(x125,y1680,15mm proud of cover)": 28.3,
+   "brow_bumper_B1(x115,y1800) on head": 7.9
+  },
+  {
+   "theta_deg": 90,
+   "chest_pad_face(x147,y1530)": 42.3,
+   "epaulette_E1(x125,y1680,15mm proud of cover)": 20.3,
+   "brow_bumper_B1(x115,y1800) on head": 10.3
+  },
+  {
+   "theta_deg": 95,
+   "chest_pad_face(x147,y1530)": 19.9,
+   "epaulette_E1(x125,y1680,15mm proud of cover)": 11.1,
+   "brow_bumper_B1(x115,y1800) on head": 11.6
+  },
+  {
+   "theta_deg": 100,
+   "chest_pad_face(x147,y1530)": -3.5,
+   "epaulette_E1(x125,y1680,15mm proud of cover)": 0.9,
+   "brow_bumper_B1(x115,y1800) on head": 11.9
+  },
+  {
+   "theta_deg": 105,
+   "chest_pad_face(x147,y1530)": -26.9,
+   "epaulette_E1(x125,y1680,15mm proud of cover)": -9.3,
+   "brow_bumper_B1(x115,y1800) on head": 12.1
+  },
+  {
+   "theta_deg": 110,
+   "chest_pad_face(x147,y1530)": -51.7,
+   "epaulette_E1(x125,y1680,15mm proud of cover)": -21.0,
+   "brow_bumper_B1(x115,y1800) on head": 10.6
+  },
+  {
+   "theta_deg": 115,
+   "chest_pad_face(x147,y1530)": -76.4,
+   "epaulette_E1(x125,y1680,15mm proud of cover)": -33.0,
+   "brow_bumper_B1(x115,y1800) on head": 8.7
+  },
+  {
+   "theta_deg": 120,
+   "chest_pad_face(x147,y1530)": -100.8,
+   "epaulette_E1(x125,y1680,15mm proud of cover)": -44.9,
+   "brow_bumper_B1(x115,y1800) on head": 6.5
+  },
+  {
+   "theta_deg": 125,
+   "chest_pad_face(x147,y1530)": -126.2,
+   "epaulette_E1(x125,y1680,15mm proud of cover)": -58.1,
+   "brow_bumper_B1(x115,y1800) on head": 2.5
+  },
+  {
+   "theta_deg": 130,
+   "chest_pad_face(x147,y1530)": -150.5,
+   "epaulette_E1(x125,y1680,15mm proud of cover)": -71.0,
+   "brow_bumper_B1(x115,y1800) on head": -1.5
+  },
+  {
+   "theta_deg": 135,
+   "chest_pad_face(x147,y1530)": -174.6,
+   "epaulette_E1(x125,y1680,15mm proud of cover)": -84.1,
+   "brow_bumper_B1(x115,y1800) on head": -6.3
+  },
+  {
+   "theta_deg": 140,
+   "chest_pad_face(x147,y1530)": -198.4,
+   "epaulette_E1(x125,y1680,15mm proud of cover)": -97.7,
+   "brow_bumper_B1(x115,y1800) on head": -12.2
+  },
+  {
+   "theta_deg": 145,
+   "chest_pad_face(x147,y1530)": -220.8,
+   "epaulette_E1(x125,y1680,15mm proud of cover)": -110.5,
+   "brow_bumper_B1(x115,y1800) on head": -18.0
+  },
+  {
+   "theta_deg": 150,
+   "chest_pad_face(x147,y1530)": -242.9,
+   "epaulette_E1(x125,y1680,15mm proud of cover)": -124.0,
+   "brow_bumper_B1(x115,y1800) on head": -25.0
+  },
+  {
+   "theta_deg": 155,
+   "chest_pad_face(x147,y1530)": -263.6,
+   "epaulette_E1(x125,y1680,15mm proud of cover)": -137.0,
+   "brow_bumper_B1(x115,y1800) on head": -32.4
+  },
+  {
+   "theta_deg": 160,
+   "chest_pad_face(x147,y1530)": -282.9,
+   "epaulette_E1(x125,y1680,15mm proud of cover)": -149.4,
+   "brow_bumper_B1(x115,y1800) on head": -40.1
+  },
+  {
+   "theta_deg": 165,
+   "chest_pad_face(x147,y1530)": -301.0,
+   "epaulette_E1(x125,y1680,15mm proud of cover)": -161.8,
+   "brow_bumper_B1(x115,y1800) on head": -48.5
+  },
+  {
+   "theta_deg": 170,
+   "chest_pad_face(x147,y1530)": -317.2,
+   "epaulette_E1(x125,y1680,15mm proud of cover)": -173.3,
+   "brow_bumper_B1(x115,y1800) on head": -56.9
+  },
+  {
+   "theta_deg": 175,
+   "chest_pad_face(x147,y1530)": -331.7,
+   "epaulette_E1(x125,y1680,15mm proud of cover)": -184.2,
+   "brow_bumper_B1(x115,y1800) on head": -65.6
+  },
+  {
+   "theta_deg": 180,
+   "chest_pad_face(x147,y1530)": -345.0,
+   "epaulette_E1(x125,y1680,15mm proud of cover)": -195.0,
+   "brow_bumper_B1(x115,y1800) on head": -75.0
+  }
+ ]
+}
