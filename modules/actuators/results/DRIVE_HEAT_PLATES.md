@@ -58,3 +58,26 @@ Supersedes the rev 3 knee. The guard is ID's CAD, not drawn here: `modules/desig
 - **Guard/ID:** the window and guard narrow by 2 mm: window 100 × 46, guard wall 104 × 50 (y 105–155). At ID's current 52 mm wall (y 104–156) the guard touches the L58 tab edges inside x −34.5…−38 (tab tips at x −38). Even at 50 mm the guard wall sits only 1 mm from the tabs, so ID and Legs need to shorten the tabs to x ≤ −34 or notch the guard.
 - **Binding (Thermal 389f91b):** the knee plate's PEM M3 studs must land in **G10 standoffs with no metal contact** to the frame or femur. A metal path takes the femur bond to 69–71 °C (limit 70).
 - **Guard superseded:** the P-154 PC guard is dropped in favour of a **vented fairing grille (ID/Legs)**. The fin tips still need **≥10 mm of clear air** behind the grille's inner face.
+
+## Rev 4c — D95 placements (after Legs L72 e44c588 FAIL), 2026-10-21
+Script `drive_plate_sweep_d95.py` → `results/drive_plate_sweep_d95.json`. It is Legs' L72 sweep (model_v4, L71/L72 pose set: knee 0–145, hip pitch −107.3…+40, roll/yaw/ankle extremes) with the **full envelope**: 8.5 G10 standoff + 1.5 plate + G-TWI 35 × 30 × 14.9 + PCB 1.6. The knee housing is swapped to the **release STEP** (`knee_twin_housing_release_r116.step`, with fins), not model_v4's plain D59 STEP. Frame: L51/L58 convention (zero pose, left leg, mm; right leg mirrored in y). Pass is ≥3 mm.
+
+| plate (per leg) | size | back-face point (3–4 mm off the structure) | normal (structure → drive) | min clearance | governed by | back face sees |
+|---|---|---|---|---|---|---|
+| AN1 ankle | 56 (y) × 60 (z) | (40, 130, 215), plate centre x 49.25 | **+x** (shin front) | **3.5 PASS** | the tibia tube it mounts to; everything else ≥ 4.7 (ankle screw bodies/rods 7.9–11.0); knee housing beyond 30 mm at knee 145 | tibia tube ø45 7075 (structure, no heat source) ≤ 50 °C [EST] |
+| AN2 ankle | 56 × 60 | (40, 130, 290) | +x | **3.5 PASS** | same | same |
+| HP1 hip pitch | 84 (y) × 84 (z) | (−88, 45, 1178), plate centre x −97.25 | **−x** (outboard of the pelvis rear wall) | **3.0 PASS** | the pelvis shell it mounts to (Torso); waist deck 8.0; hip yaw yoke 24.5 | pelvis shell rear wall, 4 mm 7075 (Torso: confirm ≤ 50 °C, i.e. no battery or heat source behind it) |
+| HP2 hip pitch | 84 × 84 | (−88, 135, 1178) | −x | **3.0 PASS** | same; hip yaw yoke 18.0 | same |
+
+- **Rejected:** lateral (+y) and medial (−y) tibia faces read 0.0 mm (knee housing at knee 145, the other leg at hip roll −20). The D94 rear-shin and z 905 hip positions fail per L72.
+- **Shin-front drives** reach x 49.25 + 0.75 + 16.5 = **66.5**. The shin hull/cover isn't in model_v4, so ID must confirm the shin cover clears x 66.5 + 3 at z 185–320. Harness exits +z to the ankle (Electronics §18.5).
+- **Hip pitch plates** span y 3–87 and 93–177 per side (inside the shell's y ±185), z 1136–1220 (inside the shell's z 1126–1230). Drives reach x −114.5, so the rear torso cover needs to clear x −117.5.
+  - **Harness reach to the hip pitch motors** (on the hip pitch screw units, about z 880–1000 near the hip pitch axis z 920, y ≈ 130): straight line about 200–330 mm. Routed through the hip yaw (+45/−35°) and roll (−20/+45°) service loop, about **0.45–0.6 m per drive [EST]**. That's plausible for motor phase + Hall/thermistor + encoder from the drive. It's longer than the current knee runs, so Electronics should confirm the cable length limit and EMC.
+- Plate masses are unchanged (hip pitch 84 × 84, ankle 60 × 56). Torso owns the pelvis-wall mounting (4 × M3 G10 standoffs per plate).
+
+### Knee twin housing front fins (answer for ID P-156 / Legs L72 §2b)
+**Yes.** The release geometry `cad/knee_twin_housing_release_r116.step` (job 9c, D80, built on rev B fins D69, `knee_fins_revb.py`) has **front fins**: 7 per motor can, 9 mm tall, 1.0 thick, axial over the can (z 1–43), spanning ±27.7° about the screw axis on the front (local −y). It also has rear fins: 14 per can, 25 mm, 60° span. That is 42 fins, 0.0703 m², 0.093 kg per knee.
+- Local bbox: plain D59 STEP y −41…+41, x ±92; release STEP **y −50…+65.8, x ±102.4** (front +9, rear +24.8, sides +10.4 including the R-116 boss).
+- model_v4 / L72 use the plain D59 STEP, so the housing's real front is about 9 mm further forward than L72's x −79.4 (≈ −70 [EST], depending on the screw-axis direction), and its rear about 25 mm further aft.
+- Rev C was withdrawn. There is no later re-CAD.
+- Legs should swap model_v4 to the release STEP. My D95 sweep uses it.

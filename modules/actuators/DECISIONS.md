@@ -37,3 +37,6 @@ Fins are 8 × 18.5 × 1 at 6 mm pitch, with R0.5 tips and the lower ends tapered
 
 ## D94 (Legs L71) Knee plate rev 4b: 46 mm wide (y 107–153)
 8 fins × 0.75 mm at 5.75 pitch (5.0 gap), 18.5 mm, taper kept. UA 0.247, 75.4 °C standing duty (scaled from Thermal rev 4). −21 g robot. The guard must narrow to a 50 mm wall, and it still sits 1 mm from the L58 tabs (ID/Legs). Taper accepted at 18.5 mm (R-145 §4).
+
+## D95 (Legs L72) Drive plate placements, swept with full drive envelopes
+Ankle plates go on the shin front, normal +x, at (40, 130, 215/290): 3.5 mm, PASS through knee 145. Hip pitch plates go outboard of the pelvis rear wall (x −85, Torso), normal −x, at (−88, 45/135, 1178): 3.0 mm, PASS. The sweep uses the release knee housing. The knee release STEP has front fins (9 mm), and model_v4 uses the unfinned D59, so Legs should swap it. Harness to the hip pitch motors is about 0.45–0.6 m [EST]. Torso to provide the mounting; ID to check the shin cover (x ≥ 69.5) and rear cover (x ≤ −117.5).
