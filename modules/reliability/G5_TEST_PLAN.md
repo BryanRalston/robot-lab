@@ -70,3 +70,8 @@ Per `legs/R031_FIXES.md`: 5 ASTM D1002 coupons per lot at 23 and 60 °C, part-eq
 - **Samples:** every production bonded joint covered by R-112 (A38 hot bond), plus 1 qualification part per lot.
 - **Method:** soak the part at **80 °C** ≥ 1 h, then apply the proof load (1.25 × design, as in PROOF_TEST_hip_lever) for 30 s at temperature.
 - **Pass:** no residual set > 0.02 mm, no audible or visible disbond, a tap/ultrasonic check unchanged; the qualification part then goes to rupture and must be ≥ 1.5 × design at 80 °C.
+
+## TP-G5-15 Knee fin guard touch temperature (R-143 §2b, R143_TOUCH_BURN.md)
+- **Setup:** knee rev 3 plate + guard on the robot leg (or a heated rig at the same plate power, 7.2 W/plate). Surface thermocouples (type T, ≤ 0.13 mm bead, bonded with thin thermal epoxy or a spring-loaded contact probe, ±1 K, per ISO 13732-1 §5 measurement guidance: error ≤ ±2 K at ≥ 50 °C) at the **touch points**: guard face centre, guard edge above the hottest fin, guard boss, and the exposed thigh shell next to the window; plus one on a fin tip and the plate base for reference. IR camera (emissivity-calibrated against the TCs).
+- **Cases:** (1) duty cycle (R-096) walking 0.5–2 m/s at 25 °C and 35 °C ambient to steady state; (2) continuous carry until the derate holds; (3) standstill after carry (heat soak, natural convection) for 30 min.
+- **Pass:** every touch point ≤ **48 °C** in all cases at 35 °C ambient, and ≤ **43 °C** at 25 °C ambient in case 1; no fin reachable by the IEC 61032 probe B through the guard; fin/plate temperatures within ±3 K of the unguarded Thermal model + the agreed UA loss (else the derate limit is revised).
