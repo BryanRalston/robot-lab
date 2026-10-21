@@ -623,7 +623,7 @@ Recorded: rail A = F1–F3 + S1, S2 + hand logic; rail B = F4–F6 + S3–S5. Si
 | **B-config, best case** | (43.3 × 1.12 + 3.9 + 2.0) × 2 = **0.109 kg** | 0.077 + 0.010 NTC = **0.087** | **+0.022 OVER** |
 | B-config, cited gauges only | 0.193 kg | 0.087 | +0.106 over |
 
-- **Verdict: the B-config leads do NOT fit.** The best case is 0.022 kg over, which is above the R-043 0.02 kg limit, so this goes back to the Arbiter.
+- **Verdict: the B-config leads do NOT fit.** The best case is 0.022 kg over, which is above the freeze threshold (0.005 kg, R-066; earlier cited here as 0.02), so this goes back to the Arbiter.
 - **Cause:** R-047 booked one pair, but B needs 2 rails + return + AO + EN + NTC.
 - **Options:**
   - (a) A cited thin multi-core cable for the signal lines.
@@ -679,7 +679,7 @@ Recorded: rail A = F1–F3 + S1, S2 + hand logic; rail B = F4–F6 + S3–S5. Si
 
 - **Robot total:** ≈ **+0.142 kg** (wire only ≈ +0.122 kg).
 - **No saving on bus, STO or EtherCAT:** these are line runs that continue down to the ankle drives, so moving the knee tee upward does not shorten them.
-- **Mass freeze:** this exceeds the R-043 freeze threshold (0.02 kg). It needs an Arbiter booking against R-062 (an R-062 consequence, not discretionary).
+- **Mass freeze:** this exceeds the freeze threshold (0.005 kg, R-066). It needs an Arbiter booking against R-062 (an R-062 consequence, not discretionary).
 - **Open:** Legs CAD for the actual drive-to-motor distance. Each 0.05 m changes the result by about ±0.013 kg/leg.
 
 ## 18. R-069 mass-down pass: electronics and harness (2026-10-14)
@@ -1308,7 +1308,7 @@ Source [EAM]: Elmo *EtherCAT Application Manual*, G-ETHERCATAM Ver. 1.403 (Nov 2
 **Mass (Electronics side).**
 - Drive-to-plate screws: 14 plated drives × 4 × M2 × 6 at 0.15 g = **+8.4 g**. These aren't in D89's 40.8 g, which counts M3 standoff screws only.
 - Temperature sensing and PE (per Q2): 0.
-- **Delta +0.008 kg (under 0.02, no freeze flag).** D89's +0.044 is Actuators' and goes to the Arbiter separately.
+- **Delta +0.008 kg: over the 0.005 kg freeze (R-066). Booked in full under R-141.** D89's +0.044 is Actuators' and goes to the Arbiter separately.
 - BOM.md fastener table to be updated with the 56 × M2.
 
 **Blocked/open:**
@@ -1425,7 +1425,7 @@ Standard cited: **ANSI/CAN/UL/ULC 2271:2023** (LEV batteries; public IBR copy la
 - sense leads +0.002
 - liner +0.007
 - **Total +0.050 kg [CALC from cited Cu density/resistivity, lengths EST]**
-- **Over the 0.02 freeze: Arbiter booking.** Holder count is unchanged; holder re-tooling is Torso's.
+- **Over the 0.005 kg freeze (R-066). Booked under R-151.** Holder count is unchanged; holder re-tooling is Torso's.
 
 **Open:**
 - notch depth (1 or 2 tiers);
@@ -1434,3 +1434,34 @@ Standard cited: **ANSI/CAN/UL/ULC 2271:2023** (LEV batteries; public IBR copy la
 - SBS75X position and main-run length;
 - BQ79616 balance current cite;
 - link lengths from CAD.
+
+**P-057 review of Torso's Option A layout (ea6fc57, `torso/pack/pack_layout_optA_*`), 2026-10-21.**
+The layout matches P-057:
+- 2 tiers, notch 100 mm, 4 groups / 20 cells relocated to S17–S20 in c7;
+- 5P groups whole (half-rows along y);
+- BQ split at S10/S11. **Confirmed.**
+
+1. **Tap harness: CONFIRMED, with additions.**
+   - Datasheet: the reference is **TI BQ7961x-Q1 datasheet SLUSE81F (Rev. F, June 2026)**, not "SLUSE14".
+   - Per its §8.2.1.2.1 (p.192): VC0–VC16 use a **100 Ω + 0.47 µF/16 V (or 1 µF) differential RC** on the board ("highly recommended … hot-plug"). The CB-pin resistor sets the balance current: I_CB = V_cell / (2·R_CB + R_DS(on)) (§7.3.3, p.36).
+   - The datasheet specifies **no harness fuse**. These resistors are on the BMS board, so the 22 leads are **unprotected between cell tab and board**. Electronics requirement: a fusible element at the **cell end** of every tap (e.g. a fuse on the tap FPC/collector, or a fusible-link wire). **Part open, Torso.**
+   - **Separate VC and CB wires are not required.** One lead per node can carry both if the VC/CB split is on the board. BQ#1 VC10 and BQ#2 VC0 at S10+/S11− are two leads on one node: OK.
+   - Gauge: **0.25 mm² SiF** (5.4 g/m pair, §17.3). The 240 mA balance current is fine thermally.
+   - Over 269 mm: R = 1.7241e-8 × 0.269 / 0.25e-6 = **18.5 mΩ per lead**. During balancing the current flows through two leads, 37 mΩ, giving **≈ 9 mV** error (not 3.3 mV), and the R_CB budget falls by < 0.5 %. Measure with balancing paused (Torso's note stands).
+   - Total length 4.00 m: 4.00 × 2.7 g/m = **10.8 g** for the full harness, against the BMS 0.30 lump. The incremental +2.2 g stays.
+2. **Links: CONFIRMED.**
+   - Link A (S16 → S17) and link B (pack− S1 → SBS75X), 12 mm² × 0.19 m.
+   - Link B **replaces the 10 mm² front-low main run** (≈ 0.20 m [EST], §18.7.4): −10 mm² × 0.20 m × 8.96 g/cm³ = **−17.9 g**. Net links +40.9 − 17.9 = **+23.0 g**.
+   - **P-057 net: +0.050 − 0.018 = +0.032 kg.** The +0.050 was booked under R-151, so the −0.018 is a correction for the Arbiter.
+3. **BMS board, rear-web zone x −105…−95: OK, with depth rules.**
+   - 10 mm = G10 standoff **≥ 4 mm** (creepage ≥ 3.0 mm bus → box along the standoff, clearance ≥ 1.5 mm, plus liner) + PCB 1.6 + **parts ≤ 4.4 mm**.
+   - BQ79616 HTQFP and ISO1042 fit. **The 22-way tap connector and the isolation transformers/caps must be ≤ 4.4 mm or face forward into the 35 mm gap to c7.** Connector part open, Torso.
+   - PCB rule E-PCB-1: ISO1042 barrier ≥ 3.0 mm creepage; no copper within 3.0 mm of the board edge on the box side.
+   - FET board and busbar blocks in c1/c2 outboard: OK at ≥ 3.0 / 1.5 mm to the notch socket walls and land (metal), with the liner continuous.
+4. **SBS75X and vent.**
+   - SBS75X at (−105, −60, 160), 147 mm from the vent: OK. **But** the rear web now sits at the shell inner wall, so the SBS75X mating face needs **a shell opening or an inward-facing mount**. Open, Torso.
+   - Vent aim: the floor vent at x −80 is rear and below the box, away from the chest intake (front-low above the lid), so **OK on intake**.
+   - **Pelvis below the vent: FAIL as placed at y +80.** In model_v4 the +y **hip-yaw housing** (y 130, r ≈ 55, so y 75–185) and its Elmo drive sit directly under it. The L39 **PU bumpers** under the deck (combustible) and the waist bracket (y 67) and harness are close by.
+     - SiF harness is rated 180 °C, against ≈ 500 °C vent gas (§18.6 basis).
+   - Fix: a **sealed vent duct** (steel or mica [EST]) from the vent to a dedicated opening in the pelvis shell, **rearward and outward, clear of hip-yaw drives, bumpers and harness**; or move the vent to y ≈ 0 with a deflector to a rear pelvis opening.
+   - UL 2271 §45 (no external fire) applies to the pack, but damage to our drives and harness is our safety problem. **Open, Torso + Legs.**
