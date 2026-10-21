@@ -193,3 +193,26 @@ Source: controls/limits/SIDE_FALL.md, side_fall_results.json (54 runs/variant), 
 - Confirm the real foot contact force with Controls' foot-force logging (TP-G5-19 e).
 
 **1.70 m/s landing, other parts** (Legs L81): ankle screws SF 1.72 (impulse) / 1.41 (energy) vs C0a. The cross, DU bushes and sole need Job 7 FEA proof-case SF ≥ 1.22 / 1.48 (OPEN, Legs).
+
+# Rev C.3 (2026-10-21 ~10:40 ET): Controls 976eca8 stumble run (stumble_fall.py, controls/limits/SIDE_FALL.md)
+**PROVISIONAL:** the walk itself falls at ≈ 2.8 s.
+
+**Mid-walk stumble at 250/400/550 N:** knee-first with the foot moving is **0/36 in every variant**.
+- **S2c (knee-first in walking): not observed in sim.** To be confirmed by TP-G5-19 (f).
+- **No tuck:** swing foot ≤ 2.08 m/s, knee 2.28 m/s, foot force 1119 N; 5 ankle-stop hits with motor 44–54 N·m.
+- **Tuck in swing:** foot 6.75 m/s, 2677 N. **Robot Lab: tuck is standing-only (disabled in swing).**
+- **Standing tuck:** foot 2708 N, no ankle-stop hit.
+
+**Foot/ankle verdict:**
+- Tuck landing 2708 N vs the Legs foot fall case 3914 N = **69 %. PASS on the load envelope.**
+- This replaces the 1.2–2.5 kN [EST] scaling with a sim value.
+- It stays **CONDITIONAL on Legs' Job 7 FEA including a 2.7 kN tuck landing case** (cross / DU / sole), plus the open fall-toe element maximum.
+
+**Ankle-roll stop:**
+- The 15b4bcd SFs are **unaffected**: the standing tuck has no stop hit; no-tuck hits are within the 4.29 / 5.9 kN cases.
+- The motor 44–54 N·m is well under the 193 N·m edge cap. The contact-force share was not logged.
+
+**Side-fall verdicts:**
+- S1 PASS, S2b PASS (bumper 78 % of 4.68 J).
+- S2c tuck (standing) PASS.
+- S2c walking stumble: not observed (provisional).

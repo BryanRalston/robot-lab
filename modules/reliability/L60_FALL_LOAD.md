@@ -139,3 +139,6 @@ This replaces the D98 interim. Tibia 45×2.0 Z 2781 mm³; femur 50×1.5 Z 2691 m
   - **D99 mass: PASS by Robot Lab ruling.** The cap was raised to 0.49 kg; D99 is 0.484 kg (Legs L84 placement 0.487).
   - Femur 50×1.5 at bottoming: yield SF 0.98, accepted as slight set under F1 (Legs L79/L83, Robot Lab).
   - Legs strap SF 2.53 noted (13.1 kN, G10 bearing at 71 °C).
+- **Rev C.3 (2026-10-21, Controls 976eca8, provisional):**
+  - Knee TUCK stop energy: **0/90 runs over 44.1 J, max 38.5 J**. The powered case is under D99's 44.1 J design (normal SFs 1.37 / 1.33 hold).
+  - **A tripped drive gives ≤ 81 J.** That is a **fault case** under the 95.8 J bottoming energy: no bottoming, no rupture, covered by the C.1 fault check (1077 N·m bound); **inspect per F1**.
