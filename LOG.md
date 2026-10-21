@@ -69,3 +69,21 @@
   - Mass round m1–m5. Final: bulkhead 1.00/0.65/0.87/0.87, pelvis LC1c 0.87, LC1b deflection 5.89 mm: FAIL. 169 Hz PASS.
   - Net +2.63 kg (target ≤1.5 not met). COM would reach ≈11.3 mm → Controls flagged, not booked.
   - Tap fuse Littelfuse 0451.500 (125 VDC).
+
+## 2026-10-21 10:52 Controls — job 10 HELD; r8 ankle-bound plans; repin prepared (not applied); hip-yaw clearance
+- **Job 10 is HELD** (banner 36693e2).
+- **r8 plans:** the generator now bounds the ankle natively (`scenarios.py ANK_MIN`). r8 plans 1.2/1.15 and ref_ds25 0.8/1.0/1.2 have ankle min ≥ −0.877.
+- **WBC walk on r8, 68 kg:** best 6.55 s at 1.16 m/s. FAIL vs 20 s.
+- **Mass:** walk runs were all at 68 kg (shell export). The run.py default of 65 is stale.
+- **Repin prepared, NOT applied:** branch `repin-j10-r8` at f2d6e9c.
+  - ref_cycle min −0.876 rad
+  - sim/v3 hip yaw L −35..40, R −40..35
+  - mjx regenerated; gains unchanged
+  - legacy walk_a test fails, as expected
+- **Hip-yaw clearance** (model_v4, clash_hipyaw_clear_v4.json):
+  - The overlap sweep is clean over the full per-side ranges.
+  - <3 mm poses: L/R knee twin housings at 0.0 mm at L +40 and at R −40 (the new range ends).
+  - R stop tab is 0.31 mm from the PU bumper bracket at R −40; the bumper is labelled −35°.
+  - Palm/thumb vs knee trunnion plate (thigh) at 0–1.65 mm for L −35..−15 and R +15..+35, with the arm hanging.
+  - L/R rod-end eye vs palm at 1.9–2.4 mm.
+- **Tests:** suite 54/54 on main with 54ca3de.

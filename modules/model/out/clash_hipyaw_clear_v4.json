@@ -1,0 +1,804 @@
+{
+ "L_hip_yaw": {
+  "range": [
+   -35,
+   40
+  ],
+  "poses": [
+   {
+    "angle": -35,
+    "under_3mm": [
+     [
+      "L_palm 7075-T6 machined shell 1.5 mm w/ openings (P-021/A32, palm_7075.py)",
+      "L_knee trunnion bracket top plate (thigh) [EST]",
+      0.0
+     ],
+     [
+      "L_thumb phalanx1 [EST]",
+      "L_knee trunnion bracket top plate (thigh) [EST]",
+      0.0
+     ],
+     [
+      "L_palm 7075-T6 machined shell 1.5 mm w/ openings (P-021/A32, palm_7075.py)",
+      "L_hip_pitch screw +y GE12 C rod-end eye",
+      2.06
+     ],
+     [
+      "L_hip yaw housing (Actuators STEP, CRBH 6013 A output)",
+      "L_hip_yaw stop tab 10x12x70 (L39)",
+      3.0
+     ]
+    ]
+   },
+   {
+    "angle": -30,
+    "under_3mm": [
+     [
+      "L_palm 7075-T6 machined shell 1.5 mm w/ openings (P-021/A32, palm_7075.py)",
+      "L_knee trunnion bracket top plate (thigh) [EST]",
+      0.0
+     ],
+     [
+      "L_thumb phalanx1 [EST]",
+      "L_knee trunnion bracket top plate (thigh) [EST]",
+      1.65
+     ],
+     [
+      "L_palm 7075-T6 machined shell 1.5 mm w/ openings (P-021/A32, palm_7075.py)",
+      "L_hip_pitch screw +y GE12 C rod-end eye",
+      1.89
+     ],
+     [
+      "L_hip yaw housing (Actuators STEP, CRBH 6013 A output)",
+      "L_hip_yaw stop tab 10x12x70 (L39)",
+      3.0
+     ]
+    ]
+   },
+   {
+    "angle": -25,
+    "under_3mm": [
+     [
+      "L_palm 7075-T6 machined shell 1.5 mm w/ openings (P-021/A32, palm_7075.py)",
+      "L_knee trunnion bracket top plate (thigh) [EST]",
+      0.0
+     ],
+     [
+      "L_palm 7075-T6 machined shell 1.5 mm w/ openings (P-021/A32, palm_7075.py)",
+      "L_hip_pitch screw +y GE12 C rod-end eye",
+      2.35
+     ],
+     [
+      "L_hip yaw housing (Actuators STEP, CRBH 6013 A output)",
+      "L_hip_yaw stop tab 10x12x70 (L39)",
+      3.0
+     ]
+    ]
+   },
+   {
+    "angle": -20,
+    "under_3mm": [
+     [
+      "L_palm 7075-T6 machined shell 1.5 mm w/ openings (P-021/A32, palm_7075.py)",
+      "L_knee trunnion bracket top plate (thigh) [EST]",
+      0.0
+     ],
+     [
+      "L_hip yaw housing (Actuators STEP, CRBH 6013 A output)",
+      "L_hip_yaw stop tab 10x12x70 (L39)",
+      3.0
+     ]
+    ]
+   },
+   {
+    "angle": -15,
+    "under_3mm": [
+     [
+      "L_palm 7075-T6 machined shell 1.5 mm w/ openings (P-021/A32, palm_7075.py)",
+      "L_knee trunnion bracket top plate (thigh) [EST]",
+      0.0
+     ],
+     [
+      "L_hip yaw housing (Actuators STEP, CRBH 6013 A output)",
+      "L_hip_yaw stop tab 10x12x70 (L39)",
+      3.0
+     ]
+    ]
+   },
+   {
+    "angle": -10,
+    "under_3mm": [
+     [
+      "L_hip yaw housing (Actuators STEP, CRBH 6013 A output)",
+      "L_hip_yaw stop tab 10x12x70 (L39)",
+      3.0
+     ]
+    ]
+   },
+   {
+    "angle": -5,
+    "under_3mm": [
+     [
+      "L_hip yaw housing (Actuators STEP, CRBH 6013 A output)",
+      "L_hip_yaw stop tab 10x12x70 (L39)",
+      3.0
+     ]
+    ]
+   },
+   {
+    "angle": 5,
+    "under_3mm": [
+     [
+      "L_hip yaw housing (Actuators STEP, CRBH 6013 A output)",
+      "L_hip_yaw stop tab 10x12x70 (L39)",
+      3.0
+     ]
+    ]
+   },
+   {
+    "angle": 10,
+    "under_3mm": [
+     [
+      "L_hip yaw housing (Actuators STEP, CRBH 6013 A output)",
+      "L_hip_yaw stop tab 10x12x70 (L39)",
+      3.0
+     ]
+    ]
+   },
+   {
+    "angle": 15,
+    "under_3mm": [
+     [
+      "L_hip yaw housing (Actuators STEP, CRBH 6013 A output)",
+      "L_hip_yaw stop tab 10x12x70 (L39)",
+      3.0
+     ]
+    ]
+   },
+   {
+    "angle": 20,
+    "under_3mm": [
+     [
+      "L_hip yaw housing (Actuators STEP, CRBH 6013 A output)",
+      "L_hip_yaw stop tab 10x12x70 (L39)",
+      3.0
+     ]
+    ]
+   },
+   {
+    "angle": 25,
+    "under_3mm": [
+     [
+      "L_hip yaw housing (Actuators STEP, CRBH 6013 A output)",
+      "L_hip_yaw stop tab 10x12x70 (L39)",
+      3.0
+     ]
+    ]
+   },
+   {
+    "angle": 30,
+    "under_3mm": []
+   },
+   {
+    "angle": 35,
+    "under_3mm": [
+     [
+      "L_hip yaw housing (Actuators STEP, CRBH 6013 A output)",
+      "L_hip_yaw stop tab 10x12x70 (L39)",
+      3.0
+     ]
+    ]
+   },
+   {
+    "angle": 40,
+    "under_3mm": [
+     [
+      "L_knee twin housing (Actuators D96 r116b release STEP: 9 mm front fins, rear fin-tip trim; shared centre web)",
+      "R_knee twin housing (Actuators D96 r116b release STEP: 9 mm front fins, rear fin-tip trim; shared centre web)",
+      0.0
+     ],
+     [
+      "L_hip yaw housing (Actuators STEP, CRBH 6013 A output)",
+      "L_hip_yaw stop tab 10x12x70 (L39)",
+      3.0
+     ]
+    ]
+   }
+  ],
+  "min_clear_poses": [
+   {
+    "angle": -35,
+    "under_3mm": [
+     [
+      "L_palm 7075-T6 machined shell 1.5 mm w/ openings (P-021/A32, palm_7075.py)",
+      "L_knee trunnion bracket top plate (thigh) [EST]",
+      0.0
+     ],
+     [
+      "L_thumb phalanx1 [EST]",
+      "L_knee trunnion bracket top plate (thigh) [EST]",
+      0.0
+     ],
+     [
+      "L_palm 7075-T6 machined shell 1.5 mm w/ openings (P-021/A32, palm_7075.py)",
+      "L_hip_pitch screw +y GE12 C rod-end eye",
+      2.06
+     ],
+     [
+      "L_hip yaw housing (Actuators STEP, CRBH 6013 A output)",
+      "L_hip_yaw stop tab 10x12x70 (L39)",
+      3.0
+     ]
+    ]
+   },
+   {
+    "angle": -30,
+    "under_3mm": [
+     [
+      "L_palm 7075-T6 machined shell 1.5 mm w/ openings (P-021/A32, palm_7075.py)",
+      "L_knee trunnion bracket top plate (thigh) [EST]",
+      0.0
+     ],
+     [
+      "L_thumb phalanx1 [EST]",
+      "L_knee trunnion bracket top plate (thigh) [EST]",
+      1.65
+     ],
+     [
+      "L_palm 7075-T6 machined shell 1.5 mm w/ openings (P-021/A32, palm_7075.py)",
+      "L_hip_pitch screw +y GE12 C rod-end eye",
+      1.89
+     ],
+     [
+      "L_hip yaw housing (Actuators STEP, CRBH 6013 A output)",
+      "L_hip_yaw stop tab 10x12x70 (L39)",
+      3.0
+     ]
+    ]
+   },
+   {
+    "angle": -25,
+    "under_3mm": [
+     [
+      "L_palm 7075-T6 machined shell 1.5 mm w/ openings (P-021/A32, palm_7075.py)",
+      "L_knee trunnion bracket top plate (thigh) [EST]",
+      0.0
+     ],
+     [
+      "L_palm 7075-T6 machined shell 1.5 mm w/ openings (P-021/A32, palm_7075.py)",
+      "L_hip_pitch screw +y GE12 C rod-end eye",
+      2.35
+     ],
+     [
+      "L_hip yaw housing (Actuators STEP, CRBH 6013 A output)",
+      "L_hip_yaw stop tab 10x12x70 (L39)",
+      3.0
+     ]
+    ]
+   },
+   {
+    "angle": -20,
+    "under_3mm": [
+     [
+      "L_palm 7075-T6 machined shell 1.5 mm w/ openings (P-021/A32, palm_7075.py)",
+      "L_knee trunnion bracket top plate (thigh) [EST]",
+      0.0
+     ],
+     [
+      "L_hip yaw housing (Actuators STEP, CRBH 6013 A output)",
+      "L_hip_yaw stop tab 10x12x70 (L39)",
+      3.0
+     ]
+    ]
+   },
+   {
+    "angle": -15,
+    "under_3mm": [
+     [
+      "L_palm 7075-T6 machined shell 1.5 mm w/ openings (P-021/A32, palm_7075.py)",
+      "L_knee trunnion bracket top plate (thigh) [EST]",
+      0.0
+     ],
+     [
+      "L_hip yaw housing (Actuators STEP, CRBH 6013 A output)",
+      "L_hip_yaw stop tab 10x12x70 (L39)",
+      3.0
+     ]
+    ]
+   },
+   {
+    "angle": -10,
+    "under_3mm": [
+     [
+      "L_hip yaw housing (Actuators STEP, CRBH 6013 A output)",
+      "L_hip_yaw stop tab 10x12x70 (L39)",
+      3.0
+     ]
+    ]
+   },
+   {
+    "angle": -5,
+    "under_3mm": [
+     [
+      "L_hip yaw housing (Actuators STEP, CRBH 6013 A output)",
+      "L_hip_yaw stop tab 10x12x70 (L39)",
+      3.0
+     ]
+    ]
+   },
+   {
+    "angle": 5,
+    "under_3mm": [
+     [
+      "L_hip yaw housing (Actuators STEP, CRBH 6013 A output)",
+      "L_hip_yaw stop tab 10x12x70 (L39)",
+      3.0
+     ]
+    ]
+   },
+   {
+    "angle": 10,
+    "under_3mm": [
+     [
+      "L_hip yaw housing (Actuators STEP, CRBH 6013 A output)",
+      "L_hip_yaw stop tab 10x12x70 (L39)",
+      3.0
+     ]
+    ]
+   },
+   {
+    "angle": 15,
+    "under_3mm": [
+     [
+      "L_hip yaw housing (Actuators STEP, CRBH 6013 A output)",
+      "L_hip_yaw stop tab 10x12x70 (L39)",
+      3.0
+     ]
+    ]
+   },
+   {
+    "angle": 20,
+    "under_3mm": [
+     [
+      "L_hip yaw housing (Actuators STEP, CRBH 6013 A output)",
+      "L_hip_yaw stop tab 10x12x70 (L39)",
+      3.0
+     ]
+    ]
+   },
+   {
+    "angle": 25,
+    "under_3mm": [
+     [
+      "L_hip yaw housing (Actuators STEP, CRBH 6013 A output)",
+      "L_hip_yaw stop tab 10x12x70 (L39)",
+      3.0
+     ]
+    ]
+   },
+   {
+    "angle": 35,
+    "under_3mm": [
+     [
+      "L_hip yaw housing (Actuators STEP, CRBH 6013 A output)",
+      "L_hip_yaw stop tab 10x12x70 (L39)",
+      3.0
+     ]
+    ]
+   },
+   {
+    "angle": 40,
+    "under_3mm": [
+     [
+      "L_knee twin housing (Actuators D96 r116b release STEP: 9 mm front fins, rear fin-tip trim; shared centre web)",
+      "R_knee twin housing (Actuators D96 r116b release STEP: 9 mm front fins, rear fin-tip trim; shared centre web)",
+      0.0
+     ],
+     [
+      "L_hip yaw housing (Actuators STEP, CRBH 6013 A output)",
+      "L_hip_yaw stop tab 10x12x70 (L39)",
+      3.0
+     ]
+    ]
+   }
+  ]
+ },
+ "R_hip_yaw": {
+  "range": [
+   -40,
+   35
+  ],
+  "poses": [
+   {
+    "angle": -40,
+    "under_3mm": [
+     [
+      "L_knee twin housing (Actuators D96 r116b release STEP: 9 mm front fins, rear fin-tip trim; shared centre web)",
+      "R_knee twin housing (Actuators D96 r116b release STEP: 9 mm front fins, rear fin-tip trim; shared centre web)",
+      0.0
+     ],
+     [
+      "R_hip_yaw stop tab 10x12x70 (L39)",
+      "R_hip_yaw PU bumper + bracket -35\u00b0 (L39)",
+      0.31
+     ],
+     [
+      "R_hip yaw housing (Actuators STEP, CRBH 6013 A output)",
+      "R_hip_yaw stop tab 10x12x70 (L39)",
+      3.0
+     ]
+    ]
+   },
+   {
+    "angle": -35,
+    "under_3mm": [
+     [
+      "R_hip yaw housing (Actuators STEP, CRBH 6013 A output)",
+      "R_hip_yaw stop tab 10x12x70 (L39)",
+      3.0
+     ]
+    ]
+   },
+   {
+    "angle": -30,
+    "under_3mm": []
+   },
+   {
+    "angle": -25,
+    "under_3mm": [
+     [
+      "R_hip yaw housing (Actuators STEP, CRBH 6013 A output)",
+      "R_hip_yaw stop tab 10x12x70 (L39)",
+      3.0
+     ]
+    ]
+   },
+   {
+    "angle": -20,
+    "under_3mm": [
+     [
+      "R_hip yaw housing (Actuators STEP, CRBH 6013 A output)",
+      "R_hip_yaw stop tab 10x12x70 (L39)",
+      3.0
+     ]
+    ]
+   },
+   {
+    "angle": -15,
+    "under_3mm": [
+     [
+      "R_hip yaw housing (Actuators STEP, CRBH 6013 A output)",
+      "R_hip_yaw stop tab 10x12x70 (L39)",
+      3.0
+     ]
+    ]
+   },
+   {
+    "angle": -10,
+    "under_3mm": []
+   },
+   {
+    "angle": -5,
+    "under_3mm": [
+     [
+      "R_hip yaw housing (Actuators STEP, CRBH 6013 A output)",
+      "R_hip_yaw stop tab 10x12x70 (L39)",
+      3.0
+     ]
+    ]
+   },
+   {
+    "angle": 5,
+    "under_3mm": [
+     [
+      "R_hip yaw housing (Actuators STEP, CRBH 6013 A output)",
+      "R_hip_yaw stop tab 10x12x70 (L39)",
+      3.0
+     ]
+    ]
+   },
+   {
+    "angle": 10,
+    "under_3mm": [
+     [
+      "R_hip yaw housing (Actuators STEP, CRBH 6013 A output)",
+      "R_hip_yaw stop tab 10x12x70 (L39)",
+      3.0
+     ]
+    ]
+   },
+   {
+    "angle": 15,
+    "under_3mm": [
+     [
+      "R_palm 7075-T6 machined shell 1.5 mm w/ openings (P-021/A32, palm_7075.py)",
+      "R_knee trunnion bracket top plate (thigh) [EST]",
+      0.0
+     ],
+     [
+      "R_hip yaw housing (Actuators STEP, CRBH 6013 A output)",
+      "R_hip_yaw stop tab 10x12x70 (L39)",
+      3.0
+     ]
+    ]
+   },
+   {
+    "angle": 20,
+    "under_3mm": [
+     [
+      "R_palm 7075-T6 machined shell 1.5 mm w/ openings (P-021/A32, palm_7075.py)",
+      "R_knee trunnion bracket top plate (thigh) [EST]",
+      0.0
+     ],
+     [
+      "R_hip yaw housing (Actuators STEP, CRBH 6013 A output)",
+      "R_hip_yaw stop tab 10x12x70 (L39)",
+      3.0
+     ]
+    ]
+   },
+   {
+    "angle": 25,
+    "under_3mm": [
+     [
+      "R_palm 7075-T6 machined shell 1.5 mm w/ openings (P-021/A32, palm_7075.py)",
+      "R_knee trunnion bracket top plate (thigh) [EST]",
+      0.0
+     ],
+     [
+      "R_palm 7075-T6 machined shell 1.5 mm w/ openings (P-021/A32, palm_7075.py)",
+      "R_hip_pitch screw -y GE12 C rod-end eye",
+      2.35
+     ],
+     [
+      "R_hip yaw housing (Actuators STEP, CRBH 6013 A output)",
+      "R_hip_yaw stop tab 10x12x70 (L39)",
+      3.0
+     ]
+    ]
+   },
+   {
+    "angle": 30,
+    "under_3mm": [
+     [
+      "R_palm 7075-T6 machined shell 1.5 mm w/ openings (P-021/A32, palm_7075.py)",
+      "R_knee trunnion bracket top plate (thigh) [EST]",
+      0.0
+     ],
+     [
+      "R_thumb phalanx1 [EST]",
+      "R_knee trunnion bracket top plate (thigh) [EST]",
+      1.65
+     ],
+     [
+      "R_palm 7075-T6 machined shell 1.5 mm w/ openings (P-021/A32, palm_7075.py)",
+      "R_hip_pitch screw -y GE12 C rod-end eye",
+      1.89
+     ],
+     [
+      "R_hip yaw housing (Actuators STEP, CRBH 6013 A output)",
+      "R_hip_yaw stop tab 10x12x70 (L39)",
+      3.0
+     ]
+    ]
+   },
+   {
+    "angle": 35,
+    "under_3mm": [
+     [
+      "R_palm 7075-T6 machined shell 1.5 mm w/ openings (P-021/A32, palm_7075.py)",
+      "R_knee trunnion bracket top plate (thigh) [EST]",
+      0.0
+     ],
+     [
+      "R_thumb phalanx1 [EST]",
+      "R_knee trunnion bracket top plate (thigh) [EST]",
+      0.0
+     ],
+     [
+      "R_palm 7075-T6 machined shell 1.5 mm w/ openings (P-021/A32, palm_7075.py)",
+      "R_hip_pitch screw -y GE12 C rod-end eye",
+      2.06
+     ],
+     [
+      "R_hip yaw housing (Actuators STEP, CRBH 6013 A output)",
+      "R_hip_yaw stop tab 10x12x70 (L39)",
+      3.0
+     ]
+    ]
+   }
+  ],
+  "min_clear_poses": [
+   {
+    "angle": -40,
+    "under_3mm": [
+     [
+      "L_knee twin housing (Actuators D96 r116b release STEP: 9 mm front fins, rear fin-tip trim; shared centre web)",
+      "R_knee twin housing (Actuators D96 r116b release STEP: 9 mm front fins, rear fin-tip trim; shared centre web)",
+      0.0
+     ],
+     [
+      "R_hip_yaw stop tab 10x12x70 (L39)",
+      "R_hip_yaw PU bumper + bracket -35\u00b0 (L39)",
+      0.31
+     ],
+     [
+      "R_hip yaw housing (Actuators STEP, CRBH 6013 A output)",
+      "R_hip_yaw stop tab 10x12x70 (L39)",
+      3.0
+     ]
+    ]
+   },
+   {
+    "angle": -35,
+    "under_3mm": [
+     [
+      "R_hip yaw housing (Actuators STEP, CRBH 6013 A output)",
+      "R_hip_yaw stop tab 10x12x70 (L39)",
+      3.0
+     ]
+    ]
+   },
+   {
+    "angle": -25,
+    "under_3mm": [
+     [
+      "R_hip yaw housing (Actuators STEP, CRBH 6013 A output)",
+      "R_hip_yaw stop tab 10x12x70 (L39)",
+      3.0
+     ]
+    ]
+   },
+   {
+    "angle": -20,
+    "under_3mm": [
+     [
+      "R_hip yaw housing (Actuators STEP, CRBH 6013 A output)",
+      "R_hip_yaw stop tab 10x12x70 (L39)",
+      3.0
+     ]
+    ]
+   },
+   {
+    "angle": -15,
+    "under_3mm": [
+     [
+      "R_hip yaw housing (Actuators STEP, CRBH 6013 A output)",
+      "R_hip_yaw stop tab 10x12x70 (L39)",
+      3.0
+     ]
+    ]
+   },
+   {
+    "angle": -5,
+    "under_3mm": [
+     [
+      "R_hip yaw housing (Actuators STEP, CRBH 6013 A output)",
+      "R_hip_yaw stop tab 10x12x70 (L39)",
+      3.0
+     ]
+    ]
+   },
+   {
+    "angle": 5,
+    "under_3mm": [
+     [
+      "R_hip yaw housing (Actuators STEP, CRBH 6013 A output)",
+      "R_hip_yaw stop tab 10x12x70 (L39)",
+      3.0
+     ]
+    ]
+   },
+   {
+    "angle": 10,
+    "under_3mm": [
+     [
+      "R_hip yaw housing (Actuators STEP, CRBH 6013 A output)",
+      "R_hip_yaw stop tab 10x12x70 (L39)",
+      3.0
+     ]
+    ]
+   },
+   {
+    "angle": 15,
+    "under_3mm": [
+     [
+      "R_palm 7075-T6 machined shell 1.5 mm w/ openings (P-021/A32, palm_7075.py)",
+      "R_knee trunnion bracket top plate (thigh) [EST]",
+      0.0
+     ],
+     [
+      "R_hip yaw housing (Actuators STEP, CRBH 6013 A output)",
+      "R_hip_yaw stop tab 10x12x70 (L39)",
+      3.0
+     ]
+    ]
+   },
+   {
+    "angle": 20,
+    "under_3mm": [
+     [
+      "R_palm 7075-T6 machined shell 1.5 mm w/ openings (P-021/A32, palm_7075.py)",
+      "R_knee trunnion bracket top plate (thigh) [EST]",
+      0.0
+     ],
+     [
+      "R_hip yaw housing (Actuators STEP, CRBH 6013 A output)",
+      "R_hip_yaw stop tab 10x12x70 (L39)",
+      3.0
+     ]
+    ]
+   },
+   {
+    "angle": 25,
+    "under_3mm": [
+     [
+      "R_palm 7075-T6 machined shell 1.5 mm w/ openings (P-021/A32, palm_7075.py)",
+      "R_knee trunnion bracket top plate (thigh) [EST]",
+      0.0
+     ],
+     [
+      "R_palm 7075-T6 machined shell 1.5 mm w/ openings (P-021/A32, palm_7075.py)",
+      "R_hip_pitch screw -y GE12 C rod-end eye",
+      2.35
+     ],
+     [
+      "R_hip yaw housing (Actuators STEP, CRBH 6013 A output)",
+      "R_hip_yaw stop tab 10x12x70 (L39)",
+      3.0
+     ]
+    ]
+   },
+   {
+    "angle": 30,
+    "under_3mm": [
+     [
+      "R_palm 7075-T6 machined shell 1.5 mm w/ openings (P-021/A32, palm_7075.py)",
+      "R_knee trunnion bracket top plate (thigh) [EST]",
+      0.0
+     ],
+     [
+      "R_thumb phalanx1 [EST]",
+      "R_knee trunnion bracket top plate (thigh) [EST]",
+      1.65
+     ],
+     [
+      "R_palm 7075-T6 machined shell 1.5 mm w/ openings (P-021/A32, palm_7075.py)",
+      "R_hip_pitch screw -y GE12 C rod-end eye",
+      1.89
+     ],
+     [
+      "R_hip yaw housing (Actuators STEP, CRBH 6013 A output)",
+      "R_hip_yaw stop tab 10x12x70 (L39)",
+      3.0
+     ]
+    ]
+   },
+   {
+    "angle": 35,
+    "under_3mm": [
+     [
+      "R_palm 7075-T6 machined shell 1.5 mm w/ openings (P-021/A32, palm_7075.py)",
+      "R_knee trunnion bracket top plate (thigh) [EST]",
+      0.0
+     ],
+     [
+      "R_thumb phalanx1 [EST]",
+      "R_knee trunnion bracket top plate (thigh) [EST]",
+      0.0
+     ],
+     [
+      "R_palm 7075-T6 machined shell 1.5 mm w/ openings (P-021/A32, palm_7075.py)",
+      "R_hip_pitch screw -y GE12 C rod-end eye",
+      2.06
+     ],
+     [
+      "R_hip yaw housing (Actuators STEP, CRBH 6013 A output)",
+      "R_hip_yaw stop tab 10x12x70 (L39)",
+      3.0
+     ]
+    ]
+   }
+  ]
+ }
+}
