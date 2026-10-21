@@ -164,3 +164,36 @@ Checked against the R-065 criteria with sim/v3:
   - stiffness: EI ≥ 0.8 and GJ reported vs 7075 (Controls to set a GJ floor)
   - thermal: hand-off to Thermal ladder B with the sleeve
 - Output: `modules/arms/results/job8c_*`.
+
+### §G status after R-132 / R-133 (2026-10-21). Supersedes the earlier Job 8b and 8c gate lines.
+**Job 8b: RELEASED (W2 carrier, `cad/r15/carrier_w2.step`).**
+- Drawing **e ≤ 2.2 mm** (s0 = 2.0 at e = 2.246; worst stack 1.92).
+- Stock 7075-T651, 2.5 in plate, grain L = Y / LT = X / ST = Z.
+- vM gates: **294 MPa LT** (governing in-plane), **271 MPa for any ST-loaded (Z) feature**.
+- Gap 3.4 ± 0.2 nominal, ≥ 3.0 loaded. Mx ≤ 351 N·m. s0 ≥ 2.0 at e worst (stack + FE e under load). Deflection ≤ 1 mm.
+- R6 plate-root fillet. Report stresses by grain axis.
+- Roll soft limit is 127° (R-133).
+
+**Job 8c: FINAL, QUEUEABLE by Robot Lab (R-132 §4). CF forearm with a 0.8 mm 7075 heat-spreader sleeve.**
+- **Geometry:**
+  - CF tube Ø70/67 × 194, roll-wrapped 0/90; E 75 / G 5 GPa until Materials cites
+  - 2 × 7075-T651 spigots Ø67/64 (1.0 in plate → 313 MPa band), 20 mm DP460 bond each end, 0.15 mm bondline
+  - **0.8 mm 7075 inner sleeve over the 120 mm flexor-motor zone, bonded**
+  - elbow and wrist end fittings per model_v4
+  - galvanic isolation scrim in the bondline (Materials)
+- **Loads:** bending 78 N·m (fall) and 69 N·m (elbow cap); torsion 36 N·m (wrist roll); P-042 20 kg carry (elbow 14.6); combined at worst phase.
+- **Gates (R-132):**
+  - 7075 fittings and sleeve vM ≤ the R-128 band for their stock (`STOCK_GRAIN.md`; unstated 257); fall = min(A-band, Sy/1.1)
+  - bond peak shear ≤ 4.6 MPa, peel reported
+  - CF Tsai-Wu FI ≤ 1/1.5
+  - EI ≥ 0.8 × 7075
+- **Torsional stiffness vs Controls' bandwidth gate:**
+  - Report the forearm torsional stiffness k_t and the first forearm/wrist torsional mode.
+  - Hand calc for CF:
+    - k_t = GJ/L ≈ 9.8 kN·m/rad (7075 ≈ 69)
+    - f ≈ 810 Hz with the hand alone (I 3.8e-4 kg·m²)
+    - f ≈ 50 Hz with a 10 kg payload at 0.1 m (I ≈ 0.1) [EST]
+  - Gate: f_torsion ≥ Controls' arm bandwidth gate × the Controls-specified separation ratio. Controls hasn't published a number in the repo yet, so Robot Lab gets it from Controls before running.
+  - If it fails, re-run with a ±45° braid overwrap (+~0.01 kg/side, mass at full).
+- **Thermal:** hand off the sleeve geometry to Thermal for ladder B. The Job 8c pass alone does not release credit (R-132: booked 0 until Job 8c, Thermal and Materials all sign off).
+- **Output:** `modules/arms/results/job8c_*`.
