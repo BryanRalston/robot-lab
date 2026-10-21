@@ -1255,6 +1255,47 @@ Sources:
   - CR is from 2013, so the firmware may differ.
 - **Flag:** hip_pitch runs at **75.3 °C at duty** (D89), so the derate starts in normal use (≈ −4 % at 75.3 on this curve, more on a hot day). Recommended: Actuators/Thermal size the hip plate for ≤ 72 °C at duty. Not booked here.
 
+
+**P-055 addendum (2026-10-21): CoE objects for the derate (Controls blocker).**
+Source [EAM]: Elmo *EtherCAT Application Manual*, G-ETHERCATAM Ver. 1.403 (Nov 2012). Public copy: pk-rus.ru/fileadmin/download/ethercat_application_manual.pdf. Pages are the printed numbers.
+
+*Temperature (TI[1]):*
+- [EAM §5.1 object list, p.63] lists:
+  - **0x22A2 "Drive Temperature in C", UINT16, RO, mappable Yes ("Legacy object")**;
+  - **0x22A3, 4 sub-indices, "Temperature", UINT16, RO, mappable Yes, "Similar to TI[]"**.
+- **The sub-index that equals TI[1] is not stated.** Sub 1 = TI[1] is the obvious reading but it is unconfirmed.
+- **Recommendation:**
+  - map **0x22A2:00** in the cyclic TxPDO (documented °C, mappable);
+  - on the first bench drive, compare 0x22A2 and 0x22A3:1–4 against TI[1] read through EAS, then switch to 0x22A3:n if preferred.
+- Both objects are mappable, so 1 kHz TxPDO is allowed by the OD. The free TxPDO entry/size limits aren't checked in this extract.
+
+*SDO fallback rate (if a PDO slot is short):*
+- Lumped plate τ = m·c_p / (h·A), with c_p 6061 = 896 J/kgK [MIF6061 makeitfrom] and h 8 (D89 basis). Drive mass is excluded, so these τ are lower bounds:
+
+| plate | m·c_p | τ |
+|---|---|---|
+| knee | 45.0 g → 40.3 J/K | over 0.0273 m² → **τ ≈ 185 s** |
+| hip_pitch | 25.8 g | 0.0122 m² → τ ≈ 237 s |
+| ankle | 13.5 g | 0.0060 m² → τ ≈ 252 s |
+
+- Worst slope ≈ 12 W / 40.3 J/K ≈ 0.3 K/s (knee, both drives at carry).
+- **10 Hz SDO per drive** (round-robin) gives < 0.03 K per sample, well under the 1 °C integer resolution and the 2 K margin to the 84 °C stop. 1 Hz would still be < 0.3 K/sample. Recommendation: **10 Hz**.
+
+*Current limit (CL[1], PL[1]):*
+- **No CoE object for CL[] or PL[] is listed in the [EAM] object list (pp.62–64).** That index isn't public.
+- Documented options:
+  - (a) **0x6073 "Maximal current", INT16, RW** [EAM p.64], included in the predefined RxPDO **0x160E** [EAM p.21, Table 5];
+  - (b) **0x6072 "Maximal torque", INT16, RW** [p.64], in RxPDO **0x160D** and **0x1605** [p.21].
+  - Note: p.64 marks 0x6072/0x6073 "Mappable No" while Table 5 maps them, an inconsistency in Elmo's document.
+  - Units: per-mille of 0x6075 "Motor rated current" (UINT32, p.64) under CiA 402. **This is not stated in [EAM]**, so it's unconfirmed.
+  - How 0x6073 interacts with CL[1]/PL[1] (min of both?) is **not documented**.
+- **Fallback for CL[1]/PL[1] themselves:** the Binary Interpreter objects **0x2013 (map to rPDO2) / 0x2012 (map to tPDO2)**, UINT64 [EAM p.62]. They carry interpreter commands such as CL[1]=x. The binary frame format isn't in [EAM], and the RO/WO attributes look swapped in the table, so both are unconfirmed.
+  - Alternative: SDO write to the binary interpreter at a low rate (10 Hz suffices, per τ above).
+- **Recommended:**
+  - drive the derate through **0x6072 in the cyclic RxPDO** (each cycle, scaled by f(T));
+  - keep CL[1]/PL[1] at their commissioned values;
+  - on the bench, verify that 0x6072/0x6073 cap the current below CL/PL and the units.
+
 **Mass (Electronics side).**
 - Drive-to-plate screws: 14 plated drives × 4 × M2 × 6 at 0.15 g = **+8.4 g**. These aren't in D89's 40.8 g, which counts M3 standoff screws only.
 - Temperature sensing and PE (per Q2): 0.
