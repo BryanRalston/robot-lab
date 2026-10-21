@@ -36,3 +36,20 @@
   - Peak use: hip roll -5.2° L / +5.3° R, yaw -9.4..+9.1°. Coupled violation 0, far from -10.
   - **Standing:** the WBC has no standing side-step. stand_only does not step and run.py has no stand-push mode, so the standing lateral push was NOT tested.
   - Logs: modules/controls/balance/push_l90/; script: modules/legs/wbc/push_l90.py.
+
+## 2026-10-21 11:20 ET: L93/L93b surface (Legs 955d2c8 / 7b519dd) on repin-j10-r8. PARTIAL
+- **Change:** hip_stop_pair / clip_hip_pair take both legs, with dp-dependent adduction (5 / 2.5 / 10°), toe-out 16→13 [EST] / cap 27, and inward yaw -12. They are wired into joystick.py. 7 tests pass.
+- **ref_cycle r8:** compliant, worst margin 2.49°.
+- **r8 walk_1p15 / 1p2 and WBC heel070: VIOLATE** on adduction.
+  - L: -1.95° at t=0.59 s, dp 10°.
+  - R: -1.06° at t=8.59 s, dp 0.2°.
+  - About 5–6% of frames per leg, mostly double support.
+  - Gait not changed.
+- **Not done:** jax smoke of the wiring; WBC fix for the adduction limit.
+- **Blob hashes:**
+  - modules/legs/rl/hip_stop_l90.py 4bba79b8417fcf1b888118914867262cecfeaade
+  - modules/legs/rl/joystick.py d11981055d84129a2ed65d46d594ce44f78b9501
+  - modules/legs/rl/test_hip_stop_l90.py 168aef77d0c0dd77054787054bd11f447f74ef00
+  - modules/legs/rl/ref_cycle.npz c9b6d0e5860a135810112d7e6723f78377b9d523
+  - sim/v3/humanoid_v3.xml 8947b3caa2351ef0672e3658442176807fc426ca
+  - modules/legs/rl/humanoid_mjx.xml a4b7a3aa589d9aaa8007e826222d37d810e27293

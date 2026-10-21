@@ -36,3 +36,37 @@ def test_clip_lands_on_surface():
         r = rng.uniform(-20, 20, 500) * D; y = rng.uniform(-40, 40, 500) * D
         rc, yc = clip_hip_l90(r, y, s)
         assert np.all(hip_stop_l90(rc, yc, s) < 1e-12)
+
+
+from hip_stop_l90 import hip_stop_pair, clip_hip_pair
+
+
+def P(rL, yL, pL, rR, yR, pR):
+    a, b = hip_stop_pair(rL * D, yL * D, pL * D, rR * D, yR * D, pR * D)
+    return a / D, b / D
+
+
+def test_l93_adduction_limits():
+    assert abs(P(-5, 0, 0, 0, 0, 0)[0]) < 1e-9 and abs(P(-6, 0, 0, 0, 0, 0)[0] - 1) < 1e-9       # dp<10, other not adducted
+    assert abs(P(-3.5, 0, 0, 3.5, 0, 0)[0] - 1) < 1e-9                                         # both adduct (R +3.5) -> 2.5
+    assert abs(P(-3.5, 0, 0, 3.5, 0, 0)[1] - 1) < 1e-9                                         # mirrored right
+    assert abs(P(-10, 0, 25, 0, 0, 0)[0]) < 1e-9 and abs(P(-7.5, 0, 15, 0, 0, 0)[0]) < 1e-9    # dp>=20 -> 10; dp 15 -> 7.5
+    assert abs(P(-8.5, 0, 15, 0, 0, 0)[0] - 1) < 1e-9
+
+
+def test_l93_toe_out():
+    assert abs(P(0, 16, 0, 0, 0, 0)[0]) < 1e-9 and abs(P(0, 17, 0, 0, 0, 0)[0] - 1) < 1e-9
+    assert abs(P(-3, 14, 0, 0, 0, 0)[0] - 1) < 1e-9                                            # 13 at r=-3 [EST]
+    assert abs(P(0, 28, 30, 0, 0, 0)[0] - 1) < 1e-9 and abs(P(0, 27, 30, 0, 0, 0)[0]) < 1e-9   # cap 27
+    assert abs(P(-10, 14, 30, 0, 0, 0)[0]) < 1e-9 and abs(P(-10, 15, 30, 0, 0, 0)[0] - 1) < 1e-9  # L92 below
+    assert abs(P(0, -12, 0, 0, 0, 0)[0]) < 1e-9 and abs(P(0, -13, 0, 0, 0, 0)[0] - 1) < 1e-9
+    assert abs(P(0, 0, 0, 0, -17, 0)[1] - 1) < 1e-9                                            # right toe-out mirrored
+
+
+def test_l93_clip():
+    rng = np.random.default_rng(1); n = 2000
+    x = [rng.uniform(-15, 15, n) * D, rng.uniform(-35, 35, n) * D, rng.uniform(-40, 40, n) * D,
+         rng.uniform(-15, 15, n) * D, rng.uniform(-35, 35, n) * D, rng.uniform(-40, 40, n) * D]
+    rL, yL, rR, yR = clip_hip_pair(*x)
+    a, b = hip_stop_pair(rL, yL, x[2], rR, yR, x[5])
+    assert a.max() < 1e-9 and b.max() < 1e-9

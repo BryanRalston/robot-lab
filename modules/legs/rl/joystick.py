@@ -5,7 +5,7 @@ tanh residual in [-1, 1], scaled per joint. Brax's autoreset keeps the first
 reset's physics state and does not restore info, so a fall writes the initial
 command, phase and PD memory back into info before returning.
 """
-from hip_stop_l90 import hip_stop_l90, clip_hip_l90, TERM_RAD as HIP_STOP_TERM
+from hip_stop_l90 import hip_stop_pair, clip_hip_pair, TERM_RAD as HIP_STOP_TERM
 import os
 
 import jax
@@ -228,16 +228,15 @@ class HumanoidWalk(mjx_env.MjxEnv):
         base = jp.where(stand, self._home_q, ref_q)
         target = base + payload_frac * self._carry + action * self._action_scale
         target = jp.clip(target, self._low, self._high)
-        # L90 coupled hip stop (Legs 8569e3a): project hip (roll, yaw) targets into the surface.
-        lr, ly = clip_hip_l90(target[1], target[0], 'L', xp=jp)
-        rr, ry = clip_hip_l90(target[7], target[6], 'R', xp=jp)
+        # L93 hip stop (Legs 955d2c8/7b519dd, both legs, dp-dependent): project hip (roll, yaw) targets onto the surface.
+        lr, ly, rr, ry = clip_hip_pair(target[1], target[0], target[2], target[7], target[6], target[8], xp=jp)
         target = target.at[0].set(ly).at[1].set(lr).at[6].set(ry).at[7].set(rr)
         return target, stand, ref_q
 
     @staticmethod
     def _hip_stop_viol(data):
         q = data.qpos[7:]
-        return (hip_stop_l90(q[1], q[0], 'L', xp=jp), hip_stop_l90(q[7], q[6], 'R', xp=jp))
+        return hip_stop_pair(q[1], q[0], q[2], q[7], q[6], q[8], xp=jp)
 
     def _gravity(self, data):
         return math.rotate(jp.array([0.0, 0.0, -1.0]), math.quat_inv(data.qpos[3:7]))

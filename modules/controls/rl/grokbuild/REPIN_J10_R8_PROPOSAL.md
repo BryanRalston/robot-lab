@@ -35,3 +35,18 @@ Supersedes the yaw ranges above (L -35..40 / R -40..35 are void).
   - The binding constraint is the roll limit (plan roll down to -7.0°); yaw use is ±6.9°. No violations.
 - **ref_cycle is unchanged** (r8 ankle-bound). gains.npz is unchanged.
 - **Blob hashes:** see the LOG.md entry for this commit (`git rev-parse <commit>:<path>`).
+
+## Update 2026-10-21 11:20 ET: L93/L93b final surface (Legs 955d2c8 / 7b519dd). PARTIAL; the gait VIOLATES it
+- **Functions:** `hip_stop_pair` / `clip_hip_pair` in hip_stop_l90.py take both legs' state; dp = |pitch_L - pitch_R|.
+  - Adduction limit: 5° (2.5° each if both adduct) at dp<10, 10° at dp>=20, linear between. The box stays at -10.
+  - Toe-out: at dp<10, 16° at roll 0, linear to 13° at roll -3 [EST], min with L92 below that; at dp>=10, L92 capped at 27°.
+  - Inward yaw: -12° per L92.
+- **joystick.py:** clip, penalty and termination now use the pair functions. Tests: 7 passed. Still untested under jax.
+- **Gait check against L93:**
+  - ref_cycle r8: OK, 0 violating frames. Worst margin 2.49° (R roll -2.51° vs the 5° limit, 1.2 m/s).
+  - r8 walk_1p15_r2 / walk_1p2_r2 / WBC heel070: **VIOLATE.**
+    - L: worst -1.95° (roll -6.95° vs the -5° limit at dp 10.0°, frame 118). About 116 frames (6%), 99 of them in double support.
+    - R: worst -1.06° (roll -6.06° at dp 0.2°, frame 1718). About 86 frames (5%), 39 in double support.
+    - All violations are on roll (the adduction limit at small dp); yaw is never binding.
+  - Gait not changed, per instruction. Job 10 must not start on these WBC plans as-is. The ref_cycle it trains on is compliant.
+- **Hashes:** see LOG.md, 11:20 ET entry.

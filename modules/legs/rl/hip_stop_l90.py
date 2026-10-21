@@ -38,3 +38,46 @@ def clip_hip_l90(roll, yaw, side, xp=None):
     r = xp.maximum(r, ROLL_MIN)
     ymin, ymax = _bounds(xp, r)
     return s * r, s * xp.clip(y, ymin, ymax)
+
+
+# ---- L93/L93b (Legs 955d2c8 / 7b519dd): final job 10 surface, both legs (2026-10-21) ----
+# dp = |pitch_L - pitch_R|. Per leg, in the left frame (right mirrored):
+#   adduction limit a_lim: dp<10: 5 deg if the other leg is not adducted, 2.5 deg if both adduct; dp>=20: 10; linear in 10..20.
+#   toe-out max: dp<10: 16 at r>=0, linear to 13 at r=-3 [EST], below -3 min(13, L92); dp>=10: min(L92, 27).
+#   inward yaw min: L92 (-12, coupled). Mechanical box stays at -10 roll.
+
+def _lim_pair(xp, r_self, r_other, dp):
+    both = (r_self < 0.0) & (r_other < 0.0)
+    a_small = xp.where(both, 2.5 * D, 5.0 * D)
+    t = xp.clip((dp - 10.0 * D) / (10.0 * D), 0.0, 1.0)
+    a_lim = a_small + t * (10.0 * D - a_small)
+    ymin, ymax92 = _bounds(xp, r_self)
+    small = xp.minimum(xp.maximum(16.0 * D + r_self, 13.0 * D), 16.0 * D)   # 16 @ r>=0 -> 13 @ r<=-3 [EST]
+    ymax = xp.where(dp < 10.0 * D, xp.minimum(small, ymax92), xp.minimum(ymax92, 27.0 * D))
+    return -a_lim, ymin, ymax
+
+
+def hip_stop_pair(rL, yL, pL, rR, yR, pR, xp=None):
+    """L93 violation (rad, >=0) for (left, right). Inputs in the joint frame (right roll/yaw mirrored internally)."""
+    if xp is None:
+        import numpy as xp
+    dp = xp.abs(pL - pR)
+    l_r, l_y, r_r, r_y = rL, yL, -rR, -yR
+    out = []
+    for r, y, ro in ((l_r, l_y, r_r), (r_r, r_y, l_r)):
+        rmin, ymin, ymax = _lim_pair(xp, r, ro, dp)
+        out.append(xp.maximum(xp.maximum(rmin - r, 0.0), xp.maximum(xp.maximum(ymin - y, y - ymax), 0.0)))
+    return out[0], out[1]
+
+
+def clip_hip_pair(rL, yL, pL, rR, yR, pR, xp=None):
+    """Project both hips' (roll, yaw) targets onto the L93 surface (roll first, then yaw at the clipped roll)."""
+    if xp is None:
+        import numpy as xp
+    dp = xp.abs(pL - pR)
+    l_r, r_r = rL, -rR
+    rminL, _, _ = _lim_pair(xp, l_r, r_r, dp); rminR, _, _ = _lim_pair(xp, r_r, l_r, dp)
+    l_r = xp.maximum(l_r, rminL); r_r = xp.maximum(r_r, rminR)
+    _, a, b = _lim_pair(xp, l_r, r_r, dp); yl = xp.clip(yL, a, b)
+    _, a, b = _lim_pair(xp, r_r, l_r, dp); yr = xp.clip(-yR, a, b)
+    return l_r, yl, -r_r, -yr
