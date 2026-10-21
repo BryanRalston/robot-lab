@@ -1,4 +1,4 @@
-"""D99 (from D98; T&R 8c7ac56 L60 rev C pass limits): bottoming energy >=92.5 J at 25 %, design 44.1 J, rate factor, speed cap, mass.
+"""D99 rev r75b (Legs L84 r2 6a3d84c: striker arm 24x18 x 63 mm cantilever, tibia ring ø51x3x24 bonded + 2x ø6 pins). D99 (from D98; T&R 8c7ac56 L60 rev C pass limits): bottoming energy >=92.5 J at 25 %, design 44.1 J, rate factor, speed cap, mass.
 D98: r75 PU knee stop - sizing for 66 J x >=1.4, placement in model_v4 (Legs L78 sweep method), STEP of pads + seats.
 Basis: Controls b5890e1 worst 6.37 rad/s at stop contact (135 deg); I_body 2.71 kg m^2/knee (D97 fit);
 reflected rotor J_r(q) = 2 x (0.576 [TBM2G-07613D, tbm2g p.284] + 0.2 [EST hub]) e-4 x N(q)^2, N(q)=2*pi*arm(q)/5 (RV12x5),
@@ -42,7 +42,8 @@ pk=at(E_des); alpha=pk['torque_Nm']/(Ib+Jc); tau_rot_knee=Jc*alpha              
 F_rot_pair=tau_rot_knee/(arm(C)/1000); F_rot_screw=F_rot_pair/2
 F_mot_pair=7267.0   # D96 K_PEAK pair motor peak
 dLdq=(L(C+0.5)-L(C-0.5))/1.0                                                          # mm/deg: screw shortens with flexion at 135
-mass=(V*1.13+(NL-1)*2*(AY*AR-math.pi*9)*ts*2.8e-3+2*2*(AY+2)*(AR+2)*2*2.8e-3+2*(AY*20*8+8*24*50)*2.8e-3+2*30*26*6*2.8e-3+40)/1000   # PU, 7075 shims 1 mm, end plates, strikers, seats, collar bar 40 g [EST]
+mass=(V*1.13+(NL-1)*2*(AY*AR-math.pi*9)*ts*2.8e-3+2*2*(AY+2)*(AR+2)*2*2.8e-3+2*(AY*20*8+18*24*63)*2.8e-3+2*30*26*6*2.8e-3+40)/1000   # own-estimate cross-check: PU, 7075 shims, end plates, strikers (lug + 24x18x63 arm), seats, bar 40 g [EST]
+MASS_LINE_ROBOT=0.344+0.143   # P-159 line per Legs L84 r2 (6a3d84c): D99 0.344 + Legs leg-side growth 0.143 (ring 28.7 + arm deepening 38 + tie boss 5 g/knee)
 res=dict(J_reflected_kgm2={q:round(Jref(q),3) for q in (0,30,60,75,90,120,135,143.6)},arm_mm_135=round(arm(C),1),N_135=round(N(C),1),
  E_physical_J=round(E_phys,1),E_rotor_J=round(0.5*Jc*w**2,1),E_design_J=E_des,E_required_25pct_J=round(E_req,1),
  pad=f'2 stacks {AY:.0f}(y) x {AR:.0f}(radial) face, {NL} x {tl} mm PUR90A + {NL-1} x {ts} mm 7075 shims + 2 x 3 mm end plates + ø6 guide pin, centroid r {R:.0f}',
@@ -68,7 +69,7 @@ chk=dict(rate_factor=RATE,strain_rate_per_s=round(w*R/T,1),
    pass_=Mf*1000/min(ZT,ZF)<=FTU,elastic=Mf*1000/min(ZT,ZF)<=FY),
  top_out=dict(deg=curve[-1]['knee_deg'],limit='<=143.6',pass_=curve[-1]['knee_deg']<=143.61),
  speed_cap=dict(w_44J_rad_s=round(wcap(E_des),2),w_bottom_rad_s=round(wcap(E25),2),note='contact speed at 130 deg for 44.1 J / 25 % bottoming (I_body 2.71 + J_refl(130))'),
- mass=dict(robot_kg=round(2*mass,3),limit='<=0.35',pass_=2*mass<=0.35))
+ mass=dict(robot_kg=MASS_LINE_ROBOT,own_estimate_robot_kg=round(2*mass,3),source='Legs L84 r2 6a3d84c',limit='<=0.35',pass_=MASS_LINE_ROBOT<=0.35,status='FAIL pending Robot Lab ruling'))
 res['D99_checks']=chk
 json.dump(res,open(f'{HERE}/results/knee_stop_pu_d99.json','w'),indent=1,default=lambda o:o.item())
 print(json.dumps(chk,indent=0,default=lambda o:o.item()))
@@ -82,5 +83,9 @@ st=st.union(cq.Workplane('XY').box(AY+2,AR+2,3,centered=(True,True,False))).unio
 st=st.cut(cq.Workplane('XY').circle(3).extrude(z+6))
 seat=cq.Workplane('XY').box(36,30,8,centered=(True,True,False)).translate((0,0,z+6))
 strk=cq.Workplane('XY').box(32,22,10,centered=(True,True,False)).translate((0,0,-10))
+strk=strk.union(cq.Workplane('XY').box(63,24,18,centered=(False,True,False)).translate((16,0,-18)))   # L84 r2 arm 24 (radial) x 18 (tangential) x 63, flush with the striker face
+ring=cq.Workplane('YZ').circle(25.5).circle(22.5).extrude(24).translate((79,0,-13))                  # tibia ring ø51 x 3 x 24 (Legs)
+pins=cq.Workplane('XY').circle(3).extrude(51).translate((91,0,-38.5)).union(cq.Workplane('XZ').circle(3).extrude(51,both=True).translate((91,0,-13)))  # 2x ø6 cross pins [EST layout]
+strk=strk.union(ring).union(pins)
 asm=st.union(seat).union(strk)
-cq.exporters.export(asm,f'{HERE}/cad/knee_stop_pu_r75_d99.step'); print('stack length mm',z+6)
+cq.exporters.export(asm,f'{HERE}/cad/knee_stop_pu_r75b_d99.step'); print('stack length mm',z+6)

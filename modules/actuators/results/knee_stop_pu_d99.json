@@ -115,8 +115,8 @@
   "per_screw_worst_N": 3634,
   "C0a_frac": 0.133
  },
- "mass_kg_per_knee": 0.242,
- "mass_kg_robot": 0.484,
+ "mass_kg_per_knee": 0.341,
+ "mass_kg_robot": 0.682,
  "curve": [
   {
    "strain": 0.0,
@@ -204,9 +204,12 @@
    "note": "contact speed at 130 deg for 44.1 J / 25 % bottoming (I_body 2.71 + J_refl(130))"
   },
   "mass": {
-   "robot_kg": 0.484,
+   "robot_kg": 0.487,
+   "own_estimate_robot_kg": 0.682,
+   "source": "Legs L84 r2 6a3d84c",
    "limit": "<=0.35",
-   "pass_": false
+   "pass_": false,
+   "status": "FAIL pending Robot Lab ruling"
   }
  }
 }

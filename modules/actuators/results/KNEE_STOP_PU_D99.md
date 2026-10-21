@@ -41,3 +41,27 @@ Curve (strain / knee° / N·m / J): 2 % 131.1/75/0.7 · 5 % 132.7/152/3.9 · 10 
   → ≈ 0.17 kg/knee, **≈ 0.34 kg robot**, only if Legs books the collar growth in this line.
 - Other levers lower the fault energy, which is set by Robot Lab: 92.5 → 80 J saves ≈ 10 g/knee of PU.
 - Cost of contact at 130°: free flexion ends 5° earlier than 135° (Controls TUCK check).
+
+## Rev r75b (2026-10-21 ~10:45 ET) — Legs L84 r2 (6a3d84c)
+- **Striker arm 24 (radial) × 18 (tangential) × 63 mm** (was 24×12; 399 MPa root FAIL per Legs). Legs: SF 1.05 design / 1.10 bottoming with Kt 1.4.
+- **Tibia ring ø51 × 3 × 24, bonded + 2× ø6 pins** (bond alone SF 0.92 at bottoming; pins SF 4.65/3.23, Legs).
+- Arm deepened **toward the striker face (t0−18…t0, flush)**, not Legs' t0−22 side. With t0−22 the arm comes within **0.5 mm** of the ankle screw body (knee 145°, ankle −45°), which fails.
+- **Re-sweep (knee_stop_sweep_d99.py → knee_stop_sweep_d99b.json),** now including striker ↔ ankle parts on the same segment:
+  - **min 4.5 mm**: striker arm ↔ ankle screw body at knee 145°, ankle −45°;
+  - strut 6.7; pad ↔ ankle screw 10.3; R-leg plate 12.0;
+  - pad ↔ own striker 2.3 at 128° (intended approach).
+  - **PASS ≥ 3.**
+- STEP: cad/knee_stop_pu_r75b_d99.step (stack + seat + lug + 24×18 arm + ring + 2× ø6 pins). The r75 STEP is kept for history.
+- Loads unchanged: 7.3 kN design / 10.5 kN bottoming (Legs confirmed).
+- **Mass line: 0.487 kg robot** (D99 0.344 + Legs leg-side 0.143 = ring 28.7 + arm deepening 38 + tie boss 5 g/knee; Legs L84 r2 6a3d84c). **FAIL vs 0.35, pending the Robot Lab ruling.**
+
+### Mass-saving options on our side [EST]
+| option | saving (robot) | verdict |
+|---|---|---|
+| Thinner/smaller pads at 92.5 J: PU is energy-bound (62.1 cm³ minimum vs 64.3 now) | −0.005 kg | negligible |
+| Fault energy 92.5 → 80 J (Robot Lab bound) | −0.02 kg | needs a ruling |
+| PU 95A instead of 90A (≈1.4× energy density) → PU, shims and plates ≈ −30 % | −0.04 kg | needs data for 95A and a re-check of the shape factor |
+| Lighter striker material: Ti-6Al-4V (+20 %) or 4340 steel (+90 %) at equal SF | none (heavier) | 7075 is already the lightest |
+| Tapered/pocketed 7075 arm (equal-strength taper ≈ ⅔ volume, I-section): the arms are ≈ 0.30 kg robot as 24×18×63 solid | −0.08 to −0.10 kg | best option. Legs owns the arm; needs FEA with Kt |
+| 1 stack per knee | −0.10 kg | **not viable**: 10.5 kN at 84 mm offset → 0.88 kN·m tibia torsion → von Mises ≈ 540 MPa > 469 |
+| Combined realistic (taper arms + 95A + 80 J) | ≈ −0.13 to −0.16 → **≈ 0.33–0.36 kg** | borderline vs the 0.35 cap |

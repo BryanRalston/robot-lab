@@ -22,7 +22,7 @@ def parts(t0):
         seat.append(rtbox(R-15,R+15,t0+HS,t0+HS+8,yc-18,yc+18))
         strk.append(rtbox(R-11,R+11,t0-10,t0,yc-16,yc+16))
         yi,yo=(yc+16,Y0-21) if yc<Y0 else (Y0+21,yc-16)
-        strk.append(rtbox(R-12,R+12,t0-16,t0-4,yi,yo))
+        strk.append(rtbox(R-12,R+12,t0-18,t0,yi,yo))   # r75b: arm 24x18 (L84 r2), flush with the striker face (t0-22 hits the ankle screw at 0.5 mm)
     # collar bar: from both seats to the femur collar (x~-8,z~600), at the seat back level, through y 28..232
     seat.append(rtbox(R-15,R+15,t0+HS+8,t0+HS+18,28,232))
     u=lambda L:L[0] if len(L)==1 else cq.Workplane('XY').add(L[0]).union(cq.Workplane('XY').add(L[1:])).val()
@@ -67,7 +67,7 @@ for pz in P:
                 if v['seg']==p['seg']: continue                     # pad/seat/strk same body: integral
                 if pz.get('L_knee',0)>128: continue                 # pad<->striker in contact
             elif v['seg']==p['seg'] and 'knee twin housing' not in p['name']:
-                if v['name'].startswith('X_seat') or v['name'].startswith('X_strk'): continue   # mounts onto own segment
+                if v['name'].startswith('X_seat') or (v['name'].startswith('X_strk') and not ('ankle' in p['name'])): continue   # mounts onto own segment
                 if not ('femur tube' in p['name'] or 'collar' in p['name']): pass
             b=p['solid'].BoundingBox(); bb=v['solid'].BoundingBox(); m=12
             if b.xmin>bb.xmax+m or b.xmax<bb.xmin-m or b.ymin>bb.ymax+m or b.ymax<bb.ymin-m or b.zmin>bb.zmax+m or b.zmax<bb.zmin-m: continue
@@ -77,4 +77,4 @@ for pz in P:
 rows=sorted([[k,d,pz] for k,(d,pz) in res.items()],key=lambda t:t[1])
 out={t:[r for r in rows if r[0].startswith(f'{t:+.0f} ')][:15] for t in T0S}
 out={f'{t:+.0f}':v for t,v in out.items()}
-json.dump(out,open(f'{HERE}/results/knee_stop_sweep_d99.json','w'),indent=1); print(json.dumps(out,indent=0))
+json.dump(out,open(f'{HERE}/results/knee_stop_sweep_d99b.json','w'),indent=1); print(json.dumps(out,indent=0))
