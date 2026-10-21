@@ -839,3 +839,7 @@ Retention at 1.2 m/s:
 ## D87 (R-128/R-130) Stock, grain and path classification (`results/STOCK_GRAIN.md`)
 - Thick actuator bodies go to 7075-T7351 plate (3.5–4.5 in; T651 bands stop at 3.0 in). Single path: hip yaw/roll, knee twin housing, knee lever, D76 wrist housings, clamp ring. Multi path: screw bodies, hubs, eyes.
 - All parts pass their band allowable (tightest: knee lever 208 vs 313). G4 brief gates: 239 (hip yaw/roll), 262 (screw bodies), fault 393. G4-Mg addendum classified.
+
+## D88 (R-131) Bottom-up table, 32 units (`results/R131_BOTTOM_UP.md/.json`)
+- True overlap: leg +0.03 0.12; +0.04 net of output hubs 0.326; +0.10 net of rotor bearing 0.936; +0.08 0 (7202); connector allowance 0.18 → adders −1.562 full. Drive −0.411 on 26 booked units; 6 wrist drives unbooked +0.133. **Total −1.84 kg full** (R-131 has −1.536 now → −0.304 more).
+- Flag: shoulder_roll v3 row is CRBH 4010; R-120 delta assumed 6013 → possible +0.36 pair under-booking.
