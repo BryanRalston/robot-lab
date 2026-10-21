@@ -20,3 +20,5 @@
 ## 2026-10-21 — Arms R17 clevis + roll-yaw link pocketing study (R-132 §5); Job 8c torsion gate
 - R17: −0.296 kg/side (−0.59 pair) [CALC on EST geometry]; half credit (~−0.30 pair) until CAD and Job 8d FEA. The lugs must go 8 → 9 mm (245/294 MPa). The roll-yaw link becomes a 4 mm-wall box (35/308 MPa). Job 8d spec in §G, not launched. Image: media/progress/2026-10-21_arms_R17_clevis_link.png
 - Job 8c §G (b9e8f03): Controls gate 8f80c42. Assembly k_t ≥ 2.9 kN·m/rad. Modes with CSG-14 in series: ≥ 15 Hz at T5 0.2 kg·m², ≥ 40 Hz hand-only. CF hand calc 20.1 / 460 Hz, pass. R16 estimate corrected.
+
+- 2026-10-21 Legs L68: knee web → hand forging (R-137 §6/R-138), P-152 sleeve OD 46.80 accepted pending Actuators co-sign.
