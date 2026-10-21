@@ -245,6 +245,16 @@ geometry:
       z1: 69.6
       web_t: 4
       web_z1: 40
+    keepout_torque_limiter:
+      part: Mayr EAS-compact size 2, type 490.6_1_.0 (overload, 80-200 Nm; set <204 Nm)
+      source: 'mayr K.490 EAS-compact catalogue (mayr.com.sg k_490_v16_en / Extract-EAS-Com-89): size 2 limit torque 80-200 Nm, mass 2.88 kg; OD 95 / L 67 per catalogue summary [verify on drawing]'
+      axis: waist pitch axis (y), centre z 69.6
+      y:
+      - 55
+      - 123
+      od: 95
+      clearance_r: 50
+      note: replaces the +y Al spacer (gear output -> torso cheek); torso +y cheek becomes the limiter flange seat; FEA geometry unchanged (stand-in)
   yoke:
     path: single
     stock: '7075-T651 plate 1.0 in (25.4) [R-128 band: 271?] cheeks'

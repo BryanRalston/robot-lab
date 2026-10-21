@@ -651,3 +651,20 @@ A full ring flange instead of the cheek (≈0.4 kg [EST]) would give ≈ +2 mm z
 - **Keep-out:** no harness or connectors at x < −95, global z 1360–1420. BMS board at torso z ≥ 145. The SBS75X at global z 1440 is clear.
 - **Partition:** Thor's fin exhaust rises behind Thor (exhaust upper back centre), so the 6 mm gap would carry it. Partition moved **x −63 → −78 (21 mm gap)**, gasketed to the shell/lid on both sides and the top. EtherCAT junction stays forward of x −63 (intake side). Mass: 0 (moved).
 - **Net for these items: +0.032 kg.**
+
+### Waist-pitch torque limiter keep-out, +y drive side (T&R P-160 / Actuators D102c, 2026-10-21, geometry only)
+- **Part basis:** Mayr **EAS-compact size 2, type 490.6_1_.0**, overload limit 80–200 Nm, set below 204 Nm (the CSG-25 repeated peak).
+  - Mass **2.88 kg** (cone-bushing type; 2.55 kg keyway type).
+  - OD 95 mm, L 67 mm, from the catalogue summary **[verify on the K.490 drawing]**.
+  - Source: Mayr K.490 EAS-compact catalogue (mayr.com.sg k_490_v16_en, Extract-EAS-Com-89).
+  - The R+W SK2-200 (120–240 Nm, OD 90, L 128, 4.0 kg; R+W SK2 datasheet 221208) is rejected: too long and heavier.
+- **Keep-out:** coaxial with the pitch axis (z 69.6), **Ø100 (95 + 2.5 radial) × y 55…123**, between the gear output flange and the torso +y cheek.
+  - It replaces the Al spacer; the cheek becomes the limiter's flange seat.
+  - Recorded in fea_job3c/3d yaml (`waist.keepout_torque_limiter`). The FEA stand-in is unchanged.
+- **Clearances:**
+  - Pitch −30/+60°: coaxial, so no sweep change. Top at z 117.1 against the floor at 121.6: 4.5 mm.
+  - Pelvis top (−50): 72 mm.
+  - Yaw ±90°: r_xy ≤ 132 mm above z 22; nothing static there.
+  - Hip sweep: below the deck, clear.
+  - **Open:** the outboard end at y 123 sits inside the cover's lower width (inner |y| ≈ 123 at z 50–60), so ≈ 0–2 mm. ID to check, or recess the cheek seat 5 mm inboard.
+- **Mass [EST]:** +2.88 − 0.11 (spacer) = **+2.77 kg**. Not booked (R-158: no booking until the FEA is done). A rotary damper alternative (D102c) would change this.
