@@ -1246,3 +1246,12 @@ Evidence checked on origin/main (ec12542). Credit rules unchanged: cited or meas
   - Row 11 (6013 bearing, G5 only) −0.16 → best case −0.12.
 - **R-122 conclusion changes.** Not only is +0.30 unreachable; **even the 66.5 hard limit (reserve 0) is now unreachable on the full design-phase plan** (short by about 0.28 kg best case and about 0.73 kg on present credit). To reach +0.30 needs about 1.77 kg credited. The arm and waist fastener delta is likely to worsen this.
 - The **options for Bryan (A–D in R-122) are now due, not at the end of R13**. Option A alone (accepting a smaller reserve) no longer suffices; it needs B (raise T2), C (deeper redesign) or a combination. The Arbiter brings this to Bryan now. The R-066 freeze stands.
+
+## R-124 — T2 mass limit raised to 68.0 kg, conditional (TARGETS 561eb35) — 2026-10-21
+Basis: Bryan's 2026-10-13 instruction that the crew (Robot Lab/Arbiter) decides design calls like the mass-limit change; Robot Lab chose option B, as the Arbiter recommended. Bryan may override.
+Ruling: T2 hard limit is 68.0 kg (was 66.5), carry stays 20 kg, CONDITIONAL on all of:
+1. Actuators confirm peak and RMS torque margins at 68.0 kg + 20 kg carry, against the existing gate SFs.
+2. Thermal confirms steady-state and duty-cycle winding/housing limits at 68.0 + 20 kg (R-096 duty).
+3. J10 sim passes at a 68.0 kg nominal (Controls; randomized range 65.0–68.5 unchanged), including the carry ≥0.8 m/s and recovery gates.
+4. The R-122/R-123 mass-down plan continues; the R-066 add-mass freeze stays (>0.005 kg needs a ruling).
+Credible mass ~67.97 kg means a reserve of +0.03 kg against 68.0; the +0.30 reserve floor still applies against 68.0 and is the R-122 goal. If any of 1–3 fail, T2 reverts to 66.5 and option C (deeper redesign) opens. Until 1–3 pass, G4/G5 sign-off is withheld against 68.0.
