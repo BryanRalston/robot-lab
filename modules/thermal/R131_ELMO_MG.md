@@ -405,3 +405,52 @@ Model: PC 1.5 mm, ≈ 8 mm gap, housing ε 0.85, outer face h 4 + 6 radiation to
 - (2) PASS with the fin-to-grille baffle and an aft/up outlet: grille ≈ 37–39 °C, **+0.014 kg**.
 - (3) The knee-housing fairing FAILS as drawn; it PASSES with inner foil and a vented gap of ≥ 10 mm (≈ 40–41.5 °C), **+0.012 kg**.
 - Total: **+0.026 kg**.
+
+## Rev 4e: outlet shroud (T&R 67e6eed) and ID outlet at 0.18 m — 2026-10-21 09:07 EDT
+Basis:
+- `r131_rev4d_chimney.py`.
+- P-156 geometry: inlet z 643–681, outlet z 799–837, 1296 mm² free each.
+- Exhaust ≈ 0.13–0.15 g/s at 79–97 °C (35 °C ambient).
+
+### (1) Outlet shroud
+- **Exhaust speed:** under a shroud of ≥ 2 × free area, the exhaust moves at only ≈ 0.04 m/s. The shroud inner face therefore sees nearly natural convection, h_i ≈ 2–5 W/m²K.
+- **Shroud outer face** = (h_i · T_mix + (4 conv + 6 rad) · 35) / (h_i + 10):
+
+| inner h_i / mixed air under the shroud | outer face |
+|---|---|
+| 2 / 62 °C (1:1 dilution) | 39.5 |
+| 3 / 62 | **41.2** |
+| 3 / 70 (poor dilution) | 43.1 |
+| 5 / 62 | 44.0 |
+| 5 / 70 | 46.7 (T&R 44–48 consistent) |
+
+- **Spec to reach ≤ 43 °C** (best estimate 41–43 °C):
+  - **Construction:** 1.5 mm PC with an Al foil inner face (ε ≤ 0.05); this removes the web and duct radiation.
+  - **Standoff and opening:** ≥ 15 mm standoff (10 is the minimum). Open aft/up, ≥ 2600 mm² free (2 × outlet).
+  - **Dilution slots:** ≥ 600 mm² low and at the sides, ≤ 5 mm wide, so ambient air is drawn in for ≈ 1:1 mixing before the shroud face. That keeps T_mix ≤ 62 °C and lets the plume sweep away from the shroud wall.
+  - **Margin:** this is thin, ≈ 0 to 2 K against 43.
+- **Mass:** ≈ 5 g/knee, so **+0.010 kg robot** [EST].
+- **Touch classification:** the outlet is at the upper rear of the knee, z 799–837 aft, an occasional brush/assist touch zone. I propose that T&R class it **"no sustained contact"**, so it is gated on 10 min / 48 °C, which gives a **5–7 K margin**. Keep 43 °C as the target; TP-G5-15 measures it.
+- **Outlet webs, metal vs polymer:** the webs are thin and washed on both sides, so they reach exhaust temperature whatever their k. Low-k PA12 webs change only the perceived short contact: 1 min plastic 60 °C against metal 51. At 54–61 °C they are still a FAIL for ≥ 10 min.
+  - **Better:** under the shroud the webs are not touchable (4.5 mm slots, 15 mm hood), so use plain moulded PA12/PC webs. No metal is needed.
+- **Outlet with no grille** (recessed 4.5 mm slots ≥ 10 mm inboard, plus the hood): thermally the same case, because the shroud is the only touch surface. It saves the grille part. **Equivalent: ID's choice.**
+
+### (2) Effect of the shroud on fin flow
+- The shroud, in series at 2 × area, adds ≈ 25 % to the outlet loss, so the effective area falls ≈ 11 %.
+- The fin channels still control the flow: ṁ changes by −0.001 g/s and the drive base by **+0.2 K** (78.0 → 78.2 °C at H 0.12). **Negligible. PASS.**
+
+### (3) ID outlet at 0.18 m
+| H (m) | ṁ (g/s) | drive base standing, no shroud / with shroud |
+|---|---|---|
+| 0.12 (baseline) | 0.129 | 78.0 / 78.2 |
+| **0.18 (ID)** | 0.154 | **73.0 / 73.2** |
+| 0.20 | 0.162 | 71.8 / 72.0 |
+
+- **0.18 m: PASS**, ≈ 7 K under 80 °C.
+- It recovers 4.8 of the 6 K that 0.20 m would give, about 1 K short of the 72 °C figure. Accept.
+
+**Verdict:**
+- Shroud (foil inner, ≥ 15 mm, ≥ 2 × area, dilution slots): outer face ≈ **41–43 °C**. PASS against 43, thin margin; 5–7 K margin against 48 if the zone is classed no-sustained-contact.
+- Outlet webs: polymer is fine.
+- Shroud flow penalty: +0.2 K.
+- H 0.18: drive base 73.2 °C standing.
