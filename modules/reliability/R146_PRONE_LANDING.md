@@ -80,3 +80,63 @@ See G5_TEST_PLAN.md TP-G5-16: (a) a controlled lower ×20 on load-plate floor; (
 **Verdicts now:** L1 PASS. **L2 CONDITIONAL until TP-G5-17 passes** (pad/stroke/bulkhead PASS, head PASS). L3 = T-031, head marginal. T-031 gate head clearance FAIL / open to ID.
 
 ## 8. TP-G5-17 pack drop test: see G5_TEST_PLAN.md
+
+## 9. Update ~09:25 ET: Controls fc86721 sim data [EST] + HANDLING_MAP e6dd4b0 rescue procedure
+Recompute script: `r146_fc86721.json`. Inputs: kneel CoG 0.674 m (was my 0.50 EST), standing CoG 0.91 m (Controls), prone split chest 64 % (46–64 % DR), knees 27.5, feet 4.7, hands 3.9. Settle 0.30 m/s / 1.74 kN. Kneel tip: 13.3 kN, 43–44 g raw / 24 g 60 Hz MA.
+
+| quantity | old | **new** |
+|---|---|---|
+| L2 kneel tip energy | 252 J | **368 J** (68.42 × 9.81 × 0.549) |
+| L2 crush, 100 mm core (19.5 kN 0° … 18.1 kN 15°) | 13–14 mm | **18.9–20.4 mm of 70 (3.4×)** |
+| L2 pad speed / pack Δv (m_eff 28.8 kg, knee pivot) | 5.4 | **5.1 m/s / 4.0 m/s** |
+| L2 pack g: free / pinned at 22.35 kN / pinned at dynamic 29 kN | 38 / 104 / 135 | **38 / 63 / 82 g**; sim 44 raw, 24 filtered |
+| rail load (8.75 kg) | 3.3–8.9 kN | **2.1 (24 g) … 3.8 (44 g) … 7.1 kN (82 g)** → 216 MPa ≤ 320 PASS |
+| L3 standing tip energy / crush | 549 J / 28–30 | **527 J / 27–29 mm of 70** |
+| prone static chest load | 0.34–0.47 kN EST | **412 N (DR 46–64 % → 0.31–0.43 kN)** |
+- The higher kneel CoG raises the **energy** but lowers the pinned g, because the larger I about the knee gives the same pad ceiling a smaller angular deceleration.
+- **The sim's 13.3 kN is not conservative.** MuJoCo's soft default contact has no crushable model. The real cartridge is elastic only up to ~6.5 J before the plateau onset (17.7–19.5 kN), and 368 J ≫ 6.5 J, so the real pad **crushes at the plateau (19.5–22.3 kN quasi-static, up to 29 kN dynamic)**. Use the plateau for structure and pack, and the sim only for kinematics.
+
+**Head clearance (fd981f1, 41.8 mm minimum; need crush + 1 + 10):**
+- L1: 11 → PASS.
+- **L2: 31.4 → PASS (10.4 mm spare).**
+- **L3: 40.1 → marginal PASS (1.7 mm spare).**
+- T-031 full gate 68 → FAIL (open to ID/Torso, unchanged).
+
+### Verdicts (updated)
+- **L1 controlled lower: CONDITIONAL.**
+  - Structure PASS: 1.74 kN ≪ 17.7 kN crush onset. The whole-body KE at 0.30 m/s is 3.1 J < 6.5 J elastic capacity, so it **stays elastic and the cartridge is not consumed**. It is 5× under the 8.8 kN routine limit.
+  - **D94 interlock FAIL** (0.30 vs 0.10 m/s) with the PD stand-in; the WBC arm-supported lower is pending.
+  - Structural no-crush speed ≈ 0.5 m/s [EST, m_eff 40 kg on the 6.5 J elastic cap]. Keep **0.10 m/s as the gate**: it is a controls/interlock requirement, and 5× margin is needed against unconverged contact.
+  - Closes when the WBC shows ≤ 0.10 m/s over DR **and** TP-G5-16(a) measures ≤ 8.8 kN with no indentation.
+- **L2 tip from kneel: CONDITIONAL** (unchanged status). Stroke, bulkhead, rails and head PASS. Pack demand 24–82 g at Δv ≈ 4.0 m/s sits under TP-G5-17's 104 g / 20 ms / 5.7 m/s, but the pulse is outside the qualification until **TP-G5-17 passes**.
+- **L3 tip from standing: PASS on stroke (29/70), rails and bulkhead; head marginal (1.7 mm).** T-031 governs; it is a fall event.
+
+### Filtered vs raw g, and what it means for TP-G5-17
+- The sim's 44 g is a raw finite difference of the torso COM velocity. The 24 g is a 60 Hz moving average (16.7 ms window). For a 7–20 ms pulse that window cuts the peak by ~40 %, so the two numbers are the same event seen through different filters. **Neither is a pack spec.**
+- **Do not size or pass TP-G5-17 on the 24 g filtered number.** The test is specified by table control (half-sine peak + duration + Δv), which envelopes the event:
+  - 104 g ≥ the 82 g pinned/dynamic bound (≥ 2.4× the raw sim);
+  - 20 ms ≥ the 7–23 ms band midpoint;
+  - **5.7 m/s ≥ 4.0 m/s pack Δv**.
+- Measure control and response at **SAE J211 CFC 1000** (raw) and also report the 60 Hz MA, so the sim can be correlated filter-for-filter. Compare at least on Δv and on the shock response spectrum, not only on the peak.
+- Controls should report their sim pack-rail g at CFC 1000-equivalent and the Δv.
+
+### Prone rescue procedure review (HANDLING_MAP e6dd4b0): ACCEPT WITH CHANGES
+Good points: lock-out before approach, remote E-stop for a crouched HOLD_DERATED robot (it will collapse), no brakes stated, H1/H2 only, never by a limb, explicit re-enable.
+
+Required changes (Controls/ID to edit the map):
+1. **Battery first (missing).** After any tip/TUCK/fall, check the pack **before** approaching and before step 3: smoke, hissing, sweet/solvent odour, swelling, BMS cell temperature rising. If any of these, evacuate, keep clear, and don't roll or lift it (thermal runaway risk). Use a pack thermal camera reading if available.
+2. **Step 2 cool-down:**
+   - Re-point it from "rev 4e" to the chosen **B2 rear outlet** zone (N1 moves aft/up; prone puts the rear outlet **facing up**, right where rescuers lean over). Use the TP-G5-15 measured time to ≤ 43 °C.
+   - Until published, **EN 407 contact-heat level ≥ 1 (100 °C) gloves** for an urgent move.
+   - Drives latch at 82 °C, so the knee housing and drive band are hot too, not just N1.
+3. **Lift load:** 68.4 kg with two carriers is ≈ 34 kg each, above the NIOSH 23 kg reference. Make **three people minimum or a board/strap lift aid** mandatory (step 5 implies but does not require it).
+4. **Backdriving pinch in the roll:** in the log roll the knee (90° prone) and hip backdrive freely. Hands must stay off the thigh–shank gap (pinch), not just N5. Add a knee strap or a rule to keep the legs straightened before the roll.
+5. **Cartridge replacement** (step 6 says only "inspect"; specify it):
+   - **replace** after any L2/L3/TUCK event regardless of appearance, or if indentation > 2 mm (crush) / > 0.5 mm face mark (L1 gate), or if the tap test fails
+   - lot-certified cartridge in the 19.5–22.3 kN band, **100 mm core** (Robot Lab ruling)
+   - bezel 4 × M4 captive at spec torque
+   - inspect the land, backing and bulkhead; dye-penetrant after any L3/T-031-level event
+   - record the cartridge lot and the event in the fall log
+   - the pad is underneath when prone, so inspection needs the supine roll or a lift on a board
+6. **Re-enable gate, add:** pack OCV/group voltages, isolation and BMS log unchanged (TP-G5-17 criteria) after any L2/L3 event; chest cartridge replaced; R-146 fall-budget entry.
+7. Step 1: a robot mid-way through the R-146b sequence may still move. Wait for MO_OFF **plus 5 s** with no motion before approach, even with the remote E-stop pressed.
