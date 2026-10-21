@@ -1371,3 +1371,66 @@ Standard cited: **ANSI/CAN/UL/ULC 2271:2023** (LEV batteries; public IBR copy la
   - (f) no SELV 0 V to box except at the one defined chassis point (§18.2e).
 
 **Open:** vent/burst path and part; gasket; busbar blocks; gland part; Nomex moisture compliance; thin-sheet layer rule; BMS mount positions vs the FEA peaks.
+
+### 18.7 P-057: Torso Option A pack notch (52 × 110 × 100 front-top, rear +26.5), Electronics feasibility (5a1e33d, 2026-10-21)
+**Pack spec as it exists:**
+- Molicel INR-21700-P45B, **20S5P**, 100 cells, 68/72/84 V (Torso §3).
+- 2 × BQ79616-Q1 (10S + 10S, daisy-chain) (Torso §4).
+- BMS on the rear web z 60–120, FET board on the left wall, busbar blocks on the right wall (Torso P-056 reply).
+- Envelope 185 × 220 × 144 (model_v4; the label there reads "13S", which is stale).
+- **No cell layout, group order or busbar drawing exists in the repo.** The layout below is the Electronics reference layout **[EST, ours]**. It is the basis of the check, not a pre-existing design.
+
+**Reference layout [EST]:**
+- Cells vertical, 2 tiers × 70 mm (fits the 144 envelope), 22 mm pitch (Ø21.7 cell).
+- Each 5P group is a 5-cell row along y, nickel-strip parallel.
+- Groups are chained in series by Cu links. Slots per tier: 8 (x) × 10 (y) = 80 → 160 slots for 100 cells.
+
+**1. Groups whole?** Yes, if whole groups move.
+- The notch (x 52 → 2 columns, y 110 → 5 rows) removes exactly **one 5P group-pair footprint per tier** (2 cols × 5 rows = 10 slots).
+- In z the notch is 100 of 144 mm, so it cuts the **top tier and 28 mm of the lower tier**. That makes it **20 cells / 4 groups**, not ~10. With the notch ≤ 72 mm deep (top tier only) it's **10 cells / 2 groups**.
+- Rear +26.5 mm adds 1 column × 10 rows × 2 tiers = **20 slots**, so either case fits.
+- **Rule: relocate whole 5P groups only. Never split a group across the notch.** Free slots after the change: 9 × 10 × 2 − 20 = 160 ≥ 100.
+- Recommendation: Torso limits the notch to z ≤ 72 (one tier) if the core allows it; otherwise it's the 4-group case. **Open: Torso.**
+
+**2. BMS sense and balance.**
+- Re-sequence the chain so the relocated groups are its last links (S17–S20), in the new rear column next to the BMS on the rear web. Sense leads then **shorten or stay** for those groups.
+- Worst case, 4 groups × +0.20 m [EST] of 0.25 mm² SiF at 2.7 g/m per conductor (5.4 g/m pair, §17.3) = **+2.2 g**.
+- Lead resistance +0.2 m × 0.25 mm² Cu = 13.8 mΩ, from ρ 1.7241 µΩ·cm (IEC 60028 annealed Cu standard). The voltage error during balancing is I_bal × 13.8 mΩ, so a few mV at a ~0.2 A class balance current. **BQ79616 balance current not cited; open.** Measure with balancing paused, which is standard BQ7961x practice [EST].
+- Both ICs keep 10S each. The split point must stay at a group boundary (S10/S11). NTCs move with their groups.
+
+**3. Busbar rework.** Re-sequencing adds **2 long series links** (front chain → rear column and back) of ≈ 0.19 m each [EST, x span 185 + 26.5 − margins].
+- Section 12 mm² Cu (e.g. 6 × 2 mm).
+- Current density 60 A cont / 12 = **5.0 A/mm²**; 100 A / 2 s peak = **8.3 A/mm²**.
+- R = ρL/A = 1.7241e-8 × 0.19 / 12e-6 = **0.27 mΩ per link**.
+- ΔV at 100 A = **27 mV per link, 55 mV for both (0.08 % of 72 V)**; 5.4 W for 2 s.
+- Mass 12 mm² × 0.19 m × 8.96 g/cm³ (Cu, as §17.2) = **20.4 g per link → +40.9 g**.
+- The short group-to-group links they replace stay in the count (same number of joints), so 0 is credited.
+- Intra-group nickel strip: same groups, same strips, **0 delta** (Ni not re-massed).
+
+**4. Wiring and main connector.**
+- Pack + and − terminate at the chain ends. With the re-sequence, one end is at the rear column and the other stays front-low.
+- Route the main + and − to the SBS75X bulkhead on the **rear web, ≥ 40 mm from the vent** (§18.6), with both main runs in the lower tier, away from the notch. The front-low run goes along the floor under the liner: 10 mm², ≈ 0.20 m.
+  - That run already exists in some form because the pack main is booked (R-084); its length change is **open** until Torso places the SBS75X.
+- The CAN gland stays at the BMS rear web.
+
+**5. Vent, liner and isolation (§18.6 / P-056).**
+- **Vent: CONFLICT.** Option A moves the pack rear to the shell inner wall, and the GORE vent is on the **rear web at y 0, z 40**, outlet rearward and down. That outlet would now face the shell.
+  - Either move the vent to the **floor or a side wall low**, with an outlet path down through the pelvis open top, or add a matching shell opening.
+  - The vent must stay off the lid and front web, and ≥ 40 mm from joints. **Open: Torso.**
+- **Liner:** notch faces replace removed faces 1:1 (52 × 110 + 100 × 110 + 2 × 52 × 100 = 0.0271 m² in = out), so net 0. The rear extension adds 2 × 26.5 × 230 + 2 × 26.5 × 144 = **0.0198 m²**: Nomex 410 3 × 115 g/m² → **+6.8 g**; Torso's Formex GK-10 alternative ≈ +5 g [density EST].
+- **Isolation:** the notch puts a metal box inner corner (bulkhead/land at the pad core) against cell cans, which are live negative. The liner must be continuous around the notch's re-entrant corner, with no seam inside 3.0 mm creepage / 1.5 mm clearance. That's ≥ 1.5 mm air gap plus the liner to the notch faces, and the cell holder supplies the clearance. The vent cut-out in the liner needs the same ≥ 3.0 mm creepage from its edge to any live part.
+
+**Pack mass change (cells moved, 0):**
+- busbars +0.041
+- sense leads +0.002
+- liner +0.007
+- **Total +0.050 kg [CALC from cited Cu density/resistivity, lengths EST]**
+- **Over the 0.02 freeze: Arbiter booking.** Holder count is unchanged; holder re-tooling is Torso's.
+
+**Open:**
+- notch depth (1 or 2 tiers);
+- cell-holder layout drawing (Torso/pack);
+- vent relocation;
+- SBS75X position and main-run length;
+- BQ79616 balance current cite;
+- link lengths from CAD.
