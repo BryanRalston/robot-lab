@@ -87,3 +87,6 @@
   - Palm/thumb vs knee trunnion plate (thigh) at 0–1.65 mm for L −35..−15 and R +15..+35, with the arm hanging.
   - L/R rod-end eye vs palm at 1.9–2.4 mm.
 - **Tests:** suite 54/54 on main with 54ca3de.
+- 2026-10-21 11:30 ET RL Torso: 3c rev D: chest load taken off the lid (socket walls to floor, shelves to side walls), lid back to 1.5 mm, Thor +6 mm.
+  - Final n6: bulkhead ≥1.04, waistY ≥1.17, yoke ≥1.90; 4.36/5.21 mm PASS; 190 Hz PASS. Pelvis 0.89–1.08 FAIL (ribs back to 8 mm, not run).
+  - Net +2.57 kg (floor ≈ +2.2; ≤1.5 unreachable). COM would reach ≈10.7 mm → Controls flagged, not booked.

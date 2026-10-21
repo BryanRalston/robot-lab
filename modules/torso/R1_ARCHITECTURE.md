@@ -627,6 +627,11 @@ If the refined job 3c needs the 3 mm lid: +0.184 more (0.876).
 | Option A pack notch / re-layout (ea6fc57) | −2.2 | 0 | +0.1 | accepted by Controls |
 | Two-sided yoke (cheeks t14×D140 + spacers + THK RB7013; −waist ring 0.25; box −0.19), job 3c-final | −0.2 | 0 | ≈ +6.3 [EST, robot COM z ≈ 1.0 m assumed] | modelled (coarse) |
 | **Cumulative (booked)** | **−2.4** | **0** | **≈ +6.4** | **≈ 6.8 mm < 10 mm** |
-| 3c rev C candidate (m5: lid 4.5, pelvis lip/ribs/ring, waistY closed section), NOT booked | ≈ +0.2 | 0 | ≈ +4.6 [EST] | **would bring the total to ≈ 11.3 mm > 10: Controls flagged, not booked** |
+| 3c rev D candidate (n6: load off the lid, lid 1.5, shelves, pelvis ribs/x-ribs, waistY closed section), NOT booked | ≈ +0.2 | 0 | ≈ +4.0 [EST] | **would bring the total to ≈ 10.7 mm > 10: Controls flagged, not booked** |
 
 A full ring flange instead of the cheek (≈0.4 kg [EST]) would give ≈ +2 mm z. That's still under the limit.
+
+### Tap fuse resistance in the balance-resistor sizing (2026-10-21)
+- The tap fuses are Littelfuse 0451.500 (0.3046 Ω cold each, 451/453 datasheet). The BQ79616 balancing path passes through **two** taps, so it carries an extra **2 × 0.30 Ω ≈ 0.61 Ω**. This **must be included in R_CB sizing**.
+- Per TI SLVAE87B §4.2: I_CB = V_cell / (2·R_CB + R_DS(on) + 0.61 Ω).
+- The BQ79616 internal balance current is **240 mA max** (BQ7961X-Q1 datasheet Rev F). At 240 mA the fuses drop ≈ 146 mV and dissipate ≈ 35 mW total, so cell voltages must be measured with balancing paused.

@@ -96,6 +96,8 @@ def build(c):
         li = occ.addBox(-xi+L_, -yi_+L_, zt_-rf["lip_t"]-1, 2*(xi-L_), 2*(yi_-L_), rf["lip_t"]+2)
         lip, _ = occ.cut([(3, lo)], [(3, li)])
         rb = [occ.addBox(-xi-0.01, yy-rf["rib_t"]/2, dz_, 2*xi+0.02, rf["rib_t"], zt_-dz_) for yy in rf["rib_y"]]
+        for xx in rf.get("xribs", []):   # fore-aft ribs between the transverse ribs, |y| <= xrib_y (clear of hip-yaw bolt keep-out)
+            rb.append(occ.addBox(xx-rf["rib_t"]/2, -rf["xrib_y"], dz_, rf["rib_t"], 2*rf["xrib_y"], zt_-dz_))
         if rf.get("rib_cap"):   # T-flange on each rib top (rib_cap = [width, thickness])
             cw, ct = rf["rib_cap"]; rb += [occ.addBox(-xi-0.01, yy-cw/2, zt_-ct, 2*xi+0.02, cw, ct) for yy in rf["rib_y"]]
         if rf.get("ring"):   # annular rib around the waist-yaw housing seat, deck top -> pelvis top

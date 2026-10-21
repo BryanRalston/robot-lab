@@ -212,3 +212,42 @@ Layout: pack/pack_layout_optA.{py,json,svg}, pack/pack_layout_optA_tables.md.
 - **COM:** Δz ≈ +4.6 mm since the booked state [EST, robot COM z ≈ 1.0 m] → cumulative ≈ 11.3 mm, **> 10 mm. Controls flagged; not booked** (sim_torso_body/model_v4 unchanged).
 
 **(3) Tap fuse:** **Littelfuse 0451.500** (NANO2, 0.5 A, **125 VAC/VDC**, 50 A @125 VDC interrupting, 0.3046 Ω cold), from the Littelfuse 451/453 datasheet. Rated ≥ 84 V DC, so it passes. Its 2 × 0.30 Ω in the balance path gives ≈ 146 mV at 240 mA: include it in R_CB sizing, and measure with balancing paused.
+
+## 3c rev D (10:49): chest load taken off the lid (step 4), coarse n1–n6
+**Load path:** the land/socket goes straight down to the floor and cheeks; the lid is no longer in the path.
+- Socket walls run from the floor (z 125.5) to the land top (270.5); they no longer touch the lid.
+- A socket top cap (x 52–106.5, |y| < 54.5, z 270.5–274.5) is 2 mm below the lid. The front window is closed above 270.5.
+- Two shelves (struts as shear plates) run from the socket walls to the side walls through the empty front zone: x 52–106.5, |y| 54.5–112, at z 165–171 and 262–268.
+- Side-wall inner doublers, front zone (x 52–106.5, y ±(109–112), z 125.5–268). External wing doubler y ±(115–118), x 30–72, z 240–278.
+- **Lid back to 1.5 mm** (z1 278), so the **Thor bay is +6 mm and the ID chamfer is 18 mm**. The lid-top doubler, under-lid shelf and land cap are deleted.
+- **Pocketing:** floor 4 mm plus 4 mm strips under the cells/cheeks; pelvis ribs 6 mm plus fore-aft ribs at x ±55 (|y| ≤ 66, clear of the hip-yaw bolt keep-out).
+- n4/n5 first attempts failed meshing (0.01 mm slivers / negative Jacobian) and were fixed by re-snapping the boxes.
+
+| run | bulkhead LC1a/b/c/u | pelvis LC1a/b/c/u | defl a/b mm | Hz |
+|---|---|---|---|---|
+| n1 | 0.33/0.17/0.45/0.29 | 1.08/0.97/0.75/0.90 | 5.27/6.35 | 166 |
+| n3 (walls stop below lid) | 0.87/0.33/0.78/0.76 | 1.20/1.06/0.93/0.99 | 5.70/7.91 | 185 |
+| n4 (socket top cap) | 0.36/0.23/0.43/0.32 | 1.08/0.96/0.95/0.89 | 4.41/5.22 | 191 |
+| **n6 final** | **2.01/1.04/2.09/1.75** | **1.08/0.95/0.95/0.89** | **4.36/5.21** | **190** |
+
+- n6, other parts: waistY ≥ 1.17, yoke ≥ 1.90, LC2 bulkhead 1.30, buckling 12.6.
+- **Only the pelvis fails** (5–11 % short), at the rib/fore-aft rib tops near the lip: (−61.5, 59.5, −52) and (53.5, −39, −53).
+- Fix, not run (run budget used): ribs back to 8 mm. Rev B had ribs 8 and lip 20 × 8 with pelvis ≥ 1.54. Estimated +0.06 kg.
+- **Stiffness:** 6.65 MN/m centred, 5.57 MN/m offset (5.21 mm ≤ 5.5). **PASS.**
+
+**Clearances:**
+- The struts/shelves sit at x ≥ 52: cells x ≤ 50.2 (1.8 mm incl. liner) ✓; BMS and SBS75X at x ≤ −60 ✓.
+- **Two geometry nits for the next run:**
+  - The 6 mm socket walls have their inner face at |y| 48.5 against the core half-width 49, a **0.5 mm interference**. Fix: land_web.y 56.5.
+  - The notch floor top at z 171 touches the core bottom, 0 mm against 1.5 needed. Fix: notch floor top 169.5.
+  - The pad stroke is along x inside |y| ≤ 49 and z 171–269, so the shelves, which are outboard of the socket walls, don't touch it.
+- The FET/busbar zone is now between the shelves: x 52–104.5, |y| 54.5–109, z 171–262 (91 mm tall). Electronics to confirm.
+
+**Mass (n6):**
+- Box + bulkhead 2.953 kg (mesh); cheeks 0.842 (mesh); spacers 0.225; RB7013 0.35; waistY +0.411; pelvis +0.659 (mesh 3.228 − 2.569); stop / fuses / Electronics +0.11.
+- Credits −2.978.
+- **Net +2.57 kg. The ≤ 1.5 target is NOT reachable** in this architecture.
+- Honest floor ≈ +2.2 kg: the two-sided yoke (cheeks + spacers + bearing ≈ 1.42), waistY +0.41 and pelvis reinforcement ≈ 0.6 are needed by the T&R loads with a fixed pelvis, and the box beyond job 3's 1.99 + 0.74 credit is ≈ 0.2–0.5.
+- Getting to +1.5 would need a lower LC1 basis or a non-fixed-pelvis reaction (T&R).
+
+**COM:** Δz ≈ +4.0 mm since the booked state [EST, robot COM z ≈ 1.0 m] → cumulative ≈ 10.7 mm, **> 10. Controls flagged; not booked.**
