@@ -404,3 +404,15 @@ Script `cad/covers/hip_skirt_r8.py` → `hip_skirt_r8.json`, `hip_skirt_r8_pelvi
   - **Panel L ↔ panel R: FAIL in bilateral poses only.** 0 of 255 single-leg poses fail (other leg at zero). 50 symmetric both-leg poses fail: 34 where the thighs themselves collide (infeasible) and **16 cover-caused**: both-leg adduction (roll −20) with flexion ≤ −40, or both-leg yaw 45 (e.g. pitch −100 / roll −20 / yaw 0, gap 0.1).
 - **Smallest fix (not ID's to make):** a Controls bilateral keep-out, with no simultaneous both-leg roll < 0 at pitch ≤ −40 and no simultaneous both-leg yaw 45. These postures also bring the thighs within 60–200 mm and are already self-collision-adjacent. The single-leg ROM is untouched. Cover alternative: trim the panels' inboard edge. Inboard edges at y 60 / 70 / 80 were tried and don't remove the bilateral cases.
 - **Mass:** panel + lips/inserts + foil band = **0.0245 kg per panel**; fixed-skirt PC removed **−0.299** → net **−0.274 kg**, vs rev 6 (−0.198) **−0.076 kg lighter** [EST, same v5 keep-out basis].
+
+## P-158 thigh-front knee-pad extension (Controls 49fd991: pads roll off onto the thigh fronts), 2026-10-21
+`thigh_knee_pad_p158.json`. Cover-only. No knee-pad spec exists (they are sim boxes only), so I used the chest-pad crushable approach: 5052 honeycomb, 3.1 pcf, 15 mm, plus a 1 mm CF face and 0.4 TPU film, bonded to the P-020 thigh front skin with 2 M3 into new inserts.
+- **Extent:** thigh frame (knee axis z 500). **z 540–590** (s 40–90 mm above the knee axis), y 95–165, 16.4 mm proud. It laps 2 mm onto the existing knee pad, so the pad surface runs continuously from about z 460 to 590.
+- **Contact angles:** s = 66.8·tan θ, fitted to Controls' 27 mm at 22°. The lower runs from θ ≈ 2° (spawn) to 22° (end). The pad covers **0–50.1°**, with a 10 mm edge margin, so contact stays on the pad through the whole roll.
+- **Load:** the end-pose static load is 138 N per leg, which stays elastic. Crush plateau ≈ 3.9 kN [EST] for impact.
+- **Clearances:**
+  - Knee drive-panel vents (z 680–800): ≥ 90 mm.
+  - Rev 8 thigh panel and P-156 inlet: on the rear of the thigh.
+  - Range of motion: the part is thigh-fixed, and the knee cap swings away in flexion. ≥ 3 mm is analytic; **Legs CAD should confirm**.
+  - H4 (upper half, z ≈ 710–920) does not overlap and is unchanged.
+- **Mass:** 0.0141/side, **0.028 pair [EST]**. The Arbiter books it.

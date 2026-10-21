@@ -476,3 +476,6 @@ All keep R-076 (reinforced isolation, IEC 60664-1 creepage, IP2X), R-074 (main l
 - Mass: **+0.010 kg [EST]** (adopted by Robot Lab). Closes the latch OPEN item.
 - 25° tuck options (same file §4.1/4.4): (1) Controls caps TUCK chest pitch at 5–15° head-up: no mass, and it also fixes head clearance (≥68 mm); (2) confirm densification ≥0.75 in the R-102 lot coupon, because the 100 mm core passes 25° at 0.75 (14 %) and fails at 0.70 (8 %); (3) a further core length increase (not recommended: standout/ID).
 - Status: ADOPTED (Robot Lab), Arbiter to book
+
+### P-158: ID: thigh-front knee-pad extension (Controls 49fd991)
+- Crushable honeycomb + CF + TPU strip on the thigh front, z 540–590 (s 40–90 above the knee axis), y 95–165, laps the knee pad. Covers thigh contact angles 0–50.1° (needed 2–22°). Clear of the vents, the rev 8 panel and H4. +0.028 kg pair [EST]. Legs CAD ROM check owed. Evidence: design/thigh_knee_pad_p158.json, V5_COVER_SET.md.

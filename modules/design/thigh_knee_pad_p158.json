@@ -1,0 +1,54 @@
+{
+ "part": "P-158 thigh-front knee-pad extension (ID, cover-only)",
+ "basis": "Controls 49fd991 R-146b: knee pads roll off, thigh contact ~27 mm above the knee axis at end pose (knee 1.95 rad, hip -0.84)",
+ "spec_basis": "No knee-pad spec exists (sim boxes only, PRONE_DATA_TR) -> chest-pad crushable approach: 5052 honeycomb + 1 mm CF face + TPU film",
+ "frame": "thigh frame, knee axis z 500 (hip pitch z 920 - thigh 420)",
+ "extent": {
+  "s_from_knee_axis_mm": [
+   40,
+   90
+  ],
+  "z": [
+   540,
+   590
+  ],
+  "y": [
+   95,
+   165
+  ],
+  "note": "joins the existing knee pad (sim box 80 tall about the axis, s -40..40) with a 2 mm lap; continuous pad z ~460-590"
+ },
+ "stack": {
+  "honeycomb": "5052 1/8 in 3.1 pcf, 15 mm, curved to the thigh front",
+  "face": "CF 1.0 mm",
+  "film": "TPU 0.4",
+  "backing": "bonded to the P-020 thigh front skin + 2 M3 into new P-158 inserts",
+  "proud_mm": 16.4,
+  "crush": "plateau ~1.1 MPa x 70x50 = ~3.9 kN [EST]; static end load 275 N total (138 N/leg) elastic"
+ },
+ "contact_model": "contact point on the pad s = 66.8*tan(theta), theta = thigh angle from the floor normal (fit to Controls: 27 mm at 22 deg)",
+ "contact_angles_deg": {
+  "needed": "2 (spawn, knee 1.6 rad) -> 22 (end, knee 1.95 rad)",
+  "covered": [
+   0,
+   50.1
+  ],
+  "edge_margin_mm": 10
+ },
+ "clearances": {
+  "front_drive_panel_vents": "knee drive panel tabs/vents z 680-800: >=90 mm PASS",
+  "rev8_thigh_panel": "rear, z ~797-877: other side of the thigh, PASS",
+  "P156_inlet": "rear z 643-675 PASS",
+  "ROM": "thigh-fixed; only the knee cap/shin moves near it and it swings away from the front in flexion; at knee 0 the shin top stays below s 0 [analytic, Legs CAD to confirm >=3 mm]",
+  "H4": "H4 is the upper half, z ~710-920: no overlap, unchanged"
+ },
+ "mass_g_side": {
+  "honeycomb": 2.6,
+  "cf_face": 6.0,
+  "tpu": 1.5,
+  "backing_bond": 1.0,
+  "inserts_edge": 3.0
+ },
+ "kg_side": 0.0141,
+ "kg_pair": 0.028
+}
