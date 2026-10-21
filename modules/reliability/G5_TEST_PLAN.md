@@ -114,3 +114,12 @@ Per `legs/R031_FIXES.md`: 5 ASTM D1002 coupons per lot at 23 and 60 °C, part-eq
 - **Fall/overtravel:** a drop-tower fall (TP-G5 fall set) with gap targets marked; post-test inspection of the edges.
 - **Handling:** H2 lift trial with limp legs; verify no finger in the hem band with the 100 mm keep-off.
 - **Rev 8b additions:** (1) **limp clamping force**: drop each leg limp from the worst bilateral and hem poses onto the ISO 13857 finger and a 100 × 30 mm hand surrogate in the foam; pass finger ≤ 140 N, hand ≤ 140 N quasi-static (≤ 280 N transient); also record whether the foam bottoms (residual thickness). (2) **Foam ageing**: 1000 closure cycles at 50 % strain plus 168 h at 85 °C (the plume sector), then residual thickness ≥ 25 mm, set ≤ 10 %, no tears. (3) Plume thermocouple on the hem foam in sit/kneel (with TP-G5-15). (4) Rigid gaps measured edge to edge including the J-channel: hem ≥ 25 mm, L↔R keep-out trip ≥ 28 mm. (5) Panel flex ≤ 1 mm under a 50 N push.
+
+## TP-G5-19 Side-fall frontal tube bending (SIDE_FALL_LOAD.md)
+- **Instrumentation:** strain-gauge rosettes (frontal-plane bending) on the tibia 45 × 1.7 near the knee and the ankle, and on the femur near the hip and knee; hip-roll and ankle-roll torque/angle logs; foot force plate; high-speed video (contact order, knee/foot velocity).
+- **Runs:**
+  - (a) side fall with the stance foot planted (tuck B), L/R, ×5 each;
+  - (b) stumble side fall with the swing leg crossing, i.e. knee-first if it occurs, ×5;
+  - (c) side tip from an upright kneel (failed R-146), ×3;
+  - (d) modal tap test of the leg frontal mode and the shank f₁.
+- **Pass:** frontal bending σ ≤ 393 MPa equivalent at every gauge (SF ≥ 1.0 extrapolated to the worst run ×1.3 DLF if fewer than 5 runs); hip-roll torque peak ≤ 292 N·m; no permanent set (gauge zero shift < 50 µε); covers intact.

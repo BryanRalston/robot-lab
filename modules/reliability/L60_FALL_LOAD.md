@@ -86,3 +86,6 @@ The L60 bracket only reacts **the twin knee roller-screw thrust** (trunnion pins
 - **Actuators:** confirm r75 = 830 N·m at 62.7 J, the bottoming energy, and the rotor force sign/phase.
 - **Missing [not invented]:** measured shank f₁ (modal tap test), foot/ground contact rise time, Controls fall-mode knee torque near the stop, per-knee stop energy distribution. Lateral/out-of-plane tube bending from side falls is a separate case, not covered here.
 - **G5:** add to TP-G5 fall set: strain gauges on the tibia/femur near the knee and knee torque logged during stop-engaging falls; pass σ ≤ 393 MPa equivalent and stop energy ≤ 62.7 J.
+
+## Decision recorded (Robot Lab, 2026-10-21 10:01 ET)
+**Controls knee-torque cap ≤ 50 N·m within 10° of the 135° stop + tibia wall 1.7 mm** (femur 50 × 1.5 kept). Design knee moment 0.92 kN·m → tibia 45 × 1.7 SF ≈ 1.03 (393 fall), femur 1.14. L60 bracket fall load 13.1 kN. Stop energy ≤ 62.7 J/knee to be shown by Controls.
