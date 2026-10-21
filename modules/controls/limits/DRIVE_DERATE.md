@@ -173,3 +173,19 @@ gravity feed-forward. Sequence: contact → hold until settled (|vz| < 5 mm/s fo
   - Needs: a longer pad up the thigh front (ID), or more elbow budget, or a better arm-load schedule.
 - The trunk ends about 0.2 rad head-down (pitch 1.78) with no head contact.
 - GIF: media/progress/2026-10-21_controls_r146b_chest_lower_wbc.gif
+
+## D96 PU knee stop at 135° — knee speed at stop contact (knee_stop_impact.py, sim/v3 + pads [EST], MO=0, D94 friction)
+The stop is modelled as the joint-limit contact at 2.356 rad, with PU timeconst 0.005 / 0.01 / 0.02 s [EST].
+DR: mass 65 / 68 / 68.5 kg × timeconst × lean (99 runs).
+
+| Case | Knee speed at stop, nominal (rad/s) | DR max (rad/s) | Peak stop torque, DR max (N·m) [EST] |
+|---|---|---|---|
+| crouch collapse (HOLD_DERATED → drive trip / TUCK) | 5.36–5.40 | 5.41 | 5520 |
+| forward fall from stance | 5.99–6.18 | **6.18** | 6825 |
+| kneel tip back (sits onto heels) | 2.40–2.49 | 2.50 | 2066 |
+| kneel tip forward | stop not reached (knee ≤ 90°) | – | – |
+
+- **Design input for STOP_IMPACT_N: 6.2 rad/s per knee** (forward fall, MO=0).
+- The stop torque scales about 1/timeconst: worst case 6825 / 3333 / 1665 N·m at 0.005 / 0.01 / 0.02 s, so it needs
+  the real PU stiffness and stroke.
+- The kneel retry does not reach the pads yet (R-146(b) P1b), so kneel_tip stands in for it.
