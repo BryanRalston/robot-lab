@@ -835,3 +835,7 @@ Retention at 1.2 m/s:
 ## D86 (R-127 C(b)) Mg housings: Elektron 43, not AZ91D (`results/R127_MG_HOUSINGS.md`)
 - From CAD volumes: −0.625 kg (equal geometry + 7075 seat inserts) to −0.263 (+25 % stiffness volume) for hip yaw/roll + hip-pitch/ankle bodies. Multi-path only (hip-pitch/ankle): −0.377 / −0.159. Not additive with row 3 (combined ≈ −0.85).
 - Hand proxy passes at A-basis 130 MPa except the ankle eye lug (142 MPa peak) → 7075 bush. Stiffness/ovality needs the G4-Mg FEA (addendum in the file). No Ti in Mg; PEO + sealant + isolated fasteners; Thermal re-check of the unit ΔT.
+
+## D87 (R-128/R-130) Stock, grain and path classification (`results/STOCK_GRAIN.md`)
+- Thick actuator bodies go to 7075-T7351 plate (3.5–4.5 in; T651 bands stop at 3.0 in). Single path: hip yaw/roll, knee twin housing, knee lever, D76 wrist housings, clamp ring. Multi path: screw bodies, hubs, eyes.
+- All parts pass their band allowable (tightest: knee lever 208 vs 313). G4 brief gates: 239 (hip yaw/roll), 262 (screw bodies), fault 393. G4-Mg addendum classified.

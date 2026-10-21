@@ -30,6 +30,7 @@ Tags: **[CITED]** = a datasheet or repo result (source given); **[ASSUMPTION]** 
 - **Already at the machining minimum:** cad_mass.py sets the 2.0 mm wall from machining, not strength (line 14). **Do not thin the 2.0 mm cylindrical walls.** Pocketing is limited to the regions in §5.
 
 ## 2. Material
+**R-128 update (D87):** stock is 7075-T7351 plate, 3.5 in (hip yaw/roll axis ∥ ST; screw bodies axis ∥ L). The values below are kept for stiffness; strength gates are in §6 per housing.
 **[CITED]** 7075-T6, as used by G3 and cad_mass.py:
 - ρ 2.81 g/cm³ (cad_mass.py RHO);
 - E 70 GPa, ν 0.33 (R-123(a); 71.7 acceptable for stress-only load-controlled solves, 70 for deflection gates);
@@ -111,7 +112,7 @@ Falls: the side fall (11.5 kN shoulder, D71) is a shoulder case and doesn't load
 Don't use lattices.
 
 ## 6. Pass criteria (per housing, every case)
-1. **Static:** von Mises peak ≤ Sy / 1.5 = **320 MPa** (R-123; 320–335 is a FAIL) (R1, R2, P1, A1, A2). Overload cases P2 and A4: ≤ Sy / 1.2 = 400 MPa.
+1. **Static (R-128/R-130, per housing; see `STOCK_GRAIN.md`):** 7075-T7351 plate. Hip yaw and hip roll (single path, axis ∥ ST): **≤ 239 MPa**. Hip-pitch and ankle bodies (multi path, axis ∥ L): **≤ 262 MPa**; ankle eye lug ≤ 239. (Was 320.) (R1, R2, P1, A1, A2). Overload/fault cases P2 and A4: ≤ min(A-basis band, Sy_typ/1.1) per R-128 §5 = **393 MPa** (T7351 A-basis 393).
 2. **Fatigue:** hot-spot von Mises amplitude ≤ **Se / 1.5 = 58 MPa** (R3+R4, P3, A3). Same rule as G3.
 3. **Stiffness [ASSUMPTION; no cited limit in the repo]:**
    - CRBH seat bore ovalisation ≤ 10 µm under R2 (bearing-housing tolerance class).

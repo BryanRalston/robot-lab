@@ -56,7 +56,7 @@ Allowables: Elektron 43 static **130 MPa** (A-basis 195/1.5, single path, R-125(
 ## 7. G4 addendum brief (Mg), bryan PC via Robot Lab, after G4
 - Bodies: G4 STEPs (pocketed result if G4 lands first), material Elektron 43 T5 (E 44.1, ν 0.3, ρ 1.83), 7075-T7351 seat inserts bonded (tie) + dowels, ankle eye bush in 7075.
 - Cases: the G4 R1–R4 and P1–P3/A1–A4 set unchanged.
-- Gates: vM ≤ 130 MPa (A-basis/1.5; 162 only if the Arbiter rules the part multi-path); fatigue amplitude ≤ 28 MPa [EST Se 42] (Materials to cite an R=−1 value); insert bond shear ≤ 7.7 MPa; bearing-seat ovality < 10 µm; deflection as G4.
+- Gates: vM ≤ 130 MPa (Elektron 43 A-basis/1.5) for hip yaw/roll (single path per R-128 classification, `STOCK_GRAIN.md`); hip-pitch/ankle bodies are multi path, but stay at 130 until Materials cites a typical-basis rule for Mg; 7075-T7351 inserts ≤ 239 (ST); fatigue amplitude ≤ 28 MPa [EST Se 42] (Materials to cite an R=−1 value); insert bond shear ≤ 7.7 MPa; bearing-seat ovality < 10 µm; deflection as G4.
 - Variants: A (equal geometry) and B (walls ×1.25 at the nut section/seats). Report mass from the solid.
 - Same mesh-convergence rules as G4/JOB9.
 
