@@ -91,3 +91,66 @@ R-096 duty average (≤ 40 % carry) ≈ 0.6 × the carry loss.
 - PEO on all external faces;
 - knee housing and fins stay Al;
 - hip_pitch drives off the housing (item 1).
+
+## Rev 2: Actuators D90 (af482e1) heat plates re-check (2026-10-21 08:40 EDT)
+Script: `modules/thermal/r131_rev2_knee_gap.py`.
+Basis:
+- Losses and pad as in R131 above: knee 6.0 W/drive at carry, duty = 0.6 × carry.
+- "h" means total (convection + radiation) on an open, black-anodised face (ε 0.85).
+
+### (a) Knee plate: 6 × 15 × 1 drive-side fins, 4.0 mm femur gap
+**FAIL.** The 6 fins do not give the required area.
+
+- **Fin channels are dead.** In `drive_heat_plates.py`, 3 fins fit in each 6.5 mm strip beside the drives (x 16 → 22.5 mm), at a 2.17 mm pitch, leaving a **1.17 mm gap** between 15 mm fins.
+  - Natural convection (Elenbaas): Ra_s ≈ 0.05, so h ≈ 0.05 W/m²K, i.e. nothing.
+  - Forced flow: the inlet area of about 1e-4 m² gives ṁcp ≈ 0.02 W/K at 0.2 m/s, so the channel air would need to rise about 300 K to carry 7 W (starved).
+  - Only the strip envelope works: the outer fin faces, the tips, the exposed base strip, and about 50 % of the drives' own surfaces. That is **≈ 0.0065 m² drive-side effective, against the 0.0261 m² × η 0.993 used** (Actuators' η uses an isolated-fin m and ignores the channel).
+- **Femur side.**
+  - The plate is flat and the femur is Ø50, so the gap runs from 4 mm at the tangent to 22 mm at the plate edges. The mean gas-gap conductance (conduction floor Nu = 1, Elenbaas above that) is 7.7 / 6.0 / 5.8 / 5.5 W/m²K at a 2 / 3.5 / 4 / 6 mm minimum gap.
+  - Radiation to the femur adds ≈ 6 W/m²K (ε 0.85 both sides).
+  - All of this is **referenced to the warm femur (40–50 °C [EST])**, not to 35 °C air.
+  - So the femur face is worth about the same at 3.5 and 4.0 mm. The 30 %-below-4 mm switch in the model is a cliff-edge artefact: the real behaviour is smooth, and the full-credit-at-8 case is optimistic. **Minimum gap: 3 mm (M2 heads plus tolerance).** The temperature is insensitive to the gap from 3 to 6 mm; a larger gap only reduces heat into the femur.
+- **Heat into the femur.** About 3 W at duty goes into the femur by gas conduction plus radiation: an air path is still a path to the femur. Effect on the EA 9396 bond ≈ +2–4 K [EST], so the 67.9 °C worst case becomes ≈ 70–72 °C, **at or over the 70 °C limit.**
+
+| knee drive base | Actuators D90 | Thermal rev 2 (femur 40–50 °C) |
+|---|---|---|
+| duty, h 8 | 70.7 (75.9 at 3.5 mm) | **107–112 °C** |
+| duty, h 12 | — | **93–97 °C** |
+| continuous carry, h 8 | 94.6 | **151–158 °C** |
+| continuous carry, h 12 | 75.3 | **129–134 °C** |
+
+Required: a total UA ≥ 0.185 W/K at h 8 for ≤ 75 °C at duty. Rev 2 gives ≈ 0.105 W/K (0.052 drive side + 0.053 femur side). The 0.03 m² requirement is **not met: ≈ 0.013 m² equivalent.**
+
+Options (Actuators/Legs to pick):
+1. Fins at a pitch of 6 mm or more, in the open thigh-fairing stream outside the 26 mm L51 box: about 2 × 20 mm × 100 mm × 4 fins, or full-width fins on a plate rotated so they run along the flow.
+2. Bond the plate to the thigh shell inner face with a pad, so the shell is the sink. This needs Legs to give the shell area and its h.
+3. Split the 2 drives over 2 plates (nearly doubles the envelope).
+4. Accept a knee carry limit set by the drive-temperature derate (75 °C start). This roughly halves the allowed carry duty [EST]. Not recommended.
+
+In every option, make the femur-facing face low-ε (bare/clear) or add a shield foil, to cut heat into the femur near the bond.
+
+### (b) Hip pitch plate, 84 × 84 × 1.5 mm, 8.5 mm standoff
+Actuators credits both faces at h 8 to 35 °C air. In reality the back face sees the mounting structure across an 8.5 mm gap: Ra ≈ 110, h_conv ≈ 5.6, plus radiation ≈ 6, referenced to the structure temperature.
+
+| hip_pitch drive base | duty, h 8 | continuous, h 8 | continuous, h 12 |
+|---|---|---|---|
+| back structure ≤ 45 °C | **68.8 °C** | 87 °C | 79 °C |
+| back structure 60 °C | **77.8 °C** | — | — |
+
+- **≤ 72 °C holds only if the back face sees ≤ 50 °C structure**, never the hip_pitch housing (case 85–98 °C).
+- Condition: the back face either faces the thigh/pelvis shell, or carries a low-ε shield toward any housing.
+- Continuous carry exceeds the 80 °C base limit at h 8 (87 °C), so the drive derate is required (same as R131).
+- Ankle (60 × 56) and shoulder_pitch plates have the same back-face caveat.
+
+### (c) R-140: is h 8 defensible?
+**Flat plate in the stream** (laminar, L 0.1 m): h_conv ≈ 6.6 / 8.5 / 12 W/m²K at 0.3 / 0.5 / 1.0 m/s. Radiation to ~40 °C surroundings adds ≈ 6.
+
+| case | h (W/m²K) | is h 8 conservative? |
+|---|---|---|
+| walking, A35/A36 stream (v ≥ 0.3 m/s) | 12–18 | yes |
+| standing still, open face (natural convection 6 + radiation 6) | 10–12 | yes, if the face has ≥ 10 mm of clear air and black anodise |
+| standing still, enclosed (L51 26 mm box, narrow gaps, warm walls) | 3–6 | **no** |
+| bare/clear plate (ε ≈ 0.1) | about −5 against the above | **no** |
+| sub-5 mm fin gaps | ≈ 0 between the fins | **no** |
+
+**Verdict:** h 8 is defensible and conservative for exposed, black-anodised plate faces, walking or standing, with surroundings ≤ 40 °C. It is **not** defensible for fin channels under 5 mm, for faces inside closed boxes, or for faces looking at warm structure; those need the explicit treatment above. The h 8 vent-stream value also still depends on the Controls duty sim (open R-140 item).

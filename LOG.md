@@ -22,3 +22,4 @@
 - Job 8c §G (b9e8f03): Controls gate 8f80c42. Assembly k_t ≥ 2.9 kN·m/rad. Modes with CSG-14 in series: ≥ 15 Hz at T5 0.2 kg·m², ≥ 40 Hz hand-only. CF hand calc 20.1 / 460 Hz, pass. R16 estimate corrected.
 
 - 2026-10-21 Legs L68: knee web → hand forging (R-137 §6/R-138), P-152 sleeve OD 46.80 accepted pending Actuators co-sign.
+2026-10-21 08:55 RL Thermal: R-131 rev 2 (D90 heat plates) → R131_ELMO_MG.md: knee plate FAIL (1.17 mm fin gaps dead; base 107–112 °C duty h8, 151–158 cont; femur gap not the driver, min 3 mm; ~3 W into femur, bond ≈70–72); hip_pitch 84 mm 68.8 °C duty h8 PASS only if back face sees ≤50 °C structure; R-140 h8 OK for exposed black faces walking/standing, not for <5 mm channels/enclosed faces
