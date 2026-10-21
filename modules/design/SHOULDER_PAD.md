@@ -275,3 +275,11 @@ Foam 0.035 + sleeve 0.009 + inserts/anchor 0.006 = **0.050/side, 0.100 kg pair =
 | Torso cover | 98 | **36.5** (inboard wall at y −90) |
 
 - Shoulder cover trim changes: the pad window **68 × 68 R6 re-centres to z 0** (on the roll axis, was −20); the OD114 housing relief is unchanged; the cover skin must clear the pad side faces by ≥3 mm through roll ROM (check against the r15 carrier when Arms commits it). No head/torso trim needed.
+
+## r15 sweep (Arms R15 305de76, W2 carrier) — cad/covers/r15_roll_sweep.py/.json
+- pad_r11_standoff is **superseded by Arms' W2 one-piece carrier** (R11 box/plate absorbed).
+- **Side faces:** no shoulder cover skin node exists in the site glb or the cover set; the local cover is the R120 window spec. The pad envelope is 54.8 sq (y 63–138.8) and the window is 68 × 68 → **6.6 mm per side ≥ 3 PASS**, roll-invariant if the cover rides on the roll output. Condition: the skin must sit outboard of the carrier face (y ≥ 63 + 3). If the skin is at y < 63, it meets the carrier (x −31…42, z ±38), and the window must grow to **79 × 82** (carrier + 3 mm).
+- **Torso:** no finer torso cover CAD exists (design/, torso/, site/). The best real surface is the sim torso geom box 220 × 340 × 260 (= site p009). Analytic signed distance, roll swept in 1° steps (0–180, the joint range is −15/180) at shoulder pitch −150/−90/−30/0/5/30:
+  - **3 mm clearance lost at roll 130°; first contact at 132°** (every pitch); max penetration 29.5 mm at 180°. Arms' 118–128° used the mesh/dz fit; this check is analytic on the sim box.
+  - Full-roll relief: a pocket in the torso upper-side corner **≈ 32.5 mm deep (29.5 + 3), ≈ 125 (x) × 145 (z) mm**, at the top shoulder corner. Mass ≈ +0.01 kg CF [EST], but it intrudes 33 mm into the Torso/shoulder-pitch volume: it needs Torso/Arms space and is not an ID-only trim.
+- **Recommendation: accept a roll soft limit, no torso pocket.** ID data supports up to **127°** (130° less 3° margin); Arms' 115° is conservative and also fine. Arbiter to set. Revisit when Torso releases real cover CAD.

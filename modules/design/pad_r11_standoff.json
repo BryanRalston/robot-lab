@@ -60,7 +60,7 @@
   "box footprint Z +7..-37 vs OD70 ring and CRBH 7013 inner ring; hollow box keeps access to the 8x M4 heads? (box ID 39 inside ring ID 44: M4 heads on PCD62 sit outside box, OK)",
   "e<=5 stack with 0.6 mm defl; clash vs OD108 housing flange (>=3 mm fore-aft)"
  ],
- "status": "R-125 W2 adopted: pad on the roll axis; carrier drawn by Arms in modules/arms/cad/r15/ (R11 stand-off placement superseded)",
+ "status": "SUPERSEDED by Arms W2 one-piece carrier (R15 305de76, modules/arms/cad/r15/carrier_w2.step); R11 box/plate absorbed",
  "Arms_R14_accepted_inputs": {
   "flange_hub_shoulder_OD": 76,
   "ring_bore_under_box": 36,
