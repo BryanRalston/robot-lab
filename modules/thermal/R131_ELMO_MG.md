@@ -526,3 +526,17 @@ Legs L74 (legs/results/r031/p156_rev5_optionB.md): x −40…−80 cut FAILS (st
 - **Condition (new):** the straps are a new metal path from the bracket → they must land on the L71 G10/PEM break (no metal path to the femur bond, 70 °C rule) and must not sit in the jet (y 84–104 / 156–176 lie outside the notch y 104–156: OK).
 
 **Verdict: Option B with L74 notch PASS, 71.1 °C standing (8.9 K margin); no extra fix needed.**
+
+### Option B, ID rev 6 (341ef4a): chimney 1118 mm² + notch 1323 mm² — 2026-10-21 EDT
+Script r131_optB_r6.py (same model; chimney section as an extra loss, Cd 0.8 [EST]; stack z 860, H 0.217, rev 4e shroud).
+
+| chimney section (mm²) | drive base standing (°C) | jet (°C) |
+|---|---|---|
+| 1200 (rule) | 71.6 | 80.8 |
+| **1118 (rev 6)** | **71.7** (72.1 at Cd 0.6) | 81.0 |
+| 700 | 72.6 | 82.6 |
+| **≈ 400** | 75.1 (**≈ 5 K margin**) | 87.4 |
+| **≈ 250** | 79.7 (**80 °C minimum**) | 96.0 |
+- Walking (pumped): 62–72 °C [EST]. PASS.
+- Fin channels (≈ 650 mm²) remain the controlling restriction; 1118 vs 1200 costs ≈ 0.1 K. Jet +1 K → shroud/skirt specs unchanged.
+- **Verdict: rev 6 PASS, 71.7 °C standing (8.3 K margin).** The 1200 mm² rule can be relaxed to **≥ 1000 mm²** for the chimney and the notch on this route (keeps ≥ 8 K margin and tolerance for seals and burrs [EST]).

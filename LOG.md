@@ -36,3 +36,4 @@
 2026-10-21 09:12 RL Thermal: R-143 rev 5 (ID P-156 rev 5 a065aa3) → R131_ELMO_MG.md: H 0.14 with duct/turns/hood ṁ 0.134 g/s, drive base standing 76.8 °C PASS (3.2 K), walking 62–74; hood 41–43 °C (48 PASS, 43 thin; T&R to class hand zone); duct housing pickup ≤0.5 W no penalty, knee winding ≤+0.3 K; housing fairing 40.6–41.5 PASS; Option B H≈0.25 → 69–70 °C
 - 2026-10-21 09:20 ET Thermal: R-143 Option B (L60 cut-out) re-run, r131_optB.py — B2 70.6 °C standing PASS; shroud + skirt foil required for 48 °C.
 - 2026-10-21 09:21 ET Thermal: Option B re-run with Legs L74 notch 1320 mm² (r131_optB_notch.py): 71.1 °C standing PASS; min notch ≈320 mm² (80 °C), 500 mm² for 5 K; shroud/skirt specs unchanged.
+- 2026-10-21 09:24 ET Thermal: ID rev 6 chimney 1118 / notch 1323 (r131_optB_r6.py): 71.7 °C standing PASS; 1200 rule → ≥1000 mm²; min ≈250 mm² (80 °C), ≈400 (5 K).
