@@ -132,3 +132,13 @@ hips, knees, waist or shoulders, and collapses with MO=0. The only poses that st
 friction limit) are **lying on the floor**: forehead/chest down on the knee pads, or prone on the chest pad. That is the
 lowest-torque settled state. Open item for the Arbiter: R-145 + D94 together imply the MO=0 end state is a controlled
 lowering to prone/chest-pad (or the robot keeps derated torque, i.e. HOLD_DERATED → drive trip → tuck), not a kneel.
+
+## R-146(b) G4 toe-pivot kneel — status 2026-10-21 (sim, NOT passing)
+| Run | P1a CoM shift | CoM x reached (target 0.14) | P1b toe pivot |
+|---|---|---|---|
+| ZMP_K (12,7), T1A 0.6 | 0.6 s | 0.089 m | falls backward |
+| ZMP_K (40,12), T1A 0.8 (new default) | 0.8 s (target reached ~1.0 s) | 0.136 m | ankle hits −0.79 stop at t≈1.5 s, CoM falls back to −0.01 m, unstable |
+| same, FOOT_PITCH 0.3 / 0.15 | 0.8 s | 0.136 m | same failure |
+| same, ANKLE_MIN −1.1 (diagnostic only) | 0.8 s | 0.136 m | CoM stays forward (0.11 m) but knee hits its limit and the feet bounce: unstable |
+
+P2–P4 are never reached, so no phase times are valid against the ≤3.3 s gate. The ankle dorsiflexion stop is the binding constraint (Legs check needed).

@@ -29,11 +29,11 @@ from drive_thermal_derate import (DerateConfig, DriveDerateSupervisor, MO_OFF, K
 ANKLE_MIN = -0.79          # rad, ankle dorsiflexion stop (Legs may extend it; config value)
 FOOT_PITCH = 0.5           # rad heel-up at the end of P1
 P1_PZ, P1_PITCH, P1_CX = 0.74, 0.0, TOE - 0.04   # IK search result: knee origin 0.29 m, CoM 0.68 m over the toes
-T1A = 0.6                  # P1a: flat-foot CoM shift to the toe line (before the heel lifts)
+T1A = 0.8                  # P1a: flat-foot CoM shift to the toe line (before the heel lifts)
 T1, T2, T3, T4 = 1.0, 0.5, 0.5, 0.6   # T1: P1b pivot + lower
 KP_SOFT = 0.05
 XK = 0.0
-ZMP_K = (12.0, 7.0)
+ZMP_K = (40.0, 12.0)
 POSE_KNEEL = {'hip_pitch': -0.3, 'knee': 1.6, 'ankle_pitch': 0.6, 'waist_pitch': 0.2, 'shoulder_pitch': -1.3}
 POSE_HANDS = {'hip_pitch': -0.9, 'knee': 1.5, 'ankle_pitch': 0.6, 'waist_pitch': 0.4, 'shoulder_pitch': -1.4, 'elbow': 0.3}
 POSE_PRONE = {'hip_pitch': 0.0, 'knee': 0.3, 'ankle_pitch': 0.5, 'waist_pitch': 0.0, 'shoulder_pitch': -0.3, 'elbow': 1.8}
