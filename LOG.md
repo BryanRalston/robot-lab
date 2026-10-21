@@ -2,3 +2,4 @@
 2026-10-13 RL Legs r6 WBC: closed-loop DCM step and cruise scale; walk falls 5.676 s at 1.082 m/s; push and 20 kg carry fall; cruise 0.5 and 0.8 now differ
 2026-10-13 20:13 RL Actuators O13b: hip_pitch lever v2 — bore clamp→pressure model; B1 trial 583 MPa (rejected, relief undercut); box RAM-limited → results/GROKBUILD_lever_fea_v2.md (G2 cap/G3 flange, 0.7 mm Ball mesh/submodel); O13 open, mass unchanged
 2026-10-14 09:54 RL Actuators v4 audit: knee twin housing; ankle GE12C top eye + 27° PTFE bottom rod end, trunnion +40 mm (margin 13.9); ankle STEP valid; hip body ≥3.0 mm; +0.138 kg (P-018)
+2026-10-20 22:40 RL Industrial Design: R-113 TPU film removed from P-052 (clear coat; ID 0.040→0.035, −0.005, already booked); P-053 thigh collar radial pin access band for L63-R 8×ø7 pins replaces L30 push-through panel (+0.008/leg, +0.016 robot [EST]); foot-sole fallback +0.049/foot: no cover-set impact (boot hem above sole)

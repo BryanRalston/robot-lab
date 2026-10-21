@@ -65,14 +65,24 @@
    "note": "R-079: option B adopted at 0.116 pair (+0.024 vs 0.092 booking); field rebonding A rejected; not in P-020/P-022..25 delta"
   },
   {
-   "panel": "sternum bezel P-052 (R-094): PC ring + gasket + seal + TPU film; pad CF face is skin",
+   "panel": "sternum bezel P-052 (R-094): PC ring + gasket + seal; pad CF face (R-095 clear coat) is skin; TPU film removed R-113",
    "P": "P-052",
-   "material": "PC 1.5 bezel + TPU film",
+   "material": "PC 1.5 bezel",
    "area_m2_side": 0.0063,
    "panels": 1,
-   "kg": 0.04,
+   "kg": 0.035,
    "cf_kg": null,
    "note": "replaces full plate 0.058; CF shell cut-out -0.045 separate; service: dent>1 mm or crush => replace pad"
+  },
+  {
+   "panel": "thigh collar radial pin access band P-053 (L63-R): replaces L30 60x70 + 40x50 push-through panels",
+   "P": "P-053 (proposed)",
+   "material": "PC 1.5 band segment of P-020 + 6 M3 quarter-turn",
+   "area_m2_side": 0.0077,
+   "panels": 2,
+   "kg": 0.052,
+   "cf_kg": null,
+   "note": "delta vs L30 +0.016 robot; [EST]"
   }
  ],
  "totals": {

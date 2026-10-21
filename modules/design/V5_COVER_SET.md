@@ -9,7 +9,7 @@ Hull areas now come from the final `legs/results/v5/ENVELOPES_FOR_ID.md`: knee_c
 | panel | P | material | skin m²/side | panels | kg (PC) | kg if CF | Δ vs booked | mount |
 |---|---|---|---|---|---|---|---|---|
 | ~~shin fairing~~ | P-020 | deleted (no-cover zone) | 0 | 0 | 0 | — | | — |
-| thigh fairing, front + outboard | P-020 | PC 1.5 (CF option) | 0.119 | 4 | 0.443 | 0.383 | | split collar ø64 L34; L30 pin panel 60×70 (4× M3 quarter-turn); rear 40×50 window kept open |
+| thigh fairing, front + outboard | P-020 | PC 1.5 (CF option) | 0.119 | 4 | 0.443 | 0.383 | | split collar ø64 L34; **P-053 radial pin access band** (L63-R, replaces L30 60×70 push-through panel); rear 40×50 window kept open, unpanelled |
 | foot top shell | P-020 | PC 1.5 | 0.048 | 2 | 0.179 | — | | M3 inserts in foot box webs; covers instep lugs |
 | **P-020 subtotal** | | | 0.332 m² total | 6 | **0.621** | 0.561 | **−0.536** (booked 1.157) | |
 | knee cap | P-022 | PC 1.5 (louvred per P-026, A36) | 0.036 | 2 | 0.139 | — | +0.139 (R-029 itemized 0.116: **+20 %, R-030 >10 % trigger**) | M4 inserts, front face of knee tongue neck block (x 10, z 438–478) |
@@ -128,10 +128,19 @@ Full-wrap shin/thigh fairings (0.70 hull), foot shell 0.40, upper-arm (ø95×260
 - **L61 cheek bosses (ø26×20, 14 mm proud):** fin clear ≥ 9 mm; **~9 mm EST clash** with outboard fairing → open window 40×30 per cheek (**0 kg**).
 
 ## P-052 sternum bezel (R-094; was full plate under R-088/R-093)
-- **Pad 1 mm CF face is the visible skin** at x ≈ +0.147 (37 mm proud), bonded to the 7075 land. **PC 1.5 mm bezel ring** (4 captive M4s at (±0.040, +0.180/+0.260)) is the secondary hold and cosmetic edge: ≤ 4 mm flange overlap, 1 mm gasket stand-off (no preload), centre 90×90 free, foam edge seal (not bonded to core), TPU film 0.3–0.5 mm, 15 mm blend.
-- **ID mass 0.040 kg** (bezel + gasket + seal + film + blend + captives) vs old plate **0.058 (−0.018)**. Net vs CF shell removed (~0.045): **−0.005**. See `STERNUM_PLATE.md`.
+- **Pad 1 mm CF face is the visible skin** at x ≈ +0.147 (37 mm proud), bonded to the 7075 land. **PC 1.5 mm bezel ring** (4 captive M4s at (±0.040, +0.180/+0.260)) is the secondary hold and cosmetic edge: ≤ 4 mm flange overlap, 1 mm gasket stand-off (no preload), centre 90×90 free, foam edge seal (not bonded to core), **R-095 clear coat on the CF face (TPU film removed, R-113)**, 15 mm blend.
+- **ID mass 0.035 kg** (bezel + gasket + seal + blend + captives; film removed R-113, −0.005) vs old plate **0.058 (−0.023)**. Net vs CF shell removed (~0.045): **−0.010**. See `STERNUM_PLATE.md`.
 - **Service:** visible dent > 1 mm or any crush → replace the pad.
-- **TPU film (R-098):** 98×98 mm × 0.4 mm × ρ **1.20** (DoonX ASTM D792) = **4.61 g** (0.3–0.5 mm → 3.46–5.76 g).
+- ~~TPU film (R-098): 4.61 g~~ **removed per R-113** (R-095 clear coat confirmed on the drawing): **−0.005 kg**, already booked in R-113.
+
+## P-053 thigh collar radial pin access (Legs L63 / L63-R 504082f; supersedes L30 / a14_r7)
+- L63-R pins are 8 × ø7×10 radial, blind single-wall, H7/m6 bonded (638/648): nothing can be pushed through, so the L30 60×70 front panel + rear push-out path is obsolete.
+- **Design:** removable 50 mm tall PC 1.5 band segment of the P-020 thigh fairing centred on collar mid, 218° arc (az −64…+154°, 0 = front, 90 = outboard) at r≈45 [EST], 8 mm lands, 6 × M3 captive quarter-turn. With it off, each pin under the front+outboard arc (0, 45, 90, 135, 315°) has ≥ 40 mm radial line of sight (pin 10 + M3 extractor/slide hammer 30) and a ø15 tool envelope, plus hot-air line of sight for 638 release. The 180° pin is reached through the rear 40×50 window (kept open, no panel); 225/270° face the open inboard zone.
+- **Asks for Legs (in file, not messaged):** clocking row 1 0/90/180/270, row 2 45/135/225/315; M3-tapped pin outer ends; confirm ≥ 40 mm + tool free inboard at collar height.
+- **Mass:** 0.026 kg/leg vs L30 0.018 → **+0.008/leg, +0.016 robot** [EST, same basis as L30]. `thigh_pin_access_p053.py` → `.json`.
+
+## Foot-sole fallback (Robot Lab 10/20, +0.049 kg/foot) — no cover-set impact
+The sole pad is under the foot plate; the P-025 ankle boot hem is re-anchored above it through the 4 existing foot inserts (C2). A thicker fallback sole (SP 67A 6 mm frame vs 3 mm) lowers nothing the hem touches, so P-025 geometry and mass are unchanged. The mass is Legs' line, not ID's.
 
 ## Open questions
 1. Legs: confirm envelopes.json as final and commit; knee-cap keep-out complement vs thigh fairing overlap.

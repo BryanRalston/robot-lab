@@ -2,7 +2,7 @@
  "P": "P-052",
  "ruling": "R-094",
  "supersedes": "R-093 / R-088 full PC sternum plate (0.058 kg)",
- "design": "Chest pad 1 mm CF face is the visible sternum skin at x~+0.147 (37 mm proud). Pad bonded to 7075 land with structural epoxy. 1.5 mm PC bezel ring is secondary hold + cosmetic edge; 4 captive M4s into inserts at (y,z)=(+-0.040, +0.180/+0.260). Flange overlaps face <=4 mm with 1 mm stand-off on compliant gasket (no clamping preload); centre 90x90 free. Edge closed by bezel sidewall + foam seal (seal does not bond to core walls). 0.3-0.5 mm TPU film on face; 15 mm blend to shell.",
+ "design": "Chest pad 1 mm CF face is the visible sternum skin at x~+0.147 (37 mm proud). Pad bonded to 7075 land with structural epoxy. 1.5 mm PC bezel ring is secondary hold + cosmetic edge; 4 captive M4s into inserts at (y,z)=(+-0.040, +0.180/+0.260). Flange overlaps face <=4 mm with 1 mm stand-off on compliant gasket (no clamping preload); centre 90x90 free. Edge closed by bezel sidewall + foam seal (seal does not bond to core walls). R-095 clear coat on face (TPU film removed, R-113); 15 mm blend to shell.",
  "service_rule": "Visible dent >1 mm deep, or any crush => replace the pad. Crushed face = replace-me indicator.",
  "geometry": {
   "pad_centre_xyz": [
@@ -37,21 +37,20 @@
   "blend_15mm_to_shell": 7.29,
   "captive_M4_x4": 10.0,
   "compliant_gasket_1mm": 0.6,
-  "foam_edge_seal": 0.49,
-  "TPU_film_0p4mm_on_face": 4.61
+  "foam_edge_seal": 0.49
  },
  "bezel_ring_only_kg": 0.017,
- "id_mass_kg": 0.04,
- "id_mass_bezel_gasket_seal_film_kg": 0.04,
+ "id_mass_kg": 0.035,
+ "id_mass_bezel_gasket_seal_film_kg": 0.035,
  "vs_plate_0p058": {
   "was": 0.058,
-  "now": 0.04,
-  "delta": -0.018
+  "now": 0.035,
+  "delta": -0.023
  },
  "vs_cf_shell_removed_0p045": {
   "cf_shell_removed": 0.045,
-  "id_added": 0.04,
-  "net": -0.005
+  "id_added": 0.035,
+  "net": -0.01
  },
  "r094_ledger": {
   "ring_booked": 0.015,
@@ -59,41 +58,24 @@
   "replaces_r093_plate": -0.058,
   "arbiter_net": -0.066,
   "script_ring": 0.017,
-  "script_id_full": 0.04
+  "script_id_full": 0.035
  },
  "conditions": [
-  "Face finished (clear coat or texture) \u2014 R-094",
+  "Face finished: clear coat (R-095, confirmed on drawing; TPU film removed R-113)",
   "Torso/Materials: CF face OK for handling, UV, abrasion as outer skin",
   "Controls: T-031 with skin at x~+0.147",
   "No clamping preload (1 mm gasket stand-off)",
   "Foam edge seal must not bond to honeycomb core walls"
  ],
+ "tpu_film_removed_R113": {
+  "was_g": 4.61,
+  "basis": "98x98x0.4 mm, rho 1.20 DoonX ASTM D792 (R-098)",
+  "delta_kg": -0.005,
+  "reason": "R-095 clear coat confirmed on drawing"
+ },
  "not_id_mass": [
   "7075 land+rib +0.030 (Torso)",
   "pad core + 1 mm CF face (chest pad line)",
   "structural epoxy"
- ],
- "tpu_film_cited": {
-  "face_mm": [
-   98,
-   98
-  ],
-  "area_m2": 0.009604,
-  "density_g_cm3": 1.2,
-  "density_source": "DoonX 0.3 mm clear TPU film, specific gravity 1.20 g/cm3 ASTM D792",
-  "url": "https://www.doonx.com/products/0-3mm-clear-tpu-film",
-  "alt_covestro": {
-   "rho": 1.15,
-   "product": "Platilon U 4201 AU",
-   "url": "https://solutions.covestro.com/en/products/platilon/platilon-u-4201-au_000000000000805921"
-  },
-  "mass_g_at_mm": {
-   "0.3": 3.46,
-   "0.4": 4.61,
-   "0.5": 5.76
-  },
-  "recommended_g": 4.61,
-  "recommended_t_mm": 0.4,
-  "note": "R-098: cite film mass; 0.3-0.5 mm band = 3.46-5.76 g at rho 1.20"
- }
+ ]
 }

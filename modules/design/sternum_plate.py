@@ -27,7 +27,7 @@ gsk_g = (4 * 9.4 * 0.4) * 0.10 * 0.40   # overlap strip, 1 mm, silicone ~0.40 g/
 # Foam edge seal (does not bond to core walls)
 seal_g = 4 * 9.8 * 0.5 * 0.5 * 0.05     # 5x5 mm, 50 kg/m3 → 0.49 g
 # TPU film 0.3-0.5 mm on 98x98 face → 3-5 g
-film_g = 9.8 * 9.8 * 0.04 * 1.20        # 0.4 mm → 4.61 g
+film_g = 0.0  # R-113: TPU film removed; R-095 clear coat confirmed on drawing (was 9.8*9.8*0.04*1.20 = 4.61 g)
 
 # Parent asks: ID mass = bezel + gasket + seal + film
 # Include blend + captives in bezel assembly (attached with the bezel)
@@ -38,7 +38,6 @@ id_parts_g = dict(
     captive_M4_x4=round(captive_g, 2),
     compliant_gasket_1mm=round(gsk_g, 2),
     foam_edge_seal=round(seal_g, 2),
-    TPU_film_0p4mm_on_face=round(film_g, 2),
 )
 id_kg = sum(id_parts_g.values()) / 1000
 bezel_gasket_seal_film_kg = (flange_g + side_g + blend_g + captive_g + gsk_g + seal_g + film_g) / 1000
@@ -55,7 +54,7 @@ d = dict(
         '1.5 mm PC bezel ring is secondary hold + cosmetic edge; 4 captive M4s into inserts '
         'at (y,z)=(+-0.040, +0.180/+0.260). Flange overlaps face <=4 mm with 1 mm stand-off on '
         'compliant gasket (no clamping preload); centre 90x90 free. Edge closed by bezel sidewall '
-        '+ foam seal (seal does not bond to core walls). 0.3-0.5 mm TPU film on face; 15 mm blend to shell.'
+        '+ foam seal (seal does not bond to core walls). R-095 clear coat on face (TPU film removed, R-113); 15 mm blend to shell.'
     ),
     service_rule='Visible dent >1 mm deep, or any crush => replace the pad. Crushed face = replace-me indicator.',
     geometry=dict(
@@ -83,12 +82,13 @@ d = dict(
         script_id_full=round(id_kg, 3),
     ),
     conditions=[
-        'Face finished (clear coat or texture) — R-094',
+        'Face finished: clear coat (R-095, confirmed on drawing; TPU film removed R-113)',
         'Torso/Materials: CF face OK for handling, UV, abrasion as outer skin',
         'Controls: T-031 with skin at x~+0.147',
         'No clamping preload (1 mm gasket stand-off)',
         'Foam edge seal must not bond to honeycomb core walls',
     ],
+    tpu_film_removed_R113=dict(was_g=4.61, basis='98x98x0.4 mm, rho 1.20 DoonX ASTM D792 (R-098)', delta_kg=-0.005, reason='R-095 clear coat confirmed on drawing'),
     not_id_mass=['7075 land+rib +0.030 (Torso)', 'pad core + 1 mm CF face (chest pad line)', 'structural epoxy'],
 )
 json.dump(d, open(os.path.join(H, 'sternum_plate.json'), 'w'), indent=1)
