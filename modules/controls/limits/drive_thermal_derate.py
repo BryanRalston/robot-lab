@@ -345,3 +345,40 @@ def default_tau_nominal():
     import numpy as np
     g = np.load(os.path.join(HERE, '..', '..', 'legs', 'rl', 'gains.npz'))
     return {str(n): float(t) for n, t in zip(g['joint_names'].tolist(), g['tau_lim'])}
+
+
+class ProneLowerGuard:
+    """T&R R-146 prone check (fef9348, R146_PRONE_LANDING.md L1) controller requirements for the prone lower:
+      - chest-pad contact speed <= 0.1 m/s: speed_limit(gap) caps the commanded chest descent speed so that it is
+        <= v_contact inside the approach zone (gap <= zone_m) and is ramped from v_far above it.
+      - peak chest-pad force <= 8.8 kN: observe() records the peak and flags any exceedance (logged, test input).
+    """
+    def __init__(self, v_contact=0.10, v_far=0.40, zone_m=0.05, f_max_N=8800.0):
+        self.v_contact, self.v_far, self.zone_m, self.f_max = v_contact, v_far, zone_m, f_max_N
+        self.peak_force = 0.0
+        self.contact_speed = None
+        self.violations = []
+
+    def speed_limit(self, gap_m):
+        """Max allowed chest descent speed (m/s, >= 0) at a chest-pad-to-floor gap (m)."""
+        if gap_m <= self.zone_m:
+            return self.v_contact
+        # linear ramp to v_far over the next 0.15 m
+        return min(self.v_far, self.v_contact + (self.v_far - self.v_contact) * (gap_m - self.zone_m) / 0.15)
+
+    def clamp(self, gap_m, v_down_cmd):
+        """Clamp a commanded downward chest speed (positive = down)."""
+        return min(float(v_down_cmd), self.speed_limit(gap_m))
+
+    def observe(self, t, in_contact, v_down, force_N):
+        if in_contact and self.contact_speed is None:
+            self.contact_speed = float(v_down)
+            if v_down > self.v_contact + 1e-9:
+                self.violations.append((t, 'contact_speed', float(v_down)))
+        self.peak_force = max(self.peak_force, float(force_N))
+        if force_N > self.f_max:
+            self.violations.append((t, 'chest_force', float(force_N)))
+
+    @property
+    def ok(self):
+        return not self.violations

@@ -266,3 +266,21 @@ def test_r146_interim_defaults_crouch_hold_then_tuck_logged_as_fall():
     assert sup.state == TUCK and len(tucks) == 1 and len(falls) == 1 and len(sup.fall_events) == 1
     assert all(io.mo.values())
     assert [s for _, s in sup.log] == [CROUCH, HOLD_DERATED, TUCK]
+
+
+def test_prone_lower_guard_speed_and_force():
+    from drive_thermal_derate import ProneLowerGuard
+    g = ProneLowerGuard()
+    assert g.speed_limit(0.0) == 0.10 and g.speed_limit(0.05) == 0.10
+    assert g.speed_limit(0.5) == 0.40 and 0.10 < g.speed_limit(0.12) < 0.40
+    assert g.clamp(0.01, 0.6) == 0.10 and g.clamp(0.3, 0.05) == 0.05
+    # simulated lower: commanded 0.5 m/s, clamped each step -> contact at <= 0.1 m/s
+    gap, dt = 0.4, 0.001
+    while gap > 0:
+        v = g.clamp(gap, 0.5); gap -= v * dt
+    g.observe(1.0, True, v, 4000.0)
+    assert v <= 0.10 + 1e-9 and g.ok and g.peak_force == 4000.0
+    g.observe(1.1, True, 0.0, 9000.0)          # 9.0 kN > 8.8 kN
+    assert not g.ok and g.violations[-1][1] == 'chest_force'
+    g2 = ProneLowerGuard(); g2.observe(0.5, True, 0.3, 100.0)
+    assert not g2.ok and g2.violations[0][1] == 'contact_speed'
