@@ -11,6 +11,7 @@ def disc(od,t,idd=0):
     w=cq.Workplane('XY').circle(od/2)
     if idd: w=w.circle(idd/2)
     return w.extrude(t)
+SY_7075=480.0   # MPa, R-123(a) MATERIALS_DB 7075-T6 (typical, MIF); static allowable 480/1.5 = 320
 WALL=2.0      # 7075-T6 wall; torque/bending stress check below (machining minimum, not strength, governs)
 # stator OD, stack length (TBM2G drawing: OD from model number, stack 14.76 / 19.26 mm + end-turns -> manual "overall length" column)
 MOT={'TBM2G-06008':(60,17.71),'TBM2G-08508':(85,19.34),'TBM2G-07613':(76,23.09),'TBM2G-06013':(60,22.21)}
@@ -84,7 +85,7 @@ rec('knee_lever_r47p5',lever(47.5),'7075','linkage','replaces v3 r58.5 lever in 
 rec('knee_lever_r58p5_v3',lever(58.5,taper=False),'7075','reference','v3 shank part (already in Legs structure mass)')
 # stress check of the crossbar at actuator max force (T_out/arm/2 per screw), bending about pivot at cheek offset dy+16
 for nm,T,r in (('hip_pitch',454,0.050),('knee',345,0.0475)):
-    F=T/r/2; M=F*0.061; Z=12*24**2/6*1e-9; OUT[f'{nm}_lever_check']=dict(F_N=F,sigma_MPa=M/Z/1e6,SF_yield=503/(M/Z/1e6))
+    F=T/r/2; M=F*0.061; Z=12*24**2/6*1e-9; OUT[f'{nm}_lever_check']=dict(F_N=F,sigma_MPa=M/Z/1e6,SF_yield=SY_7075/(M/Z/1e6))   # R-123(a): Sy 480 (was 503)
 # fastener / connector allowance, counted from the bolt patterns (12.9 socket head mass per ISO 4762 tables [EST ±10 %])
 FAST=dict(rotary=8*3.6e-3+6*1.0e-3+0.015, linear=6*1.0e-3+4*1.9e-3+0.010)   # rotary: 8xM5x16 flange + 6xM3 cap + connector; linear: 6xM3 + 4xM4 + connector
 OUT['fasteners']=FAST

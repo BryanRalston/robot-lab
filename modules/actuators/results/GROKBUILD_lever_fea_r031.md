@@ -5,12 +5,12 @@
 
 **Geometry:** `modules/actuators/cad/hip_pitch_lever_r031_mw_b30_d36_RC.step`. This is a byte copy of Legs L47 `legs/cad/hip_pitch_lever_r031_mw_b30_d36.step`: 2 valid solids, 155,055 mm³.
 
-**Material and mass:** 7075-T6 (E 71.7 GPa, ν 0.33, Sy 503, Su 572). Mass by the hp_lever_fea_v2 rule: (V − 2 × π6² × 25) × 2.81e-6 + steel pins 0.0444 = **0.464 kg per lever**.
+**Material and mass:** 7075-T6 (E 70 GPa, ν 0.33, Sy 480, Su 560; R-123(a): MATERIALS_DB typical (MIF), not A/B-basis; was 71.7/503/572). Mass by the hp_lever_fea_v2 rule: (V − 2 × π6² × 25) × 2.81e-6 + steel pins 0.0444 = **0.464 kg per lever**.
 
 **Setup:** as GROKBUILD_lever_fea_v2. That means a pressure-loaded ø42 bore, yoke-face support, and pin loads on the ear pins, using `hp_lever_fea_v2.py` mesh/solve functions with the STEP imported in place of geom().
 
 **Cases:**
-1. **Design:** 4542 N per pin (454.2 N·m / 0.050 / 2). Pass: von Mises peak ≤ 503/1.5 = 335 MPa at the converged level.
+1. **Design:** 4542 N per pin (454.2 N·m / 0.050 / 2). Pass: von Mises peak ≤ 480/1.5 = **320 MPa** (R-123; peaks 320–335 FAIL) at the converged level.
 2. **Fatigue (Amendment 1, R-031 §6):** 2030 N per pin, fully reversed (R = −1). Pass: **hot-spot von Mises amplitude ≤ 58 MPa** (Se 87/1.5).
 
 **Convergence:**

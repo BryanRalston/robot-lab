@@ -17,6 +17,25 @@ Script `r122_actuators.py` → `results/fastener_bom.json`, table below (`result
 ## Under-booking flag (not a booking; for the Arbiter's R13 regen)
 `cad_mass.py` books 0.0348 kg screws per leg rotary unit and 0.0136 kg per linear unit (plus connector allowance). Counted here: CSG-25 rotary 0.122, CSG-17 0.079, linear 0.035 kg per unit. **Legs alone: counted ≈ 0.82 kg vs booked ≈ 0.30 kg → ≈ +0.5 kg possible under-booking [CALC/EST lengths]** (the HD component-set weights exclude bolts). Arm/waist unit lines (e.g. `d70_wrist_rotary.py` fasteners_EST 0.015) are similarly low. Needs a measured/CAD fastener count before it is booked; it works against R-122.
 
+## Arm and waist units: counted vs booked (R-123(c) request, D84)
+Method as the legs (R-123(c)): counted = `fastener_bom.json` steel lines; booked = the fastener term in the mass model that each unit's booked mass comes from.
+- **Counted** (this BOM): waist 0.201, shoulders 0.647, elbows 0.139, wrist roll/pitch/yaw 0.277 → **1.265 kg** (16 units).
+- **Booked:** `cad_mass.py` FAST is applied only to leg units (`size.py` CADH). Arm/waist units still carry the v3 `actuator()` rotary mass (`v3/analysis/v3.py` l.59), which has two unlabeled constants **+0.03 + 0.04 kg/unit** and no counted fastener line. Its housing ×1.25 factor is a generic feature allowance and is not taken as fasteners. The D70/D76 wrist pitch/yaw units book `fasteners_EST` 0.015 each (`d70_wrist_rotary.py`); the D76 wrist roll is taken on the same basis [EST].
+  - v3-basis units: waist 2, shoulder pitch/roll/yaw 6, elbow 2 = 10. D70-basis: wrist roll/pitch/yaw = 6.
+  - Booked, conservative (only 0.03/unit is fasteners; 0.04 is taken as connector/cabling, matching the leg split): 10 × 0.03 + 6 × 0.015 = **0.39 kg**.
+  - Booked, upper bound (all of 0.07 is fasteners): 10 × 0.07 + 6 × 0.015 = 0.79 kg.
+- **Delta: +0.875 kg (conservative), range +0.475 to +0.875 kg [CALC/EST lengths].** Per R-123(c) ("doubt resolves conservatively"), book **+0.875** as an addition at full. A lower CAD fastener count at G4 is credited at full then.
+- Excluded: Arms' shoulder-roll stand-off flange screws (8 × M4, already in Arms R13 / R-121); neck (not in the 32-drive set); Torso's own BOM (`torso/BOM_fasteners.md`).
+- Ti scope from these units is already inside the R-122 row 12 total (−0.091); no double count.
+
+## Row 12 install conditions (R-123(c), binding)
+- **Non-structural only.** No Ti in any torque, bearing-retention or joint path (every "structural YES" line above stays 12.9 steel).
+- **Galling:** hard-anodized or coated Ti screws, plus an aluminium-compatible anti-seize, torqued to a spec. No dry Ti-in-Al.
+- **Wet install** with sealant or primer (galvanic: 7075 is anodic to Ti; a small cathode on a large anode is acceptable only wet and isolated).
+- **Materials** cites the coating and anti-seize (G1 citation) before credit moves to full.
+- **Thermal** signs off Ti for the Elmo drive-mount clamp screws; otherwise those stay A2 (row 12 then −0.074 full / −0.037 credit).
+- Credit now −0.046 (half of −0.091 [CALC]).
+
 ## Per-line table
 | unit | item | size | n/unit | n/robot | grade | structural | reason | basis | steel g (robot) | Ti64 g (robot) |
 |---|---|---|---:|---:|---|---|---|---|---:|---:|

@@ -32,8 +32,8 @@ Tags: **[CITED]** = a datasheet or repo result (source given); **[ASSUMPTION]** 
 ## 2. Material
 **[CITED]** 7075-T6, as used by G3 and cad_mass.py:
 - ρ 2.81 g/cm³ (cad_mass.py RHO);
-- E 71.7 GPa, ν 0.33;
-- Sy 503 MPa, Su 572 MPa;
+- E 70 GPa, ν 0.33 (R-123(a); 71.7 acceptable for stress-only load-controlled solves, 70 for deflection gates);
+- Sy 480 MPa, Su 560 MPa (R-123(a), MATERIALS_DB typical, not A/B-basis; plate > 25 mm needs a Materials product-form allowable before sign-off);
 - endurance Se 87 MPa (fully reversed; the R-031 §6 / G3 basis).
 
 ## 3. Load cases
@@ -111,7 +111,7 @@ Falls: the side fall (11.5 kN shoulder, D71) is a shoulder case and doesn't load
 Don't use lattices.
 
 ## 6. Pass criteria (per housing, every case)
-1. **Static:** von Mises peak ≤ Sy / 1.5 = **335 MPa** (R1, R2, P1, A1, A2). Overload cases P2 and A4: ≤ Sy / 1.2 = 419 MPa.
+1. **Static:** von Mises peak ≤ Sy / 1.5 = **320 MPa** (R-123; 320–335 is a FAIL) (R1, R2, P1, A1, A2). Overload cases P2 and A4: ≤ Sy / 1.2 = 400 MPa.
 2. **Fatigue:** hot-spot von Mises amplitude ≤ **Se / 1.5 = 58 MPa** (R3+R4, P3, A3). Same rule as G3.
 3. **Stiffness [ASSUMPTION; no cited limit in the repo]:**
    - CRBH seat bore ovalisation ≤ 10 µm under R2 (bearing-housing tolerance class).

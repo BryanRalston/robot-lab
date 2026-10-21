@@ -821,3 +821,8 @@ Retention at 1.2 m/s:
 ## D83 (Job 9 c) Knee release body = rev B fins + R-116 boss; material 7075-T6
 - `cad/knee_twin_housing_release_r116.step` (`knee_release_r116.py`): rev B + Ø23 boss + Ø12×6 bore. Rev C (trimmed fins) is withdrawn; it is not a housing rev.
 - 7075-T6 one-piece (cad_mass booking). Fin mass at 7075 is +0.008 kg robot vs the 6061 figure; flagged for the Arbiter, not booked. `results/JOB9_KNEE_GEOMETRY.md`.
+
+## D84 (R-123) Arm/waist fastener delta, 7075 basis 480/560/70, row 12 conditions
+- Arm/waist fasteners: counted 1.265 kg vs booked 0.39 (conservative; v3 0.03/unit + D70 0.015) → **+0.875 kg** (range +0.475..+0.875). `FASTENER_BOM.md`.
+- G3 and G4 briefs → E 70, Sy 480, Su 560, static 320, overload 400; Se unchanged. cad_mass.py lever SF on 480: hip 2.00, knee 2.50.
+- Re-check (`results/R123_RECHECK.md`): one stale result fails 320 (h4 needle lever 332 MPa in PROOF_TEST); no live part fails.
