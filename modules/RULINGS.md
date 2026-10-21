@@ -1531,3 +1531,6 @@ Ruling: the +2.63 overrun is NOT accepted now. It is not booked as a design poin
 3. Whatever is adopted, the CoM shift must be ≤10 mm or Controls must re-verify balance and recovery at the new CoM.
 4. P-160 waist pitch hard stop (4.36 kN·m at 29 kN × 0.150 m) is accepted in principle and scales with the final LC1. Its mass is booked when sized.
 5. Torso G3 stays NOT MET until a variant is adopted.
+
+## R-157a — Torso 3c booked provisionally (Robot Lab) — 2026-10-21
+Agreed on conservatism: job 3c is the only passing torso, so +2.63 [mesh EST] is booked at full as a KNOWN LIABILITY, pending the R-157 plateau and energy-gate revisit. Any lighter adopted variant replaces it as one delta. The R-157 non-acceptance stands for design adoption: the CoM ≈10.9 mm vs the 10 mm limit is unresolved. LEDGER: ~69.48 → ~72.11 kg vs T2 66.5, 5.61 kg OVER. G4 NOT MET.
