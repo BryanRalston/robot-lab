@@ -315,3 +315,14 @@ Cap: |τ_knee| ≤ min(derate, 50 N·m) at knee ≥ 125° in stop/fall states. D
   - CoM held over the knees in task mode (falls onto the pads at 0.7 m/s)
   - 0.5 m hand reach (0.85 m/s plant)
 - **Next:** a controlled reach with the shoulder over the hand before loading, e.g. a staged hand-plant load hold.
+
+### Arbiter R-151 (10e3525): 875 N/hand heel-plant cap ruled; latch 82 interim
+- **Infeasibility proof: NOT shown, so no wrist support.**
+  - Static load: total hand load is at most the full weight, 68.5 × 9.81 = 672 N (≈336 N per hand symmetric), well under the 875 N cap.
+  - Measured peaks are 1165–1243 N per hand, at 0.58–0.66 m/s plant speed. That is impact from the robot toppling onto the hands, not static load.
+  - So the cap is a plant-speed problem: the controller has to plant at ≤ ~0.23 m/s. It is not a structural infeasibility.
+- **Elbow cap results, reported separately (49 N·m is NOT ruled):**
+  - 38 N·m: chest 0.37–0.40 m/s, ≤2.85 kN. Hand plant is the same as at 49 (≈1.2 kN, 0.59 m/s). FAIL.
+  - 49 N·m: chest 0.26–0.30 m/s, ≤1.7 kN. Hand plant ≈1.2 kN. FAIL.
+  - Details are in kneel_toe_r19_dr_results.json.
+- **Latch:** stays at 82 °C interim per R-151. The final N comes from Thermal's drive model; the earlier 81/82 estimates are superseded.
