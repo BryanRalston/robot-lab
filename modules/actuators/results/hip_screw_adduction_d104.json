@@ -1,0 +1,75 @@
+{
+ "body": {
+  "D_motor": 82,
+  "Lm": 43.09,
+  "D_nut": 41,
+  "L_body": 105.1,
+  "eye_offset": 30.0,
+  "y_inner": 61,
+  "pin_to_pin_L": 325.3
+ },
+ "clamp": {
+  "zone_body_z_mm": [
+   14,
+   38
+  ],
+  "zone_from_eye_mm": [
+   44.0,
+   68.0
+  ],
+  "band_w_max_mm": 12,
+  "keepouts": "z 0-12 rear cap/encoder + eye stub flange; z 43-49 cone; z 49-105 nut + 7202 pair + front seal/wiper (z 102-105); no clamp on the RV12 rod",
+  "p_max_MPa": 0.9,
+  "hoop_MPa": 17.9,
+  "band_tension_max_N": 358,
+  "bond": "bond the pad saddle (as clamp_review bonded+light clamp)"
+ },
+ "pad": {
+  "F_allow_N": 210,
+  "F_rod_limit_N": 210,
+  "F_nut_limit_N": 1007,
+  "E_allow_J": 0.0,
+  "k_N_per_mm": 4500,
+  "E_impact_J": {
+   "1.0": 0.9,
+   "2.0": 3.7,
+   "3.0": 8.3
+  },
+  "verdict": "pad is a touch/anti-fret buffer only (<=~1 J); it cannot be the energy stop"
+ },
+ "splay": {
+  "femur_gap_now_mm": 3.0,
+  "about_lever_eye": {
+   "3deg": {
+    "body_shift_out_mm": 15.5,
+    "femur_gap_after_mm": -12.5,
+    "L94_single_gain_deg": 4.8,
+    "torque_factor_inner": 0.9986,
+    "lateral_on_lever_eye_N_at_4542": 238,
+    "ok": false
+   },
+   "4deg": {
+    "body_shift_out_mm": 20.6,
+    "femur_gap_after_mm": -17.6,
+    "L94_single_gain_deg": 6.3,
+    "torque_factor_inner": 0.9976,
+    "lateral_on_lever_eye_N_at_4542": 317,
+    "ok": false
+   },
+   "5deg": {
+    "body_shift_out_mm": 25.7,
+    "femur_gap_after_mm": -22.7,
+    "L94_single_gain_deg": 7.9,
+    "torque_factor_inner": 0.9962,
+    "lateral_on_lever_eye_N_at_4542": 396,
+    "ok": false
+   }
+  },
+  "about_thigh_eye_shift_mm": {
+   "3": 2.1,
+   "4": 2.8,
+   "5": 3.5
+  },
+  "verdict": "3-5 deg outboard about the lever eye puts the inner body into the femur/thigh clamp (gap 3 mm [EST]); about the thigh eye the contact zone moves only 2-3.5 mm: NOT feasible"
+ }
+}
