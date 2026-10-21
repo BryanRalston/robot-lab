@@ -387,3 +387,26 @@ def run_kneel(T_crouch=2.0, T_kneel=0.8, pel_z=0.85, frames=None, fps=25, hold_a
     res['ok'] = (res['fell'] is None and res['t_mo_off'] is not None and res['t_mo_off'] <= 2.8 + 0.05 + 1e-9
                  and res['tau_frac_kneel'] <= 1.0 + 1e-6)
     return res
+
+
+# R-146(b): stiffer CoM-xy loop for the safe-stop moves. The stock balance branch of _zmp_target uses kx 2.5, which
+# is too slow to shift the CoM to the toe line in < 1 s. With self.zmp_k = (kx, dx) set, this replaces only the
+# balance-phase PD gains; projection into the (possibly toe-band) support polygon is unchanged. Unset -> stock code.
+_zmp0 = _wbcmod.WalkController._zmp_target
+def _zmp_target_k(self, d, com_xy, cd_xy, v_cmd):
+    k = getattr(self, 'zmp_k', None)
+    if k is None or self.phase != 'balance':
+        return _zmp0(self, d, com_xy, cd_xy, v_cmd)
+    om2 = self.omega ** 2
+    com_xy = np.asarray(com_xy, float); cd_xy = np.asarray(cd_xy, float)
+    a_pd = np.array([k[0] * (self.x_ref - com_xy[0]) - k[1] * cd_xy[0],
+                     14.0 * (self.y_ref - com_xy[1]) - 5.0 * cd_xy[1]])
+    a_pd = np.clip(a_pd, -4.0, 4.0)
+    p_des = com_xy - a_pd / om2
+    corners = []
+    for s in 'lr':
+        ankle, yaw = self._foot_yaw_xy(d, s)
+        corners.extend(self._sole_corners(ankle, yaw, margin=0.008))
+    p = self._project_poly(p_des, corners)
+    return p, om2 * (com_xy - p)
+_wbcmod.WalkController._zmp_target = _zmp_target_k
