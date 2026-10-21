@@ -127,3 +127,11 @@ Checked against the R-065 criteria with sim/v3:
   - Checks: ≥ 3 mm everywhere through abduction −15…180 × pitch, tuck B, and overhead pitch ≤ −150 / roll ≥ 170.
 - Output: `modules/arms/results/job8b_*`.
 - Job 8b update (2026-10-21): the head/torso cover STEPs now exist: `modules/design/cad/covers/head_shell.step` and `torso_cover.step`. They are faceted, in mm, in the site frame (Y-up), so transform them to the arms frame (X roll axis, Y outboard, Z up) before the clash check. The torso is a coarse 28-triangle envelope, so treat its clearances as indicative. Real housing STEP: `arms/cad/r14/housing_7013_real_coaxX.step`. **Job 8b stays on hold until the Arbiter's placement ruling.**
+
+**Job 8b: RELEASED (R-125, W2).** This supersedes the R14 "hold" and the R11/R-120 geometry. Route via Robot Lab, one Grok Build session at a time.
+- Geometry: `arms/cad/r15/carrier_w2.step` (one-piece 7075-T6 carrier + flange OD76/ID36 × 5, 8 × M4 12.9 PCD62, 2 × Ø6 m6 dowels PCD57). Elastic `hub_r15.step`. CRBH 7013 A as a bearing element (C0 27.7 kN, dp 85) in `housing_7013_coaxX.step`. Pad envelope `pad_envelope_w2.step`: R10 core 54.8² × 75.3 + 0.5 tray, contact Y 138.8, pad centre X0/Z0. Params in `r15_w2.json`.
+- Loads: 7.0 kN at 15° (Fn 6761, Fs 1812), axial and down, e = 0 / 2.4 (drawing limit) / 5 (informative). μ 0.15 sensitivity is not credited.
+- **Gates:** vM ≤ 320 MPa (arm root, plate root and ribs, flange ligaments), s0 ≥ 2.0 at e worst (stack 1.92 mm + FE e under load), Mx ≤ 351 N·m, deflection ≤ 1 mm. **Report pad X displacement under load (e)**, plus dowel/bolt slip and separation.
+- Hand expectations: arm 289 MPa, plate 295, Mx 251, s0 1.999 at e2.4.
+- Clash (CAD): carrier vs OD108 ≥ 3 mm (nominal 3.0); head shell and torso cover (`design/cad/covers`, site Y-up; transform x = x_s, y = −z_s, z = y_s − 57.1). Arms light check: torso penetration at roll ≥ ~118°.
+- Output: `modules/arms/results/job8b_*`.

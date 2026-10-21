@@ -1,0 +1,22 @@
+{
+ "contributors_mm": {
+  "bearing seat (H7) position": 0.05,
+  "CRBH runout / width centre": 0.05,
+  "hub end face to bearing plane": 0.1,
+  "flange thickness/flatness": 0.05,
+  "dowel location (D6 m6/H7, PCD57)": 0.03,
+  "carrier arm/plate machined position (one setup)": 0.1,
+  "tray M4 float": 0.25,
+  "tray lip to core (ID, tightened)": 0.3,
+  "core cut position/squareness (ID, tightened)": 0.3,
+  "elastic deflection in X (max of ID R11 0.69, W2 carrier calc 0.27) until Job 8b": 0.69
+ },
+ "worst_mm": 1.92,
+ "rss_mm": 0.86,
+ "limit_mm": 2.4,
+ "margin_worst_mm": 0.48,
+ "s0_at_worst": 2.01,
+ "s0_at_rss": 2.035,
+ "s0_at_limit": 1.999,
+ "verdict": "PASS"
+}
