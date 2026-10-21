@@ -1517,3 +1517,8 @@ Link B replaces the 10 mm² front-low main, -0.018. It is credited at full becau
 1. D99 (0.487 kg robot [CAD], including +0.143 leg-side growth) replaces the r75 booking (+0.303): +0.184 at full. Fault energy is 92.5 J (motors-off bottoming); the 40.1 J × 1.1 stays the design-contact energy. The tibia +0.114 is already booked in R-154, not added again.
 2. Femur: slight permanent set at motors-off bottoming is accepted as a FAULT-case allowance only, with mandatory F1 inspection after any bottoming event. It does not relax T8 (≥100 falls with no structural damage) or the R-135 no-dent fall criterion.
 3. LEDGER: credible mass ~68.87 → ~69.05 kg vs T2 66.5 kg, 2.55 kg OVER. G4 stays NOT MET. Option C(a) (15 kg carry) and C(c) (delete waist yaw), both needing Bryan, are now the remaining routes of the size required. Robot Lab should put them to Bryan.
+
+## R-156 — D99 at CAD mass; L90 hip stop (Robot Lab; Legs 211d031, 8569e3a) — 2026-10-21
+1. D99 is booked at 0.871 kg robot [CAD], replacing 0.487: +0.384 at full. The taper (~-0.09) is credited only after its FEA passes. Fault energy stays 92.5 J.
+2. L90 hip stop +0.046 [EST] is an addition, booked at full. The hip ROM becomes a coupled yaw/roll limit and CONTRACTS §2 is updated. Controls' gait, tuck and kneel must stay inside the coupled map, and Legs re-checks the gait-sim yaw/roll envelope against it (the earlier need was hip_roll to -12°).
+3. LEDGER: ~69.05 → ~69.48 kg vs T2 66.5, 2.98 kg OVER. G4 NOT MET.
