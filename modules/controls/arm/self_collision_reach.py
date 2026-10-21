@@ -52,3 +52,33 @@ out['reach_cost'] = cnt
 out['roll_ge0_breaks'] = ['LB fallback +30/-15/+30/-75 (roll -15)', 'hands together at chest (-60,-15,-60,-100) R18',
                           'P-042 close carry (-25,-10,-40,-110) R18']
 Path(__file__).with_name('self_collision_reach.json').write_text(json.dumps(out, indent=1)); print(json.dumps(out, indent=1))
+
+# tracking cost: attenuation of commanded arm velocity by the supervisor over the walk and carry sample sets
+def atten(arm_rng, leg_rng, mode, n, tag, base=None):
+    """Tracking cost on poses that START clear (every pair >= its target): attenuation = 1 - (q_s . q_c)/|q_c|^2 of a
+    random commanded arm velocity (+/-1 rad/s/joint). Poses already inside a target are counted separately (push-out)."""
+    sup = S.Supervisor(m, d); att = []; inside = 0
+    for _ in range(n):
+        q = {k: rng.uniform(*arm_rng[k]) for k in ARM}; q.update({k: rng.uniform(*leg_rng[k]) for k in LEG})
+        setq(q); mujoco.mj_comPos(m, d)
+        for t in sup.timers.values(): t.buf[:] = False; t.sum = 0; t.cur = 0.0
+        qd = np.zeros(m.nv); ad = sup.arm_dofs['l']; qd[ad] = rng.uniform(-1, 1, len(ad))
+        qs = sup.filter(qd, mode, kin=False)
+        tg = {p.name: sup.thresholds(p.kind, mode)[0] for p in sup.pairs}
+        if any(dd < tg[p.name] for p, dd, _ in sup.last if p.side == 'l' and p.kind != 'plume'): inside += 1; continue
+        att.append(float(np.clip(1 - qs[ad] @ qd[ad] / (qd[ad] @ qd[ad]), 0, 1)))
+    a = np.array(att)
+    out[tag] = dict(n=n, start_inside_target=inside, clear_starts=len(a), frac_attenuated=round(float(np.mean(a > 1e-6)), 4),
+                    mean_attenuation=round(float(a.mean()), 4), p95_attenuation=round(float(np.percentile(a, 95)), 4),
+                    p99_attenuation=round(float(np.percentile(a, 99)), 4), frac_over_50pct=round(float(np.mean(a > 0.5)), 4))
+atten(walk_arm, walk_leg, 'walk', 10000, 'attenuation_walk_10k')
+carry_arm = {k: (max(full_arm[k][0], b - 14.3), min(full_arm[k][1], b + 14.3)) for k, b in zip(ARM, [-60, 0, 0, -110, 0, 0, 0])}
+atten(carry_arm, dict(walk_leg, waist_pitch=(-15, 0)), 'carry', 10000, 'attenuation_carry_10k')
+# payload P-042 vs shroud over carry legs
+sup = S.Supervisor(m, d); pm = 9
+for _ in range(5000):
+    setq({k: rng.uniform(*v) for k, v in dict(walk_leg, l_hip_pitch=(-105, 20), l_knee=(0, 135)).items()})
+    pm = min(pm, mujoco.mj_geomDistance(m, d, m.geom('ko_payload').id, G['ko_shroud_l'], 1.0, ft))
+out['payload_vs_shroud_min_mm_hip_-105..20'] = round(1000 * pm, 1)
+Path(__file__).with_name('self_collision_reach.json').write_text(json.dumps(out, indent=1))
+print({k: v for k, v in out.items() if k.startswith(('atten', 'payload'))})

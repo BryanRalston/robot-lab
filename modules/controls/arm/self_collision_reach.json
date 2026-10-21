@@ -74,5 +74,26 @@
   "LB fallback +30/-15/+30/-75 (roll -15)",
   "hands together at chest (-60,-15,-60,-100) R18",
   "P-042 close carry (-25,-10,-40,-110) R18"
- ]
+ ],
+ "attenuation_walk_10k": {
+  "n": 10000,
+  "start_inside_target": 1122,
+  "clear_starts": 8878,
+  "frac_attenuated": 0.0569,
+  "mean_attenuation": 0.0077,
+  "p95_attenuation": 0.0139,
+  "p99_attenuation": 0.2454,
+  "frac_over_50pct": 0.0018
+ },
+ "attenuation_carry_10k": {
+  "n": 10000,
+  "start_inside_target": 0,
+  "clear_starts": 10000,
+  "frac_attenuated": 0.0,
+  "mean_attenuation": 0.0,
+  "p95_attenuation": 0.0,
+  "p99_attenuation": 0.0,
+  "frac_over_50pct": 0.0
+ },
+ "payload_vs_shroud_min_mm_hip_-105..20": 630.6
 }

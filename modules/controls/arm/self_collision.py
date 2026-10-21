@@ -35,9 +35,9 @@ DEFAULT = dict(
     enabled=True, loop_hz=1000.0,
     chest=dict(ref='Arms R18 bf228b1', body='torso', x=[0.0, 0.185], y=[-0.061, 0.061], z=[0.159, 0.281], margin=0.0),
     knee_shroud=dict(ref='ID P-156 rev 6b (baad131); T&R 925d72e', x=[-0.100, -0.020], y=[0.086, 0.150], y_out=0.150,
-                     z=[0.840, 0.904], z_top_front=0.8615, chamfer_deg=40.0, chamfer_w=0.015, skin=0.002,
+                     z=[0.840, 0.904], z_top_front=0.8615, chamfer_deg=40.0, chamfer_w=0.015, skin=0.002, status='FINAL rev 6b (valid through rev 8): ID confirmed 40 deg / 15 mm face + R10; z840 final (Thermal PASS 5fd6a54)',
                      note='convex hull: sloped top z 861.5 (x -20) -> 904 (x -100), 40 deg chamfer on the outboard-top edge, '
-                          'chamfer width 15 mm [EST: ID gives angle + R10, not the width; R10 blend ignored = conservative]; '
+                          'chamfer 15 mm face (ID confirmed); R10 blends ignored = conservative; '
                           '+2 mm skin (T&R). Set chamfer_w 0 / z_top_front = z[1] for a plain box.'),
     plume=dict(ref='T&R 925d72e (a) K_plume', offset=0.030, length=0.060, half_angle_deg=15.0,
                openings='aft face [EST: ID rev 6 slots are on the walls; aft-only per T&R fix 1]',
@@ -47,7 +47,11 @@ DEFAULT = dict(
     thresholds_mm=dict(ref='T&R 925d72e', walk=[15, 10, 5], carry=[15, 10, 5], stand=[15, 10, 5],
                        crouch=[20, 15, 10], sit=[20, 15, 10], kneel=[20, 15, 10], lowering=[20, 15, 10]),
     plume_mm=[5, 2, 0],
-    links=['forearm', 'hand'], influence=0.05, xi=1.0, xi_in=3.0, repulse_gain=1.0, passes=6,
+    payload=dict(ref='P-042 (carry_balance_r1, legs scenarios CARRY_POS)', body='torso', pos=[0.32, 0.0, 0.415],
+                 size_full=[0.212, 0.274, 0.212],
+                 size_note='sim has no payload geom; box sized from the sim inertia (20 kg, diag 0.2/0.15/0.2) [DERIVED]',
+                 modes=['carry'], hook='PENDING T&R: no hook geometry in repo; placeholder disabled'),
+    links=['forearm', 'hand'], influence=0.10, aim_offset=0.004, xi=1.0, xi_in=8.0, repulse_gain=1.0, passes=6,
     shoulder_roll_inward_soft_limit_deg=None,
     fall_override='only if fall_pose_clear()')
 
@@ -70,6 +74,10 @@ def build_model(cfg=None, xml_text=None):
     cfg = cfg or load_cfg(); x = xml_text or XML.read_text()
     ch = cfg['chest']
     g = _box('ko_chest', np.array([ch['x'][0], ch['y'][0], ch['z'][0]]), np.array([ch['x'][1], ch['y'][1], ch['z'][1]]))
+    py = cfg.get('payload')
+    if py:
+        c = np.array(py['pos']); h = np.array(py['size_full']) / 2
+        g += _box('ko_payload', c - h, c + h)
     x = re.sub(r'(<body name="torso"[^>]*>)', lambda mm: mm.group(1) + g, x, count=1)
     ks, pl = cfg['knee_shroud'], cfg['plume']; sk = ks.get('skin', 0.0)
     x0, x1 = ks['x'][0] - sk, ks['x'][1] + sk; y0, y1 = ks['y'][0] - sk, ks['y_out'] + sk; z0 = ks['z'][0] - sk
@@ -132,6 +140,11 @@ class Supervisor:
                 for ss in 'lr':
                     for kd in ('shroud', 'plume'):
                         s.pairs.append(Pair(f'{side}_{ln}:{kd}_{ss}', ag, m.geom(f'ko_{kd}_{ss}').id, kd, side))
+        if 'ko_payload' in [m.geom(i).name for i in range(m.ngeom)]:
+            for ss in 'lr':
+                for kd in ('shroud', 'plume'):
+                    s.pairs.append(Pair(f'payload:{kd}_{ss}', m.geom('ko_payload').id, m.geom(f'ko_{kd}_{ss}').id,
+                                        kd, 'payload'))
         s.arm_dofs = {sd: np.array([m.jnt_dofadr[m.joint(f'{sd}_{j}').id] for j in ARM_J]) for sd in 'lr'}
         dt = 1.0 / s.cfg['loop_hz']; pl = s.cfg['plume']
         s.timers = {sd: TransitTimer(dt, pl['transit_max_s'], pl['window_s'], pl['window_frac']) for sd in 'lr'}
@@ -151,6 +164,7 @@ class Supervisor:
             mujoco.mj_kinematics(m, d); mujoco.mj_comPos(m, d)
         out = []
         for p in s.pairs:
+            if p.side == 'payload' and s.mode not in s.cfg['payload']['modes']: out.append((p, 9.0, None)); continue
             tg = s.thresholds(p.kind)[0]
             dmax = tg + s.cfg['influence'] + 0.05
             dist = mujoco.mj_geomDistance(m, d, p.arm_geom, p.obs_geom, dmax, s._ft)
@@ -181,14 +195,15 @@ class Supervisor:
         dl = s.distances(kin)
         if bypass: return qd  # measurement only (used by the sweep's 'without supervisor' runs)
         inside = {sd: any(dd <= 0 for p, dd, _ in dl if p.kind == 'plume' and p.side == sd) for sd in 'lr'}
+        # payload pairs: warn/trip events only (torso-fixed in this model; legs/WBC must act), no arm correction
         plume_ok = {sd: (mode == 'walk' and s.timers[sd].allowed(s.cfg['plume'].get('exit_at_s'))) for sd in 'lr'}
         for sd in 'lr': s.timers[sd].step(inside[sd])
         act = []
         for p, dist, row in dl:
-            if p.kind == 'plume' and plume_ok[p.side]: continue  # walk swing transit inside budget
+            if p.kind == 'plume' and p.side in plume_ok and plume_ok[p.side]: continue  # walk swing transit inside budget
             tg, wn, tr = s.thresholds(p.kind)
             if p.kind != 'chest' and dist < wn: s.events.append((round(s.t, 3), 'trip' if dist < tr else 'warn', p.name, dist))
-            if row is not None: act.append((p, dist, row, tg))
+            if row is not None and p.side != 'payload': act.append((p, dist, row, tg + s.cfg.get('aim_offset', 0.0)))
         for _ in range(s.cfg['passes']):
             hit = False
             for p, dist, row, tg in act:
@@ -205,8 +220,8 @@ class Supervisor:
     def repulsive_tasks(s, hook: WBCHook | None = None):
         tasks = []
         for p, dist, row in s.last:
-            if row is None: continue
-            tg = s.thresholds(p.kind)[0]; di = tg + s.cfg['influence']
+            if row is None or p.side == 'payload': continue
+            tg = s.thresholds(p.kind)[0] + s.cfg.get('aim_offset', 0.0); di = tg + s.cfg['influence']
             if dist >= di: continue
             rate = s.cfg['repulse_gain'] * (di - dist); w = (di - dist) / s.cfg['influence']
             tasks.append((p.name, row, rate, w))
@@ -220,7 +235,7 @@ class Supervisor:
         for k, v in target.items(): s.d.qpos[s.m.jnt_qposadr[s.m.joint(k).id]] = v
         mujoco.mj_kinematics(s.m, s.d); res = []
         for p in s.pairs:
-            if p.kind == 'plume': continue
+            if p.kind == 'plume' or p.side == 'payload': continue
             dd = mujoco.mj_geomDistance(s.m, s.d, p.arm_geom, p.obs_geom, 1.0, s._ft)
             res.append((dd - s.thresholds(p.kind, mode)[2], p.name))
         s.d.qpos[:] = save; mujoco.mj_kinematics(s.m, s.d)

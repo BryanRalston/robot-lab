@@ -113,7 +113,8 @@
       "chamfer_deg": 40.0,
       "chamfer_w": 0.015,
       "skin": 0.002,
-      "note": "convex hull: sloped top z 861.5 (x -20) -> 904 (x -100), 40 deg chamfer on the outboard-top edge, chamfer width 15 mm [EST: ID gives angle + R10, not the width; R10 blend ignored = conservative]; +2 mm skin (T&R). Set chamfer_w 0 / z_top_front = z[1] for a plain box."
+      "status": "FINAL rev 6b (valid through rev 8): ID confirmed 40 deg / 15 mm face + R10; z840 final (Thermal PASS 5fd6a54)",
+      "note": "convex hull: sloped top z 861.5 (x -20) -> 904 (x -100), 40 deg chamfer on the outboard-top edge, chamfer 15 mm face (ID confirmed); R10 blends ignored = conservative; +2 mm skin (T&R). Set chamfer_w 0 / z_top_front = z[1] for a plain box."
     },
     "plume": {
       "ref": "T&R 925d72e (a) K_plume",
@@ -170,13 +171,33 @@
       2,
       0
     ],
+    "payload": {
+      "ref": "P-042 (carry_balance_r1, legs scenarios CARRY_POS)",
+      "body": "torso",
+      "pos": [
+        0.32,
+        0.0,
+        0.415
+      ],
+      "size_full": [
+        0.212,
+        0.274,
+        0.212
+      ],
+      "size_note": "sim has no payload geom; box sized from the sim inertia (20 kg, diag 0.2/0.15/0.2) [DERIVED]",
+      "modes": [
+        "carry"
+      ],
+      "hook": "PENDING T&R: no hook geometry in repo; placeholder disabled"
+    },
     "links": [
       "forearm",
       "hand"
     ],
-    "influence": 0.05,
+    "influence": 0.1,
+    "aim_offset": 0.004,
     "xi": 1.0,
-    "xi_in": 3.0,
+    "xi_in": 8.0,
     "repulse_gain": 1.0,
     "passes": 6,
     "shoulder_roll_inward_soft_limit_deg": null,
