@@ -1555,3 +1555,6 @@ Evidence: 32 passive topples peak at 17 deg chest angle, none reached 25 deg. Th
 
 ## R-159 — D102c waist friction limiter booked (Actuators eb5520f) — 2026-10-21
 +0.394 kg [CAD], an addition, booked at full. It replaces the rejected Mayr EAS (+2.77 was never booked, so there is no double count). It closes the P-160 waist-stop mass item, PENDING the T&R independent check of slip torque vs the 2.5 kN.m IR waist limit. LEDGER: ~72.11 -> ~72.50 kg vs T2 66.5, 6.00 kg OVER. G4 NOT MET.
+
+## R-160 — P-161 crown liner booked (ID 8e0c0d6) — 2026-10-21
++0.022 kg [EST], an addition, booked at full. Head-first HIGH item: noted that Robot Lab directs a passive neck breakaway with a bypass load path (owner Actuators). Its mass will be booked when it lands, and the HIGH item stays OPEN until test or sim evidence closes it. LEDGER: ~72.50 -> ~72.52 kg vs T2 66.5, 6.02 kg OVER.
