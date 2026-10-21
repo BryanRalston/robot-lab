@@ -1,0 +1,66 @@
+{
+ "standing_duty_Ta25": {
+  "T_base": 78.3,
+  "Q_W": 7.2,
+  "dT_air_out": 27.8,
+  "v": 0.19,
+  "grille_mixed": 31.2,
+  "grille_exhaust": 36.0
+ },
+ "standing_carry_Ta25": {
+  "T_base": 87.5,
+  "Q_W": 8.4,
+  "dT_air_out": 30.9,
+  "v": 0.2,
+  "grille_mixed": 32.0,
+  "grille_exhaust": 37.3
+ },
+ "walking_duty_Ta25": {
+  "T_base": 61.0,
+  "Q_W": 7.2,
+  "dT_air_out": 6.5,
+  "v": 0.3,
+  "grille_mixed": 26.6,
+  "grille_exhaust": 27.8
+ },
+ "walking_carry_Ta25": {
+  "T_base": 87.5,
+  "Q_W": 12.5,
+  "dT_air_out": 11.3,
+  "v": 0.3,
+  "grille_mixed": 27.8,
+  "grille_exhaust": 29.9
+ },
+ "standing_duty_Ta35": {
+  "T_base": 87.5,
+  "Q_W": 7.1,
+  "dT_air_out": 27.5,
+  "v": 0.19,
+  "grille_mixed": 41.0,
+  "grille_exhaust": 45.6
+ },
+ "standing_carry_Ta35": {
+  "T_base": 87.5,
+  "Q_W": 7.1,
+  "dT_air_out": 27.5,
+  "v": 0.19,
+  "grille_mixed": 41.0,
+  "grille_exhaust": 45.6
+ },
+ "walking_duty_Ta35": {
+  "T_base": 71.0,
+  "Q_W": 7.2,
+  "dT_air_out": 6.5,
+  "v": 0.3,
+  "grille_mixed": 36.6,
+  "grille_exhaust": 37.8
+ },
+ "walking_carry_Ta35": {
+  "T_base": 87.5,
+  "Q_W": 10.5,
+  "dT_air_out": 9.5,
+  "v": 0.3,
+  "grille_mixed": 37.4,
+  "grille_exhaust": 39.1
+ }
+}
