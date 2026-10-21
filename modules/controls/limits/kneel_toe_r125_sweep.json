@@ -1,0 +1,482 @@
+[
+ {
+  "elbow_cap": 38.0,
+  "COMZ_A": 0.68,
+  "HAND_X_TOE": 0.4,
+  "H_SPEED_SCALE": 1.0,
+  "fell": null,
+  "phase_times_s": {
+   "A": 1.0,
+   "H": 1.67,
+   "K": 0.019,
+   "S": 0.401
+  },
+  "knee_max_deg_by_phase": {
+   "A": 117.2,
+   "H": 138.4,
+   "K": 134.4,
+   "D_chest": 135.2
+  },
+  "knee_max_deg": 138.4,
+  "hand_peak_N": {
+   "l": 1433.3,
+   "r": 1400.6
+  },
+  "hand_speed_mps": {
+   "l": 2.9741,
+   "r": 2.9542
+  },
+  "chest_mps": null,
+  "chest_N": 0.0,
+  "pass_": false
+ },
+ {
+  "elbow_cap": 38.0,
+  "COMZ_A": 0.68,
+  "HAND_X_TOE": 0.4,
+  "H_SPEED_SCALE": 0.4,
+  "fell": null,
+  "phase_times_s": {
+   "A": 1.0,
+   "H": 2.0,
+   "K": 1.247,
+   "S": 0.4
+  },
+  "knee_max_deg_by_phase": {
+   "A": 117.2,
+   "H": 133.6,
+   "K": 83.1,
+   "D_chest": 118.7
+  },
+  "knee_max_deg": 133.6,
+  "hand_peak_N": {
+   "l": 1960.1,
+   "r": 2022.5
+  },
+  "hand_speed_mps": {
+   "l": 0.8644,
+   "r": 0.8862
+  },
+  "chest_mps": 0.4521,
+  "chest_N": 2597.7,
+  "pass_": false
+ },
+ {
+  "elbow_cap": 38.0,
+  "COMZ_A": 0.68,
+  "HAND_X_TOE": 0.55,
+  "H_SPEED_SCALE": 1.0,
+  "fell": null,
+  "phase_times_s": {
+   "A": 1.0,
+   "H": 0.883,
+   "K": 1.257,
+   "S": 0.401
+  },
+  "knee_max_deg_by_phase": {
+   "A": 117.2,
+   "H": 136.0,
+   "K": 119.5,
+   "D_chest": 129.6
+  },
+  "knee_max_deg": 136.0,
+  "hand_peak_N": {
+   "l": 1183.0,
+   "r": 1136.3
+  },
+  "hand_speed_mps": {
+   "l": 0.8696,
+   "r": 0.8261
+  },
+  "chest_mps": 0.2638,
+  "chest_N": 1291.5,
+  "pass_": false
+ },
+ {
+  "elbow_cap": 38.0,
+  "COMZ_A": 0.68,
+  "HAND_X_TOE": 0.55,
+  "H_SPEED_SCALE": 0.4,
+  "fell": "K",
+  "phase_times_s": {
+   "A": 1.0,
+   "H": 1.042
+  },
+  "knee_max_deg_by_phase": {
+   "A": 117.2,
+   "H": 135.8,
+   "K": 128.9
+  },
+  "knee_max_deg": 135.8,
+  "hand_peak_N": {
+   "l": 513.5,
+   "r": 499.5
+  },
+  "hand_speed_mps": {
+   "l": 1.0962,
+   "r": 0.9375
+  },
+  "chest_mps": null,
+  "chest_N": null,
+  "pass_": false
+ },
+ {
+  "elbow_cap": 38.0,
+  "COMZ_A": 0.74,
+  "HAND_X_TOE": 0.4,
+  "H_SPEED_SCALE": 1.0,
+  "fell": "K",
+  "phase_times_s": {
+   "A": 1.0,
+   "H": 1.849
+  },
+  "knee_max_deg_by_phase": {
+   "A": 104.5,
+   "H": 135.9,
+   "K": 51.7
+  },
+  "knee_max_deg": 135.9,
+  "hand_peak_N": {
+   "l": 1197.6,
+   "r": 1215.8
+  },
+  "hand_speed_mps": {
+   "l": 2.2138,
+   "r": 2.2081
+  },
+  "chest_mps": null,
+  "chest_N": null,
+  "pass_": false
+ },
+ {
+  "elbow_cap": 38.0,
+  "COMZ_A": 0.74,
+  "HAND_X_TOE": 0.4,
+  "H_SPEED_SCALE": 0.4,
+  "fell": null,
+  "phase_times_s": {
+   "A": 1.0,
+   "H": 3.401,
+   "K": 1.24,
+   "S": 0.4
+  },
+  "knee_max_deg_by_phase": {
+   "A": 104.5,
+   "H": 135.4,
+   "K": 85.2,
+   "D_chest": 119.3
+  },
+  "knee_max_deg": 135.4,
+  "hand_peak_N": {
+   "l": 1964.1,
+   "r": 1959.5
+  },
+  "hand_speed_mps": {
+   "l": 0.5054,
+   "r": 0.4285
+  },
+  "chest_mps": 0.5172,
+  "chest_N": 3544.4,
+  "pass_": false
+ },
+ {
+  "elbow_cap": 38.0,
+  "COMZ_A": 0.74,
+  "HAND_X_TOE": 0.55,
+  "H_SPEED_SCALE": 1.0,
+  "fell": null,
+  "phase_times_s": {
+   "A": 1.0,
+   "H": 1.846,
+   "K": 0.791,
+   "S": 0.401
+  },
+  "knee_max_deg_by_phase": {
+   "A": 104.5,
+   "H": 136.5,
+   "K": 135.4,
+   "D_chest": 136.2
+  },
+  "knee_max_deg": 136.5,
+  "hand_peak_N": {
+   "l": 1634.9,
+   "r": 2496.7
+  },
+  "hand_speed_mps": {
+   "l": 3.9617,
+   "r": 4.4415
+  },
+  "chest_mps": null,
+  "chest_N": 0.0,
+  "pass_": false
+ },
+ {
+  "elbow_cap": 38.0,
+  "COMZ_A": 0.74,
+  "HAND_X_TOE": 0.55,
+  "H_SPEED_SCALE": 0.4,
+  "fell": "K",
+  "phase_times_s": {
+   "A": 1.0,
+   "H": 1.271,
+   "K": 1.009
+  },
+  "knee_max_deg_by_phase": {
+   "A": 104.5,
+   "H": 136.3,
+   "K": 119.6
+  },
+  "knee_max_deg": 136.3,
+  "hand_peak_N": {
+   "l": 1012.0,
+   "r": 997.8
+  },
+  "hand_speed_mps": {
+   "l": 1.7298,
+   "r": 1.7382
+  },
+  "chest_mps": null,
+  "chest_N": null,
+  "pass_": false
+ },
+ {
+  "elbow_cap": 49.0,
+  "COMZ_A": 0.68,
+  "HAND_X_TOE": 0.4,
+  "H_SPEED_SCALE": 1.0,
+  "fell": null,
+  "phase_times_s": {
+   "A": 1.0,
+   "H": 1.67,
+   "K": 0.019,
+   "S": 0.401
+  },
+  "knee_max_deg_by_phase": {
+   "A": 117.2,
+   "H": 138.4,
+   "K": 134.8,
+   "D_chest": 135.1
+  },
+  "knee_max_deg": 138.4,
+  "hand_peak_N": {
+   "l": 1439.6,
+   "r": 1400.6
+  },
+  "hand_speed_mps": {
+   "l": 2.9741,
+   "r": 2.9542
+  },
+  "chest_mps": null,
+  "chest_N": 0.0,
+  "pass_": false
+ },
+ {
+  "elbow_cap": 49.0,
+  "COMZ_A": 0.68,
+  "HAND_X_TOE": 0.4,
+  "H_SPEED_SCALE": 0.4,
+  "fell": null,
+  "phase_times_s": {
+   "A": 1.0,
+   "H": 2.0,
+   "K": 1.309,
+   "S": 0.4
+  },
+  "knee_max_deg_by_phase": {
+   "A": 117.2,
+   "H": 133.6,
+   "K": 87.1,
+   "D_chest": 106.0
+  },
+  "knee_max_deg": 133.6,
+  "hand_peak_N": {
+   "l": 1953.8,
+   "r": 1954.7
+  },
+  "hand_speed_mps": {
+   "l": 0.8644,
+   "r": 0.8862
+  },
+  "chest_mps": 1.8437,
+  "chest_N": 6423.1,
+  "pass_": false
+ },
+ {
+  "elbow_cap": 49.0,
+  "COMZ_A": 0.68,
+  "HAND_X_TOE": 0.55,
+  "H_SPEED_SCALE": 1.0,
+  "fell": null,
+  "phase_times_s": {
+   "A": 1.0,
+   "H": 0.883,
+   "K": 1.238,
+   "S": 0.401
+  },
+  "knee_max_deg_by_phase": {
+   "A": 117.2,
+   "H": 136.0,
+   "K": 119.5,
+   "D_chest": 130.1
+  },
+  "knee_max_deg": 136.0,
+  "hand_peak_N": {
+   "l": 1183.0,
+   "r": 1136.3
+  },
+  "hand_speed_mps": {
+   "l": 0.8696,
+   "r": 0.8261
+  },
+  "chest_mps": 0.2366,
+  "chest_N": 1049.8,
+  "pass_": false
+ },
+ {
+  "elbow_cap": 49.0,
+  "COMZ_A": 0.68,
+  "HAND_X_TOE": 0.55,
+  "H_SPEED_SCALE": 0.4,
+  "fell": "K",
+  "phase_times_s": {
+   "A": 1.0,
+   "H": 1.042
+  },
+  "knee_max_deg_by_phase": {
+   "A": 117.2,
+   "H": 135.8,
+   "K": 128.9
+  },
+  "knee_max_deg": 135.8,
+  "hand_peak_N": {
+   "l": 513.5,
+   "r": 499.5
+  },
+  "hand_speed_mps": {
+   "l": 1.0962,
+   "r": 0.9375
+  },
+  "chest_mps": null,
+  "chest_N": null,
+  "pass_": false
+ },
+ {
+  "elbow_cap": 49.0,
+  "COMZ_A": 0.74,
+  "HAND_X_TOE": 0.4,
+  "H_SPEED_SCALE": 1.0,
+  "fell": "K",
+  "phase_times_s": {
+   "A": 1.0,
+   "H": 1.849
+  },
+  "knee_max_deg_by_phase": {
+   "A": 104.5,
+   "H": 135.9,
+   "K": 51.2
+  },
+  "knee_max_deg": 135.9,
+  "hand_peak_N": {
+   "l": 1197.6,
+   "r": 1215.8
+  },
+  "hand_speed_mps": {
+   "l": 2.2138,
+   "r": 2.2081
+  },
+  "chest_mps": null,
+  "chest_N": null,
+  "pass_": false
+ },
+ {
+  "elbow_cap": 49.0,
+  "COMZ_A": 0.74,
+  "HAND_X_TOE": 0.4,
+  "H_SPEED_SCALE": 0.4,
+  "fell": null,
+  "phase_times_s": {
+   "A": 1.0,
+   "H": 3.401,
+   "K": 1.241,
+   "S": 0.4
+  },
+  "knee_max_deg_by_phase": {
+   "A": 104.5,
+   "H": 135.4,
+   "K": 85.2,
+   "D_chest": 120.1
+  },
+  "knee_max_deg": 135.4,
+  "hand_peak_N": {
+   "l": 2059.7,
+   "r": 2054.5
+  },
+  "hand_speed_mps": {
+   "l": 0.5054,
+   "r": 0.4285
+  },
+  "chest_mps": 0.5564,
+  "chest_N": 2270.8,
+  "pass_": false
+ },
+ {
+  "elbow_cap": 49.0,
+  "COMZ_A": 0.74,
+  "HAND_X_TOE": 0.55,
+  "H_SPEED_SCALE": 1.0,
+  "fell": null,
+  "phase_times_s": {
+   "A": 1.0,
+   "H": 1.846,
+   "K": 0.8,
+   "S": 0.401
+  },
+  "knee_max_deg_by_phase": {
+   "A": 104.5,
+   "H": 136.5,
+   "K": 135.4,
+   "D_chest": 137.3
+  },
+  "knee_max_deg": 137.3,
+  "hand_peak_N": {
+   "l": 1634.9,
+   "r": 2528.0
+  },
+  "hand_speed_mps": {
+   "l": 3.9617,
+   "r": 4.4646
+  },
+  "chest_mps": null,
+  "chest_N": 0.0,
+  "pass_": false
+ },
+ {
+  "elbow_cap": 49.0,
+  "COMZ_A": 0.74,
+  "HAND_X_TOE": 0.55,
+  "H_SPEED_SCALE": 0.4,
+  "fell": "K",
+  "phase_times_s": {
+   "A": 1.0,
+   "H": 1.271,
+   "K": 1.009
+  },
+  "knee_max_deg_by_phase": {
+   "A": 104.5,
+   "H": 136.3,
+   "K": 119.6
+  },
+  "knee_max_deg": 136.3,
+  "hand_peak_N": {
+   "l": 1012.0,
+   "r": 997.8
+  },
+  "hand_speed_mps": {
+   "l": 1.7298,
+   "r": 1.7382
+  },
+  "chest_mps": null,
+  "chest_N": null,
+  "pass_": false
+ }
+]

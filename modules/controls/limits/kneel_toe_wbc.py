@@ -44,6 +44,9 @@ H_ELBOW = None
 H_WRIST = None
 H_PITCH_RATE = 0.8   # rad/s trunk pitch ramp while reaching for the floor
 W_ELB = 50.0
+KNEE_MAX_RAD = None   # soft upper knee limit for the whole kneel (Robot Lab: <= 125 deg, no exemption)
+H_SPEED_SCALE = 1.0  # hand descent speed scale vs ProneLowerGuard
+KNEE_CAP = True      # 513a7d5/D99 cap: <= 50 N.m at >= 120 deg
 
 
 def corners(m, d, g, toe_only):
@@ -68,6 +71,10 @@ def run(mass=68.0, pad_tc=0.02, frames=None, fps=25, join_chest=True):
     for i, n in enumerate(s.names):
         if not any(n.endswith(j) for j in IKJ): lock[act[i]] = 1e6
     jid = m.actuator_trnid[:, 0]; lo = m.jnt_range[jid, 0] + 0.01; hi = m.jnt_range[jid, 1] - 0.01
+    if KNEE_MAX_RAD is not None:
+        for i, n in enumerate(s.names):
+            if n.endswith('knee'): hi[i] = min(hi[i], KNEE_MAX_RAD)
+    kmax = {}
     feet = [m.geom('l_foot').id, m.geom('r_foot').id]
     kp = [m.geom('l_knee_pad').id, m.geom('r_knee_pad').id]
     hands = [m.geom('l_hand').id, m.geom('r_hand').id]
@@ -136,7 +143,7 @@ def run(mass=68.0, pad_tc=0.02, frames=None, fps=25, join_chest=True):
             task(jc[0:1], KC * (toe_x - COM_BACK - com[0]), W_COM); task(jc[1:2], KC * (0 - com[1]), W_COM)
             hz = min(float(d.geom_xpos[g][2] - m.geom_size[g][0]) for g in hands)
             if href is None: href = hz
-            v_ref = MARGIN * hguard.speed_limit(max(hz, 0.0))
+            v_ref = H_SPEED_SCALE * MARGIN * hguard.speed_limit(max(hz, 0.0))
             href = max(href - v_ref * m.opt.timestep, hz - 0.01)
             for g, ht in zip(hands, hand_tgt):
                 mujoco.mj_jacGeom(m, d, (jp := np.zeros((3, nv))), None, g)
@@ -213,6 +220,9 @@ def run(mass=68.0, pad_tc=0.02, frames=None, fps=25, join_chest=True):
             q_des = qK0 + (qK1 - qK0) * a5; qa = np.zeros(m.nu)
         sup_g = feet + (kp if ph == 'C' else []) + (hands if ph == 'K' else [])
         tau = np.clip(s.pd(q_des, qa) + CL.static_ff(m, d, sup_g, act), -s.lim, s.lim)
+        if KNEE_CAP:
+            CL.apply_knee_stop_cap(s.names, lambda n: float(d.qpos[s.qadr[s.names.index(n)]]), tau, 'KNEEL')
+        kq_ = max(float(d.qpos[s.qadr[i]]) for i, n in enumerate(s.names) if n.endswith('knee')); kmax[ph] = max(kmax.get(ph, 0.0), kq_)
         d.ctrl[:] = tau; peak_tau = np.maximum(peak_tau, np.abs(tau))
         if DEBUG and int(round(t * 1000)) % 100 == 0:
             r_ = np.abs(tau) / s.lim; i_ = int(np.argmax(r_))
@@ -242,10 +252,19 @@ def run(mass=68.0, pad_tc=0.02, frames=None, fps=25, join_chest=True):
     keys = ['A', 'B', 'C', 'D'] if ORDER == 'knees_first' else ['A', 'H', 'K', 'S', 'D']
     res['phase_times_s'] = {k: round(tph[keys[i + 1]] - tph[k], 3) for i, k in enumerate(keys[:-1]) if keys[i + 1] in tph}
     res['t_kneel_s'] = round(t, 3)
+    res['knee_max_deg_by_phase'] = {k: round(float(np.degrees(v)), 1) for k, v in kmax.items()}
     res['peak_tau_Nm'] = {j: round(float(max(peak_tau[i] for i, n in enumerate(s.names) if n.endswith(j))), 1) for j in ('hip_pitch', 'knee', 'ankle_pitch', 'elbow', 'shoulder_pitch')}
     res['ankle_min_rad'] = round(float(min(d.qpos[m.jnt_qposadr[m.joint(n).id]] for n in ('l_ankle_pitch', 'r_ankle_pitch'))), 3)
     if join_chest and res['fell'] is None and 'D' in tph:
-        r2 = CL.run(sim=s, frames=frames, fps=fps)
+        _cap = CL.apply_knee_stop_cap; kd_ = {'q': 0.0}
+        def _w(names, qf, tau, st):
+            kd_['q'] = max(kd_['q'], max(qf(n) for n in names if n.endswith('knee'))); return _cap(names, qf, tau, st)
+        CL.apply_knee_stop_cap = _w
+        try:
+            r2 = CL.run(sim=s, frames=frames, fps=fps)
+        finally:
+            CL.apply_knee_stop_cap = _cap
+        res['knee_max_deg_by_phase']['D_chest'] = round(float(np.degrees(kd_['q'])), 1)
         res['chest'] = {k: r2[k] for k in ('chest_contact_speed_mps', 'peak_chest_N', 't_lower_s', 't_d94_flag_mo0_s', 'max_descent_speed_minus_guard_limit_mps', 'peak_tau_Nm', 'prone_static_N', 'other_contact_geoms')}
     global LAST_SIM; LAST_SIM = s
     return res

@@ -58,3 +58,6 @@ One line per image: date, file, module, what changed.
 
 ## 2026-10-21 ~10:35 ET — Controls: contract TUCK knees-on, D99 stop, stumble
 - Knees on in TUCK, ramp 90→120 B 172, cap ≥120, knees drop last. D99 90-case: powered 38.5 J max (0/90 > 44.1), 3.80 rad/s at 130°; tripped 81 J / 6.17 rad/s. Short-brake [EST] 4.6–13 J. Stumble: no knee-first; tuck whips foot (6.75 m/s, 2.7 kN). Toe kneel 134.5° > 125.
+
+## 2026-10-21 ~10:55 ET — Controls: toe kneel ≤125° attempt
+- 16-variant sweep (elbow 38/49): knee 133–138° in the hand-reach phase in all; 0 pass. 65 kg chest-lower bug = head contacts first, chest stalls 26 mm. KNEEL_R125.md.
