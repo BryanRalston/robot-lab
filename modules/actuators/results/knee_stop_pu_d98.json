@@ -1,0 +1,149 @@
+{
+ "J_reflected_kgm2": {
+  "0": 0.079,
+  "30": 0.314,
+  "60": 0.524,
+  "75": 0.553,
+  "90": 0.506,
+  "120": 0.23,
+  "135": 0.083,
+  "143.6": 0.027
+ },
+ "arm_mm_135": 20.2,
+ "N_135": 25.4,
+ "E_physical_J": 57.0,
+ "E_rotor_J": 2.0,
+ "E_design_J": 66.0,
+ "E_required_25pct_J": 92.4,
+ "pad": "2 stacks 28(y) x 21(radial) face, 6 x 9.25 mm PUR90A + 5 x 1.5 mm steel shims + 2 x 3 mm end plates, centroid r 75",
+ "shape_factor": 0.62,
+ "V_cm3": 62.1,
+ "E_bottom_25pct_J": 92.5,
+ "energy_SF_vs_66": 1.4,
+ "at_physical": {
+  "E_J": 57.00847493615521,
+  "strain": 0.195,
+  "knee_deg": 141.26,
+  "pad_force_kN": 10.39,
+  "torque_Nm": 779
+ },
+ "at_62p7": {
+  "E_J": 62.7,
+  "strain": 0.205,
+  "knee_deg": 141.68,
+  "pad_force_kN": 10.87,
+  "torque_Nm": 815
+ },
+ "at_66": {
+  "E_J": 66.0,
+  "strain": 0.21,
+  "knee_deg": 141.89,
+  "pad_force_kN": 11.11,
+  "torque_Nm": 834
+ },
+ "at_bottom": {
+  "E_J": 92.51884301982939,
+  "strain": 0.25,
+  "knee_deg": 143.6,
+  "pad_force_kN": 13.04,
+  "torque_Nm": 978
+ },
+ "top_out_25pct_deg": 143.6,
+ "alt_contact_for_830": [
+  {
+   "contact_deg": 135,
+   "T_mm": 45.0,
+   "A_mm2": 1378,
+   "torque_66J_Nm": 1027
+  },
+  {
+   "contact_deg": 133,
+   "T_mm": 55.5,
+   "A_mm2": 1118,
+   "torque_66J_Nm": 833
+  },
+  {
+   "contact_deg": 132,
+   "T_mm": 60.7,
+   "A_mm2": 1022,
+   "torque_66J_Nm": 761
+  },
+  {
+   "contact_deg": 131,
+   "T_mm": 66.0,
+   "A_mm2": 940,
+   "torque_66J_Nm": 701
+  },
+  {
+   "contact_deg": 130,
+   "T_mm": 71.2,
+   "A_mm2": 871,
+   "torque_66J_Nm": 649
+  }
+ ],
+ "rotor": {
+  "alpha_rad_s2": 297,
+  "tau_rotor_on_shank_Nm": 29.7,
+  "sign": "+flexion (same sense as the impact; the pad reacts it)",
+  "F_rotor_pair_N": 1469,
+  "F_rotor_per_screw_N": 734,
+  "screw_dL_dq_mm_per_deg": -0.352,
+  "screw_rotor_load": "tension (screw shortens with flexion; rotor keeps driving shortening)",
+  "F_motor_peak_pair_N": 7267,
+  "per_screw_worst_N": 3634,
+  "C0a_frac": 0.133
+ },
+ "mass_kg_per_knee": 0.403,
+ "mass_kg_robot": 0.807,
+ "curve": [
+  {
+   "strain": 0.0,
+   "knee_deg": 133.0,
+   "torque_Nm": 0,
+   "pad_force_kN": 0.0,
+   "energy_J": 0.0
+  },
+  {
+   "strain": 0.02,
+   "knee_deg": 133.85,
+   "torque_Nm": 93,
+   "pad_force_kN": 1.23,
+   "energy_J": 0.7
+  },
+  {
+   "strain": 0.05,
+   "knee_deg": 135.12,
+   "torque_Nm": 188,
+   "pad_force_kN": 2.51,
+   "energy_J": 3.8
+  },
+  {
+   "strain": 0.1,
+   "knee_deg": 137.24,
+   "torque_Nm": 408,
+   "pad_force_kN": 5.44,
+   "energy_J": 14.8
+  },
+  {
+   "strain": 0.15,
+   "knee_deg": 139.36,
+   "torque_Nm": 608,
+   "pad_force_kN": 8.1,
+   "energy_J": 33.6
+  },
+  {
+   "strain": 0.2,
+   "knee_deg": 141.48,
+   "torque_Nm": 799,
+   "pad_force_kN": 10.65,
+   "energy_J": 59.7
+  },
+  {
+   "strain": 0.25,
+   "knee_deg": 143.6,
+   "torque_Nm": 978,
+   "pad_force_kN": 13.04,
+   "energy_J": 92.5
+  }
+ ]
+}
