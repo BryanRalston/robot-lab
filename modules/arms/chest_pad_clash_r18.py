@@ -22,6 +22,25 @@ CAR=np.vstack([trimesh.load(os.path.join(H,'cad/r15',f)).sample(800,seed=1) for 
 Rx=lambda a:np.array([[1,0,0],[0,np.cos(a),-np.sin(a)],[0,np.sin(a),np.cos(a)]])
 def padgap(P,xmax):
     lo=np.array([.056,-.051,.169]); hi=np.array([xmax,.051,.271]); return np.linalg.norm(np.maximum(np.maximum(lo-P,P-hi),0),axis=1)
+import cadquery as cq
+from scipy.spatial import cKDTree
+_st=cq.importers.importStep(os.path.join(H,'../design/cad/covers/chest_pad_bezel_r2.step'))
+MS=[]
+for so in _st.solids().vals():
+    v,f=so.tessellate(0.2,0.2); MS.append(trimesh.Trimesh(np.array([[p.x,p.y,p.z] for p in v]),np.array(f)))
+STEPM=trimesh.util.concatenate(MS); STEPM.vertices=(STEPM.vertices-[0,0,1280.0])/1000  # global -> torso frame (R-146: z 1451 global = 0.171 torso)
+_sp=np.vstack([trimesh.sample.sample_surface_even(mm,max(2000,int(mm.area/4)))[0] for mm in MS]); _sp=(_sp-[0,0,1280.0])/1000
+SB=[((mm.bounds[0]-[0,0,1280.0])/1000,(mm.bounds[1]-[0,0,1280.0])/1000) for mm in MS if mm.volume/np.prod(mm.bounds[1]-mm.bounds[0])>0.75]  # solid prisms only; thin fairing/posts use surface distance
+KD=cKDTree(_sp); BB=(STEPM.bounds[0]-0.002,STEPM.bounds[1]+0.002)
+def stepgap(P):
+    dd=np.linalg.norm(np.maximum(np.maximum(BB[0]-P,P-BB[1]),0),axis=1)+0.0  # lower bound; exact KD only within 25 mm of the bbox
+    c=dd<0.025
+    if c.any(): dd[c]=KD.query(P[c])[0]
+    near=((P>BB[0])&(P<BB[1])).all(1)
+    if near.any():  # inside test: each STEP body is a prism/box, so its own AABB; only bodies whose volume fills >75 % of their AABB (rtree not on the box for mesh.contains)
+        for lo_,hi_ in SB: dd[((P>lo_)&(P<hi_)).all(1)]=0
+    return dd
+STEP_ON=True
 tlo=np.array([-.11,-.17,.05]); thi=np.array([.11,.17,.31])
 def ev(sp,sr,sy,el):
     mujoco.mj_resetData(m,d); d.qpos[2]=1.16
@@ -36,10 +55,13 @@ def ev(sp,sr,sy,el):
     r=dict(pose=[sp,sr,sy,el],infeasible_torso=bool(inside_t))
     for tag,xm in (('before',.159),('after',.175)):
         gg={k:float(padgap(P,xm).min()*1000) for k,P in pts.items()}; r[tag]=min(gg.values()); r[tag+'_part']=min(gg,key=gg.get)
+    if STEP_ON:
+        gg={k:float(stepgap(P).min()*1000) for k,P in pts.items()}; r['step']=min(gg.values()); r['step_part']=min(gg,key=gg.get)
     return r
 named=dict(tuck_B=(5,0,0,0),roll_soft_127=(-30,127,0,0),hand_to_opp_shoulder=(-60,-15,-90,-140),hand_to_opp_shoulder_high=(-90,-15,-60,-140),
            hands_together_chest=(-60,-15,-60,-100),hands_together_low=(-30,-10,-45,-90),P042_two_hand_carry=(-45,-10,-30,-90),
            P042_carry_close=(-25,-10,-40,-110),forearm_across_chest=(-20,-15,-90,-130),elbow_fold_front=(-90,0,0,-140))
+print('watertight',[mm.is_watertight for mm in MS])
 out={'named':{k:ev(*v) for k,v in named.items()}}
 rows=[ev(*p) for p in itertools.product(range(-120,61,10),range(-15,31,5),range(-150,151,15),range(-140,1,10))]
 rows+= [ev(sp,127,sy,el) for sp,sy,el in itertools.product(range(-150,61,15),range(-150,151,30),range(-140,1,20))]
@@ -62,5 +84,14 @@ for el in range(-140,1,10):
     lim[el]=dict(yaw_fail=rngs(s,2),pitch_fail=rngs(s,0)) if s else None
 out['after_fail_by_elbow']=lim
 out['roll127_min_after']=min((r for r in feas if r['pose'][1]==127),key=lambda r:r['after'])
+for tag in ('step',):
+    w=min(feas,key=lambda r:r[tag]); out['min_step']=w; out['n_lt10_step']=sum(r['step']<10 for r in feas); out['n_contact_step']=sum(r['step']<=0 for r in feas)
+    fs=[r for r in feas if r['step']<10]
+    out['step_fail_parts']={p:sum(r['step_part']==p for r in fs) for p in ('upper_arm','forearm','hand','W2_carrier')}
+    out['step_fail_ranges']={n:rngs(fs,i) for i,n in enumerate(('pitch','roll','yaw','elbow'))}
+    out['step_fail_by_elbow']={el:(dict(yaw=rngs([r for r in fs if r['pose'][3]==el],2),pitch=rngs([r for r in fs if r['pose'][3]==el],0)) if any(r['pose'][3]==el for r in fs) else None) for el in range(-140,1,10)}
+    out['step_new_vs_R18']=sum(r['step']<10 and r['after']>=10 for r in feas)
+    out['step_roll127_min']=min((r for r in feas if r['pose'][1]==127),key=lambda r:r['step'])
+    out['step_bbox_torso_m']=[list(np.round(STEPM.bounds[0],4)),list(np.round(STEPM.bounds[1],4))]
 json.dump(out,open(os.path.join(H,'chest_pad_clash_r18.json'),'w'),indent=1)
-print(json.dumps({k:v for k,v in out.items()},indent=0)[:6000])
+print(json.dumps({k:v for k,v in out.items() if k.startswith(('step','n_','min_step'))}),json.dumps({k:(v['after'],v['step']) for k,v in out['named'].items()}))

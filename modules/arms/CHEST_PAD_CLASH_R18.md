@@ -61,3 +61,41 @@ From Arms' side, the 116 mm core is acceptable provided Controls adopts the keep
 **Caveats:**
 - The torso box is crude, and wrist joints are held at 0. A wrist flexed toward the chest could make the hand worse.
 - The cover/pad bezel is [EST]. Final check on the real cover STEP comes in the G2 full-ROM sweep.
+
+## R18b (2026-10-21): re-run against ID's real chest geometry (ec40f5f, `design/cad/covers/chest_pad_bezel_r2.step`)
+**What changed in the model:**
+- The pad is now the real STEP: 11 bodies covering pad_core_116, pad_face_CF, land, the fairing P052r2 (4 segments) and crush_posts_x4.
+- Global → torso frame is x, y unchanged and z −1.280 m. That's the R-146 datum: core z 1451 global = 0.171 torso. Torso-frame bbox: x 0.052–0.175, y ±0.075, z 0.145–0.295.
+- Each body is tessellated to a 0.2 mm tolerance, and its surface is sampled about every 2 mm into a KD-tree.
+- Penetration check: done by AABB only for the solid prisms (core, face, land). The thin fairing (3 % fill) and the posts are checked by surface distance.
+- Poses, arm geometry and the 10 mm gate are the same as R18. JSON keys: `step*`, and `named.*.step`.
+
+| item | R18 (box, 116 core) | **R18b (real STEP)** |
+|---|---|---|
+| feasible poses < 10 mm | 269 | **329** (61 more than R18) |
+| contact poses | 205 | **193** |
+| failing parts | hand 216 / forearm 53 | hand 266 / forearm 63; upper arm and W2 carrier still clear |
+| hands together at chest | 11.9 (1.9 margin) | **12.0 (2.0 margin), pass** |
+| P-042 two-hand carry | 132 | **109, pass** |
+| P-042 close carry | 55 | **33, pass** |
+| tuck B | 198 | **172, pass** |
+| roll 127° named pose (−30, 127, 0, 0) | 142 | **116, pass** |
+| roll 127° worst pose in sweep | 10.6 | **0.5 at (30, 127, 60, −140), FAIL**: full elbow fold puts the hand onto the fairing top edge |
+| minimum clearance | 0 | 0 |
+
+- **Why the result changed:** the 150 × 150 fairing reaches y ±75 and z 0.145–0.295, wider than the R18 box. That adds failures at full elbow fold (−140°), where the hand now meets the fairing at any yaw/pitch, including at roll 127°.
+- **Failing joint ranges** are otherwise as in R18:
+
+  | elbow | failing yaw | failing pitch |
+  |---|---|---|
+  | −140 | any | any |
+  | −130 | −45 to −120 | −10 to −120 |
+  | −120 | −45 to −135 | −20 to −120 |
+  | −110 / −100 | −60 to −120 | — |
+  | −90 | −90 | — |
+  | ≥ −80 | none | none |
+
+### Revised Controls keep-out box (torso frame): CHANGED
+The new box is the STEP bbox plus the 10 mm gate: **x ≤ +0.185, y ±0.085, z 0.135–0.305 m**. It replaces R18's x ≤ 0.185, y ±0.061, z 0.159–0.281, so it is 24 mm wider per side and 24 mm taller each way.
+- It is applied to the hand and forearm only. The fairing is open at the front, so the box is conservative.
+- If Controls wants a joint-space rule instead: at elbow ≤ −130° with the hand ahead of the chest, this needs a box check, not a yaw limit.

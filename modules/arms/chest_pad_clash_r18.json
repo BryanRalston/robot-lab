@@ -11,7 +11,9 @@
    "before": 198.30610332036701,
    "before_part": "W2_carrier",
    "after": 198.30610332036701,
-   "after_part": "W2_carrier"
+   "after_part": "W2_carrier",
+   "step": 171.623141434852,
+   "step_part": "W2_carrier"
   },
   "roll_soft_127": {
    "pose": [
@@ -24,7 +26,9 @@
    "before": 142.02554002805934,
    "before_part": "W2_carrier",
    "after": 142.02554002805934,
-   "after_part": "W2_carrier"
+   "after_part": "W2_carrier",
+   "step": 115.79982900786953,
+   "step_part": "W2_carrier"
   },
   "hand_to_opp_shoulder": {
    "pose": [
@@ -37,7 +41,9 @@
    "before": 18.446848891878954,
    "before_part": "forearm",
    "after": 18.446848891878954,
-   "after_part": "forearm"
+   "after_part": "forearm",
+   "step": 18.52462404868165,
+   "step_part": "forearm"
   },
   "hand_to_opp_shoulder_high": {
    "pose": [
@@ -50,7 +56,9 @@
    "before": 42.176946346639355,
    "before_part": "hand",
    "after": 42.176946346639355,
-   "after_part": "hand"
+   "after_part": "hand",
+   "step": 25.028311257361114,
+   "step_part": "forearm"
   },
   "hands_together_chest": {
    "pose": [
@@ -63,7 +71,9 @@
    "before": 27.900017437199555,
    "before_part": "hand",
    "after": 11.900017437199567,
-   "after_part": "hand"
+   "after_part": "hand",
+   "step": 12.013266049188333,
+   "step_part": "hand"
   },
   "hands_together_low": {
    "pose": [
@@ -76,7 +86,9 @@
    "before": 116.99254601481871,
    "before_part": "forearm",
    "after": 105.14633508464284,
-   "after_part": "forearm"
+   "after_part": "forearm",
+   "step": 82.99445906819189,
+   "step_part": "forearm"
   },
   "P042_two_hand_carry": {
    "pose": [
@@ -89,7 +101,9 @@
    "before": 144.08308138734756,
    "before_part": "forearm",
    "after": 131.73627138304218,
-   "after_part": "forearm"
+   "after_part": "forearm",
+   "step": 109.34263670313418,
+   "step_part": "forearm"
   },
   "P042_carry_close": {
    "pose": [
@@ -102,7 +116,9 @@
    "before": 69.17782342954509,
    "before_part": "forearm",
    "after": 54.810671615572076,
-   "after_part": "hand"
+   "after_part": "hand",
+   "step": 33.107097963771395,
+   "step_part": "forearm"
   },
   "forearm_across_chest": {
    "pose": [
@@ -115,7 +131,9 @@
    "before": 0.0,
    "before_part": "hand",
    "after": 0.0,
-   "after_part": "hand"
+   "after_part": "hand",
+   "step": 0.0,
+   "step_part": "hand"
   },
   "elbow_fold_front": {
    "pose": [
@@ -128,7 +146,9 @@
    "before": 191.00242216651074,
    "before_part": "upper_arm",
    "after": 191.00242216651074,
-   "after_part": "upper_arm"
+   "after_part": "upper_arm",
+   "step": 165.00242216651074,
+   "step_part": "upper_arm"
   }
  },
  "n_poses": 61170,
@@ -144,7 +164,9 @@
   "before": 0.0,
   "before_part": "forearm",
   "after": 0.0,
-  "after_part": "forearm"
+  "after_part": "forearm",
+  "step": 0.0,
+  "step_part": "forearm"
  },
  "n_lt10_before": 192,
  "n_contact_before": 123,
@@ -159,7 +181,9 @@
   "before": 0.0,
   "before_part": "forearm",
   "after": 0.0,
-  "after_part": "forearm"
+  "after_part": "forearm",
+  "step": 0.0,
+  "step_part": "forearm"
  },
  "n_lt10_after": 269,
  "n_contact_after": 205,
@@ -176,7 +200,9 @@
    "before": 13.579443386160106,
    "before_part": "hand",
    "after": 0.0,
-   "after_part": "hand"
+   "after_part": "hand",
+   "step": 0.0,
+   "step_part": "hand"
   },
   {
    "pose": [
@@ -189,7 +215,9 @@
    "before": 13.70969011488063,
    "before_part": "hand",
    "after": 0.0,
-   "after_part": "hand"
+   "after_part": "hand",
+   "step": 0.0,
+   "step_part": "hand"
   },
   {
    "pose": [
@@ -202,7 +230,9 @@
    "before": 10.033144404368521,
    "before_part": "hand",
    "after": 0.0,
-   "after_part": "hand"
+   "after_part": "hand",
+   "step": 0.0,
+   "step_part": "hand"
   },
   {
    "pose": [
@@ -215,7 +245,9 @@
    "before": 14.770779679754638,
    "before_part": "hand",
    "after": 0.0,
-   "after_part": "hand"
+   "after_part": "hand",
+   "step": 1.4181440728131862,
+   "step_part": "forearm"
   },
   {
    "pose": [
@@ -228,7 +260,9 @@
    "before": 11.720029809400872,
    "before_part": "forearm",
    "after": 0.0,
-   "after_part": "forearm"
+   "after_part": "forearm",
+   "step": 0.0,
+   "step_part": "forearm"
   },
   {
    "pose": [
@@ -241,7 +275,9 @@
    "before": 14.011150676153393,
    "before_part": "hand",
    "after": 0.0,
-   "after_part": "hand"
+   "after_part": "hand",
+   "step": 0.40456781565700833,
+   "step_part": "hand"
   },
   {
    "pose": [
@@ -254,7 +290,9 @@
    "before": 10.466246488390368,
    "before_part": "hand",
    "after": 0.0,
-   "after_part": "hand"
+   "after_part": "hand",
+   "step": 0.0,
+   "step_part": "hand"
   },
   {
    "pose": [
@@ -267,7 +305,9 @@
    "before": 15.601919316012513,
    "before_part": "hand",
    "after": 0.0,
-   "after_part": "hand"
+   "after_part": "hand",
+   "step": 0.0,
+   "step_part": "hand"
   },
   {
    "pose": [
@@ -280,7 +320,9 @@
    "before": 14.65400544108722,
    "before_part": "hand",
    "after": 0.0,
-   "after_part": "hand"
+   "after_part": "hand",
+   "step": 0.0,
+   "step_part": "hand"
   },
   {
    "pose": [
@@ -293,7 +335,9 @@
    "before": 10.249214363125452,
    "before_part": "hand",
    "after": 0.0,
-   "after_part": "hand"
+   "after_part": "hand",
+   "step": 0.0,
+   "step_part": "hand"
   },
   {
    "pose": [
@@ -306,7 +350,9 @@
    "before": 10.005614309380878,
    "before_part": "hand",
    "after": 0.0,
-   "after_part": "hand"
+   "after_part": "hand",
+   "step": 0.0,
+   "step_part": "hand"
   },
   {
    "pose": [
@@ -319,7 +365,9 @@
    "before": 12.220416117255603,
    "before_part": "hand",
    "after": 0.0,
-   "after_part": "hand"
+   "after_part": "hand",
+   "step": 0.0,
+   "step_part": "hand"
   },
   {
    "pose": [
@@ -332,7 +380,9 @@
    "before": 12.130019048460245,
    "before_part": "hand",
    "after": 0.0,
-   "after_part": "hand"
+   "after_part": "hand",
+   "step": 1.6122587911445057,
+   "step_part": "hand"
   },
   {
    "pose": [
@@ -345,7 +395,9 @@
    "before": 14.886817634478245,
    "before_part": "hand",
    "after": 0.0,
-   "after_part": "hand"
+   "after_part": "hand",
+   "step": 0.8375583381479503,
+   "step_part": "hand"
   },
   {
    "pose": [
@@ -358,7 +410,9 @@
    "before": 13.560240608414182,
    "before_part": "hand",
    "after": 0.0,
-   "after_part": "hand"
+   "after_part": "hand",
+   "step": 0.0,
+   "step_part": "hand"
   }
  ],
  "fail_parts_after": {
@@ -485,6 +539,148 @@
   "before": 10.587678181932437,
   "before_part": "hand",
   "after": 10.587678181932437,
-  "after_part": "hand"
- }
+  "after_part": "hand",
+  "step": 0.4585696573172845,
+  "step_part": "hand"
+ },
+ "min_step": {
+  "pose": [
+   -120,
+   -15,
+   -120,
+   -110
+  ],
+  "infeasible_torso": false,
+  "before": 0.0,
+  "before_part": "forearm",
+  "after": 0.0,
+  "after_part": "forearm",
+  "step": 0.0,
+  "step_part": "forearm"
+ },
+ "n_lt10_step": 329,
+ "n_contact_step": 193,
+ "step_fail_parts": {
+  "upper_arm": 0,
+  "forearm": 63,
+  "hand": 266,
+  "W2_carrier": 0
+ },
+ "step_fail_ranges": {
+  "pitch": [
+   -120,
+   60
+  ],
+  "roll": [
+   -15,
+   127
+  ],
+  "yaw": [
+   -135,
+   60
+  ],
+  "elbow": [
+   -140,
+   -90
+  ]
+ },
+ "step_fail_by_elbow": {
+  "-140": {
+   "yaw": [
+    -120,
+    60
+   ],
+   "pitch": [
+    -120,
+    60
+   ]
+  },
+  "-130": {
+   "yaw": [
+    -120,
+    -45
+   ],
+   "pitch": [
+    -120,
+    -10
+   ]
+  },
+  "-120": {
+   "yaw": [
+    -135,
+    -45
+   ],
+   "pitch": [
+    -120,
+    -20
+   ]
+  },
+  "-110": {
+   "yaw": [
+    -120,
+    -60
+   ],
+   "pitch": [
+    -120,
+    -20
+   ]
+  },
+  "-100": {
+   "yaw": [
+    -120,
+    -60
+   ],
+   "pitch": [
+    -120,
+    -40
+   ]
+  },
+  "-90": {
+   "yaw": [
+    -90,
+    -90
+   ],
+   "pitch": [
+    -100,
+    -70
+   ]
+  },
+  "-80": null,
+  "-70": null,
+  "-60": null,
+  "-50": null,
+  "-40": null,
+  "-30": null,
+  "-20": null,
+  "-10": null,
+  "0": null
+ },
+ "step_new_vs_R18": 61,
+ "step_roll127_min": {
+  "pose": [
+   30,
+   127,
+   60,
+   -140
+  ],
+  "infeasible_torso": false,
+  "before": 10.587678181932437,
+  "before_part": "hand",
+  "after": 10.587678181932437,
+  "after_part": "hand",
+  "step": 0.4585696573172845,
+  "step_part": "hand"
+ },
+ "step_bbox_torso_m": [
+  [
+   0.052,
+   -0.075,
+   0.145
+  ],
+  [
+   0.175,
+   0.075,
+   0.295
+  ]
+ ]
 }
