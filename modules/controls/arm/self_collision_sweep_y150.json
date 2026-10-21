@@ -1,0 +1,349 @@
+{
+ "y_out": 0.15,
+ "cases": [
+  {
+   "min_shroud_mm": -58.9,
+   "min_chest_mm": 100.0,
+   "min_plume_mm": -5.1,
+   "plume_s": 0.0,
+   "max_transit_s": 0.0,
+   "max_window_frac": 0.0,
+   "trip_cycles": 0,
+   "case": "full-range worst",
+   "mode": "stand",
+   "supervisor": false
+  },
+  {
+   "min_shroud_mm": 11.3,
+   "min_chest_mm": 100.0,
+   "min_plume_mm": 5.0,
+   "plume_s": 0.0,
+   "max_transit_s": 0.0,
+   "max_window_frac": 0.0,
+   "trip_cycles": 0,
+   "case": "full-range worst",
+   "mode": "stand",
+   "supervisor": true
+  },
+  {
+   "min_shroud_mm": -34.7,
+   "min_chest_mm": 100.0,
+   "min_plume_mm": -41.5,
+   "plume_s": 0.0,
+   "max_transit_s": 0.0,
+   "max_window_frac": 0.0,
+   "trip_cycles": 0,
+   "case": "walk-residual worst",
+   "mode": "walk",
+   "supervisor": false
+  },
+  {
+   "min_shroud_mm": 15.1,
+   "min_chest_mm": 100.0,
+   "min_plume_mm": -51.7,
+   "plume_s": 1.477,
+   "max_transit_s": 0.307,
+   "max_window_frac": 0.148,
+   "trip_cycles": 25,
+   "case": "walk-residual worst",
+   "mode": "walk",
+   "supervisor": true
+  },
+  {
+   "min_shroud_mm": 2.0,
+   "min_chest_mm": 100.0,
+   "min_plume_mm": 64.0,
+   "plume_s": 0.0,
+   "max_transit_s": 0.0,
+   "max_window_frac": 0.0,
+   "trip_cycles": 0,
+   "case": "adduction -14.3 stand",
+   "mode": "stand",
+   "supervisor": false
+  },
+  {
+   "min_shroud_mm": 15.0,
+   "min_chest_mm": 100.0,
+   "min_plume_mm": 74.8,
+   "plume_s": 0.0,
+   "max_transit_s": 0.0,
+   "max_window_frac": 0.0,
+   "trip_cycles": 0,
+   "case": "adduction -14.3 stand",
+   "mode": "stand",
+   "supervisor": true
+  },
+  {
+   "min_shroud_mm": -33.5,
+   "min_chest_mm": 100.0,
+   "min_plume_mm": 17.4,
+   "plume_s": 0.0,
+   "max_transit_s": 0.0,
+   "max_window_frac": 0.0,
+   "trip_cycles": 0,
+   "case": "adduction -15 + hip flex 50",
+   "mode": "walk",
+   "supervisor": false
+  },
+  {
+   "min_shroud_mm": 13.7,
+   "min_chest_mm": 100.0,
+   "min_plume_mm": 67.5,
+   "plume_s": 0.0,
+   "max_transit_s": 0.0,
+   "max_window_frac": 0.0,
+   "trip_cycles": 0,
+   "case": "adduction -15 + hip flex 50",
+   "mode": "walk",
+   "supervisor": true
+  },
+  {
+   "min_shroud_mm": 87.0,
+   "min_chest_mm": 100.0,
+   "min_plume_mm": 40.9,
+   "plume_s": 0.0,
+   "max_transit_s": 0.0,
+   "max_window_frac": 0.0,
+   "trip_cycles": 0,
+   "case": "hanging + crouch hip -105",
+   "mode": "crouch",
+   "supervisor": false
+  },
+  {
+   "min_shroud_mm": 87.0,
+   "min_chest_mm": 100.0,
+   "min_plume_mm": 40.9,
+   "plume_s": 0.0,
+   "max_transit_s": 0.0,
+   "max_window_frac": 0.0,
+   "trip_cycles": 0,
+   "case": "hanging + crouch hip -105",
+   "mode": "crouch",
+   "supervisor": true
+  },
+  {
+   "min_shroud_mm": 73.2,
+   "min_chest_mm": -46.6,
+   "min_plume_mm": 94.1,
+   "plume_s": 0.0,
+   "max_transit_s": 0.0,
+   "max_window_frac": 0.0,
+   "trip_cycles": 0,
+   "case": "wrist-flexed chest fold",
+   "mode": "stand",
+   "supervisor": false
+  },
+  {
+   "min_shroud_mm": 73.2,
+   "min_chest_mm": -0.0,
+   "min_plume_mm": 94.1,
+   "plume_s": 0.0,
+   "max_transit_s": 0.0,
+   "max_window_frac": 0.0,
+   "trip_cycles": 0,
+   "case": "wrist-flexed chest fold",
+   "mode": "stand",
+   "supervisor": true
+  },
+  {
+   "min_shroud_mm": 74.5,
+   "min_chest_mm": 0.1,
+   "min_plume_mm": 94.1,
+   "plume_s": 0.0,
+   "max_transit_s": 0.0,
+   "max_window_frac": 0.0,
+   "trip_cycles": 0,
+   "case": "hands together at chest",
+   "mode": "carry",
+   "supervisor": false
+  },
+  {
+   "min_shroud_mm": 74.5,
+   "min_chest_mm": 0.1,
+   "min_plume_mm": 94.1,
+   "plume_s": 0.0,
+   "max_transit_s": 0.0,
+   "max_window_frac": 0.0,
+   "trip_cycles": 0,
+   "case": "hands together at chest",
+   "mode": "carry",
+   "supervisor": true
+  },
+  {
+   "case": "walk random x12",
+   "mode": "walk",
+   "supervisor": false,
+   "min_shroud_mm": 23.1,
+   "min_chest_mm": 100.0,
+   "min_plume_mm": 26.7,
+   "plume_s": 0.0,
+   "trip_cycles": 0
+  },
+  {
+   "case": "walk random x12",
+   "mode": "walk",
+   "supervisor": true,
+   "min_shroud_mm": 23.1,
+   "min_chest_mm": 100.0,
+   "min_plume_mm": 26.7,
+   "plume_s": 0.0,
+   "trip_cycles": 0
+  },
+  {
+   "case": "carry random x12",
+   "mode": "carry",
+   "supervisor": false,
+   "min_shroud_mm": 87.0,
+   "min_chest_mm": 100.0,
+   "min_plume_mm": 94.1,
+   "plume_s": 0.0,
+   "trip_cycles": 0
+  },
+  {
+   "case": "carry random x12",
+   "mode": "carry",
+   "supervisor": true,
+   "min_shroud_mm": 87.0,
+   "min_chest_mm": 100.0,
+   "min_plume_mm": 94.1,
+   "plume_s": 0.0,
+   "trip_cycles": 0
+  },
+  {
+   "case": "stand random x12",
+   "mode": "stand",
+   "supervisor": false,
+   "min_shroud_mm": 57.3,
+   "min_chest_mm": 71.7,
+   "min_plume_mm": -14.9,
+   "plume_s": 0.0,
+   "trip_cycles": 0
+  },
+  {
+   "case": "stand random x12",
+   "mode": "stand",
+   "supervisor": true,
+   "min_shroud_mm": 57.3,
+   "min_chest_mm": 71.7,
+   "min_plume_mm": 6.2,
+   "plume_s": 0.0,
+   "trip_cycles": 0
+  },
+  {
+   "case": "crouch random x12",
+   "mode": "crouch",
+   "supervisor": false,
+   "min_shroud_mm": 87.0,
+   "min_chest_mm": 69.1,
+   "min_plume_mm": 40.9,
+   "plume_s": 0.0,
+   "trip_cycles": 0
+  },
+  {
+   "case": "crouch random x12",
+   "mode": "crouch",
+   "supervisor": true,
+   "min_shroud_mm": 87.0,
+   "min_chest_mm": 69.1,
+   "min_plume_mm": 40.9,
+   "plume_s": 0.0,
+   "trip_cycles": 0
+  },
+  {
+   "min_shroud_mm": -21.0,
+   "min_chest_mm": 100.0,
+   "min_plume_mm": -67.4,
+   "plume_s": 0.0,
+   "max_transit_s": 0.0,
+   "max_window_frac": 0.0,
+   "trip_cycles": 0,
+   "case": "walk swing 12 s (hip -60..+20 at 1 Hz), arm residual pushed aft/inward",
+   "mode": "walk",
+   "supervisor": false
+  },
+  {
+   "min_shroud_mm": 15.6,
+   "min_chest_mm": 100.0,
+   "min_plume_mm": -68.4,
+   "plume_s": 2.809,
+   "max_transit_s": 0.309,
+   "max_window_frac": 0.153,
+   "trip_cycles": 28,
+   "case": "walk swing 12 s (hip -60..+20 at 1 Hz), arm residual pushed aft/inward",
+   "mode": "walk",
+   "supervisor": true
+  }
+ ],
+ "fall": [
+  {
+   "pose": "tuck B",
+   "legs": "stand",
+   "clear": true,
+   "worst": "l_hand:shroud_l",
+   "slack_vs_trip10_mm": 77.0
+  },
+  {
+   "pose": "tuck B",
+   "legs": "crouch hip-105",
+   "clear": true,
+   "worst": "r_hand:shroud_r",
+   "slack_vs_trip10_mm": 77.0
+  },
+  {
+   "pose": "tuck B",
+   "legs": "POSE_PRONE",
+   "clear": true,
+   "worst": "l_hand:shroud_l",
+   "slack_vs_trip10_mm": 77.0
+  },
+  {
+   "pose": "tuck B",
+   "legs": "KNEEL_W1",
+   "clear": true,
+   "worst": "r_forearm:shroud_r",
+   "slack_vs_trip10_mm": 195.9
+  },
+  {
+   "pose": "tuck B",
+   "legs": "side-fall hip roll+15",
+   "clear": true,
+   "worst": "l_hand:shroud_l",
+   "slack_vs_trip10_mm": 24.2
+  },
+  {
+   "pose": "LB fallback",
+   "legs": "stand",
+   "clear": true,
+   "worst": "r_hand:shroud_r",
+   "slack_vs_trip10_mm": 77.0
+  },
+  {
+   "pose": "LB fallback",
+   "legs": "crouch hip-105",
+   "clear": true,
+   "worst": "r_hand:shroud_r",
+   "slack_vs_trip10_mm": 77.0
+  },
+  {
+   "pose": "LB fallback",
+   "legs": "POSE_PRONE",
+   "clear": true,
+   "worst": "r_hand:shroud_r",
+   "slack_vs_trip10_mm": 77.0
+  },
+  {
+   "pose": "LB fallback",
+   "legs": "KNEEL_W1",
+   "clear": true,
+   "worst": "r_forearm:shroud_r",
+   "slack_vs_trip10_mm": 195.9
+  },
+  {
+   "pose": "LB fallback",
+   "legs": "side-fall hip roll+15",
+   "clear": true,
+   "worst": "r_hand:shroud_r",
+   "slack_vs_trip10_mm": 77.0
+  }
+ ]
+}

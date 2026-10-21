@@ -69,5 +69,115 @@
       12.0
     ],
     "safe_stop_zmp_k_note": "CoM-xy PD gains (kx, dx) applied ONLY in the kneel/safe-stop moves (R-146b). Global WBC balance gains are unchanged (stock kx 2.5; zmp_k unset outside safe-stop)."
+  },
+  "arm_self_collision": {
+    "enabled": true,
+    "loop_hz": 1000.0,
+    "chest": {
+      "ref": "Arms R18 bf228b1",
+      "body": "torso",
+      "x": [
+        0.0,
+        0.185
+      ],
+      "y": [
+        -0.061,
+        0.061
+      ],
+      "z": [
+        0.159,
+        0.281
+      ],
+      "margin": 0.0
+    },
+    "knee_shroud": {
+      "ref": "ID P-156 rev 6b (baad131); T&R 925d72e",
+      "x": [
+        -0.1,
+        -0.02
+      ],
+      "y": [
+        0.086,
+        0.15
+      ],
+      "y_out": 0.15,
+      "z": [
+        0.84,
+        0.904
+      ],
+      "z_top_front": 0.8615,
+      "chamfer_deg": 40.0,
+      "chamfer_w": 0.015,
+      "skin": 0.002,
+      "note": "convex hull: sloped top z 861.5 (x -20) -> 904 (x -100), 40 deg chamfer on the outboard-top edge, chamfer width 15 mm [EST: ID gives angle + R10, not the width; R10 blend ignored = conservative]; +2 mm skin (T&R). Set chamfer_w 0 / z_top_front = z[1] for a plain box."
+    },
+    "plume": {
+      "ref": "T&R 925d72e (a) K_plume",
+      "offset": 0.03,
+      "length": 0.06,
+      "half_angle_deg": 15.0,
+      "openings": "aft face [EST: ID rev 6 slots are on the walls; aft-only per T&R fix 1]",
+      "transit_max_s": 0.5,
+      "window_s": 10.0,
+      "window_frac": 0.2,
+      "exit_at_s": 0.3,
+      "admit_note": "entry admitted only if a full 0.5 s pass still fits in the 10 s / 20 % budget; after exit_at_s inside, the plume becomes a keep-out (push-out) so the pass ends by 0.5 s"
+    },
+    "thresholds_mm": {
+      "ref": "T&R 925d72e",
+      "walk": [
+        15,
+        10,
+        5
+      ],
+      "carry": [
+        15,
+        10,
+        5
+      ],
+      "stand": [
+        15,
+        10,
+        5
+      ],
+      "crouch": [
+        20,
+        15,
+        10
+      ],
+      "sit": [
+        20,
+        15,
+        10
+      ],
+      "kneel": [
+        20,
+        15,
+        10
+      ],
+      "lowering": [
+        20,
+        15,
+        10
+      ]
+    },
+    "plume_mm": [
+      5,
+      2,
+      0
+    ],
+    "links": [
+      "forearm",
+      "hand"
+    ],
+    "influence": 0.05,
+    "xi": 1.0,
+    "xi_in": 3.0,
+    "repulse_gain": 1.0,
+    "passes": 6,
+    "shoulder_roll_inward_soft_limit_deg": null,
+    "fall_override": "only if fall_pose_clear()",
+    "module": "modules/controls/arm/self_collision.py",
+    "doc": "modules/controls/arm/SELF_COLLISION.md"
   }
 }

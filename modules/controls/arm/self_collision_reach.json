@@ -1,0 +1,78 @@
+{
+ "open_loop_full_range": {
+  "min_mm": -59.4,
+  "frac_below_15mm": 0.0024,
+  "worst": {
+   "l_shoulder_pitch": -18.3,
+   "l_shoulder_roll": -0.8,
+   "l_shoulder_yaw": -42.6,
+   "l_elbow": -40.0,
+   "l_wrist_roll": -7.1,
+   "l_wrist_pitch": -27.0,
+   "l_wrist_yaw": 19.0,
+   "l_hip_yaw": -32.7,
+   "l_hip_roll": -8.5,
+   "l_hip_pitch": 19.0,
+   "l_knee": 116.1,
+   "waist_yaw": 80.7,
+   "waist_pitch": 33.4
+  },
+  "n": 20000
+ },
+ "open_loop_walk_residual": {
+  "min_mm": -72.3,
+  "frac_below_15mm": 0.1149,
+  "worst": {
+   "l_shoulder_pitch": 14.1,
+   "l_shoulder_roll": -12.9,
+   "l_shoulder_yaw": 14.1,
+   "l_elbow": -6.6,
+   "l_wrist_roll": 0.6,
+   "l_wrist_pitch": 6.8,
+   "l_wrist_yaw": -12.6,
+   "l_hip_yaw": -7.5,
+   "l_hip_roll": 3.9,
+   "l_hip_pitch": -5.3,
+   "l_knee": 56.6,
+   "waist_yaw": 10.3,
+   "waist_pitch": -12.8
+  },
+  "n": 10000
+ },
+ "walk_residual_roll_ge0": {
+  "min_mm": 39.7,
+  "frac_below_15mm": 0.0,
+  "worst": {
+   "l_shoulder_pitch": 11.4,
+   "l_shoulder_roll": 0.2,
+   "l_shoulder_yaw": -2.7,
+   "l_elbow": -6.4,
+   "l_wrist_roll": -9.0,
+   "l_wrist_pitch": -10.8,
+   "l_wrist_yaw": -9.7,
+   "l_hip_yaw": -5.7,
+   "l_hip_roll": 4.1,
+   "l_hip_pitch": 5.3,
+   "l_knee": 51.0,
+   "waist_yaw": 11.7,
+   "waist_pitch": 2.9
+  },
+  "n": 10000
+ },
+ "reach_cost": {
+  "total": 56479,
+  "torso_self": 3371,
+  "cross": 3764,
+  "sup_block": 291,
+  "sup_block_cross": 115,
+  "r18_block": 1338,
+  "r18_block_cross": 501,
+  "sup_only": 81,
+  "r18_only": 1128
+ },
+ "roll_ge0_breaks": [
+  "LB fallback +30/-15/+30/-75 (roll -15)",
+  "hands together at chest (-60,-15,-60,-100) R18",
+  "P-042 close carry (-25,-10,-40,-110) R18"
+ ]
+}
