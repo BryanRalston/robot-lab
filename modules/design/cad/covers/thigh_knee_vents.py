@@ -1,4 +1,4 @@
-"""P-156 thigh-fairing knee venting (ID), replaces withdrawn P-154 guard. Governing spec: Thermal 389f91b (R131 rev 4b) via Legs:
+"""P-156 (rev 4b base; rev 4d record in thigh_knee_vents.json + thigh_knee_vents_r4d_stl.py) thigh-fairing knee venting (ID), replaces withdrawn P-154 guard. Governing spec: Thermal 389f91b (R131 rev 4b) via Legs:
 (1) grille over the full fin field >=104x52, >=60 % open, slots <=5 mm, inner face eps<=0.1; (2) low inlet below z 690 and high
 outlet above z 792 on the rear skin, each >=1200 mm2 free, aligned with the fin channels; pocket walls duct to the fin ends,
 side gaps <=5 mm; >=3 mm to L58 tabs; knee ROM (Legs min 18.1 mm housing case). Thigh frame, L leg (R mirrored).
