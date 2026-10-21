@@ -1314,3 +1314,21 @@ Credible mass ~67.97 kg means a reserve of +0.03 kg against 68.0; the +0.30 rese
   - Under R-124, **T2 reverts to 66.5 and option C (deeper redesign) opens**.
   - The alternative is a further T2 raise to about 69.5 kg, which needs new Actuators/Thermal margins at 69.5 + 20 kg carry and a J10 range extended to ≥ 70.0.
   - This is a target-level decision for **Bryan, through Robot Lab**. The R-066 freeze stands, and G4/G5 sign-off is withheld.
+
+## R-126 (2026-10-21) G4 CAD mass count and option C scope (Robot Lab assignment)
+Files: `arbiter/MASS_ROLLUP_G4.md`, `arbiter/g4_rollup.py`, `arbiter/mass_rollup_g4.json`; `arbiter/MASS_ROLLUP_OFFICIAL.md` regenerated (was stale at R-031 65.809).
+- **G4 credible mass: 69.42 kg** (ledger chain 69.41; +0.005 from CAD/BOM checks). Reserve vs 66.5: **−2.92**. Needed for the +0.30 floor: **−3.22 kg credited**. T2 stays 66.5; R-066 freeze holds; G4/G5 sign-off withheld.
+- Method limit (stated plainly): no assembly CAD exists for 45.05 kg of the v3 basis, so this is the R-031 itemised base plus the post-R-031 ruled chain (itemised for the first time), checked against every STEP and counted BOM in the repo. It is not a CAD-only count.
+- CAD checks (CadQuery, 7075 2810 kg/m³): knee fins rev B 0.097/knee vs 0.094 booked → **+0.006** booked; actuator fastener BOM 2.083 vs 2.084 booked (confirmed); palm 0.1195/hand confirmed. **Held, not credited:** stand-off R14 STEP 0.118/side vs 0.124 (−0.012 pair) and L47 lever STEP 0.436 vs 0.4642 booked (−0.057 pair), pending owners naming the measured body.
+- **Candidate double counts (not credited; owners must answer before C is finalised):** v3 `actuator()` unlabelled +0.04 per rotary unit (≤0.72); v3 linear-unit +0.08/+0.10 per motor side in the legs (≤2.16) if the R-015 CAD linkage table did not remove them; connector allowances vs harness connectors (≤0.18). Drive mass is still the 0.038 Everest placeholder ×32; Elmo G-TWI must be cited.
+- **Option C (to 66.20):** with R-122 (−0.74 now / −1.19 best), C must deliver −2.03 to −2.48.
+
+| rank | item | full kg [basis] | credit now | cost [EST] | schedule | gate risk | Bryan approval |
+|---|---|---|---|---|---|---|---|
+| 1 | (b) Mg housings (multi-path only), CF arm links, CF/honeycomb torso-pelvis plates | −1.2 (−0.9..−1.5) [EST] | −0.6 | $2–5k | 2–3 rounds, FEA on bryan PC | G3 fatigue/galvanic/bond, G5 | none |
+| 2 | (a) Carry 20→15 kg (10 kg option): shoulder CSG-25→20, waist pitch step-down, knee D69 revert if Thermal passes | 15 kg −0.95 (−0.7..−1.2); 10 kg −1.5 [EST, v3 catalog] | −0.45 / −0.75 | <$1k | 1–2 rounds | G4 carry/recovery, G3 thermal | **T5 20→15 kg** |
+| 3 | (c) Delete waist_yaw (+ frame step-downs) | −1.1 (+−0.1..−0.3) [v3 catalog cited] | −0.6 | <$1k | 2 rounds re-layout | G2, G4, T3 | **T3 30→29 DOF** |
+
+- Excluded on prior rulings, revisited with no new evidence: carbon femur (single-path, Materials not recommended), shin fairing (deleted), CSG-32, CRBH 8016.
+- **Ruling/recommendation:** (b) proceeds now under Arbiter authority (no target change). (a) carry 20→15 kg is recommended to Bryan as the second lever. (c) is held as the backstop. Mid-estimate end state with R-122 best case: ~65.0 kg full credit, ~66.6 kg on today's credit rules, so two of three items are needed. **First action:** Actuators answer the v3 adder double-count question (could remove up to ~2 kg of phantom mass and shrink C).
+- Decision on (a)/(c) goes to Bryan through Robot Lab.

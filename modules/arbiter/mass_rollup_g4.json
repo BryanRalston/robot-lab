@@ -1,0 +1,296 @@
+{
+ "ledger_chain_kg": 69.411,
+ "g4_credible_kg": 69.416,
+ "limit": 66.5,
+ "reserve_target": 0.3,
+ "reserve_vs_66p5": -2.916,
+ "needed_for_reserve": 3.216,
+ "lines": [
+  {
+   "module": "base R-031",
+   "line": "leg structure M2 (Legs r8 design, L36 FEA fixes)",
+   "kg": 5.421,
+   "tag": "RULED (R-022..R-031 evidence)",
+   "source": "Legs f480ed2 L36, structure_fixes_r8.json",
+   "note": ""
+  },
+  {
+   "module": "base R-031",
+   "line": "Legs A14 adds: ankle_roll stops (both) + thigh pin access panels (2)",
+   "kg": 0.069,
+   "tag": "RULED (R-022..R-031 evidence)",
+   "source": "Legs 4f772c6 A14",
+   "note": ""
+  },
+  {
+   "module": "base R-031",
+   "line": "leg structure r6 add: hip-stop bumper + collar bolts over 0.04 allowance",
+   "kg": 0.022,
+   "tag": "RULED (R-022..R-031 evidence)",
+   "source": "Legs 2bf99d5 L25-L27, hip_stop.json",
+   "note": ""
+  },
+  {
+   "module": "base R-031",
+   "line": "harness M3 (Actuators)",
+   "kg": 1.496,
+   "tag": "RULED (R-022..R-031 evidence)",
+   "source": "Actuators 71f3c3e D53, harness.json",
+   "note": ""
+  },
+  {
+   "module": "base R-031",
+   "line": "covers M3 (Arbiter): thermoformed PC 1.5 mm, 50 % limb coverage + EPP (R-027; replaces PA12 MJF)",
+   "kg": 1.713,
+   "tag": "RULED (R-022..R-031 evidence)",
+   "source": "R-027, a28_covers_palm.json",
+   "note": ""
+  },
+  {
+   "module": "base R-031",
+   "line": "hands: palm PA12 skin -> machined 7075 1.5 mm (R-027)",
+   "kg": 0.144,
+   "tag": "RULED (R-022..R-031 evidence)",
+   "source": "R-027, a28_covers_palm.json",
+   "note": ""
+  },
+  {
+   "module": "base R-031",
+   "line": "brain M4 (Arbiter)",
+   "kg": 1.216,
+   "tag": "RULED (R-022..R-031 evidence)",
+   "source": "R-021, a3_size.json",
+   "note": ""
+  },
+  {
+   "module": "base R-031",
+   "line": "linkage r6 delta (GE 12 E -> GE 12 C eye)",
+   "kg": 0.0,
+   "tag": "RULED (R-022..R-031 evidence)",
+   "source": "Actuators 71f3c3e LINKAGE_TABLE",
+   "note": ""
+  },
+  {
+   "module": "base R-031",
+   "line": "Legs v4 audit fixes L37-L40 (clamp step, ankle clevises+outrigger, hip yaw/roll stops, clevis trim)",
+   "kg": 0.2,
+   "tag": "RULED (R-022..R-031 evidence)",
+   "source": "Legs 15c602d, r8/model_v4_fix_mass.json",
+   "note": ""
+  },
+  {
+   "module": "base R-031",
+   "line": "Actuators v4 audit fixes D59-D62 (knee twin housing, ankle GE top eye + QA1 PTFE bottom rod end, hip body trim)",
+   "kg": 0.138,
+   "tag": "RULED (R-022..R-031 evidence)",
+   "source": "Actuators 67b0b13 P-018, v4_deltas.json",
+   "note": ""
+  },
+  {
+   "module": "base R-031",
+   "line": "head + neck (P-019; 2x XM430-W350-R, ZED X Mini, CF shell)",
+   "kg": 1.12,
+   "tag": "RULED (R-022..R-031 evidence)",
+   "source": "a88c2d8 P-019; A23 6e75636 (R-026)",
+   "note": ""
+  },
+  {
+   "module": "base R-031",
+   "line": "brain add: GMSL2 camera platform JCB022 (A11)",
+   "kg": 0.045,
+   "tag": "RULED (R-022..R-031 evidence)",
+   "source": "R-025 A11",
+   "note": ""
+  },
+  {
+   "module": "base R-031",
+   "line": "battery 20S5P P45B",
+   "kg": 8.75,
+   "tag": "RULED (R-022..R-031 evidence)",
+   "source": "CONTRACTS R1.1",
+   "note": ""
+  },
+  {
+   "module": "base R-031",
+   "line": "covers trimmed set v5 incl. P-022..P-025 (R-030, f651270)",
+   "kg": 0.236,
+   "tag": "RULED (R-022..R-031 evidence)",
+   "source": "R-030",
+   "note": ""
+  },
+  {
+   "module": "base R-031",
+   "line": "Thor cooling: 1x Sunon fan (P-044, R-032 replaces 0.04 blower est.)",
+   "kg": 0.042,
+   "tag": "RULED (R-022..R-031 evidence)",
+   "source": "R-032",
+   "note": ""
+  },
+  {
+   "module": "base R-031",
+   "line": "regen clamp P-045 (Torso & Power + Electronics)",
+   "kg": 0.15,
+   "tag": "RULED (R-022..R-031 evidence)",
+   "source": "R-031 \u00a73",
+   "note": ""
+  },
+  {
+   "module": "base R-031",
+   "line": "all other lines (DERIVED: leg actuators+linkage, torso, arms, hands, thermal, pelvis; head+neck removed R-025; v3 basis + R-015..R-020 credits)",
+   "kg": 45.047,
+   "tag": "RULED (R-022..R-031 evidence)",
+   "source": "derived",
+   "note": ""
+  },
+  {
+   "module": "ruled chain",
+   "line": "R-032..R-045: torso 5.026 line (R-035), P-027 wrist -1.332 (R-035), D69 knee rev B, spreaders, hip lever L47 +0.43 (R-056/R-069) etc.; net per RULINGS reserve trail 0.691->0.32",
+   "kg": 0.371,
+   "tag": "RULED",
+   "source": "R-032..R-045",
+   "note": ""
+  },
+  {
+   "module": "ruled chain",
+   "line": "R-046..R-079: covers/vents, harness mass-down, pad cores, touch protection; reserve 0.32 -> -0.13",
+   "kg": 0.45,
+   "tag": "RULED",
+   "source": "R-046..R-079",
+   "note": ""
+  },
+  {
+   "module": "ruled chain",
+   "line": "R-080..R-116: chest backing, trunnion bushes L61/L62, R-099 +0.166, R-116 +0.008; reserve -0.13 -> -0.64",
+   "kg": 0.51,
+   "tag": "RULED",
+   "source": "R-080..R-116",
+   "note": ""
+  },
+  {
+   "module": "ruled chain",
+   "line": "R-120: CRBH 7013 + housing + stand-off + pad (net)",
+   "kg": 0.194,
+   "tag": "RULED",
+   "source": "R-120",
+   "note": ""
+  },
+  {
+   "module": "ruled chain",
+   "line": "R-121: R13 flange/stand-off",
+   "kg": 0.059,
+   "tag": "RULED",
+   "source": "R-121",
+   "note": ""
+  },
+  {
+   "module": "ruled chain",
+   "line": "R-123 (c): leg actuator fasteners 0.819 counted - 0.302 booked",
+   "kg": 0.517,
+   "tag": "RULED",
+   "source": "R-123 (c)",
+   "note": ""
+  },
+  {
+   "module": "ruled chain",
+   "line": "R-123 (d): stand-off R11",
+   "kg": 0.06,
+   "tag": "RULED",
+   "source": "R-123 (d)",
+   "note": ""
+  },
+  {
+   "module": "ruled chain",
+   "line": "R-125 (a): W2 stand-off +0.044, wrap carrier +0.140 [EST full]",
+   "kg": 0.184,
+   "tag": "RULED",
+   "source": "R-125 (a)",
+   "note": ""
+  },
+  {
+   "module": "ruled chain",
+   "line": "R-125 (a2): arm-structure fasteners 0.500 - 0.107 overlap",
+   "kg": 0.393,
+   "tag": "RULED",
+   "source": "R-125 (a2)",
+   "note": ""
+  },
+  {
+   "module": "ruled chain",
+   "line": "R-125 row 13: Ti non-structural arm screws (half credit)",
+   "kg": -0.011,
+   "tag": "RULED",
+   "source": "R-125 row 13",
+   "note": ""
+  },
+  {
+   "module": "ruled chain",
+   "line": "R-125 (c): arm/waist actuator fasteners 1.265 - 0.39",
+   "kg": 0.875,
+   "tag": "RULED",
+   "source": "R-125 (c)",
+   "note": ""
+  },
+  {
+   "module": "G4 check",
+   "line": "knee fins rev B: CAD 0.0970/knee (incl. R-116 boss) vs booked 0.090 EST + 0.004 boss",
+   "kg": 0.006,
+   "tag": "CAD-volume x density",
+   "source": "knee_twin_housing_release_r116.step vs knee_twin_housing.step",
+   "note": "addition at full"
+  },
+  {
+   "module": "G4 check",
+   "line": "stand-off R14: CAD 0.1178/side vs 0.124 CALC booked",
+   "kg": 0.0,
+   "tag": "CAD-volume x density (HELD)",
+   "source": "arms/cad/r14/standoff_r14.step",
+   "note": "-0.012 pair held until Arms confirms STEP = drawing incl. dowel holes"
+  },
+  {
+   "module": "G4 check",
+   "line": "hip lever L47: CAD 0.4357/lever (7075) vs 0.4642 booked \"measured\"",
+   "kg": 0.0,
+   "tag": "CAD-volume x density (HELD)",
+   "source": "actuators/cad/hip_pitch_lever_r031_mw_b30_d36_RC.step",
+   "note": "-0.057 pair held: booked body may include steel bush/pins; Legs+Actuators name the body"
+  },
+  {
+   "module": "G4 check",
+   "line": "palm 7075: CAD 0.1195/hand reconciles with palm_7075.json and R-037 credit",
+   "kg": 0.0,
+   "tag": "CAD-volume x density",
+   "source": "arms/cad/palm_7075.step",
+   "note": "confirmed, no change"
+  },
+  {
+   "module": "G4 check",
+   "line": "actuator fasteners: BOM 2.083 kg (1234 pcs) vs booked 0.302+0.517+0.390+0.875=2.084",
+   "kg": -0.001,
+   "tag": "counted BOM",
+   "source": "actuators/results/fastener_bom.json",
+   "note": "confirmed, no double count with arms FASTENER_BOM after R-125 -0.107"
+  }
+ ],
+ "candidate_double_counts": [
+  {
+   "item": "v3 actuator() unlabelled +0.04 per rotary unit (18 units in arms/waist/hip)",
+   "kg_upper": 0.72,
+   "status": "owners to state content; possible overlap with harness connectors 0.261 and cad_mass connector allowances"
+  },
+  {
+   "item": "v3 linear unit +0.08 +0.10 per motor side (knee/ankle x2 legs)",
+   "kg_upper": 2.16,
+   "status": "Actuators to state whether cad_mass/linkage table (R-015) removed these; if not, part may be double counted with CAD linkage 0.609/1.086"
+  },
+  {
+   "item": "cad_mass connector allowance 0.015 rotary / 0.010 linear vs harness connectors",
+   "kg_upper": 0.18,
+   "status": "Electronics/Actuators"
+  }
+ ],
+ "stale": [
+  "MASS_ROLLUP_OFFICIAL.md at 65.809 (R-031) -> regenerated by R-126",
+  "v3 DRIVE mass is Novanta Everest 0.038 placeholder; selected drive is Elmo Gold Twitter (R-006) - mass not cited",
+  "R-123 (c) quotes leg housings 2.221 kg; cad_mass per_leg housing 1.657 x2 = 3.314 (knee twin both halves) - basis differs"
+ ]
+}
