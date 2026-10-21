@@ -17,7 +17,7 @@ For T&R `reliability/JOB9_SPEC.md` (7e55be7) item (c). Script `knee_release_r116
 | D80 / `knee_trunnion_bore_r114.py` | 6061 for the boss check, "as asked"; it notes 7075 is no worse |
 - The booking (cad_mass) is the only source that sets the **housing** alloy; 6061 appears only for the **fins** and as a requested conservative check. The rev B STEP fuses the fins into the housing as one solid, so as modelled it is one part and must be one alloy. **We book 7075-T6 for all of it.**
 - Consequence: the fin mass was computed at 6061 density. At 7075 it is 0.0932 × 2.81/2.70 = 0.0970 kg/knee: **+0.004 kg/knee, +0.008 kg robot [CALC]**. That is above the R-066 0.005 freeze, so it is flagged for the Arbiter, not booked. The fins could stay 6061 only as a separate clip-on part. Thermal D69B allowed either. That needs its own interface and thermal contact resistance, so I don't recommend it.
-- Thermal: 7075-T6 k ≈ 130 vs 6061 ≈ 167 W/m·K. Fin efficiency for 1.0 × 25 mm fins is still ≈ 0.98 [CALC, m = √(2h/kt), h 12], so the Thermal/Controls rev B results stand.
+- Thermal: 7075-T6 k ≈ 130 vs 6061 ≈ 167 W/m·K. Fin efficiency for 1.0 × 25 mm fins is ≈ 0.96 at 7075 vs 0.97 at 6061 [CALC, tanh(mL)/mL, m = √(2h/kt), h 12], so the Thermal/Controls rev B results stand.
 
 ## Release STEP vs R-116
 - The rev B STEP **did not include R-116**. It had the Ø20 boss with **no bore** (probed: solid at x 86–91.5; boundary at r 10). D80 modelled the bore only inside its hand check.
