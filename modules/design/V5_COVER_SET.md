@@ -294,3 +294,14 @@ The sole pad is under the foot plate; the P-025 ankle boot hem is re-anchored ab
   - ID mass: drop the transfer duct (15 g) and side hood (12.5 g), add a riser + rear hood (~10 g) → **≈ −0.035 pair**.
   - Cut 7075 −0.047 kg/side [EST] before any reinforcement (Legs ledger).
   - Removes the outboard exhaust near the hand zone.
+
+## Prone head clearance (T&R 5842853 / fef9348 ask 1) — 2026-10-21
+Robot face down on a flat floor, resting on the chest pad (CF face at x ≈ +147 mm, STERNUM_PLATE.md). Head shell (head_shell.stl/.step) frontmost at x = +104.7; torso cover frontmost +110.
+- Level body (pad tangent to floor): **head-to-floor gap 42.3 mm** (target ≥10) — PASS.
+- Tilted on a second contact (knee front or toe, x 30–150 mm, y 60–760): gap **41.8–78.3 mm**; worst is a toe level with the pad, 41.8 mm. Pad y was taken as ≈1530 mm (sternum land); ±50 mm on that changes the worst case by <3 mm.
+- Torso cover front (x 110) sits 37 mm off the floor, so the pad is the only upper-body contact. No cover change needed.
+
+## Rev 5a side hood vs. T&R ask 3 — confirmed, no change
+- Dilution: 947 mm² min of 4.0±0.3 slots (≥600, ≤5) — yes.
+- Top/aft/upper outer-face openings louvred, gaps ≤4.8 incl. tol (0b3fab9) — yes.
+- Foil inner face: already specified as "PC, Al foil inner ε≤0.05" in thigh_knee_vents.json hood.material. Its mass is already inside hood kg_side 0.0125, so the mass is unchanged (pair +0.112).
