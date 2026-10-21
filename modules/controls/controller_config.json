@@ -4,6 +4,6 @@
   "note": "Provisional (R-102). Sole hardness not yet ruled; not a booking.",
   "elbow_accel_scale_full_reach": 0.84,
   "fall_config": "modules/controls/fall/fall_config.json",
-  "shoulder_roll_soft_limit_deg": 115,
-  "shoulder_roll_soft_limit_ref": "R-127; source of truth limits/soft_limits.json (abduction only, mirrored)"
+  "shoulder_roll_soft_limit_deg": 127,
+  "shoulder_roll_soft_limit_ref": "R-133; source of truth limits/soft_limits.json (abduction only, mirrored)"
 }

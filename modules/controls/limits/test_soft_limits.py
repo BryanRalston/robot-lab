@@ -5,12 +5,12 @@ from elbow_accel_limit import accel_scale, alpha_limit, elbow_total_est, ALPHA_R
 
 def test_roll_soft():
     lo, hi = roll_soft_limit_rad('l')
-    assert abs(hi - math.radians(115)) < 1e-9   # R-127
-    assert clamp_q('shoulder_roll', math.radians(120), 'l') == hi
+    assert abs(hi - math.radians(127)) < 1e-9   # R-133
+    assert clamp_q('shoulder_roll', math.radians(130), 'l') == hi
     rlo, rhi = roll_soft_limit_rad('r')
-    assert abs(rlo + math.radians(115)) < 1e-9
+    assert abs(rlo + math.radians(127)) < 1e-9
 
-def test_r127_fall_poses_inside_roll_limit():
+def test_r133_fall_poses_inside_roll_limit():
     import json, os
     cfg = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'fall', 'fall_config.json')))
     lo, hi = roll_soft_limit_rad('l')   # fall_config roll is in the left-arm convention (deg)
@@ -33,4 +33,4 @@ def test_r085_blend():
     assert abs(alpha_limit(0.667, 10.0) - ALPHA_R1 * 0.84) < 1e-9
 
 if __name__ == '__main__':
-    test_roll_soft(); test_r127_fall_poses_inside_roll_limit(); test_elbow_cap(); test_r085_blend(); print('ok')
+    test_roll_soft(); test_r133_fall_poses_inside_roll_limit(); test_elbow_cap(); test_r085_blend(); print('ok')

@@ -1,6 +1,6 @@
 {
-  "shoulder_roll_abduction_deg": 115,
-  "shoulder_roll_note": "R-127 (5c203ad): interim soft limit 115 deg (ID babab4a sweep contact at 132 deg; R15 coarse torso-cover penetration >= ~118 deg). Abduction only: left +115, right -115 (mirror); adduction side keeps the hard 15 deg. MJCF hard range -15..180 unchanged (CONTRACTS ROM). Returns to 135 only on ID torso-cover evidence with >= 3 mm clearance.",
+  "shoulder_roll_abduction_deg": 127,
+  "shoulder_roll_note": "R-133 (ID e874653 real torso cover check): soft limit 127 deg, replacing R-127's interim 115. 3 mm clearance is lost at 130 deg roll at all pitches (contact at 132). Abduction only: left +127, right -127 (mirror); adduction keeps the hard 15 deg. MJCF hard range -15..180 unchanged. May rise only after Torso fixes the cover height (z 50-310) and shoulder openings (dia 110 at z 220) and ID re-sweeps with >= 3 mm clearance.",
   "elbow_torque_hard_cap_Nm": 69,
   "elbow_torque_hard_cap_source": "R-080 / R-085",
   "elbow_thermal_short_Nm": 40,

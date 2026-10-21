@@ -1,4 +1,4 @@
-"""Controls soft joint limits (abduction interim 115 deg, R-127; elbow caps are documented in SOFT_LIMITS.md)."""
+"""Controls soft joint limits (abduction 127 deg, R-133; elbow caps are documented in SOFT_LIMITS.md)."""
 import json, math, os
 _HERE = os.path.dirname(os.path.abspath(__file__))
 CFG = json.load(open(os.path.join(_HERE, 'soft_limits.json')))
