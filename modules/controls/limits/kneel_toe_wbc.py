@@ -37,6 +37,10 @@ PITCH_K0, PITCH_K = 0.6, 1.25   # trunk pitch ramp during the knee drop (frees t
 COM_K = 0.25          # hands_first knee drop: CoM held this far ahead of the toe line
 HAND_X_TOE = 0.30      # hands_first: hand target ahead of the toe line (m)
 DEBUG = False
+COM_OVER_KNEES = False
+COM_KNEE_OFF = 0.05
+K_ELBOW = None
+W_ELB = 50.0
 
 
 def corners(m, d, g, toe_only):
@@ -151,7 +155,13 @@ def run(mass=68.0, pad_tc=0.02, frames=None, fps=25, join_chest=True):
                 task(jp[2:3], -float(np.clip(v_ref + 8.0 * (gap - kref), 0.0, v_ref)), W_TASK)
             ck = COM_K0 + (COM_K - COM_K0) * (1 - max(kref, 0.0) / res["knee_gap0_m"])
             task(jr[1:2], 3.0 * (PITCH_K0 + (PITCH_K - PITCH_K0) * (1 - max(kref, 0.0) / res["knee_gap0_m"]) - pitch), W_PITCH)
+            if COM_OVER_KNEES:   # CoM x held over the knee pads (plus COM_KNEE_OFF), not ahead of the toes
+                ck = float(np.mean([d.geom_xpos[g][0] for g in kp])) + COM_KNEE_OFF - toe_x
             task(jc[0:1], KC * (toe_x + ck - com[0]), W_COM); task(jc[1:2], KC * (0 - com[1]), W_COM)
+            if K_ELBOW is not None:   # near-straight elbows: arm load through the bones, not elbow torque
+                for i, n in enumerate(s.names):
+                    if n.endswith('elbow'):
+                        jj = np.zeros((1, nv)); jj[0, act[i]] = 1.0; task(jj, 4.0 * (K_ELBOW - d.qpos[s.qadr[i]]), W_ELB)
             vz = max(-float((point_jac(m, d, m.geom_bodyid[g], d.geom_xpos[g]) @ d.qvel)[2]) for g in kp)
             kguard.observe(t, f['knee_pads'] > 1.0, vz, f['knee_pads'])
             if f['knee_pads'] > 1.0 and 'S' not in tph:
@@ -186,7 +196,9 @@ def run(mass=68.0, pad_tc=0.02, frames=None, fps=25, join_chest=True):
         q_des = np.clip(q_des + qa * m.opt.timestep, lo, hi)
         if ph == 'K' and K_MODE == 'joint':
             if qK0 is None:
-                qK0 = d.qpos[s.qadr].copy(); qK1 = s.target(dict(CL.SPAWN, **K_ARMS)); sK = 0.0
+                qK0 = d.qpos[s.qadr].copy(); qK1 = s.target(dict(CL.SPAWN, **{k: v for k, v in K_ARMS.items() if v is not None})); sK = 0.0
+                for i, n in enumerate(s.names):   # None in K_ARMS: hold that joint where K started
+                    if any(n.endswith(k) for k, v in K_ARMS.items() if v is None): qK1[i] = qK0[i]
             vlim = kguard.speed_limit(max(gap, 0.0))
             sc = 1.0 if vz <= 0.5 * vlim else max(0.02, min(1.0, vlim / max(vz, 1e-6)))
             if 'S' not in tph: sK = min(1.0, sK + K_RATE * sc * m.opt.timestep)   # freeze at knee contact, settle
