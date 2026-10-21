@@ -61,3 +61,6 @@ One line per image: date, file, module, what changed.
 
 ## 2026-10-21 ~10:55 ET — Controls: toe kneel ≤125° attempt
 - 16-variant sweep (elbow 38/49): knee 133–138° in the hand-reach phase in all; 0 pass. 65 kg chest-lower bug = head contacts first, chest stalls 26 mm. KNEEL_R125.md.
+
+## 2026-10-21 ~10:50 ET — Controls: pose study (b) + fallback (c)
+- (b) static feasible 75/108, transition 0/36 (tips forward). (c) crouch→sit-back 0/9: knee collapses past 120° under the 50 N·m cap to 135.7°, pelvis lands 2.4–2.75 m/s. POSE_STUDY_B.md, SITBACK_LOWER.md.
