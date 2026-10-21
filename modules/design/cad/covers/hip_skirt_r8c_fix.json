@@ -1,0 +1,78 @@
+{
+ "rev": "8c (Legs L77 fixes)",
+ "hem_R": 78.5,
+ "gate_mm": 27.5,
+ "JCH": 3.0,
+ "includes": "panel (R152 relief-conservative, y86+chamfer) + real shroud wedge + stack",
+ "min_ovt": [
+  27.8,
+  [
+   42.5,
+   -14.5,
+   -35
+  ]
+ ],
+ "min_ovt_minus_tol2": 25.8,
+ "min_ROM": [
+  32.0,
+  [
+   40,
+   -8,
+   22
+  ]
+ ],
+ "legs_grid_min": [
+  32.0,
+  [
+   40,
+   -10,
+   -35
+  ]
+ ],
+ "legs_grid_below3": [],
+ "legs_pose_10_45_45": 78.1,
+ "fixed_skirt_retained_pct": 0.0,
+ "fixed_skirt_removed_kg": -0.5376,
+ "option_notch": {
+  "option": "hem R141.5 + local shroud notch",
+  "retained_pct": 34.6,
+  "notch_area_mm2": 17104,
+  "notch_bbox": [
+   [
+    -118.8,
+    5.4,
+    964.9
+   ],
+   [
+    15.5,
+    248.5,
+    1021.7
+   ]
+  ],
+  "gap_panel_ovt": [
+   50.9,
+   [
+    42.5,
+    17.5,
+    -37.5
+   ]
+  ],
+  "gap_shroud_ovt": [
+   28.0,
+   [
+    42.5,
+    -14.5,
+    47.5
+   ]
+  ],
+  "legs_grid_min": [
+   -2.5,
+   [
+    40,
+    45,
+    -35
+   ]
+  ],
+  "fixed_removed_kg": -0.3515
+ }
+}
