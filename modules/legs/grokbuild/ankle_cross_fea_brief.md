@@ -1,13 +1,16 @@
 # Grok Build brief: 7075-T7351 ankle cross, pocketed (R-069, Robot Lab confirmed). Run on the bryan PC after L47-SO, NOT the box
 **Why not the box:** gmsh can't load (libGLU missing), and a converged 3D P2 study needs about 4 GB. Our box hand model is `legs/ankle_cross_pocket_est.py` (mass only, [EST]).
 
-**Status: FINAL rev B 2026-10-21** (Robot Lab job 7). Rev B applies Materials a2bf811 `modules/materials/ANKLE_CROSS_7075.md` (§1–§4) and P-151 hollow pins (Materials, `modules/PROPOSALS.md`). Self-contained; no open TODOs. Unverifiable items marked [EST] or in Assumptions.
+**Status: FINAL rev C 2026-10-21** (Robot Lab job 7). Rev C applies Materials e98d18d / R-125(b) (`modules/materials/ANKLE_CROSS_7075.md`, R-123 update + R-125(b) VERIFIED): verified A-basis limits, plate stock ≤ 1.500 in, ST check at 239 MPa, grain orientation, bearing 295. Rev B applied Materials a2bf811 `modules/materials/ANKLE_CROSS_7075.md` (§1–§4) and P-151 hollow pins (Materials, `modules/PROPOSALS.md`). Self-contained; no open TODOs. Unverifiable items marked [EST] or in Assumptions.
 
 ## Allowables (Materials a2bf811 `ANKLE_CROSS_7075.md` §1–§2; MATERIALS_DB)
 - **Material: 7075-T7351 plate ONLY.** T6/T651 is not allowed: SCC risk in short-transverse under sustained press-fit hoop stress at the bores (§1). If the lightest W/F passes only at T6 values, re-size; never drop to T6.
-- **AL7075T7351:** ρ 2.81, E 70 GPa (ν 0.33), Sy 410, Su 500 (MIF 7075-T73, cited in §1). Still orient the plate so pin loads are not short-transverse.
-- **Design/fault/stop peak ≤ 273 MPa** (410/1.5).
-- **Pin-bore bearing ≤ 308 MPa** nominal P/(d·t) on the bush OD bore (1.5 × 410/2). Edge distance e/D ≥ 2.0 at every bore.
+- **AL7075T7351:** ρ 2.81, E 70 GPa (ν 0.33). Fty A-basis L/LT **393 MPa** (57 ksi), MIL-HDBK-5H p. 3-348, T7351 plate, stock 1.001–1.500 in (verified, Materials e98d18d / R-125(b), `ANKLE_CROSS_7075.md` R-123 update). Single load path → A-basis governs. (Superseded: 410 MIF typical, 273/308.)
+- **Stock: 7075-T7351 plate ≤ 1.500 in (38.1 mm) thick as heat-treated** (band set by stock at heat treat, not finished part). Envelope check: cross is 30 (x) × 46 (y) × 30 (z); with plate thickness along z the 30 mm fits in 38.1 mm stock (≥ 8 mm machining allowance; 46 mm and 30 mm x lie in the plate plane). Order 1.25 in (31.75 mm) or 1.5 in plate [stock size choice EST]. Thicker stock (1.501–2.000 in) is NOT allowed: limit would drop to 253 MPa L/LT, 239 MPa ST.
+- **Grain orientation (mandatory on drawing):** plate thickness (ST) = cross z; L along y (pitch pin axis), LT along x (roll pin axis). Pin axes therefore lie in L/LT; pin-bore hoop/press-fit stress acts in the L–ST and LT–ST planes, so ST stress is NOT excluded.
+- **Design/fault/stop peak ≤ 262 MPa** (393/1.5) on L/LT von Mises.
+- **ST check ≤ 239 MPa:** the run extracts the σ_zz (ST) normal stress component at every case and reports it against 239 MPa (Materials' 1.501–2.000 in ST A-basis 52 ksi /1.5; applied conservatively here because `ANKLE_CROSS_7075.md` gives no ST value for the 1.001–1.500 in band — gap flagged to Materials). Sustained press-fit hoop tension in ST also reported (SCC, §1).
+- **Pin-bore bearing ≤ 295 MPa** nominal P/(d·t) on the bush OD bore (1.5 × 393/2, re-derived on the same basis per `ANKLE_CROSS_7075.md` R-123 update; replaces 308). Edge distance e/D ≥ 2.0 at every bore.
 - **Fatigue amplitude ≤ 58 MPa** on un-anodized machined surfaces (R-031 §6 Se 87 / 1.5). Not recomputed: Materials §1 gives the same 160 MPa MIF fatigue for T73 and T6 and instructs keeping Se 87 / 58 MPa. [EST]: Se 87 was set on the T6 basis and no T7351-specific endurance data is in the repo; the run reports the amplitude SF vs 58 and flags any location < 1.2 SF for Materials. FEA peak includes Kt; compare to Se, not Se/Kf (§2).
 - Any anodized-corner amplitude limit would be ≈ 35 MPa [EST] (§2); not applicable because hard anodize is banned there (see Surface treatment).
 - **TI64** (comparison/keep): ρ 4.4, Sy 910, fatigue 530.
@@ -46,7 +49,7 @@ Replace the Ti-6Al-4V ankle cross (booked 0.120 kg/leg, unverified; model_v4 l.1
 2. **Fault/proof:** the R-020 proof rule as in BOND_SPEC §5. That is 1.5 × the max screw force with both screws at max, plus a **one-screw fault** case.
 3. **Roll hard-stop impact:** the ±18° stop block load (L29/A14 stop stiffness) at the walking peak roll velocity.
 4. **Fatigue:** walking cycle amplitude, R per pose pair.
-   - Pass: amplitude ≤ 58 MPa; design/fault/stop ≤ 273 MPa; bearing ≤ 308 MPa (see Allowables); hollow pins pass B5(a)/(b).
+   - Pass: amplitude ≤ 58 MPa; design/fault/stop ≤ 262 MPa (L/LT), σ_ST ≤ 239 MPa; bearing ≤ 295 MPa (see Allowables); hollow pins pass B5(a)/(b).
 
 ## Method
 - Solid P2 tets via gmsh, h 3 → 2 → 1 with refinement at the pocket corners and the bore edges. Peak change < 5 % over the last two levels.
