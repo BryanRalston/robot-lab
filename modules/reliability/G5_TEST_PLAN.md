@@ -106,3 +106,10 @@ Per `legs/R031_FIXES.md`: 5 ASTM D1002 coupons per lot at 23 and 60 °C, part-eq
   - **BMS OK:** no fault latched, isolation ≥ spec, comms intact
   - then a full charge/discharge cycle at 1C with capacity within 2 % and no thermal anomaly
 - **Until it passes, R-146 L2 (tip from kneel) stays CONDITIONAL.**
+
+## TP-G5-18 Hip skirt rev 8 pinch/crush (R_HIP_PINCH.md)
+- **Gap survey:** a powered slow sweep (≤ 10 % speed) of each hip through the contract ROM to the hard stops and both-leg combinations (incl. both yaw 22–45, both roll −12, asymmetric pairs). Measure hem↔panel, L↔R panel, panel↔thigh and panel↔shank (knee 135–145) with feeler/laser/photogrammetry on the production covers. Pass: moving gaps ≥ 25 mm everywhere reachable, or the edge is compliant (below); fixed gaps ≤ 4 mm under a 50 N push.
+- **Supervisor test (motors on):** command closing trajectories toward each bilateral boundary. The trip must hold ≥ 28 mm (measured); log the min.
+- **Pinch force (ISO/TS 15066 method):** a pressure-film/force gauge finger and hand surrogate (ISO 13857 test finger ø12, hand block 100 mm) in each closing gap. Motors on at full commanded torque (slow) and motors off with the leg dropped limp from the worst pose. Pass: quasi-static ≤ 140 N (hand/finger), transient ≤ 280 N, pressure within Annex A, no cover crack.
+- **Fall/overtravel:** a drop-tower fall (TP-G5 fall set) with gap targets marked; post-test inspection of the edges.
+- **Handling:** H2 lift trial with limp legs; verify no finger in the hem band with the 100 mm keep-off.
