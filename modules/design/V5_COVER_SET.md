@@ -478,3 +478,10 @@ Script `cad/covers/hip_skirt_r8c_fix.py/.json`. New STLs: `hip_skirt_r8c_pelvis_
 3. **J-channel inner width 15.5 → 14.5 mm**: 0.5 mm press fit on the 15 mm strip + lip + VHB (mechanical retention).
 4. Empty `hip_skirt_r8c_pelvis.stl` **deleted**; notched mesh is the only pelvis hem.
 Mass vs 8c: +0.0095 kg/side. `cad/covers/hip_skirt_r8d_standoff.json`.
+
+## P-023 rev 8e — option (a) stop-in-cup, 2026-10-21 (NOT RECOMMENDED)
+- Geometry (`cad/covers/hip_skirt_r8e_stops.py/.step/.stl/.json`, contact-pose local frame): each panel carries one stop + one cup, mirror-paired (L stop φ40 / cup φ70; R reversed). Stop PA66-GF30 tube ø25/ø17, 95 mm from face. Cup ø35 OD, ø29 bore (2.0 mm radial entry gap ≤4, ø12 finger cannot enter), 45 tall (5 mm proud of foam → no trap), floor 15 mm, 30 mm engagement, 45° lead-in to ø45 (±8 mm capture). Rigid 110 mm / foam faces 30 mm kept.
+- **Alignment FAILS:** over 57,600 both-leg poses (pitch −10..45, yaw 0..45, roll ±20 each), 16,668 close past stand; the tip lands within 8/16 mm capture in only 101/365 (≤2.2 %). Median lateral miss 87 mm (p90 153, max 245), stop axis 44° off median. It seats only when both legs move nearly together (pitch/roll matched within ~±5°/±3° EST). Elsewhere the tip bears on the other panel's foam → rigid path on a hand, the same as 8d.
+- Strength (tube Z 1206 mm³, 95 mm lever, 44° side load): limp 165 N 9 MPa OK; powered 2.2 kN 120 MPa vs PA66-GF30 ~130–180 (SF 1.1–1.5, marginal) → breakaway (2× M4 PA66 shear screws, ~1.0 kN lateral); fall 1 kN [EST] 55 MPa OK. PA12 ø16 solid: 361 MPa, FAIL.
+- Mass 0.069 kg/side (+0.059 vs 8d).
+- **Recommendation:** don't build. No pointwise rigid stop can protect a hand across the sliding/angled closures. Use a load-limited fix instead: a limp clamp measured at ≤140 N (TP-G5-18), damped limp, or a Controls powered keep-out plus limp brake.

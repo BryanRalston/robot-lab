@@ -1,0 +1,49 @@
+{
+ "rev": "P-023 rev 8e option (a)",
+ "frame": "contact-pose local: panels parallel, inboard faces y=+-55 (110 rigid), x fwd, z up; z=-55 phi40 station, +55 phi70",
+ "contact_pose": "limp adduction with equal pitch/roll/yaw both legs (the only family where the tip lands in the cup)",
+ "stop": {
+  "mat": "PA66-GF30",
+  "od": 25,
+  "id": 17,
+  "len_from_face": 95,
+  "station": "L phi40 / R phi70"
+ },
+ "cup": {
+  "mat": "PA66-GF30",
+  "od": 35,
+  "bore": 29,
+  "radial_entry_gap": 2.0,
+  "height": 45,
+  "floor_from_face": 15,
+  "engagement": 30,
+  "lead_in": "45 deg to d45 mouth (capture +-8 mm)"
+ },
+ "foam_gaps": {
+  "foam_face_gap_mm": 30,
+  "cup_proud_of_foam_mm": 5,
+  "trap": "none: 5 mm step <=5, 30 mm open >=25"
+ },
+ "alignment": {
+  "poses": 57600,
+  "closing_past_stand": 16668,
+  "seated_capture8": 101,
+  "seated_capture16": 365,
+  "lateral_miss_p50_mm": 87,
+  "p90": 153,
+  "max": 245,
+  "stop_axis_angle_p50_deg": 44,
+  "verdict": "FAIL: tip lands off-cup on the other panel/foam in ~98% of closing poses; seats only when the two legs' pitch and roll match within ~+-5 deg/+-3 deg (EST from grid)"
+ },
+ "strength": {
+  "axial_165N_MPa": 0.8,
+  "lat_165N_at44deg_bend_MPa": 9.0,
+  "powered_2200N_axial_MPa": 10.4,
+  "powered_2200N_at44deg_bend_MPa": 120,
+  "fall_1000N_EST_at44deg_MPa": 55,
+  "PA12_d16_solid_powered_bend_MPa": 361,
+  "verdict": "PA12 fails powered; PA66-GF30 d25/d17 tube 120 MPa vs ~130-180 conditioned UTS (SF 1.1-1.5) MARGINAL; specify breakaway: 2x M4 PA66 shear screws at the base, release ~1.0 kN lateral"
+ },
+ "mass_kg_side": 0.069,
+ "mass_delta_vs_8d": 0.059
+}
