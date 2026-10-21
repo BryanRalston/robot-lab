@@ -504,3 +504,14 @@ No limp brake, so every gap must be safe by geometry. Fresh sweep (`cad/covers/r
 | L ↔ R shroud | (b) needed | 0.0 mm raw | 42.5, −15.6, 47.5 both | 133 / 131 | FAIL |
 
 L↔R closes to 0 mm even in nominal ROM (both legs adducted, yaw 45°). No panel cutback reaches the ≥ 30 mm rigid standoff, and the rigid shroud (y 86–150, Thermal) is itself an L↔R hazard. Robot Lab to rule: crushable shroud + panel inboard zone at ≤ 140 N sustained over ≥ 30 mm (TP-G5-18 item 6), or a Legs hip adduction + yaw hard stop. Legs L79 −35.2 mm at (42.5, −14.5, −35) is the un-notched sphere metric; real gaps there are 67.3 (panel) / 31.7 mm (shroud). Geometry = 8f; mass ≈ −0.296 kg vs v5 [EST]. J-channel aged VHB pull-off test is in TP-G5-18.
+
+## Waist cover vs D102c torque limiter (Actuators eb5520f) — 2026-10-21
+Limiter STEP bbox (local, axis z = waist pitch axis y): r ≤ 48.8 mm body, one feature to r 54 (x +54), stack 23.1 mm. Placed on the CSG-25 output (+y), model_v4 frame: axis (0, y, wp), stack taken as y ≈ +31…+54 [EST: housing 86 long from the −y cheek at −55; Actuators confirm]. The limiter rotates about its own axis, so waist pitch −30/+60 (v3 range) does not change its distance to the waist covers; waist yaw ±90 rotates the whole yoke inside the axisymmetric bellows, no change either.
+| to | clearance | basis |
+|---|---|---|
+| P-024 bellows band (ø300 OD, inner r ≈ 128 after ≤ 20 mm convolution [EST]) | **≈ 52 mm** radial (worst corner √(54²+54²) = 76 mm from the yaw axis) | bbox math |
+| torso shell front/back wall (x ±107 inner) | 53 mm | 107 − 54 |
+| torso shell side wall (y ±167 inner) | 113 mm axial | 167 − 54 |
+**Result: PASS, cover-side minimum ≈ 52 mm [EST].** No cover change.
+Flags for Actuators (not cover items): (1) torso waist bracket plate underside sits at wp+52; the r 54 feature must turn with the torso (yoke lug) or it clashes in a slip; (2) limiter outer face y ≈ 54 vs torso bracket web y 63: ~9 mm, confirm in their CAD.
+Service: drop the bellows lower clamp band and roll the bellows up (P-024 clamp bands); the M68 lock-nut ring is then open from +y/front with ≥ 53 mm radial room for a C-spanner. Torso shell does not need to come off. PASS.
