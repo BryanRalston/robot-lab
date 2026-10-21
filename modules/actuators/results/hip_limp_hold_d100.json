@@ -1,0 +1,152 @@
+{
+ "F_lim_N": 140,
+ "est": [
+  "lever L=0.10 m both joints (hem R141.5 is the outer skin; 0.10 is a conservative inner gap)",
+  "leg Jl, leg 11 kg @0.45 m, stance offsets 0.10 m",
+  "hand stiffness 30 N/mm, rotational via L",
+  "creep: friction=Tbd constant (Table 37 is breakaway; running friction lower -> conservative on creep only)"
+ ],
+ "hip_roll": {
+  "motor": "TBM2G-08508A",
+  "N": 100,
+  "J_reflected": 0.593,
+  "T_backdrive": 9.2,
+  "L": 0.1,
+  "T_allow": 14.0,
+  "B_lowspeed_Nms_per_rad": 326.0,
+  "T_peak": 124.1,
+  "w_peak": 0.76,
+  "table": [
+   [
+    0.05,
+    16.2
+   ],
+   [
+    0.1,
+    32.1
+   ],
+   [
+    0.2,
+    61.0
+   ],
+   [
+    0.5,
+    113.9
+   ],
+   [
+    1,
+    119.6
+   ],
+   [
+    2,
+    82.5
+   ],
+   [
+    5,
+    36.9
+   ]
+  ],
+  "cases": [
+   {
+    "case": "limp leg hanging, 15 deg roll",
+    "Tg": 12.6,
+    "holds": false,
+    "creep_rad_s": 0.02,
+    "creep_deg_s": 1.15,
+    "F_static": 34,
+    "F_impact": 56,
+    "F_total": 89,
+    "P_winding_W": 0.1,
+    "pass_": true
+   },
+   {
+    "case": "double-stance sag, 34 kg x 0.10 m",
+    "Tg": 33.4,
+    "holds": false,
+    "creep_rad_s": 0.08,
+    "creep_deg_s": 4.58,
+    "F_static": 242,
+    "F_impact": 223,
+    "F_total": 465,
+    "P_winding_W": 2.1,
+    "pass_": false
+   },
+   {
+    "case": "single-stance fall, 68 kg x 0.10 m",
+    "Tg": 66.7,
+    "holds": false,
+    "creep_rad_s": 0.19,
+    "creep_deg_s": 10.89,
+    "F_static": 575,
+    "F_impact": 530,
+    "F_total": 1105,
+    "P_winding_W": 11.1,
+    "pass_": false
+   }
+  ]
+ },
+ "hip_yaw": {
+  "motor": "TBM2G-06008A",
+  "N": 100,
+  "J_reflected": 0.137,
+  "T_backdrive": 3.1,
+  "L": 0.1,
+  "T_allow": 14.0,
+  "B_lowspeed_Nms_per_rad": 61.2,
+  "T_peak": 46.2,
+  "w_peak": 1.51,
+  "table": [
+   [
+    0.05,
+    3.1
+   ],
+   [
+    0.1,
+    6.1
+   ],
+   [
+    0.2,
+    12.0
+   ],
+   [
+    0.5,
+    27.6
+   ],
+   [
+    1,
+    42.6
+   ],
+   [
+    2,
+    44.4
+   ],
+   [
+    5,
+    25.6
+   ]
+  ],
+  "cases": [
+   {
+    "case": "limp leg, gravity (yaw axis vertical)",
+    "Tg": 0.0,
+    "holds": true,
+    "F_static": 0.0,
+    "F_total": 0.0
+   },
+   {
+    "case": "foot-scuff twist, 200 N x 0.10 m",
+    "Tg": 20.0,
+    "holds": false,
+    "creep_rad_s": 0.29,
+    "creep_deg_s": 16.62,
+    "F_static": 169,
+    "F_impact": 269,
+    "F_total": 438,
+    "P_winding_W": 5.0,
+    "pass_": false
+   }
+  ]
+ },
+ "fall_energy_J": 20.0,
+ "dT_winding_C": 0.4
+}
