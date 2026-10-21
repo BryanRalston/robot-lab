@@ -50,3 +50,32 @@ slope conservative. The sit duration itself is an estimate: measure stand-to-sit
 ## Open items
 - MuJoCo heat-up/sit smoke not added: the PD-only stand on the box isn't stable without the policy/WBC, so it can't validate the sit. Run it with the WBC sit once that path exists.
 - The WBC/fall-mode `request_safe_sit` hook and `sit_done` signal must be wired by the WBC owner. τ_nominal must come from the commissioned limits.
+
+## Safe-sit time in sim (R-142 follow-up), `safe_sit_wbc.py`
+Setup: sim/v3 4115f6e at 68 kg (LEGS_MASS=68), CPU MuJoCo, 1 kHz. Legs WBC (`modules/legs/wbc/controller.py`) in stand mode
+(QP + ZMP-in-support), with every leg drive limited to 0.5 × the R1.2 limit. The CoM height reference and the joint
+posture follow a minimum-jerk profile from standing (CoM 0.909 m) to a crouch. A 0.45 m chair is drawn but has no contact.
+Pass: no fall, 0 QP failures, final CoM within 3 cm of the target, |τ| ≤ derated limit, measured CoP margin ≥ 0.
+Raw output: `safe_sit_wbc_results.txt`.
+
+| descent T | result (crouch: pelvis 0.85 m, CoM 0.909 → 0.765 m, −0.144 m) |
+|---|---|
+| 1.0 s | **falls** at 2.59 s (CoP 25 mm outside the sole, torque saturated) |
+| 1.5 s | stable, but leg torque hits the 0.5 derate limit (clipped) |
+| 2.0 s | stable, peak 0.95 of the derated limit |
+| 2.5 s | stable, peak 0.95 |
+
+**Fastest stable: 1.5 s; fastest without torque saturation: 2.0 s. Both ≤ 2.5 s.** At 0.3 K/s, 2.0 s + 0.05 s uses 0.62 K
+of the ≥1.0 K band (R-142), so the margin is about 1.6×. Full torque gives the same shape: 1.5 s ok, 1.0 s not.
+
+Limits of this result (do not over-read):
+- **It is a crouch, not a seated sit.** With an upright pelvis the IK pose needs the ankle past its −0.79 rad dorsiflexion
+  stop below a pelvis height of about 0.94 m. Deeper poses run the shank into the stop, and the stand-mode WBC diverges
+  (this happens at full torque too, so it is not a derate effect). With 0.4 rad of pelvis pitch, a CoM of 0.725 m was
+  stable once at T = 2.5 s, but it is not robust: it fell with nearby gains. Reaching a 0.45 m seat (CoM about 0.59 m) needs
+  a trunk-lean sit mode in the WBC: pelvis pitch reference, stiffer stand-mode CoM-x loop (gain 2.5 s⁻² now), and a joint-limit-aware posture.
+  That belongs to Legs/WBC.
+- The measured CoP touches the sole edge briefly (minimum margin 0 mm; < 5 mm for 1.8 % of the time at T = 2.0 s), so the ZMP
+  margin is thin. The contact points are the 4 box corners per foot.
+- The script patches the WBC at runtime (pelvis pitch reference, leg posture gains); both stay at their stock values for this
+  table. `controller.py` is not edited.

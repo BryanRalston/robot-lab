@@ -1,0 +1,6 @@
+{"T": 1.0, "fell": 2.591, "cop_margin_min_mm": -24.8, "tau_ratio_max": 1.0, "qp_fail": 0, "com_z0": 0.909, "com_z_target": 0.765, "cop_min_t": 2.516, "cop_margin_min_after_settle_mm": -24.8, "cop_lt5mm_frac": 0.149, "com_z_final": 0.875, "pelvis_z_final": 0.979, "ok": false}
+{"T": 1.5, "fell": null, "cop_margin_min_mm": -0.0, "tau_ratio_max": 1.0, "qp_fail": 0, "com_z0": 0.909, "com_z_target": 0.765, "cop_min_t": 2.126, "cop_margin_min_after_settle_mm": -0.0, "cop_lt5mm_frac": 0.034, "com_z_final": 0.768, "pelvis_z_final": 0.844, "ok": true}
+{"T": 2.0, "fell": null, "cop_margin_min_mm": 0.0, "tau_ratio_max": 0.952, "qp_fail": 0, "com_z0": 0.909, "com_z_target": 0.765, "cop_min_t": 2.093, "cop_margin_min_after_settle_mm": 0.0, "cop_lt5mm_frac": 0.018, "com_z_final": 0.767, "pelvis_z_final": 0.844, "ok": true}
+{"T": 2.5, "fell": null, "cop_margin_min_mm": 0.0, "tau_ratio_max": 0.952, "qp_fail": 0, "com_z0": 0.909, "com_z_target": 0.765, "cop_min_t": 1.661, "cop_margin_min_after_settle_mm": 0.0, "cop_lt5mm_frac": 0.014, "com_z_final": 0.767, "pelvis_z_final": 0.844, "ok": true}
+FASTEST_STABLE 1.5 FASTEST_UNSATURATED 2.0
+GIF /workspace/tmp/rlc-j4/media/progress/2026-10-21_controls_r142_safe_sit_wbc.gif 100

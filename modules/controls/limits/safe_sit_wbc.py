@@ -1,0 +1,178 @@
+"""R-141/R-142 safe-sit timing in sim: the legs WBC (modules/legs/wbc, QP + ZMP balance) holds the CoM over the
+feet while it lowers the CoM on a minimum-jerk profile into a deep sit/squat pose over a 0.45 m chair box.
+Leg drive torque limits are the 0.5 derate (the stop latches at >= 83 C, R-142, where f(T) = 0.5).
+Light CPU MuJoCo only. Model: sim/v3 at 68 kg (LEGS_MASS=68, R-123).
+
+Pass per duration: no fall (pelvis tilt < pitch ref + 0.6 rad, pelvis z > 0.3 m), ZMP (measured CoP of the feet) inside the support polygon
+(margin >= 0), |tau| <= derated limit for all leg actuators, QP failures 0, final CoM within 3 cm of target height.
+Usage: python safe_sit_wbc.py [--gif]
+"""
+import os, sys, json, argparse
+os.environ.setdefault('LEGS_MASS', '68')
+os.environ.setdefault('LEGS_LIMITS', 'r1')
+os.environ.setdefault('LEGS_CHAIR', '-0.02,0.45')   # chair seat front edge at x -0.02, seat 0.45 m (visual, no contact)
+os.environ.setdefault('MUJOCO_GL', 'glfw')   # egl/osmesa unavailable on the box
+import numpy as np
+import mujoco
+HERE = os.path.dirname(os.path.abspath(__file__))
+ROOT = os.path.abspath(os.path.join(HERE, '..', '..', '..'))
+LEGS = os.path.join(ROOT, 'modules', 'legs')
+sys.path[:0] = [LEGS, os.path.join(LEGS, 'wbc')]
+from gait_lib import load, LEG, SOLE
+import controller as _wbcmod
+from controller import WalkController, HALF_W, FC, measured_cop
+from gait_lib import quat_pitch
+
+# Pelvis pitch reference. controller._wbc holds the pelvis at rpy_R(0, 0, yaw_ref) (line ~841), and that is its
+# only rpy_R call. This script wraps rpy_R for calls from _wbc only, so the pelvis attitude task tracks
+# PEL_PITCH['now']. The legs module itself is not edited.
+PEL_PITCH = {'now': 0.0}
+_rpy = _wbcmod.rpy_R
+def _rpy_hook(roll, pitch, yaw):
+    if sys._getframe(1).f_code.co_name == '_wbc' and roll == 0.0 and pitch == 0.0:
+        return _rpy(0.0, PEL_PITCH['now'], yaw)
+    return _rpy(roll, pitch, yaw)
+_wbcmod.rpy_R = _rpy_hook
+
+# Leg posture gain. In stand mode the WBC weights leg posture at kp 16, kd 3, w 0.12, so during a descent the
+# hips lag and the shank runs into the ankle dorsiflexion stop (-0.79 rad), then it diverges. This rebuilds
+# _wbc at runtime from its own source, with those three literals read from LEG_POSTURE. controller.py is unchanged.
+import inspect, textwrap
+LEG_POSTURE = {'kp': 16.0, 'kd': 3.0, 'w': 0.12}
+_src = textwrap.dedent(inspect.getsource(_wbcmod.WalkController._wbc))
+_lit = 'kp, kd, w = 16.0, 3.0, 0.12'
+assert _src.count(_lit) == 1, 'controller._wbc leg posture literal changed'
+_src = _src.replace(_lit, "kp, kd, w = LEG_POSTURE['kp'], LEG_POSTURE['kd'], LEG_POSTURE['w']")
+_ns = dict(vars(_wbcmod)); _ns['LEG_POSTURE'] = LEG_POSTURE
+exec(compile(_src, _wbcmod.__file__ + ':_wbc[patched]', 'exec'), _ns)
+_wbcmod.WalkController._wbc = _ns['_wbc']
+
+DERATE = 0.5
+SETTLE = 0.5
+HOLD = 1.5
+WAIST = 0.0
+SHOULDER = 0.0
+XK = 0.0          # 5.0 used for the pitched-crouch case
+LEAD = 1.0
+PITCH = 0.0       # rad pelvis forward pitch at the bottom (hip flexion; keeps ankle inside its -0.79 rad stop)
+
+
+def mj(s):
+    s = min(max(s, 0.0), 1.0)
+    return 10 * s ** 3 - 15 * s ** 4 + 6 * s ** 5
+
+
+def mj_d(s):
+    s = min(max(s, 0.0), 1.0)
+    return 30 * s ** 2 - 60 * s ** 3 + 30 * s ** 4
+
+
+def sit_pose(ctrl, d, pel_z):
+    r = ctrl.robot
+    m = ctrl.m
+    d0 = d.qpos.copy()
+    A = lambda n: m.jnt_qposadr[m.joint(n).id]
+    # Trunk lean and arms forward put the CoM ahead so the shank stays inside the ankle dorsiflexion stop
+    # (-0.79 rad); with an upright trunk the IK needs ankle -1.05 rad at this depth.
+    d0[A('waist_pitch')] = WAIST
+    d0[A('l_shoulder_pitch')] = d0[A('r_shoulder_pitch')] = SHOULDER
+    feet = {'l': (np.array([0.0, HALF_W, SOLE]), 0.0, 0.0), 'r': (np.array([0.0, -HALF_W, SOLE]), 0.0, 0.0)}
+    q = r.ik_com(d0, feet, np.array([FC, 0.0]), pel_z, quat_pitch(PITCH), iters=12)
+    r.fk(q)
+    return q, float(r.com()[2])
+
+
+def run(T, pel_z_sit=0.85, frames=None, fps=25):
+    m = load()
+    m.opt.timestep = 0.001
+    d = mujoco.MjData(m)
+    ctrl = WalkController(m)
+    ctrl.stand_only = True
+    info = ctrl.initialize(d)
+    leg = np.array([any(ctrl.act_name[i].endswith(j) for j in LEG) for i in range(m.nu)])
+    nominal = ctrl.tau_max.copy()
+    ctrl.tau_max = np.where(leg, DERATE * nominal, nominal)   # derate on every leg drive (whole-robot worst case)
+    PEL_PITCH['now'] = 0.0
+    q0 = d.qpos.copy(); z0 = ctrl.com_z_ref
+    q1, z1 = sit_pose(ctrl, d, pel_z_sit)
+    ctrl.v_ref = np.zeros(m.nv)
+    res = dict(T=T, fell=None, cop_margin_min_mm=1e9, tau_ratio_max=0.0, qp_fail=0, com_z0=round(z0, 3), com_z_target=round(z1, 3))
+    soles = [m.geom('l_foot').id, m.geom('r_foot').id]
+    renderer = None
+    if frames is not None:
+        renderer = mujoco.Renderer(m, 360, 480)
+        cam = mujoco.MjvCamera(); cam.azimuth = 120; cam.elevation = -12; cam.distance = 2.6; cam.lookat[:] = [0, 0, 0.6]
+    n = int((SETTLE + T + HOLD) / 0.001)
+    for k in range(n):
+        t = k * 0.001
+        s = (t - SETTLE) / T
+        a = mj(s)
+        ctrl.com_z_ref = z0 + (z1 - z0) * a
+        PEL_PITCH['now'] = PITCH * mj(s * LEAD)   # hip hinge leads the descent (LEAD >= 1)
+        ctrl.q_ref = q0 + (q1 - q0) * a
+        v = np.zeros(m.nv)
+        v[6:] = (q1 - q0)[7:] * mj_d(s) / T if 0 < s < 1 else 0.0
+        ctrl.v_ref = v
+        # CoM over the sole centres. The stand ZMP loop has x gain 2.5 s^-2 (controller._zmp_target), too soft
+        # for a fast descent, so the reference is leaned against the error (XK) to stiffen it from outside.
+        mujoco.mj_subtreeCom(m, d) if hasattr(mujoco, 'mj_subtreeCom') else None
+        ex = float(d.subtree_com[1][0]) - FC
+        ctrl.x_ref = FC - float(np.clip(XK * ex, -0.06, 0.06))
+        tau = ctrl.step(d)
+        mujoco.mj_step(m, d)
+        if ctrl.last_status != 'ok':
+            res['qp_fail'] += 1
+        res['tau_ratio_max'] = max(res['tau_ratio_max'], float(np.max(np.abs(d.ctrl[leg]) / (DERATE * nominal[leg]))))
+        up = d.xmat[ctrl.pelvis][8]
+        if up < np.cos(min(PEL_PITCH['now'] + 0.6, 1.5)) or d.qpos[2] < 0.3:   # fall: >0.6 rad past the pitch ref
+            res['fell'] = round(t, 3); break
+        # support polygon: both feet flat, rectangle hull; margin from measured CoP of the total wrench
+        num = np.zeros(3); fzt = 0.0
+        for g in soles:
+            c_, f_ = measured_cop(m, d, g)
+            if c_ is not None:
+                num += f_ * c_; fzt += f_
+        cop = num / fzt if fzt > 1.0 else None
+        if cop is not None:
+            xs = []
+            for g in soles:
+                c = d.geom_xpos[g]; h = m.geom_size[g]
+                xs.append((c[0] - h[0], c[0] + h[0], c[1] - h[1], c[1] + h[1]))
+            x0, x1 = min(b[0] for b in xs), max(b[1] for b in xs)
+            y0, y1 = min(b[2] for b in xs), max(b[3] for b in xs)
+            mg = min(cop[0] - x0, x1 - cop[0], cop[1] - y0, y1 - cop[1]) * 1e3
+            if mg < res['cop_margin_min_mm']:
+                res['cop_margin_min_mm'] = float(mg); res['cop_min_t'] = round(t, 3)
+            if t > SETTLE:
+                res['_n'] = res.get('_n', 0) + 1
+                res['_edge'] = res.get('_edge', 0) + (mg < 5.0)
+                res['cop_margin_min_after_settle_mm'] = round(min(res.get('cop_margin_min_after_settle_mm', 1e9), float(mg)), 1)
+        if renderer is not None and k % int(1000 / fps) == 0:
+            renderer.update_scene(d, cam); frames.append(renderer.render().copy())
+    mujoco.mj_subtreeVel(m, d)
+    res['cop_lt5mm_frac'] = round(res.pop('_edge', 0) / max(res.pop('_n', 1), 1), 3)
+    res['com_z_final'] = round(float(d.subtree_com[1][2]), 3)
+    res['pelvis_z_final'] = round(float(d.qpos[2]), 3)
+    res['tau_ratio_max'] = round(res['tau_ratio_max'], 3)
+    res['cop_margin_min_mm'] = round(res['cop_margin_min_mm'], 1)
+    res['ok'] = (res['fell'] is None and res['qp_fail'] == 0 and res['cop_margin_min_mm'] >= 0
+                 and res['tau_ratio_max'] <= 1.0 + 1e-6 and abs(res['com_z_final'] - z1) < 0.03)
+    return res
+
+
+if __name__ == '__main__':
+    ap = argparse.ArgumentParser(); ap.add_argument('--gif', action='store_true'); ap.add_argument('--pel', type=float, default=0.85)
+    a = ap.parse_args()
+    out = [run(T, a.pel) for T in (1.0, 1.5, 2.0, 2.5)]
+    for r in out: print(json.dumps(r, default=float))
+    ok = [r['T'] for r in out if r['ok']]
+    clean = [r['T'] for r in out if r['ok'] and r['tau_ratio_max'] < 0.999]
+    print('FASTEST_STABLE', min(ok) if ok else None, 'FASTEST_UNSATURATED', min(clean) if clean else None)
+    if a.gif:
+        import imageio.v2 as imageio
+        T = min(clean) if clean else 2.5
+        frames = []
+        run(T, a.pel, frames=frames)
+        gif = os.path.join(ROOT, 'media', 'progress', '2026-10-21_controls_r142_safe_sit_wbc.gif')
+        imageio.mimsave(gif, frames, duration=0.04, loop=0)
+        print('GIF', gif, len(frames))
