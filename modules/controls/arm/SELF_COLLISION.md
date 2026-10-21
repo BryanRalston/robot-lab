@@ -103,7 +103,7 @@ The raised L60 top plate is x −175…−40, y 32–228, z 820–828 mm. The tw
 
 ## Hip-pinch keep-out, rev 8f (ID 76cc34d, T&R 42c4e50): hip_pinch.py
 **Thresholds: 40/35/33 stopgap, KEPT** (T&R 42c4e50). Return to 35/30/28 only after T&R re-verifies. Geometry: `hip_skirt_r8f_thigh_panel.stl` + `hip_skirt_r8f_pelvis_notched.stl` (8c + 8d notch +1.5 mm, no stops), J-channel 3.0, rigid only.
-T&R's 15 listed 8f L/R closures (3 nominal, 7 at +2.5° overtravel, 5 at +3.6°; `hip_pinch_8f_untripped_check.json`): **all 15 trip at 33**. They read 24.2–27.4 mm in this model, and every one is within 0.83 mm of T&R. None is left untripped.
+T&R's listed 8f L/R closures (3 nominal, 6 at +2.5° overtravel, 5 at +3.6° = 14; T&R counts 7 at +2.5° but its json shows only 6, so one is unlisted; `hip_pinch_8f_untripped_check.json`): **all 14 trip at 33**. They read 24.2–27.4 mm in this model, and every one is within 0.83 mm of T&R. None is left untripped.
 The 8c results below are superseded by 8f (the 8c → 8f change is the hem notch only; the panel is the same).
 
 ### rev 8c record (T&R 76de66a, ID ee80543/ec4dde7/d58ffa4, Actuators D100 31875a1)

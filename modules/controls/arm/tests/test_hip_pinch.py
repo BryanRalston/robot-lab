@@ -37,7 +37,7 @@ def test_tr_42c4e50_8f_closures_all_trip_at_33():
     """T&R 42c4e50: rev 8f L/R closures (nominal, +2.5, +3.6 deg overtravel) that the old model missed at 28 must trip at 33."""
     import json, pathlib
     rows = json.loads((pathlib.Path(__file__).resolve().parents[1] / 'hip_pinch_8f_untripped_check.json').read_text())
-    assert len(rows) == 15
+    assert len(rows) == 14  # T&R json lists 3 + 6 + 5 examples (it counts 7 at +2.5 but shows 6)
     for r in rows:
         g = H.gaps(q(*r['a'], *r['b'])); assert min(g.values()) < H.TRIP, r
         assert abs(g['lr'] - r['tr_8f']) < 1.0, r  # agrees with T&R 8f within 1 mm
