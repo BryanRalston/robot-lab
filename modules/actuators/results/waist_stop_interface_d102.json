@@ -1,0 +1,70 @@
+{
+ "gear": "HD CSG-25-100 component set (strain wave), ratio 100",
+ "T1_Nm": 14,
+ "K1": 31000.0,
+ "T2_Nm": 48,
+ "K2": 50000.0,
+ "K3": 57000.0,
+ "windup_deg": {
+  "T1": 0.0259,
+  "T2": 0.0648,
+  "rated_87": 0.104,
+  "rep_peak_204": 0.2216,
+  "mom_369": 0.3875,
+  "ratchet_650": 0.67
+ },
+ "lost_motion_deg": 0.0166,
+ "torques_Nm": {
+  "rated": 87,
+  "repeated_peak": 204,
+  "avg_limit": 140,
+  "momentary": 369,
+  "ratchet": 650,
+  "buckling": 1700,
+  "motor_peak_output": 115.4
+ },
+ "A_input_locked": {
+  "budget_gap_plus_lost_motion_deg": 0.1,
+  "max_budget_deg_absolute": 0.2216,
+  "physical_gap_deg": 0.0834,
+  "Ks_kNm_per_rad": 634,
+  "cases": {
+   "1550": {
+    "theta_deg": 0.2216,
+    "stop_defl_deg": 0.1216,
+    "gear_Nm": 204,
+    "stop_Nm": 1346
+   },
+   "2300": {
+    "theta_deg": 0.2838,
+    "stop_defl_deg": 0.1838,
+    "gear_Nm": 266,
+    "stop_Nm": 2034
+   }
+  }
+ },
+ "B_no_brake": {
+  "J_refl_kgm2": 0.239,
+  "static_gear_Nm": 115.4,
+  "soft_stop_gear_Nm": {
+   "1550": 230,
+   "2300": 285
+  },
+  "impact_Nm_per_rad_s": 116.7,
+  "w_max_rad_s": {
+   "repeated_peak_motor_on": 0.76,
+   "repeated_peak_motor_off": 1.75,
+   "momentary_motor_on": 2.17,
+   "ratchet_motor_off": 5.57
+  }
+ },
+ "bearing": {
+  "C_N": 18800,
+  "C0_N": 24300,
+  "Dpw_m": 0.075,
+  "M_allow_static_fs1_Nm": 911,
+  "M_allow_fs1p5_Nm": 608,
+  "combined": "Fr + 2M/0.075 + 0.44 Fa <= 24300/fs (fs>=1.5 shock -> 16.2 kN)",
+  "one_lug_10kN_radial_fs": 2.43
+ }
+}
