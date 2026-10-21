@@ -57,3 +57,28 @@ Searched 32 ICs (`l3_forced25.json`): knee and toe pivot × roll 0.3–0.6 rad �
 this set.** In this passive model a 25° chest-pad-first contact does not arise from topple ICs alone; it would need an imposed initial
 angular velocity / a pivot that holds the body at 65° pitch, i.e. a prescribed-state impact, not a topple. The trunk-history logging
 (pitch/roll/ω every 20 ms for 1 s after pad contact) is now in `l3_25deg_topple.py` for that run.
+
+---
+# Head 1.104 kg rerun (ID; CONTRACTS head+neck R-026/A23) — `l3_headfirst_replay_1104.json`, `l3_headfirst_geometry.json`, `l3_headfirst_worst_pose.json`
+Head body mass 0.484 → 1.104 kg (inertia scaled ×2.28); the difference is taken off the torso (inertia scaled); total checked = 68.000 kg.
+Same 11 seeds, same ICs. Speeds = head body linear velocity, world frame, at first head–floor contact. E = 0.5·1.104·v² [EST].
+dz = height of the reference's lowest point minus the head's lowest point, along the floor normal (+ = head lower). Shoulder = upper_arm
+geom lowest point (shoulderP has no geom). Contact order excludes feet; knee-pivot seeds list the shanks at t=0 (they start kneeling).
+| seed | head-first | t s | |v| | v_n | E J | upper KE J | dz chest pad mm | dz L/R shoulder mm | 2nd (gap ms) | 3rd (gap ms) |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 0 | yes | 0.945 | 3.83 | 3.79 | 8.1 | 205 | 253 | 335/335 | L_hand (190) | R_hand (190) |
+| 2 | yes | 0.774 | 4.91 | 4.85 | 13.3 | 294 | 123 | 249/249 | L_hand (83) | R_hand (83) |
+| 3 | yes (after shanks) | 0.639 | 4.56 | 4.53 | 11.5 | 200 | 50 | 136/136 | — | — |
+| 6 | yes | 0.907 | 4.45 | 4.40 | 10.9 | 274 | 169 | 293/293 | L_hand (129) | R_hand (129) |
+| 9 | yes (after shanks) | 0.685 | 4.44 | 4.42 | 10.9 | 190 | 69 | 183/183 | — | — |
+| 10 | yes | 0.748 | 4.68 | 4.63 | 12.1 | 279 | 149 | 270/272 | R_hand (99) | L_hand (100) |
+| **14** | yes | 0.823 | **5.02** | **4.94** | **13.9** | **305** | 104 | 233/232 | L_hand (75) | R_hand (75) |
+| 16 | yes | 1.061 | 4.31 | 4.28 | 10.3 | 258 | 191 | 308/309 | L_hand (148) | R_hand (148) |
+| 17 | yes (after shanks) | 0.653 | 4.01 | 3.99 | 8.9 | 165 | 111 | 220/220 | — | — |
+| 20 | yes | 1.079 | 4.55 | 4.47 | 11.4 | 281 | 155 | 285/285 | L_hand (118) | R_hand (118) |
+| 22 | yes | 0.897 | 3.84 | 3.80 | 8.1 | 206 | 254 | 338/337 | L_hand (209) | R_hand (209) |
+For the knee-pivot seeds 3/9/17 the order is shanks (t 0), head; 2nd/3rd after the head were not captured (log keeps the first 3 contacts).
+All 11 remain head-first. The head is 50–254 mm below the chest-pad plane and 136–338 mm below the shoulders at contact: the head lands
+alone, with the shoulders far off the floor, so a shoulder cover would not intercept it in these topples.
+Worst seed 14: full pose at head contact in `l3_headfirst_worst_pose.json` (all body positions, torso/shoulder/upper-arm/head quats);
+upper-arm lowest point 231 mm (L) / 231 mm (R) above the floor.

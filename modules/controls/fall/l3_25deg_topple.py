@@ -8,6 +8,17 @@ H = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, os.path.join(
 import prone_data as P
 from drive_thermal_derate import friction_hold
 FP, ST, KB = 9210.0, 0.0812, 5.3e6
+def low(m, d, g):
+    if m.geom_type[g] == 3:
+        R = d.geom_xmat[g].reshape(3, 3); a = R[:, 2] * m.geom_size[g][1]; c = d.geom_xpos[g]
+        return float(min(c[2] + a[2], c[2] - a[2]) - m.geom_size[g][0])
+    if m.geom_type[g] == 2: return float(d.geom_xpos[g][2] - m.geom_size[g][0])
+    if m.geom_type[g] == 6:
+        R = d.geom_xmat[g].reshape(3, 3); h = m.geom_size[g]
+        return float(min((d.geom_xpos[g] + R @ (np.array([a, b, c]) * h))[2] for a in (-1, 1) for b in (-1, 1) for c in (-1, 1)))
+    return float(d.geom_xpos[g][2] - m.geom_rbound[g])
+def blow(m, d, name):
+    return min(low(m, d, g) for g in range(m.ngeom) if m.geom_bodyid[g] == m.body(name).id)
 def run(seed, mass=68.0, roll=0.0, lean_o=None, piv_o=None, sp_o=None, hp_o=None):
     r = np.random.default_rng(seed); piv = 'knee' if seed % 2 else 'toe'
     fr = float(r.uniform(0.5, 1.0)); s = P.Sim(mass, friction=fr); m, d = s.m, s.d
@@ -25,7 +36,7 @@ def run(seed, mass=68.0, roll=0.0, lean_o=None, piv_o=None, sp_o=None, hp_o=None
     feet = {m.body('L_foot').id, m.body('R_foot').id}; kn = {m.body('L_shank').id, m.body('R_shank').id}
     p0 = {b: d.xpos[b][:2].copy() for b in feet | kn}
     cmax = 0.0; E = 0.0; first = None; tfirst = None; tchest = None; vn = None; att = None; hist = []; bott = False; F = 0.0; dt = m.opt.timestep
-    hb = m.body('head').id; head = None; trunk = []; wb = m.body('waistY').id
+    hb = m.body('head').id; head = None; order = {}; trunk = []; wb = m.body('waistY').id
     for k in range(int(2.5 / dt)):
         d.ctrl[:] = 0; t = k * dt
         R = d.geom_xmat[cp].reshape(3, 3); hs = m.geom_size[cp]
@@ -49,6 +60,12 @@ def run(seed, mass=68.0, roll=0.0, lean_o=None, piv_o=None, sp_o=None, hp_o=None
                 if 0 in bb and len(bb) == 2:
                     b = (bb - {0}).pop()
                     if b not in feet and not (piv == 'knee' and b in kn): first, tfirst = m.body(b).name, t; break
+        for ci in range(d.ncon):
+            g = d.contact[ci]; bb = {m.geom_bodyid[g.geom1], m.geom_bodyid[g.geom2]}
+            if 0 in bb and len(bb) == 2:
+                b = (bb - {0}).pop()
+                if b not in feet and m.body(b).name not in order: order[m.body(b).name] = round(t, 4)
+        if c > 0 and 'chest_pad' not in order: order['chest_pad'] = round(t, 4)
         if head is None:
             for ci in range(d.ncon):
                 g = d.contact[ci]
@@ -61,7 +78,13 @@ def run(seed, mass=68.0, roll=0.0, lean_o=None, piv_o=None, sp_o=None, hp_o=None
                         vc = jp @ d.qvel; wv_ = jr @ d.qvel; Rb = d.ximat[b].reshape(3, 3); wl = Rb.T @ wv_
                         ke += 0.5 * m.body_mass[b] * vc @ vc + 0.5 * float(wl @ (m.body_inertia[b] * wl))
                     head = dict(t=round(t, 3), v_world=[round(float(x), 2) for x in vh], speed=round(float(np.linalg.norm(vh)), 2), v_normal=round(float(-vh[2]), 2),
-                                m_head=round(float(m.body_mass[hb]), 2), E_head_EST=round(0.5 * float(m.body_mass[hb]) * float(vh @ vh), 1), upper_KE=round(ke, 1)); break
+                                m_head=round(float(m.body_mass[hb]), 2), E_head_EST=round(0.5 * float(m.body_mass[hb]) * float(vh @ vh), 1), upper_KE=round(ke, 1),
+                                geom=dict(head_low_m=round(blow(m, d, 'head'), 4), dz_vs_chestpad_mm=round(1000 * (pf[2] - blow(m, d, 'head')), 1),
+                                          dz_vs_L_shoulder_mm=round(1000 * (blow(m, d, 'L_upper_arm') - blow(m, d, 'head')), 1),
+                                          dz_vs_R_shoulder_mm=round(1000 * (blow(m, d, 'R_upper_arm') - blow(m, d, 'head')), 1)),
+                                pose=dict(body_pos={m.body(b).name: [round(float(x), 4) for x in d.xpos[b]] for b in range(1, m.nbody)},
+                                          quat={n: [round(float(x), 4) for x in d.xquat[m.body(n).id]] for n in ('torso', 'L_shoulderP', 'R_shoulderP', 'L_upper_arm', 'R_upper_arm', 'head')},
+                                          shoulder_floor_clear_m={n: round(blow(m, d, n), 4) for n in ('L_upper_arm', 'R_upper_arm')})); break
         if tchest is not None and t - tchest <= 1.0 and k % 20 == 0:
             Rt = d.xmat[tb].reshape(3, 3); z = Rt[:, 0]; w = d.cvel[tb][:3]
             trunk.append([round(t - tchest, 3), round(math.degrees(math.asin(np.clip(-z[2], -1, 1))), 1), round(math.degrees(math.asin(np.clip(z[1], -1, 1))), 1), [round(float(x), 2) for x in w]])
@@ -75,7 +98,7 @@ def run(seed, mass=68.0, roll=0.0, lean_o=None, piv_o=None, sp_o=None, hp_o=None
     return dict(seed=seed, pivot=piv, friction=round(fr, 2), lean=round(lean, 3), yaw=round(yaw, 3), shoulder_pitch=round(pose['shoulder_pitch'], 2),
                 first_contact=first, gap_to_chest_ms=gap, chest_contact=tchest is not None, chest_E_J=round(E, 1), chest_E_x1p5=E15, pad_vn=vn, at_contact=att,
                 max_crush_mm=round(cmax * 1000, 1), bottomed=bott, slide_mm=slide, crush_hist=hist,
-                C1=c1, head=head, trunk_hist=trunk, mass=mass, roll=roll, tilt_deg=None if att is None else round(90 - att['pitch_deg'], 1), C2=(vn is not None and vn <= vlim), C3=any(v > 20 for v in slide.values()))
+                C1=c1, head=head, contact_order=sorted(order.items(), key=lambda x: x[1])[:6], trunk_hist=trunk, mass=mass, roll=roll, tilt_deg=None if att is None else round(90 - att['pitch_deg'], 1), C2=(vn is not None and vn <= vlim), C3=any(v > 20 for v in slide.values()))
 if __name__ == '__main__':
   rows = [run(i) for i in range(24)]
   for x in rows: print({k: x[k] for k in x if k != 'crush_hist'}, flush=True)
