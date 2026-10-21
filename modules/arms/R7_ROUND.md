@@ -197,3 +197,14 @@ Checked against the R-065 criteria with sim/v3:
   - If it fails, re-run with a ±45° braid overwrap (+~0.01 kg/side, mass at full).
 - **Thermal:** hand off the sleeve geometry to Thermal for ladder B. The Job 8c pass alone does not release credit (R-132: booked 0 until Job 8c, Thermal and Materials all sign off).
 - **Output:** `modules/arms/results/job8c_*`.
+**Job 8d (Arms R17): pocketed elbow clevis + roll-yaw link FEA.** Not launched. Run after 8b/8c, via Robot Lab.
+- Geometry: needs Arms CAD (to make from `R17_CLEVIS_LINK.md`):
+  - clevis: base 3 mm floor, 4 mm rims, tube boss; lugs 9 mm tapered
+  - link: box 60 × 40 × 50, 4 mm wall, solid bolt lands
+- Loads: upper-arm fall 104 N·m; elbow cap 69 N·m; lug reaction 520 N + 78 N·m couple; yaw torque 70 N·m; 20 kg P-042 carry.
+- Gates:
+  - clevis 2.5 in T651: 294 LT / 271 ST
+  - link 2.0 in T651: 308 (ST-loaded features 271)
+  - fall = min(A-band, Sy/1.1)
+  - deflection at the elbow axis ≤ 0.5 mm [EST], to be confirmed by Controls
+  - report CAD mass
