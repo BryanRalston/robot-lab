@@ -1,0 +1,68 @@
+{
+ "I_body_kgm2": 2.708,
+ "J_rotor_reflected_kgm2": 0.553,
+ "E_total_J": 62.7,
+ "E_rotor_J": 10.6,
+ "rotor_share": 0.17,
+ "pad": "2 pads, each 30x30 face, 3 x 12 mm PUR90A + 2 x 1 mm steel shims (38 mm), at r 60 mm from the knee axis, tongue -> clevis",
+ "shape_factor_per_layer": 0.625,
+ "V_cm3": 64.8,
+ "E_capacity_25pct_J": 96.5,
+ "energy_SF": 1.54,
+ "peak_strain": 0.201,
+ "peak_torque_Nm": 1031,
+ "stroke_deg": 6.9,
+ "stroke_mm_at_pad": 7.2,
+ "max_knee_deg": 141.9,
+ "pad_force_total_kN": 17.2,
+ "screw_axial_rotor_pair_N": 3680,
+ "screw_axial_per_screw_N_nominal": 1840,
+ "screw_axial_per_screw_N_worst_arm": 2592,
+ "C0a_frac_worst": 0.095,
+ "mass_kg_per_knee": 0.131,
+ "mass_kg_robot": 0.263,
+ "curve": [
+  {
+   "strain": 0.0,
+   "theta_deg": 0.0,
+   "torque_Nm": 0.0,
+   "energy_J": 0.0
+  },
+  {
+   "strain": 0.02,
+   "theta_deg": 0.69,
+   "torque_Nm": 119.0,
+   "energy_J": 0.7
+  },
+  {
+   "strain": 0.05,
+   "theta_deg": 1.72,
+   "torque_Nm": 242.0,
+   "energy_J": 4.0
+  },
+  {
+   "strain": 0.1,
+   "theta_deg": 3.44,
+   "torque_Nm": 525.0,
+   "energy_J": 15.5
+  },
+  {
+   "strain": 0.15,
+   "theta_deg": 5.16,
+   "torque_Nm": 782.0,
+   "energy_J": 35.1
+  },
+  {
+   "strain": 0.2,
+   "theta_deg": 6.88,
+   "torque_Nm": 1028.0,
+   "energy_J": 62.2
+  },
+  {
+   "strain": 0.25,
+   "theta_deg": 8.59,
+   "torque_Nm": 1258.0,
+   "energy_J": 96.5
+  }
+ ]
+}

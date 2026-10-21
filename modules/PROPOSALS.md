@@ -479,3 +479,9 @@ All keep R-076 (reinforced isolation, IEC 60664-1 creepage, IP2X), R-074 (main l
 
 ### P-158: ID: thigh-front knee-pad extension (Controls 49fd991)
 - Crushable honeycomb + CF + TPU strip on the thigh front, z 540–590 (s 40–90 above the knee axis), y 95–165, laps the knee pad. Covers thigh contact angles 0–50.1° (needed 2–22°). Clear of the vents, the rev 8 panel and H4. +0.028 kg pair [EST]. Legs CAD ROM check owed. Evidence: design/thigh_knee_pad_p158.json, V5_COVER_SET.md.
+
+### P-158: Actuators: PU knee stop pair at 135° (D97), +0.263 kg robot
+- **Change:** 2 laminated cast PU 90A pads per knee (30 × 30, 3 × 12 mm + shims) at r 60, tongue → clevis. Peak ≈ 1030 N·m at 6.9° stroke (max 141.9°), screw axial from the rotors ≤ 2590 N (0.095 C0a).
+- **Mass:** +0.131 kg per knee, **+0.263 kg robot** (over the freeze). **Envelope:** two 40 × 40 × 41 stacks in the thigh clevis (Legs to place and sweep).
+- **Evidence:** modules/actuators/results/KNEE_STOP_PU_D97.md, knee_stop_pu_d97.py/.json, cad/knee_stop_pu_pad_d97.step.
+- **Gates:** Legs tongue/clevis/pad-seat check at 17.2 kN; Controls re-run with the stiffness curve.
