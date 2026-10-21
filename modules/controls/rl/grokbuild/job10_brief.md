@@ -2,6 +2,11 @@
 
 Owner: RL Controls. Plan and evidence: `modules/controls/rl/RETRAIN_PLAN_J10.md`. Use the same WSL venv and repo clone as job 4 (JAX 0.11.2, Playground 0.2.0, Brax 0.14.2, MuJoCo/MJX 3.15.0). Report honestly: no numbers you did not measure.
 
+**Pinned inputs:**
+- sim/v3 = **4115f6e** (J10 hardware update: forearm 287, knee rev B fins, fallback SP 67A 6 mm sole, chest pad, neck XM430; 64.827 kg, rescaled to 65.0 for training and gates).
+- Gates per **Arbiter R-117**.
+- Usage MODE (`/workspace/usage/status.md`): **NORMAL**, both Grok Bot and the Grok subscription. The file was last updated 2026-10-14, so re-check the Grok Build log first; if the subscription is ≥ 75 % (CAUTION), ask Bryan via Robot Lab before starting the ~13 h run.
+
 ## 0. Sync and record inputs
 ```bash
 cd <job-4 WSL clone of robot-lab> && git pull --rebase
@@ -9,17 +14,17 @@ git log -1 --format='%h %s' ; git log -1 --format='%h' -- sim/v3/humanoid_v3.xml
 cd modules/legs/rl
 export XLA_PYTHON_CLIENT_PREALLOCATE=false MUJOCO_GL=egl RL_RUNS=/root/rl-runs-j10
 ```
-Record both hashes in the report. Use a new `RL_RUNS` dir so job-4 checkpoints are not picked up by `restore`.
+Record both hashes in the report. **If the sim/v3 hash is not 4115f6e, stop and report** (the model changed under the plan). Use a new `RL_RUNS` dir so job-4 checkpoints are not picked up by `restore`.
 
 ## 1. Regenerate the MJX model from the current sim/v3 (CPU, ~1 min)
 ```bash
 python make_model.py
 ```
-Expect `mass 65.001` (or whatever sim/v3 now gives, scaled to 65) and `home_z ≈ 1.14`. Commit any diff in `humanoid_mjx*.xml`, `gains.npz` or `ref_cycle.npz` with the report.
+Expect `mass 65.001` and `stand settle z 1.1497 up 0.999` (sim/v3 4115f6e). The files should be unchanged against the repo; if they differ, report the diff. Commit any diff in `humanoid_mjx*.xml`, `gains.npz` or `ref_cycle.npz` with the report.
 
 ## 2. Harness tests and smoke (must pass before training)
 ```bash
-MUJOCO_GL=disable python -m pytest -q test_eval_box.py    # expect 7 passed
+MUJOCO_GL=disable python -m pytest -q test_eval_box.py    # expect 9 passed
 python train.py --smoke-step --stage j10_walk               # expect obs {'state': (109,), 'privileged_state': (149,)}, finite rewards
 ```
 If the smoke fails, stop and report the traceback. Do not patch reward or obs semantics yourself. Fixing a typo or a shape bug is fine; note it.
@@ -46,7 +51,7 @@ Copy the best passing stage to `policy_j10.npz` + `policy_j10.meta.json` and run
 1. Walk at 1.2 m/s for 20 s: no fall, mean horizontal speed ≥ 1.15, net x/t ≥ 1.15, |final_y| ≤ 0.5 m, |final_heading_deg| ≤ 5.
 2. Lateral 300 N × 0.2 s at 4 s: no fall through 6 s.
 3. Forward +0.6 m/s from stand at 1 s: upright with speed < 0.5 at 3 s.
-4. 20 kg carry at 0.8 m/s for 20 s: no fall, speed and net x/t ≥ 0.8, same drift gate.
+4. 20 kg carry, **INTERIM per R-117**, payload at **P-042 (0.32, 0, 0.415)** torso frame, 0.8 m/s for 20 s: no fall, speed and net x/t ≥ 0.8, same drift gate (`carry.json`). Also report `carry_legs.json` (Legs' point (0.25, 0, 0.10)), not gated. The final G4 carry gate follows TARGETS.md. The j10_carry/j10_rough stages randomize the payload position over x 0.24–0.33, y ±0.02, z 0.09–0.425 (R-117).
 
 ## 6. Deliverables (commit to main under modules/legs/rl/, commit before pull --rebase)
 - `policy_j10*.npz` + `.meta.json` per stage, `results/j10*_*.json`, GIFs, `curves/j10_*.png`, `logs/j10_*.jsonl`
