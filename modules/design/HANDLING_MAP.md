@@ -71,3 +71,20 @@ Controls facts behind this procedure:
 7. **Stand-up checks:** joint-limit and encoder sanity check in the supported pose, then a stand-up only from a supported
    pose with the gantry or tether attached for the first stand after a thermal event. Log the event (R-146: fall-budget
    entry if it came via TUCK).
+
+**Controls review of the T&R bec3b82 edits as applied by ID (ecb938d): accepted, no wording changed above. Conflicts and
+open points vs controls facts, for T&R/ID:**
+- **C1 (edit 7 vs R-146(a) interim):** in HOLD_DERATED the motors stay ON and the controller never commands MO_OFF; it waits
+  for a drive trip, then TUCKs (the other drives stay energised). So "wait for MO_OFF + 5 s" never starts on its own under
+  the interim: the remote E-stop with the area clear comes first, then MO=0 on every drive + 5 s with no motion. Under
+  R-146(b) the MO_OFF interlock (contact, supported CoM, CoM speed < 0.1 m/s, all torques below friction, 50 ms) is the
+  trigger, as T&R wrote.
+- **C2 (edit 1 order):** T&R requires the battery check **before approaching**. Step 1a currently follows step 1, whose
+  E-stop/contactor/LOTO actions may need an approach. Recommend running 1a from a distance first (remote E-stop is fine).
+- **C3 (edit 4, D94):** with no brakes and backdriving screws (friction 7–9 N·m), straightened legs re-flex in the roll
+  unless strapped; the knee strap is what holds them, and straightening by hand is itself a hand-in-pinch action. Step 4's
+  heading still says "Two-person roll"; the roll is two-person, the lift (step 5) is three.
+- **C4 (edit 5 vs N6):** T&R/Robot Lab say "100 mm core"; N6 above (P-052 rev 2, Torso 1585e80) says 116 mm core. ID/Torso
+  to confirm the cartridge spec for step 6.
+- **C5 (edit 2):** 82 °C is the R-146(a) interim latch (R-142's 83 °C belongs to the G4 path); the hot-band warning holds either way.
+- No conflict for edits 3 and 6.
