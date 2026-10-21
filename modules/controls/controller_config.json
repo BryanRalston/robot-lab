@@ -7,11 +7,11 @@
   "shoulder_roll_soft_limit_deg": 127,
   "shoulder_roll_soft_limit_ref": "R-133; source of truth limits/soft_limits.json (abduction only, mirrored)",
   "drive_thermal_derate": {
-    "ruling": "R-141 (e8b74e7); Electronics \u00a718.5 P-055 23f6992 + addendum 430684c",
+    "ruling": "R-141 (e8b74e7), R-142 (00b3268); Electronics \u00a718.5 P-055 23f6992 + addendum 430684c",
     "t_start": 75.0,
     "t_half": 82.0,
     "scale_min": 0.5,
-    "t_stop": 84.0,
+    "t_stop": 83.0, "t_stop_note": "R-142 (00b3268): latch at a 0x22A2 reading >= 83 C, final even if the bench shows rounding",
     "t_resume": 78.0,
     "t_drive_trip": 85.0,
     "temp_source": "0x22A2:00",

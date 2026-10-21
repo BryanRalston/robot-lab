@@ -58,7 +58,9 @@ def test_ramp_derate_writes_permille_and_never_cl_pl():
 
 def test_stop_latch_whole_robot_then_mo_off_after_sit():
     io, sup, sits = make()
-    ramp(io, sup, 'l_knee', 70, 84.2, rate_K_s=3.0)
+    ramp(io, sup, 'l_knee', 70, 82.9, rate_K_s=3.0)
+    assert sup.state == RUN
+    ramp(io, sup, 'l_knee', 82, 83.2, rate_K_s=3.0)
     assert sup.state == STOPPING and len(sits) == 1 and 'l_knee' in sits[0]
     assert all(io.mo.values())                     # still powered during the sit
     assert io.limit['l_knee'] == 500 and io.limit['r_knee'] == 1000
@@ -145,5 +147,6 @@ def test_min_combination():
 
 
 def test_sit_timing_numbers():
+    assert DerateConfig().t_stop == 83.0                # R-142
     assert sit_timing_margin(0.3, 1.2) > 1.5          # plate slope (430684c): 3.3 s for 1 K
     assert sit_timing_margin(1.19, 1.2) < 0           # drive-only adiabatic bound: flagged in DRIVE_DERATE.md

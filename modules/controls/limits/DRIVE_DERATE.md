@@ -1,6 +1,6 @@
 # Drive thermal derate (R-141)
 
-Sources: Arbiter **R-141** (e8b74e7, modules/RULINGS.md); Electronics R1_ARCHITECTURE §18.5 **P-055** (23f6992) and the
+Sources: Arbiter **R-141** (e8b74e7, modules/RULINGS.md), **R-142** (00b3268: stop latch at a reading ≥83 °C, final); Electronics R1_ARCHITECTURE §18.5 **P-055** (23f6992) and the
 **P-055 addendum** (430684c, citing Elmo *EtherCAT Application Manual* G-ETHERCATAM v1.403 [EAM]).
 Code: `drive_thermal_derate.py`. Tests: `test_drive_thermal_derate.py`. Config: `controller_config.json` → `drive_thermal_derate`.
 
@@ -9,8 +9,8 @@ Code: `drive_thermal_derate.py`. Tests: `test_drive_thermal_derate.py`. Config: 
 |---|---|
 | ≤ 75 °C | scale 1.0 |
 | 75–82 °C | linear 1.0 → 0.5 |
-| 82–84 °C | 0.5 |
-| ≥ 84 °C on **any** drive | latch whole-robot controlled stop: `request_safe_sit()` (WBC/fall-mode safe posture or sit), drives stay on and derated during the sit; on `sit_done()` (or `sit_timeout_s` 3 s) MO=0 on **all** drives |
+| 82–83 °C | 0.5 |
+| reading ≥ 83 °C on **any** drive (R-142; R-141 had 84) | latch whole-robot controlled stop: `request_safe_sit()` (WBC/fall-mode safe posture or sit), drives stay on and derated during the sit; on `sit_done()` (or `sit_timeout_s` 3 s) MO=0 on **all** drives |
 | drive fault MF 0xD000 / EMCY 0x4310 (own trip 85 °C) | same latch (fault input) |
 | resume | only `re_enable()`, only if every drive has a fresh reading < 78 °C and no over-temp fault; nominals restored, then the curve applies |
 
@@ -34,7 +34,7 @@ Jumps: a step larger than max(2 K, 3 K/s × age) is rejected unless repeated 3 c
 
 **Flag: 1 °C quantisation.** 0x22A2 is integer °C. If the drive truncates, a reading of 84 can be a true 84.99 °C, so the
 real band before the 85 °C trip can be ~0 K. At 0.3 K/s the sit needs ≥ 0.38 K of band.
-**Proposal (ruling not changed):** latch the stop on a reading ≥ 83 °C, i.e. a true temperature of ≥ 83.0 °C. That gives
+**Adopted by R-142 (00b3268), final even if the bench shows rounding:** latch the stop on a reading ≥ 83 °C, i.e. a true temperature of ≥ 83.0 °C. That gives
 ≥ 1 K, which is 3.3 s at the plate slope (margin +2.1 s) and covers the quantisation. Keep resume at < 78 °C.
 Above 82 °C the limit is already 0.5, so I²R losses during the sit are ≤ ~¼ of the losses at peak. That makes the plate
 slope conservative. The sit duration itself is an estimate: measure stand-to-sit on the bench.
@@ -45,7 +45,7 @@ slope conservative. The sit duration itself is an estimate: measure stand-to-sit
 3. 0x6072/0x6073 units: per-mille of 0x6075 (CiA 402) is not stated in [EAM].
 4. CL[1]/PL[1] interaction: verify that 0x6072/0x6073 cap the current **below** the commissioned CL/PL (effective = min?).
 5. Binary Interpreter fallback 0x2013 (rPDO2) / 0x2012 (tPDO2), UINT64: the frame format isn't in [EAM], and the RO/WO attributes look swapped. Use it only if (4) fails.
-6. Integer truncation versus rounding of 0x22A2 (sets whether the 83 °C proposal is needed).
+6. Integer truncation versus rounding of 0x22A2 (informational only; R-142 keeps 83 °C either way).
 
 ## Open items
 - MuJoCo heat-up/sit smoke not added: the PD-only stand on the box isn't stable without the policy/WBC, so it can't validate the sit. Run it with the WBC sit once that path exists.

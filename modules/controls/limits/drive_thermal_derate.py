@@ -28,7 +28,7 @@ class DerateConfig:
     t_start: float = 75.0          # R-141
     t_half: float = 82.0           # R-141: 0.5 here
     scale_min: float = 0.5
-    t_stop: float = 84.0           # R-141 controlled stop
+    t_stop: float = 83.0           # R-142 (00b3268): latch at a reading >= 83 C, final (was 84, R-141)
     t_resume: float = 78.0         # R-141 hysteresis
     t_drive_trip: float = 85.0     # drive's own shut-off [CR p.284]
     temp_source: str = '0x22A2:00'  # primary (430684c); '0x22A3:1'..4 candidate; 'sdo' fallback
@@ -213,7 +213,7 @@ def combine_min(*limit_sets):
 
 
 # ---- timing check (R-141 stop at 84 vs drive trip at 85)
-def sit_timing_margin(dTdt_K_s, sit_s, latency_s=0.05, t_stop=84.0, t_trip=85.0):
+def sit_timing_margin(dTdt_K_s, sit_s, latency_s=0.05, t_stop=83.0, t_trip=85.0):
     """Seconds left before the drive's own trip after the sit completes (positive = OK)."""
     return (t_trip - t_stop) / dTdt_K_s - (sit_s + latency_s)
 
