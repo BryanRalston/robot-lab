@@ -10,7 +10,8 @@ geometry:   # robot frame origin = waist centre; x fwd, y left, z up (mm)
   shoulder_flange: {y_c: 150, bc_dia: 80, n_bolt: 8, bolt_dia: 8.4}
   grommet: {dia: 22, y_c: 110, z_off: -55}
   bezel_inserts: {dia: 5.6, pitch: 116}        # 4x M4 on the land corners
-  partition: {mat: CFRP_QI, width_y: 260, height_z: 280, t: 1.0, x0: -10, z0: 40}
+  partition: {mat: CFRP_QI, width_y: 260, height_z: 320, t: 1.0, x0: -10, z0: 0}   # spans pelvis top to bulkhead rib
+  posts: {mat: Al7075T651, y: [-100, 100], w_y: 20}   # waist-ring posts pelvis->bulkhead (bulkhead x0..x0+t)
   ethercat_bosses: {dia: 3.2, dx: 70, dz: 50, z_c: 90}
   pelvis: {mat: Al7075T651, width_y: 260, depth_x: 140, height_z: 60, wall: 6, z0: -60}
 load_cases:   # forces in N, moments in N*mm
@@ -22,3 +23,4 @@ load_cases:   # forces in N, moments in N*mm
   LC6_stand:       {target: pelvis_top, F: [0, 0, -652]}              # 66.5 kg
 fixed: pelvis_bottom
 criteria: {SF_min: 2.0, land_defl_max: 0.05, mode1_min_hz: 80, buckling_min: 3.0}
+post: {freq_case: LC6_stand, buckle_case: LC1_chest_pad}
