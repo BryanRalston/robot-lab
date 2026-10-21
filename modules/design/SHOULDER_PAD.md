@@ -264,3 +264,14 @@ Foam 0.035 + sleeve 0.009 + inserts/anchor 0.006 = **0.050/side, 0.100 kg pair =
 - Drawing limit **e ≤ 2.4 mm**; Arms' stack passes by 0.11 mm at:
   - **tray lip tolerance ≤ ±0.3 mm**
   - **core cut tolerance ≤ ±0.3 mm**
+
+## W2 cover check (R-125) — cad/covers/w2_cover_check.py/.json
+- Inputs: head shell (p100) and torso cover (p009, **coarse 28-tri envelope**) from site v4, converted to Arms' frame (x = X, y_out = −(Z+260), z = Y−1500; L shoulder_roll at site (0,1500,−260), R mirrored). The Arms r15 carrier is not in the repo yet, so this used the R14 housing (OD108, x ±7.5) + the pad R10 envelope on the roll axis: tray 62², outer face 36.5 mm beyond the flange (y 8.2–90.5, z ±31).
+- Results (no clash, 0 points inside):
+
+| Cover | to pad (mm) | to housing (mm) |
+|---|---|---|
+| Head shell | 271 | 234 |
+| Torso cover | 98 | **36.5** (inboard wall at y −90) |
+
+- Shoulder cover trim changes: the pad window **68 × 68 R6 re-centres to z 0** (on the roll axis, was −20); the OD114 housing relief is unchanged; the cover skin must clear the pad side faces by ≥3 mm through roll ROM (check against the r15 carrier when Arms commits it). No head/torso trim needed.
