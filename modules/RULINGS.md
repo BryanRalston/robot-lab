@@ -1115,3 +1115,7 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
 
 ## R-116 (2026-10-14) Trunnion bore (Actuators 46436e5, D80)
 - Adopt a 12 mm bore with the housing trunnion boss grown from 20 to 23 mm, outward only and 7 mm deep (fatigue ratio 1.65, static SF >=3.6). **+0.008** in full. Slip or bonded pin fit, no press fit. This closes the L62 condition. Reserve ~-0.64.
+
+## R-117 (2026-10-20) J10 gates (Controls 5ecdbf4)
+- No-drift gate accepted: 1.2 m/s for 20 s, |final y| <=0.5 m, |heading| <=5 deg, net x/t >=1.15. Carry >=0.8 m/s is an **interim** gate; the final G4 carry gate follows TARGETS.md.
+- Carry payload: use **P-042 (0.32, 0, 0.415)**, the basis for the R-079/R-081/R-096 thermal and carry rulings. Add payload-position randomization covering at least Legs (0.25, 0, 0.10) to P-042 before job 10.
