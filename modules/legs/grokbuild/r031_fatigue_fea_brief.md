@@ -22,3 +22,9 @@ Inputs: `legs/R031_FIXES.md`, `legs/hp_lever_family_r031.py`, `actuators/results
 7. Knee twin-housing centre web at 3.6 kN/screw (T&R #8), with D69 ø85 frame geometry from Actuators. Material per R-132 §2 / L66: 7075-T7351, plate 3.501–4.0 in [EST], ST = web thickness (trunnion axis y) [EST]; sustained ST load YES (bearing press fit + bolt preload) → limits 211 static (ST), 221 L/LT-only features, 317 fall (Job 9 interim); results above are held.
 
 Output: `reliability/results/r031_*.json` with the peak, amplitude, Kt, SF and mesh-level table for each run.
+
+## R-135 request: JOB9 b3 re-run at minimum wall (Legs L65/P-152, 2026-10-21)
+- Geometry: femur ø50 × **1.37** wall, tibia ø45 × **1.40** wall (σ∝t^-n minimum from femur_dent_l65.py [EST interp]), outside the sleeve; sleeve OD 46.80 per P-152, DP490 layer as JOB9_SPEC b3.
+- Load: R-023 side dent / bending + fall, as JOB9_SPEC b3.
+- Pass: fall peak **SF ≥ 1.0 vs 393 MPa** (7050-T73511 S-basis, no permanent dent) for both tubes; keep the b3 262 single-path and adhesive peel/shear checks.
+- PASS → 1.5 mm adopted (booking +0.15). FAIL → revert to P-047 1.6 mm (bore 46.8, sleeve ≤ 46.6 per BOND_SPEC §3).

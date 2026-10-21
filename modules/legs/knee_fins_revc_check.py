@@ -1,6 +1,9 @@
 """R-077: clash check of Actuators rev C finned knee housing (cad/knee_twin_housing_finned_revc.step) - fins-only body (rev C minus D59
 housing) swapped into model_v4, knee 0..135: min OCC distance to every L/R part except the housing's own mates, + v5 thigh fairing hull
-(fins inside?) + knee-cap keep-out. Same method as knee_fins_d69c.py (L50)."""
+(fins inside?) + knee-cap keep-out. Same method as knee_fins_d69c.py (L50).
+Stock (R-128/R-132/R-135, L67): housing + centre web one piece, 7075-T7351. CAD envelope rev C 184.0x107.9x105.1, release r116
+204.8x115.8x105.1 mm -> 105.1+3 = 4.25 in stock, above the 4.0 in plate limit: no permitted plate band (forging / split nut / <=98 mm open,
+actuators/results/STOCK_GRAIN.md). ST along 105.1 (screw axes). Limits 211 static (provisional, ST) / 317 fall (Job 9 interim)."""
 import os,sys,json,numpy as np
 HERE=os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0,os.path.join(HERE,'../model'))
 import cadquery as cq, trimesh, model_v4 as M

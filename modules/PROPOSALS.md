@@ -400,3 +400,18 @@ All keep R-076 (reinforced isolation, IEC 60664-1 creepage, IP2X), R-074 (main l
 - **(b) local step/doubler over 80 mm:** rejected. ~+0.013 pair per tube at 1.4 mm, but the 80 mm is the FE stub length, not a defined impact zone — a side fall can strike any exposed span, so the band can't be placed with evidence. A step adds Kt ~1.5–2 [EST] on the fall bending (220.1 at 1.2 → ~330–440 vs 262 single-path) and fatigue at the step; a local internal step means boring from thicker stock or bonding (DP490 peel, R1 §8 concerns). Saving ≤0.03 kg/pair does not justify it.
 - **Other cases at 1.5:** fall bending and 3 BW scale down from 1.2 (220.1/110.1 MPa at 1.2 → lower at 1.5), so fall SF vs 262 ≥1.19 and fatigue no worse than baseline. Bond/collar ID unchanged (OD held 50/45); internal sleeve 47.6 OD must become ≤47.0 (tube ID 47.0 at 1.5) — flag to self/BOND_SPEC. No thigh-cover load path counted.
 - **Gate:** job 9 b3 re-run at 1.5 mm to confirm dent ≤393.
+
+### P-152: Legs: femur/tibia inner bonded sleeve OD 47.6 → 46.80 mm for the 1.5 mm wall (L65, R-135)
+- Date: 2026-10-21
+- Module / proposer: Legs / RL Legs
+- Affected owners: Actuators (hip-pitch output / collar interface, per R-135 "through CONTRACTS with Actuators"), Materials (bond), Arbiter
+- Change: inner 7075 sleeve (DECISIONS L22, BOND_SPEC header "47.6/43.6 × 34") OD **47.6 → ≤ 47.0; proposed 46.80 mm** (ID 43.6 and length 34 unchanged → sleeve wall 2.0 → 1.6 mm). Reason: L65 ø50 × 1.5 tube gives a 47.0 bore. **The brief's 46.9 does NOT keep the BOND_SPEC §3 bond line**: §3 sets diametral clearance 0.20 ± 0.03 mm (0.10 radial target, 0.08–0.13 range); 47.0 − 0.20 = **46.80** (46.9 would give 0.05 radial, below the 0.08 floor). Tolerance: sleeve OD 46.80 ± 0.015 with tube bore 47.00 ± 0.015 [EST tolerance split] holds 0.20 ± 0.03.
+- Contract row: **no CONTRACTS.md row currently states the sleeve OD** (searched: only "knee clevis → femur flange | 4 × M5 12.9" in §1c Mounting and the §Structural femur/tibia line; sleeve is defined only in legs/DECISIONS L22 and legs/BOND_SPEC). Requested Arbiter edit (Legs does not edit CONTRACTS): add to §1c Mounting table a row
+  `| hip-pitch collar → femur tube (bonded) | 7075 split collar ID 50 × 34 + femur ø50 × 1.5 (bore 47.0) + inner 7075 sleeve OD 46.80 / ID 43.6 × 34, DP490 0.10 mm bond line (0.20 ± 0.03 diametral), 8 × ø7 42CrMo4 backup pins (L63-R) | fall + R-023 dent/bending; bond SF per BOND_SPEC | legs/BOND_SPEC.md, legs/DECISIONS L22/L63/L65, P-152 |`
+  and the same sleeve line for the tibia (ø45 × 1.5) if Arbiter wants the tibia joint listed. Owner: Legs (sleeve, tube); Actuators co-sign (collar / hip-pitch output side).
+- Fallback: if JOB9 b3 re-run at min-wall 1.37 femur / 1.40 tibia fails SF ≥ 1.0 vs 393 (R-135), revert to P-047 1.6 mm → bore 46.8, sleeve OD ≤ 46.8 (by BOND_SPEC §3: **46.60**).
+- Impact on contracts: sleeve mass −0.004 kg/sleeve [EST: π/4(47.6²−46.8²)·34·2.81e-6]; booking unchanged (+0.15, R-135).
+- Impact on targets: none beyond L65.
+- Evidence: legs/femur_dent_l65.py, results/r031/femur_dent_l65.json, BOND_SPEC §3, RULINGS R-135 (b8a2c69).
+- Affected owner response: pending (Actuators)
+- Status: open

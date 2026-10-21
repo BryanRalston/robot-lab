@@ -15,3 +15,4 @@
 - 2026-10-21 Legs L64: R-128 check; job 7 limit kept 262 (T651/T7351 conflict); femur/P-047 re-check; legs DRAWING_NOTES.md.
 - 2026-10-21 Legs L65/L66: femur/tibia dent fix 1.5 mm wall proposed; knee centre web T7351 stock/grain/ST notes.
 2026-10-21 09:05 RL Thermal: R-131 → modules/thermal/R131_ELMO_MG.md: (1) G-TWI no-heatsink credit valid, but mounts FAIL as booked: knee thigh plate ~174 °C cont/120 duty (needs ~0.03 m² finned plate +35–40 g/leg), hip_pitch/ankle drives on housing exceed 85 °C baseplate (own standoff plates), firmware drive-temp derate 75→85 °C; net credit ≈ −0.25…−0.30 kg; (2) D86 Elektron 43 ΔT +1–2.5 K hip/ankle, knee/shoulder unchanged (knee stays Al): PASS with hot-sized/bonded stator fit + PEO
+- 2026-10-21 Legs L67 (R-135): P-152 sleeve OD 46.80; knee web stock 4.25 in from CAD (no permitted plate, 211/317 provisional); JOB9 b3 min-wall re-run request.
