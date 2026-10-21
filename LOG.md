@@ -33,3 +33,4 @@
 - 2026-10-21 09:20 ET Thermal: R-143 Option B (L60 cut-out) re-run, r131_optB.py — B2 70.6 °C standing PASS; shroud + skirt foil required for 48 °C.
 - 2026-10-21 09:21 ET Thermal: Option B re-run with Legs L74 notch 1320 mm² (r131_optB_notch.py): 71.1 °C standing PASS; min notch ≈320 mm² (80 °C), 500 mm² for 5 K; shroud/skirt specs unchanged.
 - 2026-10-21 09:24 ET Thermal: ID rev 6 chimney 1118 / notch 1323 (r131_optB_r6.py): 71.7 °C standing PASS; 1200 rule → ≥1000 mm²; min ≈250 mm² (80 °C), ≈400 (5 K).
+- 2026-10-21 09:27 ET Thermal: D95 hip-pitch plates on pelvis rear wall (D95_HIP_WALL_CHECK.md, d95_hip_wall.py): wall ≤49 °C PASS, plates 60–69 °C duty, hip-yaw +≤1 K; shield optional.
