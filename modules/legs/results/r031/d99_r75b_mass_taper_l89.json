@@ -1,0 +1,50 @@
+{
+ "step_cm3": [
+  81.03,
+  14.7
+ ],
+ "per_side": {
+  "PU_g": 36.3,
+  "shims_plates_g": 17.3,
+  "seat_g": 24.3,
+  "lug_g": 19.8,
+  "arm_g": 76.5,
+  "residual_metal_g": -0.5
+ },
+ "ring": {
+  "ring_g": 37.5,
+  "pins_g": 10.7
+ },
+ "per_knee_g": 395.5,
+ "bar_g_EST": 40,
+ "robot_kg": 0.871,
+ "arms_robot_kg": 0.306,
+ "taper": {
+  "profile": "h = 18*sqrt(x/63), floor 9, 24 wide; root 18 kept over the R5 fillet",
+  "vol_ratio": 0.708,
+  "save_robot_kg": 0.089,
+  "stress_const_along": "sigma(x)=root sigma until the 9 mm floor (x<15.8), lower beyond",
+  "checks": {
+   "design 3.65 kN": {
+    "root_MPa": 177,
+    "SF_net": 1.48,
+    "SF_Kt1p4": 1.05,
+    "tip_shear_MPa": 25.3
+   },
+   "bottoming 5.25 kN": {
+    "root_MPa": 255,
+    "SF_net": 1.54,
+    "SF_Kt1p4": 1.1,
+    "tip_shear_MPa": 36.5
+   },
+   "T_STOP 830 N.m (5.53 kN/side)": {
+    "root_MPa": 269,
+    "SF_net": 1.46,
+    "SF_Kt1p4": 1.04,
+    "tip_shear_MPa": 38.4
+   }
+  },
+  "fatigue": "rare-event stop (Controls kneel 108.9 deg < 130 contact); root 1.4 x 177 = 248 MPa > 58 at 1e8 -> rare-event acceptance only, as L84 r2",
+  "energy": "92.5 J is absorbed by the PU; arm compliance not credited (stiffer than the pad by >20x [EST])"
+ }
+}

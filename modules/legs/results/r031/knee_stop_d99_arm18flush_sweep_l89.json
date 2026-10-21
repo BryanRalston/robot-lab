@@ -1,0 +1,79 @@
+{
+ "-20": [
+  [
+   "-20 | X_strk | X_pad0_-20",
+   2.3,
+   "{'L_knee': 128}"
+  ],
+  [
+   "-20 | X_strk | X_pad1_-20",
+   2.3,
+   "{'L_knee': 128}"
+  ],
+  [
+   "-20 | X_pad0 | X_strk_-20",
+   2.3,
+   "{'L_knee': 128}"
+  ],
+  [
+   "-20 | X_pad1 | X_strk_-20",
+   2.3,
+   "{'L_knee': 128}"
+  ],
+  [
+   "-20 | X_strk | L_ankle screw -y body (ankle_body_x1)",
+   4.5,
+   "{'L_knee': 145, 'L_ankle_pitch': -45}"
+  ],
+  [
+   "-20 | X_strk | L_ankle screw +y body (ankle_body_x1)",
+   4.5,
+   "{'L_knee': 145, 'L_ankle_pitch': -45}"
+  ],
+  [
+   "-20 | X_strk | L_ankle trunnion bracket strut to tibia [EST]",
+   6.7,
+   "{'L_knee': 0}"
+  ],
+  [
+   "-20 | X_pad0 | L_ankle screw -y body (ankle_body_x1)",
+   10.3,
+   "{'L_knee': 145, 'L_ankle_pitch': -45}"
+  ],
+  [
+   "-20 | X_pad1 | L_ankle screw +y body (ankle_body_x1)",
+   10.3,
+   "{'L_knee': 145, 'L_ankle_pitch': -45}"
+  ],
+  [
+   "-20 | X_strk | R_ankle trunnion bracket top plate (shank) [EST]",
+   12.0,
+   "{'L_hip_yaw': 45, 'R_hip_yaw': 45, 'L_knee': 90}"
+  ],
+  [
+   "-20 | X_pad0 | L_knee lever r47.5 (Actuators STEP)",
+   13.2,
+   "{'L_knee': 120}"
+  ],
+  [
+   "-20 | X_pad1 | L_knee lever r47.5 (Actuators STEP)",
+   13.2,
+   "{'L_knee': 120}"
+  ],
+  [
+   "-20 | X_pad0 | L_knee screw -y RV12 roller-screw rod \u00f812",
+   21.0,
+   "{'L_hip_roll': -20, 'R_hip_roll': -20, 'L_knee': 145}"
+  ],
+  [
+   "-20 | X_pad1 | L_knee screw +y RV12 roller-screw rod \u00f812",
+   21.0,
+   "{'L_hip_roll': -20, 'R_hip_roll': -20, 'L_knee': 145}"
+  ],
+  [
+   "-20 | X_pad0 | L_knee screw -y GE12 C rod-end eye",
+   21.4,
+   "{'L_hip_roll': -20, 'R_hip_roll': -20, 'L_knee': 145}"
+  ]
+ ]
+}

@@ -405,3 +405,18 @@ Numbered L84 because L83 already holds the tube local-buckling item. Scripts: kn
 ## L87 — Hip yaw narrowed (Controls 2b92408); r7 gaits superseded, 2026-10-21
 - **Hip yaw:** Controls' clash rerun (2b92408) shows the r116b knee housings collide at 45°. The new range is **left −35..+40°, right −40..+35° (mirrored)**, replacing the L39 45° end. Sweeps that used yaw ±45 (L84/L85 D99, L79 skirt) are conservative against the new range.
 - **r7 reference gaits:** these exceeded the −0.916 rad (P-157 controlled) ankle bound. They are **superseded by Controls' regenerated gaits**. Anything derived from the r7 gaits (e.g. the Job 7 walking loads) must be re-derived from the regenerated set.
+
+## L89 — D99 r75b (Actuators 8978a05/13eb4b0): flush arm, CAD mass reconciliation, tapered arm, 2026-10-21
+- **Flush 24×18 arm accepted** (t0−18..t0); the Legs 6 mm extension is dropped. Re-sweep (knee_stop_d99_flush_sweep_l89.py → results/r031/knee_stop_d99_arm18flush_sweep_l89.json): **striker arm ↔ ankle screw body 4.5 mm at knee 145° / ankle −45° (PASS ≥ 3)**; pad ↔ ankle screw 10.3; rod-end eyes 21.4.
+- **Correction to L85:** the L85 "t0−22" sweep did not apply the deeper arm (the sed pattern no longer matched Actuators' source), so its 12.0 mm striker figure was for the 12 mm arm. Actuators found 0.5 mm (FAIL) for t0−22; L85 is superseded by this entry.
+- **CAD mass (d99_r75b_mass_taper_l89.py, OCC volume × density; STEP solid 0 81.03 cm³ = one stack side, solid 1 14.7 cm³ = ring + pins):** per side PU 36.3 g, shims/end plates 17.3, seat 24.3, lug 19.8, **arm 76.5**; ring 37.5 + 2× ø6 pins 10.7. **Per knee 395.5 g + collar bar 40 g [EST] = 435.5 g → 0.871 kg robot.** The arms alone are **0.306 kg robot** (confirms Actuators' ≈ 0.30).
+- **Why 0.344 was wrong:** it came from Actuators' text estimate (0.484 − 2×70 g), which booked strikers + arms at 75 g/knee for the 24×12 arm with no ring. The CAD has 2× (lug 19.8 + arm 76.5) = 193 g/knee of strikers plus the 48 g ring. Actuators' script figure (0.682 kg) matches their analytic formula (it omits the ring and pins, about 0.096 kg robot, and uses seats 30×26×6). **The CAD number, 0.87 kg robot (0.79 without the EST bar), is the right one.** The D99 line is **far over the 0.49 cap**.
+- **Tapered 7075-T7351 arm (hand beam):** tangential depth h = 18·√(x/63) from the tip, floor 9 mm (tip shear and lug), 24 mm radial, root 18 kept over the R5 fillet. Volume ×0.708 → **−0.089 kg robot** (inside the −0.08…−0.10 target). Bending stress is constant at the root value from x ≈ 15.8 mm to the root, and lower in the 9 mm tip zone.
+  - Design 3.65 kN: 177 MPa, SF 1.48 net / 1.05 Kt.
+  - Bottoming 5.25 kN: 255 MPa, 1.54 / 1.10.
+  - T_STOP 830 N·m (5.53 kN/side): 269 MPa, 1.46 / 1.04.
+  - Tip shear ≤ 38 MPa.
+  - 92.5 J goes into the PU, with arm compliance not credited.
+  - Fatigue: rare-event only (root 248 MPa at Kt > 58), since Controls' kneel at 108.9° is below the 130° contact.
+  - An I-section pocket was not taken: the gates are at SF ≈ 1.04 with Kt, so the taper is the limit without FEA. A Grok Build FEA (Kt along the taper) is needed to confirm the 1.04, or to allow pocketing.
+- **After the taper the robot total is ≈ 0.78 kg (CAD + EST bar), still over 0.49.** This goes to Robot Lab and Actuators.
