@@ -16,6 +16,8 @@ export XLA_PYTHON_CLIENT_PREALLOCATE=false MUJOCO_GL=egl RL_RUNS=/root/rl-runs-j
 ```
 Record both hashes in the report. **If the sim/v3 hash is not 4115f6e, stop and report** (the model changed under the plan). Training inputs (make_model output, R-118 mass, randomize/eval_box, obs clip, knee peak) are pinned at **d786dff**: `git merge-base --is-ancestor d786dff HEAD` must succeed, and `git diff d786dff HEAD -- modules/legs/rl sim/v3` must be empty except for this brief's own outputs. Use a new `RL_RUNS` dir so job-4 checkpoints are not picked up by `restore`.
 
+R-127 (5c203ad) shoulder-roll soft limit 115° is a Controls runtime limit (`controls/limits/soft_limits.json`). The MJCF hard range −15…180° is unchanged, so the training inputs are unchanged and the pin above stays valid. The policy's arm targets stay within ±0.25 rad (~14°) of the carry pose, well inside 115°.
+
 ## 1. Regenerate the MJX model from the current sim/v3 (CPU, ~1 min)
 ```bash
 python make_model.py
