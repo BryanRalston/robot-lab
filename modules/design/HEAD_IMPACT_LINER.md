@@ -50,3 +50,16 @@ Proposed **1.5 mm** CF 2×2 twill (≈6 plies 200 gsm, Easy Composites XC110 bas
 
 ## Open items
 Controls: body/neck orientation at contact + 1.104 kg rerun + coupled effective mass. Head/Actuators: ZED, XM430 shock ratings, bearing C0. Head: FOV vs brow lip. Materials: laminate check, LD29 rate/multi-hit. Arbiter: +0.022 kg [EST]. Robot Lab/T&R: upper-body 163–301 J needs a Controls fall strategy; covers can't take it.
+
+## 7. Citations for T&R (2026-10-21)
+**Neck bearings (radial basic load ratings; brand not yet chosen, so the lowest listed value governs):**
+| bearing | source | C (dynamic) | C0 (static) |
+|---|---|---|---|
+| 6806-2RS 30×42×7 (yaw) | NSK 6806 (open): https://www.oss.nsk.com/in/products/bearings/ball-bearings/deep-groove-ball-bearings/single-row-deep-groove-ball-bearings/6806-apn.html | 5.20 kN | 3.65 kN |
+| | ISB/TradeBearings 6806-2RS sheet: https://en.tradebearings.com/data/pdf/55/12/6806_2RS-157431.pdf | 4.55 kN | **3.40 kN** |
+| | SMT thin-wall catalogue (6806, all seal types): https://en.smtbearing.com/wp/wp-content/uploads/2015/08/en-62-68006900-catalog.pdf | 4.55 kN | 3.40 kN |
+| 6800-2RS 10×19×5 (pitch idler) | NSK 6800 / 6800DD (sealed): https://www.nsk.com/am-en/engineering/products/bearings/ball-bearings/deep-groove-ball-bearings/single-row-deep-groove-ball-bearings/6800-apn.html | 1.89 kN | **0.84 kN** |
+| | Koyo/JTEKT 6800 2RS: https://koyo.jtekt.co.jp/en/products/detail/print.php?pno=6800+2RS | 2.15 kN | 0.84 kN |
+Basis for T&R: 6806-2RS C0 3.40 kN, 6800-2RS C0 0.84 kN (radial; axial static capacity of a deep-groove bearing is lower, so ask the supplier for it). Both are far below the ~22 kN body-KE bypass load (HEAD_NECK_BREAKAWAY_PACKAGING.md), so they support the breakaway ruling: the bearings must stay out of the fall load path.
+
+**ZED X Mini non-operating shock: NOT PUBLISHED.** Stereolabs' product page (https://www.stereolabs.com/store/products/zed-x-mini-stereo-camera), the ZED X/X Mini datasheet v1.2 (https://static.generation-robots.com/media/zed-x-datasheet-v1.2.pdf) and the IP-rating support article (https://support.stereolabs.com/articles/2894153238-what-is-the-ip-rating-of-the-zed-2i-and-zed-x-and-what-does-it-mean) give IP67, an aluminium body and an IMU range of ±12 g only. The ±12 g is a measurement range, not a survivability rating. No shock or drop specification was found. → **TP-G5 needs a drop qualification of the assembled head** (ZED in its mount, liner and shell) at the P-161 energy (20.9 J), with a post-drop check of ZED calibration and depth. Alternatively, Head asks Stereolabs for a shock spec in writing. Until then the allowable g stays open.
