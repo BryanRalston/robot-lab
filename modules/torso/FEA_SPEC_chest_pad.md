@@ -23,3 +23,8 @@
 
 ## Cartridge acceptance (T&R b1fe48f)
 Dynamic crush coupon per lot at 5.7 m/s: peak ≤29.0 kN, plateau in the R-102 band, densification strain recorded. Pre-crush inspection per DIAGNOSIS.md §5.
+
+## Rev 2026-10-21: soft core option REJECTED, 4.5 pcf core kept
+- Materials b359af8 candidate: HexWeb CR III 5/32-5052-3.8, 1.276 MPa, ×1.30 rate, plateau 11.7 / 17.4 kN, 864 J, 0.072 kg (RFQ crush cert 1.24–1.31 MPa; fallback land 104 × 104).
+- **Rejected per Controls 1021e37:** the 25° chest-only landing bottoms out the core (101 vs 81.2 mm).
+- The spec and pad mass stay at **4.5 pcf, 0.085 kg core**, with lot band 19.5–22.3 kN and LC1 29 kN. The 3.8 pcf grade stays listed as a rejected option only.

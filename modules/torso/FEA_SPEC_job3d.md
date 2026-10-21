@@ -1,5 +1,5 @@
-# FEA SPEC: job 3d (IR BC, LC1 29 kN) + job 3e (reduced LC1), DRAFT/PENDING (2026-10-21)
-**Variant written: job 3d alone.** Job 3e is a separate pending draft (below). Per Arbiter R-158 (36c75a7), the merged 3d+3e brief needs two conditions, and I grepped the repo for both on 2026-10-21:
+# FEA SPEC: job 3d ONLY (IR BC + envelope check, LC1 29 kN, 3c-light) (2026-10-21, rev 2)
+**Variant written: job 3d ONLY** (Controls 1021e37 closed the 25° case as a FAIL for the soft core). Per Arbiter R-158 (36c75a7), the merged 3d+3e brief needs two conditions, and I grepped the repo for both on 2026-10-21:
 - Materials' cited HexWeb crush data for the selected lower grade, with the 1.60 dynamic/lot ratio: **not present**. MATERIALS_DB has HC5052_3.1 and HC5052_4.5 only; no selected 11.2 kN grade, no lot spread, no 1.60 ratio.
 - Controls closing the 25° chest-only case: **not present** (no Controls doc).
 
@@ -47,10 +47,11 @@ Files: `fea_job3d.yaml`, plus the shared `fea_job3.py`. The geometry is the **3c
 
 **Mass credit: none booked until 3d is done** (R-158). T&R expects −1.0 to −1.4 kg after a waist-path re-size [EST].
 
-## Job 3e: PENDING draft (do not run)
-- Energy gate **824 J** (L3 ΔPE 549 × 1.5; R-158).
-- Plateau 11.2 kN weakest-corner quasi-static (73.8 mm usable stroke at 10 % margin) → **LC1 17.9 kN limit / 26.9 kN ultimate** (× 1.60), IR BC, same gates.
-- P-160: **1.55 / 2.3 kN·m** [EST].
-- **Blocked on:**
-  - (1) Materials selecting the grade, with a cited crush strength, lot spread and rate factor confirming 1.60. Candidates from the HexWeb CR III catalog (typical crush, 1/8–3/8 cell): 2.6 pcf 5/32 = 90 psi; 3.1 pcf = 130 psi; 3.0 pcf 3/8 = 120 psi. Over the 98 × 98 land: 90 psi → 5.96 kN typ; 130 psi → 8.6 kN typ. This also means the land/core area needs re-checking against the plateau; Materials and T&R to confirm.
-  - (2) Controls closing the 25° chest-only L3 case.
+## Job 3e / soft pad core: REJECTED (Controls 1021e37)
+- Materials b359af8 (CHEST_PAD_CORE.md) offered **HexWeb CR III 5/32-5052-3.8**:
+  - 1.276 MPa crush; rate factor ×1.30;
+  - plateau 11.7 kN min / 17.4 kN dynamic upper; absorbs 864 J (gate 824 J); core 0.072 kg (−13 g).
+  - That would have allowed LC1 17.9 / 26.9 kN.
+- **Rejected:** Controls 1021e37 shows a 25° chest-only landing bottoms out that core (101 mm needed vs 81.2 mm stroke), so R-158 item 3 is not met.
+- **The design keeps the 4.5 pcf core** (LC1 29 kN). The reduced LC1 is not merged, and no P-160 reduction below the IR value is taken.
+- Local chest load = the governing of LC1 (29 kN) and the pad's dynamic upper plateau, so **LC1 governs (conservative).**
