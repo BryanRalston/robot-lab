@@ -36,3 +36,9 @@
 - 2026-10-21 09:27 ET Thermal: D95 hip-pitch plates on pelvis rear wall (D95_HIP_WALL_CHECK.md, d95_hip_wall.py): wall ≤49 °C PASS, plates 60–69 °C duty, hip-yaw +≤1 K; shield optional.
 - 2026-10-21 09:34 ET RL Controls: R-146(b) WBC chest-supported lower (standalone, hands-and-knees start, ×0.5 legs/arms) → chest_lower_wbc.py: contact 0.081 m/s nominal, ≤0.082 over DR (mass 65–68.5, pad tc 0.005–0.04), peak chest ≤430 N, lower 3.0 s, D94 flag→MO=0 at 3.9–4.0 s, elbow ≤25.2 N·m (cap 38), shoulder ≤56/83.5. Open: knee pads roll off (thigh-front contact). Prone still forbidden as routine safe-sit. GIF media/progress/2026-10-21_controls_r146b_chest_lower_wbc.gif
 - 2026-10-21 09:35 ET Thermal: ID rev 6b stack z840 + offset mouth + aft-only shroud (r131_optB_r6b.py): 73.1 °C standing PASS, shroud 40–42 °C, skirt 4 mm gap OK, keep 40 mm foil band.
+
+## 2026-10-21 Controls — R-146(b) hands-first kneel→chest lower joined, DR (R-150 a39a2a4): FAIL
+- chest contact is 1.97 m/s (limit 0.1), peak force ≤11.0 kN (limit 8.8 kN). The arms collapse at the 38 N·m elbow cap.
+- Total T is 4.81 s nominal, 5.31 s DR worst. Hand plant is ≤0.40 m/s and ≤1525 N per hand. Knee pad is 0.36 m/s and ≤1183 N.
+- Provisional latch N = 82 (measured T), or 81 [EST] with the passing chest lower. r = 0.3 K/s is not measured.
+- Details are in modules/controls/limits/DRIVE_DERATE.md.

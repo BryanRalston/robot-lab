@@ -225,3 +225,41 @@ DR: mass 65 / 68 / 68.5 kg × timeconst × lean (99 runs).
 - The armature barely matters: 1083 → 1095 N·m from 0 → 0.553.
 - Kneel tip back is mostly a static sit on the stops (about 800 N·m at only 2.5 rad/s).
 - The knee stays inside the 145° clash-free range in every case.
+
+## R-146(b) hands-first kneel → chest lower, joined (kneel_toe_wbc.py; order approved by Arbiter R-150 a39a2a4) — FAILS
+- **Sequence:**
+  - A: crouch + CoM shift, feet flat.
+  - H: hands to the floor, CoM behind the toe line.
+  - K: knee drop on toes + hands, a guard-throttled joint path.
+  - S: settle 0.4 s.
+  - D: `chest_lower_wbc.run(sim=…)`.
+- **DR:** 68 kg nominal plus mass 65/68/68.5 × chest-pad stiffness tc 0.005/0.02/0.04 (9 runs).
+- **The chest-pad tc does not change A–S.** The pads are not loaded until D, so A–S vary only with mass.
+
+| | nominal 68 kg | DR worst |
+|---|---|---|
+| A / H / K / S (s) | 1.00 / 0.78 / 1.19 / 0.40 | 1.00 / 0.80 / 1.21 / 0.40 |
+| D: chest contact (s) / MO=0 (s) | 0.14 / 1.44 | 0.15 / 1.91 |
+| **Total T through MO=0 (s)** | **4.81** | **5.31** |
+| hand plant speed, per hand (m/s) l / r | 0.36 / 0.33 | **0.40 / 0.37** (68.5 kg) |
+| hand peak force, per hand (N) l / r | 1525 / 1513 | **1525 / 1520** |
+| knee-pad contact speed (m/s) / peak force (N) | 0.36 / 1117 | **0.36 / 1183** |
+| chest contact speed (m/s), limit 0.10 | **1.97 FAIL** | **1.97 FAIL** |
+| peak chest force (N), limit 8800 | 6913 | **11006 FAIL** (3 of 9 over 8.8 kN, all at pad tc 0.005) |
+
+- **Failure:** the hands-and-knees state reached at knee contact is not held. The elbows sit at the 38 N·m derated cap
+  (0.5 × 76). The knees bounce off the pads and the trunk pitches onto the hands, so the chest is already moving down
+  at 1.1 m/s when the chest lower starts.
+  - Hand to knee is 0.36 m here, against 0.77 m in the standalone chest-lower spawn, which passes.
+  - Placing the hands farther (0.6–0.9 m ahead of the toes) makes the robot fall onto them at 0.8–1.8 m/s.
+- **Knee-pad contact vs walking:** the 1.2 m/s WBC walk (1–4 s window) gives a 1213 N peak foot force. The
+  touchdown foot speed is mean 0.035 m/s, max 1.05 m/s; the max is a noisy contact-flicker reading. The knee pads
+  (0.36 m/s, ≤ 1.18 kN per pair) are at walking-impact force level.
+  - Note: this walk run fell at 4.23 s (5 s run), so that needs a separate check.
+- **Heating rate r:** NOT measured. There is no drive thermal model in this sim; I used the ruling value
+  r = 0.3 K/s [EST].
+- **Latch N ≤ 84 − r·(T + 0.5), provisional, the sequence does not pass:**
+  - Measured T = 5.31 s (DR worst) gives 84 − 0.3·5.81 = 82.26 → **82**.
+  - If the passing standalone chest lower (3.95 s to MO=0) replaces D, T ≈ 1.0 + 0.8 + 1.21 + 0.4 + 3.95 = 7.36 s,
+    which gives 84 − 0.3·7.86 = 81.6 → **81** [EST].
+- Prone stays forbidden as a routine safe-sit.

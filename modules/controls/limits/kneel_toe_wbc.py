@@ -27,6 +27,15 @@ KC = 20.0
 PITCH_A, PITCH_C = 0.35, 1.1     # trunk pitch targets (rad, forward) at the end of A and C
 HAND_X_AHEAD = 0.50       # hand floor target ahead of the knee pads (m)
 MARGIN = 0.9
+ORDER = 'hands_first'   # 'knees_first' (ruling order; falls onto the pads) or 'hands_first' (pending Arbiter)
+COM_K0 = 0.05
+K_MODE = 'joint'      # 'joint': knee drop as a guard-throttled joint path to the hands-and-knees posture; 'task': IK
+K_ARMS = {}           # arm override of the K target posture
+SETTLE_S = 0.4         # hold the hands-and-knees posture before the chest lower
+K_RATE = 1.0 / 1.2     # path rate (1/s) before throttling
+PITCH_K0, PITCH_K = 0.6, 1.25   # trunk pitch ramp during the knee drop (frees the hip from its -105 deg limit)
+COM_K = 0.25          # hands_first knee drop: CoM held this far ahead of the toe line
+HAND_X_TOE = 0.30      # hands_first: hand target ahead of the toe line (m)
 DEBUG = False
 
 
@@ -64,6 +73,8 @@ def run(mass=68.0, pad_tc=0.02, frames=None, fps=25, join_chest=True):
         return anchors[key]
     kguard = ProneLowerGuard(); hguard = ProneLowerGuard()
     t = 0.0; ph = 'A'; tph = {'A': 0.0}; res = dict(fell=None)
+    hpk = {'l': 0.0, 'r': 0.0}; hv = {'l': None, 'r': None}
+    qK0 = None; sK = 0.0; gap = 1.0; vz = 0.0
     peak_tau = np.zeros(m.nu); kref = None; href = None; hand_tgt = None
     while t < 8.0:
         f = s.contacts()
@@ -75,12 +86,16 @@ def run(mass=68.0, pad_tc=0.02, frames=None, fps=25, join_chest=True):
         jc = np.zeros((3, nv)); mujoco.mj_jacSubtreeCom(m, d, jc, 1)
         com = d.subtree_com[1]
         # supports
-        toe_only = ph != 'A'
+        toe_only = ph in ('B', 'C', 'K')
         for g in feet:
             pts = corners(m, d, g, toe_only); a = anchor(('foot', g, toe_only), pts)
             for p, p0 in zip(pts, a):
                 task(point_jac(m, d, m.geom_bodyid[g], p), -KC * (p - p0), W_SUP)
-        if ph in ('C',):
+        if ph == 'K':
+            for g in hands:
+                a = anchor(('hand', g), [d.geom_xpos[g]])[0]
+                mujoco.mj_jacGeom(m, d, (jp := np.zeros((3, nv))), None, g); task(jp, -KC * (d.geom_xpos[g] - a), W_SUP)
+        if ph == 'C':
             for g in kp:
                 a = anchor(('knee', g), [d.geom_xpos[g]])[0]
                 mujoco.mj_jacGeom(m, d, (jp := np.zeros((3, nv))), None, g); task(jp, -KC * (d.geom_xpos[g] - a), W_SUP)
@@ -90,7 +105,7 @@ def run(mass=68.0, pad_tc=0.02, frames=None, fps=25, join_chest=True):
             task(jc[0:1], KC * (cx - com[0]), W_COM); task(jc[1:2], KC * (0 - com[1]), W_COM); task(jc[2:3], KC * (cz - com[2]), W_COM)
             task(jr[1:2], 3.0 * (PITCH_A * a5 - pitch), W_PITCH)
             if u >= 1.0:
-                ph = 'B'; tph['B'] = t
+                ph = 'B' if ORDER == 'knees_first' else 'H'; tph[ph] = t
         elif ph == 'B':
             task(jc[0:1], KC * (toe_x - 0.005 - com[0]), W_COM); task(jc[1:2], KC * (0 - com[1]), W_COM)
             gaps = [float(min(p[2] for p in [d.geom_xpos[g] + d.geom_xmat[g].reshape(3, 3) @ np.array([sx, sy, sz_]) * m.geom_size[g]
@@ -108,6 +123,41 @@ def run(mass=68.0, pad_tc=0.02, frames=None, fps=25, join_chest=True):
             kguard.observe(t, f['knee_pads'] > 1.0, vz, f['knee_pads'])
             if f['knee_pads'] > 1.0 and 'C' not in tph:
                 res['knee_contact_speed_mps'] = round(kguard.contact_speed, 4); ph = 'C'; tph['C'] = t
+        elif ph == 'H':
+            if hand_tgt is None:
+                hand_tgt = [np.array([toe_x + HAND_X_TOE, d.geom_xpos[g][1], 0.0]) for g in hands]; pitch_c0 = pitch; tc0 = t
+            task(jc[0:1], KC * (toe_x - COM_BACK - com[0]), W_COM); task(jc[1:2], KC * (0 - com[1]), W_COM)
+            hz = min(float(d.geom_xpos[g][2] - m.geom_size[g][0]) for g in hands)
+            if href is None: href = hz
+            v_ref = MARGIN * hguard.speed_limit(max(hz, 0.0))
+            href = max(href - v_ref * m.opt.timestep, hz - 0.01)
+            for g, ht in zip(hands, hand_tgt):
+                mujoco.mj_jacGeom(m, d, (jp := np.zeros((3, nv))), None, g)
+                task(jp[0:2], KC * (ht[:2] - d.geom_xpos[g][:2]) * 0.3, W_TASK)
+                task(jp[2:3], -float(np.clip(v_ref + 8.0 * (hz - href), 0.0, v_ref)), W_TASK)
+            task(jr[1:2], 3.0 * (min(PITCH_C, pitch_c0 + 0.8 * (t - tc0)) - pitch), W_PITCH)
+            vzh = max(-float((point_jac(m, d, m.geom_bodyid[g], d.geom_xpos[g]) @ d.qvel)[2]) for g in hands)
+            hguard.observe(t, f['hands_arms'] > 1.0, vzh, f['hands_arms'])
+            if f['hands_arms'] > 5.0:
+                res['hand_contact_speed_mps'] = round(hguard.contact_speed, 4); ph = 'K'; tph['K'] = t
+        elif ph == 'K':
+            gap = min(float(min(p[2] for p in [d.geom_xpos[g] + d.geom_xmat[g].reshape(3, 3) @ (np.array([sx, sy, sz_]) * m.geom_size[g])
+                                                for sx in (-1, 1) for sy in (-1, 1) for sz_ in (-1, 1)])) for g in kp)
+            if kref is None: kref = gap; res['knee_gap0_m'] = round(gap, 3)
+            v_ref = MARGIN * kguard.speed_limit(max(gap, 0.0))
+            kref = max(kref - v_ref * m.opt.timestep, gap - 0.01)
+            for g in kp:
+                mujoco.mj_jacGeom(m, d, (jp := np.zeros((3, nv))), None, g)
+                task(jp[2:3], -float(np.clip(v_ref + 8.0 * (gap - kref), 0.0, v_ref)), W_TASK)
+            ck = COM_K0 + (COM_K - COM_K0) * (1 - max(kref, 0.0) / res["knee_gap0_m"])
+            task(jr[1:2], 3.0 * (PITCH_K0 + (PITCH_K - PITCH_K0) * (1 - max(kref, 0.0) / res["knee_gap0_m"]) - pitch), W_PITCH)
+            task(jc[0:1], KC * (toe_x + ck - com[0]), W_COM); task(jc[1:2], KC * (0 - com[1]), W_COM)
+            vz = max(-float((point_jac(m, d, m.geom_bodyid[g], d.geom_xpos[g]) @ d.qvel)[2]) for g in kp)
+            kguard.observe(t, f['knee_pads'] > 1.0, vz, f['knee_pads'])
+            if f['knee_pads'] > 1.0 and 'S' not in tph:
+                res['knee_contact_speed_mps'] = round(kguard.contact_speed, 4); tph['S'] = t
+            if 'S' in tph and t - tph['S'] >= SETTLE_S:
+                tph['D'] = t; break
         elif ph == 'C':
             if hand_tgt is None:
                 xk = float(np.mean([d.geom_xpos[g][0] for g in kp]))
@@ -134,7 +184,15 @@ def run(mass=68.0, pad_tc=0.02, frames=None, fps=25, join_chest=True):
             l2 = lock.copy(); l2[act[at]] = 1e6
             qd = np.linalg.solve(J.T @ W @ J + LAM * np.eye(nv) + np.diag(l2), J.T @ W @ b); qa = qd[act]
         q_des = np.clip(q_des + qa * m.opt.timestep, lo, hi)
-        sup_g = feet + (kp if ph == 'C' else [])
+        if ph == 'K' and K_MODE == 'joint':
+            if qK0 is None:
+                qK0 = d.qpos[s.qadr].copy(); qK1 = s.target(dict(CL.SPAWN, **K_ARMS)); sK = 0.0
+            vlim = kguard.speed_limit(max(gap, 0.0))
+            sc = 1.0 if vz <= 0.5 * vlim else max(0.02, min(1.0, vlim / max(vz, 1e-6)))
+            if 'S' not in tph: sK = min(1.0, sK + K_RATE * sc * m.opt.timestep)   # freeze at knee contact, settle
+            a5 = 10 * sK**3 - 15 * sK**4 + 6 * sK**5
+            q_des = qK0 + (qK1 - qK0) * a5; qa = np.zeros(m.nu)
+        sup_g = feet + (kp if ph == 'C' else []) + (hands if ph == 'K' else [])
         tau = np.clip(s.pd(q_des, qa) + CL.static_ff(m, d, sup_g, act), -s.lim, s.lim)
         d.ctrl[:] = tau; peak_tau = np.maximum(peak_tau, np.abs(tau))
         if DEBUG and int(round(t * 1000)) % 100 == 0:
@@ -142,11 +200,21 @@ def run(mass=68.0, pad_tc=0.02, frames=None, fps=25, join_chest=True):
             heel = min(p[2] for p in corners(m, d, feet[0], False)[2:])
             print(f'{t:.2f} {ph} comx-toe {com[0]-toe_x:+.3f} comz {com[2]:.3f} pitch {pitch:.2f} heel {heel:.3f} knee_z {d.geom_xpos[kp[0]][2]:.3f} sat {r_[i_]:.2f} {s.names[i_]} q {[round(float(d.qpos[s.qadr[i]]),2) for i,n in enumerate(s.names) if n.startswith("l_") and n[2:] in ("hip_pitch","knee","ankle_pitch")]} fz {f["feet"]:.0f} kp {f["knee_pads"]:.0f}')
         mujoco.mj_step(m, d); t += m.opt.timestep
+        if ph in ('H', 'K'):
+            f6 = np.zeros(6)
+            for ci in range(d.ncon):
+                c = d.contact[ci]
+                for side, g in zip('lr', hands):
+                    if g in (c.geom1, c.geom2) and (c.geom1 in s.floor or c.geom2 in s.floor):
+                        mujoco.mj_contactForce(m, d, ci, f6); hpk[side] = max(hpk[side], float(f6[0]))
+                        if hv[side] is None:
+                            v6 = np.zeros(6); mujoco.mj_objectVelocity(m, d, mujoco.mjtObj.mjOBJ_GEOM, g, v6, 0); hv[side] = round(-float(v6[5]), 4)
         if frames is not None and int(round(t * 1000)) % int(1000 / fps) == 0: frames.append(d.qpos.copy())
         if f['chest_pad'] > 1 or f['other'] > 1 or d.qpos[2] < 0.12:
             res['fell'] = dict(t=round(t, 3), phase=ph, chest=round(f['chest_pad'], 1), other=round(f['other'], 1)); break
+    res['hand_contact_speed_per_hand_mps'] = hv; res['hand_peak_force_per_hand_N'] = {k: round(v, 1) for k, v in hpk.items()}
     res['knee_peak_force_N'] = round(kguard.peak_force, 1); res['hand_peak_force_N'] = round(hguard.peak_force, 1)
-    keys = ['A', 'B', 'C', 'D']
+    keys = ['A', 'B', 'C', 'D'] if ORDER == 'knees_first' else ['A', 'H', 'K', 'S', 'D']
     res['phase_times_s'] = {k: round(tph[keys[i + 1]] - tph[k], 3) for i, k in enumerate(keys[:-1]) if keys[i + 1] in tph}
     res['t_kneel_s'] = round(t, 3)
     res['peak_tau_Nm'] = {j: round(float(max(peak_tau[i] for i, n in enumerate(s.names) if n.endswith(j))), 1) for j in ('hip_pitch', 'knee', 'ankle_pitch', 'elbow', 'shoulder_pitch')}
@@ -159,4 +227,8 @@ def run(mass=68.0, pad_tc=0.02, frames=None, fps=25, join_chest=True):
 
 
 if __name__ == '__main__':
-    print(json.dumps(run(), indent=1))
+    import itertools
+    out = dict(order='hands_first (Arbiter R-150 a39a2a4)', nominal=run())
+    out['dr'] = [dict(run(ms, tc), mass=ms, pad_tc=tc) for ms, tc in itertools.product((65.0, 68.0, 68.5), (0.005, 0.02, 0.04))]
+    json.dump(out, open(os.path.join(HERE, 'kneel_toe_wbc_results.json'), 'w'), indent=1, default=float)
+    print(json.dumps(out['nominal'], indent=1, default=float))

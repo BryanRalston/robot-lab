@@ -1,0 +1,559 @@
+{
+ "order": "hands_first (Arbiter R-150 a39a2a4)",
+ "nominal": {
+  "fell": null,
+  "hand_contact_speed_mps": 0.327,
+  "knee_gap0_m": 0.202,
+  "knee_contact_speed_mps": 0.3581,
+  "hand_contact_speed_per_hand_mps": {
+   "l": 0.3591,
+   "r": 0.3259
+  },
+  "hand_peak_force_per_hand_N": {
+   "l": 1525.3,
+   "r": 1513.2
+  },
+  "knee_peak_force_N": 1117.2,
+  "hand_peak_force_N": 371.1,
+  "phase_times_s": {
+   "A": 1.0,
+   "H": 0.776,
+   "K": 1.19,
+   "S": 0.401
+  },
+  "t_kneel_s": 3.367,
+  "peak_tau_Nm": {
+   "hip_pitch": 126.8,
+   "knee": 129.0,
+   "ankle_pitch": 155.5,
+   "elbow": 38.0,
+   "shoulder_pitch": 83.5
+  },
+  "ankle_min_rad": 0.506,
+  "chest": {
+   "chest_contact_speed_mps": 1.9675,
+   "peak_chest_N": 6913.4,
+   "t_lower_s": 0.142,
+   "t_d94_flag_mo0_s": 1.444,
+   "max_descent_speed_minus_guard_limit_mps": 1.8616,
+   "peak_tau_Nm": {
+    "elbow": 38.0,
+    "shoulder_pitch": 83.5,
+    "hip_pitch": 52.3,
+    "knee": 95.4,
+    "ankle_pitch": 9.0
+   },
+   "prone_static_N": {
+    "chest_pad": 366.2,
+    "knee_pads": 228.6,
+    "hands_arms": 72.3,
+    "feet": 0.0,
+    "other": 0.0
+   },
+   "other_contact_geoms": []
+  }
+ },
+ "dr": [
+  {
+   "fell": null,
+   "hand_contact_speed_mps": 0.127,
+   "knee_gap0_m": 0.197,
+   "knee_contact_speed_mps": 0.254,
+   "hand_contact_speed_per_hand_mps": {
+    "l": 0.1405,
+    "r": 0.1224
+   },
+   "hand_peak_force_per_hand_N": {
+    "l": 1516.8,
+    "r": 1510.6
+   },
+   "knee_peak_force_N": 841.2,
+   "hand_peak_force_N": 239.3,
+   "phase_times_s": {
+    "A": 1.0,
+    "H": 0.673,
+    "K": 1.206,
+    "S": 0.401
+   },
+   "t_kneel_s": 3.28,
+   "peak_tau_Nm": {
+    "hip_pitch": 127.1,
+    "knee": 129.0,
+    "ankle_pitch": 155.5,
+    "elbow": 38.0,
+    "shoulder_pitch": 83.5
+   },
+   "ankle_min_rad": 0.536,
+   "chest": {
+    "chest_contact_speed_mps": 1.8132,
+    "peak_chest_N": 9768.5,
+    "t_lower_s": 0.285,
+    "t_d94_flag_mo0_s": 1.784,
+    "max_descent_speed_minus_guard_limit_mps": 1.7083,
+    "peak_tau_Nm": {
+     "elbow": 38.0,
+     "shoulder_pitch": 83.5,
+     "hip_pitch": 45.4,
+     "knee": 112.9,
+     "ankle_pitch": 10.5
+    },
+    "prone_static_N": {
+     "chest_pad": 354.9,
+     "knee_pads": 227.1,
+     "hands_arms": 55.7,
+     "feet": 0.0,
+     "other": 0.0
+    },
+    "other_contact_geoms": []
+   },
+   "mass": 65.0,
+   "pad_tc": 0.005
+  },
+  {
+   "fell": null,
+   "hand_contact_speed_mps": 0.127,
+   "knee_gap0_m": 0.197,
+   "knee_contact_speed_mps": 0.254,
+   "hand_contact_speed_per_hand_mps": {
+    "l": 0.1405,
+    "r": 0.1224
+   },
+   "hand_peak_force_per_hand_N": {
+    "l": 1516.8,
+    "r": 1510.6
+   },
+   "knee_peak_force_N": 841.2,
+   "hand_peak_force_N": 239.3,
+   "phase_times_s": {
+    "A": 1.0,
+    "H": 0.673,
+    "K": 1.206,
+    "S": 0.401
+   },
+   "t_kneel_s": 3.28,
+   "peak_tau_Nm": {
+    "hip_pitch": 127.1,
+    "knee": 129.0,
+    "ankle_pitch": 155.5,
+    "elbow": 38.0,
+    "shoulder_pitch": 83.5
+   },
+   "ankle_min_rad": 0.536,
+   "chest": {
+    "chest_contact_speed_mps": 1.8132,
+    "peak_chest_N": 6116.5,
+    "t_lower_s": 0.285,
+    "t_d94_flag_mo0_s": 1.906,
+    "max_descent_speed_minus_guard_limit_mps": 1.7083,
+    "peak_tau_Nm": {
+     "elbow": 38.0,
+     "shoulder_pitch": 83.5,
+     "hip_pitch": 47.1,
+     "knee": 103.3,
+     "ankle_pitch": 9.5
+    },
+    "prone_static_N": {
+     "chest_pad": 354.5,
+     "knee_pads": 228.5,
+     "hands_arms": 54.6,
+     "feet": 0.0,
+     "other": 0.0
+    },
+    "other_contact_geoms": []
+   },
+   "mass": 65.0,
+   "pad_tc": 0.02
+  },
+  {
+   "fell": null,
+   "hand_contact_speed_mps": 0.127,
+   "knee_gap0_m": 0.197,
+   "knee_contact_speed_mps": 0.254,
+   "hand_contact_speed_per_hand_mps": {
+    "l": 0.1405,
+    "r": 0.1224
+   },
+   "hand_peak_force_per_hand_N": {
+    "l": 1516.8,
+    "r": 1510.6
+   },
+   "knee_peak_force_N": 841.2,
+   "hand_peak_force_N": 239.3,
+   "phase_times_s": {
+    "A": 1.0,
+    "H": 0.673,
+    "K": 1.206,
+    "S": 0.401
+   },
+   "t_kneel_s": 3.28,
+   "peak_tau_Nm": {
+    "hip_pitch": 127.1,
+    "knee": 129.0,
+    "ankle_pitch": 155.5,
+    "elbow": 38.0,
+    "shoulder_pitch": 83.5
+   },
+   "ankle_min_rad": 0.536,
+   "chest": {
+    "chest_contact_speed_mps": 1.8132,
+    "peak_chest_N": 4156.0,
+    "t_lower_s": 0.285,
+    "t_d94_flag_mo0_s": 1.872,
+    "max_descent_speed_minus_guard_limit_mps": 1.7083,
+    "peak_tau_Nm": {
+     "elbow": 38.0,
+     "shoulder_pitch": 83.5,
+     "hip_pitch": 52.6,
+     "knee": 90.0,
+     "ankle_pitch": 7.9
+    },
+    "prone_static_N": {
+     "chest_pad": 353.9,
+     "knee_pads": 227.3,
+     "hands_arms": 56.4,
+     "feet": 0.0,
+     "other": 0.0
+    },
+    "other_contact_geoms": []
+   },
+   "mass": 65.0,
+   "pad_tc": 0.04
+  },
+  {
+   "fell": null,
+   "hand_contact_speed_mps": 0.327,
+   "knee_gap0_m": 0.202,
+   "knee_contact_speed_mps": 0.3581,
+   "hand_contact_speed_per_hand_mps": {
+    "l": 0.3591,
+    "r": 0.3259
+   },
+   "hand_peak_force_per_hand_N": {
+    "l": 1525.3,
+    "r": 1513.2
+   },
+   "knee_peak_force_N": 1117.2,
+   "hand_peak_force_N": 371.1,
+   "phase_times_s": {
+    "A": 1.0,
+    "H": 0.776,
+    "K": 1.19,
+    "S": 0.401
+   },
+   "t_kneel_s": 3.367,
+   "peak_tau_Nm": {
+    "hip_pitch": 126.8,
+    "knee": 129.0,
+    "ankle_pitch": 155.5,
+    "elbow": 38.0,
+    "shoulder_pitch": 83.5
+   },
+   "ankle_min_rad": 0.506,
+   "chest": {
+    "chest_contact_speed_mps": 1.9675,
+    "peak_chest_N": 11005.8,
+    "t_lower_s": 0.142,
+    "t_d94_flag_mo0_s": 1.527,
+    "max_descent_speed_minus_guard_limit_mps": 1.8616,
+    "peak_tau_Nm": {
+     "elbow": 38.0,
+     "shoulder_pitch": 83.5,
+     "hip_pitch": 52.3,
+     "knee": 107.4,
+     "ankle_pitch": 9.8
+    },
+    "prone_static_N": {
+     "chest_pad": 371.0,
+     "knee_pads": 242.7,
+     "hands_arms": 53.4,
+     "feet": 0.0,
+     "other": 0.0
+    },
+    "other_contact_geoms": []
+   },
+   "mass": 68.0,
+   "pad_tc": 0.005
+  },
+  {
+   "fell": null,
+   "hand_contact_speed_mps": 0.327,
+   "knee_gap0_m": 0.202,
+   "knee_contact_speed_mps": 0.3581,
+   "hand_contact_speed_per_hand_mps": {
+    "l": 0.3591,
+    "r": 0.3259
+   },
+   "hand_peak_force_per_hand_N": {
+    "l": 1525.3,
+    "r": 1513.2
+   },
+   "knee_peak_force_N": 1117.2,
+   "hand_peak_force_N": 371.1,
+   "phase_times_s": {
+    "A": 1.0,
+    "H": 0.776,
+    "K": 1.19,
+    "S": 0.401
+   },
+   "t_kneel_s": 3.367,
+   "peak_tau_Nm": {
+    "hip_pitch": 126.8,
+    "knee": 129.0,
+    "ankle_pitch": 155.5,
+    "elbow": 38.0,
+    "shoulder_pitch": 83.5
+   },
+   "ankle_min_rad": 0.506,
+   "chest": {
+    "chest_contact_speed_mps": 1.9675,
+    "peak_chest_N": 6913.4,
+    "t_lower_s": 0.142,
+    "t_d94_flag_mo0_s": 1.444,
+    "max_descent_speed_minus_guard_limit_mps": 1.8616,
+    "peak_tau_Nm": {
+     "elbow": 38.0,
+     "shoulder_pitch": 83.5,
+     "hip_pitch": 52.3,
+     "knee": 95.4,
+     "ankle_pitch": 9.0
+    },
+    "prone_static_N": {
+     "chest_pad": 366.2,
+     "knee_pads": 228.6,
+     "hands_arms": 72.3,
+     "feet": 0.0,
+     "other": 0.0
+    },
+    "other_contact_geoms": []
+   },
+   "mass": 68.0,
+   "pad_tc": 0.02
+  },
+  {
+   "fell": null,
+   "hand_contact_speed_mps": 0.327,
+   "knee_gap0_m": 0.202,
+   "knee_contact_speed_mps": 0.3581,
+   "hand_contact_speed_per_hand_mps": {
+    "l": 0.3591,
+    "r": 0.3259
+   },
+   "hand_peak_force_per_hand_N": {
+    "l": 1525.3,
+    "r": 1513.2
+   },
+   "knee_peak_force_N": 1117.2,
+   "hand_peak_force_N": 371.1,
+   "phase_times_s": {
+    "A": 1.0,
+    "H": 0.776,
+    "K": 1.19,
+    "S": 0.401
+   },
+   "t_kneel_s": 3.367,
+   "peak_tau_Nm": {
+    "hip_pitch": 126.8,
+    "knee": 129.0,
+    "ankle_pitch": 155.5,
+    "elbow": 38.0,
+    "shoulder_pitch": 83.5
+   },
+   "ankle_min_rad": 0.506,
+   "chest": {
+    "chest_contact_speed_mps": 1.9675,
+    "peak_chest_N": 4673.6,
+    "t_lower_s": 0.142,
+    "t_d94_flag_mo0_s": 1.342,
+    "max_descent_speed_minus_guard_limit_mps": 1.8616,
+    "peak_tau_Nm": {
+     "elbow": 38.0,
+     "shoulder_pitch": 83.5,
+     "hip_pitch": 52.3,
+     "knee": 80.9,
+     "ankle_pitch": 7.8
+    },
+    "prone_static_N": {
+     "chest_pad": 358.9,
+     "knee_pads": 163.7,
+     "hands_arms": 68.5,
+     "feet": 0.0,
+     "other": 76.0
+    },
+    "other_contact_geoms": [
+     "l_thigh",
+     "r_thigh"
+    ]
+   },
+   "mass": 68.0,
+   "pad_tc": 0.04
+  },
+  {
+   "fell": null,
+   "hand_contact_speed_mps": 0.3649,
+   "knee_gap0_m": 0.203,
+   "knee_contact_speed_mps": 0.3391,
+   "hand_contact_speed_per_hand_mps": {
+    "l": 0.3993,
+    "r": 0.3651
+   },
+   "hand_peak_force_per_hand_N": {
+    "l": 1465.2,
+    "r": 1519.5
+   },
+   "knee_peak_force_N": 1183.1,
+   "hand_peak_force_N": 470.1,
+   "phase_times_s": {
+    "A": 1.0,
+    "H": 0.798,
+    "K": 1.193,
+    "S": 0.401
+   },
+   "t_kneel_s": 3.392,
+   "peak_tau_Nm": {
+    "hip_pitch": 126.7,
+    "knee": 129.0,
+    "ankle_pitch": 155.5,
+    "elbow": 38.0,
+    "shoulder_pitch": 83.5
+   },
+   "ankle_min_rad": 0.506,
+   "chest": {
+    "chest_contact_speed_mps": 1.9657,
+    "peak_chest_N": 10089.3,
+    "t_lower_s": 0.145,
+    "t_d94_flag_mo0_s": 1.478,
+    "max_descent_speed_minus_guard_limit_mps": 1.8597,
+    "peak_tau_Nm": {
+     "elbow": 38.0,
+     "shoulder_pitch": 83.5,
+     "hip_pitch": 52.2,
+     "knee": 107.4,
+     "ankle_pitch": 10.0
+    },
+    "prone_static_N": {
+     "chest_pad": 374.6,
+     "knee_pads": 243.5,
+     "hands_arms": 53.9,
+     "feet": 0.0,
+     "other": 0.0
+    },
+    "other_contact_geoms": []
+   },
+   "mass": 68.5,
+   "pad_tc": 0.005
+  },
+  {
+   "fell": null,
+   "hand_contact_speed_mps": 0.3649,
+   "knee_gap0_m": 0.203,
+   "knee_contact_speed_mps": 0.3391,
+   "hand_contact_speed_per_hand_mps": {
+    "l": 0.3993,
+    "r": 0.3651
+   },
+   "hand_peak_force_per_hand_N": {
+    "l": 1465.2,
+    "r": 1519.5
+   },
+   "knee_peak_force_N": 1183.1,
+   "hand_peak_force_N": 470.1,
+   "phase_times_s": {
+    "A": 1.0,
+    "H": 0.798,
+    "K": 1.193,
+    "S": 0.401
+   },
+   "t_kneel_s": 3.392,
+   "peak_tau_Nm": {
+    "hip_pitch": 126.7,
+    "knee": 129.0,
+    "ankle_pitch": 155.5,
+    "elbow": 38.0,
+    "shoulder_pitch": 83.5
+   },
+   "ankle_min_rad": 0.506,
+   "chest": {
+    "chest_contact_speed_mps": 1.9657,
+    "peak_chest_N": 6666.8,
+    "t_lower_s": 0.145,
+    "t_d94_flag_mo0_s": 1.417,
+    "max_descent_speed_minus_guard_limit_mps": 1.8597,
+    "peak_tau_Nm": {
+     "elbow": 38.0,
+     "shoulder_pitch": 83.5,
+     "hip_pitch": 52.2,
+     "knee": 95.6,
+     "ankle_pitch": 9.1
+    },
+    "prone_static_N": {
+     "chest_pad": 370.0,
+     "knee_pads": 229.4,
+     "hands_arms": 72.5,
+     "feet": 0.0,
+     "other": 0.0
+    },
+    "other_contact_geoms": []
+   },
+   "mass": 68.5,
+   "pad_tc": 0.02
+  },
+  {
+   "fell": null,
+   "hand_contact_speed_mps": 0.3649,
+   "knee_gap0_m": 0.203,
+   "knee_contact_speed_mps": 0.3391,
+   "hand_contact_speed_per_hand_mps": {
+    "l": 0.3993,
+    "r": 0.3651
+   },
+   "hand_peak_force_per_hand_N": {
+    "l": 1465.2,
+    "r": 1519.5
+   },
+   "knee_peak_force_N": 1183.1,
+   "hand_peak_force_N": 470.1,
+   "phase_times_s": {
+    "A": 1.0,
+    "H": 0.798,
+    "K": 1.193,
+    "S": 0.401
+   },
+   "t_kneel_s": 3.392,
+   "peak_tau_Nm": {
+    "hip_pitch": 126.7,
+    "knee": 129.0,
+    "ankle_pitch": 155.5,
+    "elbow": 38.0,
+    "shoulder_pitch": 83.5
+   },
+   "ankle_min_rad": 0.506,
+   "chest": {
+    "chest_contact_speed_mps": 1.9657,
+    "peak_chest_N": 4666.5,
+    "t_lower_s": 0.145,
+    "t_d94_flag_mo0_s": 1.409,
+    "max_descent_speed_minus_guard_limit_mps": 1.8597,
+    "peak_tau_Nm": {
+     "elbow": 38.0,
+     "shoulder_pitch": 83.5,
+     "hip_pitch": 52.2,
+     "knee": 81.6,
+     "ankle_pitch": 8.0
+    },
+    "prone_static_N": {
+     "chest_pad": 362.1,
+     "knee_pads": 166.0,
+     "hands_arms": 68.7,
+     "feet": 0.0,
+     "other": 75.2
+    },
+    "other_contact_geoms": [
+     "l_thigh",
+     "r_thigh"
+    ]
+   },
+   "mass": 68.5,
+   "pad_tc": 0.04
+  }
+ ]
+}
