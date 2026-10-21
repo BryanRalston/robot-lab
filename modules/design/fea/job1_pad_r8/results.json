@@ -1,0 +1,399 @@
+{
+ "method": "hex8 linear elasticity (numpy/scipy) + IKO CRBH statics + DP490/M4 hand checks. No skfem/CalculiX on this PC.",
+ "validation": {
+  "patch": {
+   "sigma_xx_MPa": 99.99999999999999,
+   "expected_MPa": 100.0,
+   "err_pct": 1.4210854715202004e-14
+  },
+  "cantilever": {
+   "fea_tip_mm": 0.024391993044491612,
+   "timoshenko_mm": 0.026767085076708507,
+   "bend_mm": 0.022315202231520222,
+   "shear_mm": 0.004451882845188285,
+   "err_pct": 8.873181466754447,
+   "mesh": [
+    4,
+    4,
+    8
+   ]
+  },
+  "hole_Kt": {
+   "peak_vm_MPa": 16.37213197970547,
+   "remote_MPa": 10.0,
+   "Kt": 1.6372131979705469,
+   "kirsch": 3.0,
+   "note": "diagnostic only: traction was sigma*n on a square (near equibiaxial, Kt~2), not uniaxial Kirsch"
+  }
+ },
+ "inputs": {
+  "Fn_N": 8857.539827070756,
+  "Fs_N": 2373.3706435901154,
+  "core_mm": 61.8,
+  "y_contact_mm": 87.0,
+  "y_bond_mm": 20.5,
+  "pad_z_mm": -64.0,
+  "E_MPa": 71700.0,
+  "nu": 0.33,
+  "Sy_bearing_MPa": 480.0,
+  "CRBH": "6013 A",
+  "C0_N": 24300.0,
+  "dp_m": 0.075,
+  "preload_N": 5500.0,
+  "mu": 0.15,
+  "tray_t_mm": 0.5
+ },
+ "arm_weight": {
+  "mass_kg": 6.047000000000001,
+  "W_N": 59.321070000000006,
+  "com_mm": [
+   -33.85985472038915,
+   -10.0,
+   -387.01991041794855
+  ],
+  "F_N": [
+   0.0,
+   0.0,
+   -59.321070000000006
+  ],
+  "M_Nm": [
+   0.5932107000000001,
+   -2.0086028120580357,
+   0.0
+  ],
+  "z_below_yaw_m": 0.26849826360178597
+ },
+ "r7_simplified_s0": {
+  "e0": {
+   "P0_kN": 9.901822910250406,
+   "s0": 2.4540935765317053,
+   "M_Nm": 0.0
+  },
+  "e10": {
+   "P0_kN": 12.263833530802609,
+   "s0": 1.981435897589983,
+   "M_Nm": 88.57539827070755
+  }
+ },
+ "bond": {
+  "area_m2": 0.0038192399999999994,
+  "shear_MPa": 0.6214248498628302,
+  "compression_MPa": 2.3191891127739437,
+  "peel_MPa": 0.0,
+  "governing_MPa": 0.6214248498628302,
+  "note": "uniform crush patch 61.8 mm square; DP490 gate is shear/peel, compression reported separately"
+ },
+ "lug": {
+  "F_bolt_N": 593.3426608975288,
+  "resultant_check_N": [
+   593.3426608975286,
+   8.881784197001252e-15
+  ],
+  "p_max_MPa": 335.76326197027544,
+  "sigma_bearing_MPa": 296.6713304487644,
+  "bearing_SF": 1.6179520928898679,
+  "tearout_MPa": 124.91424439947976,
+  "tearout_SF_vs_330": 2.6418124016717375,
+  "vm_contact_MPa": 410.181396296941,
+  "vm_ligament_MPa": 346.23824454202094,
+  "edge_distance_from_wall_mm": 4.75
+ },
+ "slip": {
+  "cap_N": 825.0,
+  "shear_per_bolt_N": 593.3426608975288,
+  "no_slip": true,
+  "margin": 1.3904275798272303
+ },
+ "cases": [
+  {
+   "name": "axial_e0",
+   "direction": "axial",
+   "e_mm": 0.0,
+   "bearing": {
+    "Fr_N": 8857.738468564681,
+    "Fa_N": 2373.3706435901154,
+    "Mx_Nm": -566.2893382325284,
+    "My_Nm": -153.90432400182542,
+    "Mz_Nm": -206.48324599234002,
+    "Mtilt_Nm": 257.53033184848744,
+    "P0_N": 16769.497067703996,
+    "s0": 1.4490595574746743,
+    "shear_sign": 1.0
+   },
+   "bearing_s0_by_load_line": {
+    "contact": 1.449,
+    "bond": 1.711,
+    "link_face": 1.729
+   },
+   "fe": {
+    "nnode": 3372,
+    "nelem": 2664,
+    "loaded_area_mm2": 3843.9999999999864,
+    "applied_pad_N": [
+     2373.370643590107,
+     -8857.539827070723,
+     0.0
+    ],
+    "vm_abs": 15.389862394734987,
+    "vm_filt": 11.673702325846481,
+    "vm_p95": 8.60309142524106,
+    "vm_region": {
+     "link": 15.389862394734987,
+     "boss": 14.557651380330686,
+     "tray": 4.483488511063012
+    },
+    "defl_mean_mm": 0.006648451250191708,
+    "defl_max_mm": 0.013775005489848183,
+    "u_mean_mm": [
+     0.0019189286218795644,
+     -0.005092769200636553,
+     -0.003818811181422147
+    ],
+    "n_fixed": 177,
+    "n_bottom": 177
+   },
+   "mesh_h_mm": 4.0,
+   "gate": {
+    "von_mises_MPa": 11.673702325846481,
+    "von_mises_pass": true,
+    "bond_MPa": 0.6214248498628302,
+    "bond_pass": true,
+    "bearing_s0": 1.4490595574746743,
+    "bearing_pass": false,
+    "defl_mm": 0.013775005489848183,
+    "defl_pass": true,
+    "slip_pass": true,
+    "shear_per_bolt_N": 593.3426608975288,
+    "friction_cap_N": 825.0,
+    "tab_bearing_SF": 1.6179520928898679,
+    "tab_bearing_pass": true,
+    "case_pass": false
+   }
+  },
+  {
+   "name": "axial_e10",
+   "direction": "axial",
+   "e_mm": 10.0,
+   "bearing": {
+    "Fr_N": 8857.738468564681,
+    "Fa_N": 2373.3706435901154,
+    "Mx_Nm": -566.2893382325284,
+    "My_Nm": -153.90432400182542,
+    "Mz_Nm": -295.05864426304754,
+    "Mtilt_Nm": 332.78543312592046,
+    "P0_N": 18776.299768435543,
+    "s0": 1.29418470623537,
+    "shear_sign": 1.0
+   },
+   "bearing_s0_by_load_line": {
+    "contact": 1.294,
+    "bond": 1.578,
+    "link_face": 1.622
+   },
+   "fe": {
+    "nnode": 3405,
+    "nelem": 2688,
+    "loaded_area_mm2": 3843.9999999999973,
+    "applied_pad_N": [
+     2373.370643590114,
+     -8857.539827070748,
+     0.0
+    ],
+    "vm_abs": 25.769483729392334,
+    "vm_filt": 16.517831741249722,
+    "vm_p95": 10.843068031435442,
+    "vm_region": {
+     "link": 25.584829296461063,
+     "boss": 25.769483729392334,
+     "tray": 9.812107693596403
+    },
+    "defl_mean_mm": 0.008624246537534392,
+    "defl_max_mm": 0.02308737038088495,
+    "u_mean_mm": [
+     0.003871764549564594,
+     -0.006614688433504847,
+     -0.0039538543904101995
+    ],
+    "n_fixed": 187,
+    "n_bottom": 187
+   },
+   "mesh_h_mm": 4.0,
+   "gate": {
+    "von_mises_MPa": 17.24291117256655,
+    "von_mises_pass": true,
+    "bond_MPa": 0.6214248498628302,
+    "bond_pass": true,
+    "bearing_s0": 1.29418470623537,
+    "bearing_pass": false,
+    "defl_mm": 0.024150259647585923,
+    "defl_pass": true,
+    "slip_pass": true,
+    "shear_per_bolt_N": 593.3426608975288,
+    "friction_cap_N": 825.0,
+    "tab_bearing_SF": 1.6179520928898679,
+    "tab_bearing_pass": true,
+    "case_pass": false
+   }
+  },
+  {
+   "name": "down_e0",
+   "direction": "down",
+   "e_mm": 0.0,
+   "bearing": {
+    "Fr_N": 9185.532143622091,
+    "Fa_N": 0.0,
+    "Mx_Nm": -772.7725842248684,
+    "My_Nm": -2.0086028120580357,
+    "Mz_Nm": 0.0,
+    "Mtilt_Nm": 2.0086028120580357,
+    "P0_N": 9239.094885276972,
+    "s0": 2.630127767030886
+   },
+   "bearing_s0_by_load_line": {
+    "contact": 2.63,
+    "bond": 2.63,
+    "link_face": 2.63
+   },
+   "fe": {
+    "nnode": 3372,
+    "nelem": 2664,
+    "loaded_area_mm2": 3843.9999999999864,
+    "applied_pad_N": [
+     0.0,
+     -8857.539827070723,
+     -2373.370643590107
+    ],
+    "vm_abs": 17.497998545457644,
+    "vm_filt": 12.706415357542001,
+    "vm_p95": 9.91271525481079,
+    "vm_region": {
+     "link": 17.497998545457644,
+     "boss": 15.211405117670713,
+     "tray": 5.231896552945734
+    },
+    "defl_mean_mm": 0.008202107389745746,
+    "defl_max_mm": 0.015264319997072071,
+    "u_mean_mm": [
+     -7.210598996327783e-17,
+     -0.006097627002914408,
+     -0.005485755241190663
+    ],
+    "n_fixed": 177,
+    "n_bottom": 177
+   },
+   "mesh_h_mm": 4.0,
+   "gate": {
+    "von_mises_MPa": 12.706415357542001,
+    "von_mises_pass": true,
+    "bond_MPa": 0.6214248498628302,
+    "bond_pass": true,
+    "bearing_s0": 2.630127767030886,
+    "bearing_pass": true,
+    "defl_mm": 0.015264319997072071,
+    "defl_pass": true,
+    "slip_pass": true,
+    "shear_per_bolt_N": 593.3426608975288,
+    "friction_cap_N": 825.0,
+    "tab_bearing_SF": 1.6179520928898679,
+    "tab_bearing_pass": true,
+    "case_pass": true
+   }
+  },
+  {
+   "name": "down_e10",
+   "direction": "down",
+   "e_mm": 10.0,
+   "bearing": {
+    "Fr_N": 9185.532143622091,
+    "Fa_N": 0.0,
+    "Mx_Nm": -772.7725842248684,
+    "My_Nm": 21.72510362384312,
+    "Mz_Nm": -88.57539827070755,
+    "Mtilt_Nm": 91.20077470219857,
+    "P0_N": 11617.552802347387,
+    "s0": 2.0916625397295427
+   },
+   "bearing_s0_by_load_line": {
+    "contact": 2.092,
+    "bond": 2.092,
+    "link_face": 2.092
+   },
+   "fe": {
+    "nnode": 3405,
+    "nelem": 2688,
+    "loaded_area_mm2": 3843.9999999999973,
+    "applied_pad_N": [
+     0.0,
+     -8857.539827070748,
+     -2373.370643590114
+    ],
+    "vm_abs": 25.80302577818783,
+    "vm_filt": 16.868887792411396,
+    "vm_p95": 11.088948168248406,
+    "vm_region": {
+     "link": 25.80302577818783,
+     "boss": 22.115821915862387,
+     "tray": 8.161000556218147
+    },
+    "defl_mean_mm": 0.0094570633106861,
+    "defl_max_mm": 0.02298822287137703,
+    "u_mean_mm": [
+     0.0016073404411633568,
+     -0.007214018193444299,
+     -0.005900037684047499
+    ],
+    "n_fixed": 187,
+    "n_bottom": 187
+   },
+   "mesh_h_mm": 4.0,
+   "gate": {
+    "von_mises_MPa": 16.868887792411396,
+    "von_mises_pass": true,
+    "bond_MPa": 0.6214248498628302,
+    "bond_pass": true,
+    "bearing_s0": 2.0916625397295427,
+    "bearing_pass": true,
+    "defl_mm": 0.02298822287137703,
+    "defl_pass": true,
+    "slip_pass": true,
+    "shear_per_bolt_N": 593.3426608975288,
+    "friction_cap_N": 825.0,
+    "tab_bearing_SF": 1.6179520928898679,
+    "tab_bearing_pass": true,
+    "case_pass": true
+   }
+  }
+ ],
+ "refined_axial_e10": {
+  "h_mm": 2.0,
+  "fe": {
+   "nnode": 25100,
+   "nelem": 22232,
+   "loaded_area_mm2": 3843.9999999999714,
+   "applied_pad_N": [
+    2373.370643590098,
+    -8857.539827070688,
+    0.0
+   ],
+   "vm_abs": 51.38096710059575,
+   "vm_filt": 17.24291117256655,
+   "vm_p95": 10.509248371354795,
+   "vm_region": {
+    "link": 40.36422714423754,
+    "boss": 51.38096710059575,
+    "tray": 11.03960249461044
+   },
+   "defl_mean_mm": 0.008900529839161822,
+   "defl_max_mm": 0.024150259647585923,
+   "u_mean_mm": [
+    0.0040264906436415565,
+    -0.006798604429308939,
+    -0.004097045560920438
+   ],
+   "n_fixed": 674,
+   "n_bottom": 674
+  }
+ },
+ "vm_rule": "Peak von Mises is the hex8 Gauss maximum outside a 6 mm band on the fixed roll-output face and outside a 3 mm band on the boss/link re-entrant edge. Those two lines are support and sharp-corner artifacts; the absolute maximum is reported beside the filtered peak. The hole-contact peak is a bearing stress and is gated by the tab bearing SF, not added again as a von Mises fail, provided the joint does not slip.",
+ "overall": "FAIL"
+}
