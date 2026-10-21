@@ -1354,3 +1354,11 @@ Files: `arbiter/MASS_ROLLUP_G4.md`, `arbiter/g4_rollup.py`, `arbiter/mass_rollup
 
 ### Mass
 - R-126 G4 credible 69.42 + (a) +0.143 = **69.56 kg credible**. Reserve vs 66.5: **−3.06 kg**; to the +0.30 floor −3.36. Option C must now deliver −2.17 to −2.62 (with R-122 −1.19 best / −0.74 now). T2 66.5; R-066 freeze holds; G4/G5 sign-off withheld.
+
+## R-128 — Single-path aluminium allowables from MIL-HDBK-5H (Materials 01982fc) — 2026-10-21
+Evidence: MIL-HDBK-5H (page numbers verified, table numbers inferred) is accepted as a primary cited source; MATERIALS_DB rows AL7075T651_A, AL7050_TUBE, AL6061T6_A.
+1. Single-path 7075-T651 plate uses the A-basis band value ÷1.5 for the drawn stock thickness, not 320. Use the LT value (the lower of L and LT) unless the drawing fixes grain direction to L: 0.25–0.499 in 308; 0.5–1.0 in 313; 1.001–2.0 in 308; 2.001–2.5 in 294; 2.501–3.0 in 280 MPa. Where the load runs through the thickness (ST), use ST: 271 (2.001–2.5 in) and 257 (2.501–3.0 in). For ≤2.0 in there is no ST value, so a through-thickness-loaded part uses 271. 320 remains multi-path only. Every drawing must state its stock thickness and grain direction; an unstated one takes the lowest band value (257).
+2. Consequences: the ankle cross (~30 mm, 1.001–2.0 in band) limit is 308 MPa, replacing R-125's held 262. The W2 carrier limit (R-127's provisional 294) becomes the band value for Arms' stated stock: 308 if ≤2.0 in, in which case plate 295 and root 289 pass on hand calc, still subject to Job 8b FEA.
+3. Femur and tibia tubes are specified 7050-T73511 extrusion, with a single-path limit of 262 MPa (S-basis 393 ÷1.5). The model_v4 "T7451" label is corrected. Legs re-checks the femur tube and P-047.
+4. 6061-T6: 241 confirmed; single-path 161, multi-path 184.
+5. Fall/fault limits (R-127) are recomputed as min(A-basis band, Sy_typ/1.1) for each band.
