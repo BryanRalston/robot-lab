@@ -175,3 +175,32 @@ The sole pad is under the foot plate; the P-025 ankle boot hem is re-anchored ab
 
 - **Mass:** guard 0.0155 kg/side → 0.031 pair; window −0.019 → **net +0.012 pair [EST]** (+0.001 vs rev 4, −0.008 vs the +0.020 booking).
 - **Actuators to confirm:** fin lower-end 45° × 8 taper (Thermal UA effect). **Legs to confirm:** bosses at y 112/148, z 684/796 in the window frame.
+
+## P-156 thigh-fairing knee venting (replaces the P-154 guard, withdrawn) — cad/covers/thigh_knee_vents.py/.json/.stl
+- Basis: Thermal 389f91b (R131 rev 4b): fins sit 48–53 mm inside the v5 hull, and a closed fairing gives > 130 °C. Governing spec via Legs; Actuators D94 (7d22c91): plate window 100 × 46 at y 107–153, face x −34.5, fins 18.5 (tips −53.0); L58 tabs to x −38.
+- **Grille (integrated in the v5 rear skin, x −82.5):** 104 × 52 (y 104–156, z 688–792) over the full fin field.
+  - 8 slots 4.5 × 98 along the fin channels, 2 mm ribs → **65 % open (3528 mm²)**. Slots flush with R0.5 edges, cover colour outside (matte 2K), **Al liner ε ≤ 0.1 inside**.
+  - Fin tips to the grille inner face **29.5 mm** (≥ 10; x −82.5 ≤ −64.5).
+  - IP2X: the 4.5 mm slots stop the 12 mm finger, so 80 mm reach cannot touch fins or live parts. **The T&R touch check (TP-G5-15, ≤ 48 °C; Thermal est. 39 °C) moves to the grille.**
+- **Low inlet z 643–681 / high outlet z 799–837**, same width, 8 slots 4.5 × 36 → **1296 mm² free each** (≥ 1200; 1976 gross), aligned with the channels.
+  - 6 mm solid bars at z 681–687 / 793–799 carry the 4 ribbed PA12 bosses Ø6 × ≥ 5 at y 112/148, z 684/796 (P-154 positions reused), 4× M2.5 A2 per side.
+- **Duct insert (PA12 1.2):** side walls at y 130 ± 26.5 → **side gap 5.0 mm** to the outer fin faces (≤ 5), from x −34.5 to −63 (pocket beyond), z 643–837; notched 10 × 7 at the L58 tabs (≥ 3 mm).
+- Knee twin housing face toward the grille: **low-ε (≤ 0.1) finish, Legs/Actuators part (note only).**
+- P-053 layout unchanged (rear 40 × 50 window region is outside z 643–837 / y 104–156: Legs to confirm). L61 cheek windows (incl. the 14 mm boss window) are on the outboard cheek, ≥ 69 mm from the grille edge, on separate faces: no interaction.
+- **ROM (≥ 3 mm):** grille and duct are thigh-fixed and inside the r143 30.0 mm swept envelope.
+
+| Check | Min clearance | Result |
+|---|---|---|
+| Rods (y 130 ± 45) vs duct walls | **11.0 mm** (y separation, all angles) | PASS |
+| Rods vs the envelope | ≥ 12.0 mm at knee 140° | PASS |
+| Housing (Legs L71) | ≥ 18.1 mm at 145° | PASS |
+| Shank keep-outs | ≥ 95 mm | PASS |
+| Skin | v5 position, keep-out unchanged | PASS |
+
+- **Mass:**
+  - P-156: +0.0028 kg/side → **+0.006 pair [EST]** (duct insert 13 g + liner/fasteners − slots 10 g of PC).
+  - P-154 withdrawn: our guard was 0.031 pair (Robot Lab/Thermal −0.041 used T&R's 20.3 g/side; our rev 4b CALC is 15.5 g). The drive-bay window −0.019 stays.
+  - **True delta: −0.031 + 0.006 = −0.025 pair vs P-154's +0.012 net → knee venting total −0.013 pair.**
+- **Legs to confirm:** skin x −82.5 and the housing front / y extent vs the duct walls ending at x −63; bosses on the bars; P-053 window clear; a CAD ROM recheck with the duct insert.
+- **Thermal to confirm:** 65 % / 1296 mm² free with the duct ending at x −63.
+- **T&R to confirm:** grille touch (TP-G5-15) and IP2X 12 mm / 80 mm on the grille and inlet/outlet.
