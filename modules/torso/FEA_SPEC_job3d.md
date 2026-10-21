@@ -55,3 +55,13 @@ Files: `fea_job3d.yaml`, plus the shared `fea_job3.py`. The geometry is the **3c
 - **Rejected:** Controls 1021e37 shows a 25° chest-only landing bottoms out that core (101 mm needed vs 81.2 mm stroke), so R-158 item 3 is not met.
 - **The design keeps the 4.5 pcf core** (LC1 29 kN). The reduced LC1 is not merged, and no P-160 reduction below the IR value is taken.
 - Local chest load = the governing of LC1 (29 kN) and the pad's dynamic upper plateau, so **LC1 governs (conservative).**
+
+## Job 3e: PROVISIONAL (Arbiter R-158c efcede2), `fea_job3e.yaml`
+- **Inputs:** IR BC + envelope check (as 3d); pad core **HexWeb CR III 5/32-5052-3.8** (Materials b359af8: 1.276 MPa, ×1.30, 11.7 / 17.4 kN, 864 J); **LC1 17.9 kN limit / 26.9 kN ultimate** (LC1a/b/c scaled ×17.9/29); same 3c-light geometry.
+- The local chest load is the governing of LC1 (17.9) and the pad's dynamic upper plateau (17.4), so LC1 governs (conservative).
+- **Outputs: identical to 3d,** for a side-by-side comparison: SFs; deflection/k; modes; CAD + mesh mass; COM; IR waist V/M; P-160 = IR M_y (T&R est. 1.55/2.3 kN·m).
+- **Status:**
+  - **Geometry NOT adopted and NO mass credit** until Controls' forced-25° set (≥ 5 runs, 72.1 kg, second rotation logged) shows **≤ 680 J and no bottoming**.
+  - If that fails, **job 3d at 29 kN governs.**
+  - 3d is unchanged and runs either way.
+- This supersedes the "rejected" note above, which is now provisional under R-158c.

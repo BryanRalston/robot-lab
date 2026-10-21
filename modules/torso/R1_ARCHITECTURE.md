@@ -668,3 +668,6 @@ A full ring flange instead of the cheek (≈0.4 kg [EST]) would give ≈ +2 mm z
   - Hip sweep: below the deck, clear.
   - **Open:** the outboard end at y 123 sits inside the cover's lower width (inner |y| ≈ 123 at z 50–60), so ≈ 0–2 mm. ID to check, or recess the cheek seat 5 mm inboard.
 - **Mass [EST]:** +2.88 − 0.11 (spacer) = **+2.77 kg**. Not booked (R-158: no booking until the FEA is done). A rotary damper alternative (D102c) would change this.
+- **Update 2026-10-21 (R-158c):** the Mayr EAS-compact is **rejected**. Actuators is integrating a **≤ 0.4 kg friction limiter** into the waist-pitch drive.
+  - The torque-limiter keep-out will shrink: the final envelope is due from Actuators.
+  - **Mass note: ≤ +0.4 kg [EST, Actuators line]**, replacing the +2.77 kg above. The torso spacer stays until the envelope is fixed. Not booked.
