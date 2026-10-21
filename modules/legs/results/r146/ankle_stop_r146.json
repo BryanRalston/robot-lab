@@ -1,0 +1,310 @@
+{
+ "A_kneel_need_knee145": [
+  {
+   "heel_lift_deg": 0,
+   "shank_fwd_deg": 118.0,
+   "ankle_q_deg": -118.0,
+   "ankle_q_rad": -2.059,
+   "hip_z": 257,
+   "knee_z": -117,
+   "hip_err": 0.2
+  },
+  {
+   "heel_lift_deg": 5,
+   "shank_fwd_deg": 115.5,
+   "ankle_q_deg": -110.5,
+   "ankle_q_rad": -1.929,
+   "hip_z": 280,
+   "knee_z": -85,
+   "hip_err": 0.1
+  },
+  {
+   "heel_lift_deg": 10,
+   "shank_fwd_deg": 112.75,
+   "ankle_q_deg": -102.8,
+   "ankle_q_rad": -1.793,
+   "hip_z": 303,
+   "knee_z": -52,
+   "hip_err": 0.2
+  },
+  {
+   "heel_lift_deg": 15,
+   "shank_fwd_deg": 109.75,
+   "ankle_q_deg": -94.8,
+   "ankle_q_rad": -1.654,
+   "hip_z": 325,
+   "knee_z": -18,
+   "hip_err": 0.3
+  },
+  {
+   "heel_lift_deg": 20,
+   "shank_fwd_deg": 106.75,
+   "ankle_q_deg": -86.8,
+   "ankle_q_rad": -1.514,
+   "hip_z": 346,
+   "knee_z": 16,
+   "hip_err": 0.4
+  },
+  {
+   "heel_lift_deg": 25,
+   "shank_fwd_deg": 103.25,
+   "ankle_q_deg": -78.2,
+   "ankle_q_rad": -1.366,
+   "hip_z": 366,
+   "knee_z": 52,
+   "hip_err": 0.2
+  },
+  {
+   "heel_lift_deg": 30,
+   "shank_fwd_deg": 99.75,
+   "ankle_q_deg": -69.8,
+   "ankle_q_rad": -1.217,
+   "hip_z": 384,
+   "knee_z": 88,
+   "hip_err": 0.2
+  },
+  {
+   "heel_lift_deg": 35,
+   "shank_fwd_deg": 96.25,
+   "ankle_q_deg": -61.2,
+   "ankle_q_rad": -1.069,
+   "hip_z": 400,
+   "knee_z": 123,
+   "hip_err": 0.2
+  },
+  {
+   "heel_lift_deg": 40,
+   "shank_fwd_deg": 92.5,
+   "ankle_q_deg": -52.5,
+   "ankle_q_rad": -0.916,
+   "hip_z": 414,
+   "knee_z": 159,
+   "hip_err": 0.1
+  },
+  {
+   "heel_lift_deg": 45,
+   "shank_fwd_deg": 88.75,
+   "ankle_q_deg": -43.8,
+   "ankle_q_rad": -0.764,
+   "hip_z": 426,
+   "knee_z": 193,
+   "hip_err": 0.0
+  },
+  {
+   "heel_lift_deg": 50,
+   "shank_fwd_deg": 85.0,
+   "ankle_q_deg": -35.0,
+   "ankle_q_rad": -0.611,
+   "hip_z": 436,
+   "knee_z": 226,
+   "hip_err": 0.3
+  },
+  {
+   "heel_lift_deg": 55,
+   "shank_fwd_deg": 81.0,
+   "ankle_q_deg": -26.0,
+   "ankle_q_rad": -0.454,
+   "hip_z": 443,
+   "knee_z": 259,
+   "hip_err": 0.4
+  },
+  {
+   "heel_lift_deg": 60,
+   "shank_fwd_deg": 77.25,
+   "ankle_q_deg": -17.2,
+   "ankle_q_rad": -0.301,
+   "hip_z": 448,
+   "knee_z": 289,
+   "hip_err": 0.2
+  }
+ ],
+ "B_screw": {
+  "F_screw_N_est": 2218,
+  "rows": [
+   {
+    "q_deg": -45.0,
+    "L2d": 308.7,
+    "arm_mm": 25.7,
+    "tau_avail_Nm": 114.2,
+    "L_with_roll18_est": 266.2,
+    "len_margin_mm": 15.5
+   },
+   {
+    "q_deg": -47.5,
+    "L2d": 307.7,
+    "arm_mm": 21.9,
+    "tau_avail_Nm": 97.0,
+    "L_with_roll18_est": 265.2,
+    "len_margin_mm": 14.5
+   },
+   {
+    "q_deg": -50.0,
+    "L2d": 306.8,
+    "arm_mm": 17.9,
+    "tau_avail_Nm": 79.6,
+    "L_with_roll18_est": 264.3,
+    "len_margin_mm": 13.6
+   },
+   {
+    "q_deg": -52.5,
+    "L2d": 306.1,
+    "arm_mm": 13.9,
+    "tau_avail_Nm": 61.8,
+    "L_with_roll18_est": 263.6,
+    "len_margin_mm": 12.9
+   },
+   {
+    "q_deg": -55.0,
+    "L2d": 305.6,
+    "arm_mm": 9.9,
+    "tau_avail_Nm": 43.8,
+    "L_with_roll18_est": 263.1,
+    "len_margin_mm": 12.4
+   },
+   {
+    "q_deg": -57.5,
+    "L2d": 305.3,
+    "arm_mm": 5.8,
+    "tau_avail_Nm": 25.6,
+    "L_with_roll18_est": 262.8,
+    "len_margin_mm": 12.1
+   },
+   {
+    "q_deg": -60.0,
+    "L2d": 305.1,
+    "arm_mm": 1.7,
+    "tau_avail_Nm": 7.4,
+    "L_with_roll18_est": 262.6,
+    "len_margin_mm": 11.9
+   },
+   {
+    "q_deg": -62.5,
+    "L2d": 305.1,
+    "arm_mm": 2.5,
+    "tau_avail_Nm": 10.9,
+    "L_with_roll18_est": 262.6,
+    "len_margin_mm": 11.9
+   },
+   {
+    "q_deg": -65.0,
+    "L2d": 305.3,
+    "arm_mm": 6.6,
+    "tau_avail_Nm": 29.2,
+    "L_with_roll18_est": 262.8,
+    "len_margin_mm": 12.1
+   },
+   {
+    "q_deg": -67.5,
+    "L2d": 305.7,
+    "arm_mm": 10.7,
+    "tau_avail_Nm": 47.3,
+    "L_with_roll18_est": 263.2,
+    "len_margin_mm": 12.5
+   },
+   {
+    "q_deg": -70.0,
+    "L2d": 306.3,
+    "arm_mm": 14.7,
+    "tau_avail_Nm": 65.2,
+    "L_with_roll18_est": 263.8,
+    "len_margin_mm": 13.1
+   },
+   {
+    "q_deg": -72.5,
+    "L2d": 307.0,
+    "arm_mm": 18.7,
+    "tau_avail_Nm": 83.0,
+    "L_with_roll18_est": 264.5,
+    "len_margin_mm": 13.8
+   },
+   {
+    "q_deg": -75.0,
+    "L2d": 307.9,
+    "arm_mm": 22.6,
+    "tau_avail_Nm": 100.4,
+    "L_with_roll18_est": 265.4,
+    "len_margin_mm": 14.7
+   },
+   {
+    "q_deg": -77.5,
+    "L2d": 309.0,
+    "arm_mm": 26.5,
+    "tau_avail_Nm": 117.5,
+    "L_with_roll18_est": 266.5,
+    "len_margin_mm": 15.8
+   },
+   {
+    "q_deg": -80.0,
+    "L2d": 310.2,
+    "arm_mm": 30.2,
+    "tau_avail_Nm": 134.1,
+    "L_with_roll18_est": 267.7,
+    "len_margin_mm": 17.0
+   },
+   {
+    "q_deg": -82.5,
+    "L2d": 311.6,
+    "arm_mm": 33.9,
+    "tau_avail_Nm": 150.3,
+    "L_with_roll18_est": 269.1,
+    "len_margin_mm": 18.4
+   },
+   {
+    "q_deg": -85.0,
+    "L2d": 313.2,
+    "arm_mm": 37.4,
+    "tau_avail_Nm": 166.0,
+    "L_with_roll18_est": 270.7,
+    "len_margin_mm": 20.0
+   },
+   {
+    "q_deg": -87.5,
+    "L2d": 314.9,
+    "arm_mm": 40.8,
+    "tau_avail_Nm": 181.1,
+    "L_with_roll18_est": 272.4,
+    "len_margin_mm": 21.7
+   },
+   {
+    "q_deg": -90.0,
+    "L2d": 316.7,
+    "arm_mm": 44.1,
+    "tau_avail_Nm": 195.7,
+    "L_with_roll18_est": 274.2,
+    "len_margin_mm": 23.5
+   }
+  ]
+ },
+ "C_clearance_knee145": [
+  {
+   "q_deg": -45,
+   "min_mm": 0.9,
+   "pair": "L_ankle-roll stop carrier under cross [EST] | L_ankle fork cheek +y"
+  },
+  {
+   "q_deg": -55,
+   "min_mm": 0.0,
+   "pair": "L_ankle-roll stop carrier under cross [EST] | L_ankle fork cheek -y"
+  },
+  {
+   "q_deg": -60,
+   "min_mm": 0.0,
+   "pair": "L_ankle-roll stop carrier under cross [EST] | L_ankle fork cheek -y"
+  },
+  {
+   "q_deg": -65,
+   "min_mm": 0.0,
+   "pair": "L_ankle-roll stop carrier under cross [EST] | L_ankle fork cheek -y"
+  },
+  {
+   "q_deg": -70,
+   "min_mm": 0.0,
+   "pair": "L_ankle-roll stop carrier under cross [EST] | L_ankle fork cheek -y"
+  },
+  {
+   "q_deg": -75,
+   "min_mm": 0.0,
+   "pair": "L_ankle-roll stop carrier under cross [EST] | L_ankle fork cheek -y"
+  }
+ ]
+}

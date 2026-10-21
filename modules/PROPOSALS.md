@@ -460,3 +460,9 @@ All keep R-076 (reinforced isolation, IEC 60664-1 creepage, IP2X), R-074 (main l
 - Rev 4d (Thermal ec7b49d): 1 mm Al-taped PC fin-tip baffle (x −56) closes the chimney; outlet aft/up z 822–860 (30 mm above the grille, H ≈ 0.18 m; the H 0.20 option declined: fairing top / skirt hem); housing-fairing 0.05 mm Al foil (fairing inner face only) + slots, local bulge +2 mm for a 10 mm gap. Mass P-156 +0.039 pair [EST] (knee-venting total +0.020).
 - Affected owner response: pending (Legs CAD ROM + housing extent, Thermal areas, T&R touch/IP2X)
 - Status: open
+
+### P-157: Legs (R-146, L73): ankle_pitch dorsiflexion ROM row
+- Change: CONTRACTS ROM ankle_pitch mechanical −60…+40° → **−55…+40°** (toggle at ≈ −61°; −60° has a 1.7 mm moment arm), loaded −50…+40° → **−52.5…+40°** for the kneel only; sim MJCF −0.785 → −0.916 rad (controlled) with a −0.960 hard stop.
+- Evidence: modules/legs/results/r146/ankle_stop_extension.md (torque 62/44 N·m avail vs 29 N·m kneel [EST]; screw 1043/1465 N < walk peak 1734 N).
+- Conditions: Actuators confirm the toggle angle and torque in 3D CAD and relieve the [EST] ankle-roll stop carrier corners (0.9 mm to the fork cheek at −45°). Controls: the extension does not reach knee-pad contact (needs ≈ −78°); the kneel still needs a CoM-ahead-of-toe drop of ≈ 90–140 mm [EST].
+- Affected owners: Actuators, Controls, Arbiter (contract). Status: open
