@@ -56,3 +56,5 @@ Supersedes the rev 3 knee. The guard is ID's CAD, not drawn here: `modules/desig
 - **Thermal (scaled from Thermal rev 4):** UA **0.247** at h 8, 0.135 standing. Drive base at standing duty **75.4 °C** (≤75.5, margin 0.1 K). Thermal should confirm 5.75 pitch / 5.0 gap against their 6 mm-pitch recommendation.
 - **Mass:** knee plate 47.8 g each (rev 4 58.4), **−21 g robot**. This is a credit, not booked; it is inside the +0.066 rev 4 booking.
 - **Guard/ID:** the window and guard narrow by 2 mm: window 100 × 46, guard wall 104 × 50 (y 105–155). At ID's current 52 mm wall (y 104–156) the guard touches the L58 tab edges inside x −34.5…−38 (tab tips at x −38). Even at 50 mm the guard wall sits only 1 mm from the tabs, so ID and Legs need to shorten the tabs to x ≤ −34 or notch the guard.
+- **Binding (Thermal 389f91b):** the knee plate's PEM M3 studs must land in **G10 standoffs with no metal contact** to the frame or femur. A metal path takes the femur bond to 69–71 °C (limit 70).
+- **Guard superseded:** the P-154 PC guard is dropped in favour of a **vented fairing grille (ID/Legs)**. The fin tips still need **≥10 mm of clear air** behind the grille's inner face.
