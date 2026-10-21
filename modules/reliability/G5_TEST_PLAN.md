@@ -145,3 +145,14 @@ Per `legs/R031_FIXES.md`: 5 ASTM D1002 coupons per lot at 23 and 60 °C, part-eq
 - **Pass:** no rupture, no local buckling/crippling, permanent set measured.
 - Also: a D99 stop drop test at 44 J (moment and rate factor) and to bottoming.
 - **TP-G5-20 add (L60 rev C.1, D99):** **measure the PUR90A rate factor** (stop moment at the fall rate vs quasi-static, up to 8.22 rad/s) to confirm ×1.3 [EST]; drop test at 44.1 J and at 95.8 J bottoming.
+
+## TP-G5-21 Chest-pad core incoming inspection (per lot), TORSO_BC_P160_REVIEW §A.1, Materials b359af8
+- **Core:** HexWeb CR III 5/32-5052-3.8, pre-crushed.
+- **Per lot:**
+  - supplier cert: crush strength **1.24–1.31 MPa**;
+  - **3 quasi-static coupons + 1 drop-rate coupon** (≈ 5.7 m/s) on the 101 × 101 land, full 116 mm core, pre-crushed, no initial peak.
+- **Pass:**
+  - weakest plateau **≥ 11.2 kN at the 15° equivalent** (QS min × 0.93);
+  - **dynamic peak/plateau ≤ 17.9 kN**.
+  - Record the plateau, the lot spread and the rate factor.
+- **Fail:** reject the lot, **or use the 104 × 104 land** for a low lot, if the dynamic plateau scaled ×1.06 is still ≤ 17.9 kN.

@@ -160,3 +160,22 @@ Until the Materials core data exist, Torso reruns with IR at LC1 29 kN (job 3d);
 - Materials' lower-crush core data;
 - Controls: 25° L3 contact and waist-pitch stop speeds; backward-fall case;
 - Actuators: the P-160 list above.
+
+## A.1 Core selected (Materials b359af8, modules/materials/CHEST_PAD_CORE.md), 2026-10-21 ~11:10 ET
+**Core: HexWeb CR III 5/32-5052-3.8, pre-crushed**, on the 101 × 101 land, 116 mm.
+
+| item | value | gate | result |
+|---|---|---|---|
+| nominal plateau, 0° QS | 13.0 kN | — | — |
+| weakest corner, 15° QS | 11.7 kN | ≥ 11.2 kN | PASS |
+| dynamic upper bound | 17.4 kN | ≤ LC1 17.9 kN | PASS |
+| energy over 73.8 mm usable (10 % margin) | 864 J | ≥ 824 J (L3 ΔPE × 1.5) | PASS |
+| ratio of upper dynamic to weakest | 1.49 | (1.60 assumed in §A) | better |
+
+**Verdict: CONDITIONAL on the lot spread.**
+- The ±3 % lot spread is [EST].
+- At ±10 % the weakest corner is 10.9 kN < 11.2, so it **FAILS**.
+- The lot spread must be proven per lot by **TP-G5-21** (incoming inspection).
+- **Fallback for a soft lot: the 104 × 104 land** (+6 % area). Its upper bound must still be ≤ 17.9 kN, so it is used only for low lots.
+
+LC1 for job 3e stays **17.9 kN limit / 26.9 kN ultimate** with the IR BC.
