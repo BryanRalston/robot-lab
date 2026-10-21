@@ -1,0 +1,29 @@
+{
+ "TR_worst_pair": [
+  [
+   23.14,
+   -13.0,
+   37.99
+  ],
+  [
+   40.37,
+   2.68,
+   46.05
+  ],
+  0.77
+ ],
+ "TR_panel_phi0_35": 0.77,
+ "ctrl_panel_phi0_45_same_pose": 0.77,
+ "TR_panel_rightsign_flipped(b_r,b_y negated)": 202.08,
+ "ctrl_gaps_sim_input_as_TR(+r,+y)": 194.29,
+ "ctrl_gaps_sim_input_mirrored(-r,-y)": 0.77,
+ "ctrl_test_pose_23_0_38_40_0_46": 219.78,
+ "panel_ymin_TR": 86.0,
+ "panel_ymin_ctrl": 86.0,
+ "n_pts": [
+  767,
+  830
+ ],
+ "ctrl_minus_TR_points_outside": 51,
+ "TR_minus_ctrl": 0
+}

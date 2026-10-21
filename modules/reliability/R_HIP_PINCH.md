@@ -119,3 +119,45 @@ Script `r_hip_pinch_check_8b.py`: ID's geometry with hem R 144 and the panel tri
 | foam durability | **CONDITIONAL**: XLPE ≥ 90 °C near the plume, ≤ 10 % thickness loss criterion, annual/after-event replacement |
 | N7/N8/H2/rescue | **ACCEPT** with 2 wording fixes |
 | panel ↔ shank / floor | **OPEN** |
+
+## Rev 8c re-check (ID d58ffa4 / ec4dde7 / ee80543), 2026-10-21 ~10:15 ET
+Scripts: `r_hip_pinch_check_8c.py` (.json: hem/notch/shroud on ID's r8c_fix geometry, notched pelvis STL), `r_hip_pinch_8c_ctrl.py` (.json: panel-only hem + L↔R vs the Controls trip), `r_hip_pinch_diag_ctrl.py` (.json: 0.77 vs 21.6 mm). Grid = my 2,240 poses plus roll overtravel past the L39 stop contact (−12/+15) of **2.5° (old), 3.6° (SIDE_FALL rev B 3b4c449 / Legs L80 bottom-out [EST]) and 5.8° (proposed bigger bumper)**. J-channel JCH 3.0 mm off every rigid gap. Tolerance −2 mm.
+
+### 1. Rigid gaps (finger 25, nothing in 5–25)
+| gap | nominal ROM | +2.5° | +3.6° | +5.8° | verdict |
+|---|---|---|---|---|---|
+| hem R141.5 ↔ panel (ID r8 R150 panel, ID's number) | 32.1 | 27.7 | not run by ID | – | ID 27.7 − 2 = 25.7 |
+| hem R141.5 ↔ panel (r8c_fix panel R152, relief-conservative, mine) | 30.2 | 30.2 | 30.2 | 30.2 | worst at roll −12 itself; −2 tol → **28.2 PASS** at all overtravels |
+| notched pelvis mesh ↔ panel | 51.0 | 50.9 | 50.9 | 50.9 | PASS |
+| notched pelvis mesh ↔ shroud (local notch) | 29.9 (27.9 tol) | 28.0 (26.0) | **26.7 (24.7)** | **24.1 (22.1)** | PASS nominal/2.5°; **FAIL by 0.3 mm at the 3.6° bottom-out, FAIL by 2.9 mm with the 5.8° bumper** (worst at pitch 42.5, roll −15.6/−17.8, yaw 47.5). Fix: deepen the notch ≥ 1 mm (3.6°) / ≥ 4 mm (5.8°) |
+- **Main `hip_skirt_r8c_pelvis.stl` is empty (84 B, fixed_skirt_retained 0 %)**: the R78.5 non-notch option deleted the skirt. Only `_pelvis_notched.stl` is a valid rev 8c hem. ID: remove or relabel the empty file so nobody builds from it.
+- A sphere-hem check including the shroud gives −35 mm: the shroud penetrates R141.5, which is why the notch is mandatory, not optional.
+
+### 2. Foam force (LD29, 61/126 kPa at 25/50 %)
+- ID's 114 N = 76 kPa × 100 × 15 mm at 31 % strain is **displacement-limited** and assumes the closure stops at 31 % compression. A 30 mm hand + bottomed foam (~4 mm at ~90 %) is ~34 mm, more than the 25.7–30 mm minimum rigid gap, so a hand at the closest point **stops the leg on the hand**: the load is set by the limp drive, not the foam.
+- **Hand, hem (15-wide strip), limp:** 165 N [EST] on 100 × 15 mm = 110 kPa, ≈ 44 % strain (17.5 mm of the 40 mm), so the foam does not bottom under load. The force is still **165 N vs 140 N sustained: FAIL (+18 %)**; transient 165 ≤ 280 PASS. The narrower strip changes the pressure, not the force.
+- **Finger (ø12 on 15 mm):** ≈ 165 N [EST] on ~180 mm² is ~900 kPa → foam bottoms; force ≤ the limp drive 165 N, again > 140 sustained. Unless TP-G5-18 measures ≤ 140 N, finger and hand are **FAIL [EST]**, same as rev 8b. Same remedies: a measured limp clamp ≤ 140 N, a rigid 30 mm standoff, or a damped limp (Controls).
+- **Bottoming of the 40 mm depth:** not by load (44 %). Geometrically yes: wherever the rigid gap < ~34 mm, a 30 mm hand cannot fit without the leg resting on it.
+
+### 3. Strip retention and edge cover (15 mm foam in a 15.5 mm J-channel)
+- Edge cover: the 1.0 mm PC lips sit 37 mm behind the foam face; at 44 % compression they are still ~19.5 mm recessed. **PASS** for the cut edge.
+- Retention: 0.25 mm per side clearance and 3 mm lip engagement give **no mechanical grip**; retention is VHB only. **CONDITIONAL**: add a TP-G5-18 pull-off and shear test after the 85 °C/168 h age (≥ 3× the 1 g mass + limp drag) or close the channel to 14.5 mm (interference).
+
+### 4. L/R strips 20 × 40 × 130
+- 165 × 100/130 = 127 N is valid only when both strips contact over their full length (true at the closures, which go to −2.4 mm rigid). It is **[EST], conditional PASS** (127 < 140). Measure in TP-G5-18.
+
+### 5. Keep-out, rigid edge to rigid edge (Controls 36786b4)
+- **0.77 vs 21.6 mm, root cause:** the geometry is identical (both give 0.77 at the full pose). My 04c7199 text quoted only pitch and yaw; the real worst pair is **L (23.1, −13.0, 38.0), R (40.4, +2.7, 46.1)** in the T&R mirrored convention. Controls' test used roll 0/0, and at that pose L↔R is 219.8 mm (its 21.6 is a different pair). Fed the right rolls with the sim mirror (p, −r, −y), `hip_pinch.gaps` returns **0.77 mm**. The test's own sign convention is correct. **Both models agree; the error was my incomplete pose quote.** Controls should update the test to the full pose.
+- **Rev 8c geometry vs the rev 8b Controls model:** Controls' model has the R150 panel, hem R144 and no J-channel. Rev 8c's R152 relief and the 3 mm JCH make the real rigid gap **3–5 mm smaller**. From 8,000 asymmetric pairs per overtravel case: 20 (3.6°) / 23 (5.8°) are < 28 mm; **5 / 4 are not tripped** by the Controls model. **2 are inside the contract ROM**, e.g. L (38.9, 0.1, 37.7), R (23.2, 3.2, 39.0): rev 8c 23.6 mm, Controls 28.4. **FAIL until Controls rebuilds hip_pinch.py on rev 8c** (r8c_fix panel, R141.5 notched hem, shroud, −3 mm JCH), or as an interim adds a 5 mm offset (trip 33/limit 35/warn 40).
+- Overtravel closures (to −2.4 mm) happen only past the stop, i.e. passive impact; the guard can't act there. The foam is the only protection, so §2 applies.
+
+### Verdicts rev 8c
+| item | verdict |
+|---|---|
+| hem ↔ panel | **PASS** (28.2 mine with tol; ID 25.7), insensitive to 3.6/5.8° overtravel |
+| shroud notch | PASS nominal/2.5°; **FAIL at 3.6° (24.7) and 5.8° (22.1)** → deepen notch ≥ 1 / ≥ 4 mm |
+| empty r8c_pelvis.stl | **fix** (delete/relabel) |
+| foam hand/finger, limp | **FAIL [EST]** 165 vs 140 sustained (114 N is displacement-limited, not valid with a hand); measure TP-G5-18 |
+| J-channel 15.5 / foam 15 | edge cover PASS; retention **CONDITIONAL** (VHB only) |
+| L/R strip 127 N | **conditional PASS [EST]** |
+| Controls keep-out | rigid-to-rigid basis OK; 0.77 vs 21.6 resolved (my quote); **rev 8c not covered: 2 untripped in-ROM closures** → rebuild on 8c or +5 mm |
