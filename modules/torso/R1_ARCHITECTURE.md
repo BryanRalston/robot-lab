@@ -606,7 +606,7 @@ If the refined job 3c needs the 3 mm lid: +0.184 more (0.876).
 - **SBS75X:** rear web at (−105, −60, 160), 147 mm from the floor vent (≥ 40 mm).
 - **Vent:** floor at (−80, 80), outlet down into the pelvis open top.
 - **Liner:** continuous around the notch re-entrant corner (socket walls, floor and land), ≥ 3.0 mm creepage and ≥ 1.5 mm clearance.
-- **BQ79616 balance current:** **240 mA max** (internal CBFET; abs-max table, "max of 8 cells balancing at 75 °C ambient"), TI BQ79616-Q1 datasheet SLUSE14 Rev F (ti.com/lit/ds/symlink/bq79616-q1.pdf). I_CB = V_cell/(2·R_CB + R_DS(on)), per TI SLVAE87B §4.2. The voltage error from a 0.2 m tap at 240 mA is 3.3 mV, so measure with balancing paused.
+- **BQ79616 balance current:** **240 mA max** (internal CBFET; abs-max table, "max of 8 cells balancing at 75 °C ambient"), TI BQ7961X-Q1 datasheet Rev F (ti.com/lit/ds/symlink/bq79616-q1.pdf). I_CB = V_cell/(2·R_CB + R_DS(on)), per TI SLVAE87B §4.2. The voltage error from a 0.2 m tap at 240 mA is 3.3 mV, so measure with balancing paused.
 - **COM:**
   - Pack Δ = **(−16.1, 0, +1.0) mm**, mass 8.80 kg.
   - Whole robot (65.809 kg credible): **(−2.2, 0, +0.1) mm**.
