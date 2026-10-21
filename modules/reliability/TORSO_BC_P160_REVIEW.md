@@ -233,3 +233,15 @@ Script `l3_25deg_pad.py` → `l3_25deg_pad.json` (MuJoCo 3.15 on modules/legs/rl
 2. **pad-point normal velocity** at first pad contact ≤ 4.24 m/s (toe-held) / ≤ 4.67 m/s (knee-held), i.e. E_pad ≤ 453 J; **or**
 3. the feet/knees **slide** (no held pivot) so the free-body bound applies, with the second-stage trunk rotation onto the pad included in the logged pad energy.
 Sim must also log: torso pitch/roll at contact (the 25° definition), CoM height at contact, the pad crush history and any bottoming. Otherwise the fix is outside 3e: a deeper core (stroke ≥ 86 mm usable → ≈ 123 mm core, outside the 116 envelope) or keep LC1 29.0 kN.
+
+### L3 25° chest-only: Controls f1663cc update (2026-10-21 ~11:25 ET)
+- The passive topple cannot reach 25°: 32 initial-condition tries gave at most 17° (or no chest contact) (f1663cc).
+- 24 randomized drives-off topples (2975e93): chest energy ×1.5 max 489 J at 68 kg, ≈519 J at 72.1 kg [EST, mass-scaled]; max crush 36.5 mm; no bottoming.
+- Capacity at the 25° plateau: 9.21 kN × 81.2 mm = 748 J.
+- **T&R recommends releasing job 3e (reduced LC1), pending Arbiter R-158**, on two conditions: (1) the trunk second-rotation log keeps chest energy ×1.5 ≤ 680 J; (2) TP-G5-21 per-lot core acceptance passes.
+
+### P-160 note: waist stop gate (2026-10-21 ~11:25 ET)
+- Gate energy: 0.5 · (3.52 + 0.652) · 8.32² ≈ 144 J → ≈216 J with ×1.5 [EST]; tripped, no TUCK credit (19f27ef).
+- Stop peak moment ≤ 657 N·m (arms-down inertia governs).
+- An elastomer stop alone fails (travel not available); a slip clutch or rotary damper is required, and it must never bottom.
+- Gate: a dynamic model shows gear ≤ 204 N·m at 8.32 rad/s for both inertias (arms down and arms forward).
