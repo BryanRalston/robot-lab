@@ -61,3 +61,25 @@ def test_heading_obs_zero_at_reference():
     yaw = 0.3
     D.qpos = np.array([0, 0, 1, np.cos(yaw / 2), 0, 0, np.sin(yaw / 2)])
     assert np.allclose(eb._heading_obs(D, 0.0), [np.sin(yaw), np.cos(yaw)])
+
+
+def test_payload_pos_dr_covers_both_points():
+    """R-117: the DR box must cover P-042 and Legs' point; eval gate uses P-042."""
+    import yaml
+    import payload_pos as pp
+    cfg = yaml.safe_load(open(os.path.join(HERE, 'train_cfg.yaml')))
+    for name in ('j10_carry', 'j10_rough'):
+        lo, hi = pp.bounds(cfg['stages'][name])
+        assert pp.covers(lo, hi, pp.P042) and pp.covers(lo, hi, pp.LEGS), name
+    lo, hi = pp.bounds({})
+    assert pp.covers(lo, hi, pp.P042) and pp.covers(lo, hi, pp.LEGS)
+    with pytest.raises(ValueError):
+        pp.bounds({'payload_pos': [[0.4, 0, 0], [0.3, 0, 0]]})
+    assert tuple(eb.P042) == pp.P042 and tuple(eb.LEGS_PAYLOAD) == pp.LEGS
+
+
+def test_carry_box_places_payload_at_p042():
+    m, _ = eb.load_box(20.0)
+    assert np.allclose(m.body_pos[m.body('payload').id], [0.32, 0.0, 0.415])
+    m2, _ = eb.load_box(20.0, payload_pos=eb.LEGS_PAYLOAD)
+    assert np.allclose(m2.body_pos[m2.body('payload').id], [0.25, 0.0, 0.10])

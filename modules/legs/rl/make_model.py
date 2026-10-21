@@ -48,14 +48,14 @@ def _xml_text():
         '<option timestep="0.002" integrator="implicitfast" iterations="4" ls_iterations="8"/>',
     )
     xml = xml.replace(
-        '<geom name="l_foot" type="box" pos="0.060 0 -0.071" size="0.120 0.05 0.009" friction="1.0"/>',
-        '<site name="l_sole" pos="0.060 0 -0.080" size="0.20"/>'
-        '<geom name="l_foot" type="box" pos="0.060 0 -0.071" size="0.120 0.05 0.009" condim="3" friction="1.0 0.005 0.0001"/>',
+        '<geom name="l_foot" type="box" pos="0.060 0 -0.074" size="0.120 0.05 0.012" friction="1.0"/>',
+        '<site name="l_sole" pos="0.060 0 -0.086" size="0.20"/>'
+        '<geom name="l_foot" type="box" pos="0.060 0 -0.074" size="0.120 0.05 0.012" condim="3" friction="1.0 0.005 0.0001"/>',
     )
     xml = xml.replace(
-        '<geom name="r_foot" type="box" pos="0.060 0 -0.071" size="0.120 0.05 0.009" friction="1.0"/>',
-        '<site name="r_sole" pos="0.060 0 -0.080" size="0.20"/>'
-        '<geom name="r_foot" type="box" pos="0.060 0 -0.071" size="0.120 0.05 0.009" condim="3" friction="1.0 0.005 0.0001"/>',
+        '<geom name="r_foot" type="box" pos="0.060 0 -0.074" size="0.120 0.05 0.012" friction="1.0"/>',
+        '<site name="r_sole" pos="0.060 0 -0.086" size="0.20"/>'
+        '<geom name="r_foot" type="box" pos="0.060 0 -0.074" size="0.120 0.05 0.012" condim="3" friction="1.0 0.005 0.0001"/>',
     )
     xml = xml.replace(
         '<geom name="torso" type="box" pos="0 0 0.180" size="0.11 0.17 0.130"/>',

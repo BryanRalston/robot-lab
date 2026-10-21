@@ -59,7 +59,7 @@ def _env_from_stage(stage, noise=1.0):
     return HumanoidWalk(xml_path=os.path.join(HERE, xml), config_overrides=overrides)
 
 
-def _randomizer(env, carry):
+def _randomizer(env, carry, stage=None):
     from randomize import make_randomizer
     m = env.mj_model
     return make_randomizer(
@@ -68,7 +68,13 @@ def _randomizer(env, carry):
         [m.geom('l_foot').id, m.geom('r_foot').id],
         float(carry[0]),
         float(carry[1]),
+        *(_payload_bounds(stage) if float(carry[1]) > float(carry[0]) else (None, None)),
     )
+
+
+def _payload_bounds(stage):
+    from payload_pos import bounds
+    return bounds(stage)
 
 
 def network_factory(obs_size, action_size, preprocess_observations_fn):
@@ -292,7 +298,7 @@ def train_stage(name, stage, cfg, num_envs, timesteps, num_evals, run_evals=True
     os.makedirs(os.path.join(HERE, 'logs'), exist_ok=True)
     log_path = os.path.join(HERE, 'logs', f'{name}.jsonl')
     env = _env_from_stage(stage)
-    rand = _randomizer(env, stage['carry'])
+    rand = _randomizer(env, stage['carry'], stage)
     batch = int(cfg['batch_size'])
     minibatch = int(cfg['num_minibatches'])
     # Keep batch * minibatch == num_envs. Scale batch with the env count.

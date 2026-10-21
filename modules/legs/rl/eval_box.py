@@ -106,12 +106,16 @@ def policy_action(obs, weights, mean, std):
     return np.tanh(h[:30])
 
 
-def load_box(carry_kg=0.0):
+P042 = (0.32, 0.0, 0.415)   # R-117 carry gate point, torso frame
+LEGS_PAYLOAD = (0.25, 0.0, 0.10)
+
+
+def load_box(carry_kg=0.0, payload_pos=P042):
     xml = open(XML_V3, encoding='utf-8').read()
     if carry_kg > 0:
         needle = '<geom name="torso" type="box" pos="0 0 0.180" size="0.11 0.17 0.130"/>'
         payload = (
-            f'<body name="payload" pos="0.25 0 0.10">'
+            f'<body name="payload" pos="{payload_pos[0]} {payload_pos[1]} {payload_pos[2]}">'
             f'<inertial pos="0 0 0" mass="{carry_kg}" diaginertia="0.2 0.15 0.2"/>'
             f'</body>'
         )
@@ -515,23 +519,33 @@ def main():
     fwd['impulse_Ns'] = round(0.6 * float(np.sum(m.body_mass)), 3)
     print('FORWARD', fwd['pass'], 'fell', fwd['fell_at_s'], 'final_v', fwd['final_horiz_speed'], 'up', fwd['final_up'], flush=True)
 
-    m20, k20 = load_box(20.0)
-    print('carry mass', round(float(np.sum(m20.body_mass)), 3), 'scale', round(k20, 6), flush=True)
-    try:
-        carry, _ = run_episode(
-            m20, policy, gains, ref, cmd=np.array([0.8, 0.0, 0.0]),
-            seconds=20.0, mode='gait', payload_frac=1.0,
-        )
-    except SystemExit as exc:
-        # A policy trained without payload has a ~1e-6 std on payload_frac: carry is out of scope.
-        carry = {'fell_at_s': None, 'seconds_ran': 0.0, 'mean_horiz_speed': 0.0, 'final_y': 0.0,
+    def carry_trial(pos):
+        mc, kc = load_box(20.0, payload_pos=pos)
+        try:
+            c, _ = run_episode(
+                mc, policy, gains, ref, cmd=np.array([0.8, 0.0, 0.0]),
+                seconds=20.0, mode='gait', payload_frac=1.0,
+            )
+        except SystemExit as exc:
+            # A policy trained without payload has a ~1e-6 std on payload_frac: carry is out of scope.
+            c = {'fell_at_s': None, 'seconds_ran': 0.0, 'mean_horiz_speed': 0.0, 'final_y': 0.0,
                  'final_heading_deg': 0.0, 'net_x_over_t': 0.0, 'error': str(exc)}
-    carry['pass_legacy'] = bool(carry['fell_at_s'] is None and carry['seconds_ran'] >= 19.9 and carry['mean_horiz_speed'] >= 0.8)
-    carry['drift_ok'] = drift_ok(carry)
-    carry['pass'] = bool(carry['pass_legacy'] and carry['drift_ok'] and carry['net_x_over_t'] >= 0.8)
-    carry['gate'] = '20 kg torso payload at (0.25, 0, 0.10), command 0.8 m/s, 20 s, mean horizontal speed >= 0.8, no fall'
-    carry['payload_kg'] = 20.0
+        c['pass_legacy'] = bool(c['fell_at_s'] is None and c['seconds_ran'] >= 19.9 and c['mean_horiz_speed'] >= 0.8)
+        c['drift_ok'] = drift_ok(c)
+        c['pass'] = bool(c['pass_legacy'] and c['drift_ok'] and c['net_x_over_t'] >= 0.8)
+        c['payload_kg'] = 20.0
+        c['payload_pos'] = list(pos)
+        return c
+
+    # R-117: gate at P-042; Legs' point is also scored (reported, not gated). The 0.8 m/s
+    # threshold is INTERIM; the final G4 carry gate follows TARGETS.md (T5, R-003).
+    carry = carry_trial(P042)
+    carry['gate'] = ('INTERIM (R-117): 20 kg payload at P-042 (0.32, 0, 0.415) torso frame, command 0.8 m/s, 20 s, '
+                     'mean speed and net x/t >= 0.8, no fall, drift gate; final G4 carry gate follows TARGETS.md')
     print('CARRY', carry['pass'], 'speed', carry['mean_horiz_speed'], 'fell', carry['fell_at_s'], flush=True)
+    carry_legs = carry_trial(LEGS_PAYLOAD)
+    carry_legs['gate'] = 'reported only (R-117): same as carry with the payload at Legs (0.25, 0, 0.10)'
+    print('CARRY_LEGS', carry_legs['pass'], 'speed', carry_legs['mean_horiz_speed'], 'fell', carry_legs['fell_at_s'], flush=True)
 
     # Drop the bulky per-joint maps from the top level into legs for the walk file only.
     def slim(s, keep_legs=False):
@@ -548,6 +562,7 @@ def main():
         ('push_lateral.json', slim(lat)),
         ('push_forward.json', slim(fwd)),
         ('carry.json', slim(carry)),
+        ('carry_legs.json', slim(carry_legs)),
     ]
     for name, payload in written:
         payload['policy'] = policy_name

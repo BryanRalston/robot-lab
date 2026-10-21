@@ -1,0 +1,44 @@
+{
+  "seconds_ran": 20.0,
+  "fell_at_s": null,
+  "fall_why": "",
+  "z0": 1.027,
+  "mean_horiz_speed": 0.7229,
+  "mean_forward": 0.7112,
+  "mean_vx_world": 0.6134,
+  "mean_vy_world": -0.2818,
+  "net_x_over_t": 0.6136,
+  "final_y": -5.624,
+  "final_heading_deg": -67.68,
+  "payload_frac_obs": 1.0,
+  "knee_rms_nm": [
+    56.3,
+    71.1
+  ],
+  "obs_z_max_t0": 2.96,
+  "min_z": 1.0182,
+  "min_up": 0.9885,
+  "final_up": 0.9937,
+  "final_horiz_speed": 0.8759,
+  "ds_fraction": 0.182,
+  "flight_fraction": 0.0,
+  "ankle_roll_peak_rad": [
+    0.1544,
+    0.1574
+  ],
+  "ankle_roll_peak_deg": [
+    8.85,
+    9.02
+  ],
+  "pass_legacy": false,
+  "drift_ok": false,
+  "pass": false,
+  "payload_kg": 20.0,
+  "payload_pos": [
+    0.25,
+    0.0,
+    0.1
+  ],
+  "gate": "reported only (R-117): same as carry with the payload at Legs (0.25, 0, 0.10)",
+  "policy": "policy_carry.npz"
+}

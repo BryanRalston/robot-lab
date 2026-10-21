@@ -8,7 +8,8 @@ import jax
 from mujoco import mjx
 
 
-def make_randomizer(payload_id, floor_id, foot_ids, carry_low, carry_high):
+def make_randomizer(payload_id, floor_id, foot_ids, carry_low, carry_high, pos_low=None, pos_high=None):
+    """pos_low/pos_high: payload body position box (torso frame), R-117. None keeps the XML position."""
     payload_id = int(payload_id)
     floor_id = int(floor_id)
     foot_ids = tuple(int(i) for i in foot_ids)
@@ -46,21 +47,29 @@ def make_randomizer(payload_id, floor_id, foot_ids, carry_low, carry_high):
             fric = fric.at[floor_id, 0].set(jax.random.uniform(k1, minval=0.5, maxval=1.2))
             foot_f = jax.random.uniform(k2, (len(foot_ids),), minval=0.5, maxval=1.2)
             fric = fric.at[foot_ids, 0].set(foot_f)
-            return mass, inertia, ipos, fric
 
-        body_mass, body_inertia, body_ipos, geom_friction = rand(rng)
+            bpos = model.body_pos
+            if pos_low is not None:
+                rng, k = jax.random.split(rng)
+                p = jax.random.uniform(k, (3,), minval=jax.numpy.array(pos_low), maxval=jax.numpy.array(pos_high))
+                bpos = bpos.at[payload_id].set(p)
+            return mass, inertia, ipos, fric, bpos
+
+        body_mass, body_inertia, body_ipos, geom_friction, body_pos = rand(rng)
         in_axes = jax.tree_util.tree_map(lambda x: None, model)
         in_axes = in_axes.tree_replace({
             'body_mass': 0,
             'body_inertia': 0,
             'body_ipos': 0,
             'geom_friction': 0,
+            'body_pos': 0,
         })
         model = model.tree_replace({
             'body_mass': body_mass,
             'body_inertia': body_inertia,
             'body_ipos': body_ipos,
             'geom_friction': geom_friction,
+            'body_pos': body_pos,
         })
         return model, in_axes
 

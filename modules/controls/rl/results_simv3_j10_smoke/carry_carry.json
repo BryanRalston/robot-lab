@@ -1,0 +1,44 @@
+{
+  "seconds_ran": 11.4,
+  "fell_at_s": 10.86,
+  "fall_why": "pelvis",
+  "z0": 1.027,
+  "mean_horiz_speed": 0.9503,
+  "mean_forward": 0.8942,
+  "mean_vx_world": 0.6426,
+  "mean_vy_world": 0.5011,
+  "net_x_over_t": 0.6433,
+  "final_y": 5.704,
+  "final_heading_deg": 39.17,
+  "payload_frac_obs": 1.0,
+  "knee_rms_nm": [
+    52.1,
+    53.8
+  ],
+  "obs_z_max_t0": 2.96,
+  "min_z": 0.2662,
+  "min_up": -0.2546,
+  "final_up": -0.2546,
+  "final_horiz_speed": 0.8337,
+  "ds_fraction": 0.1088,
+  "flight_fraction": 0.0456,
+  "ankle_roll_peak_rad": [
+    0.1058,
+    0.2263
+  ],
+  "ankle_roll_peak_deg": [
+    6.06,
+    12.97
+  ],
+  "pass_legacy": false,
+  "drift_ok": false,
+  "pass": false,
+  "payload_kg": 20.0,
+  "payload_pos": [
+    0.32,
+    0.0,
+    0.415
+  ],
+  "gate": "INTERIM (R-117): 20 kg payload at P-042 (0.32, 0, 0.415) torso frame, command 0.8 m/s, 20 s, mean speed and net x/t >= 0.8, no fall, drift gate; final G4 carry gate follows TARGETS.md",
+  "policy": "policy_carry.npz"
+}

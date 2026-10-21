@@ -91,12 +91,44 @@ Stop rules (save PC time):
 1. Walk: command 1.2 m/s, 20 s, no fall, mean horizontal speed ≥ 1.15 **and** net x/t ≥ 1.15, |y_final| ≤ 0.5 m, |heading_final| ≤ 5°.
 2. Lateral push: 300 N × 0.2 s (+Y) at 4 s during the 1.2 m/s walk, no fall through 6 s.
 3. Forward push: +0.6 m/s at 1 s from stand, upright with speed < 0.5 m/s at 3 s.
-4. Carry: 20 kg at (0.25, 0, 0.10), command 0.8 m/s, 20 s, no fall, mean speed and net x/t ≥ 0.8, same drift gate.
+4. Carry (**INTERIM, R-117**): 20 kg at **P-042 (0.32, 0, 0.415)** torso frame, command 0.8 m/s, 20 s, no fall, mean speed and net x/t ≥ 0.8, same drift gate. The final G4 carry gate follows TARGETS.md (T5 / R-003). Legs' point (0.25, 0, 0.10) is also scored (`carry_legs.json`), report only.
 5. Report (not gated): leg τ/ω peaks and saturation, knee RMS vs 76.9 N·m, ankle roll vs ±18°, DS/flight, obs_z_max_t0 < 8.
 
 Success = 1–4 pass on one policy file (the shipped `policy_j10.npz`).
 
 ## 6. Open items
-- **Arbiter:** the numeric drift gate (|y| ≤ 0.5 m, |heading| ≤ 5° over 20 s, plus net x/t) is my proposal. The QC text only says "no drift".
-- **Arbiter:** the carry gate payload location. The gate uses Legs' (0.25, 0, 0.10), while the P-042 pose puts the payload at (0.32, 0, 0.415) (R1_STATUS: COM 107 vs 92 mm ahead of the ankle). Training randomizes mass, not position. If P-042 is the gate, add payload-position DR before job 10.
+- **Ruled (R-117, 2026-10-20):** the drift gate is accepted as written. Carry ≥ 0.8 m/s is interim; the final G4 carry gate follows TARGETS.md. The carry payload is P-042 (0.32, 0, 0.415). Implemented: `payload_pos.py` + `randomize.py` payload body-position DR, box x 0.24–0.33, y ±0.02, z 0.09–0.425 (covers P-042 and Legs), in `j10_carry` / `j10_rough`. The eval_box carry gate is at P-042, with Legs' point also scored. Tests added.
 - Not covered by RL: the elbow 0.84 accel scale, WBC_COP_M 16 mm, and the carry bout limits. They are runtime limits on arms, WBC and supervisor, not the walk policy. The policy holds the arms near the carry pose (the residual on arms is ±0.25 rad around fixed offsets).
+
+## 7. sim/v3 hardware update for job 10 (`modules/controls/sim/v3_update_j10.py`)
+
+| Item | Source | Change in sim/v3 | Δ mass (robot) |
+|---|---|---|---|
+| Forearm 287 mm | Arms R8b f9eba88 (`forearm_ext_r7.json`) | hand body −0.250 → −0.267 m (+17 mm); forearm capsule to −0.257; +0.0214 kg/side at z −0.2585 | +0.043 |
+| Knee D69 rev B fins as built | actuators DECISIONS "D69 rev B fins as built" (0.0932 kg/knee measured) | Lumped into the thigh at its COM [EST location]. Motors unchanged (2× 07613D) → armature unchanged | +0.186 |
+| Sole: **fallback SP 67A 6 mm frame** (Bryan/Atlas, TARGETS 2026-10-20 10:17 PM) | SOLE_PAD_SPEC (0.098 kg/foot) | Foot box 18 → **24 mm** (bottom 6 mm lower), contact on the pad face; `make_model.py` foot/sole-site strings updated. E ≈ 4.8 MPa (Gent, 67A) → pad k ≈ 1.9e7 N/m flat, stiffer than the MuJoCo default contact, so the default solref is kept [EST] | +0.196 |
+| Chest pad (R-079/R-088) | R1_ARCHITECTURE §25.1, RULINGS R-088 (pad+land 0.091) | 0.091 kg at (0.100, 0, 0.220) torso frame + `chest_pad` geom 98×98×88; PC plate net +0.013 [EST] at x 0.150 | +0.104 |
+| Neck XM430 4.1 N·m | eac9a46 | already in (ctrlrange ±4.1) | 0 |
+| Torso / arms | Torso ad9878e (16.625), Arms a618ce0 r3 | already in; no newer files | 0 |
+| **sim/v3 total** | | **64.298 → 64.827 kg** | +0.529 |
+
+Against the mass budget:
+- The official rollup file `arbiter/mass_rollup_official.json` is stale (R-031: credible 65.809).
+- The latest running reserve is R-116, about −0.64 kg vs 66.5, so **credible ≈ 67.14 kg [derived]**, plus the fallback sole (+0.049/foot, if not already counted).
+- sim/v3 is 2.3 kg under that. The gap is unlocalized items (harness, covers, fasteners, Torso notes "add 0.3–0.5 kg"), not missing parts in the sim.
+- `make_model.py` and `eval_box.py` rescale every non-payload body to **65.0 kg** (gates at 65 kg). Training DR caps the robot at 66.5. **The gates and training run ~2 kg lighter than the credible rollup.** Raising MASS_TARGET changes the gate definition, so it is an Arbiter call (flagged, not changed).
+
+CPU smoke on the updated sim (`results_simv3_j10_smoke/`, job-4 carry policy, fixed eval):
+- The stand settles at z 1.1497 (+6 mm), up 0.999.
+- Walk at 1.2 m/s: fell at 8.06 s (airborne), net x/t 1.005.
+- P-042 carry: fell at 10.86 s. Legs-point carry: 20 s, 0.723 m/s.
+- Knee RMS on the walk: 73.6 / 83.2 N·m (vs 76.9 continuous).
+- The job-4 policy never saw this model or payload point, so job 10 retrains on it. 9/9 harness tests pass.
+
+Missing data (marked EST in the sim):
+- Knee fin mass location within the thigh.
+- Chest pad frame confirmation and the PC plate mass.
+- A sole frame contact patch (modelled as a full box).
+- Measured 67A Shore/E.
+- Head/neck masses vs the credited 1.104 (sim 0.810).
+- A localized harness/covers distribution.
