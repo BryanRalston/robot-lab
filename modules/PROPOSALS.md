@@ -415,3 +415,9 @@ All keep R-076 (reinforced isolation, IEC 60664-1 creepage, IP2X), R-074 (main l
 - Evidence: legs/femur_dent_l65.py, results/r031/femur_dent_l65.json, BOND_SPEC §3, RULINGS R-135 (b8a2c69).
 - Affected owner response: **Actuators co-signs (2026-10-21).** The collar (ID 50 × 34) and the hip-pitch output side are unchanged; the collar bore still mates the ø50 tube OD; no actuator load or contract value changes. Co-sign stays conditional on the P-152 fallback (JOB9 b3) passing.
 - Status: open
+
+### P-153: Actuators: heat plates rev 2 mass +0.008 kg (D90, P-055 / R-141)
+- **Change:** hip_pitch plate 80 → 84 mm square to reach ≤72 °C at duty (Electronics 23f6992 §18.5): 71.5 °C, +2.6 g × 4. Knee fins moved to the drive side so the knee stack fits 23.0 of 26 mm with no Legs/ID depth change, −1.6 g × 2. Serrated PE washers +0.1 g × 12.
+- **Mass:** 0.339 → 0.347 kg, **+0.008 kg** (over the 0.005 freeze), separate from R-141's +0.008 for the M2 screws.
+- **Evidence:** modules/actuators/drive_heat_plates.py, results/drive_heat_plates.json, results/DRIVE_HEAT_PLATES.md rev 2, cad/drive_plate_*.step.
+- **Open:** a Thermal re-run on the knee 4.0 mm femur gap and drive-side fins, and the R-140 conditions (h 8 vent stream, Controls duty sim).

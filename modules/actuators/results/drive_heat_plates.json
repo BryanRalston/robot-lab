@@ -1,46 +1,52 @@
 {
  "knee": {
   "plates": 2,
+  "fin_side": "drive",
+  "standoff_mm": 4.0,
   "drives_per_plate": 2,
   "L": 100,
   "W": 48,
   "t_base": 1.5,
-  "fins": 12,
-  "fin_h": 8.0,
+  "fins": 6,
+  "fin_h": 15.0,
   "fin_t": 1.0,
-  "area_m2": 0.0273,
-  "fin_eta": 0.998,
-  "mass_g": 45.0,
+  "area_m2": 0.0261,
+  "fin_eta": 0.993,
+  "mass_g": 43.4,
   "T_base_C": {
-   "duty_h8": 69.2,
-   "carry_cont_h8": 91.9,
-   "carry_cont_h12": 73.6
+   "duty_h8": 70.7,
+   "carry_cont_h8": 94.6,
+   "carry_cont_h12": 75.3
   },
   "pass_duty_h8": true,
   "step": "cad/drive_plate_knee.step"
  },
  "hip_pitch": {
   "plates": 4,
+  "fin_side": "femur",
+  "standoff_mm": 8.5,
   "drives_per_plate": 1,
-  "L": 80,
-  "W": 80,
+  "L": 84.0,
+  "W": 84.0,
   "t_base": 1.5,
   "fins": 0,
   "fin_h": 0,
   "fin_t": 0,
-  "area_m2": 0.0122,
+  "area_m2": 0.0136,
   "fin_eta": 0.97,
-  "mass_g": 25.8,
+  "mass_g": 28.4,
   "T_base_C": {
-   "duty_h8": 75.3,
-   "carry_cont_h8": 102.2,
-   "carry_cont_h12": 80.4
+   "duty_h8": 71.5,
+   "carry_cont_h8": 95.8,
+   "carry_cont_h12": 76.1
   },
   "pass_duty_h8": true,
   "step": "cad/drive_plate_hip_pitch.step"
  },
  "ankle": {
   "plates": 4,
+  "fin_side": "femur",
+  "standoff_mm": 8.5,
   "drives_per_plate": 1,
   "L": 60,
   "W": 56,
@@ -50,17 +56,19 @@
   "fin_t": 0,
   "area_m2": 0.006,
   "fin_eta": 0.97,
-  "mass_g": 13.5,
+  "mass_g": 13.4,
   "T_base_C": {
    "duty_h8": 74.1,
-   "carry_cont_h8": 100.2,
-   "carry_cont_h12": 78.8
+   "carry_cont_h8": 100.1,
+   "carry_cont_h12": 78.7
   },
   "pass_duty_h8": true,
   "step": "cad/drive_plate_ankle.step"
  },
  "shoulder_pitch": {
   "plates": 2,
+  "fin_side": "femur",
+  "standoff_mm": 8.5,
   "drives_per_plate": 1,
   "L": 80,
   "W": 80,
@@ -70,7 +78,7 @@
   "fin_t": 0,
   "area_m2": 0.0122,
   "fin_eta": 0.97,
-  "mass_g": 25.8,
+  "mass_g": 25.7,
   "T_base_C": {
    "duty_h8": 62.3,
    "carry_cont_h8": 80.5,
@@ -80,14 +88,16 @@
   "step": "cad/drive_plate_shoulder_pitch.step"
  },
  "_total": {
-  "plates_g": 298.4,
-  "standoff_hw_g": 40.8,
-  "total_kg": 0.339,
+  "plates_g": 305.2,
+  "standoff_hw_g": 42.0,
+  "total_kg": 0.347,
   "r136_booked_as_addition_kg": "in -0.25 net Elmo credit (Thermal +0.21..0.26)"
  },
  "_L51_envelope": {
-  "depth_stack_mm": 25.4,
-  "depth_margin_mm": 0.6,
+  "depth_stack_mm": 23.0,
+  "fin_top_mm": 20.5,
+  "id_3mm_margin_mm": 0.0,
+  "depth_margin_mm": 3.0,
   "y_margin_mm": 4,
   "z_margin_mm": 4,
   "drives_on_plate_z_mm": 75.0,
