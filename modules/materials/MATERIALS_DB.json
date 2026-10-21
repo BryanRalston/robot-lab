@@ -17,6 +17,9 @@
   "SKF_GE12C": "modules/actuators/datasheets/skf_ge12c.html (SKF https://www.skf.com/products/plain-bearings/spherical-plain-bearings-rod-ends/radial/productid-GE%2012%20C)",
   "G10_CC": "https://currentcomposites.com/wp-content/uploads/2024/10/TSD-MIL-I-24768_27_G10_FR4.pdf (Current Composites FR-4/G10 TDS)",
   "G10_GUND": "https://thegundcompany.com/wp-content/uploads/2024/03/NEMA-FR4-Glass-Epoxy-Laminate-by-The-Gund-Co.pdf (Gund NEMA FR4)",
+  "G10_ACCULAM": "https://acculam.com/resource-center/technical-data/sheet-comparative-data-chart (NEMA G10 engineering values, MIN unless noted: compr flatwise 60 ksi, edgewise 35 ksi; MIL-I-24768/2 GEE)",
+  "G10_CC_G10": "https://currentcomposites.com/wp-content/uploads/2024/10/TSD-MIL-I-24768_2_-G-10_sheet.pdf (Current Composites G-10, MIL-I-24768/2: compr flatwise 68 ksi / edgewise 35 ksi typical, D695; temp index 130/140 C)",
+  "G10_LAMPL": "https://www.laminatedplastics.com/g-10.pdf (G-10 k 2.0 BTU-in/ft2-hr-F = 0.288 W/mK, ASTM C177 (through-thickness by method); max operating 140 C)",
   "G10_RAX": "https://www.raxpanel.com/fiberglass-reinforced-sheet/fr4-fiberglass-sheet/ (k through-plane, CTE in-plane)",
   "MIFPEEK": "https://www.makeitfrom.com/material-properties/Polyetheretherketone-PEEK",
   "MIFPEI": "https://www.makeitfrom.com/material-properties/Polyetherimide-PEI",
@@ -389,8 +392,8 @@
   },
   {
    "id": "G10FR4",
-   "name": "G10/FR4 glass-epoxy (NEMA LI-1, EPGC 201/202)",
-   "used_in": "A37 thermal-break sleeves (proposed)",
+   "name": "G10/FR4 glass-epoxy (NEMA LI-1, MIL-I-24768/2 GEE, /27 GEE-F)",
+   "used_in": "A37 sleeves; L71/L75 strap thermal-break blocks",
    "density_g_cc": 1.85,
    "E_GPa": "18-20 (flex)",
    "yield_MPa": null,
@@ -400,19 +403,24 @@
    "T_max_mech_C": "130-140 (temp index)",
    "toughness": null,
    "other": {
-    "compr_flatwise_MPa": "414-483",
-    "compr_edgewise_MPa": "172-241",
+    "compr_flatwise_MPa": "414 MIN (60 ksi, Acculam) / 455-469 typ (Gund, CC)",
+    "compr_edgewise_MPa": "241 (35 ksi, MIN Acculam; typ CC)",
     "shear_punch_MPa": 148,
-    "k_through_W_mK": 0.29,
-    "CTE_inplane_um_mK": "13-18"
+    "bearing_MPa": "NOT on any datasheet. [EST] ultimate ~ edgewise compression 241 (pin load in-plane)",
+    "R125b_limits_MPa": "edgewise/bearing 161 RT, 128 at 71 C [EST x0.8]; flatwise 276 RT, 221 at 71 C",
+    "k_through_W_mK": "0.288 (C177, Laminated Plastics)",
+    "k_inplane_W_mK": "not published; [EST] 0.5-0.9 (woven glass, fibre-direction) - use upper bound for thermal-break R",
+    "CTE_inplane_um_mK": "9-10 (Acculam 0.9-1.0e-5)"
    },
    "cost_hint": null,
    "sources": [
-    "G10_CC",
+    "G10_ACCULAM",
+    "G10_CC_G10",
     "G10_GUND",
+    "G10_LAMPL",
     "G10_RAX"
    ],
-   "notes": "Creep under sustained bearing at temperature not verified."
+   "notes": "Hot knock-down x0.8 at 70-75 C is [EST] (epoxy Tg ~ 130-140, no elevated-T data on datasheets). Creep under sustained bearing at temperature not verified: limits are for fault/short-time; sustained bearing <= 1/2 of these [EST] until a G5 creep test. Previous edgewise 172-241 range had no citation; replaced."
   },
   {
    "id": "PEEK",
