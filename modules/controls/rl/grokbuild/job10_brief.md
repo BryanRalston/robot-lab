@@ -24,7 +24,7 @@ Expect `mass 67.101` and `stand settle z 1.1495 up 0.999` (sim/v3 4115f6e, R-118
 
 ## 2. Harness tests and smoke (must pass before training)
 ```bash
-MUJOCO_GL=disable python -m pytest -q test_eval_box.py    # expect 10 passed
+MUJOCO_GL=disable python -m pytest -q test_eval_box.py    # expect 13 passed
 python train.py --smoke-step --stage j10_walk               # expect obs {'state': (109,), 'privileged_state': (149,)}, finite rewards
 ```
 If the smoke fails, stop and report the traceback. Do not patch reward or obs semantics yourself. Fixing a typo or a shape bug is fine; note it.
@@ -54,6 +54,8 @@ Copy the best passing stage to `policy_j10.npz` + `policy_j10.meta.json` and run
 4. 20 kg carry, **INTERIM per R-117**, payload at **P-042 (0.32, 0, 0.415)** torso frame, 0.8 m/s for 20 s: no fall, speed and net x/t ≥ 0.8, same drift gate (`carry.json`). Also report `carry_legs.json` (Legs' point (0.25, 0, 0.10)), not gated. The final G4 carry gate follows TARGETS.md. The j10_carry/j10_rough stages randomize the payload position over x 0.24–0.33, y ±0.02, z 0.09–0.425 (R-117).
 
 5. R-118 mass corners: walk and P-042 carry also pass at 65.0 and 68.5 kg. Ship only if `results/j10_gates_summary.json` has `all_pass: true`.
+
+6. Knee: report `knee_peak_nm`/`knee_peak_ok` and `knee_thermal` (KneeThermal winding °C) for walk and carry from `gates_summary.json` (logged, not gated). Obs are clipped at ±5σ in training and eval (T&R R2_VERIFY 7e55be7).
 
 ## 6. Deliverables (commit to main under modules/legs/rl/, commit before pull --rebase)
 - `policy_j10*.npz` + `.meta.json` per stage, `results/j10*_*.json`, GIFs, `curves/j10_*.png`, `logs/j10_*.jsonl`

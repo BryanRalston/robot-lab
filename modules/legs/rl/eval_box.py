@@ -7,6 +7,7 @@ tanh of the first 30 MLP outputs, after the training obs normalizer.
 import argparse
 import json
 import os
+import sys
 
 os.environ.setdefault('MUJOCO_GL', 'egl')
 
@@ -97,8 +98,13 @@ def obs_z_check(obs, mean, std, names=None):
     return float(z[i]), i
 
 
-def policy_action(obs, weights, mean, std):
-    h = (obs - mean) / std
+OBS_CLIP = 5.0           # normalized-obs clip (sigma), same as train.OBS_CLIP (T&R R2_VERIFY)
+KNEE_PEAK_NM = 258.0     # CONTRACTS R1.2 knee avail peak, worst-angle (2x TBM2G-07613D + 2x RV12x4)
+
+
+def policy_action(obs, weights, mean, std, clip=OBS_CLIP):
+    # The 8 sigma abort in run_episode checks the RAW normalized obs before this clip.
+    h = np.clip((obs - mean) / std, -clip, clip)
     for i, (w, b) in enumerate(weights):
         h = h @ w + b
         if i < len(weights) - 1:
@@ -295,6 +301,7 @@ def run_episode(m, policy, gains, ref, cmd, seconds, mode, payload_frac,
     z_first = None
     knee_idx = [i for i, n in enumerate(names) if n.endswith('knee')]
     knee_sq = []
+    knee_log = []
 
     for k in range(n_ctrl):
         t = k * CTRL_DT
@@ -311,7 +318,7 @@ def run_episode(m, policy, gains, ref, cmd, seconds, mode, payload_frac,
                 raise SystemExit(f'obs index {z_first[1]} is {z_first[0]:.1f} sigma from the training '
                                  f'normalizer at t=0: replay does not match the training env')
         heading_ref += float(cmd[2]) * CTRL_DT
-        action = policy_action(obs, weights, mean, std)
+        action = policy_action(obs, weights, mean, std, float(meta.get('obs_clip', OBS_CLIP)))
         stand = _is_stand(cmd)
         if stand:
             base = home_q
@@ -338,6 +345,7 @@ def run_episode(m, policy, gains, ref, cmd, seconds, mode, payload_frac,
             mujoco.mj_step(m, d)
         tau_peak = np.maximum(tau_peak, np.abs(tau))
         knee_sq.append([float(tau[i]) ** 2 for i in knee_idx])
+        knee_log.append([(float(tau[i]), float(d.qvel[6 + i])) for i in knee_idx])
         w_peak = np.maximum(w_peak, np.abs(d.qvel[6:]))
         sat += (np.abs(tau) > 0.95 * np.maximum(tmax, 1e-6)).astype(np.float64)
         R = _quat_R(d.qpos[3:7])
@@ -393,6 +401,9 @@ def run_episode(m, policy, gains, ref, cmd, seconds, mode, payload_frac,
         'final_y': round(float(d.qpos[1]), 3),
         'final_heading_deg': round(float(np.degrees(_yaw(d.qpos[3:7]))), 2),
         'payload_frac_obs': payload_frac,
+        'knee_peak_nm': [round(float(np.max(np.abs([r[j][0] for r in knee_log]))), 1) for j in range(len(knee_idx))] if knee_log else None,
+        'knee_at_peak_frac': [round(float(np.mean([abs(r[j][0]) >= 0.99 * KNEE_PEAK_NM for r in knee_log])), 4) for j in range(len(knee_idx))] if knee_log else None,
+        'knee_thermal': knee_thermal_report(knee_log, CTRL_DT),
         'knee_rms_nm': [round(float(np.sqrt(np.mean(np.asarray(knee_sq)[:, j]))), 1) for j in range(len(knee_idx))] if knee_sq else None,
         'obs_z_max_t0': None if z_first is None else round(z_first[0], 2),
         'min_z': round(float(np.min(z_log)) if z_log else 0.0, 4),
@@ -410,6 +421,37 @@ def run_episode(m, policy, gains, ref, cmd, seconds, mode, payload_frac,
         'w_lim': {names[i]: round(float(w_lim[i]), 3) for i in range(m.nu)},
     }
     return summary, frames
+
+
+def knee_thermal_report(knee_log, dt):
+    """Run the controls KneeThermal (A40 winding model, D69 rev B, carry_limit.py) on each knee's
+    recorded torque/speed from 35 C cold. Reports peak winding C and the end state. Report only (not gated)."""
+    if not knee_log:
+        return None
+    try:
+        sys.path.insert(0, os.path.join(ROOT, 'modules', 'controls', 'limits'))
+        from carry_limit import KneeThermal, T_TGT
+    except Exception as exc:  # thermal model is optional for the gate run
+        return {'error': f'KneeThermal unavailable: {exc}'}
+    out = []
+    for j in range(len(knee_log[0])):
+        kt = KneeThermal()
+        peak = kt.Tw
+        for row in knee_log:
+            tau, w = row[j]
+            kt.step(abs(tau), dt, omega=abs(w))
+            peak = max(peak, kt.Tw)
+        out.append({'peak_winding_C': round(float(peak), 2), 'end_winding_C': round(float(kt.Tw), 2),
+                    'end_housing_C': round(float(kt.Th), 2), 'target_C': float(T_TGT),
+                    'time_to_target_s_after': (None if not np.isfinite(t := kt.time_to_target(
+                        float(np.sqrt(np.mean([r[j][0] ** 2 for r in knee_log]))))) else round(float(t), 1))})
+    return out
+
+
+def knee_peak_ok(s):
+    """Logged gate metric: no knee sample above the CONTRACTS peak (eval clips at tau_lim, so this
+    flags a clip change or a model regression)."""
+    return bool(s.get('knee_peak_nm') is not None and max(s['knee_peak_nm']) <= KNEE_PEAK_NM + 1e-6)
 
 
 DRIFT_Y_MAX_M = 0.5
@@ -480,6 +522,7 @@ def main():
     walk_pass = walk['fell_at_s'] is None and walk['seconds_ran'] >= 19.9 and walk['mean_horiz_speed'] >= 1.15
     walk['pass_legacy'] = bool(walk_pass)
     walk['drift_ok'] = drift_ok(walk)
+    walk['knee_peak_ok'] = knee_peak_ok(walk)
     walk['pass'] = bool(walk_pass and walk['drift_ok'] and walk['net_x_over_t'] >= 1.15)
     walk['gate'] = 'walk 20s at 1.2 m/s, mean horizontal speed and net x/t >= 1.15, no fall, |y| <= 0.5 m, |heading| <= 5 deg'
     walk['legs'] = _leg_rows(walk)
@@ -534,6 +577,7 @@ def main():
                  'final_heading_deg': 0.0, 'net_x_over_t': 0.0, 'error': str(exc)}
         c['pass_legacy'] = bool(c['fell_at_s'] is None and c['seconds_ran'] >= 19.9 and c['mean_horiz_speed'] >= 0.8)
         c['drift_ok'] = drift_ok(c)
+        c['knee_peak_ok'] = knee_peak_ok(c) if 'error' not in c else None
         c['pass'] = bool(c['pass_legacy'] and c['drift_ok'] and c['net_x_over_t'] >= 0.8)
         c['payload_kg'] = 20.0
         c['payload_pos'] = list(pos)
@@ -584,7 +628,10 @@ def main():
         ('carry.json', slim(carry)),
         ('carry_legs.json', slim(carry_legs)),
     ] + [(n, slim(x)) for n, x in corners] + [('gates_summary.json', {
-        'all_pass': all_pass, 'mass_nominal_kg': MASS_NOMINAL, 'mass_corners_kg': list(MASS_CORNERS),
+        'all_pass': all_pass, 'mass_nominal_kg': MASS_NOMINAL,
+        'knee_peak_limit_nm': KNEE_PEAK_NM, 'knee_peak_ok_walk': walk.get('knee_peak_ok'),
+        'knee_peak_ok_carry': carry.get('knee_peak_ok'), 'obs_clip_sigma': OBS_CLIP,
+        'knee_thermal_walk': walk.get('knee_thermal'), 'knee_thermal_carry': carry.get('knee_thermal'), 'mass_corners_kg': list(MASS_CORNERS),
         'ruling': 'R-117 gates, R-118 mass; carry 0.8 m/s is INTERIM (final G4 per TARGETS.md)'})]
     for name, payload in written:
         payload['policy'] = policy_name

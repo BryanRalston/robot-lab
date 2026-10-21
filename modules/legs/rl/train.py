@@ -21,6 +21,7 @@ import numpy as np
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 RUNS = os.environ.get('RL_RUNS', '/root/rl-runs')
+OBS_CLIP = 5.0  # normalized-obs clip (sigma); must equal eval_box.OBS_CLIP
 
 
 def _load_cfg():
@@ -51,7 +52,7 @@ def _env_from_stage(stage, noise=1.0):
         'dr_gains': True,
     }
     # J10 knobs (RETRAIN_PLAN_J10.md). Absent keys keep the job-4 defaults.
-    for key in ('heading_obs', 'tracking_sigma', 'heading_sigma', 'leg_action_mult', 'knee_cont_nm', 'resample_steps'):
+    for key in ('heading_obs', 'tracking_sigma', 'heading_sigma', 'leg_action_mult', 'knee_cont_nm', 'knee_peak_nm', 'resample_steps'):
         if key in stage:
             overrides[key] = stage[key]
     for key, val in (stage.get('rewards') or {}).items():
@@ -80,10 +81,16 @@ def _payload_bounds(stage):
 def network_factory(obs_size, action_size, preprocess_observations_fn):
     from brax.training.agents.ppo import networks as ppo_networks
     import jax
+
+    def clipped(obs, params):
+        # J10 (T&R R2_VERIFY): clip normalized obs to +-OBS_CLIP sigma so a 1e-6 std floor can't
+        # amplify a tiny raw difference (job 4 payload_frac). eval_box applies the same clip.
+        return jax.tree_util.tree_map(lambda x: jax.numpy.clip(x, -OBS_CLIP, OBS_CLIP),
+                                      preprocess_observations_fn(obs, params))
     return ppo_networks.make_ppo_networks(
         obs_size,
         action_size,
-        preprocess_observations_fn=preprocess_observations_fn,
+        preprocess_observations_fn=clipped,
         policy_hidden_layer_sizes=(512, 256, 128),
         value_hidden_layer_sizes=(512, 256, 128),
         activation=jax.nn.swish,
@@ -221,6 +228,7 @@ def _write_meta(npz_path, env, stage, name):
         'heading_obs': bool(cfg.heading_obs),
         'leg_action_mult': float(cfg.leg_action_mult),
         'payload_empty_frac': 0.0,
+        'obs_clip': OBS_CLIP,
         'xml': os.path.basename(env.xml_path),
         'model_mass_kg': float(env.mj_model.body_mass.sum()),
     }
