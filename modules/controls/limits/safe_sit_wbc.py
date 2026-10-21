@@ -176,3 +176,185 @@ if __name__ == '__main__':
         gif = os.path.join(ROOT, 'media', 'progress', '2026-10-21_controls_r142_safe_sit_wbc.gif')
         imageio.mimsave(gif, frames, duration=0.04, loop=0)
         print('GIF', gif, len(frames))
+
+
+# ----------------------------------------------------------------------------------------------------------------
+# R-145 (5f5bd1d): crouch (WBC, 2.0 s) then a controlled kneel to knee-pad contact, MO=0 only once supported.
+# The repo has no fall-mode controller or config, so the kneel is a joint-space PD (gains.npz kp/kd, eval_box
+# style) along a minimum-jerk path to KNEEL_POSE, with leg torque clipped to the 0.5 derate. Pose and gains are
+# recorded in controller_config.json "fall_mode_kneel" [EST]. sim/v3 has no knee-contact geom, so a minimal pad
+# box is added on the front of each shank at the knee [EST: 50 x 100 x 80 mm, not the PA12 cap CAD].
+import tempfile
+import gait_lib as _gl
+from drive_thermal_derate import DerateConfig, DriveIO, DriveDerateSupervisor, MO_OFF, KNEEL, CONTACT_CONFIRMED
+
+KNEE_PAD = '<geom name="{s}_knee_pad" type="box" pos="0.050 0 -0.060" size="0.025 0.05 0.04" rgba="0.9 0.5 0.1 1"/>'
+# Two waypoints [EST]: W1 hinge forward so the CoM passes the toes and the heels lift (knees travel forward/down),
+# W2 upright kneel on pads + toes. Fraction of T_kneel spent reaching W1: KNEEL_W1_FRAC.
+KNEEL_W1 = {'hip_pitch': -1.45, 'knee': 1.70, 'ankle_pitch': -0.75, 'waist_pitch': 0.8, 'shoulder_pitch': -1.2}
+KNEEL_POSE = {'hip_pitch': -0.6, 'knee': 1.9, 'ankle_pitch': 0.3, 'waist_pitch': 0.4, 'shoulder_pitch': -0.6}
+KNEEL_W1_FRAC = 0.5
+KNEEL_GAIN = 1.0      # x gains.npz kp/kd
+
+
+def _xml_with_pads():
+    xml = open(_gl.XML).read()
+    for s, S in (('l', 'L'), ('r', 'R')):
+        tag = f'<geom name="{s}_shank" type="capsule"'
+        assert tag in xml
+        xml = xml.replace(tag, KNEE_PAD.format(s=s) + tag, 1)
+    f = tempfile.NamedTemporaryFile('w', suffix='.xml', delete=False, dir=os.path.dirname(_gl.XML))
+    f.write(xml); f.close()
+    return f.name
+
+
+class _SimIO(DriveIO):
+    def __init__(s, names, t0): s.temp = {n: t0 for n in names}; s.mo = {n: True for n in names}; s.lim = {}
+    def read_temp(s, n): return float(int(s.temp[n]))
+    def write_limit(s, n, pm): s.lim[n] = pm
+    def set_mo(s, n, on): s.mo[n] = on
+
+
+def _hull_contains(pts, p):
+    pts = np.unique(np.round(np.asarray(pts), 4), axis=0)
+    if len(pts) < 3:
+        return False, -1.0
+    from scipy.spatial import ConvexHull
+    try:
+        h = ConvexHull(pts)
+    except Exception:
+        return False, -1.0
+    # equations: n.x + c <= 0 inside
+    dist = -(h.equations[:, :2] @ p + h.equations[:, 2])
+    return bool(np.all(dist >= 0)), float(dist.min())
+
+
+def run_kneel(T_crouch=2.0, T_kneel=0.8, pel_z=0.85, frames=None, fps=25, hold_after=1.0):
+    orig_xml = _gl.XML
+    path = _xml_with_pads()
+    try:
+        _gl.XML = path
+        os.environ['LEGS_CHAIR'] = ''
+        m = load()
+    finally:
+        _gl.XML = orig_xml
+        os.unlink(path)
+    m.opt.timestep = 0.001
+    d = mujoco.MjData(m)
+    ctrl = WalkController(m); ctrl.stand_only = True
+    ctrl.initialize(d)
+    names = list(ctrl.act_name)
+    leg = np.array([any(n.endswith(j) for j in LEG) for n in names])
+    nominal = ctrl.tau_max.copy()
+    der = np.where(leg, DERATE * nominal, nominal)
+    ctrl.tau_max = der.copy()
+    PEL_PITCH['now'] = 0.0
+    q0 = d.qpos.copy(); z0 = ctrl.com_z_ref
+    q1, z1 = sit_pose(ctrl, d, pel_z)
+    g = np.load(os.path.join(LEGS, 'rl', 'gains.npz'))
+    gn = [str(x) for x in g['joint_names'].tolist()]
+    kp = np.array([g['kp'][gn.index(n)] for n in names]) * KNEEL_GAIN
+    kd = np.array([g['kd'][gn.index(n)] for n in names]) * KNEEL_GAIN
+    qadr = np.array([m.jnt_qposadr[m.actuator_trnid[i, 0]] for i in range(m.nu)])
+    vadr = np.array([m.jnt_dofadr[m.actuator_trnid[i, 0]] for i in range(m.nu)])
+    qk = q1[qadr].copy(); qw = q1[qadr].copy()
+    for i, n in enumerate(names):
+        for k, v in KNEEL_POSE.items():
+            if n.endswith(k): qk[i] = v
+        for k, v in KNEEL_W1.items():
+            if n.endswith(k): qw[i] = v
+    pads = [m.geom('l_knee_pad').id, m.geom('r_knee_pad').id]
+    shanks = [m.geom('l_shank').id, m.geom('r_shank').id]
+    feet = [m.geom('l_foot').id, m.geom('r_foot').id]
+    floor = [i for i in range(m.ngeom) if m.geom_type[i] == mujoco.mjtGeom.mjGEOM_PLANE]
+    io = _SimIO(names, 83.0)
+    ev = {}
+    sup = DriveDerateSupervisor(names, io, DerateConfig(), request_safe_sit=lambda r: ev.setdefault('latch', d.time),
+                                request_kneel=lambda: ev.setdefault('kneel', d.time))
+    res = dict(T_crouch=T_crouch, T_kneel=T_kneel, fell=None, peak_pad_force_N=0.0, peak_shank_force_N=0.0,
+               tau_frac_crouch=0.0, tau_frac_kneel=0.0, first_contact=None, t_supported=None, t_mo_off=None)
+    renderer = None
+    if frames is not None:
+        renderer = mujoco.Renderer(m, 360, 480)
+        cam = mujoco.MjvCamera(); cam.azimuth = 100; cam.elevation = -10; cam.distance = 2.6; cam.lookat[:] = [0.2, 0, 0.5]
+    mode = 'settle'; qc = None; t_k0 = None
+    f6 = np.zeros(6)
+    n_steps = int((SETTLE + T_crouch + T_kneel + 1.5 + hold_after) / 0.001)
+    for k in range(n_steps):
+        t = k * 0.001
+        if t >= SETTLE:
+            sup.step(0.001)            # temperatures read 83 -> latches CROUCH at t = SETTLE
+        st = sup.state
+        if st in ('CROUCH',) or mode == 'settle':
+            mode = 'settle' if t < SETTLE else 'crouch'
+            s = (t - SETTLE) / T_crouch
+            a = mj(s)
+            ctrl.com_z_ref = z0 + (z1 - z0) * a
+            ctrl.q_ref = q0 + (q1 - q0) * a
+            v = np.zeros(m.nv); v[6:] = (q1 - q0)[7:] * mj_d(s) / T_crouch if 0 < s < 1 else 0.0
+            ctrl.v_ref = v; ctrl.x_ref = FC
+            ctrl.step(d)
+            if mode == 'crouch':
+                res['tau_frac_crouch'] = max(res['tau_frac_crouch'], float(np.max(np.abs(d.ctrl[leg]) / der[leg])))
+        else:
+            if qc is None:
+                qc = d.qpos[qadr].copy(); t_k0 = t
+            T1 = KNEEL_W1_FRAC * T_kneel; T2 = T_kneel - T1
+            if t - t_k0 < T1:
+                s = (t - t_k0) / T1; qa_, qb_, TT = qc, qw, T1
+            else:
+                s = (t - t_k0 - T1) / T2; qa_, qb_, TT = qw, qk, T2
+            qt = qa_ + (qb_ - qa_) * mj(s)
+            vt = (qb_ - qa_) * mj_d(s) / TT if s < 1 else 0 * qk
+            tau = kp * (qt - d.qpos[qadr]) + kd * (vt - d.qvel[vadr])
+            tau = np.clip(tau, -der, der)
+            on = np.array([io.mo[n] for n in names], float)
+            d.ctrl[:] = tau * on
+            if on.all():
+                res['tau_frac_kneel'] = max(res['tau_frac_kneel'], float(np.max(np.abs(tau[leg]) / der[leg])))
+        mujoco.mj_step(m, d)
+        # contacts
+        knee_c, pts, padF, shF = False, [], 0.0, 0.0
+        for i in range(d.ncon):
+            c = d.contact[i]
+            gg = {c.geom1, c.geom2}
+            if not (gg & set(floor)):
+                continue
+            mujoco.mj_contactForce(m, d, i, f6)
+            if gg & set(pads):
+                knee_c = True; pts.append(c.pos[:2].copy()); padF += f6[0]
+            elif gg & set(shanks):
+                knee_c = True; pts.append(c.pos[:2].copy()); shF += f6[0]
+            elif gg & set(feet):
+                pts.append(c.pos[:2].copy())
+            elif t > SETTLE:
+                res['fell'] = res['fell'] or f'{t:.3f} {m.geom(list(gg - set(floor))[0]).name} on floor'
+        res['peak_pad_force_N'] = max(res['peak_pad_force_N'], padF)
+        res['peak_shank_force_N'] = max(res['peak_shank_force_N'], shF)
+        if knee_c and res['first_contact'] is None:
+            res['first_contact'] = round(t - SETTLE, 3)
+        mujoco.mj_subtreeVel(m, d)
+        com = d.subtree_com[1]; vcom = float(np.linalg.norm(d.subtree_linvel[1]))
+        inside, margin = _hull_contains(pts, com[:2]) if knee_c else (False, -1.0)
+        if sup.state in (KNEEL, CONTACT_CONFIRMED):
+            sup.set_support(knee_c, inside, vcom)
+        if sup.state == CONTACT_CONFIRMED and res['t_supported'] is None:
+            res['t_supported'] = round(t - SETTLE, 3); res['support_margin_mm'] = round(margin * 1e3, 1)
+        if sup.state != CONTACT_CONFIRMED and sup.state != MO_OFF:
+            res['t_supported'] = None
+        if sup.state == MO_OFF and res['t_mo_off'] is None:
+            res['t_mo_off'] = round(t - SETTLE, 3)
+        if renderer is not None and k % int(1000 / fps) == 0:
+            renderer.update_scene(d, cam); frames.append(renderer.render().copy())
+        if res['t_mo_off'] is not None and t - SETTLE > res['t_mo_off'] + hold_after:
+            break
+    mujoco.mj_subtreeVel(m, d)
+    res['state'] = sup.state
+    res['log'] = sup.log
+    res['com_z_end'] = round(float(d.subtree_com[1][2]), 3)
+    res['pelvis_up_end'] = round(float(d.xmat[ctrl.pelvis][8]), 3)
+    for kk in ('peak_pad_force_N', 'peak_shank_force_N', 'tau_frac_crouch', 'tau_frac_kneel'):
+        res[kk] = round(res[kk], 3 if 'frac' in kk else 1)
+    res['ok'] = (res['fell'] is None and res['t_mo_off'] is not None and res['t_mo_off'] <= 2.8 + 0.05 + 1e-9
+                 and res['tau_frac_kneel'] <= 1.0 + 1e-6)
+    return res
