@@ -31,3 +31,6 @@ The job2 singular point was the unfilleted upper web/arm edge at |y| 38.5 (−15
 **Stock (L70):** 7075-T651 2.5 in plate. Each solid is 60 × 61.5 × 93 (+3 stock = 63 ≤ 63.5). x ∥ ST, arm plane L/LT. Single-path allowable 271 ST / 294 LT (R-128); the 119 peak passes even T7351's 239. STOCK_GRAIN line 13 (`hip_pitch_lever_r50`, 1.0 in T651 313) is the superseded lever and does not apply. The new row is below.
 
 Re-run brief: GROKBUILD_lever_fea_r031.md §G3-R2.
+
+## D93 (Thermal rev 4 44b7c36, ID e61cbf2, R-143) Knee plate rev 4: 18.5 mm fins + lower taper under ID's low-ε PC guard
+Fins are 8 × 18.5 × 1 at 6 mm pitch, with R0.5 tips and the lower ends tapered 45° × 8 to match ID's guard chamfer. The taper alone (18 mm) gives 76.1 °C standing, over 75.5, so the fins go +0.5 mm: UA 0.248 at h 8, 75.2 °C standing duty. The corner screws are replaced by PEM FHS-M3 studs (no fin cut). ID's guard is used as-is but its inner face moves out 0.5 mm (proud 30.0); the edge seal is inboard and clears the 4 mm flange. Mass booked +0.066 kg vs rev 3 (P-153). Thermal re-check and an ID rod-sweep re-run are requested.
