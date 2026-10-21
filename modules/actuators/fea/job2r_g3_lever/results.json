@@ -44,13 +44,31 @@
    "verdict": "FAIL"
   },
   "b": {
-   "n_levels": 2,
-   "complete": false,
+   "n_levels": 3,
+   "complete": true,
    "converged": false,
-   "singular": null,
+   "rel_change": 0.11516343378704053,
+   "location_shift_mm": 0.09219544457292594,
+   "location_shift_absolute_mm": 0.09219544457292594,
+   "p999_over_peak": 0.3175527949808037,
+   "conv_peak": false,
+   "conv_location": true,
+   "conv_bulk": false,
    "static_pass": false,
    "fatigue_pass": false,
-   "verdict": "INCOMPLETE"
+   "peak_MPa": 483.8551653501532,
+   "amplitude_MPa": 216.2540699385317,
+   "peak_at_mm": [
+    12.53,
+    49.72,
+    -53.35
+   ],
+   "singular": [
+    12.53,
+    49.72,
+    -53.35
+   ],
+   "verdict": "FAIL"
   }
  },
  "levels": {
@@ -660,6 +678,127 @@
       "-1": 881
      },
      "yoke_facets": 917
+    }
+   },
+   {
+    "h_mm": 2.5,
+    "hloc_mm": 0.6,
+    "ball_r_mm": 4.0,
+    "ball_t_mm": 4.0,
+    "tets": 121448,
+    "nodes": 26017,
+    "ndof": 558036,
+    "governing": "sym_phi+60",
+    "peak_MPa": 483.8551653501532,
+    "p999_MPa": 153.64956012284006,
+    "p999_over_peak": 0.3175527949808037,
+    "peak_at_mm": [
+     12.53,
+     49.72,
+     -53.35
+    ],
+    "amplitude_MPa": 216.2540699385317,
+    "fault_peak_MPa": 483.5654002429551,
+    "fault_at_mm": [
+     12.53,
+     49.72,
+     -53.35
+    ],
+    "mass": {
+     "volume_mm3": 156129.53700393016,
+     "pin_stub_mm3": 5654.8667764616275,
+     "mass_7075_kg": 0.4228338233391866,
+     "mass_pins_kg": 0.04439070419522377,
+     "mass_kg": 0.4672245275344104,
+     "rule": "(V - 2*pi*6^2*25)*2.81e-6 + steel pins at 7.85 g/cm^3"
+    },
+    "families": {
+     "upper_r8": {
+      "vm_MPa": 352.3460366884973,
+      "amp_MPa": 157.477422826431,
+      "at_mm": [
+       -14.67,
+       43.52,
+       -14.31
+      ]
+     },
+     "ear_r5": {
+      "vm_MPa": 483.8551653501532,
+      "amp_MPa": 216.2540699385317,
+      "at_mm": [
+       12.53,
+       49.72,
+       -53.35
+      ]
+     },
+     "lower_r8": {
+      "vm_MPa": 145.94027235511456,
+      "amp_MPa": 65.22649777210096,
+      "at_mm": [
+       -14.56,
+       -38.34,
+       -23.85
+      ]
+     },
+     "bore_lip": {
+      "vm_MPa": 23.60527990815108,
+      "amp_MPa": 10.550136110424194,
+      "at_mm": [
+       -2.98,
+       33.33,
+       -20.91
+      ]
+     }
+    },
+    "surface_samples": {
+     "d2_mm": {
+      "vm_MPa": 54.864051991404395,
+      "amp_MPa": 24.520921519716186,
+      "at_mm": [
+       10.7,
+       49.41,
+       -52.52
+      ],
+      "target_mm": [
+       10.6,
+       49.72,
+       -52.84
+      ],
+      "elem_dist_mm": 0.455
+     },
+     "d4_mm": {
+      "vm_MPa": 156.0574706963972,
+      "amp_MPa": 69.74827510208857,
+      "at_mm": [
+       8.6,
+       49.72,
+       -52.14
+      ],
+      "target_mm": [
+       8.67,
+       49.72,
+       -52.33
+      ],
+      "elem_dist_mm": 0.204
+     },
+     "outward_normal": [
+      0.967,
+      -0.0,
+      -0.2547
+     ],
+     "surface_gap_mm": 0.057,
+     "normal_flipped": false
+    },
+    "facets": {
+     "pin_facets": {
+      "1": 208,
+      "-1": 212
+     },
+     "bore_facets": {
+      "1": 1311,
+      "-1": 1297
+     },
+     "yoke_facets": 1277
     }
    }
   ]

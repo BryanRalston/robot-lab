@@ -53,6 +53,7 @@ Volume 156129.5 mm³. Mass 0.4672 kg per lever (7075 body 0.4228 kg, steel pins 
 |---|---|---|---|---|---|---|---|---|---|---|
 | 1 | 4 / 1.5 | 4 | 20961 | 109380 | sym_phi+30 | 307.61 | 117.16 | 0.381 | (12.56, 49.36, -53.13) | 137.49 |
 | 2 | 3 / 1 | 4 | 50207 | 244860 | sym_phi+60 | 433.89 | 138.99 | 0.320 | (12.53, 49.63, -53.33) | 193.92 |
+| 3 | 2.5 / 0.6 | 4 | 121448 | 558036 | sym_phi+60 | 483.86 | 153.65 | 0.318 | (12.53, 49.72, -53.35) | 216.25 |
 
 Family maxima inside each Ball, peak / amplitude in MPa:
 
@@ -60,12 +61,15 @@ Family maxima inside each Ball, peak / amplitude in MPa:
 |---|---|---|---|---|
 | 1 | 145.9 / 65.2 | 307.6 / 137.5 | 127.7 / 57.1 | 10.8 / 4.8 |
 | 2 | 238.2 / 106.4 | 433.9 / 193.9 | 137.0 / 61.2 | 18.3 / 8.2 |
+| 3 | 352.3 / 157.5 | 483.9 / 216.3 | 145.9 / 65.2 | 23.6 / 10.6 |
 
-Finest-level families (max inside the Ball radius on the governing case): upper_r8: 238.2 MPa / amp 106.4 at (-14.55, 43.50, -14.51); ear_r5: 433.9 MPa / amp 193.9 at (12.53, 49.63, -53.33); lower_r8: 137.0 MPa / amp 61.2 at (-14.54, -38.25, -23.97); bore_lip: 18.3 MPa / amp 8.2 at (-3.86, 33.26, -20.92).
+Finest-level families (max inside the Ball radius on the governing case): upper_r8: 352.3 MPa / amp 157.5 at (-14.67, 43.52, -14.31); ear_r5: 483.9 MPa / amp 216.3 at (12.53, 49.72, -53.35); lower_r8: 145.9 MPa / amp 65.2 at (-14.56, -38.34, -23.85); bore_lip: 23.6 MPa / amp 10.6 at (-2.98, 33.33, -20.91).
 
-Off-surface samples on the finest governing case: outward normal [0.9669, -0.0, -0.2551], surface gap 0.07 mm; 2 mm inward: 111.8 MPa (amp 50.0) at (10.57, 49.44, -52.26), 0.59 mm from the target; 4 mm inward: 136.3 MPa (amp 60.9) at (9.00, 49.73, -51.99), 0.48 mm from the target.
+Off-surface samples on the finest governing case: outward normal [0.967, -0.0, -0.2547], surface gap 0.057 mm; 2 mm inward: 54.9 MPa (amp 24.5) at (10.70, 49.41, -52.52), 0.46 mm from the target; 4 mm inward: 156.1 MPa (amp 69.7) at (8.60, 49.72, -52.14), 0.20 mm from the target.
 
-Gate: INCOMPLETE (2 of 3 levels). No pass, and no extrapolation. Level 3 was meshed (121448 tets, Ball radius 4 mm) and was still in the CG solve at the 11:15 ET checkpoint, so it is not in this table.
+Convergence, levels 2 to 3: peak change 11.52% (5% or more), same fillet after folding ±x/±y: shift 0.09 mm (yes, within 2 mm), absolute coordinate shift 0.09 mm, p99.9/peak 0.318 (below 0.75).
+Not converged. Singular at (12.53, 49.72, -53.35). The level-3 element max is 483.9 MPa and the amplitude is 216.3 MPa. Those numbers are not a pass and are not extrapolated.
+Case verdict: **FAIL**.
 
 ## Hand estimate
 
@@ -73,7 +77,7 @@ D92 estimate: upper R8 peak about 119 MPa and amplitude about 53 MPa (nominal 88
 
 Case a: upper R8 60/27 → 62/28 → 93/42 MPa (peak/amp), last step 49%; ear R5 526/235 → 504/225 → 760/340 MPa (peak/amp), last step 51%.
 
-Case b: upper R8 146/65 → 238/106 MPa (peak/amp), last step 63%; ear R5 308/137 → 434/194 MPa (peak/amp), last step 41%.
+Case b: upper R8 146/65 → 238/106 → 352/157 MPa (peak/amp), last step 48%; ear R5 308/137 → 434/194 → 484/216 MPa (peak/amp), last step 12%.
 
 Where the last step is over 5%, that blend is not converged. Do not read it as beating or missing the hand estimate.
 
