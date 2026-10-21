@@ -1415,3 +1415,7 @@ Evidence: against Torso's real cover, 3 mm clearance is lost at 130° roll at al
 4. Net: -0.532 + 0.133 + 0.36 = -0.039. Credible mass ~68.02 → ~67.98 kg.
 5. D87 thick bodies: move to 7075-T7351 accepted with no mass change. Materials must cite the T7351 band for each stock thickness. R-132 covers only up to 4.0 in, so any body over 4.0 in follows §6.
 6. Knee twin housing (~4.25 in stock): option (a) adopted. It becomes a 7075-T7352 (or 7050-T7452) hand forging with grain flow along the housing axis, and Materials cites the A/S-basis for the 4–4.5 in band. Until then 211 MPa applies (it passes at 75.7, margin 2.8). (b) is rejected because the split adds a bolted joint and mass; (c) is rejected because it changes the interface. No mass change.
+
+## R-138 — P-152 bonded sleeve OD and CONTRACTS §1c row (Legs ced62f5) — 2026-10-21
+1. Sleeve OD 46.80 is accepted: bore 47.0 - 46.80 = 0.20 diametral, which meets BOND_SPEC (0.08 min bond line); 46.9 is rejected. Fallback: 46.60 with a 1.6 mm wall, tied to the R-135 Job 9 b3 outcome. The §1c mounting row is added to CONTRACTS, marked Actuators co-sign pending; it becomes binding when Actuators co-signs. No mass change beyond R-135.
+2. Knee web stock: already ruled in R-137 §6. The web is integral with the knee twin housing, made as a 7075-T7352/7050-T7452 hand forging with a Materials-cited allowable; 211/317 interim.

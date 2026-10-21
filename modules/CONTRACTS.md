@@ -97,6 +97,7 @@ Gear lengths are [EST] in v3 (`GEAR_LEN`); Actuators must replace them with Harm
 | hip-pitch flexspline → output flange | 8 × M6 12.9 | momentary peak, friction-transmitted | same |
 | knee clevis → femur flange | 4 × M5 12.9 | landing 3 BW, 0.12 m lever | same |
 | shoulder actuator → torso frame | 8 × M8 12.9 | side-fall impact | same |
+| hip-pitch collar → femur tube (bonded) | 7075 split collar ID 50 × 34 + femur ø50 × 1.5 (bore 47.0) + inner 7075 sleeve OD 46.80 / ID 43.6 × 34, DP490 0.10 mm bond line (0.20 ± 0.03 diametral), 8 × ø7 42CrMo4 backup pins (L63-R); fallback sleeve OD 46.60 with 1.6 mm wall if Job 9 b3 fails | fall + R-023 dent/bending; bond SF per BOND_SPEC | legs/BOND_SPEC.md, legs/DECISIONS L22/L63/L65, P-152, R-138 (Actuators co-sign pending) |
 Bolt-circle diameters: v3 uses r_pcd = 50 mm default in `bolted()` [EST]; not tied to CAD. Actuators to publish flange drawings (PCD, pilot, bolt count) per frame size; Legs/Torso design to them.
 
 ### 1d. Electrical/data per actuator
