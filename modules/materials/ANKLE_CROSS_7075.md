@@ -14,7 +14,7 @@ RL Materials, 2026-10-21. Basis: legs/grokbuild/ankle_cross_fea_brief.md (R-069/
 
 ### R-123 update: thick-plate A/B basis
 - The cross is machined from plate of about 30 mm, so it falls in the MMPDS 1.001–2.000 in band.
-- 7075-T7351 Fty A/B = 57/59 ksi = **393/407 MPa** (Ftu 68/70 ksi). **Unverified:** taken from a web-search synthesis of a third-party stress report quoting MMPDS, not seen in an MMPDS table.
+- 7075-T7351 Fty A/B = 57/59 ksi = **393/407 MPa** (Ftu 68/70 ksi). **Superseded by the verified MIL-HDBK-5H values below (1.001–1.500 in A-basis 57 ksi = 393 MPa matches).** Originally taken from a web-search synthesis of a third-party stress report quoting MMPDS, not seen in an MMPDS table.
 - If A-basis governs (single load path): the static limit is 393/1.5 = **262 MPa**, not 273. Bearing is 1.5 × 393/2 = 295 MPa.
 - Legs should use 262 until a verified MMPDS table or a mill cert (AMS-QQ-A-250/12 or AMS 4078) is in hand.
 - **R-125(b) VERIFIED (2026-10-21), MIL-HDBK-5H p. 3-348, T7351 plate (https://ssrl-uark.com/MILHDBK5H.pdf):**

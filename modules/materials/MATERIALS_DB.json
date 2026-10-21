@@ -123,6 +123,29 @@
    "notes": "Thickness = stock thickness at heat treat. LT governs in-plane unless the load direction is controlled. T651 ST SCC rating D (MIL-HDBK-5H fn b). Bearing values are dry-pin."
   },
   {
+   "id": "AL7075T651_THICK",
+   "name": "Al 7075-T651 plate >3.0 in, A-basis [MIL-HDBK-5H p. 3-346, Table 3.7.4.0(b1) inferred; table ends at 4.000 in]",
+   "used_in": "knee centre web (stock thickness to be stated by Legs)",
+   "density_g_cc": 2.81,
+   "E_GPa": 71,
+   "yield_MPa": "A Fty L/LT/ST MPa: 3.001-3.500 in 414/400/372; 3.501-4.000 in 386/372/345. >4.000 in: NOT tabulated for T651 in 5H",
+   "UTS_MPa": "A Ftu L/LT/ST: 3.001-3.500 483/490/448; 3.501-4.000 455/462/421",
+   "fatigue_MPa": null,
+   "elongation_pct": null,
+   "T_max_mech_C": null,
+   "toughness": null,
+   "other": {
+    "Fbry_A_eD1.5/2.0_MPa": "3.001-3.500 614/717; 3.501-4.000 579/676",
+    "R125b_single_path_MPa": "3.001-3.500: L 276 / LT 267 / ST 248; 3.501-4.000: L 257 / LT 248 / ST 230",
+    "closest_beyond_4in": "none for T651; T7351 p. 3-348 tabulates only to 4.000 in (3.001-3.500 S Fty L/LT 49, ST 47 ksi; 3.501-4.000 S 48/48/46 ksi = 331/331/317 MPa -> 221/221/211 single-path)"
+   },
+   "cost_hint": null,
+   "sources": [
+    "MILHDBK5H"
+   ],
+   "notes": "T651 ST SCC rating D (5H fn b): for a thick knee web with sustained ST load prefer T7351 (lower yield) or 7050-T7451 plate. Stock thickness at heat treat sets the band."
+  },
+  {
    "id": "AL7050_TUBE",
    "name": "Al 7050 femur tube \u00f850x1.2 (model_v4: '7050-T7451'). T7451 is a PLATE temper; no 7050 tube table in MIL-HDBK-5H (T74511 note: excluding tubing). Closest form: extrusion",
    "used_in": "femur tube",
