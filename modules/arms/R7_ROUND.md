@@ -143,3 +143,9 @@ Checked against the R-065 criteria with sim/v3:
   - Geometry: `cad/r15/carrier_w2.step` (R-127 revision: gap 3.4, arm 60 × 4.0, R6 plate-root fillet on the drawing).
   - Hand expectations: arm 243, plate 255 (R6) / 294 (R3) MPa.
   - Roll soft limit 115° (ID: torso contact 132°).
+
+**Stock / grain (R-128):** see `modules/arms/STOCK_GRAIN.md`, which gives stock thickness, grain direction and single-path limit for every Arms 7075 part. An unstated row takes 257 MPa.
+- **Job 8b gate per R-128 (9e49b7a), supersedes 294/262 (R-127):**
+  - Carrier stock is 7075-T651 **2.5 in plate**, grain L = Y (arm), LT = X, ST = Z, so the single-path vM gate is **294 MPa** (2.001–2.5 in, LT). The ≤ 2 in band (308) is not available: the carrier is 73 × 63.4 × 62.
+  - Report stresses by grain axis (L = Y, LT = X), and any ST (Z) component against 271.
+  - Other gates unchanged: e ≤ 2.3 (Arms proposes 2.2), gap 3.4 ± 0.2, ≥ 3.0 loaded, Mx ≤ 351, s0 ≥ 2.0, deflection ≤ 1 mm.

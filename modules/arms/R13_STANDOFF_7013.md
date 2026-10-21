@@ -65,3 +65,5 @@ Head sweep: the pad sets **no** head limit. The R7 135° soft limit can be lifte
 The overrun comes from the stronger flange (+0.017/side vs ID) and the larger hub. Measured masses at G5.
 
 ## FEA re-run: Job 8 add-on (spec in R7_ROUND.md §G; not launched)
+
+**Stock / grain (R-128):** see `modules/arms/STOCK_GRAIN.md`, which gives stock thickness, grain direction and single-path limit for every Arms 7075 part. An unstated row takes 257 MPa.

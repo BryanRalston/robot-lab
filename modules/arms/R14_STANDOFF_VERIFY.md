@@ -71,3 +71,5 @@ Gate: SF ≥ 1.5 vs 7075-T6 yield 503. Tags: [CALC] = computed here (not measure
 - Waist: **the Arms BOM does not touch the waist** (waist units are in the Actuators BOM).
 
 **Verdict for FEA routing: NOT CONFIRMED.** The part design is OK with the R14 fixes, but its placement intersects the CRBH 7013 A. Job 8b waits for an Arbiter ruling on placement (W2 / W3 / other).
+
+**Stock / grain (R-128):** see `modules/arms/STOCK_GRAIN.md`, which gives stock thickness, grain direction and single-path limit for every Arms 7075 part. An unstated row takes 257 MPa.

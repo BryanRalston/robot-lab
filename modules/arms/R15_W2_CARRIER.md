@@ -57,3 +57,10 @@ Worst **1.92 mm**, RSS 0.86 mm, margin 0.48 mm. s0 is 2.01 at worst case and 2.0
 - Mx 252 N·m, CSG-25 SF 1.39.
 - **Mass:** 0.2849 kg/side (was 0.266) → **+0.182 kg pair vs booked** (+0.039 pair vs R15 for the heavier arm).
 - **Roll soft limit:** 115° interim (R-127). **ID babab4a:** torso contact at 132° on the real torso cover (vs my coarse ≈ 118°). A shoulder cover on the roll output needs skin at y ≥ 66 to clear the carrier plate (Y 63.4) and the pad mount.
+
+## R-128 (9e49b7a): stock and grain
+- **Carrier stock:** 7075-T651 plate, **2.5 in (63.5 mm)**, ST = Z. The billet is ≈ 76 (X) × 66 (Y) × 64 (Z) mm. The ≈ 76 × 88 × 32 billet was the superseded R11 stand-off. The W2 carrier is 73 × 63.4 × 62, with no dimension ≤ 50.8, so it **cannot** come from ≤ 2 in plate.
+- **Grain:** **L = Y**, along the arm, which is the arm root's primary bending direction. LT = X (plate cantilever). ST = Z, with no through-thickness load path.
+- **Job 8b single-path gate: 294 MPa** (2.001–2.5 in band, LT). 308 does not apply.
+- Hand: arm root 243 PASS. Plate root 255 with the R6 fillet PASS; 294 with R3 is at the limit. **The R6 fillet stays mandatory.**
+- Option to reach 308: split the carrier into an arm (≤ 2 in) and a plate (≤ 2 in) with a bolted joint. That adds a joint at the plate root and is not recommended. See STOCK_GRAIN.md.
