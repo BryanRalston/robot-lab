@@ -1,0 +1,26 @@
+{
+ "controlled_KE_J": 0.34210000000000007,
+ "controlled_static_N": [
+  335.6001,
+  469.84014
+ ],
+ "controlled_peak_N": 3568.2268169659337,
+ "controlled_elastic_cap_J": 6.526875,
+ "kneel_E_J": 251.700075,
+ "kneel_stroke_mm": [
+  11.286998878923766,
+  15.162655120481928
+ ],
+ "stand_E_J": 549.0417636,
+ "stand_stroke_mm": [
+  24.62070688789238,
+  33.07480503614458
+ ],
+ "kneel_meff_kg": 17.549999999999997,
+ "kneel_vpad": 5.355723035293109,
+ "kneel_g_pinned_at_r0.8": 103.85355951105187,
+ "kneel_g_free": 37.971457696228335,
+ "bulkhead_MPa_at_ceiling": 197.85245901639345,
+ "pack_N_at_free_g": 3259.375,
+ "pack_N_at_pinned_g": 8914.529914529916
+}

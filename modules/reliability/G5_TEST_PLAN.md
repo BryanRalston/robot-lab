@@ -85,3 +85,10 @@ Per `legs/R031_FIXES.md`: 5 ASTM D1002 coupons per lot at 23 and 60 °C, part-eq
   - derate behaves per R-136 (75 °C start, 50 % at 85, off at 90);
   - IP2X as above.
 
+
+## TP-G5-16 Chest-pad prone landing (R-146b; R146_PRONE_LANDING.md)
+- Setup: full robot at 68.4 kg ±1 %, force plate under the pad zone (≥20 kHz), triaxial accelerometers on the pack rail and the bulkhead (≥10 kHz, CFC1000), high-speed video ≥1000 fps, new certified cartridge (lot plateau 19.5–22.3 kN).
+- (a) L1: run the R-146b kneel-to-prone sequence ×20 from the thermal latch. Pass: peak pad force ≤8.8 kN, contact speed ≤0.1 m/s (≥95 %), ≤0.2 m/s worst case, face indentation ≤0.5 mm, MO=0 only after the D94 flags.
+- (b) L2: from a held upright kneel, MO=0 tip forward ×3 (new cartridge each), arms passive. Pass: crush ≤50 mm, force ≤22.35 kN, pack-rail accel ≤ the pack rating (provisional 50 g), no structural damage.
+- (c) After each L2 run: pack OCV, isolation, BMS log, visual of the cell gap; bulkhead dye-penetrant after the final run.
+- Ballast-dummy alternative for (b) before a full robot is risked: a rigid-link dummy with matched mass/CoM/I about the knee.
