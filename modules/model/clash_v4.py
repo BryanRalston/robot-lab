@@ -46,10 +46,12 @@ def floating(parts,tol=0.3):
         k=st.pop()
         for q in adj[k]-seen: seen.add(q); st.append(q)
     return [parts[i]['name'] for i in range(n) if i not in seen]
-LIM={'hip_yaw':(-35,45),'hip_roll':(-12,15),'hip_pitch':(-105,40),'knee':(0,135),'ankle_pitch':(-45,40),'ankle_roll':(-18,18),
+LIM={'hip_yaw':(-35,40),'hip_yaw_R':(-40,35),'hip_roll':(-12,15),'hip_pitch':(-105,40),'knee':(0,135),'ankle_pitch':(-45,40),'ankle_roll':(-18,18),
      'waist_yaw':(-90,90),'waist_pitch':(-30,60),'shoulder_pitch':(-180,60),'shoulder_roll':(-15,180),'shoulder_yaw':(-150,150),'elbow':(-140,0),
      'wrist_roll':(-170,170),'wrist_pitch':(-70,70),'wrist_yaw':(-40,40),'neck_yaw':(-80,80),'neck_pitch':(-40,40)}   # sim/v3 humanoid_v3.xml (ankle roll ±18 per L31)
-def jname(k): return k if k.startswith(('waist','neck')) else 'L_'+k
+def jname(k):   # hip_yaw per side, mirrored (Legs ruling 2026-10-21: L -35..+40, R -40..+35, r116b final)
+    if k=='hip_yaw_R': return 'R_hip_yaw'
+    return k if k.startswith(('waist','neck')) else 'L_'+k
 def steps(lim,st):
     a=list(range(0,int(lim),st if lim>0 else -st))[1:]+[lim]; return a
 ARM=('uarm','farm','wR','wP','hand'); LEG=('hipY','hipR','thigh','shank','ankX','foot')
@@ -58,6 +60,7 @@ def armleg(c,parts):
     f=lambda n:any(seg[n].endswith(a) for a in ARM); g=lambda n:any(seg[n].endswith(a) for a in LEG)
     return [x for x in c if (f(x[0]) and g(x[1])) or (f(x[1]) and g(x[0]))]
 def pose_for(k,jn,a):
+    if k=='hip_yaw_R': return {jn:a}
     if (k=='hip_roll' and a<0) or (k=='hip_yaw' and a<0): return {'L_'+k:a,'R_'+k:a}   # adduction / inward yaw: pelvis shift or turning step (v3 rule)
     return {jn:a}
 def test(k,jn,a,r):

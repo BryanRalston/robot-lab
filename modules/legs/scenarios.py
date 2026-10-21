@@ -3,6 +3,7 @@ usage: python3 scenarios.py [scenario ...]   (one at a time keeps RAM small)"""
 import sys, json, numpy as np, mujoco
 from gait_lib import *
 OUT=os.path.join(HERE,'results',os.environ.get('LEGS_OUT','')); os.makedirs(OUT,exist_ok=True)
+ANK_MIN=float(os.environ['ANK_MIN']) if os.environ.get('ANK_MIN') else None   # 2026-10-21 Controls: stance ankle bound (rad), heel rise generated natively
 TH_TO=np.radians(25); PEL_Z=1.04; FY=0.13; FC=0.06   # pelvis height while walking, foot lateral, foot centre x offset
 
 def heel_off(p,th):
@@ -61,6 +62,20 @@ def ik_track(r,F,com,pel_z,pitch=0.0,P=None):
             q[r.m.jnt_qposadr[r.m.joint('waist_yaw').id]]=-y
             for sd,sg in (('l',1),('r',-1)): q[r.m.jnt_qposadr[r.m.joint(f'{sd}_shoulder_pitch').id]]=r.q[r.m.jnt_qposadr[r.m.joint(f'{sd}_shoulder_pitch').id]]+sg*ge['arm'][k]
         q=r.ik_com(q,{s_:(F[s_][k],0.0,0.0 if P is None else P[s_][k]) for s_ in 'lr'},com[k],pel_z[k],pq)
+        if ANK_MIN is not None and P is not None:   # native stance heel rise: pivot on the toe until ankle_pitch >= ANK_MIN
+            for _ in range(4):
+                lift=False
+                for s_ in 'lr':
+                    ank=q[r.m.jnt_qposadr[r.m.joint(f'{s_}_ankle_pitch').id]]
+                    grounded=abs(F[s_][k][2]-heel_off(np.zeros(3),P[s_][k])[2]-SOLE)<2e-3
+                    if ank<ANK_MIN:
+                        th0=P[s_][k]; th=th0+(ANK_MIN-ank)+0.002; lift=True
+                        if grounded: flat=F[s_][k]-heel_off(np.zeros(3),th0); F[s_][k]=heel_off(flat,th)   # stance: pivot on the toe
+                        P[s_][k]=th   # swing: pitch the foot toe-down about the ankle
+                        if not hasattr(r,'heel_mask'): r.heel_mask=np.zeros((N,2),bool)
+                        if grounded: r.heel_mask[k,0 if s_=='l' else 1]=True
+                if not lift: break
+                q=r.ik_com(q,{s_:(F[s_][k],0.0,P[s_][k]) for s_ in 'lr'},com[k],pel_z[k],pq)
         r.fk(q); e=max(np.linalg.norm(r.d.xpos[r.foot[s]]-F[s][k]) for s in 'lr'); err=max(err,e)
         Q[k]=q
     return Q,err
@@ -106,8 +121,9 @@ def sc_walk(carry=0.0,v=1.2,Tstep=0.45,name='walk_1p2',arm=0.0,yaw=0.0,ds=0.2,pe
     r.gait_extra=dict(arm=arm*dl,yaw=-yaw*dl)
     if pel_z is not None: r.pel_z_walk=pel_z
     Q,com,zmp,err=build_walk(r,F,AL,Z,zc,P=P,pel_z=None if pel_z is None else np.full(len(Z),pel_z))
+    if getattr(r,'heel_mask',None) is not None: TO=TO|r.heel_mask   # heel-raised stance frames load the toe line
     r.toe=TO
-    return r,Q,AL,dict(zc=zc,ik_err_m=err,v=v,Tstep=Tstep,carry=carry,step_lengths=lens),com,zmp
+    return r,Q,AL,dict(ank_min=ANK_MIN,zc=zc,ik_err_m=err,v=v,Tstep=Tstep,carry=carry,step_lengths=lens),com,zmp
 
 def sc_stairs(rise=0.18,tread=0.30,Tstep=0.9):
     m=load(); r=Robot(m); zc=com_height(r)
@@ -186,7 +202,8 @@ def sc_push(v0=0.6,react=0.10,Tsw=0.35,Tend=1.6):
     r.trim=(0.0,0.3)   # push gives the COM velocity at t=0; keep the start
     return r,Q,AL,dict(v0=v0,impulse_Ns=float(v0*m.body_subtreemass[1]),land_x=float(land[0]),land_y=float(land[1]),zc=zc,ik_err_m=err,final_com_v=float(np.linalg.norm(xd))),COM,np.array(ZMP)
 
-SC={'walk_1p2_r2':lambda:sc_walk(v=1.2,Tstep=float(os.environ.get('TSTEP','0.5')),arm=float(os.environ.get('ARM','0.35')),yaw=float(os.environ.get('YAW','0.12')),ds=float(os.environ.get('DS','0.15')),pel_z=float(os.environ.get('PELZ','1.02'))),
+SC={'walk_1p15_r2':lambda:sc_walk(v=1.15,Tstep=float(os.environ.get('TSTEP','0.5')),arm=float(os.environ.get('ARM','0.35')),yaw=float(os.environ.get('YAW','0.12')),ds=float(os.environ.get('DS','0.15')),pel_z=float(os.environ.get('PELZ','1.02'))),
+    'walk_1p2_r2':lambda:sc_walk(v=1.2,Tstep=float(os.environ.get('TSTEP','0.5')),arm=float(os.environ.get('ARM','0.35')),yaw=float(os.environ.get('YAW','0.12')),ds=float(os.environ.get('DS','0.15')),pel_z=float(os.environ.get('PELZ','1.02'))),
     'carry_20kg_r2':lambda:sc_walk(carry=20.0,v=1.2,Tstep=float(os.environ.get('TSTEP','0.5')),yaw=float(os.environ.get('YAW','0.12')),ds=float(os.environ.get('DS','0.15')),pel_z=float(os.environ.get('PELZ','1.02'))),
     'walk_1p2':lambda:sc_walk(),'walk_0p8':lambda:sc_walk(v=0.8,Tstep=0.5),'walk_1p0':lambda:sc_walk(v=1.0,Tstep=0.47),'stairs_18cm':lambda:sc_stairs(),'carry_20kg':lambda:sc_walk(carry=20.0,name='carry_20kg'),
     'sit_to_stand':lambda:sc_sit_to_stand(),'sit_to_stand_r3':lambda:sc_sit_to_stand_r3(),'carry_20kg_0p8':lambda:sc_walk(carry=20.0,v=0.8,Tstep=0.5,name='carry_20kg_0p8'),'carry_20kg_1p0':lambda:sc_walk(carry=20.0,v=1.0,Tstep=0.47,name='carry_20kg_1p0'),'push_recover':lambda:sc_push(),
