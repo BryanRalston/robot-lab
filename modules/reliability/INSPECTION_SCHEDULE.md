@@ -22,3 +22,7 @@ Items accumulated from T&R reviews. Owners: Controls (operator manual), Legs/Tor
 - **When:** after any head-first ground contact (logged or observed).
 - **Check:** (1) visor (replaceable, 4× M2.5) for cracks — replace if cracked; (2) LD29 head liner (P-161, ID dc84836) for permanent set; (3) CF shell at the contact point for cracks/delamination.
 - **Thresholds:** TBD — pending ID and Materials. No numeric acceptance set yet.
+
+## Hip-pitch screw tubes (FMEA F21, Legs f535463) — added 2026-10-21 ~11:27 ET
+- **When:** after any fall or limp (drives-off) event.
+- **Check:** L/R inner hip-pitch screw tubes and seals for dents/scuffs from body-on-body contact; check interim PU pad band condition. Acceptance thresholds TBD (Legs/Actuators).
