@@ -1393,3 +1393,8 @@ Option C(b) now: the torso yields ~−0.05 instead of the −0.4 share assumed i
 
 ## R-133 — Shoulder roll soft limit after real torso cover check (ID e874653) — 2026-10-21
 Evidence: against Torso's real cover, 3 mm clearance is lost at 130° roll at all pitches (contact at 132°). Ruling: the soft limit is 127° (replacing R-127's interim 115°), owned by Controls; no torso pocket. It may rise only after Torso fixes the cover height (z 50–310) and shoulder openings (Ø110 at z 220) and ID re-sweeps with ≥3 mm clearance. G2 remains NOT MET until the full-ROM clash check passes on final covers.
+
+## R-134 — Elektron 43 allowables and Mg galvanic plan (Materials 5f25c5b) — 2026-10-21
+1. Adopted: AMS 4485 extruded T5, longitudinal A-basis Fty 195, giving a single-path limit of 130 MPa only for stress along the bar axis. Non-longitudinal, multi-axial, wall or plate stress uses 98 MPa [EST]. This is conservative (typical transverse yield 183 / 1.5 = 122) and stays in place until an A/B-basis transverse value is cited. Bearing (Fbry) is not credited: all bearing loads go into the 7075-T7351/6061 seat rings. Actuators specify AMS 4485 bar with its axis on the housing axis.
+2. G4-Mg FEA must report principal-stress direction relative to the bar axis per region and check each region against 130 or 98. A region with no stated direction uses 98.
+3. Galvanic plan (MG_GALVANIC_PLAN.md) adopted as mandatory. Adder +0.17 kg [EST], so the net Mg credit is about -0.09 kg (vs R-131 -0.263 gross). It is booked 0 until the G4-Mg FEA, Thermal, and G5 salt-fog/humidity/bolt-retention coupons pass, then at half until measured. Mg is now a low-value option; Actuators should weigh it against pocketing in 7075 alone.
