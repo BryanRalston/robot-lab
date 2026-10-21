@@ -36,3 +36,4 @@ One line per image: date, file, module, what changed.
 - 2026-10-21 arms R11: shoulder-pad load path fix after FEA Job 1 fail (roll-axis carrier + CRBH 8016 recommended; gear-upsize case) — 2026-10-21_arms_R11_pad_fix.png (modules/arms/R11_PAD_FIX.md)
 - 2026-10-21 arms R13: R-120 pad stand-off (ID layout, Arms flange 8xM4 PCD62 + dowels), CRBH 7013 A housing, e stack 2.1 mm WC, clash, mass +0.059 pair over booking — 2026-10-21_arms_R13_standoff_7013.png (modules/arms/R13_STANDOFF_7013.md)
 - 2026-10-21 reliability R2: job 1 + job 4 verified (R2_VERIFY.md), job 9 spec (b)/(c), G5 test plan +14, tracker → 2026-10-21_reliability_R2_verify.png
+- 2026-10-21 arms R14: ID stand-off R11 verified (OD76 flange, dowels PCD57, plate access holes); real 7013 housing coaxial with roll axis X -> interference with stand-off/pad: FEA routing NOT CONFIRMED pending Arbiter; arms fastener BOM — 2026-10-21_arms_R14_standoff_verify.png (modules/arms/R14_STANDOFF_VERIFY.md)

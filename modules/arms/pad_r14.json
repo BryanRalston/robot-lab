@@ -1,0 +1,168 @@
+{
+ "rev": "R14",
+ "basis": "ID ec12542 stand-off R11",
+ "box": {
+  "A_mm2": 415.0,
+  "S_mm3": 5434,
+  "sigma_hand_MPa": 62.8,
+  "sigma_cal_MPa": 180,
+  "ID_cal_MPa": 215,
+  "SF_yield": 2.34,
+  "gate": ">=1.5 PASS",
+  "note": "Arms hand (biaxial, Fn offset 5 mm, e5) x2.86 gives the same order as ID 215; governs 215 -> SF 2.34 vs yield, 1.57 vs 337 FEA limit"
+ },
+ "plate": {
+  "ID_span_MPa": 149,
+  "SF": 3.38,
+  "overhang_MPa": 25
+ },
+ "flange": {
+  "R13_OD70": {
+   "M4_4.5": {
+    "outer_mm": 1.75,
+    "inner_mm": 6.75,
+    "edge_dist_over_d": 0.89
+   },
+   "D6_dowel": {
+    "outer_mm": 1.0,
+    "inner_mm": 6.0,
+    "edge_dist_over_d": 0.67
+   }
+  },
+  "R14_OD76": {
+   "M4_4.5": {
+    "outer_mm": 4.75,
+    "inner_mm": 6.75,
+    "edge_dist_over_d": 1.56
+   },
+   "D6_dowel": {
+    "outer_mm": 4.0,
+    "inner_mm": 6.0,
+    "edge_dist_over_d": 1.17
+   }
+  },
+  "rule": "edge distance >= 1.5 d (bearing-joint practice) [EST]; OD70 gives 0.89 d (M4) / 0.67 d (D6): FAIL; OD76 gives 1.56 d / 1.17 d",
+  "fix": "flange + hub shoulder OD 76 (= CRBH 7013 A inner-ring shoulder 76, IKO l.802) and dowels on PCD 57 between bolts: D6 ligaments 3.5 / 6.5 mm",
+  "dowel_PCD57": {
+   "tau_MPa": 249,
+   "SF_vs600": 2.41
+  },
+  "bearing_OD76_t5_MPa": 192,
+  "note2": "ID bearing 216 MPa (SF 2.22) assumed full ring; with OD76 edge distance the 2.22 holds",
+  "dm_side_kg_OD70_to_76": 0.0097
+ },
+ "bolt_access": {
+  "cases": {
+   "pattern_offset_0deg": {
+    "blocked": 3,
+    "pos": [
+     [
+      -21.9,
+      -21.9
+     ],
+     [
+      -0.0,
+      -31.0
+     ],
+     [
+      21.9,
+      -21.9
+     ]
+    ]
+   },
+   "pattern_offset_22.5deg": {
+    "blocked": 2,
+    "pos": [
+     [
+      -11.9,
+      -28.6
+     ],
+     [
+      11.9,
+      -28.6
+     ]
+    ]
+   }
+  },
+  "verdict": "FAIL: 2-3 flange bolt heads sit under the closed box/solid plate; no tool access once one-piece",
+  "fix": "3 x D8 wrench holes through the plate on the blocked bolt axes (tray covers them; pad fitted after the stand-off) or a split stand-off (flange bolts, then box/plate bolted) - Job 8b checks plate with holes"
+ },
+ "machining": {
+  "billet_mm": "76 x 88 x 32 (X x Z x Y) 7075-T6 plate",
+  "ops": "2 setups: (1) flange side: turn/mill ring, bore D44, box ID 39x39 pocket through the bore 28 deep with D8 end mill (R4 inner corners, L/D 3.5); (2) plate side: plate, R3 fillets, 4xM4 bosses",
+  "issue": "box walls X+-22 coincide with ring bore D44: the box root lands on the ring only where r>=22 (corners and Z<-22); top/side walls sit over the bore -> FE root fix at Y0 is non-conservative",
+  "fix": "box root fillet R3 into a 3 mm root land; or reduce bore to D36 under the box (keeps M4 at PCD62, hub ID54 unaffected since bore only needs clearance) - Arms picks bore D36",
+  "verdict": "machinable (no 3D printing); conventional 3-axis"
+ },
+ "e_stack": {
+  "contributors_mm": {
+   "bearing seat (H7)": 0.05,
+   "CRBH runout/width centre": 0.05,
+   "hub face to bearing plane": 0.1,
+   "flange thickness/flatness": 0.05,
+   "dowel location (D6 m6/H7)": 0.03,
+   "box/plate machined position (one setup)": 0.1,
+   "tray M4 float": 0.25,
+   "tray lip to core": 0.5,
+   "core cut position/squareness": 0.5,
+   "elastic deflection (ID calibrated)": 0.69
+  },
+  "worst_mm": 2.32,
+  "rss_mm": 1.03,
+  "budget": 5.0,
+  "verdict": "PASS (within e<=5) - but see geometry blocker"
+ },
+ "geometry": {
+  "ID_CAD_frame": "housing_7013 / OD108 / stand-off flange modelled coaxial with Y (ring axis y) - inconsistent with the roll axis X used for Mx, s0 and in sim/v3",
+  "consistent_frame": "7013 A coaxial with X at the bearing plane (x=0, e measured from it) occupies r 35..50, seat flange r..54 over x -6.5..+6.5",
+  "standoff_pad_min_r_mm": 0.1,
+  "overlap_with_bearing_envelope": true,
+  "clear_option_axial_e_mm": 40.5,
+  "s0_7013_at_e40_5": 1.5,
+  "verdict": "BLOCKER: with e<=5 the stand-off/pad (Y 0..102, Z -51..+11, |X|<=31) sits inside the CRBH 7013 A / OD108 envelope. Their CAD does not show it only because the housing ring is drawn on the wrong axis. Axial gap >=3 mm to OD108 is therefore not achievable at e<=5."
+ },
+ "buildable_alternatives": {
+  "W2 wrap carrier, 7013, pad on axis (Z0)": {
+   "contact_Y": 138.8,
+   "s0_e0": 2.06,
+   "s0_e5": 1.94,
+   "Mx": 251,
+   "gear_SF": 1.4,
+   "pad_proud_extra_mm": 36.5,
+   "mass": "carrier ~+0.14 pair [EST]"
+  },
+  "W3 wrap carrier, 8016, Z0": {
+   "contact_Y": 144.8,
+   "s0_e0": 3.39,
+   "s0_e5": 3.22,
+   "Mx": 262,
+   "gear_SF": 1.34,
+   "pad_proud_extra_mm": 42.5,
+   "mass": "+0.72 bearing (cited) + housing ~+0.2 + carrier ~+0.14 [EST] (= R11 B, rejected for mass)"
+  },
+  "W1 wrap carrier, 7013, Z-20": {
+   "contact_Y": 138.8,
+   "s0_e0": 2.05,
+   "s0_e5": 1.93,
+   "Mx": 387,
+   "gear_SF": 0.91,
+   "pad_proud_extra_mm": 36.5,
+   "mass": ""
+  }
+ },
+ "covers": {
+  "window": "68x68 R6 at (X0,Z-20): box X+-22 / Z+7..-37 margins 12 / 7 / 17 mm; plate 62 vs window 68: 3 mm/side; PASS",
+  "housing_relief": "cover relief OD114 vs OD108 flange: 3 mm radial; PASS in ID frame (moot under blocker)",
+  "flange_vs_housing_flange_ID_frame": "stand-off flange y -5..0 abuts housing flange face y -10..-5: 0 mm axial gap (radially separated r35 vs r50): FAIL vs >=3 mm even in ID frame",
+  "not_checkable": "head shell, torso cover, abduction ROM: no CAD; light-model R13 results stand (head >=141, overhead roll>=170 torso 9.4 marginal, keep 135 soft limit)"
+ },
+ "mass": {
+  "ID_R11_side": 0.102,
+  "R14_side_CALC": 0.11,
+  "R13_side": 0.072,
+  "delta_pair_vs_R121": 0.076,
+  "R121_pair": 0.271,
+  "new_pair": 0.347,
+  "note": "addition >0.005: needs a ruling under the R-066 freeze; Arms does NOT book it while the geometry blocker stands"
+ }
+}

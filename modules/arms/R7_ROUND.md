@@ -114,3 +114,15 @@ Checked against the R-065 criteria with sim/v3:
 - Report: s0 (≥ 2.0 at e5), Mx raw and CSG-25 SF at fault ×1.05 (≥ 1.0), rib weak-axis and face-pocket von Mises ≤ 335 MPa, flange bolt/dowel shear, no M4 separation, pad deflection (feeds the e stack, 0.5 mm assumed).
 - Clash in CAD: pad + stand-off + housing Ø108 axial gap ≥ 3 mm, abduction −15…180 × pitch with the head shell (not the sphere), overhead pitch ≤ −150 / roll ≥ 170 vs the torso cover, tuck B, ID cover trims.
 - Output: `modules/arms/results/job8_r13_*` md/json/png.
+
+**Job 8b (Arms R14): stand-off R11/R14 FEA re-run.** Not launched. **Do not queue until the Arbiter rules on the R14 placement blocker** (`R14_STANDOFF_VERIFY.md`): the R-120 geometry intersects the CRBH 7013 A when the roll axis is X.
+- Geometry: ID `design/pad_r11_standoff.json` (ec12542) + Arms R14 (flange OD76, bore Ø36, 2 × Ø6 m6 on PCD57, 8 × M4 12.9 PCD62, 3 × Ø8 plate access holes, R3 fillets). Use `arms/cad/r14/standoff_r14.step`, or the ruled placement (e.g. W2 wrap carrier) once decided. Housing `housing_7013_r14.step` coaxial with X.
+- Loads and gates as job1_pad_r11/CASE.md (7.0 kN at 15°, axial + down, e 0/5 qualified, 10 informative; μ 0.15 sensitivity). Gate SF ≥ 1.5 vs 503 on box, plate (around the access holes), ring ligaments and root land. Deflection ≤ 0.69 mm as booked in the e stack (≤ 1 mm hard). Dowel shear, bearing at the OD76 edge, bolt separation.
+- Model the flange/hub as elastic (not a fixed root at Y0), including the CRBH stiffness, so the root-on-bore issue shows.
+- CAD clash (needs these models; Arms supplies the first three as STEP via `cad/r14/r14_cad.py`):
+  - stand-off, housing 7013/OD108, pad envelope (Arms)
+  - shoulder cover / cover window (ID, `design/cad/shoulder_pad`)
+  - head shell and torso cover (Head/ID: **not yet existing**, minimum = outer-surface STEP)
+  - shoulder_P bracket (Arms, to be made)
+  - Checks: ≥ 3 mm everywhere through abduction −15…180 × pitch, tuck B, and overhead pitch ≤ −150 / roll ≥ 170.
+- Output: `modules/arms/results/job8b_*`.

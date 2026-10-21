@@ -1,0 +1,18 @@
+where,size,per_side,per_robot,grade,structural,reason,basis,steel_g_robot,ti64_g_robot,ti_candidate
+shoulder_P -> torso frame (CONTRACTS 1c),M8x20 SHCS,8,16,12.9 steel,Y,"arm-to-torso joint, side-fall case",R2_OPEN_ITEMS l.152 (8xM8 12.9 BC80),239.9,,False
+pad stand-off flange -> roll-output hub,M4x12 SHCS,8,16,12.9 steel,Y,321 N.m + 7 kN pad load,R13/R14 (PCD62),33.1,,False
+pad stand-off dowels,D6 m6 x10 dowel,2,4,hardened steel,Y,flange shear (fitted),ID ec12542 / R14 (PCD57),8.9,,False
+roll housing seat flange -> shoulder_P,M4x10 SHCS,8,16,12.9 steel,Y,"bearing retention, pad impact",R13 housing [EST count],30.0,,False
+upper-arm link -> elbow unit,M5x14 SHCS,8,16,12.9 steel,Y,carry/reach bending,"[EST, HD CSG-20 pattern]",62.3,,False
+forearm tube -> elbow output / wrist node,M4x10 SHCS,12,24,12.9 steel,Y,forearm bending (10 kg reach),[EST] 6 per end,45.0,,False
+wrist fork -> palm 7075,M3x8 SHCS,8,16,12.9 steel,Y,grip/wrist torque,A32/A42 [EST],13.1,,False
+finger phalanx pivot screws,M2x6 shoulder,15,30,A2-70 / steel,Y,finger joint pin (grip 22 N),R9 hand [EST 5 fingers x3],7.8,,False
+palm tendon stops,M3x6 set,6,12,steel,Y,tendon anchor (flexor tension),A42 l.39 (palm M3 stops),8.5,,False
+sheath end clamps,M2x5 SHCS,12,24,A2-70,N,locates sheath; tendon load in stop not clamp,R8 clamps [EST 6 sheaths x2],5.6,3.2,True
+flexor motor/encoder end-cap clamps,M2.5x6 SHCS,12,24,A2-70,N,thermal clamp to shell (Thermal to OK Ti),R5/R8 ladder B clamps [EST],10.8,6.1,True
+hand board (144 MHz) standoffs,M2x5 SHCS,4,8,A2-70,N,PCB mount (gap pad clamp),R9 thermal [EST],1.9,1.1,True
+DRV8874 / driver PCB,M2x5 SHCS,4,8,A2-70,N,PCB mount,[EST],1.9,1.1,True
+ENX22 encoder mounts (6 flexors),M1.6x4,12,24,A2,N,"encoder locate, no load",maxon ENX22 [EST 2 per],2.9,1.6,True
+forearm covers / wrist fairing,M2.5x6 button,10,20,A2-70,N,cosmetic/impact skin,R-070 fairing [EST],9.0,5.1,True
+upper-arm cover / shoulder local cover,M3x8 button,8,16,A2-70,N,cover skin (ID PC 1.5),COVER_TRIMS_R120 [EST],13.1,7.4,True
+harness P-clips,M2.5x5 SHCS,8,16,A2-70,N,cable retention,[EST],6.6,3.7,True
