@@ -79,6 +79,7 @@ Per `legs/R031_FIXES.md`: 5 ASTM D1002 coupons per lot at 23 and 60 °C, part-eq
 - **Cases:** at 25 °C and **35 °C** ambient: (1) standing at R-096 duty to steady state (the governing thermal case); (2) walking 0.5–2 m/s at duty; (3) continuous carry until the derate holds; (4) 30 min standstill heat soak after (3); (5) seated/kneeling 10 min (openings partly blocked).
 - **IP2X / probe:** IEC 61032 probe B (ø12 mm, 80 mm reach, 30 N) applied to every slot of the grille, inlet, outlet and knee-housing fairing: no contact with any surface > 48 °C or with the baffle, fins or housing. The 50 mm sphere must not enter. Slot widths measured on 5 production parts: ≤ 5.0 mm max (4.5 nominal).
 - **Rev 4e additions (outlet shroud):** touch TCs on the shroud outer face (centre, top and upper-side opening edges, the skin 20 mm downstream of the jet) and on the outlet webs (reference, inside). Probe B through the top/side openings: no contact with any surface > 48 °C. **Pass for the shroud zone (no-sustained-contact class): ≤ 48 °C at 35 °C ambient standing hot (target ≤ 43)**, other touch points unchanged. Run once with the dilution slots taped shut (poor-mixing sensitivity). **Cool-down:** after case (4), command the R-146 safe-sit prone fallback (MO = 0) and record the time for every touch point to reach ≤ 43 °C (sets the rescue/handling wait in the handling map).
+- **Rev 5 additions (side exit/hood, if built):** TCs on the hood outer face, louvre blade edges (top and aft), skin 20/50/80 mm above the hood (plume), the W017 label site, and a dummy hand cover (silicone skin with TC) at the hanging-hand position and in the swing path. Run with dilution slots taped shut (poor mixing). Probe B and the IP2X sphere on the louvres. Arm-at-side hand-to-hood clearance measured in the stand and walk modes. **Pass for rev 5: ≤ 43 °C at every touch point, all cases, both ambients (likely contact);** hand ≥ 30 mm from the hood. If Option B is built: the rear outlet uses the 48 °C class below.
 - **Pass:**
   - every touch point ≤ **48 °C** at 35 °C ambient and ≤ **43 °C** at 25 °C ambient, in all cases (the outlet is included; it fails on the current estimate unless fixed);
   - **drive base ≤ 80 °C in case (1) at 35 °C ambient** (Thermal predicts 76.2–78.5, margin 1.5–3.8 K; if the measurement exceeds 78.5, Thermal re-runs the duty limit);
@@ -92,3 +93,15 @@ Per `legs/R031_FIXES.md`: 5 ASTM D1002 coupons per lot at 23 and 60 °C, part-eq
 - (b) L2: from a held upright kneel, MO=0 tip forward ×3 (new cartridge each), arms passive. Pass: crush ≤50 mm, force ≤22.35 kN, pack-rail accel ≤ the pack rating (provisional 50 g), no structural damage.
 - (c) After each L2 run: pack OCV, isolation, BMS log, visual of the cell gap; bulkhead dye-penetrant after the final run.
 - Ballast-dummy alternative for (b) before a full robot is risked: a rigid-link dummy with matched mass/CoM/I about the knee.
+
+## TP-G5-17 Pack shock at the fall pulse (R-146; R146_PRONE_LANDING.md §7; Torso c974f54)
+- **Item:** flight-standard 20S5P pack (8.75 kg) with cells, holders, BMS, enclosure, rails and the rail stop shoulder, mounted on flight-standard rails on a rigid fixture. 100 % SOC (worst), 25 °C.
+- **Pulse:** half-sine **104 g peak, 20 ms, Δv ≈ 5.7 m/s** (drop table or pneumatic shock machine, tolerance per IEC 60068-2-27). **3 axes, both directions (6 orientations), 3 shocks each**, plus the forward axis (pad direction) at +15 % (120 g) as a margin shot on a separate sample.
+- **Instrumentation:** control accel on the table plus response accels on the pack rail and an internal cell module (CFC 1000); BMS log; cell-group voltages; video.
+- **Pass:**
+  - **no venting, leak, smoke, fire or rupture** (observe 1 h after the shock)
+  - **OCV change ≤ 0.1 % and per-group voltage unchanged within ±5 mV; AC impedance (1 kHz) per group unchanged within ±5 %**
+  - **no mechanical damage:** no cracked holders, no cell displacement into the ≥ 5 mm gap, no rail/latch/stop yield, fasteners torque-checked
+  - **BMS OK:** no fault latched, isolation ≥ spec, comms intact
+  - then a full charge/discharge cycle at 1C with capacity within 2 % and no thermal anomaly
+- **Until it passes, R-146 L2 (tip from kneel) stays CONDITIONAL.**

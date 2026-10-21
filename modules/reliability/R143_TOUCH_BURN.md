@@ -1,5 +1,52 @@
 # R-143 §2b — Knee fins: ISO 13732-1 touch-burn check (RL T&R, 2026-10-21)
 
+## ▶ Rev 5 / 5a (ID a065aa3, hood 0b3fab9, HANDLING_MAP draft): outboard side exit under a louvred hood. **REJECT as drawn; recommend Option B (rear outlet through the L60 cut-out)**
+Script: `r143_rev5.py` → `r143_rev5.json` [hand model, same balances as rev 4e]. Drive base per case comes from the rev 4b/4c tables, with +2.5 K on standing for H 0.14 vs 0.18 [EST; Thermal must re-run]. Exhaust = Ta + (0.85–1.0)(Tb − Ta). Good mixing = 1:1 dilution (947 mm² min ≥ 600 OK); poor mixing = no dilution, h_i 5.
+
+### 1. Temperatures (°C)
+| case | hood outer face good / poor | louvre blades good / poor | recessed exit webs |
+|---|---|---|---|
+| 25 °C walk duty | 28.5–29.2 / 35.2–37.0 | 40.3–43.0 / 55.6–61.0 | 55.6–61.0 |
+| 25 °C carry (derate 87.5) | 31.1–32.2 / **42.7–45.8** | **51.6–56.2** / 78–88 | 78–88 |
+| 25 °C standing hot | 30.5–31.4 / **40.8–43.6** | **48.7–52.9** / 72–81 | 72–81 |
+| 35 °C walk duty | 38.5–39.2 / **45.2–47.0** | **50.3–53.0** / 66–71 | 66–71 |
+| 35 °C carry | 40.1–41.1 / **49.9–52.5** | **57.3–61.2** / 80–88 | 80–88 |
+| 35 °C standing hot | 39.5–40.3 / **48.0–50.3** | **54.5–58.0** / 74–81 | 74–81 |
+- **Exhaust jet** (louvres angled 30° up/aft) leaves at about T_mix: 49–61 °C with good mixing, 72–88 °C with poor mixing, straight up past the outboard thigh. ISO 13732-1 covers surfaces, not air. But the jet heats whatever sits in it (the robot's hand cover, a person's hand), and it washes the thigh skin above the hood (z 815 → ≈ 900), **including the W017 label site at z 830**.
+- **Housing fairing slots 4.0 ± 0.3 (≤ 4.3):** 31.6–32.5 at 25 °C / 40.6–41.5 at 35 °C (rev 4e, unchanged; not on the chimney).
+
+### 2. IP2X / probe B
+- Hood louvres ≤ 4.8 mm (≤ 5.0 incl. tolerance), dilution slots 4.0 ± 0.3, fairing slots ≤ 4.3: the ø12 finger and the 50 mm sphere cannot enter. Exit webs (11 mm recessed) and fins are not reachable. **IP2X PASS** at every point.
+- **The louvre blades themselves are the touchable surface**, and they are exhaust-washed on both faces.
+
+### 3. Hand proximity (sim/v3 arm chain + model_v4, standing, arm hanging, joints 0)
+- Shoulder z 1.50, y 0.170 (+0.112 roll offset) → hand box y 0.239–0.325, x ±0.016, **z 0.763–0.903**. Forearm ends at z 0.943, so it is above the hood. The hood outer skin is at y 0.261, x −0.010…−0.100, **z 0.780–0.815**.
+- **The hanging hand's inboard face is 22 mm inboard of the hood skin** (interference). The hood fully overlaps the hand's z range and sits only 6 mm aft of the hand's x. With the arm at the side, the hand either rests on the hood or must be abducted. In walking, shoulder-pitch swing (±0.2 m fore/aft at the hand [EST]) **sweeps the hand across the hood/louvres every stride**, and the up-jet blows into the palm/wrist when the hand hangs.
+- People: the zone is at about 0.8 m, outboard, exactly where someone walking beside, guiding, or holding the robot's hand (or a child's head/hands) is. **Contact is likely, and sustained when the robot stands with its hand at its side and someone holds it.** The robot's own hand cover sits in a 49–88 °C jet, so it becomes a hot surface itself.
+
+### 4. ISO 13732-1 limit and classification
+- Likely or sustained contact → **8 h value 43 °C** (Table 1). The 48 °C "no-sustained-contact" class from rev 4e/N1 **does not apply here**: it relied on the zone being away from hand paths, and rev 5 puts it in the hand path. Under CENELEC Guide 29 and ISO 12100, a W017 label is a supplementary measure after design. It cannot reclassify a likely-contact surface.
+- **Per point vs 43 °C:**
+  - **hood outer face: PASS only with good mixing** (≤ 41.1). With poor mixing it **FAILS** at 25 °C carry/standing (42.7–45.8) and at all 35 °C cases (45–52.5).
+  - **louvre blades: FAIL** in every case except 25 °C walk duty (good mixing). Even against the 1–10 s plastic limit (~60–77) they fail with poor mixing.
+  - **exit webs:** not touchable (IP2X PASS), but they set the jet temperature.
+  - **side-exit surround / skin above the hood: FAIL [EST]**, washed by the 49–88 °C plume.
+  - **housing fairing slots:** IP2X PASS; 41.5 ≤ 43 at 35 °C, **PASS (1.5 K margin)**.
+  - **robot hand in the jet: FAIL** (hand cover heated toward T_mix; contact-likely surface).
+- **N1 (HANDLING_MAP draft) check:**
+  - z 755–845 covers the hood/exit z 780–815 (≥ 25 mm margin) and x −10…−100. **The z range is OK for the hood.**
+  - It does not cover the plume-washed skin above it (to ≈ 900).
+  - **The hanging hand (z 763–903) lies inside and above N1, so the robot's own hand sits in the no-hold zone.**
+  - N1's stated class "up to 48 °C, no-sustained-contact" is **wrong for rev 5**. It must read 43 °C likely-contact, or the outlet must move.
+  - The label at z 830 sits in the jet.
+
+### 5. Option B: rear outlet through the L60 top-plate cut-out (~52 × 40, y 104–156)
+- The outlet is inboard (y 104–156, about 85 mm inboard of the hand's inboard face, shadowed by the thigh) and aft (x −40…−80 up/rear). That is **outside the hand-hang and arm-swing envelope**, and the jet rises into the skirt/buttock region, not into a hand. Full chimney height raises draft and lowers Tb and exhaust temperature, recovering the H 0.14 loss.
+- Remaining exposure: a person behind the robot, and the prone rescue state (rear thigh faces up). Keep it no-hold with the 48 °C class (contact not likely), louvres ≤ 5 mm, dilution, and TP-G5-15.
+- **Cost:** Legs structural check of the 52 × 40 cut-out in the 8 mm trunnion top plate (load path near the knee trunnion), skirt clearance (P-023), and a Thermal re-run.
+- **Verdict: Option B is safer. T&R recommends B.** Rev 5 is acceptable only if (i) the hand is kept ≥ 30 mm clear by a hard keep-out (shoulder roll/abduction limit in the stand and walk modes, plus a skin standoff), and (ii) every touch point meets 43 °C including poor mixing. On the current numbers (i) costs posture and (ii) fails.
+
+
 ## ▶ Rev 4e update (09:40 ET) — outlet shroud + "no-sustained-contact" class: **CONFIRMED WITH CONDITIONS**
 Sources: Thermal 218a541 (rev 4e shroud, H 0.18 → drive base 73.2 °C standing); ID P-156 rev 4e (`design/V5_COVER_SET.md` §P-156 rev 4e, `cad/covers/thigh_knee_vents.json`): shroud = v5 skin swelled +6 mm, 1.0 mm PC, outlet slot face recessed to x −71.5 → **17 mm standoff**, y 96–164, z 815–865, **closed bottom**, **open up (68 × 17 = 1156 mm²) and both upper sides (1530 mm²)**, outlet webs 28 mm behind the shroud skin. Knee-housing fairing slots 5 × 4.0 ± 0.3 × 20 per end (≤ 4.3 mm): the rev 4d IP2X gap is **closed**. Housing low-ε callout removed (foil on the fairing only), which resolves the rev 4d conflict. T&R recheck: `r143_rev4e.py` → `r143_rev4e.json`.
 

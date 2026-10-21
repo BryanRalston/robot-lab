@@ -50,3 +50,33 @@ See G5_TEST_PLAN.md TP-G5-16: (a) a controlled lower ×20 on load-plate floor; (
 - Rotational torso g in the tip from kneel (Controls sim with the plateau pad model, `--chest-k` not linear).
 - Head/face clearance in prone (ID): pose F shows no head contact, but no clearance number exists.
 - Rescue/handling map for the prone state (HANDLING-MAP gap, R-143 rev 4e).
+
+## 7. Update 2026-10-21 ~09:20 ET: Torso c974f54 (pack shock), Robot Lab ruling (100 mm core + rail stop), ID fd981f1 (head clearance)
+**Pack shock (Torso R146_pack_shock.md):**
+- P45B cell: 150 g / 6 ms. Pack UN 38.3 T4 level: 107.4 g / 6 ms, Δv 4.0 m/s.
+- My pinned bound of 104 g is within the T4 level by only 3 %, and **a test level is not a design limit**.
+- The fall pulse is 7–23 ms with Δv up to 5.67 m/s, so **T4 does not envelope it**.
+- Rails: 272/320 MPa (85 %, [EST] section).
+- Torso's screen model gives the kneel tip at 59–85 g.
+- **Note:** with the dynamic factor 1.10–1.30 on the plateau (as in Torso's calibration), the pinned bound rises to 104 × 29.0/22.35 ≈ **135 g**. The demand band is therefore 38–135 g, with the screen model at 59–85 g. Only the drop test closes this.
+
+**100 mm core recheck (plateau unchanged, so peak force and g unchanged; only the stroke grows):**
+| | 88 mm | **100 mm** |
+|---|---|---|
+| usable stroke (0.70 t) | 62 mm | **70 mm** (75 at densification ε 0.75) |
+| L2 kneel tip 252 J, lot 19.5 kN 0° … 18.1 kN 15° | 13–14 mm | **13–14 mm → margin 5×** |
+| L3 standing tip 549 J | 28–30 mm | **28–30 mm of 70** |
+| T-031 gate 1.03 kJ at 18.1 kN | 57 mm (8 % margin) | **57 mm of 70 (≥ 10 % margin restored)** |
+| peak force / pack g | ≤ 22.35 kN quasi-static (29 kN dynamic) | unchanged |
+- The rail stop shoulder closes Torso's latch OPEN item (13.4 kN axial) provided it is sized to 13.4 kN. Torso to show the calc.
+
+**Head clearance (ID fd981f1: 42.3 mm level, 41.8 mm minimum tilted; ID's target was ≥ 10).** The value needed is crush stroke + elastic (≈ 1 mm) + 10 mm margin:
+- L1 controlled lower: no crush → need 11 → **PASS** (41.8).
+- L2 kneel tip: 14 + 11 = 25 → **PASS** (16.8 mm spare).
+- L3 standing tip: 30 + 11 = 41 → **marginal PASS** (0.8 mm spare at the 41.8 minimum).
+- T-031 full gate (57 mm stroke): 68 mm needed → **FAIL**. In a full-energy forward fall the head shell (N3, fragile) touches the floor at about 41 mm of crush, before the pad has absorbed the gate energy.
+- **Open:** does the 100 mm core push the pad face out 12 mm (gap → 54.3/53.8, then L3 PASS with 13 mm spare; gate still needs 68) or is it recessed into the land (gap unchanged)? ID/Torso to state. Target: head ≥ 68 mm behind the pad plane, or accept a head-shell floor touch only beyond L3 energy.
+
+**Verdicts now:** L1 PASS. **L2 CONDITIONAL until TP-G5-17 passes** (pad/stroke/bulkhead PASS, head PASS). L3 = T-031, head marginal. T-031 gate head clearance FAIL / open to ID.
+
+## 8. TP-G5-17 pack drop test: see G5_TEST_PLAN.md
