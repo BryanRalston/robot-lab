@@ -32,3 +32,46 @@ The Molicel spec gives no allowable beyond the 150 g / 6 ms qualification. **A t
 5. **Rail section:** upsizing to 12 × 17 mm (+0.012 kg [EST]) gives 66 % used, if Materials wants margin on the [EST] section.
 
 Inputs: `fea_chest_pad.yaml`; results: `fea/chest_pad_SCREEN_results.json` [SCREEN, 1-DOF].
+
+## 4. Robot Lab ruling on c974f54, plus Controls fc86721, T&R 7f12ce9 and ID requests (2026-10-21 ~09:30 ET)
+### 4.1 100 mm core (adopted, +0.006)
+- Core 98 × 98 × **100** (was 88), outward on the unchanged land. **Pad face (skin) x = +0.159 m torso frame** (was +0.147, +12 mm). Bulge 49 mm proud of the 110 cover front (was 37). **ID: update the 37 mm bulge to 49.** The cover CAD is updated (`cad/torso_cover.py`, sternum_proud 49, bbox x max 159).
+- **Frame transform (torso → SITE/global, model_v4 / sim v3 standing, waist joints at 0):** global = torso + (0, 0, +1280) mm, identity rotation. Torso origin = waist-pitch joint (sim v3 `torso` body at z 1.280; check: shoulder pitch torso z 220 ↔ model_v4 shoulder_z 1500).
+  - **Pad in global:** face **x = +159**. Core y −49…+49. Core z **1451…1549** (centre 1500). Land 101 × 101: y ±50.5, z 1449.5…1550.5. Bezel outer 128 × 128 [EST, 101 + 2 × 13.5 flange]: z 1436…1564.
+- Stroke at 100 mm: available 70 (0.70 densification, T&R) to 75 mm (0.75). Screen: 0° / 15° at 64 kg use 48 / 51 mm, so margin ≥28 % at 0.70. **25° at 64 kg, soft lot: 64.4 mm → 8.1 % margin at 0.70 (FAIL, need 10 %), 14 % at 0.75 (PASS).** The 25° verdict depends on the densification strain. Add it to the R-102 lot coupon (record the strain at plateau end) or cap TUCK at ≤15° (see 4.4).
+
+### 4.2 Rail-end stop shoulder (adopted, +0.010): latch item CLOSED
+- 13.4 kN (8.9 × 1.5) along the insertion axis is routed into **integral 7075 shoulders on both rail ends** (one per rail, 6.7 kN each). A pack-side lug bears on each. The latch only retains (≤0.2 kN).
+- Shoulder: 12 (w) × 8 (h) × **9 mm** (axial) lip, R1 root fillet. Rails are multi-path (2 rails), so the allowable is 320 MPa (R-128); shear allowable 0.6 × 320 = 192.
+  - Bearing 6700 / (12 × 8) = **70 MPa ≤ 320**.
+  - Root shear 6700 / (12 × 9) = **62 MPa ≤ 192**.
+  - Lip bending M = 6.7 kN × 4 mm = 26.8 N·m, Z = 12 × 9² / 6 = 162 mm³: **165 MPa ≤ 320 (51 % used)**. The 6 mm lip I tried first gave 372 MPa, so it was thickened to 9.
+- Rail bolts 6 × M5 10.9 shear 23.6 kN vs 13.4: PASS. Mass: 2 × 2.4 g lips + 2 × ~2.5 g pack lugs ≈ **0.010 kg**. **Latch OPEN item closed.** Pack shock stays **CONDITIONAL until the G5 drop test (TP-G5-17).**
+
+### 4.3 Controls fc86721 kneel tip-over: 13.3 kN at the pad, 43–44 g raw at the pack
+- **The "8.8 kN pad limit" is not structural.** It is T&R's L1 controlled-lowering limit (R146_PRONE_LANDING.md §L1: "≤8.8 kN = 0.5 × the plateau floor", so a routine safe-sit never consumes the cartridge; also PRONE_DATA_TR.md, G5 TP L1). The kneel tip is **L2** (limit 22.35 kN crush ceiling), so 13.3 kN is inside L2.
+- **At 13.3 kN, below the 19.5 kN (×1.10 dyn = 21.45) plateau, the pre-crushed core stays elastic.** No crush, no energy absorbed by the pad: the load goes into the structure, and the energy goes into body compliance and rebound. Face stress 13.3 kN / 98² = 1.38 MPa, below the 1.79 MPa crush and the 3.79 MPa bare compressive (HEX_CRIII 550 psi). Indentation must be checked against the T&R 0.5 mm L1 rule only if it is applied to L2.
+- **Structure at 13.3 kN (R-128):**
+  - Land/rib (single path, 257): 216 MPa × 13.3 / 24.4 = **118 MPa, SF 2.18 vs 257: PASS**.
+  - 100 mm core: elastic: PASS.
+  - Rails (multi-path, 320): pack load 8.75 × 9.81 × 44 = 3.78 kN → **116 MPa: PASS**.
+  - Stop shoulder: 3.78 kN against the 13.4 kN design: PASS.
+  - Pack 44 g against the 107 g T4 level: PASS on peak (Δv/pulse still per TP-G5-17).
+- Chest-pad decks now include **`kneel_tip_13p3kN`** (force-driven, 34.9 kg): screen gives 38.8 g from F/m (Controls' raw 43–44 g includes rotation about the knees). PASS.
+
+### 4.4 Head clearance (T&R 7f12ce9, ID fd981f1)
+Prone geometry: gap = pad face x − head frontmost x (104.7), level body. Needed = gate stroke + elastic 1 + 10 margin = **68 mm** (T&R, gate stroke 57). My 100 mm-core screen gives 48 mm gate stroke, so 59 mm by my number. 68 is used below.
+
+| Option | Face x | Gap level | vs 68 |
+|---|---|---|---|
+| Current (88 core) | 147 | 42.3 | FAIL −25.7 |
+| (a) 100 core, face +12 (ruled) | 159 | **54.3** | FAIL −13.7 (PASS L3 41 + 13 spare; vs my 59: −4.7) |
+| (b) land recessed 12, face kept | 147 | **42.3** | FAIL −25.7 (clearance does not grow; recess only adds stroke) |
+| Standout alone to pass | **172.7** | 68 | needs +25.7 over 147 (+13.7 over (a)): bulge 63 mm proud |
+| (a) + head-up tuck θ | 159 | 54.3·cosθ + d·sinθ | **θ ≥ 4.0° (d 200) to 5.4° (d 150)** |
+| face 147 + tuck θ | 147 | 42.3·cosθ + d·sinθ | θ ≥ 7.5–10.2° |
+| (a) + 15° tuck | 159 | 104 | PASS +36 |
+
+d = height of the head's frontmost point above the pad centre, **150–200 mm [EST]** (head origin z +370 torso; ID to give the exact head-shell point).
+
+**Recommendation:** keep (a) (face +0.159). Controls holds the TUCK chest pitch **head-up 5°–15°** at pad contact. That passes the 68 mm head clearance with margin and keeps stroke margin ≥10 % (≤15° is verified; 25° is marginal on densification). Do not grow the bulge to 63 mm (ID shape, core length). Recessing the land does nothing for the head.

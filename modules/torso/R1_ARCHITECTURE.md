@@ -523,3 +523,20 @@ Rated on the kitting duty cycle at **4.55 h**; no bigger pack.
   - Outlet: z 160–214, 2 columns (x ±62…±102, clear of the Ø110 opening), 9 rows, **25.2 cm²/side**. Both meet A35 ≥25 cm² (projected; the true area on the slope is slightly larger).
   - IP2X: a 12 mm finger cannot enter a 3.5 mm slot; live parts are kept ≥80 mm behind the slots. Bays stay clear of the Thor exhaust (upper back).
 - Thor plus A41 duct above z 265: |y| ≤ 101 (130 × 200 bay + 1 mm walls, orientation [EST]). The 45 mm chamfer is at |y| 125 at the top (z 310) and reaches |y| 101 only at z 334. **Clears, 24 mm margin; chamfer stays 45 mm.** Details in cad/torso_cover.json.
+
+### D95 hip-pitch Elmo plates on the pelvis rear wall (Actuators 27afe00 / Legs L72), torso answers (2026-10-21)
+- **Ownership:** the pelvis shell (model_v4 "pelvis shell 7075 4 mm", 170 × 370 × 104, global z 1126–1230) is in the **torso line** (R1 pelvis 1.45 kg; D95 table "Torso"). Torso owns the wall mounting.
+- **Frame:** model_v4/site global = torso + (0, 0, 1280) mm. D95 z 1178 → torso **−102**; plates z 1136–1220 → torso −144…−60; pelvis top 1230 → −50.
+1. **16 × M3 mounting:** rear wall is 4 mm 7075-T651. 7075 is too hard for self-clinching PEMs, so use **tapped M3 through-holes (4 mm engagement = 1.33 d)** with **G10 standoffs, no metal contact**, matching Thermal's binding rule for the knee.
+   - Load per screw: 0.1 kg × 50 g / 4 ≈ 12 N, trivial.
+   - R-128: the pelvis is single-path (271). Ø2.5 tap holes at Kt 3 in a low-stress region of the rear wall. The holes are added to the job 3 check scope.
+   - Job 3 pelvis geometry is updated to the model_v4 shell (170 × 370 × 104 × 4) in fea_job3.yaml / 3b.
+   - Clearance: plates are outboard (x −88…−114.5), so there is no conflict with the job 3 bulkhead, posts or partition, which are all at torso z ≥ 0.
+2. **Rear wall ≤50 °C:** **no battery behind it.** The pack sits in the torso, model_v4 z ≈ 1340–1484 global (tb = waist pitch + 60), so it is 110 mm above the pelvis top. The regen clamp and DCM are on the bulkhead / Thor plate (torso z ≥ 140).
+   - **Open:** the hip-yaw housings inside the pelvis (y ±130) face the rear wall's inner face. Thermal must confirm their skin is ≤50 °C, or add a low-ε shield on the wall's inner face (+0.005 kg [EST]).
+3. **Rear cover x ≤ −117.5:** the torso cover ends at z 1330 global (torso 50), above the plates (≤1220), so it does not overlap. Nothing torso-owned lies at x < −85 in z 1126–1230. The pelvis-level skirt/bellows is ID's to clear at −117.5.
+4. **Harness:** the pelvis is open top/bottom, so **no wall pass-through is needed.**
+   - Drive feeds (bus pair plus EtherCAT/STO) come down the waist service loop, cross the open top behind the waist deck, and run down the outboard face to the plates in 2 P-clips per side on the wall's top edge.
+   - Motor leads (0.45–0.6 m) go down outboard to the hip pitch motors through the yaw/roll service loop.
+   - **R-076:** the bus pair goes in its own sleeved bundle (reinforced insulation). Signal (EtherCAT/STO) stays ≥20 mm from bus and phase conductors. Phase leads are treated as bus potential. No grommet, because there is no wall crossing.
+   - If ID closes the pelvis top, use a Ø16 grommet pair at y ±183? No: the plates span to y 177, so a top-edge notch is used instead.

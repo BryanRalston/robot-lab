@@ -13,7 +13,7 @@ geometry:   # robot frame origin = waist centre; x fwd, y left, z up (mm)
   partition: {path: multi, stock: 'CFRP QI 1.0 mm laminate', grain: 'QI 0/±45/90', mat: CFRP_QI, width_y: 260, height_z: 300, t: 1.0, x0: -10, z0: 0}   # spans pelvis top to bulkhead rib
   posts: {path: single, stock: 'from bulkhead stock 3.0 in', grain: 'L along z', allowable: 257, mat: Al7075T651, y: [-100, 100], w_y: 20}   # waist-ring posts pelvis->bulkhead (bulkhead x0..x0+t)
   ethercat_bosses: {dia: 3.2, dx: 70, dz: 50, z_c: 90}
-  pelvis: {path: single, stock: '7075-T651 plate 2.5 in (63.5 mm)', grain: 'L along y', allowable: 271, mat: Al7075T651, width_y: 260, depth_x: 140, height_z: 60, wall: 6, z0: -60}
+  pelvis: {path: single, stock: '7075-T651 plate 2.5 in (63.5 mm)', grain: 'L along y', allowable: 271, mat: Al7075T651, width_y: 370, depth_x: 170, height_z: 104, wall: 4, z0: -104}   # model_v4 pelvis shell 170x370x104, 4 mm (global z 1126-1230)
 load_cases:   # forces in N, moments in N*mm
   LC1_chest_pad:   {target: land, F: [-33500, 0, 0]}
   LC2_side_fall:   {target: shoulder_flange_L, M: [0, 0, 0], F: [0, -9000, 0], note: "D71 <=550 N*m via 61 mm lever"}

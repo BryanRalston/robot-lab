@@ -4,54 +4,84 @@
   "fall_0deg_64": {
    "soft_lot": {
     "plateau_kN": 21.45,
+    "F_kN": 21.45,
+    "elastic": false,
     "stroke_mm": 47.9,
-    "stroke_avail_mm": 66.0,
-    "margin": 0.274,
+    "stroke_avail_mm": 70.0,
+    "margin": 0.315,
     "bottomed": false,
     "pulse_ms": 16.9,
     "peak_g": 34.2,
-    "dv_ms": 5.67,
     "rail_load_kN": 2.93,
     "force_stroke": [
      [
-      2.79,
+      10.7,
       21.45
      ],
      [
-      26.14,
+      20.0,
       21.45
      ],
      [
-      41.06,
+      28.0,
       21.45
      ],
      [
-      47.6,
+      34.7,
+      21.45
+     ],
+     [
+      39.9,
+      21.45
+     ],
+     [
+      43.9,
+      21.45
+     ],
+     [
+      46.5,
+      21.45
+     ],
+     [
+      47.8,
       21.45
      ]
     ]
    },
    "hard_lot_dyn": {
     "plateau_kN": 28.99,
+    "F_kN": 28.99,
+    "elastic": false,
     "stroke_mm": 35.5,
-    "stroke_avail_mm": 66.0,
-    "margin": 0.463,
+    "stroke_avail_mm": 70.0,
+    "margin": 0.493,
     "bottomed": false,
     "pulse_ms": 12.5,
     "peak_g": 46.2,
-    "dv_ms": 5.67,
     "rail_load_kN": 3.96,
     "force_stroke": [
      [
-      2.78,
+      10.4,
       28.99
      ],
      [
-      24.35,
+      19.0,
       28.99
      ],
      [
-      34.55,
+      25.9,
+      28.99
+     ],
+     [
+      30.9,
+      28.99
+     ],
+     [
+      34.0,
+      28.99
+     ],
+     [
+      35.4,
       28.99
      ]
     ]
@@ -60,61 +90,120 @@
     "stroke_margin": true,
     "ceiling_quasistatic": true,
     "pack_g": true,
-    "pack_dv": false
+    "land_stress": true,
+    "rail_stress": true,
+    "pack_dv_enveloped_by_T4": false
    },
-   "pass": false
+   "pass": true,
+   "note": "\u0394v beyond UN T4 envelope -> TP-G5-17 drop test",
+   "decks": [
+    {
+     "base": "/tmp/cp2/fall_0deg_64_lo_c8",
+     "elems": 1728
+    },
+    {
+     "base": "/tmp/cp2/fall_0deg_64_hi_c8",
+     "elems": 1728
+    },
+    {
+     "base": "/tmp/cp2/fall_0deg_64_lo_c4",
+     "elems": 14400
+    },
+    {
+     "base": "/tmp/cp2/fall_0deg_64_hi_c4",
+     "elems": 14400
+    },
+    {
+     "base": "/tmp/cp2/fall_0deg_64_lo_c2",
+     "elems": 120050
+    },
+    {
+     "base": "/tmp/cp2/fall_0deg_64_hi_c2",
+     "elems": 120050
+    }
+   ]
   },
   "fall_15deg_64": {
    "soft_lot": {
     "plateau_kN": 20.36,
+    "F_kN": 20.36,
+    "elastic": false,
     "stroke_mm": 50.5,
-    "stroke_avail_mm": 66.0,
-    "margin": 0.235,
+    "stroke_avail_mm": 70.0,
+    "margin": 0.278,
     "bottomed": false,
     "pulse_ms": 17.8,
     "peak_g": 32.4,
-    "dv_ms": 5.67,
     "rail_load_kN": 2.78,
     "force_stroke": [
      [
-      2.79,
+      10.7,
       20.36
      ],
      [
-      26.4,
+      20.1,
       20.36
      ],
      [
-      42.01,
+      28.3,
       20.36
      ],
      [
-      49.66,
+      35.2,
+      20.36
+     ],
+     [
+      40.8,
+      20.36
+     ],
+     [
+      45.1,
+      20.36
+     ],
+     [
+      48.2,
+      20.36
+     ],
+     [
+      50.0,
       20.36
      ]
     ]
    },
    "hard_lot_dyn": {
     "plateau_kN": 27.51,
+    "F_kN": 27.51,
+    "elastic": false,
     "stroke_mm": 37.4,
-    "stroke_avail_mm": 66.0,
-    "margin": 0.434,
+    "stroke_avail_mm": 70.0,
+    "margin": 0.466,
     "bottomed": false,
     "pulse_ms": 13.2,
     "peak_g": 43.8,
-    "dv_ms": 5.67,
     "rail_load_kN": 3.76,
     "force_stroke": [
      [
-      2.78,
+      10.5,
       27.51
      ],
      [
-      24.7,
+      19.2,
       27.51
      ],
      [
-      35.83,
+      26.3,
+      27.51
+     ],
+     [
+      31.6,
+      27.51
+     ],
+     [
+      35.2,
+      27.51
+     ],
+     [
+      37.1,
       27.51
      ]
     ]
@@ -123,69 +212,140 @@
     "stroke_margin": true,
     "ceiling_quasistatic": true,
     "pack_g": true,
-    "pack_dv": false
+    "land_stress": true,
+    "rail_stress": true,
+    "pack_dv_enveloped_by_T4": false
    },
-   "pass": false
+   "pass": true,
+   "note": "\u0394v beyond UN T4 envelope -> TP-G5-17 drop test",
+   "decks": [
+    {
+     "base": "/tmp/cp2/fall_15deg_64_lo_c8",
+     "elems": 1728
+    },
+    {
+     "base": "/tmp/cp2/fall_15deg_64_hi_c8",
+     "elems": 1728
+    },
+    {
+     "base": "/tmp/cp2/fall_15deg_64_lo_c4",
+     "elems": 14400
+    },
+    {
+     "base": "/tmp/cp2/fall_15deg_64_hi_c4",
+     "elems": 14400
+    },
+    {
+     "base": "/tmp/cp2/fall_15deg_64_lo_c2",
+     "elems": 120050
+    },
+    {
+     "base": "/tmp/cp2/fall_15deg_64_hi_c2",
+     "elems": 120050
+    }
+   ]
   },
   "fall_25deg_64": {
    "soft_lot": {
     "plateau_kN": 15.98,
+    "F_kN": 15.98,
+    "elastic": false,
     "stroke_mm": 64.4,
-    "stroke_avail_mm": 66.0,
-    "margin": 0.025,
+    "stroke_avail_mm": 70.0,
+    "margin": 0.081,
     "bottomed": false,
     "pulse_ms": 22.7,
     "peak_g": 25.4,
-    "dv_ms": 5.67,
     "rail_load_kN": 2.18,
     "force_stroke": [
      [
-      2.8,
+      10.8,
       15.98
      ],
      [
-      27.45,
+      20.7,
       15.98
      ],
      [
-      45.79,
+      29.6,
       15.98
      ],
      [
-      57.89,
+      37.4,
       15.98
      ],
      [
-      63.76,
+      44.2,
+      15.98
+     ],
+     [
+      50.1,
+      15.98
+     ],
+     [
+      54.9,
+      15.98
+     ],
+     [
+      58.8,
+      15.98
+     ],
+     [
+      61.6,
+      15.98
+     ],
+     [
+      63.5,
+      15.98
+     ],
+     [
+      64.3,
       15.98
      ]
     ]
    },
    "hard_lot_dyn": {
     "plateau_kN": 21.59,
+    "F_kN": 21.59,
+    "elastic": false,
     "stroke_mm": 47.6,
-    "stroke_avail_mm": 66.0,
-    "margin": 0.279,
+    "stroke_avail_mm": 70.0,
+    "margin": 0.32,
     "bottomed": false,
     "pulse_ms": 16.8,
     "peak_g": 34.4,
-    "dv_ms": 5.67,
     "rail_load_kN": 2.95,
     "force_stroke": [
      [
-      2.79,
+      10.7,
       21.59
      ],
      [
-      26.11,
+      20.0,
       21.59
      ],
      [
-      40.94,
+      28.0,
       21.59
      ],
      [
-      47.33,
+      34.6,
+      21.59
+     ],
+     [
+      39.8,
+      21.59
+     ],
+     [
+      43.7,
+      21.59
+     ],
+     [
+      46.3,
+      21.59
+     ],
+     [
+      47.5,
       21.59
      ]
     ]
@@ -194,49 +354,92 @@
     "stroke_margin": false,
     "ceiling_quasistatic": true,
     "pack_g": true,
-    "pack_dv": false
+    "land_stress": true,
+    "rail_stress": true,
+    "pack_dv_enveloped_by_T4": false
    },
-   "pass": false
+   "pass": false,
+   "note": "\u0394v beyond UN T4 envelope -> TP-G5-17 drop test",
+   "decks": [
+    {
+     "base": "/tmp/cp2/fall_25deg_64_lo_c8",
+     "elems": 1728
+    },
+    {
+     "base": "/tmp/cp2/fall_25deg_64_hi_c8",
+     "elems": 1728
+    },
+    {
+     "base": "/tmp/cp2/fall_25deg_64_lo_c4",
+     "elems": 14400
+    },
+    {
+     "base": "/tmp/cp2/fall_25deg_64_hi_c4",
+     "elems": 14400
+    },
+    {
+     "base": "/tmp/cp2/fall_25deg_64_lo_c2",
+     "elems": 120050
+    },
+    {
+     "base": "/tmp/cp2/fall_25deg_64_hi_c2",
+     "elems": 120050
+    }
+   ]
   },
   "fall_0deg_34p9": {
    "soft_lot": {
     "plateau_kN": 21.45,
+    "F_kN": 21.45,
+    "elastic": false,
     "stroke_mm": 26.1,
-    "stroke_avail_mm": 66.0,
-    "margin": 0.604,
+    "stroke_avail_mm": 70.0,
+    "margin": 0.627,
     "bottomed": false,
     "pulse_ms": 9.2,
     "peak_g": 62.7,
-    "dv_ms": 5.67,
     "rail_load_kN": 5.38,
     "force_stroke": [
      [
-      2.76,
+      10.1,
       21.45
      ],
      [
-      21.89,
+      17.8,
+      21.45
+     ],
+     [
+      23.0,
+      21.45
+     ],
+     [
+      25.7,
       21.45
      ]
     ]
    },
    "hard_lot_dyn": {
     "plateau_kN": 28.99,
+    "F_kN": 28.99,
+    "elastic": false,
     "stroke_mm": 19.3,
-    "stroke_avail_mm": 66.0,
-    "margin": 0.707,
+    "stroke_avail_mm": 70.0,
+    "margin": 0.724,
     "bottomed": false,
     "pulse_ms": 6.8,
     "peak_g": 84.7,
-    "dv_ms": 5.67,
     "rail_load_kN": 7.27,
     "force_stroke": [
      [
-      2.73,
+      9.7,
       28.99
      ],
      [
-      18.61,
+      16.0,
+      28.99
+     ],
+     [
+      19.0,
       28.99
      ]
     ]
@@ -245,49 +448,92 @@
     "stroke_margin": true,
     "ceiling_quasistatic": true,
     "pack_g": true,
-    "pack_dv": false
+    "land_stress": true,
+    "rail_stress": true,
+    "pack_dv_enveloped_by_T4": false
    },
-   "pass": false
+   "pass": true,
+   "note": "\u0394v beyond UN T4 envelope -> TP-G5-17 drop test",
+   "decks": [
+    {
+     "base": "/tmp/cp2/fall_0deg_34p9_lo_c8",
+     "elems": 1728
+    },
+    {
+     "base": "/tmp/cp2/fall_0deg_34p9_hi_c8",
+     "elems": 1728
+    },
+    {
+     "base": "/tmp/cp2/fall_0deg_34p9_lo_c4",
+     "elems": 14400
+    },
+    {
+     "base": "/tmp/cp2/fall_0deg_34p9_hi_c4",
+     "elems": 14400
+    },
+    {
+     "base": "/tmp/cp2/fall_0deg_34p9_lo_c2",
+     "elems": 120050
+    },
+    {
+     "base": "/tmp/cp2/fall_0deg_34p9_hi_c2",
+     "elems": 120050
+    }
+   ]
   },
   "fall_15deg_34p9": {
    "soft_lot": {
     "plateau_kN": 20.36,
+    "F_kN": 20.36,
+    "elastic": false,
     "stroke_mm": 27.5,
-    "stroke_avail_mm": 66.0,
-    "margin": 0.583,
+    "stroke_avail_mm": 70.0,
+    "margin": 0.607,
     "bottomed": false,
     "pulse_ms": 9.7,
     "peak_g": 59.5,
-    "dv_ms": 5.67,
     "rail_load_kN": 5.1,
     "force_stroke": [
      [
-      2.76,
+      10.2,
       20.36
      ],
      [
-      22.37,
+      18.0,
+      20.36
+     ],
+     [
+      23.5,
+      20.36
+     ],
+     [
+      26.7,
       20.36
      ]
     ]
    },
    "hard_lot_dyn": {
     "plateau_kN": 27.51,
+    "F_kN": 27.51,
+    "elastic": false,
     "stroke_mm": 20.4,
-    "stroke_avail_mm": 66.0,
-    "margin": 0.691,
+    "stroke_avail_mm": 70.0,
+    "margin": 0.709,
     "bottomed": false,
     "pulse_ms": 7.2,
     "peak_g": 80.4,
-    "dv_ms": 5.67,
     "rail_load_kN": 6.9,
     "force_stroke": [
      [
-      2.73,
+      9.8,
       27.51
      ],
      [
-      19.25,
+      16.4,
+      27.51
+     ],
+     [
+      19.8,
       27.51
      ]
     ]
@@ -296,41 +542,112 @@
     "stroke_margin": true,
     "ceiling_quasistatic": true,
     "pack_g": true,
-    "pack_dv": false
+    "land_stress": true,
+    "rail_stress": true,
+    "pack_dv_enveloped_by_T4": false
    },
-   "pass": false
+   "pass": true,
+   "note": "\u0394v beyond UN T4 envelope -> TP-G5-17 drop test",
+   "decks": [
+    {
+     "base": "/tmp/cp2/fall_15deg_34p9_lo_c8",
+     "elems": 1728
+    },
+    {
+     "base": "/tmp/cp2/fall_15deg_34p9_hi_c8",
+     "elems": 1728
+    },
+    {
+     "base": "/tmp/cp2/fall_15deg_34p9_lo_c4",
+     "elems": 14400
+    },
+    {
+     "base": "/tmp/cp2/fall_15deg_34p9_hi_c4",
+     "elems": 14400
+    },
+    {
+     "base": "/tmp/cp2/fall_15deg_34p9_lo_c2",
+     "elems": 120050
+    },
+    {
+     "base": "/tmp/cp2/fall_15deg_34p9_hi_c2",
+     "elems": 120050
+    }
+   ]
+  },
+  "kneel_tip_13p3kN": {
+   "soft_lot": {
+    "plateau_kN": 21.45,
+    "F_kN": 13.3,
+    "elastic": true,
+    "stroke_mm": 0.0,
+    "stroke_avail_mm": 70.0,
+    "margin": 1.0,
+    "bottomed": false,
+    "peak_g": 38.8,
+    "rail_load_kN": 3.33,
+    "force_stroke": []
+   },
+   "hard_lot_dyn": {
+    "plateau_kN": 28.99,
+    "F_kN": 13.3,
+    "elastic": true,
+    "stroke_mm": 0.0,
+    "stroke_avail_mm": 70.0,
+    "margin": 1.0,
+    "bottomed": false,
+    "peak_g": 38.8,
+    "rail_load_kN": 3.33,
+    "force_stroke": []
+   },
+   "checks": {
+    "stroke_margin": true,
+    "ceiling_quasistatic": true,
+    "pack_g": true,
+    "land_stress": true,
+    "rail_stress": true,
+    "pack_dv_enveloped_by_T4": true
+   },
+   "pass": true,
+   "note": ""
   },
   "kneel_tip_prone": {
    "soft_lot": {
     "plateau_kN": 21.45,
+    "F_kN": 21.45,
+    "elastic": false,
     "stroke_mm": 7.3,
-    "stroke_avail_mm": 66.0,
-    "margin": 0.889,
+    "stroke_avail_mm": 70.0,
+    "margin": 0.896,
     "bottomed": false,
     "pulse_ms": 4.9,
     "peak_g": 62.7,
-    "dv_ms": 3.0,
     "rail_load_kN": 5.38,
     "force_stroke": [
      [
-      1.42,
+      4.8,
+      21.45
+     ],
+     [
+      7.1,
       21.45
      ]
     ]
    },
    "hard_lot_dyn": {
     "plateau_kN": 28.99,
+    "F_kN": 28.99,
+    "elastic": false,
     "stroke_mm": 5.4,
-    "stroke_avail_mm": 66.0,
-    "margin": 0.918,
+    "stroke_avail_mm": 70.0,
+    "margin": 0.923,
     "bottomed": false,
     "pulse_ms": 3.6,
     "peak_g": 84.7,
-    "dv_ms": 3.0,
     "rail_load_kN": 7.27,
     "force_stroke": [
      [
-      1.39,
+      4.3,
       28.99
      ]
     ]
@@ -339,10 +656,38 @@
     "stroke_margin": true,
     "ceiling_quasistatic": true,
     "pack_g": true,
-    "pack_dv": true
+    "land_stress": true,
+    "rail_stress": true,
+    "pack_dv_enveloped_by_T4": true
    },
-   "pass": true
+   "pass": true,
+   "note": "",
+   "decks": [
+    {
+     "base": "/tmp/cp2/kneel_tip_prone_lo_c8",
+     "elems": 1728
+    },
+    {
+     "base": "/tmp/cp2/kneel_tip_prone_hi_c8",
+     "elems": 1728
+    },
+    {
+     "base": "/tmp/cp2/kneel_tip_prone_lo_c4",
+     "elems": 14400
+    },
+    {
+     "base": "/tmp/cp2/kneel_tip_prone_hi_c4",
+     "elems": 14400
+    },
+    {
+     "base": "/tmp/cp2/kneel_tip_prone_lo_c2",
+     "elems": 120050
+    },
+    {
+     "base": "/tmp/cp2/kneel_tip_prone_hi_c2",
+     "elems": 120050
+    }
+   ]
   }
- },
- "radioss_available": false
+ }
 }

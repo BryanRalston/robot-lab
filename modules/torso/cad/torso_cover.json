@@ -53,21 +53,21 @@
    ]
   },
   "sternum_size": 110,
-  "sternum_proud": 37,
-  "sternum_core": 40,
+  "sternum_proud": 49,
+  "sternum_core": 52,
   "sternum_blend": 15
  },
  "bbox_mm": [
   -110.0,
   -170.0,
   50.0,
-  147.0,
+  159.0,
   170.0,
   310.0
  ],
- "volume_mm3": 661802,
- "mass_kg_CFRP_1550": 1.026,
- "sternum_skin_x_mm": 147,
+ "volume_mm3": 671593,
+ "mass_kg_CFRP_1550": 1.041,
+ "sternum_skin_x_mm": 159,
  "vents_per_side": {
   "in": [
    8,

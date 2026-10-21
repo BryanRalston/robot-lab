@@ -151,7 +151,7 @@ def main():
     sets = {
         "fixed": node_set(N, (-B, -B, pv["z0"]-t, B, B, pv["z0"]+t), used),
         "land": node_set(N, (xf-t, -L["size"]/2-t, L["z_c"]-L["size"]/2-t, xf+t, L["size"]/2+t, L["z_c"]+L["size"]/2+t), used),
-        "shoulder_flange_L": node_set(N, (-B, b["width_y"]/2-t, -B, B, B, B), used),
+        "shoulder_flange_L": node_set(N, (-B, b["width_y"]/2-t, b["z0"]-t, B, B, B), used),
         "pelvis_top": node_set(N, (-B, -B, zt-t, B, B, zt+t), used),
         "partition": node_set(N, (p["x0"]-t, -B, p["z0"]+t, p["x0"]+t, B, B), used),
         "ethercat_bosses": node_set(N, (p["x0"]-t, -e["dx"], e["z_c"]-e["dz"], p["x0"]+t, e["dx"], e["z_c"]+e["dz"]), used),

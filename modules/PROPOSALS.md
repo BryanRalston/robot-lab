@@ -467,3 +467,9 @@ All keep R-076 (reinforced isolation, IEC 60664-1 creepage, IP2X), R-074 (main l
 - Evidence: modules/legs/results/r146/ankle_stop_extension.md (torque 62/44 N·m avail vs 29 N·m kneel [EST]; screw 1043/1465 N < walk peak 1734 N).
 - Conditions: Actuators confirm the toggle angle and torque in 3D CAD and relieve the [EST] ankle-roll stop carrier corners (0.9 mm to the fork cheek at −45°). Controls: the extension does not reach knee-pad contact (needs ≈ −78°); the kneel still needs a CoM-ahead-of-toe drop of ≈ 90–140 mm [EST].
 - Affected owners: Actuators, Controls, Arbiter (contract). Status: open
+
+### P-158: Torso: pack rail-end stop shoulders (R-146 ruling)
+- Change: integral 7075 lips, 12 × 8 × 9 mm, on both rail ends, plus pack-side lugs. They carry 13.4 kN along the insertion axis (8.9 kN at 104 g × 1.5); the latch only retains. Sized in torso/R146_pack_shock.md §4.2: bearing 70, shear 62, bending 165 MPa against 320 (multi-path, R-128).
+- Mass: **+0.010 kg [EST]** (adopted by Robot Lab). Closes the latch OPEN item.
+- 25° tuck options (same file §4.1/4.4): (1) Controls caps TUCK chest pitch at 5–15° head-up: no mass, and it also fixes head clearance (≥68 mm); (2) confirm densification ≥0.75 in the R-102 lot coupon, because the 100 mm core passes 25° at 0.75 (14 %) and fails at 0.70 (8 %); (3) a further core length increase (not recommended: standout/ID).
+- Status: ADOPTED (Robot Lab), Arbiter to book

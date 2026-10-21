@@ -1,6 +1,7 @@
+# Robot Lab R-146 ruling: 100 mm core (+0.006). land 216 MPa @ 24.4 kN (Materials c859e43) -> 8.85 MPa/kN; rail 272 MPa @ 8.9 kN -> 30.6 MPa/kN [EST section]
 # Chest-pad crush job (T-031 / R-146). Units SI. Solver: OpenRadioss (free, explicit), plus a 1-DOF plateau model for screening.
-core: {name: HexWeb CR III 5052 1/8 4.5 pcf, size_mm: [98, 98, 88], crush_typ_MPa: 1.79, dyn_factor: [1.10, 1.30],
-       angle_factor: {0: 0.98, 15: 0.93, 25: 0.73}, densification_strain: 0.75}   # MATERIALS_DB HC5052_4.5, HEX_CRIII, HC_ANGLE_PMC
+core: {name: HexWeb CR III 5052 1/8 4.5 pcf, size_mm: [98, 98, 100], crush_typ_MPa: 1.79, dyn_factor: [1.10, 1.30],
+       angle_factor: {0: 0.98, 15: 0.93, 25: 0.73}, densification_strain: 0.70}   # MATERIALS_DB HC5052_4.5, HEX_CRIII, HC_ANGLE_PMC
 lot_plateau_0deg_kN: [19.5, 22.3]          # R-102 acceptance band (quasi-static, 0 deg equivalent)
 stack: {face: CF 1 mm, bezel: PC 1.5 mm ring (4x M4 captive), land: 7075 101x101 on 12 mm bulkhead + 60x6 rib}
 pack_mass_kg: 8.75
@@ -10,6 +11,7 @@ cases:
   - {name: fall_25deg_64,  m_kg: 64.0, v_ms: 5.67, angle: 25}
   - {name: fall_0deg_34p9, m_kg: 34.9, v_ms: 5.67, angle: 0}    # Controls effective mass
   - {name: fall_15deg_34p9, m_kg: 34.9, v_ms: 5.67, angle: 15}
+  - {name: kneel_tip_13p3kN, m_kg: 34.9, F_peak_kN: 13.3, angle: 0}  # Controls fc86721 sim: 13.3 kN pad, 43-44 g pack; below plateau -> elastic
   - {name: kneel_tip_prone, m_kg: 34.9, v_ms: 3.0, angle: 0}    # R-146 (b) prone landing [EST v from 0.45 m chest drop]
-criteria: {stroke_margin_min: 0.10, ceiling_kN: 22.35, pack_g_allow: 107, pack_dv_allow_ms: 4.0}  # pack allowables from R146_pack_shock.md
+criteria: {elastic_limit_kN: 8.8, land_allow_MPa: 257, land_MPa_per_kN: 8.85, rail_allow_MPa: 320, rail_MPa_per_kN: 30.6, stroke_margin_min: 0.10, ceiling_kN: 22.35, pack_g_allow: 107, pack_dv_allow_ms: 4.0}  # pack allowables from R146_pack_shock.md
 mesh_study: {cell_mm: [8, 4, 2], max_change: 0.05}
