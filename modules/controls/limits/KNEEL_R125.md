@@ -23,3 +23,9 @@ Per-phase times are in the json. Gates: hand ≤ 875 N & ≈ 0.23 m/s, chest ≤
 
 ## 65 kg chest-lower "no result" bug (diagnosed)
 With the R19 candidate at 65 kg the chest lower starts from a 0.47 m gap; the **head contacts the floor first** (`other_contact_geoms: ['head']`) and the chest stalls 26 mm above the pad, so no chest-contact speed is recorded (68 kg: gap 0.41, thighs touch, chest reaches 0). Fix needs neck pitch / head-clear posture in the lower; knee torque in that run also saturates at the 50 N·m cap.
+
+## Head-clear chest lower (2026-10-21 ~11:00 ET)
+`chest_lower_wbc.py`: neck pitch ramps to **−0.68 rad (up/back)** over 0.5 s during the lower (`NECK_LOWER_RAD`); head clearance logged until chest contact; optional `WAIST_LOWER_RAD` (default off).
+- **Standalone chest-lower DR set (65/68/68.5 × pad tc 0.005/0.02/0.04): 9/9 PASS.** Chest contact 0.0813–0.0817 m/s (≤ 0.1), peak 255–433 N (≤ 8.8 kN), knee max 111.7°, head clearance ≥ 48 mm before chest contact, lower 3.00–3.02 s, MO=0 flag 3.90–4.00 s. `chest_lower_headclear_dr.json`.
+- **Joined 65 kg (from the R19 toe-kneel end state): NOT fixed by the neck alone** — head still touches (−7 mm), chest stalls 23 mm. Adding waist pitch −0.3 / 0.0 clears the head (68 / 27 mm) but the chest then lands at 0.38–0.47 m/s (0.21 m/s with a 1.5 s ramp) → fails 0.1. Moot until the kneel itself passes.
+- `kneel_toe_wbc_results.json` is marked **STALE** (pre-cap); not regenerated.

@@ -1,4 +1,5 @@
 {
+ "STALE": "2026-10-21 ~10:55 ET: generated before the 513a7d5/D99 knee cap (>=120 deg 50 N.m), the D99 130 deg stop and the knee<=125 rule. kneel_toe_wbc.run now has the cap on by default and falls; see KNEEL_R125.md / kneel_toe_r125_sweep.json. Not regenerated (kneel variants wait on a ruling).",
  "order": "hands_first (Arbiter R-150 a39a2a4)",
  "nominal": {
   "fell": null,

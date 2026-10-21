@@ -1,0 +1,131 @@
+{
+ "neck_lower_rad": -0.68,
+ "rows": [
+  {
+   "mass": 65.0,
+   "pad_tc": 0.005,
+   "chest_mps": 0.0817,
+   "chest_N": 416.0,
+   "knee_max_deg": 111.7,
+   "head_clear_m": 0.0481,
+   "t_lower_s": 3.0,
+   "t_mo0_s": 3.903,
+   "other": [
+    "l_thigh",
+    "r_thigh"
+   ]
+  },
+  {
+   "mass": 65.0,
+   "pad_tc": 0.02,
+   "chest_mps": 0.0817,
+   "chest_N": 260.5,
+   "knee_max_deg": 111.7,
+   "head_clear_m": 0.0481,
+   "t_lower_s": 3.0,
+   "t_mo0_s": 3.933,
+   "other": [
+    "l_thigh",
+    "r_thigh"
+   ]
+  },
+  {
+   "mass": 65.0,
+   "pad_tc": 0.04,
+   "chest_mps": 0.0817,
+   "chest_N": 255.4,
+   "knee_max_deg": 111.7,
+   "head_clear_m": 0.0481,
+   "t_lower_s": 3.0,
+   "t_mo0_s": 3.971,
+   "other": [
+    "l_thigh",
+    "r_thigh"
+   ]
+  },
+  {
+   "mass": 68.0,
+   "pad_tc": 0.005,
+   "chest_mps": 0.0813,
+   "chest_N": 418.0,
+   "knee_max_deg": 111.7,
+   "head_clear_m": 0.0482,
+   "t_lower_s": 3.015,
+   "t_mo0_s": 3.923,
+   "other": [
+    "l_thigh",
+    "r_thigh"
+   ]
+  },
+  {
+   "mass": 68.0,
+   "pad_tc": 0.02,
+   "chest_mps": 0.0813,
+   "chest_N": 270.8,
+   "knee_max_deg": 111.7,
+   "head_clear_m": 0.0482,
+   "t_lower_s": 3.015,
+   "t_mo0_s": 3.953,
+   "other": [
+    "l_thigh",
+    "r_thigh"
+   ]
+  },
+  {
+   "mass": 68.0,
+   "pad_tc": 0.04,
+   "chest_mps": 0.0813,
+   "chest_N": 267.6,
+   "knee_max_deg": 111.7,
+   "head_clear_m": 0.0482,
+   "t_lower_s": 3.015,
+   "t_mo0_s": 3.991,
+   "other": [
+    "l_thigh",
+    "r_thigh"
+   ]
+  },
+  {
+   "mass": 68.5,
+   "pad_tc": 0.005,
+   "chest_mps": 0.0813,
+   "chest_N": 433.2,
+   "knee_max_deg": 111.7,
+   "head_clear_m": 0.0481,
+   "t_lower_s": 3.018,
+   "t_mo0_s": 3.928,
+   "other": [
+    "l_thigh",
+    "r_thigh"
+   ]
+  },
+  {
+   "mass": 68.5,
+   "pad_tc": 0.02,
+   "chest_mps": 0.0813,
+   "chest_N": 272.9,
+   "knee_max_deg": 111.7,
+   "head_clear_m": 0.0481,
+   "t_lower_s": 3.018,
+   "t_mo0_s": 3.958,
+   "other": [
+    "l_thigh",
+    "r_thigh"
+   ]
+  },
+  {
+   "mass": 68.5,
+   "pad_tc": 0.04,
+   "chest_mps": 0.0813,
+   "chest_N": 269.6,
+   "knee_max_deg": 111.7,
+   "head_clear_m": 0.0481,
+   "t_lower_s": 3.018,
+   "t_mo0_s": 3.996,
+   "other": [
+    "l_thigh",
+    "r_thigh"
+   ]
+  }
+ ]
+}

@@ -76,6 +76,11 @@ def make_sim(mass=68.0, pad_tc=0.02):
     return s
 
 
+NECK_LOWER_RAD = -0.68   # head-clear: neck pitch up/back (range -40..40 deg) during the lower, ramped over NECK_RAMP_S
+NECK_RAMP_S = 0.5
+WAIST_LOWER_RAD = None   # optional waist pitch target during the lower (head clear)
+
+
 def run(mass=68.0, pad_tc=0.02, frames=None, fps=25, sim=None):
     """sim=None: standalone (spawn hands-and-knees). sim given: continue from its current state (joined sequence)."""
     if sim is None:
@@ -93,6 +98,8 @@ def run(mass=68.0, pad_tc=0.02, frames=None, fps=25, sim=None):
     Rk0 = {g: d.geom_xmat[g].reshape(3, 3).copy() for g in knee_ids}
     Rh0 = {g: d.geom_xmat[g].reshape(3, 3).copy() for g in hand_ids}
     q_des = d.qpos[s.qadr].copy(); q_nom = q_des.copy()
+    neck_i = s.names.index('neck_pitch'); q_neck0 = float(q_des[neck_i]); head_g = m.geom('head').id; head_min = 9.0
+    waist_i = s.names.index('waist_pitch'); q_waist0 = float(q_des[waist_i])
     pitch0 = 2 * np.arcsin(d.qpos[5])
     dx0 = {sd: float(d.xpos[m.body(f'{sd}_forearm').id][0] - d.geom_xpos[m.geom(f'{sd.lower()}_hand').id][0]) for sd in 'LR'}
     guard = ProneLowerGuard(); gap0, _ = s.chest_gap_vz(); gap_ref = gap0
@@ -153,6 +160,10 @@ def run(mass=68.0, pad_tc=0.02, frames=None, fps=25, sim=None):
             qd = np.linalg.solve(A, J.T @ W @ b + LAM * reg)
             qd_act = qd[act]
             q_des = np.clip(q_des + qd_act * m.opt.timestep, lo, hi)
+            if NECK_LOWER_RAD is not None:
+                q_des[neck_i] = q_neck0 + (NECK_LOWER_RAD - q_neck0) * min(1.0, t / NECK_RAMP_S)
+            if WAIST_LOWER_RAD is not None:
+                q_des[waist_i] = q_waist0 + (WAIST_LOWER_RAD - q_waist0) * min(1.0, t / NECK_RAMP_S)
             if fc > 1.0:
                 st = 'HOLD'; t_contact = t; qd_act[:] = 0
         else:
@@ -182,6 +193,8 @@ def run(mass=68.0, pad_tc=0.02, frames=None, fps=25, sim=None):
         d.ctrl[:] = tau
         peak_tau = np.maximum(peak_tau, np.abs(tau))
         mujoco.mj_step(m, d); t += m.opt.timestep
+        if t_contact is None and fc <= 1.0:
+            head_min = min(head_min, float(d.geom_xpos[head_g][2] - np.max(m.geom_size[head_g])))
         if frames is not None and int(t * 1000) % int(1000 / fps) == 0:
             frames.append(d.qpos.copy())
         hist.append((t, gap, vz, fc, gap_ref, 2 * np.arcsin(d.qpos[5]), float(np.abs(tau[el]).max()), float((np.abs(tau) / s.lim).max()), int(np.argmax(np.abs(tau) / s.lim))))
@@ -195,7 +208,7 @@ def run(mass=68.0, pad_tc=0.02, frames=None, fps=25, sim=None):
     global LAST_SIM; LAST_SIM = s
     tau_j = {n: round(float(peak_tau[i]), 1) for i, n in enumerate(s.names)}
     def pk(suf): return max(v for k, v in tau_j.items() if k.endswith(suf))
-    return dict(mass=mass, pad_tc=pad_tc, gap0_m=round(gap0, 3),
+    return dict(mass=mass, pad_tc=pad_tc, gap0_m=round(gap0, 3), head_clear_before_chest_m=round(head_min, 4),
                 chest_contact_speed_mps=None if guard.contact_speed is None else round(guard.contact_speed, 4),
                 peak_chest_N=round(guard.peak_force, 1), guard_ok=guard.ok,
                 t_lower_s=None if t_contact is None else round(t_contact, 3),
