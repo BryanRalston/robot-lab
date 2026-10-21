@@ -314,3 +314,34 @@ With 1–3 in place:
 - D93 as drawn: confirmed on the open-flow basis (75.8 vs 75.2 °C), with the condition that the PEM studs land in G10.
 - In the L71 pocket with a closed fairing: FAIL.
 - With the vents (1–3): PASS, ≈ 76–79 °C standing with the guard, or 74–76 °C without it. **Recommend dropping the guard.**
+
+## Rev 4c: D94 knee plate (7d22c91), 46 mm wide, 8 × 0.75 mm fins at 5.75 pitch — 2026-10-21 09:01 EDT
+Basis: rev 4 / 4b model (`r131_rev4_guard.py`). 2 × 6.0 W carry, duty 0.6, 35 °C, no guard.
+
+**Fins:**
+- **Efficiency:** m = 11.3 /m, L_c 19 mm, so η = **0.985** (1.0 mm fins: 0.994). −0.9 %.
+- **Area:** same fin count and height, so the fin faces are unchanged. The base is 46 instead of 48 mm (−2 %) and the tips are thinner. Net ≈ −0.6 %.
+- **Channel:** the 5.0 mm gap is unchanged, so the Elenbaas h and the channel heat-capacity limit are unchanged.
+- **Side gaps:** the fin pack is 41 mm wide, leaving 2.5 mm each side on the plate. With no guard, the side gap is set by the pocket duct walls, which must stay ≤ 5 mm to stop bypass flow.
+- **Mass:** ≈ −3.6 g per knee vs D93 (fins −2.8, base −0.8) [EST].
+
+| case | UA (W/K) | drive base duty | continuous carry |
+|---|---|---|---|
+| open flow, h 8 basis | **0.245** (Actuators 0.247, confirmed within 1 %) | 61.0 | 77.7 |
+| open flow, standing, no guard | 0.134–0.138 | **74.8–75.6** (Actuators 75.4, confirmed) | 100–102, derate |
+| **vented fairing (rev 4b items 1–3), standing** | 0.121–0.131 | **76.2–78.5 ≤ 80: PASS** (1.5–3.8 K margin) | 103–107, derate |
+| vented fairing, walking | 0.15–0.24 | 61–73: PASS | 78–99, derate |
+| vented fairing, h 8 basis equivalent | ≈ 0.22–0.23 ≥ 0.21 | — | — |
+
+**Femur bond:** G10 standoffs, PEM studs with no metal path (L71), so **68.2–69.1 °C ≤ 70. PASS.** Gas gap and foil are unchanged.
+
+**Grille face:** ≈ 39 °C with a low-ε inner face. PASS (≤ 45).
+
+**Verdict:**
+- **D94: PASS**, in open flow and in the vented fairing.
+- Conditions:
+  - the rev 4b vents are built as specified: grille ≥ 60 % open with ≤ 5 mm slots and a low-ε inner face; low inlet and high outlet each ≥ 1200 mm² free, ducted to the fin ends; pocket side gaps ≤ 5 mm;
+  - the knee housing face toward the pocket is low-ε;
+  - the drive derate stays for continuous carry.
+- The thinner fins and the narrower plate cost < 1.5 % UA.
+- Margin standing is thin (1.5–3.8 K). TP-G5-15 should measure the standing drive base in the fairing.
