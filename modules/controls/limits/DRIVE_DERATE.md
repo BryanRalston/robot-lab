@@ -189,3 +189,20 @@ DR: mass 65 / 68 / 68.5 kg × timeconst × lean (99 runs).
 - The stop torque scales about 1/timeconst: worst case 6825 / 3333 / 1665 N·m at 0.005 / 0.01 / 0.02 s, so it needs
   the real PU stiffness and stroke.
 - The kneel retry does not reach the pads yet (R-146(b) P1b), so kneel_tip stands in for it.
+
+## P-157 / D96 ankle update and kneel retry (2026-10-21)
+- **Soft limit with roll coupling** (`ankle_pitch_min`, `check_ankles`; config `drive_thermal_derate.ankle_*`):
+  - −0.916 rad (−52.5°) at any roll.
+  - Down to −0.955 rad only with |ankle roll| ≤ 10°; the −0.960 rad (−55°) mechanical stop is never commanded.
+  - A violation in KNEEL → HOLD_DERATED. Tests added.
+- **sim/v3 XML not changed** (ankle range still −45°). job 10's brief stops if the sim/v3 hash ≠ 4115f6e or if
+  `git diff d786dff HEAD -- sim/v3` is non-empty, and the ankle range feeds make_model (a training input). The kneel
+  applies −0.955 at runtime instead (`kneel_prone_wbc.ANKLE_MIN`). Regenerating sim/v3 (gen_v3.py LIM and the XML)
+  needs a decision on job 10.
+- **Kneel retry with ANKLE_MIN −0.955, safe-stop ZMP_K (40,12):** still FAILS in P1b.
+  - The CoM reaches 0.136 m (target 0.14) and the ankle now reaches −0.96.
+  - At t≈1.4–1.5 s the feet unload (fz 15 N), the foot never pitches onto the toes, and the CoM falls from 0.87 to
+    0.76 m in 0.2 s, then bounces.
+  - The knee pads are never reached, so there is no knee-pad contact speed yet. Phase times: P1a 0.8 s; P1b–P4 not
+    valid against the 3.3 s total.
+  - The stance QP is flat-foot only; a toe-support task-space controller (as in chest_lower_wbc.py) is the next step.
