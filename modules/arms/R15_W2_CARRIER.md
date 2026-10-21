@@ -34,3 +34,26 @@ Worst **1.92 mm**, RSS 0.86 mm, margin 0.48 mm. s0 is 2.01 at worst case and 2.0
 - Booked: 0.102/side (R-121/R-123), plus R-125 +0.044 pair (stand-off net), plus +0.140 pair (carrier [EST]) = 0.194/side.
 - **Δ = +0.143 kg pair over booking.** The carrier replaces the R11 box/plate, so there's no separate stand-off.
 - Lightening for Job 8b to confirm: pocket the arm side walls and trim the plate X extent to 42. About −0.03/side [EST].
+
+
+## R-127 update (5c203ad), 2026-10-21
+- **Geometry:**
+  - plate inner face moved to the **3.4 mm gap** (Y 57.4)
+  - haunch moved to x 10.9, giving 3.4 mm axially to OD108
+  - OCC minimum distance carrier → housing **3.4 mm**
+  - contact Y 139.2
+  - arm resized to 25 × 60 × 4.0 wall, ribs 10 wide, plate 6
+- **s0(e):** e0 2.053, e2.3 1.999. **s0 = 2.0 at e = 2.246 mm** (gap 3.4). It moves −0.054 mm per +0.2 mm gap: 2.30 at gap 3.2, 2.19 at gap 3.6. **The R-127 drawing limit e ≤ 2.3 sits 0.05 mm past the crossing (s0 1.999). Propose e ≤ 2.2.**
+- **e stack:** worst 1.92 / RSS 0.86 mm. It clears 2.3 by 0.38 mm and the s0 crossing by 0.33 mm (s0 2.008 at worst case). **PASS.**
+- **Stresses vs 294 / 262 (hand):**
+
+| location | stress | vs 294 | vs 262 |
+|---|---|---|---|
+| arm root (× 2.86) | 243 MPa | PASS | PASS |
+| plate root, R3 fillet (Kt 1.5) | 294 MPa | at the limit | FAIL |
+| plate root, R6 fillet (Kt 1.3 [EST]) | 255 MPa | PASS | PASS |
+
+  **Drawing: R6 plate-root fillet.** A 7 mm plate would give 233 MPa but moves contact +1 mm, which puts the s0 crossing at 1.98 mm, only 0.06 above the stack. Rejected.
+- Mx 252 N·m, CSG-25 SF 1.39.
+- **Mass:** 0.2849 kg/side (was 0.266) → **+0.182 kg pair vs booked** (+0.039 pair vs R15 for the heavier arm).
+- **Roll soft limit:** 115° interim (R-127). **ID babab4a:** torso contact at 132° on the real torso cover (vs my coarse ≈ 118°). A shoulder cover on the roll output needs skin at y ≥ 66 to clear the carrier plate (Y 63.4) and the pad mount.

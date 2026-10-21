@@ -8,6 +8,6 @@ tol={'bearing seat (H7) position':0.05,'CRBH runout / width centre':0.05,'hub en
 wc=round(sum(tol.values()),2); rss=round(math.sqrt(sum(v*v for v in tol.values())),2)
 Fn,Fs=7000*math.cos(math.radians(15)),7000*math.sin(math.radians(15)); Y=c['contact_Y']
 s0=lambda e:round(27700/(Fn+2*(Fs*Y/1e3+Fn*e/1e3)/0.085+0.44*Fs),3)
-out=dict(contributors_mm=tol,worst_mm=wc,rss_mm=rss,limit_mm=2.4,margin_worst_mm=round(2.4-wc,2),s0_at_worst=s0(wc),s0_at_rss=s0(rss),s0_at_limit=s0(2.4),
-         verdict='PASS' if wc<=2.4 else 'FAIL')
+out=dict(contributors_mm=tol,worst_mm=wc,rss_mm=rss,limit_mm=2.3,e_at_s0_2=c['e_at_s0_2'],margin_worst_mm=round(2.3-wc,2),margin_to_s0_crossing_mm=round(c['e_at_s0_2']-wc,2),s0_at_worst=s0(wc),s0_at_rss=s0(rss),s0_at_limit=s0(2.3),
+         verdict='PASS' if wc<=min(2.3,c['e_at_s0_2']) else 'FAIL')
 json.dump(out,open(os.path.join(H,'e_stack_r15.json'),'w'),indent=1); print(out)

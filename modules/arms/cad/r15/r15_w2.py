@@ -5,7 +5,7 @@ hub end face x 12..17. Carrier = radial box arm x 17..45 beyond the housing, out
 Hand stresses x2.86 (ID R10 FE calibration, conservative for closed sections) vs gate 320."""
 import cadquery as cq, json, os, math, numpy as np
 H=os.path.dirname(os.path.abspath(__file__)); os.chdir(H)
-P=dict(r_h=54.0,gap=3.0,tp=6.0,ax0=17.0,ax1=42.0,az=56.0,aw=3.5,xh=10.5,rib_w=8.0,rib_y0=None,core=54.8,core_h=75.3,tray=0.5,fl_t=5.0,hub_end=12.0)
+P=dict(r_h=54.0,gap=3.4,tp=6.0,ax0=17.0,ax1=42.0,az=60.0,aw=4.0,xh=10.9,rib_w=10.0,rib_y0=None,core=54.8,core_h=75.3,tray=0.5,fl_t=5.0,hub_end=12.0)
 Ym=P['r_h']+P['gap']            # plate inner face
 P['rib_y0']=round(math.sqrt((P['r_h']+P['gap'])**2-(31-P['rib_w'])**2)+0.1,2)  # rib follows housing at >=3 mm
 Yf=Ym+P['tp']                    # pad mount face
@@ -55,11 +55,11 @@ tp,d,bw=P['tp'],Ym-P['rib_y0'],P['rib_w']; Ap=62*tp; Ar=2*bw*d; yc=(Ap*tp/2-Ar*d
 Ipl=62*tp**3/12+Ap*(tp/2-yc)**2+2*bw*d**3/12+Ar*(d/2+yc)**2; cbot=yc+d
 sig_pl=Mpl*cbot/Ipl
 K=2.86
-st=dict(arm_hand=round(sig_arm,1),arm_cal_x2p86=round(K*sig_arm),plate_root_hand=round(sig_pl,1),plate_root_Kt1p5=round(1.5*sig_pl),plate_root_M_Nmm=round(Mpl),gate=320,note='plate: rib-stiffened T (ribs follow housing, >=3 mm), Kt 1.5 at R3 root [EST]; FEA decides')
+st=dict(arm_hand=round(sig_arm,1),arm_cal_x2p86=round(K*sig_arm),plate_root_hand=round(sig_pl,1),plate_root_Kt1p5=round(1.5*sig_pl),plate_root_Kt1p3_R6=round(1.3*sig_pl),plate_root_M_Nmm=round(Mpl),gate=320,note='plate: rib-stiffened T (ribs follow housing, >=3 mm), Kt 1.5 at R3 root [EST]; FEA decides')
 # pad-centre X displacement under load (feeds e): arm rotation about Z * Yc lever? Fn bends arm in X: tip dx = Fn*xa*Lr^2/(2EIz)
 E=70000; Lr=Ym
 dx=Fn*xa*Lr**2/(2*E*Iz); dpl=q*a**4/(8*E*Ipl)  # plate tip (Y) deflection
 defl=dict(pad_dx_arm_mm=round(dx,3),plate_tip_dy_mm=round(dpl,3),pad_dx_cal_mm=round(dx*37.4/ (37.4/2.86) ,3))
-out=dict(params=P,Ym=Ym,Yf=Yf,contact_Y=Yc,s0={'e0':s0(0),'e2.4':s0(2.4)},Mx_Nm=Mx,CSG25_SF_fault=round(369/(1.05*Mx),2),
+out=dict(params=P,Ym=Ym,Yf=Yf,contact_Y=Yc,s0={'e0':s0(0),'e2.4':s0(2.4),'e2.3':s0(2.3)},e_at_s0_2=round(((27700/2-Fn-0.44*Fs)*0.085/2-Fs*Yc/1e3)/Fn*1e3,3),Mx_Nm=Mx,CSG25_SF_fault=round(369/(1.05*Mx),2),
          stress=st,deflection=defl,clearance_mm=clr,mass=mass)
 json.dump(out,open('r15_w2.json','w'),indent=1); print(json.dumps(out,indent=1))

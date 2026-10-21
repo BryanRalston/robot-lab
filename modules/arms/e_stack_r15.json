@@ -9,14 +9,16 @@
   "tray M4 float": 0.25,
   "tray lip to core (ID, tightened)": 0.3,
   "core cut position/squareness (ID, tightened)": 0.3,
-  "elastic deflection in X (max of ID R11 0.69, W2 carrier calc 0.27) until Job 8b": 0.69
+  "elastic deflection in X (max of ID R11 0.69, W2 carrier calc 0.24) until Job 8b": 0.69
  },
  "worst_mm": 1.92,
  "rss_mm": 0.86,
- "limit_mm": 2.4,
- "margin_worst_mm": 0.48,
- "s0_at_worst": 2.01,
- "s0_at_rss": 2.035,
+ "limit_mm": 2.3,
+ "e_at_s0_2": 2.246,
+ "margin_worst_mm": 0.38,
+ "margin_to_s0_crossing_mm": 0.33,
+ "s0_at_worst": 2.008,
+ "s0_at_rss": 2.032,
  "s0_at_limit": 1.999,
  "verdict": "PASS"
 }

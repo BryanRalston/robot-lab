@@ -135,3 +135,11 @@ Checked against the R-065 criteria with sim/v3:
 - Hand expectations: arm 289 MPa, plate 295, Mx 251, s0 1.999 at e2.4.
 - Clash (CAD): carrier vs OD108 ≥ 3 mm (nominal 3.0); head shell and torso cover (`design/cad/covers`, site Y-up; transform x = x_s, y = −z_s, z = y_s − 57.1). Arms light check: torso penetration at roll ≥ ~118°.
 - Output: `modules/arms/results/job8b_*`.
+- **Job 8b gates per R-127 (5c203ad), supersede the above:**
+  - vM ≤ **294 MPa** (≤ **262** if Materials cannot cite T651 A-basis at stock thickness)
+  - drawing e ≤ **2.3** (Arms notes the s0 = 2.0 crossing at 2.246 mm for gap 3.4, so proposes 2.2)
+  - plate gap **3.4 ± 0.2** nominal, ≥ **3.0 loaded** (report the loaded gap)
+  - Mx ≤ 351, s0 ≥ 2.0, deflection ≤ 1 mm
+  - Geometry: `cad/r15/carrier_w2.step` (R-127 revision: gap 3.4, arm 60 × 4.0, R6 plate-root fillet on the drawing).
+  - Hand expectations: arm 243, plate 255 (R6) / 294 (R3) MPa.
+  - Roll soft limit 115° (ID: torso contact 132°).

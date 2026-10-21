@@ -1,53 +1,56 @@
 {
  "params": {
   "r_h": 54.0,
-  "gap": 3.0,
+  "gap": 3.4,
   "tp": 6.0,
   "ax0": 17.0,
   "ax1": 42.0,
-  "az": 56.0,
-  "aw": 3.5,
-  "xh": 10.5,
-  "rib_w": 8.0,
-  "rib_y0": 52.25,
+  "az": 60.0,
+  "aw": 4.0,
+  "xh": 10.9,
+  "rib_w": 10.0,
+  "rib_y0": 53.52,
   "core": 54.8,
   "core_h": 75.3,
   "tray": 0.5,
   "fl_t": 5.0,
   "hub_end": 12.0
  },
- "Ym": 57.0,
- "Yf": 63.0,
- "contact_Y": 138.8,
+ "Ym": 57.4,
+ "Yf": 63.4,
+ "contact_Y": 139.2,
  "s0": {
-  "e0": 2.056,
-  "e2.4": 1.999
+  "e0": 2.053,
+  "e2.4": 1.996,
+  "e2.3": 1.999
  },
- "Mx_Nm": 251,
- "CSG25_SF_fault": 1.4,
+ "e_at_s0_2": 2.246,
+ "Mx_Nm": 252,
+ "CSG25_SF_fault": 1.39,
  "stress": {
-  "arm_hand": 101.0,
-  "arm_cal_x2p86": 289,
-  "plate_root_hand": 196.6,
-  "plate_root_Kt1p5": 295,
-  "plate_root_M_Nmm": 88615,
+  "arm_hand": 85.0,
+  "arm_cal_x2p86": 243,
+  "plate_root_hand": 196.2,
+  "plate_root_Kt1p5": 294,
+  "plate_root_Kt1p3_R6": 255,
+  "plate_root_M_Nmm": 90496,
   "gate": 320,
   "note": "plate: rib-stiffened T (ribs follow housing, >=3 mm), Kt 1.5 at R3 root [EST]; FEA decides"
  },
  "deflection": {
-  "pad_dx_arm_mm": 0.094,
-  "plate_tip_dy_mm": 0.147,
-  "pad_dx_cal_mm": 0.27
+  "pad_dx_arm_mm": 0.083,
+  "plate_tip_dy_mm": 0.171,
+  "pad_dx_cal_mm": 0.236
  },
  "clearance_mm": {
-  "carrier_to_housing": 3.0,
-  "pad_to_housing": 9.0,
+  "carrier_to_housing": 3.4,
+  "pad_to_housing": 9.4,
   "carrier_to_hub_interference_cm3": 0.0
  },
  "mass": {
-  "carrier_side_kg": 0.2657,
+  "carrier_side_kg": 0.2849,
   "booked_side": 0.194,
-  "delta_pair_vs_booked": 0.143,
+  "delta_pair_vs_booked": 0.182,
   "note": "booked = R-121/R-123 0.102/side + R-125 (a) stand-off net +0.044 pair + carrier +0.140 pair [EST]"
  }
 }
