@@ -21,6 +21,7 @@ import numpy as np, mujoco
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
 import prone_data as P
 from drive_thermal_derate import ProneLowerGuard, friction_hold
+from soft_limits import apply_knee_stop_cap
 
 SPAWN = {'hip_pitch': -1.1, 'knee': 1.6, 'ankle_pitch': 0.6, 'shoulder_pitch': -0.85, 'elbow': -1.0, 'neck_pitch': -0.3}   # hands-and-knees: hands + knee pads
 SPAWN_PITCH = 1.35
@@ -163,6 +164,7 @@ def run(mass=68.0, pad_tc=0.02, frames=None, fps=25, sim=None):
             moved_in_relax = max(moved_in_relax, abs(vz))
         tau = s.pd(q_des, qd_act) + FF * static_ff(m, d, sup, act)
         tau = np.clip(tau, -s.lim, s.lim) * scale
+        apply_knee_stop_cap(s.names, lambda n: float(d.qpos[s.qadr[s.names.index(n)]]), tau, 'CHEST_LOWER')   # 513a7d5 cap
         if st == 'RELAX':
             flag = all(abs(tau[i]) < friction_hold(n) for i, n in enumerate(s.names)) and abs(vz) < 0.01
             if flag:

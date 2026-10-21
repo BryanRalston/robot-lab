@@ -337,6 +337,8 @@ def run_kneel(T_crouch=2.0, T_kneel=0.8, pel_z=0.85, frames=None, fps=25, hold_a
             vt = (qb_ - qa_) * mj_d(s) / TT if s < 1 else 0 * qk
             tau = kp * (qt - d.qpos[qadr]) + kd * (vt - d.qvel[vadr])
             tau = np.clip(tau, -der, der)
+            from soft_limits import apply_knee_stop_cap   # 513a7d5 cap on top of derate
+            apply_knee_stop_cap(names, lambda n: float(d.qpos[qadr[names.index(n)]]), tau, 'KNEEL')
             on = np.array([io.mo[n] for n in names], float)
             d.ctrl[:] = tau * on
             if on.all():

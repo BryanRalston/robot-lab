@@ -306,9 +306,17 @@ class DriveDerateSupervisor:
     def scale(self, drive):
         return self.d[drive].scale()
 
-    def torque_limits(self):
-        """Derated joint torque limits for the WBC (N·m): scale * tau_nominal (tau_nominal = Kt*ratio*I_nom)."""
-        return {j: self.scale(j) * t for j, t in self.tau_nominal.items() if j in self.d}
+    def torque_limits(self, knee_q=None):
+        """Derated joint torque limits for the WBC (N·m): scale * tau_nominal (tau_nominal = Kt*ratio*I_nom).
+        knee_q: {joint: rad}; in STOP_STATES a knee at >= 125 deg is further capped to 50 N·m (513a7d5 ruling),
+        i.e. min(derate, cap)."""
+        lim = {j: self.scale(j) * t for j, t in self.tau_nominal.items() if j in self.d}
+        if knee_q and self.state in STOP_STATES:
+            from soft_limits import knee_torque_limit
+            for j, q in knee_q.items():
+                if j in lim:
+                    lim[j] = knee_torque_limit(q, 'TUCK', lim[j])   # any cap state
+        return lim
 
 
 # Actuators D94 (7d22c91, results/SAFE_SIT_HOLDING.md): friction hold at the joint with MO=0, N·m [EST there].

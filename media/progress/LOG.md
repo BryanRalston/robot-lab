@@ -48,3 +48,7 @@ One line per image: date, file, module, what changed.
 - 2026-10-21 ID: P-023 rev 7 flap study FAIL (59.7 % cut, 112/255 finger-trap poses); recommend per-leg split rear skirt — 2026-10-21_hip_skirt_r7_study.png
 - 2026-10-21 ID: P-023 rev 8 split rear skirt (thigh panel + spherical pelvis hem R152.8), 44.4 % fixed kept, hem gap ≥25.7, bilateral L/R fails 16 poses → Controls keep-out — 2026-10-21_hip_skirt_r8.png
 - 2026-10-21 arms R18b/R19: clash against the real chest pad STEP (ec40f5f): <10 mm poses 269 → 329; hands-together 12.0 mm, P-042 carries 109 / 33 mm, tuck B 172 mm; roll-127 worst 0.5 mm at full elbow fold. Controls keep-out widened to y ±85 / z 135–305 mm. R-150 hand plant at 1525 N: CRBH 258 A wrist s0 1.15 FAIL. Fixes: cap ≤ 875 N/hand or 2-sided wrist support; heel-plant posture required. Palm 4 mm heel band added (+0.0117 kg/hand). Elbow 2 s at 82 °C ≈ 49 N·m (drive-limited). — 2026-10-21_arms_R18b_R19_kneel_plant.png
+
+## 2026-10-21 ~10:35 ET — Controls: knee stop-zone cap (513a7d5)
+- Cap ≤50 N·m at knee ≥125° in fall/TUCK/R-146 states, on top of the derate (soft_limits.py, drive_thermal_derate, chest_lower, safe_sit kneel). Tests: test_knee_stop_cap.py.
+- Fall set (90 runs): MO=0 fails 62.7 J in 18/90 (max 92.5 J, forward fall). Knee-only pre-stop damping ramp + cap: 0/90 fail, max 40.1 J. Toe kneel conflicts with cap (knee 134.5°, falls) — open.

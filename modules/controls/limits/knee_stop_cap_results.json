@@ -1,0 +1,8078 @@
+{
+ "mo0": {
+  "summary": {
+   "crouch_collapse": {
+    "n": 27,
+    "E_max_J": 61.3,
+    "E_min_J": 52.1,
+    "peak_torque_Nm": 954.3,
+    "pen_max_deg": 6.39,
+    "n_fail": 0
+   },
+   "forward_fall": {
+    "n": 27,
+    "E_max_J": 92.5,
+    "E_min_J": 50.0,
+    "peak_torque_Nm": 1086.5,
+    "pen_max_deg": 7.33,
+    "n_fail": 18
+   },
+   "kneel_tip": {
+    "n": 36,
+    "E_max_J": 57.4,
+    "E_min_J": 0.0,
+    "peak_torque_Nm": 822.9,
+    "pen_max_deg": 5.48,
+    "n_fail": 0
+   },
+   "all": {
+    "n": 90,
+    "n_fail": 18,
+    "E_max_J": 92.5,
+    "zone_cmd_max_Nm": 0.0
+   }
+  },
+  "rows": [
+   {
+    "case": "crouch_collapse",
+    "lean": 0.0,
+    "mass": 65.0,
+    "knee_armature": 0.553,
+    "mode": "mo0",
+    "E_J": [
+     53.2,
+     53.1
+    ],
+    "E_max_J": 53.2,
+    "speed_at_stop_rad_s": [
+     5.4,
+     5.4
+    ],
+    "peak_stop_torque_Nm": 906.5,
+    "peak_penetration_deg": 6.06,
+    "knee_max_deg": 141.1,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": 0.0,
+    "mass": 65.0,
+    "knee_armature": 0.2018,
+    "mode": "mo0",
+    "E_J": [
+     52.9,
+     52.3
+    ],
+    "E_max_J": 52.9,
+    "speed_at_stop_rad_s": [
+     5.68,
+     5.71
+    ],
+    "peak_stop_torque_Nm": 900.9,
+    "peak_penetration_deg": 6.02,
+    "knee_max_deg": 141.0,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": 0.0,
+    "mass": 65.0,
+    "knee_armature": 0.0,
+    "mode": "mo0",
+    "E_J": [
+     52.1,
+     52.1
+    ],
+    "E_max_J": 52.1,
+    "speed_at_stop_rad_s": [
+     5.91,
+     5.91
+    ],
+    "peak_stop_torque_Nm": 893.3,
+    "peak_penetration_deg": 5.97,
+    "knee_max_deg": 141.0,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": 0.0,
+    "mass": 68.0,
+    "knee_armature": 0.553,
+    "mode": "mo0",
+    "E_J": [
+     55.6,
+     55.4
+    ],
+    "E_max_J": 55.6,
+    "speed_at_stop_rad_s": [
+     5.45,
+     5.46
+    ],
+    "peak_stop_torque_Nm": 931.4,
+    "peak_penetration_deg": 6.23,
+    "knee_max_deg": 141.2,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": 0.0,
+    "mass": 68.0,
+    "knee_armature": 0.2018,
+    "mode": "mo0",
+    "E_J": [
+     54.9,
+     55.1
+    ],
+    "E_max_J": 55.1,
+    "speed_at_stop_rad_s": [
+     5.78,
+     5.75
+    ],
+    "peak_stop_torque_Nm": 924.4,
+    "peak_penetration_deg": 6.18,
+    "knee_max_deg": 141.2,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": 0.0,
+    "mass": 68.0,
+    "knee_armature": 0.0,
+    "mode": "mo0",
+    "E_J": [
+     54.9,
+     55.0
+    ],
+    "E_max_J": 55.0,
+    "speed_at_stop_rad_s": [
+     5.96,
+     6.01
+    ],
+    "peak_stop_torque_Nm": 922.2,
+    "peak_penetration_deg": 6.17,
+    "knee_max_deg": 141.2,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": 0.0,
+    "mass": 68.5,
+    "knee_armature": 0.553,
+    "mode": "mo0",
+    "E_J": [
+     55.8,
+     55.9
+    ],
+    "E_max_J": 55.9,
+    "speed_at_stop_rad_s": [
+     5.47,
+     5.44
+    ],
+    "peak_stop_torque_Nm": 934.9,
+    "peak_penetration_deg": 6.26,
+    "knee_max_deg": 141.3,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": 0.0,
+    "mass": 68.5,
+    "knee_armature": 0.2018,
+    "mode": "mo0",
+    "E_J": [
+     55.2,
+     55.1
+    ],
+    "E_max_J": 55.2,
+    "speed_at_stop_rad_s": [
+     5.75,
+     5.76
+    ],
+    "peak_stop_torque_Nm": 926.8,
+    "peak_penetration_deg": 6.2,
+    "knee_max_deg": 141.2,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": 0.0,
+    "mass": 68.5,
+    "knee_armature": 0.0,
+    "mode": "mo0",
+    "E_J": [
+     55.6,
+     55.3
+    ],
+    "E_max_J": 55.6,
+    "speed_at_stop_rad_s": [
+     6.01,
+     5.99
+    ],
+    "peak_stop_torque_Nm": 926.6,
+    "peak_penetration_deg": 6.2,
+    "knee_max_deg": 141.2,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": 0.05,
+    "mass": 65.0,
+    "knee_armature": 0.553,
+    "mode": "mo0",
+    "E_J": [
+     57.3,
+     57.0
+    ],
+    "E_max_J": 57.3,
+    "speed_at_stop_rad_s": [
+     5.4,
+     5.39
+    ],
+    "peak_stop_torque_Nm": 910.1,
+    "peak_penetration_deg": 6.09,
+    "knee_max_deg": 141.1,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": 0.05,
+    "mass": 65.0,
+    "knee_armature": 0.2018,
+    "mode": "mo0",
+    "E_J": [
+     57.7,
+     57.4
+    ],
+    "E_max_J": 57.7,
+    "speed_at_stop_rad_s": [
+     5.77,
+     5.77
+    ],
+    "peak_stop_torque_Nm": 907.8,
+    "peak_penetration_deg": 6.07,
+    "knee_max_deg": 141.1,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": 0.05,
+    "mass": 65.0,
+    "knee_armature": 0.0,
+    "mode": "mo0",
+    "E_J": [
+     58.3,
+     57.4
+    ],
+    "E_max_J": 58.3,
+    "speed_at_stop_rad_s": [
+     5.93,
+     5.98
+    ],
+    "peak_stop_torque_Nm": 910.5,
+    "peak_penetration_deg": 6.09,
+    "knee_max_deg": 141.1,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": 0.05,
+    "mass": 68.0,
+    "knee_armature": 0.553,
+    "mode": "mo0",
+    "E_J": [
+     60.2,
+     59.8
+    ],
+    "E_max_J": 60.2,
+    "speed_at_stop_rad_s": [
+     5.44,
+     5.44
+    ],
+    "peak_stop_torque_Nm": 936.0,
+    "peak_penetration_deg": 6.26,
+    "knee_max_deg": 141.3,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": 0.05,
+    "mass": 68.0,
+    "knee_armature": 0.2018,
+    "mode": "mo0",
+    "E_J": [
+     60.8,
+     60.3
+    ],
+    "E_max_J": 60.8,
+    "speed_at_stop_rad_s": [
+     5.8,
+     5.81
+    ],
+    "peak_stop_torque_Nm": 935.4,
+    "peak_penetration_deg": 6.26,
+    "knee_max_deg": 141.3,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": 0.05,
+    "mass": 68.0,
+    "knee_armature": 0.0,
+    "mode": "mo0",
+    "E_J": [
+     61.0,
+     60.3
+    ],
+    "E_max_J": 61.0,
+    "speed_at_stop_rad_s": [
+     6.0,
+     6.0
+    ],
+    "peak_stop_torque_Nm": 935.3,
+    "peak_penetration_deg": 6.26,
+    "knee_max_deg": 141.3,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": 0.05,
+    "mass": 68.5,
+    "knee_armature": 0.553,
+    "mode": "mo0",
+    "E_J": [
+     60.6,
+     60.3
+    ],
+    "E_max_J": 60.6,
+    "speed_at_stop_rad_s": [
+     5.45,
+     5.45
+    ],
+    "peak_stop_torque_Nm": 939.9,
+    "peak_penetration_deg": 6.29,
+    "knee_max_deg": 141.3,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": 0.05,
+    "mass": 68.5,
+    "knee_armature": 0.2018,
+    "mode": "mo0",
+    "E_J": [
+     61.2,
+     60.8
+    ],
+    "E_max_J": 61.2,
+    "speed_at_stop_rad_s": [
+     5.81,
+     5.83
+    ],
+    "peak_stop_torque_Nm": 939.1,
+    "peak_penetration_deg": 6.29,
+    "knee_max_deg": 141.3,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": 0.05,
+    "mass": 68.5,
+    "knee_armature": 0.0,
+    "mode": "mo0",
+    "E_J": [
+     61.3,
+     61.2
+    ],
+    "E_max_J": 61.3,
+    "speed_at_stop_rad_s": [
+     6.06,
+     6.01
+    ],
+    "peak_stop_torque_Nm": 938.4,
+    "peak_penetration_deg": 6.28,
+    "knee_max_deg": 141.3,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": -0.05,
+    "mass": 65.0,
+    "knee_armature": 0.553,
+    "mode": "mo0",
+    "E_J": [
+     55.1,
+     55.1
+    ],
+    "E_max_J": 55.1,
+    "speed_at_stop_rad_s": [
+     5.47,
+     5.47
+    ],
+    "peak_stop_torque_Nm": 923.9,
+    "peak_penetration_deg": 6.18,
+    "knee_max_deg": 141.2,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": -0.05,
+    "mass": 65.0,
+    "knee_armature": 0.2018,
+    "mode": "mo0",
+    "E_J": [
+     54.4,
+     54.7
+    ],
+    "E_max_J": 54.7,
+    "speed_at_stop_rad_s": [
+     5.81,
+     5.82
+    ],
+    "peak_stop_torque_Nm": 919.4,
+    "peak_penetration_deg": 6.15,
+    "knee_max_deg": 141.1,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": -0.05,
+    "mass": 65.0,
+    "knee_armature": 0.0,
+    "mode": "mo0",
+    "E_J": [
+     54.1,
+     53.9
+    ],
+    "E_max_J": 54.1,
+    "speed_at_stop_rad_s": [
+     6.06,
+     6.06
+    ],
+    "peak_stop_torque_Nm": 913.7,
+    "peak_penetration_deg": 6.11,
+    "knee_max_deg": 141.1,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": -0.05,
+    "mass": 68.0,
+    "knee_armature": 0.553,
+    "mode": "mo0",
+    "E_J": [
+     58.2,
+     58.1
+    ],
+    "E_max_J": 58.2,
+    "speed_at_stop_rad_s": [
+     5.52,
+     5.52
+    ],
+    "peak_stop_torque_Nm": 950.9,
+    "peak_penetration_deg": 6.37,
+    "knee_max_deg": 141.4,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": -0.05,
+    "mass": 68.0,
+    "knee_armature": 0.2018,
+    "mode": "mo0",
+    "E_J": [
+     57.7,
+     57.1
+    ],
+    "E_max_J": 57.7,
+    "speed_at_stop_rad_s": [
+     5.82,
+     5.83
+    ],
+    "peak_stop_torque_Nm": 947.1,
+    "peak_penetration_deg": 6.34,
+    "knee_max_deg": 141.3,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": -0.05,
+    "mass": 68.0,
+    "knee_armature": 0.0,
+    "mode": "mo0",
+    "E_J": [
+     57.0,
+     56.7
+    ],
+    "E_max_J": 57.0,
+    "speed_at_stop_rad_s": [
+     6.1,
+     6.06
+    ],
+    "peak_stop_torque_Nm": 940.7,
+    "peak_penetration_deg": 6.3,
+    "knee_max_deg": 141.3,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": -0.05,
+    "mass": 68.5,
+    "knee_armature": 0.553,
+    "mode": "mo0",
+    "E_J": [
+     58.5,
+     58.4
+    ],
+    "E_max_J": 58.5,
+    "speed_at_stop_rad_s": [
+     5.53,
+     5.54
+    ],
+    "peak_stop_torque_Nm": 954.3,
+    "peak_penetration_deg": 6.39,
+    "knee_max_deg": 141.4,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": -0.05,
+    "mass": 68.5,
+    "knee_armature": 0.2018,
+    "mode": "mo0",
+    "E_J": [
+     58.0,
+     58.1
+    ],
+    "E_max_J": 58.1,
+    "speed_at_stop_rad_s": [
+     5.87,
+     5.78
+    ],
+    "peak_stop_torque_Nm": 949.7,
+    "peak_penetration_deg": 6.36,
+    "knee_max_deg": 141.4,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": -0.05,
+    "mass": 68.5,
+    "knee_armature": 0.0,
+    "mode": "mo0",
+    "E_J": [
+     56.9,
+     56.7
+    ],
+    "E_max_J": 56.9,
+    "speed_at_stop_rad_s": [
+     6.12,
+     6.12
+    ],
+    "peak_stop_torque_Nm": 940.8,
+    "peak_penetration_deg": 6.3,
+    "knee_max_deg": 141.3,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.1,
+    "mass": 65.0,
+    "knee_armature": 0.553,
+    "mode": "mo0",
+    "E_J": [
+     90.7,
+     90.0
+    ],
+    "E_max_J": 90.7,
+    "speed_at_stop_rad_s": [
+     6.05,
+     6.07
+    ],
+    "peak_stop_torque_Nm": 1038.7,
+    "peak_penetration_deg": 6.98,
+    "knee_max_deg": 142.0,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": false
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.1,
+    "mass": 65.0,
+    "knee_armature": 0.2018,
+    "mode": "mo0",
+    "E_J": [
+     85.1,
+     84.8
+    ],
+    "E_max_J": 85.1,
+    "speed_at_stop_rad_s": [
+     6.39,
+     6.4
+    ],
+    "peak_stop_torque_Nm": 1037.1,
+    "peak_penetration_deg": 6.97,
+    "knee_max_deg": 142.0,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": false
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.1,
+    "mass": 65.0,
+    "knee_armature": 0.0,
+    "mode": "mo0",
+    "E_J": [
+     86.1,
+     85.7
+    ],
+    "E_max_J": 86.1,
+    "speed_at_stop_rad_s": [
+     6.67,
+     6.57
+    ],
+    "peak_stop_torque_Nm": 1039.8,
+    "peak_penetration_deg": 6.99,
+    "knee_max_deg": 142.0,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": false
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.1,
+    "mass": 68.0,
+    "knee_armature": 0.553,
+    "mode": "mo0",
+    "E_J": [
+     88.0,
+     87.6
+    ],
+    "E_max_J": 88.0,
+    "speed_at_stop_rad_s": [
+     6.11,
+     6.07
+    ],
+    "peak_stop_torque_Nm": 1065.7,
+    "peak_penetration_deg": 7.18,
+    "knee_max_deg": 142.2,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": false
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.1,
+    "mass": 68.0,
+    "knee_armature": 0.2018,
+    "mode": "mo0",
+    "E_J": [
+     89.5,
+     89.7
+    ],
+    "E_max_J": 89.7,
+    "speed_at_stop_rad_s": [
+     6.48,
+     6.45
+    ],
+    "peak_stop_torque_Nm": 1065.8,
+    "peak_penetration_deg": 7.18,
+    "knee_max_deg": 142.2,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": false
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.1,
+    "mass": 68.0,
+    "knee_armature": 0.0,
+    "mode": "mo0",
+    "E_J": [
+     91.7,
+     91.2
+    ],
+    "E_max_J": 91.7,
+    "speed_at_stop_rad_s": [
+     6.69,
+     6.7
+    ],
+    "peak_stop_torque_Nm": 1071.2,
+    "peak_penetration_deg": 7.22,
+    "knee_max_deg": 142.2,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": false
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.1,
+    "mass": 68.5,
+    "knee_armature": 0.553,
+    "mode": "mo0",
+    "E_J": [
+     88.5,
+     88.1
+    ],
+    "E_max_J": 88.5,
+    "speed_at_stop_rad_s": [
+     6.09,
+     6.15
+    ],
+    "peak_stop_torque_Nm": 1069.4,
+    "peak_penetration_deg": 7.21,
+    "knee_max_deg": 142.2,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": false
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.1,
+    "mass": 68.5,
+    "knee_armature": 0.2018,
+    "mode": "mo0",
+    "E_J": [
+     89.9,
+     90.7
+    ],
+    "E_max_J": 90.7,
+    "speed_at_stop_rad_s": [
+     6.46,
+     6.43
+    ],
+    "peak_stop_torque_Nm": 1069.7,
+    "peak_penetration_deg": 7.21,
+    "knee_max_deg": 142.2,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": false
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.1,
+    "mass": 68.5,
+    "knee_armature": 0.0,
+    "mode": "mo0",
+    "E_J": [
+     92.5,
+     92.1
+    ],
+    "E_max_J": 92.5,
+    "speed_at_stop_rad_s": [
+     6.65,
+     6.62
+    ],
+    "peak_stop_torque_Nm": 1074.7,
+    "peak_penetration_deg": 7.24,
+    "knee_max_deg": 142.2,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": false
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.2,
+    "mass": 65.0,
+    "knee_armature": 0.553,
+    "mode": "mo0",
+    "E_J": [
+     68.2,
+     68.0
+    ],
+    "E_max_J": 68.2,
+    "speed_at_stop_rad_s": [
+     5.99,
+     5.99
+    ],
+    "peak_stop_torque_Nm": 1051.2,
+    "peak_penetration_deg": 7.07,
+    "knee_max_deg": 142.1,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": false
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.2,
+    "mass": 65.0,
+    "knee_armature": 0.2018,
+    "mode": "mo0",
+    "E_J": [
+     75.6,
+     75.2
+    ],
+    "E_max_J": 75.6,
+    "speed_at_stop_rad_s": [
+     6.34,
+     6.37
+    ],
+    "peak_stop_torque_Nm": 1046.6,
+    "peak_penetration_deg": 7.04,
+    "knee_max_deg": 142.0,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": false
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.2,
+    "mass": 65.0,
+    "knee_armature": 0.0,
+    "mode": "mo0",
+    "E_J": [
+     84.7,
+     84.4
+    ],
+    "E_max_J": 84.7,
+    "speed_at_stop_rad_s": [
+     6.58,
+     6.55
+    ],
+    "peak_stop_torque_Nm": 1034.9,
+    "peak_penetration_deg": 6.95,
+    "knee_max_deg": 142.0,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": false
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.2,
+    "mass": 68.0,
+    "knee_armature": 0.553,
+    "mode": "mo0",
+    "E_J": [
+     75.4,
+     75.2
+    ],
+    "E_max_J": 75.4,
+    "speed_at_stop_rad_s": [
+     6.07,
+     6.06
+    ],
+    "peak_stop_torque_Nm": 1080.6,
+    "peak_penetration_deg": 7.29,
+    "knee_max_deg": 142.3,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": false
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.2,
+    "mass": 68.0,
+    "knee_armature": 0.2018,
+    "mode": "mo0",
+    "E_J": [
+     80.0,
+     80.2
+    ],
+    "E_max_J": 80.2,
+    "speed_at_stop_rad_s": [
+     6.43,
+     6.4
+    ],
+    "peak_stop_torque_Nm": 1075.9,
+    "peak_penetration_deg": 7.25,
+    "knee_max_deg": 142.3,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": false
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.2,
+    "mass": 68.0,
+    "knee_armature": 0.0,
+    "mode": "mo0",
+    "E_J": [
+     85.2,
+     85.1
+    ],
+    "E_max_J": 85.2,
+    "speed_at_stop_rad_s": [
+     6.6,
+     6.61
+    ],
+    "peak_stop_torque_Nm": 1066.9,
+    "peak_penetration_deg": 7.19,
+    "knee_max_deg": 142.2,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": false
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.2,
+    "mass": 68.5,
+    "knee_armature": 0.553,
+    "mode": "mo0",
+    "E_J": [
+     76.2,
+     75.9
+    ],
+    "E_max_J": 76.2,
+    "speed_at_stop_rad_s": [
+     6.11,
+     6.1
+    ],
+    "peak_stop_torque_Nm": 1086.5,
+    "peak_penetration_deg": 7.33,
+    "knee_max_deg": 142.3,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": false
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.2,
+    "mass": 68.5,
+    "knee_armature": 0.2018,
+    "mode": "mo0",
+    "E_J": [
+     81.4,
+     81.3
+    ],
+    "E_max_J": 81.4,
+    "speed_at_stop_rad_s": [
+     6.41,
+     6.43
+    ],
+    "peak_stop_torque_Nm": 1083.6,
+    "peak_penetration_deg": 7.31,
+    "knee_max_deg": 142.3,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": false
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.2,
+    "mass": 68.5,
+    "knee_armature": 0.0,
+    "mode": "mo0",
+    "E_J": [
+     85.1,
+     85.3
+    ],
+    "E_max_J": 85.3,
+    "speed_at_stop_rad_s": [
+     6.67,
+     6.67
+    ],
+    "peak_stop_torque_Nm": 1076.4,
+    "peak_penetration_deg": 7.26,
+    "knee_max_deg": 142.3,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": false
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.3,
+    "mass": 65.0,
+    "knee_armature": 0.553,
+    "mode": "mo0",
+    "E_J": [
+     50.7,
+     50.4
+    ],
+    "E_max_J": 50.7,
+    "speed_at_stop_rad_s": [
+     5.81,
+     5.84
+    ],
+    "peak_stop_torque_Nm": 907.7,
+    "peak_penetration_deg": 6.07,
+    "knee_max_deg": 141.1,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.3,
+    "mass": 65.0,
+    "knee_armature": 0.2018,
+    "mode": "mo0",
+    "E_J": [
+     50.0,
+     50.0
+    ],
+    "E_max_J": 50.0,
+    "speed_at_stop_rad_s": [
+     6.19,
+     6.17
+    ],
+    "peak_stop_torque_Nm": 900.2,
+    "peak_penetration_deg": 6.02,
+    "knee_max_deg": 141.0,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.3,
+    "mass": 65.0,
+    "knee_armature": 0.0,
+    "mode": "mo0",
+    "E_J": [
+     50.8,
+     50.6
+    ],
+    "E_max_J": 50.8,
+    "speed_at_stop_rad_s": [
+     6.46,
+     6.46
+    ],
+    "peak_stop_torque_Nm": 890.1,
+    "peak_penetration_deg": 5.95,
+    "knee_max_deg": 140.9,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.3,
+    "mass": 68.0,
+    "knee_armature": 0.553,
+    "mode": "mo0",
+    "E_J": [
+     56.4,
+     56.3
+    ],
+    "E_max_J": 56.4,
+    "speed_at_stop_rad_s": [
+     5.9,
+     5.88
+    ],
+    "peak_stop_torque_Nm": 957.1,
+    "peak_penetration_deg": 6.41,
+    "knee_max_deg": 141.4,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.3,
+    "mass": 68.0,
+    "knee_armature": 0.2018,
+    "mode": "mo0",
+    "E_J": [
+     54.6,
+     54.5
+    ],
+    "E_max_J": 54.6,
+    "speed_at_stop_rad_s": [
+     6.25,
+     6.26
+    ],
+    "peak_stop_torque_Nm": 940.3,
+    "peak_penetration_deg": 6.29,
+    "knee_max_deg": 141.3,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.3,
+    "mass": 68.0,
+    "knee_armature": 0.0,
+    "mode": "mo0",
+    "E_J": [
+     55.0,
+     55.0
+    ],
+    "E_max_J": 55.0,
+    "speed_at_stop_rad_s": [
+     6.53,
+     6.5
+    ],
+    "peak_stop_torque_Nm": 928.3,
+    "peak_penetration_deg": 6.21,
+    "knee_max_deg": 141.2,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.3,
+    "mass": 68.5,
+    "knee_armature": 0.553,
+    "mode": "mo0",
+    "E_J": [
+     57.8,
+     57.7
+    ],
+    "E_max_J": 57.8,
+    "speed_at_stop_rad_s": [
+     5.92,
+     5.9
+    ],
+    "peak_stop_torque_Nm": 968.7,
+    "peak_penetration_deg": 6.49,
+    "knee_max_deg": 141.5,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.3,
+    "mass": 68.5,
+    "knee_armature": 0.2018,
+    "mode": "mo0",
+    "E_J": [
+     56.0,
+     55.4
+    ],
+    "E_max_J": 56.0,
+    "speed_at_stop_rad_s": [
+     6.27,
+     6.26
+    ],
+    "peak_stop_torque_Nm": 952.1,
+    "peak_penetration_deg": 6.38,
+    "knee_max_deg": 141.4,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.3,
+    "mass": 68.5,
+    "knee_armature": 0.0,
+    "mode": "mo0",
+    "E_J": [
+     55.9,
+     55.7
+    ],
+    "E_max_J": 55.9,
+    "speed_at_stop_rad_s": [
+     6.52,
+     6.52
+    ],
+    "peak_stop_torque_Nm": 935.2,
+    "peak_penetration_deg": 6.26,
+    "knee_max_deg": 141.3,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": -0.3,
+    "mass": 65.0,
+    "knee_armature": 0.553,
+    "mode": "mo0",
+    "E_J": [
+     51.8,
+     51.5
+    ],
+    "E_max_J": 51.8,
+    "speed_at_stop_rad_s": [
+     2.58,
+     2.57
+    ],
+    "peak_stop_torque_Nm": 773.1,
+    "peak_penetration_deg": 5.14,
+    "knee_max_deg": 140.1,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": -0.3,
+    "mass": 65.0,
+    "knee_armature": 0.2018,
+    "mode": "mo0",
+    "E_J": [
+     54.0,
+     54.0
+    ],
+    "E_max_J": 54.0,
+    "speed_at_stop_rad_s": [
+     2.41,
+     2.41
+    ],
+    "peak_stop_torque_Nm": 798.0,
+    "peak_penetration_deg": 5.31,
+    "knee_max_deg": 140.3,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": -0.3,
+    "mass": 65.0,
+    "knee_armature": 0.0,
+    "mode": "mo0",
+    "E_J": [
+     51.5,
+     51.5
+    ],
+    "E_max_J": 51.5,
+    "speed_at_stop_rad_s": [
+     2.17,
+     2.16
+    ],
+    "peak_stop_torque_Nm": 794.4,
+    "peak_penetration_deg": 5.29,
+    "knee_max_deg": 140.3,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": -0.3,
+    "mass": 68.0,
+    "knee_armature": 0.553,
+    "mode": "mo0",
+    "E_J": [
+     54.3,
+     54.1
+    ],
+    "E_max_J": 54.3,
+    "speed_at_stop_rad_s": [
+     2.63,
+     2.63
+    ],
+    "peak_stop_torque_Nm": 788.7,
+    "peak_penetration_deg": 5.25,
+    "knee_max_deg": 140.2,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": -0.3,
+    "mass": 68.0,
+    "knee_armature": 0.2018,
+    "mode": "mo0",
+    "E_J": [
+     56.5,
+     56.5
+    ],
+    "E_max_J": 56.5,
+    "speed_at_stop_rad_s": [
+     2.49,
+     2.48
+    ],
+    "peak_stop_torque_Nm": 817.0,
+    "peak_penetration_deg": 5.44,
+    "knee_max_deg": 140.4,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": -0.3,
+    "mass": 68.0,
+    "knee_armature": 0.0,
+    "mode": "mo0",
+    "E_J": [
+     55.4,
+     55.2
+    ],
+    "E_max_J": 55.4,
+    "speed_at_stop_rad_s": [
+     2.27,
+     2.26
+    ],
+    "peak_stop_torque_Nm": 822.3,
+    "peak_penetration_deg": 5.48,
+    "knee_max_deg": 140.5,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": -0.3,
+    "mass": 68.5,
+    "knee_armature": 0.553,
+    "mode": "mo0",
+    "E_J": [
+     54.1,
+     53.9
+    ],
+    "E_max_J": 54.1,
+    "speed_at_stop_rad_s": [
+     2.64,
+     2.64
+    ],
+    "peak_stop_torque_Nm": 785.3,
+    "peak_penetration_deg": 5.22,
+    "knee_max_deg": 140.2,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": -0.3,
+    "mass": 68.5,
+    "knee_armature": 0.2018,
+    "mode": "mo0",
+    "E_J": [
+     57.3,
+     57.4
+    ],
+    "E_max_J": 57.4,
+    "speed_at_stop_rad_s": [
+     2.5,
+     2.49
+    ],
+    "peak_stop_torque_Nm": 819.6,
+    "peak_penetration_deg": 5.46,
+    "knee_max_deg": 140.5,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": -0.3,
+    "mass": 68.5,
+    "knee_armature": 0.0,
+    "mode": "mo0",
+    "E_J": [
+     55.7,
+     55.5
+    ],
+    "E_max_J": 55.7,
+    "speed_at_stop_rad_s": [
+     2.29,
+     2.27
+    ],
+    "peak_stop_torque_Nm": 822.9,
+    "peak_penetration_deg": 5.48,
+    "knee_max_deg": 140.5,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": -0.15,
+    "mass": 65.0,
+    "knee_armature": 0.553,
+    "mode": "mo0",
+    "E_J": [
+     48.4,
+     48.5
+    ],
+    "E_max_J": 48.5,
+    "speed_at_stop_rad_s": [
+     2.37,
+     2.35
+    ],
+    "peak_stop_torque_Nm": 779.8,
+    "peak_penetration_deg": 5.18,
+    "knee_max_deg": 140.2,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": -0.15,
+    "mass": 65.0,
+    "knee_armature": 0.2018,
+    "mode": "mo0",
+    "E_J": [
+     46.2,
+     46.2
+    ],
+    "E_max_J": 46.2,
+    "speed_at_stop_rad_s": [
+     2.4,
+     2.38
+    ],
+    "peak_stop_torque_Nm": 763.9,
+    "peak_penetration_deg": 5.07,
+    "knee_max_deg": 140.1,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": -0.15,
+    "mass": 65.0,
+    "knee_armature": 0.0,
+    "mode": "mo0",
+    "E_J": [
+     46.0,
+     45.9
+    ],
+    "E_max_J": 46.0,
+    "speed_at_stop_rad_s": [
+     2.39,
+     2.4
+    ],
+    "peak_stop_torque_Nm": 765.6,
+    "peak_penetration_deg": 5.09,
+    "knee_max_deg": 140.1,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": -0.15,
+    "mass": 68.0,
+    "knee_armature": 0.553,
+    "mode": "mo0",
+    "E_J": [
+     50.7,
+     50.5
+    ],
+    "E_max_J": 50.7,
+    "speed_at_stop_rad_s": [
+     2.39,
+     2.38
+    ],
+    "peak_stop_torque_Nm": 798.8,
+    "peak_penetration_deg": 5.32,
+    "knee_max_deg": 140.3,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": -0.15,
+    "mass": 68.0,
+    "knee_armature": 0.2018,
+    "mode": "mo0",
+    "E_J": [
+     48.4,
+     48.5
+    ],
+    "E_max_J": 48.5,
+    "speed_at_stop_rad_s": [
+     2.4,
+     2.4
+    ],
+    "peak_stop_torque_Nm": 787.4,
+    "peak_penetration_deg": 5.24,
+    "knee_max_deg": 140.2,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": -0.15,
+    "mass": 68.0,
+    "knee_armature": 0.0,
+    "mode": "mo0",
+    "E_J": [
+     48.3,
+     48.1
+    ],
+    "E_max_J": 48.3,
+    "speed_at_stop_rad_s": [
+     2.43,
+     2.41
+    ],
+    "peak_stop_torque_Nm": 789.1,
+    "peak_penetration_deg": 5.25,
+    "knee_max_deg": 140.2,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": -0.15,
+    "mass": 68.5,
+    "knee_armature": 0.553,
+    "mode": "mo0",
+    "E_J": [
+     50.4,
+     50.6
+    ],
+    "E_max_J": 50.6,
+    "speed_at_stop_rad_s": [
+     2.39,
+     2.36
+    ],
+    "peak_stop_torque_Nm": 799.6,
+    "peak_penetration_deg": 5.32,
+    "knee_max_deg": 140.3,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": -0.15,
+    "mass": 68.5,
+    "knee_armature": 0.2018,
+    "mode": "mo0",
+    "E_J": [
+     49.5,
+     49.3
+    ],
+    "E_max_J": 49.5,
+    "speed_at_stop_rad_s": [
+     2.4,
+     2.41
+    ],
+    "peak_stop_torque_Nm": 796.0,
+    "peak_penetration_deg": 5.3,
+    "knee_max_deg": 140.3,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": -0.15,
+    "mass": 68.5,
+    "knee_armature": 0.0,
+    "mode": "mo0",
+    "E_J": [
+     48.9,
+     48.9
+    ],
+    "E_max_J": 48.9,
+    "speed_at_stop_rad_s": [
+     2.39,
+     2.42
+    ],
+    "peak_stop_torque_Nm": 794.5,
+    "peak_penetration_deg": 5.29,
+    "knee_max_deg": 140.3,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": 0.15,
+    "mass": 65.0,
+    "knee_armature": 0.553,
+    "mode": "mo0",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 89.9,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": 0.15,
+    "mass": 65.0,
+    "knee_armature": 0.2018,
+    "mode": "mo0",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 89.9,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": 0.15,
+    "mass": 65.0,
+    "knee_armature": 0.0,
+    "mode": "mo0",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 89.9,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": 0.15,
+    "mass": 68.0,
+    "knee_armature": 0.553,
+    "mode": "mo0",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 89.9,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": 0.15,
+    "mass": 68.0,
+    "knee_armature": 0.2018,
+    "mode": "mo0",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 89.9,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": 0.15,
+    "mass": 68.0,
+    "knee_armature": 0.0,
+    "mode": "mo0",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 89.9,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": 0.15,
+    "mass": 68.5,
+    "knee_armature": 0.553,
+    "mode": "mo0",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 89.9,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": 0.15,
+    "mass": 68.5,
+    "knee_armature": 0.2018,
+    "mode": "mo0",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 89.9,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": 0.15,
+    "mass": 68.5,
+    "knee_armature": 0.0,
+    "mode": "mo0",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 89.9,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": 0.3,
+    "mass": 65.0,
+    "knee_armature": 0.553,
+    "mode": "mo0",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 89.9,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": 0.3,
+    "mass": 65.0,
+    "knee_armature": 0.2018,
+    "mode": "mo0",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 89.9,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": 0.3,
+    "mass": 65.0,
+    "knee_armature": 0.0,
+    "mode": "mo0",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 89.8,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": 0.3,
+    "mass": 68.0,
+    "knee_armature": 0.553,
+    "mode": "mo0",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 89.9,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": 0.3,
+    "mass": 68.0,
+    "knee_armature": 0.2018,
+    "mode": "mo0",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 89.9,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": 0.3,
+    "mass": 68.0,
+    "knee_armature": 0.0,
+    "mode": "mo0",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 89.8,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": 0.3,
+    "mass": 68.5,
+    "knee_armature": 0.553,
+    "mode": "mo0",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 89.9,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": 0.3,
+    "mass": 68.5,
+    "knee_armature": 0.2018,
+    "mode": "mo0",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 89.9,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": 0.3,
+    "mass": 68.5,
+    "knee_armature": 0.0,
+    "mode": "mo0",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 89.8,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   }
+  ]
+ },
+ "cap": {
+  "summary": {
+   "crouch_collapse": {
+    "n": 27,
+    "E_max_J": 14.5,
+    "E_min_J": 11.7,
+    "peak_torque_Nm": 502.7,
+    "pen_max_deg": 3.27,
+    "n_fail": 0
+   },
+   "forward_fall": {
+    "n": 27,
+    "E_max_J": 1.6,
+    "E_min_J": 0.0,
+    "peak_torque_Nm": 141.1,
+    "pen_max_deg": 0.88,
+    "n_fail": 0
+   },
+   "kneel_tip": {
+    "n": 36,
+    "E_max_J": 0.0,
+    "E_min_J": 0.0,
+    "peak_torque_Nm": 0.0,
+    "pen_max_deg": 0.0,
+    "n_fail": 0
+   },
+   "all": {
+    "n": 90,
+    "n_fail": 0,
+    "E_max_J": 14.5,
+    "zone_cmd_max_Nm": 50.0
+   }
+  },
+  "rows": [
+   {
+    "case": "crouch_collapse",
+    "lean": 0.0,
+    "mass": 65.0,
+    "knee_armature": 0.553,
+    "mode": "cap",
+    "E_J": [
+     12.7,
+     12.6
+    ],
+    "E_max_J": 12.7,
+    "speed_at_stop_rad_s": [
+     2.21,
+     2.21
+    ],
+    "peak_stop_torque_Nm": 468.8,
+    "peak_penetration_deg": 3.06,
+    "knee_max_deg": 138.1,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": 0.0,
+    "mass": 65.0,
+    "knee_armature": 0.2018,
+    "mode": "cap",
+    "E_J": [
+     12.1,
+     12.0
+    ],
+    "E_max_J": 12.1,
+    "speed_at_stop_rad_s": [
+     2.25,
+     2.25
+    ],
+    "peak_stop_torque_Nm": 455.2,
+    "peak_penetration_deg": 2.98,
+    "knee_max_deg": 138.0,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": 0.0,
+    "mass": 65.0,
+    "knee_armature": 0.0,
+    "mode": "cap",
+    "E_J": [
+     11.7,
+     11.6
+    ],
+    "E_max_J": 11.7,
+    "speed_at_stop_rad_s": [
+     2.27,
+     2.27
+    ],
+    "peak_stop_torque_Nm": 446.6,
+    "peak_penetration_deg": 2.93,
+    "knee_max_deg": 137.9,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": 0.0,
+    "mass": 68.0,
+    "knee_armature": 0.553,
+    "mode": "cap",
+    "E_J": [
+     13.8,
+     13.7
+    ],
+    "E_max_J": 13.8,
+    "speed_at_stop_rad_s": [
+     2.27,
+     2.27
+    ],
+    "peak_stop_torque_Nm": 490.2,
+    "peak_penetration_deg": 3.19,
+    "knee_max_deg": 138.2,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": 0.0,
+    "mass": 68.0,
+    "knee_armature": 0.2018,
+    "mode": "cap",
+    "E_J": [
+     13.1,
+     13.0
+    ],
+    "E_max_J": 13.1,
+    "speed_at_stop_rad_s": [
+     2.31,
+     2.31
+    ],
+    "peak_stop_torque_Nm": 475.3,
+    "peak_penetration_deg": 3.1,
+    "knee_max_deg": 138.1,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": 0.0,
+    "mass": 68.0,
+    "knee_armature": 0.0,
+    "mode": "cap",
+    "E_J": [
+     12.6,
+     12.5
+    ],
+    "E_max_J": 12.6,
+    "speed_at_stop_rad_s": [
+     2.32,
+     2.33
+    ],
+    "peak_stop_torque_Nm": 466.3,
+    "peak_penetration_deg": 3.05,
+    "knee_max_deg": 138.0,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": 0.0,
+    "mass": 68.5,
+    "knee_armature": 0.553,
+    "mode": "cap",
+    "E_J": [
+     14.0,
+     13.9
+    ],
+    "E_max_J": 14.0,
+    "speed_at_stop_rad_s": [
+     2.28,
+     2.28
+    ],
+    "peak_stop_torque_Nm": 493.5,
+    "peak_penetration_deg": 3.21,
+    "knee_max_deg": 138.2,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": 0.0,
+    "mass": 68.5,
+    "knee_armature": 0.2018,
+    "mode": "cap",
+    "E_J": [
+     13.2,
+     13.1
+    ],
+    "E_max_J": 13.2,
+    "speed_at_stop_rad_s": [
+     2.32,
+     2.32
+    ],
+    "peak_stop_torque_Nm": 478.7,
+    "peak_penetration_deg": 3.12,
+    "knee_max_deg": 138.1,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": 0.0,
+    "mass": 68.5,
+    "knee_armature": 0.0,
+    "mode": "cap",
+    "E_J": [
+     12.8,
+     12.7
+    ],
+    "E_max_J": 12.8,
+    "speed_at_stop_rad_s": [
+     2.33,
+     2.33
+    ],
+    "peak_stop_torque_Nm": 469.4,
+    "peak_penetration_deg": 3.07,
+    "knee_max_deg": 138.1,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": 0.05,
+    "mass": 65.0,
+    "knee_armature": 0.553,
+    "mode": "cap",
+    "E_J": [
+     13.2,
+     13.1
+    ],
+    "E_max_J": 13.2,
+    "speed_at_stop_rad_s": [
+     2.26,
+     2.26
+    ],
+    "peak_stop_torque_Nm": 477.2,
+    "peak_penetration_deg": 3.11,
+    "knee_max_deg": 138.1,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": 0.05,
+    "mass": 65.0,
+    "knee_armature": 0.2018,
+    "mode": "cap",
+    "E_J": [
+     12.4,
+     12.3
+    ],
+    "E_max_J": 12.4,
+    "speed_at_stop_rad_s": [
+     2.29,
+     2.29
+    ],
+    "peak_stop_torque_Nm": 462.3,
+    "peak_penetration_deg": 3.02,
+    "knee_max_deg": 138.0,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": 0.05,
+    "mass": 65.0,
+    "knee_armature": 0.0,
+    "mode": "cap",
+    "E_J": [
+     12.0,
+     11.9
+    ],
+    "E_max_J": 12.0,
+    "speed_at_stop_rad_s": [
+     2.31,
+     2.31
+    ],
+    "peak_stop_torque_Nm": 452.9,
+    "peak_penetration_deg": 2.97,
+    "knee_max_deg": 138.0,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": 0.05,
+    "mass": 68.0,
+    "knee_armature": 0.553,
+    "mode": "cap",
+    "E_J": [
+     14.3,
+     14.2
+    ],
+    "E_max_J": 14.3,
+    "speed_at_stop_rad_s": [
+     2.32,
+     2.32
+    ],
+    "peak_stop_torque_Nm": 499.2,
+    "peak_penetration_deg": 3.25,
+    "knee_max_deg": 138.2,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": 0.05,
+    "mass": 68.0,
+    "knee_armature": 0.2018,
+    "mode": "cap",
+    "E_J": [
+     13.5,
+     13.4
+    ],
+    "E_max_J": 13.5,
+    "speed_at_stop_rad_s": [
+     2.35,
+     2.35
+    ],
+    "peak_stop_torque_Nm": 483.1,
+    "peak_penetration_deg": 3.15,
+    "knee_max_deg": 138.1,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": 0.05,
+    "mass": 68.0,
+    "knee_armature": 0.0,
+    "mode": "cap",
+    "E_J": [
+     13.0,
+     12.9
+    ],
+    "E_max_J": 13.0,
+    "speed_at_stop_rad_s": [
+     2.37,
+     2.37
+    ],
+    "peak_stop_torque_Nm": 473.3,
+    "peak_penetration_deg": 3.09,
+    "knee_max_deg": 138.1,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": 0.05,
+    "mass": 68.5,
+    "knee_armature": 0.553,
+    "mode": "cap",
+    "E_J": [
+     14.5,
+     14.4
+    ],
+    "E_max_J": 14.5,
+    "speed_at_stop_rad_s": [
+     2.33,
+     2.33
+    ],
+    "peak_stop_torque_Nm": 502.7,
+    "peak_penetration_deg": 3.27,
+    "knee_max_deg": 138.3,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": 0.05,
+    "mass": 68.5,
+    "knee_armature": 0.2018,
+    "mode": "cap",
+    "E_J": [
+     13.6,
+     13.5
+    ],
+    "E_max_J": 13.6,
+    "speed_at_stop_rad_s": [
+     2.36,
+     2.36
+    ],
+    "peak_stop_torque_Nm": 486.2,
+    "peak_penetration_deg": 3.17,
+    "knee_max_deg": 138.2,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": 0.05,
+    "mass": 68.5,
+    "knee_armature": 0.0,
+    "mode": "cap",
+    "E_J": [
+     13.1,
+     13.0
+    ],
+    "E_max_J": 13.1,
+    "speed_at_stop_rad_s": [
+     2.38,
+     2.38
+    ],
+    "peak_stop_torque_Nm": 476.1,
+    "peak_penetration_deg": 3.11,
+    "knee_max_deg": 138.1,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": -0.05,
+    "mass": 65.0,
+    "knee_armature": 0.553,
+    "mode": "cap",
+    "E_J": [
+     12.8,
+     12.7
+    ],
+    "E_max_J": 12.8,
+    "speed_at_stop_rad_s": [
+     2.21,
+     2.21
+    ],
+    "peak_stop_torque_Nm": 471.2,
+    "peak_penetration_deg": 3.08,
+    "knee_max_deg": 138.1,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": -0.05,
+    "mass": 65.0,
+    "knee_armature": 0.2018,
+    "mode": "cap",
+    "E_J": [
+     12.4,
+     12.3
+    ],
+    "E_max_J": 12.4,
+    "speed_at_stop_rad_s": [
+     2.27,
+     2.27
+    ],
+    "peak_stop_torque_Nm": 461.5,
+    "peak_penetration_deg": 3.02,
+    "knee_max_deg": 138.0,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": -0.05,
+    "mass": 65.0,
+    "knee_armature": 0.0,
+    "mode": "cap",
+    "E_J": [
+     12.0,
+     11.9
+    ],
+    "E_max_J": 12.0,
+    "speed_at_stop_rad_s": [
+     2.29,
+     2.29
+    ],
+    "peak_stop_torque_Nm": 453.7,
+    "peak_penetration_deg": 2.97,
+    "knee_max_deg": 138.0,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": -0.05,
+    "mass": 68.0,
+    "knee_armature": 0.553,
+    "mode": "cap",
+    "E_J": [
+     13.9,
+     13.8
+    ],
+    "E_max_J": 13.9,
+    "speed_at_stop_rad_s": [
+     2.28,
+     2.28
+    ],
+    "peak_stop_torque_Nm": 492.5,
+    "peak_penetration_deg": 3.2,
+    "knee_max_deg": 138.2,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": -0.05,
+    "mass": 68.0,
+    "knee_armature": 0.2018,
+    "mode": "cap",
+    "E_J": [
+     13.4,
+     13.3
+    ],
+    "E_max_J": 13.4,
+    "speed_at_stop_rad_s": [
+     2.33,
+     2.33
+    ],
+    "peak_stop_torque_Nm": 482.6,
+    "peak_penetration_deg": 3.15,
+    "knee_max_deg": 138.1,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": -0.05,
+    "mass": 68.0,
+    "knee_armature": 0.0,
+    "mode": "cap",
+    "E_J": [
+     13.1,
+     13.0
+    ],
+    "E_max_J": 13.1,
+    "speed_at_stop_rad_s": [
+     2.36,
+     2.36
+    ],
+    "peak_stop_torque_Nm": 475.7,
+    "peak_penetration_deg": 3.1,
+    "knee_max_deg": 138.1,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": -0.05,
+    "mass": 68.5,
+    "knee_armature": 0.553,
+    "mode": "cap",
+    "E_J": [
+     14.1,
+     13.9
+    ],
+    "E_max_J": 14.1,
+    "speed_at_stop_rad_s": [
+     2.28,
+     2.28
+    ],
+    "peak_stop_torque_Nm": 494.8,
+    "peak_penetration_deg": 3.22,
+    "knee_max_deg": 138.2,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": -0.05,
+    "mass": 68.5,
+    "knee_armature": 0.2018,
+    "mode": "cap",
+    "E_J": [
+     13.6,
+     13.5
+    ],
+    "E_max_J": 13.6,
+    "speed_at_stop_rad_s": [
+     2.34,
+     2.34
+    ],
+    "peak_stop_torque_Nm": 485.8,
+    "peak_penetration_deg": 3.16,
+    "knee_max_deg": 138.2,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": -0.05,
+    "mass": 68.5,
+    "knee_armature": 0.0,
+    "mode": "cap",
+    "E_J": [
+     13.3,
+     13.2
+    ],
+    "E_max_J": 13.3,
+    "speed_at_stop_rad_s": [
+     2.37,
+     2.37
+    ],
+    "peak_stop_torque_Nm": 479.2,
+    "peak_penetration_deg": 3.12,
+    "knee_max_deg": 138.1,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.1,
+    "mass": 65.0,
+    "knee_armature": 0.553,
+    "mode": "cap",
+    "E_J": [
+     1.0,
+     0.9
+    ],
+    "E_max_J": 1.0,
+    "speed_at_stop_rad_s": [
+     0.51,
+     0.48
+    ],
+    "peak_stop_torque_Nm": 128.1,
+    "peak_penetration_deg": 0.77,
+    "knee_max_deg": 135.8,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.1,
+    "mass": 65.0,
+    "knee_armature": 0.2018,
+    "mode": "cap",
+    "E_J": [
+     1.2,
+     1.2
+    ],
+    "E_max_J": 1.2,
+    "speed_at_stop_rad_s": [
+     0.74,
+     0.73
+    ],
+    "peak_stop_torque_Nm": 137.7,
+    "peak_penetration_deg": 0.85,
+    "knee_max_deg": 135.9,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.1,
+    "mass": 65.0,
+    "knee_armature": 0.0,
+    "mode": "cap",
+    "E_J": [
+     1.1,
+     1.2
+    ],
+    "E_max_J": 1.2,
+    "speed_at_stop_rad_s": [
+     1.02,
+     0.73
+    ],
+    "peak_stop_torque_Nm": 141.1,
+    "peak_penetration_deg": 0.88,
+    "knee_max_deg": 135.9,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.1,
+    "mass": 68.0,
+    "knee_armature": 0.553,
+    "mode": "cap",
+    "E_J": [
+     1.6,
+     1.6
+    ],
+    "E_max_J": 1.6,
+    "speed_at_stop_rad_s": [
+     0.92,
+     0.92
+    ],
+    "peak_stop_torque_Nm": 126.1,
+    "peak_penetration_deg": 0.76,
+    "knee_max_deg": 135.8,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.1,
+    "mass": 68.0,
+    "knee_armature": 0.2018,
+    "mode": "cap",
+    "E_J": [
+     1.4,
+     1.3
+    ],
+    "E_max_J": 1.4,
+    "speed_at_stop_rad_s": [
+     0.93,
+     0.93
+    ],
+    "peak_stop_torque_Nm": 117.8,
+    "peak_penetration_deg": 0.69,
+    "knee_max_deg": 135.7,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.1,
+    "mass": 68.0,
+    "knee_armature": 0.0,
+    "mode": "cap",
+    "E_J": [
+     0.9,
+     1.1
+    ],
+    "E_max_J": 1.1,
+    "speed_at_stop_rad_s": [
+     0.92,
+     0.93
+    ],
+    "peak_stop_torque_Nm": 100.8,
+    "peak_penetration_deg": 0.59,
+    "knee_max_deg": 135.6,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.1,
+    "mass": 68.5,
+    "knee_armature": 0.553,
+    "mode": "cap",
+    "E_J": [
+     1.6,
+     1.6
+    ],
+    "E_max_J": 1.6,
+    "speed_at_stop_rad_s": [
+     0.97,
+     0.97
+    ],
+    "peak_stop_torque_Nm": 124.9,
+    "peak_penetration_deg": 0.75,
+    "knee_max_deg": 135.7,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.1,
+    "mass": 68.5,
+    "knee_armature": 0.2018,
+    "mode": "cap",
+    "E_J": [
+     1.5,
+     1.5
+    ],
+    "E_max_J": 1.5,
+    "speed_at_stop_rad_s": [
+     0.99,
+     0.97
+    ],
+    "peak_stop_torque_Nm": 117.7,
+    "peak_penetration_deg": 0.69,
+    "knee_max_deg": 135.7,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.1,
+    "mass": 68.5,
+    "knee_armature": 0.0,
+    "mode": "cap",
+    "E_J": [
+     1.2,
+     1.1
+    ],
+    "E_max_J": 1.2,
+    "speed_at_stop_rad_s": [
+     0.99,
+     0.97
+    ],
+    "peak_stop_torque_Nm": 115.7,
+    "peak_penetration_deg": 0.68,
+    "knee_max_deg": 135.7,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.2,
+    "mass": 65.0,
+    "knee_armature": 0.553,
+    "mode": "cap",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 69.2,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.2,
+    "mass": 65.0,
+    "knee_armature": 0.2018,
+    "mode": "cap",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 70.4,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.2,
+    "mass": 65.0,
+    "knee_armature": 0.0,
+    "mode": "cap",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 72.3,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.2,
+    "mass": 68.0,
+    "knee_armature": 0.553,
+    "mode": "cap",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 69.3,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.2,
+    "mass": 68.0,
+    "knee_armature": 0.2018,
+    "mode": "cap",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 70.6,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.2,
+    "mass": 68.0,
+    "knee_armature": 0.0,
+    "mode": "cap",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 72.1,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.2,
+    "mass": 68.5,
+    "knee_armature": 0.553,
+    "mode": "cap",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 69.3,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.2,
+    "mass": 68.5,
+    "knee_armature": 0.2018,
+    "mode": "cap",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 70.5,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.2,
+    "mass": 68.5,
+    "knee_armature": 0.0,
+    "mode": "cap",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 72.2,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.3,
+    "mass": 65.0,
+    "knee_armature": 0.553,
+    "mode": "cap",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 69.1,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.3,
+    "mass": 65.0,
+    "knee_armature": 0.2018,
+    "mode": "cap",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 70.3,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.3,
+    "mass": 65.0,
+    "knee_armature": 0.0,
+    "mode": "cap",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 71.8,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.3,
+    "mass": 68.0,
+    "knee_armature": 0.553,
+    "mode": "cap",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 69.3,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.3,
+    "mass": 68.0,
+    "knee_armature": 0.2018,
+    "mode": "cap",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 70.5,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.3,
+    "mass": 68.0,
+    "knee_armature": 0.0,
+    "mode": "cap",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 72.1,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.3,
+    "mass": 68.5,
+    "knee_armature": 0.553,
+    "mode": "cap",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 69.2,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.3,
+    "mass": 68.5,
+    "knee_armature": 0.2018,
+    "mode": "cap",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 70.5,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.3,
+    "mass": 68.5,
+    "knee_armature": 0.0,
+    "mode": "cap",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 72.1,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": -0.3,
+    "mass": 65.0,
+    "knee_armature": 0.553,
+    "mode": "cap",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 110.1,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": -0.3,
+    "mass": 65.0,
+    "knee_armature": 0.2018,
+    "mode": "cap",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 110.2,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": -0.3,
+    "mass": 65.0,
+    "knee_armature": 0.0,
+    "mode": "cap",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 110.0,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": -0.3,
+    "mass": 68.0,
+    "knee_armature": 0.553,
+    "mode": "cap",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 110.7,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": -0.3,
+    "mass": 68.0,
+    "knee_armature": 0.2018,
+    "mode": "cap",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 110.6,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": -0.3,
+    "mass": 68.0,
+    "knee_armature": 0.0,
+    "mode": "cap",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 110.5,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": -0.3,
+    "mass": 68.5,
+    "knee_armature": 0.553,
+    "mode": "cap",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 110.9,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": -0.3,
+    "mass": 68.5,
+    "knee_armature": 0.2018,
+    "mode": "cap",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 110.7,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": -0.3,
+    "mass": 68.5,
+    "knee_armature": 0.0,
+    "mode": "cap",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 110.6,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": -0.15,
+    "mass": 65.0,
+    "knee_armature": 0.553,
+    "mode": "cap",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 100.0,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": -0.15,
+    "mass": 65.0,
+    "knee_armature": 0.2018,
+    "mode": "cap",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 100.1,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": -0.15,
+    "mass": 65.0,
+    "knee_armature": 0.0,
+    "mode": "cap",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 100.1,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": -0.15,
+    "mass": 68.0,
+    "knee_armature": 0.553,
+    "mode": "cap",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 100.2,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": -0.15,
+    "mass": 68.0,
+    "knee_armature": 0.2018,
+    "mode": "cap",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 100.3,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": -0.15,
+    "mass": 68.0,
+    "knee_armature": 0.0,
+    "mode": "cap",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 100.4,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": -0.15,
+    "mass": 68.5,
+    "knee_armature": 0.553,
+    "mode": "cap",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 100.3,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": -0.15,
+    "mass": 68.5,
+    "knee_armature": 0.2018,
+    "mode": "cap",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 100.3,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": -0.15,
+    "mass": 68.5,
+    "knee_armature": 0.0,
+    "mode": "cap",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 100.4,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": 0.15,
+    "mass": 65.0,
+    "knee_armature": 0.553,
+    "mode": "cap",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 93.6,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": 0.15,
+    "mass": 65.0,
+    "knee_armature": 0.2018,
+    "mode": "cap",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 95.0,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": 0.15,
+    "mass": 65.0,
+    "knee_armature": 0.0,
+    "mode": "cap",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 96.6,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": 0.15,
+    "mass": 68.0,
+    "knee_armature": 0.553,
+    "mode": "cap",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 93.9,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": 0.15,
+    "mass": 68.0,
+    "knee_armature": 0.2018,
+    "mode": "cap",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 95.4,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": 0.15,
+    "mass": 68.0,
+    "knee_armature": 0.0,
+    "mode": "cap",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 97.0,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": 0.15,
+    "mass": 68.5,
+    "knee_armature": 0.553,
+    "mode": "cap",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 93.9,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": 0.15,
+    "mass": 68.5,
+    "knee_armature": 0.2018,
+    "mode": "cap",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 95.5,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": 0.15,
+    "mass": 68.5,
+    "knee_armature": 0.0,
+    "mode": "cap",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 97.0,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": 0.3,
+    "mass": 65.0,
+    "knee_armature": 0.553,
+    "mode": "cap",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 93.4,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": 0.3,
+    "mass": 65.0,
+    "knee_armature": 0.2018,
+    "mode": "cap",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 94.8,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": 0.3,
+    "mass": 65.0,
+    "knee_armature": 0.0,
+    "mode": "cap",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 96.2,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": 0.3,
+    "mass": 68.0,
+    "knee_armature": 0.553,
+    "mode": "cap",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 93.7,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": 0.3,
+    "mass": 68.0,
+    "knee_armature": 0.2018,
+    "mode": "cap",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 95.0,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": 0.3,
+    "mass": 68.0,
+    "knee_armature": 0.0,
+    "mode": "cap",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 96.6,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": 0.3,
+    "mass": 68.5,
+    "knee_armature": 0.553,
+    "mode": "cap",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 93.7,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": 0.3,
+    "mass": 68.5,
+    "knee_armature": 0.2018,
+    "mode": "cap",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 95.1,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": 0.3,
+    "mass": 68.5,
+    "knee_armature": 0.0,
+    "mode": "cap",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 96.6,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   }
+  ]
+ },
+ "ramp": {
+  "summary": {
+   "crouch_collapse": {
+    "n": 27,
+    "E_max_J": 13.5,
+    "E_min_J": 4.7,
+    "peak_torque_Nm": 406.7,
+    "pen_max_deg": 2.69,
+    "n_fail": 0
+   },
+   "forward_fall": {
+    "n": 27,
+    "E_max_J": 36.6,
+    "E_min_J": 7.8,
+    "peak_torque_Nm": 746.6,
+    "pen_max_deg": 4.95,
+    "n_fail": 0
+   },
+   "kneel_tip": {
+    "n": 36,
+    "E_max_J": 9.1,
+    "E_min_J": 0.0,
+    "peak_torque_Nm": 371.3,
+    "pen_max_deg": 2.48,
+    "n_fail": 0
+   },
+   "all": {
+    "n": 90,
+    "n_fail": 0,
+    "E_max_J": 36.6,
+    "zone_cmd_max_Nm": 50.0
+   }
+  },
+  "rows": [
+   {
+    "case": "crouch_collapse",
+    "lean": 0.0,
+    "mass": 65.0,
+    "knee_armature": 0.553,
+    "mode": "ramp",
+    "E_J": [
+     4.7,
+     4.6
+    ],
+    "E_max_J": 4.7,
+    "speed_at_stop_rad_s": [
+     1.51,
+     1.51
+    ],
+    "peak_stop_torque_Nm": 237.3,
+    "peak_penetration_deg": 1.66,
+    "knee_max_deg": 136.7,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": 0.0,
+    "mass": 65.0,
+    "knee_armature": 0.2018,
+    "mode": "ramp",
+    "E_J": [
+     5.2,
+     5.1
+    ],
+    "E_max_J": 5.2,
+    "speed_at_stop_rad_s": [
+     1.6,
+     1.6
+    ],
+    "peak_stop_torque_Nm": 241.1,
+    "peak_penetration_deg": 1.69,
+    "knee_max_deg": 136.7,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": 0.0,
+    "mass": 65.0,
+    "knee_armature": 0.0,
+    "mode": "ramp",
+    "E_J": [
+     5.4,
+     5.4
+    ],
+    "E_max_J": 5.4,
+    "speed_at_stop_rad_s": [
+     1.66,
+     1.66
+    ],
+    "peak_stop_torque_Nm": 243.2,
+    "peak_penetration_deg": 1.71,
+    "knee_max_deg": 136.7,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": 0.0,
+    "mass": 68.0,
+    "knee_armature": 0.553,
+    "mode": "ramp",
+    "E_J": [
+     7.5,
+     7.4
+    ],
+    "E_max_J": 7.5,
+    "speed_at_stop_rad_s": [
+     1.87,
+     1.87
+    ],
+    "peak_stop_torque_Nm": 321.0,
+    "peak_penetration_deg": 2.17,
+    "knee_max_deg": 137.2,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": 0.0,
+    "mass": 68.0,
+    "knee_armature": 0.2018,
+    "mode": "ramp",
+    "E_J": [
+     8.4,
+     8.2
+    ],
+    "E_max_J": 8.4,
+    "speed_at_stop_rad_s": [
+     1.97,
+     1.97
+    ],
+    "peak_stop_torque_Nm": 323.8,
+    "peak_penetration_deg": 2.19,
+    "knee_max_deg": 137.2,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": 0.0,
+    "mass": 68.0,
+    "knee_armature": 0.0,
+    "mode": "ramp",
+    "E_J": [
+     8.7,
+     8.6
+    ],
+    "E_max_J": 8.7,
+    "speed_at_stop_rad_s": [
+     2.03,
+     2.03
+    ],
+    "peak_stop_torque_Nm": 324.6,
+    "peak_penetration_deg": 2.2,
+    "knee_max_deg": 137.2,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": 0.0,
+    "mass": 68.5,
+    "knee_armature": 0.553,
+    "mode": "ramp",
+    "E_J": [
+     8.0,
+     7.9
+    ],
+    "E_max_J": 8.0,
+    "speed_at_stop_rad_s": [
+     1.92,
+     1.92
+    ],
+    "peak_stop_torque_Nm": 332.6,
+    "peak_penetration_deg": 2.24,
+    "knee_max_deg": 137.2,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": 0.0,
+    "mass": 68.5,
+    "knee_armature": 0.2018,
+    "mode": "ramp",
+    "E_J": [
+     8.8,
+     8.7
+    ],
+    "E_max_J": 8.8,
+    "speed_at_stop_rad_s": [
+     2.02,
+     2.02
+    ],
+    "peak_stop_torque_Nm": 335.1,
+    "peak_penetration_deg": 2.26,
+    "knee_max_deg": 137.3,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": 0.0,
+    "mass": 68.5,
+    "knee_armature": 0.0,
+    "mode": "ramp",
+    "E_J": [
+     9.3,
+     9.2
+    ],
+    "E_max_J": 9.3,
+    "speed_at_stop_rad_s": [
+     2.08,
+     2.08
+    ],
+    "peak_stop_torque_Nm": 335.7,
+    "peak_penetration_deg": 2.26,
+    "knee_max_deg": 137.3,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": 0.05,
+    "mass": 65.0,
+    "knee_armature": 0.553,
+    "mode": "ramp",
+    "E_J": [
+     10.0,
+     9.9
+    ],
+    "E_max_J": 10.0,
+    "speed_at_stop_rad_s": [
+     1.93,
+     1.93
+    ],
+    "peak_stop_torque_Nm": 338.0,
+    "peak_penetration_deg": 2.28,
+    "knee_max_deg": 137.3,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": 0.05,
+    "mass": 65.0,
+    "knee_armature": 0.2018,
+    "mode": "ramp",
+    "E_J": [
+     10.2,
+     10.1
+    ],
+    "E_max_J": 10.2,
+    "speed_at_stop_rad_s": [
+     2.03,
+     2.03
+    ],
+    "peak_stop_torque_Nm": 338.6,
+    "peak_penetration_deg": 2.28,
+    "knee_max_deg": 137.3,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": 0.05,
+    "mass": 65.0,
+    "knee_armature": 0.0,
+    "mode": "ramp",
+    "E_J": [
+     10.0,
+     9.9
+    ],
+    "E_max_J": 10.0,
+    "speed_at_stop_rad_s": [
+     2.09,
+     2.1
+    ],
+    "peak_stop_torque_Nm": 337.6,
+    "peak_penetration_deg": 2.27,
+    "knee_max_deg": 137.3,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": 0.05,
+    "mass": 68.0,
+    "knee_armature": 0.553,
+    "mode": "ramp",
+    "E_J": [
+     13.0,
+     12.8
+    ],
+    "E_max_J": 13.0,
+    "speed_at_stop_rad_s": [
+     2.18,
+     2.18
+    ],
+    "peak_stop_torque_Nm": 397.7,
+    "peak_penetration_deg": 2.64,
+    "knee_max_deg": 137.6,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": 0.05,
+    "mass": 68.0,
+    "knee_armature": 0.2018,
+    "mode": "ramp",
+    "E_J": [
+     12.8,
+     12.7
+    ],
+    "E_max_J": 12.8,
+    "speed_at_stop_rad_s": [
+     2.29,
+     2.29
+    ],
+    "peak_stop_torque_Nm": 397.2,
+    "peak_penetration_deg": 2.63,
+    "knee_max_deg": 137.6,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": 0.05,
+    "mass": 68.0,
+    "knee_armature": 0.0,
+    "mode": "ramp",
+    "E_J": [
+     12.6,
+     12.5
+    ],
+    "E_max_J": 12.6,
+    "speed_at_stop_rad_s": [
+     2.36,
+     2.36
+    ],
+    "peak_stop_torque_Nm": 395.3,
+    "peak_penetration_deg": 2.62,
+    "knee_max_deg": 137.6,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": 0.05,
+    "mass": 68.5,
+    "knee_armature": 0.553,
+    "mode": "ramp",
+    "E_J": [
+     13.5,
+     13.3
+    ],
+    "E_max_J": 13.5,
+    "speed_at_stop_rad_s": [
+     2.22,
+     2.22
+    ],
+    "peak_stop_torque_Nm": 406.7,
+    "peak_penetration_deg": 2.69,
+    "knee_max_deg": 137.7,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": 0.05,
+    "mass": 68.5,
+    "knee_armature": 0.2018,
+    "mode": "ramp",
+    "E_J": [
+     13.2,
+     13.1
+    ],
+    "E_max_J": 13.2,
+    "speed_at_stop_rad_s": [
+     2.33,
+     2.33
+    ],
+    "peak_stop_torque_Nm": 406.2,
+    "peak_penetration_deg": 2.69,
+    "knee_max_deg": 137.7,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": 0.05,
+    "mass": 68.5,
+    "knee_armature": 0.0,
+    "mode": "ramp",
+    "E_J": [
+     13.1,
+     13.0
+    ],
+    "E_max_J": 13.1,
+    "speed_at_stop_rad_s": [
+     2.4,
+     2.4
+    ],
+    "peak_stop_torque_Nm": 404.2,
+    "peak_penetration_deg": 2.67,
+    "knee_max_deg": 137.7,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": -0.05,
+    "mass": 65.0,
+    "knee_armature": 0.553,
+    "mode": "ramp",
+    "E_J": [
+     6.0,
+     5.9
+    ],
+    "E_max_J": 6.0,
+    "speed_at_stop_rad_s": [
+     1.77,
+     1.76
+    ],
+    "peak_stop_torque_Nm": 288.0,
+    "peak_penetration_deg": 1.98,
+    "knee_max_deg": 137.0,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": -0.05,
+    "mass": 65.0,
+    "knee_armature": 0.2018,
+    "mode": "ramp",
+    "E_J": [
+     6.1,
+     6.0
+    ],
+    "E_max_J": 6.1,
+    "speed_at_stop_rad_s": [
+     1.83,
+     1.83
+    ],
+    "peak_stop_torque_Nm": 282.4,
+    "peak_penetration_deg": 1.94,
+    "knee_max_deg": 136.9,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": -0.05,
+    "mass": 65.0,
+    "knee_armature": 0.0,
+    "mode": "ramp",
+    "E_J": [
+     6.3,
+     6.2
+    ],
+    "E_max_J": 6.3,
+    "speed_at_stop_rad_s": [
+     1.87,
+     1.86
+    ],
+    "peak_stop_torque_Nm": 278.2,
+    "peak_penetration_deg": 1.92,
+    "knee_max_deg": 136.9,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": -0.05,
+    "mass": 68.0,
+    "knee_armature": 0.553,
+    "mode": "ramp",
+    "E_J": [
+     8.9,
+     8.8
+    ],
+    "E_max_J": 8.9,
+    "speed_at_stop_rad_s": [
+     2.07,
+     2.07
+    ],
+    "peak_stop_torque_Nm": 360.1,
+    "peak_penetration_deg": 2.41,
+    "knee_max_deg": 137.4,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": -0.05,
+    "mass": 68.0,
+    "knee_armature": 0.2018,
+    "mode": "ramp",
+    "E_J": [
+     9.2,
+     9.1
+    ],
+    "E_max_J": 9.2,
+    "speed_at_stop_rad_s": [
+     2.15,
+     2.15
+    ],
+    "peak_stop_torque_Nm": 355.0,
+    "peak_penetration_deg": 2.38,
+    "knee_max_deg": 137.4,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": -0.05,
+    "mass": 68.0,
+    "knee_armature": 0.0,
+    "mode": "ramp",
+    "E_J": [
+     9.3,
+     9.3
+    ],
+    "E_max_J": 9.3,
+    "speed_at_stop_rad_s": [
+     2.2,
+     2.2
+    ],
+    "peak_stop_torque_Nm": 351.0,
+    "peak_penetration_deg": 2.35,
+    "knee_max_deg": 137.4,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": -0.05,
+    "mass": 68.5,
+    "knee_armature": 0.553,
+    "mode": "ramp",
+    "E_J": [
+     9.4,
+     9.3
+    ],
+    "E_max_J": 9.4,
+    "speed_at_stop_rad_s": [
+     2.12,
+     2.12
+    ],
+    "peak_stop_torque_Nm": 370.8,
+    "peak_penetration_deg": 2.47,
+    "knee_max_deg": 137.5,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": -0.05,
+    "mass": 68.5,
+    "knee_armature": 0.2018,
+    "mode": "ramp",
+    "E_J": [
+     9.7,
+     9.6
+    ],
+    "E_max_J": 9.7,
+    "speed_at_stop_rad_s": [
+     2.2,
+     2.2
+    ],
+    "peak_stop_torque_Nm": 365.7,
+    "peak_penetration_deg": 2.44,
+    "knee_max_deg": 137.4,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": -0.05,
+    "mass": 68.5,
+    "knee_armature": 0.0,
+    "mode": "ramp",
+    "E_J": [
+     9.9,
+     9.8
+    ],
+    "E_max_J": 9.9,
+    "speed_at_stop_rad_s": [
+     2.25,
+     2.25
+    ],
+    "peak_stop_torque_Nm": 361.7,
+    "peak_penetration_deg": 2.42,
+    "knee_max_deg": 137.4,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.1,
+    "mass": 65.0,
+    "knee_armature": 0.553,
+    "mode": "ramp",
+    "E_J": [
+     33.1,
+     33.0
+    ],
+    "E_max_J": 33.1,
+    "speed_at_stop_rad_s": [
+     3.81,
+     3.75
+    ],
+    "peak_stop_torque_Nm": 708.1,
+    "peak_penetration_deg": 4.68,
+    "knee_max_deg": 139.7,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.1,
+    "mass": 65.0,
+    "knee_armature": 0.2018,
+    "mode": "ramp",
+    "E_J": [
+     32.1,
+     31.7
+    ],
+    "E_max_J": 32.1,
+    "speed_at_stop_rad_s": [
+     3.89,
+     3.95
+    ],
+    "peak_stop_torque_Nm": 694.4,
+    "peak_penetration_deg": 4.59,
+    "knee_max_deg": 139.6,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.1,
+    "mass": 65.0,
+    "knee_armature": 0.0,
+    "mode": "ramp",
+    "E_J": [
+     31.3,
+     31.3
+    ],
+    "E_max_J": 31.3,
+    "speed_at_stop_rad_s": [
+     3.98,
+     4.05
+    ],
+    "peak_stop_torque_Nm": 686.1,
+    "peak_penetration_deg": 4.53,
+    "knee_max_deg": 139.5,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.1,
+    "mass": 68.0,
+    "knee_armature": 0.553,
+    "mode": "ramp",
+    "E_J": [
+     36.1,
+     35.9
+    ],
+    "E_max_J": 36.1,
+    "speed_at_stop_rad_s": [
+     3.92,
+     3.94
+    ],
+    "peak_stop_torque_Nm": 741.6,
+    "peak_penetration_deg": 4.92,
+    "knee_max_deg": 139.9,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.1,
+    "mass": 68.0,
+    "knee_armature": 0.2018,
+    "mode": "ramp",
+    "E_J": [
+     34.7,
+     34.5
+    ],
+    "E_max_J": 34.7,
+    "speed_at_stop_rad_s": [
+     4.04,
+     4.08
+    ],
+    "peak_stop_torque_Nm": 726.6,
+    "peak_penetration_deg": 4.81,
+    "knee_max_deg": 139.8,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.1,
+    "mass": 68.0,
+    "knee_armature": 0.0,
+    "mode": "ramp",
+    "E_J": [
+     34.0,
+     34.2
+    ],
+    "E_max_J": 34.2,
+    "speed_at_stop_rad_s": [
+     4.13,
+     4.1
+    ],
+    "peak_stop_torque_Nm": 718.4,
+    "peak_penetration_deg": 4.75,
+    "knee_max_deg": 139.8,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.1,
+    "mass": 68.5,
+    "knee_armature": 0.553,
+    "mode": "ramp",
+    "E_J": [
+     36.5,
+     36.6
+    ],
+    "E_max_J": 36.6,
+    "speed_at_stop_rad_s": [
+     3.92,
+     3.96
+    ],
+    "peak_stop_torque_Nm": 746.6,
+    "peak_penetration_deg": 4.95,
+    "knee_max_deg": 140.0,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.1,
+    "mass": 68.5,
+    "knee_armature": 0.2018,
+    "mode": "ramp",
+    "E_J": [
+     35.1,
+     35.0
+    ],
+    "E_max_J": 35.1,
+    "speed_at_stop_rad_s": [
+     4.09,
+     4.1
+    ],
+    "peak_stop_torque_Nm": 731.0,
+    "peak_penetration_deg": 4.84,
+    "knee_max_deg": 139.8,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.1,
+    "mass": 68.5,
+    "knee_armature": 0.0,
+    "mode": "ramp",
+    "E_J": [
+     34.8,
+     34.6
+    ],
+    "E_max_J": 34.8,
+    "speed_at_stop_rad_s": [
+     4.16,
+     4.16
+    ],
+    "peak_stop_torque_Nm": 723.1,
+    "peak_penetration_deg": 4.79,
+    "knee_max_deg": 139.8,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.2,
+    "mass": 65.0,
+    "knee_armature": 0.553,
+    "mode": "ramp",
+    "E_J": [
+     30.1,
+     30.0
+    ],
+    "E_max_J": 30.1,
+    "speed_at_stop_rad_s": [
+     3.83,
+     3.84
+    ],
+    "peak_stop_torque_Nm": 708.3,
+    "peak_penetration_deg": 4.68,
+    "knee_max_deg": 139.7,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.2,
+    "mass": 65.0,
+    "knee_armature": 0.2018,
+    "mode": "ramp",
+    "E_J": [
+     29.0,
+     29.1
+    ],
+    "E_max_J": 29.1,
+    "speed_at_stop_rad_s": [
+     3.97,
+     3.98
+    ],
+    "peak_stop_torque_Nm": 696.2,
+    "peak_penetration_deg": 4.6,
+    "knee_max_deg": 139.6,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.2,
+    "mass": 65.0,
+    "knee_armature": 0.0,
+    "mode": "ramp",
+    "E_J": [
+     28.6,
+     28.5
+    ],
+    "E_max_J": 28.6,
+    "speed_at_stop_rad_s": [
+     4.06,
+     4.08
+    ],
+    "peak_stop_torque_Nm": 690.0,
+    "peak_penetration_deg": 4.56,
+    "knee_max_deg": 139.6,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.2,
+    "mass": 68.0,
+    "knee_armature": 0.553,
+    "mode": "ramp",
+    "E_J": [
+     33.3,
+     33.2
+    ],
+    "E_max_J": 33.3,
+    "speed_at_stop_rad_s": [
+     3.96,
+     3.97
+    ],
+    "peak_stop_torque_Nm": 742.6,
+    "peak_penetration_deg": 4.92,
+    "knee_max_deg": 139.9,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.2,
+    "mass": 68.0,
+    "knee_armature": 0.2018,
+    "mode": "ramp",
+    "E_J": [
+     32.0,
+     31.9
+    ],
+    "E_max_J": 32.0,
+    "speed_at_stop_rad_s": [
+     4.11,
+     4.11
+    ],
+    "peak_stop_torque_Nm": 728.3,
+    "peak_penetration_deg": 4.82,
+    "knee_max_deg": 139.8,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.2,
+    "mass": 68.0,
+    "knee_armature": 0.0,
+    "mode": "ramp",
+    "E_J": [
+     31.1,
+     31.0
+    ],
+    "E_max_J": 31.1,
+    "speed_at_stop_rad_s": [
+     4.2,
+     4.2
+    ],
+    "peak_stop_torque_Nm": 717.9,
+    "peak_penetration_deg": 4.75,
+    "knee_max_deg": 139.8,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.2,
+    "mass": 68.5,
+    "knee_armature": 0.553,
+    "mode": "ramp",
+    "E_J": [
+     33.6,
+     33.5
+    ],
+    "E_max_J": 33.6,
+    "speed_at_stop_rad_s": [
+     3.98,
+     3.98
+    ],
+    "peak_stop_torque_Nm": 745.8,
+    "peak_penetration_deg": 4.95,
+    "knee_max_deg": 139.9,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.2,
+    "mass": 68.5,
+    "knee_armature": 0.2018,
+    "mode": "ramp",
+    "E_J": [
+     32.5,
+     32.5
+    ],
+    "E_max_J": 32.5,
+    "speed_at_stop_rad_s": [
+     4.13,
+     4.1
+    ],
+    "peak_stop_torque_Nm": 733.4,
+    "peak_penetration_deg": 4.86,
+    "knee_max_deg": 139.9,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.2,
+    "mass": 68.5,
+    "knee_armature": 0.0,
+    "mode": "ramp",
+    "E_J": [
+     31.6,
+     31.5
+    ],
+    "E_max_J": 31.6,
+    "speed_at_stop_rad_s": [
+     4.22,
+     4.22
+    ],
+    "peak_stop_torque_Nm": 723.2,
+    "peak_penetration_deg": 4.79,
+    "knee_max_deg": 139.8,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.3,
+    "mass": 65.0,
+    "knee_armature": 0.553,
+    "mode": "ramp",
+    "E_J": [
+     7.8,
+     7.7
+    ],
+    "E_max_J": 7.8,
+    "speed_at_stop_rad_s": [
+     3.79,
+     3.79
+    ],
+    "peak_stop_torque_Nm": 336.0,
+    "peak_penetration_deg": 2.26,
+    "knee_max_deg": 137.3,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.3,
+    "mass": 65.0,
+    "knee_armature": 0.2018,
+    "mode": "ramp",
+    "E_J": [
+     8.0,
+     8.0
+    ],
+    "E_max_J": 8.0,
+    "speed_at_stop_rad_s": [
+     3.81,
+     3.81
+    ],
+    "peak_stop_torque_Nm": 343.9,
+    "peak_penetration_deg": 2.31,
+    "knee_max_deg": 137.3,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.3,
+    "mass": 65.0,
+    "knee_armature": 0.0,
+    "mode": "ramp",
+    "E_J": [
+     14.1,
+     14.1
+    ],
+    "E_max_J": 14.1,
+    "speed_at_stop_rad_s": [
+     3.92,
+     3.92
+    ],
+    "peak_stop_torque_Nm": 473.7,
+    "peak_penetration_deg": 3.09,
+    "knee_max_deg": 138.1,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.3,
+    "mass": 68.0,
+    "knee_armature": 0.553,
+    "mode": "ramp",
+    "E_J": [
+     9.2,
+     9.1
+    ],
+    "E_max_J": 9.2,
+    "speed_at_stop_rad_s": [
+     3.96,
+     3.95
+    ],
+    "peak_stop_torque_Nm": 371.6,
+    "peak_penetration_deg": 2.48,
+    "knee_max_deg": 137.5,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.3,
+    "mass": 68.0,
+    "knee_armature": 0.2018,
+    "mode": "ramp",
+    "E_J": [
+     10.9,
+     10.8
+    ],
+    "E_max_J": 10.9,
+    "speed_at_stop_rad_s": [
+     3.94,
+     3.94
+    ],
+    "peak_stop_torque_Nm": 411.6,
+    "peak_penetration_deg": 2.72,
+    "knee_max_deg": 137.7,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.3,
+    "mass": 68.0,
+    "knee_armature": 0.0,
+    "mode": "ramp",
+    "E_J": [
+     16.4,
+     16.3
+    ],
+    "E_max_J": 16.4,
+    "speed_at_stop_rad_s": [
+     4.05,
+     4.05
+    ],
+    "peak_stop_torque_Nm": 514.8,
+    "peak_penetration_deg": 3.34,
+    "knee_max_deg": 138.3,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.3,
+    "mass": 68.5,
+    "knee_armature": 0.553,
+    "mode": "ramp",
+    "E_J": [
+     9.6,
+     9.5
+    ],
+    "E_max_J": 9.6,
+    "speed_at_stop_rad_s": [
+     3.98,
+     3.98
+    ],
+    "peak_stop_torque_Nm": 381.0,
+    "peak_penetration_deg": 2.53,
+    "knee_max_deg": 137.5,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.3,
+    "mass": 68.5,
+    "knee_armature": 0.2018,
+    "mode": "ramp",
+    "E_J": [
+     11.1,
+     11.0
+    ],
+    "E_max_J": 11.1,
+    "speed_at_stop_rad_s": [
+     3.96,
+     3.96
+    ],
+    "peak_stop_torque_Nm": 415.9,
+    "peak_penetration_deg": 2.74,
+    "knee_max_deg": 137.7,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.3,
+    "mass": 68.5,
+    "knee_armature": 0.0,
+    "mode": "ramp",
+    "E_J": [
+     16.4,
+     16.3
+    ],
+    "E_max_J": 16.4,
+    "speed_at_stop_rad_s": [
+     4.08,
+     4.07
+    ],
+    "peak_stop_torque_Nm": 516.2,
+    "peak_penetration_deg": 3.35,
+    "knee_max_deg": 138.3,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": -0.3,
+    "mass": 65.0,
+    "knee_armature": 0.553,
+    "mode": "ramp",
+    "E_J": [
+     8.4,
+     8.4
+    ],
+    "E_max_J": 8.4,
+    "speed_at_stop_rad_s": [
+     1.6,
+     1.6
+    ],
+    "peak_stop_torque_Nm": 345.7,
+    "peak_penetration_deg": 2.32,
+    "knee_max_deg": 137.3,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": -0.3,
+    "mass": 65.0,
+    "knee_armature": 0.2018,
+    "mode": "ramp",
+    "E_J": [
+     8.0,
+     8.0
+    ],
+    "E_max_J": 8.0,
+    "speed_at_stop_rad_s": [
+     1.6,
+     1.6
+    ],
+    "peak_stop_torque_Nm": 329.1,
+    "peak_penetration_deg": 2.22,
+    "knee_max_deg": 137.2,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": -0.3,
+    "mass": 65.0,
+    "knee_armature": 0.0,
+    "mode": "ramp",
+    "E_J": [
+     8.0,
+     8.0
+    ],
+    "E_max_J": 8.0,
+    "speed_at_stop_rad_s": [
+     1.6,
+     1.6
+    ],
+    "peak_stop_torque_Nm": 320.7,
+    "peak_penetration_deg": 2.17,
+    "knee_max_deg": 137.2,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": -0.3,
+    "mass": 68.0,
+    "knee_armature": 0.553,
+    "mode": "ramp",
+    "E_J": [
+     8.6,
+     8.6
+    ],
+    "E_max_J": 8.6,
+    "speed_at_stop_rad_s": [
+     1.64,
+     1.64
+    ],
+    "peak_stop_torque_Nm": 357.5,
+    "peak_penetration_deg": 2.39,
+    "knee_max_deg": 137.4,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": -0.3,
+    "mass": 68.0,
+    "knee_armature": 0.2018,
+    "mode": "ramp",
+    "E_J": [
+     8.4,
+     8.3
+    ],
+    "E_max_J": 8.4,
+    "speed_at_stop_rad_s": [
+     1.64,
+     1.64
+    ],
+    "peak_stop_torque_Nm": 340.2,
+    "peak_penetration_deg": 2.29,
+    "knee_max_deg": 137.3,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": -0.3,
+    "mass": 68.0,
+    "knee_armature": 0.0,
+    "mode": "ramp",
+    "E_J": [
+     8.2,
+     8.2
+    ],
+    "E_max_J": 8.2,
+    "speed_at_stop_rad_s": [
+     1.64,
+     1.64
+    ],
+    "peak_stop_torque_Nm": 332.8,
+    "peak_penetration_deg": 2.25,
+    "knee_max_deg": 137.2,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": -0.3,
+    "mass": 68.5,
+    "knee_armature": 0.553,
+    "mode": "ramp",
+    "E_J": [
+     8.8,
+     8.7
+    ],
+    "E_max_J": 8.8,
+    "speed_at_stop_rad_s": [
+     1.64,
+     1.64
+    ],
+    "peak_stop_torque_Nm": 358.6,
+    "peak_penetration_deg": 2.4,
+    "knee_max_deg": 137.4,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": -0.3,
+    "mass": 68.5,
+    "knee_armature": 0.2018,
+    "mode": "ramp",
+    "E_J": [
+     8.4,
+     8.4
+    ],
+    "E_max_J": 8.4,
+    "speed_at_stop_rad_s": [
+     1.65,
+     1.65
+    ],
+    "peak_stop_torque_Nm": 342.5,
+    "peak_penetration_deg": 2.3,
+    "knee_max_deg": 137.3,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": -0.3,
+    "mass": 68.5,
+    "knee_armature": 0.0,
+    "mode": "ramp",
+    "E_J": [
+     8.3,
+     8.3
+    ],
+    "E_max_J": 8.3,
+    "speed_at_stop_rad_s": [
+     1.64,
+     1.58
+    ],
+    "peak_stop_torque_Nm": 333.3,
+    "peak_penetration_deg": 2.25,
+    "knee_max_deg": 137.2,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": -0.15,
+    "mass": 65.0,
+    "knee_armature": 0.553,
+    "mode": "ramp",
+    "E_J": [
+     8.9,
+     8.8
+    ],
+    "E_max_J": 8.9,
+    "speed_at_stop_rad_s": [
+     1.67,
+     1.67
+    ],
+    "peak_stop_torque_Nm": 357.3,
+    "peak_penetration_deg": 2.39,
+    "knee_max_deg": 137.4,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": -0.15,
+    "mass": 65.0,
+    "knee_armature": 0.2018,
+    "mode": "ramp",
+    "E_J": [
+     8.6,
+     8.6
+    ],
+    "E_max_J": 8.6,
+    "speed_at_stop_rad_s": [
+     1.68,
+     1.68
+    ],
+    "peak_stop_torque_Nm": 340.9,
+    "peak_penetration_deg": 2.29,
+    "knee_max_deg": 137.3,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": -0.15,
+    "mass": 65.0,
+    "knee_armature": 0.0,
+    "mode": "ramp",
+    "E_J": [
+     8.4,
+     8.4
+    ],
+    "E_max_J": 8.4,
+    "speed_at_stop_rad_s": [
+     1.68,
+     1.68
+    ],
+    "peak_stop_torque_Nm": 331.1,
+    "peak_penetration_deg": 2.24,
+    "knee_max_deg": 137.2,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": -0.15,
+    "mass": 68.0,
+    "knee_armature": 0.553,
+    "mode": "ramp",
+    "E_J": [
+     9.1,
+     9.0
+    ],
+    "E_max_J": 9.1,
+    "speed_at_stop_rad_s": [
+     1.69,
+     1.7
+    ],
+    "peak_stop_torque_Nm": 371.3,
+    "peak_penetration_deg": 2.48,
+    "knee_max_deg": 137.5,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": -0.15,
+    "mass": 68.0,
+    "knee_armature": 0.2018,
+    "mode": "ramp",
+    "E_J": [
+     8.7,
+     8.7
+    ],
+    "E_max_J": 8.7,
+    "speed_at_stop_rad_s": [
+     1.66,
+     1.71
+    ],
+    "peak_stop_torque_Nm": 354.0,
+    "peak_penetration_deg": 2.37,
+    "knee_max_deg": 137.4,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": -0.15,
+    "mass": 68.0,
+    "knee_armature": 0.0,
+    "mode": "ramp",
+    "E_J": [
+     8.4,
+     8.4
+    ],
+    "E_max_J": 8.4,
+    "speed_at_stop_rad_s": [
+     1.73,
+     1.72
+    ],
+    "peak_stop_torque_Nm": 344.5,
+    "peak_penetration_deg": 2.32,
+    "knee_max_deg": 137.3,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": -0.15,
+    "mass": 68.5,
+    "knee_armature": 0.553,
+    "mode": "ramp",
+    "E_J": [
+     9.1,
+     9.1
+    ],
+    "E_max_J": 9.1,
+    "speed_at_stop_rad_s": [
+     1.71,
+     1.71
+    ],
+    "peak_stop_torque_Nm": 371.1,
+    "peak_penetration_deg": 2.48,
+    "knee_max_deg": 137.5,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": -0.15,
+    "mass": 68.5,
+    "knee_armature": 0.2018,
+    "mode": "ramp",
+    "E_J": [
+     8.9,
+     8.9
+    ],
+    "E_max_J": 8.9,
+    "speed_at_stop_rad_s": [
+     1.71,
+     1.72
+    ],
+    "peak_stop_torque_Nm": 357.2,
+    "peak_penetration_deg": 2.39,
+    "knee_max_deg": 137.4,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": -0.15,
+    "mass": 68.5,
+    "knee_armature": 0.0,
+    "mode": "ramp",
+    "E_J": [
+     8.6,
+     8.5
+    ],
+    "E_max_J": 8.6,
+    "speed_at_stop_rad_s": [
+     1.7,
+     1.73
+    ],
+    "peak_stop_torque_Nm": 346.6,
+    "peak_penetration_deg": 2.33,
+    "knee_max_deg": 137.3,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": 0.15,
+    "mass": 65.0,
+    "knee_armature": 0.553,
+    "mode": "ramp",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 89.9,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": 0.15,
+    "mass": 65.0,
+    "knee_armature": 0.2018,
+    "mode": "ramp",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 89.9,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": 0.15,
+    "mass": 65.0,
+    "knee_armature": 0.0,
+    "mode": "ramp",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 89.9,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": 0.15,
+    "mass": 68.0,
+    "knee_armature": 0.553,
+    "mode": "ramp",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 89.9,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": 0.15,
+    "mass": 68.0,
+    "knee_armature": 0.2018,
+    "mode": "ramp",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 89.9,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": 0.15,
+    "mass": 68.0,
+    "knee_armature": 0.0,
+    "mode": "ramp",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 89.9,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": 0.15,
+    "mass": 68.5,
+    "knee_armature": 0.553,
+    "mode": "ramp",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 89.9,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": 0.15,
+    "mass": 68.5,
+    "knee_armature": 0.2018,
+    "mode": "ramp",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 89.9,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": 0.15,
+    "mass": 68.5,
+    "knee_armature": 0.0,
+    "mode": "ramp",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 89.9,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": 0.3,
+    "mass": 65.0,
+    "knee_armature": 0.553,
+    "mode": "ramp",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 89.9,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": 0.3,
+    "mass": 65.0,
+    "knee_armature": 0.2018,
+    "mode": "ramp",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 89.9,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": 0.3,
+    "mass": 65.0,
+    "knee_armature": 0.0,
+    "mode": "ramp",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 89.8,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": 0.3,
+    "mass": 68.0,
+    "knee_armature": 0.553,
+    "mode": "ramp",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 89.9,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": 0.3,
+    "mass": 68.0,
+    "knee_armature": 0.2018,
+    "mode": "ramp",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 89.9,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": 0.3,
+    "mass": 68.0,
+    "knee_armature": 0.0,
+    "mode": "ramp",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 89.8,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": 0.3,
+    "mass": 68.5,
+    "knee_armature": 0.553,
+    "mode": "ramp",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 89.9,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": 0.3,
+    "mass": 68.5,
+    "knee_armature": 0.2018,
+    "mode": "ramp",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 89.9,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": 0.3,
+    "mass": 68.5,
+    "knee_armature": 0.0,
+    "mode": "ramp",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 89.8,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   }
+  ]
+ },
+ "ramp_knee_only": {
+  "summary": {
+   "crouch_collapse": {
+    "n": 27,
+    "E_max_J": 17.5,
+    "E_min_J": 10.0,
+    "peak_torque_Nm": 548.3,
+    "pen_max_deg": 3.56,
+    "n_fail": 0
+   },
+   "forward_fall": {
+    "n": 27,
+    "E_max_J": 40.1,
+    "E_min_J": 6.5,
+    "peak_torque_Nm": 720.7,
+    "pen_max_deg": 4.77,
+    "n_fail": 0
+   },
+   "kneel_tip": {
+    "n": 36,
+    "E_max_J": 37.9,
+    "E_min_J": 0.0,
+    "peak_torque_Nm": 790.0,
+    "pen_max_deg": 5.26,
+    "n_fail": 0
+   },
+   "all": {
+    "n": 90,
+    "n_fail": 0,
+    "E_max_J": 40.1,
+    "zone_cmd_max_Nm": 50.0
+   }
+  },
+  "rows": [
+   {
+    "case": "crouch_collapse",
+    "lean": 0.0,
+    "mass": 65.0,
+    "knee_armature": 0.553,
+    "mode": "ramp_knee_only",
+    "E_J": [
+     12.0,
+     11.8
+    ],
+    "E_max_J": 12.0,
+    "speed_at_stop_rad_s": [
+     2.73,
+     2.73
+    ],
+    "peak_stop_torque_Nm": 449.6,
+    "peak_penetration_deg": 2.95,
+    "knee_max_deg": 137.9,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": 0.0,
+    "mass": 65.0,
+    "knee_armature": 0.2018,
+    "mode": "ramp_knee_only",
+    "E_J": [
+     11.8,
+     11.6
+    ],
+    "E_max_J": 11.8,
+    "speed_at_stop_rad_s": [
+     2.85,
+     2.85
+    ],
+    "peak_stop_torque_Nm": 439.4,
+    "peak_penetration_deg": 2.89,
+    "knee_max_deg": 137.9,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": 0.0,
+    "mass": 65.0,
+    "knee_armature": 0.0,
+    "mode": "ramp_knee_only",
+    "E_J": [
+     11.7,
+     11.5
+    ],
+    "E_max_J": 11.7,
+    "speed_at_stop_rad_s": [
+     2.93,
+     2.93
+    ],
+    "peak_stop_torque_Nm": 432.6,
+    "peak_penetration_deg": 2.84,
+    "knee_max_deg": 137.8,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": 0.0,
+    "mass": 68.0,
+    "knee_armature": 0.553,
+    "mode": "ramp_knee_only",
+    "E_J": [
+     14.5,
+     14.3
+    ],
+    "E_max_J": 14.5,
+    "speed_at_stop_rad_s": [
+     2.94,
+     2.94
+    ],
+    "peak_stop_torque_Nm": 498.3,
+    "peak_penetration_deg": 3.24,
+    "knee_max_deg": 138.2,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": 0.0,
+    "mass": 68.0,
+    "knee_armature": 0.2018,
+    "mode": "ramp_knee_only",
+    "E_J": [
+     14.2,
+     14.1
+    ],
+    "E_max_J": 14.2,
+    "speed_at_stop_rad_s": [
+     3.08,
+     3.08
+    ],
+    "peak_stop_torque_Nm": 489.5,
+    "peak_penetration_deg": 3.19,
+    "knee_max_deg": 138.2,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": 0.0,
+    "mass": 68.0,
+    "knee_armature": 0.0,
+    "mode": "ramp_knee_only",
+    "E_J": [
+     14.3,
+     14.1
+    ],
+    "E_max_J": 14.3,
+    "speed_at_stop_rad_s": [
+     3.17,
+     3.17
+    ],
+    "peak_stop_torque_Nm": 483.1,
+    "peak_penetration_deg": 3.15,
+    "knee_max_deg": 138.1,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": 0.0,
+    "mass": 68.5,
+    "knee_armature": 0.553,
+    "mode": "ramp_knee_only",
+    "E_J": [
+     14.9,
+     14.8
+    ],
+    "E_max_J": 14.9,
+    "speed_at_stop_rad_s": [
+     2.98,
+     2.98
+    ],
+    "peak_stop_torque_Nm": 506.6,
+    "peak_penetration_deg": 3.29,
+    "knee_max_deg": 138.3,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": 0.0,
+    "mass": 68.5,
+    "knee_armature": 0.2018,
+    "mode": "ramp_knee_only",
+    "E_J": [
+     14.6,
+     14.5
+    ],
+    "E_max_J": 14.6,
+    "speed_at_stop_rad_s": [
+     3.11,
+     3.11
+    ],
+    "peak_stop_torque_Nm": 495.2,
+    "peak_penetration_deg": 3.22,
+    "knee_max_deg": 138.2,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": 0.0,
+    "mass": 68.5,
+    "knee_armature": 0.0,
+    "mode": "ramp_knee_only",
+    "E_J": [
+     14.7,
+     14.5
+    ],
+    "E_max_J": 14.7,
+    "speed_at_stop_rad_s": [
+     3.21,
+     3.21
+    ],
+    "peak_stop_torque_Nm": 491.8,
+    "peak_penetration_deg": 3.2,
+    "knee_max_deg": 138.2,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": 0.05,
+    "mass": 65.0,
+    "knee_armature": 0.553,
+    "mode": "ramp_knee_only",
+    "E_J": [
+     10.0,
+     9.9
+    ],
+    "E_max_J": 10.0,
+    "speed_at_stop_rad_s": [
+     2.55,
+     2.55
+    ],
+    "peak_stop_torque_Nm": 397.6,
+    "peak_penetration_deg": 2.63,
+    "knee_max_deg": 137.6,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": 0.05,
+    "mass": 65.0,
+    "knee_armature": 0.2018,
+    "mode": "ramp_knee_only",
+    "E_J": [
+     10.5,
+     10.4
+    ],
+    "E_max_J": 10.5,
+    "speed_at_stop_rad_s": [
+     2.72,
+     2.71
+    ],
+    "peak_stop_torque_Nm": 397.1,
+    "peak_penetration_deg": 2.63,
+    "knee_max_deg": 137.6,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": 0.05,
+    "mass": 65.0,
+    "knee_armature": 0.0,
+    "mode": "ramp_knee_only",
+    "E_J": [
+     10.9,
+     10.8
+    ],
+    "E_max_J": 10.9,
+    "speed_at_stop_rad_s": [
+     2.82,
+     2.82
+    ],
+    "peak_stop_torque_Nm": 395.0,
+    "peak_penetration_deg": 2.62,
+    "knee_max_deg": 137.6,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": 0.05,
+    "mass": 68.0,
+    "knee_armature": 0.553,
+    "mode": "ramp_knee_only",
+    "E_J": [
+     12.8,
+     12.5
+    ],
+    "E_max_J": 12.8,
+    "speed_at_stop_rad_s": [
+     2.8,
+     2.8
+    ],
+    "peak_stop_torque_Nm": 451.5,
+    "peak_penetration_deg": 2.96,
+    "knee_max_deg": 138.0,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": 0.05,
+    "mass": 68.0,
+    "knee_armature": 0.2018,
+    "mode": "ramp_knee_only",
+    "E_J": [
+     13.1,
+     12.9
+    ],
+    "E_max_J": 13.1,
+    "speed_at_stop_rad_s": [
+     2.97,
+     2.97
+    ],
+    "peak_stop_torque_Nm": 449.8,
+    "peak_penetration_deg": 2.95,
+    "knee_max_deg": 137.9,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": 0.05,
+    "mass": 68.0,
+    "knee_armature": 0.0,
+    "mode": "ramp_knee_only",
+    "E_J": [
+     13.4,
+     13.3
+    ],
+    "E_max_J": 13.4,
+    "speed_at_stop_rad_s": [
+     3.07,
+     3.07
+    ],
+    "peak_stop_torque_Nm": 447.1,
+    "peak_penetration_deg": 2.93,
+    "knee_max_deg": 137.9,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": 0.05,
+    "mass": 68.5,
+    "knee_armature": 0.553,
+    "mode": "ramp_knee_only",
+    "E_J": [
+     13.1,
+     12.9
+    ],
+    "E_max_J": 13.1,
+    "speed_at_stop_rad_s": [
+     2.84,
+     2.84
+    ],
+    "peak_stop_torque_Nm": 460.4,
+    "peak_penetration_deg": 3.01,
+    "knee_max_deg": 138.0,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": 0.05,
+    "mass": 68.5,
+    "knee_armature": 0.2018,
+    "mode": "ramp_knee_only",
+    "E_J": [
+     13.3,
+     13.1
+    ],
+    "E_max_J": 13.3,
+    "speed_at_stop_rad_s": [
+     2.99,
+     2.99
+    ],
+    "peak_stop_torque_Nm": 455.0,
+    "peak_penetration_deg": 2.98,
+    "knee_max_deg": 138.0,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": 0.05,
+    "mass": 68.5,
+    "knee_armature": 0.0,
+    "mode": "ramp_knee_only",
+    "E_J": [
+     14.0,
+     13.8
+    ],
+    "E_max_J": 14.0,
+    "speed_at_stop_rad_s": [
+     3.11,
+     3.11
+    ],
+    "peak_stop_torque_Nm": 455.0,
+    "peak_penetration_deg": 2.98,
+    "knee_max_deg": 138.0,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": -0.05,
+    "mass": 65.0,
+    "knee_armature": 0.553,
+    "mode": "ramp_knee_only",
+    "E_J": [
+     14.5,
+     14.4
+    ],
+    "E_max_J": 14.5,
+    "speed_at_stop_rad_s": [
+     2.97,
+     2.97
+    ],
+    "peak_stop_torque_Nm": 497.6,
+    "peak_penetration_deg": 3.24,
+    "knee_max_deg": 138.2,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": -0.05,
+    "mass": 65.0,
+    "knee_armature": 0.2018,
+    "mode": "ramp_knee_only",
+    "E_J": [
+     14.2,
+     14.2
+    ],
+    "E_max_J": 14.2,
+    "speed_at_stop_rad_s": [
+     3.11,
+     3.11
+    ],
+    "peak_stop_torque_Nm": 488.5,
+    "peak_penetration_deg": 3.18,
+    "knee_max_deg": 138.2,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": -0.05,
+    "mass": 65.0,
+    "knee_armature": 0.0,
+    "mode": "ramp_knee_only",
+    "E_J": [
+     14.3,
+     14.2
+    ],
+    "E_max_J": 14.3,
+    "speed_at_stop_rad_s": [
+     3.22,
+     3.22
+    ],
+    "peak_stop_torque_Nm": 484.1,
+    "peak_penetration_deg": 3.15,
+    "knee_max_deg": 138.2,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": -0.05,
+    "mass": 68.0,
+    "knee_armature": 0.553,
+    "mode": "ramp_knee_only",
+    "E_J": [
+     17.0,
+     16.9
+    ],
+    "E_max_J": 17.0,
+    "speed_at_stop_rad_s": [
+     3.16,
+     3.16
+    ],
+    "peak_stop_torque_Nm": 541.1,
+    "peak_penetration_deg": 3.51,
+    "knee_max_deg": 138.5,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": -0.05,
+    "mass": 68.0,
+    "knee_armature": 0.2018,
+    "mode": "ramp_knee_only",
+    "E_J": [
+     16.9,
+     16.8
+    ],
+    "E_max_J": 16.9,
+    "speed_at_stop_rad_s": [
+     3.33,
+     3.32
+    ],
+    "peak_stop_torque_Nm": 534.7,
+    "peak_penetration_deg": 3.47,
+    "knee_max_deg": 138.5,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": -0.05,
+    "mass": 68.0,
+    "knee_armature": 0.0,
+    "mode": "ramp_knee_only",
+    "E_J": [
+     17.0,
+     16.9
+    ],
+    "E_max_J": 17.0,
+    "speed_at_stop_rad_s": [
+     3.43,
+     3.43
+    ],
+    "peak_stop_torque_Nm": 530.5,
+    "peak_penetration_deg": 3.44,
+    "knee_max_deg": 138.4,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": -0.05,
+    "mass": 68.5,
+    "knee_armature": 0.553,
+    "mode": "ramp_knee_only",
+    "E_J": [
+     17.5,
+     17.4
+    ],
+    "E_max_J": 17.5,
+    "speed_at_stop_rad_s": [
+     3.2,
+     3.2
+    ],
+    "peak_stop_torque_Nm": 548.3,
+    "peak_penetration_deg": 3.56,
+    "knee_max_deg": 138.6,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": -0.05,
+    "mass": 68.5,
+    "knee_armature": 0.2018,
+    "mode": "ramp_knee_only",
+    "E_J": [
+     17.4,
+     17.2
+    ],
+    "E_max_J": 17.4,
+    "speed_at_stop_rad_s": [
+     3.35,
+     3.35
+    ],
+    "peak_stop_torque_Nm": 540.1,
+    "peak_penetration_deg": 3.51,
+    "knee_max_deg": 138.5,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "crouch_collapse",
+    "lean": -0.05,
+    "mass": 68.5,
+    "knee_armature": 0.0,
+    "mode": "ramp_knee_only",
+    "E_J": [
+     17.2,
+     17.1
+    ],
+    "E_max_J": 17.2,
+    "speed_at_stop_rad_s": [
+     3.46,
+     3.46
+    ],
+    "peak_stop_torque_Nm": 535.9,
+    "peak_penetration_deg": 3.48,
+    "knee_max_deg": 138.5,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.1,
+    "mass": 65.0,
+    "knee_armature": 0.553,
+    "mode": "ramp_knee_only",
+    "E_J": [
+     32.7,
+     32.4
+    ],
+    "E_max_J": 32.7,
+    "speed_at_stop_rad_s": [
+     4.02,
+     4.03
+    ],
+    "peak_stop_torque_Nm": 671.2,
+    "peak_penetration_deg": 4.42,
+    "knee_max_deg": 139.4,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.1,
+    "mass": 65.0,
+    "knee_armature": 0.2018,
+    "mode": "ramp_knee_only",
+    "E_J": [
+     32.8,
+     32.7
+    ],
+    "E_max_J": 32.8,
+    "speed_at_stop_rad_s": [
+     4.23,
+     4.23
+    ],
+    "peak_stop_torque_Nm": 667.6,
+    "peak_penetration_deg": 4.4,
+    "knee_max_deg": 139.4,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.1,
+    "mass": 65.0,
+    "knee_armature": 0.0,
+    "mode": "ramp_knee_only",
+    "E_J": [
+     34.2,
+     33.9
+    ],
+    "E_max_J": 34.2,
+    "speed_at_stop_rad_s": [
+     4.43,
+     4.43
+    ],
+    "peak_stop_torque_Nm": 671.2,
+    "peak_penetration_deg": 4.42,
+    "knee_max_deg": 139.4,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.1,
+    "mass": 68.0,
+    "knee_armature": 0.553,
+    "mode": "ramp_knee_only",
+    "E_J": [
+     36.6,
+     36.3
+    ],
+    "E_max_J": 36.6,
+    "speed_at_stop_rad_s": [
+     4.2,
+     4.19
+    ],
+    "peak_stop_torque_Nm": 712.4,
+    "peak_penetration_deg": 4.71,
+    "knee_max_deg": 139.7,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.1,
+    "mass": 68.0,
+    "knee_armature": 0.2018,
+    "mode": "ramp_knee_only",
+    "E_J": [
+     36.6,
+     36.7
+    ],
+    "E_max_J": 36.7,
+    "speed_at_stop_rad_s": [
+     4.41,
+     4.38
+    ],
+    "peak_stop_torque_Nm": 711.9,
+    "peak_penetration_deg": 4.71,
+    "knee_max_deg": 139.7,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.1,
+    "mass": 68.0,
+    "knee_armature": 0.0,
+    "mode": "ramp_knee_only",
+    "E_J": [
+     38.5,
+     38.3
+    ],
+    "E_max_J": 38.5,
+    "speed_at_stop_rad_s": [
+     4.58,
+     4.58
+    ],
+    "peak_stop_torque_Nm": 716.0,
+    "peak_penetration_deg": 4.74,
+    "knee_max_deg": 139.7,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.1,
+    "mass": 68.5,
+    "knee_armature": 0.553,
+    "mode": "ramp_knee_only",
+    "E_J": [
+     37.3,
+     37.1
+    ],
+    "E_max_J": 37.3,
+    "speed_at_stop_rad_s": [
+     4.22,
+     4.22
+    ],
+    "peak_stop_torque_Nm": 719.4,
+    "peak_penetration_deg": 4.76,
+    "knee_max_deg": 139.8,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.1,
+    "mass": 68.5,
+    "knee_armature": 0.2018,
+    "mode": "ramp_knee_only",
+    "E_J": [
+     37.4,
+     37.2
+    ],
+    "E_max_J": 37.4,
+    "speed_at_stop_rad_s": [
+     4.44,
+     4.42
+    ],
+    "peak_stop_torque_Nm": 718.5,
+    "peak_penetration_deg": 4.75,
+    "knee_max_deg": 139.8,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.1,
+    "mass": 68.5,
+    "knee_armature": 0.0,
+    "mode": "ramp_knee_only",
+    "E_J": [
+     39.1,
+     39.0
+    ],
+    "E_max_J": 39.1,
+    "speed_at_stop_rad_s": [
+     4.6,
+     4.63
+    ],
+    "peak_stop_torque_Nm": 720.7,
+    "peak_penetration_deg": 4.77,
+    "knee_max_deg": 139.8,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.2,
+    "mass": 65.0,
+    "knee_armature": 0.553,
+    "mode": "ramp_knee_only",
+    "E_J": [
+     25.3,
+     25.1
+    ],
+    "E_max_J": 25.3,
+    "speed_at_stop_rad_s": [
+     3.68,
+     3.68
+    ],
+    "peak_stop_torque_Nm": 636.0,
+    "peak_penetration_deg": 4.18,
+    "knee_max_deg": 139.2,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.2,
+    "mass": 65.0,
+    "knee_armature": 0.2018,
+    "mode": "ramp_knee_only",
+    "E_J": [
+     26.9,
+     26.6
+    ],
+    "E_max_J": 26.9,
+    "speed_at_stop_rad_s": [
+     3.95,
+     3.95
+    ],
+    "peak_stop_torque_Nm": 638.7,
+    "peak_penetration_deg": 4.2,
+    "knee_max_deg": 139.2,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.2,
+    "mass": 65.0,
+    "knee_armature": 0.0,
+    "mode": "ramp_knee_only",
+    "E_J": [
+     33.1,
+     32.9
+    ],
+    "E_max_J": 33.1,
+    "speed_at_stop_rad_s": [
+     4.18,
+     4.17
+    ],
+    "peak_stop_torque_Nm": 641.8,
+    "peak_penetration_deg": 4.22,
+    "knee_max_deg": 139.2,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.2,
+    "mass": 68.0,
+    "knee_armature": 0.553,
+    "mode": "ramp_knee_only",
+    "E_J": [
+     28.9,
+     28.5
+    ],
+    "E_max_J": 28.9,
+    "speed_at_stop_rad_s": [
+     3.88,
+     3.88
+    ],
+    "peak_stop_torque_Nm": 678.4,
+    "peak_penetration_deg": 4.47,
+    "knee_max_deg": 139.5,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.2,
+    "mass": 68.0,
+    "knee_armature": 0.2018,
+    "mode": "ramp_knee_only",
+    "E_J": [
+     30.4,
+     30.1
+    ],
+    "E_max_J": 30.4,
+    "speed_at_stop_rad_s": [
+     4.13,
+     4.13
+    ],
+    "peak_stop_torque_Nm": 680.2,
+    "peak_penetration_deg": 4.49,
+    "knee_max_deg": 139.5,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.2,
+    "mass": 68.0,
+    "knee_armature": 0.0,
+    "mode": "ramp_knee_only",
+    "E_J": [
+     38.5,
+     38.1
+    ],
+    "E_max_J": 38.5,
+    "speed_at_stop_rad_s": [
+     4.38,
+     4.36
+    ],
+    "peak_stop_torque_Nm": 687.6,
+    "peak_penetration_deg": 4.54,
+    "knee_max_deg": 139.5,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.2,
+    "mass": 68.5,
+    "knee_armature": 0.553,
+    "mode": "ramp_knee_only",
+    "E_J": [
+     29.6,
+     29.3
+    ],
+    "E_max_J": 29.6,
+    "speed_at_stop_rad_s": [
+     3.91,
+     3.91
+    ],
+    "peak_stop_torque_Nm": 685.4,
+    "peak_penetration_deg": 4.52,
+    "knee_max_deg": 139.5,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.2,
+    "mass": 68.5,
+    "knee_armature": 0.2018,
+    "mode": "ramp_knee_only",
+    "E_J": [
+     31.0,
+     30.7
+    ],
+    "E_max_J": 31.0,
+    "speed_at_stop_rad_s": [
+     4.15,
+     4.15
+    ],
+    "peak_stop_torque_Nm": 687.2,
+    "peak_penetration_deg": 4.54,
+    "knee_max_deg": 139.5,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.2,
+    "mass": 68.5,
+    "knee_armature": 0.0,
+    "mode": "ramp_knee_only",
+    "E_J": [
+     40.1,
+     39.9
+    ],
+    "E_max_J": 40.1,
+    "speed_at_stop_rad_s": [
+     4.35,
+     4.38
+    ],
+    "peak_stop_torque_Nm": 696.5,
+    "peak_penetration_deg": 4.6,
+    "knee_max_deg": 139.6,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.3,
+    "mass": 65.0,
+    "knee_armature": 0.553,
+    "mode": "ramp_knee_only",
+    "E_J": [
+     6.5,
+     6.4
+    ],
+    "E_max_J": 6.5,
+    "speed_at_stop_rad_s": [
+     3.39,
+     3.39
+    ],
+    "peak_stop_torque_Nm": 317.5,
+    "peak_penetration_deg": 2.15,
+    "knee_max_deg": 137.2,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.3,
+    "mass": 65.0,
+    "knee_armature": 0.2018,
+    "mode": "ramp_knee_only",
+    "E_J": [
+     8.7,
+     8.6
+    ],
+    "E_max_J": 8.7,
+    "speed_at_stop_rad_s": [
+     3.74,
+     3.73
+    ],
+    "peak_stop_torque_Nm": 372.0,
+    "peak_penetration_deg": 2.48,
+    "knee_max_deg": 137.5,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.3,
+    "mass": 65.0,
+    "knee_armature": 0.0,
+    "mode": "ramp_knee_only",
+    "E_J": [
+     9.5,
+     9.4
+    ],
+    "E_max_J": 9.5,
+    "speed_at_stop_rad_s": [
+     3.97,
+     3.97
+    ],
+    "peak_stop_torque_Nm": 386.3,
+    "peak_penetration_deg": 2.57,
+    "knee_max_deg": 137.6,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.3,
+    "mass": 68.0,
+    "knee_armature": 0.553,
+    "mode": "ramp_knee_only",
+    "E_J": [
+     12.6,
+     12.5
+    ],
+    "E_max_J": 12.6,
+    "speed_at_stop_rad_s": [
+     3.6,
+     3.6
+    ],
+    "peak_stop_torque_Nm": 461.9,
+    "peak_penetration_deg": 3.02,
+    "knee_max_deg": 138.0,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.3,
+    "mass": 68.0,
+    "knee_armature": 0.2018,
+    "mode": "ramp_knee_only",
+    "E_J": [
+     13.6,
+     13.4
+    ],
+    "E_max_J": 13.6,
+    "speed_at_stop_rad_s": [
+     3.94,
+     3.94
+    ],
+    "peak_stop_torque_Nm": 477.0,
+    "peak_penetration_deg": 3.11,
+    "knee_max_deg": 138.1,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.3,
+    "mass": 68.0,
+    "knee_armature": 0.0,
+    "mode": "ramp_knee_only",
+    "E_J": [
+     13.3,
+     13.2
+    ],
+    "E_max_J": 13.3,
+    "speed_at_stop_rad_s": [
+     4.17,
+     4.16
+    ],
+    "peak_stop_torque_Nm": 464.4,
+    "peak_penetration_deg": 3.04,
+    "knee_max_deg": 138.0,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.3,
+    "mass": 68.5,
+    "knee_armature": 0.553,
+    "mode": "ramp_knee_only",
+    "E_J": [
+     13.3,
+     13.1
+    ],
+    "E_max_J": 13.3,
+    "speed_at_stop_rad_s": [
+     3.63,
+     3.63
+    ],
+    "peak_stop_torque_Nm": 475.3,
+    "peak_penetration_deg": 3.1,
+    "knee_max_deg": 138.1,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.3,
+    "mass": 68.5,
+    "knee_armature": 0.2018,
+    "mode": "ramp_knee_only",
+    "E_J": [
+     14.0,
+     13.9
+    ],
+    "E_max_J": 14.0,
+    "speed_at_stop_rad_s": [
+     3.97,
+     3.97
+    ],
+    "peak_stop_torque_Nm": 486.2,
+    "peak_penetration_deg": 3.17,
+    "knee_max_deg": 138.2,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "forward_fall",
+    "lean": 0.3,
+    "mass": 68.5,
+    "knee_armature": 0.0,
+    "mode": "ramp_knee_only",
+    "E_J": [
+     14.1,
+     14.0
+    ],
+    "E_max_J": 14.1,
+    "speed_at_stop_rad_s": [
+     4.19,
+     4.19
+    ],
+    "peak_stop_torque_Nm": 479.4,
+    "peak_penetration_deg": 3.13,
+    "knee_max_deg": 138.1,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": -0.3,
+    "mass": 65.0,
+    "knee_armature": 0.553,
+    "mode": "ramp_knee_only",
+    "E_J": [
+     34.7,
+     34.7
+    ],
+    "E_max_J": 34.7,
+    "speed_at_stop_rad_s": [
+     2.81,
+     2.82
+    ],
+    "peak_stop_torque_Nm": 757.2,
+    "peak_penetration_deg": 5.03,
+    "knee_max_deg": 140.0,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": -0.3,
+    "mass": 65.0,
+    "knee_armature": 0.2018,
+    "mode": "ramp_knee_only",
+    "E_J": [
+     34.2,
+     34.1
+    ],
+    "E_max_J": 34.2,
+    "speed_at_stop_rad_s": [
+     2.89,
+     2.89
+    ],
+    "peak_stop_torque_Nm": 750.8,
+    "peak_penetration_deg": 4.98,
+    "knee_max_deg": 140.0,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": -0.3,
+    "mass": 65.0,
+    "knee_armature": 0.0,
+    "mode": "ramp_knee_only",
+    "E_J": [
+     34.0,
+     33.8
+    ],
+    "E_max_J": 34.0,
+    "speed_at_stop_rad_s": [
+     2.9,
+     2.89
+    ],
+    "peak_stop_torque_Nm": 746.5,
+    "peak_penetration_deg": 4.95,
+    "knee_max_deg": 140.0,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": -0.3,
+    "mass": 68.0,
+    "knee_armature": 0.553,
+    "mode": "ramp_knee_only",
+    "E_J": [
+     36.7,
+     36.7
+    ],
+    "E_max_J": 36.7,
+    "speed_at_stop_rad_s": [
+     2.85,
+     2.85
+    ],
+    "peak_stop_torque_Nm": 779.5,
+    "peak_penetration_deg": 5.18,
+    "knee_max_deg": 140.2,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": -0.3,
+    "mass": 68.0,
+    "knee_armature": 0.2018,
+    "mode": "ramp_knee_only",
+    "E_J": [
+     35.9,
+     35.8
+    ],
+    "E_max_J": 35.9,
+    "speed_at_stop_rad_s": [
+     2.92,
+     2.92
+    ],
+    "peak_stop_torque_Nm": 770.6,
+    "peak_penetration_deg": 5.12,
+    "knee_max_deg": 140.1,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": -0.3,
+    "mass": 68.0,
+    "knee_armature": 0.0,
+    "mode": "ramp_knee_only",
+    "E_J": [
+     35.6,
+     35.5
+    ],
+    "E_max_J": 35.6,
+    "speed_at_stop_rad_s": [
+     2.94,
+     2.94
+    ],
+    "peak_stop_torque_Nm": 766.8,
+    "peak_penetration_deg": 5.09,
+    "knee_max_deg": 140.1,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": -0.3,
+    "mass": 68.5,
+    "knee_armature": 0.553,
+    "mode": "ramp_knee_only",
+    "E_J": [
+     37.1,
+     37.0
+    ],
+    "E_max_J": 37.1,
+    "speed_at_stop_rad_s": [
+     2.86,
+     2.86
+    ],
+    "peak_stop_torque_Nm": 783.2,
+    "peak_penetration_deg": 5.21,
+    "knee_max_deg": 140.2,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": -0.3,
+    "mass": 68.5,
+    "knee_armature": 0.2018,
+    "mode": "ramp_knee_only",
+    "E_J": [
+     36.2,
+     36.2
+    ],
+    "E_max_J": 36.2,
+    "speed_at_stop_rad_s": [
+     2.92,
+     2.93
+    ],
+    "peak_stop_torque_Nm": 773.8,
+    "peak_penetration_deg": 5.14,
+    "knee_max_deg": 140.1,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": -0.3,
+    "mass": 68.5,
+    "knee_armature": 0.0,
+    "mode": "ramp_knee_only",
+    "E_J": [
+     35.9,
+     35.8
+    ],
+    "E_max_J": 35.9,
+    "speed_at_stop_rad_s": [
+     2.95,
+     2.94
+    ],
+    "peak_stop_torque_Nm": 770.4,
+    "peak_penetration_deg": 5.12,
+    "knee_max_deg": 140.1,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": -0.15,
+    "mass": 65.0,
+    "knee_armature": 0.553,
+    "mode": "ramp_knee_only",
+    "E_J": [
+     35.8,
+     35.8
+    ],
+    "E_max_J": 35.8,
+    "speed_at_stop_rad_s": [
+     2.84,
+     2.81
+    ],
+    "peak_stop_torque_Nm": 762.0,
+    "peak_penetration_deg": 5.06,
+    "knee_max_deg": 140.1,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": -0.15,
+    "mass": 65.0,
+    "knee_armature": 0.2018,
+    "mode": "ramp_knee_only",
+    "E_J": [
+     35.4,
+     35.2
+    ],
+    "E_max_J": 35.4,
+    "speed_at_stop_rad_s": [
+     2.85,
+     2.89
+    ],
+    "peak_stop_torque_Nm": 752.7,
+    "peak_penetration_deg": 4.99,
+    "knee_max_deg": 140.0,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": -0.15,
+    "mass": 65.0,
+    "knee_armature": 0.0,
+    "mode": "ramp_knee_only",
+    "E_J": [
+     35.0,
+     34.8
+    ],
+    "E_max_J": 35.0,
+    "speed_at_stop_rad_s": [
+     2.87,
+     2.94
+    ],
+    "peak_stop_torque_Nm": 747.2,
+    "peak_penetration_deg": 4.96,
+    "knee_max_deg": 140.0,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": -0.15,
+    "mass": 68.0,
+    "knee_armature": 0.553,
+    "mode": "ramp_knee_only",
+    "E_J": [
+     37.6,
+     37.4
+    ],
+    "E_max_J": 37.6,
+    "speed_at_stop_rad_s": [
+     2.83,
+     2.88
+    ],
+    "peak_stop_torque_Nm": 785.9,
+    "peak_penetration_deg": 5.23,
+    "knee_max_deg": 140.2,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": -0.15,
+    "mass": 68.0,
+    "knee_armature": 0.2018,
+    "mode": "ramp_knee_only",
+    "E_J": [
+     36.9,
+     36.7
+    ],
+    "E_max_J": 36.9,
+    "speed_at_stop_rad_s": [
+     2.94,
+     2.93
+    ],
+    "peak_stop_torque_Nm": 775.4,
+    "peak_penetration_deg": 5.15,
+    "knee_max_deg": 140.2,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": -0.15,
+    "mass": 68.0,
+    "knee_armature": 0.0,
+    "mode": "ramp_knee_only",
+    "E_J": [
+     36.9,
+     36.7
+    ],
+    "E_max_J": 36.9,
+    "speed_at_stop_rad_s": [
+     2.91,
+     2.93
+    ],
+    "peak_stop_torque_Nm": 771.5,
+    "peak_penetration_deg": 5.13,
+    "knee_max_deg": 140.1,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": -0.15,
+    "mass": 68.5,
+    "knee_armature": 0.553,
+    "mode": "ramp_knee_only",
+    "E_J": [
+     37.9,
+     37.8
+    ],
+    "E_max_J": 37.9,
+    "speed_at_stop_rad_s": [
+     2.89,
+     2.83
+    ],
+    "peak_stop_torque_Nm": 790.0,
+    "peak_penetration_deg": 5.26,
+    "knee_max_deg": 140.3,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": -0.15,
+    "mass": 68.5,
+    "knee_armature": 0.2018,
+    "mode": "ramp_knee_only",
+    "E_J": [
+     37.1,
+     37.0
+    ],
+    "E_max_J": 37.1,
+    "speed_at_stop_rad_s": [
+     2.94,
+     2.95
+    ],
+    "peak_stop_torque_Nm": 777.9,
+    "peak_penetration_deg": 5.17,
+    "knee_max_deg": 140.2,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": -0.15,
+    "mass": 68.5,
+    "knee_armature": 0.0,
+    "mode": "ramp_knee_only",
+    "E_J": [
+     36.9,
+     36.7
+    ],
+    "E_max_J": 36.9,
+    "speed_at_stop_rad_s": [
+     2.94,
+     2.98
+    ],
+    "peak_stop_torque_Nm": 773.2,
+    "peak_penetration_deg": 5.14,
+    "knee_max_deg": 140.1,
+    "knee_cmd_max_in_zone_Nm": 50.0,
+    "knee_cmd_max_Nm": 64.5,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": 0.15,
+    "mass": 65.0,
+    "knee_armature": 0.553,
+    "mode": "ramp_knee_only",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 89.9,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": 0.15,
+    "mass": 65.0,
+    "knee_armature": 0.2018,
+    "mode": "ramp_knee_only",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 89.9,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": 0.15,
+    "mass": 65.0,
+    "knee_armature": 0.0,
+    "mode": "ramp_knee_only",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 89.9,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": 0.15,
+    "mass": 68.0,
+    "knee_armature": 0.553,
+    "mode": "ramp_knee_only",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 89.9,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": 0.15,
+    "mass": 68.0,
+    "knee_armature": 0.2018,
+    "mode": "ramp_knee_only",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 89.9,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": 0.15,
+    "mass": 68.0,
+    "knee_armature": 0.0,
+    "mode": "ramp_knee_only",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 89.9,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": 0.15,
+    "mass": 68.5,
+    "knee_armature": 0.553,
+    "mode": "ramp_knee_only",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 89.9,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": 0.15,
+    "mass": 68.5,
+    "knee_armature": 0.2018,
+    "mode": "ramp_knee_only",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 89.9,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": 0.15,
+    "mass": 68.5,
+    "knee_armature": 0.0,
+    "mode": "ramp_knee_only",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 89.9,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": 0.3,
+    "mass": 65.0,
+    "knee_armature": 0.553,
+    "mode": "ramp_knee_only",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 89.9,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": 0.3,
+    "mass": 65.0,
+    "knee_armature": 0.2018,
+    "mode": "ramp_knee_only",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 89.9,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": 0.3,
+    "mass": 65.0,
+    "knee_armature": 0.0,
+    "mode": "ramp_knee_only",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 89.8,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": 0.3,
+    "mass": 68.0,
+    "knee_armature": 0.553,
+    "mode": "ramp_knee_only",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 89.9,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": 0.3,
+    "mass": 68.0,
+    "knee_armature": 0.2018,
+    "mode": "ramp_knee_only",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 89.9,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": 0.3,
+    "mass": 68.0,
+    "knee_armature": 0.0,
+    "mode": "ramp_knee_only",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 89.8,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": 0.3,
+    "mass": 68.5,
+    "knee_armature": 0.553,
+    "mode": "ramp_knee_only",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 89.9,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": 0.3,
+    "mass": 68.5,
+    "knee_armature": 0.2018,
+    "mode": "ramp_knee_only",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 89.9,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   },
+   {
+    "case": "kneel_tip",
+    "lean": 0.3,
+    "mass": 68.5,
+    "knee_armature": 0.0,
+    "mode": "ramp_knee_only",
+    "E_J": [
+     0.0,
+     0.0
+    ],
+    "E_max_J": 0.0,
+    "speed_at_stop_rad_s": [
+     null,
+     null
+    ],
+    "peak_stop_torque_Nm": 0.0,
+    "peak_penetration_deg": 0.0,
+    "knee_max_deg": 89.8,
+    "knee_cmd_max_in_zone_Nm": 0.0,
+    "knee_cmd_max_Nm": 0.0,
+    "passes": true
+   }
+  ]
+ },
+ "meta": {
+  "gate_J": 62.7,
+  "bottom_J": 97.0,
+  "cap_Nm": 50.0,
+  "cap_start_deg": 125.0,
+  "derate": 0.5,
+  "ramp": {
+   "start_deg": 95.0,
+   "B_max": 60.0
+  },
+  "basis": "D97 PU (b5890e1) + 513a7d5 cap; sim/v3 + pads [EST]"
+ }
+}

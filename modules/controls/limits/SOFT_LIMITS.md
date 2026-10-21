@@ -34,3 +34,9 @@ Two distinct limits — both real; do not collapse them:
 - Forearm 287 mm (Arms R10 EXT 17): static **42.62**, R1 inertial **31.06**.
 - 0.87 → 69.64; **0.85 → 69.02 > 69**; **0.84 → 68.71** (margin 0.29). Config uses **0.84**.
 - O-T5: time scale 1/√0.84 ≈ **+9.1%** on accel-limited segments. T-A pick+place ≈ +0.36 s on 52 s (**+0.7%**); T-D ≈ +2.9 s on 307 s (**+0.9%**). Still acceptable [EST].
+
+## Knee stop-zone torque cap (Robot Lab ruling per T&R 513a7d5, 2026-10-21) — contract item
+- **|τ_knee| ≤ 50 N·m when knee ≥ 125°** (10° before the 135° PU stop) in FALL, TUCK, CROUCH, KNEEL, CONTACT_CONFIRMED, HOLD_DERATED and CHEST_LOWER states. RUN/walk unaffected. Replaces thicker tibia/femur tubes (tube moment (830+50)×1.05 = 0.92 kN·m).
+- Applied **on top of the thermal derate**: limit = min(derated limit, 50). Code: `soft_limits.py` (`knee_torque_limit`, `apply_knee_stop_cap`), `DriveDerateSupervisor.torque_limits(knee_q=…)`, wired in `chest_lower_wbc.py` and the `safe_sit_wbc.py` kneel path. Config: `soft_limits.json` `knee_stop_zone_*`.
+- **Conflict (open):** the hands-first toe kneel (`kneel_toe_wbc.py`, owned by another executor, not wired here) reaches knee 134.5° and needs 129 N·m in the zone; with the cap it falls in phase K at t = 3.33 s. Needs the kneel knee ≤ 125° or an explicit ruling. Chest lower: unchanged with the cap (knee ≤ 112°, 0.081 m/s chest contact).
+- Fall-set energy results: `knee_stop_cap.py` → `knee_stop_cap_results.json`, summarised in DRIVE_DERATE.md.

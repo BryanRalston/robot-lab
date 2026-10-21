@@ -12,8 +12,21 @@
   "R085_accel_scale_at_full_reach": 0.84,
   "R085_full_reach_m": 0.667,
   "R085_blend_start_reach_m": 0.5,
-  "R102_note": "0.85 at 287 mm gives 69.02>69; set 0.84 (68.71). G5 may restore. Arbiter R-102 asked 0.85 \u2014 flag.",
+  "R102_note": "0.85 at 287 mm gives 69.02>69; set 0.84 (68.71). G5 may restore. Arbiter R-102 asked 0.85 — flag.",
   "R085_elbow_static_Nm_at_287": 42.62,
   "R085_elbow_inertial_R1_Nm_at_287": 31.06,
-  "R085_elbow_total_at_scale": 68.71
+  "R085_elbow_total_at_scale": 68.71,
+  "knee_stop_zone_cap_Nm": 50.0,
+  "knee_stop_zone_start_deg": 125.0,
+  "knee_stop_deg": 135.0,
+  "knee_stop_zone_states": [
+    "FALL",
+    "TUCK",
+    "CROUCH",
+    "KNEEL",
+    "CONTACT_CONFIRMED",
+    "HOLD_DERATED",
+    "CHEST_LOWER"
+  ],
+  "knee_stop_zone_source": "Robot Lab ruling per T&R 513a7d5 (L60 rev B B3/B5): |knee torque| <= 50 N.m at knee >= 125 deg in fall/TUCK/R-146 states; replaces thicker tibia/femur tubes (tube moment 0.92 kN.m). Applied after the thermal derate (min of both)."
 }

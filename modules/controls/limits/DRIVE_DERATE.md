@@ -263,3 +263,16 @@ DR: mass 65 / 68 / 68.5 kg × timeconst × lean (99 runs).
   - If the passing standalone chest lower (3.95 s to MO=0) replaces D, T ≈ 1.0 + 0.8 + 1.21 + 0.4 + 3.95 = 7.36 s,
     which gives 84 − 0.3·7.86 = 81.6 → **81** [EST].
 - Prone stays forbidden as a routine safe-sit.
+
+## Knee stop-zone cap on top of the derate (513a7d5) and stop energy, 2026-10-21
+Cap: |τ_knee| ≤ min(derate, 50 N·m) at knee ≥ 125° in stop/fall states. D97 PU fall set (knee_stop_impact cases; **90 runs**, 27+27+36, not 99), sim/v3 at ddfcff8, per-knee stop energy = PU loading work past 135°. Gate ≤ 62.7 J (bottoms ≈ 97 J).
+
+| mode | crouch_collapse E max | forward_fall E max | kneel_tip E max | peak stop τ | max pen. | fails |
+|---|---|---|---|---|---|---|
+| MO=0 (drive tripped; cap has nothing to clip) | 61.3 J | **92.5 J** | 57.4 J | 1086.5 N·m | 7.33° | **18/90** (all forward_fall lean 0.1/0.2) |
+| motors on, derated hold + cap | 14.5 | 1.6 | 0.0 | 502.7 | 3.27° | 0/90 |
+| damping ramp 95→125° (B 60 N·m·s/rad) + hold + cap | 13.5 | 36.6 | 9.1 | 746.6 | 4.95° | 0/90 |
+| damping ramp, knees only (all else MO=0) + cap | 17.5 | 40.1 | 37.9 | 790.0 | 5.26° | 0/90 |
+
+- The cap alone does not reduce stop energy in an MO=0 fall (torque is already 0). The energy gate needs the **knee drives kept enabled through the fall with a pre-stop damping ramp** (knee-only, cap respected; max zone command 50.0 N·m). B 120/172 give 45.4/46.8 J max (worse on kneel_tip); 60 used.
+- So R-146a "TUCK after drive trip" with knees MO=0 fails 62.7 J; the knee drives must stay on (or be the last to drop) in TUCK. [sim, PU pads EST]
