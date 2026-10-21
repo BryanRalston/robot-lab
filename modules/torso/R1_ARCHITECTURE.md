@@ -516,3 +516,10 @@ Rated on the kitting duty cycle at **4.55 h**; no bigger pack.
 | Torso shell | CFRP 2.0 mm | QI | multi / secondary | skin 300 [EST] |
 | Sternum land inserts, EtherCAT bosses | in the bulkhead / partition | – | carried by the parent | parent |
 - Applied in fea_job3.yaml/.py and fea_job3b.yaml as per-part allowables. The script refuses a single-path metal part without one. Drawings state stock and grain as above; if the drawing fixes grain L, the L value may be used only after the R-128 table is checked.
+
+### Cover vents and Thor clearance (ID e874653 decisions, 2026-10-21)
+- Width held at 340 at z 220 (ID). Shoulder-bay vents moved onto the sloped side panel (y ≈ ±141…±167). Slots are horizontal, 3.5 mm wide (≥3 mm), 6 mm pitch.
+  - Inlet: z 105–155, 3 columns (x −60…60), 8 rows, **30.2 cm²/side**.
+  - Outlet: z 160–214, 2 columns (x ±62…±102, clear of the Ø110 opening), 9 rows, **25.2 cm²/side**. Both meet A35 ≥25 cm² (projected; the true area on the slope is slightly larger).
+  - IP2X: a 12 mm finger cannot enter a 3.5 mm slot; live parts are kept ≥80 mm behind the slots. Bays stay clear of the Thor exhaust (upper back).
+- Thor plus A41 duct above z 265: |y| ≤ 101 (130 × 200 bay + 1 mm walls, orientation [EST]). The 45 mm chamfer is at |y| 125 at the top (z 310) and reaches |y| 101 only at z 334. **Clears, 24 mm margin; chamfer stays 45 mm.** Details in cad/torso_cover.json.
