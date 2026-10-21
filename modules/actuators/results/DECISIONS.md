@@ -843,3 +843,17 @@ Retention at 1.2 m/s:
 ## D88 (R-131) Bottom-up table, 32 units (`results/R131_BOTTOM_UP.md/.json`)
 - True overlap: leg +0.03 0.12; +0.04 net of output hubs 0.326; +0.10 net of rotor bearing 0.936; +0.08 0 (7202); connector allowance 0.18 → adders −1.562 full. Drive −0.411 on 26 booked units; 6 wrist drives unbooked +0.133. **Total −1.84 kg full** (R-131 has −1.536 now → −0.304 more).
 - Flag: shoulder_roll v3 row is CRBH 4010; R-120 delta assumed 6013 → possible +0.36 pair under-booking.
+
+## D88 addendum (R-137 §3) Shoulder roll bearing basis, IKO catalog (`datasheets/iko_crb_catalog.txt` l.799, 802, 803)
+| bearing | where | mass kg | d × D × B mm | C0 kN |
+|---|---|---:|---|---:|
+| CRBH 4010 A | v3 shoulder_roll row (`v3.json` bearing map) | 0.15 | 40 × 65 × 10 | 10.6 |
+| CRBH 6013 A | R-120's delta basis | 0.33 | 60 × 90 × 13 | 24.3 |
+| CRBH 7013 A | selected for shoulder roll (R-120/R-121, Arms R13) | 0.38 | 70 × 100 × 13 | 27.7 |
+- Note: D71 is the **shoulder_pitch** bearing (also 7013 A), not the roll; it is booked separately (D71/Arbiter) and is not part of this delta.
+- Bearing: true 4010 → 7013 = +0.23/side = **+0.46 pair**; R-120 booked +0.100 (6013 → 7013), so **missing +0.36 pair (cited). R-137's +0.36 is confirmed.**
+- **Housing, also missing [EST]:** the v3 row's housing() is sized on the 4010 (D 74 mm, 0.269 kg); on a 7013 seat it is D 106, 0.450 kg (`v3.py housing()`, same ×1.25 model). That is +0.181/side = +0.362 pair. R-121 booked +0.075 pair for the housing growth against a 6013 seat (Arms R13 table), so **+0.287 pair is still missing [EST, v3 housing model]**. If Arms' R13 roll-housing CAD replaces the v3 housing() row, use its measured mass instead.
+- **Shoulder roll total missing: +0.36 (cited) + 0.287 [EST] = +0.647 pair.**
+
+## D89 (R-137 §6) Knee twin housing = hand forging
+- 7075-T7352 (or 7050-T7452) hand forging, grain flow along the housing axis; 211 MPa interim until Materials cites the forging A/S-basis (4–4.5 in). Updated: STOCK_GRAIN.md, JOB9_KNEE_GEOMETRY.md, knee_release_r116.py/.json notes, cad_mass.py rec notes. No mass change.

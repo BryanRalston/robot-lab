@@ -30,3 +30,6 @@ For T&R `reliability/JOB9_SPEC.md` (7e55be7) item (c). Script `knee_release_r116
 
 ## R-128/R-132 update (D87)
 - Material for job 9 (c): run **7075-T7351 at 211 MPa static / 317 fall (R-132 §2, ST)**, not 320. The part needs ≥ 4.25 in stock (105.1 mm body + stock), above the 4.0 in limit, so the stock form is open: forging or split nut sections (`STOCK_GRAIN.md`). D80 net 75.7 MPa passes 211.
+
+## R-137 update (D89)
+- Material for job 9 (c): **7075-T7352 (or 7050-T7452) hand forging, grain flow along the housing axis**. Static limit **211 MPa interim** (fall 317) until Materials cites the forging A/S-basis for the 4–4.5 in section; then that value governs. Mass unchanged (7075 2.81; 7050 2.83 g/cm³ would be +0.3 % if 7050 is chosen [CALC]).

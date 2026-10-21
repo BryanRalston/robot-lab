@@ -2,6 +2,7 @@
 Input cad/knee_twin_housing_finned_revb.step (Thermal f2da3ab kept rev B; rev C withdrawn, Controls a5e14ff).
 Boss location from cad_mass.py linear_body/knee_twin: twin at x +-45, motor OD 76 -> can D 82, outer boss x 85..92, centre z Lm/2 = (23.09+20)/2, y 0.
 The Ø23 cylinder starts at x 84 (not 85) so it fuses with the r41 can over its full face (can surface at y +-11.5 is x 84.35).
+Material (R-137 §6): 7075-T7352 or 7050-T7452 hand forging, grain flow along the housing (screw) axis; 211 MPa interim until Materials cites the forging allowable.
 -> cad/knee_twin_housing_release_r116.step, results/knee_release_r116.json"""
 import cadquery as cq, json, os
 H=os.path.dirname(os.path.abspath(__file__)); ZC=(23.09+20)/2; R7075=2.81e-6; R6061=2.70e-6
