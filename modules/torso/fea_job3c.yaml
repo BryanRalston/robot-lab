@@ -86,6 +86,7 @@ geometry:
     deck_y: 364
   sternum_box: {web_y: [-60, 60], x_rear: -84, t: 3, t_cap: 3, note: 'closed sternum box: 2 shear webs + top cap tie the bulkhead/land back to the bay rear web; full mass'}
   bay_box:
+    vent: {dia: 25, y: 0, z: 40, part: 'GORE MultiVent (opens 50 mbar, 50 L/s @ 180 mbar)', note: 'rear web, >=40 mm from web/lid joints'}
     y: 115
     x_front: 106
     x_rear: -84

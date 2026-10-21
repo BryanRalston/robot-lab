@@ -546,3 +546,48 @@ The core is 116 mm (supersedes 88 and 100). Skin x +0.175, 65 mm proud of the co
 
 ### Pocketing credit pulled (2026-10-21)
 Job 3 FAILED. All pocketing credit is withdrawn. P-148/P-149 are on hold; P-145/146/147/150 are independent and stand. Job 3c (closed boxes, T&R b1fe48f loads) is in DIAGNOSIS.md.
+
+## Pack enclosure = job 3c bay box (Electronics 1a23584 §18.6 P-056, UL 2271:2023: OK on conditions), 2026-10-21
+1. **Lid:** tool-removable (8 × M4 captive, Torx). Gasket: silicone sponge strip **Rogers BISCO HT-800** (closed-cell silicone foam, medium), 6 × 3 mm in a 2 mm-deep groove, perimeter 0.84 m. Volume 15.1 cm³ at ~0.35 g/cm³ [density EST, verify on the BISCO data sheet] = **0.005 kg**. Target IPX3 minimum (IP54 achievable). All openings (gland, vent, SBS75X cut-out) are IP3X or better.
+2. **Vent/burst path** (single-cell failure, 20S5P P45B, 1.62 kWh):
+   - **Gas per cell:** 4.5 Ah × 1.3–2.5 L/Ah = **5.9–11.3 L STP** (Koch et al. 2018, J. Power Sources, doi:10.1016/j.jpowsour.2018.07.051: mean 1.96, range 1.3–2.5 L/Ah, NMC at 100 % SOC). Hot gas at ~500 °C is ×2.6, so ≈ **29 L**, released over ~1–2 s [EST], peak ≈ 15–30 L/s.
+   - **Box free volume:** interior 190 × 230 × 138 = 6.0 L, less cells 100 × 25.2 cm³ = 2.5 L, less holders/BMS/busbars ~1.1 L [EST] = **≈ 2.4 L**. Sealed, one cell would take the box to ≈ 5.7 bar abs, so a vent is mandatory.
+   - **Part: GORE MultiVent all-in-one battery vent** (https://www.gore.com/products/battery-vents-multivent-series): opens at **50 mbar**, **50 L/s at 180 mbar**, reseals; IPX7/X8/X9K; 500 °C short-term; 77 × 55 × 22.5 mm; 3 × M5. Preliminary data; mass not published, **0.040 kg [EST]**. It is not UL 1989-listed (that standard covers standby batteries); UL 2271 enclosure compliance is via test.
+   - At 30 L/s hot flow, Δp ∝ Q² gives a peak ≈ 180 × (30/50)² ≈ **65 mbar** (≤ 180 at 50 L/s). **Design burst/relief pressure 0.2 bar.**
+   - **Vent hole Ø25 mm (4.9 cm²)** in the **rear web** at y 0, z 40 (low). Outlet faces rearward and down through the pelvis's open top/rear, away from the pad and the bulkhead, and never the lid or front web. Orifice check: A = Q / (Cd·√(2Δp/ρ)) = 0.05 / (0.6 × √(2 × 18000 / 0.5)) = 3.1 cm² ≤ 4.9 ✓.
+   - **Walls at 0.2 bar:** lid 1.5 mm 7075, 186 × 224, σ ≈ 0.4 q b²/t² = **123 MPa ≤ 386 (fall) / 257**: PASS. Deflection ≈ 6 mm, so the gasket unloads only above the vent opening (1.5 mm at 50 mbar). Rear web 2 mm, b 138: 43 MPa, PASS.
+   - The vent hole is ≥ 40 mm from every web/lid joint; the coarse peaks are at the front-web/lid/land junctions. Added to `fea_job3c.yaml` (bay_box.vent).
+3. **Mounts off the failing joints:**
+   - BMS board (BQ79616/S32K344) on the **rear web, z 60–120**.
+   - FET/pre-charge board on the **left side wall, x −60…+20, z 40–110**.
+   - Busbar blocks (2 × PA66-GF30 [EST 0.010 each]) on the **right side wall at mid-span**.
+   - All on G10 standoffs (isolation), ≥ 30 mm from any web-lid or front-web joint and outside the land/sternum-box load path.
+4. **Earthing:**
+   - Box to the main ground terminal ≤ **0.1 Ω**.
+   - 4 bond seats masked from anodize (chem film MIL-DTL-5541 Class 3 on the seats).
+   - Lid bond strap: tinned Cu braid 6 mm², 80 mm (0.005 kg).
+   - SBS75X mounting plate bonded to the box.
+   - CAN through an EMC gland with **360° shield** termination (e.g. Lapp SKINTOP MS-SC-M M16, 0.015 kg [EST]).
+5. **Isolation:** reinforced; **creepage ≥ 3.0 mm, clearance ≥ 1.5 mm** (R-076, IEC 60664-1, ≤ 92 V, PD2).
+   - **OPEN:** Nomex 410 vs UL 2271 §8.3 (non-absorbent liner).
+   - **Proposed alternative:** **ITW Formex GK-10** (0.25 mm flame-retardant PP, UL 94 V-0, non-hygroscopic) lining the box interior (0.20 m²): ≈ **0.051 kg** [density ~1.0 g/cm³ EST]. GK-17 (0.43 mm): 0.087 kg.
+
+**Mass ledger (full):**
+
+| Item | kg |
+|---|---|
+| Bay box + sternum box (job 3c mesh) | +1.43 |
+| Less pack enclosure walls (pack line) | −0.75 |
+| Less pack rails | −0.20 |
+| Retained pack parts (Electronics, cited) | +0.076 |
+| Lid gasket BISCO HT-800 | +0.005 |
+| GORE MultiVent | +0.040 [EST] |
+| Busbar blocks ×2 | +0.020 [EST] |
+| EMC gland | +0.015 [EST] |
+| Lid bond strap | +0.005 [EST] |
+| Formex GK-10 liner | +0.051 [EST] |
+| **Net** | **+0.692 kg** |
+
+If the refined job 3c needs the 3 mm lid: +0.184 more (0.876).
+
+**Geometry OPEN (found while doing this):** the job 3c box (torso z 0–140) and model_v4's pack envelope (185 × 220 × 144 at x −80.5…+104.5) do not line up in z. The pad core (x 56–172, z 171–269 torso) may intersect the pack's front-top corner (x ≤ 104.5). The box height must grow to hold the 144 mm pack (z1 ≥ 150 + gasket), and the land/core-to-pack clearance must be checked in model_v4 before the refined run (deflection gate: 1.5 mm + 2 mm).

@@ -54,6 +54,8 @@ def build(c):
     for dy in (-1, 1):
         for dz in (-1, 1):
             cuts.append((3, occ.addCylinder(xf+1, dy*bi["pitch"]*0.4, L["z_c"]+dz*bi["pitch"]*0.4, -9, 0, 0, bi["dia"]/2)))
+    if bx and bx.get("vent"):   # UL 2271 vent/burst port in the rear web, aimed down/rearward
+        vt = bx["vent"]; cuts.append((3, occ.addCylinder(bx["x_rear"]-1, vt["y"], vt["z"], bx["t_web"]+2, 0, 0, vt["dia"]/2)))
     bulk, _ = occ.cut(bulk, cuts)
     p = g["partition"]; part = occ.addBox(p["x0"], -p["width_y"]/2, p["z0"], p["t"], p["width_y"], p["height_z"])
     pv = g["pelvis"]; w = pv["wall"]
