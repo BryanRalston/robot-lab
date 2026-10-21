@@ -1,0 +1,348 @@
+{
+ "mode": "radioss",
+ "cases": {
+  "fall_0deg_64": {
+   "soft_lot": {
+    "plateau_kN": 21.45,
+    "stroke_mm": 47.9,
+    "stroke_avail_mm": 66.0,
+    "margin": 0.274,
+    "bottomed": false,
+    "pulse_ms": 16.9,
+    "peak_g": 34.2,
+    "dv_ms": 5.67,
+    "rail_load_kN": 2.93,
+    "force_stroke": [
+     [
+      2.79,
+      21.45
+     ],
+     [
+      26.14,
+      21.45
+     ],
+     [
+      41.06,
+      21.45
+     ],
+     [
+      47.6,
+      21.45
+     ]
+    ]
+   },
+   "hard_lot_dyn": {
+    "plateau_kN": 28.99,
+    "stroke_mm": 35.5,
+    "stroke_avail_mm": 66.0,
+    "margin": 0.463,
+    "bottomed": false,
+    "pulse_ms": 12.5,
+    "peak_g": 46.2,
+    "dv_ms": 5.67,
+    "rail_load_kN": 3.96,
+    "force_stroke": [
+     [
+      2.78,
+      28.99
+     ],
+     [
+      24.35,
+      28.99
+     ],
+     [
+      34.55,
+      28.99
+     ]
+    ]
+   },
+   "checks": {
+    "stroke_margin": true,
+    "ceiling_quasistatic": true,
+    "pack_g": true,
+    "pack_dv": false
+   },
+   "pass": false
+  },
+  "fall_15deg_64": {
+   "soft_lot": {
+    "plateau_kN": 20.36,
+    "stroke_mm": 50.5,
+    "stroke_avail_mm": 66.0,
+    "margin": 0.235,
+    "bottomed": false,
+    "pulse_ms": 17.8,
+    "peak_g": 32.4,
+    "dv_ms": 5.67,
+    "rail_load_kN": 2.78,
+    "force_stroke": [
+     [
+      2.79,
+      20.36
+     ],
+     [
+      26.4,
+      20.36
+     ],
+     [
+      42.01,
+      20.36
+     ],
+     [
+      49.66,
+      20.36
+     ]
+    ]
+   },
+   "hard_lot_dyn": {
+    "plateau_kN": 27.51,
+    "stroke_mm": 37.4,
+    "stroke_avail_mm": 66.0,
+    "margin": 0.434,
+    "bottomed": false,
+    "pulse_ms": 13.2,
+    "peak_g": 43.8,
+    "dv_ms": 5.67,
+    "rail_load_kN": 3.76,
+    "force_stroke": [
+     [
+      2.78,
+      27.51
+     ],
+     [
+      24.7,
+      27.51
+     ],
+     [
+      35.83,
+      27.51
+     ]
+    ]
+   },
+   "checks": {
+    "stroke_margin": true,
+    "ceiling_quasistatic": true,
+    "pack_g": true,
+    "pack_dv": false
+   },
+   "pass": false
+  },
+  "fall_25deg_64": {
+   "soft_lot": {
+    "plateau_kN": 15.98,
+    "stroke_mm": 64.4,
+    "stroke_avail_mm": 66.0,
+    "margin": 0.025,
+    "bottomed": false,
+    "pulse_ms": 22.7,
+    "peak_g": 25.4,
+    "dv_ms": 5.67,
+    "rail_load_kN": 2.18,
+    "force_stroke": [
+     [
+      2.8,
+      15.98
+     ],
+     [
+      27.45,
+      15.98
+     ],
+     [
+      45.79,
+      15.98
+     ],
+     [
+      57.89,
+      15.98
+     ],
+     [
+      63.76,
+      15.98
+     ]
+    ]
+   },
+   "hard_lot_dyn": {
+    "plateau_kN": 21.59,
+    "stroke_mm": 47.6,
+    "stroke_avail_mm": 66.0,
+    "margin": 0.279,
+    "bottomed": false,
+    "pulse_ms": 16.8,
+    "peak_g": 34.4,
+    "dv_ms": 5.67,
+    "rail_load_kN": 2.95,
+    "force_stroke": [
+     [
+      2.79,
+      21.59
+     ],
+     [
+      26.11,
+      21.59
+     ],
+     [
+      40.94,
+      21.59
+     ],
+     [
+      47.33,
+      21.59
+     ]
+    ]
+   },
+   "checks": {
+    "stroke_margin": false,
+    "ceiling_quasistatic": true,
+    "pack_g": true,
+    "pack_dv": false
+   },
+   "pass": false
+  },
+  "fall_0deg_34p9": {
+   "soft_lot": {
+    "plateau_kN": 21.45,
+    "stroke_mm": 26.1,
+    "stroke_avail_mm": 66.0,
+    "margin": 0.604,
+    "bottomed": false,
+    "pulse_ms": 9.2,
+    "peak_g": 62.7,
+    "dv_ms": 5.67,
+    "rail_load_kN": 5.38,
+    "force_stroke": [
+     [
+      2.76,
+      21.45
+     ],
+     [
+      21.89,
+      21.45
+     ]
+    ]
+   },
+   "hard_lot_dyn": {
+    "plateau_kN": 28.99,
+    "stroke_mm": 19.3,
+    "stroke_avail_mm": 66.0,
+    "margin": 0.707,
+    "bottomed": false,
+    "pulse_ms": 6.8,
+    "peak_g": 84.7,
+    "dv_ms": 5.67,
+    "rail_load_kN": 7.27,
+    "force_stroke": [
+     [
+      2.73,
+      28.99
+     ],
+     [
+      18.61,
+      28.99
+     ]
+    ]
+   },
+   "checks": {
+    "stroke_margin": true,
+    "ceiling_quasistatic": true,
+    "pack_g": true,
+    "pack_dv": false
+   },
+   "pass": false
+  },
+  "fall_15deg_34p9": {
+   "soft_lot": {
+    "plateau_kN": 20.36,
+    "stroke_mm": 27.5,
+    "stroke_avail_mm": 66.0,
+    "margin": 0.583,
+    "bottomed": false,
+    "pulse_ms": 9.7,
+    "peak_g": 59.5,
+    "dv_ms": 5.67,
+    "rail_load_kN": 5.1,
+    "force_stroke": [
+     [
+      2.76,
+      20.36
+     ],
+     [
+      22.37,
+      20.36
+     ]
+    ]
+   },
+   "hard_lot_dyn": {
+    "plateau_kN": 27.51,
+    "stroke_mm": 20.4,
+    "stroke_avail_mm": 66.0,
+    "margin": 0.691,
+    "bottomed": false,
+    "pulse_ms": 7.2,
+    "peak_g": 80.4,
+    "dv_ms": 5.67,
+    "rail_load_kN": 6.9,
+    "force_stroke": [
+     [
+      2.73,
+      27.51
+     ],
+     [
+      19.25,
+      27.51
+     ]
+    ]
+   },
+   "checks": {
+    "stroke_margin": true,
+    "ceiling_quasistatic": true,
+    "pack_g": true,
+    "pack_dv": false
+   },
+   "pass": false
+  },
+  "kneel_tip_prone": {
+   "soft_lot": {
+    "plateau_kN": 21.45,
+    "stroke_mm": 7.3,
+    "stroke_avail_mm": 66.0,
+    "margin": 0.889,
+    "bottomed": false,
+    "pulse_ms": 4.9,
+    "peak_g": 62.7,
+    "dv_ms": 3.0,
+    "rail_load_kN": 5.38,
+    "force_stroke": [
+     [
+      1.42,
+      21.45
+     ]
+    ]
+   },
+   "hard_lot_dyn": {
+    "plateau_kN": 28.99,
+    "stroke_mm": 5.4,
+    "stroke_avail_mm": 66.0,
+    "margin": 0.918,
+    "bottomed": false,
+    "pulse_ms": 3.6,
+    "peak_g": 84.7,
+    "dv_ms": 3.0,
+    "rail_load_kN": 7.27,
+    "force_stroke": [
+     [
+      1.39,
+      28.99
+     ]
+    ]
+   },
+   "checks": {
+    "stroke_margin": true,
+    "ceiling_quasistatic": true,
+    "pack_g": true,
+    "pack_dv": true
+   },
+   "pass": true
+  }
+ },
+ "radioss_available": false
+}
