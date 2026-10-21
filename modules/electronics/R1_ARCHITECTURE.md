@@ -1174,7 +1174,7 @@ Findings:
 
 **Still unconfirmed:**
 1. The numeric factory WI[35] for G-TWIR70/100 and R50/100.
-2. The OV comparator's hysteresis and response time, and whether OV recovery is a latch or auto-clear (CR says the fault clears via MO=1 after the voltage falls; the timing isn't given).
+2. The OV comparator's hysteresis and response time, and whether OV recovery is a latch or auto-clear (not stated in CR 1.406).
 3. MAN-G-CR 1.406 is from 2013, so the current firmware may differ.
 
 **Closure without vendor:** read WI[35] and WI[36] on the first bench drive (G5, §12 workaround). The O-E9 item stays **open, partially closed** on public data.
