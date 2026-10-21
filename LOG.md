@@ -58,13 +58,13 @@
 - job 10 ref_cycle.npz needs ankle past −0.916 (min −1.019 at 1.2 m/s). Recommend holding job 10 until the ref is regenerated. Pin not changed.
 - clash_v4: the knee 0–135 sweep is clean; the 15–60 claim is false. The L/R knee housings clash at hip_yaw 45° instead (committed json stale).
 - Details: modules/legs/wbc/RETUNE_2026-10-21.md
-- 2026-10-21 10:50 ET RL Torso: job 3c-final rev B, 4 coarse iterations (media/progress/2026-10-21_torso_yoke_revB.png).
+- 2026-10-21 10:36 ET RL Torso: job 3c-final rev B, 4 coarse iterations (media/progress/2026-10-21_torso_yoke_revB.png).
   - Changes: closed-section waistY; pelvis internal lip, ribs and ring (outer surface unchanged); lid/socket gussets; Thor +9 mm; partition moved to x −63; hard stop P-160.
   - Results: k 8.4 MN/m PASS; mode 1 239 Hz PASS; pelvis SF ≥1.54, waistY ≥2.07, yoke ≥1.98 PASS.
   - Bulkhead lid sliver SF 0.06–0.10 FAIL (fine-mesh check needed). Pelvis is 35 % of the remaining compliance.
   - Net +3.47 kg. COM would reach ≈15 mm (>10) → Controls flagged, not booked.
   - Vent at floor (−90, 0, global 1401.6) with a rearward deflector.
-- 2026-10-21 11:05 ET RL Torso: 3c rev C.
+- 2026-10-21 10:49 ET RL Torso: 3c rev C.
   - Fine lid submodel (h 1.0 local): the singular step did not converge → redesigned to a 4.5 mm lid, no top doubler.
   - Mass round m1–m5. Final: bulkhead 1.00/0.65/0.87/0.87, pelvis LC1c 0.87, LC1b deflection 5.89 mm: FAIL. 169 Hz PASS.
   - Net +2.63 kg (target ≤1.5 not met). COM would reach ≈11.3 mm → Controls flagged, not booked.
@@ -87,12 +87,12 @@
   - Palm/thumb vs knee trunnion plate (thigh) at 0–1.65 mm for L −35..−15 and R +15..+35, with the arm hanging.
   - L/R rod-end eye vs palm at 1.9–2.4 mm.
 - **Tests:** suite 54/54 on main with 54ca3de.
-- 2026-10-21 11:30 ET RL Torso: 3c rev D: chest load taken off the lid (socket walls to floor, shelves to side walls), lid back to 1.5 mm, Thor +6 mm.
+- 2026-10-21 10:56 ET RL Torso: 3c rev D: chest load taken off the lid (socket walls to floor, shelves to side walls), lid back to 1.5 mm, Thor +6 mm.
   - Final n6: bulkhead ≥1.04, waistY ≥1.17, yoke ≥1.90; 4.36/5.21 mm PASS; 190 Hz PASS. Pelvis 0.89–1.08 FAIL (ribs back to 8 mm, not run).
   - Net +2.57 kg (floor ≈ +2.2; ≤1.5 unreachable). COM would reach ≈10.7 mm → Controls flagged, not booked.
-- 2026-10-21 11:45 ET RL Torso: 3c rev E final coarse: all SFs ≥1.04, 4.91 mm offset, 207 Hz PASS. Net +2.63 kg (floor ≈ +2.2), COM ≈10.9 mm [EST] → R1 overrun note (T&R BC/LC1 or Arbiter acceptance).
+- 2026-10-21 10:59 ET RL Torso: 3c rev E final coarse: all SFs ≥1.04, 4.91 mm offset, 207 Hz PASS. Net +2.63 kg (floor ≈ +2.2), COM ≈10.9 mm [EST] → R1 overrun note (T&R BC/LC1 or Arbiter acceptance).
 - 2026-10-21 11:01 ET Thermal: Torso 9700df9/b3811cc vent + Thor partition check (T9700_VENT_THOR_CHECK.md): runaway plume FAILS rear PC cover at 10 mm → cover port + SS/mica patch; legs/hip/knee PASS; partition x −63 PASS conditional (no exhaust through 6 mm gap, gasketed).
-- 2026-10-21 12:05 ET RL Torso: FEA_SPEC_job3d (+fea_job3d.yaml) for the bryan PC: IR BC + envelope check, LC1 29 kN, waist V/M output, P-160 2.5/3.75 kN·m. Job 3e (17.9/26.9 kN) is a PENDING draft: Materials grade/1.60 data and the Controls 25° case are not in the repo. 3c-light geometry (config only). Thermal 1ce8963 cover port + SS patch (+0.034 kg), partition moved to x −78.
-- 2026-10-21 12:15 ET RL Torso: FEA_SPEC_job3d rev 2 = job 3d ONLY (IR + envelope check, LC1 29 kN, 3c-light). Soft 3.8 pcf core rejected (Controls 1021e37: 25° bottoms out); 4.5 pcf core kept.
-- 2026-10-21 12:30 ET RL Torso: waist-pitch torque-limiter keep-out (+y, Ø100 × y 55–123, Mayr EAS-compact size 2 80–200 Nm, 2.88 kg; net +2.77 kg [EST], not booked); cover clearance at y 123 open (ID).
-- 2026-10-21 12:40 ET RL Torso: job 3e PROVISIONAL brief (fea_job3e.yaml; IR, CR III 5/32-3.8, LC1 17.9/26.9; no adoption/credit until the Controls forced-25° set ≤680 J, no bottoming). Mayr limiter rejected → Actuators ≤0.4 kg friction limiter.
+- 2026-10-21 11:07 ET RL Torso: FEA_SPEC_job3d (+fea_job3d.yaml) for the bryan PC: IR BC + envelope check, LC1 29 kN, waist V/M output, P-160 2.5/3.75 kN·m. Job 3e (17.9/26.9 kN) is a PENDING draft: Materials grade/1.60 data and the Controls 25° case are not in the repo. 3c-light geometry (config only). Thermal 1ce8963 cover port + SS patch (+0.034 kg), partition moved to x −78.
+- 2026-10-21 11:08 ET RL Torso: FEA_SPEC_job3d rev 2 = job 3d ONLY (IR + envelope check, LC1 29 kN, 3c-light). Soft 3.8 pcf core rejected (Controls 1021e37: 25° bottoms out); 4.5 pcf core kept.
+- 2026-10-21 11:12 ET RL Torso: waist-pitch torque-limiter keep-out (+y, Ø100 × y 55–123, Mayr EAS-compact size 2 80–200 Nm, 2.88 kg; net +2.77 kg [EST], not booked); cover clearance at y 123 open (ID).
+- 2026-10-21 11:14 ET RL Torso: job 3e PROVISIONAL brief (fea_job3e.yaml; IR, CR III 5/32-3.8, LC1 17.9/26.9; no adoption/credit until the Controls forced-25° set ≤680 J, no bottoming). Mayr limiter rejected → Actuators ≤0.4 kg friction limiter.
