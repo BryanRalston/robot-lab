@@ -1,0 +1,64 @@
+{
+ "grille_baffle_Ta25_dTp28_hx2": {
+  "baffle": 45.6,
+  "cavity_air": 35.8,
+  "grille": 28.3
+ },
+ "grille_baffle_Ta25_dTp28_hx5": {
+  "baffle": 43.7,
+  "cavity_air": 31.5,
+  "grille": 27.3
+ },
+ "grille_baffle_Ta25_dTp31_hx2": {
+  "baffle": 47.2,
+  "cavity_air": 36.6,
+  "grille": 28.6
+ },
+ "grille_baffle_Ta25_dTp31_hx5": {
+  "baffle": 45.2,
+  "cavity_air": 32.0,
+  "grille": 27.4
+ },
+ "grille_baffle_Ta35_dTp28_hx2": {
+  "baffle": 55.7,
+  "cavity_air": 45.8,
+  "grille": 38.3
+ },
+ "grille_baffle_Ta35_dTp28_hx5": {
+  "baffle": 53.9,
+  "cavity_air": 41.5,
+  "grille": 37.2
+ },
+ "grille_baffle_Ta35_dTp31_hx2": {
+  "baffle": 57.3,
+  "cavity_air": 46.7,
+  "grille": 38.5
+ },
+ "grille_baffle_Ta35_dTp31_hx5": {
+  "baffle": 55.3,
+  "cavity_air": 42.0,
+  "grille": 37.4
+ },
+ "outlet_web_Ta25_dTout44": 44.6,
+ "outlet_web_Ta25_dTout62": 52.3,
+ "inlet_web_Ta25": 25.9,
+ "outlet_web_Ta35_dTout44": 54.0,
+ "outlet_web_Ta35_dTout62": 61.4,
+ "inlet_web_Ta35": 35.9,
+ "housing_fairing_vented_Ta25_Th90": {
+  "fairing": 31.6,
+  "gap_air": 44.5
+ },
+ "housing_fairing_vented_Ta25_Th100": {
+  "fairing": 32.5,
+  "gap_air": 46.7
+ },
+ "housing_fairing_vented_Ta35_Th90": {
+  "fairing": 40.6,
+  "gap_air": 52.2
+ },
+ "housing_fairing_vented_Ta35_Th100": {
+  "fairing": 41.5,
+  "gap_air": 54.5
+ }
+}

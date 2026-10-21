@@ -63,5 +63,5 @@ Status caveat: the box was overloaded during R1, so closure status for A-items w
 | TP-G5-11 | T-029 | BiSS-C CM noise + MII timing | electronics | planned | P2 |
 | TP-G5-12 | R-114 | EA 9396 lap coupons, A38 prep, 82 °C post-cure, 1000 h at 80 °C ≥ 3.3 MPa | materials | planned | P1 |
 | TP-G5-14 | R-112 | 80 °C hot proof | materials/legs | planned | P1 |
-| R143-TB | RULINGS.md R-143 §2b; reliability/R143_TOUCH_BURN.md; Thermal 389f91b | rev 4b: fins recessed ≥ 30 mm behind fairing grille (≥ 60 % open, ≤ 5 mm, ε ≤ 0.1), P-154 guard dropped; grille ≤ 45.6 °C worst (35 °C amb standing) → PASS vs 48, −2.6 vs 8 h 43 (residual); probe B can't reach | ID/Legs (grille, vents), Thermal, Controls (derate) | conditional pass; G5 TP-G5-15 | P1 |
+| R143-TB | RULINGS.md R-143 §2b; reliability/R143_TOUCH_BURN.md rev 4d; Thermal ec7b49d/eef2728; ID P-156 | rev 4d recheck: grille 37–38.5 PASS, inlet 36 PASS, knee-housing fairing 40.6–41.5 PASS (slots must be ≤ 5 mm), **outlet webs 54–61 °C FAIL** → outlet shroud/relocation; housing low-ε vs fairing-foil conflict; standing drive base margin 1.5–3.8 K | Thermal + ID (outlet, slots, ε conflict), T&R (G5) | outlet open; rest conditional pass | P1 |
 | TP-G5-15 | G5_TEST_PLAN.md | grille/fairing touch-point thermocouples, duty/carry/standstill/seated, probe B push | T&R/Thermal | planned | P1 |

@@ -71,8 +71,16 @@ Per `legs/R031_FIXES.md`: 5 ASTM D1002 coupons per lot at 23 and 60 °C, part-eq
 - **Method:** soak the part at **80 °C** ≥ 1 h, then apply the proof load (1.25 × design, as in PROOF_TEST_hip_lever) for 30 s at temperature.
 - **Pass:** no residual set > 0.02 mm, no audible or visible disbond, a tap/ultrasonic check unchanged; the qualification part then goes to rupture and must be ≥ 1.5 × design at 80 °C.
 
-## TP-G5-15 Knee fin grille touch temperature (R-143 §2b rev 4b, R143_TOUCH_BURN.md; P-154 guard dropped)
-- **Setup:** D93 knee plate in the L71 pocket behind the v5 fairing grille (≥ 60 % open, ≤ 5 mm slots, inner ε ≤ 0.1), with the low inlet / high outlet vents and the low-ε knee-housing face, on the robot leg (or a heated rig at plate power 7.2 W, plus the knee housing at its case temperature). Surface thermocouples (type T, ≤ 0.13 mm bead, thin epoxy or spring contact probe; error ≤ ±2 K at ≥ 50 °C per ISO 13732-1 measurement guidance) at the **touch points**: grille outer face centre; grille top and bottom rows (slot-web middle); grille frame/edges top and bottom; fairing within 20 mm of the grille; inlet and outlet vent grilles; fairing over the knee twin housing. Reference TCs: fin tip, plate base, pocket air at the outlet. IR camera calibrated against the TCs.
-- **Cases:** (1) R-096 duty walking 0.5–2 m/s at 25 and 35 °C ambient to steady state; (2) continuous carry until the derate holds; (3) standstill heat soak after (2) for 30 min (natural convection, worst case); (4) seated/kneeling (vents partly blocked) for 10 min.
-- **Mechanical:** 30 N push with the IEC 61032 probe B at the grille centre and edge: no contact with any part ≥ 50 °C, and slots stay ≤ 5 mm under load. Slot width on 5 production grilles ≤ 5.0 mm max.
-- **Pass:** every touch point ≤ **48 °C** at 35 °C ambient and ≤ **43 °C** at 25 °C ambient in all cases; drive base ≤ 80 °C standing duty (Thermal) with the derate behaving as specified; top grille rows within +3 K of the centre (exhaust not leaving through the face grille).
+## TP-G5-15 Knee venting touch temperature, IP2X and standing drive base (R-143 §2b; rev 4d, P-156; R143_TOUCH_BURN.md)
+- **Setup:** D94 knee plate in the L71 pocket with the P-156 thigh fairing: grille 8 × 4.5 mm slots with Al liner, fin-tip baffle (Al tape fin side), inlet z 643–681, outlet z 799–837 routed aft/up (with the outlet shroud if adopted), duct insert, foil under the fairing over the knee twin housing with ≥ 10 mm vented gap. Full robot leg (or a heated rig at plate power 7.2 W duty / 2 × 6.0 W carry, plus the knee housing at its case temperature).
+- **Thermocouples** (type T, ≤ 0.13 mm bead, thin epoxy or spring-contact probe; ≤ ±2 K at ≥ 50 °C per ISO 13732-1 measurement guidance), IR camera calibrated against them:
+  - **Touch points:** grille centre, grille top and bottom slot webs, grille frame; **inlet** webs and frame; **outlet** webs (centre and the downstream edge), frame and the skin 20 mm downstream; **fairing over the knee housing** (centre, top and bottom slot edges); fairing within 20 mm of each opening.
+  - **Drive base (inside the closed fairing):** TC on each drive's heat-sink face / plate base under the drive (2 per knee), fin tip, baffle, pocket air at the outlet, knee housing case.
+- **Cases:** at 25 °C and **35 °C** ambient: (1) standing at R-096 duty to steady state (the governing thermal case); (2) walking 0.5–2 m/s at duty; (3) continuous carry until the derate holds; (4) 30 min standstill heat soak after (3); (5) seated/kneeling 10 min (openings partly blocked).
+- **IP2X / probe:** IEC 61032 probe B (ø12 mm, 80 mm reach, 30 N) applied to every slot of the grille, inlet, outlet and knee-housing fairing: no contact with any surface > 48 °C or with the baffle, fins or housing. The 50 mm sphere must not enter. Slot widths measured on 5 production parts: ≤ 5.0 mm max (4.5 nominal).
+- **Pass:**
+  - every touch point ≤ **48 °C** at 35 °C ambient and ≤ **43 °C** at 25 °C ambient, in all cases (the outlet is included; it fails on the current estimate unless fixed);
+  - **drive base ≤ 80 °C in case (1) at 35 °C ambient** (Thermal predicts 76.2–78.5, margin 1.5–3.8 K; if the measurement exceeds 78.5, Thermal re-runs the duty limit);
+  - derate behaves per R-136 (75 °C start, 50 % at 85, off at 90);
+  - IP2X as above.
+
