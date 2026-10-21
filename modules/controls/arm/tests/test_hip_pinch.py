@@ -8,8 +8,8 @@ def q(lp, lr, ly, rp, rr, ry):  # T&R (p, r, y) per leg; right leg -> sim mirror
             'r_hip_pitch': R(rp), 'r_hip_roll': R(-rr), 'r_hip_yaw': R(-ry)}
 
 def test_thresholds():
-    assert (H.WARN, H.LIMIT, H.TRIP) == (40.0, 35.0, 33.0)
-    assert [H.status(x) for x in (45, 38, 34, 32)] == ['ok', 'warn', 'limit', 'trip']
+    assert (H.WARN, H.LIMIT, H.TRIP) == (35.0, 30.0, 28.0)
+    assert [H.status(x) for x in (40, 33, 29, 27)] == ['ok', 'warn', 'limit', 'trip']
 
 def test_zero_pose_clear():
     g = H.gaps(q(0, 0, 0, 0, 0, 0)); assert min(g.values()) > 100

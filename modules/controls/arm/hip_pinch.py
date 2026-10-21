@@ -18,7 +18,7 @@ HEM_R = 144.0  # rev 8b (fallback REV='8b')
 REV = "8f"
 COV = ROOT / 'modules/design/cad/covers'
 JCH = 3.0  # rev 8c rigid PC J-channel lip on the hem (foam excluded)
-WARN, LIMIT, TRIP = 40.0, 35.0, 33.0  # T&R 76de66a/42c4e50 stopgap; return to 35/30/28 only on T&R re-verification
+WARN, LIMIT, TRIP = 35.0, 30.0, 28.0  # T&R c1bc29d re-verified on 8f STLs (max model error +0.64 mm); any geometry change needs re-check; hardware trip TP-G5-18 item 9
 HIP = ['hip_pitch', 'hip_roll', 'hip_yaw']
 _G = {}
 
