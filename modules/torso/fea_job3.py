@@ -171,8 +171,10 @@ def main():
             if not r["solved"]: r["log_tail"] = p_.stdout[-800:]
             chk = {}
             for part, vm in d["S"].items():
-                Mt = c["materials"][g[part.lower()]["mat"]]; Sy = Mt.get("allowable", Mt["Sy"]); sf = Sy/vm if vm else float("inf")  # R-123: SF vs static allowable where given
-                chk[f"SF_{part.lower()}"] = {"vm_max": round(vm, 2), "SF": round(sf, 3), "pass": sf >= cr["SF_min"]}
+                gp = g[part.lower()]; Mt = c["materials"][gp["mat"]]
+                if gp.get("path") == "single" and "allowable" not in gp and Mt["Sy"] > 300: raise SystemExit(f"R-128: single-path {part} needs a per-part allowable")
+                Sy = gp.get("allowable", Mt.get("allowable", Mt["Sy"])); sf = Sy/vm if vm else float("inf")  # R-128: per-part single-path A-basis band; else material (320 multi-path)
+                chk[f"SF_{part.lower()}"] = {"path": gp.get("path"), "allowable": Sy, "vm_max": round(vm, 2), "SF": round(sf, 3), "pass": sf >= cr["SF_min"]}
             if d["U"]: um = max(d["U"]); chk["land_defl"] = {"mm": round(um, 5), "pass": (um <= cr["land_defl_max"]) if name == "LC1_chest_pad" else None}
             if d["freq"]: chk["mode1_hz"] = {"hz": round(d["freq"][0], 2), "pass": d["freq"][0] >= cr["mode1_min_hz"]}
             if d["buckle"]: chk["buckling"] = {"factor": round(d["buckle"][0], 3), "pass": d["buckle"][0] >= cr["buckling_min"]}

@@ -503,3 +503,16 @@ Torso frame = waist_pitch origin; x forward, y left, z up. Layout [EST until CAD
 
 ### O-T5 CLOSED (2026-10-21)
 Rated on the kitting duty cycle at **4.55 h**; no bigger pack.
+
+
+### R-128 (9e49b7a) stock, grain and load-path classification (2026-10-21)
+| Part | Stock | Grain | Path | Allowable (MPa) |
+|---|---|---|---|---|
+| Shoulder bulkhead, 12 mm web + 101×101 land + integral 60×6 rib (with posts) | 7075-T651 plate 3.0 in (76 mm) | L along y (span); LT/ST used | **single** (only chest→torso and shoulder→torso path) | **257** (ST 2.501–3.0 in; M8 flange clamp is through-thickness) |
+| Pelvis incl. hip/waist hardpoint nodes | 7075-T651 plate 2.5 in (63.5 mm) | L along y | **single** (only legs↔torso path) | **271** (ST, through-thickness hip/waist bolts) |
+| Waist ring | 7075-T651 plate 1.5 in [EST] | L along y | **single** (waist torque path) | **271** (ST, ≤2.0 in) |
+| Pack rails + latch | 7075-T651 plate 0.75 in | L along x (rail axis) | multi (2 rails) | 320 |
+| Partition | CFRP QI 1.0 mm | 0/±45/90 | multi / secondary | skin 300 [EST] |
+| Torso shell | CFRP 2.0 mm | QI | multi / secondary | skin 300 [EST] |
+| Sternum land inserts, EtherCAT bosses | in the bulkhead / partition | – | carried by the parent | parent |
+- Applied in fea_job3.yaml/.py and fea_job3b.yaml as per-part allowables. The script refuses a single-path metal part without one. Drawings state stock and grain as above; if the drawing fixes grain L, the L value may be used only after the R-128 table is checked.
