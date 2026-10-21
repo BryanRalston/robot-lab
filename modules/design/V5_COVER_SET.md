@@ -439,3 +439,17 @@ Scripts: `cad/covers/hip_skirt_r8_asym.py/.json` (L/R asymmetric both-leg sweep)
   - Foam + J-channel + VHB **+0.0138**.
   - Net **−0.006/side vs rev 8**, so P-023 is about **−0.280** vs v5 [EST].
 - **Still open (T&R):** panel ↔ shank in deep kneel/sit-back (knee 135–145) and panel ↔ floor need Legs CAD. Panel flex under a hand push must stay ≤ 1 mm.
+
+## P-023 rev 8c — T&R 04c7199 fixes (J-channel in the gate, foam force), 2026-10-21
+- **J-channel: it was NOT modelled in rev 8b** (the json/STL had the bare panel cylinder and the hem sphere). It is now in `cad/covers/hip_skirt_r8c.py/.json`: 1.0 mm PC wall + 0.5 lip on both mating edges, giving **JCH = 3.0 mm** off every hem gap. On T&R's 2240-pose grid:
+  - R 144: 25.3 mm with overtravel. FAIL (matches T&R).
+  - **R 141.5: 32.1 mm in ROM, 27.7 mm with overtravel at (42.5, −4, −35)**, 25.7 mm with ±2 tolerance, and 0 poses in the 5–25 band. **PASS ≥ 27.5.** Adopted.
+  - Fixed skirt retained **40.4 %**.
+- **Foam: 40 mm deep × 20 mm wide XLPE (chemically cross-linked PE), about 28 kg/m³, black skinned, grade rated ≥ 90 °C.**
+  - Stress–strain from an ISO 3386-1 datasheet (Burrill & Co XPE/XLPE, 28 kg/m³): **25 %: 29.6 kPa; 45 %: 54.4 kPa; 50 %: 79.5 kPa**. That grade is rated only to 80 °C, so a ≥ 90 °C chemically cross-linked grade of the same density must be sourced, and its curve confirmed [EST until then].
+  - **Hem:** the rigid gate stops closure at 27.7 mm, so the foam compresses at most 12.3/40 = **31 % → ≈ 37 kPa** → hand patch 100 × 20 = **74 N ≤ 140 PASS**.
+  - **L/R panels (limp, 165 N available):** the foam must carry the load over more than the hand width, so the inboard strip is lengthened to **130 mm** per panel (inboard arc + chamfer + lower corner). A hand takes ≤ 100/130 of 165 = **127 N ≤ 140 PASS**. At equilibrium each strip is about 49 % compressed (σ ≈ 165/2600 mm² ≈ 63 kPa), leaving ≥ 40 mm foam-to-foam with no rigid contact. Powered closure is the Controls keep-out (35/30/28).
+- **Intrusion:** the foam projects into the hem gap by design (compliant). The rigid gate above is unaffected.
+  - Over the outlet sector (hem edge behind the shroud, y 86–150) the hem foam is cut to **25 mm deep** to stay out of the jet path (rev 8 jet-to-fixed-skirt min was 27 mm, and the smaller hem adds clearance). XLPE ≥ 90 °C covers the ≤ 55 °C mixed plume [EST].
+  - Elsewhere the foam is ≥ 3 mm from non-mating parts (it sits on the edges only).
+- **Mass per side:** foam 9.6 g + J-channel 5.9 + VHB 1.0 = 16.5 g (rev 8b 13.8, so +2.7). Smaller hem −4.8 g of fixed-skirt PC. **Net −2.1 g/side vs rev 8b**; P-023 ≈ **−0.282 kg** vs v5 [EST].
