@@ -90,3 +90,4 @@
 - 2026-10-21 11:30 ET RL Torso: 3c rev D: chest load taken off the lid (socket walls to floor, shelves to side walls), lid back to 1.5 mm, Thor +6 mm.
   - Final n6: bulkhead ≥1.04, waistY ≥1.17, yoke ≥1.90; 4.36/5.21 mm PASS; 190 Hz PASS. Pelvis 0.89–1.08 FAIL (ribs back to 8 mm, not run).
   - Net +2.57 kg (floor ≈ +2.2; ≤1.5 unreachable). COM would reach ≈10.7 mm → Controls flagged, not booked.
+- 2026-10-21 11:45 ET RL Torso: 3c rev E final coarse: all SFs ≥1.04, 4.91 mm offset, 207 Hz PASS. Net +2.63 kg (floor ≈ +2.2), COM ≈10.9 mm [EST] → R1 overrun note (T&R BC/LC1 or Arbiter acceptance).

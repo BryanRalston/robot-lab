@@ -635,3 +635,11 @@ A full ring flange instead of the cheek (≈0.4 kg [EST]) would give ≈ +2 mm z
 - The tap fuses are Littelfuse 0451.500 (0.3046 Ω cold each, 451/453 datasheet). The BQ79616 balancing path passes through **two** taps, so it carries an extra **2 × 0.30 Ω ≈ 0.61 Ω**. This **must be included in R_CB sizing**.
 - Per TI SLVAE87B §4.2: I_CB = V_cell / (2·R_CB + R_DS(on) + 0.61 Ω).
 - The BQ79616 internal balance current is **240 mA max** (BQ7961X-Q1 datasheet Rev F). At 240 mA the fuses drop ≈ 146 mV and dissipate ≈ 35 mW total, so cell voltages must be measured with balancing paused.
+
+### Job 3c mass and COM overrun (2026-10-21, rev E)
+- **Passing design (coarse; fixed pelvis; LC1 per T&R b1fe48f):** net **+2.63 kg**. All SFs ≥ 1.04, 4.91 mm at 29 kN offset, 207 Hz.
+- **Honest floor ≈ +2.2 kg** under a fixed-pelvis BC with LC1 as given. The two-sided yoke (≈ 1.42), the closed-section waistY (+0.41) and the pelvis reinforcement (≈ 0.6–0.7) are load-driven. The bay box beyond job 3's 1.99 plus the 0.74 enclosure credit is ≈ 0.2–0.5.
+- **Whole-robot COM total ≈ 10.7–10.9 mm [EST, robot COM z ≈ 1.0 m assumed]**, over the 10 mm Controls threshold. **Not booked** into model_v4 or sim_torso_body; Controls notified via this entry.
+- **Options:**
+  1. T&R revisits the BC (a fixed pelvis is conservative for a chest fall, where the real reaction is whole-body inertia) and/or the LC1 magnitude.
+  2. The Arbiter accepts the mass overrun (≈ +1.1 kg over the +1.5 target) and Controls accepts the COM total.

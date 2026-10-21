@@ -251,3 +251,17 @@ Layout: pack/pack_layout_optA.{py,json,svg}, pack/pack_layout_optA_tables.md.
 - Getting to +1.5 would need a lower LC1 basis or a non-fixed-pelvis reaction (T&R).
 
 **COM:** Δz ≈ +4.0 mm since the booked state [EST, robot COM z ≈ 1.0 m] → cumulative ≈ 10.7 mm, **> 10. Controls flagged; not booked.**
+
+## 3c rev E (10:57), final coarse run (2 runs)
+- Changes: pelvis ribs 8 mm; socket walls at land_web.y 56.5 (inner face 50.5, so 1.5 mm to the core); notch floor top at 169.5 (1.5 mm to the core).
+- Run 1: bulkhead LC1b 0.94 at the socket wall/cap front-top corner.
+- Run 2: the upper shelf raised to z 268.5–274.5, flush with the socket cap, making a continuous plate from socket to side walls.
+- **Final, all pass:**
+  - SF LC1a/b/c/u: bulkhead 2.31/1.38/2.23/2.02; pelvis 1.26/1.13/1.17/1.04; waistY 1.41/1.14/1.77/1.23; yoke 2.97/1.94/2.71/2.59.
+  - LC2: bulkhead 1.29.
+  - Deflection 4.08 / 4.91 mm (offset) ≤ 5.5. Mode 1 207 Hz. Buckling 12.4.
+- **Mass:**
+  - Box + bulkhead 2.962 kg (mesh); cheeks 0.842 (mesh); spacers 0.225; RB7013 0.35; waistY +0.411; pelvis +0.709 (mesh 3.278 − 2.569); stop / fuses / Electronics +0.11.
+  - Credits −2.978.
+  - **Net +2.63 kg.**
+- **COM:** Δz ≈ +4.2 mm since the booked state → cumulative ≈ 10.9 mm [EST]. Not booked.

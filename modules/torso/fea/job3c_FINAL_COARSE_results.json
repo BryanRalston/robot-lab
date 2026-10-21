@@ -2,22 +2,22 @@
  "mesh_h": 25.0,
  "element": "C3D10",
  "solver": "calculix",
- "nodes": 28082,
+ "nodes": 27644,
  "elements_skipped_not_tet10": 0,
  "parts": {
-  "bulkhead": 7620,
-  "partition": 97,
-  "pelvis": 3694,
-  "waist": 2333,
+  "bulkhead": 7518,
+  "partition": 92,
+  "pelvis": 3605,
+  "waist": 2292,
   "posts": 0,
   "yoke": 585
  },
  "set_sizes": {
   "fixed": 264,
-  "land": 246,
-  "land_off": 62,
+  "land": 285,
+  "land_off": 71,
   "shoulder_flange_L": 63,
-  "pelvis_top": 609,
+  "pelvis_top": 569,
   "partition": 55,
   "ethercat_bosses": 12
  },
@@ -29,23 +29,23 @@
   "partition|pelvis": 0,
   "partition|waist": 0,
   "partition|yoke": 0,
-  "pelvis|waist": 285,
+  "pelvis|waist": 265,
   "pelvis|yoke": 0,
   "waist|yoke": 234
  },
  "mass_kg": {
-  "bulkhead": 2.9527,
+  "bulkhead": 2.9622,
   "partition": 0.0089,
-  "pelvis": 3.2277,
-  "waist": 7.1929,
+  "pelvis": 3.278,
+  "waist": 7.1919,
   "yoke": 0.8415
  },
- "mass_kg_total": 14.2237,
+ "mass_kg_total": 14.2825,
  "mass_detail": {
   "bulkhead": {
    "mat": "Al7075T651",
-   "volume_mm3": 1050782.4,
-   "kg": 2.9527
+   "volume_mm3": 1054159.8,
+   "kg": 2.9622
   },
   "partition": {
    "mat": "CFRP_QI",
@@ -54,13 +54,13 @@
   },
   "pelvis": {
    "mat": "Al7075T651",
-   "volume_mm3": 1148657.5,
-   "kg": 3.2277
+   "volume_mm3": 1166548.4,
+   "kg": 3.278
   },
   "waist": {
    "mat": "Al7075T651",
-   "volume_mm3": 2559733.7,
-   "kg": 7.1929
+   "volume_mm3": 2559379.9,
+   "kg": 7.1919
   },
   "yoke": {
    "mat": "Al7075T651",
@@ -69,7 +69,7 @@
   }
  },
  "quality_min": 6e-05,
- "quality_lt_0.01": 246,
+ "quality_lt_0.01": 236,
  "singularity_band_mm": 5.0,
  "criteria": {
   "SF_min": 1.0,
@@ -80,9 +80,9 @@
  },
  "cases": {
   "LC1a_29kN_normal": {
-   "deck": "/tmp/n6/LC1a_29kN_normal.inp",
+   "deck": "/tmp/p2/LC1a_29kN_normal.inp",
    "solved": true,
-   "seconds": 14.7,
+   "seconds": 10.0,
    "ccx_rc": 0,
    "applied_F": [
     -29000,
@@ -90,132 +90,132 @@
     0
    ],
    "reaction_F": [
-    28999.955,
+    28999.888,
     -0.0,
-    -0.005
+    0.003
    ],
-   "force_residual_N": 0.0451,
+   "force_residual_N": 0.1117,
    "equilibrium_pass": true,
    "checks": {
     "SF_bulkhead": {
      "path": "single",
      "allowable": 386,
-     "vm_max": 1083.86,
+     "vm_max": 386.91,
      "vm_loc_mm": [
-      56.24,
-      48.63,
-      171.77
+      56.75,
+      -109.12,
+      164.99
      ],
-     "vm_struct": 192.42,
+     "vm_struct": 166.78,
      "vm_struct_loc_mm": [
-      52.25,
-      110.9,
+      52.12,
+      102.18,
       277.62
      ],
-     "SF": 2.006,
-     "SF_raw": 0.356,
+     "SF": 2.314,
+     "SF_raw": 0.998,
      "pass": true
     },
     "SF_partition": {
      "path": "multi",
      "allowable": 450,
-     "vm_max": 6.1,
+     "vm_max": 5.85,
      "vm_loc_mm": [
       -62.12,
-      107.09,
+      -107.09,
       283.5
      ],
-     "vm_struct": 6.1,
+     "vm_struct": 5.85,
      "vm_struct_loc_mm": [
       -62.12,
-      107.09,
+      -107.09,
       283.5
      ],
-     "SF": 73.752,
-     "SF_raw": 73.752,
+     "SF": 76.926,
+     "SF_raw": 76.926,
      "pass": true,
-     "SF_vs_320": 52.446
+     "SF_vs_320": 54.703
     },
     "SF_pelvis": {
      "path": "single",
      "allowable": 406,
-     "vm_max": 377.66,
+     "vm_max": 322.18,
      "vm_loc_mm": [
-      -61.5,
-      59.5,
+      62.0,
+      -59.0,
       -52.0
      ],
-     "vm_struct": 377.66,
+     "vm_struct": 322.18,
      "vm_struct_loc_mm": [
-      -61.5,
-      59.5,
+      62.0,
+      -59.0,
       -52.0
      ],
-     "SF": 1.075,
-     "SF_raw": 1.075,
+     "SF": 1.26,
+     "SF_raw": 1.26,
      "pass": true
     },
     "SF_waist": {
      "path": "single",
      "allowable": 386,
-     "vm_max": 268.47,
+     "vm_max": 273.15,
      "vm_loc_mm": [
-      -16.98,
+      16.98,
       49.0,
       17.66
      ],
-     "vm_struct": 268.47,
+     "vm_struct": 273.15,
      "vm_struct_loc_mm": [
-      -16.98,
+      16.98,
       49.0,
       17.66
      ],
-     "SF": 1.438,
-     "SF_raw": 1.438,
+     "SF": 1.413,
+     "SF_raw": 1.413,
      "pass": true
     },
     "SF_yoke": {
      "path": "single",
      "allowable": 386,
-     "vm_max": 132.72,
+     "vm_max": 129.81,
      "vm_loc_mm": [
       61.36,
       112.62,
       110.32
      ],
-     "vm_struct": 132.72,
+     "vm_struct": 129.81,
      "vm_struct_loc_mm": [
       61.36,
       112.62,
       110.32
      ],
-     "SF": 2.908,
-     "SF_raw": 2.908,
+     "SF": 2.974,
+     "SF_raw": 2.974,
      "pass": true
     },
     "land_defl": {
-     "mm": 4.35788,
+     "mm": 4.07673,
      "limit_mm": 5.5,
      "pass": true
     },
     "buckling": {
-     "factor": 12.613,
+     "factor": 12.434,
      "all": [
-      12.613,
-      17.479
+      12.434,
+      12.808
      ],
      "pass": true
     },
     "equilibrium": {
-     "residual_N": 0.0451,
+     "residual_N": 0.1117,
      "pass": true
     }
    }
   },
   "LC1b_29kN_offset25": {
-   "deck": "/tmp/n6/LC1b_29kN_offset25.inp",
+   "deck": "/tmp/p2/LC1b_29kN_offset25.inp",
    "solved": true,
-   "seconds": 3.7,
+   "seconds": 2.4,
    "ccx_rc": 0,
    "applied_F": [
     -29000,
@@ -223,124 +223,124 @@
     0
    ],
    "reaction_F": [
-    28999.998,
-    0.0,
+    29000.025,
+    -0.0,
     0.002
    ],
-   "force_residual_N": 0.0024,
+   "force_residual_N": 0.0251,
    "equilibrium_pass": true,
    "checks": {
     "SF_bulkhead": {
      "path": "single",
      "allowable": 386,
-     "vm_max": 864.46,
+     "vm_max": 1028.64,
      "vm_loc_mm": [
-      55.62,
-      47.63,
-      269.22
+      55.5,
+      49.34,
+      266.99
      ],
-     "vm_struct": 372.06,
+     "vm_struct": 279.42,
      "vm_struct_loc_mm": [
       105.5,
-      53.31,
-      274.88
+      42.16,
+      271.5
      ],
-     "SF": 1.037,
-     "SF_raw": 0.447,
+     "SF": 1.381,
+     "SF_raw": 0.375,
      "pass": true
     },
     "SF_partition": {
      "path": "multi",
      "allowable": 450,
-     "vm_max": 9.6,
+     "vm_max": 9.46,
      "vm_loc_mm": [
       -62.12,
       -107.09,
       283.5
      ],
-     "vm_struct": 9.6,
+     "vm_struct": 9.46,
      "vm_struct_loc_mm": [
       -62.12,
       -107.09,
       283.5
      ],
-     "SF": 46.89,
-     "SF_raw": 46.89,
+     "SF": 47.587,
+     "SF_raw": 47.587,
      "pass": true,
-     "SF_vs_320": 33.344
+     "SF_vs_320": 33.84
     },
     "SF_pelvis": {
      "path": "single",
      "allowable": 406,
-     "vm_max": 428.63,
+     "vm_max": 358.61,
      "vm_loc_mm": [
-      -61.5,
-      59.5,
+      -62.0,
+      59.0,
       -52.0
      ],
-     "vm_struct": 428.63,
+     "vm_struct": 358.61,
      "vm_struct_loc_mm": [
-      -61.5,
-      59.5,
+      -62.0,
+      59.0,
       -52.0
      ],
-     "SF": 0.947,
-     "SF_raw": 0.947,
-     "pass": false
+     "SF": 1.132,
+     "SF_raw": 1.132,
+     "pass": true
     },
     "SF_waist": {
      "path": "single",
      "allowable": 386,
-     "vm_max": 331.22,
+     "vm_max": 337.82,
      "vm_loc_mm": [
-      -16.98,
+      16.98,
       49.0,
       17.66
      ],
-     "vm_struct": 331.22,
+     "vm_struct": 337.82,
      "vm_struct_loc_mm": [
-      -16.98,
+      16.98,
       49.0,
       17.66
      ],
-     "SF": 1.165,
-     "SF_raw": 1.165,
+     "SF": 1.143,
+     "SF_raw": 1.143,
      "pass": true
     },
     "SF_yoke": {
      "path": "single",
      "allowable": 386,
-     "vm_max": 203.19,
+     "vm_max": 199.48,
      "vm_loc_mm": [
       61.36,
       112.62,
       110.32
      ],
-     "vm_struct": 203.19,
+     "vm_struct": 199.48,
      "vm_struct_loc_mm": [
       61.36,
       112.62,
       110.32
      ],
-     "SF": 1.9,
-     "SF_raw": 1.9,
+     "SF": 1.935,
+     "SF_raw": 1.935,
      "pass": true
     },
     "land_defl": {
-     "mm": 5.20958,
+     "mm": 4.91326,
      "limit_mm": 5.5,
      "pass": true
     },
     "equilibrium": {
-     "residual_N": 0.0024,
+     "residual_N": 0.0251,
      "pass": true
     }
    }
   },
   "LC1c_25deg": {
-   "deck": "/tmp/n6/LC1c_25deg.inp",
+   "deck": "/tmp/p2/LC1c_25deg.inp",
    "solved": true,
-   "seconds": 4.3,
+   "seconds": 2.5,
    "ccx_rc": 0,
    "applied_F": [
     -21200,
@@ -348,124 +348,124 @@
     0
    ],
    "reaction_F": [
-    21200.01,
-    -9899.999,
-    -0.0
+    21200.008,
+    -9899.988,
+    -0.001
    ],
-   "force_residual_N": 0.0104,
+   "force_residual_N": 0.014,
    "equilibrium_pass": true,
    "checks": {
     "SF_bulkhead": {
      "path": "single",
      "allowable": 386,
-     "vm_max": 841.11,
+     "vm_max": 346.99,
      "vm_loc_mm": [
-      56.24,
-      48.63,
-      171.77
+      56.75,
+      109.12,
+      164.99
      ],
-     "vm_struct": 184.41,
+     "vm_struct": 173.23,
      "vm_struct_loc_mm": [
       39.62,
       113.5,
       277.24
      ],
-     "SF": 2.093,
-     "SF_raw": 0.459,
+     "SF": 2.228,
+     "SF_raw": 1.112,
      "pass": true
     },
     "SF_partition": {
      "path": "multi",
      "allowable": 450,
-     "vm_max": 5.08,
+     "vm_max": 4.91,
      "vm_loc_mm": [
-      -62.75,
+      -62.5,
       -83.93,
       283.5
      ],
-     "vm_struct": 5.08,
+     "vm_struct": 4.91,
      "vm_struct_loc_mm": [
-      -62.75,
+      -62.5,
       -83.93,
       283.5
      ],
-     "SF": 88.634,
-     "SF_raw": 88.634,
+     "SF": 91.587,
+     "SF_raw": 91.587,
      "pass": true,
-     "SF_vs_320": 63.028
+     "SF_vs_320": 65.129
     },
     "SF_pelvis": {
      "path": "single",
      "allowable": 406,
-     "vm_max": 428.97,
+     "vm_max": 346.41,
      "vm_loc_mm": [
-      53.5,
-      -38.95,
+      30.16,
+      -59.0,
       -52.92
      ],
-     "vm_struct": 428.97,
+     "vm_struct": 346.41,
      "vm_struct_loc_mm": [
-      53.5,
-      -38.95,
+      30.16,
+      -59.0,
       -52.92
      ],
-     "SF": 0.946,
-     "SF_raw": 0.946,
-     "pass": false
+     "SF": 1.172,
+     "SF_raw": 1.172,
+     "pass": true
     },
     "SF_waist": {
      "path": "single",
      "allowable": 386,
-     "vm_max": 220.0,
+     "vm_max": 218.32,
      "vm_loc_mm": [
       -16.98,
       49.0,
       17.66
      ],
-     "vm_struct": 220.0,
+     "vm_struct": 218.32,
      "vm_struct_loc_mm": [
       -16.98,
       49.0,
       17.66
      ],
-     "SF": 1.755,
-     "SF_raw": 1.755,
+     "SF": 1.768,
+     "SF_raw": 1.768,
      "pass": true
     },
     "SF_yoke": {
      "path": "single",
      "allowable": 386,
-     "vm_max": 139.35,
+     "vm_max": 142.32,
      "vm_loc_mm": [
       50.65,
       106.38,
       118.5
      ],
-     "vm_struct": 139.35,
+     "vm_struct": 142.32,
      "vm_struct_loc_mm": [
       50.65,
       106.38,
       118.5
      ],
-     "SF": 2.77,
-     "SF_raw": 2.77,
+     "SF": 2.712,
+     "SF_raw": 2.712,
      "pass": true
     },
     "land_defl": {
-     "mm": 3.73509,
+     "mm": 3.41623,
      "limit_mm": 5.5,
      "pass": true
     },
     "equilibrium": {
-     "residual_N": 0.0104,
+     "residual_N": 0.014,
      "pass": true
     }
    }
   },
   "LC1u_43p5kN_ultimate": {
-   "deck": "/tmp/n6/LC1u_43p5kN_ultimate.inp",
+   "deck": "/tmp/p2/LC1u_43p5kN_ultimate.inp",
    "solved": true,
-   "seconds": 4.8,
+   "seconds": 2.5,
    "ccx_rc": 0,
    "applied_F": [
     -43500,
@@ -473,124 +473,124 @@
     0
    ],
    "reaction_F": [
-    43499.932,
-    0.001,
-    -0.003
+    43500.117,
+    0.0,
+    -0.002
    ],
-   "force_residual_N": 0.0683,
+   "force_residual_N": 0.1168,
    "equilibrium_pass": true,
    "checks": {
     "SF_bulkhead": {
      "path": "single",
      "allowable": 504,
-     "vm_max": 1625.79,
+     "vm_max": 580.37,
      "vm_loc_mm": [
-      56.24,
-      48.63,
-      171.77
+      56.75,
+      -109.12,
+      164.99
      ],
-     "vm_struct": 288.62,
+     "vm_struct": 250.17,
      "vm_struct_loc_mm": [
-      52.25,
-      110.9,
+      52.12,
+      102.18,
       277.62
      ],
-     "SF": 1.746,
-     "SF_raw": 0.31,
+     "SF": 2.015,
+     "SF_raw": 0.868,
      "pass": true
     },
     "SF_partition": {
      "path": "multi",
      "allowable": 600,
-     "vm_max": 9.15,
+     "vm_max": 8.77,
      "vm_loc_mm": [
       -62.12,
-      107.09,
+      -107.09,
       283.5
      ],
-     "vm_struct": 9.15,
+     "vm_struct": 8.77,
      "vm_struct_loc_mm": [
       -62.12,
-      107.09,
+      -107.09,
       283.5
      ],
-     "SF": 65.557,
-     "SF_raw": 65.557,
+     "SF": 68.378,
+     "SF_raw": 68.378,
      "pass": true,
-     "SF_vs_320": 34.964
+     "SF_vs_320": 36.468
     },
     "SF_pelvis": {
      "path": "single",
      "allowable": 504,
-     "vm_max": 566.48,
+     "vm_max": 483.27,
      "vm_loc_mm": [
-      -61.5,
-      59.5,
+      62.0,
+      -59.0,
       -52.0
      ],
-     "vm_struct": 566.48,
+     "vm_struct": 483.27,
      "vm_struct_loc_mm": [
-      -61.5,
-      59.5,
+      62.0,
+      -59.0,
       -52.0
      ],
-     "SF": 0.89,
-     "SF_raw": 0.89,
-     "pass": false
+     "SF": 1.043,
+     "SF_raw": 1.043,
+     "pass": true
     },
     "SF_waist": {
      "path": "single",
      "allowable": 504,
-     "vm_max": 402.71,
+     "vm_max": 409.72,
      "vm_loc_mm": [
-      -16.98,
+      16.98,
       49.0,
       17.66
      ],
-     "vm_struct": 402.71,
+     "vm_struct": 409.72,
      "vm_struct_loc_mm": [
-      -16.98,
+      16.98,
       49.0,
       17.66
      ],
-     "SF": 1.252,
-     "SF_raw": 1.252,
+     "SF": 1.23,
+     "SF_raw": 1.23,
      "pass": true
     },
     "SF_yoke": {
      "path": "single",
      "allowable": 504,
-     "vm_max": 199.07,
+     "vm_max": 194.72,
      "vm_loc_mm": [
       61.36,
       112.62,
       110.32
      ],
-     "vm_struct": 199.07,
+     "vm_struct": 194.72,
      "vm_struct_loc_mm": [
       61.36,
       112.62,
       110.32
      ],
-     "SF": 2.532,
-     "SF_raw": 2.532,
+     "SF": 2.588,
+     "SF_raw": 2.588,
      "pass": true
     },
     "land_defl": {
-     "mm": 6.53682,
+     "mm": 6.11514,
      "limit_mm": 5.5,
      "pass": false
     },
     "equilibrium": {
-     "residual_N": 0.0683,
+     "residual_N": 0.1168,
      "pass": true
     }
    }
   },
   "LC2_side_fall": {
-   "deck": "/tmp/n6/LC2_side_fall.inp",
+   "deck": "/tmp/p2/LC2_side_fall.inp",
    "solved": true,
-   "seconds": 3.7,
+   "seconds": 2.6,
    "ccx_rc": 0,
    "applied_F": [
     0,
@@ -598,7 +598,7 @@
     0
    ],
    "reaction_F": [
-    -0.001,
+    -0.0,
     8999.991,
     0.0
    ],
@@ -608,101 +608,101 @@
     "SF_bulkhead": {
      "path": "single",
      "allowable": 257,
-     "vm_max": 221.84,
+     "vm_max": 258.51,
      "vm_loc_mm": [
       56.75,
       109.12,
       164.99
      ],
-     "vm_struct": 197.22,
+     "vm_struct": 198.98,
      "vm_struct_loc_mm": [
       39.75,
       112.75,
       138.2
      ],
-     "SF": 1.303,
-     "SF_raw": 1.158,
+     "SF": 1.292,
+     "SF_raw": 0.994,
      "pass": true
     },
     "SF_partition": {
      "path": "multi",
      "allowable": 450,
-     "vm_max": 7.43,
+     "vm_max": 7.65,
      "vm_loc_mm": [
       -62.12,
       107.09,
       283.5
      ],
-     "vm_struct": 7.43,
+     "vm_struct": 7.65,
      "vm_struct_loc_mm": [
       -62.12,
       107.09,
       283.5
      ],
-     "SF": 60.6,
-     "SF_raw": 60.6,
+     "SF": 58.8,
+     "SF_raw": 58.8,
      "pass": true,
-     "SF_vs_320": 43.093
+     "SF_vs_320": 41.813
     },
     "SF_pelvis": {
      "path": "single",
      "allowable": 271,
-     "vm_max": 200.38,
+     "vm_max": 149.92,
      "vm_loc_mm": [
-      53.5,
-      -38.95,
-      -52.92
+      63.5,
+      63.0,
+      -52.0
      ],
-     "vm_struct": 200.38,
+     "vm_struct": 149.92,
      "vm_struct_loc_mm": [
-      53.5,
-      -38.95,
-      -52.92
+      63.5,
+      63.0,
+      -52.0
      ],
-     "SF": 1.352,
-     "SF_raw": 1.352,
+     "SF": 1.808,
+     "SF_raw": 1.808,
      "pass": true
     },
     "SF_waist": {
      "path": "single",
      "allowable": 257,
-     "vm_max": 93.96,
+     "vm_max": 86.11,
      "vm_loc_mm": [
       11.36,
       51.0,
       18.73
      ],
-     "vm_struct": 93.96,
+     "vm_struct": 86.11,
      "vm_struct_loc_mm": [
       11.36,
       51.0,
       18.73
      ],
-     "SF": 2.735,
-     "SF_raw": 2.735,
+     "SF": 2.985,
+     "SF_raw": 2.985,
      "pass": true
     },
     "SF_yoke": {
      "path": "single",
      "allowable": 257,
-     "vm_max": 76.45,
+     "vm_max": 77.27,
      "vm_loc_mm": [
       50.65,
       106.38,
       118.5
      ],
-     "vm_struct": 76.45,
+     "vm_struct": 77.27,
      "vm_struct_loc_mm": [
       50.65,
       106.38,
       118.5
      ],
-     "SF": 3.362,
-     "SF_raw": 3.362,
+     "SF": 3.326,
+     "SF_raw": 3.326,
      "pass": true
     },
     "land_defl": {
-     "mm": 1.71167,
+     "mm": 1.47066,
      "limit_mm": 5.5,
      "pass": null
     },
@@ -713,9 +713,9 @@
    }
   },
   "LC3_waist_reach": {
-   "deck": "/tmp/n6/LC3_waist_reach.inp",
+   "deck": "/tmp/p2/LC3_waist_reach.inp",
    "solved": true,
-   "seconds": 3.5,
+   "seconds": 2.8,
    "ccx_rc": 0,
    "applied_F": [
     0,
@@ -727,7 +727,7 @@
     -0.0,
     0.001
    ],
-   "force_residual_N": 0.0007,
+   "force_residual_N": 0.001,
    "equilibrium_pass": true,
    "checks": {
     "SF_bulkhead": {
@@ -735,18 +735,18 @@
      "allowable": 257,
      "vm_max": 0.0,
      "vm_loc_mm": [
-      60.91,
-      98.69,
+      61.15,
+      98.48,
       123.6
      ],
      "vm_struct": 0.0,
      "vm_struct_loc_mm": [
-      60.91,
-      98.69,
+      61.15,
+      98.48,
       123.6
      ],
-     "SF": 4033233.475,
-     "SF_raw": 4033233.475,
+     "SF": 3987704.929,
+     "SF_raw": 3987704.929,
      "pass": true
     },
     "SF_partition": {
@@ -754,57 +754,57 @@
      "allowable": 450,
      "vm_max": 0.0,
      "vm_loc_mm": [
-      -62.75,
+      -62.5,
       -83.93,
       283.5
      ],
      "vm_struct": 0.0,
      "vm_struct_loc_mm": [
-      -62.75,
+      -62.5,
       -83.93,
       283.5
      ],
-     "SF": 303944807.568,
-     "SF_raw": 303944807.568,
+     "SF": 352686495.472,
+     "SF_raw": 352686495.472,
      "pass": true,
-     "SF_vs_320": 216138529.826
+     "SF_vs_320": 250799285.669
     },
     "SF_pelvis": {
      "path": "single",
      "allowable": 271,
-     "vm_max": 5.51,
+     "vm_max": 4.74,
      "vm_loc_mm": [
-      -61.5,
-      59.5,
+      62.0,
+      -59.0,
       -52.0
      ],
-     "vm_struct": 5.51,
+     "vm_struct": 4.74,
      "vm_struct_loc_mm": [
-      -61.5,
-      59.5,
+      62.0,
+      -59.0,
       -52.0
      ],
-     "SF": 49.215,
-     "SF_raw": 49.215,
+     "SF": 57.167,
+     "SF_raw": 57.167,
      "pass": true
     },
     "SF_waist": {
      "path": "single",
      "allowable": 257,
-     "vm_max": 0.75,
+     "vm_max": 0.4,
      "vm_loc_mm": [
-      -54.12,
-      -0.26,
-      -67.56
+      -53.5,
+      -0.0,
+      -67.55
      ],
-     "vm_struct": 0.75,
+     "vm_struct": 0.4,
      "vm_struct_loc_mm": [
-      -54.12,
-      -0.26,
-      -67.56
+      -53.5,
+      -0.0,
+      -67.55
      ],
-     "SF": 343.327,
-     "SF_raw": 343.327,
+     "SF": 645.661,
+     "SF_raw": 645.661,
      "pass": true
     },
     "SF_yoke": {
@@ -812,35 +812,35 @@
      "allowable": 257,
      "vm_max": 0.0,
      "vm_loc_mm": [
-      -6.0,
-      105.75,
-      119.36
+      63.38,
+      108.28,
+      119.05
      ],
      "vm_struct": 0.0,
      "vm_struct_loc_mm": [
-      -6.0,
-      105.75,
-      119.36
+      63.38,
+      108.28,
+      119.05
      ],
-     "SF": 3461863.191,
-     "SF_raw": 3461863.191,
+     "SF": 3794763.105,
+     "SF_raw": 3794763.105,
      "pass": true
     },
     "land_defl": {
-     "mm": 0.02177,
+     "mm": 0.01968,
      "limit_mm": 5.5,
      "pass": null
     },
     "equilibrium": {
-     "residual_N": 0.0007,
+     "residual_N": 0.001,
      "pass": true
     }
    }
   },
   "LC4_pack_10g": {
-   "deck": "/tmp/n6/LC4_pack_10g.inp",
+   "deck": "/tmp/p2/LC4_pack_10g.inp",
    "solved": true,
-   "seconds": 3.4,
+   "seconds": 2.6,
    "ccx_rc": 0,
    "applied_F": [
     0,
@@ -848,8 +848,8 @@
     -858
    ],
    "reaction_F": [
-    0.0,
     -0.0,
+    0.0,
     858.0
    ],
    "force_residual_N": 0.0,
@@ -858,101 +858,101 @@
     "SF_bulkhead": {
      "path": "single",
      "allowable": 257,
-     "vm_max": 19.14,
+     "vm_max": 19.27,
      "vm_loc_mm": [
       -61.33,
       -108.5,
       277.62
      ],
-     "vm_struct": 19.14,
+     "vm_struct": 19.27,
      "vm_struct_loc_mm": [
       -61.33,
       -108.5,
       277.62
      ],
-     "SF": 13.428,
-     "SF_raw": 13.428,
+     "SF": 13.334,
+     "SF_raw": 13.334,
      "pass": true
     },
     "SF_partition": {
      "path": "multi",
      "allowable": 450,
-     "vm_max": 25.21,
+     "vm_max": 24.97,
      "vm_loc_mm": [
-      -62.38,
-      44.21,
-      298.17
+      -62.5,
+      -2.95,
+      294.5
      ],
-     "vm_struct": 25.21,
+     "vm_struct": 24.97,
      "vm_struct_loc_mm": [
-      -62.38,
-      44.21,
-      298.17
+      -62.5,
+      -2.95,
+      294.5
      ],
-     "SF": 17.85,
-     "SF_raw": 17.85,
+     "SF": 18.021,
+     "SF_raw": 18.021,
      "pass": true,
-     "SF_vs_320": 12.693
+     "SF_vs_320": 12.815
     },
     "SF_pelvis": {
      "path": "single",
      "allowable": 271,
-     "vm_max": 5.32,
+     "vm_max": 4.54,
      "vm_loc_mm": [
-      -61.5,
-      59.5,
+      -62.0,
+      59.0,
       -52.0
      ],
-     "vm_struct": 5.32,
+     "vm_struct": 4.54,
      "vm_struct_loc_mm": [
-      -61.5,
-      59.5,
+      -62.0,
+      59.0,
       -52.0
      ],
-     "SF": 50.945,
-     "SF_raw": 50.945,
+     "SF": 59.652,
+     "SF_raw": 59.652,
      "pass": true
     },
     "SF_waist": {
      "path": "single",
      "allowable": 257,
-     "vm_max": 3.36,
+     "vm_max": 3.49,
      "vm_loc_mm": [
-      -16.98,
-      49.0,
-      17.66
+      -17.29,
+      -57.0,
+      18.85
      ],
-     "vm_struct": 3.36,
+     "vm_struct": 3.49,
      "vm_struct_loc_mm": [
-      -16.98,
-      49.0,
-      17.66
+      -17.29,
+      -57.0,
+      18.85
      ],
-     "SF": 76.491,
-     "SF_raw": 76.491,
+     "SF": 73.541,
+     "SF_raw": 73.541,
      "pass": true
     },
     "SF_yoke": {
      "path": "single",
      "allowable": 257,
-     "vm_max": 3.94,
+     "vm_max": 3.95,
      "vm_loc_mm": [
       -61.39,
       112.62,
       110.33
      ],
-     "vm_struct": 3.94,
+     "vm_struct": 3.95,
      "vm_struct_loc_mm": [
       -61.39,
       112.62,
       110.33
      ],
-     "SF": 65.22,
-     "SF_raw": 65.22,
+     "SF": 65.08,
+     "SF_raw": 65.08,
      "pass": true
     },
     "land_defl": {
-     "mm": 0.03018,
+     "mm": 0.02846,
      "limit_mm": 5.5,
      "pass": null
     },
@@ -963,9 +963,9 @@
    }
   },
   "LC5_bosses_50g": {
-   "deck": "/tmp/n6/LC5_bosses_50g.inp",
+   "deck": "/tmp/p2/LC5_bosses_50g.inp",
    "solved": true,
-   "seconds": 3.4,
+   "seconds": 2.5,
    "ccx_rc": 0,
    "applied_F": [
     -25,
@@ -983,59 +983,59 @@
     "SF_bulkhead": {
      "path": "single",
      "allowable": 257,
-     "vm_max": 2.14,
+     "vm_max": 2.11,
      "vm_loc_mm": [
       -64.25,
       86.12,
       277.62
      ],
-     "vm_struct": 2.14,
+     "vm_struct": 2.11,
      "vm_struct_loc_mm": [
       -64.25,
       86.12,
       277.62
      ],
-     "SF": 119.893,
-     "SF_raw": 119.893,
+     "SF": 121.736,
+     "SF_raw": 121.736,
      "pass": true
     },
     "SF_partition": {
      "path": "multi",
      "allowable": 450,
-     "vm_max": 2.08,
+     "vm_max": 1.92,
      "vm_loc_mm": [
-      -62.12,
-      46.85,
-      292.67
+      -62.25,
+      0.0,
+      289.0
      ],
-     "vm_struct": 2.08,
+     "vm_struct": 1.92,
      "vm_struct_loc_mm": [
-      -62.12,
-      46.85,
-      292.67
+      -62.25,
+      0.0,
+      289.0
      ],
-     "SF": 216.49,
-     "SF_raw": 216.49,
+     "SF": 234.628,
+     "SF_raw": 234.628,
      "pass": true,
-     "SF_vs_320": 153.948
+     "SF_vs_320": 166.847
     },
     "SF_pelvis": {
      "path": "single",
      "allowable": 271,
-     "vm_max": 0.56,
+     "vm_max": 0.47,
      "vm_loc_mm": [
-      -61.5,
-      59.5,
+      -62.0,
+      59.0,
       -52.0
      ],
-     "vm_struct": 0.56,
+     "vm_struct": 0.47,
      "vm_struct_loc_mm": [
-      -61.5,
-      59.5,
+      -62.0,
+      59.0,
       -52.0
      ],
-     "SF": 483.896,
-     "SF_raw": 483.896,
+     "SF": 571.355,
+     "SF_raw": 571.355,
      "pass": true
     },
     "SF_waist": {
@@ -1043,18 +1043,18 @@
      "allowable": 257,
      "vm_max": 0.4,
      "vm_loc_mm": [
-      -16.98,
-      49.0,
-      17.66
+      -17.29,
+      -57.0,
+      18.85
      ],
      "vm_struct": 0.4,
      "vm_struct_loc_mm": [
-      -16.98,
-      49.0,
-      17.66
+      -17.29,
+      -57.0,
+      18.85
      ],
-     "SF": 641.631,
-     "SF_raw": 641.631,
+     "SF": 642.241,
+     "SF_raw": 642.241,
      "pass": true
     },
     "SF_yoke": {
@@ -1072,12 +1072,12 @@
       112.62,
       110.33
      ],
-     "SF": 827.353,
-     "SF_raw": 827.353,
+     "SF": 825.773,
+     "SF_raw": 825.773,
      "pass": true
     },
     "land_defl": {
-     "mm": 0.00525,
+     "mm": 0.00492,
      "limit_mm": 5.5,
      "pass": null
     },
@@ -1088,9 +1088,9 @@
    }
   },
   "LC6_stand": {
-   "deck": "/tmp/n6/LC6_stand.inp",
+   "deck": "/tmp/p2/LC6_stand.inp",
    "solved": true,
-   "seconds": 11.3,
+   "seconds": 8.2,
    "ccx_rc": 0,
    "applied_F": [
     0,
@@ -1099,10 +1099,10 @@
    ],
    "reaction_F": [
     -0.0,
-    0.0,
-    652.001
+    -0.0,
+    652.0
    ],
-   "force_residual_N": 0.0015,
+   "force_residual_N": 0.0,
    "equilibrium_pass": true,
    "checks": {
     "SF_bulkhead": {
@@ -1116,12 +1116,12 @@
      ],
      "vm_struct": 0.0,
      "vm_struct_loc_mm": [
-      34.66,
-      -19.16,
+      34.97,
+      2.92,
       124.6
      ],
-     "SF": 531258.798,
-     "SF_raw": 254888.144,
+     "SF": 550611.44,
+     "SF_raw": 257928.559,
      "pass": true
     },
     "SF_partition": {
@@ -1129,57 +1129,57 @@
      "allowable": 450,
      "vm_max": 0.0,
      "vm_loc_mm": [
-      -62.62,
-      -44.21,
-      298.17
+      -62.75,
+      2.95,
+      294.5
      ],
      "vm_struct": 0.0,
      "vm_struct_loc_mm": [
-      -62.62,
-      -44.21,
-      298.17
+      -62.75,
+      2.95,
+      294.5
      ],
-     "SF": 77061902.068,
-     "SF_raw": 77061902.068,
+     "SF": 76851431.687,
+     "SF_raw": 76851431.687,
      "pass": true,
-     "SF_vs_320": 54799574.804
+     "SF_vs_320": 54649906.978
     },
     "SF_pelvis": {
      "path": "single",
      "allowable": 271,
-     "vm_max": 1.19,
+     "vm_max": 1.04,
      "vm_loc_mm": [
-      -61.5,
-      59.5,
+      -62.0,
+      59.0,
       -52.0
      ],
-     "vm_struct": 1.19,
+     "vm_struct": 1.04,
      "vm_struct_loc_mm": [
-      -61.5,
-      59.5,
+      -62.0,
+      59.0,
       -52.0
      ],
-     "SF": 227.36,
-     "SF_raw": 227.36,
+     "SF": 261.238,
+     "SF_raw": 261.238,
      "pass": true
     },
     "SF_waist": {
      "path": "single",
      "allowable": 257,
-     "vm_max": 0.25,
+     "vm_max": 0.14,
      "vm_loc_mm": [
-      -54.12,
-      -0.26,
-      -67.56
+      39.17,
+      -27.28,
+      -45.53
      ],
-     "vm_struct": 0.25,
+     "vm_struct": 0.14,
      "vm_struct_loc_mm": [
-      -54.12,
-      -0.26,
-      -67.56
+      39.17,
+      -27.28,
+      -45.53
      ],
-     "SF": 1041.335,
-     "SF_raw": 1041.335,
+     "SF": 1787.741,
+     "SF_raw": 1787.741,
      "pass": true
     },
     "SF_yoke": {
@@ -1197,31 +1197,31 @@
       -105.75,
       121.1
      ],
-     "SF": 241665.132,
-     "SF_raw": 241665.132,
+     "SF": 244082.092,
+     "SF_raw": 244082.092,
      "pass": true
     },
     "land_defl": {
-     "mm": 0.00139,
+     "mm": 0.00126,
      "limit_mm": 5.5,
      "pass": null
     },
     "mode1_hz": {
-     "hz": 190.42,
+     "hz": 206.73,
      "all_hz": [
-      190.42,
-      242.38,
-      556.12
+      206.73,
+      251.41,
+      582.61
      ],
      "pass": true
     },
     "equilibrium": {
-     "residual_N": 0.0015,
+     "residual_N": 0.0,
      "pass": true
     }
    }
   }
  },
  "overall": "FAIL",
- "wall_s": 55.1
+ "wall_s": 37.9
 }
