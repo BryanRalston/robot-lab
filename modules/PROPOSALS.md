@@ -486,20 +486,11 @@ All keep R-076 (reinforced isolation, IEC 60664-1 creepage, IP2X), R-074 (main l
 ### P-158: ID: thigh-front knee-pad extension (Controls 49fd991)
 - Crushable honeycomb + CF + TPU strip on the thigh front, z 540–590 (s 40–90 above the knee axis), y 95–165, laps the knee pad. Covers thigh contact angles 0–50.1° (needed 2–22°). Clear of the vents, the rev 8 panel and H4. +0.028 kg pair [EST]. Legs CAD ROM check owed. Evidence: design/thigh_knee_pad_p158.json, V5_COVER_SET.md.
 
-### P-159: Actuators: PU knee stop pair — rev D99 r75b (r75, contact 130°), **0.487 kg robot** (D99 0.344 + Legs leg-side 0.143, Legs L84 r2 6a3d84c): **FAIL vs 0.35 cap, pending Robot Lab ruling**
+### P-159: Actuators: PU knee stop pair — rev D99 r75b (r75, contact 130°), **0.487 kg robot** (D99 0.344 + Legs leg-side 0.143, Legs L84 r2 6a3d84c): **ACCEPTED at 0.49 kg cap (Robot Lab r75b ruling 2026-10-21); Legs tapered arms + mass reconcile pending**
 - **Change (D99, T&R 8c7ac56 limits):** 2 stacks per knee, each 24 × 20, 7 × 10.17 mm PUR90A + 6 × 1 mm 7075 shims + guide pin, at r 75, contact 130°. **544 N·m / 7.3 kN at 44.1 J**; 25 % bottoming 95.8 J (≥ 92.5) at 143.6°, 789 N·m / 10.5 kN; rate ×1.3 [EST]. C1, bottoming, C2 and top-out PASS; mass FAIL.
 - **Mass:** **0.487 kg robot** (Legs L84 r2 6a3d84c: 24×18 striker arms, ring ø51×3×24 + 2× ø6 pins). Savings options in KNEE_STOP_PU_D99.md (best: tapered arms −0.08 to −0.10 kg).
 - **Evidence:** modules/actuators/results/KNEE_STOP_PU_D99.md, knee_stop_pu_d99.py/.json, knee_stop_sweep_d99.py/.json, cad/knee_stop_pu_r75b_d99.step (r75b; r75/D98/D97 kept), sweep knee_stop_sweep_d99b.json min 4.5 mm.
 - **Gates:** Legs collar/lug integration and check at 10.5 kN × 1.3; Controls TUCK with contact at 130° and the D99 curve; TP-G5-20 drop test for the rate factor.
-### P-159: Actuators: PU knee stop pair — rev D98 (r75, contact 133°), +0.807 kg robot (was D97 r60 +0.263)
-- **Change (D98, supersedes D97 geometry):** 2 stacks per knee, each 28 × 21, 6 × 9.25 mm PUR90A + 5 × 1.5 shims + ø6 guide pin, at r 75. Contact at 133°. **834 N·m / 11.1 kN at 66 J (141.9°)**, 815 N·m at 62.7 J. Bottoms at 92.5 J (143.6°, 978 N·m). Thigh-fixed outboard of the knee screws (y 32–60 / 200–228). Strikers are tibia lugs. Swept ≥ 6.4 mm (t0 −20).
-- **Mass:** 0.403 kg per knee, **+0.807 kg robot** [EST, includes the 80 g femur collar bar].
-- **Evidence:** modules/actuators/results/KNEE_STOP_PU_D98.md, knee_stop_pu_d98.py/.json, knee_stop_sweep_d98.py/.json, cad/knee_stop_pu_r75_d98.step (D97 files kept for history).
-- **Gates:** Legs femur collar + tibia lug check at 13.0 kN (bottoming) / 11.1 kN design; tube moment at 834 N·m (+ motor per T&R B3); Controls re-run with the D98 curve and contact 133°.
-- **[WITHDRAWN: stops were a 10 mm standing trap; notch + J-channel carried into 8f] P-023 rev 8d (T&R 76de66a):** notch +1.5 mm → shroud 29.8 mm (27.8 tol) at 3.6° overtravel PASS; 2 × 55 mm PA12 foam-capped stops per panel inboard edge (rigid 110 mm, foam faces 30 mm, ~0 N on hand), +0.010 kg/side; J-channel 14.5 mm press fit; empty r8c_pelvis.stl deleted. Retained 34.2 %.
-- **[WITHDRAWN: seats in ≤2 % of closures] P-023 rev 8e (option a, stop-in-cup):** drawn (hip_skirt_r8e_stops.*); seats in ≤2.2 % of closing both-leg poses (median miss 87 mm) → FAIL as a hand guard; GF30 + breakaway needed for powered; 0.069 kg/side. Recommend load-limited limp (≤140 N measured / damped) instead.
-- **P-023 rev 8f (CURRENT):** 8c geometry (d58ffa4, LD29 15×40 hem/notch, 20×40×130 L/R) + 8d notch (27.8 mm with tol at 3.6°) + 14.5 J-channel press fit, no stops. Load-limited hand protection: Controls keep-out warn 35/limit 30/trip 28 mm on panel surfaces (powered); limp clamp ≤140 N measured in TP-G5-18 (EST ~127 N, limp hold pending Actuators/Controls). ≈ −0.296 kg vs v5 [EST]. hip_skirt_r8f.*
-
 ### P-160: Torso: waist-pitch yoke hard stop rated 4.36 kN·m (for T&R + Actuators), +0.05 kg [EST]
 - **Why:** with the two-sided yoke (3c-final), the LC1 chest load puts 29 kN × 0.150 m = **4.36 kN·m** about the waist-pitch axis (ultimate 6.54 kN·m). The waist_pitch motor is rated 116 N·m (sim v3 ctrlrange), so the moment has to go into a hard stop, not the gear train.
 - **Requirement (draft):**
