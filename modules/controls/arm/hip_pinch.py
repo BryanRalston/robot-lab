@@ -14,8 +14,11 @@ from scipy.spatial import cKDTree
 ROOT = Path(__file__).resolve().parents[3]
 ID_SCRIPT = ROOT / 'modules/design/cad/covers/hip_skirt_r8.py'
 ASYM = ROOT / 'modules/design/cad/covers/hip_skirt_r8_asym.py'
-HEM_R = 144.0  # rev 8b
-WARN, LIMIT, TRIP = 40.0, 35.0, 33.0  # T&R 76de66a stopgap (+5 mm); nominal 35/30/28
+HEM_R = 144.0  # rev 8b (fallback REV='8b')
+REV = "8c"
+COV = ROOT / 'modules/design/cad/covers'
+JCH = 3.0  # rev 8c rigid PC J-channel lip on the hem (foam excluded)
+WARN, LIMIT, TRIP = 35.0, 30.0, 28.0  # nominal on rev 8c rigid geometry (stopgap 40/35/33 of T&R 76de66a retired with this rebuild)
 HIP = ['hip_pitch', 'hip_roll', 'hip_yaw']
 _G = {}
 
@@ -27,7 +30,17 @@ def geometry():
     ns = {'__file__': str(ID_SCRIPT)}; exec(compile(src, 'hip_skirt_r8', 'exec'), ns)
     asym = {'__file__': str(ASYM)}; a = ASYM.read_text().split('rng=np.random')[0]
     exec(compile(a, 'hip_skirt_r8_asym', 'exec'), asym)
-    _G.update(P=asym['panel'](y0=86, c=40, phi0=45), T=ns['T'], KT=ns['KT'], mir=ns['mir'])
+    if REV == '8b':
+        _G.update(P=asym['panel'](y0=86, c=40, phi0=45), T=ns['T'], KT=ns['KT'], mir=ns['mir'], off=0.0); return _G
+    import trimesh  # rev 8c (ID ee80543): rigid panel STL (R152 relief, y86 + chamfer) and notched hem STL (R141.5)
+    pm = trimesh.load(COV / 'hip_skirt_r8c_thigh_panel.stl', force='mesh')
+    hm = trimesh.load(COV / 'hip_skirt_r8c_pelvis_notched.stl', force='mesh')
+    P = np.vstack([pm.vertices, trimesh.sample.sample_surface_even(pm, 4000, seed=0)[0]])
+    P = P[P[:, 0] <= P[:, 0].max() - 1.0]  # inboard skin of the 1.5 mm hull only (drop the offset copy)
+    _, ix = np.unique(np.round(P / 2.0), axis=0, return_index=True); P = P[np.sort(ix)]  # 2 mm voxel thin-out (<=~1 mm error)
+    KH = np.vstack([hm.vertices, hm.triangles_center])
+    _, ix = np.unique(np.round(KH / 2.0), axis=0, return_index=True); KH = KH[ix]
+    _G.update(P=P, T=ns['T'], KT=cKDTree(KH), mir=ns['mir'], off=JCH)
     return _G
 
 def _deg(q, sd, j): return float(np.degrees(q.get(f'{sd}_{j}', 0.0)))
@@ -37,8 +50,9 @@ def gaps(q: dict):
     g = geometry(); T, P, mir = g['T'], g['P'], g['mir']
     PL = T(P, _deg(q, 'l', 'hip_pitch'), _deg(q, 'l', 'hip_roll'), _deg(q, 'l', 'hip_yaw'))
     PR = mir(T(P, _deg(q, 'r', 'hip_pitch'), -_deg(q, 'r', 'hip_roll'), -_deg(q, 'r', 'hip_yaw')))
-    lr = float(cKDTree(PL).query(PR)[0].min())
-    return dict(lr=lr, hem_l=float(g['KT'].query(PL)[0].min()), hem_r=float(g['KT'].query(mir(PR))[0].min()))
+    lr = float(cKDTree(PL).query(PR)[0].min()) - g['off']  # rev 8c: L/R inboard edges also in the rigid J-channel
+    o = g['off']
+    return dict(lr=lr, hem_l=float(g['KT'].query(PL)[0].min()) - o, hem_r=float(g['KT'].query(mir(PR))[0].min()) - o)
 
 def min_gap(q): return min(gaps(q).values())
 

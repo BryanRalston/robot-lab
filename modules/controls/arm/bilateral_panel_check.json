@@ -1,113 +1,113 @@
 {
  "thresholds_mm": [
+  40.0,
   35.0,
-  30.0,
-  28.0
+  33.0
  ],
  "poses": [
   {
    "pose": "stand",
-   "min_mm": 118.9,
+   "min_mm": 164.2,
    "pair": "hem_l",
    "status": "ok"
   },
   {
    "pose": "safe-sit crouch [approx hip -0.6]",
-   "min_mm": 172.0,
+   "min_mm": 169.0,
    "pair": "lr",
    "status": "ok"
   },
   {
    "pose": "KNEEL_W1",
-   "min_mm": 151.8,
+   "min_mm": 152.9,
    "pair": "hem_l",
    "status": "ok"
   },
   {
    "pose": "KNEEL_POSE",
-   "min_mm": 172.0,
+   "min_mm": 169.0,
    "pair": "lr",
    "status": "ok"
   },
   {
    "pose": "POSE_KNEEL",
-   "min_mm": 152.7,
-   "pair": "hem_l",
+   "min_mm": 169.0,
+   "pair": "lr",
    "status": "ok"
   },
   {
    "pose": "chest-lower start POSE_HANDS",
-   "min_mm": 172.0,
+   "min_mm": 169.0,
    "pair": "lr",
    "status": "ok"
   },
   {
    "pose": "chest-lower end POSE_PRONE",
-   "min_mm": 118.9,
+   "min_mm": 164.2,
    "pair": "hem_l",
    "status": "ok"
   },
   {
    "pose": "kneel_hold A",
-   "min_mm": 118.9,
+   "min_mm": 164.2,
    "pair": "hem_l",
    "status": "ok"
   },
   {
    "pose": "kneel_hold B sit-back",
-   "min_mm": 172.0,
+   "min_mm": 169.0,
    "pair": "lr",
    "status": "ok"
   },
   {
    "pose": "kneel_hold C",
-   "min_mm": 151.8,
+   "min_mm": 152.9,
    "pair": "hem_l",
    "status": "ok"
   },
   {
    "pose": "kneel_hold D",
-   "min_mm": 157.5,
+   "min_mm": 158.6,
    "pair": "hem_l",
    "status": "ok"
   },
   {
    "pose": "sit 0.45 m [approx hip -1.57]",
-   "min_mm": 137.7,
+   "min_mm": 138.8,
    "pair": "hem_l",
    "status": "ok"
   },
   {
    "pose": "fall tuck B knee drop [approx hip -1.0]",
-   "min_mm": 172.0,
+   "min_mm": 169.0,
    "pair": "lr",
    "status": "ok"
   },
   {
    "pose": "deep crouch hip -105 (limit)",
-   "min_mm": 104.5,
+   "min_mm": 105.7,
    "pair": "hem_l",
    "status": "ok"
   },
   {
    "pose": "hip extension +40 (limit)",
-   "min_mm": 32.9,
+   "min_mm": 73.6,
    "pair": "hem_l",
-   "status": "warn"
+   "status": "ok"
   }
  ],
  "sweeps": {
   "walk_carry_assumed (hip -60..+20, roll +/-5, yaw +/-10 per leg)": {
    "n": 600,
-   "min_mm": 75.0,
-   "pair": "hem_r",
+   "min_mm": 119.0,
+   "pair": "hem_l",
    "worst": {
-    "l_hip_pitch": -24.4,
-    "r_hip_pitch": 20.0,
-    "l_hip_roll": 1.7,
-    "r_hip_roll": 1.1,
-    "l_hip_yaw": -1.1,
-    "r_hip_yaw": 5.9
+    "l_hip_pitch": 19.9,
+    "r_hip_pitch": -39.7,
+    "l_hip_roll": 2.9,
+    "r_hip_roll": -1.1,
+    "l_hip_yaw": -8.6,
+    "r_hip_yaw": -4.4
    },
    "counts": {
     "ok": 600,
@@ -118,7 +118,7 @@
   },
   "job10 action space: ref_cycle + uniform +/-0.25 rad (hips, clipped to mirrored ROM)": {
    "n": 600,
-   "min_mm": 57.4,
+   "min_mm": 53.6,
    "pair": "lr",
    "worst": {
     "l_hip_yaw": 7.8,
@@ -137,7 +137,7 @@
   },
   "job10 action space: ref_cycle + corner +/-0.25 rad": {
    "n": 600,
-   "min_mm": 43.6,
+   "min_mm": 39.5,
    "pair": "lr",
    "worst": {
     "l_hip_yaw": 16.9,
@@ -148,15 +148,15 @@
     "r_hip_pitch": -8.6
    },
    "counts": {
-    "ok": 600,
-    "warn": 0,
+    "ok": 599,
+    "warn": 1,
     "limit": 0,
     "trip": 0
    }
   },
   "stand mode: home + corner +/-0.25 rad": {
    "n": 400,
-   "min_mm": 30.5,
+   "min_mm": 26.3,
    "pair": "lr",
    "worst": {
     "l_hip_yaw": 14.3,
@@ -167,10 +167,10 @@
     "r_hip_pitch": 14.3
    },
    "counts": {
-    "ok": 394,
-    "warn": 6,
+    "ok": 385,
+    "warn": 0,
     "limit": 0,
-    "trip": 0
+    "trip": 15
    }
   }
  },

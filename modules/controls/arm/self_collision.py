@@ -54,7 +54,7 @@ DEFAULT = dict(
                        crouch=[20, 15, 10], sit=[20, 15, 10], kneel=[20, 15, 10], lowering=[20, 15, 10]),
     plume_mm=[5, 2, 0],
     hip_pinch=dict(ref='T&R R_HIP_PINCH.md ca68f3a on ID P-023 rev 8b acb9bd5', module='modules/controls/arm/hip_pinch.py',
-                   warn_mm=40, limit_mm=35, trip_mm=33, nominal_mm=[35, 30, 28], stopgap='T&R 76de66a +5 mm', modes='all motors-on (walk, carry, stand, crouch, kneel, sit, R-146 lowering)',
+                   warn_mm=35, limit_mm=30, trip_mm=28, geometry='ID rev 8c STLs (ee80543), rigid incl. J-channel 3.0, foam excluded', stopgap_retired='40/35/33 (T&R 76de66a) until the 8c rebuild', modes='all motors-on (walk, carry, stand, crouch, kneel, sit, R-146 lowering)',
                    note='L<->R panels + hem<->panel from both hips (pitch, roll, yaw); at trip the closing joint pair stops. '
                         'Replaces the rev 8 mesh pair and the two coupled backup rules (dropped per Robot Lab). Motors-off: ID foam edges.'),
     payload=dict(ref='P-042 (carry_balance_r1, legs scenarios CARRY_POS)', body='torso', pos=[0.32, 0.0, 0.415],
@@ -248,6 +248,15 @@ class Supervisor:
             if hook is not None: hook.add_nullspace_task('sc_' + p.name, row, rate, w)
         return tasks
 
+    def limp_hip(s, hip_q: dict, mo_on: bool, planned_mo_off: bool = False):
+        """TP-G5-18 limp-mode hip hold (limp_hip_hold.py). mo_on: low-current hip roll/yaw hold commands.
+        planned_mo_off: MO=0 is allowed only once the hip-pinch gaps are >= warn (pre-limp posture reached).
+        Returns (commands, mo_off_allowed, gaps)."""
+        try: import limp_hip_hold as L
+        except ImportError: from . import limp_hip_hold as L
+        if not hasattr(s, '_lhh'): s._lhh = L.LimpHipHold()
+        ok, g = s._lhh.mo_off_allowed(hip_q) if planned_mo_off else (None, None)
+        return s._lhh.limp_command(hip_q, mo_on), ok, g
     def fall_pose_clear(s, target: dict, mode='crouch'):
         """Distances at the commanded fall pose with the CURRENT leg/waist pose. Clear = chest >= 0, shroud >= trip
         of `mode`, plume entry allowed (fall is transient). Returns (clear, (worst_slack, pair))."""

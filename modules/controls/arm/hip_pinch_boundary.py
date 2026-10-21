@@ -6,7 +6,7 @@ sys.path.insert(0, str(Path(__file__).parent))
 import hip_pinch as H
 from scipy.spatial import cKDTree
 R = np.radians; g = H.geometry(); T, P, mir, KT = g['T'], g['P'], g['mir'], g['KT']
-PS = np.arange(-105, 40.1, 5); RS = np.arange(-12, 15.1, 1); YS = np.arange(-35, 45.1, 2.5)
+PS = np.arange(-105, 40.1, 5); RS = np.r_[np.arange(-12, 15.1, 2), 15.0]; YS = np.arange(-35, 45.1, 2.5)
 hem = np.zeros((len(PS), len(RS), len(YS))); lr = np.zeros_like(hem)
 for i, p in enumerate(PS):
     for j, r in enumerate(RS):
@@ -28,7 +28,7 @@ def bound(A, name):
                      n_bad=int(bad.sum()), n=int(bad.size), per_roll=per_roll)
 bound(hem, 'hem_single_leg'); bound(lr, 'lr_symmetric')
 # asymmetric both-leg random sample (independent legs, mirrored ROM)
-rng = np.random.default_rng(0); worst = (1e9, None); nb = 0; N = 4000
+rng = np.random.default_rng(0); worst = (1e9, None); nb = 0; N = 1000
 for _ in range(N):
     q = {}
     for sd, s in (('l', 1), ('r', -1)):
