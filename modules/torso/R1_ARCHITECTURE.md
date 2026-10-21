@@ -489,3 +489,17 @@ Torso frame = waist_pitch origin; x forward, y left, z up. Layout [EST until CAD
 - O-T2 approved on citation (§13.1); O-T3 → contactor (§13.2); O-T5 re-rate proposed (§13.5).
 - O-T7: file delivered (§15.7); Controls to merge.
 - **O-T7 (Legs/Controls):** sim torso 18.762 kg should be re-split (pack 8.75 in chest) when the sim is updated.
+
+### 25.1a R-103 sternum mass reconciliation (2026-10-21)
+| Line | Arbiter ledger | Physical [EST] | Note |
+|---|---|---|---|
+| R-093 P-052 plate | +0.058 | 0 (plate deleted) | replaced by package below |
+| R-098 skin package (bezel 0.017, gasket, edge seal, TPU film, blend, 4 captive M4) | −0.009 (0.040 vs 0.058 at half credit) | +0.040 | |
+| R-095 2K PU clear coat | +0.008 | +0.008 | |
+| CF shell cut-out 120×120 (R-094) | not carried (withdrawn with R-094) | −0.045 | missing credit |
+| **Total** | **+0.057** | **+0.003** | |
+- Torso's earlier +0.028 is withdrawn. Its errors: (1) the ring at 0.015 instead of ID's 0.017, and the gasket, seal, blend and captives left out (undercount ≈0.013); (2) film and clear coat both counted, but R-098 makes them alternatives (double count 0.005); (3) the shell cut-out taken at full credit.
+- **True number at ledger rules: +0.057 − 0.0225 (shell cut-out at half credit) = +0.0345 ≈ +0.035 kg.** No double count in the Arbiter's +0.057; it only lacks the shell credit. The film credit (−0.005) waits for a cited mass per R-098. Request to the Arbiter: carry +0.035, full credit to +0.003 once weighed.
+
+### O-T5 CLOSED (2026-10-21)
+Rated on the kitting duty cycle at **4.55 h**; no bigger pack.
