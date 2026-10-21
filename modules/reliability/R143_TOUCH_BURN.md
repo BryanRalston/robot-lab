@@ -1,5 +1,20 @@
 # R-143 §2b — Knee fins: ISO 13732-1 touch-burn check (RL T&R, 2026-10-21)
 
+## ▶ B2 (Robot Lab choice, Thermal a32d341): Option B rear outlet through the L60 notch, stack to z 860, rev 4e shroud, skirt foil + 15 mm gap. **PASS (48 °C no-sustained-contact class) WITH CONDITIONS**
+- **Thermal:** standing drive base 70.6 °C (9.4 K margin), walking 62–72 °C. Jet 79–84 °C at the exit, 58–66 °C mixed. Shroud outer face 40–42 °C [EST].
+- **T&R rerun with Legs' actual notch (1320 mm², not 2080):** Tb **71.3 °C**, jet 80 °C, mixed 54–62 °C. Still PASS.
+- **Touch points and class:**
+  - shroud outer face 40–42 ≤ 48 (and ≤ 43) **PASS**
+  - louvres/openings ≤ 5 mm, so probe B and the 50 mm sphere cannot reach the 65–75 °C webs: **IP2X PASS required as drawn**
+  - skirt inner face over the plume: 50–55 °C without foil (FAIL); **with Al foil + ≥ 15 mm gap ≤ 48 [EST]**
+  - housing fairing 40.6–41.5 **PASS**
+  - femur bond 68–69 (not touchable)
+- **48 °C no-sustained-contact class is valid here** because the outlet is out of the hand path:
+  - The hanging hand is at y ≥ 0.239, z 0.763–0.903 (sim/v3 chain). The outlet is at y 104–156 inside the thigh shadow; with the shroud outboard edge at ≤ y 176 (strap line) the **lateral clearance is ≥ 63 mm**, and arm swing moves the hand in x, not inboard.
+  - **Conditions:** shroud outboard edge ≤ y 176; no arm pose in the stand, walk, carry or prone states brings the hand within 30 mm (Controls to confirm the arm envelope, including the P-042 carry and the prone-state arms); TP-G5-15 measures it.
+  - Remaining exposure: people behind the robot, and the **prone rescue state (outlet faces up)**. N1 must move to the rear outlet in HANDLING_MAP, with the W017 label outside the plume, and the cool-down to ≤ 43 °C before rescuers handle the thigh.
+- **Legs' cut-out confirmed** for thermal (1320 mm² at x −34.5…−61 sits over the chimney). Structurally it is sound on the strap/notch sections at the T&R fall load (L60_FALL_LOAD.md); the joints and FEA are owed.
+
 ## ▶ Rev 5 / 5a (ID a065aa3, hood 0b3fab9, HANDLING_MAP draft): outboard side exit under a louvred hood. **REJECT as drawn; recommend Option B (rear outlet through the L60 cut-out)**
 Script: `r143_rev5.py` → `r143_rev5.json` [hand model, same balances as rev 4e]. Drive base per case comes from the rev 4b/4c tables, with +2.5 K on standing for H 0.14 vs 0.18 [EST; Thermal must re-run]. Exhaust = Ta + (0.85–1.0)(Tb − Ta). Good mixing = 1:1 dilution (947 mm² min ≥ 600 OK); poor mixing = no dilution, h_i 5.
 
