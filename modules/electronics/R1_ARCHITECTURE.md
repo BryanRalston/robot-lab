@@ -1465,3 +1465,50 @@ The layout matches P-057:
      - SiF harness is rated 180 °C, against ≈ 500 °C vent gas (§18.6 basis).
    - Fix: a **sealed vent duct** (steel or mica [EST]) from the vent to a dedicated opening in the pelvis shell, **rearward and outward, clear of hip-yaw drives, bumpers and harness**; or move the vent to y ≈ 0 with a deflector to a rear pelvis opening.
    - UL 2271 §45 (no external fire) applies to the pack, but damage to our drives and harness is our safety problem. **Open, Torso + Legs.**
+
+### 18.8 P-058: waist back-drive regen after a trip (Actuators D102c eb5520f, Controls 084af79/19f27ef) (2026-10-21)
+**Inputs.** TBM2G-06808A Ke 14.7 V pk L-L/krpm cold, 9.24 Vrms/krpm hot; CSG-25 ratio 100 (D102c, citing TBM2G manual §9.4.1 p.272). So EMF = **14.04 V per rad/s output cold** (12.48 hot). Tripped falls: 6.3 rad/s forward, ≤ 8.32 rad/s backward (Controls). Waist KE 55–144 J [EST, Controls]. Pack 20S5P Molicel P45B: max charge 13.5 A/cell, 70 °C cut-off; standard 4.5 A (Molicel INR-21700-P45B data sheet v1.4, p.1, https://www.molicel.com/wp-content/uploads/INR21700P45B_1.4_Product-Data-Sheet-of-INR-21700-P45B-80109.pdf).
+
+| bus level | V | waist EMF reaches it at (cold) |
+|---|---|---|
+| pack full (20 × 4.2) | 84 | 5.98 rad/s |
+| P-045 clamp ON | 88 | 6.27 rad/s |
+| XP[1] OV trip (planned) | 92 | 6.55 rad/s |
+| **G-TWI 100 V model maximum supply = bridge-at-risk level** | **95** | **6.77 rad/s** |
+| EMF at 6.3 / 8.32 rad/s | 88.4 / **116.8** (103.8 hot) | |
+
+**Bridge-at-risk voltage:** 95 V, the Elmo maximum supply for the 100 V Gold Twitter (MAN-G-TWI Table 3; Installation Guide Table 1; §18.4 [IG]/[PP]). The internal MOSFET Vds rating is **not published** by Elmo (searched in §18.4 sources); treat 95 V as the hard limit.
+
+**Mechanism.** Whether the drive is enabled, faulted, OV-tripped, over-temperature (85 °C) tripped or in STO, the six body diodes rectify the phase EMF onto the drive DC link. Current flows only while EMF peak > link voltage. The energy pumped is therefore only the KE above the threshold speed: **E ≤ KE·(1 − (ω_th/ω)²)** (upper bound: ignores winding, limiter and stop losses).
+
+| case | threshold | fraction of KE | pumped (KE 55 / 144 J) |
+|---|---|---|---|
+| 8.32 rad/s back, pack connected | 5.98 | 48 % | 27 / **70 J** |
+| 8.32 rad/s back, pack open (clamp) | 6.27 | 43 % | 24 / 62 J |
+| 6.3 rad/s fwd, pack connected | 5.98 | 10 % | 5 / 14 J |
+| 6.3 rad/s fwd, pack open | 6.27 | 1 % | 0.5 / 1.4 J |
+
+**(a) Bus connected: the pack accepts it.** ≤ 70 J even if delivered in 50 ms [EST bound] is 1.4 kW = 17 A at 84 V = **3.3 A/cell, vs 13.5 A max charge (25 %)** and below the 4.5 A standard rate. Energy is 0.001 % of 1.62 kWh. Full SOC: per §13.1/R-036 the BMS must accept regen pulses at any SOC ≤ 84 V (T-027) and charge is capped at 4.15 V/cell operationally; 70 J into a 32 mF bus [EST, §15] alone would raise it from 84 V only to ≈ 86 V. If the BQ76200 charge FET is open, case (b) applies. **P-045 covers both**: 70 J ≪ its 400 J design event, adiabatic rise 70/76.7 = 0.9 K on the HS100, and 5.16 kW ON power ≫ 1.4 kW.
+
+**(b) Drive disabled / pack disconnected.**
+- **Contactor or charge FET open (incl. the O-T9 fall-through-STO case, §13.2 steps 2–4):** this case exists: all drives STO, robot falls, waist back-driven at up to 8.32 rad/s. The waist drives still share the DC bus with the other 31 drives' link capacitance and the P-045 clamp, which §13.2 step 4 already requires to be **powered from the drive side of the disconnect**. The bus is held at 88 V (ON) ≤ 90 V design; ≤ 62 J pumped. **No per-drive clamp is needed while the drive stays connected to the common bus.**
+- **Only the waist drive's own feed open** (branch connector/fuse open while moving): its isolated link charges toward 116.8 V peak, above 95 V. Energy is small (link cap only), but the voltage destroys the bridge. A local TVS cannot fix this: **no catalog TVS fits the window** (stand-off ≥ 84 V and clamping < 95 V): SMDJ90A has 100 V min breakdown (§9.3, R-027); SMDJ78A has a 78 V stand-off (conducts on a full pack) and a 126 V clamp at Ipp (Littelfuse SMDJ series datasheet, electrical characteristics table, https://www.littelfuse.com/assetdocs/tvs-diodes-smdj-datasheet [verify revision]). **Rule instead:** no fuse, switch or separable connector between the waist drive VP+ and the common bus except the locking, latched drive connector (Actuators harness, A25); branch fusing for the waist drives sits on the bus side with the clamp downstream of it, and connector retention is verified in G5.
+
+**Recommendation: no new part. Keep the P-045 clamp (Arcol HS100 1R5 F + 2× IPT059N15N3, 0.145 kg, already booked at 0.15; HS100 cited in §13.1).** Add mass: **0.000 kg**, no Arbiter booking.
+
+**Alternatives compared.**
+| option | covers tripped (unpowered) case? | mass | verdict |
+|---|---|---|---|
+| P-045 bus clamp (existing) | yes, drive-side powered | 0 added | **chosen** |
+| firmware speed limit | no: a trip means no torque; powered braking already bus-limited to 5.75 rad/s, Controls holds 3.67 avg / 5.86 momentary (D102c, CSG-25 Table 3) | 0 | keep as powered-side rule, not a clamp |
+| short-brake at threshold | G-TWI STO leaves phases open (MAN-G-TWI §10.4.3, Controls D100) → needs NC relay/MOSFET ≈ 15 g/joint [EST], and adds braking torque at contact on top of the D102c limiter case | +0.015 kg [EST] | rejected (same reason as the knee withdrawal, R-ruling via Robot Lab) |
+| per-drive TVS | no catalog part fits 84–95 V | ~1 g | rejected |
+
+**Protection logic for Controls (waist pitch; also applies to all drives).**
+1. Bus monitor AN[6] (per drive, CR p.38) and the TMS570 bus-sense frame (§16.1): **86 V warn** → stop commanding regenerative braking torque on any joint, log. **88 V** P-045 HW clamp ON (no firmware). **92 V** XP[1] OV trip (only if WI[35] ≥ 92, T-025). **95 V** never: bridge damage.
+2. Powered waist braking: torque command only while |ω| ≤ 5.75 rad/s (EMF ≤ 0.96 × 84 V); keep Controls' 3.67 avg / 5.86 momentary gear limits, whichever is lower. Above 5.75 rad/s command zero torque and leave MO=1 (no gain from disabling; diodes conduct either way).
+3. Thermal sequence unchanged (R-141): 100 % to 75 °C, 50 % at 82 °C, controlled stop at 84 °C, drive self-trip at 85 °C. An 85 °C or OV trip disables the bridge → diode rectification into the clamped bus; nothing extra needed while bus/clamp are intact.
+4. Disconnect interlock: do not open the BQ76200 FETs or contactor for **non-cell** faults while any joint |ω| > 5.98 rad/s (use SS1 → STO → open, §13.2). Cell faults (O-T9) open immediately and rely on the drive-side clamp.
+5. After an event with bus > 88 V: log peak AN[6], clamp-fire count and HS100 temperature; if a 0x5000 OV fault latched, clear per T-025 findings.
+
+**Open.** O-E9 WI[35] (T-025); O-T8 HS100 pulse curve (now 62–70 J, far inside); T-026 clamp pulse test to add a waist back-drive case at 8.32 rad/s with pack open (bus peak ≤ 90 V); SMDJ78A figures to verify against the datasheet revision; KE 55–144 J is [EST] (Controls); G-TWI FET Vds not public.
