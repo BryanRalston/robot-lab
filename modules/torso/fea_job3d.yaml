@@ -253,6 +253,11 @@ geometry:
       id: 66
       clearance_r: 47
       encoder_ring: yoke side of limiter, y 78-84
+    keepout_waist_stops:
+      part: PUR90A stacks, 183 J adopted (WAIST_STOP_PU_D102c.md), 8 stacks 135 mm tangent at r_lug 100, r 89-121
+      y_bands: [[72, 86], [86, 100]]
+      sweep_deg: [-47, 77]
+      cheek_pad: 4 mm local pad under each lug (cheek 12 mm locally)
   yoke:
     path: single
     stock: '7075-T651 plate 1.0 in (25.4) [R-128 band: 271?] cheeks'

@@ -47,3 +47,11 @@ Lug force F = T/(4r): 4.25 kN at 1.7 kN·m (17 kN couple), 5.8 kN at 2.32 kN·m.
 ### Fit on the strike wings
 - Stack 135 mm straight, tangent at r 100: ends at r 121, inner face r 89, outside the limiter ø90 (r 45), the CRBH OD 90 and the ø100 spacers (r 50); y 72–100 is outside waistY |y| ≤ 70.
 - Arc per cheek: 2 stacks (pair) ≈ 2 × 78° + lug sweep 124° + lug 15° ≈ 295° < 360°. Pairs are diametral, so both ends together need 4 stacks/cheek: **does NOT fit at 135 mm** (≈450°). Fits with the 183 J (b) 95 mm stacks (4 × 57° + 139° = 367°, marginal) or by splitting by y (inner band y 72–86 for one end, outer y 86–100 for the other: 2 × 295° in separate planes, FITS, wing width 28 -> 2 × 14 mm, stack width 22 -> 14: A 336 mm², needs L 190 for 356 J -> FAIL; OK for 183 J (a)).
+
+## ADOPTED (Actuators, 2026-10-21): 183 J design
+Actuators confirms 183 J governs: the 356 J figure double-counted, and the drive inertia sheds through limiter slip. Gear ≤193 N·m holds.
+- Stops: PUR90A, 8 stacks (2 diametral pairs per range end), 17° travel, peak 1.19 kN·m, 120 mm PU (≈135 mm stack), A 272 mm²,
+  two y-bands per cheek (y 72–86 for one end, y 86–100 for the other). Mass 0.71 kg.
+- Cheek: 4 mm local pad under each lug (12 mm total), +0.03 kg.
+- P-162 brake: react through a bolt circle or a pin ≤14 mm from the CRBH 6013 plane (agreed with Actuators).
+The 356 J sizing above is superseded.

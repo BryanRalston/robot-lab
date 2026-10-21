@@ -675,3 +675,4 @@ A full ring flange instead of the cheek (≈0.4 kg [EST]) would give ≈ +2 mm z
 ### Waist limiter + stops mass note (D102c eb5520f, 2026-10-21)
 Friction limiter +0.394 kg (CAD, ø90/66 × 23) replaces Mayr keep-out. PU end stops 4 × 0.24 = +0.97 kg (PUR90A, D99 data).
 Total +1.36 kg. Stops miss the 1.7 kN·m peak (2.32 kN·m at 17°); see torso/WAIST_STOP_PU_D102c.md.
+- UPDATE (183 J adopted): limiter 0.394 + PU stops 0.71 + cheek pads 0.03 = **+1.13 kg [EST] (not booked)**; supersedes the +1.36 kg above.
