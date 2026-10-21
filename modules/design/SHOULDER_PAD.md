@@ -229,3 +229,13 @@ Foam 0.035 + sleeve 0.009 + inserts/anchor 0.006 = **0.050/side, 0.100 kg pair =
 - Envelope: core +15 mm vs R8 (+15 mm proud per side): needs check.
 - Trade: lowering F does not close s0 (core grows to hold 292 J, lever grows): 6.0 kN → 88 mm core, s0 2.04/1.91/1.80. 7.0 kN is the best trade (shortest, lightest proud). **Closes only with Arms: bearing C0 ≥ 26.8 kN (e0) / ≥ 30.4 kN (e10) vs CRBH 6013 24.3**, or Materials-credited μ ≤ 0.15 skin plus e ≤ 5 mm.
 - Rerun: fea/job1_pad_r10/CASE.md.
+
+## R10 status per R-120 (12f68a4)
+- **Booked: R10 pad pair 0.065 kg PASS** vs 0.100 cap (cap = pad assembly incl tray/sleeve/fasteners; stand-off outside it, Arms ledger). +15 mm/side envelope accepted provisionally pending Arms clash check.
+- s0 path (R-120): R10 core + Arms stand-off (pad centre Z −20) + CRBH 7013 A + e ≤ 5 mm: s0 2.31/2.16/2.04, Mx 321 N·m, CSG-25 SF 1.10. R-119 clutch basis withdrawn.
+
+## R10 stand-off layout proposal (Arms-owned part) — pad_r10_standoff.py/.json
+- Machined 7075-T6, replaces the 62×62×10 boss. **ID layout only; Arms owns and finalizes it** (roll-output bolt interface, sizing, drawing).
+- Roll flange ring OD 60 / ID 40 × 4 mm on the roll output (bolt pattern TBD Arms) → 2 ribs 5 × 30 mm, Y 0–23, spanning Z 0 to −20 → pad face plate 62 × 62 × 4 (Y 23–27, rear pocketed, 2 mm floor) with 4× M4 tapped bosses on ±24 mm. Tray (0.5 mm) and R10 core 54.8 sq centred unchanged; mount face Y 27 keeps contact Y 102.3.
+- Mass **0.051 kg/side, 0.102 pair [EST]** (plate 0.019, ribs 0.018, flange 0.014); R-120 booked 0.050/side.
+- Arms to confirm: roll-output bolt pattern on CRBH 7013 A; rib/flange sizing under 7.0 kN at 15° (Job 8 add-on); e ≤ 5 mm tolerance stack; clash check (pad + stand-off + 7013 housing through abduction ROM, tuck, cover set); Y datum 27.
