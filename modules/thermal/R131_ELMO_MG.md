@@ -511,3 +511,18 @@ Geometry read from repo (replaces the rev 5 "H 0.25 assumed"):
 - No CFD needed; G5/TP-G5-15 thermocouple check of the shroud and skirt inner face confirms.
 
 **Verdict: Option B PASS with the B2 build** (stack to z 860 + rev 4e shroud + foil on skirt inner face): 70.6 °C standing, skin ≤ 42 °C. Conditions: Legs structural OK on the cut-out; Legs to give the cut-out x-range.
+
+### Option B rev (L74 af1b331 notch) — 2026-10-21 EDT
+Legs L74 (legs/results/r031/p156_rev5_optionB.md): x −40…−80 cut FAILS (strut, housing). Usable outlet = R8 notch x −34.5…−61 × y 104–156, **≈ 1320 mm² free**, strut → two 20 × 8 straps [EST]. Release housing top z 814.0, front x −61.0. Script r131_optB_notch.py (same model, stack to z 860, H 0.217).
+
+| case | ṁ (g/s) | jet at exit (°C) | drive base standing (°C) | verdict |
+|---|---|---|---|---|
+| **B2n notch 1320 + stack z 860 + rev 4e shroud** | 0.166 | 79.8 | **71.1** | PASS 8.9 K (B2 was 70.6) |
+| B3n notch 1320, grille only 1250 | 0.161 | 81.2 | 71.8 | PASS |
+| Walking (pumped) | — | — | 62–72 [EST] | PASS |
+- **Notch area sweep (B2n):** 1000 → 71.7; 600 → 73.8; **500 → 75.1 (≈ 5 K margin)**; 400 → 77.1; **≈ 320 mm² → 80.0 (minimum)**; 250 → 83.7 FAIL. Fin channels still control the flow; the notch costs only +0.5 K. [Loss term K 1.0 referenced to 2080 mm², small effect.]
+- **Jet on housing top:** the notch is forward of the housing front (x > −61) and the flow is vertical, so the jet does not hit the housing top; the 2 mm housing-to-plate gap is stagnant (no flow either way, as before). Drive base and knee winding unchanged (≤ 0.1 K).
+- **Touch vs 48 °C:** jet 80–81 °C (+1 K vs B2) → exposed jet/bare louvres still FAIL; rev 4e shroud outer face ≈ 40–42 °C [EST] PASS; skirt inner face over the outlet needs Al foil and a ≥ 15 mm gap (≈ 50–55 °C without, FAIL). **Shroud and skirt specs unchanged.**
+- **Condition (new):** the straps are a new metal path from the bracket → they must land on the L71 G10/PEM break (no metal path to the femur bond, 70 °C rule) and must not sit in the jet (y 84–104 / 156–176 lie outside the notch y 104–156: OK).
+
+**Verdict: Option B with L74 notch PASS, 71.1 °C standing (8.9 K margin); no extra fix needed.**
