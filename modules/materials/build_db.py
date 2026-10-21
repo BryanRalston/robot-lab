@@ -54,6 +54,9 @@ S={
  "DP420":"https://multimedia.3m.com/mws/media/2365743O/3m-scotch-weld-epoxy-adhesive-dp420-black.pdf",
  "DP460":"https://multimedia.3m.com/mws/media/2365880O/3m-scotch-weld-epoxy-adhesive-dp460-off-white.pdf ; https://bac-online.com/content/PDF/DP460-TDS.pdf",
  "LUX_DS490":"https://www.luxfermeltechnologies.com/wp-content/uploads/2026/05/DS-490-Elektron-43-0526.pdf (Elektron 43 extruded T5; A-basis L spec minima; states MMPDS-08 A/B for extrusion and plate)",
+ "PLZ_LD29":"https://www.zotefoams.com/wp-content/uploads/2025/03/PIS-A008-Plastazote-LD29.pdf (Zotefoams PIS A008: 29 kg/m3, 25%/50% 61/126 kPa ISO 7214, max op 95 C = 5% shrink/24 h)",
+ "PLZ_HD30":"https://www.zotefoams.com/wp-content/uploads/2025/03/PIS-A024-Plastazote-HD30.pdf (30 kg/m3 HDPE, 144/215 kPa, 125 C)",
+ "BURRILL_XLPE":"design/V5_COVER_SET.md rev 8c (Burrill & Co XPE 28 kg/m3, ISO 3386-1: 25/45/50% 29.6/54.4/79.5 kPa, 80 C)",
  "R027":"modules/RULINGS.md R-027 (PALSUN/LEXAN, Toray 3900, Easy Composites XC110 citations)",
 }
 def M(id,name,where,rho=None,E=None,ys=None,uts=None,fat=None,elong=None,tmax=None,other=None,cost=None,src=(),notes=""):
@@ -149,6 +152,9 @@ DB=[
  M("MG_EL43_T5","Elektron 43 (WE43C, UNS M18434) extruded T5, AMS 4485","actuator housings (R-131 candidate)",1.83,44.1,"195 A-basis L (typ L 243, T 183)","303 A-basis L (typ L 352, T 305)","195 max @R0.1 5e7 (typ)","6 (A min) / 11.5 typ",250,
    {"Fbry":"not published","R125b_single_path_MPa":"130 (L, extruded bar) / 98 [EST] transverse or plate","k_W_mK":57.6,"CTE_um_mK":25.6},None,["LUX_DS490"],
    "A-basis values are longitudinal extrusion only (DS-490). Plate and transverse A-basis are in MMPDS-08 (not accessed). Not in MIL-HDBK-5H. See MG_GALVANIC_PLAN.md."),
+ M("XLPE_LD29","Zotefoams Plastazote LD29 (N2-blown crosslinked LDPE block foam) - hip skirt foam (P-023 rev 8c)","hip skirt hem/limp strips 40 mm",0.029,None,None,"0.338 tensile",None,131,95,
+   {"CLD_25_50_kPa":"61 / 126 (ISO 7214)","CLD_31pct_kPa":"77 [interp]","comp_set_25pct_24h":"3 %","Tmax_def":"5 % linear shrink after 24 h (not a continuous rating)","alt_HD30":"144/215 kPa, 125 C (too stiff: hem 322 N)"},None,["PLZ_LD29","PLZ_HD30","BURRILL_XLPE"],
+   "About 2x stiffer than the ID-assumed Burrill 80 C grade (29.6/79.5). Hem at 31%: 77 kPa x 100x20 = 153 N > 140 FAIL; fix with a 15 mm wide hem strip (115 N) or 50 mm deep (24.6%, 121 N). Limp 127 N is load-limited (100/130 of 165 N): unchanged."),
  M("BRG_STEEL","Bearing steel (GE 12 C inner ring, CRBH, IKO)","bearings",None,None,None,None,None,None,None,{},None,["SKF_GE12C"],"Catalog parts; masses from catalogs."),
 ]
 json.dump({"version":"R1 2026-10-14","owner":"RL Materials","sources":S,"materials":DB},open("MATERIALS_DB.json","w"),indent=1)
