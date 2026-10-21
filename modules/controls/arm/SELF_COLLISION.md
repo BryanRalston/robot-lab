@@ -104,6 +104,37 @@ The raised L60 top plate is x −175…−40, y 32–228, z 820–828 mm. The tw
 ## Hip-pinch keep-out, rev 8f (ID 76cc34d, T&R 42c4e50): hip_pinch.py
 **Thresholds: 40/35/33 stopgap, KEPT** (T&R 42c4e50). Return to 35/30/28 only after T&R re-verifies. Geometry: `hip_skirt_r8f_thigh_panel.stl` + `hip_skirt_r8f_pelvis_notched.stl` (8c + 8d notch +1.5 mm, no stops), J-channel 3.0, rigid only.
 T&R's listed 8f L/R closures (3 nominal, 6 at +2.5° overtravel, 5 at +3.6° = 14; T&R counts 7 at +2.5° but its json shows only 6, so one is unlisted; `hip_pinch_8f_untripped_check.json`): **all 14 trip at 33**. They read 24.2–27.4 mm in this model, and every one is within 0.83 mm of T&R. None is left untripped.
+**Rev 8f results** (`hip_pinch_boundary.json`, trip 33; `bilateral_panel_check.json`; `hip_pinch_cap_check.json`):
+
+Exact symmetric L↔R boundary at trip 33 mm (grid: pitch −105…40 step 5, roll −12…15 step 2, yaw ±45 step 2.5; 934 trip cells):
+
+| roll | trips at yaw ≥ | toe-in ≤ | pitch range at max yaw |
+|---|---|---|---|
+| −12 | 15 | −15 | −20…40 |
+| −10 | 17.5 | −17.5 | −15…40 |
+| −8 | 22.5 | −22.5 | −10…40 |
+| −6 | 25 | −25 | −5…40 |
+| −4 | 27.5 | −27.5 | 0…40 |
+| −2 | 30 | −30 | 5…40 |
+| 0 | 30 | −32.5 | 10…40 |
+| +2 | 32.5 | — | 10…40 |
+| +4 | 35 | — | 15…40 |
+| +6 | 37.5 | — | 20…40 |
+| +8 | 40 | — | 25…40 |
+| +10 | 42.5 | — | 30…40 |
+| +12…14 | 45 | — | 35–40…40 |
+| +15 | none | none | |
+
+- **Change from rev 8c: none on L↔R.** The panel STL is the same, and the boundary is identical cell for cell. Only the hem notch changed:
+  - single-leg hem minimum 58.4 → 60.1 mm, at (40, 15, −35), still never trips;
+  - hip +40 extension limit 32.9 → 76.6 mm;
+  - deep crouch 104.5 → 105.7 mm;
+  - walk/carry (assumed) 119.0 → 120.4 mm.
+- 1000 asymmetric random samples: minimum 25.8 mm.
+- Job 10 action space (600 samples each): uniform 53.6 mm, corners **39.5 mm**, 0 trips. One corner sample is a warn under the 40 mm stopgap. Unchanged from 8c. **No job 10 pose limit needed.**
+- Stand-mode corner residuals: 26.3 mm, 15/400 trip (the guard acts). Unchanged.
+- 14 N·m cap rerun with the **40 mm** stopgap zone (side_fall tuck, S1/S2b/S2c × L/R × 68 kg × 250/550 N): gap min 103.3 mm, 0 active samples, results identical with and without the cap.
+
 The 8c results below are superseded by 8f (the 8c → 8f change is the hem notch only; the panel is the same).
 
 ### rev 8c record (T&R 76de66a, ID ee80543/ec4dde7/d58ffa4, Actuators D100 31875a1)

@@ -87,7 +87,7 @@
  },
  "trip_mm": 33.0,
  "hem_single_leg": {
-  "min_mm": 58.4,
+  "min_mm": 60.1,
   "at": {
    "pitch": 40.0,
    "roll": 15.0,

@@ -7,7 +7,7 @@
  "poses": [
   {
    "pose": "stand",
-   "min_mm": 164.2,
+   "min_mm": 167.4,
    "pair": "hem_l",
    "status": "ok"
   },
@@ -43,13 +43,13 @@
   },
   {
    "pose": "chest-lower end POSE_PRONE",
-   "min_mm": 164.2,
+   "min_mm": 167.4,
    "pair": "hem_l",
    "status": "ok"
   },
   {
    "pose": "kneel_hold A",
-   "min_mm": 164.2,
+   "min_mm": 167.4,
    "pair": "hem_l",
    "status": "ok"
   },
@@ -91,7 +91,7 @@
   },
   {
    "pose": "hip extension +40 (limit)",
-   "min_mm": 73.6,
+   "min_mm": 76.6,
    "pair": "hem_l",
    "status": "ok"
   }
@@ -99,15 +99,15 @@
  "sweeps": {
   "walk_carry_assumed (hip -60..+20, roll +/-5, yaw +/-10 per leg)": {
    "n": 600,
-   "min_mm": 119.0,
-   "pair": "hem_l",
+   "min_mm": 120.4,
+   "pair": "lr",
    "worst": {
-    "l_hip_pitch": 19.9,
-    "r_hip_pitch": -39.7,
-    "l_hip_roll": 2.9,
-    "r_hip_roll": -1.1,
-    "l_hip_yaw": -8.6,
-    "r_hip_yaw": -4.4
+    "l_hip_pitch": -27.2,
+    "r_hip_pitch": -23.5,
+    "l_hip_roll": -3.7,
+    "r_hip_roll": 4.7,
+    "l_hip_yaw": 6.5,
+    "r_hip_yaw": -5.8
    },
    "counts": {
     "ok": 600,
