@@ -1497,3 +1497,6 @@ The +0.36 pair bearing delta is confirmed by catalog (IKO 4010 0.15 vs 7013 0.38
 1. Hand plant: Controls caps the hand-plant force at ≤875 N per hand, which clears the wrist CRBH 258 A. A two-sided wrist support (mass) is used only if Controls shows the cap makes the sequence infeasible. Heel plant only: the R19 palm heel band is mandatory.
 2. Safe-stop sequence still FAILS (elbow saturation at 38 N·m, chest contact 1.97 m/s vs 0.1, 11.0 kN vs 8.8 kN). The knee-pad contact (0.36 m/s, 1183 N, about the walking footstrike) passes the R-150 condition. The latch stays at the R-146 82 °C interim. The final latch follows R-150 §2 from a passing sequence, and r must come from Thermal's drive model (worst-case plate rate), not the 0.3 [EST].
 3. Mass at full: knee PU stop r75 fallback +0.040 pair over D97 (contract: 135° plus stop crush, top-out ≤143.6°); palm heel band +0.023 pair [CALC, CAD]; Electronics P-057 pack notch +0.050 (the freeze threshold is 0.005 kg per R-066, not 0.02). Arms states the R-027 skin credit change as a kg delta against the booked value before it moves. Credible mass ~68.67 → ~68.78 kg.
+
+## R-151a — Palm credit reconciliation (Arms 8f6a8f1) — 2026-10-21
+The R-027 palm credit change (-0.120 to -0.097 pair) is the same +0.023 as the R-151 heel-band line, so it is booked once only, via R-151. No change. Credible mass stays ~68.78 kg.
