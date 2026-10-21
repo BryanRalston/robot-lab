@@ -333,6 +333,28 @@ Any change to CONTRACTS.md or TARGETS.md, or to another module's files, starts h
   - **Thermal:** confirm (c), and the shoulder at 43–50 N·m.
 - Status: OPEN
 
+### P-053: Materials: hollow ankle pitch/roll pins (ø12 steel, ø6 bore)
+- Date: 2026-10-21
+- Module / proposer: Materials / RL Materials
+- Affected owners: Legs (job 7 ankle cross, pins), Arbiter (mass)
+- Change: the 4 ankle pins per leg (pitch stubs ø12 × 18 + 12 press, roll pins ø12 × 12 each side, legs/grokbuild/ankle_cross_fea_brief.md) are made as gun-drilled ø12/ø6 tubes in 42CrMo4 Q&T (or 17-4PH).
+- Evidence (materials/R_SWAP_SCAN_R7.md):
+  - Steel volume ≈ 12.2 cm³/leg [EST, lengths from the brief] → 95 g/leg at ρ 7.8.
+  - A ø6 bore removes 25 % of the volume (**−24 g/leg, −0.048 kg robot [EST]**). Bending stiffness falls only 6 % (1 − 0.5⁴), and the section modulus by 6 %.
+  - Hollow pins also suit the DU bushes in ANKLE_CROSS_7075 §3.
+- Impact on contracts: mass −0.048 [EST]; no interface change (pin OD unchanged).
+- Risks: pin bending stress +6.7 %, which Legs checks in the job-7 FEA; plug the bore ends against debris.
+- Status: OPEN
+
+### P-054: Materials: Ti-6Al-4V ankle pins instead of steel (alternative to P-053, higher risk)
+- Date: 2026-10-21
+- Module / proposer: Materials / RL Materials
+- Affected owners: Legs, Arbiter
+- Change: solid Ti-6Al-4V (ρ 4.4, YS 910, MIFTi64) ankle pins with a nitrided or DLC running surface, in DU bushes.
+- Evidence: 95 g/leg → 54 g/leg, **−0.082 kg robot [EST]**. Ti pins are ~1.8× as flexible as steel (E 110 vs 190).
+- Risks: Ti galls and wears without a hard coating (coating spec and supplier data not yet in repo); galvanic to 7075 is worse than steel (both need the bush/sealant); cost. Not combinable with P-053 (pick one). Recommend P-053 first.
+- Status: OPEN
+
 ### P-145..P-150: Torso & Power mass cuts (Torso, 2026-10-21; R-079 FEA priority)
 All keep R-076 (reinforced isolation, IEC 60664-1 creepage, IP2X), R-074 (main link ≥10 mm², 2.5 mm² only on branches fused ≤30 A), R-036 / 2 h walk margin (+1.0 W, none of these add load) and T-031 crush (pad, land, rib untouched). Savings are [EST] unless cited; book at half credit until weighed.
 
