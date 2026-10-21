@@ -12,9 +12,11 @@ No standalone Electronics BOM existed before this file. All parts so far live in
 | F4 | TMP117 sensor tab screw | not specified | not specified ("screwed to the bracket", R1 §16.3) | not specified | shoulder-bay RP40 bracket, 2 bays | No | – | unknown |
 | F5 | EtherCAT junction PCB stand-offs | not specified (≥ 5 mm stand-off, R1 §18.2l) | not specified | not specified | partition cold face, torso | No | – | unknown |
 
-**Counted total: 14 fasteners** (F1 6 + F2 8). F3–F5 have no count in the design and aren't counted.
+| F6 | G-TWI drive-to-heat-plate screw (P-055) | M2 × 6, ▽4 in drive base, 30.6 × 25.6 pattern (MAN-G-TWI p.79) | 4 × 14 drives = **56** | A4-70 [EST; Elmo specifies stainless A2] | knee/hip_pitch/ankle/shoulder_pitch plates | No | NBK SNSL-M2-6-SD 0.15 g | **8.40** |
 
-**Steel mass that could move to Ti (non-structural, cited): 0.90 g** (F1 only).
+**Counted total: 70 fasteners** (F1 6 + F2 8 + F6 56). F2 is the knee subset of F6 and is now superseded by it, so the unique count is **62**. F3–F5 have no count in the design and aren't counted.
+
+**Steel mass that could move to Ti (non-structural, cited): 9.30 g** (F1 0.90 + F6 8.40).
 - F2 can't be massed until the G-TWI mounting-hole size is read from the drive drawing (MAN-G-TWIIG dimensions). 8 × M2 SHCS would be about 1.2 g, *but the size is not confirmed*, so it isn't booked.
 - Electronics has **no structural fasteners**.
 
