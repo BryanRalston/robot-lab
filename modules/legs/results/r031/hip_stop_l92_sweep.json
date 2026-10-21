@@ -1,0 +1,30 @@
+{
+ "L-R knee housings": [
+  0.0,
+  "{'L_hip_roll': 0, 'L_hip_yaw': 28, 'R_hip_roll': 0, 'R_hip_yaw': -28, 'L_hip_pitch': 0, 'R_hip_pitch': 0, 'L_knee': 0, 'R_knee': 0}"
+ ],
+ "R tab <-> hip_yaw PU bumper + bracket -10\u00b0 (L39)": [
+  0.0,
+  "{'L_hip_roll': 0, 'L_hip_yaw': -12.0, 'R_hip_roll': 0, 'R_hip_yaw': -28, 'L_hip_pitch': 0, 'R_hip_pitch': 0, 'L_knee': 0, 'R_knee': 0}"
+ ],
+ "L hand <-> thigh": [
+  2.75,
+  "{'L_hip_roll': 0, 'L_hip_yaw': -12.0, 'R_hip_roll': 0, 'R_hip_yaw': 12.0, 'L_hip_pitch': 0, 'R_hip_pitch': 0, 'L_knee': 0, 'R_knee': 0}"
+ ],
+ "R hand <-> thigh": [
+  2.75,
+  "{'L_hip_roll': 0, 'L_hip_yaw': -12.0, 'R_hip_roll': 0, 'R_hip_yaw': 12.0, 'L_hip_pitch': 0, 'R_hip_pitch': 0, 'L_knee': 0, 'R_knee': 0}"
+ ],
+ "L tab <-> hip_yaw PU bumper + bracket -10\u00b0 (L39)": [
+  3.56,
+  "{'L_hip_roll': 0, 'L_hip_yaw': -12.0, 'R_hip_roll': 0, 'R_hip_yaw': 12.0, 'L_hip_pitch': 0, 'R_hip_pitch': 0, 'L_knee': 0, 'R_knee': 0}"
+ ],
+ "L tab <-> hip_yaw PU bumper + bracket +26\u00b0 (L39)": [
+  3.56,
+  "{'L_hip_roll': 0, 'L_hip_yaw': 28, 'R_hip_roll': 0, 'R_hip_yaw': 12.0, 'L_hip_pitch': 0, 'R_hip_pitch': 0, 'L_knee': 0, 'R_knee': 0}"
+ ],
+ "R tab <-> hip_yaw PU bumper + bracket +26\u00b0 (L39)": [
+  20.14,
+  "{'L_hip_roll': -3, 'L_hip_yaw': -12.0, 'R_hip_roll': 3, 'R_hip_yaw': 12.0, 'L_hip_pitch': 0, 'R_hip_pitch': 0, 'L_knee': 145, 'R_knee': 145}"
+ ]
+}

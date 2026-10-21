@@ -1,0 +1,172 @@
+{
+ "r50_L44": {
+  "start": [
+   -38.3,
+   532.1
+  ],
+  "dir": [
+   0.643,
+   0.766
+  ],
+  "stack_mm3": 29568,
+  "hits": {
+   "L_femur tube 7050-T7451 \u00f850x1.2 (R-031; ": 58,
+   "L_knee tongue neck into tibia": 12857,
+   "L_knee lever r47.5 (Actuators STEP)": 7515,
+   "L_tibia tube 7075 \u00f845x1.2": 557
+  },
+  "clash_mm3_excl_bridge_neck": 8130,
+  "free_mm3": 21438
+ },
+ "r50_L50": {
+  "start": [
+   -38.3,
+   532.1
+  ],
+  "dir": [
+   0.643,
+   0.766
+  ],
+  "stack_mm3": 33600,
+  "hits": {
+   "L_femur tube 7050-T7451 \u00f850x1.2 (R-031; ": 336,
+   "L_knee tongue neck into tibia": 12857,
+   "L_knee lever r47.5 (Actuators STEP)": 7515,
+   "L_tibia tube 7075 \u00f845x1.2": 557
+  },
+  "clash_mm3_excl_bridge_neck": 8408,
+  "free_mm3": 25192
+ },
+ "r50_L56": {
+  "start": [
+   -38.3,
+   532.1
+  ],
+  "dir": [
+   0.643,
+   0.766
+  ],
+  "stack_mm3": 37632,
+  "hits": {
+   "L_femur tube 7050-T7451 \u00f850x1.2 (R-031; ": 616,
+   "L_knee tongue neck into tibia": 12857,
+   "L_knee lever r47.5 (Actuators STEP)": 7515,
+   "L_tibia tube 7075 \u00f845x1.2": 557
+  },
+  "clash_mm3_excl_bridge_neck": 8688,
+  "free_mm3": 28944
+ },
+ "r55_L44": {
+  "start": [
+   -42.1,
+   535.4
+  ],
+  "dir": [
+   0.643,
+   0.766
+  ],
+  "stack_mm3": 29568,
+  "hits": {
+   "L_femur tube 7050-T7451 \u00f850x1.2 (R-031; ": 46,
+   "L_knee tongue neck into tibia": 10518,
+   "L_knee lever r47.5 (Actuators STEP)": 5784,
+   "L_tibia tube 7075 \u00f845x1.2": 745
+  },
+  "clash_mm3_excl_bridge_neck": 6575,
+  "free_mm3": 22993
+ },
+ "r55_L50": {
+  "start": [
+   -42.1,
+   535.4
+  ],
+  "dir": [
+   0.643,
+   0.766
+  ],
+  "stack_mm3": 33600,
+  "hits": {
+   "L_femur tube 7050-T7451 \u00f850x1.2 (R-031; ": 291,
+   "L_knee tongue neck into tibia": 10518,
+   "L_knee lever r47.5 (Actuators STEP)": 5784,
+   "L_tibia tube 7075 \u00f845x1.2": 745
+  },
+  "clash_mm3_excl_bridge_neck": 6820,
+  "free_mm3": 26780
+ },
+ "r55_L56": {
+  "start": [
+   -42.1,
+   535.4
+  ],
+  "dir": [
+   0.643,
+   0.766
+  ],
+  "stack_mm3": 37632,
+  "hits": {
+   "L_femur tube 7050-T7451 \u00f850x1.2 (R-031; ": 572,
+   "L_knee tongue neck into tibia": 10518,
+   "L_knee lever r47.5 (Actuators STEP)": 5784,
+   "L_tibia tube 7075 \u00f845x1.2": 745
+  },
+  "clash_mm3_excl_bridge_neck": 7101,
+  "free_mm3": 30531
+ },
+ "r60_L44": {
+  "start": [
+   -46.0,
+   538.6
+  ],
+  "dir": [
+   0.643,
+   0.766
+  ],
+  "stack_mm3": 29568,
+  "hits": {
+   "L_knee lever r47.5 (Actuators STEP)": 2611,
+   "L_knee tongue neck into tibia": 7825,
+   "L_tibia tube 7075 \u00f845x1.2": 900
+  },
+  "clash_mm3_excl_bridge_neck": 3511,
+  "free_mm3": 26057
+ },
+ "r60_L50": {
+  "start": [
+   -46.0,
+   538.6
+  ],
+  "dir": [
+   0.643,
+   0.766
+  ],
+  "stack_mm3": 33600,
+  "hits": {
+   "L_femur tube 7050-T7451 \u00f850x1.2 (R-031; ": 55,
+   "L_knee lever r47.5 (Actuators STEP)": 2611,
+   "L_knee tongue neck into tibia": 7825,
+   "L_tibia tube 7075 \u00f845x1.2": 900
+  },
+  "clash_mm3_excl_bridge_neck": 3566,
+  "free_mm3": 30034
+ },
+ "r60_L56": {
+  "start": [
+   -46.0,
+   538.6
+  ],
+  "dir": [
+   0.643,
+   0.766
+  ],
+  "stack_mm3": 37632,
+  "hits": {
+   "L_femur tube 7050-T7451 \u00f850x1.2 (R-031; ": 300,
+   "L_knee lever r47.5 (Actuators STEP)": 2611,
+   "L_knee tongue neck into tibia": 7825,
+   "L_tibia tube 7075 \u00f845x1.2": 900
+  },
+  "clash_mm3_excl_bridge_neck": 3811,
+  "free_mm3": 33821
+ }
+}
