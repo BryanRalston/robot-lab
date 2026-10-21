@@ -1,0 +1,30 @@
+{
+ "tibia 45x2.0": {
+  "D_t": 22.5,
+  "sigma_bend_MPa": 388,
+  "SF_yield_393": 1.01,
+  "sigma_cr_elastic_MPa": 3527,
+  "SF_elastic_buckling": 9.1,
+  "M_brazier_kNm": 6.45,
+  "SF_brazier": 6.0,
+  "section": "noncompact",
+  "lambda_p": 12.8,
+  "lambda_r": 56.6,
+  "Mn_local_kNm": 1.28,
+  "SF_local_inelastic": 1.19
+ },
+ "femur 50x1.5": {
+  "D_t": 33.3,
+  "sigma_bend_MPa": 401,
+  "SF_yield_393": 0.98,
+  "sigma_cr_elastic_MPa": 2272,
+  "SF_elastic_buckling": 5.7,
+  "M_brazier_kNm": 4.09,
+  "SF_brazier": 3.8,
+  "section": "noncompact",
+  "lambda_p": 12.8,
+  "lambda_r": 56.6,
+  "Mn_local_kNm": 1.18,
+  "SF_local_inelastic": 1.09
+ }
+}
