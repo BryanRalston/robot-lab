@@ -9,7 +9,7 @@ RL Materials, 2026-10-21. Basis: legs/grokbuild/ankle_cross_fea_brief.md (R-069/
 | SCC | susceptible in short-transverse (MATERIALS_DB) | overaged to maximise SCC resistance (MIF text) | same |
 | density | 2.81 repo-wide nominal | same alloy | MATERIALS_DB (REPO_AL7075 removed, R-123) |
 - **Why:** the cross is a thick, pocketed block. Pin bores and press fits put sustained hoop tension through the short-transverse (ST) grain in a sweaty, salt-exposed foot zone. T6 in ST under sustained press-fit stress is the classic SCC case, so we take T7351.
-- **Cost:** yield is −15 %. The FEA limit becomes 410/1.5 = **273 MPa** design/fault, vs 335 in the brief. Bearing becomes ≤ 1.5 × 410/2 = 308 MPa. **Legs: run the FEA at T7351 limits.** If the lightest W/F passes only at T6, re-size; do not drop to T6.
+- **Cost:** yield is −15 %. (Typical-value limits of 273/308 MPa are SUPERSEDED; see §4 for the verified R-125(b) limits.) **Legs: run the FEA at T7351 limits.** If the lightest W/F passes only at T6, re-size; do not drop to T6.
 - Fatigue: the same 160 MPa MIF value. Keep the R-031 §6 Se 87 basis and 58 MPa amplitude, since the brief already includes the knock-downs. For local checks at the bores and pocket corners, see §2.
 
 ### R-123 update: thick-plate A/B basis
@@ -41,7 +41,23 @@ RL Materials, 2026-10-21. Basis: legs/grokbuild/ankle_cross_fea_brief.md (R-069/
 - Hardened pins: 42CrMo4 Q&T or 17-4PH H1025 (better corrosion behaviour in a sweaty foot) [EST].
 
 ## 4. Verdict, job 7
-**GO with 7075-T7351 + DU bushes + Type II/TSA anodize, no hard anodize on fatigue zones.** FEA limits are 273 MPa static/fault and bearing 308 MPa, with 58 MPa amplitude on un-anodized machined surfaces.
+**GO with 7075-T7351 + DU bushes + Type II/TSA anodize, no hard anodize on fatigue zones.**
+
+**Verified limits** (R-125(b), single path; MIL-HDBK-5H p. 3-348, T7351 plate, AMS 4078; stock 1.001–1.500 in; https://ssrl-uark.com/MILHDBK5H.pdf):
+
+| check | table A-basis | /1.5 | use |
+|---|---|---|---|
+| static/fault, L/LT | Fty 57 ksi = 393 MPa | **262 MPa** | governs |
+| static/fault, ST | **not tabulated for 1.001–1.500 in** (the ST row starts at 1.501–2.000: 52 ksi) | **239 MPa** stand-in | any ST-loaded region |
+| bore bearing, e/D 1.5 | Fbry 83 ksi = 572 MPa | **381 MPa** | |
+| bore bearing, e/D 2.0 | Fbry 99 ksi = 683 MPa | 455 MPa | only if e/D ≥ 2.0 is shown |
+| fatigue amplitude | — | 58 MPa | un-anodized machined surface |
+
+- **Bearing:** Legs' 1.5 × 393/2 = 295 MPa is conservative against the tabulated Fbry/1.5 = 381 MPa (e/D 1.5).
+  - The Fbry values are "dry pin" values (MIL-HDBK-5H §1.4.7.1) and need a clean, close pin fit. The pressed DU bush (H7 bore, interference) gives that.
+  - So check the **bush OD (ø14) projected area on the 7075 bore at 381 MPa** if e/D ≥ 1.5. Use 295 if e/D < 1.5 or the fit is not controlled. Interpolating to e/D 2.0 needs the drawing.
+  - The pin-on-bush interface is governed by the DU liner itself (GGB DU static limit ≈ 250 MPa, dynamic ≈ 140 MPa [EST, GGB catalogue not fetched]), not by the 7075.
+- Plate stock must be ≤ 1.500 in (38.1 mm). Thicker stock drops the limits to 253 MPa (L/LT) and 239 MPa (ST).
 - Expected saving: −0.084 robot (hand model) minus ~0.008 for bushes, so about **−0.076 kg [EST]**. Possibly less if the T7351 yield forces W/F up a step (W5/F5 → W6/F6).
 - The stop rule stands: if no candidate passes at W6/F6, keep Ti.
 
