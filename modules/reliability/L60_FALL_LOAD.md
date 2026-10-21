@@ -44,3 +44,45 @@ The L60 bracket only reacts **the twin knee roller-screw thrust** (trunnion pins
   - the new **metal thermal path** across the L71 PEM/G10 break (Thermal);
   - strap clearance to the release housing (y 27.6–232, top at 814, 2 mm FLAG).
 - **Verdict:** the proposal is sound on the strap and notch sections (SF 4.3 tension / 2.8 buckling at 29 kN [EST]). **Book SF at the joints, not the straps**; FEA (bryan PC, quadratic elements) is owed.
+
+# Rev B (2026-10-21 ~10:05 ET): DLF basis revised, knee stop and tube moment (after Legs 916c57f / L78, Actuators D96/D97)
+## B1. Two corrections to rev A's 29 kN
+1. **7267 N is the motor peak for the screw PAIR** (Actuators D96: "K_PEAK = 1.0 (7267 N pair = motor peak)"), not per screw. Rev A doubled it. The quasi-static ceiling is **7.27 kN pair → 345 N·m knee**.
+2. **"DF 2.0" was the step-load bound on an elastic member.** It doesn't apply this way: the drive is a current-limited actuator, not a suddenly applied external load. The real dynamic increment is the **reflected rotor inertia**, which Actuators quantified (D97): **1840–2590 N per screw** from rotor deceleration at the stop, i.e. ≤ 5.18 kN pair.
+
+## B2. Structural DLF (half-sine/ramp response) [EST]
+- **Load event:** knee stop crush (D97: PU k ≈ 8.6 kN·m/rad, peak at 6.9°). Effective inertia striking about the knee: the above-knee body and thigh ≈ 55 kg at ≈ 0.4 m → **I ≈ 8.8 kg·m²** (+0.2 reflected armature, sim/v3) [EST]. Load rise (quarter period) **t_r = (π/2)√(I/k) = (π/2)√(9.0/8600) ≈ 51 ms**.
+- **Tube response:** shank first bending mode with the foot mass. 45 × 1.5 7050, L ≈ 0.38 m, foot+ankle ≈ 1.2–1.5 kg tip mass → f₁ ≈ 100–150 Hz [EST hand estimate] → **T_n ≈ 7–10 ms**.
+- t_r / T_n ≈ 5–7. Ramp-response DLF = 1 + |sin(π t_r/T_n)|/(π t_r/T_n) ≤ **1.06**; half-sine of duration 2t_r ≈ 100 ms ≫ T_n → DLF ≈ 1.0–1.05. **Use DLF 1.05.**
+- Phase 1 (foot impact suddenly flexing the knee, before the stop): contact rise ≈ 10–20 ms [EST, unmeasured ground/foot compliance] → t_r/T_n ≈ 1–3 → DLF ≤ 1.2. That applies only to the motor + rotor term below, and phase 1 does not govern.
+- **Verdict on 2.0: REVISED to DLF 1.05 (1.2 in phase 1) on the structure, with the rotor-inertia force added explicitly.**
+
+## B3. Does the r75 PU stop cap the tube moment?
+- **Load path:** shank + foot free body. The moment in the tibia at the knee end equals the ground reaction moment about that section (F_ground × lever, minus shank inertia). That in turn equals the **net knee moment the thigh applies to the shank** = stop moment + screw (motor) moment ± rotor-inertia term. The ground force adjusts until it matches what the knee can resist (the knee flexes and the body descends otherwise). So **the tube moment is set by the knee's resisting moment, not by the ground lever**, until the knee's resistance exceeds what the ground lever can demand.
+- **The stop does not bypass the tubes.** Pad (thigh clevis) → striker (shank tongue) puts the stop moment straight into femur and tibia as knee moment (Legs L78 is correct). **It acts in parallel with the drive**, not instead of it.
+- **Phases:**
+  - **Phase 1 (knee < 135°):** M_knee ≤ motor 345 + rotor resisting sudden flexion 246 (5.18 kN × 47.5 mm) = 591 → × 1.05 = **0.62 kN·m**.
+  - **Phase 2 (on the stop):** M_knee = stop 830 (r75 at design energy) + motor 345 if fall mode still commands peak extension torque. The rotor term opposes here: the decelerating rotor drives flexion and is reacted by the stop, so it is excluded from the upper bound. → (830 + 345) × 1.05 = **1.23 kN·m**.
+  - If Controls zero/limit the knee torque near the stop (≤ 50 N·m inside 125–145°, cf. hip L26 soft limit): (830 + 50) × 1.05 = **0.92 kN·m**.
+- **The stop caps the moment only within its energy.** D97/r75 at design energy 62.7 J/knee, energy SF 1.54 → it bottoms at ≈ 97 J/knee, after which the moment is unbounded (PU solid, steel shims). The per-knee fall energy into the stop is Controls' basis (0fb7c0e). It must stay ≤ 62.7 J at the worst fall (G5 check).
+
+## B4. Governing tube moment, SF, required wall (7050-T73511, R-127: design 262, **fall limit 393**; fall case → 393)
+| case | M (kN·m) | tibia 45×1.5 σ / SF393 | femur 50×1.5 σ / SF393 | tibia wall for SF 1.0 | femur wall |
+|---|---|---|---|---|---|
+| Legs (rev A 29 kN) | 1.38 | 640 / 0.61 | 513 / 0.77 | 2.64 | 2.03 |
+| phase 1, drive path | 0.62 | 288 / **1.37** | 231 / 1.70 | 1.07 | 1.0 |
+| **phase 2, stop + motor peak (governing)** | **1.23** | 572 / **0.69** | 459 / **0.86** | **2.31** | **1.79** |
+| phase 2 with Controls knee torque ≤ 50 N·m at the stop | 0.92 | 428 / **0.92** | 343 / **1.14** | **1.66** | 1.3 (OK as is) |
+- Mass for a 0.38 m length per leg: tibia 1.5 → 2.31 ≈ +0.12 kg/leg; tibia → 1.66 ≈ +0.02 kg/leg; femur → 1.79 ≈ +0.05 kg/leg [EST].
+- **The L60 bracket fall load (rev A 29 kN) is revised to 13.1 kN** = (7.27 + 5.18) × 1.05 along the screw line, pair total. Leading screw 0.65 → 8.5 kN vs C0a 27.3 kN (SF 3.2). Legs' strap and bracket SFs improve ×2.2. The stop moment does not pass through L60.
+
+## B5. Verdict and actions
+- **Legs:**
+  - **book tube SF on 1.23 kN·m** (stop 830 + motor 345, DLF 1.05). **Tibia 45 × 1.5 FAILS (0.69) and femur FAILS (0.86).**
+  - Either take the **tibia wall 2.3 mm / femur 1.8 mm** (≈ +0.17 kg/leg), or adopt the Controls torque limit → **tibia 1.7 mm, femur 1.5 mm OK** (≈ +0.02 kg/leg).
+  - Do **not** use 2.5 mm/1.38 kN·m (based on the doubled thrust).
+  - L60 bracket: 13.1 kN.
+- **Controls (recommended, cheapest):** in fall/TUCK/R-146 states, limit knee extension torque to ≤ 50 N·m within 10° of the 135° stop. Also report the per-knee stop energy over the fall set (must be ≤ 62.7 J, never ≥ 97 J bottoming).
+- **Actuators:** confirm r75 = 830 N·m at 62.7 J, the bottoming energy, and the rotor force sign/phase.
+- **Missing [not invented]:** measured shank f₁ (modal tap test), foot/ground contact rise time, Controls fall-mode knee torque near the stop, per-knee stop energy distribution. Lateral/out-of-plane tube bending from side falls is a separate case, not covered here.
+- **G5:** add to TP-G5 fall set: strain gauges on the tibia/femur near the knee and knee torque logged during stop-engaging falls; pass σ ≤ 393 MPa equivalent and stop energy ≤ 62.7 J.
