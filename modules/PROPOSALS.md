@@ -488,7 +488,7 @@ All keep R-076 (reinforced isolation, IEC 60664-1 creepage, IP2X), R-074 (main l
 ### P-158: ID: thigh-front knee-pad extension (Controls 49fd991)
 - Crushable honeycomb + CF + TPU strip on the thigh front, z 540–590 (s 40–90 above the knee axis), y 95–165, laps the knee pad. Covers thigh contact angles 0–50.1° (needed 2–22°). Clear of the vents, the rev 8 panel and H4. +0.028 kg pair [EST]. Legs CAD ROM check owed. Evidence: design/thigh_knee_pad_p158.json, V5_COVER_SET.md.
 
-### P-159: Actuators: PU knee stop pair — rev D99 r75b (r75, contact 130°), **0.487 kg robot** (D99 0.344 + Legs leg-side 0.143, Legs L84 r2 6a3d84c): **ACCEPTED at 0.49 kg cap (Robot Lab r75b ruling 2026-10-21); Legs tapered arms + mass reconcile pending**
+### P-159: Actuators: PU knee stop pair — D99 r75b, **CAD 0.871 kg robot (Legs 211d031) FAIL vs 0.49/0.35; D101 integrated-in-housing (L91 B/A) NO-GO: housing lowest face 185 mm above the knee, ≥161 mm from the neck/lever (results/KNEE_STOP_PU_D101.md)**; needs a Robot Lab gate decision
 - **Change (D99, T&R 8c7ac56 limits):** 2 stacks per knee, each 24 × 20, 7 × 10.17 mm PUR90A + 6 × 1 mm 7075 shims + guide pin, at r 75, contact 130°. **544 N·m / 7.3 kN at 44.1 J**; 25 % bottoming 95.8 J (≥ 92.5) at 143.6°, 789 N·m / 10.5 kN; rate ×1.3 [EST]. C1, bottoming, C2 and top-out PASS; mass FAIL.
 - **Mass:** **0.487 kg robot** (Legs L84 r2 6a3d84c: 24×18 striker arms, ring ø51×3×24 + 2× ø6 pins). Savings options in KNEE_STOP_PU_D99.md (best: tapered arms −0.08 to −0.10 kg).
 - **Evidence:** modules/actuators/results/KNEE_STOP_PU_D99.md, knee_stop_pu_d99.py/.json, knee_stop_sweep_d99.py/.json, cad/knee_stop_pu_r75b_d99.step (r75b; r75/D98/D97 kept), sweep knee_stop_sweep_d99b.json min 4.5 mm.

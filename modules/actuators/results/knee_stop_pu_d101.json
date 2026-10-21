@@ -1,0 +1,84 @@
+{
+ "rev": "D101",
+ "source": "Legs L91 4ea8243",
+ "travel_vs_r": {
+  "50": {
+   "travel_mm": 3.8,
+   "PU_t_25pct_mm": 15,
+   "PU_area_mm2_for_62cm3": 4028,
+   "F25_kN": 46.9
+  },
+  "60": {
+   "travel_mm": 5.8,
+   "PU_t_25pct_mm": 23,
+   "PU_area_mm2_for_62cm3": 2652,
+   "F25_kN": 30.9
+  },
+  "100": {
+   "travel_mm": 16.3,
+   "PU_t_25pct_mm": 65,
+   "PU_area_mm2_for_62cm3": 951,
+   "F25_kN": 11.1
+  },
+  "150": {
+   "travel_mm": 30.0,
+   "PU_t_25pct_mm": 120,
+   "PU_area_mm2_for_62cm3": 516,
+   "F25_kN": 6.0
+  },
+  "200": {
+   "travel_mm": 43.9,
+   "PU_t_25pct_mm": 175,
+   "PU_area_mm2_for_62cm3": 353,
+   "F25_kN": 4.1
+  },
+  "250": {
+   "travel_mm": 57.7,
+   "PU_t_25pct_mm": 231,
+   "PU_area_mm2_for_62cm3": 268,
+   "F25_kN": 3.1
+  },
+  "280": {
+   "travel_mm": 66.0,
+   "PU_t_25pct_mm": 264,
+   "PU_area_mm2_for_62cm3": 235,
+   "F25_kN": 2.7
+  }
+ },
+ "cad": {
+  "0": {
+   "housing_to_tongue_neck": 178.5,
+   "housing_to_lever": 206.4,
+   "housing_to_tibia": 259.6,
+   "housing_zmin_above_knee": 185,
+   "housing_volume_cm3": 143.0
+  },
+  "90": {
+   "housing_to_tongue_neck": 180.2,
+   "housing_to_lever": 185.8,
+   "housing_to_tibia": 179.4,
+   "housing_zmin_above_knee": 184,
+   "housing_volume_cm3": 143.0
+  },
+  "130": {
+   "housing_to_tongue_neck": 178.8,
+   "housing_to_lever": 163.4,
+   "housing_to_tibia": 66.2,
+   "housing_zmin_above_knee": 185,
+   "housing_volume_cm3": 143.0
+  },
+  "143.6": {
+   "housing_to_tongue_neck": 178.2,
+   "housing_to_lever": 161.6,
+   "housing_to_tibia": 8.1,
+   "housing_zmin_above_knee": 185,
+   "housing_volume_cm3": 143.0
+  }
+ },
+ "phi_deg": {
+  "0": -67.73,
+  "130": -68.65,
+  "143.6": -66.28
+ },
+ "verdict": "NO-GO: hard conflict. The r116b housing is >=161 mm from every shank part near the knee (lowest face 185 mm above the knee axis); there is no housing underside at r50/r60. The only shank part that reaches the housing is the tibia tube at r~200-280 (gap 66 mm at 130 -> 8 mm at 143.6), where the relative travel is ~44-66 mm -> PU 175-265 mm thick needed. The housing also pivots about the trunnion and is held by the screws, so a strike on it bends the screws unless its line passes through the trunnion."
+}
