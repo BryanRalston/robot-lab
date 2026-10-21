@@ -192,8 +192,11 @@ KNEE_PAD = '<geom name="{s}_knee_pad" type="box" pos="0.050 0 -0.060" size="0.02
 # Two waypoints [EST]: W1 hinge forward so the CoM passes the toes and the heels lift (knees travel forward/down),
 # W2 upright kneel on pads + toes. Fraction of T_kneel spent reaching W1: KNEEL_W1_FRAC.
 KNEEL_W1 = {'hip_pitch': -1.45, 'knee': 1.70, 'ankle_pitch': -0.75, 'waist_pitch': 0.8, 'shoulder_pitch': -1.2}
-KNEEL_POSE = {'hip_pitch': -0.6, 'knee': 1.9, 'ankle_pitch': 0.3, 'waist_pitch': 0.4, 'shoulder_pitch': -0.6}
-KNEEL_W1_FRAC = 0.5
+KNEEL_POSE = {'hip_pitch': -0.6, 'knee': 1.9, 'ankle_pitch': 0.3, 'waist_pitch': 0.4}
+KNEEL_W1_FRAC = 0.6
+LEAN_S = 0.0        # WBC lean phase at the start of KNEEL: CoM forward to LEAN_X, pelvis pitch LEAN_PITCH
+LEAN_X = 0.14
+LEAN_PITCH = 0.3
 KNEEL_GAIN = 1.0      # x gains.npz kp/kd
 
 
@@ -285,7 +288,14 @@ def run_kneel(T_crouch=2.0, T_kneel=0.8, pel_z=0.85, frames=None, fps=25, hold_a
         if t >= SETTLE:
             sup.step(0.001)            # temperatures read 83 -> latches CROUCH at t = SETTLE
         st = sup.state
-        if st in ('CROUCH',) or mode == 'settle':
+        if st == KNEEL and 'kneel' in ev and t - ev['kneel'] < LEAN_S and qc is None:
+            s_ = (t - ev['kneel']) / LEAN_S
+            ctrl.x_ref = FC + (LEAN_X - FC) * mj(s_)
+            PEL_PITCH['now'] = LEAN_PITCH * mj(s_)
+            ctrl.com_z_ref = z1; ctrl.q_ref = q1; ctrl.v_ref = np.zeros(m.nv)
+            ctrl.step(d)
+            t_lean_end = t
+        elif st in ('CROUCH',) or mode == 'settle':
             mode = 'settle' if t < SETTLE else 'crouch'
             s = (t - SETTLE) / T_crouch
             a = mj(s)
@@ -299,6 +309,7 @@ def run_kneel(T_crouch=2.0, T_kneel=0.8, pel_z=0.85, frames=None, fps=25, hold_a
         else:
             if qc is None:
                 qc = d.qpos[qadr].copy(); t_k0 = t
+                res['lean_s'] = LEAN_S
             T1 = KNEEL_W1_FRAC * T_kneel; T2 = T_kneel - T1
             if t - t_k0 < T1:
                 s = (t - t_k0) / T1; qa_, qb_, TT = qc, qw, T1

@@ -36,6 +36,32 @@
     "kneel_timeout_s": 1.2,
     "confirm_s": 0.05,
     "support_speed": 0.1,
-    "stop_sequence_note": "R-145: CROUCH (2.0 s derated) -> KNEEL (fall-mode, knee pads) -> CONTACT_CONFIRMED (knee contact + CoM in knee+toe polygon + speed<0.1 m/s for 50 ms) -> MO_OFF. Fallback HOLD_DERATED until drive trip -> TUCK. MO=0 from an unsupported crouch is prohibited."
+    "stop_sequence_note": "R-145: CROUCH (2.0 s derated) -> KNEEL (fall-mode, knee pads) -> CONTACT_CONFIRMED (knee contact + CoM in knee+toe polygon + speed<0.1 m/s for 50 ms) -> MO_OFF. Fallback HOLD_DERATED until drive trip -> TUCK. MO=0 from an unsupported crouch is prohibited.",
+    "fall_mode_kneel": {
+      "status": "EST, does not reach knee contact in sim (R-145 kneel open)",
+      "kneel_w1": {
+        "hip_pitch": -1.45,
+        "knee": 1.7,
+        "ankle_pitch": -0.75,
+        "waist_pitch": 0.8,
+        "shoulder_pitch": -1.2
+      },
+      "kneel_pose": {
+        "hip_pitch": -0.6,
+        "knee": 1.9,
+        "ankle_pitch": 0.3,
+        "waist_pitch": 0.4
+      },
+      "w1_frac": 0.6,
+      "gains": "gains.npz kp/kd x1",
+      "knee_pad_geom": "EST box 50x100x80 mm on shank front at knee (sim only)"
+    },
+    "friction_hold_Nm": {
+      "source": "Actuators D94 7d22c91 SAFE_SIT_HOLDING.md",
+      "hip_pitch": 7.0,
+      "knee": 7.0,
+      "ankle_pitch": 8.0,
+      "default": 7.0
+    }
   }
 }

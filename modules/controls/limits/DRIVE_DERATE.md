@@ -79,3 +79,50 @@ Limits of this result (do not over-read):
   margin is thin. The contact points are the 4 box corners per foot.
 - The script patches the WBC at runtime (pelvis pitch reference, leg posture gains); both stay at their stock values for this
   table. `controller.py` is not edited.
+
+## R-145 (5f5bd1d) stop sequence and Actuators D94 (7d22c91) torque-free end pose
+State machine in `drive_thermal_derate.py`: **CROUCH** (2.0 s derated, WBC) → **KNEEL** (fall-mode) → **CONTACT_CONFIRMED** → **MO_OFF**.
+Fallback: **HOLD_DERATED** (kneel timeout 1.2 s [EST], crouch timeout 2.6 s, or `kneel_impossible()`), then **TUCK** on the
+first drive trip. MO is never commanded off in HOLD_DERATED or TUCK.
+`supported()` needs all four flags together: knee contact, CoM inside the knee+toe polygon, CoM speed < 0.1 m/s, and
+`torque_ok`. `torque_ok` comes from `static_hold_ok()`: the static holding torque must be below the D94 friction hold at
+every joint (hip 7, knee 7, ankle 8, all other joints 7 N·m). The flags must hold for 50 ms. `_mo_off()` raises
+`UnsupportedMoOff` otherwise. Tests cover every transition, both timeouts, contact flicker, and the MO guard over all
+flag combinations, including the torque flag.
+
+### Sim: crouch then kneel (`safe_sit_wbc.run_kneel`), sim/v3 4115f6e, 68 kg, legs at 0.5 derate, CPU
+- Knee pads: sim/v3 has no knee contact geom, so `<s>_knee_pad` boxes **[EST]** (50×100×80 mm) are added on the front of
+  each shank at the knee, for this sim only.
+- The repo has no fall-mode controller. The kneel is a joint PD (gains.npz) along minimum-jerk waypoints
+  (`fall_mode_kneel` in controller_config, **EST**), with the supervisor driving the states.
+- **Result: the kneel is not achieved. Total time to supported contact: not reached → gate (≤ 2.8 s) FAIL / not measurable.**
+  - The crouch works: 2.0 s, peak 0.95 of the derated limit.
+  - Every kneel variant tried (≈15: trunk/hip lean, arms forward, WBC CoM lean to x 0.14–0.18 m before the drop,
+    0.6–1.6 s, at both 0.5 and 1.0 torque) sits back and falls onto the pelvis/torso. No knee or pad contact occurs, so
+    the peak knee impact force is not available.
+  - Mechanism: in the crouch the ankle is already at its −0.79 rad dorsiflexion stop. The knees can only travel forward
+    if the heels lift, which needs the CoM ahead of the toe line, and neither the PD nor the stand-mode WBC moves it there.
+  - The supervisor correctly ended in HOLD_DERATED with MO on (no MO=0 was sent).
+- GIF: `media/progress/2026-10-21_controls_r145_crouch_kneel_attempt.gif`.
+- **Latch:** left at 83 °C. R-145 drops it to 82 only if the sim *shows* > 2.8 s, and the kneel time could not be
+  measured at all. Arbiter call.
+
+### End-pose holding (`kneel_hold.py`, results `kneel_hold_results.json`)
+Each candidate pose is settled under a PD hold. Then MO=0, with joint friction set to the D94 holds.
+"PD hold" is the mean PD torque at rest, an upper bound because the pose target fights the contacts.
+"MO=0" shows whether the pose actually stays with friction alone.
+
+| pose (target → actual contacts) | PD hold max (N·m) | MO=0: CoM drop / max drift / joints at friction limit |
+|---|---|---|
+| B kneel, sitting back (knees 135° stop): pads + feet | 16.5 (hips, shoulders, waist > 7) | **274 mm / 83° / hips, knees, waist, shoulders: collapses** |
+| C hands + knees: hands + feet | 40.8 (knees) | **199 mm / 107°: collapses** |
+| E child's pose: pads + feet + hands | 29.2 (hips) | 47 mm / 49° (elbows, knees at limit): slumps |
+| A upright kneel: ends face-down on chest pad + thighs + hands | 38.3 | 5.5 mm / 5.5°, hips and shoulders at friction limit |
+| D forearms + knees: ends on head + knee pads | 98.9 | **5.6 mm / 6.2°, no joint at the limit** |
+| F prone: chest pad + feet + hands | 69.3 | **22.5 mm / 9.7°, no joint at the limit** |
+
+**No kneel pose meets the D94 rule.** Every pose with the trunk held up on knees, feet or hands needs 11–41 N·m at the
+hips, knees, waist or shoulders, and collapses with MO=0. The only poses that stay put with MO=0 (no joint at its
+friction limit) are **lying on the floor**: forehead/chest down on the knee pads, or prone on the chest pad. That is the
+lowest-torque settled state. Open item for the Arbiter: R-145 + D94 together imply the MO=0 end state is a controlled
+lowering to prone/chest-pad (or the robot keeps derated torque, i.e. HOLD_DERATED → drive trip → tuck), not a kneel.

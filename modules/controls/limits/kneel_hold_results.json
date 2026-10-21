@@ -1,0 +1,678 @@
+[
+ {
+  "pose": "A_kneel_upright (knees+toes)",
+  "contacts": [
+   "chest_pad",
+   "l_hand",
+   "l_thigh",
+   "r_hand",
+   "r_thigh"
+  ],
+  "com_z": 0.151,
+  "com_speed_settled": 0.0,
+  "max_abs_hold_Nm": 38.3,
+  "static_hold_ok": false,
+  "joints_over_friction": {
+   "l_hip_pitch": [
+    -16.5,
+    7.0
+   ],
+   "r_hip_pitch": [
+    -15.9,
+    7.0
+   ],
+   "waist_pitch": [
+    38.3,
+    7.0
+   ],
+   "l_shoulder_pitch": [
+    12.8,
+    7.0
+   ],
+   "r_shoulder_pitch": [
+    12.8,
+    7.0
+   ]
+  },
+  "mo0_com_drop_mm": 5.5,
+  "mo0_max_joint_drift_deg": 5.5,
+  "mo0_worst_drift_joint": "r_wrist_pitch",
+  "mo0_end_speed": 0.004,
+  "mo0_joints_at_friction_limit": [
+   "l_hip_pitch",
+   "r_hip_pitch",
+   "l_shoulder_pitch",
+   "r_shoulder_pitch"
+  ],
+  "mo0_friction_load_Nm": {
+   "l_hip_yaw": 0.2,
+   "l_hip_roll": 0.1,
+   "l_hip_pitch": -7.0,
+   "l_knee": 2.1,
+   "l_ankle_pitch": 0.6,
+   "l_ankle_roll": -0.0,
+   "r_hip_yaw": 0.2,
+   "r_hip_roll": 0.1,
+   "r_hip_pitch": -7.0,
+   "r_knee": 2.2,
+   "r_ankle_pitch": 0.6,
+   "r_ankle_roll": 0.0,
+   "waist_yaw": -0.4,
+   "waist_pitch": 0.7,
+   "l_shoulder_pitch": -7.0,
+   "l_shoulder_roll": -0.0,
+   "l_shoulder_yaw": -0.0,
+   "l_elbow": -0.0,
+   "l_wrist_roll": -0.0,
+   "l_wrist_pitch": -0.0,
+   "l_wrist_yaw": 0.0,
+   "r_shoulder_pitch": -7.0,
+   "r_shoulder_roll": -0.0,
+   "r_shoulder_yaw": -0.0,
+   "r_elbow": -0.0,
+   "r_wrist_roll": -0.0,
+   "r_wrist_pitch": -0.0,
+   "r_wrist_yaw": 0.0,
+   "neck_yaw": 0.0,
+   "neck_pitch": -0.4
+  },
+  "hold_torque_Nm": {
+   "l_hip_yaw": 0.1,
+   "l_hip_roll": 0.0,
+   "l_hip_pitch": -16.5,
+   "l_knee": 2.9,
+   "l_ankle_pitch": 0.7,
+   "l_ankle_roll": -0.0,
+   "r_hip_yaw": 0.2,
+   "r_hip_roll": -0.2,
+   "r_hip_pitch": -15.9,
+   "r_knee": 3.0,
+   "r_ankle_pitch": 0.7,
+   "r_ankle_roll": 0.0,
+   "waist_yaw": -0.2,
+   "waist_pitch": 38.3,
+   "l_shoulder_pitch": 12.8,
+   "l_shoulder_roll": -0.0,
+   "l_shoulder_yaw": -0.0,
+   "l_elbow": 0.3,
+   "l_wrist_roll": -0.0,
+   "l_wrist_pitch": -1.8,
+   "l_wrist_yaw": -0.0,
+   "r_shoulder_pitch": 12.8,
+   "r_shoulder_roll": -0.1,
+   "r_shoulder_yaw": -0.0,
+   "r_elbow": 0.3,
+   "r_wrist_roll": -0.0,
+   "r_wrist_pitch": -1.8,
+   "r_wrist_yaw": -0.0,
+   "neck_yaw": 0.0,
+   "neck_pitch": -0.4
+  }
+ },
+ {
+  "pose": "B_kneel_sit_back (knee 135 deg stop)",
+  "contacts": [
+   "l_foot",
+   "l_knee_pad",
+   "r_foot",
+   "r_knee_pad"
+  ],
+  "com_z": 0.552,
+  "com_speed_settled": 0.0,
+  "max_abs_hold_Nm": 16.5,
+  "static_hold_ok": false,
+  "joints_over_friction": {
+   "l_hip_pitch": [
+    16.5,
+    7.0
+   ],
+   "r_hip_pitch": [
+    16.5,
+    7.0
+   ],
+   "waist_pitch": [
+    -8.4,
+    7.0
+   ],
+   "l_shoulder_pitch": [
+    10.9,
+    7.0
+   ],
+   "r_shoulder_pitch": [
+    10.9,
+    7.0
+   ]
+  },
+  "mo0_com_drop_mm": 273.7,
+  "mo0_max_joint_drift_deg": 82.5,
+  "mo0_worst_drift_joint": "l_shoulder_pitch",
+  "mo0_end_speed": 0.007,
+  "mo0_joints_at_friction_limit": [
+   "l_hip_pitch",
+   "l_knee",
+   "r_hip_pitch",
+   "r_knee",
+   "waist_pitch",
+   "l_shoulder_pitch",
+   "r_shoulder_pitch"
+  ],
+  "mo0_friction_load_Nm": {
+   "l_hip_yaw": 0.4,
+   "l_hip_roll": 0.3,
+   "l_hip_pitch": 7.0,
+   "l_knee": -7.0,
+   "l_ankle_pitch": -0.0,
+   "l_ankle_roll": 0.2,
+   "r_hip_yaw": 0.6,
+   "r_hip_roll": -0.5,
+   "r_hip_pitch": 7.0,
+   "r_knee": -7.0,
+   "r_ankle_pitch": 0.0,
+   "r_ankle_roll": 0.1,
+   "waist_yaw": 1.0,
+   "waist_pitch": 7.0,
+   "l_shoulder_pitch": -7.0,
+   "l_shoulder_roll": 0.5,
+   "l_shoulder_yaw": 0.0,
+   "l_elbow": -0.0,
+   "l_wrist_roll": -0.0,
+   "l_wrist_pitch": 0.3,
+   "l_wrist_yaw": 0.0,
+   "r_shoulder_pitch": -7.0,
+   "r_shoulder_roll": 0.5,
+   "r_shoulder_yaw": 0.0,
+   "r_elbow": -0.0,
+   "r_wrist_roll": -0.0,
+   "r_wrist_pitch": 0.3,
+   "r_wrist_yaw": 0.0,
+   "neck_yaw": 0.0,
+   "neck_pitch": -1.1
+  },
+  "hold_torque_Nm": {
+   "l_hip_yaw": 0.0,
+   "l_hip_roll": 0.0,
+   "l_hip_pitch": 16.5,
+   "l_knee": -3.1,
+   "l_ankle_pitch": -1.4,
+   "l_ankle_roll": 0.0,
+   "r_hip_yaw": 0.0,
+   "r_hip_roll": 0.0,
+   "r_hip_pitch": 16.5,
+   "r_knee": -3.1,
+   "r_ankle_pitch": -1.4,
+   "r_ankle_roll": 0.0,
+   "waist_yaw": 0.1,
+   "waist_pitch": -8.4,
+   "l_shoulder_pitch": 10.9,
+   "l_shoulder_roll": 0.0,
+   "l_shoulder_yaw": -0.0,
+   "l_elbow": 3.1,
+   "l_wrist_roll": -0.0,
+   "l_wrist_pitch": 0.1,
+   "l_wrist_yaw": -0.0,
+   "r_shoulder_pitch": 10.9,
+   "r_shoulder_roll": 0.0,
+   "r_shoulder_yaw": -0.0,
+   "r_elbow": 3.1,
+   "r_wrist_roll": -0.0,
+   "r_wrist_pitch": 0.1,
+   "r_wrist_yaw": -0.0,
+   "neck_yaw": 0.0,
+   "neck_pitch": -0.4
+  }
+ },
+ {
+  "pose": "C_hands_knees",
+  "contacts": [
+   "l_foot",
+   "l_hand",
+   "r_foot",
+   "r_hand"
+  ],
+  "com_z": 0.482,
+  "com_speed_settled": 0.003,
+  "max_abs_hold_Nm": 40.8,
+  "static_hold_ok": false,
+  "joints_over_friction": {
+   "l_hip_pitch": [
+    -21.5,
+    7.0
+   ],
+   "l_knee": [
+    -40.8,
+    7.0
+   ],
+   "r_hip_pitch": [
+    -21.5,
+    7.0
+   ],
+   "r_knee": [
+    -40.8,
+    7.0
+   ],
+   "waist_pitch": [
+    25.2,
+    7.0
+   ]
+  },
+  "mo0_com_drop_mm": 199.4,
+  "mo0_max_joint_drift_deg": 106.9,
+  "mo0_worst_drift_joint": "l_elbow",
+  "mo0_end_speed": 0.212,
+  "mo0_joints_at_friction_limit": [
+   "l_knee",
+   "r_knee",
+   "l_shoulder_pitch",
+   "l_elbow",
+   "r_shoulder_pitch",
+   "r_elbow"
+  ],
+  "mo0_friction_load_Nm": {
+   "l_hip_yaw": 0.0,
+   "l_hip_roll": -0.0,
+   "l_hip_pitch": -0.9,
+   "l_knee": 7.0,
+   "l_ankle_pitch": 0.4,
+   "l_ankle_roll": -0.0,
+   "r_hip_yaw": 0.0,
+   "r_hip_roll": -0.0,
+   "r_hip_pitch": -0.9,
+   "r_knee": 7.0,
+   "r_ankle_pitch": 0.4,
+   "r_ankle_roll": 0.0,
+   "waist_yaw": 0.2,
+   "waist_pitch": 0.6,
+   "l_shoulder_pitch": -7.0,
+   "l_shoulder_roll": -0.0,
+   "l_shoulder_yaw": -0.0,
+   "l_elbow": 7.0,
+   "l_wrist_roll": -0.0,
+   "l_wrist_pitch": -0.3,
+   "l_wrist_yaw": -0.0,
+   "r_shoulder_pitch": -7.0,
+   "r_shoulder_roll": -0.0,
+   "r_shoulder_yaw": -0.0,
+   "r_elbow": 7.0,
+   "r_wrist_roll": -0.0,
+   "r_wrist_pitch": -0.3,
+   "r_wrist_yaw": -0.0,
+   "neck_yaw": 0.0,
+   "neck_pitch": -0.0
+  },
+  "hold_torque_Nm": {
+   "l_hip_yaw": 0.0,
+   "l_hip_roll": -0.0,
+   "l_hip_pitch": -21.5,
+   "l_knee": -40.8,
+   "l_ankle_pitch": -0.9,
+   "l_ankle_roll": 0.0,
+   "r_hip_yaw": 0.0,
+   "r_hip_roll": 0.0,
+   "r_hip_pitch": -21.5,
+   "r_knee": -40.8,
+   "r_ankle_pitch": -0.9,
+   "r_ankle_roll": 0.1,
+   "waist_yaw": -0.0,
+   "waist_pitch": 25.2,
+   "l_shoulder_pitch": -6.2,
+   "l_shoulder_roll": -0.0,
+   "l_shoulder_yaw": 0.0,
+   "l_elbow": -0.2,
+   "l_wrist_roll": 0.0,
+   "l_wrist_pitch": -3.8,
+   "l_wrist_yaw": -0.0,
+   "r_shoulder_pitch": -6.2,
+   "r_shoulder_roll": -0.0,
+   "r_shoulder_yaw": 0.0,
+   "r_elbow": -0.2,
+   "r_wrist_roll": 0.0,
+   "r_wrist_pitch": -3.8,
+   "r_wrist_yaw": -0.0,
+   "neck_yaw": 0.0,
+   "neck_pitch": -0.4
+  }
+ },
+ {
+  "pose": "D_forearms_knees",
+  "contacts": [
+   "head",
+   "l_knee_pad",
+   "r_knee_pad"
+  ],
+  "com_z": 0.208,
+  "com_speed_settled": 0.005,
+  "max_abs_hold_Nm": 98.9,
+  "static_hold_ok": false,
+  "joints_over_friction": {
+   "l_hip_pitch": [
+    -25.0,
+    7.0
+   ],
+   "r_hip_pitch": [
+    -24.8,
+    7.0
+   ],
+   "waist_pitch": [
+    98.9,
+    7.0
+   ],
+   "l_shoulder_pitch": [
+    24.3,
+    7.0
+   ],
+   "r_shoulder_pitch": [
+    24.3,
+    7.0
+   ]
+  },
+  "mo0_com_drop_mm": 5.6,
+  "mo0_max_joint_drift_deg": 6.2,
+  "mo0_worst_drift_joint": "r_wrist_pitch",
+  "mo0_end_speed": 0.001,
+  "mo0_joints_at_friction_limit": [],
+  "mo0_friction_load_Nm": {
+   "l_hip_yaw": 0.0,
+   "l_hip_roll": -0.0,
+   "l_hip_pitch": -0.9,
+   "l_knee": 4.9,
+   "l_ankle_pitch": 1.5,
+   "l_ankle_roll": -0.0,
+   "r_hip_yaw": 0.0,
+   "r_hip_roll": -0.1,
+   "r_hip_pitch": -0.9,
+   "r_knee": 4.9,
+   "r_ankle_pitch": 1.5,
+   "r_ankle_roll": 0.0,
+   "waist_yaw": -0.0,
+   "waist_pitch": 5.2,
+   "l_shoulder_pitch": -4.0,
+   "l_shoulder_roll": 0.0,
+   "l_shoulder_yaw": 0.0,
+   "l_elbow": -0.0,
+   "l_wrist_roll": 0.0,
+   "l_wrist_pitch": -0.0,
+   "l_wrist_yaw": 0.0,
+   "r_shoulder_pitch": -4.1,
+   "r_shoulder_roll": 0.0,
+   "r_shoulder_yaw": 0.0,
+   "r_elbow": -0.0,
+   "r_wrist_roll": 0.0,
+   "r_wrist_pitch": -0.0,
+   "r_wrist_yaw": 0.0,
+   "neck_yaw": 0.0,
+   "neck_pitch": -0.1
+  },
+  "hold_torque_Nm": {
+   "l_hip_yaw": -0.0,
+   "l_hip_roll": 0.2,
+   "l_hip_pitch": -25.0,
+   "l_knee": -0.2,
+   "l_ankle_pitch": 1.5,
+   "l_ankle_roll": -0.0,
+   "r_hip_yaw": -0.1,
+   "r_hip_roll": -0.3,
+   "r_hip_pitch": -24.8,
+   "r_knee": -0.1,
+   "r_ankle_pitch": 1.5,
+   "r_ankle_roll": 0.0,
+   "waist_yaw": 0.2,
+   "waist_pitch": 98.9,
+   "l_shoulder_pitch": 24.3,
+   "l_shoulder_roll": -0.1,
+   "l_shoulder_yaw": -0.0,
+   "l_elbow": 6.9,
+   "l_wrist_roll": -0.0,
+   "l_wrist_pitch": 0.3,
+   "l_wrist_yaw": -0.0,
+   "r_shoulder_pitch": 24.3,
+   "r_shoulder_roll": -0.1,
+   "r_shoulder_yaw": -0.0,
+   "r_elbow": 6.9,
+   "r_wrist_roll": -0.0,
+   "r_wrist_pitch": 0.3,
+   "r_wrist_yaw": -0.0,
+   "neck_yaw": -0.0,
+   "neck_pitch": 4.1
+  }
+ },
+ {
+  "pose": "E_childs_pose (torso on thighs, arms forward)",
+  "contacts": [
+   "l_foot",
+   "l_hand",
+   "l_knee_pad",
+   "r_foot",
+   "r_hand",
+   "r_knee_pad"
+  ],
+  "com_z": 0.343,
+  "com_speed_settled": 0.0,
+  "max_abs_hold_Nm": 29.2,
+  "static_hold_ok": false,
+  "joints_over_friction": {
+   "l_hip_pitch": [
+    29.2,
+    7.0
+   ],
+   "r_hip_pitch": [
+    29.1,
+    7.0
+   ],
+   "waist_pitch": [
+    20.5,
+    7.0
+   ],
+   "l_shoulder_pitch": [
+    24.3,
+    7.0
+   ],
+   "l_elbow": [
+    20.0,
+    7.0
+   ],
+   "l_wrist_pitch": [
+    7.6,
+    7.0
+   ],
+   "r_shoulder_pitch": [
+    24.3,
+    7.0
+   ],
+   "r_elbow": [
+    20.0,
+    7.0
+   ],
+   "r_wrist_pitch": [
+    7.6,
+    7.0
+   ]
+  },
+  "mo0_com_drop_mm": 46.8,
+  "mo0_max_joint_drift_deg": 49.1,
+  "mo0_worst_drift_joint": "r_elbow",
+  "mo0_end_speed": 0.004,
+  "mo0_joints_at_friction_limit": [
+   "l_knee",
+   "r_knee",
+   "l_elbow",
+   "r_elbow"
+  ],
+  "mo0_friction_load_Nm": {
+   "l_hip_yaw": 0.0,
+   "l_hip_roll": -0.1,
+   "l_hip_pitch": -0.0,
+   "l_knee": 6.9,
+   "l_ankle_pitch": 0.6,
+   "l_ankle_roll": -0.0,
+   "r_hip_yaw": 0.0,
+   "r_hip_roll": -0.1,
+   "r_hip_pitch": -0.0,
+   "r_knee": 6.9,
+   "r_ankle_pitch": 0.6,
+   "r_ankle_roll": 0.0,
+   "waist_yaw": 0.1,
+   "waist_pitch": 0.0,
+   "l_shoulder_pitch": 2.0,
+   "l_shoulder_roll": -0.0,
+   "l_shoulder_yaw": -0.0,
+   "l_elbow": 7.0,
+   "l_wrist_roll": -0.0,
+   "l_wrist_pitch": -0.3,
+   "l_wrist_yaw": -0.0,
+   "r_shoulder_pitch": 1.9,
+   "r_shoulder_roll": -0.0,
+   "r_shoulder_yaw": -0.0,
+   "r_elbow": 6.9,
+   "r_wrist_roll": -0.0,
+   "r_wrist_pitch": -0.3,
+   "r_wrist_yaw": -0.0,
+   "neck_yaw": 0.0,
+   "neck_pitch": -0.1
+  },
+  "hold_torque_Nm": {
+   "l_hip_yaw": 0.0,
+   "l_hip_roll": -0.0,
+   "l_hip_pitch": 29.2,
+   "l_knee": -1.3,
+   "l_ankle_pitch": -0.8,
+   "l_ankle_roll": 0.0,
+   "r_hip_yaw": 0.0,
+   "r_hip_roll": -0.0,
+   "r_hip_pitch": 29.1,
+   "r_knee": -1.3,
+   "r_ankle_pitch": -0.8,
+   "r_ankle_roll": 0.0,
+   "waist_yaw": 0.1,
+   "waist_pitch": 20.5,
+   "l_shoulder_pitch": 24.3,
+   "l_shoulder_roll": -0.0,
+   "l_shoulder_yaw": 0.0,
+   "l_elbow": 20.0,
+   "l_wrist_roll": 0.0,
+   "l_wrist_pitch": 7.6,
+   "l_wrist_yaw": -0.0,
+   "r_shoulder_pitch": 24.3,
+   "r_shoulder_roll": -0.1,
+   "r_shoulder_yaw": 0.0,
+   "r_elbow": 20.0,
+   "r_wrist_roll": 0.0,
+   "r_wrist_pitch": 7.6,
+   "r_wrist_yaw": -0.0,
+   "neck_yaw": 0.0,
+   "neck_pitch": -0.3
+  }
+ },
+ {
+  "pose": "F_prone (lying face down)",
+  "contacts": [
+   "chest_pad",
+   "l_foot",
+   "l_hand",
+   "r_foot",
+   "r_hand"
+  ],
+  "com_z": 0.125,
+  "com_speed_settled": 0.0,
+  "max_abs_hold_Nm": 69.3,
+  "static_hold_ok": false,
+  "joints_over_friction": {
+   "l_hip_pitch": [
+    -44.5,
+    7.0
+   ],
+   "l_knee": [
+    -32.8,
+    7.0
+   ],
+   "r_hip_pitch": [
+    -44.5,
+    7.0
+   ],
+   "r_knee": [
+    -32.8,
+    7.0
+   ],
+   "waist_pitch": [
+    69.3,
+    7.0
+   ],
+   "l_shoulder_pitch": [
+    22.5,
+    7.0
+   ],
+   "r_shoulder_pitch": [
+    22.5,
+    7.0
+   ]
+  },
+  "mo0_com_drop_mm": 22.5,
+  "mo0_max_joint_drift_deg": 9.7,
+  "mo0_worst_drift_joint": "l_hip_pitch",
+  "mo0_end_speed": 0.0,
+  "mo0_joints_at_friction_limit": [],
+  "mo0_friction_load_Nm": {
+   "l_hip_yaw": 0.0,
+   "l_hip_roll": -0.0,
+   "l_hip_pitch": 5.4,
+   "l_knee": -2.0,
+   "l_ankle_pitch": -1.3,
+   "l_ankle_roll": 0.0,
+   "r_hip_yaw": 0.0,
+   "r_hip_roll": -0.0,
+   "r_hip_pitch": 5.4,
+   "r_knee": -2.0,
+   "r_ankle_pitch": -1.3,
+   "r_ankle_roll": 0.0,
+   "waist_yaw": -0.0,
+   "waist_pitch": 4.2,
+   "l_shoulder_pitch": -2.8,
+   "l_shoulder_roll": 0.0,
+   "l_shoulder_yaw": -0.0,
+   "l_elbow": -0.0,
+   "l_wrist_roll": -0.0,
+   "l_wrist_pitch": -0.0,
+   "l_wrist_yaw": 0.0,
+   "r_shoulder_pitch": -2.8,
+   "r_shoulder_roll": 0.0,
+   "r_shoulder_yaw": -0.0,
+   "r_elbow": -0.0,
+   "r_wrist_roll": -0.0,
+   "r_wrist_pitch": -0.0,
+   "r_wrist_yaw": 0.0,
+   "neck_yaw": 0.0,
+   "neck_pitch": -0.4
+  },
+  "hold_torque_Nm": {
+   "l_hip_yaw": 0.0,
+   "l_hip_roll": 0.0,
+   "l_hip_pitch": -44.5,
+   "l_knee": -32.8,
+   "l_ankle_pitch": -6.4,
+   "l_ankle_roll": 0.0,
+   "r_hip_yaw": 0.0,
+   "r_hip_roll": 0.0,
+   "r_hip_pitch": -44.5,
+   "r_knee": -32.8,
+   "r_ankle_pitch": -6.4,
+   "r_ankle_roll": 0.0,
+   "waist_yaw": -0.0,
+   "waist_pitch": 69.3,
+   "l_shoulder_pitch": 22.5,
+   "l_shoulder_roll": -0.0,
+   "l_shoulder_yaw": -0.0,
+   "l_elbow": 5.9,
+   "l_wrist_roll": -0.0,
+   "l_wrist_pitch": 0.0,
+   "l_wrist_yaw": -0.0,
+   "r_shoulder_pitch": 22.5,
+   "r_shoulder_roll": -0.0,
+   "r_shoulder_yaw": -0.0,
+   "r_elbow": 5.9,
+   "r_wrist_roll": -0.0,
+   "r_wrist_pitch": 0.0,
+   "r_wrist_yaw": -0.0,
+   "neck_yaw": 0.0,
+   "neck_pitch": -0.4
+  }
+ }
+]
