@@ -58,3 +58,26 @@ Hysteresis loss 2.9×10⁻⁴ rad = **1 arc-min = 0.017°** (Table 44, size 25, 
 2. **T&R:** treat the gear as current-limited (115 N·m static) plus rotor inertia, not as a locked spring. Case A applies only if a brake is ever added: then gap ≤ 0.10° total and Ks ≥ 634 kN·m/rad.
 3. **Controls/T&R:** to keep the gear ≤ 204 N·m at a stop event, either cap the joint speed at contact (≤ 0.76 rad/s rigid with the motor on) or zero the waist-pitch torque in the stop zone (≤ 1.75 rad/s). A compliant stop with motor-off allows full 1.55 kN·m at 115 N·m on the gear.
 4. **2.3 kN·m ultimate:** the gear stays under momentary (369) and ratchet (650) in every case above. Inspect for ratcheting after an ultimate event.
+
+## Rev b (~11:30 ET): drivetrain inertia, tripped-waist impact at 6.3 rad/s (Controls)
+- **Input inertia:** motor rotor Jm 0.239×10⁻⁴ kg·m² (TBM2G manual §9.4.1, p.272) + CSG-25 wave generator 0.413×10⁻⁴ kg·m² (HD catalog Table 3, "moment of inertia, reflected to the wave generator (gear input)") = 0.652×10⁻⁴ kg·m². Encoder ring and hub are not included [EST, < 5 %].
+- **Reflected to the output (× 100²): 0.652 kg·m².** This supersedes the rotor-only 0.239 in Case B above.
+- **Drivetrain kinetic energy at 6.3 rad/s output: 12.9 J.**
+- **Rigid stop (output halted; the inertia stops through the gear's own stiffness):**
+  - T = ω·√(J·K3) = 6.3 × 193 = **1215 N·m** (piecewise-energy check 1214). **1330 N·m with the motor at peak.**
+  - Gear strain energy is only 1.2 J at momentary (369) and 3.7 J at ratchet (650), against 12.9 J.
+  - **Verdict: exceeds momentary (3.3×) and ratchet (1.9×) and reaches 0.71–0.78 of buckling (1700).** A rigid stop at 6.3 rad/s ratchets the CSG-25 even with the motor off.
+- **Corrected speed limits at a rigid stop, motor off:**
+  - 1.06 rad/s for repeated peak 204;
+  - 1.91 rad/s for momentary 369;
+  - 3.37 rad/s for ratchet 650.
+  - With the motor at peak, subtract 0.60 rad/s (115 N·m ÷ 193).
+- **Compliant stop instead** (Ks ≪ K_gear; the output and drivetrain decelerate together): gear torque = T_stop·0.652/(I_body + 0.652). With I_body ≈ 3 kg·m² [EST]:
+  - 1.55 kN·m: **277 N·m** (> 204, < 369 momentary);
+  - 2.3 kN·m: **411 N·m** (> 369, < 650 ratchet).
+  - Add 115 N·m if the motor is still at peak: 392 / 526.
+
+### Changes this adds for T&R / Torso / Controls
+1. **The P-160 yoke stop must be compliant and energy-absorbing, not rigid metal.** It must absorb (I_body + 0.652)·6.3²/2 ≈ **72 J [EST, I_body 3]** with a peak ≤ 1.55 kN·m design. Its stiffness must be low enough that the deceleration time ≫ the gear-drivetrain period (2π√(0.652/5.7e4) = 21 ms). The rigid-stop Case A (634 kN·m/rad, 0.10° gap) applies only to static holding with a brake, never to the tripped-waist impact.
+2. **Controls:** zero the waist-pitch torque on a trip. At 2.3 kN·m ultimate the gear still exceeds momentary (411), so the 2.3 kN·m event is an inspect/replace event (ratchet check).
+3. Option if the gear must stay ≤ momentary at ultimate: a torque limiter (slip clutch, about 300–350 N·m) between the gear output and the yoke, or a softer stop that holds the peak ≤ 1.9 kN·m.

@@ -66,5 +66,22 @@
   "M_allow_fs1p5_Nm": 608,
   "combined": "Fr + 2M/0.075 + 0.44 Fa <= 24300/fs (fs>=1.5 shock -> 16.2 kN)",
   "one_lug_10kN_radial_fs": 2.43
+ },
+ "rev_b": {
+  "Jm_kgm2": 2.39e-05,
+  "J_wave_generator_kgm2": 4.13e-05,
+  "J_input_kgm2": 6.52e-05,
+  "J_reflected_output_kgm2": 0.652,
+  "w_output_rad_s": 6.3,
+  "KE_drivetrain_J": 12.9,
+  "impact_torque_linearK3_Nm": 1215,
+  "impact_torque_energy_piecewise_Nm": 1214,
+  "plus_motor_peak_Nm": 1330,
+  "gear_energy_to_ratchet_J": 3.71,
+  "gear_energy_to_momentary_J": 1.2,
+  "w_max_momentary_motor_off": 1.91,
+  "w_max_ratchet_motor_off": 3.37,
+  "w_max_repeated_motor_off": 1.06,
+  "verdict": "EXCEEDS ratchet (650) and approaches buckling (1700): a rigid stop at 6.3 rad/s ratchets the CSG-25 even with the motor off"
  }
 }

@@ -1,4 +1,6 @@
-"""D102: waist-pitch actuator data for the P-160 yoke hard stop (T&R 3eacd56): 1.55 kN.m design / 2.3 kN.m ultimate.
+"""D102 rev b: + reflected drivetrain inertia (Jm 0.239e-4, TBM2G §9.4.1 p.272; wave generator 0.413e-4 kg.m2, HD Table 3 CSG-25 moment of inertia at the input),
+KE at 6.3 rad/s output (Controls tripped-waist case) and gear impact torque through K3.
+D102: waist-pitch actuator data for the P-160 yoke hard stop (T&R 3eacd56): 1.55 kN.m design / 2.3 kN.m ultimate.
 Actuator (CONTRACTS.md row waist_pitch): TBM2G-06808A + HD CSG-25-100 component set (peak 115.4 N.m, sim v3 ctrlrange 116), output bearing IKO CRBH 6013 A (size.py BEAR[25]).
 Sources: HD CSF/CSG catalog (datasheets/hd_csf_csg_catalog.pdf) CSG rating table (CSG-25-100 row), Table 6 ratcheting / Table 7 buckling (p.16),
 Table 43 torsional stiffness ratio>=80 and Table 44 hysteresis (p.50); TBM2G manual §9.4.1 p.272 (Jm 0.239 kg.cm2);
@@ -47,5 +49,18 @@ res=dict(gear='HD CSG-25-100 component set (strain wave), ratio 100',T1_Nm=T1,K1
   lost_motion_deg=d(LM),torques_Nm=dict(rated=T_rated,repeated_peak=T_rep,avg_limit=T_avg,momentary=T_mom,ratchet=T_rat,buckling=T_buck,motor_peak_output=T_mot),
   A_input_locked=dict(budget_gap_plus_lost_motion_deg=d(g),max_budget_deg_absolute=d(th_rep),physical_gap_deg=d(g-LM),
      Ks_kNm_per_rad=round(Ks/1000),cases=A),B_no_brake=B,bearing=brg)
+Jwg=0.413e-4; Jin=Jm+Jwg; Jr=Jin*N**2; w=6.3
+def U(T):  # gear strain energy up to T (piecewise linear)
+    th=wind(T); n=400; return sum(Tg(th*(i+0.5)/n)*th/n for i in range(n))
+Ti=w*math.sqrt(Jr*K3)
+lo,hi=0,5000
+for _ in range(60):
+    m=(lo+hi)/2; lo,hi=(m,hi) if U(m)<0.5*Jr*w**2 else (lo,m)
+res['rev_b']=dict(Jm_kgm2=Jm,J_wave_generator_kgm2=Jwg,J_input_kgm2=round(Jin,7),J_reflected_output_kgm2=round(Jr,3),
+  w_output_rad_s=w,KE_drivetrain_J=round(0.5*Jr*w**2,1),impact_torque_linearK3_Nm=round(Ti),impact_torque_energy_piecewise_Nm=round(m),
+  plus_motor_peak_Nm=round(m+T_mot),gear_energy_to_ratchet_J=round(U(T_rat),2),gear_energy_to_momentary_J=round(U(T_mom),2),
+  w_max_momentary_motor_off=round(T_mom/math.sqrt(Jr*K3),2),w_max_ratchet_motor_off=round(T_rat/math.sqrt(Jr*K3),2),
+  w_max_repeated_motor_off=round(T_rep/math.sqrt(Jr*K3),2),
+  verdict='EXCEEDS ratchet (650) and approaches buckling (1700): a rigid stop at 6.3 rad/s ratchets the CSG-25 even with the motor off')
 json.dump(res,open(os.path.join(os.path.dirname(os.path.abspath(__file__)),'results/waist_stop_interface_d102.json'),'w'),indent=1)
 print(json.dumps(res,indent=1))
