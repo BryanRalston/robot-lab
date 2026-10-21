@@ -416,8 +416,10 @@ All keep R-076 (reinforced isolation, IEC 60664-1 creepage, IP2X), R-074 (main l
 - Affected owner response: **Actuators co-signs (2026-10-21).** The collar (ID 50 × 34) and the hip-pitch output side are unchanged; the collar bore still mates the ø50 tube OD; no actuator load or contract value changes. Co-sign stays conditional on the P-152 fallback (JOB9 b3) passing.
 - Status: open
 
-### P-153: Actuators: heat plates rev 2 mass +0.008 kg (D90, P-055 / R-141)
-- **Change:** hip_pitch plate 80 → 84 mm square to reach ≤72 °C at duty (Electronics 23f6992 §18.5): 71.5 °C, +2.6 g × 4. Knee fins moved to the drive side so the knee stack fits 23.0 of 26 mm with no Legs/ID depth change, −1.6 g × 2. Serrated PE washers +0.1 g × 12.
-- **Mass:** 0.339 → 0.347 kg, **+0.008 kg** (over the 0.005 freeze), separate from R-141's +0.008 for the M2 screws.
-- **Evidence:** modules/actuators/drive_heat_plates.py, results/drive_heat_plates.json, results/DRIVE_HEAT_PLATES.md rev 2, cad/drive_plate_*.step.
-- **Open:** a Thermal re-run on the knee 4.0 mm femur gap and drive-side fins, and the R-140 conditions (h 8 vent stream, Controls duty sim).
+### P-153: Actuators: heat plates rev 2/3 mass +0.016 kg and knee thigh-shell window (D90, D91; P-055 / R-141, Thermal R131 rev 2)
+- **Change:** (D90) hip_pitch plate 80 → 84 mm square for ≤72 °C (Thermal: 68.8 °C at duty, h 8, if the back face sees ≤50 °C structure), +2.6 g × 4; PE washers +0.1 g × 12. (D91) Knee plate flipped into a black-anodised thigh-shell window at the L51 26 mm face, with 8 × 13 × 1 fins at 6 mm pitch protruding 13 mm into the stream: UA 0.203 W/K, 71.5 °C at duty. +1.8 g × 2 vs R-140 (net of D90's −1.6); foil femur shield +0.6 g × 2.
+- **Mass:** 0.339 (R-140) → 0.355 kg, **+0.016 kg** (over the 0.005 freeze), separate from R-141's +0.008 for the M2 screws.
+- **Envelope (Legs/ID):** a 100 × 48 window in the thigh fairing over the L51 box, with fins standing 13 mm proud (12 mm minimum), axial so they run along the flow. No change to the 26 mm L51 depth inside.
+- **Interface condition:** the hip pitch/ankle/shoulder plate back faces see ≤50 °C structure, never the hip-pitch housing (85–98 °C), or carry a low-ε shield.
+- **Evidence:** modules/actuators/drive_heat_plates.py, results/drive_heat_plates.json, results/DRIVE_HEAT_PLATES.md rev 3, cad/drive_plate_*.step; Thermal R131_ELMO_MG.md rev 2.
+- **Open:** Thermal verification of rev 3, the R-140 conditions (Controls duty sim), and Electronics confirming the mated plug fits the 7 mm femur gap.

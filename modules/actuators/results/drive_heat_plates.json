@@ -1,24 +1,25 @@
 {
  "knee": {
   "plates": 2,
-  "fin_side": "drive",
-  "standoff_mm": 4.0,
+  "fin_side": "out",
+  "standoff_mm": 0.0,
   "drives_per_plate": 2,
   "L": 100,
   "W": 48,
   "t_base": 1.5,
-  "fins": 6,
-  "fin_h": 15.0,
+  "fins": 8,
+  "fin_h": 13.0,
   "fin_t": 1.0,
-  "area_m2": 0.0261,
-  "fin_eta": 0.993,
-  "mass_g": 43.4,
+  "area_m2": 0.0256,
+  "fin_eta": 0.995,
+  "mass_g": 46.8,
   "T_base_C": {
-   "duty_h8": 70.7,
-   "carry_cont_h8": 94.6,
-   "carry_cont_h12": 75.3
+   "duty_h8": 71.5,
+   "carry_cont_h8": 95.8,
+   "carry_cont_h12": 76.1
   },
   "pass_duty_h8": true,
+  "UA_h8_WK": 0.2034,
   "step": "cad/drive_plate_knee.step"
  },
  "hip_pitch": {
@@ -41,6 +42,7 @@
    "carry_cont_h12": 76.1
   },
   "pass_duty_h8": true,
+  "UA_h8_WK": 0.1053,
   "step": "cad/drive_plate_hip_pitch.step"
  },
  "ankle": {
@@ -63,6 +65,7 @@
    "carry_cont_h12": 78.7
   },
   "pass_duty_h8": true,
+  "UA_h8_WK": 0.0467,
   "step": "cad/drive_plate_ankle.step"
  },
  "shoulder_pitch": {
@@ -85,19 +88,21 @@
    "carry_cont_h12": 65.8
   },
   "pass_duty_h8": true,
+  "UA_h8_WK": 0.0949,
   "step": "cad/drive_plate_shoulder_pitch.step"
  },
  "_total": {
-  "plates_g": 305.2,
-  "standoff_hw_g": 42.0,
-  "total_kg": 0.347,
+  "plates_g": 311.9,
+  "standoff_hw_g": 43.2,
+  "total_kg": 0.355,
   "r136_booked_as_addition_kg": "in -0.25 net Elmo credit (Thermal +0.21..0.26)"
  },
  "_L51_envelope": {
-  "depth_stack_mm": 23.0,
-  "fin_top_mm": 20.5,
-  "id_3mm_margin_mm": 0.0,
-  "depth_margin_mm": 3.0,
+  "depth_stack_mm": 19.0,
+  "femur_gap_mm": 7.0,
+  "fin_protrusion_beyond_26_mm": 13.0,
+  "fin_top_mm": 39.0,
+  "depth_margin_mm": 7.0,
   "y_margin_mm": 4,
   "z_margin_mm": 4,
   "drives_on_plate_z_mm": 75.0,
