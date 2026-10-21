@@ -149,4 +149,5 @@ def test_min_combination():
 def test_sit_timing_numbers():
     assert DerateConfig().t_stop == 83.0                # R-142
     assert sit_timing_margin(0.3, 1.2) > 1.5          # plate slope (430684c): 3.3 s for 1 K
-    assert sit_timing_margin(1.19, 1.2) < 0           # drive-only adiabatic bound: flagged in DRIVE_DERATE.md
+    assert sit_timing_margin(1.19, 1.2, t_stop=84.0) < 0   # drive-only bound, 1 K worst-case truncated band
+    assert sit_timing_margin(1.19, 1.2) > 0                # 2 K nominal band at 83

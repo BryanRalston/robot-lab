@@ -26,11 +26,11 @@ Temperature source (`temp_source`): primary **0x22A2:00** (UINT16 °C, RO, mappa
 Stale handling: no accepted reading for 20 ms (PDO) / 0.5 s (SDO) → fail-safe scale 0.5; 5 s → controlled stop.
 Jumps: a step larger than max(2 K, 3 K/s × age) is rejected unless repeated 3 consecutive reads (plate ≤ 0.3 K/s, 10× margin).
 
-## Sit timing check (84 → 85 °C)
+## Sit timing check (R-142: reading 83 → trip 85 °C; worst case with truncation = 1.0 K true band)
 | basis | dT/dt | time 84→85 | sit + latency | margin |
 |---|---|---|---|---|
 | plate lumped, knee worst (430684c: τ ≥ 185 s, 12 W / 40.3 J/K) | 0.30 K/s | 3.33 s | 1.2 s [EST, = sit-to-stand] + 0.05 s | **+2.1 s PASS** |
-| drive-only, no plate (adiabatic bound, earlier estimate from DRIVE_HEAT_PLATES / R131 data) | 1.19 K/s | 0.84 s | 1.25 s | **−0.41 s** (bound, not expected) |
+| drive-only, no plate (adiabatic bound, from DRIVE_HEAT_PLATES / R131 data), 1 K worst band | 1.19 K/s | 0.84 s | 1.25 s | **−0.41 s** (bound, not expected); with a 2 K band (rounding) +0.43 s |
 
 **Flag: 1 °C quantisation.** 0x22A2 is integer °C. If the drive truncates, a reading of 84 can be a true 84.99 °C, so the
 real band before the 85 °C trip can be ~0 K. At 0.3 K/s the sit needs ≥ 0.38 K of band.
