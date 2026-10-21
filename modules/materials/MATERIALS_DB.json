@@ -1,1020 +1,1050 @@
 {
- "version": "R1 2026-10-14",
- "owner": "RL Materials",
- "sources": {
-  "MIF7075": "https://www.makeitfrom.com/material-properties/7075-T6-Aluminum",
-  "MIF7050": "https://www.makeitfrom.com/material-properties/7050-T7451-Aluminum",
-  "MIF6061": "https://www.makeitfrom.com/material-properties/6061-T6-Aluminum",
-  "MIFTi64": "https://www.makeitfrom.com/material-properties/Grade-5-Ti-6Al-4V-3.7165-R56400-Titanium",
-  "MIF4140QT": "https://www.makeitfrom.com/material-properties/Quenched-and-Tempered-4140-Cr-Mo-Steel",
-  "MIFPC": "https://www.makeitfrom.com/material-properties/Polycarbonate-PC",
-  "MIFPTFE": "https://www.makeitfrom.com/material-properties/Polytetrafluoroethylene-PTFE",
-  "MILHDBK5H": "MIL-HDBK-5H (1 Dec 1998, public domain), https://ssrl-uark.com/MILHDBK5H.pdf : 7075 sheet/plate T6/T651 table p. 3-346 (Table 3.7.4.0(b1) [table no. inferred, title glyphs unreadable in text layer]); T7351 plate table p. 3-348 (Table 3.7.4.0(b3) [inferred]). Extracted via pdftotext, 2026-10-21. VERIFIED.",
-  "MMPDS_PLATE_UNVERIFIED": "https://www.scribd.com/document/932439234/Cove2U-Analysis-G730PLOAD0R1A-F0R2-W0R2-f1-Correct-Loads-A (third-party stress report quoting MMPDS, AMS-QQ-A-250/12 plate 0.5-1.0 in; UNVERIFIED: not MMPDS itself)",
-  "MMPDS01_FORGING": "http://files.engineering.com/files/3c296b91-f1e2-478d-a42d-61448c22faf7/AR-MMPDS-01_table3.7.6.0e2.pdf (MMPDS-01 Table 3.7.6.0(e2), 7075-T73 die forging; extract hosted by a third party)",
-  "DP490_A": "https://multimedia.3m.com/mws/media/2409614O/3m-scotch-weld-epoxy-adhesive-dp490.pdf (via modules/legs/BOND_SPEC.md)",
-  "DP490_B": "https://multimedia.3m.com/mws/media/82790O/dp490-scotch-weld-tm-adhesive.pdf (via BOND_SPEC.md)",
-  "SKF_GE12C": "modules/actuators/datasheets/skf_ge12c.html (SKF https://www.skf.com/products/plain-bearings/spherical-plain-bearings-rod-ends/radial/productid-GE%2012%20C)",
-  "G10_CC": "https://currentcomposites.com/wp-content/uploads/2024/10/TSD-MIL-I-24768_27_G10_FR4.pdf (Current Composites FR-4/G10 TDS)",
-  "G10_GUND": "https://thegundcompany.com/wp-content/uploads/2024/03/NEMA-FR4-Glass-Epoxy-Laminate-by-The-Gund-Co.pdf (Gund NEMA FR4)",
-  "G10_ACCULAM": "https://acculam.com/resource-center/technical-data/sheet-comparative-data-chart (NEMA G10 engineering values, MIN unless noted: compr flatwise 60 ksi, edgewise 35 ksi; MIL-I-24768/2 GEE)",
-  "G10_CC_G10": "https://currentcomposites.com/wp-content/uploads/2024/10/TSD-MIL-I-24768_2_-G-10_sheet.pdf (Current Composites G-10, MIL-I-24768/2: compr flatwise 68 ksi / edgewise 35 ksi typical, D695; temp index 130/140 C)",
-  "G10_LAMPL": "https://www.laminatedplastics.com/g-10.pdf (G-10 k 2.0 BTU-in/ft2-hr-F = 0.288 W/mK, ASTM C177 (through-thickness by method); max operating 140 C)",
-  "G10_RAX": "https://www.raxpanel.com/fiberglass-reinforced-sheet/fr4-fiberglass-sheet/ (k through-plane, CTE in-plane)",
-  "MIFPEEK": "https://www.makeitfrom.com/material-properties/Polyetheretherketone-PEEK",
-  "MIFPEI": "https://www.makeitfrom.com/material-properties/Polyetherimide-PEI",
-  "ARPRO5170": "https://www.arpro.com/getContentAsset/31e8891f-764f-43d4-adf7-6dd33c91093b/1771ac74-d775-4539-b7e3-0cbf0ab84455/arpro-5170-datasheet-v09-en.pdf?language=en-GB (JSP ARPRO 5170 TDS v09)",
-  "ARPRO_GEN": "https://www.arpro.com/getContentAsset/7f7244c4-2514-4162-8cb3-440185f6f206/1771ac74-d775-4539-b7e3-0cbf0ab84455/typical-physical-properties-of-arpro-black-and-on-site-expansion-v08.pdf?language=en-GB",
-  "EPP_RATE_T": "https://www.sciencedirect.com/science/article/pii/S2352492819313911 (EPP 30 g/L, rate 1e-3..100/s, -30..60 C)",
-  "EPP_PMC": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7825443/ (Materials 14:249, EPP 20-220 g/L static/temperature)",
-  "ULTEM_PP": "https://www.professionalplastics.com/professionalplastics/content/downloads/Ultem1000.pdf (Ultem 1000 stock shape TDS)",
-  "ULTEM_PL": "https://www.protolabs.com/media/1014801/ultem-1000-im.pdf (SABIC Ultem 1000 datasheet; tensile creep curves ASTM D2990 to 120 h at 21/80/121/176 C)",
-  "HEX_CRIII": "https://www.hexcel.com/wp-content/uploads/2025/12/HexWeb_CRIII_DataSheet.pdf (HexWeb CR III Table I, 5052)",
-  "HEX_ATTR": "https://www.hexcel.com/wp-content/uploads/2026/01/HexWebHoneycombAttributesandProperties.pdf (crush method; dynamic up to +30%)",
-  "PLASCORE_XR1": "http://plascore.com/wp-content/uploads/dlm_uploads/2025/08/PLA_PAMG-XR1-5052_2023-06-02.pdf (bare compressive only; density tol +-10%) [curl timed out from box; content via search index]",
-  "HC_ANGLE_PMC": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10419603/ (Al honeycomb plateau vs load angle: 0.98/0.93/0.73 at 0/15/25 deg)",
-  "HONG2008": "https://www.osti.gov/biblio/921555 (Hong et al., Int J Plasticity 24(1) 2008, 5052-H38 dynamic inclined 15 deg)",
-  "PEM_IUTB": "https://www.pemnet.com/eu/products/product-finder/iutb-m4/ (M4 insert in PC: 1710 N pull-out, 5.9 N m torque-out, min hole depth 8.91 mm)",
-  "ZEUS_BEND": "https://www.zeusinc.com/resources/summary-material-properties/bend-radius/ (PTFE Industrial wall bend radius table)",
-  "ZEUS_PEEK": "https://www.zeusinc.com/wp-content/uploads/2024/06/PEEK-Extrusions-V2R2.pdf (PEEK extruded tubing sizes)",
-  "OPTINOVA_PEEK": "https://optinova.com/app/uploads/2022/09/optinova-peek-tubing.pdf (PEEK tube min bend radius <50 mm)",
-  "RBTR_SILPOLY": "https://ripstopbytheroll.com/pages/outdoorink-fabric-specifications-and-details (70D silpoly 1.9 osy, ~2.1 osy finished = ~71 g/m2)",
-  "EXT_TPU210": "https://www.extremtextil.de/en/nylon-210den-tpu-coated-one-side-heat-sealable-310g-sqm/72710.SW (210D nylon 6.6 TPU 0.13 mm, 310 g/m2) [via search index]",
-  "XL_TPU210": "https://tpufabrics.com/wp-content/uploads/2026/03/TDS-XL-TPU-Coated-Nylon-210D.pdf (300+-15 g/m2, tear 17/10 N) [via search index]",
-  "CF_NOTCH_MDPI": "https://www.mdpi.com/2504-477X/10/4/196 (open-hole tension: quasi-iso ~50% loss) [via search index]",
-  "CF_NOTCH_FLECK": "https://www.fleckmech.org/papers/331.pdf (open-hole compression 35-75% of unnotched) [via search index]",
-  "ULTEM4001": "https://drakeplastics.com/wp-content/uploads/2024/02/ULTEMResin_4001_Americas_Technical_Data_Sheet.pdf (SABIC ULTEM Resin 4001 Americas TDS; mirror https://www.resinsplastics.com/photo/resinsplastics/document/42878/4001.pdf)",
-  "VIB_TOP85_US": "https://us.vibram.com/on/demandware.static/-/Sites-VibramUS-Library/default/dw453a87e0/pdfs/vibram-shoe-repair-catalog-june-2015.pdf (7373 Protania, TOP85, 85+-3 Shore A)",
-  "VIB_TOP85_LEF": "https://www.leffler.com.au/vibram-techdata/ (TOP 85: 1.15 g/cc, 85+-3 A, <100 mm3, >16 MPa, >450%)",
-  "VIB_7663_CIAC": "https://www.ciac-srl.com/en/articolo/508163/lastra-comp-7163-gemma (7163/7663 Gemma: 1.17 g/cc, 93 Shore A, 180 mm3 DIN 53516)",
-  "ULTEM4001_EMEA": "https://www.lookpolymers.com/polymer_SABIC-Innovative-Plastics-ULTEM-4001-PEI-Europe-Africa-Middle-East.php (k 0.26 W/mK, ISO 8302)",
-  "VIB_7373_3MM": "https://www.subaru-ec.com/products/detail.php?product_id=3956 (7373 3 mm sheet, 75 Shore A listing)",
-  "EA9396": "https://www.conro.com/downloads/Manuals/Loctite-EA-9396-AERO-Epoxy-Paste-Adhesive-A-B-1USQ-Kit-TDS.pdf ; Tg: https://www.gluespec.com/Materials/SpecSheet/6b9cd73c-bc72-4e4b-ac15-20a777c6b4ca (EA 9396.6MD)",
-  "EA9394": "https://datasheets.tdx.henkel.com/LOCTITE-EA-9394-AERO-en_US.pdf",
-  "EC9323": "https://multimedia.3m.com/mws/media/820935O/3m-scotch-weld-9323-b-a.pdf ; service range: https://www.viba.nl/media/files/tds/tds0001188.pdf",
-  "DP420": "https://multimedia.3m.com/mws/media/2365743O/3m-scotch-weld-epoxy-adhesive-dp420-black.pdf",
-  "DP460": "https://multimedia.3m.com/mws/media/2365880O/3m-scotch-weld-epoxy-adhesive-dp460-off-white.pdf ; https://bac-online.com/content/PDF/DP460-TDS.pdf",
-  "LUX_DS490": "https://www.luxfermeltechnologies.com/wp-content/uploads/2026/05/DS-490-Elektron-43-0526.pdf (Elektron 43 extruded T5; A-basis L spec minima; states MMPDS-08 A/B for extrusion and plate)",
-  "PLZ_LD29": "https://www.zotefoams.com/wp-content/uploads/2025/03/PIS-A008-Plastazote-LD29.pdf (Zotefoams PIS A008: 29 kg/m3, 25%/50% 61/126 kPa ISO 7214, max op 95 C = 5% shrink/24 h)",
-  "PLZ_HD30": "https://www.zotefoams.com/wp-content/uploads/2025/03/PIS-A024-Plastazote-HD30.pdf (30 kg/m3 HDPE, 144/215 kPa, 125 C)",
-  "BURRILL_XLPE": "design/V5_COVER_SET.md rev 8c (Burrill & Co XPE 28 kg/m3, ISO 3386-1: 25/45/50% 29.6/54.4/79.5 kPa, 80 C)",
-  "R027": "modules/RULINGS.md R-027 (PALSUN/LEXAN, Toray 3900, Easy Composites XC110 citations)"
- },
- "materials": [
-  {
-   "id": "AL7075T6",
-   "name": "Al 7075-T6/T651 [typical (MakeItFrom), not A/B-basis]",
-   "used_in": "femur/tibia tubes, collars, sleeves, clevises, tongue, fork, foot, levers, palm (P-021), pelvis shell, yokes",
-   "density_g_cc": 2.81,
-   "E_GPa": 70,
-   "yield_MPa": 480,
-   "UTS_MPa": 560,
-   "fatigue_MPa": 160,
-   "elongation_pct": 7.9,
-   "T_max_mech_C": 200,
-   "toughness": null,
-   "other": {
-    "shear_MPa": 330,
-    "CTE_um_mK": 23,
-    "calomel_mV": -750
-   },
-   "cost_hint": "base metal price 10% rel. (MIF)",
-   "sources": [
-    "MIF7075"
-   ],
-   "notes": "FATIGUE (R-144, R144_7075_FATIGUE.md): MIL-HDBK-5H Fig 3.7.4.1.8(a) p.3-382 unnotched axial R=-1 mean fit Sa 171/139/121 MPa at 1e7/1e8/5e8; x ka 0.843 x kb 0.90 x ke 0.814 /1.5 = 70/57/50 MPa allowable hot-spot amplitude; 58 confirmed for <=1e8 cycles; MIF fatigue 160 (basis unstated) not used. TYPICAL (MakeItFrom), NOT A/B-basis (R-123). Static allowable 480/1.5 = 320 MPa. VERIFIED MIL-HDBK-5H A/B Fty (ksi -> MPa): T651 plate (AMS 4045/QQ-A-250/12) 0.500-1.000 L 70/72 (483/496), LT 68/70; 1.001-2.000 L 69/71 (476/490), LT 67/69 (462/476), ST n/a (ST tabulated from 2.001 in: 59/61, SCC rating D); 2.001-2.500 L 66/68. T7351 plate (AMS 4078/QQ-A-250/12) 0.500-1.000 L/LT 57/59 (393/407); 1.001-1.500 L/LT 57/59 (393/407); 1.501-2.000 L/LT 55/57 (379/393), ST 52/54 (359/372); 2.001-2.500 L 52/55. Ftu T7351 1.001-1.500 L 67/69, 1.501-2.000 L 66/68. R-125(b) RULE: single-load-path 7075 parts are checked at A-basis Fty/1.5 for their actual product form, thickness band (stock thickness at heat treat) and loaded grain direction; when unverified, the lower value governs. Multi-path parts keep 480/1.5 = 320 MPa. MIF density rounds to 3.0; repo-wide 2.81 kept (no cited source; MIF 3.0 2-sig-fig, nominal 2.81 handbook value [EST]). Fatigue = MIF value (cycle basis not stated). K1C not verified. SCC-susceptible in T6 (short transverse)."
+  "version": "R1 2026-10-14",
+  "owner": "RL Materials",
+  "sources": {
+    "MIF7075": "https://www.makeitfrom.com/material-properties/7075-T6-Aluminum",
+    "MIF7050": "https://www.makeitfrom.com/material-properties/7050-T7451-Aluminum",
+    "MIF6061": "https://www.makeitfrom.com/material-properties/6061-T6-Aluminum",
+    "MIFTi64": "https://www.makeitfrom.com/material-properties/Grade-5-Ti-6Al-4V-3.7165-R56400-Titanium",
+    "MIF4140QT": "https://www.makeitfrom.com/material-properties/Quenched-and-Tempered-4140-Cr-Mo-Steel",
+    "MIFPC": "https://www.makeitfrom.com/material-properties/Polycarbonate-PC",
+    "MIFPTFE": "https://www.makeitfrom.com/material-properties/Polytetrafluoroethylene-PTFE",
+    "MILHDBK5H": "MIL-HDBK-5H (1 Dec 1998, public domain), https://ssrl-uark.com/MILHDBK5H.pdf : 7075 sheet/plate T6/T651 table p. 3-346 (Table 3.7.4.0(b1) [table no. inferred, title glyphs unreadable in text layer]); T7351 plate table p. 3-348 (Table 3.7.4.0(b3) [inferred]). Extracted via pdftotext, 2026-10-21. VERIFIED.",
+    "MMPDS_PLATE_UNVERIFIED": "https://www.scribd.com/document/932439234/Cove2U-Analysis-G730PLOAD0R1A-F0R2-W0R2-f1-Correct-Loads-A (third-party stress report quoting MMPDS, AMS-QQ-A-250/12 plate 0.5-1.0 in; UNVERIFIED: not MMPDS itself)",
+    "MMPDS01_FORGING": "http://files.engineering.com/files/3c296b91-f1e2-478d-a42d-61448c22faf7/AR-MMPDS-01_table3.7.6.0e2.pdf (MMPDS-01 Table 3.7.6.0(e2), 7075-T73 die forging; extract hosted by a third party)",
+    "DP490_A": "https://multimedia.3m.com/mws/media/2409614O/3m-scotch-weld-epoxy-adhesive-dp490.pdf (via modules/legs/BOND_SPEC.md)",
+    "DP490_B": "https://multimedia.3m.com/mws/media/82790O/dp490-scotch-weld-tm-adhesive.pdf (via BOND_SPEC.md)",
+    "SKF_GE12C": "modules/actuators/datasheets/skf_ge12c.html (SKF https://www.skf.com/products/plain-bearings/spherical-plain-bearings-rod-ends/radial/productid-GE%2012%20C)",
+    "G10_CC": "https://currentcomposites.com/wp-content/uploads/2024/10/TSD-MIL-I-24768_27_G10_FR4.pdf (Current Composites FR-4/G10 TDS)",
+    "G10_GUND": "https://thegundcompany.com/wp-content/uploads/2024/03/NEMA-FR4-Glass-Epoxy-Laminate-by-The-Gund-Co.pdf (Gund NEMA FR4)",
+    "G10_ACCULAM": "https://acculam.com/resource-center/technical-data/sheet-comparative-data-chart (NEMA G10 engineering values, MIN unless noted: compr flatwise 60 ksi, edgewise 35 ksi; MIL-I-24768/2 GEE)",
+    "G10_CC_G10": "https://currentcomposites.com/wp-content/uploads/2024/10/TSD-MIL-I-24768_2_-G-10_sheet.pdf (Current Composites G-10, MIL-I-24768/2: compr flatwise 68 ksi / edgewise 35 ksi typical, D695; temp index 130/140 C)",
+    "G10_LAMPL": "https://www.laminatedplastics.com/g-10.pdf (G-10 k 2.0 BTU-in/ft2-hr-F = 0.288 W/mK, ASTM C177 (through-thickness by method); max operating 140 C)",
+    "G10_RAX": "https://www.raxpanel.com/fiberglass-reinforced-sheet/fr4-fiberglass-sheet/ (k through-plane, CTE in-plane)",
+    "MIFPEEK": "https://www.makeitfrom.com/material-properties/Polyetheretherketone-PEEK",
+    "MIFPEI": "https://www.makeitfrom.com/material-properties/Polyetherimide-PEI",
+    "ARPRO5170": "https://www.arpro.com/getContentAsset/31e8891f-764f-43d4-adf7-6dd33c91093b/1771ac74-d775-4539-b7e3-0cbf0ab84455/arpro-5170-datasheet-v09-en.pdf?language=en-GB (JSP ARPRO 5170 TDS v09)",
+    "ARPRO_GEN": "https://www.arpro.com/getContentAsset/7f7244c4-2514-4162-8cb3-440185f6f206/1771ac74-d775-4539-b7e3-0cbf0ab84455/typical-physical-properties-of-arpro-black-and-on-site-expansion-v08.pdf?language=en-GB",
+    "EPP_RATE_T": "https://www.sciencedirect.com/science/article/pii/S2352492819313911 (EPP 30 g/L, rate 1e-3..100/s, -30..60 C)",
+    "EPP_PMC": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7825443/ (Materials 14:249, EPP 20-220 g/L static/temperature)",
+    "ULTEM_PP": "https://www.professionalplastics.com/professionalplastics/content/downloads/Ultem1000.pdf (Ultem 1000 stock shape TDS)",
+    "ULTEM_PL": "https://www.protolabs.com/media/1014801/ultem-1000-im.pdf (SABIC Ultem 1000 datasheet; tensile creep curves ASTM D2990 to 120 h at 21/80/121/176 C)",
+    "HEX_CRIII": "https://www.hexcel.com/wp-content/uploads/2025/12/HexWeb_CRIII_DataSheet.pdf (HexWeb CR III Table I, 5052)",
+    "HEX_ATTR": "https://www.hexcel.com/wp-content/uploads/2026/01/HexWebHoneycombAttributesandProperties.pdf (crush method; dynamic up to +30%)",
+    "PLASCORE_XR1": "http://plascore.com/wp-content/uploads/dlm_uploads/2025/08/PLA_PAMG-XR1-5052_2023-06-02.pdf (bare compressive only; density tol +-10%) [curl timed out from box; content via search index]",
+    "HC_ANGLE_PMC": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10419603/ (Al honeycomb plateau vs load angle: 0.98/0.93/0.73 at 0/15/25 deg)",
+    "HONG2008": "https://www.osti.gov/biblio/921555 (Hong et al., Int J Plasticity 24(1) 2008, 5052-H38 dynamic inclined 15 deg)",
+    "PEM_IUTB": "https://www.pemnet.com/eu/products/product-finder/iutb-m4/ (M4 insert in PC: 1710 N pull-out, 5.9 N m torque-out, min hole depth 8.91 mm)",
+    "ZEUS_BEND": "https://www.zeusinc.com/resources/summary-material-properties/bend-radius/ (PTFE Industrial wall bend radius table)",
+    "ZEUS_PEEK": "https://www.zeusinc.com/wp-content/uploads/2024/06/PEEK-Extrusions-V2R2.pdf (PEEK extruded tubing sizes)",
+    "OPTINOVA_PEEK": "https://optinova.com/app/uploads/2022/09/optinova-peek-tubing.pdf (PEEK tube min bend radius <50 mm)",
+    "RBTR_SILPOLY": "https://ripstopbytheroll.com/pages/outdoorink-fabric-specifications-and-details (70D silpoly 1.9 osy, ~2.1 osy finished = ~71 g/m2)",
+    "EXT_TPU210": "https://www.extremtextil.de/en/nylon-210den-tpu-coated-one-side-heat-sealable-310g-sqm/72710.SW (210D nylon 6.6 TPU 0.13 mm, 310 g/m2) [via search index]",
+    "XL_TPU210": "https://tpufabrics.com/wp-content/uploads/2026/03/TDS-XL-TPU-Coated-Nylon-210D.pdf (300+-15 g/m2, tear 17/10 N) [via search index]",
+    "CF_NOTCH_MDPI": "https://www.mdpi.com/2504-477X/10/4/196 (open-hole tension: quasi-iso ~50% loss) [via search index]",
+    "CF_NOTCH_FLECK": "https://www.fleckmech.org/papers/331.pdf (open-hole compression 35-75% of unnotched) [via search index]",
+    "ULTEM4001": "https://drakeplastics.com/wp-content/uploads/2024/02/ULTEMResin_4001_Americas_Technical_Data_Sheet.pdf (SABIC ULTEM Resin 4001 Americas TDS; mirror https://www.resinsplastics.com/photo/resinsplastics/document/42878/4001.pdf)",
+    "VIB_TOP85_US": "https://us.vibram.com/on/demandware.static/-/Sites-VibramUS-Library/default/dw453a87e0/pdfs/vibram-shoe-repair-catalog-june-2015.pdf (7373 Protania, TOP85, 85+-3 Shore A)",
+    "VIB_TOP85_LEF": "https://www.leffler.com.au/vibram-techdata/ (TOP 85: 1.15 g/cc, 85+-3 A, <100 mm3, >16 MPa, >450%)",
+    "VIB_7663_CIAC": "https://www.ciac-srl.com/en/articolo/508163/lastra-comp-7163-gemma (7163/7663 Gemma: 1.17 g/cc, 93 Shore A, 180 mm3 DIN 53516)",
+    "ULTEM4001_EMEA": "https://www.lookpolymers.com/polymer_SABIC-Innovative-Plastics-ULTEM-4001-PEI-Europe-Africa-Middle-East.php (k 0.26 W/mK, ISO 8302)",
+    "VIB_7373_3MM": "https://www.subaru-ec.com/products/detail.php?product_id=3956 (7373 3 mm sheet, 75 Shore A listing)",
+    "EA9396": "https://www.conro.com/downloads/Manuals/Loctite-EA-9396-AERO-Epoxy-Paste-Adhesive-A-B-1USQ-Kit-TDS.pdf ; Tg: https://www.gluespec.com/Materials/SpecSheet/6b9cd73c-bc72-4e4b-ac15-20a777c6b4ca (EA 9396.6MD)",
+    "EA9394": "https://datasheets.tdx.henkel.com/LOCTITE-EA-9394-AERO-en_US.pdf",
+    "EC9323": "https://multimedia.3m.com/mws/media/820935O/3m-scotch-weld-9323-b-a.pdf ; service range: https://www.viba.nl/media/files/tds/tds0001188.pdf",
+    "DP420": "https://multimedia.3m.com/mws/media/2365743O/3m-scotch-weld-epoxy-adhesive-dp420-black.pdf",
+    "DP460": "https://multimedia.3m.com/mws/media/2365880O/3m-scotch-weld-epoxy-adhesive-dp460-off-white.pdf ; https://bac-online.com/content/PDF/DP460-TDS.pdf",
+    "LUX_DS490": "https://www.luxfermeltechnologies.com/wp-content/uploads/2026/05/DS-490-Elektron-43-0526.pdf (Elektron 43 extruded T5; A-basis L spec minima; states MMPDS-08 A/B for extrusion and plate)",
+    "PLZ_LD29": "https://www.zotefoams.com/wp-content/uploads/2025/03/PIS-A008-Plastazote-LD29.pdf (Zotefoams PIS A008: 29 kg/m3, 25%/50% 61/126 kPa ISO 7214, max op 95 C = 5% shrink/24 h)",
+    "PLZ_HD30": "https://www.zotefoams.com/wp-content/uploads/2025/03/PIS-A024-Plastazote-HD30.pdf (30 kg/m3 HDPE, 144/215 kPa, 125 C)",
+    "BURRILL_XLPE": "design/V5_COVER_SET.md rev 8c (Burrill & Co XPE 28 kg/m3, ISO 3386-1: 25/45/50% 29.6/54.4/79.5 kPa, 80 C)",
+    "R027": "modules/RULINGS.md R-027 (PALSUN/LEXAN, Toray 3900, Easy Composites XC110 citations)"
   },
-  {
-   "id": "AL7075T7351",
-   "name": "Al 7075-T7351 plate (AMS 4078) [MIL-HDBK-5H A/B, verified]",
-   "used_in": "ankle cross (job 7, R-125(b) single path)",
-   "density_g_cc": 2.81,
-   "E_GPa": 71,
-   "yield_MPa": "A/B L/LT: 393/407 (0.5-1.5 in); 379/393 (1.501-2.0 in); ST 359/372 (1.501-2.0)",
-   "UTS_MPa": "A/B L: 462/476 (1.001-1.5 in); 455/469 (1.501-2.0 in)",
-   "fatigue_MPa": null,
-   "elongation_pct": null,
-   "T_max_mech_C": null,
-   "toughness": null,
-   "other": {
-    "single_path_allowable_MPa": "262 (<=1.500 in stock) / 253 (1.501-2.000 in, L/LT) / 239 (1.501-2.000 in, ST)",
-    "E_note": "10.3e3 ksi = 71 GPa (MIL-HDBK-5H); use 70 for stiffness gates (R-123)"
-   },
-   "cost_hint": null,
-   "sources": [
-    "MILHDBK5H"
-   ],
-   "notes": "R-125(b) rule applies. Allowable = A-basis/1.5 for the stock thickness band at heat treat and the loaded grain direction. SCC rating of T73-class tempers is better than T651 (MIL-HDBK-5H footnote rates T651 ST as D)."
-  },
-  {
-   "id": "AL7075T651_A",
-   "name": "Al 7075-T651 plate (AMS 4045 / QQ-A-250/12) A-basis by thickness [MIL-HDBK-5H p. 3-346, Table 3.7.4.0(b1) inferred]",
-   "used_in": "all 7075 plate parts (stock thickness per drawing; not stated in repo except ankle cross <=1.5 in)",
-   "density_g_cc": 2.81,
-   "E_GPa": 71,
-   "yield_MPa": "A Fty L/LT[/ST] MPa: 0.250-0.499 in 476/462; 0.500-1.000 483/469; 1.001-2.000 476/462 (ST not tabulated); 2.001-2.500 455/441/407; 2.501-3.000 434/421/386",
-   "UTS_MPa": "A Ftu L/LT[/ST]: 0.250-0.499 531/538; 0.500-1.000 531/538; 1.001-2.000 524/531; 2.001-2.500 517/524/483; 2.501-3.000 490/496/455",
-   "fatigue_MPa": null,
-   "elongation_pct": null,
-   "T_max_mech_C": null,
-   "toughness": null,
-   "other": {
-    "Fbry_A_eD1.5/2.0_MPa": "0.250-0.499 669/786; 0.500-1.000 690/807; 1.001-2.000 690/807; 2.001-2.500 676/779; 2.501-3.000 648/752",
-    "R125b_single_path_MPa (A Fty/1.5, min L/LT unless ST loaded)": "0.250-0.499 308; 0.500-1.000 313; 1.001-2.000 308; 2.001-2.500 294 (ST 271); 2.501-3.000 280 (ST 257)",
-    "multi_path_MPa": 320
-   },
-   "cost_hint": null,
-   "sources": [
-    "MILHDBK5H"
-   ],
-   "notes": "Thickness = stock thickness at heat treat. LT governs in-plane unless the load direction is controlled. T651 ST SCC rating D (MIL-HDBK-5H fn b). Bearing values are dry-pin."
-  },
-  {
-   "id": "AL7075T651_THICK",
-   "name": "Al 7075-T651 plate >3.0 in, A-basis [MIL-HDBK-5H p. 3-346, Table 3.7.4.0(b1) inferred; table ends at 4.000 in]",
-   "used_in": "knee centre web (stock thickness to be stated by Legs)",
-   "density_g_cc": 2.81,
-   "E_GPa": 71,
-   "yield_MPa": "A Fty L/LT/ST MPa: 3.001-3.500 in 414/400/372; 3.501-4.000 in 386/372/345. >4.000 in: NOT tabulated for T651 in 5H",
-   "UTS_MPa": "A Ftu L/LT/ST: 3.001-3.500 483/490/448; 3.501-4.000 455/462/421",
-   "fatigue_MPa": null,
-   "elongation_pct": null,
-   "T_max_mech_C": null,
-   "toughness": null,
-   "other": {
-    "Fbry_A_eD1.5/2.0_MPa": "3.001-3.500 614/717; 3.501-4.000 579/676",
-    "R125b_single_path_MPa": "3.001-3.500: L 276 / LT 267 / ST 248; 3.501-4.000: L 257 / LT 248 / ST 230",
-    "closest_beyond_4in": "none for T651; T7351 p. 3-348 tabulates only to 4.000 in (3.001-3.500 S Fty L/LT 49, ST 47 ksi; 3.501-4.000 S 48/48/46 ksi = 331/331/317 MPa -> 221/221/211 single-path)"
-   },
-   "cost_hint": null,
-   "sources": [
-    "MILHDBK5H"
-   ],
-   "notes": "T651 ST SCC rating D (5H fn b): for a thick knee web with sustained ST load prefer T7351 (lower yield) or 7050-T7451 plate. Stock thickness at heat treat sets the band."
-  },
-  {
-   "id": "AL7050_TUBE",
-   "name": "Al 7050 femur tube \u00f850x1.2 (model_v4: '7050-T7451'). T7451 is a PLATE temper; no 7050 tube table in MIL-HDBK-5H (T74511 note: excluding tubing). Closest form: extrusion",
-   "used_in": "femur tube",
-   "density_g_cc": 2.83,
-   "E_GPa": 71,
-   "yield_MPa": "T73511 extrusion (AMS 4341) <=1.000 in, S-basis: Fty L/LT 414/393 [p. 3-314]; T76511 extrusion (AMS 4340) <=0.499 in, A/B: Fty L 469/490, LT 462/476 [p. 3-316]",
-   "UTS_MPa": "T73511 S: Ftu L/LT 483/469; T76511 A: Ftu L/LT 531/524",
-   "fatigue_MPa": null,
-   "elongation_pct": null,
-   "T_max_mech_C": null,
-   "toughness": null,
-   "other": {
-    "Fbry_eD1.5/2.0_MPa": "T73511 S 565/669; T76511 A 648/752",
-    "R125b_single_path_MPa": "T73511 262 (S LT/1.5, recommended temper for SCC) / T76511 308",
-    "multi_path_MPa": "T73511 276 / T76511 313"
-   },
-   "cost_hint": null,
-   "sources": [
-    "MILHDBK5H"
-   ],
-   "notes": "Order as 7050-T73511 (or T76511) extruded/drawn tube; there is no tabulated A-basis for 7050 tube in 5H, so the extrusion values stand in [closest form]. Density 2.83 from 5H 0.102 lb/in3 [EST: not re-read]. Model's T7451 label must change."
-  },
-  {
-   "id": "AL6061T6_A",
-   "name": "Al 6061-T6/T651 A-basis [MIL-HDBK-5H pp. 3-252/3-253/3-255]",
-   "used_in": "neck deck sheet, 6 mm cold plates, any 6061 tube",
-   "density_g_cc": 2.71,
-   "E_GPa": 69,
-   "yield_MPa": "Sheet T6 0.010-0.249 in A: L 248, LT 241; plate T651 0.250-2.000 A: L 248, LT 241 (2.001-4.000 LT 241); drawn tube T6 0.025-0.500 wall S: L 241",
-   "UTS_MPa": "Sheet/plate A: 290 (L/LT); tube S 290",
-   "fatigue_MPa": null,
-   "elongation_pct": null,
-   "T_max_mech_C": null,
-   "toughness": null,
-   "other": {
-    "Fbry_eD1.5/2.0_MPa": "sheet/plate A 345/400; tube S 338/386",
-    "R125b_single_path_MPa": 161,
-    "multi_path_MPa": "184 (R-125, typical 276/1.5)"
-   },
-   "cost_hint": null,
-   "sources": [
-    "MILHDBK5H"
-   ],
-   "notes": "R-125 '241' confirmed = 35 ksi LT A-basis (sheet/plate) and tube S-basis. Single-path limit 241/1.5 = 161 MPa."
-  },
-  {
-   "id": "AL7050T7451",
-   "name": "Al 7050-T7451 (candidate) [R-125(b): single-path parts need the A-basis value for the product form]",
-   "used_in": "alternative for 7075 plate parts",
-   "density_g_cc": 3.1,
-   "E_GPa": 70,
-   "yield_MPa": 480,
-   "UTS_MPa": 540,
-   "fatigue_MPa": 200,
-   "elongation_pct": 10,
-   "T_max_mech_C": 190,
-   "toughness": null,
-   "other": {
-    "shear_MPa": 310
-   },
-   "cost_hint": "10% rel.",
-   "sources": [
-    "MIF7050"
-   ],
-   "notes": "MIF density 2-sig-fig. Overaged temper chosen for SCC/exfoliation/toughness balance (MIF text)."
-  },
-  {
-   "id": "AL6061T6",
-   "name": "Al 6061-T6",
-   "used_in": "head neck deck sheet",
-   "density_g_cc": 2.7,
-   "E_GPa": 69,
-   "yield_MPa": 270,
-   "UTS_MPa": 310,
-   "fatigue_MPa": 96,
-   "elongation_pct": 10,
-   "T_max_mech_C": 170,
-   "toughness": null,
-   "other": {
-    "calomel_mV": -740
-   },
-   "cost_hint": "9.5% rel.",
-   "sources": [
-    "MIF6061"
-   ],
-   "notes": ""
-  },
-  {
-   "id": "TI64",
-   "name": "Ti-6Al-4V Grade 5",
-   "used_in": "ankle cross",
-   "density_g_cc": 4.4,
-   "E_GPa": 110,
-   "yield_MPa": "910-1110",
-   "UTS_MPa": "1000-1190",
-   "fatigue_MPa": "530-630",
-   "elongation_pct": "8.6-11",
-   "T_max_mech_C": 330,
-   "toughness": null,
-   "other": {
-    "CTE_um_mK": 8.9
-   },
-   "cost_hint": "36% rel.",
-   "sources": [
-    "MIFTi64"
-   ],
-   "notes": ""
-  },
-  {
-   "id": "STL42CRMO4",
-   "name": "42CrMo4 / 4140 Q&T",
-   "used_in": "clamp eye pins, bond cross pins; 12.9 bolts similar class",
-   "density_g_cc": 7.8,
-   "E_GPa": 190,
-   "yield_MPa": 990,
-   "UTS_MPa": 1080,
-   "fatigue_MPa": 650,
-   "elongation_pct": 16,
-   "T_max_mech_C": 420,
-   "toughness": null,
-   "other": {},
-   "cost_hint": "2.4% rel.",
-   "sources": [
-    "MIF4140QT"
-   ],
-   "notes": "MIF lists AISI 4140 Q&T (42CrMo4 equivalent). Bolt 12.9 grade per ISO 898-1 not fetched."
-  },
-  {
-   "id": "PC",
-   "name": "Polycarbonate sheet (thermoformed)",
-   "used_in": "P-020 covers 1.5 mm",
-   "density_g_cc": 1.2,
-   "E_GPa": null,
-   "yield_MPa": null,
-   "UTS_MPa": "66-160 (range incl. GF)",
-   "fatigue_MPa": null,
-   "elongation_pct": "3.5-110",
-   "T_max_mech_C": null,
-   "toughness": null,
-   "other": {
-    "Tg_C": 150,
-    "HDT_1.82MPa_C": "130-150",
-    "notched_izod_J_m": "140-440"
-   },
-   "cost_hint": "$25.80 per 24x48in sheet (covers/COVER_COST.md)",
-   "sources": [
-    "R027",
-    "MIFPC"
-   ],
-   "notes": "Density 1.20 from Palram PALSUN TDS per R-027. Unfilled-PC-only fatigue not verified."
-  },
-  {
-   "id": "PA12MJF",
-   "name": "PA12 (HP MJF)",
-   "used_in": "legacy covers/palm, brain lid (A31)",
-   "density_g_cc": 1.01,
-   "E_GPa": null,
-   "yield_MPa": null,
-   "UTS_MPa": null,
-   "fatigue_MPa": null,
-   "elongation_pct": null,
-   "T_max_mech_C": null,
-   "toughness": null,
-   "other": {},
-   "cost_hint": null,
-   "sources": [
-    "R027"
-   ],
-   "notes": "Only density verified (repo). MJF datasheet not fetched this round -> TODO."
-  },
-  {
-   "id": "CFRP",
-   "name": "CF prepreg 2x2 twill (Toray 3900 / XC110 class)",
-   "used_in": "torso shell 3 mm, head shell, optional fairings",
-   "density_g_cc": 1.55,
-   "E_GPa": null,
-   "yield_MPa": null,
-   "UTS_MPa": null,
-   "fatigue_MPa": null,
-   "elongation_pct": null,
-   "T_max_mech_C": null,
-   "toughness": null,
-   "other": {},
-   "cost_hint": "~$3.8k mould set [EST R-027]",
-   "sources": [
-    "R027"
-   ],
-   "notes": "Laminate props not verified. Galvanic: carbon is cathodic to Al -> isolate."
-  },
-  {
-   "id": "PTFE",
-   "name": "PTFE composite liner (SKF GE 12 C steel/PTFE sintered bronze; QA1 MGF12T PTFE)",
-   "used_in": "hip/ankle eyes, ankle rod end",
-   "density_g_cc": "2.1-2.3 (bulk PTFE)",
-   "E_GPa": null,
-   "yield_MPa": null,
-   "UTS_MPa": "13-25 (bulk)",
-   "fatigue_MPa": null,
-   "elongation_pct": "75-300",
-   "T_max_mech_C": 260,
-   "toughness": null,
-   "other": {
-    "HDT_C": "66-70",
-    "CTE_um_mK": "110-120",
-    "GE12C_C_kN": 11.4,
-    "GE12C_C0_kN": 28.5
-   },
-   "cost_hint": null,
-   "sources": [
-    "MIFPTFE",
-    "SKF_GE12C"
-   ],
-   "notes": "Bulk PTFE values only; liner composite cold-flow / wear rate not in hand. QA1 MGF12T dynamic rating NOT available (A22)."
-  },
-  {
-   "id": "DP490",
-   "name": "3M Scotch-Weld DP490 epoxy",
-   "used_in": "femur collar + sleeve bond",
-   "density_g_cc": null,
-   "E_GPa": null,
-   "yield_MPa": null,
-   "UTS_MPa": null,
-   "fatigue_MPa": null,
-   "elongation_pct": null,
-   "T_max_mech_C": null,
-   "toughness": null,
-   "other": {
-    "lap_shear_23C_MPa": 23,
-    "lap_shear_82C_MPa": 9.5,
-    "etched_120C_MPa": "2.8-3.2",
-    "peel_daN_cm": 9.24,
-    "bondline_mm": "0.08-0.13"
-   },
-   "cost_hint": null,
-   "sources": [
-    "DP490_A",
-    "DP490_B"
-   ],
-   "notes": "Fatigue, creep, humid-aged not verified."
-  },
-  {
-   "id": "G10FR4",
-   "name": "G10/FR4 glass-epoxy (NEMA LI-1, MIL-I-24768/2 GEE, /27 GEE-F)",
-   "used_in": "A37 sleeves; L71/L75 strap thermal-break blocks",
-   "density_g_cc": 1.85,
-   "E_GPa": "18-20 (flex)",
-   "yield_MPa": null,
-   "UTS_MPa": "276-345 tensile LW",
-   "fatigue_MPa": null,
-   "elongation_pct": null,
-   "T_max_mech_C": "130-140 (temp index)",
-   "toughness": null,
-   "other": {
-    "compr_flatwise_MPa": "414 MIN (60 ksi, Acculam) / 455-469 typ (Gund, CC)",
-    "compr_edgewise_MPa": "241 (35 ksi, MIN Acculam; typ CC)",
-    "shear_punch_MPa": 148,
-    "bearing_MPa": "NOT on any datasheet. [EST] ultimate ~ edgewise compression 241 (pin load in-plane)",
-    "R125b_limits_MPa": "edgewise/bearing 161 RT, 128 at 71 C [EST x0.8]; flatwise 276 RT, 221 at 71 C",
-    "k_through_W_mK": "0.288 (C177, Laminated Plastics)",
-    "k_inplane_W_mK": "not published; [EST] 0.5-0.9 (woven glass, fibre-direction) - use upper bound for thermal-break R",
-    "CTE_inplane_um_mK": "9-10 (Acculam 0.9-1.0e-5)"
-   },
-   "cost_hint": null,
-   "sources": [
-    "G10_ACCULAM",
-    "G10_CC_G10",
-    "G10_GUND",
-    "G10_LAMPL",
-    "G10_RAX"
-   ],
-   "notes": "Hot knock-down x0.8 at 70-75 C is [EST] (epoxy Tg ~ 130-140, no elevated-T data on datasheets). Creep under sustained bearing at temperature not verified: limits are for fault/short-time; sustained bearing <= 1/2 of these [EST] until a G5 creep test. Previous edgewise 172-241 range had no citation; replaced."
-  },
-  {
-   "id": "PEEK",
-   "name": "PEEK (unfilled .. 30% CF)",
-   "used_in": "A37 candidate",
-   "density_g_cc": "1.3-1.5",
-   "E_GPa": "4.0-24",
-   "yield_MPa": null,
-   "UTS_MPa": "97-200",
-   "fatigue_MPa": null,
-   "elongation_pct": "1.6-43",
-   "T_max_mech_C": 330,
-   "toughness": null,
-   "other": {
-    "compr_MPa": "120-300",
-    "shear_MPa": "50-100",
-    "Tg_C": 240,
-    "k_W_mK": "0.25-0.93",
-    "CTE_um_mK": "15-52"
-   },
-   "cost_hint": null,
-   "sources": [
-    "MIFPEEK"
-   ],
-   "notes": "Range spans unfilled to 30CF; grade-specific + creep data needed (Victrex TDS)."
-  },
-  {
-   "id": "PEI",
-   "name": "PEI (Ultem class, unfilled/30GF)",
-   "used_in": "A37 candidate",
-   "density_g_cc": "1.3-1.5",
-   "E_GPa": "3.4-5.6",
-   "yield_MPa": null,
-   "UTS_MPa": "110-160",
-   "fatigue_MPa": null,
-   "elongation_pct": "3-34",
-   "T_max_mech_C": 170,
-   "toughness": null,
-   "other": {
-    "compr_MPa": "140-180",
-    "Tg_C": 210,
-    "k_W_mK": "0.18-0.23",
-    "CTE_um_mK": "20-53"
-   },
-   "cost_hint": null,
-   "sources": [
-    "MIFPEI"
-   ],
-   "notes": ""
-  },
-  {
-   "id": "EPP80",
-   "name": "EPP 80 g/L (ARPRO 5170)",
-   "used_in": "R-042 shoulder pads; cover fall pads (grade TBC)",
-   "density_g_cc": 0.08,
-   "E_GPa": null,
-   "yield_MPa": null,
-   "UTS_MPa": null,
-   "fatigue_MPa": null,
-   "elongation_pct": null,
-   "T_max_mech_C": null,
-   "toughness": null,
-   "other": {
-    "sigma_25pct_kPa": 500,
-    "sigma_50pct_kPa": 700,
-    "sigma_75pct_kPa": 1600,
-    "compression_set_25pct_22h_pct": 11,
-    "rate_factor_100s": "1.45-1.57 (30 g/L foam)",
-    "T60C_vs_RT": "~-50% (30 g/L foam)",
-    "T-30C_vs_RT": "~+110%"
-   },
-   "cost_hint": null,
-   "sources": [
-    "ARPRO5170",
-    "ARPRO_GEN",
-    "EPP_RATE_T",
-    "EPP_PMC"
-   ],
-   "notes": "ISO 844 at 5 mm/min. Densification strain, multi-hit plateau loss, insert pull-out and max service temperature NOT in sources."
-  },
-  {
-   "id": "PEI1000",
-   "name": "PEI Ultem 1000 (unfilled)",
-   "used_in": "A37 rev B sleeves/flange lands (recommended)",
-   "density_g_cc": 1.28,
-   "E_GPa": 3.45,
-   "yield_MPa": null,
-   "UTS_MPa": 114,
-   "fatigue_MPa": null,
-   "elongation_pct": 80,
-   "T_max_mech_C": 171,
-   "toughness": null,
-   "other": {
-    "compr_MPa_10pct_def": 152,
-    "compr_modulus_MPa": 3310,
-    "shear_MPa": 103,
-    "k_W_mK": 0.12,
-    "CTE_um_mK": 56,
-    "HDT_1.82MPa_C": 204,
-    "Tg_C": 215,
-    "creep_tested_points": "tensile creep 120 h at 80 C/41 MPa, 121 C/14 and 28 MPa (curves only, ULTEM_PL)"
-   },
-   "cost_hint": null,
-   "sources": [
-    "ULTEM_PP",
-    "ULTEM_PL"
-   ],
-   "notes": "Continuous service 171 C unloaded. Compressive creep at 98 C not tabulated."
-  },
-  {
-   "id": "HC5052_3.1",
-   "name": "5052 Al honeycomb 3.1 pcf 1/8 (HexWeb CR III / PAMG-XR1)",
-   "used_in": "R-042/R-049 shoulder crush cartridge (ID R3)",
-   "density_g_cc": 0.05,
-   "E_GPa": null,
-   "yield_MPa": null,
-   "UTS_MPa": null,
-   "fatigue_MPa": null,
-   "elongation_pct": null,
-   "T_max_mech_C": null,
-   "toughness": null,
-   "other": {
-    "stab_compr_typ_MPa": 2.07,
-    "stab_compr_min_MPa": 1.48,
-    "crush_typ_MPa": 0.896,
-    "crush_min": "not published",
-    "dynamic_factor": "up to 1.30 (Hexcel)",
-    "density_tol": "+-10% (Plascore)"
-   },
-   "cost_hint": null,
-   "sources": [
-    "HEX_CRIII",
-    "HEX_ATTR",
-    "PLASCORE_XR1"
-   ],
-   "notes": "Values at 0.625 in thick, room temperature, static."
-  },
-  {
-   "id": "HC5052_4.5",
-   "name": "5052 Al honeycomb 4.5 pcf 1/8 (HexWeb CR III)",
-   "used_in": "R-049 alternative",
-   "density_g_cc": 0.072,
-   "E_GPa": null,
-   "yield_MPa": null,
-   "UTS_MPa": null,
-   "fatigue_MPa": null,
-   "elongation_pct": null,
-   "T_max_mech_C": null,
-   "toughness": null,
-   "other": {
-    "stab_compr_typ_MPa": 3.93,
-    "stab_compr_min_MPa": 2.79,
-    "crush_typ_MPa": 1.79,
-    "dynamic_factor": "up to 1.30"
-   },
-   "cost_hint": null,
-   "sources": [
-    "HEX_CRIII",
-    "HEX_ATTR"
-   ],
-   "notes": ""
-  },
-  {
-   "id": "PTFE_TUBE",
-   "name": "PTFE tubing (Zeus Industrial wall)",
-   "used_in": "tendon sheath candidate (TENDON_SHEATH.md)",
-   "density_g_cc": "2.1-2.3 (bulk)",
-   "E_GPa": null,
-   "yield_MPa": null,
-   "UTS_MPa": "13-25",
-   "fatigue_MPa": null,
-   "elongation_pct": null,
-   "T_max_mech_C": 260,
-   "toughness": null,
-   "other": {
-    "bend_R_1/32ID_x0.015wall_mm": 8.4,
-    "bend_R_1/16ID_x0.030wall_mm": 17.5,
-    "flex_modulus_GPa": "0.4-1.3"
-   },
-   "cost_hint": null,
-   "sources": [
-    "ZEUS_BEND",
-    "MIFPTFE"
-   ],
-   "notes": "No compressionless reinforcement: lost motion under tendon load."
-  },
-  {
-   "id": "PEEK_TUBE",
-   "name": "PEEK extruded tubing (Zeus/Optinova)",
-   "used_in": "tendon sheath candidate",
-   "density_g_cc": null,
-   "E_GPa": "4.0 (unfilled lower bound)",
-   "yield_MPa": null,
-   "UTS_MPa": "95-118 (Optinova)",
-   "fatigue_MPa": null,
-   "elongation_pct": null,
-   "T_max_mech_C": 260,
-   "toughness": null,
-   "other": {
-    "sizes": "Zeus 0.080 ID x 0.125 OD in (2.03x3.18 mm)",
-    "bend_R": "<50 mm (Optinova, 1/16-1/8 in OD)"
-   },
-   "cost_hint": null,
-   "sources": [
-    "ZEUS_PEEK",
-    "OPTINOVA_PEEK",
-    "MIFPEEK"
-   ],
-   "notes": ""
-  },
-  {
-   "id": "EPP",
-   "name": "EPP foam (cover pads, grade unspecified)",
-   "used_in": "cover fall pads 0.36 kg",
-   "density_g_cc": null,
-   "E_GPa": null,
-   "yield_MPa": null,
-   "UTS_MPa": null,
-   "fatigue_MPa": null,
-   "elongation_pct": null,
-   "T_max_mech_C": null,
-   "toughness": null,
-   "other": {},
-   "cost_hint": null,
-   "sources": [],
-   "notes": "Use EPP80 row if 80 g/L is chosen."
-  },
-  {
-   "id": "PU90A",
-   "name": "PU 90A bumpers",
-   "used_in": "hip hard stops",
-   "density_g_cc": null,
-   "E_GPa": null,
-   "yield_MPa": null,
-   "UTS_MPa": null,
-   "fatigue_MPa": null,
-   "elongation_pct": null,
-   "T_max_mech_C": null,
-   "toughness": null,
-   "other": {},
-   "cost_hint": null,
-   "sources": [],
-   "notes": "No datasheet [UNKNOWN]."
-  },
-  {
-   "id": "TPUNYLON",
-   "name": "TPU-coated 210D nylon fabric",
-   "used_in": "ankle boots, skirt, pad sleeve",
-   "density_g_cc": null,
-   "E_GPa": null,
-   "yield_MPa": null,
-   "UTS_MPa": null,
-   "fatigue_MPa": null,
-   "elongation_pct": null,
-   "T_max_mech_C": null,
-   "toughness": null,
-   "other": {
-    "areal_g_m2": "270-310",
-    "tear_N": "17 warp / 10 weft (XL)"
-   },
-   "cost_hint": null,
-   "sources": [
-    "EXT_TPU210",
-    "XL_TPU210"
-   ],
-   "notes": ""
-  },
-  {
-   "id": "SILPOLY70D",
-   "name": "Silicone-impregnated 70D ripstop (polyester)",
-   "used_in": "R-069 trims D/E candidate",
-   "density_g_cc": null,
-   "E_GPa": null,
-   "yield_MPa": null,
-   "UTS_MPa": null,
-   "fatigue_MPa": null,
-   "elongation_pct": null,
-   "T_max_mech_C": null,
-   "toughness": null,
-   "other": {
-    "areal_g_m2": "~71 finished (1.9 osy greige)",
-    "HH_mm": ">2000"
-   },
-   "cost_hint": null,
-   "sources": [
-    "RBTR_SILPOLY"
-   ],
-   "notes": "Silnylon 70D similar (~75-78 g/m2, forum report, not used)."
-  },
-  {
-   "id": "SILICONE",
-   "name": "Cast silicone",
-   "used_in": "hand pads",
-   "density_g_cc": null,
-   "E_GPa": null,
-   "yield_MPa": null,
-   "UTS_MPa": null,
-   "fatigue_MPa": null,
-   "elongation_pct": null,
-   "T_max_mech_C": null,
-   "toughness": null,
-   "other": {},
-   "cost_hint": null,
-   "sources": [],
-   "notes": "Shore/grade not specified [UNKNOWN]."
-  },
-  {
-   "id": "SS304",
-   "name": "304 stainless",
-   "used_in": "misc (2 repo mentions)",
-   "density_g_cc": null,
-   "E_GPa": null,
-   "yield_MPa": null,
-   "UTS_MPa": null,
-   "fatigue_MPa": null,
-   "elongation_pct": null,
-   "T_max_mech_C": null,
-   "toughness": null,
-   "other": {},
-   "cost_hint": null,
-   "sources": [],
-   "notes": "Not fetched [UNKNOWN]."
-  },
-  {
-   "id": "PEI4001",
-   "name": "SABIC ULTEM 4001 (PEI, PTFE-lubricated wear grade)",
-   "used_in": "L61 knee trunnion bushes (R-106 candidate)",
-   "density_g_cc": 1.33,
-   "E_GPa": 3.35,
-   "yield_MPa": 103,
-   "UTS_MPa": null,
-   "fatigue_MPa": null,
-   "elongation_pct": 40,
-   "T_max_mech_C": null,
-   "toughness": null,
-   "other": {
-    "flex_MPa": 151,
-    "PV_limit_MPa_m_s@0.51m/s": 1.9,
-    "K_vs_steel_mm3_Nm": "145e-8 (72e-10 in3min/ft-lb-hr @2000 psi-fpm)",
-    "K_vs_self_mm3_Nm": "54.4e-8",
-    "COF_kinetic_steel": 0.25,
-    "HDT_1.82MPa_C": 200,
-    "RTI_mech_C": 170,
-    "taber_mg_1000cy": 2,
-    "compressive_MPa": null,
-    "k_W_mK": "0.26 (ISO 8302, SABIC EMEA TDS)"
-   },
-   "cost_hint": null,
-   "sources": [
-    "ULTEM4001",
-    "ULTEM4001_EMEA"
-   ],
-   "notes": "Compressive strength NOT on SABIC TDS; k from EMEA TDS (Americas TDS leaves it blank). K/COF are RT SABIC-method values at PV 0.07 MPa m/s; 90-95 C wear and creep untested [EST]."
-  },
-  {
-   "id": "VIB7373",
-   "name": "Vibram 7373 Protania/Tequilgemma sheet, TOP85 compound",
-   "used_in": "sole pad candidate (R-102)",
-   "density_g_cc": 1.15,
-   "E_GPa": null,
-   "yield_MPa": null,
-   "UTS_MPa": ">16",
-   "fatigue_MPa": null,
-   "elongation_pct": ">450",
-   "T_max_mech_C": null,
-   "toughness": null,
-   "other": {
-    "shore_A": "85+-3",
-    "abrasion_DIN_mm3": "<100"
-   },
-   "cost_hint": null,
-   "sources": [
-    "VIB_TOP85_US",
-    "VIB_TOP85_LEF",
-    "VIB_7373_3MM"
-   ],
-   "notes": "Passes >=60A gate. Vibram lists 7373 at 1-1.8 mm; 3 mm sheet listed at 75 Shore A by subaru-ec.com product_id=3956 (still >=60A); confirm thickness and hardness by supplier cert."
-  },
-  {
-   "id": "VIB7663",
-   "name": "Vibram 7663 Tequilgemma sheet (3 mm available)",
-   "used_in": "sole pad candidate (R-102)",
-   "density_g_cc": 1.17,
-   "E_GPa": null,
-   "yield_MPa": null,
-   "UTS_MPa": null,
-   "fatigue_MPa": null,
-   "elongation_pct": null,
-   "T_max_mech_C": null,
-   "toughness": null,
-   "other": {
-    "shore_A": 93,
-    "abrasion_DIN53516_mm3": 180
-   },
-   "cost_hint": null,
-   "sources": [
-    "VIB_7663_CIAC"
-   ],
-   "notes": "Passes >=60A gate. Reseller (CIAC, Vibram distributor) value; not supplier lot cert."
-  },
-  {
-   "id": "EA9396",
-   "name": "Henkel Loctite EA 9396 AERO epoxy",
-   "used_in": "R-110 candidate: A38 femur collar bond (replaces DP490)",
-   "density_g_cc": null,
-   "E_GPa": 2.75,
-   "yield_MPa": null,
-   "UTS_MPa": null,
-   "fatigue_MPa": null,
-   "elongation_pct": 3.4,
-   "T_max_mech_C": null,
-   "toughness": null,
-   "other": {
-    "LS_25C_MPa": "24.1 (RT cure) / 27.6 (30 min 82C)",
-    "LS_82C_MPa": "22.0 / 22.8",
-    "LS_149C_MPa": "12.4 / 13.1",
-    "LS_177C_MPa": "8.3",
-    "Tg_dry_C": "64 (5 d RT) / 112 (1 h 82C, 9396.6MD TDS)",
-    "k_W_mK": "0.147 (9396.6MD)"
-   },
-   "cost_hint": null,
-   "sources": [
-    "EA9396"
-   ],
-   "notes": "LS on PAA 2024-T3 bare. Tg is for the 9396.6MD variant; wet Tg not published. Post-cure >=1 h 82C mandatory for >=80C service."
-  },
-  {
-   "id": "EA9394",
-   "name": "Henkel Loctite EA 9394 AERO epoxy",
-   "used_in": "R-110 candidate (rejected)",
-   "density_g_cc": null,
-   "E_GPa": 4.24,
-   "yield_MPa": null,
-   "UTS_MPa": null,
-   "fatigue_MPa": null,
-   "elongation_pct": 1.66,
-   "T_max_mech_C": null,
-   "toughness": null,
-   "other": {
-    "LS_25C_MPa": 28.9,
-    "LS_82C_MPa": 20.7,
-    "LS_93C_MPa": 20.0,
-    "LS_121C_MPa": 15.8,
-    "Tg_dry_C": 78,
-    "Tg_wet_C": 68
-   },
-   "cost_hint": null,
-   "sources": [
-    "EA9394"
-   ],
-   "notes": "RT cure 5 d. Tg 78/68 wet is below 80C service: rejected."
-  },
-  {
-   "id": "EC9323",
-   "name": "3M Scotch-Weld EC-9323 B/A epoxy",
-   "used_in": "R-110 candidate (rejected)",
-   "density_g_cc": null,
-   "E_GPa": null,
-   "yield_MPa": null,
-   "UTS_MPa": null,
-   "fatigue_MPa": null,
-   "elongation_pct": null,
-   "T_max_mech_C": null,
-   "toughness": null,
-   "other": {
-    "OLS_23C_MPa": 36,
-    "OLS_80C_MPa": 22,
-    "OLS_120C_MPa": 4,
-    "OLS_CFRP_23C_MPa": 28,
-    "service_C": "-55 to 82"
-   },
-   "cost_hint": null,
-   "sources": [
-    "EC9323"
-   ],
-   "notes": "Cliff between 80 and 120C; 82C service ceiling gives no margin."
-  },
-  {
-   "id": "DP420",
-   "name": "3M Scotch-Weld DP420 epoxy",
-   "used_in": "R-110 candidate (rejected)",
-   "density_g_cc": null,
-   "E_GPa": 1.87,
-   "yield_MPa": null,
-   "UTS_MPa": null,
-   "fatigue_MPa": null,
-   "elongation_pct": null,
-   "T_max_mech_C": null,
-   "toughness": null,
-   "other": {
-    "OLS_82C_MPa": 2.7,
-    "OLS_49C_MPa": 12.9,
-    "Tg_C": 81
-   },
-   "cost_hint": null,
-   "sources": [
-    "DP420"
-   ],
-   "notes": "10% retention at 82C: rejected."
-  },
-  {
-   "id": "DP460",
-   "name": "3M Scotch-Weld DP460 epoxy",
-   "used_in": "R-110 candidate (rejected)",
-   "density_g_cc": null,
-   "E_GPa": null,
-   "yield_MPa": null,
-   "UTS_MPa": null,
-   "fatigue_MPa": null,
-   "elongation_pct": null,
-   "T_max_mech_C": null,
-   "toughness": null,
-   "other": {
-    "OLS_23C_MPa": 24,
-    "OLS_82C_psi": "700-1400 (15-60 min soak, legacy TDS)"
-   },
-   "cost_hint": null,
-   "sources": [
-    "DP460"
-   ],
-   "notes": "Low hot strength; Tg not on current TDS: rejected."
-  },
-  {
-   "id": "MG_EL43_T5",
-   "name": "Elektron 43 (WE43C, UNS M18434) extruded T5, AMS 4485",
-   "used_in": "actuator housings (R-131 candidate)",
-   "density_g_cc": 1.83,
-   "E_GPa": 44.1,
-   "yield_MPa": "195 A-basis L (typ L 243, T 183)",
-   "UTS_MPa": "303 A-basis L (typ L 352, T 305)",
-   "fatigue_MPa": "195 max @R0.1 5e7 (typ)",
-   "elongation_pct": "6 (A min) / 11.5 typ",
-   "T_max_mech_C": 250,
-   "toughness": null,
-   "other": {
-    "Fbry": "not published",
-    "R125b_single_path_MPa": "130 (L, extruded bar) / 98 [EST] transverse or plate",
-    "k_W_mK": 57.6,
-    "CTE_um_mK": 25.6
-   },
-   "cost_hint": null,
-   "sources": [
-    "LUX_DS490"
-   ],
-   "notes": "A-basis values are longitudinal extrusion only (DS-490). Plate and transverse A-basis are in MMPDS-08 (not accessed). Not in MIL-HDBK-5H. See MG_GALVANIC_PLAN.md."
-  },
-  {
-   "id": "XLPE_LD29",
-   "name": "Zotefoams Plastazote LD29 (N2-blown crosslinked LDPE block foam) - hip skirt foam (P-023 rev 8c)",
-   "used_in": "hip skirt hem/limp strips 40 mm",
-   "density_g_cc": 0.029,
-   "E_GPa": null,
-   "yield_MPa": null,
-   "UTS_MPa": "0.338 tensile",
-   "fatigue_MPa": null,
-   "elongation_pct": 131,
-   "T_max_mech_C": 95,
-   "toughness": null,
-   "other": {
-    "CLD_25_50_kPa": "61 / 126 (ISO 7214)",
-    "CLD_31pct_kPa": "77 [interp]",
-    "comp_set_25pct_24h": "3 %",
-    "Tmax_def": "5 % linear shrink after 24 h (not a continuous rating)",
-    "alt_HD30": "144/215 kPa, 125 C (too stiff: hem 322 N)"
-   },
-   "cost_hint": null,
-   "sources": [
-    "PLZ_LD29",
-    "PLZ_HD30",
-    "BURRILL_XLPE"
-   ],
-   "notes": "About 2x stiffer than the ID-assumed Burrill 80 C grade (29.6/79.5). Hem at 31%: 77 kPa x 100x20 = 153 N > 140 FAIL; fix with a 15 mm wide hem strip (115 N) or 50 mm deep (24.6%, 121 N). Limp 127 N is load-limited (100/130 of 165 N): unchanged."
-  },
-  {
-   "id": "BRG_STEEL",
-   "name": "Bearing steel (GE 12 C inner ring, CRBH, IKO)",
-   "used_in": "bearings",
-   "density_g_cc": null,
-   "E_GPa": null,
-   "yield_MPa": null,
-   "UTS_MPa": null,
-   "fatigue_MPa": null,
-   "elongation_pct": null,
-   "T_max_mech_C": null,
-   "toughness": null,
-   "other": {},
-   "cost_hint": null,
-   "sources": [
-    "SKF_GE12C"
-   ],
-   "notes": "Catalog parts; masses from catalogs."
-  }
- ]
+  "materials": [
+    {
+      "id": "AL7075T6",
+      "name": "Al 7075-T6/T651 [typical (MakeItFrom), not A/B-basis]",
+      "used_in": "femur/tibia tubes, collars, sleeves, clevises, tongue, fork, foot, levers, palm (P-021), pelvis shell, yokes",
+      "density_g_cc": 2.81,
+      "E_GPa": 70,
+      "yield_MPa": 480,
+      "UTS_MPa": 560,
+      "fatigue_MPa": 160,
+      "elongation_pct": 7.9,
+      "T_max_mech_C": 200,
+      "toughness": null,
+      "other": {
+        "shear_MPa": 330,
+        "CTE_um_mK": 23,
+        "calomel_mV": -750
+      },
+      "cost_hint": "base metal price 10% rel. (MIF)",
+      "sources": [
+        "MIF7075"
+      ],
+      "notes": "FATIGUE (R-144, R144_7075_FATIGUE.md): MIL-HDBK-5H Fig 3.7.4.1.8(a) p.3-382 unnotched axial R=-1 mean fit Sa 171/139/121 MPa at 1e7/1e8/5e8; x ka 0.843 x kb 0.90 x ke 0.814 /1.5 = 70/57/50 MPa allowable hot-spot amplitude; 58 confirmed for <=1e8 cycles; MIF fatigue 160 (basis unstated) not used. TYPICAL (MakeItFrom), NOT A/B-basis (R-123). Static allowable 480/1.5 = 320 MPa. VERIFIED MIL-HDBK-5H A/B Fty (ksi -> MPa): T651 plate (AMS 4045/QQ-A-250/12) 0.500-1.000 L 70/72 (483/496), LT 68/70; 1.001-2.000 L 69/71 (476/490), LT 67/69 (462/476), ST n/a (ST tabulated from 2.001 in: 59/61, SCC rating D); 2.001-2.500 L 66/68. T7351 plate (AMS 4078/QQ-A-250/12) 0.500-1.000 L/LT 57/59 (393/407); 1.001-1.500 L/LT 57/59 (393/407); 1.501-2.000 L/LT 55/57 (379/393), ST 52/54 (359/372); 2.001-2.500 L 52/55. Ftu T7351 1.001-1.500 L 67/69, 1.501-2.000 L 66/68. R-125(b) RULE: single-load-path 7075 parts are checked at A-basis Fty/1.5 for their actual product form, thickness band (stock thickness at heat treat) and loaded grain direction; when unverified, the lower value governs. Multi-path parts keep 480/1.5 = 320 MPa. MIF density rounds to 3.0; repo-wide 2.81 kept (no cited source; MIF 3.0 2-sig-fig, nominal 2.81 handbook value [EST]). Fatigue = MIF value (cycle basis not stated). K1C not verified. SCC-susceptible in T6 (short transverse)."
+    },
+    {
+      "id": "AL7075T7351",
+      "name": "Al 7075-T7351 plate (AMS 4078) [MIL-HDBK-5H A/B, verified]",
+      "used_in": "ankle cross (job 7, R-125(b) single path)",
+      "density_g_cc": 2.81,
+      "E_GPa": 71,
+      "yield_MPa": "A/B L/LT: 393/407 (0.5-1.5 in); 379/393 (1.501-2.0 in); ST 359/372 (1.501-2.0)",
+      "UTS_MPa": "A/B L: 462/476 (1.001-1.5 in); 455/469 (1.501-2.0 in)",
+      "fatigue_MPa": null,
+      "elongation_pct": null,
+      "T_max_mech_C": null,
+      "toughness": null,
+      "other": {
+        "single_path_allowable_MPa": "262 (<=1.500 in stock) / 253 (1.501-2.000 in, L/LT) / 239 (1.501-2.000 in, ST)",
+        "E_note": "10.3e3 ksi = 71 GPa (MIL-HDBK-5H); use 70 for stiffness gates (R-123)"
+      },
+      "cost_hint": null,
+      "sources": [
+        "MILHDBK5H"
+      ],
+      "notes": "R-125(b) rule applies. Allowable = A-basis/1.5 for the stock thickness band at heat treat and the loaded grain direction. SCC rating of T73-class tempers is better than T651 (MIL-HDBK-5H footnote rates T651 ST as D)."
+    },
+    {
+      "id": "AL7075T651_A",
+      "name": "Al 7075-T651 plate (AMS 4045 / QQ-A-250/12) A-basis by thickness [MIL-HDBK-5H p. 3-346, Table 3.7.4.0(b1) inferred]",
+      "used_in": "all 7075 plate parts (stock thickness per drawing; not stated in repo except ankle cross <=1.5 in)",
+      "density_g_cc": 2.81,
+      "E_GPa": 71,
+      "yield_MPa": "A Fty L/LT[/ST] MPa: 0.250-0.499 in 476/462; 0.500-1.000 483/469; 1.001-2.000 476/462 (ST not tabulated); 2.001-2.500 455/441/407; 2.501-3.000 434/421/386",
+      "UTS_MPa": "A Ftu L/LT[/ST]: 0.250-0.499 531/538; 0.500-1.000 531/538; 1.001-2.000 524/531; 2.001-2.500 517/524/483; 2.501-3.000 490/496/455",
+      "fatigue_MPa": null,
+      "elongation_pct": null,
+      "T_max_mech_C": null,
+      "toughness": null,
+      "other": {
+        "Fbry_A_eD1.5/2.0_MPa": "0.250-0.499 669/786; 0.500-1.000 690/807; 1.001-2.000 690/807; 2.001-2.500 676/779; 2.501-3.000 648/752",
+        "R125b_single_path_MPa (A Fty/1.5, min L/LT unless ST loaded)": "0.250-0.499 308; 0.500-1.000 313; 1.001-2.000 308; 2.001-2.500 294 (ST 271); 2.501-3.000 280 (ST 257)",
+        "multi_path_MPa": 320
+      },
+      "cost_hint": null,
+      "sources": [
+        "MILHDBK5H"
+      ],
+      "notes": "Thickness = stock thickness at heat treat. LT governs in-plane unless the load direction is controlled. T651 ST SCC rating D (MIL-HDBK-5H fn b). Bearing values are dry-pin."
+    },
+    {
+      "id": "AL7075T651_THICK",
+      "name": "Al 7075-T651 plate >3.0 in, A-basis [MIL-HDBK-5H p. 3-346, Table 3.7.4.0(b1) inferred; table ends at 4.000 in]",
+      "used_in": "knee centre web (stock thickness to be stated by Legs)",
+      "density_g_cc": 2.81,
+      "E_GPa": 71,
+      "yield_MPa": "A Fty L/LT/ST MPa: 3.001-3.500 in 414/400/372; 3.501-4.000 in 386/372/345. >4.000 in: NOT tabulated for T651 in 5H",
+      "UTS_MPa": "A Ftu L/LT/ST: 3.001-3.500 483/490/448; 3.501-4.000 455/462/421",
+      "fatigue_MPa": null,
+      "elongation_pct": null,
+      "T_max_mech_C": null,
+      "toughness": null,
+      "other": {
+        "Fbry_A_eD1.5/2.0_MPa": "3.001-3.500 614/717; 3.501-4.000 579/676",
+        "R125b_single_path_MPa": "3.001-3.500: L 276 / LT 267 / ST 248; 3.501-4.000: L 257 / LT 248 / ST 230",
+        "closest_beyond_4in": "none for T651; T7351 p. 3-348 tabulates only to 4.000 in (3.001-3.500 S Fty L/LT 49, ST 47 ksi; 3.501-4.000 S 48/48/46 ksi = 331/331/317 MPa -> 221/221/211 single-path)"
+      },
+      "cost_hint": null,
+      "sources": [
+        "MILHDBK5H"
+      ],
+      "notes": "T651 ST SCC rating D (5H fn b): for a thick knee web with sustained ST load prefer T7351 (lower yield) or 7050-T7451 plate. Stock thickness at heat treat sets the band."
+    },
+    {
+      "id": "AL7050_TUBE",
+      "name": "Al 7050 femur tube \u00f850x1.2 (model_v4: '7050-T7451'). T7451 is a PLATE temper; no 7050 tube table in MIL-HDBK-5H (T74511 note: excluding tubing). Closest form: extrusion",
+      "used_in": "femur tube",
+      "density_g_cc": 2.83,
+      "E_GPa": 71,
+      "yield_MPa": "T73511 extrusion (AMS 4341) <=1.000 in, S-basis: Fty L/LT 414/393 [p. 3-314]; T76511 extrusion (AMS 4340) <=0.499 in, A/B: Fty L 469/490, LT 462/476 [p. 3-316]",
+      "UTS_MPa": "T73511 S: Ftu L/LT 483/469; T76511 A: Ftu L/LT 531/524",
+      "fatigue_MPa": null,
+      "elongation_pct": null,
+      "T_max_mech_C": null,
+      "toughness": null,
+      "other": {
+        "Fbry_eD1.5/2.0_MPa": "T73511 S 565/669; T76511 A 648/752",
+        "R125b_single_path_MPa": "T73511 262 (S LT/1.5, recommended temper for SCC) / T76511 308",
+        "multi_path_MPa": "T73511 276 / T76511 313"
+      },
+      "cost_hint": null,
+      "sources": [
+        "MILHDBK5H"
+      ],
+      "notes": "Order as 7050-T73511 (or T76511) extruded/drawn tube; there is no tabulated A-basis for 7050 tube in 5H, so the extrusion values stand in [closest form]. Density 2.83 from 5H 0.102 lb/in3 [EST: not re-read]. Model's T7451 label must change."
+    },
+    {
+      "id": "AL6061T6_A",
+      "name": "Al 6061-T6/T651 A-basis [MIL-HDBK-5H pp. 3-252/3-253/3-255]",
+      "used_in": "neck deck sheet, 6 mm cold plates, any 6061 tube",
+      "density_g_cc": 2.71,
+      "E_GPa": 69,
+      "yield_MPa": "Sheet T6 0.010-0.249 in A: L 248, LT 241; plate T651 0.250-2.000 A: L 248, LT 241 (2.001-4.000 LT 241); drawn tube T6 0.025-0.500 wall S: L 241",
+      "UTS_MPa": "Sheet/plate A: 290 (L/LT); tube S 290",
+      "fatigue_MPa": null,
+      "elongation_pct": null,
+      "T_max_mech_C": null,
+      "toughness": null,
+      "other": {
+        "Fbry_eD1.5/2.0_MPa": "sheet/plate A 345/400; tube S 338/386",
+        "R125b_single_path_MPa": 161,
+        "multi_path_MPa": "184 (R-125, typical 276/1.5)"
+      },
+      "cost_hint": null,
+      "sources": [
+        "MILHDBK5H"
+      ],
+      "notes": "R-125 '241' confirmed = 35 ksi LT A-basis (sheet/plate) and tube S-basis. Single-path limit 241/1.5 = 161 MPa."
+    },
+    {
+      "id": "AL7050T7451",
+      "name": "Al 7050-T7451 (candidate) [R-125(b): single-path parts need the A-basis value for the product form]",
+      "used_in": "alternative for 7075 plate parts",
+      "density_g_cc": 3.1,
+      "E_GPa": 70,
+      "yield_MPa": 480,
+      "UTS_MPa": 540,
+      "fatigue_MPa": 200,
+      "elongation_pct": 10,
+      "T_max_mech_C": 190,
+      "toughness": null,
+      "other": {
+        "shear_MPa": 310
+      },
+      "cost_hint": "10% rel.",
+      "sources": [
+        "MIF7050"
+      ],
+      "notes": "MIF density 2-sig-fig. Overaged temper chosen for SCC/exfoliation/toughness balance (MIF text)."
+    },
+    {
+      "id": "AL6061T6",
+      "name": "Al 6061-T6",
+      "used_in": "head neck deck sheet",
+      "density_g_cc": 2.7,
+      "E_GPa": 69,
+      "yield_MPa": 270,
+      "UTS_MPa": 310,
+      "fatigue_MPa": 96,
+      "elongation_pct": 10,
+      "T_max_mech_C": 170,
+      "toughness": null,
+      "other": {
+        "calomel_mV": -740
+      },
+      "cost_hint": "9.5% rel.",
+      "sources": [
+        "MIF6061"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "TI64",
+      "name": "Ti-6Al-4V Grade 5",
+      "used_in": "ankle cross",
+      "density_g_cc": 4.4,
+      "E_GPa": 110,
+      "yield_MPa": "910-1110",
+      "UTS_MPa": "1000-1190",
+      "fatigue_MPa": "530-630",
+      "elongation_pct": "8.6-11",
+      "T_max_mech_C": 330,
+      "toughness": null,
+      "other": {
+        "CTE_um_mK": 8.9
+      },
+      "cost_hint": "36% rel.",
+      "sources": [
+        "MIFTi64"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "STL42CRMO4",
+      "name": "42CrMo4 / 4140 Q&T",
+      "used_in": "clamp eye pins, bond cross pins; 12.9 bolts similar class",
+      "density_g_cc": 7.8,
+      "E_GPa": 190,
+      "yield_MPa": 990,
+      "UTS_MPa": 1080,
+      "fatigue_MPa": 650,
+      "elongation_pct": 16,
+      "T_max_mech_C": 420,
+      "toughness": null,
+      "other": {},
+      "cost_hint": "2.4% rel.",
+      "sources": [
+        "MIF4140QT"
+      ],
+      "notes": "MIF lists AISI 4140 Q&T (42CrMo4 equivalent). Bolt 12.9 grade per ISO 898-1 not fetched."
+    },
+    {
+      "id": "PC",
+      "name": "Polycarbonate sheet (thermoformed)",
+      "used_in": "P-020 covers 1.5 mm",
+      "density_g_cc": 1.2,
+      "E_GPa": null,
+      "yield_MPa": null,
+      "UTS_MPa": "66-160 (range incl. GF)",
+      "fatigue_MPa": null,
+      "elongation_pct": "3.5-110",
+      "T_max_mech_C": null,
+      "toughness": null,
+      "other": {
+        "Tg_C": 150,
+        "HDT_1.82MPa_C": "130-150",
+        "notched_izod_J_m": "140-440"
+      },
+      "cost_hint": "$25.80 per 24x48in sheet (covers/COVER_COST.md)",
+      "sources": [
+        "R027",
+        "MIFPC"
+      ],
+      "notes": "Density 1.20 from Palram PALSUN TDS per R-027. Unfilled-PC-only fatigue not verified."
+    },
+    {
+      "id": "PA12MJF",
+      "name": "PA12 (HP MJF)",
+      "used_in": "legacy covers/palm, brain lid (A31)",
+      "density_g_cc": 1.01,
+      "E_GPa": null,
+      "yield_MPa": null,
+      "UTS_MPa": null,
+      "fatigue_MPa": null,
+      "elongation_pct": null,
+      "T_max_mech_C": null,
+      "toughness": null,
+      "other": {},
+      "cost_hint": null,
+      "sources": [
+        "R027"
+      ],
+      "notes": "Only density verified (repo). MJF datasheet not fetched this round -> TODO."
+    },
+    {
+      "id": "CFRP",
+      "name": "CF prepreg 2x2 twill (Toray 3900 / XC110 class)",
+      "used_in": "torso shell 3 mm, head shell, optional fairings",
+      "density_g_cc": 1.55,
+      "E_GPa": null,
+      "yield_MPa": null,
+      "UTS_MPa": null,
+      "fatigue_MPa": null,
+      "elongation_pct": null,
+      "T_max_mech_C": null,
+      "toughness": null,
+      "other": {},
+      "cost_hint": "~$3.8k mould set [EST R-027]",
+      "sources": [
+        "R027"
+      ],
+      "notes": "Laminate props not verified. Galvanic: carbon is cathodic to Al -> isolate."
+    },
+    {
+      "id": "PTFE",
+      "name": "PTFE composite liner (SKF GE 12 C steel/PTFE sintered bronze; QA1 MGF12T PTFE)",
+      "used_in": "hip/ankle eyes, ankle rod end",
+      "density_g_cc": "2.1-2.3 (bulk PTFE)",
+      "E_GPa": null,
+      "yield_MPa": null,
+      "UTS_MPa": "13-25 (bulk)",
+      "fatigue_MPa": null,
+      "elongation_pct": "75-300",
+      "T_max_mech_C": 260,
+      "toughness": null,
+      "other": {
+        "HDT_C": "66-70",
+        "CTE_um_mK": "110-120",
+        "GE12C_C_kN": 11.4,
+        "GE12C_C0_kN": 28.5
+      },
+      "cost_hint": null,
+      "sources": [
+        "MIFPTFE",
+        "SKF_GE12C"
+      ],
+      "notes": "Bulk PTFE values only; liner composite cold-flow / wear rate not in hand. QA1 MGF12T dynamic rating NOT available (A22)."
+    },
+    {
+      "id": "DP490",
+      "name": "3M Scotch-Weld DP490 epoxy",
+      "used_in": "femur collar + sleeve bond",
+      "density_g_cc": null,
+      "E_GPa": null,
+      "yield_MPa": null,
+      "UTS_MPa": null,
+      "fatigue_MPa": null,
+      "elongation_pct": null,
+      "T_max_mech_C": null,
+      "toughness": null,
+      "other": {
+        "lap_shear_23C_MPa": 23,
+        "lap_shear_82C_MPa": 9.5,
+        "etched_120C_MPa": "2.8-3.2",
+        "peel_daN_cm": 9.24,
+        "bondline_mm": "0.08-0.13"
+      },
+      "cost_hint": null,
+      "sources": [
+        "DP490_A",
+        "DP490_B"
+      ],
+      "notes": "Fatigue, creep, humid-aged not verified."
+    },
+    {
+      "id": "G10FR4",
+      "name": "G10/FR4 glass-epoxy (NEMA LI-1, MIL-I-24768/2 GEE, /27 GEE-F)",
+      "used_in": "A37 sleeves; L71/L75 strap thermal-break blocks",
+      "density_g_cc": 1.85,
+      "E_GPa": "18-20 (flex)",
+      "yield_MPa": null,
+      "UTS_MPa": "276-345 tensile LW",
+      "fatigue_MPa": null,
+      "elongation_pct": null,
+      "T_max_mech_C": "130-140 (temp index)",
+      "toughness": null,
+      "other": {
+        "compr_flatwise_MPa": "414 MIN (60 ksi, Acculam) / 455-469 typ (Gund, CC)",
+        "compr_edgewise_MPa": "241 (35 ksi, MIN Acculam; typ CC)",
+        "shear_punch_MPa": 148,
+        "bearing_MPa": "NOT on any datasheet. [EST] ultimate ~ edgewise compression 241 (pin load in-plane)",
+        "R125b_limits_MPa": "edgewise/bearing 161 RT, 128 at 71 C [EST x0.8]; flatwise 276 RT, 221 at 71 C",
+        "k_through_W_mK": "0.288 (C177, Laminated Plastics)",
+        "k_inplane_W_mK": "not published; [EST] 0.5-0.9 (woven glass, fibre-direction) - use upper bound for thermal-break R",
+        "CTE_inplane_um_mK": "9-10 (Acculam 0.9-1.0e-5)"
+      },
+      "cost_hint": null,
+      "sources": [
+        "G10_ACCULAM",
+        "G10_CC_G10",
+        "G10_GUND",
+        "G10_LAMPL",
+        "G10_RAX"
+      ],
+      "notes": "Hot knock-down x0.8 at 70-75 C is [EST] (epoxy Tg ~ 130-140, no elevated-T data on datasheets). Creep under sustained bearing at temperature not verified: limits are for fault/short-time; sustained bearing <= 1/2 of these [EST] until a G5 creep test. Previous edgewise 172-241 range had no citation; replaced."
+    },
+    {
+      "id": "PEEK",
+      "name": "PEEK (unfilled .. 30% CF)",
+      "used_in": "A37 candidate",
+      "density_g_cc": "1.3-1.5",
+      "E_GPa": "4.0-24",
+      "yield_MPa": null,
+      "UTS_MPa": "97-200",
+      "fatigue_MPa": null,
+      "elongation_pct": "1.6-43",
+      "T_max_mech_C": 330,
+      "toughness": null,
+      "other": {
+        "compr_MPa": "120-300",
+        "shear_MPa": "50-100",
+        "Tg_C": 240,
+        "k_W_mK": "0.25-0.93",
+        "CTE_um_mK": "15-52"
+      },
+      "cost_hint": null,
+      "sources": [
+        "MIFPEEK"
+      ],
+      "notes": "Range spans unfilled to 30CF; grade-specific + creep data needed (Victrex TDS)."
+    },
+    {
+      "id": "PEI",
+      "name": "PEI (Ultem class, unfilled/30GF)",
+      "used_in": "A37 candidate",
+      "density_g_cc": "1.3-1.5",
+      "E_GPa": "3.4-5.6",
+      "yield_MPa": null,
+      "UTS_MPa": "110-160",
+      "fatigue_MPa": null,
+      "elongation_pct": "3-34",
+      "T_max_mech_C": 170,
+      "toughness": null,
+      "other": {
+        "compr_MPa": "140-180",
+        "Tg_C": 210,
+        "k_W_mK": "0.18-0.23",
+        "CTE_um_mK": "20-53"
+      },
+      "cost_hint": null,
+      "sources": [
+        "MIFPEI"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "EPP80",
+      "name": "EPP 80 g/L (ARPRO 5170)",
+      "used_in": "R-042 shoulder pads; cover fall pads (grade TBC)",
+      "density_g_cc": 0.08,
+      "E_GPa": null,
+      "yield_MPa": null,
+      "UTS_MPa": null,
+      "fatigue_MPa": null,
+      "elongation_pct": null,
+      "T_max_mech_C": null,
+      "toughness": null,
+      "other": {
+        "sigma_25pct_kPa": 500,
+        "sigma_50pct_kPa": 700,
+        "sigma_75pct_kPa": 1600,
+        "compression_set_25pct_22h_pct": 11,
+        "rate_factor_100s": "1.45-1.57 (30 g/L foam)",
+        "T60C_vs_RT": "~-50% (30 g/L foam)",
+        "T-30C_vs_RT": "~+110%"
+      },
+      "cost_hint": null,
+      "sources": [
+        "ARPRO5170",
+        "ARPRO_GEN",
+        "EPP_RATE_T",
+        "EPP_PMC"
+      ],
+      "notes": "ISO 844 at 5 mm/min. Densification strain, multi-hit plateau loss, insert pull-out and max service temperature NOT in sources."
+    },
+    {
+      "id": "PEI1000",
+      "name": "PEI Ultem 1000 (unfilled)",
+      "used_in": "A37 rev B sleeves/flange lands (recommended)",
+      "density_g_cc": 1.28,
+      "E_GPa": 3.45,
+      "yield_MPa": null,
+      "UTS_MPa": 114,
+      "fatigue_MPa": null,
+      "elongation_pct": 80,
+      "T_max_mech_C": 171,
+      "toughness": null,
+      "other": {
+        "compr_MPa_10pct_def": 152,
+        "compr_modulus_MPa": 3310,
+        "shear_MPa": 103,
+        "k_W_mK": 0.12,
+        "CTE_um_mK": 56,
+        "HDT_1.82MPa_C": 204,
+        "Tg_C": 215,
+        "creep_tested_points": "tensile creep 120 h at 80 C/41 MPa, 121 C/14 and 28 MPa (curves only, ULTEM_PL)"
+      },
+      "cost_hint": null,
+      "sources": [
+        "ULTEM_PP",
+        "ULTEM_PL"
+      ],
+      "notes": "Continuous service 171 C unloaded. Compressive creep at 98 C not tabulated."
+    },
+    {
+      "id": "HC5052_3.1",
+      "name": "5052 Al honeycomb 3.1 pcf 1/8 (HexWeb CR III / PAMG-XR1)",
+      "used_in": "R-042/R-049 shoulder crush cartridge (ID R3)",
+      "density_g_cc": 0.05,
+      "E_GPa": null,
+      "yield_MPa": null,
+      "UTS_MPa": null,
+      "fatigue_MPa": null,
+      "elongation_pct": null,
+      "T_max_mech_C": null,
+      "toughness": null,
+      "other": {
+        "stab_compr_typ_MPa": 2.07,
+        "stab_compr_min_MPa": 1.48,
+        "crush_typ_MPa": 0.896,
+        "crush_min": "not published",
+        "dynamic_factor": "up to 1.30 (Hexcel)",
+        "density_tol": "+-10% (Plascore)"
+      },
+      "cost_hint": null,
+      "sources": [
+        "HEX_CRIII",
+        "HEX_ATTR",
+        "PLASCORE_XR1"
+      ],
+      "notes": "Values at 0.625 in thick, room temperature, static."
+    },
+    {
+      "id": "HC5052_4.5",
+      "name": "5052 Al honeycomb 4.5 pcf 1/8 (HexWeb CR III)",
+      "used_in": "R-049 alternative",
+      "density_g_cc": 0.072,
+      "E_GPa": null,
+      "yield_MPa": null,
+      "UTS_MPa": null,
+      "fatigue_MPa": null,
+      "elongation_pct": null,
+      "T_max_mech_C": null,
+      "toughness": null,
+      "other": {
+        "stab_compr_typ_MPa": 3.93,
+        "stab_compr_min_MPa": 2.79,
+        "crush_typ_MPa": 1.79,
+        "dynamic_factor": "up to 1.30"
+      },
+      "cost_hint": null,
+      "sources": [
+        "HEX_CRIII",
+        "HEX_ATTR"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "PTFE_TUBE",
+      "name": "PTFE tubing (Zeus Industrial wall)",
+      "used_in": "tendon sheath candidate (TENDON_SHEATH.md)",
+      "density_g_cc": "2.1-2.3 (bulk)",
+      "E_GPa": null,
+      "yield_MPa": null,
+      "UTS_MPa": "13-25",
+      "fatigue_MPa": null,
+      "elongation_pct": null,
+      "T_max_mech_C": 260,
+      "toughness": null,
+      "other": {
+        "bend_R_1/32ID_x0.015wall_mm": 8.4,
+        "bend_R_1/16ID_x0.030wall_mm": 17.5,
+        "flex_modulus_GPa": "0.4-1.3"
+      },
+      "cost_hint": null,
+      "sources": [
+        "ZEUS_BEND",
+        "MIFPTFE"
+      ],
+      "notes": "No compressionless reinforcement: lost motion under tendon load."
+    },
+    {
+      "id": "PEEK_TUBE",
+      "name": "PEEK extruded tubing (Zeus/Optinova)",
+      "used_in": "tendon sheath candidate",
+      "density_g_cc": null,
+      "E_GPa": "4.0 (unfilled lower bound)",
+      "yield_MPa": null,
+      "UTS_MPa": "95-118 (Optinova)",
+      "fatigue_MPa": null,
+      "elongation_pct": null,
+      "T_max_mech_C": 260,
+      "toughness": null,
+      "other": {
+        "sizes": "Zeus 0.080 ID x 0.125 OD in (2.03x3.18 mm)",
+        "bend_R": "<50 mm (Optinova, 1/16-1/8 in OD)"
+      },
+      "cost_hint": null,
+      "sources": [
+        "ZEUS_PEEK",
+        "OPTINOVA_PEEK",
+        "MIFPEEK"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "EPP",
+      "name": "EPP foam (cover pads, grade unspecified)",
+      "used_in": "cover fall pads 0.36 kg",
+      "density_g_cc": null,
+      "E_GPa": null,
+      "yield_MPa": null,
+      "UTS_MPa": null,
+      "fatigue_MPa": null,
+      "elongation_pct": null,
+      "T_max_mech_C": null,
+      "toughness": null,
+      "other": {},
+      "cost_hint": null,
+      "sources": [],
+      "notes": "Use EPP80 row if 80 g/L is chosen."
+    },
+    {
+      "id": "PU90A",
+      "name": "PU 90A bumpers",
+      "used_in": "hip hard stops",
+      "density_g_cc": null,
+      "E_GPa": null,
+      "yield_MPa": null,
+      "UTS_MPa": null,
+      "fatigue_MPa": null,
+      "elongation_pct": null,
+      "T_max_mech_C": null,
+      "toughness": null,
+      "other": {},
+      "cost_hint": null,
+      "sources": [],
+      "notes": "No datasheet [UNKNOWN]."
+    },
+    {
+      "id": "TPUNYLON",
+      "name": "TPU-coated 210D nylon fabric",
+      "used_in": "ankle boots, skirt, pad sleeve",
+      "density_g_cc": null,
+      "E_GPa": null,
+      "yield_MPa": null,
+      "UTS_MPa": null,
+      "fatigue_MPa": null,
+      "elongation_pct": null,
+      "T_max_mech_C": null,
+      "toughness": null,
+      "other": {
+        "areal_g_m2": "270-310",
+        "tear_N": "17 warp / 10 weft (XL)"
+      },
+      "cost_hint": null,
+      "sources": [
+        "EXT_TPU210",
+        "XL_TPU210"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "SILPOLY70D",
+      "name": "Silicone-impregnated 70D ripstop (polyester)",
+      "used_in": "R-069 trims D/E candidate",
+      "density_g_cc": null,
+      "E_GPa": null,
+      "yield_MPa": null,
+      "UTS_MPa": null,
+      "fatigue_MPa": null,
+      "elongation_pct": null,
+      "T_max_mech_C": null,
+      "toughness": null,
+      "other": {
+        "areal_g_m2": "~71 finished (1.9 osy greige)",
+        "HH_mm": ">2000"
+      },
+      "cost_hint": null,
+      "sources": [
+        "RBTR_SILPOLY"
+      ],
+      "notes": "Silnylon 70D similar (~75-78 g/m2, forum report, not used)."
+    },
+    {
+      "id": "SILICONE",
+      "name": "Cast silicone",
+      "used_in": "hand pads",
+      "density_g_cc": null,
+      "E_GPa": null,
+      "yield_MPa": null,
+      "UTS_MPa": null,
+      "fatigue_MPa": null,
+      "elongation_pct": null,
+      "T_max_mech_C": null,
+      "toughness": null,
+      "other": {},
+      "cost_hint": null,
+      "sources": [],
+      "notes": "Shore/grade not specified [UNKNOWN]."
+    },
+    {
+      "id": "SS304",
+      "name": "304 stainless",
+      "used_in": "misc (2 repo mentions)",
+      "density_g_cc": null,
+      "E_GPa": null,
+      "yield_MPa": null,
+      "UTS_MPa": null,
+      "fatigue_MPa": null,
+      "elongation_pct": null,
+      "T_max_mech_C": null,
+      "toughness": null,
+      "other": {},
+      "cost_hint": null,
+      "sources": [],
+      "notes": "Not fetched [UNKNOWN]."
+    },
+    {
+      "id": "PEI4001",
+      "name": "SABIC ULTEM 4001 (PEI, PTFE-lubricated wear grade)",
+      "used_in": "L61 knee trunnion bushes (R-106 candidate)",
+      "density_g_cc": 1.33,
+      "E_GPa": 3.35,
+      "yield_MPa": 103,
+      "UTS_MPa": null,
+      "fatigue_MPa": null,
+      "elongation_pct": 40,
+      "T_max_mech_C": null,
+      "toughness": null,
+      "other": {
+        "flex_MPa": 151,
+        "PV_limit_MPa_m_s@0.51m/s": 1.9,
+        "K_vs_steel_mm3_Nm": "145e-8 (72e-10 in3min/ft-lb-hr @2000 psi-fpm)",
+        "K_vs_self_mm3_Nm": "54.4e-8",
+        "COF_kinetic_steel": 0.25,
+        "HDT_1.82MPa_C": 200,
+        "RTI_mech_C": 170,
+        "taber_mg_1000cy": 2,
+        "compressive_MPa": null,
+        "k_W_mK": "0.26 (ISO 8302, SABIC EMEA TDS)"
+      },
+      "cost_hint": null,
+      "sources": [
+        "ULTEM4001",
+        "ULTEM4001_EMEA"
+      ],
+      "notes": "Compressive strength NOT on SABIC TDS; k from EMEA TDS (Americas TDS leaves it blank). K/COF are RT SABIC-method values at PV 0.07 MPa m/s; 90-95 C wear and creep untested [EST]."
+    },
+    {
+      "id": "VIB7373",
+      "name": "Vibram 7373 Protania/Tequilgemma sheet, TOP85 compound",
+      "used_in": "sole pad candidate (R-102)",
+      "density_g_cc": 1.15,
+      "E_GPa": null,
+      "yield_MPa": null,
+      "UTS_MPa": ">16",
+      "fatigue_MPa": null,
+      "elongation_pct": ">450",
+      "T_max_mech_C": null,
+      "toughness": null,
+      "other": {
+        "shore_A": "85+-3",
+        "abrasion_DIN_mm3": "<100"
+      },
+      "cost_hint": null,
+      "sources": [
+        "VIB_TOP85_US",
+        "VIB_TOP85_LEF",
+        "VIB_7373_3MM"
+      ],
+      "notes": "Passes >=60A gate. Vibram lists 7373 at 1-1.8 mm; 3 mm sheet listed at 75 Shore A by subaru-ec.com product_id=3956 (still >=60A); confirm thickness and hardness by supplier cert."
+    },
+    {
+      "id": "VIB7663",
+      "name": "Vibram 7663 Tequilgemma sheet (3 mm available)",
+      "used_in": "sole pad candidate (R-102)",
+      "density_g_cc": 1.17,
+      "E_GPa": null,
+      "yield_MPa": null,
+      "UTS_MPa": null,
+      "fatigue_MPa": null,
+      "elongation_pct": null,
+      "T_max_mech_C": null,
+      "toughness": null,
+      "other": {
+        "shore_A": 93,
+        "abrasion_DIN53516_mm3": 180
+      },
+      "cost_hint": null,
+      "sources": [
+        "VIB_7663_CIAC"
+      ],
+      "notes": "Passes >=60A gate. Reseller (CIAC, Vibram distributor) value; not supplier lot cert."
+    },
+    {
+      "id": "EA9396",
+      "name": "Henkel Loctite EA 9396 AERO epoxy",
+      "used_in": "R-110 candidate: A38 femur collar bond (replaces DP490)",
+      "density_g_cc": null,
+      "E_GPa": 2.75,
+      "yield_MPa": null,
+      "UTS_MPa": null,
+      "fatigue_MPa": null,
+      "elongation_pct": 3.4,
+      "T_max_mech_C": null,
+      "toughness": null,
+      "other": {
+        "LS_25C_MPa": "24.1 (RT cure) / 27.6 (30 min 82C)",
+        "LS_82C_MPa": "22.0 / 22.8",
+        "LS_149C_MPa": "12.4 / 13.1",
+        "LS_177C_MPa": "8.3",
+        "Tg_dry_C": "64 (5 d RT) / 112 (1 h 82C, 9396.6MD TDS)",
+        "k_W_mK": "0.147 (9396.6MD)"
+      },
+      "cost_hint": null,
+      "sources": [
+        "EA9396"
+      ],
+      "notes": "LS on PAA 2024-T3 bare. Tg is for the 9396.6MD variant; wet Tg not published. Post-cure >=1 h 82C mandatory for >=80C service."
+    },
+    {
+      "id": "EA9394",
+      "name": "Henkel Loctite EA 9394 AERO epoxy",
+      "used_in": "R-110 candidate (rejected)",
+      "density_g_cc": null,
+      "E_GPa": 4.24,
+      "yield_MPa": null,
+      "UTS_MPa": null,
+      "fatigue_MPa": null,
+      "elongation_pct": 1.66,
+      "T_max_mech_C": null,
+      "toughness": null,
+      "other": {
+        "LS_25C_MPa": 28.9,
+        "LS_82C_MPa": 20.7,
+        "LS_93C_MPa": 20.0,
+        "LS_121C_MPa": 15.8,
+        "Tg_dry_C": 78,
+        "Tg_wet_C": 68
+      },
+      "cost_hint": null,
+      "sources": [
+        "EA9394"
+      ],
+      "notes": "RT cure 5 d. Tg 78/68 wet is below 80C service: rejected."
+    },
+    {
+      "id": "EC9323",
+      "name": "3M Scotch-Weld EC-9323 B/A epoxy",
+      "used_in": "R-110 candidate (rejected)",
+      "density_g_cc": null,
+      "E_GPa": null,
+      "yield_MPa": null,
+      "UTS_MPa": null,
+      "fatigue_MPa": null,
+      "elongation_pct": null,
+      "T_max_mech_C": null,
+      "toughness": null,
+      "other": {
+        "OLS_23C_MPa": 36,
+        "OLS_80C_MPa": 22,
+        "OLS_120C_MPa": 4,
+        "OLS_CFRP_23C_MPa": 28,
+        "service_C": "-55 to 82"
+      },
+      "cost_hint": null,
+      "sources": [
+        "EC9323"
+      ],
+      "notes": "Cliff between 80 and 120C; 82C service ceiling gives no margin."
+    },
+    {
+      "id": "DP420",
+      "name": "3M Scotch-Weld DP420 epoxy",
+      "used_in": "R-110 candidate (rejected)",
+      "density_g_cc": null,
+      "E_GPa": 1.87,
+      "yield_MPa": null,
+      "UTS_MPa": null,
+      "fatigue_MPa": null,
+      "elongation_pct": null,
+      "T_max_mech_C": null,
+      "toughness": null,
+      "other": {
+        "OLS_82C_MPa": 2.7,
+        "OLS_49C_MPa": 12.9,
+        "Tg_C": 81
+      },
+      "cost_hint": null,
+      "sources": [
+        "DP420"
+      ],
+      "notes": "10% retention at 82C: rejected."
+    },
+    {
+      "id": "DP460",
+      "name": "3M Scotch-Weld DP460 epoxy",
+      "used_in": "R-110 candidate (rejected)",
+      "density_g_cc": null,
+      "E_GPa": null,
+      "yield_MPa": null,
+      "UTS_MPa": null,
+      "fatigue_MPa": null,
+      "elongation_pct": null,
+      "T_max_mech_C": null,
+      "toughness": null,
+      "other": {
+        "OLS_23C_MPa": 24,
+        "OLS_82C_psi": "700-1400 (15-60 min soak, legacy TDS)"
+      },
+      "cost_hint": null,
+      "sources": [
+        "DP460"
+      ],
+      "notes": "Low hot strength; Tg not on current TDS: rejected."
+    },
+    {
+      "id": "MG_EL43_T5",
+      "name": "Elektron 43 (WE43C, UNS M18434) extruded T5, AMS 4485",
+      "used_in": "actuator housings (R-131 candidate)",
+      "density_g_cc": 1.83,
+      "E_GPa": 44.1,
+      "yield_MPa": "195 A-basis L (typ L 243, T 183)",
+      "UTS_MPa": "303 A-basis L (typ L 352, T 305)",
+      "fatigue_MPa": "195 max @R0.1 5e7 (typ)",
+      "elongation_pct": "6 (A min) / 11.5 typ",
+      "T_max_mech_C": 250,
+      "toughness": null,
+      "other": {
+        "Fbry": "not published",
+        "R125b_single_path_MPa": "130 (L, extruded bar) / 98 [EST] transverse or plate",
+        "k_W_mK": 57.6,
+        "CTE_um_mK": 25.6
+      },
+      "cost_hint": null,
+      "sources": [
+        "LUX_DS490"
+      ],
+      "notes": "A-basis values are longitudinal extrusion only (DS-490). Plate and transverse A-basis are in MMPDS-08 (not accessed). Not in MIL-HDBK-5H. See MG_GALVANIC_PLAN.md."
+    },
+    {
+      "id": "XLPE_LD29",
+      "name": "Zotefoams Plastazote LD29 (N2-blown crosslinked LDPE block foam) - hip skirt foam (P-023 rev 8c)",
+      "used_in": "hip skirt hem/limp strips 40 mm",
+      "density_g_cc": 0.029,
+      "E_GPa": null,
+      "yield_MPa": null,
+      "UTS_MPa": "0.338 tensile",
+      "fatigue_MPa": null,
+      "elongation_pct": 131,
+      "T_max_mech_C": 95,
+      "toughness": null,
+      "other": {
+        "CLD_25_50_kPa": "61 / 126 (ISO 7214)",
+        "CLD_31pct_kPa": "77 [interp]",
+        "comp_set_25pct_24h": "3 %",
+        "Tmax_def": "5 % linear shrink after 24 h (not a continuous rating)",
+        "alt_HD30": "144/215 kPa, 125 C (too stiff: hem 322 N)"
+      },
+      "cost_hint": null,
+      "sources": [
+        "PLZ_LD29",
+        "PLZ_HD30",
+        "BURRILL_XLPE"
+      ],
+      "notes": "About 2x stiffer than the ID-assumed Burrill 80 C grade (29.6/79.5). Hem at 31%: 77 kPa x 100x20 = 153 N > 140 FAIL; fix with a 15 mm wide hem strip (115 N) or 50 mm deep (24.6%, 121 N). Limp 127 N is load-limited (100/130 of 165 N): unchanged."
+    },
+    {
+      "id": "BRG_STEEL",
+      "name": "Bearing steel (GE 12 C inner ring, CRBH, IKO)",
+      "used_in": "bearings",
+      "density_g_cc": null,
+      "E_GPa": null,
+      "yield_MPa": null,
+      "UTS_MPa": null,
+      "fatigue_MPa": null,
+      "elongation_pct": null,
+      "T_max_mech_C": null,
+      "toughness": null,
+      "other": {},
+      "cost_hint": null,
+      "sources": [
+        "SKF_GE12C"
+      ],
+      "notes": "Catalog parts; masses from catalogs."
+    },
+    {
+      "id": "HC5052_3.8",
+      "name": "5052 Al honeycomb 3.8 pcf 5/32 (HexWeb CR III 5/32-5052-3.8)",
+      "used_in": "T-031 chest pad core re-spec (T&R 3eacd56, 11.2 kN weakest plateau)",
+      "density_g_cc": 0.061,
+      "E_GPa": null,
+      "yield_MPa": null,
+      "UTS_MPa": null,
+      "fatigue_MPa": null,
+      "elongation_pct": null,
+      "T_max_mech_C": null,
+      "toughness": null,
+      "other": {
+        "crush_typ_MPa": 1.276,
+        "crush_typ_psi": 185,
+        "bare_compr_typ_MPa": 2.72,
+        "bare_compr_min_MPa": 1.97,
+        "stab_compr_typ_MPa": 2.83,
+        "stab_compr_min_MPa": 2.07,
+        "crush_min": "not published; lot band +-3% [repo basis T031_CHEST_CRUSH, EST]",
+        "dynamic_factor": "up to 1.30 (HEX_ATTR)",
+        "angle_15deg": 0.93
+      },
+      "cost_hint": null,
+      "sources": [
+        "HEX_CRIII",
+        "HEX_ATTR"
+      ],
+      "notes": "Chest pad: 101x101 land, 116 mm core -> 0.072 kg core"
+    }
+  ]
 }
