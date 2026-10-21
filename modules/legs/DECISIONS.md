@@ -435,3 +435,11 @@ Numbered L84 because L83 already holds the tube local-buckling item. Scripts: kn
   - **This cuts the Controls yaw contract (L −35..+40) to about −18..+28 for each leg, so Robot Lab / Controls must rule.** The alternative is ID's crushable shroud/panel zone.
   - **Force/torque curve for T&R** (ø16×10 PU90A, Freelin-Wade curve L81 scaled by area 0.64, at r64 tab): 10 % (1 mm, 0.9°): 0.60 kN / 38 N·m; 20 % (2 mm, 1.8°): 1.6 kN / 102 N·m; 25 % (2.5 mm, 2.24°): 2.34 kN / 150 N·m (≈ 3.0 J); 30 % (3 mm, 2.7°): 3.3 kN / 211 N·m (≈ 4.3 J); rigid by ~40 % (3.6°) [EST interpolation]. Ramp normal load ≈ force / cos(ramp 25°) on the bracket.
   - **Mass [EST]:** ramp bracket 7075 ≈ 18 g + PU wedge 3 g + 2× M4 2 g ≈ 23 g/hip, **+0.046 kg robot**.
+
+## L91 — Robot Lab rulings: D99 reopened; 8g bumper on hold; integrated knee stop concept, 2026-10-21
+- **D99:** the cap stays at **0.49 kg**, so the concept is reopened with Actuators. **The L89 taper is NOT PURSUED** (no taper FEA on the old concept).
+- **8g angled bumper (L90): ON HOLD** pending Controls' yaw decision; otherwise ID opens the panels. The +0.046 kg booking is noted.
+- **Concept study, results/r031/knee_stop_integrated_l91.md [EST]:** PU 62 cm³/knee is energy-bound (92.5 J at 25 %); torque ≈ 760 N·m ≤ 830 for any arm.
+  - **A:** twin stacks in r116b lower-rear housing bosses at r60, striking pads on the tongue-neck block. 13.8 kN; boss SF 3.97 / 5.9. **0.36 kg robot.**
+  - **B:** single 36×36×48 stack in a housing underside pocket (9 mm floor) at r50, striking the tongue-neck top. 16.6 kN; floor SF 1.31 / 1.96. **0.26 kg robot.** Needs a central sweep.
+  - Both pass ≤ 0.49. B is recommended, with A as fallback. The housing changes for Actuators are listed in the study.
