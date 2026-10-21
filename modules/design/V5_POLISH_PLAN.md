@@ -52,3 +52,6 @@ Actuator sizing, linkage geometry, the FEA'd femur/tongue/clamp/clevis/foot, joi
 - **Yes, create one "RL Arms & Hands" agent now.** 26 of the 32 audited joints are upper-body placeholders. Arms and hands are coupled (forearm-housed tendon drives set the forearm envelope), so one agent fits better than two. Scope: shoulder/elbow/wrist actuator selection, tendon hand, forearm packaging, and its mass line to the Arbiter.
 - **Torso/waist: not yet.** It's mostly packaging (battery, compute, waist drives). Robot Lab can carry it until the arms agent's shoulder loads exist; revisit at round 13.
 - A separate Hands agent only if the 22-DoF-class tendon hand is chosen over a simpler 6–11 DoF hand.
+
+## 2026-10-21 — chest bulge 65 mm (116 mm core, Torso 1585e80)
+The chest pad now stands 65 mm proud of the torso cover (face at x +0.175), and head clearance prone is 69.8 mm (T-031 PASS). To keep the torso reading slim, the bulge is no longer a box. A 21°-draft tapered PC bezel/fairing (P-052 rev 2) turns it into a faceted sternum keel, with 4 mm chamfered edges, an R6 front edge, cover colour, and the CF face as a dark inset that echoes the head visor. Net +0.028 kg for the fairing (+0.004 for the crush posts). It is cover-only. Detail: V5_COVER_SET.md §Chest bulge.

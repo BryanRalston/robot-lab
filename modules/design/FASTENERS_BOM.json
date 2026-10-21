@@ -10,8 +10,16 @@
    "ti_swap": false
   },
   {
-   "where": "sternum bezel P-052 (PC ring -> Torso land)",
-   "size": "M4 button head",
+   "where": "sternum bezel P-052 rev 2 (PC bezel/fairing -> 4 PA66 crush posts; outside core footprint)",
+   "size": "M4x10 button head into post-top M4 heat-set inserts",
+   "count": 4,
+   "grade": "A2-70 stainless",
+   "structural": false,
+   "ti_swap": true
+  },
+  {
+   "where": "P-052 rev 2 crush-post base studs (PA66 post -> Torso land inserts at y +-63, z +157/+283 torso frame)",
+   "size": "M4x12 stud (A2), post threaded on",
    "count": 4,
    "grade": "A2-70 stainless",
    "structural": false,

@@ -1,4 +1,5 @@
 # P-052 sternum bezel (R-094)
+> **Rev 2 (2026-10-21, 116 mm core): see V5_COVER_SET.md §Chest bulge.** The tapered 1.0 PC bezel/fairing rides on 4 PA66 crush posts at y ±63, z +0.157/+0.283, outside the core footprint, recessed 2 mm behind the face. The rev 1 geometry below (inserts at y ±40, face x +0.147) is superseded. P-052 = 0.072 kg.
 Script `sternum_plate.py` → `sternum_plate.json`. Supersedes the R-088 / R-093 full PC plate (0.058 kg). Layout: Torso ab432da §25.1.
 
 ## Design

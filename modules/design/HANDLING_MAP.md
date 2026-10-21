@@ -15,7 +15,7 @@ T&R 5842853 / fef9348 ask 2. ID, 2026-10-21. Image: HANDLING_MAP.png.
 - N3 Head and neck (fragile shell and sensors).
 - N4 Hands and wrists (pinch points, fragile).
 - N5 Shoulder pads and roll gap (pinch through the roll range of motion).
-- N6 Chest pad CF face (crush indicator: don't grip or lever on it).
+- N6 Chest pad CF face and bezel/fairing (Torso 1585e80, 116 mm core): face at **x +0.175** torso/global, y ±49, global z 1451–1549 (land z 1449.5–1550.5), standing 65 mm proud of the torso cover. Crush indicator: don't grip, lever on, or lift by the bulge or its tapered fairing; the PA66 posts behind it are designed to collapse.
 
 ## Hot-surface label (N1)
 - ISO 7010 **W017** "Warning; hot surface", yellow triangle with black border.

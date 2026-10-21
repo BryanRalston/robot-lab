@@ -331,3 +331,21 @@ New baseline: **53.8 mm** (Torso: the 100 mm core puts the pad face out 12 mm, t
 
 ### Rev 6 shroud outboard edge check (T&R 2e9b25c passes B2) — confirmed
 The cap is 82 wide in y, centred at y 130, and that width already includes the 20 mm standoff walls. That puts the outboard edge at **y 171.0 nominal and y 172.0 max** with ±1.0 thermoform/fit tolerance, so it is **≤ 176: PASS** (5 mm margin). The inboard edge is y 89.0. Second W017 goes on the solid cap top (HANDLING_MAP.md).
+
+## Chest bulge with the 116 mm core (Torso 1585e80) — P-052 rev 2 bezel + tapered fairing, 2026-10-21
+- **Stack:** land +0.056, core 116, face 1 mm plus the coat. Pad face sits at **x +0.175** (torso frame = global, with global z = torso z + 1280). Core spans y ±49, global z 1451–1549. The bulge stands **65 mm proud** of the torso cover (x +0.110).
+- **Head clearance prone: 69.8 mm ≥ 68 (T-031 full gate) — PASS** (Torso 1585e80).
+- **Bezel geometry (rev 2, secondary hold only):**
+  - The bezel is a 1.0 mm PC tapered shroud. Front ring opening is 100 × 100 (1 mm round the core). Its front edge is **recessed 2 mm behind the pad face** (x +0.173), so the floor always meets the CF face first; at a 15° tilt the corner offset is 0.3 mm, which the 2 mm recess covers. The foam edge seal sits against the core sidewall and is not bonded.
+  - The shroud tapers back to a 150 × 150 base at the cover (x +0.110), a 21° draft.
+  - It is held **65 mm in front of its inserts** by **4 PA66 crush posts** (Ø8/Ø4.5 tube, L 63, a 0.8 mm crush-initiator groove at mid-length) at **y ±63, z +0.157/+0.283** (torso). These are outside the core footprint (y ±49, z 0.171–0.269), and the old inserts at y ±40 inside the footprint are deleted.
+  - The posts thread onto M4 studs in the land inserts. The bezel fixes with 4 × M4×10 button heads into heat-set inserts at the top of each post (FASTENERS_BOM.json updated: 4 + 4).
+- **Crash path:**
+  - Each post collapses at its groove at about **0.3 kN** [EST: PA66 net section ~10 mm² × 30 MPa initiation; Euler for the plain tube is 1.18 kN]. All four together give **≈ 1.2 kN, 7 % of the 17.7 kN core plateau onset**, so the posts crush first and can't carry crash load past the core.
+  - The bezel only touches anything after the core has crushed more than 2 mm, and by then the cartridge has to be replaced anyway (replace the posts with it).
+  - The routine controlled lower (L1) is elastic and never reaches the bezel.
+  - Mass: posts **+0.004 kg [EST]**.
+- **W2 carrier/pad vs. bezel + fairing** (`cad/covers/r134_bezel_roll.py/.json`, the r133 kinematics, a box envelope x 110–176, y ±75, z 145–295): across the **negative roll range −15…0°** at pitch −150/−90/−30/0/5/30, the minimum is **180.5 mm** (pitch −90, roll −13, carrier W2). That is ≥ 3, a PASS. Torso's 52 mm at roll ≥ 0 is a different measure; mine is larger because I measure to this envelope. Both are far above 3 mm.
+- **Look / proportion:** a 65 mm square block on a slim chest reads as a "backpack worn backwards" and breaks the Optimus-like line. **Fix (cover-only):** the tapered 21° bezel/fairing blends the bulge into the cover as a faceted sternum keel. It has 4 mm chamfered vertical edges and an R6 front edge, in the cover colour, with the CF face as a dark inset "visor" that echoes the head. Its visual footprint is 150 × 150 at the cover, about 44 % of the chest width.
+  - Fairing mass: 1.0 mm PC, about 34,000 mm² → 0.041 kg, minus the rev 1 sidewall (5.6 g) and blend (7.3 g) → **+0.028 kg net [EST]**.
+  - Rev 2 total: **+0.032 kg** (fairing + posts) on top of P-052's 0.040, giving **P-052 = 0.072 kg**. The Arbiter books it.
