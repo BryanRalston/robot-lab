@@ -626,6 +626,7 @@ If the refined job 3c needs the 3 mm lid: +0.184 more (0.876).
 |---|---|---|---|---|
 | Option A pack notch / re-layout (ea6fc57) | −2.2 | 0 | +0.1 | accepted by Controls |
 | Two-sided yoke (cheeks t14×D140 + spacers + THK RB7013; −waist ring 0.25; box −0.19), job 3c-final | −0.2 | 0 | ≈ +6.3 [EST, robot COM z ≈ 1.0 m assumed] | modelled (coarse) |
-| **Cumulative** | **−2.4** | **0** | **≈ +6.4** | **≈ 6.8 mm < 10 mm: close; recheck at the next change** |
+| **Cumulative (booked)** | **−2.4** | **0** | **≈ +6.4** | **≈ 6.8 mm < 10 mm** |
+| 3c rev B candidate (waistY closed section, pelvis internal reinforcement, lid/socket stiffening), NOT booked | ≈ +0.3 | 0 | ≈ +8.4 [EST] | **would bring the total to ≈ 15 mm > 10: Controls flagged, not booked** |
 
 A full ring flange instead of the cheek (≈0.4 kg [EST]) would give ≈ +2 mm z. That's still under the limit.

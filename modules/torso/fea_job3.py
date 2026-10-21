@@ -40,6 +40,9 @@ def build(c):
             lw = bx["land_web"]
             for yy in (-lw["y"], lw["y"]-lw["t"]):
                 al.append(occ.addBox(b["x0"], yy, lw["z0"], xf_-b["x0"], lw["t"], lw["z1"]-lw["z0"]))
+        for gu in bx.get("gussets", []):   # corner gussets, mirrored in y
+            for sg in (1, -1):
+                al.append(occ.addBox(gu[0], min(sg*gu[2], sg*gu[3]), gu[4], gu[1]-gu[0], abs(gu[3]-gu[2]), gu[5]-gu[4]))
         if bx.get("notch_floor"):   # Option A: socket floor under the pad core (box follows the notched pack)
             nf = bx["notch_floor"]; al.append(occ.addBox(nf["x0"], -nf["y"], nf["z0"], xf_-nf["x0"], 2*nf["y"], nf["t"]))
     sb = g.get("sternum_box")   # job 3c: closed sternum box behind the bulkhead (webs + top cap) tied to the bay rear web
@@ -77,21 +80,44 @@ def build(c):
     p = g["partition"]; part = occ.addBox(p["x0"], -p["width_y"]/2, p["z0"], p["t"], p["width_y"], p["height_z"])
     pv = g["pelvis"]; w = pv["wall"]
     po = occ.addBox(-pv["depth_x"]/2, -pv["width_y"]/2, pv["z0"], pv["depth_x"], pv["width_y"], pv["height_z"])
-    pi_ = occ.addBox(-pv["depth_x"]/2+w, -pv["width_y"]/2+w, pv["z0"]+w, pv["depth_x"]-2*w, pv["width_y"]-2*w, pv["height_z"]-2*w)
+    if pv.get("open"):   # model_v4: shell open top and bottom
+        pi_ = occ.addBox(-pv["depth_x"]/2+w, -pv["width_y"]/2+w, pv["z0"]-1, pv["depth_x"]-2*w, pv["width_y"]-2*w, pv["height_z"]+2)
+    else:
+        pi_ = occ.addBox(-pv["depth_x"]/2+w, -pv["width_y"]/2+w, pv["z0"]+w, pv["depth_x"]-2*w, pv["width_y"]-2*w, pv["height_z"]-2*w)
     pel, _ = occ.cut([(3, po)], [(3, pi_)])
     if pv.get("deck_t"):   # waist/hip-yaw deck (model_v4 160 x 364 x 8) on the pelvis top
         dz_ = pv.get("deck_ztop", pv["z0"]+pv["height_z"])
         dk = occ.addBox(-pv["deck_x"]/2, -pv["deck_y"]/2, dz_-pv["deck_t"], pv["deck_x"], pv["deck_y"], pv["deck_t"])
         pel, _ = occ.fuse(pel, [(3, dk)])
+    rf = pv.get("reinf")   # internal reinforcement (outer surface unchanged): top lip ring + transverse ribs on the deck
+    if rf:
+        zt_ = pv["z0"]+pv["height_z"]; xi, yi_ = pv["depth_x"]/2-w, pv["width_y"]/2-w; L_ = rf["lip_w"]
+        lo = occ.addBox(-xi-0.01, -yi_-0.01, zt_-rf["lip_t"], 2*xi+0.02, 2*yi_+0.02, rf["lip_t"])
+        li = occ.addBox(-xi+L_, -yi_+L_, zt_-rf["lip_t"]-1, 2*(xi-L_), 2*(yi_-L_), rf["lip_t"]+2)
+        lip, _ = occ.cut([(3, lo)], [(3, li)])
+        rb = [occ.addBox(-xi-0.01, yy-rf["rib_t"]/2, dz_, 2*xi+0.02, rf["rib_t"], zt_-dz_) for yy in rf["rib_y"]]
+        if rf.get("ring"):   # annular rib around the waist-yaw housing seat, deck top -> pelvis top
+            r0, r1 = rf["ring"]
+            ro = occ.addCylinder(0, 0, dz_, 0, 0, zt_-dz_, r1); ri = occ.addCylinder(0, 0, dz_-1, 0, 0, zt_-dz_+2, r0)
+            rg, _ = occ.cut([(3, ro)], [(3, ri)]); rb_extra = rg
+        else:
+            rb_extra = []
+        pel, _ = occ.fuse(pel, lip + [(3, t) for t in rb] + rb_extra)
     wv = []
     W = g.get("waist")   # model_v4 waist interface: yaw housing + yoke + -y cheek + pitch housing/output + torso bracket cheek (+y) to the floor
     if W:
         wl = [occ.addCylinder(0, 0, W["yaw_z0"], 0, 0, W["yaw_z1"]-W["yaw_z0"], W["yaw_d"]/2),
-              occ.addBox(-60, -70, W["yoke_z0"], 120, 140, 8),
-              occ.addBox(-35, -W["cheek_y"]-8, W["yoke_z0"]+8, 70, 8, W["pitch_z"]+30-(W["yoke_z0"]+8)),
+              occ.addBox(-60, -70, W["yoke_z0"], 120, 140, W.get("yoke_t", 8)),
+              occ.addBox(-W.get("cheek_D", 70)/2, -W["cheek_y"]-8, W["yoke_z0"]+W.get("yoke_t", 8)-0.01, W.get("cheek_D", 70), 8, W["pitch_z"]+30-(W["yoke_z0"]+W.get("yoke_t", 8))),
               occ.addCylinder(0, -W["cheek_y"], W["pitch_z"], 0, 2*W["cheek_y"], 0, W["pitch_d"]/2),
               occ.addCylinder(0, W["cheek_y"]-0.01, W["pitch_z"], 0, W["flange_t"]+0.01, 0, W["pitch_d"]/2),
               ] + ([occ.addBox(-35, W["cheek_y"]+W["flange_t"]-0.01, W["pitch_z"]-30, 70, W["bracket_t"]+0.01, W["floor_z"]-(W["pitch_z"]-30))] if not W.get("yoke2") else [])
+        cr = W.get("cradle")   # waistY +y stator cradle + fore/aft closing webs (closed section)
+        if cr:
+            z0c = W["yoke_z0"]+W.get("yoke_t", 8)-0.01
+            wl += [occ.addBox(-W["cheek_D"]/2, cr["y0"], z0c, W["cheek_D"], W["cheek_y"]-cr["y0"], cr["z1"]-z0c)]
+            for xx in (-W["cheek_D"]/2, W["cheek_D"]/2-cr["web_t"]):
+                wl.append(occ.addBox(xx, -W["cheek_y"]-0.01, z0c, cr["web_t"], W["cheek_y"]+cr["y0"]+0.02, cr["web_z1"]-z0c))
         Y2 = W.get("yoke2")   # two-sided yoke: box side walls carried down as cheeks; +y output flange + spacer, -y support bearing (THK RB7013) + spacer
         if Y2:
             yi, tc, D = Y2["y_in"], Y2["t"], Y2["D"]

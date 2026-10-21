@@ -8,8 +8,8 @@ def q(lp, lr, ly, rp, rr, ry):  # T&R (p, r, y) per leg; right leg -> sim mirror
             'r_hip_pitch': R(rp), 'r_hip_roll': R(-rr), 'r_hip_yaw': R(-ry)}
 
 def test_thresholds():
-    assert (H.WARN, H.LIMIT, H.TRIP) == (35.0, 30.0, 28.0)
-    assert [H.status(x) for x in (40, 33, 29, 27)] == ['ok', 'warn', 'limit', 'trip']
+    assert (H.WARN, H.LIMIT, H.TRIP) == (40.0, 35.0, 33.0)
+    assert [H.status(x) for x in (45, 38, 34, 32)] == ['ok', 'warn', 'limit', 'trip']
 
 def test_zero_pose_clear():
     g = H.gaps(q(0, 0, 0, 0, 0, 0)); assert min(g.values()) > 100
@@ -32,3 +32,12 @@ def test_guard_stops_closing_pair_at_trip():
     out, g, st = gd.filter(qq, qd)
     assert st == 'trip'
     assert sum(gr[n] * out[n] for n in gr) >= -1e-9
+
+def test_tr_42c4e50_8f_closures_all_trip_at_33():
+    """T&R 42c4e50: rev 8f L/R closures (nominal, +2.5, +3.6 deg overtravel) that the old model missed at 28 must trip at 33."""
+    import json, pathlib
+    rows = json.loads((pathlib.Path(__file__).resolve().parents[1] / 'hip_pinch_8f_untripped_check.json').read_text())
+    assert len(rows) == 14  # T&R json lists 3 + 6 + 5 examples (it counts 7 at +2.5 but shows 6)
+    for r in rows:
+        g = H.gaps(q(*r['a'], *r['b'])); assert min(g.values()) < H.TRIP, r
+        assert abs(g['lr'] - r['tr_8f']) < 1.0, r  # agrees with T&R 8f within 1 mm

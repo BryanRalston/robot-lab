@@ -161,3 +161,44 @@ Scripts: `r_hip_pinch_check_8c.py` (.json: hem/notch/shroud on ID's r8c_fix geom
 | J-channel 15.5 / foam 15 | edge cover PASS; retention **CONDITIONAL** (VHB only) |
 | L/R strip 127 N | **conditional PASS [EST]** |
 | Controls keep-out | rigid-to-rigid basis OK; 0.77 vs 21.6 resolved (my quote); **rev 8c not covered: 2 untripped in-ROM closures** → rebuild on 8c or +5 mm |
+
+## Rev 8f re-check (ID 76cc34d), 2026-10-21 ~10:35 ET — supersedes the rev 8c verdict
+Checked **rev 8f** (latest in the repo; no rev 8g file or commit exists on origin/main as of 10:30 ET; 8d/8e withdrawn). Geometry: `hip_skirt_r8f_pelvis_notched.stl` (8d notch, NM 4.0) + r8c panel (R152, conservative), JCH 3.0, −2 mm tol. Scripts: `r_hip_pinch_check_8f.py`/.json (notch, panel vs notched mesh), `r_hip_pinch_8f_ctrl.py`/.json (analytic hem↔panel, L↔R vs Controls d941ca6).
+
+### 1. Rigid gaps (finger 25, nothing in 5–25)
+| gap | nominal | +2.5° | +3.6° (L80 bottom-out) | (+5.8°, info) |
+|---|---|---|---|---|
+| hem R141.5 ↔ panel (analytic) | 30.2 / **28.2 tol** | 30.2 / 28.2 | 30.2 / 28.2 | – |
+| notched mesh ↔ panel | 52.8 | 52.7 | 52.7 | 52.7 |
+| **notch ↔ shroud** | 31.8 / **29.8** | 30.6 / **28.6** | 29.8 / **27.8** | 27.0 / 25.0 |
+All ≥ 25 with tolerance: **PASS**. ID's 27.8 mm at 3.6° reproduced exactly. (5.8° bigger bumper: 25.0, zero margin; rev 8f has no stops, so 3.6° governs.)
+
+### 2. J-channel 14.5 mm press fit on 15 mm LD29
+- Interference 0.5 mm (0.25/side, ~1.7 % strain of the width). Contact pressure ≈ 4–8 kPa [EST, initial-modulus extrapolation of 61 kPa @ 25 %; no low-strain data]. On 2 × 3 mm lips × 680 mm, μ 0.3–0.5 [EST]: friction pull-off ≈ **5–16 N per side strip** (≈ 0.7–2.4 N per 100 mm), vs strip weight 0.12 N. Friction alone retains the strip by weight but **not against a finger/hand snag**; the VHB base remains the primary retention. LD29 creep at 85 °C will relax the press fit [EST].
+- Cut edge: PC lips 37 mm behind the foam face, ~19.5 mm recessed at 44 % compression: **covered, PASS**.
+- Verdict: **CONDITIONAL PASS** → TP-G5-18 (7) pull-off after the ageing.
+
+### 3. Keep-out vs Controls (repo check: `hip_pinch.py` d941ca6 is **still rev 8b geometry** (HEM_R 144, R150 panel, no JCH), with the stopgap **40/35/33**)
+8,000 asymmetric pairs per case on rev 8f geometry:
+| roll range | < 28 mm on 8f | untripped at the original 28 | **untripped at the live 33 stopgap** | worst 8f |
+|---|---|---|---|---|
+| nominal | 10 | 3 (all in contract roll) | **0** | 4.3 |
+| +2.5° | 17 | 7 | **0** | 2.3 |
+| +3.6° | 15 | 5 | **0** | −2.0 |
+- **PASS with the 33 mm stopgap; FAIL if Controls reverts to 28 on the 8b model.** Largest Controls reading among 8f < 28 mm closures is 32.0 mm, so the stopgap has only ~1 mm margin [sampled, not exhaustive]. Controls must either keep 40/35/33 or rebuild on rev 8f geometry (then 35/30/28). Closures past the stop (to −2 mm) are passive impact only; the guard cannot act.
+
+### 4. Limp brake check (repo)
+**No limp/hold brake exists.** Actuators SAFE_SIT_HOLDING.md: "No hip pitch, knee or ankle has a brake … No brake part anywhere in the repo BOM/CONTRACTS ('brake' only means the DC-bus brake chopper)"; Controls kneel_hold.py (D94): "with MO=0 nothing holds (no brakes, roller screws backdrive)". The Elmo amplifier brake output (R1_ARCHITECTURE.md §OV fault) has no brake connected. Rev 8f's "limp hold pending Actuators/Controls" is therefore **not a design feature yet**; the limp clamp must be tested in the as-built state: **brake absent, motors disabled (MO=0), drives unpowered and powered-but-disabled.**
+
+### 5. Hand/finger limp force: accepted ONLY as a measured gate
+The ~127 N (L/R) and 114 N (hem) figures are [EST] and are **not accepted as analysis**. My estimate is still ≈ 165 N [EST] at the hem with a hand. Rev 8f passes this item **only if TP-G5-18 (6) passes** (definition in G5_TEST_PLAN.md). Until then: **OPEN / not READY-FOR-BUILD**.
+
+### Verdicts rev 8f
+| item | verdict |
+|---|---|
+| hem ↔ panel | PASS 28.2 (tol) at nominal/2.5/3.6° |
+| notch ↔ shroud | PASS 29.8 / 28.6 / 27.8 (tol); ID's claim confirmed |
+| J-channel 14.5 press fit | cut edge PASS; retention CONDITIONAL (VHB primary, press fit 5–16 N [EST]); pull-off test |
+| Controls keep-out | PASS only with the live 33 mm stopgap (0 untripped; ~1 mm margin); 28 on the 8b model leaves 3–7 untripped → keep stopgap or rebuild on 8f |
+| limp brake | none exists (Actuators/Controls docs); test as-built |
+| hand/finger limp force | **measured gate only**: TP-G5-18 (6) |

@@ -76,7 +76,8 @@ def run(scn, fall_side, mass, push, ctrl='base', T=2.5, hist=False):
     first = {}; speeds = {}
     E = {'l': 0.0, 'r': 0.0}; bump_peak = {'l': 0.0, 'r': 0.0}; bump_pen = {'l': 0.0, 'r': 0.0}; wc = {'l': None, 'r': None}
     roll_tau_peak = {'l': 0.0, 'r': 0.0}
-    zmin = 9.0; detected = None; H = []; zone_knee_cmd = 0.0
+    zmin = 9.0; detected = None; H = []; fpk = {'l': 0.0, 'r': 0.0}; ank_hit = {}; f6c = np.zeros(6)
+    ankj = {f'{k}_ankle_{a}': m.joint(f'{k}_ankle_{a}').id for k in 'lr' for a in ('pitch', 'roll')}; zone_knee_cmd = 0.0
     t0 = m.opt.timestep
     for step in range(int(T / t0)):
         t = step * t0
@@ -118,6 +119,17 @@ def run(scn, fall_side, mass, push, ctrl='base', T=2.5, hist=False):
                     first[gid2[b]] = round(t, 4)
                     v6 = np.zeros(6); mujoco.mj_objectVelocity(m, d, mujoco.mjtObj.mjOBJ_GEOM, b, v6, 0)
                     speeds[gid2[b]] = round(float(np.linalg.norm(v6[3:])), 3)
+        for i in range(d.ncon):
+            c = d.contact[i]
+            for a, b in ((c.geom1, c.geom2), (c.geom2, c.geom1)):
+                if a in s.floor and b in gid2 and gid2[b][1] == 'foot':
+                    mujoco.mj_contactForce(m, d, i, f6c); fpk[gid2[b][0]] = max(fpk[gid2[b][0]], float(f6c[0]))
+        for r_ in range(d.nefc):
+            if d.efc_type[r_] == mujoco.mjtConstraint.mjCNSTR_LIMIT_JOINT:
+                for nm, j in ankj.items():
+                    if d.efc_id[r_] == j and nm not in ank_hit:
+                        ank_hit[nm] = dict(t=round(t, 4), angle_deg=round(math.degrees(float(d.qpos[m.jnt_qposadr[j]])), 1),
+                                           motor_tau_Nm=round(float(d.ctrl[s.names.index(nm)]), 1), limit_force_Nm=round(abs(float(d.efc_force[r_])), 1))
         if hist and step % 5 == 0:
             H.append([round(t, 3)] + [round(float(d.qpos[rq[k]]), 4) for k in 'lr'] + [round(float(d.qvel[rv[k]]), 3) for k in 'lr'] + [round(roll, 4)])
     # per fall-side leg: first leg contact, knee vs foot speed
@@ -133,6 +145,7 @@ def run(scn, fall_side, mass, push, ctrl='base', T=2.5, hist=False):
                       v_foot_contact=speeds.get((k, 'foot')),
                       hip_roll_wc_rad_s=wc[k], bumper_E_J=round(E[k], 2), bumper_peak_Nm=round(bump_peak[k], 1),
                       bumper_pen_deg=round(math.degrees(bump_pen[k]), 2), hip_roll_motor_peak_Nm=round(roll_tau_peak[k], 1))
+    out['foot_peak_N'] = {k: round(v) for k, v in fpk.items()}; out['ankle_stop_hits'] = ank_hit
     out['torso_z_min_m'] = round(zmin, 3); out['fell'] = zmin < 0.5
     out['knee_zone_cmd_max_Nm'] = round(zone_knee_cmd, 1)
     out['E_max_J'] = max(out['l']['bumper_E_J'], out['r']['bumper_E_J'])
@@ -157,7 +170,8 @@ if __name__ == '__main__':
                           bump_pen_deg=max(l['bumper_pen_deg'] for l in legs), n_bump_fail=sum(not x['pass_bumper'] for x in r),
                           n_knee_first=sum(l['knee_first_with_foot_airborne'] for l in legs),
                           v_knee_max=max((l['v_knee_contact'] or 0) for l in legs), v_foot_max=max((l['v_foot_contact'] or 0) for l in legs),
-                          knee_zone_cmd_max=max(x['knee_zone_cmd_max_Nm'] for x in r), roll_motor_peak=max(l['hip_roll_motor_peak_Nm'] for l in legs))
+                          knee_zone_cmd_max=max(x['knee_zone_cmd_max_Nm'] for x in r), roll_motor_peak=max(l['hip_roll_motor_peak_Nm'] for l in legs),
+                          foot_peak_N=max(max(x['foot_peak_N'].values()) for x in r), n_ankle_stop=sum(bool(x['ankle_stop_hits']) for x in r))
         res[c] = dict(summary=sm, rows=rows); print(c, json.dumps(sm), flush=True)
     res['meta'] = dict(E_gate_J=E_GATE, B_roll=B_ROLL, bumper='L39 PU [EST] k 8.4 kN.m/rad lin 2.3 deg, x4 to 3.6, bottom 400 kN.m/rad', basis='3c73260/3b4c449; sim/v3 + pads [EST]; knee cap 513a7d5 on')
     json.dump(res, open(os.path.join(HERE, 'side_fall_results.json'), 'w'), indent=1)

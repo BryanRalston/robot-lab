@@ -55,3 +55,9 @@ One line per image: date, file, module, what changed.
 
 ## 2026-10-21 — Controls: side-fall set (T&R 3c73260/3b4c449)
 - side_fall.py, 54 runs × 4 variants, knee cap on. Base: S2c bumper 10.6 J (17/54 > 6.6 J). Swing-leg tuck (fall_mode.py): 0/54, max 1.66 J. Hip-roll damping not adopted. S2c knee-first not reproduced. See modules/controls/limits/SIDE_FALL.md.
+
+## 2026-10-21 ~10:35 ET — Controls: contract TUCK knees-on, D99 stop, stumble
+- Knees on in TUCK, ramp 90→120 B 172, cap ≥120, knees drop last. D99 90-case: powered 38.5 J max (0/90 > 44.1), 3.80 rad/s at 130°; tripped 81 J / 6.17 rad/s. Short-brake [EST] 4.6–13 J. Stumble: no knee-first; tuck whips foot (6.75 m/s, 2.7 kN). Toe kneel 134.5° > 125.
+
+## 2026-10-21 ~10:55 ET — Controls: toe kneel ≤125° attempt
+- 16-variant sweep (elbow 38/49): knee 133–138° in the hand-reach phase in all; 0 pass. 65 kg chest-lower bug = head contacts first, chest stalls 26 mm. KNEEL_R125.md.

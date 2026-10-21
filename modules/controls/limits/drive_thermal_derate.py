@@ -220,10 +220,14 @@ class DriveDerateSupervisor:
         self.state, self._t_state = state, 0.0
         self.log.append((round(self._t, 4), state))
 
+    def mo_off_order(self):
+        from fall_mode import mo_off_order
+        return mo_off_order(list(self.d))
+
     def _mo_off(self):
         if not (self.state == CONTACT_CONFIRMED and self.supported() and self._confirm_t >= self.c.confirm_s):
             raise UnsupportedMoOff(f'MO=0 refused in {self.state}: support {self._support}')
-        for n in self.d:
+        for n in self.mo_off_order():   # knees last (contract)
             self.io.set_mo(n, False)
         self._go(MO_OFF)
 
@@ -293,6 +297,8 @@ class DriveDerateSupervisor:
         elif st == HOLD_DERATED:
             if any_fault:
                 self._go(TUCK); self.request_tuck(self.reason)
+                # Robot Lab contract: knee drives stay ON in TUCK (fall_mode.knee_fall_torque: ramp 95->123, <=50 N.m >=123), drop LAST
+                self.knee_drives_on = True
                 # R-146(a): the trip-then-tuck end is a FALL event (Test logs it against the fall budget)
                 self.fall_events.append((round(self._t, 4), 'R-146 interim: drive trip -> TUCK', self.reason))
                 self.on_fall(self.reason)

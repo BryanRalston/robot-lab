@@ -15,6 +15,12 @@ materials:
     nu: 0.3
     rho: 1.55e-09
     Sy: 450
+  Al_rigid:
+    E: 7000000.0
+    nu: 0.33
+    rho: 2.81e-09
+    Sy: 480
+    allowable: 320
 geometry:
   bulkhead:
     path: single
@@ -54,7 +60,7 @@ geometry:
     width_y: 260
     height_z: 22
     t: 1.0
-    x0: -10
+    x0: -63
     z0: 278
   posts:
     path: single
@@ -81,18 +87,31 @@ geometry:
     wall: 4
     z0: -154
     deck_t: 8
-    deck_x: 160
+    deck_x: 162
     deck_y: 364
     deck_ztop: -73.4
     note: 'model_v4 frame: pelvis 1126-1230, deck top 1206.6 (global) = sim-torso -154/-50/-73.4'
+    open: true
+    reinf:
+      lip_w: 20
+      lip_t: 8
+      rib_t: 8
+      rib_y:
+      - -61
+      - 61
+      note: 'internal only: 15x4 top lip ring inside the walls + 2 transverse ribs y+-(58..64) deck top->pelvis top; clear of hip-yaw housings (below deck), bolt pattern (r<=58 about y+-130 -> y>=72), L39
+        bumpers (under deck), HP1/HP2 plates outside rear wall'
+      ring:
+      - 55
+      - 66
   bay_box:
     vent:
       'on': floor
-      x: -80
-      y: 80
+      x: -90
+      y: 0
       dia: 25
-      part: GORE MultiVent
-      note: 'Option A: rear web is against the shell; vent through the floor at (-80,80), outlet down into the pelvis open top, >=40 mm from the waist cheeks/joints; SBS75X on rear web'
+      part: GORE MultiVent + stainless deflector (torso floor underside) turning the plume rearward, exit at x -107 z ~110
+      note: y~0 per Robot Lab; 54 mm from the pitch housing surface; away from hip-yaw drives/bumpers (all below z -73)
     y: 115
     x_front: 106.5
     x_rear: -107
@@ -105,7 +124,7 @@ geometry:
     mat: Al7075T651
     allowable: 257
     note: '3c-final Option A (P-057): pack notched 52x110x100 front-top, rear at shell inner (x -107); box follows the notch (socket walls y+-50.5..54.5, notch floor z167-171, land is the notch rear wall);
-      bulkhead web removed inside the box (wings + strip above lid remain)'
+      bulkhead web removed inside the box (wings + strip above lid remain); lid-top doubler 3 mm x30-106.5 |y|<70 (needs Thor bay +9 mm)'
     t_floor: 8
     front_window:
       y: 50.5
@@ -113,17 +132,48 @@ geometry:
       z1: 276.5
     land_web:
       y: 54.5
-      t: 4
+      t: 8
       z0: 167
       z1: 278
     inbox_cut: true
     notch_floor:
       x0: 52
       y: 54.5
-      z0: 167
-      t: 4
+      z0: 163
+      t: 8
     thor_cut:
-      y: 112.5
+      y: 151
+    gussets:
+    - - 52
+      - 64
+      - 100
+      - 112
+      - 250
+      - 276.5
+    - - 52
+      - 106.5
+      - 54.5
+      - 80
+      - 272.5
+      - 276.5
+    - - 52
+      - 64
+      - 0.01
+      - 54.5
+      - 270.5
+      - 276.5
+    - - 52
+      - 72
+      - 115
+      - 122
+      - 240
+      - 278
+    - - 30
+      - 106.5
+      - 0.01
+      - 70
+      - 277.99
+      - 281
   waist:
     path: single
     stock: 7075 torso waist bracket (model_v4 single +y cheek 70x8) + waist actuator stand-ins (solid Al, stiff)
@@ -151,6 +201,13 @@ geometry:
       brg_w: 13
       note: 'two-sided yoke (Robot Lab decision 10:18): cheeks = box side walls carried down (outer face y+-115); +y actuator output flange + Al spacer; -y THK RB7013 crossed-roller (d70 D100 B13, C0 27.7
         kN, 0.35 kg) on a stub from the waistY -y cheek + spacer'
+    yoke_t: 16
+    cheek_D: 120
+    cradle:
+      y0: 47
+      z1: 69.6
+      web_t: 6
+      web_z1: 50
   yoke:
     path: single
     stock: '7075-T651 plate 1.0 in (25.4) [R-128 band: 271?] cheeks'

@@ -17,8 +17,8 @@
   "R085_elbow_inertial_R1_Nm_at_287": 31.06,
   "R085_elbow_total_at_scale": 68.71,
   "knee_stop_zone_cap_Nm": 50.0,
-  "knee_stop_zone_start_deg": 125.0,
-  "knee_stop_deg": 135.0,
+  "knee_stop_zone_start_deg": 120.0,
+  "knee_stop_deg": 130.0,
   "knee_stop_zone_states": [
     "FALL",
     "TUCK",
@@ -28,5 +28,13 @@
     "HOLD_DERATED",
     "CHEST_LOWER"
   ],
-  "knee_stop_zone_source": "Robot Lab ruling per T&R 513a7d5 (L60 rev B B3/B5): |knee torque| <= 50 N.m at knee >= 125 deg in fall/TUCK/R-146 states; replaces thicker tibia/femur tubes (tube moment 0.92 kN.m). Applied after the thermal derate (min of both)."
+  "knee_stop_zone_source": "Robot Lab ruling per T&R 513a7d5 (L60 rev B B3/B5): |knee torque| <= 50 N.m at knee >= 125 deg in fall/TUCK/R-146 states; replaces thicker tibia/femur tubes (tube moment 0.92 kN.m). Applied after the thermal derate (min of both). | D98 (f771262): stop contact moved to 133 deg -> cap zone now starts at 123 deg (10 deg before contact); damping ramp 95->123 deg. | D99 (via Robot Lab, 10:20 ET): contact 130 deg -> cap zone from 120 deg.",
+  "knee_fall_ramp": {
+    "start_deg": 90.0,
+    "end_deg": 120.0,
+    "B_max_Nms_per_rad": 172.0,
+    "source": "Robot Lab contract: R-146a TUCK knees stay on, ramp + cap, knee drives drop LAST",
+    "note": "departs from the ruled 95-125 (and the 95-123 D98 interim) so the ramp ends before the 120 deg cap zone",
+    "B_note": "60 failed 44.1 J on kneel_tip with D99 (49.2 J, 8/90); 120 -> 42.8 J (thin); 172 -> 38.5 J. Torque still clipped to derate and 50 N.m in the zone."
+  }
 }

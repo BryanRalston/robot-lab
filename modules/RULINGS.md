@@ -1512,3 +1512,8 @@ Link B replaces the 10 mm² front-low main, -0.018. It is credited at full becau
 ## R-154 — Tibia wall mass (Legs 8e92b89) and D99 knee stop vs cap (6a3d84c) — 2026-10-21
 1. Tibia 2.0 mm wall: +0.114 per robot over R-135 [CAD], booked at full. Credible mass ~68.76 → ~68.87 kg.
 2. D99 knee stop at 0.487 kg vs Robot Lab's 0.35 cap: not booked until Robot Lab adopts it. It replaces the R-149/R-151 r75 booking (+0.303) only on adoption, as one reconciled delta. Arbiter constraints on the options: (a) raising the cap is Robot Lab's budget call and does not need TARGETS. (b) Cutting fault energy needs Controls/Test evidence that the motors-off bottoming energy is below 40.1 J × 1.1 across domain randomisation. (c) Lowering the arm SF is rejected below the existing gate minimums (SF ≥2 static fall on the R-128 band, Goodman over 5 years).
+
+## R-155 — D99 knee stop adopted; femur set at bottoming (Robot Lab) — 2026-10-21
+1. D99 (0.487 kg robot [CAD], including +0.143 leg-side growth) replaces the r75 booking (+0.303): +0.184 at full. Fault energy is 92.5 J (motors-off bottoming); the 40.1 J × 1.1 stays the design-contact energy. The tibia +0.114 is already booked in R-154, not added again.
+2. Femur: slight permanent set at motors-off bottoming is accepted as a FAULT-case allowance only, with mandatory F1 inspection after any bottoming event. It does not relax T8 (≥100 falls with no structural damage) or the R-135 no-dent fall criterion.
+3. LEDGER: credible mass ~68.87 → ~69.05 kg vs T2 66.5 kg, 2.55 kg OVER. G4 stays NOT MET. Option C(a) (15 kg carry) and C(c) (delete waist yaw), both needing Bryan, are now the remaining routes of the size required. Robot Lab should put them to Bryan.

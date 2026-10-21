@@ -635,11 +635,28 @@
  ],
  "sbs75x": {
   "at": [
-   -105,
+   -100,
    -60,
    160
   ],
-  "note": "rear web, low left; >=40 mm from floor vent (-80, 80, 121.6): distance 147 mm"
+  "facing": "+x (inward, into the 35 mm BMS/c7 gap)",
+  "note": "inward-facing on a G10 bracket off the rear web; robot-side half mates inside the box, main cable exits via a side-wall gland at (-80,-112,150); 72 mm from the floor vent (-90, 0, 121.6)"
+ },
+ "vent": {
+  "at": [
+   -90,
+   0,
+   121.6
+  ],
+  "global_z": 1401.6,
+  "part": "GORE MultiVent",
+  "deflector": "stainless 0.5 mm chute on the floor underside, plume turned rearward, exit plane x -107 at sim z ~110 (global ~1390)"
+ },
+ "tap_fuses": {
+  "part": "fusible element at the cell end of each of 22 taps on the tap FPC/collector; candidate Littelfuse 451/453 Nano2 0.5 A (125 V class, verify datasheet); Littelfuse 438 0603 is 63 VDC max so it fails a full-stack 84 V fault [438 datasheet 05/30/24]"
+ },
+ "bms_board": {
+  "zone": "x -105..-95 board on 3 mm G10 standoffs; back-side parts <=4.4 mm; 22-way tap connector (vertical dual-row, e.g. Molex Micro-Fit 3.0 24-ckt) and isolation transformers face +x into the 35 mm gap to c7 (mated + wire bend <=30 mm [EST])"
  },
  "bms": [
   -95.0,

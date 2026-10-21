@@ -3,13 +3,13 @@ from soft_limits import knee_torque_limit, apply_knee_stop_cap, KNEE_CAP_NM, KNE
 import numpy as np
 
 def test_cap_values():
-    assert KNEE_CAP_NM == 50.0 and abs(math.degrees(KNEE_CAP_START_RAD) - 125.0) < 1e-9
+    assert KNEE_CAP_NM == 50.0 and abs(math.degrees(KNEE_CAP_START_RAD) - 120.0) < 1e-9
 
 def test_cap_on_top_of_derate():
-    q = math.radians(126)
+    q = math.radians(124)
     assert knee_torque_limit(q, 'TUCK', 172.0) == 50.0
     assert knee_torque_limit(q, 'TUCK', 30.0) == 30.0          # derate lower -> derate wins
-    assert knee_torque_limit(math.radians(124.9), 'TUCK', 172.0) == 172.0
+    assert knee_torque_limit(math.radians(119.9), 'TUCK', 172.0) == 172.0
     assert knee_torque_limit(q, 'RUN', 172.0) == 172.0          # walking unaffected
 
 def test_apply():
