@@ -1,7 +1,25 @@
 {
+ "rev": "b",
+ "pairs_m": {
+  "hem-panel": [
+   0.109,
+   0.168
+  ],
+  "hem-shroud": [
+   0.082,
+   0.104
+  ],
+  "L-R panel": [
+   0.18,
+   0.15
+  ],
+  "L-R shroud": [
+   0.133,
+   0.131
+  ]
+ },
  "F_lim_N": 140,
  "est": [
-  "lever L=0.10 m both joints (hem R141.5 is the outer skin; 0.10 is a conservative inner gap)",
   "leg Jl, leg 11 kg @0.45 m, stance offsets 0.10 m",
   "hand stiffness 30 N/mm, rotational via L",
   "creep: friction=Tbd constant (Table 37 is breakaway; running friction lower -> conservative on creep only)"
@@ -12,7 +30,12 @@
   "J_reflected": 0.593,
   "T_backdrive": 9.2,
   "L": 0.1,
-  "T_allow": 14.0,
+  "T_allow_by_pair": {
+   "hem-panel": 15.3,
+   "hem-shroud": 11.5,
+   "L-R panel": 25.2,
+   "L-R shroud": 18.6
+  },
   "B_lowspeed_Nms_per_rad": 326.0,
   "T_peak": 124.1,
   "w_peak": 0.76,
@@ -53,10 +76,38 @@
     "holds": false,
     "creep_rad_s": 0.02,
     "creep_deg_s": 1.15,
-    "F_static": 34,
-    "F_impact": 56,
-    "F_total": 89,
     "P_winding_W": 0.1,
+    "F_by_pair": {
+     "hem-panel": {
+      "L_m": 0.109,
+      "F_static": 31,
+      "F_impact": 51,
+      "F_total": 82,
+      "pass_": true
+     },
+     "hem-shroud": {
+      "L_m": 0.082,
+      "F_static": 41,
+      "F_impact": 68,
+      "F_total": 109,
+      "pass_": true
+     },
+     "L-R panel": {
+      "L_m": 0.18,
+      "F_static": 19,
+      "F_impact": 31,
+      "F_total": 50,
+      "pass_": true
+     },
+     "L-R shroud": {
+      "L_m": 0.133,
+      "F_static": 25,
+      "F_impact": 42,
+      "F_total": 67,
+      "pass_": true
+     }
+    },
+    "F_max": 109,
     "pass_": true
    },
    {
@@ -65,10 +116,38 @@
     "holds": false,
     "creep_rad_s": 0.08,
     "creep_deg_s": 4.58,
-    "F_static": 242,
-    "F_impact": 223,
-    "F_total": 465,
     "P_winding_W": 2.1,
+    "F_by_pair": {
+     "hem-panel": {
+      "L_m": 0.109,
+      "F_static": 222,
+      "F_impact": 205,
+      "F_total": 426,
+      "pass_": false
+     },
+     "hem-shroud": {
+      "L_m": 0.082,
+      "F_static": 295,
+      "F_impact": 272,
+      "F_total": 567,
+      "pass_": false
+     },
+     "L-R panel": {
+      "L_m": 0.18,
+      "F_static": 134,
+      "F_impact": 124,
+      "F_total": 258,
+      "pass_": false
+     },
+     "L-R shroud": {
+      "L_m": 0.133,
+      "F_static": 182,
+      "F_impact": 168,
+      "F_total": 349,
+      "pass_": false
+     }
+    },
+    "F_max": 567,
     "pass_": false
    },
    {
@@ -77,10 +156,38 @@
     "holds": false,
     "creep_rad_s": 0.19,
     "creep_deg_s": 10.89,
-    "F_static": 575,
-    "F_impact": 530,
-    "F_total": 1105,
     "P_winding_W": 11.1,
+    "F_by_pair": {
+     "hem-panel": {
+      "L_m": 0.109,
+      "F_static": 528,
+      "F_impact": 486,
+      "F_total": 1014,
+      "pass_": false
+     },
+     "hem-shroud": {
+      "L_m": 0.082,
+      "F_static": 701,
+      "F_impact": 646,
+      "F_total": 1348,
+      "pass_": false
+     },
+     "L-R panel": {
+      "L_m": 0.18,
+      "F_static": 319,
+      "F_impact": 294,
+      "F_total": 614,
+      "pass_": false
+     },
+     "L-R shroud": {
+      "L_m": 0.133,
+      "F_static": 432,
+      "F_impact": 398,
+      "F_total": 831,
+      "pass_": false
+     }
+    },
+    "F_max": 1348,
     "pass_": false
    }
   ]
@@ -91,7 +198,12 @@
   "J_reflected": 0.137,
   "T_backdrive": 3.1,
   "L": 0.1,
-  "T_allow": 14.0,
+  "T_allow_by_pair": {
+   "hem-panel": 23.5,
+   "hem-shroud": 14.6,
+   "L-R panel": 21.0,
+   "L-R shroud": 18.3
+  },
   "B_lowspeed_Nms_per_rad": 61.2,
   "T_peak": 46.2,
   "w_peak": 1.51,
@@ -130,8 +242,13 @@
     "case": "limp leg, gravity (yaw axis vertical)",
     "Tg": 0.0,
     "holds": true,
-    "F_static": 0.0,
-    "F_total": 0.0
+    "F_by_pair": {
+     "hem-panel": 0,
+     "hem-shroud": 0,
+     "L-R panel": 0,
+     "L-R shroud": 0
+    },
+    "pass_": true
    },
    {
     "case": "foot-scuff twist, 200 N x 0.10 m",
@@ -139,10 +256,38 @@
     "holds": false,
     "creep_rad_s": 0.29,
     "creep_deg_s": 16.62,
-    "F_static": 169,
-    "F_impact": 269,
-    "F_total": 438,
     "P_winding_W": 5.0,
+    "F_by_pair": {
+     "hem-panel": {
+      "L_m": 0.168,
+      "F_static": 101,
+      "F_impact": 160,
+      "F_total": 261,
+      "pass_": false
+     },
+     "hem-shroud": {
+      "L_m": 0.104,
+      "F_static": 162,
+      "F_impact": 259,
+      "F_total": 421,
+      "pass_": false
+     },
+     "L-R panel": {
+      "L_m": 0.15,
+      "F_static": 113,
+      "F_impact": 179,
+      "F_total": 292,
+      "pass_": false
+     },
+     "L-R shroud": {
+      "L_m": 0.131,
+      "F_static": 129,
+      "F_impact": 205,
+      "F_total": 334,
+      "pass_": false
+     }
+    },
+    "F_max": 421,
     "pass_": false
    }
   ]

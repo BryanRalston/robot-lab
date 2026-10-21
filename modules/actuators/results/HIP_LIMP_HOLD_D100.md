@@ -39,3 +39,16 @@ A static clamp ≤140 N requires external torque ≤14 + T_bd: **23.2 N·m for r
 1. **ID/Legs:** at 8f, make the gap geometrically safe. Either the minimum gap across ROM + overtravel stays ≥25 mm (hand) or ≤4 mm (finger exclusion), or the skirt panel is compliant with a crush force ≤140 N over ≥25 mm of travel. Otherwise keep a rigid or bumper stop that leaves a ≥25 mm gap at contact.
 2. **Controls:** limp/safe-stop must kneel or sit first (as for the knee). Don't go MO=0 in stance. With motors on, limit the hip roll and yaw torque to ≤14 N·m in the pinch zone only if ID can't fix the geometry.
 3. **Robot Lab:** rule that 8f's "load-limited hand protection" can't come from the actuators. Restore stops or require the gap/compliance criterion in (1).
+
+## Rev b (2026-10-21 ~10:55 ET): real hand lever arms, ID P-023 rev 8g (d8fb6f9, design/cad/covers/hip_skirt_r8g.json)
+The 0.10 m [EST] lever is replaced by the perpendicular distance from the worst contact point to each axis (roll / yaw): hem-panel 109/168 mm, hem-shroud 82/104, L-R panel 180/150, L-R shroud 133/131. Shorting brake, creep speeds and loads are unchanged. Clamp force = (T − T_backdrive)/L + creep·√(J·k)/L, with k = 30 N/mm. Limit 140 N.
+
+| joint / case | creep °/s | hem-panel | hem-shroud | L-R panel | L-R shroud | verdict |
+|---|---|---|---|---|---|---|
+| roll: limp leg hanging, 15° | 1.15 | 82 N | 109 N | 50 N | 67 N | PASS |
+| roll: double-stance sag (34 kg × 0.10 m) | 4.58 | 426 | **567** | 258 | 349 | **FAIL** |
+| roll: single-stance fall (68 kg × 0.10 m) | 10.9 | 1014 | **1348** | 614 | 831 | **FAIL** |
+| yaw: limp leg (gravity) | holds | 0 | 0 | 0 | 0 | PASS |
+| yaw: foot-scuff twist (200 N × 0.10 m) | 16.6 | 261 | **421** | 292 | 334 | **FAIL** |
+
+**Verdict rev b: still FAIL in stance and twist for every contact pair.** The hem-shroud (82 mm roll / 104 mm yaw) is worst, at 1.2–1.3× the rev-a 0.10 m forces. The L-R panel is lightest but still 1.8–4.4× over. A limp hold by shorting stays damping-only. This agrees with the Controls D100 rules (no commanded MO=0 standing; 14 N·m cap in the pinch zone).
