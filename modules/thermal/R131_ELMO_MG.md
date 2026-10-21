@@ -261,3 +261,56 @@ Notes on the table:
 - With the low-ε guard, no touch cap is needed. The drive derate (75 → 85 → 90 °C) stays.
 - **Fallback if the guard inner face is black (ε 0.9):** a touch cap with drive base ≤ 58 °C whenever the robot is standing still or in contact modes. That gives a guard face ≤ 45 °C, and it roughly halves the standing carry duty [EST].
 - Femur bond: unchanged, 68.2–69.1 °C.
+
+## Rev 4b: D93 knee plate (5008683), placed in the L71 thigh pocket (6060973) — 2026-10-21 08:58 EDT
+Basis: `r131_rev4_guard.py`.
+Geometry:
+- Guard: ID P-154 as specified. 1.5 mm PC, 104 × 52, inner face ε ≤ 0.1, 4 mm slots at 5.5 mm pitch, 64 % open, 10 mm face standoff (+0.5), side walls 4.5 mm from the outer fins (L71 1b).
+- Fins sit 48.6–52.7 mm inside the v5 hull, with 13–18 mm of air aft to the knee twin housing (case ≈ 90–100 °C).
+
+### As drawn by Actuators (open-flow basis)
+
+**Taper (45° × 8 on the z 690 ends):** −512 mm² (−1.5 %). The +0.5 mm on the fins gives back +2.8 %, so UA on the h 8 basis is 0.249 (**Actuators 0.248, confirmed**).
+- The taper is at the inlet end for standing chimney flow, where the local h is highest. It slightly eases channel entry, so I take the effect on flow as neutral and the area-scaling basis stands.
+- The guard side walls at 4.5 mm (not 10) restrict the two outer channels: −2–3 % [EST]. Standing UA ≈ 0.133, so **drive base at duty standing ≈ 75.8 °C** (Actuators 75.2) and walking 59–72 °C.
+- Guard face: 37.6–40.3 °C. PASS.
+
+**PEM FHS-M3 studs:** the result depends on what they land in.
+- Into the PA12 frame or G10 standoffs: leak ≤ 0.01 W/K, negligible. PASS.
+- **Into the metal band clamps on the femur:** about 20–25 K/W for 4 steel studs, so ≈ 1.4 W into the femur. The bond goes from 68.2–69.1 to **69.1–71.0 °C, FAIL marginal.**
+- **Condition:** the studs must land in G10 standoffs or washers (≥ 10 K/W each), with no stud–metal contact to the clamps.
+
+**Femur bond** with G10: 68.2–69.1 °C. PASS.
+
+### In the L71 pocket (as actually placed)
+**v5 fairing closed over the pocket: FAIL.**
+- The pocket walls (PA12 skin, ≈ 0.03 m², U ≈ 2.2 W/m²K) give UA_wall ≈ 0.065 W/K.
+- 7.2 W from the plate plus radiation from the knee housing would heat the pocket air by ≈ 100 K or more, so the drive base would be > 130 °C at duty.
+- The h 8 basis does not apply to an enclosed recess.
+
+**A36 vent stream:** not shown through the pocket. L71 2c says the guard is in open flow only if the rear PA12 panel is opened around it, so I do not credit it.
+
+**Fix: vent the pocket to suit the fin channels.**
+1. **Face opening:** a fairing grille over the full fin field, ≥ 104 × 52 mm, **≥ 60 % open**, slots ≤ 5 mm, inner face low-ε (ε ≤ 0.1) or ≥ 30 mm from the fin tips.
+   - It sits 48 − 18.5 ≈ 30 mm from the fin tips. View factor ≈ 0.5, so the grille face is ≈ 39 °C with a low-ε inner face, or 47 °C with a black one (FAIL vs 45).
+2. **Low inlet** (below z 690, at the taper end) and **high outlet** (above z 792), both on the aft/outer skin and aligned with the axial channels.
+   - Each **≥ 1200 mm² free area** (≈ 7 × 5 × 18.5 mm of channel plus 10 × 52 mm of face gap), i.e. ≈ 2000 mm² gross at 60 % open.
+   - The pocket walls must duct them to the fin ends: no bypass around the fin pack, side gaps ≤ 5 mm.
+3. **Knee housing:** a low-ε face (foil or bare) toward the pocket, or an Al foil shield on the pocket aft wall. This keeps the 90–100 °C housing from heating the pocket air and fins (≈ 0.2–0.5 W [EST]).
+
+With 1–3 in place:
+- Standing chimney UA ≈ 0.12–0.13 (−5–10 % for the 48 mm duct depth and the radiation view lost) gives **drive base at standing duty ≈ 76–79 °C ≤ 80**. PASS.
+- UA on the h 8 basis ≈ 0.22–0.235 ≥ 0.21. PASS.
+- Walking (pumping through the grille ≈ 0.2–0.4 m/s): 0.15–0.24.
+
+**Guard: redundant once the fins are recessed behind that grille.**
+- IEC 61032 probe B cannot pass 5 mm slots and reach fins ≥ 30 mm behind them, and the fall shielding is per L71 3.
+- **Drop P-154:** −2 × 20.3 g = **−0.041 kg**, which also removes the guard's −15 % flow / −40 % radiation-intercept loss.
+- With no guard, standing UA ≈ 0.135–0.14, so **drive base at standing duty ≈ 74–76 °C**, with 4–6 K margin to 80 °C, and h-8-basis UA ≈ 0.25.
+- The fairing grille takes over the touch role and must meet the TP-G5-15 touch points (≤ 48 °C; estimate ≈ 39 °C with a low-ε inner face).
+- **Required instead:** the grille plus the inlet/outlet in 1–2.
+
+**Verdict:**
+- D93 as drawn: confirmed on the open-flow basis (75.8 vs 75.2 °C), with the condition that the PEM studs land in G10.
+- In the L71 pocket with a closed fairing: FAIL.
+- With the vents (1–3): PASS, ≈ 76–79 °C standing with the guard, or 74–76 °C without it. **Recommend dropping the guard.**

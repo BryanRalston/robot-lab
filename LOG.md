@@ -29,3 +29,4 @@
 - 2026-10-21 RL Legs: L47-SO brief per R-144 (single-path 294/271, candidate 0 own ladder), DECISIONS L70.
 - 2026-10-21 08:53 ET RL Legs: 58 MPa hip lever fatigue amplitude CONFIRMED (Materials e21dafd/6d01d59, R144_7075_FATIGUE.md; <=1e8 cycles, 70@1e7, 50@5e8); no hard anodize on hot spots. l47_shape_opt_brief.md, r031_fatigue_fea_brief.md.
 - 2026-10-21 RL Legs: L71 P-153/P-154 knee window + guard check, ROM min 13.3-18.1 mm PASS (results/r031/p153_window_check.md)
+2026-10-21 08:58 RL Thermal: R-143 rev 4b (D93 + L71 pocket) → R131_ELMO_MG.md: D93 open-flow UA 0.249 h8, 75.8 °C standing (≈ Actuators); PEM studs must land in G10 (metal clamps → bond 69.1–71 FAIL); in L71 pocket with closed v5 fairing FAIL (>130 °C); fix = fairing grille ≥60 % open ≤5 mm slots over fins + low inlet/high outlet ≥1200 mm² free each + low-ε knee-housing face → 76–79 °C (guard) / 74–76 °C (no guard); guard redundant, drop P-154 −0.041 kg
