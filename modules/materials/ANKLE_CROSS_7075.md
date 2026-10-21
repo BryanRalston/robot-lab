@@ -17,6 +17,10 @@ RL Materials, 2026-10-21. Basis: legs/grokbuild/ankle_cross_fea_brief.md (R-069/
 - 7075-T7351 Fty A/B = 57/59 ksi = **393/407 MPa** (Ftu 68/70 ksi). **Unverified:** taken from a web-search synthesis of a third-party stress report quoting MMPDS, not seen in an MMPDS table.
 - If A-basis governs (single load path): the static limit is 393/1.5 = **262 MPa**, not 273. Bearing is 1.5 × 393/2 = 295 MPa.
 - Legs should use 262 until a verified MMPDS table or a mill cert (AMS-QQ-A-250/12 or AMS 4078) is in hand.
+- **R-125(b) VERIFIED (2026-10-21), MIL-HDBK-5H p. 3-348, T7351 plate (https://ssrl-uark.com/MILHDBK5H.pdf):**
+  - Stock 1.001–1.500 in: A-basis Fty L/LT 57 ksi = 393 MPa, so the limit **stays at 262 MPa**.
+  - Stock 1.501–2.000 in: A-basis 55 ksi = 379 MPa, so **253 MPa** (L/LT), or 52 ksi = 359 MPa → **239 MPa** if ST-loaded.
+  - The band is set by the stock thickness at heat treat, not the finished part. **Legs: buy ≤ 1.500 in (38.1 mm) plate for the 30 mm cross.**
 
 ## 2. Fatigue at features [EST, Shigley/Peterson method]
 - Machined surface: ka = 4.51·Sut^−0.265 = 4.51·500^−0.265 ≈ **0.87**.
