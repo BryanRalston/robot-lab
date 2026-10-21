@@ -4,11 +4,18 @@
 ## 0. Allowables (cite MATERIALS_DB) and assumptions
 - **Material source:** `modules/materials/MATERIALS_DB.md` row AL7075T6: ρ 2.81, E 70 GPa, Sy 480, Su 560, fatigue 160 (MIF, cycle basis not stated). R-031 §6 overrides fatigue: **Se = 87 MPa** (corrected value, rule).
 - G3 brief (Actuators) uses E 71.7 / Sy 503 / Su 572 (repo datasheet REPO_AL7075). To stay comparable with G3, **solve with E 71.7, ν 0.33**; E difference <3 %, no effect on stress in a load-controlled linear solve.
-- **Design/fault pass = von Mises ≤ 320 MPa** (MATERIALS_DB Sy 480 / 1.5, the more conservative value). Also report SF vs 335 (503/1.5, G3 rule). A peak in 320–335 is reported as a flag to the Arbiter, not as a pass.
-- **Fatigue pass = hot-spot amplitude ≤ 58 MPa** (87/1.5, R-031 §6). Unchanged.
+- **Design/fault pass = von Mises ≤ 294 MPa** (R-144 / R-128 §1 single-path band, replaces 320; see §0a). Also report SF vs 320 and 335 for comparison with job 2 only; a peak in 294–335 is a FAIL, reported to the Arbiter.
+- **Fatigue pass = hot-spot amplitude ≤ 58 MPa** (87/1.5, R-031 §6) **[EST, pending a Materials citation of the R=−1 endurance basis; G3 is not final until cited]** (R-144).
 - Assumption A1: G3 converged mesh settings are taken from Actuators' G3 report when it lands; if G3 reports none, use the G3 brief sequence (global h 4→3→2, local 1.5→1.0→0.6 mm).
 - Assumption A2: A38 rev D (tine bore 22, flange clearance 2.0 mm) and R-1xx rulings through R-115 do not touch the lever's frozen regions or load path; femur clearance check uses model_v4 as of main 2026-10-21.
 - Booking: L47-R/R-069 +0.430 kg robot stands until this result is measured; credit only on measured CAD + passing converged FEA (R-073).
+
+## 0a. R-144 (6ff0bb4) load-path classification and stock band
+- **Classification: SINGLE-PATH.** Reasoning: one hip_pitch lever per hip carries the whole hip-pitch moment from the twin screws (two RV12 rod eyes on the ø12 pin stubs, x 0, |y| 50–75) through the ø42 needle bores into the femur/hip pitch axis (§1 loads, `actuators/hp_lever_fea_v2.py` cases incl. single-pin `fault_phi*`). The two rods are parallel only at the pins; the lever body, bores and arm/web are one load path with no alternate member — a crack in an arm or web drops that hip. The single-pin fault cases test loss of one rod, not redundancy of the lever. Actuators classed the predecessor lever (r50) single-path (`actuators/results/STOCK_GRAIN.md` l.13); Legs DECISIONS L6 counts it as one linkage member.
+- **Temper:** 7075-T651 plate [EST temper; DRAWING_NOTES.md row "Hip-pitch lever"; this brief's MATERIALS_DB row AL7075T6]. If Actuators release it in T7351, R-130 applies instead: 262 L/LT, 239 ST.
+- **Stock thickness (undefined on the drawing, so derived):** RC STEP = 2 solids, each 60.0 (x) × 61.5 (y, |y| 13.5–75) × 93.0 (z) mm (CadQuery bounding box, 2026-10-21). Thinnest dimension 60.0 + 3 mm machining stock [EST, per STOCK_GRAIN.md rule] = 63 mm = 2.48 in → **2.5 in plate, band 2.001–2.5 in**. Plate thickness along x; L/LT in the y–z plane [EST, to be stated on the drawing].
+- **Allowable:** R-128 §1 band 2.001–2.5 in, LT = **294 MPa** static, design AND fault (fault kept at 294 conservatively; R-128 §5 min(A-basis, Sy_typ/1.1) may raise the fault limit only after an Arbiter ruling). Any feature loaded through the thickness (x) uses **ST 271 MPa**; report the principal-stress direction at each hot spot. Stock >2.5 in would drop the band to 280 LT / 257 ST.
+- **Booking:** +0.009 kg robot booked for the RC + R8 fillets (R-144).
 
 **Owner:** RL Legs (spec). The part belongs to RL Actuators (release CAD).
 **Prerequisite (hard gate):** run this only **after Actuators' G3** (`modules/actuators/results/GROKBUILD_lever_fea_r031.md`) has finished and **G3 passes**:
@@ -24,9 +31,9 @@
 - **Booking:** the booked delta is +0.430 kg robot vs sf15 0.2492 (Legs L47-R, Arbiter R-056).
 - **Material:** 7075-T6 per §0 (solve E 71.7 GPa, ν 0.33; ρ 2.81; Se 87 per R-031 §6).
 - **Loads:** same cases as G3.
-  - Design: 4542 N per pin (454.2 N·m / 0.050 / 2), pass ≤ 320 MPa von Mises (§0; report vs 335 too).
+  - Design: 4542 N per pin (454.2 N·m / 0.050 / 2), pass ≤ 294 MPa von Mises (§0a; ST features 271).
   - Fatigue: 2030 N per pin, fully reversed (R = −1), pass **hot-spot amplitude ≤ 58 MPa** (87/1.5).
-  - Also the single-pin fault cases (`fault_phi*`, `faultL_phi*` in `hp_lever_fea_v2.cases`). Pass ≤ 320 (§0).
+  - Also the single-pin fault cases (`fault_phi*`, `faultL_phi*` in `hp_lever_fea_v2.cases`). Pass ≤ 294 (§0a).
 - **Supports:** as G3/v2. Cosine bearing pressure in the ø42 needle bores (|y| 13.5–33.5), yoke face |y| = 13.5 fixed.
 
 ## 2. Frozen regions (no material removed or added)
@@ -66,7 +73,7 @@
 - **Target:** save **0.13–0.17 kg robot**, i.e. 0.065–0.085 kg per lever, which is 0.379–0.399 kg per lever.
 - **Pass:**
   - fatigue amplitude ≤ 58 MPa;
-  - design and fault ≤ 320 MPa at the converged level (§0);
+  - design and fault ≤ 294 MPa (ST 271) at the converged level (§0a), each candidate on its own converged ladder (§6b);
   - all §3 clearances met;
   - valid solid.
 - **Stop when any of these holds:**
@@ -74,7 +81,7 @@
   - (2) 2 full size-opt rounds done and the best passing saving is < 0.13 kg robot. Stop and report the best passing (even if < target) plus the governing constraint.
   - (3) 8 h wall time on the bryan PC.
   - (4) No candidate passes fatigue. Stop and report RC as final, saving 0.
-- **Never** hand-tune stresses, drop a case, or relax 58 MPa / 10 mm / 1 mm. If a peak is a singularity (no convergence at a sharp re-entrant corner), report it and its location; don't average it away.
+- **Never** hand-tune stresses, drop a case, or relax 294 / 58 MPa / 10 mm / 1 mm. If a peak is a singularity (no convergence at a sharp re-entrant corner), report it and its location; don't average it away.
 
 ## 6. Outputs (to `modules/legs/results/l47_so/`; STEP to `modules/legs/cad/`)
 1. `hip_pitch_lever_r031_so.step`, the optimised body: 2 valid solids, with feature parameters in a JSON.
@@ -89,7 +96,7 @@
 
 ## 6b. Mesh/convergence (explicit)
 - P2 tets (gmsh), same functions as `actuators/hp_lever_fea_v2.py` with STEP import.
-- Screening candidates: G3's converged level only (A1). Final candidate: full sequence, peak change < 5 % over the last two levels, else declare singularity with location.
+- Screening candidates: G3's converged level only (A1), for ranking only — no pass is claimed from a screening run. **R-144: every candidate reported as passing needs its own converged ladder** (< 5 % change on BOTH peak and amplitude over the last two levels, no singularities). **Any fillet below R8 is verified on its own ladder.** Otherwise declare the singularity with location; the candidate fails.
 - Refinement balls: G3 hot spots + every new pocket corner/rib root (local h ≤ 1.0 mm).
 
 ## 6c. Compute budget
@@ -105,9 +112,12 @@
   - Actuators DECISIONS (RC measurement);
   - `GROKBUILD_lever_fea_r031.md` (G3).
 
-## L69 addendum — candidate 0 replaces the separate G3 re-run (if Arbiter agrees)
+## L69 addendum — candidate 0 replaces the separate G3 re-run (R-144 approved)
 - Candidate 0 = RC STEP + R8 on the upper arm/web edges (|y| = 38.5) and lower arm edges; nothing else changed. Actuators supplies the STEP.
 - Run it first, same load/BC/mesh ladder as job 2 (Ball r 4 mm, hloc 1.5/1.0/0.6), refinement balls on the new fillets.
-- Pass = converged (< 5 % last two levels) peak ≤ 320 MPa (R-123) and amplitude ≤ 58 MPa. Hand-calc expectation σa ≈ 32 MPa [EST] (results/r031/g3_fail_review.md).
-- Candidate 0 pass counts as the G3 pass; then continue with the optimisation. Candidate 0 fail: stop and report.
+- Pass = converged peak ≤ 294 MPa (ST 271; §0a, replaces 320 per R-144) and amplitude ≤ 58 MPa [EST, Materials citation pending]. Hand-calc expectation σa ≈ 32 MPa [EST] (results/r031/g3_fail_review.md).
+- **R-144 (6ff0bb4): combined run APPROVED.** Candidate 0 = RC + R8 on the upper AND lower arm edges, both sides (all sharp re-entrant edges filleted). It is reported as **its own complete converged mesh ladder**: < 5 % change on BOTH peak and amplitude over the last two levels, no singularities. **Only candidate 0 earns G3**; no shape-opt candidate substitutes for it.
+- G3 is not final until Materials cites the 58 MPa amplitude basis.
+- Candidate 0 pass → continue with the optimisation. Candidate 0 fail: stop and report.
+- Booked: +0.009 kg robot (R-144).
 - Re-run RV12 sweep and femur clearance on candidate 0 (not yet verified).

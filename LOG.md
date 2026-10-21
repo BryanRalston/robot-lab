@@ -26,3 +26,4 @@
 2026-10-21 09:05 RL Thermal: R-131 rev 3 (D91 knee shell-window plate) → R131_ELMO_MG.md: fins η .994; outer UA 0.14–0.23 walking, 0.12 standing (h8 optimistic standing); base duty 62–78 °C PASS, cont 80–105 FAIL→derate; femur 0.3–0.9 W, bond 68.2–69.1 PASS; shell PASS; touch/snag FAIL until guard or 60 °C touch cap + ID OK
 - 2026-10-21 Legs L69: G3 FAIL review, R8 arm-edge fillet, L47 brief candidate 0 (results/r031/g3_fail_review.md)
 2026-10-21 08:51 RL Thermal: R-143 rev 4 (knee fin guard) → R131_ELMO_MG.md: guarded rev3 UA 0.189 h8 (T&R confirmed), standing base 81.4 FAIL; min fix fins 13→18 mm + PC guard with low-ε (≤0.1) inner face, 10 mm standoff: UA 0.246 h8, base ≤75.5 °C, guard face ≤40.3 °C PASS; +0.066 kg vs rev3 (+0.026 over T&R), protrusion 29.5 mm; black guard fallback = 58 °C base touch cap
+- 2026-10-21 RL Legs: L47-SO brief per R-144 (single-path 294/271, candidate 0 own ladder), DECISIONS L70.

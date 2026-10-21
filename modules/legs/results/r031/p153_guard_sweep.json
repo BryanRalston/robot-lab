@@ -1,0 +1,20 @@
+{
+ "GUARD_x40_64p5": {
+  "cand": {
+   "seg": "thigh",
+   "size": [
+    24.5,
+    66,
+    110
+   ],
+   "c": [
+    -52.25,
+    130,
+    740
+   ]
+  },
+  "min": 14.8,
+  "lim": "L_knee twin housing (Actuators D59 STEP, shared centre web) @{'L_knee': 145}",
+  "max_outside_thigh_fairing_mm": -49.5
+ }
+}
