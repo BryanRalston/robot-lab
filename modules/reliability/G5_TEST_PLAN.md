@@ -156,3 +156,12 @@ Per `legs/R031_FIXES.md`: 5 ASTM D1002 coupons per lot at 23 and 60 °C, part-eq
   - **dynamic peak/plateau ≤ 17.9 kN**.
   - Record the plateau, the lot spread and the rate factor.
 - **Fail:** reject the lot, **or use the 104 × 104 land** for a low lot, if the dynamic plateau scaled ×1.06 is still ≤ 17.9 kN.
+
+## TP-G5-22 — Waist friction limiter break-away calibration, wear and temperature (D102c, eb5520f)
+- **Purpose:** replace the [EST] μ, Belleville load, wear rate and ~10k-event interval in D102c with measured data.
+- **Specimens:** limiters from ≥ 3 lots of lining / Belleville (sample size per lot TBD by Actuators).
+- **1. Break-away calibration:** measure static break-away on each unit after set; pass = 153–187 N·m (170 ±10 %); record lot spread.
+- **2. Wear:** 10 000 slip cycles at the routine-event energy (≤ 53 J/event per D102c) plus fault events at the D102c fault energy; re-measure break-away at intervals (interval TBD); pass = stays within 153–187 N·m or re-torque interval confirmed.
+- **3. Temperature / environment:** break-away at the operating temperature extremes and humidity (range per system spec, TBD); measure slip-face temperature rise in a fault-energy slip vs D102c's +3.2 °C bulk / 5–7 °C flash [EST].
+- **Fail →** revise Tc set point, lining or Belleville choice, or inspection interval.
+- Owner: Actuators; witness: reliability. Refs: R1_FMEA F20, INSPECTION_SCHEDULE.

@@ -245,3 +245,10 @@ Sim must also log: torso pitch/roll at contact (the 25° definition), CoM height
 - Stop peak moment ≤ 657 N·m (arms-down inertia governs).
 - An elastomer stop alone fails (travel not available); a slip clutch or rotary damper is required, and it must never bottom.
 - Gate: a dynamic model shows gear ≤ 204 N·m at 8.32 rad/s for both inertias (arms down and arms forward).
+
+## VERIFY — D102c waist friction limiter (Actuators eb5520f), 2026-10-21 ~11:26 ET
+**Verdict: CONDITIONAL.**
+1. **Location: PASS.** motor → CSG-25 → friction limiter → yoke/torso; PU end stops act torso ↔ pelvis on the torso side. Drive inertia (0.652) decelerates only through Tc. Gear peak = Tc,max 187 + output-node/clutch-stiffness overshoot (Jo 1e-3 [EST], Kc 2e5) = **193 ≤ 204** (governing 8.32 rad/s unpowered, torso 1.44; also 193 at 7.0 rad/s motor + at Tc 187). The +6 N·m (≈3 %) is consistent with the model; not independently re-simulated here.
+2. **Energy split: covered in D102c, not yet in Torso.** Rotor KE at 8.32 rad/s = ½·0.652·8.32² ≈ 22.6 J; upper body ½·(1.44–3.52)·8.32² ≈ 50–122 J. Limiter slip 37–43 J (unpowered) ≈ the drive share, so **the upper-body KE goes into the PU stop and yoke, not the clutch.** D102c states the stop carries the 324 J gate (E25 ≥ 356 J, peak 1.7 kN·m ≤ 2.5, no bottoming) and the stop must react as a couple in the yoke, not as tilt through the CRBH 6013 A (0.61 kN·m at fs 1.5). **Missing load case:** Torso 19f8fa1 gives only lug location (r 100 mm, torso-cheek, two lug pairs) and states "no sizing is committed". The stop face, yoke and lugs have **no structural check** at 1.5 × upper-body KE with peak ≤ 2.5 kN·m (≈ 17 kN couple at 1.7 kN·m / 100 mm), nor a check that the bearing tilt stays ≤ 0.61 kN·m with real lug offsets. → Torso action.
+3. **Thermal and wear: [EST] flagged** (μ, Belleville F(s), wear rate 0.2 mm³/kJ, Jo, PU curve ×1.3). ~10k events is unflagged arithmetic on [EST] inputs — treat as [EST]. Test required: **TP-G5-22** (G5_TEST_PLAN). Inspection added (INSPECTION_SCHEDULE); FMEA F20.
+**Conditions to PASS:** Torso yoke/lug/stop-face structural case and bearing-tilt check; TP-G5-22 results in band.
