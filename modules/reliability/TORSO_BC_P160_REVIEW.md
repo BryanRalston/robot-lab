@@ -179,3 +179,32 @@ Until the Materials core data exist, Torso reruns with IR at LC1 29 kN (job 3d);
 - **Fallback for a soft lot: the 104 × 104 land** (+6 % area). Its upper bound must still be ≤ 17.9 kN, so it is used only for low lots.
 
 LC1 for job 3e stays **17.9 kN limit / 26.9 kN ultimate** with the IR BC.
+
+## A.2 / 2.1 Controls 1021e37 inputs (2026-10-21 ~11:12 ET)
+### Reduced LC1 is CONDITIONAL on the 25° chest-only landing
+- At 25° the normal plateau is ×0.73, so 824 J needs ≈ **101 mm vs 81.2 mm usable**.
+- The reduced LC1 (17.9 kN) holds only if a **25° landing does not load the chest alone**, i.e. the shoulder pad / LC2 shares or takes it (R-146 basis).
+- **Controls to run a 25° chest-only landing sim.**
+- **Until then: job 3d stays at LC1 29.0 kN (ult 43.5) with the inertia-relief BC. Job 3e (17.9 kN) waits** on the sim and on TP-G5-21.
+
+### P-160: tripped-waist end impacts govern the stop by ENERGY
+- Controls: a tripped waist reaches its ends at up to **6.34 rad/s (−30° end)** and **6.15 rad/s (+60° end)**.
+- **Upper-body KE about the waist-pitch axis:**
+  - I ≈ 1.55 kg·m² (sim model upper body about the waist axis; script torso_bc_inertia_relief.py) gives **≈ 31 J / 29 J**;
+  - **≈ 33 / 31 J at 72.1 kg** [EST, mass-scaled];
+  - **plus the reflected rotor inertia** (I_rotor × N², unknown: could dominate; Actuators).
+- **Stop sizing:**
+  - A linear stop gives M_peak = √(2 E k_θ). Example: E 33 J at k_θ 10 kN·m/rad gives 0.81 kN·m [EST]; at 100 kN·m/rad, 2.6 kN·m. **A rigid metal stop is not acceptable**: the moment is unbounded and the gear sees the windup.
+  - The stop must absorb ≥ 1.5 × (33 J + reflected) with M_peak ≤ the structure rating (2.5 kN·m IR limit), and gear windup at contact ≤ the repeated-peak torque.
+  - An elastomer face is required.
+- **Inputs needed from Torso/Actuators:**
+  - stop stiffness k_θ;
+  - travel to bottoming and the bottoming angle;
+  - reflected inertia (rotor × N²) and gear stiffness;
+  - repeated-peak / momentary torque;
+  - stop lever and lug count.
+- **P-160 verdict: CONDITIONAL; size by energy.**
+
+### Backward-fall waist case
+- **Agreed with Controls:** 72.1 kg model; starts at −30° and +60° waist; log the waist moment, speed at stop contact and stop energy.
+- **PENDING (Controls).**
