@@ -447,3 +447,19 @@ Numbered L84 because L83 already holds the tube local-buckling item. Scripts: kn
   - **Left leg:** yaw **−18..+28° for roll ≥ −3°**, linear to **−5..+10° at roll −12°**. Roll adduction contact at **−10°**, **−12.3° at full crush**.
   - **Right leg:** mirrored (yaw −28..+18 → −10..+5; roll contact +10°, +12.3° crushed).
   - The torque curve for T&R is as in L90.
+
+## L92 — Final coupled hip yaw/roll limit (Controls clash check 1b44344), 2026-10-21
+- **The L90 hip stop is approved and final** (already noted in the L91 addendum, c5917da): angled PU 90A ø16×10 on a ramp bracket, struck by the L39 yaw tab, **+0.046 kg robot**. The 8g hold is cleared.
+- **Final limit, LEFT leg (it supersedes the L91 addendum's −18 inward end; together they replace L87's −35..+40 / −40..+35):**
+  - Yaw **−12..+28° for roll ≥ −3°**.
+  - For −12 ≤ roll < −3: **yaw_max = 28 − 2(−3 − r)**, **yaw_min = −12 + (7/9)(−3 − r)**, which gives **+10 / −5 at roll −12**.
+  - Roll adduction contact at **−10°**, **−12.3° fully crushed**.
+  - **RIGHT leg mirrored:** yaw −28..+12 → −10..+5 at roll +12; roll contact +10, +12.3 crushed.
+- **Reasons (Controls 1b44344):**
+  - The r116b knee housings touch at yaw ±40.
+  - The right yaw tab is 0.31 mm from its bracket at −40.
+  - The hanging hand is 0–1.65 mm from the thigh plate at inward yaw −15..−35.
+  - The new limit also keeps the L90 8g L↔R gap ≥ 30 mm, since the inward end is tighter than L90's −18.
+- **Ramp bracket:** the inward (−yaw) face moves so the crushed end sits at −12°. With 2.24° crush at 25 % strain, **PU contact is at −9.8° (roll ≥ −3)**, ramping to contact −2.8° / crushed −5° at roll −12. The outward face is unchanged (contact +25.8 / crushed +28 → +7.8 / +10).
+  - Ramp slope: inward 7/9 °/° of roll, outward 2 °/°.
+  - Bracket geometry is re-placed by angle only: same r64 tab radius, inward face rotated +6° from the L90 position. model_v4 L39 bumper placement update is pending (not swept; it needs a one-line angle change at model_v4 l.123).
