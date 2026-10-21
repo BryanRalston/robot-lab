@@ -283,3 +283,14 @@ Foam 0.035 + sleeve 0.009 + inserts/anchor 0.006 = **0.050/side, 0.100 kg pair =
   - **3 mm clearance lost at roll 130°; first contact at 132°** (every pitch); max penetration 29.5 mm at 180°. Arms' 118–128° used the mesh/dz fit; this check is analytic on the sim box.
   - Full-roll relief: a pocket in the torso upper-side corner **≈ 32.5 mm deep (29.5 + 3), ≈ 125 (x) × 145 (z) mm**, at the top shoulder corner. Mass ≈ +0.01 kg CF [EST], but it intrudes 33 mm into the Torso/shoulder-pitch volume: it needs Torso/Arms space and is not an ID-only trim.
 - **Recommendation: accept a roll soft limit, no torso pocket.** ID data supports up to **127°** (130° less 3° margin); Arms' 115° is conservative and also fine. Arbiter to set. Revisit when Torso releases real cover CAD.
+
+## R-127: roll sweep vs Torso's real cover (b697350) — cad/covers/r127_roll_sweep.py/.json
+- Method: the r15 sweep (1° roll 0–180, pitch −150/−90/−30/0/5/30, Arms r15 carrier + pad + housing), against an analytic model of Torso's `torso_cover.json` (rounded box R25, sternum bulge to x +147, side openings). Frame: torso body (waist centre). Results don't depend on pitch: pitch turns about the side-wall normal (Y).
+- **As given (220 × 340 × 470, Ø130 at z 380):** 3 mm lost at **130°**, first contact at **132°** (pad on the side wall); housing 58 mm clear, carrier 41.5 mm.
+- **Geometry check:** shoulder pitch axis is Y at torso-frame (0, 170, **220**); the roll axis is (0, 282, 180), 112 mm outboard of the wall; neck/head origin at z **370**.
+  - Torso's Ø130 openings at z 380 sit **160 mm above the pitch axis** and miss it.
+  - The 7013 roll housing (OD108/114 relief) and the pad never reach the opening (≥ 58 mm). The opening only passes the **shoulder-pitch actuator (OD96)**.
+- **Recommended opening: Ø110 on the pitch axis (z 220)**: OD96 + 7 mm radial (3 mm clearance + skin tolerance and seal lip). Coaxial with pitch, so it holds through the full pitch ROM. The pad window (68 × 68 on the arm) and the OD114 relief are unaffected.
+- **Envelope verdict: 220 (x) × 340 (y) confirmed; height 470 is wrong.** Site v4 / sim torso is z 50–310 (260 tall; glb 200 + skirt). A 470 top would bury the neck (z 370) and head shell. Correct to **z 50–310** (neck opening Ø90 at the top). V5 target stays a taper 330 → 250 with chamfered shoulders (V5_POLISH_PLAN row 4); sternum skin x +147 confirmed (P-052).
+- **ID-corrected cover (z 50–310, Ø110 at z 220):** 3 mm lost at **130°**; the pad then runs ≤ 3 mm along the wall over the opening region, with hard contact at **170°**.
+- **Recommended soft limit: 127°** (130 − 3° margin), with no torso pocket. Arms' 115° is also safe. Arbiter to set.
