@@ -1255,3 +1255,41 @@ Ruling: T2 hard limit is 68.0 kg (was 66.5), carry stays 20 kg, CONDITIONAL on a
 3. J10 sim passes at a 68.0 kg nominal (Controls; randomized range 65.0–68.5 unchanged), including the carry ≥0.8 m/s and recovery gates.
 4. The R-122/R-123 mass-down plan continues; the R-066 add-mass freeze stays (>0.005 kg needs a ruling).
 Credible mass ~67.97 kg means a reserve of +0.03 kg against 68.0; the +0.30 reserve floor still applies against 68.0 and is the R-122 goal. If any of 1–3 fail, T2 reverts to 66.5 and option C (deeper redesign) opens. Until 1–3 pass, G4/G5 sign-off is withheld against 68.0.
+
+## R-125 (2026-10-21) Shoulder placement W2, R-121 clash correction, arm fasteners, ankle-cross allowable (Arms 4b47656 R14; Materials 1e75ba8)
+
+### (a) Shoulder roll pad/stand-off placement. **W2 adopted (CRBH 7013 A, pad on roll axis Z0, wrap carrier), e ≤ 2.4 mm.**
+- **Clash accepted on evidence.** The roll axis is X (sim/v3 `l_shoulder_roll` 1 0 0; R-120 Mx = Fn·Z + Fs·Y; s0 e axial). ID's CAD put the 7013/OD108 coaxial with Y. `cad/r14/r14_cad.json` CadQuery booleans give stand-off ∩ housing 2.16 cm³ and pad ∩ housing 12.38 cm³. Clearing axially needs e ≈ 40.5 mm, so s0 = 1.50 (fail). Even in ID's frame the flange gap is 0 mm against the ≥ 3 mm rule.
+- **R-121 corrected.** Its "clash pass" rested on Arms R13's "axial gap open, assumed outboard", which contradicts e ≤ 5. That finding is **withdrawn**. The R-120 placement (pad centre 20 mm below the axis, inside the bearing plane) is **unbuildable**. R-120's s0 2.31/2.16/2.04 and 321 N·m no longer apply.
+- **Arithmetic checked** (`pad_r14.json`):
+  - W1 vs W2 share contact Y 138.8. Fs = 251/0.1388 = 1.81 kN; W1 adds Fn·0.020 = 136 → Fn ≈ 6.8 kN, consistent with the R10 7.0 kN peak. W3 1.81 × 0.1448 = 262 ✓.
+  - W2 Mx 251 vs CSG-25 369 peak: 1.47 nominal, Arms' fault case 1.40. PASS (≥ 1.3 gate) and ≤ 351 FEA gate. W1 387 → 0.91 FAIL.
+  - s0 interpolation (load ∝ 1/s0, linear in e): 1/2.06 = 0.4854, 1/1.94 = 0.5155 → 0.00602/mm. **s0 = 2.0 at e = 2.43 mm.** At e = 3, s0 = 1.99 (FAIL, not "pass at e ≤ 3"). The limit is therefore **e ≤ 2.4 mm**.
+  - Stack (R14, incl. 0.69 mm deflection): worst 2.32 mm → s0 ≈ 2.004, **margin 0.11 mm** (0.2%). RSS 1.03 mm → s0 ≈ 2.04. **Passes worst case, but thinly.**
+- **Ruling: W2.** W3 (+~1.1 kg) is rejected for mass. W1 fails the gear.
+  - Conditions: drawing limit e ≤ 2.4 mm. Arms and ID should tighten the two largest stack terms (tray lip to core 0.5, core cut 0.5) to ≤ 0.3 each, to bring worst case to about 1.9 mm (≥ 0.5 mm margin). If that is not achievable, the 0.11 mm margin stands. Job 8b must report e under load. If FEA e > 2.4 or s0 < 2.0, the outcome is W3 or a μ measurement at G5 (back to me).
+  - Envelope: +36.5 mm proud per side replaces the +15 mm provisionally accepted in R-120. This is **accepted provisionally**. ID re-runs cover, head-shell and abduction ROM against the X-coaxial housing (`housing_7013_real_coaxX.stl`). The 135° roll soft limit stays.
+  - The Arms R14 interface fixes (flange OD76, ring bore Ø36, 2 × Ø6 m6 dowels on PCD57, 3 × Ø8 plate access holes, 8 × M4 12.9 PCD62) are adopted. ID drops the stand-off flange M4 and dowels from its BOM.
+- **Job 8b released** with the W2 geometry: X-coaxial 7013 housing, pad Z0, wrap carrier. Gates: vM ≤ 320 MPa (R-123), s0 ≥ 2.0 at e worst, Mx ≤ 351 N·m, deflection ≤ 1 mm, no dowel/bolt slip. Robot Lab routes it (one Grok Build session at a time).
+- **Mass (W2), additions at full, no double count:**
+  - Stand-off: R14 0.124/side [CALC] (md; `pad_r14.json` "0.110 / +0.076" is stale and is superseded). R-121 + R-123 already booked to 0.102/side (R-123 (d) +0.060). Arms' "+0.103 vs R-121" ignores R-123's +0.060. **Net new = 2 × (0.124 − 0.102) = +0.044 kg.**
+  - Wrap carrier: ~+0.14 pair [EST]. As an addition it is booked at **+0.140 full**. If Arms' CAD shows the carrier replaces part of the stand-off, the overlap is credited back at full once it is calculated.
+  - (a) total **+0.184 kg**.
+
+### (a2) Arm-structure fasteners. **Book +0.500 kg at full.**
+- CONTRACTS §3 Arms (structure) is 1.6 kg (0.80/side), with no itemisation and no mention of hardware. By contrast, the legs line explicitly says "+ bolts/bumper". No cad_mass or ledger line books arm-structure fasteners. **Inclusion is not evidenced**, so booked = 0.
+- `arms/FASTENER_BOM.csv`: 290 pcs, 0.500 kg/robot [CALC/EST]. Booked as an **ADDITION at full, +0.500 kg**. If Arms' G4 CAD count comes in lower, it is credited at full then.
+- No double count with R-123: R-123's open risk (1.264 kg counted) covers **actuator-unit** fasteners in the arm and waist units, which this BOM excludes. That risk stays open, still likely adverse.
+- Ti non-structural candidate −0.0225 [CALC] → R-122 row 13, credit −0.011 now. Same gates as row 12 (Materials coating/anti-seize cite, Thermal for flexor end-cap clamps).
+
+### (b) Job 7 ankle cross allowable. **262 MPa.**
+- R-123 required a cited allowable for 7075 plate > 25 mm. The only figure offered is MMPDS A-basis Fty 393 MPa at 1–2 in T7351, and it comes from a secondary source that has not been verified. That does not meet the citation requirement, so 320 (derived from typical 480) **cannot be kept** for this single-load-path part.
+- **The Job 7 FEA must meet vM ≤ 262 MPa** (393/1.5). If Materials obtains a verified primary MMPDS (or equivalent) table, the limit becomes that A-basis/1.5. Results between 262 and 320 must be held, not passed.
+- **General tightening, on evidence:** typical (480) is not conservative against A-basis for 7075. From now on, **single-load-path 7075 parts** (no redundant path, where failure means loss of the joint or structure) are checked against A-basis Fty/1.5 for their product form and thickness. Unverified A-basis values are used provisionally, with the lower one governing. Multi-path parts keep R-123's 320 (480 typical/1.5). Owners flag single-path parts in their FEA briefs. These include the shoulder stand-off (T6 billet 32 mm): ID and Arms state its A-basis limit in the Job 8b CASE.md.
+- T031 rib: SF 2.22 typical / 2.04 T651 A-basis. **PASS stands.**
+
+### Mass and R-124
+- Chain: R-124 credible ≈ 67.97 kg. (a) +0.184 → 68.154. (a2) +0.500 → **68.654 kg credible**. R-122 row 13 credit −0.011 → **68.64 kg**.
+- **Reserve against 68.0: −0.64 kg.** The R-122 best-case plan (−0.58 more beyond current credit) does not close it.
+- **R-124 fails: the credible mass exceeds the conditional 68.0 kg limit.** Thermal's condition was met (93cd74b) and the Actuators and J10 conditions are still pending, but mass alone breaks the limit. The mass is also **above the J10 randomization top (68.5)**, so J10 at a 68.0 nominal no longer represents the robot.
+- Under R-124, **T2 reverts to 66.5 and option C (deeper redesign) opens**. Against 66.5 the reserve is −2.14 kg. This is a target-level decision: **it goes to Bryan through Robot Lab** (C, or a further T2 raise to about 69.0 with a new J10 range, plus Actuators/Thermal re-checks). The R-066 freeze stands, and G4/G5 sign-off is withheld.
