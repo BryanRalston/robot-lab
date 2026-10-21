@@ -1522,3 +1522,12 @@ Link B replaces the 10 mm² front-low main, -0.018. It is credited at full becau
 1. D99 is booked at 0.871 kg robot [CAD], replacing 0.487: +0.384 at full. The taper (~-0.09) is credited only after its FEA passes. Fault energy stays 92.5 J.
 2. L90 hip stop +0.046 [EST] is an addition, booked at full. The hip ROM becomes a coupled yaw/roll limit and CONTRACTS §2 is updated. Controls' gait, tuck and kneel must stay inside the coupled map, and Legs re-checks the gait-sim yaw/roll envelope against it (the earlier need was hip_roll to -12°).
 3. LEDGER: ~69.05 → ~69.48 kg vs T2 66.5, 2.98 kg OVER. G4 NOT MET.
+
+## R-157 — Torso job 3c two-sided waist yoke (Torso b3811cc) — 2026-10-21
+Evidence: T&R CHEST_DESIGN_LOAD.md corrects LC1 to 29.0 kN (pad crush plateau, lot top 22.3 × rate 1.30) and removes the 0.05 mm gate and the stacked SF. This answers R-149 §1b. Job 3c passes LC1 (SF ≥1.04, 207 Hz) at +2.63 kg [mesh] with a ≈10.9 mm CoM shift [EST], over Controls' 10 mm.
+Ruling: the +2.63 overrun is NOT accepted now. It is not booked as a design point, but it is carried as a risk: the credible ledger is ~69.48 plus up to +2.63 pending.
+1. LC1 is force-limited by the chest pad, so the torso load is a design choice, not a given. T&R and Torso size the cartridge plateau DOWN (lower-density core, keeping pre-crush) to the lowest plateau that absorbs the governing fall energy within 0.70 stroke with ≥1.3 margin. Then they re-run the torso at that LC1 and report the torso mass as a function of plateau (at least 3 points). Electronics checks the chest-mounted parts at the resulting g level.
+2. T&R cites the source of the T-031 1.03 kJ envelope gate against the worst defined fall energy (R-146 L3, 527 J). If 1.03 kJ is not traceable to a defined fall in T8 with a stated margin, the governing energy is the worst defined fall × 1.5.
+3. Whatever is adopted, the CoM shift must be ≤10 mm or Controls must re-verify balance and recovery at the new CoM.
+4. P-160 waist pitch hard stop (4.36 kN·m at 29 kN × 0.150 m) is accepted in principle and scales with the final LC1. Its mass is booked when sized.
+5. Torso G3 stays NOT MET until a variant is adopted.
