@@ -1,0 +1,128 @@
+[
+ {
+  "case": "crouch_collapse",
+  "lean": 0.1,
+  "waist_range_deg": [
+   -30.0,
+   60.0
+  ],
+  "waist_q_span_deg": [
+   -15.5,
+   61.9
+  ],
+  "peak_abs_waist_qvel": 4.714,
+  "v_at_range_end": 4.714
+ },
+ {
+  "case": "crouch_collapse",
+  "lean": 0.3,
+  "waist_range_deg": [
+   -30.0,
+   60.0
+  ],
+  "waist_q_span_deg": [
+   -2.9,
+   62.6
+  ],
+  "peak_abs_waist_qvel": 6.859,
+  "v_at_range_end": 6.153
+ },
+ {
+  "case": "crouch_collapse",
+  "lean": 0.5,
+  "waist_range_deg": [
+   -30.0,
+   60.0
+  ],
+  "waist_q_span_deg": [
+   -32.6,
+   1.3
+  ],
+  "peak_abs_waist_qvel": 9.974,
+  "v_at_range_end": -6.337
+ },
+ {
+  "case": "forward_fall",
+  "lean": 0.1,
+  "waist_range_deg": [
+   -30.0,
+   60.0
+  ],
+  "waist_q_span_deg": [
+   -31.3,
+   33.5
+  ],
+  "peak_abs_waist_qvel": 6.063,
+  "v_at_range_end": -3.014
+ },
+ {
+  "case": "forward_fall",
+  "lean": 0.3,
+  "waist_range_deg": [
+   -30.0,
+   60.0
+  ],
+  "waist_q_span_deg": [
+   -11.4,
+   24.4
+  ],
+  "peak_abs_waist_qvel": 6.242,
+  "v_at_range_end": null
+ },
+ {
+  "case": "forward_fall",
+  "lean": 0.5,
+  "waist_range_deg": [
+   -30.0,
+   60.0
+  ],
+  "waist_q_span_deg": [
+   -30.4,
+   0.6
+  ],
+  "peak_abs_waist_qvel": 2.105,
+  "v_at_range_end": -1.029
+ },
+ {
+  "case": "kneel_tip",
+  "lean": 0.1,
+  "waist_range_deg": [
+   -30.0,
+   60.0
+  ],
+  "waist_q_span_deg": [
+   -6.9,
+   -0.0
+  ],
+  "peak_abs_waist_qvel": 1.469,
+  "v_at_range_end": null
+ },
+ {
+  "case": "kneel_tip",
+  "lean": 0.3,
+  "waist_range_deg": [
+   -30.0,
+   60.0
+  ],
+  "waist_q_span_deg": [
+   -7.8,
+   -0.0
+  ],
+  "peak_abs_waist_qvel": 1.055,
+  "v_at_range_end": null
+ },
+ {
+  "case": "kneel_tip",
+  "lean": 0.5,
+  "waist_range_deg": [
+   -30.0,
+   60.0
+  ],
+  "waist_q_span_deg": [
+   -11.5,
+   -0.0
+  ],
+  "peak_abs_waist_qvel": 1.925,
+  "v_at_range_end": null
+ }
+]
