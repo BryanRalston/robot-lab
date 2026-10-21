@@ -1534,3 +1534,9 @@ Ruling: the +2.63 overrun is NOT accepted now. It is not booked as a design poin
 
 ## R-157a — Torso 3c booked provisionally (Robot Lab) — 2026-10-21
 Agreed on conservatism: job 3c is the only passing torso, so +2.63 [mesh EST] is booked at full as a KNOWN LIABILITY, pending the R-157 plateau and energy-gate revisit. Any lighter adopted variant replaces it as one delta. The R-157 non-acceptance stands for design adoption: the CoM ≈10.9 mm vs the 10 mm limit is unresolved. LEDGER: ~69.48 → ~72.11 kg vs T2 66.5, 5.61 kg OVER. G4 NOT MET.
+
+## R-158 — Torso BC, T-031 gate, chest plateau (T&R 3eacd56) — 2026-10-21
+1. ACCEPT inertia relief for LC1, using the lumped masses as specified, scaled to 72.1 kg. Waist limit 9.0 kN / 2.5 kN·m (ult 13.5 / 3.75). The chest land, bulkhead and socket stay at the full local LC1. The envelope spring check is MANDATORY in the same run. The IR waist-section F/M must be reported and must be ≤ 9.0 / 2.5, otherwise the envelope governs.
+2. ACCEPT cutting the T-031 1.03 kJ gate. It traces to a sizing heuristic, not a defined fall. Governing = 549 J ΔPE × 1.5 = 824 J (the conservative variant over 791).
+3. CONDITIONAL: the 11.2 kN weakest-corner plateau gives LC1 17.9 / 26.9 kN, but only once Materials cites a HexWeb crush, lot spread and rate factor and the 1.60 ratio is recomputed. The 25° L3 chest-only case must be closed with Controls first. Without both, LC1 stays at 29 kN.
+RUN: merging 3d and 3e into one run is allowed ONLY if the cited core data is in the repo before submission. Otherwise run 3d (IR at 29 kN) now and do 3e later. No mass credit until the FEA lands. The 2.63 liability (R-157a) stands, and the ledger stays ~72.11.
