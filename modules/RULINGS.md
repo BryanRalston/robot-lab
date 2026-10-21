@@ -1500,3 +1500,8 @@ The +0.36 pair bearing delta is confirmed by catalog (IKO 4010 0.15 vs 7013 0.38
 
 ## R-151a — Palm credit reconciliation (Arms 8f6a8f1) — 2026-10-21
 The R-027 palm credit change (-0.120 to -0.097 pair) is the same +0.023 as the R-151 heel-band line, so it is booked once only, via R-151. No change. Credible mass stays ~68.78 kg.
+
+## R-152 — Knee stop, TUCK and tibia wall contract changes (Robot Lab R-146a) — 2026-10-21
+1. Booked into CONTRACTS §2 ROM: PU stop contact at 133° (r75, 40.1 J × 1.1 design energy, top-out ≤143.6°); motors-off bottoming is a fault case that Test covers in G5; kneel ≤125° with no exemption; TUCK keeps the knee drives on with a 95–125° damping ramp at ≤50 N·m and drops them last; swing-leg tuck for side falls. Controls' R-150/R-151 sequence must respect the 125° kneel limit.
+2. Tibia wall 2.0 mm replaces R-135's 1.5 mm for the tibia. This is a mass ADDITION that is not yet booked. Legs states the kg delta vs the R-135 booking (CALC from CAD), and it is booked at full on receipt. The femur stays per R-135 pending T&R's dynamic factor.
+3. Actuators D98 +0.807 knee stop is not booked (Robot Lab rejected it; D99 ≤0.35 pending). P-057 +0.050 is already booked in R-151, not again. Credible mass ~68.78 kg plus the open tibia delta.
