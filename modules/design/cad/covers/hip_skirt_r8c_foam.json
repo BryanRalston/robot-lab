@@ -1,0 +1,32 @@
+{
+ "source": "Materials 3dd50e4: Zotefoams Plastazote LD29, cross-linked LDPE 29 kg/m3, 61 kPa @25% / 126 kPa @50% (PIS-A008), 95 C max",
+ "hem_notch_strip": {
+  "width_mm": 15,
+  "depth_mm": 40,
+  "length_mm_side": 680,
+  "max_strain": 0.307,
+  "stress_kPa": 76.0,
+  "hand_patch_mm": [
+   100,
+   15
+  ],
+  "force_N": 113.9,
+  "limit_N": 140,
+  "jchannel": "PC 1.0 wall, inner width 20 -> 15.5 mm, 3 mm lip engagement + VHB on the foam base; retained"
+ },
+ "LR_strip": {
+  "width_mm": 20,
+  "depth_mm": 40,
+  "length_mm": 130,
+  "limp_force_N": 165,
+  "equilibrium_stress_kPa": 63.5,
+  "equilibrium_strain": "~26% (LD29)",
+  "hand_force_N": 126.9,
+  "note": "load-limited: hand share = 165 x 100/130 independent of foam stiffness; no narrowing needed"
+ },
+ "mass_g_side": {
+  "foam_hem_notch": 11.8,
+  "foam_LR": 3.0,
+  "delta_vs_prev_8c": -3.9
+ }
+}
