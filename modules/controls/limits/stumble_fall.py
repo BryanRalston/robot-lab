@@ -19,7 +19,7 @@ from fall_mode import swing_leg_tuck, fall_detected
 PLAN = os.path.join(LEGS, 'results', 'r2', 'walk_1p2_r2.npz')
 
 
-def run(t_push, push, sgn, tuck, T_after=1.6, tuck_s=0.0):
+def run(t_push, push, sgn, tuck, T_after=1.6, tuck_s=0.0, force_tuck=True):
     m = load(); m.opt.timestep = 0.001; d = mujoco.MjData(m)
     c = WalkController(m); c.initialize(d); c.use_plan(PLAN, d)
     names = [m.actuator(i).name for i in range(m.nu)]
@@ -52,7 +52,7 @@ def run(t_push, push, sgn, tuck, T_after=1.6, tuck_s=0.0):
         if pushing is not None and det is None and fall_detected(roll, float(d.qvel[3])):
             det = t; hold = d.qpos[qa].copy(); hold0 = hold.copy()
             if tuck and swing:
-                tg = swing_leg_tuck({nm: hold[i] for i, nm in enumerate(names)}, swing)
+                tg = swing_leg_tuck({nm: hold[i] for i, nm in enumerate(names)}, swing, "ds" if force_tuck else getattr(c, "phase", "ss"))
                 hold = np.array([tg[nm] for nm in names])
         if det is None:
             try:

@@ -30,3 +30,4 @@ L39 bumper [EST, T&R rev B]: contact L −12/+15°, R mirrored −15/+12°; k_θ
 
 - **S2c (knee first, foot moving) is not reproduced in the stumble set either**: the foot always lands first. T&R's 4.2 m/s relative-speed case did not appear.
 - **The swing-leg tuck in mid-walk is counter-productive**: straightening the swing knee whips the foot into the ground (up to 6.75 m/s, 2.7 kN). Recommend: keep the tuck for standing side falls (S2c, bumper energy) but **not in mid-stride stumbles** until a rate-limited version is tuned; T&R foot/ankle check owed at 2.2–2.7 kN.
+- **Ruling on 976eca8 (implemented):** swing-leg tuck gated to standing/double support only (`fall_mode.tuck_allowed`; `swing_leg_tuck(..., support_phase)` is a no-op in single support 'ss'). Mid-walk stumbles detected in single support therefore keep the base behaviour (swing foot ≤ 2.08 m/s, 1119 N). The stumble table's tuck rows were run with the tuck forced (`force_tuck=True`) to show why.

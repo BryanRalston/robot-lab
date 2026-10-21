@@ -11,10 +11,18 @@ def fall_detected(torso_roll, roll_rate):
     return abs(torso_roll) > DETECT_ROLL_RAD or abs(roll_rate) > DETECT_ROLL_RATE
 
 
-def swing_leg_tuck(targets, swing_side):
-    """targets: dict joint-name -> rad (modified copy). swing_side 'l'/'r' or None."""
+TUCK_PHASES = frozenset(('stand', 'balance', 'ds', 'double'))   # Robot Lab ruling on 976eca8: standing/double support only
+
+
+def tuck_allowed(support_phase):
+    """Swing-leg tuck only from standing / double support; disabled in single support (mid-stride whips the foot)."""
+    return support_phase in TUCK_PHASES
+
+
+def swing_leg_tuck(targets, swing_side, support_phase='stand'):
+    """targets: dict joint-name -> rad (modified copy). swing_side 'l'/'r' or None. No-op in single support ('ss')."""
     t = dict(targets)
-    if swing_side:
+    if swing_side and tuck_allowed(support_phase):
         t[f'{swing_side}_knee'] = SWING_KNEE_RAD; t[f'{swing_side}_hip_pitch'] = SWING_HIP_PITCH_RAD
     return t
 

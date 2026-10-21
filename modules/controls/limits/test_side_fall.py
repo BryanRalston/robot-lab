@@ -12,3 +12,8 @@ def test_results():
     for sc in ('S1', 'S2b', 'S2c'):
         assert d['tuck']['summary'][sc]['n_bump_fail'] == 0
         assert d['tuck']['summary'][sc]['knee_zone_cmd_max'] <= 50.0
+
+def test_tuck_gated_in_swing():
+    q = {'l_knee': 1.0, 'l_hip_pitch': -0.6}
+    assert swing_leg_tuck(q, 'l', 'ss') == q
+    assert swing_leg_tuck(q, 'l', 'ds')['l_knee'] == 0.15
