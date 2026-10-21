@@ -187,14 +187,12 @@ Checked against the R-065 criteria with sim/v3:
   - bond peak shear ≤ 4.6 MPa, peel reported
   - CF Tsai-Wu FI ≤ 1/1.5
   - EI ≥ 0.8 × 7075
-- **Torsional stiffness vs Controls' bandwidth gate:**
-  - Report the forearm torsional stiffness k_t and the first forearm/wrist torsional mode.
-  - Hand calc for CF:
-    - k_t = GJ/L ≈ 9.8 kN·m/rad (7075 ≈ 69)
-    - f ≈ 810 Hz with the hand alone (I 3.8e-4 kg·m²)
-    - f ≈ 50 Hz with a 10 kg payload at 0.1 m (I ≈ 0.1) [EST]
-  - Gate: f_torsion ≥ Controls' arm bandwidth gate × the Controls-specified separation ratio. Controls hasn't published a number in the repo yet, so Robot Lab gets it from Controls before running.
-  - If it fails, re-run with a ±45° braid overwrap (+~0.01 kg/side, mass at full).
+- **Torsional stiffness vs Controls' gate (8f80c42, `modules/controls/arm/FOREARM_TORSION_REQ.md`):**
+  - Gate 1: forearm assembly stiffness (tube + fittings + bond) **k_t ≥ 2.9 kN·m/rad**.
+  - Gate 2: first torsion mode with the CSG-14-100 wrist-roll gear in series (4.7 kN·m/rad) and the payload inertia: **≥ 15 Hz** at 0.2 kg·m² (10 kg single-hand T5), and **≥ 40 Hz** hand-only (3.8e-4 kg·m²).
+  - Hand calc at CF 9.8: series stiffness 3.18 kN·m/rad, so **20.1 Hz** at T5 (Controls estimates ≈ 20.1, a pass) and **460 Hz** hand-only.
+  - 8c must report both: the FE assembly k_t and both modes.
+  - The ±45° braid overwrap re-run happens only if the FE assembly k_t < 2.9 (mass at full).
 - **Thermal:** hand off the sleeve geometry to Thermal for ladder B. The Job 8c pass alone does not release credit (R-132: booked 0 until Job 8c, Thermal and Materials all sign off).
 - **Output:** `modules/arms/results/job8c_*`.
 **Job 8d (Arms R17): pocketed elbow clevis + roll-yaw link FEA.** Not launched. Run after 8b/8c, via Robot Lab.
