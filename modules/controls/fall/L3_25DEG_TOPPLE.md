@@ -27,3 +27,33 @@ Not logged: the second trunk rotation (only pitch/roll at contact and crush hist
   +0.11 m in x → **+ waist pitch = flexion; −30° end = extension stop, +60° = flexion stop.**
 - Inertia used in waist_energy_backfall: model body inertias of the waistY subtree only (incl. arms, head) about the waist axis at the impact pose;
   **no reflected rotor/armature** (Torso 0.24 or T&R 0.652 kg·m² would add on top). Arms are at their passive pose at impact (start pose arms-down), not forced down.
+
+---
+# Follow-up round (T&R after 2975e93) — PARTIAL
+## (2) Head-first replay (11 seeds, deterministic rerun; `l3_headfirst_replay.json`)
+Head body linear velocity in the WORLD frame via mj_objectVelocity at first head–floor contact (not cvel). Head body mass in model
+(scaled to 68 kg) = **0.48 kg** [model value; looks light vs a real head+sensors — flag]. E_head = 0.5·m·v² [EST]. Upper KE = waistY..head
+subtree translational + rotational KE at that instant.
+| seed | t s | |v| m/s | v_normal | E_head J | upper KE J |
+|---|---|---|---|---|---|
+| 0 | 0.943 | 3.82 | 3.78 | 3.5 | 209 |
+| 2 | 0.770 | 4.86 | 4.81 | 5.7 | 289 |
+| 3 | 0.634 | 4.54 | 4.52 | 5.0 | 196 |
+| 6 | 0.906 | 4.45 | 4.40 | 4.8 | 268 |
+| 9 | 0.680 | 4.42 | 4.40 | 4.7 | 186 |
+| 10 | 0.746 | 4.66 | 4.61 | 5.3 | 276 |
+| 14 | 0.820 | **4.99** | **4.91** | **6.0** | **301** |
+| 16 | 1.063 | 4.33 | 4.29 | 4.5 | 263 |
+| 17 | 0.649 | 3.99 | 3.98 | 3.8 | 163 |
+| 20 | 1.080 | 4.58 | 4.49 | 5.1 | 283 |
+| 22 | 0.895 | 3.83 | 3.78 | 3.5 | 202 |
+Worst: 4.99 m/s (4.91 normal), 6.0 J head-only [EST], 301 J upper body (seed 14, toe pivot). The head reaches the floor essentially vertically,
+carrying most of the upper-body KE behind it: head-first is a real failure mode in passive (MO=0) topples, not an artefact.
+
+## (1) Forced-25° set at 72.1 kg — NOT ACHIEVED
+Searched 32 ICs (`l3_forced25.json`): knee and toe pivot × roll 0.3–0.6 rad × lean 0.15/0.3; then arms overhead (sp −2.8) / back (+1.5)
+× hip pitch −0.6/−1.2 × roll 0/0.4. Pad tilt at first pad contact stayed 9.9–17.0°; with arms/hips moved, the pad mostly never touched
+(hands, shanks, thigh or pelvis took the landing). **0 runs within 25±3° → no forced-25° results, second-rotation history, crush or criteria for
+this set.** In this passive model a 25° chest-pad-first contact does not arise from topple ICs alone; it would need an imposed initial
+angular velocity / a pivot that holds the body at 65° pitch, i.e. a prescribed-state impact, not a topple. The trunk-history logging
+(pitch/roll/ω every 20 ms for 1 s after pad contact) is now in `l3_25deg_topple.py` for that run.
