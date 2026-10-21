@@ -370,3 +370,13 @@ All keep R-076 (reinforced isolation, IEC 60664-1 creepage, IP2X), R-074 (main l
 - Considered and rejected: contactor swap (only lighter cited part, EV100, fails the coil-power limit, R-074); fan (Sunon fixed, no cited lighter part at the airflow); bus-bar downsizing below 10 mm² (R-074); DC-DC repackaging (DCM is a sealed module on the cold plate).
 - Total proposed: **−0.26 kg [EST]**, −0.13 at half credit. P-148 and P-149 are confirmed by FEA job 3 (FEA_SPEC_torso_pocketing.md).
 - Status: OPEN (Arbiter)
+### P-055: Actuators: shoulder_roll contract row drops the slip clutch (R-120)
+- Date: 2026-10-21
+- Module / proposer: Actuators / RL Actuators
+- Affected owners: Arms & Hands, Arbiter
+- Change: CONTRACTS shoulder_roll row "rotary + 300 N·m slip clutch" → "rotary"; envelope "74 × 87 (+ clutch, TBD)" → "74 × 87 (CRBH 7013 A seat flange Ø108 per R13)".
+- Impact on contracts: mass 0 (clutch was never booked); torque basis CSG-25-100 momentary 369 N·m, gate Mx ≤ 351 N·m at ×1.05.
+- Impact on targets: none.
+- Evidence: actuators/forearm_roll_torque.py, results/FOREARM_ROLL_TORQUE.md; R-120 (Mx 321 N·m, SF 1.10).
+- Affected owner response: pending
+- Status: open

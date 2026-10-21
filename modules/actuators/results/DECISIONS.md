@@ -808,3 +808,8 @@ Retention at 1.2 m/s:
   - +3.8 g per knee (6061 density; 4.0 g at 7075), +7.7 g robot.
   - Fin gap ≈ 13 mm.
 - **Ruling proposed:** YES to Ø12, but only with the boss grown Ø20 → Ø23 (outward only, same 7 mm). Its net mass is about −2 g robot vs Legs' Ø9 fallback (+10 g). In the plain Ø20 boss, NO (fatigue 1.15).
+
+## D81 (Robot Lab job1 a556d44) "Forearm-roll" 566–773 N·m is the superseded shoulder_roll pad case
+- Job1 Mx is spin about the **shoulder_roll** axis from the side-fall pad (9.17 kN, pad 64 mm off-axis, CRBH 6013). Not the D76 wrist roll; forearm cap unaffected. Superseded by R-120/R-121 (Z −20, CRBH 7013 A): Mx 321 N·m, CSG-25-100 SF 1.09 at ×1.05, ratchet 650 SF 1.93, s0 2.04–2.31.
+- Options costed (`results/FOREARM_ROLL_TORQUE.md`): CSG-32 +≈1.1 kg pair [EST incl. housing], CSG-40 +2.56 kg gears alone, SHG same ratings heavier, clutch 1.6–4.0 kg (R-057), current limit gives no impact credit.
+- Decision: keep CSG-25-100 + CRBH 7013 A, no clutch; P-055 removes the clutch from the shoulder_roll contract row. Gate Job 8 Mx ≤ 351 N·m; fallbacks CSG-25-120 (0 kg) then CSG-32-100.
