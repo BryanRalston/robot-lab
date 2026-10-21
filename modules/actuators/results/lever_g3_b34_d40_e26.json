@@ -1,0 +1,21 @@
+{
+ "tag": "g3_b34_d40_e26",
+ "b": 34.0,
+ "d0": 40.0,
+ "d1": 21.0,
+ "ear_dia": 26.0,
+ "fillets": [
+  "lower web/arm R8 on 4 edges",
+  "upper web/arm R8 explicit blend (|x|=17, |y|=38.5, z -24..-6), 4 places",
+  "ear root R5 explicit blend (|x|=12.9, |y|=50), 4 places"
+ ],
+ "R_upper": 8.0,
+ "R_lower": 8,
+ "R_ear": 5.0,
+ "valid": true,
+ "volume_mm3": 175164.0,
+ "mass_kg": 0.5207,
+ "step": "cad/hip_pitch_lever_g3_b34_d40_e26.step",
+ "rod_min_mm": 1.18,
+ "solids": 2
+}

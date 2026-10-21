@@ -434,3 +434,9 @@ All keep R-076 (reinforced isolation, IEC 60664-1 creepage, IP2X), R-074 (main l
 - Evidence: design/cad/covers/knee_fin_guard.py/.json/.stl, r143_knee_sweep.py/.json (min 7.8 mm rods at knee 141° with chamfer [EST]; 2.5 mm FAIL without); V5_COVER_SET.md R-143 section.
 - Affected owner response: pending (Actuators UA with guard; Legs placement/inserts/fall)
 - Status: open
+
+### P-155: Actuators: hip-pitch lever G3-R2: section b30/d36 → b34/d40, R8 upper + R5 ear blends, +0.113 kg (D92)
+- **Why:** job2 (334e848) FAILED with a singular unfilleted upper web/arm edge, and the near-corner field (116–157 MPa design) puts the nominal amplitude at about 54 MPa. Even with R8 (Kt ≈ 1.35) that is ≈ 73 against 58, so a fillet alone is not enough (this contradicts the L69 estimate).
+- **Change:** b34/d40/d1 21. R8 on the upper web/arm edges and R5 on the ear roots (both sides). Estimated peak 119 MPa, amplitude 53 MPa [EST]. RV12 rod 1.18 mm. 7075-T651 2.5 in, single-path 271 ST.
+- **Mass:** 0.4642 → 0.5207 kg per lever, **+0.113 kg robot** (over the 0.005 freeze). This sits inside Legs L47's b35/d40 fallback booking (+0.242 vs the old baseline), so it depends on what is currently booked for the lever.
+- **Gate:** the G3-R2 FEA (brief GROKBUILD_lever_fea_r031.md §G3-R2) has to converge with amplitude ≤ 58 at both the upper R8 and the ear R5.

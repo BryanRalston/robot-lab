@@ -13,3 +13,21 @@ Pitch -45..+40 and -60..+40 identical: Lmin 262.6, Lmax 374.3, stroke 111.7, nee
 
 ## D91 (Thermal R131 rev 2 16f8176) Heat plates rev 3: knee plate as finned thigh-shell window
 Rev 2 knee FAILED (1.17 mm fin gaps dead, ≈107–112 °C). The plate is flipped: drives on the femur side, outer black face at the 26 mm boundary, 8 × 13 × 1 fins at 6 mm pitch in the open stream (13 mm beyond L51; 12 mm minimum). UA 0.203 W/K, 71.5 °C duty h8, femur gap 7 mm with foil shield, ≈0.3 W to the femur [EST]. Fitting inside 26 mm is not achievable on Thermal's basis. Interface condition: the hip pitch/ankle/shoulder plate back faces see ≤50 °C structure, never the hip-pitch housing (no assembly CAD yet to verify). Mass 0.355 kg, +0.016 vs R-140 (P-153 updated). Legs/ID envelope change needed.
+
+## D92 (job2 334e848 G3 FAIL, Legs L69/L70) Hip-pitch lever: R8/R5 blends + section b34/d40
+The job2 singular point was the unfilleted upper web/arm edge at |y| 38.5 (−15.7, 38.6, −10.0); the ear root was the second hot spot.
+
+**Hand check:** the RC FEA field 3–12 mm from that corner reads 116–157 MPa at design (p99.9 120.6). Nominal ≈ 120 MPa gives a 54 MPa amplitude. This contradicts the L69 50 MPa / 22.4 MPa amplitude [EST]. With R8 (Peterson shoulder fillet, r/d 0.24–0.27, Kt ≈ 1.3–1.42) the b30 local amplitude would be ≈ 70–76 MPa against 58, so the fillet alone FAILS and the section must grow.
+
+**Chosen design:**
+- b34/d40/d1 21, ear Ø26.
+- R8 upper blend and R5 ear blend, both built as explicit concave solids (BRep fillet fails on the loft edges); lower R8 kept.
+- The nominal scales 1/(d·b²) by 0.70, giving 88 MPa design / 39 MPa amplitude, then × Kt 1.35 gives a **peak ≈ 119 MPa, amplitude ≈ 53 MPa against 58** (9 % margin) [EST].
+- Ear-root amplitude ≈ 48–64 MPa [EST]: at risk, and the FEA decides.
+- b36/b38 and ear Ø32/34 were rejected: the RV12 rod sweep falls to 0.5–0.83 mm (<1.0). b34 gives 1.18 mm. Fillets on b30 leave the rod at 1.94.
+
+**Mass:** 0.5207 kg per lever against 0.4642 RC, so **+0.0565 per lever, +0.113 kg robot** (2 levers) → P-155. The RC + blends only would be +0.003 per lever.
+
+**Stock (L70):** 7075-T651 2.5 in plate. Each solid is 60 × 61.5 × 93 (+3 stock = 63 ≤ 63.5). x ∥ ST, arm plane L/LT. Single-path allowable 271 ST / 294 LT (R-128); the 119 peak passes even T7351's 239. STOCK_GRAIN line 13 (`hip_pitch_lever_r50`, 1.0 in T651 313) is the superseded lever and does not apply. The new row is below.
+
+Re-run brief: GROKBUILD_lever_fea_r031.md §G3-R2.

@@ -24,3 +24,43 @@
 **If it fails:**
 - Go to the b35/d40 fallback (Legs L47 mass +0.242 robot).
 - If that fails, use 17-4PH H1025, per R-031 §6.
+
+---
+# Re-run brief G3-R2 (D92, after job2 334e848 FAIL) — supersedes the geometry, allowable and convergence sections above
+**Geometry:** `modules/actuators/cad/hip_pitch_lever_g3_b34_d40_e26.step` (made by `lever_g3_fillet.py`, B=34 D0=40 D1=21 ED=26 RU=8 RE=5 XE=12.9). It is the Legs L47 merged web resized b30/d36 → **b34/d40**, with these blends:
+- the lower web/arm R8, as before;
+- **R8 on the upper web/arm edge** (|x| 17, |y| 38.5, z −24…−6; this was the job2 singular point at (−15.7, 38.6, −10.0)), on both sides;
+- **R5 on the ear/arm root** (|x| 12.9, |y| 50, z −60…−40; the job2 L2 and b35 hot spot), on both sides.
+
+It is 2 valid solids, 175,164 mm³, **0.5207 kg per lever** by the same mass rule. RV12 rod sweep min 1.18 mm (≥1.0 OK). For comparison: `hip_pitch_lever_g3_b30_d36_e26.step` is the RC with the blends only, 0.4672 kg, rod 1.94. Run it as case B so we can see what the fillet alone does.
+
+**Material / allowables (L70):** 7075-T651 plate, 2.5 in (each solid 60 × 61.5 × 93; 63 mm with stock ≤ 63.5). Plate thickness runs along x (= ST); the arm y–z plane is L/LT. The part is single-path, so the static pass is the R-128 band value **≤ 271 MPa** (ST, 2.001–2.5 in), which replaces the 320 multi-path value. If Materials moves it to T7351, use 239. Fatigue: hot-spot von Mises amplitude **≤ 58 MPa** at 2030 N/pin, R = −1 (unchanged).
+
+**Mesh for the 15 GB WSL cap:** gmsh Ball fields **radius 4 mm, thickness 4 mm** (the job2 setting, 235k tets / 1.03M dofs at the finest level), centred on these points only (no others):
+- the 4 upper R8 blends, at (±17+…, ±38.5±4, −14)
+- the 4 ear-root R5 blends, at (±13, ±48, −52)
+- the 4 lower R8 blends
+- the 2 bore lips
+
+Levels:
+| level | h | hloc |
+|---|---|---|
+| 1 | 4 | 1.5 |
+| 2 | 3 | 1.0 |
+| 3 | 2.5 | 0.6 |
+
+At 0.6 there are ≥13 elements across the R8 and ≥8 across the R5. If a level goes over about 300k tets, drop to Ball radius 3 mm rather than coarsen hloc.
+
+**Convergence criterion:** at the governing hot spot, the peak must change by **< 5 % between levels 2 and 3**. Also:
+- the p99.9 must be ≥ 0.75 × the element max, otherwise it is still singular;
+- the same hot-spot location must govern at levels 2 and 3, within 2 mm.
+
+Also report the von Mises at 2 mm and 4 mm from the hot spot, normal to the surface, for the hand-Kt cross-check.
+
+If it isn't converged, report it as singular with its location. Don't extrapolate.
+
+**Hand estimate (D92) to beat:**
+- **upper R8:** nominal ≈ 88 MPa design / 39 MPa amplitude, Kt 1.35, giving **peak ≈ 119 MPa, amplitude ≈ 53 MPa**;
+- **ear R5:** amplitude ≈ 48–64 MPa [EST], which is the at-risk spot.
+
+**If it fails:** report the hot spot. The next step is ear Ø26 → 28 with R5 (the rod sweep needs re-checking: Ø32 gave 0.5 mm), not 17-4PH.
