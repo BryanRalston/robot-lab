@@ -428,9 +428,9 @@ All keep R-076 (reinforced isolation, IEC 60664-1 creepage, IP2X), R-074 (main l
 - Date: 2026-10-21
 - Module / proposer: Design / RL Industrial Design
 - Affected owners: Actuators, Legs, Thermal, Test & Reliability, Arbiter
-- Change: thermoformed 1.5 mm PC cap over the 100×48 knee-plate window, 24.5 mm proud, 3.5 mm slots (33.8 cm² open), fin-to-inner-face 10 mm, 4× M2.5 A2 captive into window-frame inserts; drive-bay panel gets the 100×48 window.
+- Change (rev 4, Thermal 44b7c36): thermoformed 1.5 mm PC cap over the 100×48 knee-plate window, 29.5 mm proud (fins 18 mm + 10 mm air + 1.5), 4.0 mm slots 64 % open (46.4 cm²), ends open, low-ε (≤0.1) Al inner face, outer in cover colour; 45°×8 mm lower outer-edge chamfer (+ fin-end taper, Actuators) for RV12 rod clearance; 4× M2.5 A2 captive into window-frame inserts; drive-bay panel gets the 100×48 window.
 - Impact on contracts: none (no mechanism change); envelope 24.5 mm proud at the femur rear.
-- Impact on targets: mass +0.020 kg pair [EST] (guard 0.039, window −0.019).
-- Evidence: design/cad/covers/knee_fin_guard.py/.json/.stl, r143_knee_sweep.py/.json (min 6.6 mm rods at knee 141° [EST]); V5_COVER_SET.md R-143 section.
+- Impact on targets: mass +0.011 kg pair [EST] (guard 0.030 incl. liner/paint, window −0.019); fin growth is Actuators'.
+- Evidence: design/cad/covers/knee_fin_guard.py/.json/.stl, r143_knee_sweep.py/.json (min 7.8 mm rods at knee 141° with chamfer [EST]; 2.5 mm FAIL without); V5_COVER_SET.md R-143 section.
 - Affected owner response: pending (Actuators UA with guard; Legs placement/inserts/fall)
 - Status: open

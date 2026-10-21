@@ -11,25 +11,29 @@
    52
   ],
   "flange_w": 4,
-  "proud_outer": 24.5,
-  "fin_h": 13,
-  "inner_face": 23.0,
-  "slot_w": 3.5,
-  "slot_pitch": 6.0,
-  "face_slot_len": 90,
+  "proud_outer": 29.5,
+  "fin_h": 18,
+  "inner_face": 28.0,
+  "slot_w": 4.0,
+  "slot_pitch": 5.5,
+  "face_slot_len": 96,
   "side_slot": [
-   3.5,
-   12,
+   4.0,
+   14,
    14
   ],
+  "ends_open": true,
+  "liner": "vapour-deposited Al (or 25 um Al foil PSA) on inner face, eps<=0.1 (Thermal 44b7c36)",
+  "outer_finish": "cover colour (V5 gold/graphite per panel), matte 2K paint 20 um",
   "x_plate": -34.5,
   "yc": 130,
   "zc": 740,
-  "fasteners": "4x M2.5 x6 A2-70 pan head, captive, into M2.5 heat-set inserts in the thigh-fairing window frame (non-structural)"
+  "fasteners": "4x M2.5 x6 A2-70 pan head, captive, into M2.5 heat-set inserts in the thigh-fairing window frame (non-structural)",
+  "lower_edge_chamfer": "45 deg x 8 mm on the outer z 690 edge (clears RV12 rods at knee 132-145); fin lower ends tapered 45 deg x 8 mm to keep the 10 mm standoff there (Actuators to confirm)"
  },
  "envelope_thigh_frame": {
   "x": [
-   -59.0,
+   -64.0,
    -34.5
   ],
   "y": [
@@ -42,26 +46,31 @@
   ]
  },
  "fin_tip_to_guard_inner_mm": 10.0,
+ "Thermal_ge10": true,
  "A35_fin_rule_ge8": true,
  "open_area_cm2": {
-  "face": 22.1,
-  "sides": 11.8,
-  "total": 33.8,
-  "A35_min_per_bay": 25
+  "face": 30.7,
+  "sides": 15.7,
+  "total": 46.4,
+  "A35_min_per_bay": 25,
+  "face_open_frac": 0.64,
+  "Thermal_min_frac": 0.6,
+  "ends": "open both z ends"
  },
  "IP2X": "3.5 mm slots: 12 mm test finger cannot enter; fin tips 10 mm behind the inner face (burn: T&R to re-run ISO 13732-1 on the PC outer face)",
- "kg_side_EST": 0.0195,
- "kg_pair_EST": 0.039,
+ "kg_side_EST": 0.0151,
+ "kg_pair_EST": 0.03,
  "confirm": {
   "Actuators": [
-   "fins unchanged 13 mm and plate face at x -34.5 (L51 26 mm boundary)",
+   "fins 18 mm (rev 4) and plate face at x -34.5 (L51 26 mm boundary)",
    "UA re-check with guard (R-143 2b, Thermal)",
-   "plate edge seal vs guard flange stack"
+   "plate edge seal vs guard flange stack",
+   "fin lower-end 45x8 mm taper under the guard chamfer (UA effect, Thermal)"
   ],
   "Legs": [
    "window frame inserts (4x M2.5) in the thigh fairing / drive-bay panel",
    "L51 plate placement y 130 +-24, z 690-790 (no assembly CAD)",
-   "knee lever eye r 47.5 and RV12 rod path; rod clearance 6.6 mm at 141 deg [EST]",
+   "knee lever eye r 47.5 and RV12 rod path; rod clearance at 29.5 mm envelope (see r143_knee_sweep.json) [EST]",
    "fall/side impact: guard sacrificial, drive bay stays closed (R-143 2c)"
   ]
  }

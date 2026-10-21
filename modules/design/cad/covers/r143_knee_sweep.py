@@ -1,4 +1,4 @@
-"""R-143 + T&R 447aa8e guard: envelope = guard outer face 24.5 proud of the plate (x -59.0), sides at the 100x48 window.
+"""R-143 + T&R 447aa8e guard (rev 4, Thermal 44b7c36: fins 18): envelope = guard outer face 29.5 proud of the plate (x -64.0), sides at the 100x48 window.
 R-143 (a01b3e6): knee heat-plate rev 3 (Actuators D91 194f615: 100x48 plate, 8 fins 13x1.0 @6.0 pitch, fins out) ROM sweep.
 No assembly CAD places the plate (Actuators note), so the plate is placed from committed Legs data (thigh frame = world at zero pose):
  - L51 box on the femur rear, z 688-792, 26 deep from the band clamp face x -8.5 -> plate outer face x -34.5; fins to x -47.5;
@@ -15,8 +15,10 @@ H = os.path.dirname(os.path.abspath(__file__)); V = os.path.join(H, '../../../le
 ld = lambda f: np.load(os.path.join(V, f+'_pts.npy'))
 # fin envelope (tips plane + sides), sampled
 fy, fz = np.meshgrid(np.linspace(106, 154, 9), np.linspace(690, 790, 21))
-FIN = np.c_[np.full(fy.size, -59.0), fy.ravel(), fz.ravel()]
-FIN = np.vstack([FIN] + [np.c_[np.full(fz.size, x), fy.ravel(), fz.ravel()] for x in (-34.5, -41.0, -47.5, -53.0)])
+FIN = np.c_[np.full(fy.size, -64.0), fy.ravel(), fz.ravel()]
+FIN = np.vstack([FIN] + [np.c_[np.full(fz.size, x), fy.ravel(), fz.ravel()] for x in (-34.5, -41.0, -47.5, -53.0, -58.5)])
+CH = 8.0   # P-154 rev 4: 45 deg chamfer CH mm on the guard's lower (z 690) outer edge, clears the RV12 rods at deep flexion
+FIN[:, 0] = np.maximum(FIN[:, 0], -64.0 + np.maximum(0, (690 + CH) - FIN[:, 2]))
 def Ry(P, th, c):
     t = np.radians(th); x, z = P[:, 0]-c[0], P[:, 2]-c[1]
     return np.c_[x*np.cos(t)+z*np.sin(t)+c[0], P[:, 1], -x*np.sin(t)+z*np.cos(t)+c[1]]
@@ -30,13 +32,13 @@ for a in range(0, 146):
     S = Ry(shank, a, (0, 500)); eye = Ry(np.array([[-47.5, 130, 500]]), a, (0, 500))[0][[0, 2]]
     rod = float(seg_d(FIN[:, [0, 2]], np.array([-130., 770.]), eye).min() - 6)
     knee.append(dict(deg=a, shank_keepouts=round(mind(FIN, S), 1), rods=round(rod, 1)))
-hous = round(float(-59.0 - (-130 + 42.5 + 9)), 1)
+hous = round(float(-64.0 - (-130 + 42.5 + 9)), 1)
 hip = []   # pelvis-fixed hardware: pelvis shell underside z 1126 (model_v4 pelvis_bot); hip skirt is flexible P-023 fabric over the thigh
 for a in range(-105, 41):
     hip.append(dict(deg=a, hip_skirt=round(float(1126 - Ry(FIN, a, (0, 920))[:, 2].max()), 1)))
 kmin = min(knee, key=lambda r: min(r['shank_keepouts'], r['rods'])); hmin = min(hip, key=lambda r: r['hip_skirt'])
 out = dict(assumptions=__doc__, knee_min=kmin, hip_min=hmin, housing_fin_tips_static_mm=hous,
-           seated_fin_above_seat_mm=round(-59.0 - (-197), 1), A35_static_cover_inner_face_to_fins="n/a: fins pass through a sealed window (no cover over them); window edge seal to plate base",
+           seated_fin_above_seat_mm=round(-64.0 - (-197), 1), A35_static_cover_inner_face_to_fins="n/a: fins pass through a sealed window (no cover over them); window edge seal to plate base",
            gate_mm=3, knee=knee, hip=hip)
 json.dump(out, open(os.path.join(H, 'r143_knee_sweep.json'), 'w'), indent=1)
 print(json.dumps({k: out[k] for k in ('knee_min', 'hip_min', 'housing_fin_tips_static_mm', 'seated_fin_above_seat_mm')}))
