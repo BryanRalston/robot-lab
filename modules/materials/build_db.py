@@ -50,6 +50,7 @@ S={
  "EC9323":"https://multimedia.3m.com/mws/media/820935O/3m-scotch-weld-9323-b-a.pdf ; service range: https://www.viba.nl/media/files/tds/tds0001188.pdf",
  "DP420":"https://multimedia.3m.com/mws/media/2365743O/3m-scotch-weld-epoxy-adhesive-dp420-black.pdf",
  "DP460":"https://multimedia.3m.com/mws/media/2365880O/3m-scotch-weld-epoxy-adhesive-dp460-off-white.pdf ; https://bac-online.com/content/PDF/DP460-TDS.pdf",
+ "LUX_DS490":"https://www.luxfermeltechnologies.com/wp-content/uploads/2026/05/DS-490-Elektron-43-0526.pdf (Elektron 43 extruded T5; A-basis L spec minima; states MMPDS-08 A/B for extrusion and plate)",
  "R027":"modules/RULINGS.md R-027 (PALSUN/LEXAN, Toray 3900, Easy Composites XC110 citations)",
 }
 def M(id,name,where,rho=None,E=None,ys=None,uts=None,fat=None,elong=None,tmax=None,other=None,cost=None,src=(),notes=""):
@@ -138,6 +139,9 @@ DB=[
  M("EC9323","3M Scotch-Weld EC-9323 B/A epoxy","R-110 candidate (rejected)",None,None,None,None,None,None,None,{"OLS_23C_MPa":36,"OLS_80C_MPa":22,"OLS_120C_MPa":4,"OLS_CFRP_23C_MPa":28,"service_C":"-55 to 82"},None,["EC9323"],"Cliff between 80 and 120C; 82C service ceiling gives no margin."),
  M("DP420","3M Scotch-Weld DP420 epoxy","R-110 candidate (rejected)",None,1.87,None,None,None,None,None,{"OLS_82C_MPa":2.7,"OLS_49C_MPa":12.9,"Tg_C":81},None,["DP420"],"10% retention at 82C: rejected."),
  M("DP460","3M Scotch-Weld DP460 epoxy","R-110 candidate (rejected)",None,None,None,None,None,None,None,{"OLS_23C_MPa":24,"OLS_82C_psi":"700-1400 (15-60 min soak, legacy TDS)"},None,["DP460"],"Low hot strength; Tg not on current TDS: rejected."),
+ M("MG_EL43_T5","Elektron 43 (WE43C, UNS M18434) extruded T5, AMS 4485","actuator housings (R-131 candidate)",1.83,44.1,"195 A-basis L (typ L 243, T 183)","303 A-basis L (typ L 352, T 305)","195 max @R0.1 5e7 (typ)","6 (A min) / 11.5 typ",250,
+   {"Fbry":"not published","R125b_single_path_MPa":"130 (L, extruded bar) / 98 [EST] transverse or plate","k_W_mK":57.6,"CTE_um_mK":25.6},None,["LUX_DS490"],
+   "A-basis values are longitudinal extrusion only (DS-490). Plate and transverse A-basis are in MMPDS-08 (not accessed). Not in MIL-HDBK-5H. See MG_GALVANIC_PLAN.md."),
  M("BRG_STEEL","Bearing steel (GE 12 C inner ring, CRBH, IKO)","bearings",None,None,None,None,None,None,None,{},None,["SKF_GE12C"],"Catalog parts; masses from catalogs."),
 ]
 json.dump({"version":"R1 2026-10-14","owner":"RL Materials","sources":S,"materials":DB},open("MATERIALS_DB.json","w"),indent=1)
