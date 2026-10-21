@@ -216,3 +216,12 @@ def combine_min(*limit_sets):
 def sit_timing_margin(dTdt_K_s, sit_s, latency_s=0.05, t_stop=84.0, t_trip=85.0):
     """Seconds left before the drive's own trip after the sit completes (positive = OK)."""
     return (t_trip - t_stop) / dTdt_K_s - (sit_s + latency_s)
+
+
+def default_tau_nominal():
+    """Joint torque at the commissioned (nominal) limit, N·m, keyed by joint name. Uses the CONTRACTS R1.2
+    available peaks / MJCF ctrlranges already baked into modules/legs/rl/gains.npz (tau_lim). That equals
+    Kt*ratio*I_nom only if the commissioned limit is set to the contract peak [EST until commissioning]."""
+    import numpy as np
+    g = np.load(os.path.join(HERE, '..', '..', 'legs', 'rl', 'gains.npz'))
+    return {str(n): float(t) for n, t in zip(g['joint_names'].tolist(), g['tau_lim'])}

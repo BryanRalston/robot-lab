@@ -5,5 +5,31 @@
   "elbow_accel_scale_full_reach": 0.84,
   "fall_config": "modules/controls/fall/fall_config.json",
   "shoulder_roll_soft_limit_deg": 127,
-  "shoulder_roll_soft_limit_ref": "R-133; source of truth limits/soft_limits.json (abduction only, mirrored)"
+  "shoulder_roll_soft_limit_ref": "R-133; source of truth limits/soft_limits.json (abduction only, mirrored)",
+  "drive_thermal_derate": {
+    "ruling": "R-141 (e8b74e7); Electronics \u00a718.5 P-055 23f6992 + addendum 430684c",
+    "t_start": 75.0,
+    "t_half": 82.0,
+    "scale_min": 0.5,
+    "t_stop": 84.0,
+    "t_resume": 78.0,
+    "t_drive_trip": 85.0,
+    "temp_source": "0x22A2:00",
+    "temp_source_note": "primary: 0x22A2:00 UINT16 degC RO mappable in the 1 kHz TxPDO; candidate 0x22A3:1-4 (bench compare vs TI[1] via EAS); fallback 'sdo' 10 Hz round-robin. Object indices owned by Electronics; UNCONFIRMED until bench.",
+    "loop_hz": 1000.0,
+    "sdo_hz": 10.0,
+    "stale_s_pdo": 0.02,
+    "stale_s_sdo": 0.5,
+    "stale_scale": 0.5,
+    "stale_stop_s": 5.0,
+    "max_rate_K_s": 3.0,
+    "jump_floor_K": 2.0,
+    "jump_confirm": 3,
+    "limit_object": "0x6072",
+    "limit_object_note": "0x6072 Max torque (RxPDO 0x160D/0x1605), per-mille of 0x6075 [bench-verify]; alternative 0x6073 Max current (0x160E). CL[1]/PL[1] stay commissioned: never written, never SV.",
+    "nominal_permille": 1000,
+    "sit_timeout_s": 3.0,
+    "module": "limits/drive_thermal_derate.py",
+    "doc": "limits/DRIVE_DERATE.md"
+  }
 }
