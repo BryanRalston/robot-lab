@@ -1422,3 +1422,7 @@ Evidence: against Torso's real cover, 3 mm clearance is lost at 130° roll at al
 
 ## R-139 — Shoulder roll bearing seat housing (Actuators D88 addendum 85787c9) — 2026-10-21
 The +0.36 pair bearing delta is confirmed by catalog (IKO 4010 0.15 vs 7013 0.38 kg), so R-137 §3 stands as cited. The roll housing resized for the 7013 seat is (0.450 - 0.269) × 2 = 0.362 pair, less R-121's +0.075 = +0.287 pair, booked at full as an addition. If Arms' R13 roll-housing CAD mass exists, it replaces this figure when Arms publishes it. Credible mass ~67.98 → ~68.27 kg.
+
+## R-140 — Drive heat plate CAD (Actuators D89 eb575a5) — 2026-10-21
+1. Plates measured at 0.298 [CAD] plus 0.041 [EST] standoffs/screws, net of the R-066 knee plates 0.300 vs 0.256 implied by R-136. The +0.044 excess is booked at full under R-137 §2. Credible mass ~68.27 → ~68.31 kg.
+2. Knee plate at 0.0273 m² (9% under target, depth-limited by L51) is ACCEPTED, because the evidence that governs is the temperature, not the area: at duty (h 8) every plate is ≤75.3 °C, under the 85 °C limit. Continuous carry above 85 °C on the knee, hip pitch and ankle plates is not a design point; it is covered by the R-136 derate. Conditions: Thermal confirms the h 8 coefficient for the vent stream, and Controls' duty sim shows the TARGETS kitting duty cycle completes without hitting the 75 °C derate start, or with derate losses inside the torque margin. G3 stays open until both pass.
