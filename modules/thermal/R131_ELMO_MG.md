@@ -154,3 +154,61 @@ Actuators credits both faces at h 8 to 35 °C air. In reality the back face sees
 | sub-5 mm fin gaps | ≈ 0 between the fins | **no** |
 
 **Verdict:** h 8 is defensible and conservative for exposed, black-anodised plate faces, walking or standing, with surroundings ≤ 40 °C. It is **not** defensible for fin channels under 5 mm, for faces inside closed boxes, or for faces looking at warm structure; those need the explicit treatment above. The h 8 vent-stream value also still depends on the Controls duty sim (open R-140 item).
+
+## Rev 3: Actuators D91 (194f615) knee drive plate as a thigh-shell window (2026-10-21 08:46 EDT)
+Script: `modules/thermal/r131_rev3_knee_window.py`. Basis as in rev 2: 2 × 6.0 W at carry, duty 0.6, pad 0.3 K/W, air 35 °C, femur 45 °C [EST].
+
+**Fins** (8 × 13 × 1 mm, 6061):
+- Efficiency η = 0.994. PASS.
+- With 5 mm gaps the channels work. That is not true of the 1.17 mm gaps in rev 2.
+
+**Outer UA, which depends on flow:**
+
+| condition | outer UA (W/K) | basis |
+|---|---|---|
+| Actuators claim | 0.203 | h 8 |
+| walking, 0.2 m/s in the channels | 0.143 | developing laminar Nu ≈ 20 W/m²K; the air in the channels heats up as it passes (heat-capacity limit) |
+| walking, 0.4 m/s in the channels | 0.231 | same |
+| standing still | 0.124 | Elenbaas, s 5 mm: h 3.4 + radiation from the envelope |
+
+- **Walking:** h 8 is reasonable if the leg swing gives ≥ 0.3 m/s along the fins.
+- **Standing still:** h 8 is **optimistic**; the equivalent is ≈ h 5.
+- **Fin orientation:** axial fins are vertical when standing, which is good. Keep them axial, never circumferential.
+
+**Other heat paths:**
+- **Femur gap, 7 mm, bare 6061 (ε 0.1) / Al foil (ε 0.05):** radiation is negligible (≈ 0.3 W/m²K). Gas conduction plus convection gives G ≈ 0.027 W/K, so **0.3–0.9 W into the femur at duty** (claim 0.3; it is 0.3 only at h 12). PASS.
+- **Shell-window joint:** the PC shell acts as a poor fin, G ≈ 0.016 W/K, so ≈ 0.4–0.7 W goes into the shell.
+  - The shell edge reaches the plate temperature and falls to air within ≈ 5 mm (1/m).
+  - PC at ≤ 78 °C at duty and ≤ 105 °C at continuous standing is under its ~115 °C continuous rating. PASS.
+  - Use a gasket and keep the screws away from thin ribs.
+
+**Drive base (°C):**
+
+| outer UA | duty | continuous |
+|---|---|---|
+| h 8 claim | 65.0 | 84.3 |
+| walking, low (0.143) | 73.7 | 98.6 |
+| walking, high (0.231) | 62.2 | 79.7 |
+| standing (0.124) | **77.7** | 105.2 |
+| h 12 | 56.9 | 70.9 |
+
+- **At duty: PASS** (≤ 80 °C). Standing in carry goes past the 75 °C derate start, so the derate (R131) takes effect.
+- **Continuous carry: FAIL** at h 8 and standing; the derate is still required (unchanged from R131). At h 12 it is 70.9 °C, a PASS.
+
+**Femur bond:** T2_68KG plus Mg is 67.9 °C, plus this leak at 0.67–1.33 K/W [EST from rev 2] gives **68.2–69.1 °C ≤ 70. PASS**, with 0.9–1.8 K margin. Keep the foil and the bare inner face; do not anodise the inner face.
+
+**Outer surface:**
+- **Touch: FAIL as drawn.**
+  - Fins run ≈ 1 K under the drive base: 56–78 °C at duty, up to 104 °C continuous standing.
+  - Bare/anodised metal burn thresholds (ISO 13732-1) are ≈ 65–70 °C for 1 s and ≈ 55–60 °C for 10 s. The thigh is a handling and grab zone.
+  - Fix with either:
+    1. a ventilated PC/nylon guard over the fins, ≥ 50 % open with ≥ 5 mm standoff (h drops ≈ 10–20 % [EST]; re-check), or
+    2. a firmware touch cap: base ≤ 60 °C whenever the robot is in human-contact modes.
+  - Mark the area hot regardless.
+- **Snag/sharp edges:** 13 mm × 1 mm fins on an outer surface catch clothing and cables and can cut. The guard fixes this too; at minimum use tip radii ≥ 0.5 mm and chamfered fin ends.
+- **ID/styling:** Legs/ID must accept a 13 mm protrusion and a 100 × 48 window (open item). An ingress (IP) rating applies to the window seal.
+
+**Verdict:**
+- Thermal: **PASS at duty**, conditional on ≥ 0.3 m/s walking flow, the derate for standing and continuous carry, and keeping the foil and bare inner face.
+- Femur bond and shell: PASS.
+- **Outer surface: FAIL (touch and snag) until a guard or touch cap and ID acceptance.**

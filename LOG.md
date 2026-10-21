@@ -23,3 +23,4 @@
 
 - 2026-10-21 Legs L68: knee web → hand forging (R-137 §6/R-138), P-152 sleeve OD 46.80 accepted pending Actuators co-sign.
 2026-10-21 08:55 RL Thermal: R-131 rev 2 (D90 heat plates) → R131_ELMO_MG.md: knee plate FAIL (1.17 mm fin gaps dead; base 107–112 °C duty h8, 151–158 cont; femur gap not the driver, min 3 mm; ~3 W into femur, bond ≈70–72); hip_pitch 84 mm 68.8 °C duty h8 PASS only if back face sees ≤50 °C structure; R-140 h8 OK for exposed black faces walking/standing, not for <5 mm channels/enclosed faces
+2026-10-21 09:05 RL Thermal: R-131 rev 3 (D91 knee shell-window plate) → R131_ELMO_MG.md: fins η .994; outer UA 0.14–0.23 walking, 0.12 standing (h8 optimistic standing); base duty 62–78 °C PASS, cont 80–105 FAIL→derate; femur 0.3–0.9 W, bond 68.2–69.1 PASS; shell PASS; touch/snag FAIL until guard or 60 °C touch cap + ID OK
