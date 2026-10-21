@@ -1,81 +1,63 @@
 {
- "P": "P-053 (proposed)",
- "supersedes": "L30 / a14_r7 thigh pin panel 60x70 front + 40x50 rear push-through (0.018 kg/leg)",
- "basis": "Legs L63-R (504082f): 8 x o7x10 42CrMo4 radial, H7/m6 bonded (638/648), rows z 8.25/25.75, row 2 at +45 deg",
- "design": "Removable 1.5 mm PC band segment of the P-020 thigh fairing, 50 mm tall centred on collar mid, 218 deg arc (az -64..154, 0=front, 90=outboard) at r~45; 8 mm lands, 6 x M3 captive quarter-turn. Removing it exposes every pin under the front+outboard arc with >= 40 mm radial line-of-sight and o15 tool envelope; rear pin via the kept 40x50 window (now open, no panel); inboard pins face the open inter-thigh zone. No push-through path needed (pins are single-wall, blind).",
- "tool": "M3 tapped extractor + slide hammer, radial; heat release (Loctite 638/648 release needs local heat ~250 C: band open gives hot-air nozzle line of sight); install with o6.5 drift",
+ "P": "P-053 (proposed, rev 2)",
+ "supersedes": "L30 / a14_r7 thigh pin panel 60x70 + 40x50 rear panel; and P-053 rev1 218 deg band (deleted)",
+ "basis": "Legs L63-R confirmed 2026-10-20: angles as assumed, M3-tapped ends; bench-only extraction with thigh dismounted",
+ "design": "No dedicated access panel. L30 hatch and the rev1 218 deg band are deleted; the P-020 front half is a continuous skin over the collar. Bench service: remove the front and outboard P-020 halves (own fasteners, independent of L30), dismount thigh, extract radially with M3 extractor. Rear 40x50 window stays an open hole (no panel).",
  "pins": [
   {
    "z_mm": 8.25,
    "az_deg": 0,
-   "access": "through P-053 band (removed)",
-   "radial_free_mm": ">=40",
-   "tool_env_d_mm": 15.0
+   "coverage": "under P-020 fairing",
+   "covered": true
   },
   {
    "z_mm": 8.25,
    "az_deg": 90,
-   "access": "through P-053 band (removed)",
-   "radial_free_mm": ">=40",
-   "tool_env_d_mm": 15.0
+   "coverage": "under P-020 fairing",
+   "covered": true
   },
   {
    "z_mm": 8.25,
    "az_deg": 180,
-   "access": "rear open window 40x50 (kept, unpanelled)",
-   "radial_free_mm": ">=40",
-   "tool_env_d_mm": 15.0
+   "coverage": "rear 40x50 open window (exposed)",
+   "covered": false
   },
   {
    "z_mm": 8.25,
    "az_deg": 270,
-   "access": "inboard open zone (inter-thigh gap, no fairing)",
-   "radial_free_mm": ">=40",
-   "tool_env_d_mm": 15.0
+   "coverage": "inboard open zone (exposed, no fairing)",
+   "covered": false
   },
   {
    "z_mm": 25.75,
    "az_deg": 45,
-   "access": "through P-053 band (removed)",
-   "radial_free_mm": ">=40",
-   "tool_env_d_mm": 15.0
+   "coverage": "under P-020 fairing",
+   "covered": true
   },
   {
    "z_mm": 25.75,
    "az_deg": 135,
-   "access": "through P-053 band (removed)",
-   "radial_free_mm": ">=40",
-   "tool_env_d_mm": 15.0
+   "coverage": "under P-020 fairing",
+   "covered": true
   },
   {
    "z_mm": 25.75,
    "az_deg": 225,
-   "access": "inboard open zone (inter-thigh gap, no fairing)",
-   "radial_free_mm": ">=40",
-   "tool_env_d_mm": 15.0
+   "coverage": "inboard open zone (exposed, no fairing)",
+   "covered": false
   },
   {
    "z_mm": 25.75,
    "az_deg": 315,
-   "access": "through P-053 band (removed)",
-   "radial_free_mm": ">=40",
-   "tool_env_d_mm": 15.0
+   "coverage": "under P-020 fairing",
+   "covered": true
   }
  ],
- "interface_asks_to_legs": [
-  "Confirm pin clocking row1 0/90/180/270, row2 45/135/225/315 (az 0 = +x front)",
-  "Pin outer end tapped M3 (or flush with chamfer) for extraction",
-  "Confirm inboard gap >= 40 mm + tool at collar height (hip y spacing) [EST]"
- ],
- "mass_g": {
-  "band": 15.4,
-  "lands": 3.2,
-  "fasteners": 7.2,
-  "total": 25.8
- },
- "kg_per_leg": 0.0258,
+ "covered_count": 5,
+ "coverage_finding": "Fairing covers 5 of 8 pin ends (0,45,90,135,315). 180 (rear window) and 225/270 (inboard) are exposed as before: P-020 never covered rear/inboard at the collar. Flush bonded pins, cosmetic only; no IP/touch issue (passive steel). Add a 2-piece rear/inboard collar cover only if Robot Lab wants all 8 hidden.",
+ "kg_per_leg": 0.0,
  "old_kg_per_leg": 0.018,
- "delta_kg_per_leg": 0.0078,
- "delta_kg_robot": 0.016,
- "note": "Same basis as L30 (panel area counted, displaced fairing skin not credited). [EST] until A29 CAD."
+ "delta_kg_per_leg": -0.018,
+ "delta_kg_robot": -0.036,
+ "note": "[EST] until A29 CAD; fairing removal fasteners not yet defined in the repo (A29)."
 }

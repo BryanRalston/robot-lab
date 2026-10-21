@@ -40,7 +40,7 @@ out.append(dict(panel='shoulder impact pad R8 option B: replaceable 7075 tray on
 st=json.load(open(os.path.join(H,'sternum_plate.json')))
 out.append(dict(panel='sternum bezel P-052 (R-094): PC ring + gasket + seal; pad CF face (R-095 clear coat) is skin; TPU film removed R-113',P='P-052',material='PC 1.5 bezel',area_m2_side=0.0063,panels=1,kg=st['id_mass_kg'],cf_kg=None,note='replaces full plate 0.058; CF shell cut-out -0.045 separate; service: dent>1 mm or crush => replace pad'))
 pa=json.load(open(os.path.join(H,'thigh_pin_access_p053.json')))
-out.append(dict(panel='thigh collar radial pin access band P-053 (L63-R): replaces L30 60x70 + 40x50 push-through panels',P='P-053 (proposed)',material='PC 1.5 band segment of P-020 + 6 M3 quarter-turn',area_m2_side=0.0077,panels=2,kg=round(2*pa['kg_per_leg'],3),cf_kg=None,note=f"delta vs L30 {pa['delta_kg_robot']:+.3f} robot; [EST]"))
+out.append(dict(panel='thigh pin access P-053 rev2 (L63-R): no panel; L30 hatch + rear panel deleted, bench-only extraction',P='P-053 (proposed)',material='none (P-020 continuous skin)',area_m2_side=0.0,panels=2,kg=round(2*pa['kg_per_leg'],3),cf_kg=None,note=f"delta vs L30 {pa['delta_kg_robot']:+.3f} robot; [EST]"))
 json.dump(dict(rows=out,totals={k:round(v,3) for k,v in tot.items()},booked_P020_skin_kg=1.157,delta_vs_booked_kg=round(sum(tot.values())-1.157,3),measured=False,pc_area_m2=round(sum(r['area_m2_side']*(2) for r in out if r['P']=='P-020'),3)),open(os.path.join(H,'cover_set_v5.json' if TRIM else 'cover_set_v5_untrimmed.json'),'w'),indent=1)
 for r in out: print(r)
 print({k:round(v,3) for k,v in tot.items()})

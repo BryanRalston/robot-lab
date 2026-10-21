@@ -75,14 +75,14 @@
    "note": "replaces full plate 0.058; CF shell cut-out -0.045 separate; service: dent>1 mm or crush => replace pad"
   },
   {
-   "panel": "thigh collar radial pin access band P-053 (L63-R): replaces L30 60x70 + 40x50 push-through panels",
+   "panel": "thigh pin access P-053 rev2 (L63-R): no panel; L30 hatch + rear panel deleted, bench-only extraction",
    "P": "P-053 (proposed)",
-   "material": "PC 1.5 band segment of P-020 + 6 M3 quarter-turn",
-   "area_m2_side": 0.0077,
+   "material": "none (P-020 continuous skin)",
+   "area_m2_side": 0.0,
    "panels": 2,
-   "kg": 0.052,
+   "kg": 0.0,
    "cf_kg": null,
-   "note": "delta vs L30 +0.016 robot; [EST]"
+   "note": "delta vs L30 -0.036 robot; [EST]"
   }
  ],
  "totals": {
