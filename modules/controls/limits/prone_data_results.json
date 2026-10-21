@@ -1,0 +1,273 @@
+{
+ "kneel": {
+  "kneel_cog_height_m": 0.674,
+  "basis": "kinematic placement on knee pads + toes, trunk upright [EST]",
+  "pose": {
+   "hip_pitch": 0.0,
+   "knee": 1.57,
+   "ankle_pitch": 0.7
+  }
+ },
+ "lower_nominal": {
+  "mass": 68.0,
+  "friction": 1.0,
+  "pad_tc": 0.02,
+  "t_lower_s": 3.752,
+  "t_chest_contact_s": 3.273,
+  "chest_contact_speed_mps": 0.298,
+  "peak_chest_N": 1234.4,
+  "guard_ok": false,
+  "prone_static_N": {
+   "chest_pad": 412.4,
+   "knee_pads": 177.2,
+   "hands_arms": 24.9,
+   "feet": 30.2,
+   "other": 0.0
+  },
+  "prone_static_pct": {
+   "chest_pad": 64.0,
+   "knee_pads": 27.5,
+   "hands_arms": 3.9,
+   "feet": 4.7,
+   "other": 0.0
+  },
+  "total_N": 644.8,
+  "weight_N": 666.9
+ },
+ "lower_dr": [
+  {
+   "mass": 65.0,
+   "friction": 0.6,
+   "pad_tc": 0.005,
+   "t_lower_s": 3.756,
+   "t_chest_contact_s": 3.28,
+   "chest_contact_speed_mps": 0.309,
+   "peak_chest_N": 1741.9,
+   "guard_ok": false,
+   "prone_static_N": {
+    "chest_pad": 385.2,
+    "knee_pads": 176.5,
+    "hands_arms": 49.4,
+    "feet": 26.5,
+    "other": 0.0
+   },
+   "prone_static_pct": {
+    "chest_pad": 60.4,
+    "knee_pads": 27.7,
+    "hands_arms": 7.7,
+    "feet": 4.1,
+    "other": 0.0
+   },
+   "total_N": 637.6,
+   "weight_N": 637.4
+  },
+  {
+   "mass": 65.0,
+   "friction": 0.6,
+   "pad_tc": 0.02,
+   "t_lower_s": 3.758,
+   "t_chest_contact_s": 3.28,
+   "chest_contact_speed_mps": 0.309,
+   "peak_chest_N": 1235.2,
+   "guard_ok": false,
+   "prone_static_N": {
+    "chest_pad": 385.9,
+    "knee_pads": 176.8,
+    "hands_arms": 48.8,
+    "feet": 26.1,
+    "other": 0.0
+   },
+   "prone_static_pct": {
+    "chest_pad": 60.5,
+    "knee_pads": 27.7,
+    "hands_arms": 7.7,
+    "feet": 4.1,
+    "other": 0.0
+   },
+   "total_N": 637.6,
+   "weight_N": 637.4
+  },
+  {
+   "mass": 65.0,
+   "friction": 1.0,
+   "pad_tc": 0.005,
+   "t_lower_s": 3.756,
+   "t_chest_contact_s": 3.28,
+   "chest_contact_speed_mps": 0.309,
+   "peak_chest_N": 1741.9,
+   "guard_ok": false,
+   "prone_static_N": {
+    "chest_pad": 385.2,
+    "knee_pads": 176.5,
+    "hands_arms": 49.4,
+    "feet": 26.5,
+    "other": 0.0
+   },
+   "prone_static_pct": {
+    "chest_pad": 60.4,
+    "knee_pads": 27.7,
+    "hands_arms": 7.7,
+    "feet": 4.1,
+    "other": 0.0
+   },
+   "total_N": 637.6,
+   "weight_N": 637.4
+  },
+  {
+   "mass": 65.0,
+   "friction": 1.0,
+   "pad_tc": 0.02,
+   "t_lower_s": 3.758,
+   "t_chest_contact_s": 3.28,
+   "chest_contact_speed_mps": 0.309,
+   "peak_chest_N": 1235.2,
+   "guard_ok": false,
+   "prone_static_N": {
+    "chest_pad": 385.9,
+    "knee_pads": 176.8,
+    "hands_arms": 48.8,
+    "feet": 26.1,
+    "other": 0.0
+   },
+   "prone_static_pct": {
+    "chest_pad": 60.5,
+    "knee_pads": 27.7,
+    "hands_arms": 7.7,
+    "feet": 4.1,
+    "other": 0.0
+   },
+   "total_N": 637.6,
+   "weight_N": 637.4
+  },
+  {
+   "mass": 68.5,
+   "friction": 0.6,
+   "pad_tc": 0.005,
+   "t_lower_s": 3.749,
+   "t_chest_contact_s": 3.271,
+   "chest_contact_speed_mps": 0.299,
+   "peak_chest_N": 1727.6,
+   "guard_ok": false,
+   "prone_static_N": {
+    "chest_pad": 307.6,
+    "knee_pads": 23.3,
+    "hands_arms": 70.5,
+    "feet": 55.5,
+    "other": 214.0
+   },
+   "prone_static_pct": {
+    "chest_pad": 45.9,
+    "knee_pads": 3.5,
+    "hands_arms": 10.5,
+    "feet": 8.3,
+    "other": 31.9
+   },
+   "total_N": 670.9,
+   "weight_N": 671.8
+  },
+  {
+   "mass": 68.5,
+   "friction": 0.6,
+   "pad_tc": 0.02,
+   "t_lower_s": 3.75,
+   "t_chest_contact_s": 3.271,
+   "chest_contact_speed_mps": 0.299,
+   "peak_chest_N": 1244.6,
+   "guard_ok": false,
+   "prone_static_N": {
+    "chest_pad": 322.3,
+    "knee_pads": 39.9,
+    "hands_arms": 68.6,
+    "feet": 56.1,
+    "other": 184.7
+   },
+   "prone_static_pct": {
+    "chest_pad": 48.0,
+    "knee_pads": 5.9,
+    "hands_arms": 10.2,
+    "feet": 8.4,
+    "other": 27.5
+   },
+   "total_N": 671.7,
+   "weight_N": 671.8
+  },
+  {
+   "mass": 68.5,
+   "friction": 1.0,
+   "pad_tc": 0.005,
+   "t_lower_s": 3.749,
+   "t_chest_contact_s": 3.271,
+   "chest_contact_speed_mps": 0.299,
+   "peak_chest_N": 1727.6,
+   "guard_ok": false,
+   "prone_static_N": {
+    "chest_pad": 307.6,
+    "knee_pads": 23.3,
+    "hands_arms": 70.5,
+    "feet": 55.5,
+    "other": 214.0
+   },
+   "prone_static_pct": {
+    "chest_pad": 45.9,
+    "knee_pads": 3.5,
+    "hands_arms": 10.5,
+    "feet": 8.3,
+    "other": 31.9
+   },
+   "total_N": 670.9,
+   "weight_N": 671.8
+  },
+  {
+   "mass": 68.5,
+   "friction": 1.0,
+   "pad_tc": 0.02,
+   "t_lower_s": 3.75,
+   "t_chest_contact_s": 3.271,
+   "chest_contact_speed_mps": 0.299,
+   "peak_chest_N": 1244.6,
+   "guard_ok": false,
+   "prone_static_N": {
+    "chest_pad": 322.3,
+    "knee_pads": 39.9,
+    "hands_arms": 68.6,
+    "feet": 56.1,
+    "other": 184.7
+   },
+   "prone_static_pct": {
+    "chest_pad": 48.0,
+    "knee_pads": 5.9,
+    "hands_arms": 10.2,
+    "feet": 8.4,
+    "other": 27.5
+   },
+   "total_N": 671.7,
+   "weight_N": 671.8
+  }
+ ],
+ "lower_dr_summary": {
+  "n": 8,
+  "contacts": 8,
+  "speed_mean": 0.304,
+  "speed_max": 0.309,
+  "peak_force_mean": 1487.3,
+  "peak_force_max": 1741.9
+ },
+ "tip_over": [
+  {
+   "lean": 0.15,
+   "first_upper_contact": "chest_pad",
+   "t_chest_hit_s": 0.927,
+   "peak_chest_N": 13330.6,
+   "torso_peak_g_raw": 44.2,
+   "torso_peak_g_ma60Hz": 23.9
+  },
+  {
+   "lean": 0.3,
+   "first_upper_contact": "hands_arms",
+   "t_chest_hit_s": 0.683,
+   "peak_chest_N": 13269.7,
+   "torso_peak_g_raw": 43.4,
+   "torso_peak_g_ma60Hz": 23.6
+  }
+ ]
+}
