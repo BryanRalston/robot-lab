@@ -52,3 +52,9 @@
   - Path still FAILS: bulkhead wing/lid corner SF 0.08–0.19; model_v4 waistY 8 mm cheek 0.14–0.24; pelvis 0.28–0.41. k 0.93 MN/m (≥5.3), mode 1 41.6 Hz (≥80). Fixed-pelvis BC kept (conservative).
   - Net +1.56 kg; whole-robot COM ≈ +6.3 mm z [EST].
   - Thor overlaps the lid by 4.4 mm → raise the Thor bay 6 mm. Front web is now 106.5.
+
+## 2026-10-21 10:35 Controls — WBC walk retune on ddfcff8 (no stop): best 13.78 s @1.2 cmd, FAIL 20 s
+- Heel-rise plan pre-pass (plan ankle ≥ −0.70, −0.877 measured) plus touchdown gate, CoP margin 13 mm, gate timeout 0.25 s. 1.15 m/s is worse (6.35 s).
+- job 10 ref_cycle.npz needs ankle past −0.916 (min −1.019 at 1.2 m/s). Recommend holding job 10 until the ref is regenerated. Pin not changed.
+- clash_v4: the knee 0–135 sweep is clean; the 15–60 claim is false. The L/R knee housings clash at hip_yaw 45° instead (committed json stale).
+- Details: modules/legs/wbc/RETUNE_2026-10-21.md
