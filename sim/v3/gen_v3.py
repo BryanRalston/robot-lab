@@ -11,13 +11,13 @@ mm=lambda v: v/1000.0
 hz,kz,az=P['hip_z'],P['knee_z'],P['ankle_z']; yz=hz+P['yaw_z_off']; rz=hz+P['roll_z_off']; pt=P['pelvis_top']; tt=P['torso_top']
 sz=P['shoulder_z']; ua=GEO['upper_arm']*1000; ez=sz-ua; wz=ez-GEO['forearm']*1000
 # ankle_pitch -52.48 deg = -0.916 rad controlled hard range (P-157 / R-147, Actuators D96); -0.955 roll-coupled ext = runtime soft limit only
-LIM={'hip_yaw':(-35,40),'hip_roll':(-12,15),'hip_pitch':(-105,40),'knee':(0,135),'ankle_pitch':(-52.48,40),'ankle_roll':(-25,25),
+LIM={'hip_yaw':(-12,28),'hip_roll':(-10,15),'hip_pitch':(-105,40),'knee':(0,135),'ankle_pitch':(-52.48,40),'ankle_roll':(-25,25),
      'waist_yaw':(-90,90),'waist_pitch':(-30,60),'shoulder_pitch':(-180,60),'shoulder_roll':(-15,180),'shoulder_yaw':(-150,150),
      'elbow':(-140,0),'wrist_roll':(-170,170),'wrist_pitch':(-70,70),'wrist_yaw':(-40,40),'neck_yaw':(-80,80),'neck_pitch':(-40,40)}
 acts=[]
 def jnt(n,s,axis,pos=(0,0,0)):
     lo,hi=LIM[n]
-    if s=='R' and n in('hip_roll','shoulder_roll','hip_yaw'): lo,hi=-hi,-lo  # mirror x/z-axis joints; hip_yaw per Legs L39 (R -40..35; Legs ruling 2026-10-21, 45 end dropped, r116b final)
+    if s=='R' and n in('hip_roll','shoulder_roll','hip_yaw'): lo,hi=-hi,-lo  # mirror x/z-axis joints; hip_yaw per Legs L39 (L90 final 2026-10-21: L yaw -12..28 roll -10..15, R mirrored; coupling in modules/legs/rl/hip_stop_l90.py)
     name=f'{s.lower()}_{n}' if s else n
     r=rows[n]; d=ST['J'][n]; Jr=PT.MOT[d['motor']]['J_kgcm2']*1e-4
     N=PT.CSG[d['gear']]['N'] if d['kind']=='rotary' else 2*math.pi*d['arm']/(PT.RV[d['screw']]['lead']/1000)

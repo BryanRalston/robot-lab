@@ -96,10 +96,10 @@
       <site name="imu"/>
       <body name="L_hipY" pos="0 0.13 0">
         <inertial pos="0.0059 0 -0.1058" mass="2.1325" diaginertia="0.00339857 0.00457339 0.00363983"/>
-        <joint name="l_hip_yaw" range="-0.610865 0.698132" armature="0.079" damping="0.5" frictionloss="0.3"/>
+        <joint name="l_hip_yaw" range="-0.209440 0.488692" armature="0.079" damping="0.5" frictionloss="0.3"/>
         <body name="L_hipR" pos="0 0 -0.115">
           <inertial pos="0 0.0023 -0.1151" mass="1.95942" diaginertia="0.00392304 0.00340906 0.00288459"/>
-          <joint name="l_hip_roll" range="-0.20944 0.261799" armature="0.441" damping="0.5" frictionloss="0.3" axis="1 0 0"/>
+          <joint name="l_hip_roll" range="-0.174533 0.261799" armature="0.441" damping="0.5" frictionloss="0.3" axis="1 0 0"/>
           <body name="L_thigh" pos="0 0 -0.125">
             <inertial pos="-0.06 0 -0.1867" quat="0.707107 0 0 0.707107" mass="2.49984" diaginertia="0.0383913 0.032192 0.0139824"/>
             <joint name="l_hip_pitch" range="-1.8326 0.698132" armature="0.441" damping="0.5" frictionloss="0.3" axis="0 1 0"/>
@@ -122,10 +122,10 @@
       </body>
       <body name="R_hipY" pos="0 -0.13 0">
         <inertial pos="0.0059 0 -0.1058" mass="2.1325" diaginertia="0.00339857 0.00457339 0.00363983"/>
-        <joint name="r_hip_yaw" range="-0.698132 0.610865" armature="0.079" damping="0.5" frictionloss="0.3"/>
+        <joint name="r_hip_yaw" range="-0.488692 0.209440" armature="0.079" damping="0.5" frictionloss="0.3"/>
         <body name="R_hipR" pos="0 0 -0.115">
           <inertial pos="0 0.0106 -0.1151" mass="1.95942" diaginertia="0.00371326 0.00340906 0.0026748"/>
-          <joint name="r_hip_roll" range="-0.261799 0.20944" armature="0.441" damping="0.5" frictionloss="0.3" axis="1 0 0"/>
+          <joint name="r_hip_roll" range="-0.261799 0.174533" armature="0.441" damping="0.5" frictionloss="0.3" axis="1 0 0"/>
           <body name="R_thigh" pos="0 0 -0.125">
             <inertial pos="-0.06 0 -0.1867" quat="0.707107 0 0 0.707107" mass="2.49984" diaginertia="0.0383913 0.032192 0.0139824"/>
             <joint name="r_hip_pitch" range="-1.8326 0.698132" armature="0.441" damping="0.5" frictionloss="0.3" axis="0 1 0"/>

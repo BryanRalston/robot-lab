@@ -1,0 +1,38 @@
+
+## 2026-10-21 ~11:05 ET: L90 hip stop into the job 10 repin branch (repin-j10-r8), plus a lateral push check
+- **Branch:** repin-j10-r8, rebased onto main. NOT merged; job 10 stays HELD.
+- **Limits:**
+  - Box limits: hip_yaw L -12..+28 / R -28..+12; hip_roll adduction -10 (L) / +10 (R).
+  - Coupled surface: hip_stop_l90.py, wired into joystick.py as a target clip, a penalty, and termination above 3.6°.
+- **Blob hashes:**
+  - sim/v3/humanoid_v3.xml 8947b3caa2351ef0672e3658442176807fc426ca
+  - modules/legs/rl/humanoid_mjx.xml a4b7a3aa589d9aaa8007e826222d37d810e27293
+  - modules/legs/rl/humanoid_mjx_rough.xml faa2fcf144d35566f34fa4244f92fc27ca145963
+  - modules/legs/rl/ref_cycle.npz c9b6d0e5860a135810112d7e6723f78377b9d523
+  - modules/legs/rl/hip_stop_l90.py c5bc9ee971303b9e9da62cc1aa78c2c422125c3a
+  - modules/legs/rl/joystick.py 8d343ee5fff555d53f7c29b2ed6db842055bd9f5
+- **Coupled-surface margins:**
+  - ref_cycle: worst 5.11°.
+  - Walk plans: worst 2.99° (L roll -7.0° in r8 walk_1p15/1p2_r2).
+  - No violations.
+- **clash_hipyaw_clear_v4, rerun on the surface:**
+  - Poses: band ends at r = 15, 0, -3, -6, -10, -12, plus (0,0) and (-10,0). Arms hang at default, so the hand is included.
+  - Under 3 mm: 13/14 poses per side (all except (0,0)). Only (0,0) is clear.
+  - **The old ±40 knee-housing contact is gone at the yaw ends with r ≥ 0.**
+  - New in this static pose (other leg straight at 0):
+    - The L-R hip_pitch screw bodies touch at 0.0 mm from adduction -6° (R +6°).
+    - The L-R knee twin housings touch at 0.0–1.54 mm at toe-out ≥ 22° with roll ≤ -3° (R mirrored).
+    - Ankle screws overlap at -10°.
+  - Hanging hand:
+    - The palm is 2.75 mm from the knee trunnion plate at yaw -12 (R +12), r = 0.
+    - The wrist roll fork touches the hip_pitch screw (0.0 mm) at abduction +15 with yaw -12.
+  - The L39 stop tab reads 3.0 mm in every pose (stop hardware, at threshold).
+  - Full detail: modules/model/out/clash_hipyaw_clear_v4.json.
+- **Push (WBC, 68 kg, L90 box limits as joint limits; coupled surface checked post hoc):**
+  - Setup: walking at a 1.2 m/s command with plan heel070 and the gate env. Lateral push of 0.2 s on the torso, mid-swing of the push-side foot.
+  - Results: **FAIL at every level tested, both directions**, including 20 N·s. Falls 0.4–1.1 s after the push.
+  - Baseline: no push walks 8 s.
+  - The same 60 N·s push with the OLD limits falls at the same times (4.095 / 4.686 s). **The L90 stop is not the cause.**
+  - Peak use: hip roll -5.2° L / +5.3° R, yaw -9.4..+9.1°. Coupled violation 0, far from -10.
+  - **Standing:** the WBC has no standing side-step. stand_only does not step and run.py has no stand-push mode, so the standing lateral push was NOT tested.
+  - Logs: modules/controls/balance/push_l90/; script: modules/legs/wbc/push_l90.py.

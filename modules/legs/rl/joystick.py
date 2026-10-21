@@ -5,6 +5,7 @@ tanh residual in [-1, 1], scaled per joint. Brax's autoreset keeps the first
 reset's physics state and does not restore info, so a fall writes the initial
 command, phase and PD memory back into info before returning.
 """
+from hip_stop_l90 import hip_stop_l90, clip_hip_l90, TERM_RAD as HIP_STOP_TERM
 import os
 
 import jax
@@ -226,7 +227,17 @@ class HumanoidWalk(mjx_env.MjxEnv):
         stand = self._is_stand(cmd)
         base = jp.where(stand, self._home_q, ref_q)
         target = base + payload_frac * self._carry + action * self._action_scale
-        return jp.clip(target, self._low, self._high), stand, ref_q
+        target = jp.clip(target, self._low, self._high)
+        # L90 coupled hip stop (Legs 8569e3a): project hip (roll, yaw) targets into the surface.
+        lr, ly = clip_hip_l90(target[1], target[0], 'L', xp=jp)
+        rr, ry = clip_hip_l90(target[7], target[6], 'R', xp=jp)
+        target = target.at[0].set(ly).at[1].set(lr).at[6].set(ry).at[7].set(rr)
+        return target, stand, ref_q
+
+    @staticmethod
+    def _hip_stop_viol(data):
+        q = data.qpos[7:]
+        return (hip_stop_l90(q[1], q[0], 'L', xp=jp), hip_stop_l90(q[7], q[6], 'R', xp=jp))
 
     def _gravity(self, data):
         return math.rotate(jp.array([0.0, 0.0, -1.0]), math.quat_inv(data.qpos[3:7]))
@@ -430,7 +441,8 @@ class HumanoidWalk(mjx_env.MjxEnv):
             'torque': -jp.mean(jp.square(tau / self._tau_lim)),
             'action_rate': -jp.mean(jp.square(action - info['last_action'])),
             'vel_limit': -jp.sum(over_w),
-            'joint_limit': -jp.sum(jp.square(soft)),
+            'joint_limit': -jp.sum(jp.square(soft)) - float(self._config.get('hip_stop_w', 100.0))
+                           * sum(jp.square(h) for h in self._hip_stop_viol(data)),  # L90 coupled stop
             'alive': 1.0 - done,
         }
         scales = dict(self._scales)
@@ -490,7 +502,8 @@ class HumanoidWalk(mjx_env.MjxEnv):
         info['heading_ref'] = info['heading_ref'] + cmd[2] * self.dt
         up = mjx_env.get_sensor_data(self.mj_model, data, 'upvector')[2]
         nan = jp.isnan(data.qpos).any() | jp.isnan(data.qvel).any()
-        fell = (data.qpos[2] < 0.70) | (up < 0.50) | nan
+        hv = self._hip_stop_viol(data)
+        fell = (data.qpos[2] < 0.70) | (up < 0.50) | nan | (jp.maximum(hv[0], hv[1]) > HIP_STOP_TERM)
         done = fell.astype(jp.float32)
 
         # Air-time reward reads the timer before contact zeros it. Pass a copy via info.

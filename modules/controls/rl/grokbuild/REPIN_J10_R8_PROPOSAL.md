@@ -20,3 +20,18 @@ Prepared by RL Controls, 2026-10-21. Base: main 7eed331. Job 10 stays HELD until
 ## Brief diff to apply on repin
 - In job10_brief.md: the sim/v3 line becomes the new sim/v3 hash from this branch, with the r8 reference noted.
 - Remove the HOLD banner once this branch is on main.
+
+## Update 2026-10-21 ~11:00 ET: L90 hip stop, FINAL (Legs 8569e3a + Legs yaw_min update)
+Supersedes the yaw ranges above (L -35..40 / R -40..35 are void).
+- **Box limits, sim/v3 + humanoid_mjx(_rough).xml:** hip_yaw L -12..+28 / R -28..+12; hip_roll adduction L -10 / R +10, abduction unchanged (15).
+- **Coupled surface:** `modules/legs/rl/hip_stop_l90.py`. Left: r>=-3 gives yaw -12..+28; for -3>r>=-12, yaw_max = 28-2(-3-r) and yaw_min = -12+(7/9)(-3-r), so +10/-5 at r=-12. Right is mirrored.
+  - joystick.py `_target` projects hip (roll, yaw) targets onto the surface (`clip_hip_l90`).
+  - The `joint_limit` reward subtracts hip_stop_w (default 100) × violation² (rad).
+  - Termination when violation > 3.6° (the stop is rigid by about 3.6°).
+  - Tests: test_hip_stop_l90.py, 4 passed. The joystick wiring is not run on the box (no jax); the job 10 smoke on the bryan PC must exercise it first.
+- **Worst margin to the coupled surface:**
+  - ref_cycle r8: L 5.11° / R 5.12°.
+  - Walk plans: r8 ref_ds25 0.8/1.0/1.2 L 3.16° / R 4.13°; r8 walk_1p15/1p2_r2 L 2.99° / R 3.94°; wbc heel070 L 3.02° / R 4.01°.
+  - The binding constraint is the roll limit (plan roll down to -7.0°); yaw use is ±6.9°. No violations.
+- **ref_cycle is unchanged** (r8 ankle-bound). gains.npz is unchanged.
+- **Blob hashes:** see the LOG.md entry for this commit (`git rev-parse <commit>:<path>`).
