@@ -276,3 +276,42 @@ Cap: |τ_knee| ≤ min(derate, 50 N·m) at knee ≥ 125° in stop/fall states. D
 
 - The cap alone does not reduce stop energy in an MO=0 fall (torque is already 0). The energy gate needs the **knee drives kept enabled through the fall with a pre-stop damping ramp** (knee-only, cap respected; max zone command 50.0 N·m). B 120/172 give 45.4/46.8 J max (worse on kneel_tip); 60 used.
 - So R-146a "TUCK after drive trip" with knees MO=0 fails 62.7 J; the knee drives must stay on (or be the last to drop) in TUCK. [sim, PU pads EST]
+## WBC 1.2 m/s walk fall: diagnosis (2026-10-21)
+- **The ~4 s fall is old.** It is in every WBC walk version since the first QP commit:
+  - f214cdb (10-13) falls at 4.05 s.
+  - ffe289c falls at 3.81 s.
+  - From d786dff~1 through ddfcff8~1 it falls at 4.227 s (pelvis).
+  - The ankle-limit commit c3dca07, the ZMP_K revert and model_v4 c0e188e all leave the walk unchanged (still 4.227 s).
+- **Regression from sim/v3 ddfcff8** (job 10 repinned at 9d6e8d7): the walk now falls at **2.815 s** ("airborne"), and the
+  legacy walk_a test falls at 2.6 s.
+  - Bisected to the **ankle_pitch hard range −45° → −52.48°**. With r_hip_yaw reverted alone it still falls at 2.815 s; with the ankle range reverted alone it falls at 4.227 s again.
+  - The gait starts at ankle −0.778 rad, which is on the old −0.785 stop. The walk was resting on the −45° MJCF stop: minimum ankle −0.81 rad with the old range, −0.936 rad with the new one (past the −0.916 controlled limit).
+  - A WBC-side −45° bound on the QP does not reproduce the stop torque (falls at 2.95 s). The fix is a gait retune that
+    keeps the stance ankle off the stop, owned by Legs WBC. It is not fixed here, and the 20 s rerun has not been done.
+
+## R-146(b) hands-first kneel: Arms R19 (3de759b) / R18b (0a8a3cc) straight-arm plant candidate (kneel_toe_r19_dr.py)
+- **Candidate:**
+  - plant posture: elbow −7.5°, wrist pitch −55°, wrist yaw 0
+  - hands 0.40 m ahead of the toes
+  - CoM 0.06 m behind the toe line while reaching
+- **Elbow budget:** 49 N·m in kneel/lower only (Arms R19 [EST], an **Arbiter proposal, not ruled**). The 38 N·m derate stays everywhere else.
+- **Not modelled:** fingers and heel plant (the sim hand is a single geom).
+
+| run (49 N·m) | hand l/r peak N | hand l/r m/s | knee m/s / N | chest m/s / N | T s |
+|---|---|---|---|---|---|
+| 68 nominal | 1194 / 1228 | 0.59 / 0.59 | 0.28 / 799 | **0.26** / 913 | 5.69 |
+| DR worst (68.5, tc 0.005) | 1202 / 1243 | 0.59 / 0.58 | 0.28 / 797 | **0.30** / 1695 | 6.04 |
+| 65 kg (all tc) | 1165 / 1191 | 0.66 / 0.59 | 0.24 / 729 | chest lower did not complete (no result) | – |
+
+- **Phases (68 kg):** A 1.00, H 0.79, K 1.05, S 0.40 s. The chest lower reaches MO=0 at 2.04 s.
+- **With the 38 N·m cap:** chest contact 0.37–0.40 m/s, ≤2.85 kN.
+- **Status: FAIL vs targets.**
+  - Chest contact is ≥0.26 m/s (limit 0.1). The chest peak stays well under 8.8 kN.
+  - The hand plant exceeds Arms R19 (≤875 N, ~0.23 m/s).
+  - The force line is ~150 mm from the elbow axis (limit 25 mm) and 155–210 mm from the shoulder (limit 55 mm). The arm is not vertical over the hand at plant.
+  - The robot still topples onto the hands at the end of the H phase.
+- **Other variants tried, all worse:**
+  - joint-path knee drop with straight arms (feet lift off and the robot pitches over the hands)
+  - CoM held over the knees in task mode (falls onto the pads at 0.7 m/s)
+  - 0.5 m hand reach (0.85 m/s plant)
+- **Next:** a controlled reach with the shoulder over the hand before loading, e.g. a staged hand-plant load hold.

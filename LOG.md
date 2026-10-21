@@ -42,3 +42,8 @@
 - Total T is 4.81 s nominal, 5.31 s DR worst. Hand plant is ≤0.40 m/s and ≤1525 N per hand. Knee pad is 0.36 m/s and ≤1183 N.
 - Provisional latch N = 82 (measured T), or 81 [EST] with the passing chest lower. r = 0.3 K/s is not measured.
 - Details are in modules/controls/limits/DRIVE_DERATE.md.
+
+## 2026-10-21 Controls — walk-fall bisect + R19 straight-arm kneel candidate
+- The ~4 s walk fall is old. The fall at 2.8 s (walk_a 2.6 s) is a regression from the ddfcff8 ankle range: the walk rested on the −45° stop. Needs a Legs gait retune; not fixed.
+- Kneel candidate (straight-arm plant, 49 N·m [EST] proposal): chest contact 0.26–0.30 m/s, ≤1.7 kN. FAIL on 0.1 m/s and on Arms R19 plant (≈1.2 kN, 0.6 m/s per hand).
+- job10_brief wording: the repin was RL Controls' decision. No pinned input changed.

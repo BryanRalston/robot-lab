@@ -1,0 +1,879 @@
+{
+ "candidate": {
+  "H_ELBOW": -0.13,
+  "H_WRIST": -0.96,
+  "K_ELBOW": null,
+  "HAND_X_TOE": 0.4,
+  "COM_BACK": 0.06
+ },
+ "limits": {
+  "hand_N": 875.0,
+  "hand_mps": 0.23,
+  "chest_mps": 0.1,
+  "chest_N": 8800.0,
+  "line_elbow_mm": 25.0,
+  "line_shoulder_mm": 55.0
+ },
+ "runs": [
+  {
+   "mass": 68.0,
+   "pad_tc": 0.02,
+   "elbow_cap_Nm": 49.0,
+   "fell": null,
+   "phase_times_s": {
+    "A": 1.0,
+    "H": 0.794,
+    "K": 1.052,
+    "S": 0.401
+   },
+   "chest_to_mo0_s": 2.441,
+   "T_s": 5.688,
+   "hand_peak_N": {
+    "l": 1194.1,
+    "r": 1227.7
+   },
+   "hand_speed_mps": {
+    "l": 0.5916,
+    "r": 0.5862
+   },
+   "hand_posture": {
+    "r": {
+     "elbow_deg": -8.0,
+     "wrist_pitch_deg": -52.7,
+     "wrist_yaw_deg": -0.0,
+     "line_to_elbow_mm": 151.4,
+     "line_to_shoulder_mm": 206.8
+    },
+    "l": {
+     "elbow_deg": -8.0,
+     "wrist_pitch_deg": -52.7,
+     "wrist_yaw_deg": -0.0,
+     "line_to_elbow_mm": 152.5,
+     "line_to_shoulder_mm": 154.9
+    }
+   },
+   "knee_contact_mps": 0.2756,
+   "knee_peak_N": 798.7,
+   "chest_contact_mps": 0.2597,
+   "chest_peak_N": 912.7,
+   "elbow_peak_Nm": 49.0
+  },
+  {
+   "mass": 65.0,
+   "pad_tc": 0.005,
+   "elbow_cap_Nm": 49.0,
+   "fell": null,
+   "phase_times_s": {
+    "A": 1.0,
+    "H": 0.851,
+    "K": 1.059,
+    "S": 0.401
+   },
+   "chest_to_mo0_s": null,
+   "T_s": 3.311,
+   "hand_peak_N": {
+    "l": 1164.5,
+    "r": 1191.2
+   },
+   "hand_speed_mps": {
+    "l": 0.6643,
+    "r": 0.5871
+   },
+   "hand_posture": {
+    "r": {
+     "elbow_deg": -8.1,
+     "wrist_pitch_deg": -53.2,
+     "wrist_yaw_deg": -0.0,
+     "line_to_elbow_mm": 154.9,
+     "line_to_shoulder_mm": 210.6
+    },
+    "l": {
+     "elbow_deg": -8.0,
+     "wrist_pitch_deg": -53.1,
+     "wrist_yaw_deg": -0.0,
+     "line_to_elbow_mm": 156.2,
+     "line_to_shoulder_mm": 160.9
+    }
+   },
+   "knee_contact_mps": 0.2356,
+   "knee_peak_N": 729.3,
+   "chest_contact_mps": null,
+   "chest_peak_N": 0.0,
+   "elbow_peak_Nm": 47.5
+  },
+  {
+   "mass": 65.0,
+   "pad_tc": 0.02,
+   "elbow_cap_Nm": 49.0,
+   "fell": null,
+   "phase_times_s": {
+    "A": 1.0,
+    "H": 0.851,
+    "K": 1.059,
+    "S": 0.401
+   },
+   "chest_to_mo0_s": null,
+   "T_s": 3.311,
+   "hand_peak_N": {
+    "l": 1164.5,
+    "r": 1191.2
+   },
+   "hand_speed_mps": {
+    "l": 0.6643,
+    "r": 0.5871
+   },
+   "hand_posture": {
+    "r": {
+     "elbow_deg": -8.1,
+     "wrist_pitch_deg": -53.2,
+     "wrist_yaw_deg": -0.0,
+     "line_to_elbow_mm": 154.9,
+     "line_to_shoulder_mm": 210.6
+    },
+    "l": {
+     "elbow_deg": -8.0,
+     "wrist_pitch_deg": -53.1,
+     "wrist_yaw_deg": -0.0,
+     "line_to_elbow_mm": 156.2,
+     "line_to_shoulder_mm": 160.9
+    }
+   },
+   "knee_contact_mps": 0.2356,
+   "knee_peak_N": 729.3,
+   "chest_contact_mps": null,
+   "chest_peak_N": 0.0,
+   "elbow_peak_Nm": 47.5
+  },
+  {
+   "mass": 65.0,
+   "pad_tc": 0.04,
+   "elbow_cap_Nm": 49.0,
+   "fell": null,
+   "phase_times_s": {
+    "A": 1.0,
+    "H": 0.851,
+    "K": 1.059,
+    "S": 0.401
+   },
+   "chest_to_mo0_s": null,
+   "T_s": 3.311,
+   "hand_peak_N": {
+    "l": 1164.5,
+    "r": 1191.2
+   },
+   "hand_speed_mps": {
+    "l": 0.6643,
+    "r": 0.5871
+   },
+   "hand_posture": {
+    "r": {
+     "elbow_deg": -8.1,
+     "wrist_pitch_deg": -53.2,
+     "wrist_yaw_deg": -0.0,
+     "line_to_elbow_mm": 154.9,
+     "line_to_shoulder_mm": 210.6
+    },
+    "l": {
+     "elbow_deg": -8.0,
+     "wrist_pitch_deg": -53.1,
+     "wrist_yaw_deg": -0.0,
+     "line_to_elbow_mm": 156.2,
+     "line_to_shoulder_mm": 160.9
+    }
+   },
+   "knee_contact_mps": 0.2356,
+   "knee_peak_N": 729.3,
+   "chest_contact_mps": null,
+   "chest_peak_N": 0.0,
+   "elbow_peak_Nm": 47.5
+  },
+  {
+   "mass": 68.0,
+   "pad_tc": 0.005,
+   "elbow_cap_Nm": 49.0,
+   "fell": null,
+   "phase_times_s": {
+    "A": 1.0,
+    "H": 0.794,
+    "K": 1.052,
+    "S": 0.401
+   },
+   "chest_to_mo0_s": 2.444,
+   "T_s": 5.691,
+   "hand_peak_N": {
+    "l": 1194.1,
+    "r": 1227.7
+   },
+   "hand_speed_mps": {
+    "l": 0.5916,
+    "r": 0.5862
+   },
+   "hand_posture": {
+    "r": {
+     "elbow_deg": -8.0,
+     "wrist_pitch_deg": -52.7,
+     "wrist_yaw_deg": -0.0,
+     "line_to_elbow_mm": 151.4,
+     "line_to_shoulder_mm": 206.8
+    },
+    "l": {
+     "elbow_deg": -8.0,
+     "wrist_pitch_deg": -52.7,
+     "wrist_yaw_deg": -0.0,
+     "line_to_elbow_mm": 152.5,
+     "line_to_shoulder_mm": 154.9
+    }
+   },
+   "knee_contact_mps": 0.2756,
+   "knee_peak_N": 798.7,
+   "chest_contact_mps": 0.2597,
+   "chest_peak_N": 1374.1,
+   "elbow_peak_Nm": 49.0
+  },
+  {
+   "mass": 68.0,
+   "pad_tc": 0.02,
+   "elbow_cap_Nm": 49.0,
+   "fell": null,
+   "phase_times_s": {
+    "A": 1.0,
+    "H": 0.794,
+    "K": 1.052,
+    "S": 0.401
+   },
+   "chest_to_mo0_s": 2.441,
+   "T_s": 5.688,
+   "hand_peak_N": {
+    "l": 1194.1,
+    "r": 1227.7
+   },
+   "hand_speed_mps": {
+    "l": 0.5916,
+    "r": 0.5862
+   },
+   "hand_posture": {
+    "r": {
+     "elbow_deg": -8.0,
+     "wrist_pitch_deg": -52.7,
+     "wrist_yaw_deg": -0.0,
+     "line_to_elbow_mm": 151.4,
+     "line_to_shoulder_mm": 206.8
+    },
+    "l": {
+     "elbow_deg": -8.0,
+     "wrist_pitch_deg": -52.7,
+     "wrist_yaw_deg": -0.0,
+     "line_to_elbow_mm": 152.5,
+     "line_to_shoulder_mm": 154.9
+    }
+   },
+   "knee_contact_mps": 0.2756,
+   "knee_peak_N": 798.7,
+   "chest_contact_mps": 0.2597,
+   "chest_peak_N": 912.7,
+   "elbow_peak_Nm": 49.0
+  },
+  {
+   "mass": 68.0,
+   "pad_tc": 0.04,
+   "elbow_cap_Nm": 49.0,
+   "fell": null,
+   "phase_times_s": {
+    "A": 1.0,
+    "H": 0.794,
+    "K": 1.052,
+    "S": 0.401
+   },
+   "chest_to_mo0_s": 2.439,
+   "T_s": 5.686,
+   "hand_peak_N": {
+    "l": 1194.1,
+    "r": 1227.7
+   },
+   "hand_speed_mps": {
+    "l": 0.5916,
+    "r": 0.5862
+   },
+   "hand_posture": {
+    "r": {
+     "elbow_deg": -8.0,
+     "wrist_pitch_deg": -52.7,
+     "wrist_yaw_deg": -0.0,
+     "line_to_elbow_mm": 151.4,
+     "line_to_shoulder_mm": 206.8
+    },
+    "l": {
+     "elbow_deg": -8.0,
+     "wrist_pitch_deg": -52.7,
+     "wrist_yaw_deg": -0.0,
+     "line_to_elbow_mm": 152.5,
+     "line_to_shoulder_mm": 154.9
+    }
+   },
+   "knee_contact_mps": 0.2756,
+   "knee_peak_N": 798.7,
+   "chest_contact_mps": 0.2597,
+   "chest_peak_N": 655.1,
+   "elbow_peak_Nm": 49.0
+  },
+  {
+   "mass": 68.5,
+   "pad_tc": 0.005,
+   "elbow_cap_Nm": 49.0,
+   "fell": null,
+   "phase_times_s": {
+    "A": 1.0,
+    "H": 0.789,
+    "K": 1.05,
+    "S": 0.401
+   },
+   "chest_to_mo0_s": 2.803,
+   "T_s": 6.043,
+   "hand_peak_N": {
+    "l": 1202.1,
+    "r": 1243.4
+   },
+   "hand_speed_mps": {
+    "l": 0.5928,
+    "r": 0.5791
+   },
+   "hand_posture": {
+    "r": {
+     "elbow_deg": -8.0,
+     "wrist_pitch_deg": -52.7,
+     "wrist_yaw_deg": -0.0,
+     "line_to_elbow_mm": 150.5,
+     "line_to_shoulder_mm": 205.7
+    },
+    "l": {
+     "elbow_deg": -8.0,
+     "wrist_pitch_deg": -52.7,
+     "wrist_yaw_deg": -0.0,
+     "line_to_elbow_mm": 152.2,
+     "line_to_shoulder_mm": 154.5
+    }
+   },
+   "knee_contact_mps": 0.2784,
+   "knee_peak_N": 796.6,
+   "chest_contact_mps": 0.2955,
+   "chest_peak_N": 1694.5,
+   "elbow_peak_Nm": 49.0
+  },
+  {
+   "mass": 68.5,
+   "pad_tc": 0.02,
+   "elbow_cap_Nm": 49.0,
+   "fell": null,
+   "phase_times_s": {
+    "A": 1.0,
+    "H": 0.789,
+    "K": 1.05,
+    "S": 0.401
+   },
+   "chest_to_mo0_s": 2.742,
+   "T_s": 5.982,
+   "hand_peak_N": {
+    "l": 1202.1,
+    "r": 1243.4
+   },
+   "hand_speed_mps": {
+    "l": 0.5928,
+    "r": 0.5791
+   },
+   "hand_posture": {
+    "r": {
+     "elbow_deg": -8.0,
+     "wrist_pitch_deg": -52.7,
+     "wrist_yaw_deg": -0.0,
+     "line_to_elbow_mm": 150.5,
+     "line_to_shoulder_mm": 205.7
+    },
+    "l": {
+     "elbow_deg": -8.0,
+     "wrist_pitch_deg": -52.7,
+     "wrist_yaw_deg": -0.0,
+     "line_to_elbow_mm": 152.2,
+     "line_to_shoulder_mm": 154.5
+    }
+   },
+   "knee_contact_mps": 0.2784,
+   "knee_peak_N": 796.6,
+   "chest_contact_mps": 0.2955,
+   "chest_peak_N": 1122.8,
+   "elbow_peak_Nm": 49.0
+  },
+  {
+   "mass": 68.5,
+   "pad_tc": 0.04,
+   "elbow_cap_Nm": 49.0,
+   "fell": null,
+   "phase_times_s": {
+    "A": 1.0,
+    "H": 0.789,
+    "K": 1.05,
+    "S": 0.401
+   },
+   "chest_to_mo0_s": 2.703,
+   "T_s": 5.943,
+   "hand_peak_N": {
+    "l": 1202.1,
+    "r": 1243.4
+   },
+   "hand_speed_mps": {
+    "l": 0.5928,
+    "r": 0.5791
+   },
+   "hand_posture": {
+    "r": {
+     "elbow_deg": -8.0,
+     "wrist_pitch_deg": -52.7,
+     "wrist_yaw_deg": -0.0,
+     "line_to_elbow_mm": 150.5,
+     "line_to_shoulder_mm": 205.7
+    },
+    "l": {
+     "elbow_deg": -8.0,
+     "wrist_pitch_deg": -52.7,
+     "wrist_yaw_deg": -0.0,
+     "line_to_elbow_mm": 152.2,
+     "line_to_shoulder_mm": 154.5
+    }
+   },
+   "knee_contact_mps": 0.2784,
+   "knee_peak_N": 796.6,
+   "chest_contact_mps": 0.2955,
+   "chest_peak_N": 779.5,
+   "elbow_peak_Nm": 49.0
+  },
+  {
+   "mass": 68.0,
+   "pad_tc": 0.02,
+   "elbow_cap_Nm": 38.0,
+   "fell": null,
+   "phase_times_s": {
+    "A": 1.0,
+    "H": 0.794,
+    "K": 1.052,
+    "S": 0.401
+   },
+   "chest_to_mo0_s": 2.215,
+   "T_s": 5.462,
+   "hand_peak_N": {
+    "l": 1194.1,
+    "r": 1227.7
+   },
+   "hand_speed_mps": {
+    "l": 0.5916,
+    "r": 0.5862
+   },
+   "hand_posture": {
+    "r": {
+     "elbow_deg": -8.0,
+     "wrist_pitch_deg": -52.7,
+     "wrist_yaw_deg": -0.0,
+     "line_to_elbow_mm": 151.4,
+     "line_to_shoulder_mm": 206.8
+    },
+    "l": {
+     "elbow_deg": -8.0,
+     "wrist_pitch_deg": -52.7,
+     "wrist_yaw_deg": -0.0,
+     "line_to_elbow_mm": 152.5,
+     "line_to_shoulder_mm": 154.9
+    }
+   },
+   "knee_contact_mps": 0.275,
+   "knee_peak_N": 795.3,
+   "chest_contact_mps": 0.4029,
+   "chest_peak_N": 1828.0,
+   "elbow_peak_Nm": 38.0
+  },
+  {
+   "mass": 65.0,
+   "pad_tc": 0.005,
+   "elbow_cap_Nm": 38.0,
+   "fell": null,
+   "phase_times_s": {
+    "A": 1.0,
+    "H": 0.851,
+    "K": 1.059,
+    "S": 0.401
+   },
+   "chest_to_mo0_s": null,
+   "T_s": 3.311,
+   "hand_peak_N": {
+    "l": 1164.5,
+    "r": 1191.2
+   },
+   "hand_speed_mps": {
+    "l": 0.6643,
+    "r": 0.5871
+   },
+   "hand_posture": {
+    "r": {
+     "elbow_deg": -8.1,
+     "wrist_pitch_deg": -53.2,
+     "wrist_yaw_deg": -0.0,
+     "line_to_elbow_mm": 154.9,
+     "line_to_shoulder_mm": 210.6
+    },
+    "l": {
+     "elbow_deg": -8.0,
+     "wrist_pitch_deg": -53.1,
+     "wrist_yaw_deg": -0.0,
+     "line_to_elbow_mm": 156.2,
+     "line_to_shoulder_mm": 160.9
+    }
+   },
+   "knee_contact_mps": 0.236,
+   "knee_peak_N": 731.5,
+   "chest_contact_mps": null,
+   "chest_peak_N": 0.0,
+   "elbow_peak_Nm": 38.0
+  },
+  {
+   "mass": 65.0,
+   "pad_tc": 0.02,
+   "elbow_cap_Nm": 38.0,
+   "fell": null,
+   "phase_times_s": {
+    "A": 1.0,
+    "H": 0.851,
+    "K": 1.059,
+    "S": 0.401
+   },
+   "chest_to_mo0_s": null,
+   "T_s": 3.311,
+   "hand_peak_N": {
+    "l": 1164.5,
+    "r": 1191.2
+   },
+   "hand_speed_mps": {
+    "l": 0.6643,
+    "r": 0.5871
+   },
+   "hand_posture": {
+    "r": {
+     "elbow_deg": -8.1,
+     "wrist_pitch_deg": -53.2,
+     "wrist_yaw_deg": -0.0,
+     "line_to_elbow_mm": 154.9,
+     "line_to_shoulder_mm": 210.6
+    },
+    "l": {
+     "elbow_deg": -8.0,
+     "wrist_pitch_deg": -53.1,
+     "wrist_yaw_deg": -0.0,
+     "line_to_elbow_mm": 156.2,
+     "line_to_shoulder_mm": 160.9
+    }
+   },
+   "knee_contact_mps": 0.236,
+   "knee_peak_N": 731.5,
+   "chest_contact_mps": null,
+   "chest_peak_N": 0.0,
+   "elbow_peak_Nm": 38.0
+  },
+  {
+   "mass": 65.0,
+   "pad_tc": 0.04,
+   "elbow_cap_Nm": 38.0,
+   "fell": null,
+   "phase_times_s": {
+    "A": 1.0,
+    "H": 0.851,
+    "K": 1.059,
+    "S": 0.401
+   },
+   "chest_to_mo0_s": null,
+   "T_s": 3.311,
+   "hand_peak_N": {
+    "l": 1164.5,
+    "r": 1191.2
+   },
+   "hand_speed_mps": {
+    "l": 0.6643,
+    "r": 0.5871
+   },
+   "hand_posture": {
+    "r": {
+     "elbow_deg": -8.1,
+     "wrist_pitch_deg": -53.2,
+     "wrist_yaw_deg": -0.0,
+     "line_to_elbow_mm": 154.9,
+     "line_to_shoulder_mm": 210.6
+    },
+    "l": {
+     "elbow_deg": -8.0,
+     "wrist_pitch_deg": -53.1,
+     "wrist_yaw_deg": -0.0,
+     "line_to_elbow_mm": 156.2,
+     "line_to_shoulder_mm": 160.9
+    }
+   },
+   "knee_contact_mps": 0.236,
+   "knee_peak_N": 731.5,
+   "chest_contact_mps": null,
+   "chest_peak_N": 0.0,
+   "elbow_peak_Nm": 38.0
+  },
+  {
+   "mass": 68.0,
+   "pad_tc": 0.005,
+   "elbow_cap_Nm": 38.0,
+   "fell": null,
+   "phase_times_s": {
+    "A": 1.0,
+    "H": 0.794,
+    "K": 1.052,
+    "S": 0.401
+   },
+   "chest_to_mo0_s": 2.148,
+   "T_s": 5.395,
+   "hand_peak_N": {
+    "l": 1194.1,
+    "r": 1227.7
+   },
+   "hand_speed_mps": {
+    "l": 0.5916,
+    "r": 0.5862
+   },
+   "hand_posture": {
+    "r": {
+     "elbow_deg": -8.0,
+     "wrist_pitch_deg": -52.7,
+     "wrist_yaw_deg": -0.0,
+     "line_to_elbow_mm": 151.4,
+     "line_to_shoulder_mm": 206.8
+    },
+    "l": {
+     "elbow_deg": -8.0,
+     "wrist_pitch_deg": -52.7,
+     "wrist_yaw_deg": -0.0,
+     "line_to_elbow_mm": 152.5,
+     "line_to_shoulder_mm": 154.9
+    }
+   },
+   "knee_contact_mps": 0.275,
+   "knee_peak_N": 795.3,
+   "chest_contact_mps": 0.4029,
+   "chest_peak_N": 2844.9,
+   "elbow_peak_Nm": 38.0
+  },
+  {
+   "mass": 68.0,
+   "pad_tc": 0.02,
+   "elbow_cap_Nm": 38.0,
+   "fell": null,
+   "phase_times_s": {
+    "A": 1.0,
+    "H": 0.794,
+    "K": 1.052,
+    "S": 0.401
+   },
+   "chest_to_mo0_s": 2.215,
+   "T_s": 5.462,
+   "hand_peak_N": {
+    "l": 1194.1,
+    "r": 1227.7
+   },
+   "hand_speed_mps": {
+    "l": 0.5916,
+    "r": 0.5862
+   },
+   "hand_posture": {
+    "r": {
+     "elbow_deg": -8.0,
+     "wrist_pitch_deg": -52.7,
+     "wrist_yaw_deg": -0.0,
+     "line_to_elbow_mm": 151.4,
+     "line_to_shoulder_mm": 206.8
+    },
+    "l": {
+     "elbow_deg": -8.0,
+     "wrist_pitch_deg": -52.7,
+     "wrist_yaw_deg": -0.0,
+     "line_to_elbow_mm": 152.5,
+     "line_to_shoulder_mm": 154.9
+    }
+   },
+   "knee_contact_mps": 0.275,
+   "knee_peak_N": 795.3,
+   "chest_contact_mps": 0.4029,
+   "chest_peak_N": 1828.0,
+   "elbow_peak_Nm": 38.0
+  },
+  {
+   "mass": 68.0,
+   "pad_tc": 0.04,
+   "elbow_cap_Nm": 38.0,
+   "fell": null,
+   "phase_times_s": {
+    "A": 1.0,
+    "H": 0.794,
+    "K": 1.052,
+    "S": 0.401
+   },
+   "chest_to_mo0_s": 2.215,
+   "T_s": 5.462,
+   "hand_peak_N": {
+    "l": 1194.1,
+    "r": 1227.7
+   },
+   "hand_speed_mps": {
+    "l": 0.5916,
+    "r": 0.5862
+   },
+   "hand_posture": {
+    "r": {
+     "elbow_deg": -8.0,
+     "wrist_pitch_deg": -52.7,
+     "wrist_yaw_deg": -0.0,
+     "line_to_elbow_mm": 151.4,
+     "line_to_shoulder_mm": 206.8
+    },
+    "l": {
+     "elbow_deg": -8.0,
+     "wrist_pitch_deg": -52.7,
+     "wrist_yaw_deg": -0.0,
+     "line_to_elbow_mm": 152.5,
+     "line_to_shoulder_mm": 154.9
+    }
+   },
+   "knee_contact_mps": 0.275,
+   "knee_peak_N": 795.3,
+   "chest_contact_mps": 0.4029,
+   "chest_peak_N": 1260.0,
+   "elbow_peak_Nm": 38.0
+  },
+  {
+   "mass": 68.5,
+   "pad_tc": 0.005,
+   "elbow_cap_Nm": 38.0,
+   "fell": null,
+   "phase_times_s": {
+    "A": 1.0,
+    "H": 0.789,
+    "K": 1.051,
+    "S": 0.401
+   },
+   "chest_to_mo0_s": 2.212,
+   "T_s": 5.453,
+   "hand_peak_N": {
+    "l": 1202.1,
+    "r": 1243.4
+   },
+   "hand_speed_mps": {
+    "l": 0.5928,
+    "r": 0.5791
+   },
+   "hand_posture": {
+    "r": {
+     "elbow_deg": -8.0,
+     "wrist_pitch_deg": -52.7,
+     "wrist_yaw_deg": -0.0,
+     "line_to_elbow_mm": 150.5,
+     "line_to_shoulder_mm": 205.7
+    },
+    "l": {
+     "elbow_deg": -8.0,
+     "wrist_pitch_deg": -52.7,
+     "wrist_yaw_deg": -0.0,
+     "line_to_elbow_mm": 152.2,
+     "line_to_shoulder_mm": 154.5
+    }
+   },
+   "knee_contact_mps": 0.2598,
+   "knee_peak_N": 842.8,
+   "chest_contact_mps": 0.3705,
+   "chest_peak_N": 2658.1,
+   "elbow_peak_Nm": 38.0
+  },
+  {
+   "mass": 68.5,
+   "pad_tc": 0.02,
+   "elbow_cap_Nm": 38.0,
+   "fell": null,
+   "phase_times_s": {
+    "A": 1.0,
+    "H": 0.789,
+    "K": 1.051,
+    "S": 0.401
+   },
+   "chest_to_mo0_s": 2.204,
+   "T_s": 5.445,
+   "hand_peak_N": {
+    "l": 1202.1,
+    "r": 1243.4
+   },
+   "hand_speed_mps": {
+    "l": 0.5928,
+    "r": 0.5791
+   },
+   "hand_posture": {
+    "r": {
+     "elbow_deg": -8.0,
+     "wrist_pitch_deg": -52.7,
+     "wrist_yaw_deg": -0.0,
+     "line_to_elbow_mm": 150.5,
+     "line_to_shoulder_mm": 205.7
+    },
+    "l": {
+     "elbow_deg": -8.0,
+     "wrist_pitch_deg": -52.7,
+     "wrist_yaw_deg": -0.0,
+     "line_to_elbow_mm": 152.2,
+     "line_to_shoulder_mm": 154.5
+    }
+   },
+   "knee_contact_mps": 0.2598,
+   "knee_peak_N": 842.8,
+   "chest_contact_mps": 0.3705,
+   "chest_peak_N": 1763.6,
+   "elbow_peak_Nm": 38.0
+  },
+  {
+   "mass": 68.5,
+   "pad_tc": 0.04,
+   "elbow_cap_Nm": 38.0,
+   "fell": null,
+   "phase_times_s": {
+    "A": 1.0,
+    "H": 0.789,
+    "K": 1.051,
+    "S": 0.401
+   },
+   "chest_to_mo0_s": 2.166,
+   "T_s": 5.407,
+   "hand_peak_N": {
+    "l": 1202.1,
+    "r": 1243.4
+   },
+   "hand_speed_mps": {
+    "l": 0.5928,
+    "r": 0.5791
+   },
+   "hand_posture": {
+    "r": {
+     "elbow_deg": -8.0,
+     "wrist_pitch_deg": -52.7,
+     "wrist_yaw_deg": -0.0,
+     "line_to_elbow_mm": 150.5,
+     "line_to_shoulder_mm": 205.7
+    },
+    "l": {
+     "elbow_deg": -8.0,
+     "wrist_pitch_deg": -52.7,
+     "wrist_yaw_deg": -0.0,
+     "line_to_elbow_mm": 152.2,
+     "line_to_shoulder_mm": 154.5
+    }
+   },
+   "knee_contact_mps": 0.2598,
+   "knee_peak_N": 842.8,
+   "chest_contact_mps": 0.3705,
+   "chest_peak_N": 1245.2,
+   "elbow_peak_Nm": 38.0
+  }
+ ]
+}

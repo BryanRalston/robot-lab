@@ -62,12 +62,17 @@ def static_ff(m, d, sup, act):
     return d.qfrc_bias[act] - (Jc[:, act].T @ f)
 
 
+ELBOW_KNEEL_NM = None   # None: 38 N.m derate (0.5 x 76). 49.0: Arms R19 proposal, kneel/lower only, NOT ruled
+
+
 def make_sim(mass=68.0, pad_tc=0.02):
     s = P.Sim(mass, 1.0, pad_tc); m = s.m
     arm = np.array([any(n.endswith(a) for a in ARM) for n in s.names])
     s.lim = np.where(arm, 0.5 * m.actuator_ctrlrange[:, 1], s.lim)
     el = np.array([n.endswith('elbow') for n in s.names])
     s.lim = np.where(el, np.minimum(s.lim, ELBOW_HARD), s.lim)
+    if ELBOW_KNEEL_NM is not None:   # kneel/lower states only (Arms R19 3de759b: ~49 N.m for 2 s at 82 C) [EST], Arbiter proposal
+        s.lim = np.where(el, min(ELBOW_KNEEL_NM, ELBOW_HARD), s.lim)
     return s
 
 

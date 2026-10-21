@@ -17,7 +17,7 @@ import prone_data as P
 import chest_lower_wbc as CL
 from drive_thermal_derate import ProneLowerGuard, ankle_pitch_min
 
-IKJ = ('hip_pitch', 'knee', 'ankle_pitch', 'shoulder_pitch', 'elbow', 'wrist_pitch', 'waist_pitch')
+IKJ = ('wrist_yaw', 'hip_pitch', 'knee', 'ankle_pitch', 'shoulder_pitch', 'elbow', 'wrist_pitch', 'waist_pitch')
 STAND = dict(hip_pitch=-0.54, knee=1.17, ankle_pitch=-0.63, shoulder_pitch=-0.3, elbow=-0.3)
 T_A = 1.0                 # s, crouch + CoM shift
 COMZ_A = 0.62             # CoM height at the end of A [EST from the IK]
@@ -40,6 +40,9 @@ DEBUG = False
 COM_OVER_KNEES = False
 COM_KNEE_OFF = 0.05
 K_ELBOW = None
+H_ELBOW = None
+H_WRIST = None
+H_PITCH_RATE = 0.8   # rad/s trunk pitch ramp while reaching for the floor
 W_ELB = 50.0
 
 
@@ -77,7 +80,7 @@ def run(mass=68.0, pad_tc=0.02, frames=None, fps=25, join_chest=True):
         return anchors[key]
     kguard = ProneLowerGuard(); hguard = ProneLowerGuard()
     t = 0.0; ph = 'A'; tph = {'A': 0.0}; res = dict(fell=None)
-    hpk = {'l': 0.0, 'r': 0.0}; hv = {'l': None, 'r': None}
+    hpk = {'l': 0.0, 'r': 0.0}; hv = {'l': None, 'r': None}; hpost = {}
     qK0 = None; sK = 0.0; gap = 1.0; vz = 0.0
     peak_tau = np.zeros(m.nu); kref = None; href = None; hand_tgt = None
     while t < 8.0:
@@ -139,7 +142,11 @@ def run(mass=68.0, pad_tc=0.02, frames=None, fps=25, join_chest=True):
                 mujoco.mj_jacGeom(m, d, (jp := np.zeros((3, nv))), None, g)
                 task(jp[0:2], KC * (ht[:2] - d.geom_xpos[g][:2]) * 0.3, W_TASK)
                 task(jp[2:3], -float(np.clip(v_ref + 8.0 * (hz - href), 0.0, v_ref)), W_TASK)
-            task(jr[1:2], 3.0 * (min(PITCH_C, pitch_c0 + 0.8 * (t - tc0)) - pitch), W_PITCH)
+            task(jr[1:2], 3.0 * (min(PITCH_C, pitch_c0 + H_PITCH_RATE * (t - tc0)) - pitch), W_PITCH)
+            for i, n in enumerate(s.names):   # Arms R19 plant posture targets
+                tgt = {k: v for k, v in {'elbow': H_ELBOW, 'wrist_pitch': H_WRIST, 'wrist_yaw': 0.0 if H_ELBOW is not None else None}.items() if v is not None}.get(n[2:])
+                if tgt is not None:
+                    jj = np.zeros((1, nv)); jj[0, act[i]] = 1.0; task(jj, 4.0 * (tgt - d.qpos[s.qadr[i]]), W_ELB)
             vzh = max(-float((point_jac(m, d, m.geom_bodyid[g], d.geom_xpos[g]) @ d.qvel)[2]) for g in hands)
             hguard.observe(t, f['hands_arms'] > 1.0, vzh, f['hands_arms'])
             if f['hands_arms'] > 5.0:
@@ -180,7 +187,7 @@ def run(mass=68.0, pad_tc=0.02, frames=None, fps=25, join_chest=True):
                 mujoco.mj_jacGeom(m, d, (jp := np.zeros((3, nv))), None, g)
                 task(jp[0:2], KC * (ht[:2] - d.geom_xpos[g][:2]) * 0.3, W_TASK)
                 task(jp[2:3], -float(np.clip(v_ref + 8.0 * (hz - href), 0.0, v_ref)), W_TASK)
-            task(jr[1:2], 3.0 * (min(PITCH_C, pitch_c0 + 0.8 * (t - tc0)) - pitch), W_PITCH)
+            task(jr[1:2], 3.0 * (min(PITCH_C, pitch_c0 + H_PITCH_RATE * (t - tc0)) - pitch), W_PITCH)
             vzh = max(-float((point_jac(m, d, m.geom_bodyid[g], d.geom_xpos[g]) @ d.qvel)[2]) for g in hands)
             hguard.observe(t, f['hands_arms'] > 1.0, vzh, f['hands_arms'])
             if f['hands_arms'] > 5.0:
@@ -220,11 +227,17 @@ def run(mass=68.0, pad_tc=0.02, frames=None, fps=25, join_chest=True):
                     if g in (c.geom1, c.geom2) and (c.geom1 in s.floor or c.geom2 in s.floor):
                         mujoco.mj_contactForce(m, d, ci, f6); hpk[side] = max(hpk[side], float(f6[0]))
                         if hv[side] is None:
+                            q_ = lambda j: float(d.qpos[m.jnt_qposadr[m.joint(f'{side}_{j}').id]])
+                            hp_ = d.contact[ci].pos
+                            def line_mm(body):   # horizontal distance of the vertical force line through the contact to a joint
+                                jid_ = m.joint(f'{side}_{body}').id; return round(1000 * float(np.hypot(*(d.xanchor[jid_][:2] - hp_[:2]))), 1)
+                            hpost[side] = dict(elbow_deg=round(np.degrees(q_('elbow')), 1), wrist_pitch_deg=round(np.degrees(q_('wrist_pitch')), 1),
+                                               wrist_yaw_deg=round(np.degrees(q_('wrist_yaw')), 1), line_to_elbow_mm=line_mm('elbow'), line_to_shoulder_mm=line_mm('shoulder_pitch'))
                             v6 = np.zeros(6); mujoco.mj_objectVelocity(m, d, mujoco.mjtObj.mjOBJ_GEOM, g, v6, 0); hv[side] = round(-float(v6[5]), 4)
         if frames is not None and int(round(t * 1000)) % int(1000 / fps) == 0: frames.append(d.qpos.copy())
         if f['chest_pad'] > 1 or f['other'] > 1 or d.qpos[2] < 0.12:
             res['fell'] = dict(t=round(t, 3), phase=ph, chest=round(f['chest_pad'], 1), other=round(f['other'], 1)); break
-    res['hand_contact_speed_per_hand_mps'] = hv; res['hand_peak_force_per_hand_N'] = {k: round(v, 1) for k, v in hpk.items()}
+    res['hand_plant_posture'] = hpost; res['hand_contact_speed_per_hand_mps'] = hv; res['hand_peak_force_per_hand_N'] = {k: round(v, 1) for k, v in hpk.items()}
     res['knee_peak_force_N'] = round(kguard.peak_force, 1); res['hand_peak_force_N'] = round(hguard.peak_force, 1)
     keys = ['A', 'B', 'C', 'D'] if ORDER == 'knees_first' else ['A', 'H', 'K', 'S', 'D']
     res['phase_times_s'] = {k: round(tph[keys[i + 1]] - tph[k], 3) for i, k in enumerate(keys[:-1]) if keys[i + 1] in tph}
