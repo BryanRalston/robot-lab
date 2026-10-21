@@ -1,5 +1,45 @@
 # R-143 §2b — Knee fins: ISO 13732-1 touch-burn check (RL T&R, 2026-10-21)
 
+## ▶ B2 hand-clearance spec for the arm keep-out supervisor (after Controls 6d4c8fb), 2026-10-21 09:35 ET
+**Correction:** my 63 mm (2e9b25c) assumed a straight leg. Controls shows the thigh-mounted shroud (box x −76…−20, y 89…171/176, z 860…882 standing) rising into the hanging hand with hip flexion: 2.6 mm at ~50°, and **−65 mm (interference)** over the walk-policy sweep (±0.25 rad about the hanging arm). Shoulder-roll adduction of −14° alone gives 4 mm. The **30 mm blanket rule is withdrawn** and replaced by three separate criteria.
+
+**Whose skin:** the hand near the shroud is **the robot's own hand**. Burn limits protect people, so they apply (i) to the shroud surfaces people touch, and (ii) to the robot hand cover, because a person may hold or touch the robot's hand after it has soaked in the plume.
+
+### (a) Plume and louvres: thermal keep-out (protects the hand cover and the outlet flow)
+- **Keep-out volume K_plume:** the louvre/opening faces of the shroud, offset **30 mm** normal to the opening, plus a downstream plume prism extending **60 mm** past the openings along the jet (Thermal: plume < 48 °C at 40–60 mm), widened by a 15° half-angle [EST]. Louvres/jet run 58–84 °C.
+- **Rule:**
+  - **no dwell**: the hand, fingers and forearm must not be inside K_plume when hand speed < 0.1 m/s or for more than 0.5 s continuous;
+  - **transit allowed** ≤ 0.5 s per entry and ≤ 20 % of any 10 s window (walk swing crossing). At 80 °C air and ≤ 0.5 s the cover heats < 1 K [EST], and the outlet is not blocked.
+  - Sustained postures (standing, kneel, carry, any MO=0 end state): **zero entry**.
+- Reason: a hand soaking in a 58–84 °C jet takes the cover over 43 °C (it becomes a hot surface for people) and blocks the outlet (Tb rises).
+
+### (b) Shroud outer face: contact acceptable thermally
+- The face is 40–42 °C [EST; TP-G5-15 measures it], which is ≤ the ISO 13732-1 8 h value of 43 °C. **Any contact duration is thermally acceptable** for a person or for the robot hand cover, and the 1–10 s limits (~55–70 °C) are far above it.
+- **Condition:** if TP-G5-15 measures > 43 °C on the face, (b) reverts to "brief (≤ 4 s) contact only" (limit ≥ 58 °C) and standing/kneel postures need a clearance ≥ (c).
+
+### (c) Mechanical: collision and wear (governs the supervisor)
+- Robot hand striking the PC shroud is a **collision**. Hand cover and finger damage, shroud cracking or louvre breakage (which then fails IP2X), and noise/wear are not burn issues.
+- Nominal clearance target **≥ 10 mm**. Tolerance stack (RSS): kinematic/encoder + sim-vs-CAD ±4, cover/shroud manufacturing ±2, shroud/cover flex ±2, hand cover compliance ±2 → **±5.3 → 5 mm tolerance + 5 mm margin = 10 mm**.
+- **Incidental contact is accepted as a fault-tolerant event only:** the shroud must survive a hand strike of **≥ 100 N** (≈ 0.6 kg hand at 1.5 m/s on a compliant cover, [EST]) without cracking or louvre damage. Add a TPU wear strip on the shroud's outboard/top edge. Count contacts in the log, with a target of 0 per km of walking.
+
+### Supervisor thresholds per pose class (surface-to-surface, any hand/finger/forearm geometry to the shroud; plume per (a))
+| pose class | shroud outer face: target / warn / trip | K_plume (a) | notes |
+|---|---|---|---|
+| **walk swing** (incl. turning, stairs; hip flex −20…+60°) | **15 / 10 / 5 mm** | transit ≤ 0.5 s, ≤ 20 %/10 s; no dwell | trip = bias shoulder roll outboard (abduction) / clamp the residual. Controls' sweep needs ~80 mm of shift (≈ 8° abduction at ~0.6 m) unless the shroud moves (below) |
+| **carry** (P-042 and policy ±0.25) | **15 / 10 / 5 mm**, also for **the payload** and the hook | **zero entry** (hand and payload) | Controls' min is 193 mm, so it passes as is; keep the rule for new carry poses |
+| **standing / idle / manipulation** (hip flex ≤ 20°) | **15 / 10 / 5 mm** | **zero entry** (sustained) | the hanging arm is at 63 mm straight-leg: OK; the adduction limit must keep ≥ 10 |
+| **crouch / sit / kneel / R-146 lowering** (hip flex up to 105°) | **20 / 15 / 10 mm** (bigger: sustained, larger thigh motion, less control authority) | **zero entry** | the waypoint arms are at ≥ 197 mm, so they pass. **After MO=0 the supervisor is off**: the passive end pose must be verified by geometry, with the hand ≥ 30 mm from the openings with arms limp (the stack keeps convecting for minutes) |
+- **Supervisor input geometry:** the shroud box + 2 mm skin allowance, and the plume prism, attached to the thigh frame (the hip angle moves them). The hand box from sim/v3 is acceptable for now; use the CAD hand when available.
+- **Tolerance/margin already inside the numbers:** 5 mm tolerance + 5 mm margin between trip and target. Controls should not add more without a reason.
+
+### Source fixes (preferred over arm restrictions)
+1. **Move or shape the shroud inboard/aft:** outboard edge from y 171–176 to **≤ y 150**, with the openings facing **aft only** (not up/outboard). This keeps K_plume behind the thigh, out of the swing plane. Controls to re-sweep; ID/Thermal to check the area (≥ 2600 + 600 dilution).
+2. **Chamfer the outboard-top edge 35–45° with an R ≥ 10** so a swinging hand deflects off, plus the TPU wear strip.
+3. **Lower the stack top** (z 860 → ~840) to reduce the rise at hip flexion. Thermal: this costs H (Tb rises ~+1 K [EST]; 9.4/8.7 K margin available).
+4. **Arm-side:** a 3–5° default shoulder-roll abduction offset in the walk policy (retrain J10).
+- **Recommendation:** fix 1 + 2 first (zero arm restriction if the re-sweep gives ≥ 15 mm); use the supervisor as the backstop.
+- **TP-G5-15:** verify on hardware (hand-to-shroud clearance video and contact log over 1 km of walking, a carry and a kneel; plume TC on a dummy hand cover).
+
 ## ▶ B2 (Robot Lab choice, Thermal a32d341): Option B rear outlet through the L60 notch, stack to z 860, rev 4e shroud, skirt foil + 15 mm gap. **PASS (48 °C no-sustained-contact class) WITH CONDITIONS**
 - **Thermal:** standing drive base 70.6 °C (9.4 K margin), walking 62–72 °C. Jet 79–84 °C at the exit, 58–66 °C mixed. Shroud outer face 40–42 °C [EST].
 - **T&R rerun with Legs' actual notch (1320 mm², not 2080):** Tb **71.3 °C**, jet 80 °C, mixed 54–62 °C. Still PASS.
