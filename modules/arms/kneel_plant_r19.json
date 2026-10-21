@@ -1,0 +1,77 @@
+{
+ "F_peak_N": {
+  "L": 1525.0,
+  "R": 1520.0
+ },
+ "wrist_bearing_CRBH258A": {
+  "e0mm_radial": 1.84,
+  "e5mm_radial": 1.41,
+  "e10mm_radial": 1.15,
+  "e20mm_radial": 0.83
+ },
+ "wrist_bearing_roll_axial_e10": 2.96,
+ "F_max_for_s0_2": {
+  "e0": 1405,
+  "e5": 1078,
+  "e10": 875
+ },
+ "wrist_pitch_yaw_CSG14": {
+  "e10mm": {
+   "M": 15.2,
+   "SF_rep": 2.36,
+   "SF_mom": 4.59
+  },
+  "e20mm": {
+   "M": 30.5,
+   "SF_rep": 1.18,
+   "SF_mom": 2.3
+  },
+  "e45mm": {
+   "M": 68.6,
+   "SF_rep": 0.52,
+   "SF_mom": 1.02
+  }
+ },
+ "wrist_roll_CSG14": {
+  "M": 7.3,
+  "SF_rep": 4.9
+ },
+ "palm_flat_face_MPa": 319,
+ "palm_heel_cantilever_1p5_MPa": 473,
+ "palm_heel_4mm_MPa": 66,
+ "palm_limit": 308,
+ "palm_heel_band_mass_kg": 0.012,
+ "forearm": {
+  "CF_buckling_N": 3727063,
+  "bond_shear_MPa": 0.36,
+  "bond_SF": 12.7
+ },
+ "elbow_lug_MPa": 163,
+ "elbow_offset_max_mm": {
+  "cap38": 25,
+  "cap76": 50
+ },
+ "shoulder_offset_max_mm": {
+  "derated83.5": 55,
+  "momentary369_SF1.5": 161
+ },
+ "elbow_2s": {
+  "gear_rep": 107,
+  "gear_mom": 191,
+  "motor_peak_avail": 76,
+  "hard_cap": 69,
+  "winding_rise_2s_K": {
+   "38": 1.6,
+   "49": 2.6,
+   "69": 5.1,
+   "76": 6.2
+  },
+  "drive_rise_2s_K_bound": {
+   "38": 0.59,
+   "49": 0.99,
+   "69": 1.96,
+   "76": 2.38
+  },
+  "T_for_drive_rise_le_1K": 49
+ }
+}
