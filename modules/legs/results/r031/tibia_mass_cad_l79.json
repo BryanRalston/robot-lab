@@ -1,0 +1,25 @@
+{
+ "length_mm": 314,
+ "per_wall": {
+  "1.2": {
+   "tube_kg": 0.1457,
+   "sleeve_kg": 0.0185,
+   "sum_kg_leg": 0.1642
+  },
+  "1.5": {
+   "tube_kg": 0.1809,
+   "sleeve_kg": 0.0182,
+   "sum_kg_leg": 0.1991
+  },
+  "2.0": {
+   "tube_kg": 0.2384,
+   "sleeve_kg": 0.0178,
+   "sum_kg_leg": 0.2562
+  }
+ },
+ "delta_2p0_vs_1p5_kg_leg": 0.0571,
+ "delta_robot": 0.1142,
+ "tibia_share_of_R135_1p5_vs_1p2_robot": 0.0698,
+ "new_total_booking_robot": 0.264,
+ "note": "R-135 booked +0.15 robot (femur+tibia 1.2 -> 1.5); femur unchanged at 1.5"
+}

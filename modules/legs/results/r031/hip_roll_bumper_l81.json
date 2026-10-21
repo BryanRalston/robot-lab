@@ -1,0 +1,140 @@
+{
+ "baseline o20x10": {
+  "SF": 0.5,
+  "A_mm2": 314.2,
+  "rows": [
+   {
+    "strain_pct": 10,
+    "stress_MPa": 4.86,
+    "F_kN": 1.53,
+    "defl_mm": 1.0,
+    "k_secant_kN_mm": 1.53,
+    "T_joint_Nm": 96,
+    "theta_deg": 0.91,
+    "energy_J": 0.75,
+    "EST": false
+   },
+   {
+    "strain_pct": 20,
+    "stress_MPa": 9.51,
+    "F_kN": 2.99,
+    "defl_mm": 2.0,
+    "k_secant_kN_mm": 1.49,
+    "T_joint_Nm": 188,
+    "theta_deg": 1.82,
+    "energy_J": 3.02,
+    "EST": false
+   },
+   {
+    "strain_pct": 25,
+    "stress_MPa": 11.65,
+    "F_kN": 3.66,
+    "defl_mm": 2.5,
+    "k_secant_kN_mm": 1.46,
+    "T_joint_Nm": 231,
+    "theta_deg": 2.27,
+    "energy_J": 4.68,
+    "EST": false
+   },
+   {
+    "strain_pct": 30,
+    "stress_MPa": 14.27,
+    "F_kN": 4.48,
+    "defl_mm": 3.0,
+    "k_secant_kN_mm": 1.49,
+    "T_joint_Nm": 282,
+    "theta_deg": 2.73,
+    "energy_J": 6.71,
+    "EST": true
+   },
+   {
+    "strain_pct": 40,
+    "stress_MPa": 19.51,
+    "F_kN": 6.13,
+    "defl_mm": 4.0,
+    "k_secant_kN_mm": 1.53,
+    "T_joint_Nm": 386,
+    "theta_deg": 3.64,
+    "energy_J": 12.02,
+    "EST": true
+   }
+  ],
+  "k_joint_kNm_rad_25": 5.81
+ },
+ "fallback o24x16": {
+  "SF": 0.375,
+  "A_mm2": 452.4,
+  "rows": [
+   {
+    "strain_pct": 10,
+    "stress_MPa": 3.83,
+    "F_kN": 1.73,
+    "defl_mm": 1.6,
+    "k_secant_kN_mm": 1.08,
+    "T_joint_Nm": 109,
+    "theta_deg": 1.46,
+    "energy_J": 1.36,
+    "EST": false
+   },
+   {
+    "strain_pct": 20,
+    "stress_MPa": 7.49,
+    "F_kN": 3.39,
+    "defl_mm": 3.2,
+    "k_secant_kN_mm": 1.06,
+    "T_joint_Nm": 214,
+    "theta_deg": 2.91,
+    "energy_J": 5.47,
+    "EST": false
+   },
+   {
+    "strain_pct": 25,
+    "stress_MPa": 9.17,
+    "F_kN": 4.15,
+    "defl_mm": 4.0,
+    "k_secant_kN_mm": 1.04,
+    "T_joint_Nm": 261,
+    "theta_deg": 3.64,
+    "energy_J": 8.49,
+    "EST": false
+   },
+   {
+    "strain_pct": 30,
+    "stress_MPa": 11.24,
+    "F_kN": 5.08,
+    "defl_mm": 4.8,
+    "k_secant_kN_mm": 1.06,
+    "T_joint_Nm": 320,
+    "theta_deg": 4.37,
+    "energy_J": 12.18,
+    "EST": true
+   },
+   {
+    "strain_pct": 40,
+    "stress_MPa": 15.36,
+    "F_kN": 6.95,
+    "defl_mm": 6.4,
+    "k_secant_kN_mm": 1.09,
+    "T_joint_Nm": 438,
+    "theta_deg": 5.82,
+    "energy_J": 21.81,
+    "EST": true
+   }
+  ],
+  "k_joint_kNm_rad_25": 4.12
+ },
+ "L39_4J_basis": "L39 (15c602d) \"vs 4 J\" has no source in the repo (no PU datasheet existed; hip_stop_r6 used an uncited E 25 MPa linear estimate). Replaced by the cited energy at 25-30 % strain (per bumper).",
+ "bottomed_path_EST": {
+  "lug_kN_mm": 18.1,
+  "deck_bracket_kN_mm": 13.5,
+  "yoke_plate_kN_mm": 177.2,
+  "series_kN_mm": 7.4,
+  "joint_kNm_rad": 29.4,
+  "fallback_plus6mm_bracket": {
+   "deck_bracket_kN_mm": 6.3,
+   "series_kN_mm": 4.6,
+   "joint_kNm_rad": 18.1
+  },
+  "assumptions": "lug 12x12 cantilever 26 mm; deck bracket 6 x 30 angle leg, 20 mm arm (+6 mm -> 26 mm for the fallback); yoke plate 8 x 40, 30 mm span SS; 7075; bolt/joint compliance ignored (stiff side) [EST]"
+ }
+}

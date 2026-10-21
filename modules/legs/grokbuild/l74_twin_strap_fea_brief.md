@@ -56,3 +56,10 @@ The G10 isolator blocks must be cut so the strap-to-clamp heat path runs through
 - **RV12x5 static rating check per screw (fall):** 14.5 kN × 0.65/0.5 → 18.9 kN on the leading screw < **C0a 27.3 kN** (SF 1.44). Report it; the screw is the fuse only above that.
 - **Knee stop (L78, supersedes the 6.8 kN·m upper bound):** run **T_STOP = 830 N·m** (Actuators D97 r75 / 3 × 15 mm fallback, pad force 11.1 kN at r 75, contact 135°, max ≈ 143.6° [EST]) reacted pad (thigh clevis) → striker (shank tongue) → femur/tibia as knee moment; pad location = parameter STOP_PAD_XYZ (Actuators). The r60 D97 pad (1030 N·m, 17.2 kN) is the alternate case. Previously: there is **no mechanical knee stop**; CONTRACTS l.116 knee 0–135° is the sim limit. Actuators proposes a PU stop pair at 135°. Controls 0fb7c0e impact speed 6.2 rad/s (now known). Our clearance sweeps use 145° (conservative). Arbiter should set the contract ROM: if the PU stop at 135° is adopted, 135° + stop compression is the clearance basis, and 145° is a margin case only.
 - Housing: use **knee_twin_housing_release_r116b.step** (rear fin tips trimmed) for all clearance checks.
+
+## Addendum L79 (T&R L60 rev B 513a7d5; Robot Lab rulings) — supersedes the fall load above
+- **FALL_LOAD_N = 13 100 N** (DF 1.05, not 2.0): **6.55 kN per screw**, tension and compression, knee 90° and 135°, **65/35 split** (8.52 kN leading screw; RV12x5 C0a 27.3 kN → SF 3.21).
+- Hand [EST, tube_resize_l79.json; couple 22.5 kN]: straps 11.2 kN equal / 14.6 kN at 65/35 → net SF 5.60 / 4.31, root (Kt 1.5) 3.73 / 2.87; bolts 4 × M6 12.9 shear 7.38 / 5.68; pad bearing (455 tier) 7.78 / 5.99; G10 bearing 39.0 / 50.7 MPa vs 128 MPa at 71 °C (L76) → 3.28 / 2.53.
+- Knee stop: **r75, T_STOP = 830 N·m** (Robot Lab). Knee ROM basis: 135° + crush, top-out **≤ 143.6°** governing; 145° margin only.
+- Knee design moment for the tubes 0.92 kN·m (Controls cap ≤ 50 N·m within 10° of the stop) — tube check is Legs hand (L79), not part of this run.
+- Plate raise +4 mm kept (worst-case basis, no RSS).

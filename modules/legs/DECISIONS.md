@@ -352,3 +352,16 @@ results/r031/p156_rev5_optionB.md/.json, l60_cutout_optB_l74.py, drive_plate_swe
 
 ## L78 — knee PU stop (D97/P-159) + P-158 pad, 2026-10-21
 D97 r60 1030 N·m: tibia 45×1.5 SF 0.82 FAIL; r75 fallback 830 N·m: tibia 1.02, femur 1.27, tongue 2.86, bolts 7.49, bearing 13.8 → **recommend r75** (pending Actuators energy/travel confirmation); brief T_STOP = 830 N·m. Stacks placed outboard of the cheeks clash the knee lever/rods/eyes (0.0) → Actuators to place. FLAG: 29 kN drive fall case = 1.38 kN·m → tibia SF 0.61 (governs tube walls). P-158 pad min 33.0 mm PASS.
+
+## L79 — Robot Lab rulings; tibia 2.0 wall (R-152 CAD mass); straps at 13.1 kN; rev 8c skirt, 2026-10-21
+- Rulings: knee stop = r75 fallback, 830 N·m; +4 mm plate raise KEPT (worst case, no RSS); knee ROM contract 135° + crush, top-out ≤ 143.6° (pending Arbiter) governs panel/shank gates, 145° margin; T&R L60 rev B (513a7d5) DF 1.05 → fall 13.1 kN (6.55 kN/screw); Controls cap ≤ 50 N·m within 10° of the stop → 0.92 kN·m design knee moment; **tibia wall 2.0 mm (Robot Lab, supersedes 1.7)**, femur 1.5; D98 (+0.807 kg) REJECTED (D99 ≤ 0.35 kg pending).
+- **Tibia 45×2.0 (hand, 393 fall / 58 fatigue):** 0.92 kN·m SF 1.19; stop 830 SF 1.32; bottoming 1028 (978+50) SF 1.06; fatigue σa 42.2 → SF 1.37. Femur 50×1.5: 1.15 / 1.27 / 1.03 / 1.33. Doubler sleeve 0.5×100 OD 41.8 → **40.8** (ID 41.0 − 0.20 bond); P-152 46.80 is the femur sleeve, unchanged; tibia OD 45 unchanged.
+- **R-152 mass from model_v4 CAD (tibia_mass_cad_l79.py):** tube ø45 × 314 (+ sleeve 0.5 × 100) per leg 0.1991 kg at 1.5 → 0.2562 kg at 2.0: **+0.0571 kg/leg, +0.1142 kg robot** vs the R-135 (1.5) booking; new femur+tibia wall booking **+0.264 robot** (R-135 +0.15 + 0.114).
+- Straps at 13.1 kN (couple 22.5 kN): net SF 5.60 / 4.31 (65/35), root 3.73 / 2.87, bolts 7.38 / 5.68, pad bearing 7.78 / 5.99, G10 39.0 / 50.7 MPa vs 128 → 3.28 / 2.53; screw 8.52 kN vs C0a 27.3 → SF 3.21. Brief addendum L79.
+- Rev 8b superseded by 8c before the sweep finished; rev 8c results in results/r031/skirt_r8c_sweep_l79.json (see L79b). The main r8c pelvis STL is EMPTY (84 B, 0 % fixed skirt retained), so the hem gate is run on the notched option.
+
+## L80 — L39 hip-roll PU bumper stiffness to T&R side fall (3c73260) [all EST], 2026-10-21
+PU 90A ø20×10 at r63, E 45 MPa (30–60), shape factor 0.5 → Ec ≈ 1.5E; k ≈ 2.1 kN/mm (1.4–2.8) = 8.4 kN·m/rad (5.6–11.1); linear to 25 % (2.5 mm, 2.3°) ≈ 334 N·m (222–445), ≈ 6.6 J; stiffens sharply > 30 %, rigid ≈ 40 % (4 mm, 3.6°). L39 rating 4 J. Needs a supplier curve + drop test. Hold the 2.3 mm tibia option; Robot Lab prefers the Controls swing-tuck rule. (Superseded by the cited L81 curve.)
+
+## L81 — hip-roll bumper from the cited Freelin-Wade PUR90A curve (results/r031/hip_roll_bumper_l81.md), 2026-10-21
+ø20×10: 3.66 kN / 231 N·m / 4.68 J at 25 %, 6.71 J at 30 % [EST interp]; 5.8 kN·m/rad. L39 "4 J" was uncited → replaced. Tuck case 1.33 J SF 3.5; no-tuck 10.6 J fails baseline; fallback ø24×16 8.5 J (25 %) / 12.2 J (30 %) held. Bottomed path 7.4 kN/mm = 29.4 kN·m/rad (fallback 18.1). R roll mirrored −15/+12. 1.70 m/s landing: ×1.214 (impulse) / ×1.474 (energy) on the proof case → ankle screws SF 1.72 / 1.41 vs C0a; cross/DU/sole need proof SF ≥ 1.22/1.48 from the Job 7 FEA.

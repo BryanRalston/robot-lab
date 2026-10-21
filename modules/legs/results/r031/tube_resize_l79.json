@@ -1,0 +1,72 @@
+{
+ "tibia 45x2.0 (RULED)": {
+  "Z": 2781,
+  "SF_design_0p92": 1.19,
+  "SF_stop_830": 1.32,
+  "SF_bottom_1028": 1.06,
+  "sigma_a": 42.2,
+  "SF_fatigue_58": 1.37
+ },
+ "tibia 45x1.7": {
+  "Z": 2412,
+  "SF_design_0p92": 1.03,
+  "SF_stop_830": 1.14,
+  "SF_bottom_1028": 0.92,
+  "sigma_a": 48.7,
+  "SF_fatigue_58": 1.19
+ },
+ "tibia 45x1.5 (L65)": {
+  "Z": 2158,
+  "SF_design_0p92": 0.92,
+  "SF_stop_830": 1.02,
+  "SF_bottom_1028": 0.82,
+  "sigma_a": 54.5,
+  "SF_fatigue_58": 1.06
+ },
+ "femur 50x1.5": {
+  "Z": 2691,
+  "SF_design_0p92": 1.15,
+  "SF_stop_830": 1.27,
+  "SF_bottom_1028": 1.03,
+  "sigma_a": 43.7,
+  "SF_fatigue_58": 1.33
+ },
+ "mass": {
+  "tube_kg_leg": 0.0575,
+  "sleeve_kg_leg": -0.0004,
+  "net_kg_leg": 0.0572,
+  "net_kg_robot": 0.1143,
+  "basis": "vs L65 1.5 wall; tube length 314 (model_v4 tt-tb)"
+ },
+ "tibia_sleeve": {
+  "tube_ID_2p0": 41.0,
+  "sleeve_OD_max": 40.8,
+  "sleeve_ID": 39.8,
+  "note": "0.20 diametral bond per BOND_SPEC 3; tibia doubler 0.5 wall OD 41.8 (1.5 wall) -> 40.8 (2.0 wall). Not a CONTRACTS row (P-152 46.80 is the FEMUR sleeve, unchanged). Tibia OD 45 unchanged -> fork/collar interfaces unchanged."
+ },
+ "straps_13p1kN": {
+  "couple_kN": 22.5,
+  "cases": {
+   "equal": {
+    "strap_kN": 11.2,
+    "SF_net": 5.6,
+    "SF_root_Kt1p5": 3.73,
+    "bolt_shear_SF": 7.38,
+    "pad_bearing_SF_455": 7.78,
+    "G10_bearing_MPa": 39.0,
+    "G10_margin_128": 3.28
+   },
+   "65/35": {
+    "strap_kN": 14.6,
+    "SF_net": 4.31,
+    "SF_root_Kt1p5": 2.87,
+    "bolt_shear_SF": 5.68,
+    "pad_bearing_SF_455": 5.99,
+    "G10_bearing_MPa": 50.7,
+    "G10_margin_128": 2.53
+   }
+  },
+  "screw_65_35_kN": 8.52,
+  "screw_SF_C0a_27p3": 3.21
+ }
+}
