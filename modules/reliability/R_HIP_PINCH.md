@@ -66,3 +66,56 @@ Robot Lab request. Independent re-run: `r_hip_pinch_check.py`, which wraps ID's 
 | N7 / H2 | **revise** (wording, N8, H2 keep-off band ≥ 100 mm, limp-leg warning) |
 
 ## 6. TP-G5-18 (G5_TEST_PLAN.md)
+
+## Rev 8b re-check (ID acb9bd5), 2026-10-21 ~10:00 ET
+Script `r_hip_pinch_check_8b.py`: ID's geometry with hem R 144 and the panel trimmed to y 86 + a 40 mm inboard-rear chamfer, on my 2240-pose grid. L/R check: 6000 random **asymmetric** both-leg pairs over the **full ROM + overtravel** (pitch −107.5…42.5, roll −14.5…17.5, yaw −37.5…47.5), excluding thigh-thigh collisions.
+
+### 1. Claims
+| claim | T&R | verdict |
+|---|---|---|
+| hem R 144: 32.6 in ROM, 28.3 with overtravel, 26.3 with tolerance, 0 in 5–25 | **32.6 (40, −8, −35) / 28.3 (42.5, 0, −17)**, 0 in band; −2 tol → 26.3 ≥ 25 | **PASS** (1.3 mm margin at the worst combined case). Max gap now 203 mm (N7 says 186; update) |
+| y 86 + chamfer: −83 % contact poses, worst 0.1 | ID's asym sweep covered **pitch −10…45 only** (no flexion). Over the full ROM mine gives **1/6000 pairs < 3 mm, 4/6000 < 28 mm, worst 0.77 mm** at both legs extended (+23/+40) with yaw 38/46. **None with a leg flexed beyond −10°**, so the deep-flexion closures of rev 8 are gone | **PASS as stated** (rare, extension + high-yaw only). Closure still exists, so the **Controls ≥ 28 mm keep-out stays mandatory** (warn 35 / limit 30 / trip 28, measured rigid edge to rigid edge, **excluding foam**) |
+| foam ≈ 24 N fingertip / ≈ 120 N hand at full closure | see §2: **the stress basis is wrong**; the force is set by the drive, not the foam | **CONDITIONAL / marginal FAIL** (hand, limp) |
+
+### 2. Foam force check (closed-cell PE, 30 kg/m³)
+- **Typical compressive stress for LDPE foam at ~30–35 kg/m³** (e.g. Ethafoam 220-class datasheets, [uncertain, not fetched for this exact grade]): ≈ 45–50 kPa at 10 %, 55–70 at 25 %, 100–130 at 50 %, and **≈ 300–500 kPa at 75–80 %** (densification onset).
+- **ID's "60 kPa at 80 %" is roughly the 25 % value. At 80 % the stress is ~5–8× higher.**
+- **Full closure (80 % strain), if forced:** finger patch 20 × 20 → 120–200 N; hand 100 × 20 → 600–1000 N. So the foam alone does **not** keep 140 N at full closure. It is a contact softener, not a force limiter.
+- **What actually sets the force** is the closing drive. The foam only spreads it:
+  - **Powered (≈ 2.2 kN):** the foam bottoms (2.2 kN / 0.002 m² ≈ 1.1 MPa ≫ densification), and the rigid edge comes through. **Only the keep-out protects** (agreed with the brief).
+  - **Limp (≈ 165 N, leg weight moment ≈ 25 N·m / r 0.15 [EST]):**
+    - **Finger (≈ 15 mm thick)** in 28 mm foam: ~54 % strain → ~110–130 kPa × 4 cm² ≈ **45–52 N ≤ 140 PASS** (ID's 24 N is low but the conclusion holds). The foam doesn't bottom; residual ≥ 13 mm.
+    - **Hand (≈ 25–30 mm thick)** in a 28 mm foam strip: ≈ 90–100 % strain, so the foam **bottoms** and the hand sees the full limp drive, **≈ 165 N vs 140 N quasi-static: marginal FAIL (+18 %)**. Transient 165 ≤ 280 PASS. Pressure 165 N / 20 cm² ≈ 8 N/cm², far under the Annex A hand limits (PASS).
+    - With foam on **both** closing edges (L↔R panels: 2 × 28 = 56 mm) the hand is at ~50 % per strip, so no bottoming. The force is still the drive's 165 N at equilibrium (the foam can't reduce a static gravity load), so it is the same marginal result.
+  - **Fix options (any one):**
+    - (i) **measure the real limp clamping force** (TP-G5-18). If ≤ 140 N it passes; 165 N is my estimate from a ~10 kg leg at 0.25 m;
+    - (ii) **a rigid 30 mm standoff bump** at the panel/hem edge ends, so that limp closure can't drop below a hand-crush-limited gap (combined with the foam);
+    - (iii) a **40 mm deep foam** so the hand doesn't bottom (doesn't change the static force but removes the rigid-edge contact).
+  - **Recommend (i) + (iii)**, and accept transient-only contact if (i) shows ≤ 140 N.
+
+### 3. Foam durability and geometry
+- **Compression set:** closed-cell LDPE at 30 kg/m³ is ~10–20 % after 25 % / 22 h (ASTM D3575-type data [uncertain]). It is much worse after repeated 50–80 % strains. Cross-linked PE (XLPE) is better (~5–10 %). **Specify XLPE** and a residual thickness ≥ 25 mm (≤ 10 % loss) as the replace criterion.
+- **Heat:** LDPE softens about 70–80 °C. **The hem edge is in the B2 rear-outlet plume path in sit/kneel** (Thermal: the jet points at the pelvis rear cover, 58–84 °C). **Specify XLPE rated ≥ 90 °C** in that ±100 mm sector, or keep the foam out of the jet (TP-G5-15 thermocouple on the foam).
+- **UV:** black-skinned PE with carbon black is OK indoors. Outdoors, expect embrittlement and chalking in 1–2 years.
+- **Tear/abrasion:** PE foam tear strength is low (~1–3 N/mm). Edges rub on clothing and on each other in closure. Skinned face, J-channel lip covering the foam corner, no exposed cut edges.
+- **Replacement interval:** inspect at each service (monthly) and after any pinch/fall/rescue. Replace if thickness loss > 10 %, there are cuts or tears, there is heat glazing, or **annually** regardless [EST until TP-G5-18 ageing]. The J-channel design is replaceable: good.
+- **Geometry:** the keep-out gap is defined **rigid edge to rigid edge (panel/J-channel PC), not foam surface**. The foam is allowed to fill the 28 mm gap (no open finger gap at the hem's closest poses, which is ID's point). It must not add rigid thickness: J-channel ≤ 1 mm, and it **reduces the rigid gap by ≤ 2 mm** → recheck hem 28.3 − 2 = 26.3 (tolerance already included; J-channel thickness was not). **Hem with the J-channel: ≈ 25.3–26.3 mm, still ≥ 25 PASS (thin)**. ID should confirm whether the 1 mm channel was in its numbers.
+
+### 4. HANDLING_MAP (acb9bd5)
+- **N7 reworded: OK** (pose-dependent, crushing force stated, powered or limp). Change "up to 186" → **203 mm (R 144)**. Change "the foam edges are the protection" → **"the Controls keep-out (powered) and the foam edges (limp, finger) are the protection"**: the foam doesn't protect a hand against the powered drive.
+- **N8 added: OK.**
+- **H2 ≥ 100 mm above the hem: OK** (ISO 13854 hand). ID to mark the line on the cover (moulded rib or a texture change) so it is visible.
+- **Rescue step 5 (support the thighs first): OK.** It removes the limp-swing closure during the lift.
+- **Panel ↔ shank (knee 135–145, deep kneel/sit-back) and panel ↔ floor: STILL OPEN** (Legs CAD). Panel flex ≤ 1 mm under a hand push: open (TP-G5-18).
+
+### Verdicts rev 8b
+| item | verdict |
+|---|---|
+| hem ↔ panel (finger 25) | **PASS** (26.3 with tolerance; ~25.3 if the J-channel isn't included: confirm) |
+| L ↔ R panels | **PASS with Controls keep-out** (rare residual closures, worst 0.77 mm at extension + yaw) |
+| foam, finger, limp | **PASS** (45–52 N) |
+| foam, hand, limp | **marginal FAIL / CONDITIONAL** (≈ 165 N vs 140): measure; 40 mm foam or a standoff |
+| foam, powered | not protective; **keep-out mandatory** |
+| foam durability | **CONDITIONAL**: XLPE ≥ 90 °C near the plume, ≤ 10 % thickness loss criterion, annual/after-event replacement |
+| N7/N8/H2/rescue | **ACCEPT** with 2 wording fixes |
+| panel ↔ shank / floor | **OPEN** |
