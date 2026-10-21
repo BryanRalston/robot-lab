@@ -15,10 +15,10 @@ ROOT = Path(__file__).resolve().parents[3]
 ID_SCRIPT = ROOT / 'modules/design/cad/covers/hip_skirt_r8.py'
 ASYM = ROOT / 'modules/design/cad/covers/hip_skirt_r8_asym.py'
 HEM_R = 144.0  # rev 8b (fallback REV='8b')
-REV = "8c"
+REV = "8f"
 COV = ROOT / 'modules/design/cad/covers'
 JCH = 3.0  # rev 8c rigid PC J-channel lip on the hem (foam excluded)
-WARN, LIMIT, TRIP = 35.0, 30.0, 28.0  # nominal on rev 8c rigid geometry (stopgap 40/35/33 of T&R 76de66a retired with this rebuild)
+WARN, LIMIT, TRIP = 40.0, 35.0, 33.0  # T&R 76de66a/42c4e50 stopgap; return to 35/30/28 only on T&R re-verification
 HIP = ['hip_pitch', 'hip_roll', 'hip_yaw']
 _G = {}
 
@@ -32,9 +32,9 @@ def geometry():
     exec(compile(a, 'hip_skirt_r8_asym', 'exec'), asym)
     if REV == '8b':
         _G.update(P=asym['panel'](y0=86, c=40, phi0=45), T=ns['T'], KT=ns['KT'], mir=ns['mir'], off=0.0); return _G
-    import trimesh  # rev 8c (ID ee80543): rigid panel STL (R152 relief, y86 + chamfer) and notched hem STL (R141.5)
-    pm = trimesh.load(COV / 'hip_skirt_r8c_thigh_panel.stl', force='mesh')
-    hm = trimesh.load(COV / 'hip_skirt_r8c_pelvis_notched.stl', force='mesh')
+    import trimesh  # rev 8f (ID 76cc34d): rigid panel STL (R152 relief, y86 + chamfer) and notched hem STL (R141.5)
+    pm = trimesh.load(COV / 'hip_skirt_r8f_thigh_panel.stl', force='mesh')
+    hm = trimesh.load(COV / 'hip_skirt_r8f_pelvis_notched.stl', force='mesh')
     P = np.vstack([pm.vertices, trimesh.sample.sample_surface_even(pm, 4000, seed=0)[0]])
     P = P[P[:, 0] <= P[:, 0].max() - 1.0]  # inboard skin of the 1.5 mm hull only (drop the offset copy)
     _, ix = np.unique(np.round(P / 2.0), axis=0, return_index=True); P = P[np.sort(ix)]  # 2 mm voxel thin-out (<=~1 mm error)
