@@ -142,3 +142,54 @@ Source: controls/limits/SIDE_FALL.md, side_fall_results.json (54 runs/variant), 
   - sole pad bond: Legs T8 drop test.
 - **Needed:** Controls to log the peak foot contact force (normal + lateral) and the ankle roll angle/stop contact in the tuck runs. Legs to give the ankle roll stop radius and bolt grade.
 - **G5:** TP-G5-19 item (e) below.
+
+# Rev C.2 (2026-10-21 ~10:40 ET): Legs L80–L83 inputs (8e92b89 / 6a3d84c, DECISIONS L81/L83)
+## Hip-roll bumper rating
+- **ø20×10 PUR90A, cited curve (L81): 4.68 J at 25 % strain** (231 N·m, 5.8 kN·m/rad). This replaces the uncited L39 "4 J". 6.71 J at 30 % is [EST interp].
+- Usage of the 4.68 J rating:
+  - S1: 1.66 J (35 %);
+  - **S2b: 3.65 J (78 %)**;
+  - S2c with the tuck: 1.33 J (28 %).
+  - All **PASS**.
+- No-tuck S2c (10.6 J) still fails. The ø24×16 fallback (8.5 J) is held for the walking-stumble result.
+- The cited k (5.8) is softer than the rev B estimate (8.4), so the peak moments in the rev C table are on the stiff, conservative side.
+- **Inspect the bumpers after any event > 4.68 J** (INSPECTION_SCHEDULE F3).
+
+## Ankle-roll stop M4 / dowel: CLOSED, PASS
+**Inputs:**
+- Stop face at r 45 mm (L83; a14.json).
+- 2 × 7075 blocks 20×12×10, each with 1 × ISO 4762 M4 12.9 zinc-flake + Loctite 243 into a helicoil in the 7075 cross, plus a ø4 h6 hardened dowel (L83).
+- One block engages per event.
+
+**Block load:**
+- **Tuck landing at 1.70 m/s:** edge-capped ankle roll moment ≈ 193 N·m [EST], giving F = 193/0.045 = **4.29 kN**. That is ≈ 2.5 kN × 74 mm edge, capped by the foot edge geometry.
+- **Foot fall case / Legs stop design:** 3933 N hold × 1.5 dynamic [EST] = **5.9 kN** (265 N·m) per block.
+  - This envelopes the 3914 N 6 BW fall case applied at the foot edge only if the moment is reduced to ≤ 265 N·m.
+  - Full 3914 N at 74 mm would give 290 N·m / 6.4 kN [EST]. That is not credible together with the edge cap, but it is noted.
+
+**Load sharing:**
+- The dowel is h6 in reamed holes; the M4 sits in a ø4.5 clearance hole with 0.25 mm radial clearance. So the **dowel carries ~100 % of the tangential (shear) load**.
+- Preload friction is ignored: 6.4 kN [EST, 75 % proof] × μ 0.15 ≈ 1.0 kN.
+- The bolt carries only the prying tension from the face force acting ≈ 5 mm above the joint, about a heel ≈ 6 mm from the bolt [EST]: **T ≈ 0.83 F**.
+
+| check | capacity | tuck 4.29 kN | fall 5.9 kN |
+|---|---|---|---|
+| dowel ø4 shear (Legs L83, ≈ 7.5 kN [EST, ~600 MPa]) | 7.5 kN | **SF 1.75** | **SF 1.27** |
+| dowel bearing in 7075 (4 × 5 mm engagement [EST], 214/295 MPa vs ≈ 900 Fbru [EST]) | | 4.2 | 3.1 |
+| M4 12.9 tension vs proof (As 8.78 × 970 = 8.5 kN; T 3.6/4.9 kN) | 8.5 kN | **2.36** | **1.73** |
+| joint separation (preload 6.4 kN [EST]; separation ≈ preload/(1−Φ≈0.2) = 8 kN) | 8 kN | no separation | no separation |
+| helicoil pull-out in the parent 7075 cross (STI major ≈ 5.0 mm, 1.5D = 6 mm, 0.6 thread shear-area factor → 56 mm²; Fsu ≈ 0.6 Ftu, T7351 462 → 277 MPa [EST: DB has no Fsu; the lower temper in AL7075T7351 is used] ≈ 15.7 kN) | 15.7 kN | **4.3** | **3.2** |
+| bolt ultimate vs strip | 10.7 kN < 15.7 kN | the bolt fails before the threads strip (good) | |
+| dowel lost, M4 shear alone (L83, 6.4 kN) | 6.4 kN | 1.49 | 1.08 (marginal) |
+
+**Verdict:** **PASS** for the tuck landing and the foot-fall/stop design case. The dowel is the primary shear path, and the bolt, helicoil and parent material all have margin. With the dowel missing it is marginal (1.08), so dowel presence is an inspection and assembly item.
+
+**[EST] / missing:**
+- helicoil length and engagement depth (assumed 1.5D);
+- block-to-cross heel geometry;
+- cross temper (T6 vs T7351; the lower is used);
+- dowel engagement depth;
+- tightening torque/preload.
+- Confirm the real foot contact force with Controls' foot-force logging (TP-G5-19 e).
+
+**1.70 m/s landing, other parts** (Legs L81): ankle screws SF 1.72 (impulse) / 1.41 (energy) vs C0a. The cross, DU bushes and sole need Job 7 FEA proof-case SF ≥ 1.22 / 1.48 (OPEN, Legs).

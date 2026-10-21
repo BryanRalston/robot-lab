@@ -135,3 +135,7 @@ This replaces the D98 interim. Tibia 45×2.0 Z 2781 mm³; femur 50×1.5 Z 2691 m
 - **Speed cap:** 5.58 rad/s at stop contact gives 44.1 J; **8.22 rad/s reaches bottoming**.
 - **Mass: FAIL**, 0.484 kg vs 0.35 kg budget. Legs/Actuators to resolve; re-check the moments if the pad changes.
 - The rate factor ×1.3 is still [EST], to be measured in TP-G5-20.
+- **Rev C.2 (2026-10-21):**
+  - **D99 mass: PASS by Robot Lab ruling.** The cap was raised to 0.49 kg; D99 is 0.484 kg (Legs L84 placement 0.487).
+  - Femur 50×1.5 at bottoming: yield SF 0.98, accepted as slight set under F1 (Legs L79/L83, Robot Lab).
+  - Legs strap SF 2.53 noted (13.1 kN, G10 bearing at 71 °C).
