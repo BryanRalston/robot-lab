@@ -1,0 +1,9 @@
+# Pose study (b): hands to the floor, knee ≤ 120°, hip ≥ −105°, wide stance (Robot Lab, 2026-10-21 ~10:45 ET)
+## Static feasibility (`pose_study_b.py` → `pose_study_b.json`)
+Grid 108 poses (knee 100/112/120°, hip −74.5/−88.8/−104.9°, shoulder −1.4/−1.9, waist 0/0.4, stance +0/+0.05/+0.10 m per foot). Root pitch + ankle solved so the hands touch the floor (|z| ≤ 10 mm) and nothing else does. **Feet flat is impossible** at these knee/hip angles (needs ankle ≈ −1.7 rad vs the −0.955 soft limit) → feet are on the toes (heels up).
+- Geometry OK 78/108; **static pass 75** (CoM within the hand–foot x span, every joint within the derated budget, elbow ≤ 38 or 49, hand normal ≤ 875 N). Static hand loads ≈ 110–190 N/hand, knee torque ≲ 50 N·m [support-force split is the min-norm one, EST].
+- Dynamic hold placed directly in the 6 best poses (both elbow caps): **no fall, hands 113–165 N, knee 100–120°**.
+## Dynamic transition stand → that pose (`pose_b_transition.py` → `pose_b_transition.json`)
+Joint-space min-jerk path, 2.0 / 3.5 s, derated PD + static ff (feet, then feet + hands), knee cap ≥ 120°, 68 kg, 3 targets × 3 stance widths × 2 elbow caps = 36 runs: **0/36 pass.**
+- The body tips forward before the hands arrive: hand contact 1.5–2.4 m/s (gate ≈ 0.23), peak 750–1230 N/hand; 30/36 then fall (other contact) at 1.9–3.0 s; the 6 non-falls (knee 100°, 2.0 s) plant at 2.4 m/s / 1.17 kN. Knee overshoots to 126–133° with the 120° target (cap), ≤ 123° with the 112° target.
+- **Conclusion:** the end pose is statically feasible; a feed-forward joint path cannot reach it without the CoM running ahead of the toes. A CoM-governed reach (task-space WBC on toe support with the knee hard-limited ≤ 120°) is what's missing; the existing kneel_toe WBC is the closest tool and exceeds 125° in its reach phase (KNEEL_R125.md). Not achieved by 11:15.

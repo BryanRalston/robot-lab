@@ -1,0 +1,758 @@
+[
+ {
+  "knee_t": 111.7,
+  "hip_t": -104.9,
+  "waist": 0.4,
+  "T": 2.0,
+  "mass": 68.0,
+  "elbow_cap": 38.0,
+  "width": 0.0,
+  "fell": 1.956,
+  "t_hand_touch": 1.511,
+  "hand_speed_mps": [
+   1.697,
+   1.701
+  ],
+  "hand_peak_N": [
+   843.7,
+   825.2
+  ],
+  "knee_max_deg": 121.7,
+  "pass_": false
+ },
+ {
+  "knee_t": 111.7,
+  "hip_t": -104.9,
+  "waist": 0.4,
+  "T": 2.0,
+  "mass": 68.0,
+  "elbow_cap": 49.0,
+  "width": 0.0,
+  "fell": 1.95,
+  "t_hand_touch": 1.511,
+  "hand_speed_mps": [
+   1.697,
+   1.701
+  ],
+  "hand_peak_N": [
+   842.2,
+   824.3
+  ],
+  "knee_max_deg": 118.4,
+  "pass_": false
+ },
+ {
+  "knee_t": 111.7,
+  "hip_t": -104.9,
+  "waist": 0.4,
+  "T": 2.0,
+  "mass": 68.0,
+  "elbow_cap": 38.0,
+  "width": 0.05,
+  "fell": 1.944,
+  "t_hand_touch": 1.51,
+  "hand_speed_mps": [
+   1.684,
+   1.686
+  ],
+  "hand_peak_N": [
+   840.5,
+   846.1
+  ],
+  "knee_max_deg": 123.3,
+  "pass_": false
+ },
+ {
+  "knee_t": 111.7,
+  "hip_t": -104.9,
+  "waist": 0.4,
+  "T": 2.0,
+  "mass": 68.0,
+  "elbow_cap": 49.0,
+  "width": 0.05,
+  "fell": 1.947,
+  "t_hand_touch": 1.51,
+  "hand_speed_mps": [
+   1.684,
+   1.686
+  ],
+  "hand_peak_N": [
+   838.2,
+   843.5
+  ],
+  "knee_max_deg": 118.3,
+  "pass_": false
+ },
+ {
+  "knee_t": 111.7,
+  "hip_t": -104.9,
+  "waist": 0.4,
+  "T": 2.0,
+  "mass": 68.0,
+  "elbow_cap": 38.0,
+  "width": 0.1,
+  "fell": 1.949,
+  "t_hand_touch": 1.512,
+  "hand_speed_mps": [
+   1.67,
+   1.672
+  ],
+  "hand_peak_N": [
+   828.0,
+   829.7
+  ],
+  "knee_max_deg": 122.8,
+  "pass_": false
+ },
+ {
+  "knee_t": 111.7,
+  "hip_t": -104.9,
+  "waist": 0.4,
+  "T": 2.0,
+  "mass": 68.0,
+  "elbow_cap": 49.0,
+  "width": 0.1,
+  "fell": 1.943,
+  "t_hand_touch": 1.512,
+  "hand_speed_mps": [
+   1.67,
+   1.672
+  ],
+  "hand_peak_N": [
+   825.4,
+   827.0
+  ],
+  "knee_max_deg": 119.7,
+  "pass_": false
+ },
+ {
+  "knee_t": 111.7,
+  "hip_t": -104.9,
+  "waist": 0.4,
+  "T": 3.5,
+  "mass": 68.0,
+  "elbow_cap": 38.0,
+  "width": 0.0,
+  "fell": 2.571,
+  "t_hand_touch": 2.296,
+  "hand_speed_mps": [
+   1.821,
+   1.824
+  ],
+  "hand_peak_N": [
+   811.1,
+   813.8
+  ],
+  "knee_max_deg": 118.5,
+  "pass_": false
+ },
+ {
+  "knee_t": 111.7,
+  "hip_t": -104.9,
+  "waist": 0.4,
+  "T": 3.5,
+  "mass": 68.0,
+  "elbow_cap": 49.0,
+  "width": 0.0,
+  "fell": 2.573,
+  "t_hand_touch": 2.296,
+  "hand_speed_mps": [
+   1.821,
+   1.824
+  ],
+  "hand_peak_N": [
+   811.1,
+   813.8
+  ],
+  "knee_max_deg": 116.5,
+  "pass_": false
+ },
+ {
+  "knee_t": 111.7,
+  "hip_t": -104.9,
+  "waist": 0.4,
+  "T": 3.5,
+  "mass": 68.0,
+  "elbow_cap": 38.0,
+  "width": 0.05,
+  "fell": 2.571,
+  "t_hand_touch": 2.294,
+  "hand_speed_mps": [
+   1.824,
+   1.809
+  ],
+  "hand_peak_N": [
+   815.9,
+   811.4
+  ],
+  "knee_max_deg": 118.7,
+  "pass_": false
+ },
+ {
+  "knee_t": 111.7,
+  "hip_t": -104.9,
+  "waist": 0.4,
+  "T": 3.5,
+  "mass": 68.0,
+  "elbow_cap": 49.0,
+  "width": 0.05,
+  "fell": 2.573,
+  "t_hand_touch": 2.294,
+  "hand_speed_mps": [
+   1.824,
+   1.809
+  ],
+  "hand_peak_N": [
+   815.9,
+   811.4
+  ],
+  "knee_max_deg": 116.4,
+  "pass_": false
+ },
+ {
+  "knee_t": 111.7,
+  "hip_t": -104.9,
+  "waist": 0.4,
+  "T": 3.5,
+  "mass": 68.0,
+  "elbow_cap": 38.0,
+  "width": 0.1,
+  "fell": 2.566,
+  "t_hand_touch": 2.291,
+  "hand_speed_mps": [
+   1.803,
+   1.816
+  ],
+  "hand_peak_N": [
+   810.8,
+   813.2
+  ],
+  "knee_max_deg": 118.9,
+  "pass_": false
+ },
+ {
+  "knee_t": 111.7,
+  "hip_t": -104.9,
+  "waist": 0.4,
+  "T": 3.5,
+  "mass": 68.0,
+  "elbow_cap": 49.0,
+  "width": 0.1,
+  "fell": 2.568,
+  "t_hand_touch": 2.291,
+  "hand_speed_mps": [
+   1.803,
+   1.816
+  ],
+  "hand_peak_N": [
+   810.8,
+   813.2
+  ],
+  "knee_max_deg": 116.6,
+  "pass_": false
+ },
+ {
+  "knee_t": 119.7,
+  "hip_t": -104.9,
+  "waist": 0.4,
+  "T": 2.0,
+  "mass": 68.0,
+  "elbow_cap": 38.0,
+  "width": 0.0,
+  "fell": 2.493,
+  "t_hand_touch": 1.637,
+  "hand_speed_mps": [
+   1.562,
+   1.553
+  ],
+  "hand_peak_N": [
+   818.6,
+   826.9
+  ],
+  "knee_max_deg": 133.0,
+  "pass_": false
+ },
+ {
+  "knee_t": 119.7,
+  "hip_t": -104.9,
+  "waist": 0.4,
+  "T": 2.0,
+  "mass": 68.0,
+  "elbow_cap": 49.0,
+  "width": 0.0,
+  "fell": 2.44,
+  "t_hand_touch": 1.637,
+  "hand_speed_mps": [
+   1.562,
+   1.553
+  ],
+  "hand_peak_N": [
+   818.6,
+   826.9
+  ],
+  "knee_max_deg": 127.8,
+  "pass_": false
+ },
+ {
+  "knee_t": 119.7,
+  "hip_t": -104.9,
+  "waist": 0.4,
+  "T": 2.0,
+  "mass": 68.0,
+  "elbow_cap": 38.0,
+  "width": 0.05,
+  "fell": 2.444,
+  "t_hand_touch": 1.636,
+  "hand_speed_mps": [
+   1.54,
+   1.542
+  ],
+  "hand_peak_N": [
+   826.3,
+   828.8
+  ],
+  "knee_max_deg": 133.0,
+  "pass_": false
+ },
+ {
+  "knee_t": 119.7,
+  "hip_t": -104.9,
+  "waist": 0.4,
+  "T": 2.0,
+  "mass": 68.0,
+  "elbow_cap": 49.0,
+  "width": 0.05,
+  "fell": 2.408,
+  "t_hand_touch": 1.636,
+  "hand_speed_mps": [
+   1.54,
+   1.542
+  ],
+  "hand_peak_N": [
+   826.3,
+   828.8
+  ],
+  "knee_max_deg": 127.8,
+  "pass_": false
+ },
+ {
+  "knee_t": 119.7,
+  "hip_t": -104.9,
+  "waist": 0.4,
+  "T": 2.0,
+  "mass": 68.0,
+  "elbow_cap": 38.0,
+  "width": 0.1,
+  "fell": 2.441,
+  "t_hand_touch": 1.639,
+  "hand_speed_mps": [
+   1.523,
+   1.525
+  ],
+  "hand_peak_N": [
+   814.7,
+   816.1
+  ],
+  "knee_max_deg": 132.7,
+  "pass_": false
+ },
+ {
+  "knee_t": 119.7,
+  "hip_t": -104.9,
+  "waist": 0.4,
+  "T": 2.0,
+  "mass": 68.0,
+  "elbow_cap": 49.0,
+  "width": 0.1,
+  "fell": 2.4,
+  "t_hand_touch": 1.639,
+  "hand_speed_mps": [
+   1.523,
+   1.525
+  ],
+  "hand_peak_N": [
+   814.7,
+   816.1
+  ],
+  "knee_max_deg": 128.2,
+  "pass_": false
+ },
+ {
+  "knee_t": 119.7,
+  "hip_t": -104.9,
+  "waist": 0.4,
+  "T": 3.5,
+  "mass": 68.0,
+  "elbow_cap": 38.0,
+  "width": 0.0,
+  "fell": 2.968,
+  "t_hand_touch": 2.53,
+  "hand_speed_mps": [
+   1.673,
+   1.662
+  ],
+  "hand_peak_N": [
+   795.1,
+   791.6
+  ],
+  "knee_max_deg": 129.0,
+  "pass_": false
+ },
+ {
+  "knee_t": 119.7,
+  "hip_t": -104.9,
+  "waist": 0.4,
+  "T": 3.5,
+  "mass": 68.0,
+  "elbow_cap": 49.0,
+  "width": 0.0,
+  "fell": 2.974,
+  "t_hand_touch": 2.53,
+  "hand_speed_mps": [
+   1.673,
+   1.662
+  ],
+  "hand_peak_N": [
+   795.1,
+   791.6
+  ],
+  "knee_max_deg": 126.1,
+  "pass_": false
+ },
+ {
+  "knee_t": 119.7,
+  "hip_t": -104.9,
+  "waist": 0.4,
+  "T": 3.5,
+  "mass": 68.0,
+  "elbow_cap": 38.0,
+  "width": 0.05,
+  "fell": 2.963,
+  "t_hand_touch": 2.527,
+  "hand_speed_mps": [
+   1.661,
+   1.651
+  ],
+  "hand_peak_N": [
+   788.7,
+   769.4
+  ],
+  "knee_max_deg": 129.4,
+  "pass_": false
+ },
+ {
+  "knee_t": 119.7,
+  "hip_t": -104.9,
+  "waist": 0.4,
+  "T": 3.5,
+  "mass": 68.0,
+  "elbow_cap": 49.0,
+  "width": 0.05,
+  "fell": 2.968,
+  "t_hand_touch": 2.527,
+  "hand_speed_mps": [
+   1.661,
+   1.651
+  ],
+  "hand_peak_N": [
+   788.7,
+   769.4
+  ],
+  "knee_max_deg": 126.1,
+  "pass_": false
+ },
+ {
+  "knee_t": 119.7,
+  "hip_t": -104.9,
+  "waist": 0.4,
+  "T": 3.5,
+  "mass": 68.0,
+  "elbow_cap": 38.0,
+  "width": 0.1,
+  "fell": 2.947,
+  "t_hand_touch": 2.521,
+  "hand_speed_mps": [
+   1.635,
+   1.669
+  ],
+  "hand_peak_N": [
+   753.0,
+   773.6
+  ],
+  "knee_max_deg": 129.0,
+  "pass_": false
+ },
+ {
+  "knee_t": 119.7,
+  "hip_t": -104.9,
+  "waist": 0.4,
+  "T": 3.5,
+  "mass": 68.0,
+  "elbow_cap": 49.0,
+  "width": 0.1,
+  "fell": 2.947,
+  "t_hand_touch": 2.521,
+  "hand_speed_mps": [
+   1.635,
+   1.669
+  ],
+  "hand_peak_N": [
+   753.0,
+   773.5
+  ],
+  "knee_max_deg": 126.6,
+  "pass_": false
+ },
+ {
+  "knee_t": 100.3,
+  "hip_t": -104.9,
+  "waist": 0.0,
+  "T": 2.0,
+  "mass": 68.0,
+  "elbow_cap": 38.0,
+  "width": 0.0,
+  "fell": null,
+  "t_hand_touch": 1.449,
+  "hand_speed_mps": [
+   2.395,
+   2.399
+  ],
+  "hand_peak_N": [
+   1166.7,
+   1169.0
+  ],
+  "knee_max_deg": 99.2,
+  "pass_": false
+ },
+ {
+  "knee_t": 100.3,
+  "hip_t": -104.9,
+  "waist": 0.0,
+  "T": 2.0,
+  "mass": 68.0,
+  "elbow_cap": 49.0,
+  "width": 0.0,
+  "fell": null,
+  "t_hand_touch": 1.449,
+  "hand_speed_mps": [
+   2.395,
+   2.399
+  ],
+  "hand_peak_N": [
+   1166.7,
+   1169.0
+  ],
+  "knee_max_deg": 99.2,
+  "pass_": false
+ },
+ {
+  "knee_t": 100.3,
+  "hip_t": -104.9,
+  "waist": 0.0,
+  "T": 2.0,
+  "mass": 68.0,
+  "elbow_cap": 38.0,
+  "width": 0.05,
+  "fell": null,
+  "t_hand_touch": 1.447,
+  "hand_speed_mps": [
+   2.399,
+   2.382
+  ],
+  "hand_peak_N": [
+   1158.5,
+   1125.5
+  ],
+  "knee_max_deg": 99.4,
+  "pass_": false
+ },
+ {
+  "knee_t": 100.3,
+  "hip_t": -104.9,
+  "waist": 0.0,
+  "T": 2.0,
+  "mass": 68.0,
+  "elbow_cap": 49.0,
+  "width": 0.05,
+  "fell": null,
+  "t_hand_touch": 1.447,
+  "hand_speed_mps": [
+   2.399,
+   2.382
+  ],
+  "hand_peak_N": [
+   1158.5,
+   1125.5
+  ],
+  "knee_max_deg": 99.3,
+  "pass_": false
+ },
+ {
+  "knee_t": 100.3,
+  "hip_t": -104.9,
+  "waist": 0.0,
+  "T": 2.0,
+  "mass": 68.0,
+  "elbow_cap": 38.0,
+  "width": 0.1,
+  "fell": null,
+  "t_hand_touch": 1.449,
+  "hand_speed_mps": [
+   2.368,
+   2.371
+  ],
+  "hand_peak_N": [
+   1150.9,
+   1155.1
+  ],
+  "knee_max_deg": 99.5,
+  "pass_": false
+ },
+ {
+  "knee_t": 100.3,
+  "hip_t": -104.9,
+  "waist": 0.0,
+  "T": 2.0,
+  "mass": 68.0,
+  "elbow_cap": 49.0,
+  "width": 0.1,
+  "fell": null,
+  "t_hand_touch": 1.449,
+  "hand_speed_mps": [
+   2.368,
+   2.371
+  ],
+  "hand_peak_N": [
+   1150.9,
+   1155.1
+  ],
+  "knee_max_deg": 99.5,
+  "pass_": false
+ },
+ {
+  "knee_t": 100.3,
+  "hip_t": -104.9,
+  "waist": 0.0,
+  "T": 3.5,
+  "mass": 68.0,
+  "elbow_cap": 38.0,
+  "width": 0.0,
+  "fell": 2.547,
+  "t_hand_touch": 2.127,
+  "hand_speed_mps": [
+   2.388,
+   2.365
+  ],
+  "hand_peak_N": [
+   1030.7,
+   1024.1
+  ],
+  "knee_max_deg": 104.9,
+  "pass_": false
+ },
+ {
+  "knee_t": 100.3,
+  "hip_t": -104.9,
+  "waist": 0.0,
+  "T": 3.5,
+  "mass": 68.0,
+  "elbow_cap": 49.0,
+  "width": 0.0,
+  "fell": 2.545,
+  "t_hand_touch": 2.127,
+  "hand_speed_mps": [
+   2.388,
+   2.365
+  ],
+  "hand_peak_N": [
+   1030.7,
+   1024.1
+  ],
+  "knee_max_deg": 104.6,
+  "pass_": false
+ },
+ {
+  "knee_t": 100.3,
+  "hip_t": -104.9,
+  "waist": 0.0,
+  "T": 3.5,
+  "mass": 68.0,
+  "elbow_cap": 38.0,
+  "width": 0.05,
+  "fell": 2.537,
+  "t_hand_touch": 2.126,
+  "hand_speed_mps": [
+   2.381,
+   2.356
+  ],
+  "hand_peak_N": [
+   1036.9,
+   1032.6
+  ],
+  "knee_max_deg": 104.9,
+  "pass_": false
+ },
+ {
+  "knee_t": 100.3,
+  "hip_t": -104.9,
+  "waist": 0.0,
+  "T": 3.5,
+  "mass": 68.0,
+  "elbow_cap": 49.0,
+  "width": 0.05,
+  "fell": 2.538,
+  "t_hand_touch": 2.126,
+  "hand_speed_mps": [
+   2.381,
+   2.356
+  ],
+  "hand_peak_N": [
+   1036.9,
+   1032.6
+  ],
+  "knee_max_deg": 104.6,
+  "pass_": false
+ },
+ {
+  "knee_t": 100.3,
+  "hip_t": -104.9,
+  "waist": 0.0,
+  "T": 3.5,
+  "mass": 68.0,
+  "elbow_cap": 38.0,
+  "width": 0.1,
+  "fell": 2.526,
+  "t_hand_touch": 2.124,
+  "hand_speed_mps": [
+   2.362,
+   2.352
+  ],
+  "hand_peak_N": [
+   1030.7,
+   1229.2
+  ],
+  "knee_max_deg": 104.9,
+  "pass_": false
+ },
+ {
+  "knee_t": 100.3,
+  "hip_t": -104.9,
+  "waist": 0.0,
+  "T": 3.5,
+  "mass": 68.0,
+  "elbow_cap": 49.0,
+  "width": 0.1,
+  "fell": 2.53,
+  "t_hand_touch": 2.124,
+  "hand_speed_mps": [
+   2.362,
+   2.352
+  ],
+  "hand_peak_N": [
+   1030.7,
+   1229.2
+  ],
+  "knee_max_deg": 104.9,
+  "pass_": false
+ }
+]

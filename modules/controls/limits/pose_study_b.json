@@ -1,0 +1,4351 @@
+{
+ "static": [
+  {
+   "knee_deg": 100.3,
+   "hip_deg": -74.5,
+   "shoulder": -1.4,
+   "waist": 0.0,
+   "width_m": 0.0,
+   "root_pitch": 1.325,
+   "ankle": -0.95,
+   "foot_tilt": 0.859,
+   "hand_z": 0.0084,
+   "other_min_z": 0.038,
+   "geom_ok": 1.0,
+   "static_38": {
+    "hand_N": [
+     206.6,
+     205.2
+    ],
+    "foot_N": [
+     128.0,
+     127.3
+    ],
+    "com_in_x": true,
+    "worst_joint": "waist_pitch",
+    "worst_ratio": 0.71,
+    "knee_tau": 40.4,
+    "elbow_tau": 24.7
+   },
+   "static_49": {
+    "hand_N": [
+     206.6,
+     205.2
+    ],
+    "foot_N": [
+     128.0,
+     127.3
+    ],
+    "com_in_x": true,
+    "worst_joint": "waist_pitch",
+    "worst_ratio": 0.71,
+    "knee_tau": 40.4,
+    "elbow_tau": 24.7
+   }
+  },
+  {
+   "knee_deg": 100.3,
+   "hip_deg": -74.5,
+   "shoulder": -1.4,
+   "waist": 0.0,
+   "width_m": 0.05,
+   "root_pitch": 1.325,
+   "ankle": -0.95,
+   "foot_tilt": 0.859,
+   "hand_z": 0.0088,
+   "other_min_z": 0.038,
+   "geom_ok": 1.0,
+   "static_38": {
+    "hand_N": [
+     188.3,
+     223.4
+    ],
+    "foot_N": [
+     117.3,
+     138.1
+    ],
+    "com_in_x": true,
+    "worst_joint": "r_elbow",
+    "worst_ratio": 0.71,
+    "knee_tau": 44.7,
+    "elbow_tau": 26.9
+   },
+   "static_49": {
+    "hand_N": [
+     188.3,
+     223.4
+    ],
+    "foot_N": [
+     117.3,
+     138.1
+    ],
+    "com_in_x": true,
+    "worst_joint": "waist_pitch",
+    "worst_ratio": 0.7,
+    "knee_tau": 44.7,
+    "elbow_tau": 26.9
+   }
+  },
+  {
+   "knee_deg": 100.3,
+   "hip_deg": -74.5,
+   "shoulder": -1.4,
+   "waist": 0.0,
+   "width_m": 0.1,
+   "root_pitch": 1.325,
+   "ankle": -0.95,
+   "foot_tilt": 0.86,
+   "hand_z": 0.0119,
+   "other_min_z": 0.038,
+   "geom_ok": 0.0
+  },
+  {
+   "knee_deg": 100.3,
+   "hip_deg": -74.5,
+   "shoulder": -1.4,
+   "waist": 0.4,
+   "width_m": 0.0,
+   "root_pitch": 1.2,
+   "ankle": -0.95,
+   "foot_tilt": 0.734,
+   "hand_z": 0.0023,
+   "other_min_z": 0.078,
+   "geom_ok": 1.0,
+   "static_38": {
+    "hand_N": [
+     234.2,
+     232.8
+    ],
+    "foot_N": [
+     100.4,
+     99.7
+    ],
+    "com_in_x": true,
+    "worst_joint": "l_wrist_pitch",
+    "worst_ratio": 0.52,
+    "knee_tau": 28.3,
+    "elbow_tau": 8.9
+   },
+   "static_49": {
+    "hand_N": [
+     234.2,
+     232.8
+    ],
+    "foot_N": [
+     100.4,
+     99.7
+    ],
+    "com_in_x": true,
+    "worst_joint": "l_wrist_pitch",
+    "worst_ratio": 0.52,
+    "knee_tau": 28.3,
+    "elbow_tau": 8.9
+   }
+  },
+  {
+   "knee_deg": 100.3,
+   "hip_deg": -74.5,
+   "shoulder": -1.4,
+   "waist": 0.4,
+   "width_m": 0.05,
+   "root_pitch": 1.2,
+   "ankle": -0.95,
+   "foot_tilt": 0.734,
+   "hand_z": 0.0019,
+   "other_min_z": 0.078,
+   "geom_ok": 1.0,
+   "static_38": {
+    "hand_N": [
+     212.9,
+     254.0
+    ],
+    "foot_N": [
+     88.0,
+     112.2
+    ],
+    "com_in_x": true,
+    "worst_joint": "r_wrist_pitch",
+    "worst_ratio": 0.57,
+    "knee_tau": 33.3,
+    "elbow_tau": 9.6
+   },
+   "static_49": {
+    "hand_N": [
+     212.9,
+     254.0
+    ],
+    "foot_N": [
+     88.0,
+     112.2
+    ],
+    "com_in_x": true,
+    "worst_joint": "r_wrist_pitch",
+    "worst_ratio": 0.57,
+    "knee_tau": 33.3,
+    "elbow_tau": 9.6
+   }
+  },
+  {
+   "knee_deg": 100.3,
+   "hip_deg": -74.5,
+   "shoulder": -1.4,
+   "waist": 0.4,
+   "width_m": 0.1,
+   "root_pitch": 1.2,
+   "ankle": -0.95,
+   "foot_tilt": 0.736,
+   "hand_z": 0.0038,
+   "other_min_z": 0.077,
+   "geom_ok": 1.0,
+   "static_38": {
+    "hand_N": [
+     196.2,
+     270.2
+    ],
+    "foot_N": [
+     73.7,
+     126.9
+    ],
+    "com_in_x": true,
+    "worst_joint": "r_wrist_pitch",
+    "worst_ratio": 0.61,
+    "knee_tau": 39.5,
+    "elbow_tau": 10.0
+   },
+   "static_49": {
+    "hand_N": [
+     196.2,
+     270.2
+    ],
+    "foot_N": [
+     73.7,
+     126.9
+    ],
+    "com_in_x": true,
+    "worst_joint": "r_wrist_pitch",
+    "worst_ratio": 0.61,
+    "knee_tau": 39.5,
+    "elbow_tau": 10.0
+   }
+  },
+  {
+   "knee_deg": 100.3,
+   "hip_deg": -74.5,
+   "shoulder": -1.9,
+   "waist": 0.0,
+   "width_m": 0.0,
+   "root_pitch": 1.4,
+   "ankle": -0.95,
+   "foot_tilt": 0.934,
+   "hand_z": 0.0773,
+   "other_min_z": 0.014,
+   "geom_ok": 0.0
+  },
+  {
+   "knee_deg": 100.3,
+   "hip_deg": -74.5,
+   "shoulder": -1.9,
+   "waist": 0.0,
+   "width_m": 0.05,
+   "root_pitch": 1.4,
+   "ankle": -0.95,
+   "foot_tilt": 0.934,
+   "hand_z": 0.0786,
+   "other_min_z": 0.014,
+   "geom_ok": 0.0
+  },
+  {
+   "knee_deg": 100.3,
+   "hip_deg": -74.5,
+   "shoulder": -1.9,
+   "waist": 0.0,
+   "width_m": 0.1,
+   "root_pitch": 1.4,
+   "ankle": -0.95,
+   "foot_tilt": 0.935,
+   "hand_z": 0.0813,
+   "other_min_z": 0.015,
+   "geom_ok": 0.0
+  },
+  {
+   "knee_deg": 100.3,
+   "hip_deg": -74.5,
+   "shoulder": -1.9,
+   "waist": 0.4,
+   "width_m": 0.0,
+   "root_pitch": 1.275,
+   "ankle": -0.95,
+   "foot_tilt": 0.809,
+   "hand_z": 0.0052,
+   "other_min_z": 0.054,
+   "geom_ok": 1.0,
+   "static_38": {
+    "hand_N": [
+     192.8,
+     191.4
+    ],
+    "foot_N": [
+     141.8,
+     141.1
+    ],
+    "com_in_x": true,
+    "worst_joint": "waist_pitch",
+    "worst_ratio": 0.86,
+    "knee_tau": 46.2,
+    "elbow_tau": 30.7
+   },
+   "static_49": {
+    "hand_N": [
+     192.8,
+     191.4
+    ],
+    "foot_N": [
+     141.8,
+     141.1
+    ],
+    "com_in_x": true,
+    "worst_joint": "waist_pitch",
+    "worst_ratio": 0.86,
+    "knee_tau": 46.2,
+    "elbow_tau": 30.7
+   }
+  },
+  {
+   "knee_deg": 100.3,
+   "hip_deg": -74.5,
+   "shoulder": -1.9,
+   "waist": 0.4,
+   "width_m": 0.05,
+   "root_pitch": 1.275,
+   "ankle": -0.95,
+   "foot_tilt": 0.809,
+   "hand_z": 0.0059,
+   "other_min_z": 0.054,
+   "geom_ok": 1.0,
+   "static_38": {
+    "hand_N": [
+     176.0,
+     208.2
+    ],
+    "foot_N": [
+     131.9,
+     150.9
+    ],
+    "com_in_x": true,
+    "worst_joint": "r_elbow",
+    "worst_ratio": 0.88,
+    "knee_tau": 50.1,
+    "elbow_tau": 33.5
+   },
+   "static_49": {
+    "hand_N": [
+     176.0,
+     208.2
+    ],
+    "foot_N": [
+     131.9,
+     150.9
+    ],
+    "com_in_x": true,
+    "worst_joint": "waist_pitch",
+    "worst_ratio": 0.86,
+    "knee_tau": 50.1,
+    "elbow_tau": 33.5
+   }
+  },
+  {
+   "knee_deg": 100.3,
+   "hip_deg": -74.5,
+   "shoulder": -1.9,
+   "waist": 0.4,
+   "width_m": 0.1,
+   "root_pitch": 1.275,
+   "ankle": -0.95,
+   "foot_tilt": 0.811,
+   "hand_z": 0.0091,
+   "other_min_z": 0.054,
+   "geom_ok": 1.0,
+   "static_38": {
+    "hand_N": [
+     162.8,
+     221.3
+    ],
+    "foot_N": [
+     120.5,
+     162.5
+    ],
+    "com_in_x": true,
+    "worst_joint": "r_elbow",
+    "worst_ratio": 0.94,
+    "knee_tau": 54.9,
+    "elbow_tau": 35.6
+   },
+   "static_49": {
+    "hand_N": [
+     162.8,
+     221.3
+    ],
+    "foot_N": [
+     120.5,
+     162.5
+    ],
+    "com_in_x": true,
+    "worst_joint": "waist_pitch",
+    "worst_ratio": 0.85,
+    "knee_tau": 54.9,
+    "elbow_tau": 35.6
+   }
+  },
+  {
+   "knee_deg": 100.3,
+   "hip_deg": -88.8,
+   "shoulder": -1.4,
+   "waist": 0.0,
+   "width_m": 0.0,
+   "root_pitch": 1.35,
+   "ankle": 0.6,
+   "foot_tilt": 0.992,
+   "hand_z": -0.0007,
+   "other_min_z": 0.048,
+   "geom_ok": 1.0,
+   "static_38": {
+    "hand_N": [
+     212.2,
+     210.7
+    ],
+    "foot_N": [
+     122.4,
+     121.8
+    ],
+    "com_in_x": true,
+    "worst_joint": "waist_pitch",
+    "worst_ratio": 0.7,
+    "knee_tau": 46.8,
+    "elbow_tau": 24.1
+   },
+   "static_49": {
+    "hand_N": [
+     212.2,
+     210.7
+    ],
+    "foot_N": [
+     122.4,
+     121.8
+    ],
+    "com_in_x": true,
+    "worst_joint": "waist_pitch",
+    "worst_ratio": 0.7,
+    "knee_tau": 46.8,
+    "elbow_tau": 24.1
+   }
+  },
+  {
+   "knee_deg": 100.3,
+   "hip_deg": -88.8,
+   "shoulder": -1.4,
+   "waist": 0.0,
+   "width_m": 0.05,
+   "root_pitch": 1.35,
+   "ankle": 0.6,
+   "foot_tilt": 0.991,
+   "hand_z": 0.0009,
+   "other_min_z": 0.05,
+   "geom_ok": 1.0,
+   "static_38": {
+    "hand_N": [
+     193.2,
+     229.6
+    ],
+    "foot_N": [
+     111.4,
+     132.8
+    ],
+    "com_in_x": true,
+    "worst_joint": "waist_pitch",
+    "worst_ratio": 0.7,
+    "knee_tau": 52.1,
+    "elbow_tau": 26.4
+   },
+   "static_49": {
+    "hand_N": [
+     193.2,
+     229.6
+    ],
+    "foot_N": [
+     111.4,
+     132.8
+    ],
+    "com_in_x": true,
+    "worst_joint": "waist_pitch",
+    "worst_ratio": 0.7,
+    "knee_tau": 52.1,
+    "elbow_tau": 26.4
+   }
+  },
+  {
+   "knee_deg": 100.3,
+   "hip_deg": -88.8,
+   "shoulder": -1.4,
+   "waist": 0.0,
+   "width_m": 0.1,
+   "root_pitch": 1.425,
+   "ankle": -0.75,
+   "foot_tilt": 0.876,
+   "hand_z": -0.0016,
+   "other_min_z": 0.098,
+   "geom_ok": 1.0,
+   "static_38": {
+    "hand_N": [
+     178.8,
+     247.3
+    ],
+    "foot_N": [
+     97.1,
+     143.9
+    ],
+    "com_in_x": true,
+    "worst_joint": "r_wrist_pitch",
+    "worst_ratio": 0.63,
+    "knee_tau": 48.5,
+    "elbow_tau": 22.9
+   },
+   "static_49": {
+    "hand_N": [
+     178.8,
+     247.3
+    ],
+    "foot_N": [
+     97.1,
+     143.9
+    ],
+    "com_in_x": true,
+    "worst_joint": "r_wrist_pitch",
+    "worst_ratio": 0.63,
+    "knee_tau": 48.5,
+    "elbow_tau": 22.9
+   }
+  },
+  {
+   "knee_deg": 100.3,
+   "hip_deg": -88.8,
+   "shoulder": -1.4,
+   "waist": 0.4,
+   "width_m": 0.0,
+   "root_pitch": 1.275,
+   "ankle": -0.95,
+   "foot_tilt": 0.559,
+   "hand_z": 0.0045,
+   "other_min_z": 0.124,
+   "geom_ok": 1.0,
+   "static_38": {
+    "hand_N": [
+     241.8,
+     240.4
+    ],
+    "foot_N": [
+     92.8,
+     92.1
+    ],
+    "com_in_x": true,
+    "worst_joint": "l_wrist_pitch",
+    "worst_ratio": 0.51,
+    "knee_tau": 24.0,
+    "elbow_tau": 3.0
+   },
+   "static_49": {
+    "hand_N": [
+     241.8,
+     240.4
+    ],
+    "foot_N": [
+     92.8,
+     92.1
+    ],
+    "com_in_x": true,
+    "worst_joint": "l_wrist_pitch",
+    "worst_ratio": 0.51,
+    "knee_tau": 24.0,
+    "elbow_tau": 3.0
+   }
+  },
+  {
+   "knee_deg": 100.3,
+   "hip_deg": -88.8,
+   "shoulder": -1.4,
+   "waist": 0.4,
+   "width_m": 0.05,
+   "root_pitch": 1.275,
+   "ankle": -0.95,
+   "foot_tilt": 0.559,
+   "hand_z": 0.0046,
+   "other_min_z": 0.125,
+   "geom_ok": 1.0,
+   "static_38": {
+    "hand_N": [
+     219.3,
+     262.7
+    ],
+    "foot_N": [
+     80.2,
+     104.9
+    ],
+    "com_in_x": true,
+    "worst_joint": "r_wrist_pitch",
+    "worst_ratio": 0.55,
+    "knee_tau": 28.9,
+    "elbow_tau": 3.1
+   },
+   "static_49": {
+    "hand_N": [
+     219.3,
+     262.7
+    ],
+    "foot_N": [
+     80.2,
+     104.9
+    ],
+    "com_in_x": true,
+    "worst_joint": "r_wrist_pitch",
+    "worst_ratio": 0.55,
+    "knee_tau": 28.9,
+    "elbow_tau": 3.1
+   }
+  },
+  {
+   "knee_deg": 100.3,
+   "hip_deg": -88.8,
+   "shoulder": -1.4,
+   "waist": 0.4,
+   "width_m": 0.1,
+   "root_pitch": 1.3,
+   "ankle": -0.8,
+   "foot_tilt": 0.702,
+   "hand_z": -0.0006,
+   "other_min_z": 0.13,
+   "geom_ok": 1.0,
+   "static_38": {
+    "hand_N": [
+     205.4,
+     287.0
+    ],
+    "foot_N": [
+     59.5,
+     115.2
+    ],
+    "com_in_x": true,
+    "worst_joint": "r_wrist_pitch",
+    "worst_ratio": 0.59,
+    "knee_tau": 34.5,
+    "elbow_tau": 1.6
+   },
+   "static_49": {
+    "hand_N": [
+     205.4,
+     287.0
+    ],
+    "foot_N": [
+     59.5,
+     115.2
+    ],
+    "com_in_x": true,
+    "worst_joint": "r_wrist_pitch",
+    "worst_ratio": 0.59,
+    "knee_tau": 34.5,
+    "elbow_tau": 1.6
+   }
+  },
+  {
+   "knee_deg": 100.3,
+   "hip_deg": -88.8,
+   "shoulder": -1.9,
+   "waist": 0.0,
+   "width_m": 0.0,
+   "root_pitch": 1.525,
+   "ankle": -0.95,
+   "foot_tilt": 0.809,
+   "hand_z": 0.0017,
+   "other_min_z": 0.054,
+   "geom_ok": 1.0,
+   "static_38": {
+    "hand_N": [
+     183.1,
+     181.7
+    ],
+    "foot_N": [
+     151.5,
+     150.8
+    ],
+    "com_in_x": true,
+    "worst_joint": "waist_pitch",
+    "worst_ratio": 0.99,
+    "knee_tau": 50.3,
+    "elbow_tau": 35.8
+   },
+   "static_49": {
+    "hand_N": [
+     183.1,
+     181.7
+    ],
+    "foot_N": [
+     151.5,
+     150.8
+    ],
+    "com_in_x": true,
+    "worst_joint": "waist_pitch",
+    "worst_ratio": 0.99,
+    "knee_tau": 50.3,
+    "elbow_tau": 35.8
+   }
+  },
+  {
+   "knee_deg": 100.3,
+   "hip_deg": -88.8,
+   "shoulder": -1.9,
+   "waist": 0.0,
+   "width_m": 0.05,
+   "root_pitch": 1.525,
+   "ankle": -0.95,
+   "foot_tilt": 0.809,
+   "hand_z": 0.0039,
+   "other_min_z": 0.056,
+   "geom_ok": 1.0,
+   "static_38": {
+    "hand_N": [
+     167.1,
+     197.8
+    ],
+    "foot_N": [
+     142.4,
+     159.9
+    ],
+    "com_in_x": true,
+    "worst_joint": "r_elbow",
+    "worst_ratio": 1.03,
+    "knee_tau": 53.9,
+    "elbow_tau": 39.0
+   },
+   "static_49": {
+    "hand_N": [
+     167.1,
+     197.8
+    ],
+    "foot_N": [
+     142.4,
+     159.9
+    ],
+    "com_in_x": true,
+    "worst_joint": "waist_pitch",
+    "worst_ratio": 0.99,
+    "knee_tau": 53.9,
+    "elbow_tau": 39.0
+   }
+  },
+  {
+   "knee_deg": 100.3,
+   "hip_deg": -88.8,
+   "shoulder": -1.9,
+   "waist": 0.0,
+   "width_m": 0.1,
+   "root_pitch": 1.525,
+   "ankle": -0.95,
+   "foot_tilt": 0.809,
+   "hand_z": 0.0086,
+   "other_min_z": 0.057,
+   "geom_ok": 1.0,
+   "static_38": {
+    "hand_N": [
+     154.0,
+     210.9
+    ],
+    "foot_N": [
+     131.8,
+     170.4
+    ],
+    "com_in_x": true,
+    "worst_joint": "r_elbow",
+    "worst_ratio": 1.1,
+    "knee_tau": 58.3,
+    "elbow_tau": 41.8
+   },
+   "static_49": {
+    "hand_N": [
+     154.0,
+     210.9
+    ],
+    "foot_N": [
+     131.8,
+     170.4
+    ],
+    "com_in_x": true,
+    "worst_joint": "waist_pitch",
+    "worst_ratio": 0.98,
+    "knee_tau": 58.3,
+    "elbow_tau": 41.8
+   }
+  },
+  {
+   "knee_deg": 100.3,
+   "hip_deg": -88.8,
+   "shoulder": -1.9,
+   "waist": 0.4,
+   "width_m": 0.0,
+   "root_pitch": 1.35,
+   "ankle": -0.85,
+   "foot_tilt": 0.7,
+   "hand_z": -0.0009,
+   "other_min_z": 0.113,
+   "geom_ok": 1.0,
+   "static_38": {
+    "hand_N": [
+     194.1,
+     192.6
+    ],
+    "foot_N": [
+     140.5,
+     139.9
+    ],
+    "com_in_x": true,
+    "worst_joint": "waist_pitch",
+    "worst_ratio": 0.75,
+    "knee_tau": 45.2,
+    "elbow_tau": 27.0
+   },
+   "static_49": {
+    "hand_N": [
+     194.1,
+     192.6
+    ],
+    "foot_N": [
+     140.5,
+     139.9
+    ],
+    "com_in_x": true,
+    "worst_joint": "waist_pitch",
+    "worst_ratio": 0.75,
+    "knee_tau": 45.2,
+    "elbow_tau": 27.0
+   }
+  },
+  {
+   "knee_deg": 100.3,
+   "hip_deg": -88.8,
+   "shoulder": -1.9,
+   "waist": 0.4,
+   "width_m": 0.05,
+   "root_pitch": 1.35,
+   "ankle": -0.85,
+   "foot_tilt": 0.7,
+   "hand_z": 0.0002,
+   "other_min_z": 0.114,
+   "geom_ok": 1.0,
+   "static_38": {
+    "hand_N": [
+     176.8,
+     209.9
+    ],
+    "foot_N": [
+     130.8,
+     149.6
+    ],
+    "com_in_x": true,
+    "worst_joint": "r_elbow",
+    "worst_ratio": 0.78,
+    "knee_tau": 49.0,
+    "elbow_tau": 29.5
+   },
+   "static_49": {
+    "hand_N": [
+     176.8,
+     209.9
+    ],
+    "foot_N": [
+     130.8,
+     149.6
+    ],
+    "com_in_x": true,
+    "worst_joint": "waist_pitch",
+    "worst_ratio": 0.75,
+    "knee_tau": 49.0,
+    "elbow_tau": 29.5
+   }
+  },
+  {
+   "knee_deg": 100.3,
+   "hip_deg": -88.8,
+   "shoulder": -1.9,
+   "waist": 0.4,
+   "width_m": 0.1,
+   "root_pitch": 1.35,
+   "ankle": -0.9,
+   "foot_tilt": 0.651,
+   "hand_z": -0.0002,
+   "other_min_z": 0.111,
+   "geom_ok": 1.0,
+   "static_38": {
+    "hand_N": [
+     162.3,
+     223.2
+    ],
+    "foot_N": [
+     120.1,
+     161.5
+    ],
+    "com_in_x": true,
+    "worst_joint": "r_elbow",
+    "worst_ratio": 0.83,
+    "knee_tau": 53.2,
+    "elbow_tau": 31.4
+   },
+   "static_49": {
+    "hand_N": [
+     162.3,
+     223.2
+    ],
+    "foot_N": [
+     120.1,
+     161.5
+    ],
+    "com_in_x": true,
+    "worst_joint": "waist_pitch",
+    "worst_ratio": 0.74,
+    "knee_tau": 53.2,
+    "elbow_tau": 31.4
+   }
+  },
+  {
+   "knee_deg": 100.3,
+   "hip_deg": -104.9,
+   "shoulder": -1.4,
+   "waist": 0.0,
+   "width_m": 0.0,
+   "root_pitch": 1.475,
+   "ankle": -0.95,
+   "foot_tilt": 0.479,
+   "hand_z": -0.0011,
+   "other_min_z": 0.141,
+   "geom_ok": 1.0,
+   "static_38": {
+    "hand_N": [
+     210.3,
+     208.9
+    ],
+    "foot_N": [
+     124.3,
+     123.6
+    ],
+    "com_in_x": true,
+    "worst_joint": "l_wrist_pitch",
+    "worst_ratio": 0.51,
+    "knee_tau": 35.7,
+    "elbow_tau": 15.6
+   },
+   "static_49": {
+    "hand_N": [
+     210.3,
+     208.9
+    ],
+    "foot_N": [
+     124.3,
+     123.6
+    ],
+    "com_in_x": true,
+    "worst_joint": "l_wrist_pitch",
+    "worst_ratio": 0.51,
+    "knee_tau": 35.7,
+    "elbow_tau": 15.6
+   }
+  },
+  {
+   "knee_deg": 100.3,
+   "hip_deg": -104.9,
+   "shoulder": -1.4,
+   "waist": 0.0,
+   "width_m": 0.05,
+   "root_pitch": 1.475,
+   "ankle": -0.95,
+   "foot_tilt": 0.479,
+   "hand_z": 0.0003,
+   "other_min_z": 0.143,
+   "geom_ok": 1.0,
+   "static_38": {
+    "hand_N": [
+     190.8,
+     228.3
+    ],
+    "foot_N": [
+     113.9,
+     134.1
+    ],
+    "com_in_x": true,
+    "worst_joint": "r_wrist_pitch",
+    "worst_ratio": 0.56,
+    "knee_tau": 39.5,
+    "elbow_tau": 16.9
+   },
+   "static_49": {
+    "hand_N": [
+     190.8,
+     228.3
+    ],
+    "foot_N": [
+     113.9,
+     134.1
+    ],
+    "com_in_x": true,
+    "worst_joint": "r_wrist_pitch",
+    "worst_ratio": 0.56,
+    "knee_tau": 39.5,
+    "elbow_tau": 16.9
+   }
+  },
+  {
+   "knee_deg": 100.3,
+   "hip_deg": -104.9,
+   "shoulder": -1.4,
+   "waist": 0.0,
+   "width_m": 0.1,
+   "root_pitch": 1.475,
+   "ankle": -0.95,
+   "foot_tilt": 0.48,
+   "hand_z": 0.0046,
+   "other_min_z": 0.145,
+   "geom_ok": 1.0,
+   "static_38": {
+    "hand_N": [
+     173.7,
+     245.2
+    ],
+    "foot_N": [
+     102.1,
+     146.1
+    ],
+    "com_in_x": true,
+    "worst_joint": "r_wrist_pitch",
+    "worst_ratio": 0.6,
+    "knee_tau": 44.2,
+    "elbow_tau": 18.0
+   },
+   "static_49": {
+    "hand_N": [
+     173.7,
+     245.2
+    ],
+    "foot_N": [
+     102.1,
+     146.1
+    ],
+    "com_in_x": true,
+    "worst_joint": "r_wrist_pitch",
+    "worst_ratio": 0.6,
+    "knee_tau": 44.2,
+    "elbow_tau": 18.0
+   }
+  },
+  {
+   "knee_deg": 100.3,
+   "hip_deg": -104.9,
+   "shoulder": -1.4,
+   "waist": 0.4,
+   "width_m": 0.0,
+   "root_pitch": 1.35,
+   "ankle": -0.85,
+   "foot_tilt": 0.42,
+   "hand_z": 0.0027,
+   "other_min_z": 0.169,
+   "geom_ok": 1.0,
+   "static_38": {
+    "hand_N": [
+     251.7,
+     250.2
+    ],
+    "foot_N": [
+     82.9,
+     82.3
+    ],
+    "com_in_x": true,
+    "worst_joint": "l_wrist_pitch",
+    "worst_ratio": 0.48,
+    "knee_tau": 18.3,
+    "elbow_tau": 3.4
+   },
+   "static_49": {
+    "hand_N": [
+     251.7,
+     250.2
+    ],
+    "foot_N": [
+     82.9,
+     82.3
+    ],
+    "com_in_x": true,
+    "worst_joint": "l_wrist_pitch",
+    "worst_ratio": 0.48,
+    "knee_tau": 18.3,
+    "elbow_tau": 3.4
+   }
+  },
+  {
+   "knee_deg": 100.3,
+   "hip_deg": -104.9,
+   "shoulder": -1.4,
+   "waist": 0.4,
+   "width_m": 0.05,
+   "root_pitch": 1.35,
+   "ankle": -0.9,
+   "foot_tilt": 0.37,
+   "hand_z": -0.0035,
+   "other_min_z": 0.164,
+   "geom_ok": 1.0,
+   "static_38": {
+    "hand_N": [
+     227.0,
+     273.6
+    ],
+    "foot_N": [
+     70.7,
+     95.8
+    ],
+    "com_in_x": true,
+    "worst_joint": "r_wrist_pitch",
+    "worst_ratio": 0.53,
+    "knee_tau": 22.8,
+    "elbow_tau": 3.9
+   },
+   "static_49": {
+    "hand_N": [
+     227.0,
+     273.6
+    ],
+    "foot_N": [
+     70.7,
+     95.8
+    ],
+    "com_in_x": true,
+    "worst_joint": "r_wrist_pitch",
+    "worst_ratio": 0.53,
+    "knee_tau": 22.8,
+    "elbow_tau": 3.9
+   }
+  },
+  {
+   "knee_deg": 100.3,
+   "hip_deg": -104.9,
+   "shoulder": -1.4,
+   "waist": 0.4,
+   "width_m": 0.1,
+   "root_pitch": 1.35,
+   "ankle": -0.9,
+   "foot_tilt": 0.372,
+   "hand_z": -0.0002,
+   "other_min_z": 0.166,
+   "geom_ok": 1.0,
+   "static_38": {
+    "hand_N": [
+     205.8,
+     293.9
+    ],
+    "foot_N": [
+     56.5,
+     110.9
+    ],
+    "com_in_x": true,
+    "worst_joint": "r_wrist_pitch",
+    "worst_ratio": 0.57,
+    "knee_tau": 28.3,
+    "elbow_tau": 4.8
+   },
+   "static_49": {
+    "hand_N": [
+     205.8,
+     293.9
+    ],
+    "foot_N": [
+     56.5,
+     110.9
+    ],
+    "com_in_x": true,
+    "worst_joint": "r_wrist_pitch",
+    "worst_ratio": 0.57,
+    "knee_tau": 28.3,
+    "elbow_tau": 4.8
+   }
+  },
+  {
+   "knee_deg": 100.3,
+   "hip_deg": -104.9,
+   "shoulder": -1.9,
+   "waist": 0.0,
+   "width_m": 0.0,
+   "root_pitch": 1.6,
+   "ankle": -0.8,
+   "foot_tilt": 0.72,
+   "hand_z": -0.0008,
+   "other_min_z": 0.125,
+   "geom_ok": 1.0,
+   "static_38": {
+    "hand_N": [
+     182.1,
+     180.6
+    ],
+    "foot_N": [
+     152.5,
+     151.8
+    ],
+    "com_in_x": true,
+    "worst_joint": "waist_pitch",
+    "worst_ratio": 0.88,
+    "knee_tau": 50.4,
+    "elbow_tau": 32.2
+   },
+   "static_49": {
+    "hand_N": [
+     182.1,
+     180.6
+    ],
+    "foot_N": [
+     152.5,
+     151.8
+    ],
+    "com_in_x": true,
+    "worst_joint": "waist_pitch",
+    "worst_ratio": 0.88,
+    "knee_tau": 50.4,
+    "elbow_tau": 32.2
+   }
+  },
+  {
+   "knee_deg": 100.3,
+   "hip_deg": -104.9,
+   "shoulder": -1.9,
+   "waist": 0.0,
+   "width_m": 0.05,
+   "root_pitch": 1.6,
+   "ankle": -0.85,
+   "foot_tilt": 0.67,
+   "hand_z": -0.0025,
+   "other_min_z": 0.123,
+   "geom_ok": 1.0,
+   "static_38": {
+    "hand_N": [
+     165.3,
+     196.4
+    ],
+    "foot_N": [
+     144.3,
+     161.1
+    ],
+    "com_in_x": true,
+    "worst_joint": "r_elbow",
+    "worst_ratio": 0.92,
+    "knee_tau": 53.3,
+    "elbow_tau": 35.1
+   },
+   "static_49": {
+    "hand_N": [
+     165.3,
+     196.4
+    ],
+    "foot_N": [
+     144.3,
+     161.1
+    ],
+    "com_in_x": true,
+    "worst_joint": "waist_pitch",
+    "worst_ratio": 0.87,
+    "knee_tau": 53.3,
+    "elbow_tau": 35.1
+   }
+  },
+  {
+   "knee_deg": 100.3,
+   "hip_deg": -104.9,
+   "shoulder": -1.9,
+   "waist": 0.0,
+   "width_m": 0.1,
+   "root_pitch": 1.6,
+   "ankle": -0.9,
+   "foot_tilt": 0.62,
+   "hand_z": -0.0017,
+   "other_min_z": 0.12,
+   "geom_ok": 1.0,
+   "static_38": {
+    "hand_N": [
+     150.7,
+     210.0
+    ],
+    "foot_N": [
+     134.9,
+     171.5
+    ],
+    "com_in_x": true,
+    "worst_joint": "r_elbow",
+    "worst_ratio": 0.99,
+    "knee_tau": 56.8,
+    "elbow_tau": 37.7
+   },
+   "static_49": {
+    "hand_N": [
+     150.7,
+     210.0
+    ],
+    "foot_N": [
+     134.9,
+     171.5
+    ],
+    "com_in_x": true,
+    "worst_joint": "waist_pitch",
+    "worst_ratio": 0.86,
+    "knee_tau": 56.8,
+    "elbow_tau": 37.7
+   }
+  },
+  {
+   "knee_deg": 100.3,
+   "hip_deg": -104.9,
+   "shoulder": -1.9,
+   "waist": 0.4,
+   "width_m": 0.0,
+   "root_pitch": 1.4,
+   "ankle": -0.85,
+   "foot_tilt": 0.47,
+   "hand_z": 0.0008,
+   "other_min_z": 0.164,
+   "geom_ok": 1.0,
+   "static_38": {
+    "hand_N": [
+     188.6,
+     187.1
+    ],
+    "foot_N": [
+     146.0,
+     145.4
+    ],
+    "com_in_x": true,
+    "worst_joint": "waist_pitch",
+    "worst_ratio": 0.62,
+    "knee_tau": 43.5,
+    "elbow_tau": 23.4
+   },
+   "static_49": {
+    "hand_N": [
+     188.6,
+     187.1
+    ],
+    "foot_N": [
+     146.0,
+     145.4
+    ],
+    "com_in_x": true,
+    "worst_joint": "waist_pitch",
+    "worst_ratio": 0.62,
+    "knee_tau": 43.5,
+    "elbow_tau": 23.4
+   }
+  },
+  {
+   "knee_deg": 100.3,
+   "hip_deg": -104.9,
+   "shoulder": -1.9,
+   "waist": 0.4,
+   "width_m": 0.05,
+   "root_pitch": 1.4,
+   "ankle": -0.85,
+   "foot_tilt": 0.47,
+   "hand_z": 0.0024,
+   "other_min_z": 0.166,
+   "geom_ok": 1.0,
+   "static_38": {
+    "hand_N": [
+     171.5,
+     204.2
+    ],
+    "foot_N": [
+     136.9,
+     154.5
+    ],
+    "com_in_x": true,
+    "worst_joint": "r_elbow",
+    "worst_ratio": 0.67,
+    "knee_tau": 46.7,
+    "elbow_tau": 25.5
+   },
+   "static_49": {
+    "hand_N": [
+     171.5,
+     204.2
+    ],
+    "foot_N": [
+     136.9,
+     154.5
+    ],
+    "com_in_x": true,
+    "worst_joint": "waist_pitch",
+    "worst_ratio": 0.62,
+    "knee_tau": 46.7,
+    "elbow_tau": 25.5
+   }
+  },
+  {
+   "knee_deg": 100.3,
+   "hip_deg": -104.9,
+   "shoulder": -1.9,
+   "waist": 0.4,
+   "width_m": 0.1,
+   "root_pitch": 1.4,
+   "ankle": -0.9,
+   "foot_tilt": 0.421,
+   "hand_z": 0.0007,
+   "other_min_z": 0.162,
+   "geom_ok": 1.0,
+   "static_38": {
+    "hand_N": [
+     156.1,
+     218.3
+    ],
+    "foot_N": [
+     127.2,
+     165.6
+    ],
+    "com_in_x": true,
+    "worst_joint": "r_elbow",
+    "worst_ratio": 0.72,
+    "knee_tau": 50.2,
+    "elbow_tau": 27.2
+   },
+   "static_49": {
+    "hand_N": [
+     156.1,
+     218.3
+    ],
+    "foot_N": [
+     127.2,
+     165.6
+    ],
+    "com_in_x": true,
+    "worst_joint": "waist_pitch",
+    "worst_ratio": 0.62,
+    "knee_tau": 50.2,
+    "elbow_tau": 27.2
+   }
+  },
+  {
+   "knee_deg": 111.7,
+   "hip_deg": -74.5,
+   "shoulder": -1.4,
+   "waist": 0.0,
+   "width_m": 0.0,
+   "root_pitch": 1.2,
+   "ankle": -0.95,
+   "foot_tilt": 0.934,
+   "hand_z": 0.079,
+   "other_min_z": 0.014,
+   "geom_ok": 0.0
+  },
+  {
+   "knee_deg": 111.7,
+   "hip_deg": -74.5,
+   "shoulder": -1.4,
+   "waist": 0.0,
+   "width_m": 0.05,
+   "root_pitch": 1.2,
+   "ankle": -0.95,
+   "foot_tilt": 0.934,
+   "hand_z": 0.0791,
+   "other_min_z": 0.013,
+   "geom_ok": 0.0
+  },
+  {
+   "knee_deg": 111.7,
+   "hip_deg": -74.5,
+   "shoulder": -1.4,
+   "waist": 0.0,
+   "width_m": 0.1,
+   "root_pitch": 1.2,
+   "ankle": -0.95,
+   "foot_tilt": 0.935,
+   "hand_z": 0.0816,
+   "other_min_z": 0.012,
+   "geom_ok": 0.0
+  },
+  {
+   "knee_deg": 111.7,
+   "hip_deg": -74.5,
+   "shoulder": -1.4,
+   "waist": 0.4,
+   "width_m": 0.0,
+   "root_pitch": 1.125,
+   "ankle": -0.9,
+   "foot_tilt": 0.875,
+   "hand_z": -0.0005,
+   "other_min_z": 0.039,
+   "geom_ok": 1.0,
+   "static_38": {
+    "hand_N": [
+     223.9,
+     222.5
+    ],
+    "foot_N": [
+     110.7,
+     110.0
+    ],
+    "com_in_x": true,
+    "worst_joint": "l_wrist_pitch",
+    "worst_ratio": 0.53,
+    "knee_tau": 33.1,
+    "elbow_tau": 13.9
+   },
+   "static_49": {
+    "hand_N": [
+     223.9,
+     222.5
+    ],
+    "foot_N": [
+     110.7,
+     110.0
+    ],
+    "com_in_x": true,
+    "worst_joint": "l_wrist_pitch",
+    "worst_ratio": 0.53,
+    "knee_tau": 33.1,
+    "elbow_tau": 13.9
+   }
+  },
+  {
+   "knee_deg": 111.7,
+   "hip_deg": -74.5,
+   "shoulder": -1.4,
+   "waist": 0.4,
+   "width_m": 0.05,
+   "root_pitch": 1.125,
+   "ankle": -0.9,
+   "foot_tilt": 0.875,
+   "hand_z": -0.0014,
+   "other_min_z": 0.038,
+   "geom_ok": 1.0,
+   "static_38": {
+    "hand_N": [
+     203.7,
+     242.7
+    ],
+    "foot_N": [
+     99.0,
+     121.8
+    ],
+    "com_in_x": true,
+    "worst_joint": "r_wrist_pitch",
+    "worst_ratio": 0.58,
+    "knee_tau": 37.9,
+    "elbow_tau": 15.2
+   },
+   "static_49": {
+    "hand_N": [
+     203.7,
+     242.7
+    ],
+    "foot_N": [
+     99.0,
+     121.8
+    ],
+    "com_in_x": true,
+    "worst_joint": "r_wrist_pitch",
+    "worst_ratio": 0.58,
+    "knee_tau": 37.9,
+    "elbow_tau": 15.2
+   }
+  },
+  {
+   "knee_deg": 111.7,
+   "hip_deg": -74.5,
+   "shoulder": -1.4,
+   "waist": 0.4,
+   "width_m": 0.1,
+   "root_pitch": 1.125,
+   "ankle": -0.9,
+   "foot_tilt": 0.876,
+   "hand_z": 0.0002,
+   "other_min_z": 0.036,
+   "geom_ok": 1.0,
+   "static_38": {
+    "hand_N": [
+     187.6,
+     258.4
+    ],
+    "foot_N": [
+     85.5,
+     135.6
+    ],
+    "com_in_x": true,
+    "worst_joint": "r_wrist_pitch",
+    "worst_ratio": 0.62,
+    "knee_tau": 43.7,
+    "elbow_tau": 16.1
+   },
+   "static_49": {
+    "hand_N": [
+     187.6,
+     258.4
+    ],
+    "foot_N": [
+     85.5,
+     135.6
+    ],
+    "com_in_x": true,
+    "worst_joint": "r_wrist_pitch",
+    "worst_ratio": 0.62,
+    "knee_tau": 43.7,
+    "elbow_tau": 16.1
+   }
+  },
+  {
+   "knee_deg": 111.7,
+   "hip_deg": -74.5,
+   "shoulder": -1.9,
+   "waist": 0.0,
+   "width_m": 0.0,
+   "root_pitch": 1.275,
+   "ankle": 0.7,
+   "foot_tilt": 0.518,
+   "hand_z": 0.0032,
+   "other_min_z": -0.174,
+   "geom_ok": 0.0
+  },
+  {
+   "knee_deg": 111.7,
+   "hip_deg": -74.5,
+   "shoulder": -1.9,
+   "waist": 0.0,
+   "width_m": 0.05,
+   "root_pitch": 1.3,
+   "ankle": 0.55,
+   "foot_tilt": 0.641,
+   "hand_z": -0.0035,
+   "other_min_z": -0.157,
+   "geom_ok": 0.0
+  },
+  {
+   "knee_deg": 111.7,
+   "hip_deg": -74.5,
+   "shoulder": -1.9,
+   "waist": 0.0,
+   "width_m": 0.1,
+   "root_pitch": 1.3,
+   "ankle": 0.55,
+   "foot_tilt": 0.639,
+   "hand_z": 0.0014,
+   "other_min_z": -0.155,
+   "geom_ok": 0.0
+  },
+  {
+   "knee_deg": 111.7,
+   "hip_deg": -74.5,
+   "shoulder": -1.9,
+   "waist": 0.4,
+   "width_m": 0.0,
+   "root_pitch": 1.2,
+   "ankle": -0.95,
+   "foot_tilt": 0.934,
+   "hand_z": 0.0246,
+   "other_min_z": 0.014,
+   "geom_ok": 0.0
+  },
+  {
+   "knee_deg": 111.7,
+   "hip_deg": -74.5,
+   "shoulder": -1.9,
+   "waist": 0.4,
+   "width_m": 0.05,
+   "root_pitch": 1.2,
+   "ankle": -0.95,
+   "foot_tilt": 0.934,
+   "hand_z": 0.0249,
+   "other_min_z": 0.013,
+   "geom_ok": 0.0
+  },
+  {
+   "knee_deg": 111.7,
+   "hip_deg": -74.5,
+   "shoulder": -1.9,
+   "waist": 0.4,
+   "width_m": 0.1,
+   "root_pitch": 1.2,
+   "ankle": -0.95,
+   "foot_tilt": 0.935,
+   "hand_z": 0.0275,
+   "other_min_z": 0.012,
+   "geom_ok": 0.0
+  },
+  {
+   "knee_deg": 111.7,
+   "hip_deg": -88.8,
+   "shoulder": -1.4,
+   "waist": 0.0,
+   "width_m": 0.0,
+   "root_pitch": 1.35,
+   "ankle": -0.75,
+   "foot_tilt": 1.0,
+   "hand_z": -0.0031,
+   "other_min_z": 0.053,
+   "geom_ok": 1.0,
+   "static_38": {
+    "hand_N": [
+     205.4,
+     204.0
+    ],
+    "foot_N": [
+     129.2,
+     128.5
+    ],
+    "com_in_x": true,
+    "worst_joint": "waist_pitch",
+    "worst_ratio": 0.66,
+    "knee_tau": 42.6,
+    "elbow_tau": 23.3
+   },
+   "static_49": {
+    "hand_N": [
+     205.4,
+     204.0
+    ],
+    "foot_N": [
+     129.2,
+     128.5
+    ],
+    "com_in_x": true,
+    "worst_joint": "waist_pitch",
+    "worst_ratio": 0.66,
+    "knee_tau": 42.6,
+    "elbow_tau": 23.3
+   }
+  },
+  {
+   "knee_deg": 111.7,
+   "hip_deg": -88.8,
+   "shoulder": -1.4,
+   "waist": 0.0,
+   "width_m": 0.05,
+   "root_pitch": 1.35,
+   "ankle": -0.75,
+   "foot_tilt": 1.0,
+   "hand_z": -0.0029,
+   "other_min_z": 0.053,
+   "geom_ok": 1.0,
+   "static_38": {
+    "hand_N": [
+     186.9,
+     222.4
+    ],
+    "foot_N": [
+     118.8,
+     139.0
+    ],
+    "com_in_x": true,
+    "worst_joint": "r_elbow",
+    "worst_ratio": 0.67,
+    "knee_tau": 46.9,
+    "elbow_tau": 25.5
+   },
+   "static_49": {
+    "hand_N": [
+     186.9,
+     222.4
+    ],
+    "foot_N": [
+     118.8,
+     139.0
+    ],
+    "com_in_x": true,
+    "worst_joint": "waist_pitch",
+    "worst_ratio": 0.66,
+    "knee_tau": 46.9,
+    "elbow_tau": 25.5
+   }
+  },
+  {
+   "knee_deg": 111.7,
+   "hip_deg": -88.8,
+   "shoulder": -1.4,
+   "waist": 0.0,
+   "width_m": 0.1,
+   "root_pitch": 1.35,
+   "ankle": -0.8,
+   "foot_tilt": 0.951,
+   "hand_z": -0.0012,
+   "other_min_z": 0.052,
+   "geom_ok": 1.0,
+   "static_38": {
+    "hand_N": [
+     171.5,
+     236.8
+    ],
+    "foot_N": [
+     107.3,
+     151.6
+    ],
+    "com_in_x": true,
+    "worst_joint": "r_elbow",
+    "worst_ratio": 0.71,
+    "knee_tau": 51.8,
+    "elbow_tau": 27.1
+   },
+   "static_49": {
+    "hand_N": [
+     171.5,
+     236.8
+    ],
+    "foot_N": [
+     107.3,
+     151.6
+    ],
+    "com_in_x": true,
+    "worst_joint": "waist_pitch",
+    "worst_ratio": 0.65,
+    "knee_tau": 51.8,
+    "elbow_tau": 27.1
+   }
+  },
+  {
+   "knee_deg": 111.7,
+   "hip_deg": -88.8,
+   "shoulder": -1.4,
+   "waist": 0.4,
+   "width_m": 0.0,
+   "root_pitch": 1.2,
+   "ankle": -0.85,
+   "foot_tilt": 0.75,
+   "hand_z": 0.0011,
+   "other_min_z": 0.099,
+   "geom_ok": 1.0,
+   "static_38": {
+    "hand_N": [
+     230.9,
+     229.5
+    ],
+    "foot_N": [
+     103.6,
+     103.0
+    ],
+    "com_in_x": true,
+    "worst_joint": "l_wrist_pitch",
+    "worst_ratio": 0.52,
+    "knee_tau": 30.1,
+    "elbow_tau": 8.9
+   },
+   "static_49": {
+    "hand_N": [
+     230.9,
+     229.5
+    ],
+    "foot_N": [
+     103.6,
+     103.0
+    ],
+    "com_in_x": true,
+    "worst_joint": "l_wrist_pitch",
+    "worst_ratio": 0.52,
+    "knee_tau": 30.1,
+    "elbow_tau": 8.9
+   }
+  },
+  {
+   "knee_deg": 111.7,
+   "hip_deg": -88.8,
+   "shoulder": -1.4,
+   "waist": 0.4,
+   "width_m": 0.05,
+   "root_pitch": 1.2,
+   "ankle": -0.85,
+   "foot_tilt": 0.75,
+   "hand_z": 0.0007,
+   "other_min_z": 0.099,
+   "geom_ok": 1.0,
+   "static_38": {
+    "hand_N": [
+     209.6,
+     250.7
+    ],
+    "foot_N": [
+     91.7,
+     115.1
+    ],
+    "com_in_x": true,
+    "worst_joint": "r_wrist_pitch",
+    "worst_ratio": 0.56,
+    "knee_tau": 34.9,
+    "elbow_tau": 9.7
+   },
+   "static_49": {
+    "hand_N": [
+     209.6,
+     250.7
+    ],
+    "foot_N": [
+     91.7,
+     115.1
+    ],
+    "com_in_x": true,
+    "worst_joint": "r_wrist_pitch",
+    "worst_ratio": 0.56,
+    "knee_tau": 34.9,
+    "elbow_tau": 9.7
+   }
+  },
+  {
+   "knee_deg": 111.7,
+   "hip_deg": -88.8,
+   "shoulder": -1.4,
+   "waist": 0.4,
+   "width_m": 0.1,
+   "root_pitch": 1.2,
+   "ankle": -0.9,
+   "foot_tilt": 0.702,
+   "hand_z": -0.0008,
+   "other_min_z": 0.094,
+   "geom_ok": 1.0,
+   "static_38": {
+    "hand_N": [
+     191.6,
+     267.2
+    ],
+    "foot_N": [
+     78.6,
+     129.6
+    ],
+    "com_in_x": true,
+    "worst_joint": "r_wrist_pitch",
+    "worst_ratio": 0.6,
+    "knee_tau": 40.5,
+    "elbow_tau": 10.1
+   },
+   "static_49": {
+    "hand_N": [
+     191.6,
+     267.2
+    ],
+    "foot_N": [
+     78.6,
+     129.6
+    ],
+    "com_in_x": true,
+    "worst_joint": "r_wrist_pitch",
+    "worst_ratio": 0.6,
+    "knee_tau": 40.5,
+    "elbow_tau": 10.1
+   }
+  },
+  {
+   "knee_deg": 111.7,
+   "hip_deg": -88.8,
+   "shoulder": -1.9,
+   "waist": 0.0,
+   "width_m": 0.0,
+   "root_pitch": 1.45,
+   "ankle": -0.95,
+   "foot_tilt": 0.934,
+   "hand_z": 0.029,
+   "other_min_z": 0.014,
+   "geom_ok": 0.0
+  },
+  {
+   "knee_deg": 111.7,
+   "hip_deg": -88.8,
+   "shoulder": -1.9,
+   "waist": 0.0,
+   "width_m": 0.05,
+   "root_pitch": 1.45,
+   "ankle": -0.95,
+   "foot_tilt": 0.934,
+   "hand_z": 0.0308,
+   "other_min_z": 0.014,
+   "geom_ok": 0.0
+  },
+  {
+   "knee_deg": 111.7,
+   "hip_deg": -88.8,
+   "shoulder": -1.9,
+   "waist": 0.0,
+   "width_m": 0.1,
+   "root_pitch": 1.45,
+   "ankle": -0.95,
+   "foot_tilt": 0.935,
+   "hand_z": 0.0349,
+   "other_min_z": 0.015,
+   "geom_ok": 0.0
+  },
+  {
+   "knee_deg": 111.7,
+   "hip_deg": -88.8,
+   "shoulder": -1.9,
+   "waist": 0.4,
+   "width_m": 0.0,
+   "root_pitch": 1.225,
+   "ankle": 0.5,
+   "foot_tilt": 1.017,
+   "hand_z": -0.0002,
+   "other_min_z": 0.024,
+   "geom_ok": 1.0,
+   "static_38": {
+    "hand_N": [
+     190.4,
+     189.0
+    ],
+    "foot_N": [
+     144.2,
+     143.5
+    ],
+    "com_in_x": true,
+    "worst_joint": "waist_pitch",
+    "worst_ratio": 0.92,
+    "knee_tau": 57.8,
+    "elbow_tau": 32.8
+   },
+   "static_49": {
+    "hand_N": [
+     190.4,
+     189.0
+    ],
+    "foot_N": [
+     144.2,
+     143.5
+    ],
+    "com_in_x": true,
+    "worst_joint": "waist_pitch",
+    "worst_ratio": 0.92,
+    "knee_tau": 57.8,
+    "elbow_tau": 32.8
+   }
+  },
+  {
+   "knee_deg": 111.7,
+   "hip_deg": -88.8,
+   "shoulder": -1.9,
+   "waist": 0.4,
+   "width_m": 0.05,
+   "root_pitch": 1.275,
+   "ankle": -0.95,
+   "foot_tilt": 0.759,
+   "hand_z": 0.0079,
+   "other_min_z": 0.07,
+   "geom_ok": 1.0,
+   "static_38": {
+    "hand_N": [
+     169.7,
+     201.1
+    ],
+    "foot_N": [
+     139.3,
+     157.1
+    ],
+    "com_in_x": true,
+    "worst_joint": "r_elbow",
+    "worst_ratio": 0.85,
+    "knee_tau": 52.4,
+    "elbow_tau": 32.1
+   },
+   "static_49": {
+    "hand_N": [
+     169.7,
+     201.1
+    ],
+    "foot_N": [
+     139.3,
+     157.1
+    ],
+    "com_in_x": true,
+    "worst_joint": "waist_pitch",
+    "worst_ratio": 0.8,
+    "knee_tau": 52.4,
+    "elbow_tau": 32.1
+   }
+  },
+  {
+   "knee_deg": 111.7,
+   "hip_deg": -88.8,
+   "shoulder": -1.9,
+   "waist": 0.4,
+   "width_m": 0.1,
+   "root_pitch": 1.225,
+   "ankle": 0.55,
+   "foot_tilt": 0.963,
+   "hand_z": -0.0003,
+   "other_min_z": 0.019,
+   "geom_ok": 1.0,
+   "static_38": {
+    "hand_N": [
+     160.4,
+     218.9
+    ],
+    "foot_N": [
+     123.4,
+     164.3
+    ],
+    "com_in_x": true,
+    "worst_joint": "r_elbow",
+    "worst_ratio": 1.01,
+    "knee_tau": 68.0,
+    "elbow_tau": 38.4
+   },
+   "static_49": {
+    "hand_N": [
+     160.4,
+     218.9
+    ],
+    "foot_N": [
+     123.4,
+     164.3
+    ],
+    "com_in_x": true,
+    "worst_joint": "waist_pitch",
+    "worst_ratio": 0.91,
+    "knee_tau": 68.0,
+    "elbow_tau": 38.4
+   }
+  },
+  {
+   "knee_deg": 111.7,
+   "hip_deg": -104.9,
+   "shoulder": -1.4,
+   "waist": 0.0,
+   "width_m": 0.0,
+   "root_pitch": 1.4,
+   "ankle": -0.95,
+   "foot_tilt": 0.604,
+   "hand_z": 0.0013,
+   "other_min_z": 0.114,
+   "geom_ok": 1.0,
+   "static_38": {
+    "hand_N": [
+     201.7,
+     200.3
+    ],
+    "foot_N": [
+     132.9,
+     132.2
+    ],
+    "com_in_x": true,
+    "worst_joint": "waist_pitch",
+    "worst_ratio": 0.54,
+    "knee_tau": 40.9,
+    "elbow_tau": 19.5
+   },
+   "static_49": {
+    "hand_N": [
+     201.7,
+     200.3
+    ],
+    "foot_N": [
+     132.9,
+     132.2
+    ],
+    "com_in_x": true,
+    "worst_joint": "waist_pitch",
+    "worst_ratio": 0.54,
+    "knee_tau": 40.9,
+    "elbow_tau": 19.5
+   }
+  },
+  {
+   "knee_deg": 111.7,
+   "hip_deg": -104.9,
+   "shoulder": -1.4,
+   "waist": 0.0,
+   "width_m": 0.05,
+   "root_pitch": 1.4,
+   "ankle": -0.95,
+   "foot_tilt": 0.604,
+   "hand_z": 0.0024,
+   "other_min_z": 0.116,
+   "geom_ok": 1.0,
+   "static_38": {
+    "hand_N": [
+     183.2,
+     218.8
+    ],
+    "foot_N": [
+     122.9,
+     142.2
+    ],
+    "com_in_x": true,
+    "worst_joint": "r_elbow",
+    "worst_ratio": 0.56,
+    "knee_tau": 44.7,
+    "elbow_tau": 21.3
+   },
+   "static_49": {
+    "hand_N": [
+     183.2,
+     218.8
+    ],
+    "foot_N": [
+     122.9,
+     142.2
+    ],
+    "com_in_x": true,
+    "worst_joint": "r_wrist_pitch",
+    "worst_ratio": 0.56,
+    "knee_tau": 44.7,
+    "elbow_tau": 21.3
+   }
+  },
+  {
+   "knee_deg": 111.7,
+   "hip_deg": -104.9,
+   "shoulder": -1.4,
+   "waist": 0.0,
+   "width_m": 0.1,
+   "root_pitch": 1.425,
+   "ankle": -0.7,
+   "foot_tilt": 0.846,
+   "hand_z": 0.0,
+   "other_min_z": 0.127,
+   "geom_ok": 1.0,
+   "static_38": {
+    "hand_N": [
+     172.3,
+     241.6
+    ],
+    "foot_N": [
+     104.6,
+     148.5
+    ],
+    "com_in_x": true,
+    "worst_joint": "r_wrist_pitch",
+    "worst_ratio": 0.61,
+    "knee_tau": 50.3,
+    "elbow_tau": 22.3
+   },
+   "static_49": {
+    "hand_N": [
+     172.3,
+     241.6
+    ],
+    "foot_N": [
+     104.6,
+     148.5
+    ],
+    "com_in_x": true,
+    "worst_joint": "r_wrist_pitch",
+    "worst_ratio": 0.61,
+    "knee_tau": 50.3,
+    "elbow_tau": 22.3
+   }
+  },
+  {
+   "knee_deg": 111.7,
+   "hip_deg": -104.9,
+   "shoulder": -1.4,
+   "waist": 0.4,
+   "width_m": 0.0,
+   "root_pitch": 1.25,
+   "ankle": -0.9,
+   "foot_tilt": 0.47,
+   "hand_z": -0.0015,
+   "other_min_z": 0.149,
+   "geom_ok": 1.0,
+   "static_38": {
+    "hand_N": [
+     232.2,
+     230.7
+    ],
+    "foot_N": [
+     102.4,
+     101.8
+    ],
+    "com_in_x": true,
+    "worst_joint": "l_wrist_pitch",
+    "worst_ratio": 0.5,
+    "knee_tau": 26.9,
+    "elbow_tau": 4.7
+   },
+   "static_49": {
+    "hand_N": [
+     232.2,
+     230.7
+    ],
+    "foot_N": [
+     102.4,
+     101.8
+    ],
+    "com_in_x": true,
+    "worst_joint": "l_wrist_pitch",
+    "worst_ratio": 0.5,
+    "knee_tau": 26.9,
+    "elbow_tau": 4.7
+   }
+  },
+  {
+   "knee_deg": 111.7,
+   "hip_deg": -104.9,
+   "shoulder": -1.4,
+   "waist": 0.4,
+   "width_m": 0.05,
+   "root_pitch": 1.25,
+   "ankle": -0.9,
+   "foot_tilt": 0.47,
+   "hand_z": -0.0013,
+   "other_min_z": 0.149,
+   "geom_ok": 1.0,
+   "static_38": {
+    "hand_N": [
+     210.2,
+     252.5
+    ],
+    "foot_N": [
+     90.7,
+     113.7
+    ],
+    "com_in_x": true,
+    "worst_joint": "r_wrist_pitch",
+    "worst_ratio": 0.54,
+    "knee_tau": 31.3,
+    "elbow_tau": 5.0
+   },
+   "static_49": {
+    "hand_N": [
+     210.2,
+     252.5
+    ],
+    "foot_N": [
+     90.7,
+     113.7
+    ],
+    "com_in_x": true,
+    "worst_joint": "r_wrist_pitch",
+    "worst_ratio": 0.54,
+    "knee_tau": 31.3,
+    "elbow_tau": 5.0
+   }
+  },
+  {
+   "knee_deg": 111.7,
+   "hip_deg": -104.9,
+   "shoulder": -1.4,
+   "waist": 0.4,
+   "width_m": 0.1,
+   "root_pitch": 1.25,
+   "ankle": -0.95,
+   "foot_tilt": 0.456,
+   "hand_z": -0.0002,
+   "other_min_z": 0.147,
+   "geom_ok": 1.0,
+   "static_38": {
+    "hand_N": [
+     191.0,
+     270.7
+    ],
+    "foot_N": [
+     77.8,
+     127.6
+    ],
+    "com_in_x": true,
+    "worst_joint": "r_wrist_pitch",
+    "worst_ratio": 0.58,
+    "knee_tau": 36.5,
+    "elbow_tau": 4.9
+   },
+   "static_49": {
+    "hand_N": [
+     191.0,
+     270.7
+    ],
+    "foot_N": [
+     77.8,
+     127.6
+    ],
+    "com_in_x": true,
+    "worst_joint": "r_wrist_pitch",
+    "worst_ratio": 0.58,
+    "knee_tau": 36.5,
+    "elbow_tau": 4.9
+   }
+  },
+  {
+   "knee_deg": 111.7,
+   "hip_deg": -104.9,
+   "shoulder": -1.9,
+   "waist": 0.0,
+   "width_m": 0.0,
+   "root_pitch": 1.475,
+   "ankle": 0.6,
+   "foot_tilt": 0.947,
+   "hand_z": -0.0006,
+   "other_min_z": 0.025,
+   "geom_ok": 1.0,
+   "static_38": {
+    "hand_N": [
+     180.6,
+     179.1
+    ],
+    "foot_N": [
+     154.0,
+     153.4
+    ],
+    "com_in_x": true,
+    "worst_joint": "waist_pitch",
+    "worst_ratio": 1.03,
+    "knee_tau": 63.0,
+    "elbow_tau": 37.3
+   },
+   "static_49": {
+    "hand_N": [
+     180.6,
+     179.1
+    ],
+    "foot_N": [
+     154.0,
+     153.4
+    ],
+    "com_in_x": true,
+    "worst_joint": "waist_pitch",
+    "worst_ratio": 1.03,
+    "knee_tau": 63.0,
+    "elbow_tau": 37.3
+   }
+  },
+  {
+   "knee_deg": 111.7,
+   "hip_deg": -104.9,
+   "shoulder": -1.9,
+   "waist": 0.0,
+   "width_m": 0.05,
+   "root_pitch": 1.475,
+   "ankle": 0.6,
+   "foot_tilt": 0.946,
+   "hand_z": 0.0019,
+   "other_min_z": 0.027,
+   "geom_ok": 1.0,
+   "static_38": {
+    "hand_N": [
+     164.7,
+     195.0
+    ],
+    "foot_N": [
+     145.2,
+     162.2
+    ],
+    "com_in_x": true,
+    "worst_joint": "r_elbow",
+    "worst_ratio": 1.07,
+    "knee_tau": 67.2,
+    "elbow_tau": 40.7
+   },
+   "static_49": {
+    "hand_N": [
+     164.7,
+     195.0
+    ],
+    "foot_N": [
+     145.2,
+     162.2
+    ],
+    "com_in_x": true,
+    "worst_joint": "waist_pitch",
+    "worst_ratio": 1.03,
+    "knee_tau": 67.2,
+    "elbow_tau": 40.7
+   }
+  },
+  {
+   "knee_deg": 111.7,
+   "hip_deg": -104.9,
+   "shoulder": -1.9,
+   "waist": 0.0,
+   "width_m": 0.1,
+   "root_pitch": 1.475,
+   "ankle": 0.65,
+   "foot_tilt": 0.896,
+   "hand_z": -0.0005,
+   "other_min_z": 0.021,
+   "geom_ok": 1.0,
+   "static_38": {
+    "hand_N": [
+     151.6,
+     208.2
+    ],
+    "foot_N": [
+     134.9,
+     172.4
+    ],
+    "com_in_x": true,
+    "worst_joint": "r_elbow",
+    "worst_ratio": 1.15,
+    "knee_tau": 72.4,
+    "elbow_tau": 43.8
+   },
+   "static_49": {
+    "hand_N": [
+     151.6,
+     208.2
+    ],
+    "foot_N": [
+     134.9,
+     172.4
+    ],
+    "com_in_x": true,
+    "worst_joint": "waist_pitch",
+    "worst_ratio": 1.02,
+    "knee_tau": 72.4,
+    "elbow_tau": 43.8
+   }
+  },
+  {
+   "knee_deg": 111.7,
+   "hip_deg": -104.9,
+   "shoulder": -1.9,
+   "waist": 0.4,
+   "width_m": 0.0,
+   "root_pitch": 1.325,
+   "ankle": -0.95,
+   "foot_tilt": 0.529,
+   "hand_z": 0.0031,
+   "other_min_z": 0.131,
+   "geom_ok": 1.0,
+   "static_38": {
+    "hand_N": [
+     181.0,
+     179.5
+    ],
+    "foot_N": [
+     153.6,
+     153.0
+    ],
+    "com_in_x": true,
+    "worst_joint": "waist_pitch",
+    "worst_ratio": 0.69,
+    "knee_tau": 48.2,
+    "elbow_tau": 26.1
+   },
+   "static_49": {
+    "hand_N": [
+     181.0,
+     179.5
+    ],
+    "foot_N": [
+     153.6,
+     153.0
+    ],
+    "com_in_x": true,
+    "worst_joint": "waist_pitch",
+    "worst_ratio": 0.69,
+    "knee_tau": 48.2,
+    "elbow_tau": 26.1
+   }
+  },
+  {
+   "knee_deg": 111.7,
+   "hip_deg": -104.9,
+   "shoulder": -1.9,
+   "waist": 0.4,
+   "width_m": 0.05,
+   "root_pitch": 1.325,
+   "ankle": -0.95,
+   "foot_tilt": 0.529,
+   "hand_z": 0.0045,
+   "other_min_z": 0.132,
+   "geom_ok": 1.0,
+   "static_38": {
+    "hand_N": [
+     164.8,
+     195.7
+    ],
+    "foot_N": [
+     144.9,
+     161.7
+    ],
+    "com_in_x": true,
+    "worst_joint": "r_elbow",
+    "worst_ratio": 0.75,
+    "knee_tau": 51.4,
+    "elbow_tau": 28.4
+   },
+   "static_49": {
+    "hand_N": [
+     164.8,
+     195.7
+    ],
+    "foot_N": [
+     144.9,
+     161.7
+    ],
+    "com_in_x": true,
+    "worst_joint": "waist_pitch",
+    "worst_ratio": 0.68,
+    "knee_tau": 51.4,
+    "elbow_tau": 28.4
+   }
+  },
+  {
+   "knee_deg": 111.7,
+   "hip_deg": -104.9,
+   "shoulder": -1.9,
+   "waist": 0.4,
+   "width_m": 0.1,
+   "root_pitch": 1.35,
+   "ankle": -0.75,
+   "foot_tilt": 0.721,
+   "hand_z": 0.0001,
+   "other_min_z": 0.142,
+   "geom_ok": 1.0,
+   "static_38": {
+    "hand_N": [
+     155.4,
+     216.1
+    ],
+    "foot_N": [
+     128.6,
+     166.9
+    ],
+    "com_in_x": true,
+    "worst_joint": "r_elbow",
+    "worst_ratio": 0.8,
+    "knee_tau": 56.3,
+    "elbow_tau": 30.4
+   },
+   "static_49": {
+    "hand_N": [
+     155.4,
+     216.1
+    ],
+    "foot_N": [
+     128.6,
+     166.9
+    ],
+    "com_in_x": true,
+    "worst_joint": "waist_pitch",
+    "worst_ratio": 0.69,
+    "knee_tau": 56.3,
+    "elbow_tau": 30.4
+   }
+  },
+  {
+   "knee_deg": 119.7,
+   "hip_deg": -74.5,
+   "shoulder": -1.4,
+   "waist": 0.0,
+   "width_m": 0.0,
+   "root_pitch": 1.075,
+   "ankle": -0.85,
+   "foot_tilt": 1.015,
+   "hand_z": 0.1732,
+   "other_min_z": 0.011,
+   "geom_ok": 0.0
+  },
+  {
+   "knee_deg": 119.7,
+   "hip_deg": -74.5,
+   "shoulder": -1.4,
+   "waist": 0.0,
+   "width_m": 0.05,
+   "root_pitch": 1.075,
+   "ankle": -0.75,
+   "foot_tilt": 1.115,
+   "hand_z": 0.1741,
+   "other_min_z": 0.01,
+   "geom_ok": 0.0
+  },
+  {
+   "knee_deg": 119.7,
+   "hip_deg": -74.5,
+   "shoulder": -1.4,
+   "waist": 0.0,
+   "width_m": 0.1,
+   "root_pitch": 1.05,
+   "ankle": -0.95,
+   "foot_tilt": 0.925,
+   "hand_z": 0.2018,
+   "other_min_z": 0.013,
+   "geom_ok": 0.0
+  },
+  {
+   "knee_deg": 119.7,
+   "hip_deg": -74.5,
+   "shoulder": -1.4,
+   "waist": 0.4,
+   "width_m": 0.0,
+   "root_pitch": 1.075,
+   "ankle": -0.85,
+   "foot_tilt": 1.015,
+   "hand_z": -0.005,
+   "other_min_z": 0.011,
+   "geom_ok": 1.0,
+   "static_38": {
+    "hand_N": [
+     217.3,
+     215.8
+    ],
+    "foot_N": [
+     117.3,
+     116.6
+    ],
+    "com_in_x": true,
+    "worst_joint": "l_wrist_pitch",
+    "worst_ratio": 0.53,
+    "knee_tau": 36.3,
+    "elbow_tau": 17.0
+   },
+   "static_49": {
+    "hand_N": [
+     217.3,
+     215.8
+    ],
+    "foot_N": [
+     117.3,
+     116.6
+    ],
+    "com_in_x": true,
+    "worst_joint": "l_wrist_pitch",
+    "worst_ratio": 0.53,
+    "knee_tau": 36.3,
+    "elbow_tau": 17.0
+   }
+  },
+  {
+   "knee_deg": 119.7,
+   "hip_deg": -74.5,
+   "shoulder": -1.4,
+   "waist": 0.4,
+   "width_m": 0.05,
+   "root_pitch": 1.075,
+   "ankle": -0.75,
+   "foot_tilt": 1.115,
+   "hand_z": -0.005,
+   "other_min_z": 0.01,
+   "geom_ok": 1.0,
+   "static_38": {
+    "hand_N": [
+     198.5,
+     236.4
+    ],
+    "foot_N": [
+     105.1,
+     127.1
+    ],
+    "com_in_x": true,
+    "worst_joint": "r_wrist_pitch",
+    "worst_ratio": 0.58,
+    "knee_tau": 41.4,
+    "elbow_tau": 18.8
+   },
+   "static_49": {
+    "hand_N": [
+     198.5,
+     236.4
+    ],
+    "foot_N": [
+     105.1,
+     127.1
+    ],
+    "com_in_x": true,
+    "worst_joint": "r_wrist_pitch",
+    "worst_ratio": 0.58,
+    "knee_tau": 41.4,
+    "elbow_tau": 18.8
+   }
+  },
+  {
+   "knee_deg": 119.7,
+   "hip_deg": -74.5,
+   "shoulder": -1.4,
+   "waist": 0.4,
+   "width_m": 0.1,
+   "root_pitch": 1.05,
+   "ankle": -0.95,
+   "foot_tilt": 0.925,
+   "hand_z": 0.0162,
+   "other_min_z": 0.013,
+   "geom_ok": 0.0
+  },
+  {
+   "knee_deg": 119.7,
+   "hip_deg": -74.5,
+   "shoulder": -1.9,
+   "waist": 0.0,
+   "width_m": 0.0,
+   "root_pitch": 1.225,
+   "ankle": 0.7,
+   "foot_tilt": 0.428,
+   "hand_z": -0.0025,
+   "other_min_z": -0.221,
+   "geom_ok": 0.0
+  },
+  {
+   "knee_deg": 119.7,
+   "hip_deg": -74.5,
+   "shoulder": -1.9,
+   "waist": 0.0,
+   "width_m": 0.05,
+   "root_pitch": 1.225,
+   "ankle": 0.7,
+   "foot_tilt": 0.428,
+   "hand_z": 0.0019,
+   "other_min_z": -0.218,
+   "geom_ok": 0.0
+  },
+  {
+   "knee_deg": 119.7,
+   "hip_deg": -74.5,
+   "shoulder": -1.9,
+   "waist": 0.0,
+   "width_m": 0.1,
+   "root_pitch": 1.25,
+   "ankle": 0.55,
+   "foot_tilt": 0.549,
+   "hand_z": -0.0025,
+   "other_min_z": -0.201,
+   "geom_ok": 0.0
+  },
+  {
+   "knee_deg": 119.7,
+   "hip_deg": -74.5,
+   "shoulder": -1.9,
+   "waist": 0.4,
+   "width_m": 0.0,
+   "root_pitch": 1.075,
+   "ankle": -0.85,
+   "foot_tilt": 1.015,
+   "hand_z": 0.1287,
+   "other_min_z": 0.011,
+   "geom_ok": 0.0
+  },
+  {
+   "knee_deg": 119.7,
+   "hip_deg": -74.5,
+   "shoulder": -1.9,
+   "waist": 0.4,
+   "width_m": 0.05,
+   "root_pitch": 1.075,
+   "ankle": -0.75,
+   "foot_tilt": 1.115,
+   "hand_z": 0.1299,
+   "other_min_z": 0.01,
+   "geom_ok": 0.0
+  },
+  {
+   "knee_deg": 119.7,
+   "hip_deg": -74.5,
+   "shoulder": -1.9,
+   "waist": 0.4,
+   "width_m": 0.1,
+   "root_pitch": 1.05,
+   "ankle": -0.95,
+   "foot_tilt": 0.925,
+   "hand_z": 0.1597,
+   "other_min_z": 0.013,
+   "geom_ok": 0.0
+  },
+  {
+   "knee_deg": 119.7,
+   "hip_deg": -88.8,
+   "shoulder": -1.4,
+   "waist": 0.0,
+   "width_m": 0.0,
+   "root_pitch": 1.3,
+   "ankle": -0.85,
+   "foot_tilt": 0.99,
+   "hand_z": -0.0065,
+   "other_min_z": 0.019,
+   "geom_ok": 1.0,
+   "static_38": {
+    "hand_N": [
+     198.6,
+     197.2
+    ],
+    "foot_N": [
+     136.0,
+     135.3
+    ],
+    "com_in_x": true,
+    "worst_joint": "waist_pitch",
+    "worst_ratio": 0.7,
+    "knee_tau": 44.5,
+    "elbow_tau": 25.2
+   },
+   "static_49": {
+    "hand_N": [
+     198.6,
+     197.2
+    ],
+    "foot_N": [
+     136.0,
+     135.3
+    ],
+    "com_in_x": true,
+    "worst_joint": "waist_pitch",
+    "worst_ratio": 0.7,
+    "knee_tau": 44.5,
+    "elbow_tau": 25.2
+   }
+  },
+  {
+   "knee_deg": 119.7,
+   "hip_deg": -88.8,
+   "shoulder": -1.4,
+   "waist": 0.0,
+   "width_m": 0.05,
+   "root_pitch": 1.3,
+   "ankle": -0.85,
+   "foot_tilt": 0.99,
+   "hand_z": -0.0064,
+   "other_min_z": 0.019,
+   "geom_ok": 1.0,
+   "static_38": {
+    "hand_N": [
+     180.8,
+     214.9
+    ],
+    "foot_N": [
+     126.0,
+     145.3
+    ],
+    "com_in_x": true,
+    "worst_joint": "r_elbow",
+    "worst_ratio": 0.73,
+    "knee_tau": 48.5,
+    "elbow_tau": 27.6
+   },
+   "static_49": {
+    "hand_N": [
+     180.8,
+     214.9
+    ],
+    "foot_N": [
+     126.0,
+     145.3
+    ],
+    "com_in_x": true,
+    "worst_joint": "waist_pitch",
+    "worst_ratio": 0.7,
+    "knee_tau": 48.5,
+    "elbow_tau": 27.6
+   }
+  },
+  {
+   "knee_deg": 119.7,
+   "hip_deg": -88.8,
+   "shoulder": -1.4,
+   "waist": 0.0,
+   "width_m": 0.1,
+   "root_pitch": 1.3,
+   "ankle": -0.85,
+   "foot_tilt": 0.991,
+   "hand_z": -0.0035,
+   "other_min_z": 0.018,
+   "geom_ok": 1.0,
+   "static_38": {
+    "hand_N": [
+     166.2,
+     229.5
+    ],
+    "foot_N": [
+     114.5,
+     156.9
+    ],
+    "com_in_x": true,
+    "worst_joint": "r_elbow",
+    "worst_ratio": 0.78,
+    "knee_tau": 53.5,
+    "elbow_tau": 29.6
+   },
+   "static_49": {
+    "hand_N": [
+     166.2,
+     229.5
+    ],
+    "foot_N": [
+     114.5,
+     156.9
+    ],
+    "com_in_x": true,
+    "worst_joint": "waist_pitch",
+    "worst_ratio": 0.7,
+    "knee_tau": 53.5,
+    "elbow_tau": 29.6
+   }
+  },
+  {
+   "knee_deg": 119.7,
+   "hip_deg": -88.8,
+   "shoulder": -1.4,
+   "waist": 0.4,
+   "width_m": 0.0,
+   "root_pitch": 1.125,
+   "ankle": -0.95,
+   "foot_tilt": 0.749,
+   "hand_z": 0.0064,
+   "other_min_z": 0.073,
+   "geom_ok": 1.0,
+   "static_38": {
+    "hand_N": [
+     218.7,
+     217.3
+    ],
+    "foot_N": [
+     115.9,
+     115.2
+    ],
+    "com_in_x": true,
+    "worst_joint": "l_wrist_pitch",
+    "worst_ratio": 0.52,
+    "knee_tau": 35.0,
+    "elbow_tau": 13.3
+   },
+   "static_49": {
+    "hand_N": [
+     218.7,
+     217.3
+    ],
+    "foot_N": [
+     115.9,
+     115.2
+    ],
+    "com_in_x": true,
+    "worst_joint": "l_wrist_pitch",
+    "worst_ratio": 0.52,
+    "knee_tau": 35.0,
+    "elbow_tau": 13.3
+   }
+  },
+  {
+   "knee_deg": 119.7,
+   "hip_deg": -88.8,
+   "shoulder": -1.4,
+   "waist": 0.4,
+   "width_m": 0.05,
+   "root_pitch": 1.125,
+   "ankle": -0.95,
+   "foot_tilt": 0.749,
+   "hand_z": 0.006,
+   "other_min_z": 0.073,
+   "geom_ok": 1.0,
+   "static_38": {
+    "hand_N": [
+     198.7,
+     237.2
+    ],
+    "foot_N": [
+     104.7,
+     126.5
+    ],
+    "com_in_x": true,
+    "worst_joint": "r_wrist_pitch",
+    "worst_ratio": 0.56,
+    "knee_tau": 39.4,
+    "elbow_tau": 14.5
+   },
+   "static_49": {
+    "hand_N": [
+     198.7,
+     237.2
+    ],
+    "foot_N": [
+     104.7,
+     126.5
+    ],
+    "com_in_x": true,
+    "worst_joint": "r_wrist_pitch",
+    "worst_ratio": 0.56,
+    "knee_tau": 39.4,
+    "elbow_tau": 14.5
+   }
+  },
+  {
+   "knee_deg": 119.7,
+   "hip_deg": -88.8,
+   "shoulder": -1.4,
+   "waist": 0.4,
+   "width_m": 0.1,
+   "root_pitch": 1.05,
+   "ankle": 0.6,
+   "foot_tilt": 0.946,
+   "hand_z": 0.0029,
+   "other_min_z": 0.03,
+   "geom_ok": 1.0,
+   "static_38": {
+    "hand_N": [
+     181.7,
+     251.4
+    ],
+    "foot_N": [
+     93.1,
+     140.9
+    ],
+    "com_in_x": true,
+    "worst_joint": "r_wrist_pitch",
+    "worst_ratio": 0.63,
+    "knee_tau": 56.1,
+    "elbow_tau": 21.6
+   },
+   "static_49": {
+    "hand_N": [
+     181.7,
+     251.4
+    ],
+    "foot_N": [
+     93.1,
+     140.9
+    ],
+    "com_in_x": true,
+    "worst_joint": "r_wrist_pitch",
+    "worst_ratio": 0.63,
+    "knee_tau": 56.1,
+    "elbow_tau": 21.6
+   }
+  },
+  {
+   "knee_deg": 119.7,
+   "hip_deg": -88.8,
+   "shoulder": -1.9,
+   "waist": 0.0,
+   "width_m": 0.0,
+   "root_pitch": 1.325,
+   "ankle": -0.85,
+   "foot_tilt": 1.015,
+   "hand_z": 0.1331,
+   "other_min_z": 0.011,
+   "geom_ok": 0.0
+  },
+  {
+   "knee_deg": 119.7,
+   "hip_deg": -88.8,
+   "shoulder": -1.9,
+   "waist": 0.0,
+   "width_m": 0.05,
+   "root_pitch": 1.325,
+   "ankle": -0.85,
+   "foot_tilt": 1.015,
+   "hand_z": 0.1342,
+   "other_min_z": 0.01,
+   "geom_ok": 0.0
+  },
+  {
+   "knee_deg": 119.7,
+   "hip_deg": -88.8,
+   "shoulder": -1.9,
+   "waist": 0.0,
+   "width_m": 0.1,
+   "root_pitch": 1.325,
+   "ankle": -0.85,
+   "foot_tilt": 1.016,
+   "hand_z": 0.1366,
+   "other_min_z": 0.01,
+   "geom_ok": 0.0
+  },
+  {
+   "knee_deg": 119.7,
+   "hip_deg": -88.8,
+   "shoulder": -1.9,
+   "waist": 0.4,
+   "width_m": 0.0,
+   "root_pitch": 1.2,
+   "ankle": 0.15,
+   "foot_tilt": 1.252,
+   "hand_z": 0.0018,
+   "other_min_z": 0.01,
+   "geom_ok": 1.0,
+   "static_38": {
+    "hand_N": [
+     186.9,
+     185.4
+    ],
+    "foot_N": [
+     147.7,
+     147.0
+    ],
+    "com_in_x": true,
+    "worst_joint": "waist_pitch",
+    "worst_ratio": 0.93,
+    "knee_tau": 58.2,
+    "elbow_tau": 33.3
+   },
+   "static_49": {
+    "hand_N": [
+     186.9,
+     185.4
+    ],
+    "foot_N": [
+     147.7,
+     147.0
+    ],
+    "com_in_x": true,
+    "worst_joint": "waist_pitch",
+    "worst_ratio": 0.93,
+    "knee_tau": 58.2,
+    "elbow_tau": 33.3
+   }
+  },
+  {
+   "knee_deg": 119.7,
+   "hip_deg": -88.8,
+   "shoulder": -1.9,
+   "waist": 0.4,
+   "width_m": 0.05,
+   "root_pitch": 1.25,
+   "ankle": -0.8,
+   "foot_tilt": 0.99,
+   "hand_z": -0.0101,
+   "other_min_z": 0.037,
+   "geom_ok": 0.0
+  },
+  {
+   "knee_deg": 119.7,
+   "hip_deg": -88.8,
+   "shoulder": -1.9,
+   "waist": 0.4,
+   "width_m": 0.1,
+   "root_pitch": 1.25,
+   "ankle": -0.8,
+   "foot_tilt": 0.991,
+   "hand_z": -0.0073,
+   "other_min_z": 0.036,
+   "geom_ok": 1.0,
+   "static_38": {
+    "hand_N": [
+     155.3,
+     213.1
+    ],
+    "foot_N": [
+     129.9,
+     168.7
+    ],
+    "com_in_x": true,
+    "worst_joint": "r_elbow",
+    "worst_ratio": 0.95,
+    "knee_tau": 59.3,
+    "elbow_tau": 35.9
+   },
+   "static_49": {
+    "hand_N": [
+     155.3,
+     213.1
+    ],
+    "foot_N": [
+     129.9,
+     168.7
+    ],
+    "com_in_x": true,
+    "worst_joint": "waist_pitch",
+    "worst_ratio": 0.83,
+    "knee_tau": 59.3,
+    "elbow_tau": 35.9
+   }
+  },
+  {
+   "knee_deg": 119.7,
+   "hip_deg": -104.9,
+   "shoulder": -1.4,
+   "waist": 0.0,
+   "width_m": 0.0,
+   "root_pitch": 1.35,
+   "ankle": -0.95,
+   "foot_tilt": 0.694,
+   "hand_z": -0.0005,
+   "other_min_z": 0.091,
+   "geom_ok": 1.0,
+   "static_38": {
+    "hand_N": [
+     196.1,
+     194.6
+    ],
+    "foot_N": [
+     138.5,
+     137.8
+    ],
+    "com_in_x": true,
+    "worst_joint": "waist_pitch",
+    "worst_ratio": 0.6,
+    "knee_tau": 44.2,
+    "elbow_tau": 21.9
+   },
+   "static_49": {
+    "hand_N": [
+     196.1,
+     194.6
+    ],
+    "foot_N": [
+     138.5,
+     137.8
+    ],
+    "com_in_x": true,
+    "worst_joint": "waist_pitch",
+    "worst_ratio": 0.6,
+    "knee_tau": 44.2,
+    "elbow_tau": 21.9
+   }
+  },
+  {
+   "knee_deg": 119.7,
+   "hip_deg": -104.9,
+   "shoulder": -1.4,
+   "waist": 0.0,
+   "width_m": 0.05,
+   "root_pitch": 1.35,
+   "ankle": -0.95,
+   "foot_tilt": 0.694,
+   "hand_z": 0.0004,
+   "other_min_z": 0.091,
+   "geom_ok": 1.0,
+   "static_38": {
+    "hand_N": [
+     178.2,
+     212.5
+    ],
+    "foot_N": [
+     128.9,
+     147.5
+    ],
+    "com_in_x": true,
+    "worst_joint": "r_elbow",
+    "worst_ratio": 0.63,
+    "knee_tau": 47.9,
+    "elbow_tau": 23.9
+   },
+   "static_49": {
+    "hand_N": [
+     178.2,
+     212.5
+    ],
+    "foot_N": [
+     128.9,
+     147.5
+    ],
+    "com_in_x": true,
+    "worst_joint": "waist_pitch",
+    "worst_ratio": 0.6,
+    "knee_tau": 47.9,
+    "elbow_tau": 23.9
+   }
+  },
+  {
+   "knee_deg": 119.7,
+   "hip_deg": -104.9,
+   "shoulder": -1.4,
+   "waist": 0.0,
+   "width_m": 0.1,
+   "root_pitch": 1.35,
+   "ankle": -0.95,
+   "foot_tilt": 0.695,
+   "hand_z": 0.0042,
+   "other_min_z": 0.092,
+   "geom_ok": 1.0,
+   "static_38": {
+    "hand_N": [
+     162.8,
+     227.8
+    ],
+    "foot_N": [
+     117.9,
+     158.6
+    ],
+    "com_in_x": true,
+    "worst_joint": "r_elbow",
+    "worst_ratio": 0.67,
+    "knee_tau": 52.5,
+    "elbow_tau": 25.6
+   },
+   "static_49": {
+    "hand_N": [
+     162.8,
+     227.8
+    ],
+    "foot_N": [
+     117.9,
+     158.6
+    ],
+    "com_in_x": true,
+    "worst_joint": "r_wrist_pitch",
+    "worst_ratio": 0.6,
+    "knee_tau": 52.5,
+    "elbow_tau": 25.6
+   }
+  },
+  {
+   "knee_deg": 119.7,
+   "hip_deg": -104.9,
+   "shoulder": -1.4,
+   "waist": 0.4,
+   "width_m": 0.0,
+   "root_pitch": 1.175,
+   "ankle": -0.95,
+   "foot_tilt": 0.519,
+   "hand_z": 0.0016,
+   "other_min_z": 0.133,
+   "geom_ok": 1.0,
+   "static_38": {
+    "hand_N": [
+     218.8,
+     217.4
+    ],
+    "foot_N": [
+     115.8,
+     115.1
+    ],
+    "com_in_x": true,
+    "worst_joint": "l_wrist_pitch",
+    "worst_ratio": 0.5,
+    "knee_tau": 32.9,
+    "elbow_tau": 9.6
+   },
+   "static_49": {
+    "hand_N": [
+     218.8,
+     217.4
+    ],
+    "foot_N": [
+     115.8,
+     115.1
+    ],
+    "com_in_x": true,
+    "worst_joint": "l_wrist_pitch",
+    "worst_ratio": 0.5,
+    "knee_tau": 32.9,
+    "elbow_tau": 9.6
+   }
+  },
+  {
+   "knee_deg": 119.7,
+   "hip_deg": -104.9,
+   "shoulder": -1.4,
+   "waist": 0.4,
+   "width_m": 0.05,
+   "root_pitch": 1.175,
+   "ankle": -0.95,
+   "foot_tilt": 0.52,
+   "hand_z": 0.0017,
+   "other_min_z": 0.133,
+   "geom_ok": 1.0,
+   "static_38": {
+    "hand_N": [
+     198.4,
+     237.7
+    ],
+    "foot_N": [
+     104.8,
+     126.2
+    ],
+    "com_in_x": true,
+    "worst_joint": "r_wrist_pitch",
+    "worst_ratio": 0.54,
+    "knee_tau": 37.0,
+    "elbow_tau": 10.4
+   },
+   "static_49": {
+    "hand_N": [
+     198.4,
+     237.7
+    ],
+    "foot_N": [
+     104.8,
+     126.2
+    ],
+    "com_in_x": true,
+    "worst_joint": "r_wrist_pitch",
+    "worst_ratio": 0.54,
+    "knee_tau": 37.0,
+    "elbow_tau": 10.4
+   }
+  },
+  {
+   "knee_deg": 119.7,
+   "hip_deg": -104.9,
+   "shoulder": -1.4,
+   "waist": 0.4,
+   "width_m": 0.1,
+   "root_pitch": 1.2,
+   "ankle": -0.8,
+   "foot_tilt": 0.662,
+   "hand_z": -0.0003,
+   "other_min_z": 0.139,
+   "geom_ok": 1.0,
+   "static_38": {
+    "hand_N": [
+     186.0,
+     262.6
+    ],
+    "foot_N": [
+     85.1,
+     133.4
+    ],
+    "com_in_x": true,
+    "worst_joint": "r_wrist_pitch",
+    "worst_ratio": 0.59,
+    "knee_tau": 41.6,
+    "elbow_tau": 9.8
+   },
+   "static_49": {
+    "hand_N": [
+     186.0,
+     262.6
+    ],
+    "foot_N": [
+     85.1,
+     133.4
+    ],
+    "com_in_x": true,
+    "worst_joint": "r_wrist_pitch",
+    "worst_ratio": 0.59,
+    "knee_tau": 41.6,
+    "elbow_tau": 9.8
+   }
+  },
+  {
+   "knee_deg": 119.7,
+   "hip_deg": -104.9,
+   "shoulder": -1.9,
+   "waist": 0.0,
+   "width_m": 0.0,
+   "root_pitch": 1.5,
+   "ankle": -0.75,
+   "foot_tilt": 1.01,
+   "hand_z": -0.0023,
+   "other_min_z": 0.049,
+   "geom_ok": 1.0,
+   "static_38": {
+    "hand_N": [
+     175.1,
+     173.7
+    ],
+    "foot_N": [
+     159.5,
+     158.8
+    ],
+    "com_in_x": true,
+    "worst_joint": "waist_pitch",
+    "worst_ratio": 0.94,
+    "knee_tau": 56.0,
+    "elbow_tau": 35.0
+   },
+   "static_49": {
+    "hand_N": [
+     175.1,
+     173.7
+    ],
+    "foot_N": [
+     159.5,
+     158.8
+    ],
+    "com_in_x": true,
+    "worst_joint": "waist_pitch",
+    "worst_ratio": 0.94,
+    "knee_tau": 56.0,
+    "elbow_tau": 35.0
+   }
+  },
+  {
+   "knee_deg": 119.7,
+   "hip_deg": -104.9,
+   "shoulder": -1.9,
+   "waist": 0.0,
+   "width_m": 0.05,
+   "root_pitch": 1.5,
+   "ankle": -0.75,
+   "foot_tilt": 1.01,
+   "hand_z": -0.0007,
+   "other_min_z": 0.05,
+   "geom_ok": 1.0,
+   "static_38": {
+    "hand_N": [
+     159.7,
+     189.2
+    ],
+    "foot_N": [
+     151.1,
+     167.2
+    ],
+    "com_in_x": true,
+    "worst_joint": "r_elbow",
+    "worst_ratio": 1.01,
+    "knee_tau": 59.4,
+    "elbow_tau": 38.3
+   },
+   "static_49": {
+    "hand_N": [
+     159.7,
+     189.2
+    ],
+    "foot_N": [
+     151.1,
+     167.2
+    ],
+    "com_in_x": true,
+    "worst_joint": "waist_pitch",
+    "worst_ratio": 0.94,
+    "knee_tau": 59.4,
+    "elbow_tau": 38.3
+   }
+  },
+  {
+   "knee_deg": 119.7,
+   "hip_deg": -104.9,
+   "shoulder": -1.9,
+   "waist": 0.0,
+   "width_m": 0.1,
+   "root_pitch": 1.5,
+   "ankle": -0.9,
+   "foot_tilt": 0.861,
+   "hand_z": -0.0014,
+   "other_min_z": 0.046,
+   "geom_ok": 1.0,
+   "static_38": {
+    "hand_N": [
+     145.0,
+     200.7
+    ],
+    "foot_N": [
+     143.3,
+     178.1
+    ],
+    "com_in_x": true,
+    "worst_joint": "r_elbow",
+    "worst_ratio": 1.07,
+    "knee_tau": 62.0,
+    "elbow_tau": 40.8
+   },
+   "static_49": {
+    "hand_N": [
+     145.0,
+     200.7
+    ],
+    "foot_N": [
+     143.3,
+     178.1
+    ],
+    "com_in_x": true,
+    "worst_joint": "waist_pitch",
+    "worst_ratio": 0.92,
+    "knee_tau": 62.0,
+    "elbow_tau": 40.8
+   }
+  },
+  {
+   "knee_deg": 119.7,
+   "hip_deg": -104.9,
+   "shoulder": -1.9,
+   "waist": 0.4,
+   "width_m": 0.0,
+   "root_pitch": 1.275,
+   "ankle": -0.95,
+   "foot_tilt": 0.619,
+   "hand_z": 0.0067,
+   "other_min_z": 0.111,
+   "geom_ok": 1.0,
+   "static_38": {
+    "hand_N": [
+     176.6,
+     175.1
+    ],
+    "foot_N": [
+     158.0,
+     157.4
+    ],
+    "com_in_x": true,
+    "worst_joint": "l_elbow",
+    "worst_ratio": 0.73,
+    "knee_tau": 51.4,
+    "elbow_tau": 27.7
+   },
+   "static_49": {
+    "hand_N": [
+     176.6,
+     175.1
+    ],
+    "foot_N": [
+     158.0,
+     157.4
+    ],
+    "com_in_x": true,
+    "worst_joint": "waist_pitch",
+    "worst_ratio": 0.72,
+    "knee_tau": 51.4,
+    "elbow_tau": 27.7
+   }
+  },
+  {
+   "knee_deg": 119.7,
+   "hip_deg": -104.9,
+   "shoulder": -1.9,
+   "waist": 0.4,
+   "width_m": 0.05,
+   "root_pitch": 1.3,
+   "ankle": -0.7,
+   "foot_tilt": 0.86,
+   "hand_z": -0.001,
+   "other_min_z": 0.121,
+   "geom_ok": 1.0,
+   "static_38": {
+    "hand_N": [
+     166.2,
+     197.3
+    ],
+    "foot_N": [
+     143.2,
+     160.3
+    ],
+    "com_in_x": true,
+    "worst_joint": "r_elbow",
+    "worst_ratio": 0.8,
+    "knee_tau": 55.6,
+    "elbow_tau": 30.3
+   },
+   "static_49": {
+    "hand_N": [
+     166.2,
+     197.3
+    ],
+    "foot_N": [
+     143.2,
+     160.3
+    ],
+    "com_in_x": true,
+    "worst_joint": "waist_pitch",
+    "worst_ratio": 0.74,
+    "knee_tau": 55.6,
+    "elbow_tau": 30.3
+   }
+  },
+  {
+   "knee_deg": 119.7,
+   "hip_deg": -104.9,
+   "shoulder": -1.9,
+   "waist": 0.4,
+   "width_m": 0.1,
+   "root_pitch": 1.3,
+   "ankle": -0.75,
+   "foot_tilt": 0.811,
+   "hand_z": -0.0002,
+   "other_min_z": 0.118,
+   "geom_ok": 1.0,
+   "static_38": {
+    "hand_N": [
+     151.8,
+     210.5
+    ],
+    "foot_N": [
+     133.8,
+     171.0
+    ],
+    "com_in_x": true,
+    "worst_joint": "r_elbow",
+    "worst_ratio": 0.85,
+    "knee_tau": 59.4,
+    "elbow_tau": 32.5
+   },
+   "static_49": {
+    "hand_N": [
+     151.8,
+     210.5
+    ],
+    "foot_N": [
+     133.8,
+     171.0
+    ],
+    "com_in_x": true,
+    "worst_joint": "waist_pitch",
+    "worst_ratio": 0.73,
+    "knee_tau": 59.4,
+    "elbow_tau": 32.5
+   }
+  }
+ ],
+ "static_pass": 75,
+ "dynamic": [
+  {
+   "knee_deg": 100.3,
+   "hip_deg": -104.9,
+   "shoulder": -1.4,
+   "waist": 0.4,
+   "width_m": 0.0,
+   "root_pitch": 1.35,
+   "ankle": -0.85,
+   "foot_tilt": 0.42,
+   "hand_z": 0.0027,
+   "other_min_z": 0.169,
+   "geom_ok": 1.0,
+   "static_38": {
+    "hand_N": [
+     251.7,
+     250.2
+    ],
+    "foot_N": [
+     82.9,
+     82.3
+    ],
+    "com_in_x": true,
+    "worst_joint": "l_wrist_pitch",
+    "worst_ratio": 0.48,
+    "knee_tau": 18.3,
+    "elbow_tau": 3.4
+   },
+   "static_49": {
+    "hand_N": [
+     251.7,
+     250.2
+    ],
+    "foot_N": [
+     82.9,
+     82.3
+    ],
+    "com_in_x": true,
+    "worst_joint": "l_wrist_pitch",
+    "worst_ratio": 0.48,
+    "knee_tau": 18.3,
+    "elbow_tau": 3.4
+   },
+   "elbow_cap": 38.0,
+   "fell": false,
+   "hand_peak_N": [
+    164.9,
+    164.2
+   ],
+   "knee_max_deg": 100.3
+  },
+  {
+   "knee_deg": 100.3,
+   "hip_deg": -104.9,
+   "shoulder": -1.4,
+   "waist": 0.4,
+   "width_m": 0.0,
+   "root_pitch": 1.35,
+   "ankle": -0.85,
+   "foot_tilt": 0.42,
+   "hand_z": 0.0027,
+   "other_min_z": 0.169,
+   "geom_ok": 1.0,
+   "static_38": {
+    "hand_N": [
+     251.7,
+     250.2
+    ],
+    "foot_N": [
+     82.9,
+     82.3
+    ],
+    "com_in_x": true,
+    "worst_joint": "l_wrist_pitch",
+    "worst_ratio": 0.48,
+    "knee_tau": 18.3,
+    "elbow_tau": 3.4
+   },
+   "static_49": {
+    "hand_N": [
+     251.7,
+     250.2
+    ],
+    "foot_N": [
+     82.9,
+     82.3
+    ],
+    "com_in_x": true,
+    "worst_joint": "l_wrist_pitch",
+    "worst_ratio": 0.48,
+    "knee_tau": 18.3,
+    "elbow_tau": 3.4
+   },
+   "elbow_cap": 49.0,
+   "fell": false,
+   "hand_peak_N": [
+    164.9,
+    164.2
+   ],
+   "knee_max_deg": 100.3
+  },
+  {
+   "knee_deg": 111.7,
+   "hip_deg": -104.9,
+   "shoulder": -1.4,
+   "waist": 0.4,
+   "width_m": 0.0,
+   "root_pitch": 1.25,
+   "ankle": -0.9,
+   "foot_tilt": 0.47,
+   "hand_z": -0.0015,
+   "other_min_z": 0.149,
+   "geom_ok": 1.0,
+   "static_38": {
+    "hand_N": [
+     232.2,
+     230.7
+    ],
+    "foot_N": [
+     102.4,
+     101.8
+    ],
+    "com_in_x": true,
+    "worst_joint": "l_wrist_pitch",
+    "worst_ratio": 0.5,
+    "knee_tau": 26.9,
+    "elbow_tau": 4.7
+   },
+   "static_49": {
+    "hand_N": [
+     232.2,
+     230.7
+    ],
+    "foot_N": [
+     102.4,
+     101.8
+    ],
+    "com_in_x": true,
+    "worst_joint": "l_wrist_pitch",
+    "worst_ratio": 0.5,
+    "knee_tau": 26.9,
+    "elbow_tau": 4.7
+   },
+   "elbow_cap": 38.0,
+   "fell": false,
+   "hand_peak_N": [
+    129.8,
+    129.2
+   ],
+   "knee_max_deg": 111.7
+  },
+  {
+   "knee_deg": 111.7,
+   "hip_deg": -104.9,
+   "shoulder": -1.4,
+   "waist": 0.4,
+   "width_m": 0.0,
+   "root_pitch": 1.25,
+   "ankle": -0.9,
+   "foot_tilt": 0.47,
+   "hand_z": -0.0015,
+   "other_min_z": 0.149,
+   "geom_ok": 1.0,
+   "static_38": {
+    "hand_N": [
+     232.2,
+     230.7
+    ],
+    "foot_N": [
+     102.4,
+     101.8
+    ],
+    "com_in_x": true,
+    "worst_joint": "l_wrist_pitch",
+    "worst_ratio": 0.5,
+    "knee_tau": 26.9,
+    "elbow_tau": 4.7
+   },
+   "static_49": {
+    "hand_N": [
+     232.2,
+     230.7
+    ],
+    "foot_N": [
+     102.4,
+     101.8
+    ],
+    "com_in_x": true,
+    "worst_joint": "l_wrist_pitch",
+    "worst_ratio": 0.5,
+    "knee_tau": 26.9,
+    "elbow_tau": 4.7
+   },
+   "elbow_cap": 49.0,
+   "fell": false,
+   "hand_peak_N": [
+    129.8,
+    129.2
+   ],
+   "knee_max_deg": 111.7
+  },
+  {
+   "knee_deg": 119.7,
+   "hip_deg": -104.9,
+   "shoulder": -1.4,
+   "waist": 0.4,
+   "width_m": 0.0,
+   "root_pitch": 1.175,
+   "ankle": -0.95,
+   "foot_tilt": 0.519,
+   "hand_z": 0.0016,
+   "other_min_z": 0.133,
+   "geom_ok": 1.0,
+   "static_38": {
+    "hand_N": [
+     218.8,
+     217.4
+    ],
+    "foot_N": [
+     115.8,
+     115.1
+    ],
+    "com_in_x": true,
+    "worst_joint": "l_wrist_pitch",
+    "worst_ratio": 0.5,
+    "knee_tau": 32.9,
+    "elbow_tau": 9.6
+   },
+   "static_49": {
+    "hand_N": [
+     218.8,
+     217.4
+    ],
+    "foot_N": [
+     115.8,
+     115.1
+    ],
+    "com_in_x": true,
+    "worst_joint": "l_wrist_pitch",
+    "worst_ratio": 0.5,
+    "knee_tau": 32.9,
+    "elbow_tau": 9.6
+   },
+   "elbow_cap": 38.0,
+   "fell": false,
+   "hand_peak_N": [
+    132.0,
+    131.3
+   ],
+   "knee_max_deg": 119.7
+  },
+  {
+   "knee_deg": 119.7,
+   "hip_deg": -104.9,
+   "shoulder": -1.4,
+   "waist": 0.4,
+   "width_m": 0.0,
+   "root_pitch": 1.175,
+   "ankle": -0.95,
+   "foot_tilt": 0.519,
+   "hand_z": 0.0016,
+   "other_min_z": 0.133,
+   "geom_ok": 1.0,
+   "static_38": {
+    "hand_N": [
+     218.8,
+     217.4
+    ],
+    "foot_N": [
+     115.8,
+     115.1
+    ],
+    "com_in_x": true,
+    "worst_joint": "l_wrist_pitch",
+    "worst_ratio": 0.5,
+    "knee_tau": 32.9,
+    "elbow_tau": 9.6
+   },
+   "static_49": {
+    "hand_N": [
+     218.8,
+     217.4
+    ],
+    "foot_N": [
+     115.8,
+     115.1
+    ],
+    "com_in_x": true,
+    "worst_joint": "l_wrist_pitch",
+    "worst_ratio": 0.5,
+    "knee_tau": 32.9,
+    "elbow_tau": 9.6
+   },
+   "elbow_cap": 49.0,
+   "fell": false,
+   "hand_peak_N": [
+    132.0,
+    131.3
+   ],
+   "knee_max_deg": 119.7
+  },
+  {
+   "knee_deg": 100.3,
+   "hip_deg": -88.8,
+   "shoulder": -1.4,
+   "waist": 0.4,
+   "width_m": 0.0,
+   "root_pitch": 1.275,
+   "ankle": -0.95,
+   "foot_tilt": 0.559,
+   "hand_z": 0.0045,
+   "other_min_z": 0.124,
+   "geom_ok": 1.0,
+   "static_38": {
+    "hand_N": [
+     241.8,
+     240.4
+    ],
+    "foot_N": [
+     92.8,
+     92.1
+    ],
+    "com_in_x": true,
+    "worst_joint": "l_wrist_pitch",
+    "worst_ratio": 0.51,
+    "knee_tau": 24.0,
+    "elbow_tau": 3.0
+   },
+   "static_49": {
+    "hand_N": [
+     241.8,
+     240.4
+    ],
+    "foot_N": [
+     92.8,
+     92.1
+    ],
+    "com_in_x": true,
+    "worst_joint": "l_wrist_pitch",
+    "worst_ratio": 0.51,
+    "knee_tau": 24.0,
+    "elbow_tau": 3.0
+   },
+   "elbow_cap": 38.0,
+   "fell": false,
+   "hand_peak_N": [
+    163.2,
+    163.0
+   ],
+   "knee_max_deg": 100.3
+  },
+  {
+   "knee_deg": 100.3,
+   "hip_deg": -88.8,
+   "shoulder": -1.4,
+   "waist": 0.4,
+   "width_m": 0.0,
+   "root_pitch": 1.275,
+   "ankle": -0.95,
+   "foot_tilt": 0.559,
+   "hand_z": 0.0045,
+   "other_min_z": 0.124,
+   "geom_ok": 1.0,
+   "static_38": {
+    "hand_N": [
+     241.8,
+     240.4
+    ],
+    "foot_N": [
+     92.8,
+     92.1
+    ],
+    "com_in_x": true,
+    "worst_joint": "l_wrist_pitch",
+    "worst_ratio": 0.51,
+    "knee_tau": 24.0,
+    "elbow_tau": 3.0
+   },
+   "static_49": {
+    "hand_N": [
+     241.8,
+     240.4
+    ],
+    "foot_N": [
+     92.8,
+     92.1
+    ],
+    "com_in_x": true,
+    "worst_joint": "l_wrist_pitch",
+    "worst_ratio": 0.51,
+    "knee_tau": 24.0,
+    "elbow_tau": 3.0
+   },
+   "elbow_cap": 49.0,
+   "fell": false,
+   "hand_peak_N": [
+    163.2,
+    163.0
+   ],
+   "knee_max_deg": 100.3
+  },
+  {
+   "knee_deg": 100.3,
+   "hip_deg": -104.9,
+   "shoulder": -1.4,
+   "waist": 0.0,
+   "width_m": 0.0,
+   "root_pitch": 1.475,
+   "ankle": -0.95,
+   "foot_tilt": 0.479,
+   "hand_z": -0.0011,
+   "other_min_z": 0.141,
+   "geom_ok": 1.0,
+   "static_38": {
+    "hand_N": [
+     210.3,
+     208.9
+    ],
+    "foot_N": [
+     124.3,
+     123.6
+    ],
+    "com_in_x": true,
+    "worst_joint": "l_wrist_pitch",
+    "worst_ratio": 0.51,
+    "knee_tau": 35.7,
+    "elbow_tau": 15.6
+   },
+   "static_49": {
+    "hand_N": [
+     210.3,
+     208.9
+    ],
+    "foot_N": [
+     124.3,
+     123.6
+    ],
+    "com_in_x": true,
+    "worst_joint": "l_wrist_pitch",
+    "worst_ratio": 0.51,
+    "knee_tau": 35.7,
+    "elbow_tau": 15.6
+   },
+   "elbow_cap": 38.0,
+   "fell": false,
+   "hand_peak_N": [
+    113.4,
+    112.8
+   ],
+   "knee_max_deg": 100.3
+  },
+  {
+   "knee_deg": 100.3,
+   "hip_deg": -104.9,
+   "shoulder": -1.4,
+   "waist": 0.0,
+   "width_m": 0.0,
+   "root_pitch": 1.475,
+   "ankle": -0.95,
+   "foot_tilt": 0.479,
+   "hand_z": -0.0011,
+   "other_min_z": 0.141,
+   "geom_ok": 1.0,
+   "static_38": {
+    "hand_N": [
+     210.3,
+     208.9
+    ],
+    "foot_N": [
+     124.3,
+     123.6
+    ],
+    "com_in_x": true,
+    "worst_joint": "l_wrist_pitch",
+    "worst_ratio": 0.51,
+    "knee_tau": 35.7,
+    "elbow_tau": 15.6
+   },
+   "static_49": {
+    "hand_N": [
+     210.3,
+     208.9
+    ],
+    "foot_N": [
+     124.3,
+     123.6
+    ],
+    "com_in_x": true,
+    "worst_joint": "l_wrist_pitch",
+    "worst_ratio": 0.51,
+    "knee_tau": 35.7,
+    "elbow_tau": 15.6
+   },
+   "elbow_cap": 49.0,
+   "fell": false,
+   "hand_peak_N": [
+    113.4,
+    112.8
+   ],
+   "knee_max_deg": 100.3
+  },
+  {
+   "knee_deg": 100.3,
+   "hip_deg": -74.5,
+   "shoulder": -1.4,
+   "waist": 0.4,
+   "width_m": 0.0,
+   "root_pitch": 1.2,
+   "ankle": -0.95,
+   "foot_tilt": 0.734,
+   "hand_z": 0.0023,
+   "other_min_z": 0.078,
+   "geom_ok": 1.0,
+   "static_38": {
+    "hand_N": [
+     234.2,
+     232.8
+    ],
+    "foot_N": [
+     100.4,
+     99.7
+    ],
+    "com_in_x": true,
+    "worst_joint": "l_wrist_pitch",
+    "worst_ratio": 0.52,
+    "knee_tau": 28.3,
+    "elbow_tau": 8.9
+   },
+   "static_49": {
+    "hand_N": [
+     234.2,
+     232.8
+    ],
+    "foot_N": [
+     100.4,
+     99.7
+    ],
+    "com_in_x": true,
+    "worst_joint": "l_wrist_pitch",
+    "worst_ratio": 0.52,
+    "knee_tau": 28.3,
+    "elbow_tau": 8.9
+   },
+   "elbow_cap": 38.0,
+   "fell": false,
+   "hand_peak_N": [
+    146.5,
+    146.4
+   ],
+   "knee_max_deg": 100.3
+  },
+  {
+   "knee_deg": 100.3,
+   "hip_deg": -74.5,
+   "shoulder": -1.4,
+   "waist": 0.4,
+   "width_m": 0.0,
+   "root_pitch": 1.2,
+   "ankle": -0.95,
+   "foot_tilt": 0.734,
+   "hand_z": 0.0023,
+   "other_min_z": 0.078,
+   "geom_ok": 1.0,
+   "static_38": {
+    "hand_N": [
+     234.2,
+     232.8
+    ],
+    "foot_N": [
+     100.4,
+     99.7
+    ],
+    "com_in_x": true,
+    "worst_joint": "l_wrist_pitch",
+    "worst_ratio": 0.52,
+    "knee_tau": 28.3,
+    "elbow_tau": 8.9
+   },
+   "static_49": {
+    "hand_N": [
+     234.2,
+     232.8
+    ],
+    "foot_N": [
+     100.4,
+     99.7
+    ],
+    "com_in_x": true,
+    "worst_joint": "l_wrist_pitch",
+    "worst_ratio": 0.52,
+    "knee_tau": 28.3,
+    "elbow_tau": 8.9
+   },
+   "elbow_cap": 49.0,
+   "fell": false,
+   "hand_peak_N": [
+    146.5,
+    146.4
+   ],
+   "knee_max_deg": 100.3
+  }
+ ]
+}
