@@ -65,3 +65,11 @@ Files: `fea_job3d.yaml`, plus the shared `fea_job3.py`. The geometry is the **3c
   - If that fails, **job 3d at 29 kN governs.**
   - 3d is unchanged and runs either way.
 - This supersedes the "rejected" note above, which is now provisional under R-158c.
+
+### Job 3e status update: Arbiter R-158d (b81488c), amends R-158c
+- **Released:** 3e at LC1 17.9 / 26.9 kN against the **≤ 17° passive envelope**. 25° remains the pad energy check. The **forced-25° set is no longer required.**
+- **Adoption + mass credit** only when both are true:
+  - (a) second-rotation chest energy × 1.5 ≤ 680 J is logged at 72.1 kg;
+  - (b) **TP-G5-21 lot acceptance** is in FEA_SPEC_chest_pad (reference added).
+- If either fails, **job 3d at 29 kN governs.**
+- **Head-first landings: HIGH. They block G4/G5 sign-off.**

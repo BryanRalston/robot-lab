@@ -28,3 +28,8 @@ Dynamic crush coupon per lot at 5.7 m/s: peak ≤29.0 kN, plateau in the R-102 b
 - Materials b359af8 candidate: HexWeb CR III 5/32-5052-3.8, 1.276 MPa, ×1.30 rate, plateau 11.7 / 17.4 kN, 864 J, 0.072 kg (RFQ crush cert 1.24–1.31 MPa; fallback land 104 × 104).
 - **Rejected per Controls 1021e37:** the 25° chest-only landing bottoms out the core (101 vs 81.2 mm).
 - The spec and pad mass stay at **4.5 pcf, 0.085 kg core**, with lot band 19.5–22.3 kN and LC1 29 kN. The 3.8 pcf grade stays listed as a rejected option only.
+
+## Lot acceptance reference: TP-G5-21 (Arbiter R-158d b81488c)
+- If job 3e is adopted, the CR III 5/32-5052-3.8 core lots are accepted per **TP-G5-21**. The RFQ crush cert is 1.24–1.31 MPa (Materials b359af8).
+- TP-G5-21 must be in this spec before 3e gets mass credit.
+- Otherwise the 4.5 pcf core and job 3d (29 kN) govern.

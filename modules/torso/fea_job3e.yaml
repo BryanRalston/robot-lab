@@ -1,4 +1,4 @@
-# FEA job 3e PROVISIONAL (R-158c): IR BC, CR III 5/32-5052-3.8 core, LC1 17.9/26.9 kN, 3c-light. Same outputs as 3d. Run: python fea_job3.py --cfg fea_job3e.yaml --out fea/job3e
+# FEA job 3e RELEASED (R-158d): IR BC, CR III 5/32-5052-3.8 core, LC1 17.9/26.9 kN, 3c-light. Same outputs as 3d. Run: python fea_job3.py --cfg fea_job3e.yaml --out fea/job3e
 mesh:
   size: 6.0
   size_coarse: 25.0
@@ -412,8 +412,9 @@ outputs:
 - waist-section V and M per LC (IR) vs 9.0 kN / 2.5 kN*m
 - P-160 stop moment = IR M_y (limit/ult)
 mass_credit: none booked until this FEA is done (R-158)
-status: 'PROVISIONAL (Arbiter R-158c efcede2): geometry NOT adopted, no mass credit, until Controls forced-25deg set (>=5 runs, 72.1 kg, second rotation logged) shows <=680 J and no bottoming; if that fails,
-  job 3d at 29 kN governs'
+status: 'RELEASED (Arbiter R-158d b81488c, amends R-158c): LC1 17.9/26.9 kN against the <=17 deg passive envelope; 25 deg remains the pad energy check. Adopt + mass credit only when (a) second-rotation
+  chest energy x1.5 <=680 J is logged at 72.1 kg and (b) TP-G5-21 lot acceptance is in FEA_SPEC_chest_pad; if either fails, job 3d at 29 kN governs. Head-first landings: HIGH, block G4/G5 sign-off. Forced-25deg
+  set no longer required.'
 pad_core: 'HexWeb CR III 5/32-5052-3.8 (Materials b359af8 CHEST_PAD_CORE.md): 1.276 MPa, rate x1.30, plateau 11.7 kN min / 17.4 kN dynamic upper, 864 J (gate 824 J), 0.072 kg'
 local_chest_load: governing of LC1 3e (17.9 kN) and pad dynamic upper 17.4 kN -> LC1 17.9 governs (conservative)
 p160: scale with the IR waist-section M_y (T&R est. 1.55 / 2.3 kN*m)
