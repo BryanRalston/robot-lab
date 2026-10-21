@@ -1,0 +1,49 @@
+{
+ "R8_asbuilt": {
+  "s0_axial": 1.45,
+  "s0_axial_e10": 1.27,
+  "Mx_axial": 567,
+  "Mx_down": 773
+ },
+ "B_rollaxis_6013": {
+  "s0_axial": 1.41,
+  "s0_axial_e10": 1.24
+ },
+ "B_rollaxis_8016": {
+  "s0_axial": 2.82,
+  "s0_axial_e10": 2.53,
+  "s0_down_e10": 3.8,
+  "Mx_axial": 0,
+  "Mx_down": 274,
+  "SF_CSG25": 1.35,
+  "SF_CSG25_fault": 1.28
+ },
+ "C_gear": {
+  "need_Nm_fault": 812,
+  "CSG32": {
+   "peak": 841,
+   "SF": 1.04,
+   "dkg": 0.47
+  },
+  "CSG40": {
+   "peak": 1400,
+   "SF": 1.72,
+   "dkg": 1.28
+  },
+  "s0_8016_axial_e10": 2.58
+ },
+ "A1_low_z0.19": {
+  "M_down": 482,
+  "M_axial": 473,
+  "gate": 550,
+  "pitch_gear_Nm": 89,
+  "abduction_roll_max_deg": 35
+ },
+ "A2_high_z0.225": {
+  "M_down": 792,
+  "M_axial": 570,
+  "gate": 550,
+  "pitch_gear_Nm": 89,
+  "abduction_roll_max_deg": 80
+ }
+}

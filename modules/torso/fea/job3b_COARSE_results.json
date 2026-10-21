@@ -1,0 +1,184 @@
+{
+ "mesh_h": 25.0,
+ "nodes": 16723,
+ "parts": {
+  "bulkhead": 5474,
+  "partition": 1428,
+  "pelvis": 1576
+ },
+ "set_sizes": {
+  "fixed": 359,
+  "land": 285,
+  "shoulder_flange_L": 73,
+  "pelvis_top": 527,
+  "partition": 943,
+  "ethercat_bosses": 133
+ },
+ "criteria": {
+  "SF_min": 2.0,
+  "land_defl_max": 0.05,
+  "mode1_min_hz": 80,
+  "buckling_min": 3.0
+ },
+ "cases": {
+  "LC1_chest_pad": {
+   "deck": "/tmp/j3b/LC1_chest_pad.inp",
+   "solved": true,
+   "checks": {
+    "SF_bulkhead": {
+     "vm_max": 5799.91,
+     "SF": 0.055,
+     "pass": false
+    },
+    "SF_partition": {
+     "vm_max": 7594.75,
+     "SF": 0.059,
+     "pass": false
+    },
+    "SF_pelvis": {
+     "vm_max": 1564.88,
+     "SF": 0.038,
+     "pass": false
+    },
+    "land_defl": {
+     "mm": 339.65403,
+     "pass": false
+    },
+    "buckling": {
+     "factor": 1.005,
+     "pass": false
+    }
+   }
+  },
+  "LC2_side_fall": {
+   "deck": "/tmp/j3b/LC2_side_fall.inp",
+   "solved": true,
+   "checks": {
+    "SF_bulkhead": {
+     "vm_max": 565.05,
+     "SF": 0.566,
+     "pass": false
+    },
+    "SF_partition": {
+     "vm_max": 589.87,
+     "SF": 0.763,
+     "pass": false
+    },
+    "SF_pelvis": {
+     "vm_max": 160.52,
+     "SF": 0.374,
+     "pass": false
+    },
+    "land_defl": {
+     "mm": 14.1796,
+     "pass": null
+    }
+   }
+  },
+  "LC3_waist_reach": {
+   "deck": "/tmp/j3b/LC3_waist_reach.inp",
+   "solved": true,
+   "checks": {
+    "SF_bulkhead": {
+     "vm_max": 3.34,
+     "SF": 95.702,
+     "pass": true
+    },
+    "SF_partition": {
+     "vm_max": 5.33,
+     "SF": 84.505,
+     "pass": true
+    },
+    "SF_pelvis": {
+     "vm_max": 2.02,
+     "SF": 29.687,
+     "pass": true
+    },
+    "land_defl": {
+     "mm": 0.05303,
+     "pass": null
+    }
+   }
+  },
+  "LC4_pack_10g": {
+   "deck": "/tmp/j3b/LC4_pack_10g.inp",
+   "solved": true,
+   "checks": {
+    "SF_bulkhead": {
+     "vm_max": 2.89,
+     "SF": 110.808,
+     "pass": true
+    },
+    "SF_partition": {
+     "vm_max": 12.15,
+     "SF": 37.038,
+     "pass": true
+    },
+    "SF_pelvis": {
+     "vm_max": 1.62,
+     "SF": 36.935,
+     "pass": true
+    },
+    "land_defl": {
+     "mm": 0.13934,
+     "pass": null
+    }
+   }
+  },
+  "LC5_bosses_50g": {
+   "deck": "/tmp/j3b/LC5_bosses_50g.inp",
+   "solved": true,
+   "checks": {
+    "SF_bulkhead": {
+     "vm_max": 16.05,
+     "SF": 19.932,
+     "pass": true
+    },
+    "SF_partition": {
+     "vm_max": 22.55,
+     "SF": 19.959,
+     "pass": true
+    },
+    "SF_pelvis": {
+     "vm_max": 2.23,
+     "SF": 26.935,
+     "pass": true
+    },
+    "land_defl": {
+     "mm": 0.04491,
+     "pass": null
+    }
+   }
+  },
+  "LC6_stand": {
+   "deck": "/tmp/j3b/LC6_stand.inp",
+   "solved": true,
+   "checks": {
+    "SF_bulkhead": {
+     "vm_max": 1025.5,
+     "SF": 0.312,
+     "pass": false
+    },
+    "SF_partition": {
+     "vm_max": 1856.52,
+     "SF": 0.242,
+     "pass": false
+    },
+    "SF_pelvis": {
+     "vm_max": 126.21,
+     "SF": 0.475,
+     "pass": false
+    },
+    "land_defl": {
+     "mm": 22.59986,
+     "pass": null
+    },
+    "mode1_hz": {
+     "hz": 35.66,
+     "pass": false
+    }
+   }
+  }
+ },
+ "overall": "FAIL"
+}

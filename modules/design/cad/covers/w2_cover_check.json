@@ -1,0 +1,39 @@
+{
+ "head_shell": {
+  "min_clear_pad_mm": 271.2,
+  "pts_inside_pad": 0,
+  "min_clear_housing_mm": 233.7,
+  "pts_inside_housing": 0,
+  "closest_pt_to_pad_armsframe": [
+   10.0,
+   -186.9,
+   219.3
+  ]
+ },
+ "torso_cover": {
+  "min_clear_pad_mm": 98.2,
+  "pts_inside_pad": 0,
+  "min_clear_housing_mm": 36.5,
+  "pts_inside_housing": 0,
+  "closest_pt_to_pad_armsframe": [
+   0.0,
+   -90.0,
+   9.8
+  ]
+ },
+ "pad_envelope_armsframe": {
+  "x": [
+   -31,
+   31
+  ],
+  "y": [
+   8.200000000000003,
+   90.5
+  ],
+  "z": [
+   -31,
+   31
+  ]
+ },
+ "note": "torso mesh = 28-tri coarse envelope; R14 housing (r15 carrier not in repo)"
+}

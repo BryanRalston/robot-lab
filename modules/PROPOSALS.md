@@ -332,3 +332,86 @@ Any change to CONTRACTS.md or TARGETS.md, or to another module's files, starts h
   - **Legs/Controls:** confirm the COM at x +0.32 / z +0.415.
   - **Thermal:** confirm (c), and the shoulder at 43–50 N·m.
 - Status: OPEN
+
+### P-151 (renumbered from P-053 by R-123): Materials: hollow ankle pitch/roll pins (ø12 steel, ø6 bore)
+- Date: 2026-10-21
+- Module / proposer: Materials / RL Materials
+- Affected owners: Legs (job 7 ankle cross, pins), Arbiter (mass)
+- Change: the 4 ankle pins per leg (pitch stubs ø12 × 18 + 12 press, roll pins ø12 × 12 each side, legs/grokbuild/ankle_cross_fea_brief.md) are made as gun-drilled ø12/ø6 tubes in 42CrMo4 Q&T (or 17-4PH).
+- Evidence (materials/R_SWAP_SCAN_R7.md):
+  - Steel volume ≈ 12.2 cm³/leg [EST, lengths from the brief] → 95 g/leg at ρ 7.8.
+  - A ø6 bore removes 25 % of the volume (**−24 g/leg, −0.048 kg robot [EST]**). Bending stiffness falls only 6 % (1 − 0.5⁴), and the section modulus by 6 %.
+  - Hollow pins also suit the DU bushes in ANKLE_CROSS_7075 §3.
+- Impact on contracts: mass −0.048 [EST]; no interface change (pin OD unchanged).
+- Risks: pin bending stress +6.7 %, which Legs checks in the job-7 FEA; plug the bore ends against debris.
+- Status: OPEN
+
+### P-054: Materials: Ti-6Al-4V ankle pins instead of steel (alternative to P-151, higher risk)
+- Date: 2026-10-21
+- Module / proposer: Materials / RL Materials
+- Affected owners: Legs, Arbiter
+- Change: solid Ti-6Al-4V (ρ 4.4, YS 910, MIFTi64) ankle pins with a nitrided or DLC running surface, in DU bushes.
+- Evidence: 95 g/leg → 54 g/leg, **−0.082 kg robot [EST]**. Ti pins are ~1.8× as flexible as steel (E 110 vs 190).
+- Risks: Ti galls and wears without a hard coating (coating spec and supplier data not yet in repo); galvanic to 7075 is worse than steel (both need the bush/sealant); cost. Not combinable with P-151 (pick one). Recommend P-151 first.
+- Status: OPEN
+
+### P-145..P-150: Torso & Power mass cuts (Torso, 2026-10-21; R-079 FEA priority)
+All keep R-076 (reinforced isolation, IEC 60664-1 creepage, IP2X), R-074 (main link ≥10 mm², 2.5 mm² only on branches fused ≤30 A), R-036 / 2 h walk margin (+1.0 W, none of these add load) and T-031 crush (pad, land, rib untouched). Savings are [EST] unless cited; book at half credit until weighed.
+
+| P | Cut | Basis | Saving kg | Risk |
+|---|---|---|---|---|
+| P-145 | PDB shrink: no limb connectors on the bulkhead (R-079), so the PDB carries only fuse, contactor, clamp FETs and 5 branch lugs; 2-layer 2 oz → 4-layer 3 oz half-area board | PDB/busbar/branch line 0.25 [EST] | −0.06 [EST] | creepage must stay 1.5 mm/≥ reinforced per R-076 at 92 V; re-layout cost |
+| P-146 | Merge BMS host (S32K344 + BQ79600) and FET/pre-charge board onto the BQ79616 board, one board in the pack | pack "BMS+FET+fuse+connector" 0.30 [EST] | −0.04 [EST] | thermal coupling of FETs to AFE; channel-2 BQ77216 stays on its own isolated section (independence per R-036) |
+| P-147 | Titanium Gr5 M3–M5 for non-preload-critical torso fasteners (shell, partition, duct, PDB, bezel, EtherCAT board); shoulder M8 12.9 steel and pelvis/waist joints unchanged. Ti density 4.43 vs steel 7.85 g/cm³ (−44 %) | ~70 fasteners, ~0.14 kg steel [EST] | −0.05 [EST] (see torso/BOM_fasteners.md) | galling (use anti-seize/thread-lock), cost; galvanic with CFRP is better than Al |
+| P-148 | Pack rails + latch 0.20 → pocketed 7075 rails, and SBS75X blind-mate (R-084) takes the alignment, so one rail becomes a plain guide | 0.20 [EST] | −0.05 [EST] | in FEA job 3 scope; latch retention vs 10 g crash load |
+| P-149 | Partition 1 mm CFRP → 0.6 mm CFRP with a 3 mm Rohacell core strip under the EtherCAT board bosses | partition [EST] | −0.03 [EST] | stiffness at board mounts (FEA job 3 checks); duct seal flange |
+| P-150 | A41 duct walls: mould the duct side walls into the shell/partition instead of separate 1 mm PC walls | duct 0.04 P-030 [EST] | −0.02 [EST] | tooling; Electronics co-owns A41 (R-030), needs their sign-off |
+
+- Considered and rejected: contactor swap (only lighter cited part, EV100, fails the coil-power limit, R-074); fan (Sunon fixed, no cited lighter part at the airflow); bus-bar downsizing below 10 mm² (R-074); DC-DC repackaging (DCM is a sealed module on the cold plate).
+- Total proposed: **−0.25 kg [EST]**, −0.125 at half credit (P-147 corrected to −0.05). P-148 and P-149 are confirmed by FEA job 3 (FEA_SPEC_torso_pocketing.md).
+- Status: OPEN (Arbiter)
+### P-055: Actuators: shoulder_roll contract row drops the slip clutch (R-120)
+- Date: 2026-10-21
+- Module / proposer: Actuators / RL Actuators
+- Affected owners: Arms & Hands, Arbiter
+- Change: CONTRACTS shoulder_roll row "rotary + 300 N·m slip clutch" → "rotary"; envelope "74 × 87 (+ clutch, TBD)" → "74 × 87 (CRBH 7013 A seat flange Ø108 per R13)".
+- Impact on contracts: mass 0 (clutch was never booked); torque basis CSG-25-100 momentary 369 N·m, gate Mx ≤ 351 N·m at ×1.05.
+- Impact on targets: none.
+- Evidence: actuators/forearm_roll_torque.py, results/FOREARM_ROLL_TORQUE.md; R-120 (Mx 321 N·m, SF 1.10).
+- Affected owner response: pending
+- Status: open
+
+### P-053: ID: thigh pin access (L63-R), band and hatches deleted
+- Date: 2026-10-21
+- Module / proposer: Design / RL Industrial Design
+- Affected owners: Legs, Arbiter
+- Change: 218° thigh band, L30 front hatch and rear panel deleted; front skin runs continuous. Fairing covers 5 of 8 pin ends (180° end visible through rear 40×50 window; 225/270° face the open inboard side, as L30; cosmetic). Pins extracted on the bench only; ends tapped M3 (Legs confirmed angles 0/90/180/270°, 45/135/225/315°).
+- Impact on contracts: none (no mechanism change); fairing fasteners TBD under A29 CAD.
+- Impact on targets: mass −0.036 kg robot [EST].
+- Evidence: design/thigh_pin_access_p053.py, design/thigh_pin_access_p053.json (adopted fe09355).
+- Affected owner response: Legs confirmed pin angles and M3 ends
+- Status: adopted (fe09355)
+
+## L65 (Legs, R-130) — femur/tibia side-dent fix: uniform 1.5 mm wall (supersedes P-047 1.6 mm)
+- **Limit:** R-130 "7050 395" = Sy_typ 435/1.1 (R-128 §5/R-127). R-128 §5 fall limit is min(A/S-basis, Sy/1.1) = min(393, 395) = **393** (S-basis Fty, JOB9_SPEC). "No permanent dent" = stay below minimum (S-basis) yield → 393 used (stricter).
+- **Data:** STRUCTURE_FEA_REPORT f58c40a dent table. (Report's "SF" column is vs Sy 503; R-130's 0.56/0.82 are vs single-path 262.) Script `modules/legs/femur_dent_l65.py` → `results/r031/femur_dent_l65.json`.
+- **(c) P-047 1.6 mm as-is:** femur 318.4 → SF **1.23** vs 393; tibia 327.2 → 1.20. PASSES. +0.0995 femur pair, +0.0954 tibia pair.
+- **(a) uniform minimum:** σ∝t^-n fitted on the 1.2/1.6 FEA points [EST] → t_min femur 1.37, tibia 1.40 mm. Chosen **1.5 mm** (standard tube wall, covers interpolation error): femur 347.3 [EST] → SF **1.13**; tibia 357.9 [EST] → **1.10**. Mass +0.0748 femur pair, +0.0717 tibia pair = **+0.147 kg robot vs 1.2 baseline; −0.003 vs P-047's +0.15 booking (vs 1.6 actual −0.049)**.
+- **(b) local step/doubler over 80 mm:** rejected. ~+0.013 pair per tube at 1.4 mm, but the 80 mm is the FE stub length, not a defined impact zone — a side fall can strike any exposed span, so the band can't be placed with evidence. A step adds Kt ~1.5–2 [EST] on the fall bending (220.1 at 1.2 → ~330–440 vs 262 single-path) and fatigue at the step; a local internal step means boring from thicker stock or bonding (DP490 peel, R1 §8 concerns). Saving ≤0.03 kg/pair does not justify it.
+- **Other cases at 1.5:** fall bending and 3 BW scale down from 1.2 (220.1/110.1 MPa at 1.2 → lower at 1.5), so fall SF vs 262 ≥1.19 and fatigue no worse than baseline. Bond/collar ID unchanged (OD held 50/45); internal sleeve 47.6 OD must become ≤47.0 (tube ID 47.0 at 1.5) — flag to self/BOND_SPEC. No thigh-cover load path counted.
+- **Gate:** job 9 b3 re-run at 1.5 mm to confirm dent ≤393.
+
+### P-152: Legs: femur/tibia inner bonded sleeve OD 47.6 → 46.80 mm for the 1.5 mm wall (L65, R-135)
+- Date: 2026-10-21
+- Module / proposer: Legs / RL Legs
+- Affected owners: Actuators (hip-pitch output / collar interface, per R-135 "through CONTRACTS with Actuators"), Materials (bond), Arbiter
+- Change: inner 7075 sleeve (DECISIONS L22, BOND_SPEC header "47.6/43.6 × 34") OD **47.6 → ≤ 47.0; proposed 46.80 mm** (ID 43.6 and length 34 unchanged → sleeve wall 2.0 → 1.6 mm). Reason: L65 ø50 × 1.5 tube gives a 47.0 bore. **The brief's 46.9 does NOT keep the BOND_SPEC §3 bond line**: §3 sets diametral clearance 0.20 ± 0.03 mm (0.10 radial target, 0.08–0.13 range); 47.0 − 0.20 = **46.80** (46.9 would give 0.05 radial, below the 0.08 floor). Tolerance: sleeve OD 46.80 ± 0.015 with tube bore 47.00 ± 0.015 [EST tolerance split] holds 0.20 ± 0.03.
+- Contract row: **no CONTRACTS.md row currently states the sleeve OD** (searched: only "knee clevis → femur flange | 4 × M5 12.9" in §1c Mounting and the §Structural femur/tibia line; sleeve is defined only in legs/DECISIONS L22 and legs/BOND_SPEC). Requested Arbiter edit (Legs does not edit CONTRACTS): add to §1c Mounting table a row
+  `| hip-pitch collar → femur tube (bonded) | 7075 split collar ID 50 × 34 + femur ø50 × 1.5 (bore 47.0) + inner 7075 sleeve OD 46.80 / ID 43.6 × 34, DP490 0.10 mm bond line (0.20 ± 0.03 diametral), 8 × ø7 42CrMo4 backup pins (L63-R) | fall + R-023 dent/bending; bond SF per BOND_SPEC | legs/BOND_SPEC.md, legs/DECISIONS L22/L63/L65, P-152 |`
+  and the same sleeve line for the tibia (ø45 × 1.5) if Arbiter wants the tibia joint listed. Owner: Legs (sleeve, tube); Actuators co-sign (collar / hip-pitch output side).
+- Fallback: if JOB9 b3 re-run at min-wall 1.37 femur / 1.40 tibia fails SF ≥ 1.0 vs 393 (R-135), revert to P-047 1.6 mm → bore 46.8, sleeve OD ≤ 46.8 (by BOND_SPEC §3: **46.60**).
+- Impact on contracts: sleeve mass −0.004 kg/sleeve [EST: π/4(47.6²−46.8²)·34·2.81e-6]; booking unchanged (+0.15, R-135).
+- Impact on targets: none beyond L65.
+- Evidence: legs/femur_dent_l65.py, results/r031/femur_dent_l65.json, BOND_SPEC §3, RULINGS R-135 (b8a2c69).
+- Affected owner response: **Actuators co-signs (2026-10-21).** The collar (ID 50 × 34) and the hip-pitch output side are unchanged; the collar bore still mates the ø50 tube OD; no actuator load or contract value changes. Co-sign stays conditional on the P-152 fallback (JOB9 b3) passing.
+- Status: open

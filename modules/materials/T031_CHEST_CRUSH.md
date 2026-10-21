@@ -42,11 +42,11 @@ Basis is the same as the shoulder pad (R042 Parts 3–6):
 - The pad sits inside the shell, behind a breakaway chest panel, as Torso suggested.
 - The pad stack is 78 mm core + 1 mm face + 2 mm shell. That needs **≥ 81 mm from the bulkhead front (x +0.05) to the outer chest skin, i.e. skin at x ≥ +0.131**. Torso and ID to confirm the chest depth. If it falls short, the pad protrudes by the difference.
 
-**Checks [hand calc, 7075-T6 Sy 503 MPa from MATERIALS_DB; FEA required]:**
+**Checks [hand calc, 7075-T6 Sy 480 MPa from MATERIALS_DB, typical (MakeItFrom), not A/B-basis (R-123: was wrongly cited as 503); FEA required]:**
 - **Bearing:** 24.4 kN / 0.0102 m² = **2.4 MPa** on 7075. Trivial, SF > 100. The 1 mm CF face spreads it.
 - **Web bending, the governing case:** load is normal to the 12 mm web, conservatively taken as simply supported at the shell side walls (y ±0.15, span 0.30), so M = PL/4 = 1.83 kN·m.
-  - Bare web (120 × 12, Z 2.88 cm³): **635 MPa, FAILS** (SF 0.79).
-  - **Add an integral 7075 rib on the back face, 60 deep × 6 thick across the 0.30 span (T-section):** I ≈ 4.99 × 10⁵ mm⁴, Z ≈ 8.5 cm³ → **216 MPa, SF 2.33**.
+  - Bare web (120 × 12, Z 2.88 cm³): **635 MPa, FAILS** (SF 0.76 on 480; was 0.79 on 503).
+  - **Add an integral 7075 rib on the back face, 60 deep × 6 thick across the 0.30 span (T-section):** I ≈ 4.99 × 10⁵ mm⁴, Z ≈ 8.5 cm³ → **216 MPa, SF 2.22 on Sy 480** (was 2.33 on 503). Against the R-123 static allowable 480/1.5 = 320 MPa: 216 ≤ 320, so it passes. If the bulkhead is T651 plate 0.5–1.0 in, the A-basis Fty is 441 MPa (unverified source), giving 294 MPa allowable, SF 2.04: still passes.
   - Rib mass 0.30 × 0.060 × 0.006 × 2 810 = **+0.030 kg**.
   - Inertial loading is distributed (pack, pelvis and legs react through the shell/waist ring), so the real moment is lower. FEA may trim the rib.
 - **Reaction into the shell:** 12.2 kN per side at the bulkhead-to-shell joint. Over a 120 mm × 20 mm bonded land that is ≈ 5 MPa shear [EST], vs DP490 overlap shear ~ 25–30 MPa (3M TDS in repo).

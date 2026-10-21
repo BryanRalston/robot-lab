@@ -55,14 +55,14 @@
    "cf_kg": null
   },
   {
-   "panel": "shoulder impact pad R8 option B: replaceable 7075 tray on integral boss, HC 4.5 pcf 61.8x61.8x60",
+   "panel": "shoulder impact pad R10 (R-120): 54.8x54.8x75.3 HC 4.5 pcf, 0.5 mm 7075 tray on Arms stand-off (R11 layout)",
    "P": "P-051 (proposed)",
    "material": "Al honeycomb + 7075 tray + EPP face",
    "area_m2_side": 0.0037,
    "panels": 2,
-   "kg": 0.1162,
+   "kg": 0.065,
    "cf_kg": null,
-   "note": "R-079: option B adopted at 0.116 pair (+0.024 vs 0.092 booking); field rebonding A rejected; not in P-020/P-022..25 delta"
+   "note": "R-120: pair 0.065 PASS vs 0.100 cap (stand-off outside cap, Arms ledger); +15 mm/side provisional; trims COVER_TRIMS_R120.md (68x68 window, OD114 housing relief)"
   },
   {
    "panel": "sternum bezel P-052 (R-094): PC ring + gasket + seal; pad CF face (R-095 clear coat) is skin; TPU film removed R-113",
@@ -95,5 +95,6 @@
  "booked_P020_skin_kg": 1.157,
  "delta_vs_booked_kg": -0.124,
  "measured": false,
- "pc_area_m2": 0.332
+ "pc_area_m2": 0.332,
+ "fasteners_ref": "FASTENERS_BOM.json"
 }

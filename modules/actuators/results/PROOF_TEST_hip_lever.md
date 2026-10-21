@@ -3,7 +3,7 @@ Applies to every production lever (100 % proof), plus one destructive qualificat
 
 **Basis.**
 - Design load is 4542 N per pin: actuator max 454.2 N·m / 50 mm / 2.
-- FEA (hp_lever_fea.py, HUB=needle, h 4 mm) gives SF 1.51 on yield at the worst direction φ = −60°. 7075-T6 Sy is 503 MPa.
+- FEA (hp_lever_fea.py, HUB=needle, h 4 mm) gives SF 1.51 on yield at the worst direction φ = −60°. 7075-T6 Sy was taken as 503 MPa. **R-123(a): Sy 480, allowable 320; this 332 MPa h 4 result is a FAIL and superseded. Use the converged G3/L47 result.**
 - Proof factor **1.25 × design = 5680 N per pin, both pins together**. The FEA-predicted peak at proof is 332 × 1.25 = 415 MPa, which is 0.83 Sy, so no yield is expected.
 - R-016 also asks for 1.5 × the fall load. The fall load per the Legs structure case (3 BW through the pivot) is lower than the actuator max on the lever, so 1.25 × actuator max governs.
 
@@ -26,7 +26,7 @@ Applies to every production lever (100 % proof), plus one destructive qualificat
 5. Repeat for φ 0° and +60° on the qualification part only.
 6. Qualification part only: continue to rupture or 2 × design. Record the yield onset (0.2 % strain at the rosette) and confirm SF_yield ≥ 1.5 against the measured Sy of the lot.
 
-**Records.** Serial number, material cert (7075-T6 or T651 plate, Sy ≥ 503 MPa), load–deflection curves and photos. The test goes into G5 bench week W2 (BENCH_TEST_PLAN.md §7).
+**Records.** Serial number, material cert (7075-T6 or T651 plate, Sy ≥ 480 MPa per R-123(a)), load–deflection curves and photos. The test goes into G5 bench week W2 (BENCH_TEST_PLAN.md §7).
 
 **Status (O13b, D58).**
 - The FEA basis above (h 4, SF 1.51) is **not converged**. O13's finest mesh reached 490 MPa, SF 1.03.

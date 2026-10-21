@@ -1,4 +1,15 @@
 # Grok Build brief L47-SO: hip_pitch lever shape optimisation (R-069 mass-down). Run on the bryan PC, NOT the box
+**Status: FINAL 2026-10-21** (Robot Lab job 5). Self-contained; no open TODOs. Items not verifiable from the repo are marked [EST] or listed under §0 Assumptions.
+
+## 0. Allowables (cite MATERIALS_DB) and assumptions
+- **Material source:** `modules/materials/MATERIALS_DB.md` row AL7075T6: ρ 2.81, E 70 GPa, Sy 480, Su 560, fatigue 160 (MIF, cycle basis not stated). R-031 §6 overrides fatigue: **Se = 87 MPa** (corrected value, rule).
+- G3 brief (Actuators) uses E 71.7 / Sy 503 / Su 572 (repo datasheet REPO_AL7075). To stay comparable with G3, **solve with E 71.7, ν 0.33**; E difference <3 %, no effect on stress in a load-controlled linear solve.
+- **Design/fault pass = von Mises ≤ 320 MPa** (MATERIALS_DB Sy 480 / 1.5, the more conservative value). Also report SF vs 335 (503/1.5, G3 rule). A peak in 320–335 is reported as a flag to the Arbiter, not as a pass.
+- **Fatigue pass = hot-spot amplitude ≤ 58 MPa** (87/1.5, R-031 §6). Unchanged.
+- Assumption A1: G3 converged mesh settings are taken from Actuators' G3 report when it lands; if G3 reports none, use the G3 brief sequence (global h 4→3→2, local 1.5→1.0→0.6 mm).
+- Assumption A2: A38 rev D (tine bore 22, flange clearance 2.0 mm) and R-1xx rulings through R-115 do not touch the lever's frozen regions or load path; femur clearance check uses model_v4 as of main 2026-10-21.
+- Booking: L47-R/R-069 +0.430 kg robot stands until this result is measured; credit only on measured CAD + passing converged FEA (R-073).
+
 **Owner:** RL Legs (spec). The part belongs to RL Actuators (release CAD).
 **Prerequisite (hard gate):** run this only **after Actuators' G3** (`modules/actuators/results/GROKBUILD_lever_fea_r031.md`) has finished and **G3 passes**:
 - design peak ≤ 335 MPa, and
@@ -11,11 +22,11 @@
 - **Geometry:** `modules/actuators/cad/hip_pitch_lever_r031_mw_b30_d36_RC.step` (2 solids, 155,055 mm³).
 - **Mass rule:** (V − 2·π·6²·25) × 2.81e-6 + 0.0444 steel pins = **0.4642 kg per lever**.
 - **Booking:** the booked delta is +0.430 kg robot vs sf15 0.2492 (Legs L47-R, Arbiter R-056).
-- **Material:** 7075-T6: E 71.7 GPa, ν 0.33, Sy 503, Su 572, Se 87 (R-031 §6). Density 2.81.
+- **Material:** 7075-T6 per §0 (solve E 71.7 GPa, ν 0.33; ρ 2.81; Se 87 per R-031 §6).
 - **Loads:** same cases as G3.
-  - Design: 4542 N per pin (454.2 N·m / 0.050 / 2), pass ≤ 335 MPa von Mises.
+  - Design: 4542 N per pin (454.2 N·m / 0.050 / 2), pass ≤ 320 MPa von Mises (§0; report vs 335 too).
   - Fatigue: 2030 N per pin, fully reversed (R = −1), pass **hot-spot amplitude ≤ 58 MPa** (87/1.5).
-  - Also the single-pin fault cases (`fault_phi*`, `faultL_phi*` in `hp_lever_fea_v2.cases`). Pass ≤ 335.
+  - Also the single-pin fault cases (`fault_phi*`, `faultL_phi*` in `hp_lever_fea_v2.cases`). Pass ≤ 320 (§0).
 - **Supports:** as G3/v2. Cosine bearing pressure in the ø42 needle bores (|y| 13.5–33.5), yoke face |y| = 13.5 fixed.
 
 ## 2. Frozen regions (no material removed or added)
@@ -54,7 +65,7 @@
 - **Target:** save **0.13–0.17 kg robot**, i.e. 0.065–0.085 kg per lever, which is 0.379–0.399 kg per lever.
 - **Pass:**
   - fatigue amplitude ≤ 58 MPa;
-  - design and fault ≤ 335 MPa at the converged level;
+  - design and fault ≤ 320 MPa at the converged level (§0);
   - all §3 clearances met;
   - valid solid.
 - **Stop when any of these holds:**
@@ -74,6 +85,15 @@
 4. Clearance table: rod sweep min, femur min (and angle), envelope bounds vs RC.
 5. The candidate table (all candidates: params, mass, pass/fail, governing).
 6. Scripts used (`l47_so_*.py`), so the box can reproduce the mass and clearance checks.
+
+## 6b. Mesh/convergence (explicit)
+- P2 tets (gmsh), same functions as `actuators/hp_lever_fea_v2.py` with STEP import.
+- Screening candidates: G3's converged level only (A1). Final candidate: full sequence, peak change < 5 % over the last two levels, else declare singularity with location.
+- Refinement balls: G3 hot spots + every new pocket corner/rib root (local h ≤ 1.0 mm).
+
+## 6c. Compute budget
+- bryan PC only, ≤ 8 h wall, ≤ 8 GB RAM; topology screen ≤ 1 h; ≤ 30 LHS candidates + ≤ 3 local refinements; ≤ 2 rounds.
+- Commit outputs as `Legs L47-SO <summary>` to `modules/legs/results/l47_so/` and `modules/legs/cad/` only. Summary file: `modules/legs/results/l47_so/L47_SO_REPORT.md` + `l47_so_results.json` (keys: mass_kg_per_lever, delta_vs_RC, delta_vs_sf15, per-case peak/amp, clearances, pass).
 
 ## 7. Resources and rules
 - **Where:** run on Bryan's "bryan" PC (ff639f5a) via Grok Interface. **Never on DESKTOP-B115PVV.** Expected about 4–8 GB RAM, ≤ 8 h.

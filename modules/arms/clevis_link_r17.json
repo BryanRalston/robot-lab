@@ -1,0 +1,25 @@
+{
+ "old_kg": {
+  "clevis_base": 0.1619,
+  "clevis_lugs": 0.1079,
+  "link": 0.3372
+ },
+ "new_kg": {
+  "clevis_base": 0.0728,
+  "clevis_lugs": 0.0971,
+  "link": 0.1408
+ },
+ "saving_side": 0.296,
+ "saving_pair": 0.592,
+ "stress": {
+  "lug_MPa": 245,
+  "lug_limit": 294,
+  "link_MPa": 35,
+  "link_limit": 308,
+  "base_note": "pocketed base carries 104 N.m into the lugs via rims/boss; hand calc not credible for the pocket web -> Job 8d FEA"
+ },
+ "stock": {
+  "clevis": "7075-T651 2.5 in plate, L=Y (across lugs), band 294 LT",
+  "link": "7075-T651 2.0 in plate, L=Z (arm axis), band 308"
+ }
+}

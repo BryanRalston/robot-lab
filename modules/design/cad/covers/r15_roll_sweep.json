@@ -1,0 +1,111 @@
+{
+ "torso_box_mm": [
+  220.0,
+  340.0,
+  260.0
+ ],
+ "sweeps": {
+  "-150": {
+   "first_contact_deg": 132,
+   "first_lt3mm_deg": 130,
+   "max_penetration_mm": 29.5,
+   "patch_bbox_torso_local_mm": [
+    [
+     -48.0,
+     141.0,
+     -15.0
+    ],
+    [
+     57.0,
+     173.0,
+     112.0
+    ]
+   ]
+  },
+  "-90": {
+   "first_contact_deg": 132,
+   "first_lt3mm_deg": 130,
+   "max_penetration_mm": 29.5,
+   "patch_bbox_torso_local_mm": [
+    [
+     -50.0,
+     141.0,
+     13.0
+    ],
+    [
+     67.0,
+     173.0,
+     67.0
+    ]
+   ]
+  },
+  "-30": {
+   "first_contact_deg": 132,
+   "first_lt3mm_deg": 130,
+   "max_penetration_mm": 29.5,
+   "patch_bbox_torso_local_mm": [
+    [
+     -48.0,
+     141.0,
+     -32.0
+    ],
+    [
+     57.0,
+     173.0,
+     96.0
+    ]
+   ]
+  },
+  "0": {
+   "first_contact_deg": 132,
+   "first_lt3mm_deg": 130,
+   "max_penetration_mm": 29.5,
+   "patch_bbox_torso_local_mm": [
+    [
+     -27.0,
+     141.0,
+     -27.0
+    ],
+    [
+     27.0,
+     173.0,
+     90.0
+    ]
+   ]
+  },
+  "5": {
+   "first_contact_deg": 132,
+   "first_lt3mm_deg": 130,
+   "max_penetration_mm": 29.5,
+   "patch_bbox_torso_local_mm": [
+    [
+     -33.0,
+     141.0,
+     -30.0
+    ],
+    [
+     31.0,
+     173.0,
+     91.0
+    ]
+   ]
+  },
+  "30": {
+   "first_contact_deg": 132,
+   "first_lt3mm_deg": 130,
+   "max_penetration_mm": 29.5,
+   "patch_bbox_torso_local_mm": [
+    [
+     -57.0,
+     141.0,
+     -32.0
+    ],
+    [
+     48.0,
+     173.0,
+     95.0
+    ]
+   ]
+  }
+ }
+}

@@ -14,7 +14,8 @@ Parts of the one machined body (all 7075-T6, rho 2.81 g/cc, MATERIALS_DB AL7075T
 Galvanic (Materials REVIEW_R1 s.2, RULINGS R-027 #8): CF backplate on 7075 is a severe couple (carbon cathodic, 7075 -750 mV
 calomel). Spec: anodize all 7075 except bond flange; glass-fibre isolation ply (or film adhesive) on the 4 mm backplate
 flange; sealed (wet-assembled) fasteners. Fatigue: check R3 window corners under 10 kg grip (7075 fatigue 160 MPa).
-Hybrid option (Materials): 7075 knuckle bar + wrist plate + thumb boss, skin in PA12/CF -> see variants()."""
+Hybrid option (Materials): 7075 knuckle bar + wrist plate + thumb boss, skin in PA12/CF -> see variants().
+PA12 skin variant is DEAD (Bryan 2026-10-20 profile rule: no 3D-printed parts). Booked palm = all-7075 machined (R-037); CF skin variant only if molded."""
 import cadquery as cq
 
 L = dict(t=32.0, w=86.0, h=90.0, wall=1.5, plate=4.0, bar=10.0, rho_7075=2.81, rho_pa12=1.01, rho_cf=1.55)

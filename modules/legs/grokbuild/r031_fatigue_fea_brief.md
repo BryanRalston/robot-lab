@@ -2,8 +2,8 @@
 Inputs: `legs/R031_FIXES.md`, `legs/hp_lever_family_r031.py`, `actuators/results/GROKBUILD_lever_fea_v2.md` (G2 geometry + Amendment 1), `reliability/R1_FEA_REVIEW.md`, `legs/grokbuild/fea_r5.py` (solver base).
 
 ## Common settings
-- 7075-T6: E 71.7 GPa, Sy 503 MPa. Se = 87 MPa.
-- Pass: hot-spot von Mises amplitude ≤ 58 MPa at the walk load, fully reversed. Also SF_yield ≥ 1.5 at the design load.
+- 7075-T6 (R-123, ca66b9b): Sy 480 MPa, Su 560 MPa, E 70 GPa (ν 0.33). Se = 87 MPa (kept). **Static allowable 320 MPa** (480/1.5) at design/fault; any peak > 320 MPa is a **FAIL** (the 320–335 band is FAIL, not marginal).
+- Pass: hot-spot von Mises amplitude ≤ 58 MPa at the walk load, fully reversed. Also design/fault peak ≤ 320 MPa (SF_yield ≥ 1.5 on Sy 480).
 - Convergence: h-refine to < 5 % peak change across three levels, with local h ≤ 0.5 mm at the fillets. Also report linearised membrane + bending through the root.
 
 ## Runs
@@ -19,6 +19,12 @@ Inputs: `legs/R031_FIXES.md`, `legs/hp_lever_family_r031.py`, `actuators/results
 4. Femur 7050-T7451 1.6 wall and tibia 1.6 wall outside the sleeve (P-047), with dent/bending at the R-023 load. Sleeve-end peel with DP490 cohesive layer E 2.5 GPa.
 5. Femur tongue + A16 dowel, interference 60 MPa, bore opening under fault (P-048).
 6. Foot collar OD edge with R2/taper (P-049).
-7. Knee twin-housing centre web at 3.6 kN/screw (T&R #8), with D69 ø85 frame geometry from Actuators.
+7. Knee twin-housing centre web at 3.6 kN/screw (T&R #8), with D69 ø85 frame geometry from Actuators. Material per R-132 §2 / L66: 7075-T7351, plate 3.501–4.0 in [EST], ST = web thickness (trunnion axis y) [EST]; sustained ST load YES (bearing press fit + bolt preload) → limits 211 static (ST), 221 L/LT-only features, 317 fall (Job 9 interim); results above are held.
 
 Output: `reliability/results/r031_*.json` with the peak, amplitude, Kt, SF and mesh-level table for each run.
+
+## R-135 request: JOB9 b3 re-run at minimum wall (Legs L65/P-152, 2026-10-21)
+- Geometry: femur ø50 × **1.37** wall, tibia ø45 × **1.40** wall (σ∝t^-n minimum from femur_dent_l65.py [EST interp]), outside the sleeve; sleeve OD 46.80 per P-152, DP490 layer as JOB9_SPEC b3.
+- Load: R-023 side dent / bending + fall, as JOB9_SPEC b3.
+- Pass: fall peak **SF ≥ 1.0 vs 393 MPa** (7050-T73511 S-basis, no permanent dent) for both tubes; keep the b3 262 single-path and adhesive peel/shear checks.
+- PASS → 1.5 mm adopted (booking +0.15). FAIL → revert to P-047 1.6 mm (bore 46.8, sleeve ≤ 46.6 per BOND_SPEC §3).

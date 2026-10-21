@@ -33,3 +33,8 @@ One line per image: date, file, module, what changed.
 - 2026-10-14 RL Torso & Power R1.3: power tree with clamp P-045, contactor, fan rail; runtime vs 4.15 V charge cap → 2026-10-14_torso_R1-3_power.png
 - 2026-10-14 legs: v5 fairing keep-outs + knee saddle no-cover zone → media/progress/2026-10-14_legs_v5_keepouts.png (legs/results/v5)
 - 2026-10-14 arms A42: forearm two-tier hand-drive pack in the unchanged Ø66 bore + wrist sphere-rule fork fix — 2026-10-14_arms_A42_forearm_wrist.png (modules/arms/A42_A43_R4.md)
+- 2026-10-21 arms R11: shoulder-pad load path fix after FEA Job 1 fail (roll-axis carrier + CRBH 8016 recommended; gear-upsize case) — 2026-10-21_arms_R11_pad_fix.png (modules/arms/R11_PAD_FIX.md)
+- 2026-10-21 arms R13: R-120 pad stand-off (ID layout, Arms flange 8xM4 PCD62 + dowels), CRBH 7013 A housing, e stack 2.1 mm WC, clash, mass +0.059 pair over booking — 2026-10-21_arms_R13_standoff_7013.png (modules/arms/R13_STANDOFF_7013.md)
+- 2026-10-21 reliability R2: job 1 + job 4 verified (R2_VERIFY.md), job 9 spec (b)/(c), G5 test plan +14, tracker → 2026-10-21_reliability_R2_verify.png
+- 2026-10-21 arms R14: ID stand-off R11 verified (OD76 flange, dowels PCD57, plate access holes); real 7013 housing coaxial with roll axis X -> interference with stand-off/pad: FEA routing NOT CONFIRMED pending Arbiter; arms fastener BOM — 2026-10-21_arms_R14_standoff_verify.png (modules/arms/R14_STANDOFF_VERIFY.md)
+- 2026-10-21 arms R15: W2 wrap carrier (R-125) one-piece 7075 in CadQuery, 3.0 mm to OD108, e stack 1.92 WC, torso cover clash above ~118 deg roll, +0.143 pair over booking; Job 8b RELEASED — 2026-10-21_arms_R15_w2_carrier.png (modules/arms/R15_W2_CARRIER.md)

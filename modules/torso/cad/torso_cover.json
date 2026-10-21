@@ -1,0 +1,90 @@
+{
+ "source": "ID e874653 SHOULDER_PAD.md; V5_POLISH_PLAN row 4",
+ "params": {
+  "x_back": -110,
+  "x_front": 110,
+  "z_bot": 50,
+  "z_top": 310,
+  "w_bot": 250,
+  "w_shoulder": 340,
+  "z_shoulder": 220,
+  "shoulder_chamfer": 45,
+  "t": 2.0,
+  "corner_fillet": 20,
+  "shoulder_open_dia": 110,
+  "neck_dia": 90,
+  "sternum_zc": 220,
+  "slot_w": 3.5,
+  "slot_pitch": 6.0,
+  "vent_in": {
+   "z": [
+    105,
+    155
+   ],
+   "x_cols": [
+    [
+     -60,
+     -24
+    ],
+    [
+     -18,
+     18
+    ],
+    [
+     24,
+     60
+    ]
+   ]
+  },
+  "vent_out": {
+   "z": [
+    160,
+    214
+   ],
+   "x_cols": [
+    [
+     -102,
+     -62
+    ],
+    [
+     62,
+     102
+    ]
+   ]
+  },
+  "sternum_size": 110,
+  "sternum_proud": 37,
+  "sternum_core": 40,
+  "sternum_blend": 15
+ },
+ "bbox_mm": [
+  -110.0,
+  -170.0,
+  50.0,
+  147.0,
+  170.0,
+  310.0
+ ],
+ "volume_mm3": 661802,
+ "mass_kg_CFRP_1550": 1.026,
+ "sternum_skin_x_mm": 147,
+ "vents_per_side": {
+  "in": [
+   8,
+   30.2
+  ],
+  "out": [
+   9,
+   25.2
+  ],
+  "rule": "A35 >=25 cm2 in/out per bay; slots 3.5 mm wide (>=3 mm), IP2X: 12 mm finger cannot enter, live parts >=80 mm reach behind slots"
+ },
+ "thor_duct_check": {
+  "basis": "electronics R1 \u00a7(duct routing): Thor cold-plate fin stack bay 130 x 200 (y 200 [EST orientation]) + 1 mm PC duct walls; Thor at z ~0.29; Sunon PF40281B1 40x40x28 inside the bay",
+  "y_extent_above_z265_mm": 101,
+  "chamfer_inner_y_at_z308_mm": 127,
+  "chamfer_line": "|y| = 170 - (z - 265) outer; at |y| 101 the chamfer is at z 334 > top 310",
+  "margin_to_|y|<125_mm": 24,
+  "verdict": "clears with the 45 mm chamfer; no change to 35 mm needed"
+ }
+}

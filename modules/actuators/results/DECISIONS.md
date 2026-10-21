@@ -808,3 +808,52 @@ Retention at 1.2 m/s:
   - +3.8 g per knee (6061 density; 4.0 g at 7075), +7.7 g robot.
   - Fin gap ≈ 13 mm.
 - **Ruling proposed:** YES to Ø12, but only with the boss grown Ø20 → Ø23 (outward only, same 7 mm). Its net mass is about −2 g robot vs Legs' Ø9 fallback (+10 g). In the plain Ø20 boss, NO (fatigue 1.15).
+
+## D81 (Robot Lab job1 a556d44) "Forearm-roll" 566–773 N·m is the superseded shoulder_roll pad case
+- Job1 Mx is spin about the **shoulder_roll** axis from the side-fall pad (9.17 kN, pad 64 mm off-axis, CRBH 6013). Not the D76 wrist roll; forearm cap unaffected. Superseded by R-120/R-121 (Z −20, CRBH 7013 A): Mx 321 N·m, CSG-25-100 SF 1.09 at ×1.05, ratchet 650 SF 1.93, s0 2.04–2.31.
+- Options costed (`results/FOREARM_ROLL_TORQUE.md`): CSG-32 +≈1.1 kg pair [EST incl. housing], CSG-40 +2.56 kg gears alone, SHG same ratings heavier, clutch 1.6–4.0 kg (R-057), current limit gives no impact credit.
+- Decision: keep CSG-25-100 + CRBH 7013 A, no clutch; P-055 removes the clutch from the shoulder_roll contract row. Gate Job 8 Mx ≤ 351 N·m; fallbacks CSG-25-120 (0 kg) then CSG-32-100.
+
+## D82 (R-122) Actuators mass-down rows and fastener BOM (`r122_actuators.py`)
+- Row 3 housing pocketing: R-122 basis 0.78 kg is one-of-each; robot is 2.221 kg. Candidate-region estimate −0.316 full (−0.354 with Thermal-gated tube windows), half credit −0.158. Ankle ring fins −0.265 only if Thermal accepts. `results/R122_ACTUATORS.md`.
+- Fastener BOM (`results/FASTENER_BOM.md`): 1234 screws, 2.08 kg steel; 384 non-structural, Ti64 swap −0.091 kg (−0.074 without drive mounts). Flag: legs counted 0.82 vs 0.30 kg booked (+0.5 kg risk).
+
+## D83 (Job 9 c) Knee release body = rev B fins + R-116 boss; material 7075-T6
+- `cad/knee_twin_housing_release_r116.step` (`knee_release_r116.py`): rev B + Ø23 boss + Ø12×6 bore. Rev C (trimmed fins) is withdrawn; it is not a housing rev.
+- 7075-T6 one-piece (cad_mass booking). Fin mass at 7075 is +0.008 kg robot vs the 6061 figure; flagged for the Arbiter, not booked. `results/JOB9_KNEE_GEOMETRY.md`.
+
+## D84 (R-123) Arm/waist fastener delta, 7075 basis 480/560/70, row 12 conditions
+- Arm/waist fasteners: counted 1.265 kg vs booked 0.39 (conservative; v3 0.03/unit + D70 0.015) → **+0.875 kg** (range +0.475..+0.875). `FASTENER_BOM.md`.
+- G3 and G4 briefs → E 70, Sy 480, Su 560, static 320, overload 400; Se unchanged. cad_mass.py lever SF on 480: hip 2.00, knee 2.50.
+- Re-check (`results/R123_RECHECK.md`): one stale result fails 320 (h4 needle lever 332 MPa in PROOF_TEST); no live part fails.
+
+## D85 (R-126) v3 actuator() adders traced (`results/R126_V3_ADDERS.md`)
+- All four constants come from 3c7b50e with no comment; they are the residual of the v2 ACT_OVERHEAD split. Inferred: rotary 0.03 fasteners, 0.04 cabling/connectors; linear 0.08 the 7202 pair (kept), 0.10 linkage hardware (double with LINKAGE_TABLE).
+- Double counts: 0.04 × 14–18 = 0.56–0.72; 0.10 × 12 = 1.20; leg 0.03 × 4 = 0.12; leg FAST connectors 0.18. Elmo G-TWI 22.2 g (MAN-G-TWI p.10) vs 0.038 placeholder × 32 = −0.506.
+- Recommended credit now −1.63 kg (drive and connectors full, the inferred lines at half); full −2.57 to −2.73 kg after a per-unit bottom-up table.
+
+## D86 (R-127 C(b)) Mg housings: Elektron 43, not AZ91D (`results/R127_MG_HOUSINGS.md`)
+- From CAD volumes: −0.625 kg (equal geometry + 7075 seat inserts) to −0.263 (+25 % stiffness volume) for hip yaw/roll + hip-pitch/ankle bodies. Multi-path only (hip-pitch/ankle): −0.377 / −0.159. Not additive with row 3 (combined ≈ −0.85).
+- Hand proxy passes at A-basis 130 MPa except the ankle eye lug (142 MPa peak) → 7075 bush. Stiffness/ovality needs the G4-Mg FEA (addendum in the file). No Ti in Mg; PEO + sealant + isolated fasteners; Thermal re-check of the unit ΔT.
+
+## D87 (R-128/R-130) Stock, grain and path classification (`results/STOCK_GRAIN.md`)
+- Thick actuator bodies go to 7075-T7351 plate (3.5–4.5 in; T651 bands stop at 3.0 in). Single path: hip yaw/roll, knee twin housing, knee lever, D76 wrist housings, clamp ring. Multi path: screw bodies, hubs, eyes.
+- All parts pass their band allowable (tightest: knee lever 208 vs 313). G4 brief gates: 239 (hip yaw/roll), 262 (screw bodies), fault 393. G4-Mg addendum classified.
+
+## D88 (R-131) Bottom-up table, 32 units (`results/R131_BOTTOM_UP.md/.json`)
+- True overlap: leg +0.03 0.12; +0.04 net of output hubs 0.326; +0.10 net of rotor bearing 0.936; +0.08 0 (7202); connector allowance 0.18 → adders −1.562 full. Drive −0.411 on 26 booked units; 6 wrist drives unbooked +0.133. **Total −1.84 kg full** (R-131 has −1.536 now → −0.304 more).
+- Flag: shoulder_roll v3 row is CRBH 4010; R-120 delta assumed 6013 → possible +0.36 pair under-booking.
+
+## D88 addendum (R-137 §3) Shoulder roll bearing basis, IKO catalog (`datasheets/iko_crb_catalog.txt` l.799, 802, 803)
+| bearing | where | mass kg | d × D × B mm | C0 kN |
+|---|---|---:|---|---:|
+| CRBH 4010 A | v3 shoulder_roll row (`v3.json` bearing map) | 0.15 | 40 × 65 × 10 | 10.6 |
+| CRBH 6013 A | R-120's delta basis | 0.33 | 60 × 90 × 13 | 24.3 |
+| CRBH 7013 A | selected for shoulder roll (R-120/R-121, Arms R13) | 0.38 | 70 × 100 × 13 | 27.7 |
+- Note: D71 is the **shoulder_pitch** bearing (also 7013 A), not the roll; it is booked separately (D71/Arbiter) and is not part of this delta.
+- Bearing: true 4010 → 7013 = +0.23/side = **+0.46 pair**; R-120 booked +0.100 (6013 → 7013), so **missing +0.36 pair (cited). R-137's +0.36 is confirmed.**
+- **Housing, also missing [EST]:** the v3 row's housing() is sized on the 4010 (D 74 mm, 0.269 kg); on a 7013 seat it is D 106, 0.450 kg (`v3.py housing()`, same ×1.25 model). That is +0.181/side = +0.362 pair. R-121 booked +0.075 pair for the housing growth against a 6013 seat (Arms R13 table), so **+0.287 pair is still missing [EST, v3 housing model]**. If Arms' R13 roll-housing CAD replaces the v3 housing() row, use its measured mass instead.
+- **Shoulder roll total missing: +0.36 (cited) + 0.287 [EST] = +0.647 pair.**
+
+## D89 (R-137 §6) Knee twin housing = hand forging
+- 7075-T7352 (or 7050-T7452) hand forging, grain flow along the housing axis; 211 MPa interim until Materials cites the forging A/S-basis (4–4.5 in). Updated: STOCK_GRAIN.md, JOB9_KNEE_GEOMETRY.md, knee_release_r116.py/.json notes, cad_mass.py rec notes. No mass change.

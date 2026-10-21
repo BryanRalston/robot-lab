@@ -212,3 +212,95 @@ Foam 0.035 + sleeve 0.009 + inserts/anchor 0.006 = **0.050/side, 0.100 kg pair =
 2. Is the contact point during the arm tuck on the lateral shoulder face (pad centre) or higher on the deltoid? If it's higher, the pad moves.
 3. Does the 40 mm pad (about 10 mm more lateral) change the topple geometry or the knee-drop timing?
 4. What sensitivity to shoulder energy above 220 J should we design for (worst-case push)?
+
+## R9 (2026-10-21): response to job1 FAIL (a556d44)
+- **Failing interface: CRBH 6013 static s0 (Arms' roll bearing)**, axial-shear cases 1.45 @0 / 1.29 @10 mm. The tray and M4s pass (tab bearing SF 1.62, no slip 593 < 825 N). No tray/washer/doubler change can fix s0: it is set by pad force and lever arm.
+- ID-side fix (pad_r9.py/.json): core **55.3 × 55.3 × 60** 4.5 pcf (peak 7.0 kN at ×1.3, was ~9 kN) + **0.25 mm PTFE-faced slip skin** on the EPP face (μ ≤ 0.15 caps tangential shear). Tray, boss, 4× M4 unchanged; core centred on tray.
+- Hand-calc s0 (same P0 as fea_job1.py): **2.32 @ e0, 2.13 @ e5, 1.97 @ e10**. Reaching 2.0 at e10 needs Arms (qualify e ≤ 5 mm or a bearing with C0 ≳ 27 kN). Proposed to Arms; not imposed.
+- Energy 237 J ≥ 220 J (A44 cap) but < 265 J R3 design energy: needs the 220 J basis confirmed.
+- Roll torque Mx 448 (axial) – 539 (down) N·m, still > CSG-25 369 N·m momentary peak (was 566–773). Driven by the 64 mm pad-centre offset from the roll axis: raised with the Arbiter.
+- Mass: −0.007 kg pair [EST] (core −3.5 g, spreader −1.1, EPP −0.4, PTFE +1.7 per side).
+- Rerun: fea/job1_pad_r9/CASE.md.
+
+## R10 (2026-10-21): per R-119 (03fe1ca) — supersedes R9
+- Core **54.8 × 54.8 × 75.3 mm** 5052 HC 4.5 pcf (1.79 MPa), peak **7.0 kN** at ×1.3, energy **292 J** (0.72 stroke, static plateau). Contact face Y = 102.3 mm (was 87). Tray, boss, 4× M4 unchanged. PTFE skin: option only, not credited.
+- s0 (15° case, shear 0.27 N): **1.81 @ e0, 1.70 @ e5, 1.60 @ e10 — FAIL**. Roll Mx raw 433 (axial) / 618 (down) N·m; clutch-limited ≤ 307 (R-119).
+- Mass: pair **0.065 kg ex Arms' boss** (≤ 0.100 PASS); 0.113 if the 0.024/side boss is counted in the pad cap (FAIL). Core mass is fixed by energy (~16 g/side regardless of F).
+- Envelope: core +15 mm vs R8 (+15 mm proud per side): needs check.
+- Trade: lowering F does not close s0 (core grows to hold 292 J, lever grows): 6.0 kN → 88 mm core, s0 2.04/1.91/1.80. 7.0 kN is the best trade (shortest, lightest proud). **Closes only with Arms: bearing C0 ≥ 26.8 kN (e0) / ≥ 30.4 kN (e10) vs CRBH 6013 24.3**, or Materials-credited μ ≤ 0.15 skin plus e ≤ 5 mm.
+- Rerun: fea/job1_pad_r10/CASE.md.
+
+## R10 status per R-120 (12f68a4)
+- **Booked: R10 pad pair 0.065 kg PASS** vs 0.100 cap (cap = pad assembly incl tray/sleeve/fasteners; stand-off outside it, Arms ledger). +15 mm/side envelope accepted provisionally pending Arms clash check.
+- s0 path (R-120): R10 core + Arms stand-off (pad centre Z −20) + CRBH 7013 A + e ≤ 5 mm: s0 2.31/2.16/2.04, Mx 321 N·m, CSG-25 SF 1.10. R-119 clutch basis withdrawn.
+
+## R10 stand-off layout proposal (Arms-owned part) — pad_r10_standoff.py/.json
+- Machined 7075-T6, replaces the 62×62×10 boss. **ID layout only; Arms owns and finalizes it** (roll-output bolt interface, sizing, drawing).
+- Roll flange ring OD 60 / ID 40 × 4 mm on the roll output (bolt pattern TBD Arms) → 2 ribs 5 × 30 mm, Y 0–23, spanning Z 0 to −20 → pad face plate 62 × 62 × 4 (Y 23–27, rear pocketed, 2 mm floor) with 4× M4 tapped bosses on ±24 mm. Tray (0.5 mm) and R10 core 54.8 sq centred unchanged; mount face Y 27 keeps contact Y 102.3.
+- Mass **0.051 kg/side, 0.102 pair [EST]** (plate 0.019, ribs 0.018, flange 0.014); R-120 booked 0.050/side.
+- Arms to confirm: roll-output bolt pattern on CRBH 7013 A; rib/flange sizing under 7.0 kN at 15° (Job 8 add-on); e ≤ 5 mm tolerance stack; clash check (pad + stand-off + 7013 housing through abduction ROM, tuck, cover set); Y datum 27.
+
+## Stand-off R11 layout (Arms-owned; ID proposal) — fixes R10 FEA fail (bc6ad91) / Arms job8 (e02c34b)
+- Cause: two 30×5 ribs took Mx 321 N·m on their weak axis; 2 mm pocket floor. Dowels Ø4 SF 0.87.
+- **R11:** R13 flange kept (OD70/ID44×5, 8×M4 12.9 PCD62) + **2×Ø6 m6 fitted dowels**; **closed box 44×44, 2.5 wall**, Y 0–23, centred X 0 / Z −15; **solid 62×62×4 plate** (no pocket), Y 23–27, centre Z −20, 4×M4 ±24 in Ø8 bosses; R3 root fillets. One machined 7075-T6 part. Mount face Y 27, contact Y 102.3 unchanged.
+- Hand calc (pad_r11_standoff.py), calibrated to R10 FEA: rib hand 183 vs FEA 524 → K 2.86 applied to the box; old-floor cantilever hand ≈1140 vs FEA 1111 (plate method ≈1:1).
+  - Box 75 MPa hand → **215 calibrated** ≤ 337 (0.67 Sy). Plate 149 (span), 25 (overhang).
+  - Deflection **0.69 mm calibrated** (rotation term ×37) ≤ 1.0; plate 0.04.
+  - Dowels Ø6: τ 229 MPa, SF 2.62; flange bearing SF 2.22.
+- Mass **0.102 kg/side, 0.204 pair [CALC]** (flange 0.035, box 0.027, plate 0.042, bosses). vs boss 0.024/side → +0.156 pair; **+0.060 pair over the +0.096 R13 booking**. Arbiter to book.
+- Rerun: fea/job1_pad_r11/CASE.md. CAD: cad/shoulder_pad/ (STL + geometry.json, plain python; housing position is a placeholder for Arms).
+- Trims: COVER_TRIMS_R120.md. Fasteners: FASTENERS_BOM.json.
+
+- **Booking (R-123(d), ca66b9b): stand-off R11 +0.060 kg pair booked in full** (addition). FEA gates: vM ≤ 320 / 480 ultimate, s0 ≥ 2.0 at e 0/5, Mx ≤ 351 N·m, deflection ≤ 1 mm.
+
+## Stand-off R11 / pad placement: ON HOLD pending Arbiter R-12x (Arms R14, 4b47656)
+- ID CAD error fixed: CRBH 7013 A housing is **coaxial with X** (roll axis), not Y. cad/shoulder_pad/ now uses Arms' real dims: bearing r35–50 × W13 (x ±6.5), seat flange r50–54 (OD108) × W15 (x ±7.5).
+- Around X, the stand-off and pad intersect the housing (Arms: 2.16 / 12.38 cm³). Placement goes to the Arbiter; no ID placement redesign until R-12x.
+- Arms R14 interface changes accepted as inputs: flange/hub shoulder OD76; ring bore Ø36 under the box; 2× Ø6 m6 dowels on PCD57; 3× Ø8 plate access holes for the M4s; one-piece 7075; R4 corners.
+- Stand-off flange fasteners/dowels now listed only in modules/arms/FASTENER_BOM.csv.
+
+## R-125 W2 adopted (placement hold lifted)
+- Placement hold resolved: **W2 adopted, pad on the roll axis; carrier drawn by Arms in modules/arms/cad/r15/** (supersedes the R11 stand-off placement above).
+- Drawing limit **e ≤ 2.4 mm**; Arms' stack passes by 0.11 mm at:
+  - **tray lip tolerance ≤ ±0.3 mm**
+  - **core cut tolerance ≤ ±0.3 mm**
+
+## W2 cover check (R-125) — cad/covers/w2_cover_check.py/.json
+- Inputs: head shell (p100) and torso cover (p009, **coarse 28-tri envelope**) from site v4, converted to Arms' frame (x = X, y_out = −(Z+260), z = Y−1500; L shoulder_roll at site (0,1500,−260), R mirrored). The Arms r15 carrier is not in the repo yet, so this used the R14 housing (OD108, x ±7.5) + the pad R10 envelope on the roll axis: tray 62², outer face 36.5 mm beyond the flange (y 8.2–90.5, z ±31).
+- Results (no clash, 0 points inside):
+
+| Cover | to pad (mm) | to housing (mm) |
+|---|---|---|
+| Head shell | 271 | 234 |
+| Torso cover | 98 | **36.5** (inboard wall at y −90) |
+
+- Shoulder cover trim changes: the pad window **68 × 68 R6 re-centres to z 0** (on the roll axis, was −20); the OD114 housing relief is unchanged; the cover skin must clear the pad side faces by ≥3 mm through roll ROM (check against the r15 carrier when Arms commits it). No head/torso trim needed.
+
+## r15 sweep (Arms R15 305de76, W2 carrier) — cad/covers/r15_roll_sweep.py/.json
+- pad_r11_standoff is **superseded by Arms' W2 one-piece carrier** (R11 box/plate absorbed).
+- **Side faces:** no shoulder cover skin node exists in the site glb or the cover set; the local cover is the R120 window spec. The pad envelope is 54.8 sq (y 63–138.8) and the window is 68 × 68 → **6.6 mm per side ≥ 3 PASS**, roll-invariant if the cover rides on the roll output. Condition: the skin must sit outboard of the carrier face (y ≥ 63 + 3). If the skin is at y < 63, it meets the carrier (x −31…42, z ±38), and the window must grow to **79 × 82** (carrier + 3 mm).
+- **Torso:** no finer torso cover CAD exists (design/, torso/, site/). The best real surface is the sim torso geom box 220 × 340 × 260 (= site p009). Analytic signed distance, roll swept in 1° steps (0–180, the joint range is −15/180) at shoulder pitch −150/−90/−30/0/5/30:
+  - **3 mm clearance lost at roll 130°; first contact at 132°** (every pitch); max penetration 29.5 mm at 180°. Arms' 118–128° used the mesh/dz fit; this check is analytic on the sim box.
+  - Full-roll relief: a pocket in the torso upper-side corner **≈ 32.5 mm deep (29.5 + 3), ≈ 125 (x) × 145 (z) mm**, at the top shoulder corner. Mass ≈ +0.01 kg CF [EST], but it intrudes 33 mm into the Torso/shoulder-pitch volume: it needs Torso/Arms space and is not an ID-only trim.
+- **Recommendation: accept a roll soft limit, no torso pocket.** ID data supports up to **127°** (130° less 3° margin); Arms' 115° is conservative and also fine. Arbiter to set. Revisit when Torso releases real cover CAD.
+
+## R-127: roll sweep vs Torso's real cover (b697350) — cad/covers/r127_roll_sweep.py/.json
+- Method: the r15 sweep (1° roll 0–180, pitch −150/−90/−30/0/5/30, Arms r15 carrier + pad + housing), against an analytic model of Torso's `torso_cover.json` (rounded box R25, sternum bulge to x +147, side openings). Frame: torso body (waist centre). Results don't depend on pitch: pitch turns about the side-wall normal (Y).
+- **As given (220 × 340 × 470, Ø130 at z 380):** 3 mm lost at **130°**, first contact at **132°** (pad on the side wall); housing 58 mm clear, carrier 41.5 mm.
+- **Geometry check:** shoulder pitch axis is Y at torso-frame (0, 170, **220**); the roll axis is (0, 282, 180), 112 mm outboard of the wall; neck/head origin at z **370**.
+  - Torso's Ø130 openings at z 380 sit **160 mm above the pitch axis** and miss it.
+  - The 7013 roll housing (OD108/114 relief) and the pad never reach the opening (≥ 58 mm). The opening only passes the **shoulder-pitch actuator (OD96)**.
+- **Recommended opening: Ø110 on the pitch axis (z 220)**: OD96 + 7 mm radial (3 mm clearance + skin tolerance and seal lip). Coaxial with pitch, so it holds through the full pitch ROM. The pad window (68 × 68 on the arm) and the OD114 relief are unaffected.
+- **Envelope verdict: 220 (x) × 340 (y) confirmed; height 470 is wrong.** Site v4 / sim torso is z 50–310 (260 tall; glb 200 + skirt). A 470 top would bury the neck (z 370) and head shell. Correct to **z 50–310** (neck opening Ø90 at the top). V5 target stays a taper 330 → 250 with chamfered shoulders (V5_POLISH_PLAN row 4); sternum skin x +147 confirmed (P-052).
+- **ID-corrected cover (z 50–310, Ø110 at z 220):** 3 mm lost at **130°**; the pad then runs ≤ 3 mm along the wall over the opening region, with hard contact at **170°**.
+- **Recommended soft limit: 127°** (130 − 3° margin), with no torso pocket. Arms' 115° is also safe. Arbiter to set.
+
+## R-133: sweep vs Torso cover 35eebd2 — cad/covers/r133_roll_sweep.py/.json
+- Cover: z 50–310; taper 250 (z 50) → 340 (z 220); 45 mm top-shoulder chamfer; Ø110 openings on the pitch axis (z 220); Ø90 neck; sternum x +147. Modelled as a convex YZ profile, with the R20 corner fillets ignored (conservative). Same r127 method: 1° roll 0–180, six pitches, Arms r15 carrier + pad + housing.
+- **3 mm lost at 130°** at every pitch (pad on the upper side wall). **First contact 170–172°.**
+- Pitch-actuator OD96 in the Ø110 opening: **7.0 mm radial**, coaxial, so it holds through the full pitch ROM. PASS.
+- Chamfer, at roll ≤ 127°: pad ≥ **6.5 mm** (at pitch ±30), carrier ≥ 52, housing 59. PASS.
+- **Recommended roll soft limit: 127°**, no torso pocket. Arbiter to set.
+- **ID decision: torso top width 340 (not 330)**, so the Ø110 openings sit on the y ±170 walls. V5_POLISH_PLAN row 4 is updated (R-133). V5_COVER_SET and cover_set_v5.json carry no torso width.
+- **R-133 re-run vs Torso 4b8ac1c** (same 340 width and 45 mm chamfer; vents on the sloped panel, 3.5 mm slots, inlet z 105–155, outlet z 160–214): **3 mm lost at 130°**, **first contact 171–172°** (pad on the upper side wall); chamfer ≥ 6.4 mm at roll ≤ 127°.
+  - Vent zones at roll ≤ 127°: pad ≥ **10.8 mm** (pitch −90), carrier ≥ 54.7, housing ≥ 61.7. No contact or blockage. **Soft limit 127° unchanged.**

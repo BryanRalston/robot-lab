@@ -1113,3 +1113,158 @@ The 41.8 g [DWG] line is **withdrawn from Electronics** and re-booked when ID se
 - **Cited wire savings: 0.064 kg.** Low/medium risk, ratings kept, STO and R-038 untouched.
 - **Target ≥ 0.18:** reached only if the Arbiter accepts #1 (soldered drive tees, +0.124 conditional, replacement mass [EST]); the total is then ≈ 0.188 kg.
 - Without #1, electronics/harness alone cannot meet the target on cited data.
+
+### 18.4 P-054: touch-guard (IP2X, C1) booking re-based on cited data, and Elmo OV-trip item (2026-10-21)
+
+**A. P-054: replace the R-079 +0.25 kg touch-protection booking.**
+Scope (R-079, R-083, R-084, R-087): the 0.25 covered *all* bus touch protection. Enclosures that need a tool to remove (C1, binding) count at 0 g because their owners already book them.
+
+Electronics guards, all cited (§18.2f, with the 18.2l changes applied):
+
+| item (§18.2f #) | basis | g |
+|---|---|---|
+| 3 AS150U cup backs | H2N0.38 19.5 g/m × 0.10 m | 2.0 |
+| 4 LEV100 terminal boots | H2N1.00 55.7 g/m × 0.08 m | 4.5 |
+| 5 bus-bar sleeve | H2N0.50 22.6 g/m × 0.66 m (Torso 357cca1 §23 run) | 14.9 |
+| 6 HS100 lugs | H2N0.25 15.5 g/m × 0.06 m | 0.9 |
+| 8 Elmo bus solder points | H2N0.25 15.5 g/m × 1.60 m | 24.8 |
+| 12 XT30U backs | H2N0.19 8.9 g/m × 0.48 m | 4.3 |
+| 13 XT60 backs | H2N0.25 15.5 g/m × 0.32 m | 5.0 |
+| 10 knee-drive covers | moved to the ID panel (KNEE_DRIVE_PANEL.md, 0.071 pair, ID line, R-087 mass-neutral) | 0 |
+| 2, 11 AS150U IP40 shroud, MR30 integrated covers | in connector mass | 0 |
+| **Electronics total** | Techflex Shrinkflex H2N sizing chart (techflex.com), kg/100 m | **56.4** |
+
+- **Torso guards: 0.089 kg** as accepted by R-084 (Torso 1f3a99b). Not re-based here. It includes the 4 × 5 g PC shroud line [EST, Torso §21.1].
+- **New booked touch protection: 0.0564 + 0.089 = 0.145 kg. Delta against the 0.25 booking: −0.105 kg.**
+  - Against the 0.175 used in R-084, this is −0.030 (knee covers −0.042 moved to ID, sleeve +0.013 per 18.2l, rounding).
+  - The Electronics share is now 100 % cited, so it no longer qualifies for half credit. The Torso EST 0.020 is still at half credit. The ruling is the Arbiter's.
+
+**C1 fastener check (ID panel, cited hardware):**
+- NBK SNSL-M2.5-6-SD, 316L small-head SHCS, **0.31 g** each (nbk1560.com product table).
+  - Retained captive by a PA12 boss undercut, so 4 per side = 1.24 g against ID's 4.8 g (KNEE_DRIVE_PANEL.md).
+- If a true captive panel screw is required: RAF M0274-SS (M2.5 × 6.5, SS, datasheets.com/raf/m0274-ss) has **no published mass**, so it can't be booked yet.
+- This is ID's line, so it is flagged only: a possible −0.007 kg pair. No change to Electronics.
+
+**Densities used elsewhere in the ledger:** PA12 1.01 g/cm³ (`arbiter/a3_size.py`), PC 1.20 g/cm³ (PALSUN, MASS_DOWN_R069). No new sheet guard is added: every bus point is either sleeved (cited per metre) or inside a C1 enclosure.
+
+**Still open on A:**
+- C1 confirmation from Torso, Arms and Legs (Legs L58 has confirmed the knee panel tabs).
+- Torso's 0.020 PC shroud line [EST].
+
+**B. Elmo Gold Twitter OV trip (§12 / O-E9 / WI[35]).**
+Sources:
+- [CR] Elmo *Command Reference for Gold Line Drives*, MAN-G-CR Ver. 1.406 (Feb 2013). Public copies: docs.mbari.org/internal/projects/CPF/Interns/Rudra/Motor_Testbench/ELMO_Gold_Solo_Twitter/Manuals/Command_Reference_Manual.pdf and pk-rus.ru/fileadmin/download/man-g-cr.pdf.
+- [IG] *Gold Twitter Installation Guide*, MAN-G-TWIIG, §4.2 Table 1 and §10.2.3.
+- [PS] *Gold Twitter Power Supply Considerations* (161208), elmomc.cn/wp-content/uploads/2018/07/Gold-Twitter-Power-Supply-Considerations-161208.pdf, ch. 4.2 and 6.1.
+- [PP] elmomc.com/product/gold-twitter.
+
+Findings:
+- **Level.** The factory maximum is WI[35], burnt in per drive, range 0 to < BV (BV is the label bus voltage) [CR, WI table, PDF p. 310; BV remarks, p. 38]. The 100 V models run at 10–95 VDC, 85 V nominal and 95 V maximum supply [IG Table 1; PP]. So WI[35] < 100 V. **The numeric WI[35] is not published.**
+- **Configurability.** XP[1] sets the OV threshold, range 0 to WI[35], default WI[35]: "Can only be reduced" [CR, XP table, p. 324]. WI[36] reads back the actual threshold, and AN[6] reads the bus voltage [CR p. 38].
+- **Response.**
+  - MF = 20480 (0x5000) means "Drive is in over voltage state … Voltage should not exceed WI[36]" [CR, MF table, p. 109]. CANopen/EtherCAT EMCY code 0x3310, error register 5 [CR, EMCY table, PDF p. ~223].
+  - OV is an *amplifier fault*: on MF > 0, MO and SO go to 0 and the brake output engages. "There may be no drive controlling the servo before the brake is fully engaged" [CR, brake/fault reaction, p. ~214; AOK function, p. ~250]. So an OV trip is an uncontrolled coast with the motor disabled, not a controlled stop.
+- **Regen.** The drive is four-quadrant and returns braking energy to VP+. It has no internal shunt. The supply must handle "power flow in both directions", otherwise the bus rises "~5·10⁶ V/s" [IG §10.2.3.2.1; PS ch. 4.2]. Elmo's rule is a shunt-on point 2–3 V below the OV setting [PS 6.1 D].
+
+**Comparison with our bus (43–92 V):**
+- 92 V is under the 95 V maximum.
+- The plan is clamp-on at 88 V with XP[1] = 92. That is valid only if WI[35] ≥ 92. If WI[35] were, say, 90, XP[1] could not be raised, and the 88 V clamp sits 2 V under it, at the edge of Elmo's 2–3 V rule.
+- The 43 V floor is unaffected, since the UV threshold is XP[13]/WI[37] and isn't part of this item.
+- The regen path is consistent with the design: pack absorbs, P-045 clamp otherwise (§13.1).
+
+**Still unconfirmed:**
+1. The numeric factory WI[35] for G-TWIR70/100 and R50/100.
+2. The OV comparator's hysteresis and response time, and whether OV recovery is a latch or auto-clear (not stated in CR 1.406).
+3. MAN-G-CR 1.406 is from 2013, so the current firmware may differ.
+
+**Closure without vendor:** read WI[35] and WI[36] on the first bench drive (G5, §12 workaround). The O-E9 item stays **open, partially closed** on public data.
+
+Draft for Bryan to send himself (not sent):
+> To: Elmo Motion Control technical support. Subject: Gold Twitter G-TWIR70/100EES and R50/100: factory overvoltage threshold. Body: For G-TWIR70/100EES and G-TWIR50/100EES (single-supply S variant, EtherCAT), what is the factory WI[35] overvoltage threshold? What are the OV detection hysteresis and response time? Does the 0x5000 fault clear on MO=1 once the bus is below WI[36], or does it need a power cycle? Our bus is 43–92 V with an external shunt clamp turning on at 88 V, and we plan XP[1]=92. Is that allowed on these models? Thank you, Bryan Ralston.
+
+### 18.5 P-055: Elmo G-TWI heat plates, Electronics interface (R-134 to R-136, Actuators D89 eb575a5) (2026-10-21)
+The plate design is Actuators' (`actuators/results/DRIVE_HEAT_PLATES.md`, `cad/drive_plate_*.step`: knee 45.0 g ×2, hip_pitch 25.8 g ×4, ankle 13.5 g ×4, shoulder_pitch 25.8 g ×2, 0.339 kg robot, +0.044 vs R-136). It is **not redesigned here**.
+
+Sources:
+- [IG] MAN-G-TWI Ver 2.011 (public copy: e-motionsupply.com/v/ELMO/Servo%20Drive/Gold%20Whistle/MAN-G-TWIIG_s.pdf):
+  - p.79 Fig. 46, dimensions;
+  - §7 p.18, PCB mounting;
+  - §7.2 p.22, external heatsink;
+  - §8.3 p.23, PE.
+- [CR] MAN-G-CR Ver 1.406: TI[] p.284–285; CL p.59–60; PL p.238; MF p.109; EMCY p.196.
+
+**Q1. Hole pattern and thread.**
+- [IG p.79 Fig. 46] gives **4 × M2, thread depth 4 (▽4), at 30.6 ± 0.1 × 25.6 ± 0.1 mm**, tapped in the drive's heat-sink base (35 × 30 body).
+- So **nothing is tapped in the 1.5 mm 6061 plate**: drill clearance holes Ø2.4 [EST, ISO 273 medium for M2 is 2.4; check against the CAD], and run the screws from the plate's femur side up into the drive.
+  - Screw: M2 × 6 A4-70 (NBK SNSL-M2-6-SD 0.15 g, nbk1560.com). Engagement 6 − 1.5 − 1.0 pad = 3.5 of the 4 mm thread [pad compressed thickness EST].
+  - Fin clearance: heads Ø3 (SNSL D1 3 mm) need a 3 mm fin gap. The knee fins at 4 mm pitch × 1 mm leave exactly 3.0, so **Actuators must place the fins clear of the 4 hole positions per drive**.
+- **Conflict in Elmo's own text:** [IG §7.2] says "four M2.5 … screws" for external-heatsink mounting and limits it to "G-TWIXXX/YYYZZ**H**" models. Our order code is G-TWIR70/100EE**S**. The drawing (M2) governs, but **the S vs H variant and the thread size must be confirmed at order** (vendor question below).
+- M2.5 in 1.5 mm 6061 isn't needed. For the record, 1.5 mm gives only 3.3 threads at 0.45 pitch; use a nut or insert if a tapped plate is ever required.
+
+**Q2. PE per plate.**
+- [IG §8.3] says the drive's PE terminal "is connected internally … to the Gold Twitter's chassis (heat-sink)". The plate is therefore at PE through the 4 M2 screws into the drive base, and the G10/PEEK standoffs isolate it from the femur.
+- **No separate plate lead** is needed, on three conditions:
+  - (a) the drive PE pin is wired to the robot chassis/PE conductor on the integration board (Electronics, below);
+  - (b) the screw seats are bare or masked from anodize, with one serrated washer per plate;
+  - (c) a bench check measures plate-to-PE resistance [limit to cite at G5].
+- If (b) can't be met, add one 0.25 mm² SiF lead per plate (≈ 0.1 m × 5.4 g/m/2 conductors ≈ 0.3 g [from §17.3 cited 5.4 g/m pair]).
+
+**Q3. Mating height and knee stack.**
+- The G-TWI has **no connector**. It is soldered into an integration PCB by its pins [IG §7 p.18]. Per [IG p.79]: body 14.4, underside of the user PCB at **14.9**, overall (19) with pins.
+- So Actuators' 25.4 mm knee stack (standoff 8.5 + base 1.5 + pad 1.0 + drive 14.4) **omits the integration board**:
+  - with a 1.6 mm board [EST], the stack is 8.5 + 1.5 + 1.0 + 14.9 + 1.6 = **27.5 mm > 26**, before any connector and before ID's ≥ 3 mm clearance to the drive tops;
+  - **this fails by ≥ 1.5 mm plus the connector height.**
+- Fix options (Actuators/Legs/ID):
+  - (i) cut the standoff 8.5 → ≤ 5 mm, with shorter fins (loses area, so Thermal must re-run);
+  - (ii) take 4–6 mm more L51 depth (ID panel pocket and bulge);
+  - (iii) put the integration board off the drive with flex pins (not supported by Elmo).
+- Plug exit: **side entry, −z (bottom edge)** to match ID's "cable exits at bottom". The connector body height isn't cited yet, so it's open.
+
+**Q4. Harness exit and bend radius.**
+
+| plate | exit side | basis |
+|---|---|---|
+| knee | −z, bottom edge, along the thigh trunk | ID panel spec, §17.1 trunk |
+| hip_pitch | toward the pelvis trunk | `harness.py` line routing |
+| ankle | +z, up the tibia trunk | same |
+| shoulder_pitch | toward the shoulder bay | same |
+
+- Bend radius:
+  - EtherCAT/encoder MRTA2P26S: ≥ 7.5 × 4.2 = **31.5 mm** (Belden rating used in `actuators/results/harness.md`).
+  - Phase leads SiF 1.5 mm² and 0.25 mm²: **minimum bend radius not cited** (Lapp ÖLFLEX HEAT 180 SiF datasheet to be read). Open.
+- Exact exit coordinates for hip, ankle and shoulder need Actuators' CAD.
+
+**Wiring changes and temperature sensing.**
+- Temperature is read from the drive's own sensor: **TI[1], heat-sink temperature in °C**, range −40 to 100 [CR p.284–285], over EtherCAT. There are **no new sensor wires**. The PT1000 motor leads (§17.3) are unchanged.
+- PE pin to chassis per Q2.
+
+**Derate (owned by Electronics and Controls, R-136: confirmed ours to configure).**
+- **Hardware fact [CR p.284]:** "In cases in which the temperature exceeds 85 °C, the servo will be shut off (MO = 0)", flagged MF 53248 (0xD000) [p.109] and EMCY 0x4310 [p.196]. It re-enables at ≤ 80 °C.
+  - An OV/OT amplifier fault drops the brake before control is guaranteed [CR p.33].
+  - **So the R-136 points "50 % at 85 °C, off at 90 °C" can't be reached on TI[1]: the drive trips by itself at 85.**
+- **Proposed (Arbiter to rule):** 100 % at TI[1] ≤ 75 °C, linear to **50 % at 82 °C**, firmware controlled stop then MO=0 at **84 °C**. Resume below 78 °C [hysteresis EST].
+- **Mechanism (Controls):**
+  - the master reads TI[1] each cycle;
+  - it sets I_lim = f(T) × nominal and writes **CL[1]** (continuous) and **PL[1]** (peak). "PL[1] and CL[1] may be changed dynamically while the motor is on" [CR p.238];
+  - CL[1] range 0 < CL[1] < MC [p.59];
+  - do **not** SV (save) the derated values, since both are non-volatile.
+- Unconfirmed:
+  - the CoE/PDO index for TI[1] (blank in CR 1.406);
+  - whether TI[1] reads the base face or an internal point, and its offset to the plate;
+  - integer 1 °C resolution;
+  - CR is from 2013, so the firmware may differ.
+- **Flag:** hip_pitch runs at **75.3 °C at duty** (D89), so the derate starts in normal use (≈ −4 % at 75.3 on this curve, more on a hot day). Recommended: Actuators/Thermal size the hip plate for ≤ 72 °C at duty. Not booked here.
+
+**Mass (Electronics side).**
+- Drive-to-plate screws: 14 plated drives × 4 × M2 × 6 at 0.15 g = **+8.4 g**. These aren't in D89's 40.8 g, which counts M3 standoff screws only.
+- Temperature sensing and PE (per Q2): 0.
+- **Delta +0.008 kg (under 0.02, no freeze flag).** D89's +0.044 is Actuators' and goes to the Arbiter separately.
+- BOM.md fastener table to be updated with the 56 × M2.
+
+**Blocked/open:**
+1. Knee stack depth (Q3), which fails.
+2. Elmo S vs H variant and M2/M2.5 thread (vendor).
+3. Derate curve vs the 85 °C hardware trip (Arbiter).
+4. TI[1] CoE index.
+5. SiF bend radius.
+6. Connector heights.

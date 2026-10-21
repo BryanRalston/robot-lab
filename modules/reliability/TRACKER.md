@@ -37,3 +37,29 @@ Status from RULINGS.md (latest mention), DECISIONS files and test-plan files. "o
 | RT-5 (new) | R1_FMEA.md F16 | lap-shear coupons per lot + per-leg proof | legs/materials | new | P1 |
 
 Status caveat: the box was overloaded during R1, so closure status for A-items was read by hand, not scripted; owners should correct any row.
+
+## R2 additions (2026-10-21)
+| ID | Source | Description | Owner | Status | Priority |
+|---|---|---|---|---|---|
+| P-046 | RULINGS.md R-031; legs/R031_FIXES.md | clevis cheek 17 / R8, clamp root 28: Goodman ≥ 1.5 at Se 87 | legs → job 9 b1/b2 | hand checks landed (1.52 / 1.50, questionable); FEA pending | P1 |
+| P-047 | same | tube walls 1.6 mm (7050 femur) outside the sleeve, SF ≥ 1.5 | legs → job 9 b3 | hand 1.58 / 1.52; FEA pending | P1 |
+| P-048 | same | tongue ø6 dowel + bore-opening check | legs → job 9 b4 | open | P1 |
+| P-049 | same | foot collar OD R2 + taper, fretting interface | legs → job 9 b5 | open | P2 |
+| P-050 | same | DP490 per-lot coupons | legs/materials | plan confirmed → TP-G5-13 | P1 |
+| JOB9-b | reliability/JOB9_SPEC.md | A15 structure r2 with P-046…P-049 | T&R on the bryan PC | spec ready | P1 |
+| JOB9-c | reliability/JOB9_SPEC.md | knee twin-housing centre web at 3.6 kN/screw | T&R on the bryan PC | spec ready, pending Actuators rev C confirmation | P2 |
+| J1-Mx | design/fea/job1_pad_r8/REPORT.md | roll torque 566–773 N·m vs CSG-25 369 N·m | arms | open (R11/R13) | P1 |
+| J10-clip | reliability/R2_VERIFY.md | clip normalized obs in job 10 train/eval | controls | recommended | P2 |
+| TP-G5-01 | R-042 | EPP80 40 mm pad drop tower, 220 J, 1/10/100 drops, 0 and 40 °C | arms/materials | planned (G5) | P1 |
+| TP-G5-02 | A37 | G10 sleeve creep 100 h, 34 MPa, 100 °C | materials | planned | P1 |
+| TP-G5-03 | design/R069_TESTS.md T-B2 | PA12 knee cap kneel-fall | design/materials | planned | P2 |
+| TP-G5-04 | T-F1 | TPU bellows flex 10⁶ cycles | design/materials | planned | P2 |
+| TP-G5-05 | T-G | snap-hook retention / fall | design | planned | P2 |
+| TP-G5-06 | R-076 | MR30 vibration + pull retention | electronics | planned | P2 |
+| TP-G5-07 | R-079 | walking convection h, heated rev B knee, skin TCs, standoff ΔT | thermal/legs | planned | P1 |
+| TP-G5-08 | R-081 | sole pad wear + impact | legs | planned | P2 |
+| TP-G5-09 | R-085 | grip with encoder-cap TC | arms | planned | P2 |
+| TP-G5-10 | R-077 | hot always-on load ≤ 2.4 W | electronics | planned | P2 |
+| TP-G5-11 | T-029 | BiSS-C CM noise + MII timing | electronics | planned | P2 |
+| TP-G5-12 | R-114 | EA 9396 lap coupons, A38 prep, 82 °C post-cure, 1000 h at 80 °C ≥ 3.3 MPa | materials | planned | P1 |
+| TP-G5-14 | R-112 | 80 °C hot proof | materials/legs | planned | P1 |

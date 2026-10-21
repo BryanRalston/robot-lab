@@ -9,7 +9,7 @@
 
   <size nkey="1"/>
 
-  <statistic meaninertia="7.32671" meanmass="2.79587"/>
+  <statistic meaninertia="7.42287" meanmass="2.83337"/>
 
   <default>
     <geom rgba="0.5 0.7 0.88 1"/>
@@ -24,27 +24,27 @@
     <geom name="floor" size="20 20 0.1" type="plane" material="grid"/>
     <light pos="0 0 4"/>
     <body name="pelvis" pos="0 0 1.16">
-      <inertial pos="0 0 0.0195" mass="6.96802" diaginertia="0.10687 0.0246655 0.110741"/>
+      <inertial pos="0 0 0.0195" mass="7.06148" diaginertia="0.108303 0.0249963 0.112226"/>
       <joint name="root" type="free"/>
       <geom name="pelvis" size="0.085 0.185 0.052" pos="0 0 0.018" type="box"/>
       <site name="imu"/>
       <body name="L_hipY" pos="0 0.13 0">
-        <inertial pos="0.0059 0 -0.1058" mass="2.10428" diaginertia="0.00335359 0.00451286 0.00359166"/>
+        <inertial pos="0.0059 0 -0.1058" mass="2.1325" diaginertia="0.00339857 0.00457339 0.00363983"/>
         <joint name="l_hip_yaw" range="-0.610865 0.785398" armature="0.079" damping="0.5" frictionloss="0.3"/>
         <body name="L_hipR" pos="0 0 -0.115">
-          <inertial pos="0 0.0023 -0.1151" mass="1.93349" diaginertia="0.00387112 0.00336394 0.00284641"/>
+          <inertial pos="0 0.0023 -0.1151" mass="1.95942" diaginertia="0.00392304 0.00340906 0.00288459"/>
           <joint name="l_hip_roll" range="-0.20944 0.261799" armature="0.441" damping="0.5" frictionloss="0.3" axis="1 0 0"/>
           <body name="L_thigh" pos="0 0 -0.125">
-            <inertial pos="-0.06 0 -0.1867" quat="0.707107 0 0 0.707107" mass="2.46675" diaginertia="0.0378832 0.031766 0.0137973"/>
+            <inertial pos="-0.06 0 -0.1867" quat="0.707107 0 0 0.707107" mass="2.49984" diaginertia="0.0383913 0.032192 0.0139824"/>
             <joint name="l_hip_pitch" range="-1.8326 0.698132" armature="0.441" damping="0.5" frictionloss="0.3" axis="0 1 0"/>
             <geom name="l_thigh" size="0.04 0.155" pos="0.018 0 -0.215" type="capsule"/>
             <body name="L_shank" pos="0 0 -0.42">
-              <inertial pos="0.0355 0.0013 -0.1027" mass="3.27079" diaginertia="0.056949 0.0612341 0.0164057"/>
+              <inertial pos="0.0355 0.0013 -0.1027" mass="3.31466" diaginertia="0.0577128 0.0620554 0.0166257"/>
               <joint name="l_knee" range="0 2.35619" armature="0.2018" damping="0.5" frictionloss="0.3" axis="0 1 0"/>
               <geom name="l_shank" size="0.035 0.15" pos="0.014 0 -0.2" type="capsule"/>
               <geom name="l_calf" size="0.045 0.07" pos="-0.06 0 -0.19" type="capsule"/>
               <body name="L_foot" pos="0 0 -0.42">
-                <inertial pos="0.0535 0.0007 -0.0317" quat="0.707098 -0.00336595 -0.00307188 0.707101" mass="2.7398" diaginertia="0.0211276 0.0150377 0.0111721"/>
+                <inertial pos="0.0535 0.0007 -0.0317" quat="0.707098 -0.00336595 -0.00307188 0.707101" mass="2.77655" diaginertia="0.021411 0.0152394 0.011322"/>
                 <joint name="l_ankle_pitch" range="-0.785398 0.698132" armature="0.289" damping="0.5" frictionloss="0.3" axis="0 1 0"/>
                 <joint name="l_ankle_roll" solreflimit="0.004" solimplimit="0.95 0.99" range="-0.314159 0.314159" armature="0.0944" damping="0.5" frictionloss="0.3" axis="1 0 0"/>
                 <geom name="l_foot" size="0.12 0.05 0.012" pos="0.06 0 -0.074" type="box"/>
@@ -55,22 +55,22 @@
         </body>
       </body>
       <body name="R_hipY" pos="0 -0.13 0">
-        <inertial pos="0.0059 0 -0.1058" mass="2.10428" diaginertia="0.00335359 0.00451286 0.00359166"/>
+        <inertial pos="0.0059 0 -0.1058" mass="2.1325" diaginertia="0.00339857 0.00457339 0.00363983"/>
         <joint name="r_hip_yaw" range="-0.610865 0.785398" armature="0.079" damping="0.5" frictionloss="0.3"/>
         <body name="R_hipR" pos="0 0 -0.115">
-          <inertial pos="0 0.0106 -0.1151" mass="1.93349" diaginertia="0.00366411 0.00336394 0.0026394"/>
+          <inertial pos="0 0.0106 -0.1151" mass="1.95942" diaginertia="0.00371326 0.00340906 0.0026748"/>
           <joint name="r_hip_roll" range="-0.261799 0.20944" armature="0.441" damping="0.5" frictionloss="0.3" axis="1 0 0"/>
           <body name="R_thigh" pos="0 0 -0.125">
-            <inertial pos="-0.06 0 -0.1867" quat="0.707107 0 0 0.707107" mass="2.46675" diaginertia="0.0378832 0.031766 0.0137973"/>
+            <inertial pos="-0.06 0 -0.1867" quat="0.707107 0 0 0.707107" mass="2.49984" diaginertia="0.0383913 0.032192 0.0139824"/>
             <joint name="r_hip_pitch" range="-1.8326 0.698132" armature="0.441" damping="0.5" frictionloss="0.3" axis="0 1 0"/>
             <geom name="r_thigh" size="0.04 0.155" pos="0.018 0 -0.215" type="capsule"/>
             <body name="R_shank" pos="0 0 -0.42">
-              <inertial pos="0.0355 -0.0013 -0.1027" mass="3.27079" diaginertia="0.056949 0.0612341 0.0164057"/>
+              <inertial pos="0.0355 -0.0013 -0.1027" mass="3.31466" diaginertia="0.0577128 0.0620554 0.0166257"/>
               <joint name="r_knee" range="0 2.35619" armature="0.2018" damping="0.5" frictionloss="0.3" axis="0 1 0"/>
               <geom name="r_shank" size="0.035 0.15" pos="0.014 0 -0.2" type="capsule"/>
               <geom name="r_calf" size="0.045 0.07" pos="-0.06 0 -0.19" type="capsule"/>
               <body name="R_foot" pos="0 0 -0.42">
-                <inertial pos="0.0535 -0.0007 -0.0317" quat="0.707101 -0.00307188 -0.00336595 0.707098" mass="2.7398" diaginertia="0.0211276 0.0150377 0.0111721"/>
+                <inertial pos="0.0535 -0.0007 -0.0317" quat="0.707101 -0.00307188 -0.00336595 0.707098" mass="2.77655" diaginertia="0.021411 0.0152394 0.011322"/>
                 <joint name="r_ankle_pitch" range="-0.785398 0.698132" armature="0.289" damping="0.5" frictionloss="0.3" axis="0 1 0"/>
                 <joint name="r_ankle_roll" solreflimit="0.004" solimplimit="0.95 0.99" range="-0.314159 0.314159" armature="0.0944" damping="0.5" frictionloss="0.3" axis="1 0 0"/>
                 <geom name="r_foot" size="0.12 0.05 0.012" pos="0.06 0 -0.074" type="box"/>
@@ -81,10 +81,10 @@
         </body>
       </body>
       <body name="waistY" pos="0 0 0.028">
-        <inertial pos="0 0.0083 0.092" mass="1.50808" diaginertia="0.00202872 0.0017389 0.00202872"/>
+        <inertial pos="0 0.0083 0.092" mass="1.52831" diaginertia="0.00205593 0.00176222 0.00205593"/>
         <joint name="waist_yaw" range="-1.5708 1.5708" armature="0.137" damping="0.5" frictionloss="0.3"/>
         <body name="torso" pos="0 0 0.092">
-          <inertial pos="-0.0006 0.0007 0.1585" quat="0.702468 0.709508 0.0371409 -0.0419261" mass="17.3155" diaginertia="0.308889 0.211256 0.17745"/>
+          <inertial pos="-0.0006 0.0007 0.1585" quat="0.702468 0.709508 0.0371409 -0.0419261" mass="17.5478" diaginertia="0.313032 0.21409 0.17983"/>
           <joint name="waist_pitch" range="-0.523599 1.0472" armature="0.239" damping="0.5" frictionloss="0.3" axis="0 1 0"/>
           <geom name="torso" size="0.11 0.17 0.13" pos="0 0 0.18" type="box"/>
           <geom name="chest_pad" size="0.044 0.049 0.049" pos="0.1 0 0.22" type="box" mass="0"/>
@@ -92,19 +92,19 @@
             <inertial pos="0 0 0" mass="0.001" diaginertia="1e-05 7.5e-06 1e-05"/>
           </body>
           <body name="L_shoulderP" pos="0 0.17 0.22">
-            <inertial pos="0 0.0857 -0.0178" quat="0.178039 0.684326 0.178039 0.684326" mass="1.43873" diaginertia="0.00162682 0.00136657 0.00125035"/>
+            <inertial pos="0 0.0857 -0.0178" quat="0.178039 0.684326 0.178039 0.684326" mass="1.45803" diaginertia="0.00164864 0.0013849 0.00126712"/>
             <joint name="l_shoulder_pitch" range="-3.14159 1.0472" armature="0.441" damping="0.5" frictionloss="0.3" axis="0 1 0"/>
             <body name="L_upper_arm" pos="0 0.112 -0.04">
-              <inertial pos="0 0 -0.1256" mass="1.20067" diaginertia="0.0032004 0.0032004 0.000641737"/>
+              <inertial pos="0 0 -0.1256" mass="1.21677" diaginertia="0.00324333 0.00324333 0.000650344"/>
               <joint name="l_shoulder_roll" range="-0.261799 3.14159" armature="0.309" damping="0.5" frictionloss="0.3" axis="1 0 0"/>
               <joint name="l_shoulder_yaw" range="-2.61799 2.61799" armature="0.137" damping="0.5" frictionloss="0.3" pos="0 0 -0.1"/>
               <geom name="l_upper_arm" size="0.04 0.085" pos="0 0 -0.135" type="capsule"/>
               <body name="L_forearm" pos="0 0 -0.26">
-                <inertial pos="0 0 -0.1136" mass="4.59194" diaginertia="0.0290676 0.0287747 0.00251105"/>
+                <inertial pos="0 0 -0.1136" mass="4.65353" diaginertia="0.0294574 0.0291606 0.00254473"/>
                 <joint name="l_elbow" range="-2.44346 0" armature="0.104" damping="0.5" frictionloss="0.3" axis="0 1 0"/>
                 <geom name="l_forearm" size="0.038 0.1085" pos="0 0 -0.1485" type="capsule"/>
                 <body name="L_hand" pos="0 0 -0.267">
-                  <inertial pos="0 0 -0.0954" mass="0.488548" diaginertia="0.000979166 0.000979166 0.000391252"/>
+                  <inertial pos="0 0 -0.0954" mass="0.495101" diaginertia="0.0009923 0.0009923 0.0003965"/>
                   <joint name="l_wrist_roll" range="-2.96706 2.96706" armature="0.079" damping="0.5" frictionloss="0.3"/>
                   <joint name="l_wrist_pitch" range="-1.22173 1.22173" armature="0.0122" damping="0.5" frictionloss="0.3" pos="0 0 -0.03" axis="0 1 0"/>
                   <joint name="l_wrist_yaw" range="-0.698132 0.698132" armature="0.0122" damping="0.5" frictionloss="0.3" pos="0 0 -0.03" axis="1 0 0"/>
@@ -114,19 +114,19 @@
             </body>
           </body>
           <body name="R_shoulderP" pos="0 -0.17 0.22">
-            <inertial pos="0 -0.0857 -0.0178" quat="-0.178039 0.684326 -0.178039 0.684326" mass="1.43873" diaginertia="0.00162682 0.00136657 0.00125035"/>
+            <inertial pos="0 -0.0857 -0.0178" quat="-0.178039 0.684326 -0.178039 0.684326" mass="1.45803" diaginertia="0.00164864 0.0013849 0.00126712"/>
             <joint name="r_shoulder_pitch" range="-3.14159 1.0472" armature="0.441" damping="0.5" frictionloss="0.3" axis="0 1 0"/>
             <body name="R_upper_arm" pos="0 -0.112 -0.04">
-              <inertial pos="0 0 -0.1256" mass="1.20067" diaginertia="0.0032004 0.0032004 0.000641737"/>
+              <inertial pos="0 0 -0.1256" mass="1.21677" diaginertia="0.00324333 0.00324333 0.000650344"/>
               <joint name="r_shoulder_roll" range="-3.14159 0.261799" armature="0.309" damping="0.5" frictionloss="0.3" axis="1 0 0"/>
               <joint name="r_shoulder_yaw" range="-2.61799 2.61799" armature="0.137" damping="0.5" frictionloss="0.3" pos="0 0 -0.1"/>
               <geom name="r_upper_arm" size="0.04 0.085" pos="0 0 -0.135" type="capsule"/>
               <body name="R_forearm" pos="0 0 -0.26">
-                <inertial pos="0 0 -0.1136" mass="4.59194" diaginertia="0.0290676 0.0287747 0.00251105"/>
+                <inertial pos="0 0 -0.1136" mass="4.65353" diaginertia="0.0294574 0.0291606 0.00254473"/>
                 <joint name="r_elbow" range="-2.44346 0" armature="0.104" damping="0.5" frictionloss="0.3" axis="0 1 0"/>
                 <geom name="r_forearm" size="0.038 0.1085" pos="0 0 -0.1485" type="capsule"/>
                 <body name="R_hand" pos="0 0 -0.267">
-                  <inertial pos="0 0 -0.0954" mass="0.488548" diaginertia="0.000979166 0.000979166 0.000391252"/>
+                  <inertial pos="0 0 -0.0954" mass="0.495101" diaginertia="0.0009923 0.0009923 0.0003965"/>
                   <joint name="r_wrist_roll" range="-2.96706 2.96706" armature="0.079" damping="0.5" frictionloss="0.3"/>
                   <joint name="r_wrist_pitch" range="-1.22173 1.22173" armature="0.0122" damping="0.5" frictionloss="0.3" pos="0 0 -0.03" axis="0 1 0"/>
                   <joint name="r_wrist_yaw" range="-0.698132 0.698132" armature="0.0122" damping="0.5" frictionloss="0.3" pos="0 0 -0.03" axis="1 0 0"/>
@@ -136,10 +136,10 @@
             </body>
           </body>
           <body name="neckY" pos="0 0 0.295">
-            <inertial pos="0 0.0004 0.075" mass="0.361236" diaginertia="0.000300167 0.00017596 0.000300167"/>
+            <inertial pos="0 0.0004 0.075" mass="0.366081" diaginertia="0.000304193 0.00017832 0.000304193"/>
             <joint name="neck_yaw" range="-1.39626 1.39626" armature="0.0005" damping="0.5" frictionloss="0.3"/>
             <body name="head" pos="0 0 0.075">
-              <inertial pos="0.0456 0 0.0848" mass="0.477162" diaginertia="0.00174925 0.00205977 0.00251519"/>
+              <inertial pos="0.0456 0 0.0848" mass="0.483562" diaginertia="0.00177271 0.0020874 0.00254893"/>
               <joint name="neck_pitch" range="-0.698132 0.698132" armature="0.0005" damping="0.5" frictionloss="0.3" axis="0 1 0"/>
               <geom name="head" size="0.1" pos="0.01 0 0.08"/>
             </body>
@@ -208,6 +208,6 @@
   </sensor>
 
   <keyframe>
-    <key name="home" qpos="0 0 1.14952 1 0 0 0 -4.01713e-06 -8.203e-05 -0.199436 0.376985 -0.142508 0.000107558 1.09995e-05 -9.93948e-05 -0.199329 0.376838 -0.142472 0.000133372 3.19377e-05 0.0073421 0.00386112 1.80554e-06 4.17552e-07 -0.292942 4.70914e-12 0.000510606 9.65455e-08 0.00386112 1.80553e-06 4.17552e-07 -0.292942 4.70905e-12 0.000510606 9.65455e-08 6.8863e-07 0.00253269"/>
+    <key name="home" qpos="0 0 1.14945 1 0 0 0 -5.70398e-06 -8.37864e-05 -0.199383 0.377488 -0.142259 0.000109713 9.91938e-06 -0.000100439 -0.199275 0.377338 -0.14222 0.000135083 3.30337e-05 0.00739669 0.00393842 1.98653e-06 4.26314e-07 -0.292835 3.8108e-12 0.000518364 9.87687e-08 0.00393841 1.98652e-06 4.26314e-07 -0.292835 3.81068e-12 0.000518364 9.87687e-08 7.14183e-07 0.00256277"/>
   </keyframe>
 </mujoco>

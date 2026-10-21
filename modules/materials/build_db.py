@@ -8,7 +8,9 @@ S={
  "MIF4140QT":"https://www.makeitfrom.com/material-properties/Quenched-and-Tempered-4140-Cr-Mo-Steel",
  "MIFPC":"https://www.makeitfrom.com/material-properties/Polycarbonate-PC",
  "MIFPTFE":"https://www.makeitfrom.com/material-properties/Polytetrafluoroethylene-PTFE",
- "REPO_AL7075":"v3/datasheets/al7075.pdf (repo copy; density 2.81 used repo-wide)",
+ "MILHDBK5H":"MIL-HDBK-5H (1 Dec 1998, public domain), https://ssrl-uark.com/MILHDBK5H.pdf : 7075 sheet/plate T6/T651 table p. 3-346 (Table 3.7.4.0(b1) [table no. inferred, title glyphs unreadable in text layer]); T7351 plate table p. 3-348 (Table 3.7.4.0(b3) [inferred]). Extracted via pdftotext, 2026-10-21. VERIFIED.",
+ "MMPDS_PLATE_UNVERIFIED":"https://www.scribd.com/document/932439234/Cove2U-Analysis-G730PLOAD0R1A-F0R2-W0R2-f1-Correct-Loads-A (third-party stress report quoting MMPDS, AMS-QQ-A-250/12 plate 0.5-1.0 in; UNVERIFIED: not MMPDS itself)",
+ "MMPDS01_FORGING":"http://files.engineering.com/files/3c296b91-f1e2-478d-a42d-61448c22faf7/AR-MMPDS-01_table3.7.6.0e2.pdf (MMPDS-01 Table 3.7.6.0(e2), 7075-T73 die forging; extract hosted by a third party)",
  "DP490_A":"https://multimedia.3m.com/mws/media/2409614O/3m-scotch-weld-epoxy-adhesive-dp490.pdf (via modules/legs/BOND_SPEC.md)",
  "DP490_B":"https://multimedia.3m.com/mws/media/82790O/dp490-scotch-weld-tm-adhesive.pdf (via BOND_SPEC.md)",
  "SKF_GE12C":"modules/actuators/datasheets/skf_ge12c.html (SKF https://www.skf.com/products/plain-bearings/spherical-plain-bearings-rod-ends/radial/productid-GE%2012%20C)",
@@ -48,16 +50,40 @@ S={
  "EC9323":"https://multimedia.3m.com/mws/media/820935O/3m-scotch-weld-9323-b-a.pdf ; service range: https://www.viba.nl/media/files/tds/tds0001188.pdf",
  "DP420":"https://multimedia.3m.com/mws/media/2365743O/3m-scotch-weld-epoxy-adhesive-dp420-black.pdf",
  "DP460":"https://multimedia.3m.com/mws/media/2365880O/3m-scotch-weld-epoxy-adhesive-dp460-off-white.pdf ; https://bac-online.com/content/PDF/DP460-TDS.pdf",
+ "LUX_DS490":"https://www.luxfermeltechnologies.com/wp-content/uploads/2026/05/DS-490-Elektron-43-0526.pdf (Elektron 43 extruded T5; A-basis L spec minima; states MMPDS-08 A/B for extrusion and plate)",
  "R027":"modules/RULINGS.md R-027 (PALSUN/LEXAN, Toray 3900, Easy Composites XC110 citations)",
 }
 def M(id,name,where,rho=None,E=None,ys=None,uts=None,fat=None,elong=None,tmax=None,other=None,cost=None,src=(),notes=""):
   return dict(id=id,name=name,used_in=where,density_g_cc=rho,E_GPa=E,yield_MPa=ys,UTS_MPa=uts,fatigue_MPa=fat,elongation_pct=elong,
     T_max_mech_C=tmax,toughness=None,other=other or {},cost_hint=cost,sources=list(src),notes=notes)
 DB=[
- M("AL7075T6","Al 7075-T6/T651","femur/tibia tubes, collars, sleeves, clevises, tongue, fork, foot, levers, palm (P-021), pelvis shell, yokes",
-   2.81,70,480,560,160,7.9,200,{"shear_MPa":330,"CTE_um_mK":23,"calomel_mV":-750},"base metal price 10% rel. (MIF)",["REPO_AL7075","MIF7075"],
-   "MIF density rounds to 3.0; repo 2.81 kept. Fatigue = MIF value (cycle basis not stated). K1C not verified. SCC-susceptible in T6 (short transverse)."),
- M("AL7050T7451","Al 7050-T7451 (candidate)","alternative for 7075 plate parts",3.1,70,480,540,200,10,190,{"shear_MPa":310},"10% rel.",["MIF7050"],
+ M("AL7075T6","Al 7075-T6/T651 [typical (MakeItFrom), not A/B-basis]","femur/tibia tubes, collars, sleeves, clevises, tongue, fork, foot, levers, palm (P-021), pelvis shell, yokes",
+   2.81,70,480,560,160,7.9,200,{"shear_MPa":330,"CTE_um_mK":23,"calomel_mV":-750},"base metal price 10% rel. (MIF)",["MIF7075"],
+   "TYPICAL (MakeItFrom), NOT A/B-basis (R-123). Static allowable 480/1.5 = 320 MPa. VERIFIED MIL-HDBK-5H A/B Fty (ksi -> MPa): T651 plate (AMS 4045/QQ-A-250/12) 0.500-1.000 L 70/72 (483/496), LT 68/70; 1.001-2.000 L 69/71 (476/490), LT 67/69 (462/476), ST n/a (ST tabulated from 2.001 in: 59/61, SCC rating D); 2.001-2.500 L 66/68. T7351 plate (AMS 4078/QQ-A-250/12) 0.500-1.000 L/LT 57/59 (393/407); 1.001-1.500 L/LT 57/59 (393/407); 1.501-2.000 L/LT 55/57 (379/393), ST 52/54 (359/372); 2.001-2.500 L 52/55. Ftu T7351 1.001-1.500 L 67/69, 1.501-2.000 L 66/68. R-125(b) RULE: single-load-path 7075 parts are checked at A-basis Fty/1.5 for their actual product form, thickness band (stock thickness at heat treat) and loaded grain direction; when unverified, the lower value governs. Multi-path parts keep 480/1.5 = 320 MPa. MIF density rounds to 3.0; repo-wide 2.81 kept (no cited source; MIF 3.0 2-sig-fig, nominal 2.81 handbook value [EST]). Fatigue = MIF value (cycle basis not stated). K1C not verified. SCC-susceptible in T6 (short transverse)."),
+ M("AL7075T7351","Al 7075-T7351 plate (AMS 4078) [MIL-HDBK-5H A/B, verified]","ankle cross (job 7, R-125(b) single path)",2.81,71,"A/B L/LT: 393/407 (0.5-1.5 in); 379/393 (1.501-2.0 in); ST 359/372 (1.501-2.0)","A/B L: 462/476 (1.001-1.5 in); 455/469 (1.501-2.0 in)",None,None,None,
+   {"single_path_allowable_MPa":"262 (<=1.500 in stock) / 253 (1.501-2.000 in, L/LT) / 239 (1.501-2.000 in, ST)","E_note":"10.3e3 ksi = 71 GPa (MIL-HDBK-5H); use 70 for stiffness gates (R-123)"},None,["MILHDBK5H"],
+   "R-125(b) rule applies. Allowable = A-basis/1.5 for the stock thickness band at heat treat and the loaded grain direction. SCC rating of T73-class tempers is better than T651 (MIL-HDBK-5H footnote rates T651 ST as D)."),
+ M("AL7075T651_A","Al 7075-T651 plate (AMS 4045 / QQ-A-250/12) A-basis by thickness [MIL-HDBK-5H p. 3-346, Table 3.7.4.0(b1) inferred]","all 7075 plate parts (stock thickness per drawing; not stated in repo except ankle cross <=1.5 in)",2.81,71,
+   "A Fty L/LT[/ST] MPa: 0.250-0.499 in 476/462; 0.500-1.000 483/469; 1.001-2.000 476/462 (ST not tabulated); 2.001-2.500 455/441/407; 2.501-3.000 434/421/386",
+   "A Ftu L/LT[/ST]: 0.250-0.499 531/538; 0.500-1.000 531/538; 1.001-2.000 524/531; 2.001-2.500 517/524/483; 2.501-3.000 490/496/455",None,None,None,
+   {"Fbry_A_eD1.5/2.0_MPa":"0.250-0.499 669/786; 0.500-1.000 690/807; 1.001-2.000 690/807; 2.001-2.500 676/779; 2.501-3.000 648/752","R125b_single_path_MPa (A Fty/1.5, min L/LT unless ST loaded)":"0.250-0.499 308; 0.500-1.000 313; 1.001-2.000 308; 2.001-2.500 294 (ST 271); 2.501-3.000 280 (ST 257)","multi_path_MPa":320},None,["MILHDBK5H"],
+   "Thickness = stock thickness at heat treat. LT governs in-plane unless the load direction is controlled. T651 ST SCC rating D (MIL-HDBK-5H fn b). Bearing values are dry-pin."),
+ M("AL7075T651_THICK","Al 7075-T651 plate >3.0 in, A-basis [MIL-HDBK-5H p. 3-346, Table 3.7.4.0(b1) inferred; table ends at 4.000 in]","knee centre web (stock thickness to be stated by Legs)",2.81,71,
+   "A Fty L/LT/ST MPa: 3.001-3.500 in 414/400/372; 3.501-4.000 in 386/372/345. >4.000 in: NOT tabulated for T651 in 5H",
+   "A Ftu L/LT/ST: 3.001-3.500 483/490/448; 3.501-4.000 455/462/421",None,None,None,
+   {"Fbry_A_eD1.5/2.0_MPa":"3.001-3.500 614/717; 3.501-4.000 579/676","R125b_single_path_MPa":"3.001-3.500: L 276 / LT 267 / ST 248; 3.501-4.000: L 257 / LT 248 / ST 230","closest_beyond_4in":"none for T651; T7351 p. 3-348 tabulates only to 4.000 in (3.001-3.500 S Fty L/LT 49, ST 47 ksi; 3.501-4.000 S 48/48/46 ksi = 331/331/317 MPa -> 221/221/211 single-path)"},None,["MILHDBK5H"],
+   "T651 ST SCC rating D (5H fn b): for a thick knee web with sustained ST load prefer T7351 (lower yield) or 7050-T7451 plate. Stock thickness at heat treat sets the band."),
+ M("AL7050_TUBE","Al 7050 femur tube ø50x1.2 (model_v4: '7050-T7451'). T7451 is a PLATE temper; no 7050 tube table in MIL-HDBK-5H (T74511 note: excluding tubing). Closest form: extrusion","femur tube",2.83,71,
+   "T73511 extrusion (AMS 4341) <=1.000 in, S-basis: Fty L/LT 414/393 [p. 3-314]; T76511 extrusion (AMS 4340) <=0.499 in, A/B: Fty L 469/490, LT 462/476 [p. 3-316]",
+   "T73511 S: Ftu L/LT 483/469; T76511 A: Ftu L/LT 531/524",None,None,None,
+   {"Fbry_eD1.5/2.0_MPa":"T73511 S 565/669; T76511 A 648/752","R125b_single_path_MPa":"T73511 262 (S LT/1.5, recommended temper for SCC) / T76511 308","multi_path_MPa":"T73511 276 / T76511 313"},None,["MILHDBK5H"],
+   "Order as 7050-T73511 (or T76511) extruded/drawn tube; there is no tabulated A-basis for 7050 tube in 5H, so the extrusion values stand in [closest form]. Density 2.83 from 5H 0.102 lb/in3 [EST: not re-read]. Model's T7451 label must change."),
+ M("AL6061T6_A","Al 6061-T6/T651 A-basis [MIL-HDBK-5H pp. 3-252/3-253/3-255]","neck deck sheet, 6 mm cold plates, any 6061 tube",2.71,69,
+   "Sheet T6 0.010-0.249 in A: L 248, LT 241; plate T651 0.250-2.000 A: L 248, LT 241 (2.001-4.000 LT 241); drawn tube T6 0.025-0.500 wall S: L 241",
+   "Sheet/plate A: 290 (L/LT); tube S 290",None,None,None,
+   {"Fbry_eD1.5/2.0_MPa":"sheet/plate A 345/400; tube S 338/386","R125b_single_path_MPa":161,"multi_path_MPa":"184 (R-125, typical 276/1.5)"},None,["MILHDBK5H"],
+   "R-125 '241' confirmed = 35 ksi LT A-basis (sheet/plate) and tube S-basis. Single-path limit 241/1.5 = 161 MPa."),
+ M("AL7050T7451","Al 7050-T7451 (candidate) [R-125(b): single-path parts need the A-basis value for the product form]","alternative for 7075 plate parts",3.1,70,480,540,200,10,190,{"shear_MPa":310},"10% rel.",["MIF7050"],
    "MIF density 2-sig-fig. Overaged temper chosen for SCC/exfoliation/toughness balance (MIF text)."),
  M("AL6061T6","Al 6061-T6","head neck deck sheet",2.7,69,270,310,96,10,170,{"calomel_mV":-740},"9.5% rel.",["MIF6061"]),
  M("TI64","Ti-6Al-4V Grade 5","ankle cross",4.4,110,"910-1110","1000-1190","530-630","8.6-11",330,{"CTE_um_mK":8.9},"36% rel.",["MIFTi64"]),
@@ -113,6 +139,9 @@ DB=[
  M("EC9323","3M Scotch-Weld EC-9323 B/A epoxy","R-110 candidate (rejected)",None,None,None,None,None,None,None,{"OLS_23C_MPa":36,"OLS_80C_MPa":22,"OLS_120C_MPa":4,"OLS_CFRP_23C_MPa":28,"service_C":"-55 to 82"},None,["EC9323"],"Cliff between 80 and 120C; 82C service ceiling gives no margin."),
  M("DP420","3M Scotch-Weld DP420 epoxy","R-110 candidate (rejected)",None,1.87,None,None,None,None,None,{"OLS_82C_MPa":2.7,"OLS_49C_MPa":12.9,"Tg_C":81},None,["DP420"],"10% retention at 82C: rejected."),
  M("DP460","3M Scotch-Weld DP460 epoxy","R-110 candidate (rejected)",None,None,None,None,None,None,None,{"OLS_23C_MPa":24,"OLS_82C_psi":"700-1400 (15-60 min soak, legacy TDS)"},None,["DP460"],"Low hot strength; Tg not on current TDS: rejected."),
+ M("MG_EL43_T5","Elektron 43 (WE43C, UNS M18434) extruded T5, AMS 4485","actuator housings (R-131 candidate)",1.83,44.1,"195 A-basis L (typ L 243, T 183)","303 A-basis L (typ L 352, T 305)","195 max @R0.1 5e7 (typ)","6 (A min) / 11.5 typ",250,
+   {"Fbry":"not published","R125b_single_path_MPa":"130 (L, extruded bar) / 98 [EST] transverse or plate","k_W_mK":57.6,"CTE_um_mK":25.6},None,["LUX_DS490"],
+   "A-basis values are longitudinal extrusion only (DS-490). Plate and transverse A-basis are in MMPDS-08 (not accessed). Not in MIL-HDBK-5H. See MG_GALVANIC_PLAN.md."),
  M("BRG_STEEL","Bearing steel (GE 12 C inner ring, CRBH, IKO)","bearings",None,None,None,None,None,None,None,{},None,["SKF_GE12C"],"Catalog parts; masses from catalogs."),
 ]
 json.dump({"version":"R1 2026-10-14","owner":"RL Materials","sources":S,"materials":DB},open("MATERIALS_DB.json","w"),indent=1)
@@ -122,5 +151,5 @@ L=["# MATERIALS_DB (RL Materials R1, 2026-10-14)","Generated by `build_db.py`. E
 for m in DB:
   L.append("| "+" | ".join([m["id"],m["name"],m["used_in"],f(m["density_g_cc"]),f(m["E_GPa"]),f(m["yield_MPa"]),f(m["UTS_MPa"]),f(m["fatigue_MPa"]),f(m["elongation_pct"]),f(m["T_max_mech_C"]),
     "; ".join(f"{k} {v}" for k,v in m["other"].items()) or "—",f(m["cost_hint"]),", ".join(m["sources"]) or "none"])+" |")
-L+=["","Notes:"]+[f"- **{m['id']}**: {m['notes']}" for m in DB if m["notes"]]+["","Fracture toughness (K1C) for all metals: NOT verified this round.","","## Sources"]+[f"- {k}: {v}" for k,v in S.items()]
+L+=["","Notes:"]+[f"- **{m['id']}**: {m['notes']}" for m in DB if m["notes"]]+["","**R-125(b) allowable rule (Arbiter 61122a8):** single-load-path 7075 parts are checked at A-basis Fty/1.5 for their product form, stock thickness band and loaded grain direction (MILHDBK5H tables), and the lower value governs when unverified. Multi-path parts keep 320 MPa (typical 480/1.5).","","Fracture toughness (K1C) for all metals: NOT verified this round.","","## Sources"]+[f"- {k}: {v}" for k,v in S.items()]
 open("MATERIALS_DB.md","w").write("\n".join(L)+"\n")

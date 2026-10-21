@@ -107,3 +107,102 @@ Checked against the R-065 criteria with sim/v3:
 **Job 2: T-030/T-031** (Controls `modules/controls/fall/`, d43f14a, 2422c87).
 - Tuck B instead of the −30 tuck. Pad lever 0.064 m (pitch), e ≤ 0.010 (roll).
 - Log pitch-gear torque (gate 369), CRBH P0 (s0 ≥ 2), hand–thigh distance, and impact points outside the core.
+
+**Job 8 add-on (Arms R13, R-120): pad stand-off + CRBH 7013 A FEA.** Queue via Robot Lab on the bryan PC, one Grok Build session at a time. Not launched. Supersedes the job1 R10 case (Z −64, 6013), which must not run.
+- Geometry: `modules/arms/R13_STANDOFF_7013.md` + `pad_r13.json`, and ID `modules/design/pad_r10_standoff.json` (00ff254) with the Arms flange (OD 70/ID 44 × 5, 8 × M4 12.9 PCD 62 + 2 × Ø4 dowels). Hub Ø70/Ø54. CRBH 7013 A as a bearing element (C0 27.7 kN, dp 85). Housing seat OD 108/Ø100.
+- Load: R10 core pressure patch 54.8², 7.0 kN peak at 15° (Fn 6.76, Fs 1.81, applied axial and downward = worst), pad centre Z −20, contact Y 102.3, e = 0/5/10 mm. Sensitivity case mu 0.15 (not credited).
+- Report: s0 (≥ 2.0 at e5), Mx raw and CSG-25 SF at fault ×1.05 (≥ 1.0), rib weak-axis and face-pocket von Mises ≤ 335 MPa, flange bolt/dowel shear, no M4 separation, pad deflection (feeds the e stack, 0.5 mm assumed).
+- Clash in CAD: pad + stand-off + housing Ø108 axial gap ≥ 3 mm, abduction −15…180 × pitch with the head shell (not the sphere), overhead pitch ≤ −150 / roll ≥ 170 vs the torso cover, tuck B, ID cover trims.
+- Output: `modules/arms/results/job8_r13_*` md/json/png.
+
+**Job 8b (Arms R14): stand-off R11/R14 FEA re-run.** Not launched. **Do not queue until the Arbiter rules on the R14 placement blocker** (`R14_STANDOFF_VERIFY.md`): the R-120 geometry intersects the CRBH 7013 A when the roll axis is X.
+- Geometry: ID `design/pad_r11_standoff.json` (ec12542) + Arms R14 (flange OD76, bore Ø36, 2 × Ø6 m6 on PCD57, 8 × M4 12.9 PCD62, 3 × Ø8 plate access holes, R3 fillets). Use `arms/cad/r14/standoff_r14.step`, or the ruled placement (e.g. W2 wrap carrier) once decided. Housing `housing_7013_r14.step` coaxial with X.
+- Loads and gates as job1_pad_r11/CASE.md (7.0 kN at 15°, axial + down, e 0/5 qualified, 10 informative; μ 0.15 sensitivity). Gate SF ≥ 1.5 vs 503 on box, plate (around the access holes), ring ligaments and root land. Deflection ≤ 0.69 mm as booked in the e stack (≤ 1 mm hard). Dowel shear, bearing at the OD76 edge, bolt separation.
+- Model the flange/hub as elastic (not a fixed root at Y0), including the CRBH stiffness, so the root-on-bore issue shows.
+- CAD clash (needs these models; Arms supplies the first three as STEP via `cad/r14/r14_cad.py`):
+  - stand-off, housing 7013/OD108, pad envelope (Arms)
+  - shoulder cover / cover window (ID, `design/cad/shoulder_pad`)
+  - head shell and torso cover (Head/ID: **not yet existing**, minimum = outer-surface STEP)
+  - shoulder_P bracket (Arms, to be made)
+  - Checks: ≥ 3 mm everywhere through abduction −15…180 × pitch, tuck B, and overhead pitch ≤ −150 / roll ≥ 170.
+- Output: `modules/arms/results/job8b_*`.
+- Job 8b update (2026-10-21): the head/torso cover STEPs now exist: `modules/design/cad/covers/head_shell.step` and `torso_cover.step`. They are faceted, in mm, in the site frame (Y-up), so transform them to the arms frame (X roll axis, Y outboard, Z up) before the clash check. The torso is a coarse 28-triangle envelope, so treat its clearances as indicative. Real housing STEP: `arms/cad/r14/housing_7013_real_coaxX.step`. **Job 8b stays on hold until the Arbiter's placement ruling.**
+
+**Job 8b: RELEASED (R-125, W2).** This supersedes the R14 "hold" and the R11/R-120 geometry. Route via Robot Lab, one Grok Build session at a time.
+- Geometry: `arms/cad/r15/carrier_w2.step` (one-piece 7075-T6 carrier + flange OD76/ID36 × 5, 8 × M4 12.9 PCD62, 2 × Ø6 m6 dowels PCD57). Elastic `hub_r15.step`. CRBH 7013 A as a bearing element (C0 27.7 kN, dp 85) in `housing_7013_coaxX.step`. Pad envelope `pad_envelope_w2.step`: R10 core 54.8² × 75.3 + 0.5 tray, contact Y 138.8, pad centre X0/Z0. Params in `r15_w2.json`.
+- Loads: 7.0 kN at 15° (Fn 6761, Fs 1812), axial and down, e = 0 / 2.4 (drawing limit) / 5 (informative). μ 0.15 sensitivity is not credited.
+- **Gates:** vM ≤ 320 MPa (arm root, plate root and ribs, flange ligaments), s0 ≥ 2.0 at e worst (stack 1.92 mm + FE e under load), Mx ≤ 351 N·m, deflection ≤ 1 mm. **Report pad X displacement under load (e)**, plus dowel/bolt slip and separation.
+- Hand expectations: arm 289 MPa, plate 295, Mx 251, s0 1.999 at e2.4.
+- Clash (CAD): carrier vs OD108 ≥ 3 mm (nominal 3.0); head shell and torso cover (`design/cad/covers`, site Y-up; transform x = x_s, y = −z_s, z = y_s − 57.1). Arms light check: torso penetration at roll ≥ ~118°.
+- Output: `modules/arms/results/job8b_*`.
+- **Job 8b gates per R-127 (5c203ad), supersede the above:**
+  - vM ≤ **294 MPa** (≤ **262** if Materials cannot cite T651 A-basis at stock thickness)
+  - drawing e ≤ **2.3** (Arms notes the s0 = 2.0 crossing at 2.246 mm for gap 3.4, so proposes 2.2)
+  - plate gap **3.4 ± 0.2** nominal, ≥ **3.0 loaded** (report the loaded gap)
+  - Mx ≤ 351, s0 ≥ 2.0, deflection ≤ 1 mm
+  - Geometry: `cad/r15/carrier_w2.step` (R-127 revision: gap 3.4, arm 60 × 4.0, R6 plate-root fillet on the drawing).
+  - Hand expectations: arm 243, plate 255 (R6) / 294 (R3) MPa.
+  - Roll soft limit 115° (ID: torso contact 132°).
+
+**Stock / grain (R-128):** see `modules/arms/STOCK_GRAIN.md`, which gives stock thickness, grain direction and single-path limit for every Arms 7075 part. An unstated row takes 257 MPa.
+- **Job 8b gate per R-128 (9e49b7a), supersedes 294/262 (R-127):**
+  - Carrier stock is 7075-T651 **2.5 in plate**, grain L = Y (arm), LT = X, ST = Z, so the single-path vM gate is **294 MPa** (2.001–2.5 in, LT). The ≤ 2 in band (308) is not available: the carrier is 73 × 63.4 × 62.
+  - Report stresses by grain axis (L = Y, LT = X), and any ST (Z) component against 271.
+  - Other gates unchanged: e ≤ 2.3 (Arms proposes 2.2), gap 3.4 ± 0.2, ≥ 3.0 loaded, Mx ≤ 351, s0 ≥ 2.0, deflection ≤ 1 mm.
+**Job 8c (Arms R16, option C(b)): CF forearm link FEA.** Not launched. Run after Job 8b, via Robot Lab, one Grok Build session at a time.
+- Geometry:
+  - CF tube Ø70/67 × 194: roll-wrapped 0/90 with an optional ±45 braid overwrap, laminate per `cf_links_r16.py` [E 75 / G 5 GPa EST until Materials cites]
+  - 2 × 7075-T651 spigots Ø67/64, 20 mm bond length, 0.15 mm DP460 bondline
+  - 0.8 mm 7075 heat-spreader sleeve over 120 mm
+  - elbow and wrist end fittings per model_v4
+  - upper-arm CF is rejected (R16), so it is not run
+- Loads: bending 78 N·m (fall) and 69 N·m (elbow cap), torsion 36 N·m (wrist roll), P-042 20 kg carry (elbow 14.6), all combined at worst phase.
+- Gates:
+  - 7075 fittings vM ≤ the R-128 band for their stock (`STOCK_GRAIN.md`; spigots 1.0 in plate → 313; unstated 257), R-125/R-127 fall/fault = min(A-band, Sy/1.1)
+  - bond peak shear ≤ 4.6 MPa and peel reported
+  - CF ply failure index (Tsai-Wu) ≤ 1/1.5
+  - stiffness: EI ≥ 0.8 and GJ reported vs 7075 (Controls to set a GJ floor)
+  - thermal: hand-off to Thermal ladder B with the sleeve
+- Output: `modules/arms/results/job8c_*`.
+
+### §G status after R-132 / R-133 (2026-10-21). Supersedes the earlier Job 8b and 8c gate lines.
+**Job 8b: RELEASED (W2 carrier, `cad/r15/carrier_w2.step`).**
+- Drawing **e ≤ 2.2 mm** (s0 = 2.0 at e = 2.246; worst stack 1.92).
+- Stock 7075-T651, 2.5 in plate, grain L = Y / LT = X / ST = Z.
+- vM gates: **294 MPa LT** (governing in-plane), **271 MPa for any ST-loaded (Z) feature**.
+- Gap 3.4 ± 0.2 nominal, ≥ 3.0 loaded. Mx ≤ 351 N·m. s0 ≥ 2.0 at e worst (stack + FE e under load). Deflection ≤ 1 mm.
+- R6 plate-root fillet. Report stresses by grain axis.
+- Roll soft limit is 127° (R-133).
+
+**Job 8c: FINAL, QUEUEABLE by Robot Lab (R-132 §4). CF forearm with a 0.8 mm 7075 heat-spreader sleeve.**
+- **Geometry:**
+  - CF tube Ø70/67 × 194, roll-wrapped 0/90; E 75 / G 5 GPa until Materials cites
+  - 2 × 7075-T651 spigots Ø67/64 (1.0 in plate → 313 MPa band), 20 mm DP460 bond each end, 0.15 mm bondline
+  - **0.8 mm 7075 inner sleeve over the 120 mm flexor-motor zone, bonded**
+  - elbow and wrist end fittings per model_v4
+  - galvanic isolation scrim in the bondline (Materials)
+- **Loads:** bending 78 N·m (fall) and 69 N·m (elbow cap); torsion 36 N·m (wrist roll); P-042 20 kg carry (elbow 14.6); combined at worst phase.
+- **Gates (R-132):**
+  - 7075 fittings and sleeve vM ≤ the R-128 band for their stock (`STOCK_GRAIN.md`; unstated 257); fall = min(A-band, Sy/1.1)
+  - bond peak shear ≤ 4.6 MPa, peel reported
+  - CF Tsai-Wu FI ≤ 1/1.5
+  - EI ≥ 0.8 × 7075
+- **Torsional stiffness vs Controls' gate (8f80c42, `modules/controls/arm/FOREARM_TORSION_REQ.md`):**
+  - Gate 1: forearm assembly stiffness (tube + fittings + bond) **k_t ≥ 2.9 kN·m/rad**.
+  - Gate 2: first torsion mode with the CSG-14-100 wrist-roll gear in series (4.7 kN·m/rad) and the payload inertia: **≥ 15 Hz** at 0.2 kg·m² (10 kg single-hand T5), and **≥ 40 Hz** hand-only (3.8e-4 kg·m²).
+  - Hand calc at CF 9.8: series stiffness 3.18 kN·m/rad, so **20.1 Hz** at T5 (Controls estimates ≈ 20.1, a pass) and **460 Hz** hand-only.
+  - 8c must report both: the FE assembly k_t and both modes.
+  - The ±45° braid overwrap re-run happens only if the FE assembly k_t < 2.9 (mass at full).
+- **Thermal:** hand off the sleeve geometry to Thermal for ladder B. The Job 8c pass alone does not release credit (R-132: booked 0 until Job 8c, Thermal and Materials all sign off).
+- **Output:** `modules/arms/results/job8c_*`.
+**Job 8d (Arms R17): pocketed elbow clevis + roll-yaw link FEA.** Not launched. Run after 8b/8c, via Robot Lab.
+- Geometry: needs Arms CAD (to make from `R17_CLEVIS_LINK.md`):
+  - clevis: base 3 mm floor, 4 mm rims, tube boss; lugs 9 mm tapered
+  - link: box 60 × 40 × 50, 4 mm wall, solid bolt lands
+- Loads: upper-arm fall 104 N·m; elbow cap 69 N·m; lug reaction 520 N + 78 N·m couple; yaw torque 70 N·m; 20 kg P-042 carry.
+- Gates:
+  - clevis 2.5 in T651: 294 LT / 271 ST
+  - link 2.0 in T651: 308 (ST-loaded features 271)
+  - fall = min(A-band, Sy/1.1)
+  - deflection at the elbow axis ≤ 0.5 mm [EST], to be confirmed by Controls
+  - report CAD mass

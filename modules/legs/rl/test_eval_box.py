@@ -88,7 +88,37 @@ def test_carry_box_places_payload_at_p042():
 def test_r118_mass_nominal_and_corners():
     import randomize_consts as rc
     m, _ = eb.load_box(0.0)
-    assert abs(float(np.sum(m.body_mass)) - 67.1) < 1e-6
+    assert abs(float(np.sum(m.body_mass)) - 68.0) < 1e-6
     m65, _ = eb.load_box(0.0, robot_kg=65.0)
     assert abs(float(np.sum(m65.body_mass)) - 65.0) < 1e-6
     assert eb.MASS_CORNERS == rc.ROBOT_MASS_RANGE == (65.0, 68.5)
+
+
+def test_obs_clip_matches_train_and_is_applied():
+    import re
+    src = open(os.path.join(HERE, 'train.py'), encoding='utf-8').read()
+    assert float(re.search(r'^OBS_CLIP = ([0-9.]+)', src, re.M).group(1)) == eb.OBS_CLIP == 5.0
+    w = [(np.eye(3), np.zeros(3)), (np.eye(3), np.zeros(3))]
+    mean, std = np.zeros(3), np.full(3, 1e-6)
+    a_big = eb.policy_action(np.array([1.0, 0, 0]), w, mean, std)       # raw z = 1e6
+    a_clip = eb.policy_action(np.array([5e-6, 0, 0]), w, mean, std)     # raw z = 5
+    assert np.allclose(a_big, a_clip)
+
+
+def test_knee_peak_metric_and_thermal_report():
+    assert eb.KNEE_PEAK_NM == 258.0
+    assert eb.knee_peak_ok({'knee_peak_nm': [243.5, 199.4]})
+    assert not eb.knee_peak_ok({'knee_peak_nm': [260.0, 199.4]})
+    log = [[(80.0, 5.0), (40.0, 5.0)]] * 500   # 10 s at 50 Hz
+    rep = eb.knee_thermal_report(log, eb.CTRL_DT)
+    assert len(rep) == 2 and 'error' not in rep[0]
+    assert rep[0]['peak_winding_C'] > rep[1]['peak_winding_C'] > 34.0
+    assert rep[0]['target_C'] == 120.0
+
+
+def test_walk_replay_reports_knee_metrics(box):
+    pol = eb.load_policy(os.path.join(HERE, 'policy_walk_a.npz'))
+    s, _ = eb.run_episode(box, pol, GAINS, REF, cmd=np.array([1.2, 0.0, 0.0]), seconds=2.0,
+                          mode='gait', payload_frac=None)
+    assert len(s['knee_peak_nm']) == 2 and max(s['knee_peak_nm']) <= eb.KNEE_PEAK_NM + 1e-6
+    assert 'peak_winding_C' in s['knee_thermal'][0]

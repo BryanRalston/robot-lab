@@ -489,3 +489,37 @@ Torso frame = waist_pitch origin; x forward, y left, z up. Layout [EST until CAD
 - O-T2 approved on citation (§13.1); O-T3 → contactor (§13.2); O-T5 re-rate proposed (§13.5).
 - O-T7: file delivered (§15.7); Controls to merge.
 - **O-T7 (Legs/Controls):** sim torso 18.762 kg should be re-split (pack 8.75 in chest) when the sim is updated.
+
+### 25.1a R-103 sternum mass reconciliation (2026-10-21)
+| Line | Arbiter ledger | Physical [EST] | Note |
+|---|---|---|---|
+| R-093 P-052 plate | +0.058 | 0 (plate deleted) | replaced by package below |
+| R-098 skin package (bezel 0.017, gasket, edge seal, TPU film, blend, 4 captive M4) | −0.009 (0.040 vs 0.058 at half credit) | +0.040 | |
+| R-095 2K PU clear coat | +0.008 | +0.008 | |
+| CF shell cut-out 120×120 (R-094) | not carried (withdrawn with R-094) | −0.045 | missing credit |
+| **Total** | **+0.057** | **+0.003** | |
+- Torso's earlier +0.028 is withdrawn. Its errors: (1) the ring at 0.015 instead of ID's 0.017, and the gasket, seal, blend and captives left out (undercount ≈0.013); (2) film and clear coat both counted, but R-098 makes them alternatives (double count 0.005); (3) the shell cut-out taken at full credit.
+- **True number at ledger rules: +0.057 − 0.0225 (shell cut-out at half credit) = +0.0345 ≈ +0.035 kg.** No double count in the Arbiter's +0.057; it only lacks the shell credit. The film credit (−0.005) waits for a cited mass per R-098. Request to the Arbiter: carry +0.035, full credit to +0.003 once weighed.
+
+### O-T5 CLOSED (2026-10-21)
+Rated on the kitting duty cycle at **4.55 h**; no bigger pack.
+
+
+### R-128 (9e49b7a) stock, grain and load-path classification (2026-10-21)
+| Part | Stock | Grain | Path | Allowable (MPa) |
+|---|---|---|---|---|
+| Shoulder bulkhead, 12 mm web + 101×101 land + integral 60×6 rib (with posts) | 7075-T651 plate 3.0 in (76 mm) | L along y (span); LT/ST used | **single** (only chest→torso and shoulder→torso path) | **257** (ST 2.501–3.0 in; M8 flange clamp is through-thickness) |
+| Pelvis incl. hip/waist hardpoint nodes | 7075-T651 plate 2.5 in (63.5 mm) | L along y | **single** (only legs↔torso path) | **271** (ST, through-thickness hip/waist bolts) |
+| Waist ring | 7075-T651 plate 1.5 in [EST] | L along y | **single** (waist torque path) | **271** (ST, ≤2.0 in) |
+| Pack rails + latch | 7075-T651 plate 0.75 in | L along x (rail axis) | multi (2 rails) | 320 |
+| Partition | CFRP QI 1.0 mm | 0/±45/90 | multi / secondary | skin 300 [EST] |
+| Torso shell | CFRP 2.0 mm | QI | multi / secondary | skin 300 [EST] |
+| Sternum land inserts, EtherCAT bosses | in the bulkhead / partition | – | carried by the parent | parent |
+- Applied in fea_job3.yaml/.py and fea_job3b.yaml as per-part allowables. The script refuses a single-path metal part without one. Drawings state stock and grain as above; if the drawing fixes grain L, the L value may be used only after the R-128 table is checked.
+
+### Cover vents and Thor clearance (ID e874653 decisions, 2026-10-21)
+- Width held at 340 at z 220 (ID). Shoulder-bay vents moved onto the sloped side panel (y ≈ ±141…±167). Slots are horizontal, 3.5 mm wide (≥3 mm), 6 mm pitch.
+  - Inlet: z 105–155, 3 columns (x −60…60), 8 rows, **30.2 cm²/side**.
+  - Outlet: z 160–214, 2 columns (x ±62…±102, clear of the Ø110 opening), 9 rows, **25.2 cm²/side**. Both meet A35 ≥25 cm² (projected; the true area on the slope is slightly larger).
+  - IP2X: a 12 mm finger cannot enter a 3.5 mm slot; live parts are kept ≥80 mm behind the slots. Bays stay clear of the Thor exhaust (upper back).
+- Thor plus A41 duct above z 265: |y| ≤ 101 (130 × 200 bay + 1 mm walls, orientation [EST]). The 45 mm chamfer is at |y| 125 at the top (z 310) and reaches |y| 101 only at z 334. **Clears, 24 mm margin; chamfer stays 45 mm.** Details in cad/torso_cover.json.

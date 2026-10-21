@@ -1,0 +1,52 @@
+{
+ "Fn_kN": 6.76,
+ "Fs_kN": 1.01,
+ "i_R9_alone": {
+  "s0_e0": 2.4,
+  "s0_e5": 2.2,
+  "s0_e10": 2.04,
+  "Mx_down_Nm": 521,
+  "SF_CSG25_fault": 0.67,
+  "pass": false
+ },
+ "ii_R9_carrier_axis_6013": {
+  "s0_e0": 2.35,
+  "s0_e5": 2.16,
+  "s0_e10": 2.0,
+  "Mx_down_Nm": 117,
+  "SF_CSG25_fault": 3.0,
+  "pass": true
+ },
+ "iii_R9_partial_z20_6013": {
+  "s0_e0": 2.41,
+  "s0_e5": 2.21,
+  "s0_e10": 2.04,
+  "Mx_down_Nm": 242,
+  "SF_CSG25_fault": 1.45,
+  "pass": true
+ },
+ "iii_R9_partial_z37_6013": {
+  "s0_e0": 2.41,
+  "s0_e5": 2.21,
+  "s0_e10": 2.04,
+  "Mx_down_Nm": 352,
+  "SF_CSG25_fault": 1.0,
+  "pass": true
+ },
+ "iv_R9_7013_no_carrier": {
+  "s0_e0": 2.83,
+  "s0_e5": 2.62,
+  "s0_e10": 2.43,
+  "Mx_down_Nm": 521,
+  "SF_CSG25_fault": 0.67,
+  "pass": false
+ },
+ "ii_plus_iv": {
+  "s0_e0": 2.78,
+  "s0_e5": 2.57,
+  "s0_e10": 2.4,
+  "Mx_down_Nm": 117,
+  "SF_CSG25_fault": 3.0,
+  "pass": true
+ }
+}

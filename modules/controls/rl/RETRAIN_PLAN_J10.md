@@ -139,3 +139,19 @@ Missing data (marked EST in the sim):
 - `eval_box.py` gates at 67.1. The walk and the P-042 carry are also gated at 65.0 and 68.5 (`walk_m65p0/68p5.json`, `carry_m65p0/68p5.json`); `gates_summary.json` `all_pass` requires every gate. 10/10 tests pass.
 - Supersedes the 65.0 kg statements in §5 and §7.
 - Mass rollup ownership: `modules/arbiter/MASS_ROLLUP_OFFICIAL.md` says "Only the Arbiter edits this file" (all commits are Arbiter's). **Not edited.** It is stale at R-031 (credible 65.809). The R-116 running reserve (≈ −0.64 → ≈ 67.14 credible) is the basis for 67.1. The refresh belongs to the Arbiter.
+
+## 9. T&R R2_VERIFY (7e55be7) follow-ups (2026-10-21; job 10 not started, queued behind ~11 PC jobs per robotlab_queue 10/21 7:54 AM)
+- **Obs clip:** normalized obs clipped to ±5σ in training (`train.py` wraps Brax's normalizer in `network_factory`, both policy and value) and in eval (`eval_box.policy_action`; `obs_clip` saved in meta). The 8σ eval abort still checks the raw normalized obs before the clip.
+- **Knee peak:**
+  - New reward `knee_peak` (weight 2.0 in all j10 stages), quadratic above **258 N·m**: CONTRACTS R1.2 knee "avail peak 258 worst-angle" (2× TBM2G-07613D + 2× RV12x4, 40 mm).
+  - It only bites when strength DR > 1.0. Training clips at τ_lim × strength (≤ 283.8 N·m); eval clips at 258.
+  - The job-4 243.5 N·m peak is under the rated peak, so the thermal side is handled by the kept RMS term (76.9 N·m, rev B continuous).
+- **Logged metric:** `knee_peak_nm`, `knee_at_peak_frac` and `knee_peak_ok` on walk and carry, also in `gates_summary.json`. Logged, not part of `all_pass`.
+- **Thermal report:** each gate run's knee τ/ω is fed through `controls/limits/carry_limit.KneeThermal` (A40, rev B, 35 °C cold start). The report gives peak/end winding temperature and the time to 120 °C at that run's RMS.
+  - Box smoke, job-4 carry policy, 20 s walk: about 46.7 °C peak, ~17 min to 120 °C at that RMS [measured on the box model, not hardware].
+  - That is a 20 s run; sustained duty stays governed by CARRY_LIMIT / R-096.
+- 13/13 harness tests.
+
+## 10. Arbiter R-123 (2026-10-21): sim nominal 68.0 kg
+- R-123 (d) chain: reserve −1.470 → credible ≈ 67.97 kg; "Controls should use 68.0 nominal" (RULINGS.md R-123). The DR range stays 65.0–68.5 (R-118).
+- `make_model.py` MASS_TARGET 67.1 → **68.0** (MJX 68.001 kg; stand settles z 1.1495, up 0.999). `eval_box.py` nominal gate is 68.0; the corner gates at 65.0 and 68.5 are unchanged. Supersedes the 67.1 in §8. 13/13 tests pass.

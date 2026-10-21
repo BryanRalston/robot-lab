@@ -1,0 +1,414 @@
+{
+ "dz_mm": -57.1,
+ "head_centre_sim_mm": [
+  10.0,
+  0.0,
+  1730.0
+ ],
+ "watertight": {
+  "head_shell": false,
+  "torso_cover": true
+ },
+ "tuckB": {
+  "head_shell": {
+   "min_gap_mm": 253.6,
+   "penetrates": false
+  },
+  "torso_cover": {
+   "min_gap_mm": 74.1,
+   "penetrates": false
+  }
+ },
+ "sweep": {
+  "-150,0": {
+   "head_shell": {
+    "min_gap_mm": 204.1,
+    "penetrates": false
+   },
+   "torso_cover": {
+    "min_gap_mm": 74.1,
+    "penetrates": false
+   }
+  },
+  "-150,45": {
+   "head_shell": {
+    "min_gap_mm": 204.0,
+    "penetrates": false
+   },
+   "torso_cover": {
+    "min_gap_mm": 74.1,
+    "penetrates": false
+   }
+  },
+  "-150,90": {
+   "head_shell": {
+    "min_gap_mm": 204.0,
+    "penetrates": false
+   },
+   "torso_cover": {
+    "min_gap_mm": 74.1,
+    "penetrates": false
+   }
+  },
+  "-150,135": {
+   "head_shell": {
+    "min_gap_mm": 194.4,
+    "penetrates": false
+   },
+   "torso_cover": {
+    "min_gap_mm": 0.4,
+    "penetrates": true
+   }
+  },
+  "-150,150": {
+   "head_shell": {
+    "min_gap_mm": 168.8,
+    "penetrates": false
+   },
+   "torso_cover": {
+    "min_gap_mm": 0.3,
+    "penetrates": true
+   }
+  },
+  "-150,170": {
+   "head_shell": {
+    "min_gap_mm": 128.3,
+    "penetrates": false
+   },
+   "torso_cover": {
+    "min_gap_mm": 0.2,
+    "penetrates": true
+   }
+  },
+  "-150,180": {
+   "head_shell": {
+    "min_gap_mm": 114.3,
+    "penetrates": false
+   },
+   "torso_cover": {
+    "min_gap_mm": 0.5,
+    "penetrates": true
+   }
+  },
+  "-90,0": {
+   "head_shell": {
+    "min_gap_mm": 226.5,
+    "penetrates": false
+   },
+   "torso_cover": {
+    "min_gap_mm": 74.1,
+    "penetrates": false
+   }
+  },
+  "-90,45": {
+   "head_shell": {
+    "min_gap_mm": 225.7,
+    "penetrates": false
+   },
+   "torso_cover": {
+    "min_gap_mm": 74.1,
+    "penetrates": false
+   }
+  },
+  "-90,90": {
+   "head_shell": {
+    "min_gap_mm": 217.6,
+    "penetrates": false
+   },
+   "torso_cover": {
+    "min_gap_mm": 74.0,
+    "penetrates": false
+   }
+  },
+  "-90,135": {
+   "head_shell": {
+    "min_gap_mm": 165.8,
+    "penetrates": false
+   },
+   "torso_cover": {
+    "min_gap_mm": 0.2,
+    "penetrates": true
+   }
+  },
+  "-90,150": {
+   "head_shell": {
+    "min_gap_mm": 151.4,
+    "penetrates": false
+   },
+   "torso_cover": {
+    "min_gap_mm": 0.3,
+    "penetrates": true
+   }
+  },
+  "-90,170": {
+   "head_shell": {
+    "min_gap_mm": 148.6,
+    "penetrates": false
+   },
+   "torso_cover": {
+    "min_gap_mm": 0.2,
+    "penetrates": true
+   }
+  },
+  "-90,180": {
+   "head_shell": {
+    "min_gap_mm": 148.8,
+    "penetrates": false
+   },
+   "torso_cover": {
+    "min_gap_mm": 0.1,
+    "penetrates": true
+   }
+  },
+  "-30,0": {
+   "head_shell": {
+    "min_gap_mm": 246.3,
+    "penetrates": false
+   },
+   "torso_cover": {
+    "min_gap_mm": 74.1,
+    "penetrates": false
+   }
+  },
+  "-30,45": {
+   "head_shell": {
+    "min_gap_mm": 246.3,
+    "penetrates": false
+   },
+   "torso_cover": {
+    "min_gap_mm": 74.1,
+    "penetrates": false
+   }
+  },
+  "-30,90": {
+   "head_shell": {
+    "min_gap_mm": 191.4,
+    "penetrates": false
+   },
+   "torso_cover": {
+    "min_gap_mm": 74.0,
+    "penetrates": false
+   }
+  },
+  "-30,135": {
+   "head_shell": {
+    "min_gap_mm": 146.7,
+    "penetrates": false
+   },
+   "torso_cover": {
+    "min_gap_mm": 0.3,
+    "penetrates": true
+   }
+  },
+  "-30,150": {
+   "head_shell": {
+    "min_gap_mm": 146.3,
+    "penetrates": false
+   },
+   "torso_cover": {
+    "min_gap_mm": 0.4,
+    "penetrates": true
+   }
+  },
+  "-30,170": {
+   "head_shell": {
+    "min_gap_mm": 156.0,
+    "penetrates": false
+   },
+   "torso_cover": {
+    "min_gap_mm": 0.2,
+    "penetrates": true
+   }
+  },
+  "-30,180": {
+   "head_shell": {
+    "min_gap_mm": 170.3,
+    "penetrates": false
+   },
+   "torso_cover": {
+    "min_gap_mm": 0.2,
+    "penetrates": true
+   }
+  },
+  "0,0": {
+   "head_shell": {
+    "min_gap_mm": 252.9,
+    "penetrates": false
+   },
+   "torso_cover": {
+    "min_gap_mm": 74.1,
+    "penetrates": false
+   }
+  },
+  "0,45": {
+   "head_shell": {
+    "min_gap_mm": 252.9,
+    "penetrates": false
+   },
+   "torso_cover": {
+    "min_gap_mm": 74.1,
+    "penetrates": false
+   }
+  },
+  "0,90": {
+   "head_shell": {
+    "min_gap_mm": 189.9,
+    "penetrates": false
+   },
+   "torso_cover": {
+    "min_gap_mm": 74.0,
+    "penetrates": false
+   }
+  },
+  "0,135": {
+   "head_shell": {
+    "min_gap_mm": 151.9,
+    "penetrates": false
+   },
+   "torso_cover": {
+    "min_gap_mm": 0.3,
+    "penetrates": true
+   }
+  },
+  "0,150": {
+   "head_shell": {
+    "min_gap_mm": 149.7,
+    "penetrates": false
+   },
+   "torso_cover": {
+    "min_gap_mm": 0.1,
+    "penetrates": true
+   }
+  },
+  "0,170": {
+   "head_shell": {
+    "min_gap_mm": 165.3,
+    "penetrates": false
+   },
+   "torso_cover": {
+    "min_gap_mm": 0.3,
+    "penetrates": true
+   }
+  },
+  "0,180": {
+   "head_shell": {
+    "min_gap_mm": 182.4,
+    "penetrates": false
+   },
+   "torso_cover": {
+    "min_gap_mm": 0.3,
+    "penetrates": true
+   }
+  },
+  "30,0": {
+   "head_shell": {
+    "min_gap_mm": 255.9,
+    "penetrates": false
+   },
+   "torso_cover": {
+    "min_gap_mm": 74.1,
+    "penetrates": false
+   }
+  },
+  "30,45": {
+   "head_shell": {
+    "min_gap_mm": 256.6,
+    "penetrates": false
+   },
+   "torso_cover": {
+    "min_gap_mm": 74.1,
+    "penetrates": false
+   }
+  },
+  "30,90": {
+   "head_shell": {
+    "min_gap_mm": 190.9,
+    "penetrates": false
+   },
+   "torso_cover": {
+    "min_gap_mm": 74.1,
+    "penetrates": false
+   }
+  },
+  "30,135": {
+   "head_shell": {
+    "min_gap_mm": 147.2,
+    "penetrates": false
+   },
+   "torso_cover": {
+    "min_gap_mm": 0.6,
+    "penetrates": true
+   }
+  },
+  "30,150": {
+   "head_shell": {
+    "min_gap_mm": 145.5,
+    "penetrates": false
+   },
+   "torso_cover": {
+    "min_gap_mm": 0.3,
+    "penetrates": true
+   }
+  },
+  "30,170": {
+   "head_shell": {
+    "min_gap_mm": 157.2,
+    "penetrates": false
+   },
+   "torso_cover": {
+    "min_gap_mm": 0.2,
+    "penetrates": true
+   }
+  },
+  "30,180": {
+   "head_shell": {
+    "min_gap_mm": 172.7,
+    "penetrates": false
+   },
+   "torso_cover": {
+    "min_gap_mm": 0.1,
+    "penetrates": true
+   }
+  }
+ },
+ "worst_head_shell": {
+  "pose": "-150,180",
+  "min_gap_mm": 114.3,
+  "penetrates": false
+ },
+ "worst_head_shell_roll_le135": [
+  "-30,135",
+  146.7
+ ],
+ "worst_torso_cover": {
+  "pose": "-90,180",
+  "min_gap_mm": 0.1,
+  "penetrates": true
+ },
+ "worst_torso_cover_roll_le135": [
+  "-90,135",
+  0.2
+ ],
+ "torso_roll_limit_ge3mm": {
+  "-150": [
+   128,
+   5.0
+  ],
+  "-90": [
+   128,
+   5.2
+  ],
+  "-30": [
+   118,
+   22.8
+  ],
+  "0": [
+   122,
+   18.5
+  ],
+  "30": [
+   118,
+   22.7
+  ]
+ }
+}

@@ -1,0 +1,223 @@
+{
+ "torso_params": {
+  "x_back": -110,
+  "x_front": 110,
+  "half_w": 170,
+  "z_bot": 50,
+  "z_top": 310,
+  "t": 2.0,
+  "fillet": 25,
+  "sternum_c": [
+   360
+  ],
+  "sternum_size": 110,
+  "sternum_proud": 37,
+  "sternum_core": 40,
+  "sternum_blend": 15,
+  "shoulder_y": 170,
+  "shoulder_z": 220,
+  "shoulder_open_dia": 130,
+  "neck_dia": 90,
+  "waist_open": [
+   200,
+   280
+  ]
+ },
+ "roll_axis_centre_torso_frame_mm": [
+  0.0,
+  282.0,
+  180.0
+ ],
+ "sweeps": {
+  "torso_as_given_D130": {
+   "-150": {
+    "first_lt3mm": [
+     130,
+     "pad_envelope_w2"
+    ],
+    "first_contact": [
+     132,
+     "pad_envelope_w2"
+    ],
+    "min_gap_by_body": {
+     "carrier_w2": 41.5,
+     "pad_envelope_w2": -29.9,
+     "housing_7013_coaxX": 58.0
+    }
+   },
+   "-90": {
+    "first_lt3mm": [
+     130,
+     "pad_envelope_w2"
+    ],
+    "first_contact": [
+     132,
+     "pad_envelope_w2"
+    ],
+    "min_gap_by_body": {
+     "carrier_w2": 41.5,
+     "pad_envelope_w2": -29.9,
+     "housing_7013_coaxX": 58.0
+    }
+   },
+   "-30": {
+    "first_lt3mm": [
+     130,
+     "pad_envelope_w2"
+    ],
+    "first_contact": [
+     132,
+     "pad_envelope_w2"
+    ],
+    "min_gap_by_body": {
+     "carrier_w2": 41.5,
+     "pad_envelope_w2": -29.9,
+     "housing_7013_coaxX": 58.0
+    }
+   },
+   "0": {
+    "first_lt3mm": [
+     130,
+     "pad_envelope_w2"
+    ],
+    "first_contact": [
+     132,
+     "pad_envelope_w2"
+    ],
+    "min_gap_by_body": {
+     "carrier_w2": 41.5,
+     "pad_envelope_w2": -29.9,
+     "housing_7013_coaxX": 58.0
+    }
+   },
+   "5": {
+    "first_lt3mm": [
+     130,
+     "pad_envelope_w2"
+    ],
+    "first_contact": [
+     132,
+     "pad_envelope_w2"
+    ],
+    "min_gap_by_body": {
+     "carrier_w2": 41.5,
+     "pad_envelope_w2": -29.9,
+     "housing_7013_coaxX": 58.0
+    }
+   },
+   "30": {
+    "first_lt3mm": [
+     130,
+     "pad_envelope_w2"
+    ],
+    "first_contact": [
+     132,
+     "pad_envelope_w2"
+    ],
+    "min_gap_by_body": {
+     "carrier_w2": 41.5,
+     "pad_envelope_w2": -29.9,
+     "housing_7013_coaxX": 58.0
+    }
+   }
+  },
+  "ID_corrected_z50_310_open_z220_D110": {
+   "-150": {
+    "first_lt3mm": [
+     130,
+     "pad_envelope_w2"
+    ],
+    "first_contact": [
+     170,
+     "pad_envelope_w2"
+    ],
+    "min_gap_by_body": {
+     "carrier_w2": 41.6,
+     "pad_envelope_w2": -29.5,
+     "housing_7013_coaxX": 58.9
+    }
+   },
+   "-90": {
+    "first_lt3mm": [
+     130,
+     "pad_envelope_w2"
+    ],
+    "first_contact": [
+     170,
+     "pad_envelope_w2"
+    ],
+    "min_gap_by_body": {
+     "carrier_w2": 41.6,
+     "pad_envelope_w2": -29.5,
+     "housing_7013_coaxX": 58.9
+    }
+   },
+   "-30": {
+    "first_lt3mm": [
+     130,
+     "pad_envelope_w2"
+    ],
+    "first_contact": [
+     170,
+     "pad_envelope_w2"
+    ],
+    "min_gap_by_body": {
+     "carrier_w2": 41.6,
+     "pad_envelope_w2": -29.5,
+     "housing_7013_coaxX": 58.9
+    }
+   },
+   "0": {
+    "first_lt3mm": [
+     130,
+     "pad_envelope_w2"
+    ],
+    "first_contact": [
+     170,
+     "pad_envelope_w2"
+    ],
+    "min_gap_by_body": {
+     "carrier_w2": 41.6,
+     "pad_envelope_w2": -29.5,
+     "housing_7013_coaxX": 58.9
+    }
+   },
+   "5": {
+    "first_lt3mm": [
+     130,
+     "pad_envelope_w2"
+    ],
+    "first_contact": [
+     170,
+     "pad_envelope_w2"
+    ],
+    "min_gap_by_body": {
+     "carrier_w2": 41.6,
+     "pad_envelope_w2": -29.5,
+     "housing_7013_coaxX": 58.9
+    }
+   },
+   "30": {
+    "first_lt3mm": [
+     130,
+     "pad_envelope_w2"
+    ],
+    "first_contact": [
+     170,
+     "pad_envelope_w2"
+    ],
+    "min_gap_by_body": {
+     "carrier_w2": 41.6,
+     "pad_envelope_w2": -29.5,
+     "housing_7013_coaxX": 58.9
+    }
+   }
+  }
+ },
+ "ID_corrected_params": {
+  "z_bot": 50,
+  "z_top": 310,
+  "shoulder_z": 220,
+  "shoulder_open_dia": 110
+ }
+}

@@ -1122,3 +1122,307 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
 
 ## R-118 (2026-10-20) J10 sim mass
 - Train and gate at the credible rollup: **67.1 kg nominal, randomization 65.0-68.5 kg** (consistent with the ~-0.64 reserve against 66.5). This is a sim robustness setting only; the 66.5 kg hard limit is unchanged, and so is the mass-down obligation. Controls refreshes the stale rollup file.
+
+## R-119 (2026-10-21) Shoulder-pad roll torque and energy basis (ID R9 a688e28, job1 a556d44)
+- Evidence: job1 R8B Mx 566-773 N·m; R9 hand calc 448 (axial, 7.0 kN x 0.064 m) - 539 (down shear) N·m, against CSG-25-100 momentary 369 N·m. Fails the gear on its own.
+- **Remedy: the shoulder_roll slip clutch already in CONTRACTS (row "rotary + 300 N·m slip clutch") is the design basis.** Mx at the gear is capped at the clutch slip torque. No new mass. CSG-32 rejected (adds mass and diameter against a -0.64 kg reserve, and is not needed). Pad relocation alone rejected: <=307 N·m (369/1.2) at 7.0 kN needs offset <=44 mm with zero shear, and 539 N·m down-shear cases still exceed it; 64 mm stays unless Arms finds a zero-mass move.
+- Conditions: Actuators cites the clutch mass (confirm it is inside the contract row, else book it full), the envelope (74x87 + clutch TBD) and the slip-torque tolerance band; **max slip incl. tolerance and rate must be <=307 N·m (>=20% under 369)**. G5: clutch slip torque measured on impact rig. This is the shoulder **roll** clutch; R-057 (no shoulder-pitch clutch) is unchanged.
+- **Energy basis: 265 J design energy governs** (R-049/R-052), with the >=10% worst-case margin at 15° (>=292 J) from my earlier pad ruling. 220 J (A44) is a load cap, not the absorption basis. R9 at 237 J **fails**. Clutch slip energy gets no credit until T-030 shows it (R-049).
+- ID: resize the R9 core to >=292 J worst case at peak <=7.0 kN x1.3 (about 48-50 mm usable crush at the plateau), within the 0.100 kg pair cap. Rerun job1 R9 with Mx reported both raw and clutch-limited; s0 >=2.0 still applies (Arms: e <=5 mm or C0 >=27 kN bearing).
+- Slip skin mu <=0.15: **Materials test required** (PTFE skin on EPP vs the R5/floor surfaces, dry and dusty, static and kinetic). It is G5. Until it is measured, FEA keeps the 15° (0.27 Fn) case as governing for s0 and Mx.
+- Mass: R9 -0.007 pair [EST] at half credit = **-0.0035 kg, held** until the energy-compliant core is defined (the resize will likely remove it). Nothing booked now.
+- Owed: ID (core resize to >=292 J, rerun); Arms (s0 at e10, eccentricity limit or bearing, pad move check); Actuators (clutch mass, envelope, slip band <=307 N·m); Materials (mu test, G5).
+
+## R-120 (2026-10-21) Shoulder pad R10 s0 path, pad cap scope, envelope (ID 8a396ec; Arms 86e092b R11, 488206d R12)
+- Evidence checked: ID `pad_r10.py` reproduced exactly (P0 13.39/14.29/15.19 kN, s0 1.81/1.70/1.60, C0 needed 26.8/28.6/30.4 kN at dp 75). Arms R12 reproduced on its own basis (R9, Fs = 0.15 Fn): s0 2.42/2.22/2.05, Mx 239 N·m at Z 20. IKO catalogue (`actuators/datasheets/iko_crb_catalog.txt` l.802-804): CRBH 6013 A C0 24.3 kN 0.33 kg 60x90x13; **CRBH 7013 A C0 27.7 kN 0.38 kg 70x100x13** (dp ~85); CRBH 8016 A C0 43.4 kN 0.74 kg 80x120x16.
+- **Arms R12 rejected as proposed.** It rests on the R9 core (237 J, fails R-119's >=292 J) and on mu <= 0.15, which is unmeasured and cannot close a gate before G5 (R-119). With the R10 core (Y 102.3) and the governing 15° case (Fs 0.27 N = 1.81 kN), the stand-off at Z 20 with the 6013 gives s0 **1.93/1.80/1.69: FAIL**; even on-axis (Z 0) 1.94/1.81/1.70 fails. The 6013 cannot pass at any pad position.
+- **Arms R11 option B (CRBH 8016 + carrier, ~+1.1 kg) rejected** (Arms withdrew it; mass not affordable).
+- **(1) Adopted s0 path: R10 core + Arms 7075 stand-off, pad centre <= 20 mm below the roll axis + shoulder_roll bearing CRBH 7013 A + e <= 5 mm qualified.** 15° case: s0 **2.31 / 2.16 / 2.04** (e0/e5/e10), Mx raw down **321 N·m**, CSG-25 SF at fault ×1.05 = **1.10** (369 momentary). Passes s0 and the gear **without** clutch credit. mu 0.15 sensitivity (not credited): s0 2.86/2.64/2.45, Mx 239.
+  - Consequence for R-119: the roll slip clutch is **no longer the torque basis**. Arms cites R-057 clutches at 1.6–4.0 kg, which conflicts with R-119's "no new mass" assumption; Actuators' clutch-mass check is moot unless FEA puts Mx above 369/1.05 = 351 N·m. The 307 N·m clutch condition is withdrawn; G5 impact rig measures roll Mx instead.
+  - Dual path, conditional: if Materials measures mu <= 0.15 at G5 (dry and dusty, R-119 test), the 6013 may be re-proposed (s0 2.22 at e5) for a -0.16 kg return. Not credited now.
+  - Fallback if FEA s0 < 2.0 at e5 with the 7013: CRBH 8016 A comes back to me with the mass.
+- **(2) Pad cap scope.** R-063 set the 0.100 pair cap on the whole pad assembly including ID's mount hardware (tray, sleeve, fasteners). Arms' boss/stand-off is roll-output structure in Arms' ledger, so it is **outside** the cap and booked separately at full; counting it in both would double count. ID R10 pair **0.065 PASS**. The old 0.024/side boss booking is replaced by the stand-off; its under-booking (solid 0.108 calc) is superseded, not added.
+- **(3) Envelope: +15 mm proud per side accepted provisionally.** TARGETS sets no width limit; precedent: +8 mm accepted (R3), +80 mm rejected (EPP 80). Conditions: Arms CAD clash check of pad + stand-off + 7013 housing (OD 90 -> 100, +10 mm) through abduction ROM, tuck and the cover set before G2.
+- **Mass (pair):** CRBH 7013 A +0.100 (cited, full); roll housing growth +0.060 [EST, addition, full]; stand-off net +0.052 (0.050 vs 0.024/side booked, [EST], addition, full); pad 0.065 calc vs 0.100 booked = -0.035 at half = **-0.018**. **Net +0.194 kg -> reserve ~ -0.83 kg.** R-119's held -0.0035 is dropped.
+- **Job1:** the R10 case as written (Z -64, CRBH 6013) is superseded and must not run. Run the R-120 geometry (R10 core, stand-off Z -20, CRBH 7013 A, e 0/5/10, 15° governing plus mu 0.15 sensitivity, report s0, Mx raw, gear SF, other gates) as the **Job 8 add-on on the bryan PC via Robot Lab**, one Grok Build session at a time.
+- Owed: ID (update CASE.md to R-120 geometry, pad + stand-off interface); Arms (stand-off drawing, CRBH 7013 A roll housing, e <= 5 mm tolerance stack, clash check, mass); Actuators (roll housing growth for 7013, confirm clutch removed from roll row); Materials (mu test stays G5, optional); Robot Lab (queue Job 8 add-on).
+
+## R-121 — Shoulder roll stand-off/flange mass (Arms R13 1ee8d73) — 2026-10-21
+Evidence: Arms R13 shows the ID flange (OD60) is under the CRBH 7013 bore (Ø70) and its 6×M4 on PCD50 gives SF 1.51 (fails). R13 uses 8×M4 12.9 on PCD62 + 2 dowels (SF 2.31). Tolerance stack worst 2.13 / RSS 0.92 mm passes e≤5. Clash check passes; the 135° overhead soft limit stays (9.4 mm at pitch ≤−150 with roll ≥170). R-120 numbers reproduced.
+Ruling: R13 geometry adopted. Mass is an addition, so it is booked at full: pair +0.271 [CALC] (bearing +0.100, housing +0.075, stand-off +0.096), replacing R-120's +0.212, so net +0.059. Reserve about −0.83 → −0.89 kg. A thinner flange or hub may be proposed only with the Job 8 FEA showing joint SF ≥2.0 and s0 ≥2.0 at e≤5; the credit is decided then. The ID flange must match the R13 interface.
+
+## R-122 (2026-10-21) Reserve recovery plan (Robot Lab request; R-066/R-079 mass-down)
+- **Verified reserve: -0.893 kg (credible ~67.39 kg vs 66.5 hard).** Chain: R-116 -0.64; R-120 +0.194 -> -0.834; R-121 +0.059 -> **-0.893**. Robot Lab's -0.64 is stale (pre R-120/R-121). `arbiter/MASS_ROLLUP_OFFICIAL.md` is stale at R-031 (65.809) and is not the current figure; Arbiter regenerates it from the ruling chain at the end of R13. This is a T2 violation (over the hard limit), not only a reserve shortfall. To reach +0.30: remove **>=1.193 kg credited**.
+- Excluded (rejected earlier): knee-fin cut (R-073), soldered splices (R-071), 2.5 mm2 battery link (R-074), CSG-32 (R-119), CRBH 8016 (R-120), CF femur tubes (Materials: not recommended), shin fairing (already deleted). Battery 20S5P (8.750) is held by T7 and is not a candidate.
+- Ranked plan (credit now = half on EST/calc; full only on CAD-measured mass with the gate passed):
+
+| # | item | owner | full kg | basis | credit if booked on current evidence | gate risk |
+|---|---|---|---|---|---|---|
+| 1 | Release leg-tube hold (A15, GB r2 FEA) | Legs | -0.267 | R-023 hold; release in full on FEA | 0 until FEA, then -0.267 | G3 |
+| 2 | Pelvis/web pocketing (FEA_SPEC_torso_pocketing) | Torso & Power | -0.15..-0.25 (mid -0.20) | [EST] Torso R1 | -0.10 | G3 |
+| 3 | Hip/ankle housing pocketing (~0.78 kg housings) | Actuators | ~-0.16 (20 %) | [EST] | -0.08 | G3, thermal path (Thermal checks) |
+| 4 | L47 hip-lever shape opt (0.464/lever) | Legs | -0.13..-0.17 (mid -0.15) | [EST] R-069 | -0.075 | G3 fatigue |
+| 5 | Ankle cross Ti64 -> pocketed 7075 | Legs + Materials | -0.088 | cited density, calc | -0.044 | G3 fatigue, anti-galling |
+| 6 | Hybrid PA12/7075 palm | Arms + Materials | -0.080 | [EST] A32 CAD | -0.040 | G3 grip FEA, G5 grip test |
+| 7 | Shoulder flange/hub thinning after Job 8 | Arms | <= -0.03 | [EST] | 0 until FEA (R-121) | G3 joint SF>=2.0, s0>=2.0 |
+| 8 | Cover residual trims (C1/F1/G) | Industrial Design | -0.015 | calc | -0.008 | G5 dent/fall |
+| 9 | Bond cross pins d6 -> d5 (residual) | Legs | -0.004 | calc | -0.002 | G3 |
+| 10 | Lighter pluggable drive connectors (R-071 b) | Electronics | unquantified | must cite | 0 until cited | G1 |
+| 11 | Roll bearing CRBH 7013 -> 6013 if mu<=0.15 measured | Materials + Arms | -0.16 | cited | 0 (G5-only; not available in the design phase) | G5 |
+
+- **Totals.** Design-phase best case (rows 1-9, all FEA pass, all CAD-measured, full credit): **-0.944** -> reserve **+0.05**. On current evidence at half credit (row 1 at full once FEA passes): **-0.616** -> reserve **-0.28** (still over 66.5). Row 11 adds -0.16 only after G5 hardware.
+- **Ruling: +0.30 is not reachable on design-phase evidence. Shortfall vs +0.30: ~0.25 kg best case, ~0.58 kg on present credit rules.** Even reaching 0 (meeting the hard limit) needs every FEA item to pass and be CAD-measured.
+- **Options for Bryan (not decided here; T2 and the floor are his):** (A) accept a reserve below the 0.30 floor (for example >=0) once the plan lands; (B) raise the T2 hard limit (for example 66.5 -> 67.0 or 67.5); only Bryan can approve; (C) authorize deeper redesign beyond this list (for example more 3D-printed or CF structure, or re-sizing for a lighter carry case), with new trade studies and gate risk; (D) hold T2 and keep the freeze until FEA credits land, accepting schedule risk.
+- **Freeze:** no additions >0.005 without a ruling (R-066 stands).
+- **Deadline: end of R13.** Owners deliver FEA/CAD mass for their rows (Robot Lab queues Grok Build jobs on the bryan PC, one at a time: torso pocketing, housing pocketing, L47, ankle cross, palm, A15 tube, Job 8 flange). If the reserve is not >=0.30 by then, the Arbiter takes options A-D to Bryan.
+- Robot Lab's other two items are closed: CSG-25 overload by R-119/R-120 (stand-off + CRBH 7013 A, Mx 321 N·m raw, gear SF 1.10, no clutch credit; job1 R8B/R10 geometry superseded, Job 8 add-on runs R-120 geometry); Arms +0.059 by R-121.
+
+## R-123 (2026-10-21) Combined ruling: 7075-T6 allowable basis, P-053 duplicate, actuator fasteners/R-122 row 3, stand-off R11 mass
+Evidence checked on origin/main (ec12542). Credit rules unchanged: cited or measured values full, EST or calc half, additions full, no double counting.
+
+### (a) Legs: 7075-T6 property conflict. **MATERIALS_DB governs: Sy 480 / Su 560 / E 70 GPa, static allowable 480/1.5 = 320 MPa.**
+- The "repo datasheet" behind 503/572/71.7 (REPO_AL7075 = `v3/datasheets/al7075.pdf`) is **not a datasheet**. It is a 146-byte nginx "404 Not Found" HTML page. 503/572/71.7 therefore have **no cited source in the repo**. They match typical (handbook-average) 7075-T6 values, not an MMPDS A- or B-basis allowable for a stated product form or thickness. The 480/560 set (MIF) is also typical but is the lower, conservative set, so it governs.
+- Thickness: 7075-T6/T651 allowables fall with section thickness (thick plate is lower). No part may claim more than 480 without a cited A- or B-basis value for its actual product form and thickness. Parts machined from plate thicker than about 25 mm: Materials to cite the product-form allowable before G3 sign-off; until then 480 stands, flagged.
+- **Peaks of 320–335 MPa are a FAIL at the G3 static gate**, not a pass and not a flag-only. To clear, the owner either redesigns to ≤320 or Materials cites an A/B-basis Fty ≥ 1.5 × peak for that product form and thickness (then that allowable governs for that part only).
+- E: use 70 GPa for deflection or stiffness gates (conservative); a 71.7 solve in a load-controlled linear stress run is acceptable for stress only (L47 brief note stands).
+- Fixes owed:
+  - **Materials** keeps MATERIALS_DB AL7075T6 at 480/560/70, marks the row "typical (MIF), not A/B-basis", and replaces REPO_AL7075 (404 placeholder) with a real source or deletes the reference. It adds the A/B-basis citation by product form when available.
+  - **Actuators** (G3 brief owner) changes 503/572/71.7 to 480/560/70 and the 335 allowable to 320. The same correction applies to `torso/FEA_SPEC_torso_pocketing.md` (Torso), `actuators/cad_mass.py` lever SF (503 → 480), `legs/grokbuild/r031_fatigue_fea_brief.md` (Legs), `materials/T031_CHEST_CRUSH.md` (Materials, cites "Sy 503 from MATERIALS_DB" in error) and ID `fea/job1_pad_r11/CASE.md` (337/503 → 320/480).
+  - L47-SO and ankle-cross briefs (e147a33) already use 320: they stand.
+  - Results already reported against 335 or 503 are re-read against 320 by their owners; any peak in 320–335 reopens that part.
+- Fatigue: R-031 Se 87 MPa stands, unchanged.
+
+### (b) Robot Lab: duplicate P-053. **Renumbered Materials' hollow ankle pins P-053 → P-151.**
+- The first use of P-053 was ID thigh pin access (7658a01 / fe09355, 2026-10-20 22:19–22:21; `design/thigh_pin_access_p053.*`, V5_COVER_SET, cover_set_v5). It was never entered in PROPOSALS.md. Materials' hollow ankle pins were added later (a2bf811, 2026-10-21 07:54; restored 0f5cea1).
+- The later one gets the next free number. **P-151** comes after P-145..P-150. P-054 (Ti pins) keeps its number, and its "alternative to P-053" text now reads P-151.
+- References updated in the same commit: `modules/PROPOSALS.md`, `modules/legs/BOM.md` (P2 row), `modules/legs/grokbuild/ankle_cross_fea_brief.md`, `modules/materials/R_SWAP_SCAN_R7.md`, `LOG.md` (07:56 Legs entry annotated). ID's P-053 references are unchanged.
+- ID must add a PROPOSALS.md entry for P-053 (thigh pin access rev 2) so the number is registered.
+
+### (c) Actuators D82 (7b6353a): leg fastener under-booking, R-122 row 3, Ti swap
+- **Verified from the repo.** `fastener_bom.json` gives leg units (hip yaw, hip roll, hip-pitch, knee and ankle RV12 screws, both legs) at **0.819 kg** steel. `cad_mass.py` books FAST rotary 0.0498 and linear 0.0236 per unit, including 0.015 and 0.010 connector allowances. Legs: 2 × (2 × 0.0498 + 6 × 0.0236) = 0.482 kg, of which **screws 0.302** and connectors 0.180.
+- Credibility of the 0.82 count:
+  - The counts and sizes are cited (HD Tables 24 and 27, the cad_mass patterns, the Elmo guide); only the lengths and the clamp-ring set are EST.
+  - The booked figure omits the flexspline and circular-spline bolts entirely, and HD component-set weights exclude bolts, so the gap is real, not a double count.
+  - The connector allowance is a separate line and is not touched.
+  - Any doubt resolves conservatively, so the count is accepted.
+- **Ruling: book +0.517 kg (0.819 − 0.302) as an ADDITION at full.** If Actuators' G4 CAD fastener count comes in lower, it is credited at full then (measured).
+- **Arm and waist units:** counted 1.264 kg. Their booked fastener lines (for example d70 wrist 0.015) look similarly low, but no consolidated booked figure exists. Not booked here. Arms and Actuators must give the booked-vs-counted delta by the R13 regeneration. This is an **open risk against the reserve**, likely adverse.
+- **R-122 row 3 corrected.**
+  - Basis: **2.221 kg** of leg housings (CAD-measured, G4 brief §1), not 0.78 kg.
+  - Pocketing full **−0.316** [EST], credit now **−0.158** (was −0.16 full / −0.08).
+  - Tube windows (−0.038 more) only if Thermal accepts. Ankle ring fins (−0.265) are Thermal-owned and not in the plan.
+  - Gate: G3/G4 static and fatigue at the rear cap and flange scallops (against 320, per (a)).
+- **New R-122 row 12: Ti-6Al-4V non-structural actuator fasteners.**
+  - Scope: 384 screws (rear caps, readheads, drive mounts); steel 0.209 → Ti 0.118, **−0.091 full [CALC], credit now −0.046**. If Thermal keeps steel drive-mount screws: −0.074 full / −0.037.
+  - Conditions:
+    - **Non-structural only.** No Ti in any torque, bearing-retention or joint path; 12.9 steel stays there.
+    - Galling: Ti-in-7075 threads must use a hard-anodized or coated Ti screw plus an anti-seize compatible with aluminium, assembled to a torque spec (no dry Ti-in-Al), and installed wet with sealant or primer.
+    - Galvanic: 7075 is anodic to Ti. The small cathode (screw) against the large anode is acceptable only with the wet install and isolation above. Materials confirms coating and anti-seize with a cited source.
+    - Thermal accepts Ti for the Elmo drive-mount clamp.
+  - Gates: Materials qualification (G1 cite) and Thermal sign-off.
+  - The Ti saving applies to mass now booked in this ruling, so there is no double count.
+
+### (d) ID stand-off R11 (ec12542). **Design accepted pending Arms' confirmation; mass +0.060 pair booked at full.**
+- Arithmetic reconciled:
+  - R-121's +0.096 pair was a delta net of the old boss: R13 stand-off 0.072/side × 2 = 0.144, minus the boss 0.048 pair = 0.096.
+  - R11 is 0.102/side [CALC] = 0.204 pair. Against the boss: 0.204 − 0.048 = 0.156.
+  - Over R-121's booking: 0.156 − 0.096 = **+0.060**. ID's figure is right. The gross 0.204 − 0.096 = 0.108 mixes a gross figure with a net one and is not used.
+  - R-120's boss under-booking (0.108 solid) stays superseded and is not added again.
+- Booked as an ADDITION at full: **+0.060 kg**.
+- Strength:
+  - Box 215 MPa (hand calc ×2.86, calibrated to R10 FEA) is below **320 MPa** (governing allowable from (a)), SF on 480 = 2.23. Plate 149 MPa. Dowels Ø6 SF 2.62. Deflection 0.69 mm ≤ 1.0 mm.
+  - It **passes by hand calc only**. The calibration factor was taken from the ribs and applied to a different section, so this is [EST] until FEA.
+  - ID's 337 MPa (0.67 × 503) limit and "503 hard" are withdrawn; CASE.md must use 320/480.
+- **Arms owns and must confirm** the design: one-piece versus bolted, R3 root fillets, Ø6 m6 dowels and ring ligament on PCD62, the e≤5 mm tolerance stack including 0.69 mm of deflection, and clash with the OD108 housing flange.
+- After Arms confirms, **Robot Lab routes `fea/job1_pad_r11/CASE.md`** as the Job 8 add-on rerun on the bryan PC, one Grok Build session at a time.
+- FEA pass: vM ≤ 320, s0 ≥ 2.0 at e0/e5, Mx ≤ 351 N·m, deflection ≤ 1 mm, dowel/bolt no slip. A fail comes back to me.
+- R-122 row 7 (flange or hub thinning) stays at ≤ −0.03, with 0 credit until FEA.
+
+### Reserve and R-122 reachability
+- **Chain:** R-122 −0.893; (c) fasteners +0.517 → −1.410; (d) +0.060 → **reserve −1.470 kg (credible ≈ 67.97 kg against the 66.5 hard limit).** This is still inside the J10 sim randomization of 65.0–68.5 (R-118), but the 67.1 nominal is now stale. Controls should use 68.0 nominal at the next sim regeneration (the range is unchanged; the top margin is now 0.53 kg).
+- **R-122 totals revised:**
+  - Current-evidence credit: −0.616, then row 3 −0.078 more and row 12 −0.046 = **−0.740 → reserve −0.73**.
+  - Design-phase best case (rows 1–9 and 12, all full): −0.944 − 0.156 − 0.091 = **−1.191 → reserve −0.28**.
+  - Row 11 (6013 bearing, G5 only) −0.16 → best case −0.12.
+- **R-122 conclusion changes.** Not only is +0.30 unreachable; **even the 66.5 hard limit (reserve 0) is now unreachable on the full design-phase plan** (short by about 0.28 kg best case and about 0.73 kg on present credit). To reach +0.30 needs about 1.77 kg credited. The arm and waist fastener delta is likely to worsen this.
+- The **options for Bryan (A–D in R-122) are now due, not at the end of R13**. Option A alone (accepting a smaller reserve) no longer suffices; it needs B (raise T2), C (deeper redesign) or a combination. The Arbiter brings this to Bryan now. The R-066 freeze stands.
+
+## R-124 — T2 mass limit raised to 68.0 kg, conditional (TARGETS 561eb35) — 2026-10-21
+Basis: Bryan's 2026-10-13 instruction that the crew (Robot Lab/Arbiter) decides design calls like the mass-limit change; Robot Lab chose option B, as the Arbiter recommended. Bryan may override.
+Ruling: T2 hard limit is 68.0 kg (was 66.5), carry stays 20 kg, CONDITIONAL on all of:
+1. Actuators confirm peak and RMS torque margins at 68.0 kg + 20 kg carry, against the existing gate SFs.
+2. Thermal confirms steady-state and duty-cycle winding/housing limits at 68.0 + 20 kg (R-096 duty).
+3. J10 sim passes at a 68.0 kg nominal (Controls; randomized range 65.0–68.5 unchanged), including the carry ≥0.8 m/s and recovery gates.
+4. The R-122/R-123 mass-down plan continues; the R-066 add-mass freeze stays (>0.005 kg needs a ruling).
+Credible mass ~67.97 kg means a reserve of +0.03 kg against 68.0; the +0.30 reserve floor still applies against 68.0 and is the R-122 goal. If any of 1–3 fail, T2 reverts to 66.5 and option C (deeper redesign) opens. Until 1–3 pass, G4/G5 sign-off is withheld against 68.0.
+
+## R-125 (2026-10-21) Shoulder placement W2, R-121 clash correction, arm fasteners, ankle-cross allowable (Arms 4b47656 R14; Materials 1e75ba8)
+
+### (a) Shoulder roll pad/stand-off placement. **W2 adopted (CRBH 7013 A, pad on roll axis Z0, wrap carrier), e ≤ 2.4 mm.**
+- **Clash accepted on evidence.** The roll axis is X (sim/v3 `l_shoulder_roll` 1 0 0; R-120 Mx = Fn·Z + Fs·Y; s0 e axial). ID's CAD put the 7013/OD108 coaxial with Y. `cad/r14/r14_cad.json` CadQuery booleans give stand-off ∩ housing 2.16 cm³ and pad ∩ housing 12.38 cm³. Clearing axially needs e ≈ 40.5 mm, so s0 = 1.50 (fail). Even in ID's frame the flange gap is 0 mm against the ≥ 3 mm rule.
+- **R-121 corrected.** Its "clash pass" rested on Arms R13's "axial gap open, assumed outboard", which contradicts e ≤ 5. That finding is **withdrawn**. The R-120 placement (pad centre 20 mm below the axis, inside the bearing plane) is **unbuildable**. R-120's s0 2.31/2.16/2.04 and 321 N·m no longer apply.
+- **Arithmetic checked** (`pad_r14.json`):
+  - W1 vs W2 share contact Y 138.8. Fs = 251/0.1388 = 1.81 kN; W1 adds Fn·0.020 = 136 → Fn ≈ 6.8 kN, consistent with the R10 7.0 kN peak. W3 1.81 × 0.1448 = 262 ✓.
+  - W2 Mx 251 vs CSG-25 369 peak: 1.47 nominal, Arms' fault case 1.40. PASS (≥ 1.3 gate) and ≤ 351 FEA gate. W1 387 → 0.91 FAIL.
+  - s0 interpolation (load ∝ 1/s0, linear in e): 1/2.06 = 0.4854, 1/1.94 = 0.5155 → 0.00602/mm. **s0 = 2.0 at e = 2.43 mm.** At e = 3, s0 = 1.99 (FAIL, not "pass at e ≤ 3"). The limit is therefore **e ≤ 2.4 mm**.
+  - Stack (R14, incl. 0.69 mm deflection): worst 2.32 mm → s0 ≈ 2.004, **margin 0.11 mm** (0.2%). RSS 1.03 mm → s0 ≈ 2.04. **Passes worst case, but thinly.**
+- **Ruling: W2.** W3 (+~1.1 kg) is rejected for mass. W1 fails the gear.
+  - Conditions: drawing limit e ≤ 2.4 mm. Arms and ID should tighten the two largest stack terms (tray lip to core 0.5, core cut 0.5) to ≤ 0.3 each, to bring worst case to about 1.9 mm (≥ 0.5 mm margin). If that is not achievable, the 0.11 mm margin stands. Job 8b must report e under load. If FEA e > 2.4 or s0 < 2.0, the outcome is W3 or a μ measurement at G5 (back to me).
+  - Envelope: +36.5 mm proud per side replaces the +15 mm provisionally accepted in R-120. This is **accepted provisionally**. ID re-runs cover, head-shell and abduction ROM against the X-coaxial housing (`housing_7013_real_coaxX.stl`). The 135° roll soft limit stays.
+  - The Arms R14 interface fixes (flange OD76, ring bore Ø36, 2 × Ø6 m6 dowels on PCD57, 3 × Ø8 plate access holes, 8 × M4 12.9 PCD62) are adopted. ID drops the stand-off flange M4 and dowels from its BOM.
+- **Job 8b released** with the W2 geometry: X-coaxial 7013 housing, pad Z0, wrap carrier. Gates: vM ≤ 320 MPa (R-123), s0 ≥ 2.0 at e worst, Mx ≤ 351 N·m, deflection ≤ 1 mm, no dowel/bolt slip. Robot Lab routes it (one Grok Build session at a time).
+- **Mass (W2), additions at full, no double count:**
+  - Stand-off: R14 0.124/side [CALC] (md; `pad_r14.json` "0.110 / +0.076" is stale and is superseded). R-121 + R-123 already booked to 0.102/side (R-123 (d) +0.060). Arms' "+0.103 vs R-121" ignores R-123's +0.060. **Net new = 2 × (0.124 − 0.102) = +0.044 kg.**
+  - Wrap carrier: ~+0.14 pair [EST]. As an addition it is booked at **+0.140 full**. If Arms' CAD shows the carrier replaces part of the stand-off, the overlap is credited back at full once it is calculated.
+  - (a) total **+0.184 kg**.
+
+### (a2) Arm-structure fasteners. **Book +0.500 kg at full.**
+- CONTRACTS §3 Arms (structure) is 1.6 kg (0.80/side), with no itemisation and no mention of hardware. By contrast, the legs line explicitly says "+ bolts/bumper". No cad_mass or ledger line books arm-structure fasteners. **Inclusion is not evidenced**, so booked = 0.
+- `arms/FASTENER_BOM.csv`: 290 pcs, 0.500 kg/robot [CALC/EST]. Booked as an **ADDITION at full, +0.500 kg**. If Arms' G4 CAD count comes in lower, it is credited at full then.
+- No double count with R-123: R-123's open risk (1.264 kg counted) covers **actuator-unit** fasteners in the arm and waist units, which this BOM excludes. That risk stays open, still likely adverse.
+- Ti non-structural candidate −0.0225 [CALC] → R-122 row 13, credit −0.011 now. Same gates as row 12 (Materials coating/anti-seize cite, Thermal for flexor end-cap clamps).
+
+### (b) Job 7 ankle cross allowable. **262 MPa.**
+- R-123 required a cited allowable for 7075 plate > 25 mm. The only figure offered is MMPDS A-basis Fty 393 MPa at 1–2 in T7351, and it comes from a secondary source that has not been verified. That does not meet the citation requirement, so 320 (derived from typical 480) **cannot be kept** for this single-load-path part.
+- **The Job 7 FEA must meet vM ≤ 262 MPa** (393/1.5). If Materials obtains a verified primary MMPDS (or equivalent) table, the limit becomes that A-basis/1.5. Results between 262 and 320 must be held, not passed.
+- **General tightening, on evidence:** typical (480) is not conservative against A-basis for 7075. From now on, **single-load-path 7075 parts** (no redundant path, where failure means loss of the joint or structure) are checked against A-basis Fty/1.5 for their product form and thickness. Unverified A-basis values are used provisionally, with the lower one governing. Multi-path parts keep R-123's 320 (480 typical/1.5). Owners flag single-path parts in their FEA briefs. These include the shoulder stand-off (T6 billet 32 mm): ID and Arms state its A-basis limit in the Job 8b CASE.md.
+- T031 rib: SF 2.22 typical / 2.04 T651 A-basis. **PASS stands.**
+
+### Mass and R-124
+- Chain: R-124 credible ≈ 67.97 kg. (a) +0.184 → 68.154. (a2) +0.500 → **68.654 kg credible**. R-122 row 13 credit −0.011 → **68.64 kg**.
+- **Reserve against 68.0: −0.64 kg.** The R-122 best-case plan (−0.58 more beyond current credit) does not close it.
+- **R-124 fails: the credible mass exceeds the conditional 68.0 kg limit.** Thermal's condition was met (93cd74b) and the Actuators and J10 conditions are still pending, but mass alone breaks the limit. The mass is also **above the J10 randomization top (68.5)**, so J10 at a 68.0 nominal no longer represents the robot.
+- Under R-124, **T2 reverts to 66.5 and option C (deeper redesign) opens**. Against 66.5 the reserve is −2.14 kg. This is a target-level decision: **it goes to Bryan through Robot Lab** (C, or a further T2 raise to about 69.0 with a new J10 range, plus Actuators/Thermal re-checks). The R-066 freeze stands, and G4/G5 sign-off is withheld.
+
+### R-125 (c) and amendment (same day): actuator arm/waist fasteners (Actuators D84 d47a4a7), (a2) overlap, 7075 basis items. **This supersedes the R-125 mass chain above.**
+- **D84 accepted: book +0.875 kg at full.**
+  - Counted 1.265 kg (16 units). Booked basis: v3 rotary 0.03/unit × 10 = 0.30, plus D70 0.015 × 6 = 0.09, total 0.39.
+  - What v3's 0.07 covers: `v3/analysis/v3.py` actuator() adds an unlabelled `+0.03+0.04` to rotary mass. No v3 or CONTRACTS text identifies the 0.04 as fasteners. cad_mass (R-123 (c)) books its fastener lines separately from a connector allowance. The 0.04 is therefore not evidenced as hardware, and the +0.475 low case is rejected.
+  - Booked as an ADDITION at full: **+0.875**. A lower G4 CAD count is credited at full when measured. This closes R-123's arm/waist open risk.
+- **(a2) overlap with the Arms BOM, by comparing the FASTENER_BOM files line by line:**
+  - Actuators already excludes the stand-off flange M4. Arms excludes actuator internals.
+  - Both files count the arm-side joints at actuator output flanges. Actuators counts "output flange → customer" M5x16 for each unit. Arms counts "upper-arm link → elbow unit" M5x14 (62.3 g) and "forearm tube → elbow output / wrist node" M4x10 (45.0 g). These are the same joints, so each is booked once, under Actuators.
+  - **(a2) reduced to +0.500 − 0.107 = +0.393 kg.** Every other Arms line (torso M8, housing seat flange, hand, covers, clips, PCBs) is arm-structure-only, with no overlap.
+- **7075 basis:**
+  - G3/G4 briefs and cad_mass now use 480/560/70 and 320. Lever SF on 480: hip 2.00, knee 2.50. **Accepted.**
+  - The h4 needle lever at 332 MPa (PROOF_TEST_hip_lever) is superseded geometry. Actuators' R123_RECHECK reports no live part above 320, and no current BOM or LINKAGE row cites h4, so it stands as superseded. If it is ever revived, it fails 320 and comes back to me.
+  - **T&R `reliability/JOB9_SPEC.md` must change 7075-T6 to Sy 480 / Su 560 / E 70, with a static limit of 320** (single-load-path parts at A-basis/1.5 per R-125 (b)). Owner: T&R, before Job 9 runs. Se 87 is unchanged.
+- **Corrected mass chain:** R-124 ≈ 67.97. (a) W2 +0.184 → 68.154. (a2) +0.393 → 68.547. Row 13 −0.011 → 68.536. (c) +0.875 → **≈ 69.41 kg credible**.
+  - **Reserve against 68.0: −1.41 kg.** Against 66.5: −2.91. That is 0.91 above the J10 randomization top of 68.5.
+  - R-122 on current evidence (−0.74) brings it to about 68.67. The design-phase best case (−1.19) brings it to about 68.22. **Neither reaches 68.0.**
+- **R-124 FAILS.** Credible mass exceeds the conditional 68.0 kg limit even on the full mass-down plan. J10 at a 68.0 nominal and the Actuators/Thermal 68.0 margins (Thermal 93cd74b) no longer represent the robot.
+  - Under R-124, **T2 reverts to 66.5 and option C (deeper redesign) opens**.
+  - The alternative is a further T2 raise to about 69.5 kg, which needs new Actuators/Thermal margins at 69.5 + 20 kg carry and a J10 range extended to ≥ 70.0.
+  - This is a target-level decision for **Bryan, through Robot Lab**. The R-066 freeze stands, and G4/G5 sign-off is withheld.
+
+## R-126 (2026-10-21) G4 CAD mass count and option C scope (Robot Lab assignment)
+Files: `arbiter/MASS_ROLLUP_G4.md`, `arbiter/g4_rollup.py`, `arbiter/mass_rollup_g4.json`; `arbiter/MASS_ROLLUP_OFFICIAL.md` regenerated (was stale at R-031 65.809).
+- **G4 credible mass: 69.42 kg** (ledger chain 69.41; +0.005 from CAD/BOM checks). Reserve vs 66.5: **−2.92**. Needed for the +0.30 floor: **−3.22 kg credited**. T2 stays 66.5; R-066 freeze holds; G4/G5 sign-off withheld.
+- Method limit (stated plainly): no assembly CAD exists for 45.05 kg of the v3 basis, so this is the R-031 itemised base plus the post-R-031 ruled chain (itemised for the first time), checked against every STEP and counted BOM in the repo. It is not a CAD-only count.
+- CAD checks (CadQuery, 7075 2810 kg/m³): knee fins rev B 0.097/knee vs 0.094 booked → **+0.006** booked; actuator fastener BOM 2.083 vs 2.084 booked (confirmed); palm 0.1195/hand confirmed. **Held, not credited:** stand-off R14 STEP 0.118/side vs 0.124 (−0.012 pair) and L47 lever STEP 0.436 vs 0.4642 booked (−0.057 pair), pending owners naming the measured body.
+- **Candidate double counts (not credited; owners must answer before C is finalised):** v3 `actuator()` unlabelled +0.04 per rotary unit (≤0.72); v3 linear-unit +0.08/+0.10 per motor side in the legs (≤2.16) if the R-015 CAD linkage table did not remove them; connector allowances vs harness connectors (≤0.18). Drive mass is still the 0.038 Everest placeholder ×32; Elmo G-TWI must be cited.
+- **Option C (to 66.20):** with R-122 (−0.74 now / −1.19 best), C must deliver −2.03 to −2.48.
+
+| rank | item | full kg [basis] | credit now | cost [EST] | schedule | gate risk | Bryan approval |
+|---|---|---|---|---|---|---|---|
+| 1 | (b) Mg housings (multi-path only), CF arm links, CF/honeycomb torso-pelvis plates | −1.2 (−0.9..−1.5) [EST] | −0.6 | $2–5k | 2–3 rounds, FEA on bryan PC | G3 fatigue/galvanic/bond, G5 | none |
+| 2 | (a) Carry 20→15 kg (10 kg option): shoulder CSG-25→20, waist pitch step-down, knee D69 revert if Thermal passes | 15 kg −0.95 (−0.7..−1.2); 10 kg −1.5 [EST, v3 catalog] | −0.45 / −0.75 | <$1k | 1–2 rounds | G4 carry/recovery, G3 thermal | **T5 20→15 kg** |
+| 3 | (c) Delete waist_yaw (+ frame step-downs) | −1.1 (+−0.1..−0.3) [v3 catalog cited] | −0.6 | <$1k | 2 rounds re-layout | G2, G4, T3 | **T3 30→29 DOF** |
+
+- Excluded on prior rulings, revisited with no new evidence: carbon femur (single-path, Materials not recommended), shin fairing (deleted), CSG-32, CRBH 8016.
+- **Ruling/recommendation:** (b) proceeds now under Arbiter authority (no target change). (a) carry 20→15 kg is recommended to Bryan as the second lever. (c) is held as the backstop. Mid-estimate end state with R-122 best case: ~65.0 kg full credit, ~66.6 kg on today's credit rules, so two of three items are needed. **First action:** Actuators answer the v3 adder double-count question (could remove up to ~2 kg of phantom mass and shrink C).
+- Decision on (a)/(c) goes to Bryan through Robot Lab.
+
+## R-127 (2026-10-21) W2 carrier R15 gates/mass/ROM; JOB9_SPEC allowables (Arms 305de76 R15_W2_CARRIER.md; T&R 887b7f4)
+
+### (a) Arms R15 W2 one-piece carrier. **Accepted with conditions; stress PASS held to Job 8b.**
+- **e limit tightened to e ≤ 2.3 mm** (was 2.4, R-125). Interpolating 1/s0 linearly between Arms' 2.056 (e0) and 1.999 (e2.4): 0.4864 → 0.5003, 0.00578/mm, so s0 = 2.000 at e = 2.36 mm; 1.999 at 2.4 is a fail, not a rounding pass. With the larger flange gap below (Arms: 3.3 mm gives s0 1.996 at e2.4), the crossing moves to ≈ 2.3 mm. Drawing limit **e ≤ 2.3**; Arms re-runs `e_stack_r15.py`/s0(e) at the final gap and reports the exact crossing. Worst stack 1.92 mm (ID 0.3 tolerances adopted) → margin ≈ 0.4 mm, s0 ≈ 2.01. **PASS.** Job 8b must report e under load (0.69 mm deflection still carried as placeholder; R15 cal 0.27 mm).
+- **Mx 251 N·m, CSG-25 SF 1.40 at fault: PASS** (≥ 1.3, ≤ 351).
+- **Stress basis: single load path.** Pad → carrier box arm/plate → flange → hub → 7013 is the only path; one-piece carrier, no redundant member. Under R-125 (b) it is checked at **A-basis Fty/1.5**, not 320. Provisional A-basis for 7075-T651 plate ≤ 2 in stock: 441 MPa (implied by Materials' T031 2.22 typical / 2.04 A-basis on 480, unverified) → **limit 294 MPa**. Arm root 289 MPa (hand) **passes thinly (SF 1.02)**; plate root 295 MPa (Kt 1.5 [EST]) **exceeds 294 → HELD**. Neither is a pass until Job 8b FEA: **Job 8b gate for the carrier = vM ≤ 294 MPa** (replaces 320 for this part). If Materials cannot cite a T651 A-basis for the stock thickness (stock > 25 mm likely for a 63 × 56 mm one-piece part), the lower provisional value (393 → **262 MPa**) governs and both hand values fail → Arms thickens/ribs the plate (mass addition, back to me). Materials owes the citation.
+- Deflection 0.27 mm ≤ 1: PASS.
+- **Flange gap: the 3.0 mm with no negative tolerance is rejected.** The drawing must state the plate inner face/rib gap to the OD108 flange as **nominal 3.4 mm, ±0.2**, giving **≥ 3.0 mm minimum running clearance at LMC and under Job 8b load** (Job 8b reports the loaded gap; < 3.0 fails). Same rule for the ribs (≥ 3 mm follow). Access-hole deletion must be confirmed on the drawing.
+- **ROM: interim shoulder roll soft limit 135° → 115° accepted.** TARGETS sets no shoulder roll ROM value; CONTRACTS ROM is "per humanoid_v3.xml" (hard range −15…180°, unchanged); T5 carry at the waist and the R-125 abduction cases use roll well below 115°. No target is violated. **Owner: Controls** updates `controls/limits/soft_limits.json` (note: R15 coarse torso-cover penetration ≥ ~118°). **ID owes** the real torso-cover re-check against `pad_envelope_w2`; the limit returns to 135° (or a measured value with ≥ 3 mm clearance) only on that evidence. G2 (zero clashes across full ROM) stays NOT MET.
+- **Mass (freeze ruling, additions full):** carrier 0.2657/side [CALC] vs booked 0.194/side → **+0.143 kg pair booked at full**. It replaces the R11/R14 stand-off (no separate stand-off line; no double count with R-125's +0.044/+0.140, which are inside the 0.194). Pocketing −0.03/side [EST]: **no credit** until Job 8b passes with the pockets, then half (CALC) or full (STEP-measured). R-126's held stand-off STEP −0.012 is void (part superseded).
+
+### (b) T&R JOB9_SPEC (887b7f4) allowables. **Amended.**
+- No prior ruling set 7050, 6061 or fall/fault allowables; JOB9's values are ruled here.
+- **7050-T7451 tubes:** typical Sy 435 → 290 is acceptable **only for multi-path parts**. The femur/tibia tubes are **single load path** (R-126 excluded carbon femur on that basis), so b3 uses A-basis Fty/1.5. No cited A-basis for the tube form exists in the repo → **provisional 262 MPa** (lowest provisional single-path value, R-125 (b) "lower governs") until Materials cites 7050 A-basis for the product form/thickness, then that/1.5. Results 262–290 are held, not passed.
+- **6061-T6:** 276/1.5 = **184 accepted for multi-path**. Single-path 6061 uses A-basis: MMPDS 6061-T6 Fty 241 (35 ksi; Materials to confirm the citation) → **161 MPa**. Fatigue gate Se/1.5 35 MPa unchanged.
+- **Fall/fault 480 (SF 1.0 on typical yield) rejected.** T8 requires ≥ 100 falls without structural damage; typical yield exceeds A-basis (7075 441/393, so 480 permits permanent set on a minimum-property part). **Fall/fault peak ≤ min(A-basis Fty, typical Sy/1.1):** 7075 multi-path 436; 7075 single-path ≤ 2 in stock 436 (441 provisional), > 25 mm plate 393; 7050 395 (435/1.1) until A-basis cited; 6061 241. b3's "fall peak ≤ 435" becomes 395.
+- **Single-path classification of the four parts: confirmed.** Clevis (only hip/knee connection, cheek pair is one member), femur tongue (sole femur-to-joint joint; dowel + press is one path), foot collar (sole shank-to-foot path), knee centre web (twin screws are redundant drives but the shared 6 mm web is one member; its failure loses the knee). Add femur/tibia tubes (above). Plate thickness > 25 mm → 262; otherwise 7075-T651 provisional 294 until Materials cites.
+- **Owner: T&R** edits JOB9_SPEC before Job 9 runs; Robot Lab routes.
+
+### Mass
+- R-126 G4 credible 69.42 + (a) +0.143 = **69.56 kg credible**. Reserve vs 66.5: **−3.06 kg**; to the +0.30 floor −3.36. Option C must now deliver −2.17 to −2.62 (with R-122 −1.19 best / −0.74 now). T2 66.5; R-066 freeze holds; G4/G5 sign-off withheld.
+
+## R-128 — Single-path aluminium allowables from MIL-HDBK-5H (Materials 01982fc) — 2026-10-21
+Evidence: MIL-HDBK-5H (page numbers verified, table numbers inferred) is accepted as a primary cited source; MATERIALS_DB rows AL7075T651_A, AL7050_TUBE, AL6061T6_A.
+1. Single-path 7075-T651 plate uses the A-basis band value ÷1.5 for the drawn stock thickness, not 320. Use the LT value (the lower of L and LT) unless the drawing fixes grain direction to L: 0.25–0.499 in 308; 0.5–1.0 in 313; 1.001–2.0 in 308; 2.001–2.5 in 294; 2.501–3.0 in 280 MPa. Where the load runs through the thickness (ST), use ST: 271 (2.001–2.5 in) and 257 (2.501–3.0 in). For ≤2.0 in there is no ST value, so a through-thickness-loaded part uses 271. 320 remains multi-path only. Every drawing must state its stock thickness and grain direction; an unstated one takes the lowest band value (257).
+2. Consequences: the ankle cross (~30 mm, 1.001–2.0 in band) limit is 308 MPa, replacing R-125's held 262. The W2 carrier limit (R-127's provisional 294) becomes the band value for Arms' stated stock: 308 if ≤2.0 in, in which case plate 295 and root 289 pass on hand calc, still subject to Job 8b FEA.
+3. Femur and tibia tubes are specified 7050-T73511 extrusion, with a single-path limit of 262 MPa (S-basis 393 ÷1.5). The model_v4 "T7451" label is corrected. Legs re-checks the femur tube and P-047.
+4. 6061-T6: 241 confirmed; single-path 161, multi-path 184.
+5. Fall/fault limits (R-127) are recomputed as min(A-basis band, Sy_typ/1.1) for each band.
+
+## R-129 — Option C(b), torso share (Torso b697350, R127_sandwich_plates.md) — 2026-10-21
+Evidence: Torso & Power's core-shear checks. Shoulder bulkhead 3.49 vs 1.25 MPa at a 30 mm core (needs 50–84 mm, no fit): FAIL. Pelvis side walls 3.85 vs 1.25 MPa (side fall): FAIL. Pelvis top/bottom: PASS by calc, −0.10 kg [CALC]. Waist ring, rails and nodes stay 7075.
+Ruling: the sandwich is rejected for the bulkhead, pelvis side walls, waist ring, rails and nodes. Pelvis top/bottom sandwich is accepted as a candidate at −0.10 [CALC], booked at 0 until all of: a cited insert pull-out datasheet, Legs' stiffness acceptance, fine-mesh job 3b, the G3 coupon, and R-076 earthing plus glass isolation (+0.005, full, added on adoption). Then it is credited at half (−0.05, net −0.045) until measured. Cost ~$2.0–2.5k [EST, quote needed].
+Torso pocketing (job 3) plus P-145–P-150, −0.25 [EST], replaces R-122 row 2 (−0.20); it is not additive with it. Credit is half (−0.125) after the job 3 FEA passes against the R-128 band allowables.
+Option C(b) now: the torso yields ~−0.05 instead of the −0.4 share assumed in R-126; the C(b) estimate falls accordingly, pending the Actuators Mg and Arms CF returns.
+
+## R-130 — Correction to R-128 §2 (ankle cross temper) and femur side-dent case (Legs f58c40a) — 2026-10-21
+1. Correction: R-128 §2 was wrong. The ankle cross is 7075-T7351 only (Materials a2bf811, SCC at the press-fit bores), not T651. The verified T7351 basis gives a single-path limit of 262 MPa (393/1.5), and 239 MPa where the load runs through the thickness (ST). Legs' brief rev D (304394c) at 262/239 stands and job 7 runs on it. Any other part specified T7351 takes the same values. The R-128 T651 bands apply only to parts drawn in T651.
+2. The femur side-dent case governs. T8 requires ≥100 falls with no structural damage, and a sideways fall loading the 80 mm stub is a credible fall case (side falls already govern the pelvis walls, R-129). It is not conservative or unbooked. At 1.2 mm (SF 0.56) and at P-047's 1.6 mm (SF 0.82) it fails.
+   Remedy: Legs proposes the lightest fix that reaches SF ≥1.0 at the R-127 fall limit (7050 395) with no permanent dent: either the full 1.9 mm wall (~+0.16 kg pair [EST]) or a local wall step/doubler over the stub zone only. The addition is booked at full when adopted. A thigh-cover load path may be credited only with ID evidence that the cover carries the side load.
+
+## R-131 — v3 adder double counts and Elmo drive mass (Actuators D85 c47e2c8); Mg housings (D86 6f75642) — 2026-10-21
+1. Elmo G-TWI: 22.2 g without heatsink (MAN-G-TWI v2.011 p.10), cited, so full credit: −0.506 kg across 32 drives, replacing the 0.038 placeholder. Condition: Thermal confirms the no-heatsink mounting (drive heat sunk into housing) at the R-096 duty. If a heatsink is needed, its mass is added at full.
+2. v3 adders (3c7b50e, uncommented). The double counts are inferred from code history, not itemised, so they are credited at half now and in full on a per-unit bottom-up table:
+   +0.04/rotary vs harness leads/connectors 0.56 (lower bound) → −0.28; +0.10/screw side vs linkage table 1.20 → −0.60; leg +0.03 vs the R-123 fastener count 0.12 → −0.06; leg connector allowance vs harness 0.18 → −0.09. Subtotal −1.03.
+   +0.08/screw side is kept (7202 support-bearing pair, booked nowhere else).
+   Total credit now −1.536 kg (Actuators proposed −1.63; the difference is connectors at half and the 0.56 lower bound). Actuators delivers the per-unit table this round, which unlocks the full credit of up to −2.57 to −2.73.
+   Credible mass 69.56 → ~68.02 kg (−1.52 vs 66.5). R-130 femur side-dent fix is pending.
+3. Mg housings: Elektron 43 (WE43-class) is accepted as a candidate; AZ91D is rejected (creep at 120 °C). Materials must cite the A-basis 195/303 source. Single-path parts follow R-125(b): A-basis/1.5 = 130 MPa. Hip yaw and roll may use Mg at ≤130 MPa (it is the same rule, not an exception). The ankle eye lug at 142 MPa takes a 7075 bush, or else stays 7075. No Ti fasteners in Mg (row 12 reduced by ~0.010); use coated steel or Al with isolation per Materials.
+   Credit: the stiffness-thickened figure governs (hip/ankle −0.263 [EST]), not the equal-geometry −0.625. It is not additive with row 3 pocketing: the combined total is ~−0.85 [EST]. It is booked 0 until G4-Mg FEA (ovality, s0 seats), Thermal's ΔT re-check and Materials' galvanic/corrosion sign-off all pass, then credited at half until measured. Cost ~$1–2k [EST].
+
+## R-132 — Knee web thick-plate allowables (Materials 5e33b17); W2 carrier final (Arms 5c6c839/7f6345f/19e2614); CF forearm (R16_CF_LINKS.md) — 2026-10-21
+1. Ankle cross: the correction Materials asked for is already made in R-130 (T7351, 262 L/LT, 239 ST).
+2. Knee centre web (>3 in stock), MIL-HDBK-5H p.3-346 accepted. T651 single-path L/LT/ST: 3.001–3.5 in 276/267/248; 3.501–4.0 in 257/248/230 MPa. Above 4.0 in there is no T651 band, so it is not permitted. If the web carries sustained ST load (it is press- and bolt-loaded), it must be T7351 (SCC rating D for T651 ST): 3.5–4.0 in S-basis 221/221/211. Legs states the stock thickness and the sustained ST load on the drawing. Until then, Job 9 uses 211 static and 317 fall (T7351 ST), and results above those are held. Fall limits are min(A-basis, Sy_typ/1.1) per band.
+3. W2 carrier: drawing limit e ≤ 2.2 mm (s0 = 2.0 at 2.246; worst stack 1.92, passes). Stock is 2.5 in T651 (finished 73×63.4×62), band 2.001–2.5: Job 8b gate 294 LT, 271 for any ST-loaded feature. Arm root 243 and plate root 255 (R6 fillet) pass on hand calc. A split carrier is rejected (joint at the root). Mass: 0.285 kg/side [CALC], +0.039 pair over R-127, an addition booked at full. Credible mass ~68.02 → ~68.06 kg.
+4. CF links: the upper arm is rejected (+0.013). The CF forearm with the 0.8 mm 7075 thermal sleeve is a candidate at −0.091 pair [CALC], booked 0 until Job 8c passes, Thermal (ladder B) and Materials (galvanic) sign off, and torsional stiffness is shown adequate for Controls' arm bandwidth gate or a braid overwrap is added (mass at full). Credit is then half until measured. Job 8c may be queued by Robot Lab.
+5. Arms is directed to study the 7075 clevis and roll-yaw link (0.61 kg/side) for topology/pocketing against the R-128 band allowables. Mg is allowed only under R-131 §3 rules.
+
+## R-133 — Shoulder roll soft limit after real torso cover check (ID e874653) — 2026-10-21
+Evidence: against Torso's real cover, 3 mm clearance is lost at 130° roll at all pitches (contact at 132°). Ruling: the soft limit is 127° (replacing R-127's interim 115°), owned by Controls; no torso pocket. It may rise only after Torso fixes the cover height (z 50–310) and shoulder openings (Ø110 at z 220) and ID re-sweeps with ≥3 mm clearance. G2 remains NOT MET until the full-ROM clash check passes on final covers.
+
+## R-134 — Elektron 43 allowables and Mg galvanic plan (Materials 5f25c5b) — 2026-10-21
+1. Adopted: AMS 4485 extruded T5, longitudinal A-basis Fty 195, giving a single-path limit of 130 MPa only for stress along the bar axis. Non-longitudinal, multi-axial, wall or plate stress uses 98 MPa [EST]. This is conservative (typical transverse yield 183 / 1.5 = 122) and stays in place until an A/B-basis transverse value is cited. Bearing (Fbry) is not credited: all bearing loads go into the 7075-T7351/6061 seat rings. Actuators specify AMS 4485 bar with its axis on the housing axis.
+2. G4-Mg FEA must report principal-stress direction relative to the bar axis per region and check each region against 130 or 98. A region with no stated direction uses 98.
+3. Galvanic plan (MG_GALVANIC_PLAN.md) adopted as mandatory. Adder +0.17 kg [EST], so the net Mg credit is about -0.09 kg (vs R-131 -0.263 gross). It is booked 0 until the G4-Mg FEA, Thermal, and G5 salt-fog/humidity/bolt-retention coupons pass, then at half until measured. Mg is now a low-value option; Actuators should weigh it against pocketing in 7075 alone.
+
+## R-135 — Femur/tibia wall (Legs L65 d803245), knee web (L66), clevis/roll-yaw pocketing (Arms R17 21ebe01) — 2026-10-21
+1. Femur dent: Legs' 393 MPa fall limit (min yield; 435/1.1 = 395) is consistent with R-127/R-128. The R-130 governing case passes at 1.6 mm (SF 1.23/1.20). Accepted: a uniform 1.5 mm wall on femur and tibia, with tolerance minimum 1.37/1.40 mm. Its SF ~1.13/~1.10 is [EST] by interpolation, so it is not accepted until the Job 9 b3 re-run at 1.5 mm (minimum-wall geometry) shows SF ≥ 1.0 against 393. If it fails, the wall reverts to 1.6 mm. The local step is rejected (new fatigue site, undefined impact zone). Mass: booking stays +0.15 (the -0.003 change is under the 0.005 freeze threshold). The sleeve OD change goes to the contract (Legs and Actuators).
+2. Knee web: T7351 with sustained ST load confirmed, 211 static / 317 fall. The stock thickness [EST] must be fixed on the drawing. Margins wait on JOB9-c.
+3. Clevis/roll-yaw link pocketing: -0.592 pair [CALC] is booked at half, -0.30, as an R-129-style pocketing credit. The 9 mm clevis lugs (245 vs 294) are mandatory and must be inside the CALC. The clevis floor web and the box-link buckling/bearing must clear Job 8d at the R-128 bands. If Job 8d or CAD fails, the credit is reversed. Credible mass ~68.06 → ~67.76 kg.
+
+## R-136 — Elmo drive thermal and Mg housing thermal (Thermal 5505e71, R131_ELMO_MG.md) — 2026-10-21
+1. The R-131 §1 condition (no heatsink needed) FAILED for the mounting as booked. Drives must keep the heat-sink face below 85 °C. Required: knee drives on finned 6061 plates of about 0.03 m² in the vent stream on insulating standoffs; hip pitch and ankle drives on their own standoff plates; shoulder and wrist get a plate/vent or rely on the derate. Firmware derate is mandatory on every drive (from 75 °C, 50% at 85 °C, off at 90 °C), owned by Electronics/Controls. The Elmo credit is rebooked to -0.25 kg (the conservative end of Thermal's -0.25 to -0.30 [EST]; the plates are additions and count in full). Change vs R-131: +0.256. Credible mass ~67.76 → ~68.02 kg. G3 thermal re-check is required once the plates are in CAD.
+2. Mg housings: the Thermal condition PASSES with 4 binding conditions: the stator is bonded or has a hot-sized press fit; PEO on all outer faces; the knee housing stays aluminium; the hip pitch drives are off-housing. The credit remains 0 per R-134 until the G4-Mg FEA and G5 coupons pass.
+
+## R-137 — Actuator bottom-up table (Actuators D88 e761f4b) and thick bodies/knee twin housing (D87 902f8d0/aad9061) — 2026-10-21
+1. The D88 32-unit ledger (each line once) replaces R-131 §2. The adder double-count correction is -1.562 kg at full (a bookkeeping correction against booked lines, not a new estimate), replacing -1.03 at half: delta -0.532.
+2. Drives: R-136 governs (-0.25 net of heat plates; note this is R-136, not R-134). The D88 -0.411 is not booked. If Actuators' CAD plate masses exceed the Thermal estimate, the difference is added in full. The 6 unbooked wrist drives are an addition, +0.133 at full.
+3. Shoulder roll under-booking: CRBH 4010 v3 row vs the R-120 6013 delta assumption. +0.36 pair is booked at full as a conservative addition. Actuators lists both bearing part numbers and masses in D88 so the figure can be confirmed or reduced.
+4. Net: -0.532 + 0.133 + 0.36 = -0.039. Credible mass ~68.02 → ~67.98 kg.
+5. D87 thick bodies: move to 7075-T7351 accepted with no mass change. Materials must cite the T7351 band for each stock thickness. R-132 covers only up to 4.0 in, so any body over 4.0 in follows §6.
+6. Knee twin housing (~4.25 in stock): option (a) adopted. It becomes a 7075-T7352 (or 7050-T7452) hand forging with grain flow along the housing axis, and Materials cites the A/S-basis for the 4–4.5 in band. Until then 211 MPa applies (it passes at 75.7, margin 2.8). (b) is rejected because the split adds a bolted joint and mass; (c) is rejected because it changes the interface. No mass change.
+
+## R-138 — P-152 bonded sleeve OD and CONTRACTS §1c row (Legs ced62f5) — 2026-10-21
+1. Sleeve OD 46.80 is accepted: bore 47.0 - 46.80 = 0.20 diametral, which meets BOND_SPEC (0.08 min bond line); 46.9 is rejected. Fallback: 46.60 with a 1.6 mm wall, tied to the R-135 Job 9 b3 outcome. The §1c mounting row is added to CONTRACTS, marked Actuators co-sign pending; it becomes binding when Actuators co-signs. No mass change beyond R-135.
+2. Knee web stock: already ruled in R-137 §6. The web is integral with the knee twin housing, made as a 7075-T7352/7050-T7452 hand forging with a Materials-cited allowable; 211/317 interim.
+
+## R-139 — Shoulder roll bearing seat housing (Actuators D88 addendum 85787c9) — 2026-10-21
+The +0.36 pair bearing delta is confirmed by catalog (IKO 4010 0.15 vs 7013 0.38 kg), so R-137 §3 stands as cited. The roll housing resized for the 7013 seat is (0.450 - 0.269) × 2 = 0.362 pair, less R-121's +0.075 = +0.287 pair, booked at full as an addition. If Arms' R13 roll-housing CAD mass exists, it replaces this figure when Arms publishes it. Credible mass ~67.98 → ~68.27 kg.
+
+## R-140 — Drive heat plate CAD (Actuators D89 eb575a5) — 2026-10-21
+1. Plates measured at 0.298 [CAD] plus 0.041 [EST] standoffs/screws, net of the R-066 knee plates 0.300 vs 0.256 implied by R-136. The +0.044 excess is booked at full under R-137 §2. Credible mass ~68.27 → ~68.31 kg.
+2. Knee plate at 0.0273 m² (9% under target, depth-limited by L51) is ACCEPTED, because the evidence that governs is the temperature, not the area: at duty (h 8) every plate is ≤75.3 °C, under the 85 °C limit. Continuous carry above 85 °C on the knee, hip pitch and ankle plates is not a design point; it is covered by the R-136 derate. Conditions: Thermal confirms the h 8 coefficient for the vent stream, and Controls' duty sim shows the TARGETS kitting duty cycle completes without hitting the 75 °C derate start, or with derate losses inside the torque margin. G3 stays open until both pass.

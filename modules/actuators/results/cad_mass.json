@@ -68,12 +68,12 @@
  "hip_pitch_lever_check": {
   "F_N": 4540.0,
   "sigma_MPa": 240.39930555555551,
-  "SF_yield": 2.0923521340362536
+  "SF_yield": 1.9966779807900632
  },
  "knee_lever_check": {
   "F_N": 3631.578947368421,
   "sigma_MPa": 192.29714912280696,
-  "SF_yield": 2.615743406985033
+  "SF_yield": 2.496136849607984
  },
  "fasteners": {
   "rotary": 0.0498,

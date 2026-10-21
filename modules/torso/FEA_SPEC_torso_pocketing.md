@@ -18,3 +18,24 @@
 - **Pass criteria:** SF ≥ 2.0 on yield in fall cases, ≥ 1.5 in landing; Goodman SF ≥ 1.5 on walking; no buckling (linear eigen, λ ≥ 3).
 - **Deliverables:** `modules/torso/results/fea_pocket/` with the summary .md (mass, σ per case, SF table, convergence) + JSON, plots, and the input deck.
 **Status: ready to run.**
+
+## FINAL — Job 3, bryan PC (2026-10-21)
+**Status: FINAL.** Runs after Legs L47 and the pad case (R-074 queue).
+**Geometry (current):** 12 mm 7075-T651 shoulder bulkhead with the 101×101 sternum land and integral 60×6 back rib (R-079/Materials c859e43); 2× shoulder flanges, 80 mm bolt circle, 8×M8 12.9 each side, plus the 22-lead grommets; 4 M4 captive bezel inserts (§25.1, edge ≥2d); 1 mm CFRP partition with the A41 duct; EtherCAT junction board, 4 M3 bosses on the partition cold face, ≥5 mm standoff (R-087); pelvis 7075 and the CFRP shell 2.0 mm [EST laminate]; pack rails.
+**Load cases:** LC1 chest pad plateau 22.35 kN ×1.5 = 33.5 kN on the land; LC2 side fall through the shoulder pad/bearing, D71 ≤550 N·m (T-030); LC3 10 kg payload at full reach with 30° lean, waist 204 N·m ×1.5; LC4 pack 8.75 kg at 10 g on the rails; LC5 EtherCAT and bezel bosses at 50 g; LC6 static stand 66.5 kg through the pelvis.
+**Pass:** SF ≥2.0 against the per-part allowable (R-128: single-path bulkhead 257, pelvis 271; multi-path 320; 7075-T6 yield 480, UTS 560, E 70 GPa; CFRP [EST] Tsai-Wu ≥2); land deflection ≤0.05 mm at LC1 (≥10× pad stiffness of 0.53 MN/m); no pack-gap closure; first mode ≥80 Hz; buckling factor ≥3.
+**Inputs:** `modules/torso/cad/torso_r1.step`, `fea_job3.yaml` (materials and loads above). **Outputs:** `modules/torso/fea/job3/` holding results.json (SF, deflection and mode per LC), pocket map STEP, pocketed mass, and report.md.
+**Run (PC):** `pip install gmsh pyyaml` and CalculiX `ccx` on PATH, then `python modules/torso/fea_job3.py --cfg modules/torso/fea_job3.yaml --out modules/torso/fea/job3`. Smoke test: add `--coarse --no-solve`. The script builds the geometry and exports torso_r1.step itself. Parts are fragmented into one conformal mesh (shared nodes); results.json carries SF, land deflection, LC6 mode 1 and the LC1 buckle factor with PASS/FAIL. ccx via conda-forge: `micromamba create -n ccx -c conda-forge calculix`, or pass `--ccx PATH`. Coarse end-to-end run proven on the box (13 s).
+
+
+### R-128 (9e49b7a) stock, grain and load-path classification (2026-10-21)
+| Part | Stock | Grain | Path | Allowable (MPa) |
+|---|---|---|---|---|
+| Shoulder bulkhead, 12 mm web + 101×101 land + integral 60×6 rib (with posts) | 7075-T651 plate 3.0 in (76 mm) | L along y (span); LT/ST used | **single** (only chest→torso and shoulder→torso path) | **257** (ST 2.501–3.0 in; M8 flange clamp is through-thickness) |
+| Pelvis incl. hip/waist hardpoint nodes | 7075-T651 plate 2.5 in (63.5 mm) | L along y | **single** (only legs↔torso path) | **271** (ST, through-thickness hip/waist bolts) |
+| Waist ring | 7075-T651 plate 1.5 in [EST] | L along y | **single** (waist torque path) | **271** (ST, ≤2.0 in) |
+| Pack rails + latch | 7075-T651 plate 0.75 in | L along x (rail axis) | multi (2 rails) | 320 |
+| Partition | CFRP QI 1.0 mm | 0/±45/90 | multi / secondary | skin 300 [EST] |
+| Torso shell | CFRP 2.0 mm | QI | multi / secondary | skin 300 [EST] |
+| Sternum land inserts, EtherCAT bosses | in the bulkhead / partition | – | carried by the parent | parent |
+- Applied in fea_job3.yaml/.py and fea_job3b.yaml as per-part allowables. The script refuses a single-path metal part without one. Drawings state stock and grain as above; if the drawing fixes grain L, the L value may be used only after the R-128 table is checked.

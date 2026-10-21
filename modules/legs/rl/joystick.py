@@ -49,6 +49,9 @@ def default_config() -> config_dict.ConfigDict:
         heading_sigma=0.1,
         leg_action_mult=1.0,
         knee_cont_nm=76.9,
+        # CONTRACTS R1.2 knee avail peak 258 N·m worst-angle (2x TBM2G-07613D + 2x RV12x4).
+        # The PD clip is tau_lim*strength, and strength DR reaches 1.10, so training can exceed it.
+        knee_peak_nm=258.0,
         reward_scales=config_dict.create(
             tracking_lin=2.0,
             tracking_ang=0.8,
@@ -65,6 +68,7 @@ def default_config() -> config_dict.ConfigDict:
             alive=0.8,
             heading=0.0,
             knee_thermal=0.0,
+            knee_peak=0.0,
         ),
     )
 
@@ -415,6 +419,8 @@ class HumanoidWalk(mjx_env.MjxEnv):
             'tracking_ang': jp.exp(-yaw_err / sig),
             'heading': jp.exp(-jp.square(he) / float(self._config.heading_sigma)),
             'knee_thermal': -jp.maximum(knee_rms / float(self._config.knee_cont_nm) - 1.0, 0.0),
+            'knee_peak': -jp.sum(jp.square(jp.maximum(jp.abs(tau) * self._knee_mask - float(self._config.knee_peak_nm), 0.0)
+                                           / float(self._config.knee_peak_nm))),
             'upright': jp.exp(-jp.square(1.0 - up) / 0.05),
             'height': jp.exp(-jp.square(data.qpos[2] - z_tgt) / 0.02),
             'ref_pose': jp.exp(-jp.mean(jp.square(data.qpos[7:] - pose_ref)) / 0.05),

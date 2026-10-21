@@ -1,0 +1,61 @@
+{
+ "note": "Design module fastener list (cover set + shoulder pad), 2026-10-21. 'structural' = carries primary/impact load; only non-structural are candidates for steel->Ti swap (RL Materials to price). Counts are robot totals. TBD = fasteners not yet defined (A29 CAD). Stand-off flange M4s (16x 12.9) and dia6 dowels removed: Arms-owned, listed in modules/arms/FASTENER_BOM.csv.",
+ "items": [
+  {
+   "where": "pad tray -> stand-off (P-051)",
+   "size": "M4x8 SHCS",
+   "count": 8,
+   "grade": "12.9 steel, 5.5 kN preload",
+   "structural": true,
+   "ti_swap": false
+  },
+  {
+   "where": "sternum bezel P-052 (PC ring -> Torso land)",
+   "size": "M4 button head",
+   "count": 4,
+   "grade": "A2-70 stainless",
+   "structural": false,
+   "ti_swap": true
+  },
+  {
+   "where": "knee drive-bay panel (merged, PA12)",
+   "size": "M2.5 captive",
+   "count": 8,
+   "grade": "A2-70 stainless",
+   "structural": false,
+   "ti_swap": true
+  },
+  {
+   "where": "ankle boot hem -> foot-box inserts (P-025)",
+   "size": "M3 into inserts",
+   "count": 8,
+   "grade": "A2-70 stainless",
+   "structural": false,
+   "ti_swap": true
+  },
+  {
+   "where": "trim quarter-turns (COVER_TRIMS_R069)",
+   "size": "M3 quarter-turn",
+   "count": 4,
+   "grade": "steel/stainless TBD",
+   "structural": false,
+   "ti_swap": true
+  },
+  {
+   "where": "thigh fairing P-020 / P-053 band",
+   "size": "TBD (A29 CAD)",
+   "count": "TBD",
+   "grade": "TBD",
+   "structural": false,
+   "ti_swap": true
+  },
+  {
+   "where": "knee cap P-022, hip skirt P-023, waist bellows P-024",
+   "size": "TBD (A29 CAD)",
+   "count": "TBD",
+   "grade": "TBD",
+   "structural": false,
+   "ti_swap": true
+  }
+ ]
+}

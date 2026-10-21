@@ -1,10 +1,10 @@
 # Controls soft / software joint limits (RL Controls)
 
 ## Shoulder roll abduction (interim, Arms R7 / R-076)
-- **Soft limit: |shoulder_roll| ≤ 135°** (left +135, right −135 by mirror).
+- **Soft limit: |shoulder_roll| ≤ 127°** (left +127, right −127 by mirror). **R-133** (ID e874653 real torso cover check): 3 mm clearance is lost at 130° roll at all pitches (contact at 132°). Replaces R-127's interim 115° (and the original 135°). Hard MJCF range −15…180° unchanged. It may rise only after Torso fixes the cover height (z 50–310) and shoulder openings (Ø110 at z 220) and ID re-sweeps with ≥ 3 mm clearance. G2 stays NOT MET.
 - Reason: with the shoulder pad on the roll-yaw link, above ≈135° the pad face turns toward the head. Head/cap clearance is not yet verified (Arms Job 1 head sweep pending).
 - Hardware MJCF range stays (−15, 180) L / mirrored R. This is a **controls soft stop**, not a hard-stop change.
-- Config: `soft_limits.json` → `shoulder_roll_abduction_deg: 135`. Runtime helper: `soft_limits.py` (`clamp_q`, `roll_soft_limit_rad`).
+- Config: `soft_limits.json` → `shoulder_roll_abduction_deg: 127`. Runtime helper: `soft_limits.py` (`clamp_q`, `roll_soft_limit_rad`).
 
 ## Elbow torque (Arbiter R-080 / R-085)
 Two distinct limits — both real; do not collapse them:

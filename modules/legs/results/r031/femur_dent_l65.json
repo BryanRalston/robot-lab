@@ -1,0 +1,58 @@
+{
+ "limit_MPa": 393.0,
+ "limits": {
+  "S_basis_Fty": 393.0,
+  "Sy_typ_over_1p1": 395.45454545454544
+ },
+ "femur": {
+  "n_fit": 1.349,
+  "t_min_EST": 1.369,
+  "SF_1p6": 1.234,
+  "SF_1p2": 0.837,
+  "tube_len_mm_EST": 296.4,
+  "t1.37": {
+   "sigma_EST": 392.5,
+   "SF": 1.001,
+   "dm_pair": 0.0425
+  },
+  "t1.4": {
+   "sigma_EST": 381.2,
+   "SF": 1.031,
+   "dm_pair": 0.05
+  },
+  "t1.5": {
+   "sigma_EST": 347.3,
+   "SF": 1.131,
+   "dm_pair": 0.0748
+  },
+  "t1.6": {
+   "sigma_EST": 318.4,
+   "SF": 1.234,
+   "dm_pair": 0.0995
+  },
+  "b_local1p4_80mm_dm_pair": 0.0135
+ },
+ "tibia": {
+  "n_fit": 1.388,
+  "t_min_EST": 1.402,
+  "SF_1p6": 1.201,
+  "SF_1p2": 0.806,
+  "tube_len_mm_EST": 317.8,
+  "t1.4": {
+   "sigma_EST": 393.8,
+   "SF": 0.998,
+   "dm_pair": 0.0479
+  },
+  "t1.5": {
+   "sigma_EST": 357.9,
+   "SF": 1.098,
+   "dm_pair": 0.0717
+  },
+  "t1.6": {
+   "sigma_EST": 327.2,
+   "SF": 1.201,
+   "dm_pair": 0.0954
+  },
+  "b_local1p4_80mm_dm_pair": 0.0121
+ }
+}
