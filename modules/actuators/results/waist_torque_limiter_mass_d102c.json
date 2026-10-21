@@ -1,0 +1,14 @@
+{
+ "parts_kg": {
+  "lining A sintered bronze 1.5": 0.039,
+  "yoke slip ring 42CrMo4 4 mm (+ 3 drive lugs to yoke, 3x12x8)": 0.107,
+  "lining B sintered bronze 1.5": 0.039,
+  "pressure plate steel wear face 1.5": 0.042,
+  "pressure plate 7075 body 4": 0.04,
+  "Belleville DIN 2093 B 80/41/3 [EST size check]": 0.087,
+  "lock nut ring M68x1.5 7075 6 mm (on output hub thread) [EST]": 0.021,
+  "anti-rotation pins/keys + bushing [EST]": 0.019
+ },
+ "total_kg": 0.394,
+ "stack_axial_mm": 23.1
+}

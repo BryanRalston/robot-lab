@@ -1,0 +1,85 @@
+{
+ "I1.44 Tc153": {
+  "gear_peak_Nm": 158.7,
+  "stop_peak_Nm": 1118,
+  "stop_travel_mrad": 107.5,
+  "stop_strain": 0.09,
+  "clutch_slip_deg": 16.1,
+  "clutch_energy_J": 43.0,
+  "bottomed": "False",
+  "E_kin": 72.4
+ },
+ "I1.44 Tc170": {
+  "gear_peak_Nm": 175.9,
+  "stop_peak_Nm": 1128,
+  "stop_travel_mrad": 108.3,
+  "stop_strain": 0.09,
+  "clutch_slip_deg": 13.6,
+  "clutch_energy_J": 40.2,
+  "bottomed": "False",
+  "E_kin": 72.4
+ },
+ "I1.44 Tc187": {
+  "gear_peak_Nm": 193.1,
+  "stop_peak_Nm": 1137,
+  "stop_travel_mrad": 109.1,
+  "stop_strain": 0.091,
+  "clutch_slip_deg": 11.5,
+  "clutch_energy_J": 37.4,
+  "bottomed": "False",
+  "E_kin": 72.4
+ },
+ "I1.44 noclutch": {
+  "gear_peak_Nm": 421.6,
+  "stop_peak_Nm": 1232,
+  "stop_travel_mrad": 117.5,
+  "stop_strain": 0.098,
+  "clutch_slip_deg": 0.0,
+  "clutch_energy_J": 0,
+  "bottomed": "False"
+ },
+ "I3.52 Tc153": {
+  "gear_peak_Nm": 156.3,
+  "stop_peak_Nm": 1695,
+  "stop_travel_mrad": 162.3,
+  "stop_strain": 0.135,
+  "clutch_slip_deg": 11.5,
+  "clutch_energy_J": 30.7,
+  "bottomed": "False",
+  "E_kin": 144.4
+ },
+ "I3.52 Tc170": {
+  "gear_peak_Nm": 173.1,
+  "stop_peak_Nm": 1703,
+  "stop_travel_mrad": 163.1,
+  "stop_strain": 0.136,
+  "clutch_slip_deg": 8.5,
+  "clutch_energy_J": 25.3,
+  "bottomed": "False",
+  "E_kin": 144.4
+ },
+ "I3.52 Tc187": {
+  "gear_peak_Nm": 189.9,
+  "stop_peak_Nm": 1711,
+  "stop_travel_mrad": 163.9,
+  "stop_strain": 0.137,
+  "clutch_slip_deg": 6.1,
+  "clutch_energy_J": 19.8,
+  "bottomed": "False",
+  "E_kin": 144.4
+ },
+ "I3.52 noclutch": {
+  "gear_peak_Nm": 314.6,
+  "stop_peak_Nm": 1736,
+  "stop_travel_mrad": 166.3,
+  "stop_strain": 0.139,
+  "clutch_slip_deg": 0.0,
+  "clutch_energy_J": 0,
+  "bottomed": "False"
+ },
+ "stop": {
+  "E25": 356.40000000000003,
+  "TH25": 0.3,
+  "M25_qs": 2324
+ }
+}

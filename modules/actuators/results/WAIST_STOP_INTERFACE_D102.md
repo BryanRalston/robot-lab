@@ -81,3 +81,58 @@ Hysteresis loss 2.9×10⁻⁴ rad = **1 arc-min = 0.017°** (Table 44, size 25, 
 1. **The P-160 yoke stop must be compliant and energy-absorbing, not rigid metal.** It must absorb (I_body + 0.652)·6.3²/2 ≈ **72 J [EST, I_body 3]** with a peak ≤ 1.55 kN·m design. Its stiffness must be low enough that the deceleration time ≫ the gear-drivetrain period (2π√(0.652/5.7e4) = 21 ms). The rigid-stop Case A (634 kN·m/rad, 0.10° gap) applies only to static holding with a brake, never to the tripped-waist impact.
 2. **Controls:** zero the waist-pitch torque on a trip. At 2.3 kN·m ultimate the gear still exceeds momentary (411), so the 2.3 kN·m event is an inspect/replace event (ratchet check).
 3. Option if the gear must stay ≤ momentary at ultimate: a torque limiter (slip clutch, about 300–350 N·m) between the gear output and the yoke, or a softer stop that holds the peak ≤ 1.9 kN·m.
+
+## Rev c (~11:45 ET): integrated torque limiter (T&R final spec + overrides). Supersedes the rev b recommendations
+**Basis.** Torso inertia 1.44 / 3.52 kg·m² (T&R); drive 0.652 kg·m² (rev b). Elastomer-only stop fails: gear share 0.30–0.37 caps the stop peak at ≈ 550–660 N·m, which needs 13–27° of travel. **Rev b's 277 N·m used I_body 3.0 [EST] (share 0.179). T&R's 0.296 static split is correct for 1.55 kg·m², and the dynamic share is higher (0.33–0.40).** Off-the-shelf limiters are too heavy: Mayr ROBA-slip hub size 2 Type 100.21_ (130–250 N·m, ø88 × 57 mm, 1.6 kg; Mayr K.123.V16 p.6) and Torso's EAS-compact size 2 (+2.77 kg).
+
+### Topology
+motor → CSG-25 → **friction limiter** → yoke/torso. **The PU end stops act torso ↔ pelvis**, on the torso side of the limiter. When the torso hits a stop, the drive inertia (0.652) can only decelerate through the limiter slip torque Tc. The gear torque is therefore capped at Tc plus the small inertia of the output node; the drive energy goes into limiter slip, not gear wind-up.
+
+### Design (CAD: waist_clutch_cad_d102c.py → cad/waist_torque_limiter_d102c.step, results/waist_torque_limiter_mass_d102c.json)
+- **Friction annulus ø90 / ø66** (inside the ø100 keep-out). 2 faces; mean friction radius 39.3 mm.
+- Stack: CSG-25 output flange | sintered-bronze lining | 42CrMo4 yoke slip ring with 3 drive lugs | lining | pressure plate (7075 body with a 1.5 mm steel face) | **Belleville DIN 2093 Group 2 Series B, 80/41/3 [EST: confirm F(s) in the DIN EN 16983 table]** | M68×1.5 7075 lock-nut ring. Stack length 23 mm axial.
+- **Friction pair:** sintered bronze on steel, dry. μ 0.15–0.45 range (Shigley, Mechanical Engineering Design, friction-material table, sintered metal dry [verify edition/table]); μ_design 0.30.
+- **Clamp force:** F = Tc/(2·μ·r_m) = 170/(2 × 0.30 × 0.0393) = **7.2 kN**, at s ≈ 0.55·h0 on the flat part of the Belleville curve.
+- **Slip-torque set:** **Tc = 170 N·m**, set by measured break-away on a bench (not by nut angle). Tolerance ±10 % for run-in, humidity and μ: **153–187 N·m**.
+  - Margin over the 115 N·m operating peak: 153/115 = 1.33.
+  - Under 204: 187 gives a dynamic gear peak of 193 (below).
+- **Mass (CAD volume):** linings 2 × 0.039, slip ring 0.107, steel face 0.042, 7075 plate 0.040, Belleville 0.087, nut ring 0.021, pins/bushing 0.019 = **0.394 kg** (≤ 0.4, 2 % margin).
+
+### Dynamic proof (3-DOF time domain: waist_clutch_d102c.py)
+Model: drive 0.652 through the nonlinear CSG-25 stiffness (Table 43) → output node Jo 1e-3 [EST] → stick/slip clutch (Kc 2e5 N·m/rad, slip at Tc) → torso → PU stop (D575 curve ×1.3 [EST]). Both directions are covered by the motor at 0 / +115 / −115 N·m.
+
+| case | torso | gear peak | stop peak | limiter slip / energy | no limiter |
+|---|---|---|---|---|---|
+| **governing fault: 8.32 rad/s unpowered, Tc 153/170/187** | 1.44 | 159 / 176 / **193** | 1.12–1.14 kN·m | 11.5–16.1°, 37–43 J | gear 422 |
+| same | 3.52 | 156 / 173 / **190** | 1.70–1.71 kN·m | 6.1–11.5°, 20–31 J | gear 315 |
+| 7.0 rad/s (motor 0 / +115 / −115) | 1.44 | 177 / 179 / 181 | 1.03–1.11 kN·m | up to 50°, 149 J (motor +) | 462 |
+| 7.0 rad/s | 3.52 | 174 / 176 / 175 | 1.54–1.66 kN·m | up to 41.5°, 123 J (motor +) | 290 |
+| 7.0, Tc band 153 / 187, motor + | 3.52 | 159 / **193** | 1.65–1.67 kN·m | 59° / 31°, 156 / 101 J | — |
+| **routine powered TUCK 2.5–4.1 rad/s** (Controls 19f27ef) | 1.44 / 3.52 | 114–177 | 0.31–1.05 kN·m | 0–17.7°, ≤ 53 J | 172–257 |
+
+**The gear stays ≤ 204 N·m in every case** (max 193, at the Tc +10 % edge). Without the limiter it reaches 257–462 N·m: over repeated peak, and over momentary 369 at 7–8.3 rad/s with the 1.44 torso.
+
+- The PU stop (Torso) for the 324 J gate must be sized with E25 ≥ 356 J and 25 % at ≥ 0.30 rad (17°). Its peak is then 1.7 kN·m ≤ 2.5 with no bottoming (strain 0.14). The stop, not the limiter, carries the 324 J; the limiter sheds ≤ 43 J unpowered and ≤ 156 J if the motor drives into the stop.
+
+### Heat and wear
+- **Worst case, all 324 J into the limiter** (bound): steel/bronze friction mass 0.227 kg × ≈ 450 J/kg·K gives **ΔT bulk ≈ 3.2 °C**.
+  - Flash rise: q = Tc·Δω/A = 170 × 8.32 / 5884 mm² = 0.24 W/mm² for ≤ 0.1 s gives **≈ 5–7 °C** (semi-infinite steel).
+  - Sintered bronze limit ≈ 300 °C. **No overheating; mass is not heat-bound.** The minimum mass that works is the CAD 0.39 kg, set by stiffness and strength, not heat.
+- **Wear** [EST energy-based rate 0.2 mm³/kJ for dry sintered metal]:
+  - Routine event (≤ 53 J): 3.6 nm per face.
+  - Fault (324 J): 22 nm.
+  - Allowance: 5 % preload loss = 0.36 kN / ≈ 5 kN/mm Belleville rate = 0.036 mm per face → **≈ 10 000 routine events or > 1000 fault events before re-torque.**
+- **Inspection rule:**
+  - Log limiter slip (output encoder vs motor encoder × N).
+  - Bench-check break-away torque (153–187) at each service, after any fault event > 100 J, or when cumulative logged slip energy exceeds 10 kJ. Re-shim or re-torque the nut if outside the band.
+  - **The joint absolute encoder must read the yoke side of the limiter** (AksIM-2 ring on the yoke, not the gear output). Otherwise a slip leaves a position offset. Re-engagement is automatic (friction): no reset is needed, but re-home and compare encoders after a slip.
+- **Rotary damper (one line):** a viscous damper sized for 324 J at ≤ 204 N·m gear share runs ≈ 0.6–1.0 kg [EST], is speed-dependent and offers no hard torque cap. Rejected.
+
+### Can the drive brake at 3–11 rad/s output? (Controls' 2.8 rad/s [EST])
+- **CSG-25-100 input limits** (HD Table 3, grease): max input 5600 rpm (**5.86 rad/s output**, momentary); limit for average input speed 3500 rpm (**3.67 rad/s**).
+- **TBM2G-06808A** (§9.4.1 p.272): Nmax 8000 rpm (8.4 rad/s output); Ke 10.4 Vrms/krpm cold (14.7 V peak line-line/krpm), 9.24 hot; Tp 1.54 N·m → 115 N·m at the output.
+- **Bus 84 V** (D3) on G-TWI R50/100 (max supply 95 V, MAN-G-TWI Table 3 / install guide):
+  - Controlled torque (EMF ≤ 0.96 × bus) up to ≈ 5.5 krpm = **5.75 rad/s**.
+  - EMF reaches 95 V at 6.5 krpm cold (6.8 rad/s).
+  - At 8.32 rad/s (7.9 krpm) EMF is 117 V cold / 104 V hot, **above the drive's 95 V absolute max**. This needs a regen sink: battery charge acceptance, or a bus clamp/shunt.
+- **Answer:** active braking is possible up to ≈ 5.7 rad/s (bus-limited), with the gear's grease momentary limit at 5.9 rad/s. **Controls' 2.8 rad/s is conservative but uncited. The cited figures are 3.67 rad/s average (gear) and 5.75 rad/s (bus).** Above ≈ 6.8 rad/s back-driving can over-volt the drive, so tripped 7–8.3 rad/s events also need the regen clamp. Braking cannot replace the limiter: the braking torque (≤ 115 N·m) is below the stop loads and does not cap gear wind-up at contact.
