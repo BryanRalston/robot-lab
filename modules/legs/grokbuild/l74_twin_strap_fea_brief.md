@@ -47,3 +47,6 @@ Hand references (L74): straps 27 MPa design / 9 MPa × Kt 2 amplitude [EST]; ban
 
 ## Report
 Write `results/r031/L74_TWIN_STRAP_FEA.md` + json: mesh stats, convergence table, SF per case and location, fall capacity, G10 stresses, housing clearance, mass (CAD volume × 2.81) vs the L74 −0.029 pair [EST]. Label anything assumed [EST].
+
+## Addendum L76: G10 orientation
+The G10 isolator blocks must be cut so the strap-to-clamp heat path runs through the laminate thickness (k 0.288, ASTM C177). Any in-plane heat path must be 13.5 mm or longer (k 0.9 [EST]). Bearing allowables: 128 MPa fall, 64 MPa sustained (Materials 6b04d2f).
