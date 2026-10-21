@@ -501,3 +501,10 @@ Numbered L84 because L83 already holds the tube local-buckling item. Scripts: kn
 - The D99 taper FEA (grokbuild/d99_taper_arm_fea_brief.md) is QUEUED, waiting on Bryan's OK.
 - Study started: limp first contact at the −10° adduction stop → results/r031/hip_screw_limp_l94.md.
 - **L94 limp study (partial):** first contact at −10 limp is the **inboard hip_pitch screw bodies + eye-stub flange (body↔body)**, single and double, not housings or bumpers. The Legs-only interim is PU 95A pads on a clamp band around the inboard bodies (needs Actuators' OK). The final fix is an Actuators screw-line splay/clock. See results/r031/hip_screw_limp_l94.md.
+
+## L95 — WBC walk_1p2_r2_heel070 pair gaps (wbc_pair_gaps_l95.py → results/r031/wbc_pair_gaps_l95.json), 2026-10-21
+- The full 12-joint pair poses come from Q[:, qa]; the joint order (yaw, roll, pitch, knee, ankle pitch, ankle roll; L then R) is [EST] from controller.py.
+- **Frame 118** (L roll −6.9 / R −7.4, L pitch −28.8 / R −38.8): hip_pitch screw bodies **34.35 mm**, ankle screw bodies 82.6, knee housings 56.7.
+- **Frame 1718** (roll +6.0 / +6.0, pitch −35.6 / −35.4, double-support-like): 40.3 / 87.4 / 57.9.
+- **Scan:** 6 frames (118, 1718 + the L−R roll extremes 173, 448–450); the full 1865-frame scan was NOT run (time). Worst is **frame 118 for all three**: 34.35 / 82.6 / 56.7, all ≥ 3 mm with large margin.
+- **Note:** the real gait keeps ≥ 34 mm, where the static "other leg straight" check (L93b) gives 0 at 6°. **The limit should be pair-geometry based** (both legs' joint vectors, as L93b's Δp coupling approximates) rather than a single-leg roll cap. Controls should run the pair clearance check on the full plan set.

@@ -1,0 +1,153 @@
+{
+ "joint_order_EST": [
+  "hip_yaw",
+  "hip_roll",
+  "hip_pitch",
+  "knee",
+  "ankle_pitch",
+  "ankle_roll"
+ ],
+ "frames": {
+  "118": {
+   "pose": {
+    "L_hip_yaw": -0.5,
+    "L_hip_roll": -6.9,
+    "L_hip_pitch": -28.8,
+    "L_knee": 65.2,
+    "L_ankle_pitch": -36.4,
+    "L_ankle_roll": 6.9,
+    "R_hip_yaw": 2.5,
+    "R_hip_roll": -7.4,
+    "R_hip_pitch": -38.8,
+    "R_knee": 79.6,
+    "R_ankle_pitch": -18.8,
+    "R_ankle_roll": 8.0
+   },
+   "gaps": {
+    "hip_pitch screw body": 34.35,
+    "ankle screw body": 82.61,
+    "knee twin housing": 56.73
+   }
+  },
+  "173": {
+   "pose": {
+    "L_hip_yaw": -0.9,
+    "L_hip_roll": -6.2,
+    "L_hip_pitch": -26.6,
+    "L_knee": 65.0,
+    "L_ankle_pitch": -38.4,
+    "L_ankle_roll": 6.2,
+    "R_hip_yaw": -0.7,
+    "R_hip_roll": -7.1,
+    "R_hip_pitch": -45.1,
+    "R_knee": 89.4,
+    "R_ankle_pitch": -40.1,
+    "R_ankle_roll": 7.1
+   },
+   "gaps": {
+    "hip_pitch screw body": 55.91,
+    "ankle screw body": 118.42,
+    "knee twin housing": 63.99
+   }
+  },
+  "448": {
+   "pose": {
+    "L_hip_yaw": -5.0,
+    "L_hip_roll": 1.3,
+    "L_hip_pitch": -6.5,
+    "L_knee": 66.2,
+    "L_ankle_pitch": -36.2,
+    "L_ankle_roll": -1.4,
+    "R_hip_yaw": -4.5,
+    "R_hip_roll": 1.3,
+    "R_hip_pitch": -37.8,
+    "R_knee": 66.5,
+    "R_ankle_pitch": -28.7,
+    "R_ankle_roll": -1.3
+   },
+   "gaps": {
+    "hip_pitch screw body": 110.64,
+    "ankle screw body": 239.99,
+    "knee twin housing": 96.1
+   }
+  },
+  "449": {
+   "pose": {
+    "L_hip_yaw": -5.0,
+    "L_hip_roll": 1.3,
+    "L_hip_pitch": -6.3,
+    "L_knee": 66.2,
+    "L_ankle_pitch": -36.8,
+    "L_ankle_roll": -1.4,
+    "R_hip_yaw": -4.4,
+    "R_hip_roll": 1.4,
+    "R_hip_pitch": -37.4,
+    "R_knee": 66.6,
+    "R_ankle_pitch": -29.2,
+    "R_ankle_roll": -1.4
+   },
+   "gaps": {
+    "hip_pitch screw body": 110.04,
+    "ankle screw body": 238.28,
+    "knee twin housing": 95.56
+   }
+  },
+  "450": {
+   "pose": {
+    "L_hip_yaw": -5.0,
+    "L_hip_roll": 1.4,
+    "L_hip_pitch": -6.2,
+    "L_knee": 66.3,
+    "L_ankle_pitch": -37.6,
+    "L_ankle_roll": -1.5,
+    "R_hip_yaw": -4.4,
+    "R_hip_roll": 1.4,
+    "R_hip_pitch": -37.1,
+    "R_knee": 66.7,
+    "R_ankle_pitch": -29.6,
+    "R_ankle_roll": -1.4
+   },
+   "gaps": {
+    "hip_pitch screw body": 109.1,
+    "ankle screw body": 236.05,
+    "knee twin housing": 94.81
+   }
+  },
+  "1718": {
+   "pose": {
+    "L_hip_yaw": -0.0,
+    "L_hip_roll": 6.0,
+    "L_hip_pitch": -35.6,
+    "L_knee": 66.3,
+    "L_ankle_pitch": -30.7,
+    "L_ankle_roll": -6.0,
+    "R_hip_yaw": -0.0,
+    "R_hip_roll": 6.0,
+    "R_hip_pitch": -35.4,
+    "R_knee": 65.8,
+    "R_ankle_pitch": -30.4,
+    "R_ankle_roll": -6.0
+   },
+   "gaps": {
+    "hip_pitch screw body": 40.32,
+    "ankle screw body": 87.37,
+    "knee twin housing": 57.89
+   }
+  }
+ },
+ "worst_scanned": {
+  "hip_pitch screw body": [
+   34.35,
+   118
+  ],
+  "ankle screw body": [
+   82.61,
+   118
+  ],
+  "knee twin housing": [
+   56.73,
+   118
+  ]
+ },
+ "scan_note": "scanned 6 frames: 118, 1718 + extremes of L_roll-R_roll (full 1865-frame scan not run, time)"
+}
