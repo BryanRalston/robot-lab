@@ -148,22 +148,30 @@ The sole pad is under the foot plate; the P-025 ankle boot hem is re-anchored ab
 3. CF on thigh for looks (shin deleted) (two-tone gold/black) — cost delta vs A30 sheet.
 
 ## R-143 knee plate rev 4 + P-154 fin guard: full-ROM sweep (cad/covers/r143_knee_sweep.py/.json, knee_fin_guard.py/.json/.stl)
-- Inputs: Actuators D91 plate + Thermal rev 4 (44b7c36): 100 × 48 window, **8 fins 18 mm**; PC guard with ≥ 10 mm air above the fin tips, ≥ 60 % open face, open at both ends, low-ε inner face. **Envelope 29.5 mm beyond the L51 box** (guard outer face x −64.0, thigh frame).
-- Placement (no assembly CAD; from Legs L51/L58): plate face x −34.5, y 130 ± 24, z 690–790; knee axis (0, 500); RV12 rods trunnion (−130, 770) → lever eye r 47.5 [EST]; Legs shank keep-outs.
-- **Sweep, 1° steps, gate ≥ 3 mm.** The plain 29.5 mm box **fails**: the rods come to 2.5 mm at knee 132–145°. **Fix:** a 45° × 8 mm chamfer on the guard's lower outer edge (z 690), with the fin lower ends tapered 45° × 8 mm under it so the 10 mm standoff holds there. With the fix:
+- Inputs: Actuators 5008683 (rev 4): 100 × 48 plate, 8 fins **18.5 mm** (tips x −53.0), edge seal = 1 mm silicone bead inboard of x −34.5. Thermal 44b7c36: ≥ 10 mm air above the tips, ≥ 60 % open face, ends open, low-ε inner face. **Guard inner face 28.5 mm, outer 30.0 mm proud (x −64.5).**
+- Legs L71 (6060973):
+  - (a) Plate placement and lever eye r 47.5 confirmed; **rods at y 130 ± 45**; Legs' minimum to the knee twin housing is 18.1 mm at 145°.
+  - (c) Insert bosses.
+  - (c2) Tab / side-wall issue.
+  - (d) Guard is sacrificial: confirmed.
+- **Guard rev 4b (changed for L71 c2):**
+  - Widened to **104 × 66 outer / 101 × 63 inner**, so the outer fins (y ± 21.5) are **10.0 mm** from the side walls (was 4.5). The walls now sit outboard of the plate, 7.5 mm/side (≥ 0.5 fit), and are clear of the seal bead.
+  - The guard flange seats on the drive-bay panel window frame (66 × 104 + 4 mm flange).
+  - **4 base notches, 10 (z) × 7 (x)**, at the L58 tabs (y 100/160, z 700/780) → ≥ 3 mm to the tab ends (was 0 / 1.5).
+  - Fin tip to inner face **10.0 mm**. 45° × 8 lower-edge chamfer + matching fin taper kept.
+  - Open area: 11 face slots 4.0 × 96 → **62 %** face, **57.9 cm²** total (≥ 25). IP2X: 4 mm slots, the 12 mm finger cannot enter.
+  - Inner face low-ε Al (ε ≤ 0.1); outer face in cover colour.
+- **Bosses (L71 c):** 4 ribbed PA12 bosses Ø6 × ≥ 5 mm in the window frame at y 112/148, z 684/796 (window ends, off the L58 screw line y 100/160 z 700/780), M2.5 heat-set; 4× M2.5 A2 captive per side.
+- **Sweep at 30.0 mm, 1° steps, gate ≥ 3 mm:**
 
 | Check | Min clearance | Where / angle | Result |
 |---|---|---|---|
-| RV12 rods vs guard | **7.8 mm** | knee **141°** [EST] | PASS |
-| Shin / boot keep-outs | 92 mm | knee 0–145° | PASS |
-| Housing front fin tips | 14.5 mm | static | PASS |
+| RV12 rods (y 130 ± 45) vs guard / chamfer | **12.0 mm** | knee 140° | PASS |
+| Knee twin housing (Legs L71 CAD) | 18.1 mm | knee 145° | PASS |
+| Shin / boot keep-outs | 95 mm | knee 0–145° | PASS |
 | Pelvis underside | 180 mm | hip −105…+40° | PASS |
-| Seated | 133 mm | hip 90° | PASS |
+| Seated | 132.5 mm | hip 90° | PASS |
+| L58 tabs | ≥ 3 mm (notched) | static | PASS |
 
-- **Guard (P-154 rev 4):**
-  - PC 1.5 mm thermoformed; fin tip to inner face **10 mm**. Face slots 4.0 mm at 5.5 pitch × 96 → **64 % open**; total **46.4 cm²** (30.7 face + 15.7 sides, ≥ 25); both z ends open. IP2X: the 12 mm finger cannot enter.
-  - **Inner face:** vapour-deposited Al or 25 µm Al foil PSA, ε ≤ 0.1. **Outer face:** cover colour, matte 2K, 20 µm.
-  - 4× M2.5 A2 captive per side (unchanged).
-- **Mass:** guard 0.0151 kg/side (incl. liner, paint, fasteners) → 0.030 pair; window −0.019 → **net +0.011 pair [EST], i.e. −0.009 vs the +0.020 booked.** The fin growth (+10.8 g/knee) is Actuators' line.
-- **Actuators to confirm:** fins 18 mm with plate face x −34.5; the fin lower-end 45° × 8 taper (Thermal UA effect); edge seal vs the guard flange stack.
-- **Legs to confirm:** plate placement (y 130 ± 24, z 690–790); lever eye r 47.5 and rod path (the 7.8 mm is [EST]); 4× M2.5 window-frame inserts; fall/side impact with a sacrificial guard and the bay kept closed (R-143 2c).
+- **Mass:** guard 0.0155 kg/side → 0.031 pair; window −0.019 → **net +0.012 pair [EST]** (+0.001 vs rev 4, −0.008 vs the +0.020 booking).
+- **Actuators to confirm:** fin lower-end 45° × 8 taper (Thermal UA effect). **Legs to confirm:** bosses at y 112/148, z 684/796 in the window frame.

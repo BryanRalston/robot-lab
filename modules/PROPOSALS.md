@@ -425,15 +425,20 @@ All keep R-076 (reinforced isolation, IEC 60664-1 creepage, IP2X), R-074 (main l
 - **Open:** Thermal verification of rev 3, the R-140 conditions (Controls duty sim), and Electronics confirming the mated plug fits the 7 mm femur gap.
 
 - **Rev 4 update (D93, 2026-10-21):** knee fins 13 → 18.5 mm with a 45° × 8 lower taper, plus ID's P-154 low-ε PC guard (2 × ≈20.3 g). **+0.066 kg vs rev 3 booked in full** (the plate and the guard). **P-153 total: +0.082 kg vs R-140** (0.016 + 0.066). Envelope: the guard is 30.0 mm proud of L51 (ID rev 4 had 29.5, +0.5 for the taper compensation). Gates: Thermal re-check of rev 4 at 18.5 mm with the taper, and the ID rod sweep at 30.0 mm.
-### P-154: ID: knee fin guard (perforated PC over Actuators D91 knee plate rev 3)
+### P-154: ID: knee fin guard (perforated PC over Actuators knee plate rev 4)
 - Date: 2026-10-21
 - Module / proposer: Design / RL Industrial Design
 - Affected owners: Actuators, Legs, Thermal, Test & Reliability, Arbiter
-- Change (rev 4, Thermal 44b7c36): thermoformed 1.5 mm PC cap over the 100×48 knee-plate window, 29.5 mm proud (fins 18 mm + 10 mm air + 1.5), 4.0 mm slots 64 % open (46.4 cm²), ends open, low-ε (≤0.1) Al inner face, outer in cover colour; 45°×8 mm lower outer-edge chamfer (+ fin-end taper, Actuators) for RV12 rod clearance; 4× M2.5 A2 captive into window-frame inserts; drive-bay panel gets the 100×48 window.
-- Impact on contracts: none (no mechanism change); envelope 24.5 mm proud at the femur rear.
-- Impact on targets: mass +0.011 kg pair [EST] (guard 0.030 incl. liner/paint, window −0.019); fin growth is Actuators'.
-- Evidence: design/cad/covers/knee_fin_guard.py/.json/.stl, r143_knee_sweep.py/.json (min 7.8 mm rods at knee 141° with chamfer [EST]; 2.5 mm FAIL without); V5_COVER_SET.md R-143 section.
-- Affected owner response: pending (Actuators UA with guard; Legs placement/inserts/fall)
+- Change (rev 4b; Actuators 5008683, Thermal 44b7c36, Legs L71 6060973):
+  - Thermoformed 1.5 mm PC cap, 104 × 66 outer / 101 × 63 inner, 30.0 mm proud (inner face 28.5; fins 18.5, tips x −53.0); fin tip to inner face 10 mm; outer fins 10 mm to the side walls.
+  - Walls 7.5 mm/side outboard of the plate (≥ 0.5 fit); edge seal is a 1 mm silicone bead inboard of x −34.5 (Actuators).
+  - 4 base notches 10 × 7 at the L58 tabs (≥ 3 mm); 45° × 8 mm lower outer-edge chamfer + matching fin taper (Actuators).
+  - 11 slots 4.0 mm, 62 % face open, 57.9 cm² total; ends open; low-ε (≤ 0.1) Al inner face, outer in cover colour.
+  - 4× M2.5 A2 captive into ribbed PA12 bosses Ø6 × ≥ 5 at y 112/148, z 684/796 (off the L58 screw line); drive-bay panel gets the window frame. Guard is sacrificial (Legs L71 d).
+- Impact on contracts: none (no mechanism change); envelope 30.0 mm proud at the femur rear.
+- Impact on targets: mass +0.012 kg pair [EST] (guard 0.031 incl. liner/paint, window −0.019); fin growth is Actuators'.
+- Evidence: design/cad/covers/knee_fin_guard.py/.json/.stl, r143_knee_sweep.py/.json (rods 12.0 mm at knee 140°; housing 18.1 mm at 145°, Legs L71); V5_COVER_SET.md R-143 section.
+- Affected owner response: Legs L71 confirmed placement, lever eye, rods y ±45, sacrificial guard; Actuators 5008683 fins/seal; pending: fin-end taper (Actuators/Thermal), boss positions (Legs)
 - Status: open
 
 ### P-155: Actuators: hip-pitch lever G3-R2: section b30/d36 → b34/d40, R8 upper + R5 ear blends, +0.113 kg (D92)

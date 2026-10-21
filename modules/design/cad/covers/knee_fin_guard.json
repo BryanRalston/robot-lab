@@ -8,12 +8,21 @@
   ],
   "wall_out": [
    104,
-   52
+   66
   ],
+  "inner_wall": [
+   101,
+   63
+  ],
+  "plate_side_clear": 7.5,
+  "fit_note": "walls now outboard of the 48 plate (7.5 mm/side >= 0.5); guard flange seats on the drive-bay panel window frame (66 x 104 + 4 flange)",
+  "tab_notches": "4 base notches 10 (z) x 7 (x) in the side walls at L58 tabs (y 100/160, z 700/780): >=3 mm to tab ends",
+  "bosses": "4x ribbed PA12 bosses dia 6 x >=5 mm in the window frame at y 112/148, z 684/796 (window ends, off the L58 screw line), M2.5 heat-set",
+  "edge_seal": "1 mm silicone bead inboard of x -34.5 (Actuators 5008683)",
   "flange_w": 4,
-  "proud_outer": 29.5,
-  "fin_h": 18,
-  "inner_face": 28.0,
+  "proud_outer": 30.0,
+  "fin_h": 18.5,
+  "inner_face": 28.5,
   "slot_w": 4.0,
   "slot_pitch": 5.5,
   "face_slot_len": 96,
@@ -28,17 +37,16 @@
   "x_plate": -34.5,
   "yc": 130,
   "zc": 740,
-  "fasteners": "4x M2.5 x6 A2-70 pan head, captive, into M2.5 heat-set inserts in the thigh-fairing window frame (non-structural)",
-  "lower_edge_chamfer": "45 deg x 8 mm on the outer z 690 edge (clears RV12 rods at knee 132-145); fin lower ends tapered 45 deg x 8 mm to keep the 10 mm standoff there (Actuators to confirm)"
+  "fasteners": "4x M2.5 x6 A2-70 pan head, captive, into M2.5 heat-set inserts in the thigh-fairing window frame (non-structural)"
  },
  "envelope_thigh_frame": {
   "x": [
-   -64.0,
+   -64.5,
    -34.5
   ],
   "y": [
-   104.0,
-   156.0
+   97.0,
+   163.0
   ],
   "z": [
    688.0,
@@ -46,26 +54,26 @@
   ]
  },
  "fin_tip_to_guard_inner_mm": 10.0,
+ "outer_fin_to_side_wall_mm": 10.0,
  "Thermal_ge10": true,
  "A35_fin_rule_ge8": true,
  "open_area_cm2": {
-  "face": 30.7,
+  "face": 42.2,
   "sides": 15.7,
-  "total": 46.4,
+  "total": 57.9,
   "A35_min_per_bay": 25,
-  "face_open_frac": 0.64,
+  "face_open_frac": 0.62,
   "Thermal_min_frac": 0.6,
   "ends": "open both z ends"
  },
  "IP2X": "3.5 mm slots: 12 mm test finger cannot enter; fin tips 10 mm behind the inner face (burn: T&R to re-run ISO 13732-1 on the PC outer face)",
- "kg_side_EST": 0.0151,
- "kg_pair_EST": 0.03,
+ "kg_side_EST": 0.0155,
+ "kg_pair_EST": 0.031,
  "confirm": {
   "Actuators": [
    "fins 18 mm (rev 4) and plate face at x -34.5 (L51 26 mm boundary)",
    "UA re-check with guard (R-143 2b, Thermal)",
-   "plate edge seal vs guard flange stack",
-   "fin lower-end 45x8 mm taper under the guard chamfer (UA effect, Thermal)"
+   "plate edge seal vs guard flange stack"
   ],
   "Legs": [
    "window frame inserts (4x M2.5) in the thigh fairing / drive-bay panel",
