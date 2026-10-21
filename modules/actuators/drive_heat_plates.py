@@ -1,4 +1,7 @@
-"""D90 rev2 (Electronics 23f6992 §18.5): G-TWI 4xM2 on 30.6x25.6 clearance holes (dia 2.4), M2x6 up from femur side;
+"""D91 rev3 (Thermal R131 rev2 16f8176): knee plate flipped: drives hang on the femur-facing side, plate outer
+face is a black-anodised window in the thigh shell at the L51 26 mm boundary, 8 axial fins 13 x 1 at 6 mm pitch in the
+open stream outside the box. Thermal basis: h 8 only on open black faces; enclosed/femur faces credited 0; UA>=0.185 W/K.
+D90 rev2 (Electronics 23f6992 §18.5): G-TWI 4xM2 on 30.6x25.6 clearance holes (dia 2.4), M2x6 up from femur side;
 one serrated washer per plate on a masked seat (PE via drive heat sink, §8.3). Knee fins moved to the DRIVE side
 (strips beside the 30 mm drive footprint) so the femur-side standoff only clears the M2 heads.
 R-134..R-136 Elmo G-TWI standoff heat plates (RL Actuators). CadQuery 2.8; light compute.
@@ -31,7 +34,7 @@ def finned(L,W,tb,nf,hf,tf,nd=1,side="femur"):
 import sys
 HP=float(sys.argv[1]) if len(sys.argv)>1 else 84.0
 PLATES={ # name: (qty, drives/plate, carry W/drive, L, W, tb, nfins, hfin, tfin[, fin side, standoff mm])
- "knee":      (4,2,6.0,100,48,1.5,6,15.0,1.0,"drive",4.0),   # fins in 9 mm strips beside drives; L51 box 26 deep
+ "knee":      (4,2,6.0,100,48,1.5,8,13.0,1.0,"out",0.0),    # D91: fins outward at 6 mm pitch (48/8), in stream beyond L51 26
  "hip_pitch": (4,1,6.2, HP,HP,1.5, 0,0,0),
  "ankle":     (4,1,3.0, 60,56,1.5, 0,0,0),
  "shoulder_pitch":(2,1,4.2,80,80,1.5,0,0,0),
@@ -48,22 +51,28 @@ for n,(q,nd,pc,L,W,tb,nf,hf,tf,side,so) in PLATES.items():
     if nf:
         mm=math.sqrt(2*8/(K*tf*1e-3)); eta=math.tanh(mm*hf*1e-3)/(mm*hf*1e-3)
     else: eta=0.97  # base spreading [EST]
+    if side=="out":  # Thermal R131 rev2 basis: only the outer face + fins (open, black, >=6 mm pitch) at h; drive/femur side 0
+        A=(L*W + nf*2*hf*L + nf*tf*L - nf*tf*L)/1e6 - 0.0  # base outer (roots~tips), fin faces
+        A-=nd*4*math.pi*1.2**2/1e6
     res={}
+    UA8=None
     for case,Q1,h in (("duty_h8",0.6*pc,8),("carry_cont_h8",pc,8),("carry_cont_h12",pc,12)):
         Q=Q1*nd; T=TAIR+Q/(h*A*eta)+Q1*RPAD
         res[case]=round(T,1)
+        if h==8: UA8=round(h*A*eta,4)
     out[n]=dict(plates=plates,fin_side=side,standoff_mm=so,drives_per_plate=nd,L=L,W=W,t_base=tb,fins=nf,fin_h=hf,fin_t=tf,
                area_m2=round(A,4),fin_eta=round(eta,3),mass_g=round(m,1),T_base_C=res,
-               pass_duty_h8=res["duty_h8"]<=80,step=f"cad/drive_plate_{n}.step")
+               pass_duty_h8=res["duty_h8"]<=80,UA_h8_WK=UA8,step=f"cad/drive_plate_{n}.step")
     total+=m*plates
 # standoffs: G10 dia6x6 tube, 4/plate ~0.25 g each + M3 A2 screw 0.6 g x4 [EST]
-nplates=sum(v["plates"] for v in out.values()); hw=nplates*4*(0.25+0.6)+nplates*0.1  # +1 serrated M3 washer/plate 0.1 g [EST]; M2 drive screws in R-141
+nplates=sum(v["plates"] for v in out.values()); hw=nplates*4*(0.25+0.6)+nplates*0.1+2*0.6  # +Al foil femur shield 0.6 g/leg [EST];   # +1 serrated M3 washer/plate 0.1 g [EST]; M2 drive screws in R-141
 out["_total"]=dict(plates_g=round(total,1),standoff_hw_g=round(hw,1),total_kg=round((total+hw)/1000,3),
   r136_booked_as_addition_kg="in -0.25 net Elmo credit (Thermal +0.21..0.26)")
 json.dump(out,open("results/drive_heat_plates.json","w"),indent=1); print(json.dumps(out,indent=1))
 # L51 envelope (Legs DECISIONS L51): box 26(x depth) x 52(y) x 104(z); plate y 106-154 (48), z 688-792
-k=out["knee"]; stack=k["standoff_mm"]+k["t_base"]+1.0+14.9+1.6   # standoff (M2 head 2.0 +0.5), pad 1.0, drive to PCB underside 14.9 + PCB 1.6 (23f6992 §18.5)
-k_fin_top=k["standoff_mm"]+k["t_base"]+k["fin_h"]  # fins sit beside drive (y strips), below PCB plane
-env=dict(depth_stack_mm=round(stack,2),fin_top_mm=k_fin_top,id_3mm_margin_mm=round(26-3-stack,2),depth_margin_mm=round(26-stack,2),y_margin_mm=52-k["W"],z_margin_mm=104-k["L"],
+k=out["knee"]; # D91: plate outer face AT the 26 boundary (replaces ID shell locally); inward: base 1.5, pad 1.0, drive 14.9, PCB 1.6
+stack=k["t_base"]+1.0+14.9+1.6; femur_gap=26-stack   # free gap PCB top -> femur (connector, foil shield)
+k_fin_top=26+k["fin_h"]  # fin tips beyond the L51 box face
+env=dict(depth_stack_mm=round(stack,2),femur_gap_mm=round(femur_gap,2),fin_protrusion_beyond_26_mm=k["fin_h"],fin_top_mm=k_fin_top,depth_margin_mm=round(26-stack,2),y_margin_mm=52-k["W"],z_margin_mm=104-k["L"],
          drives_on_plate_z_mm=2*DRV[0]+5, ok=stack<=26 and k["W"]<=52 and k["L"]<=104)
 out["_L51_envelope"]=env; json.dump(out,open("results/drive_heat_plates.json","w"),indent=1); print(env)
