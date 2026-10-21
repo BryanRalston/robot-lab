@@ -1445,3 +1445,9 @@ The +0.36 pair bearing delta is confirmed by catalog (IKO 4010 0.15 vs 7013 0.38
    Until a–c pass, the protrusion is held and G2/G3 stay open.
 3. Binding interface condition: the back faces of the hip pitch, ankle and shoulder plates face structure at ≤50 °C, never the hip pitch housing. This goes into CONTRACTS §1c when the plate drawings publish.
 4. Mass: plates total 0.355, +0.008 over R-142, booked at full. Credible mass ~68.33 → ~68.34 kg.
+
+## R-144 — Hip lever G3 re-run path (Legs L69 7fa3c93; Robot Lab Job 2 QC 334e848) — 2026-10-21
+1. Job 2 failure accepted as a geometry defect: peak stress diverges with mesh refinement (169→198→247) at an unfilleted corner, while the 99.9th percentile is stable. An R8 fillet is mandatory.
+2. Combined run APPROVED, with candidate 0 (RC lever + R8) reported as a separate, complete result: Job 2 mesh ladder, ≤5% convergence on peak and on fatigue amplitude at the fillet, with no unresolved singularities. G3 credit comes from candidate 0 only. Shape-opt candidates count only with their own converged ladder, and any fillet below R8 (minimum R5) must pass on its own.
+3. Allowables: 320 static applies only if the lever is proven multi-path. Otherwise the R-128 single-path band for its stock form and thickness governs. Legs states this in the brief before launch. The 58 MPa amplitude is [EST]: Materials cites the fatigue allowable (stress ratio, Kt basis, 5-year cycles) before the G3 pass is final.
+4. Mass: +0.009 booked at full. Credible mass ~68.34 → ~68.35 kg.
