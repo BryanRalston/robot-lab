@@ -25,6 +25,7 @@ def _box(dx, dy, dz, c): return cq.Workplane('XY').box(dx, dy, dz).translate(c)
 def _rbox(dx, dy, dz, c, r):  # rounded-corner window cutter, rounded about x-axis edges handled by caller
     return cq.Workplane('XY').box(dx, dy, dz).edges('|X' if dx < min(dy, dz) else ('|Y' if dy < min(dx, dz) else '|Z')).fillet(r).translate(c)
 
+HEEL_BAND = True
 def _parts(side=1):
     t, w, h, wl, pt, bt = L['t'], L['w'], L['h'], L['wall'], L['plate'], L['bar']
     zt, zb = h/2, -h/2
@@ -34,6 +35,10 @@ def _parts(side=1):
     # 4 mm bond land (1.5 mm thick) around the back window inside the back wall
     flange = _box(wl, 74, 68, (-t/2 + wl*1.5, 0, 0)).cut(_box(3*wl, 66, 60, (-t/2 + wl*1.5, 0, 0)))
     shell = shell.union(flange)
+    # R19 (R-150 hands-first kneel plant): 4 mm palm HEEL BAND = 2.5 mm doubler inside the 1.5 mm grip face, 20 mm tall under the
+    # wrist plate, full inner width -> heel cantilever 473 -> 66 MPa at 1525 N (limit 308, 7075-T651 1.5 in plate, ST = palm thickness x,
+    # L = finger axis z per STOCK_GRAIN.md). Machined integral with the shell (same billet), R1 inner fillet [EST, not modelled].
+    if HEEL_BAND: shell = shell.union(_box(2.5, w - 2*wl, 20, (t/2 - wl - 1.25, 0, zt - pt - 10)))
     plate = _box(t, w, pt, (0, 0, zt - pt/2)).cut(_box(26, 14, pt, (0, 0, zt - pt/2)))  # wrist-lug pocket
     import math
     for k in range(11):
@@ -57,6 +62,7 @@ DROP_MM = 12.0   # A42 (arms/A42_A43_R4.md, wrist_clash_r4.json): wrist-plate to
                  # fork/cross inside r 24.5, clash-free for any pitch/yaw over P-026 ±60/±30. The palm body moves down DROP_MM inside the
                  # same model_v4 call; a 7075 neck 20(x) x 22(y) x DROP_MM (|y| <= 11 < cheek inner face 14 - 2 gap) carries the wrist lug load.
 NECK = (20.0, 22.0)
+HEEL_BAND = True   # R19, +~0.012 kg/hand
 
 def palm(c=(0, 0, 0)):
     side = 1 if c[1] >= 0 else -1
