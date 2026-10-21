@@ -3,7 +3,7 @@ Inputs: `legs/R031_FIXES.md`, `legs/hp_lever_family_r031.py`, `actuators/results
 
 ## Common settings
 - 7075-T6 (R-123, ca66b9b): Sy 480 MPa, Su 560 MPa, E 70 GPa (ν 0.33). Se = 87 MPa (kept). **Static allowable 320 MPa** (480/1.5) at design/fault; any peak > 320 MPa is a **FAIL** (the 320–335 band is FAIL, not marginal).
-- Pass: hot-spot von Mises amplitude ≤ 58 MPa at the walk load, fully reversed. Also design/fault peak ≤ 320 MPa (SF_yield ≥ 1.5 on Sy 480).
+- Pass: hot-spot von Mises amplitude ≤ 58 MPa at the walk load, fully reversed. (58 MPa **CONFIRMED by Materials e21dafd/6d01d59**, modules/materials/R144_7075_FATIGUE.md (MIL-HDBK-5H Fig 3.7.4.1.8(a) p.3-382, 7075-T6, R=-1, Sa 139 MPa at 1e8; ka 0.843, kb 0.90 [EST], ke 0.814, /1.5 = 57). Valid for a design life <= 1e8 cycles (assumed; no life target is set). Use 70 at 1e7 and 50 at 5e8. No hard anodize on the fatigue hot spots (arm/web fillets).) Also design/fault peak ≤ 320 MPa (SF_yield ≥ 1.5 on Sy 480).
 - Convergence: h-refine to < 5 % peak change across three levels, with local h ≤ 0.5 mm at the fillets. Also report linearised membrane + bending through the root.
 
 ## Runs

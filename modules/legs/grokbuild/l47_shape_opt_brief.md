@@ -5,7 +5,7 @@
 - **Material source:** `modules/materials/MATERIALS_DB.md` row AL7075T6: ρ 2.81, E 70 GPa, Sy 480, Su 560, fatigue 160 (MIF, cycle basis not stated). R-031 §6 overrides fatigue: **Se = 87 MPa** (corrected value, rule).
 - G3 brief (Actuators) uses E 71.7 / Sy 503 / Su 572 (repo datasheet REPO_AL7075). To stay comparable with G3, **solve with E 71.7, ν 0.33**; E difference <3 %, no effect on stress in a load-controlled linear solve.
 - **Design/fault pass = von Mises ≤ 294 MPa** (R-144 / R-128 §1 single-path band, replaces 320; see §0a). Also report SF vs 320 and 335 for comparison with job 2 only; a peak in 294–335 is a FAIL, reported to the Arbiter.
-- **Fatigue pass = hot-spot amplitude ≤ 58 MPa** (87/1.5, R-031 §6) **[EST, pending a Materials citation of the R=−1 endurance basis; G3 is not final until cited]** (R-144).
+- **Fatigue pass = hot-spot amplitude ≤ 58 MPa** (87/1.5, R-031 §6) **CONFIRMED by Materials e21dafd/6d01d59**, modules/materials/R144_7075_FATIGUE.md (MIL-HDBK-5H Fig 3.7.4.1.8(a) p.3-382, 7075-T6, R=-1, Sa 139 MPa at 1e8; ka 0.843, kb 0.90 [EST], ke 0.814, /1.5 = 57). Valid for a design life <= 1e8 cycles (assumed; no life target is set). Use 70 at 1e7 and 50 at 5e8. No hard anodize on the fatigue hot spots (arm/web fillets) (R-144).
 - Assumption A1: G3 converged mesh settings are taken from Actuators' G3 report when it lands; if G3 reports none, use the G3 brief sequence (global h 4→3→2, local 1.5→1.0→0.6 mm).
 - Assumption A2: A38 rev D (tine bore 22, flange clearance 2.0 mm) and R-1xx rulings through R-115 do not touch the lever's frozen regions or load path; femur clearance check uses model_v4 as of main 2026-10-21.
 - Booking: L47-R/R-069 +0.430 kg robot stands until this result is measured; credit only on measured CAD + passing converged FEA (R-073).
@@ -115,9 +115,9 @@
 ## L69 addendum — candidate 0 replaces the separate G3 re-run (R-144 approved)
 - Candidate 0 = RC STEP + R8 on the upper arm/web edges (|y| = 38.5) and lower arm edges; nothing else changed. Actuators supplies the STEP.
 - Run it first, same load/BC/mesh ladder as job 2 (Ball r 4 mm, hloc 1.5/1.0/0.6), refinement balls on the new fillets.
-- Pass = converged peak ≤ 294 MPa (ST 271; §0a, replaces 320 per R-144) and amplitude ≤ 58 MPa [EST, Materials citation pending]. Hand-calc expectation σa ≈ 32 MPa [EST] (results/r031/g3_fail_review.md).
+- Pass = converged peak ≤ 294 MPa (ST 271; §0a, replaces 320 per R-144) and amplitude ≤ 58 MPa [CONFIRMED, Materials e21dafd/6d01d59; see §0]. Hand-calc expectation σa ≈ 32 MPa [EST] (results/r031/g3_fail_review.md).
 - **R-144 (6ff0bb4): combined run APPROVED.** Candidate 0 = RC + R8 on the upper AND lower arm edges, both sides (all sharp re-entrant edges filleted). It is reported as **its own complete converged mesh ladder**: < 5 % change on BOTH peak and amplitude over the last two levels, no singularities. **Only candidate 0 earns G3**; no shape-opt candidate substitutes for it.
-- G3 is not final until Materials cites the 58 MPa amplitude basis.
+- 58 MPa amplitude basis **CONFIRMED by Materials e21dafd/6d01d59**, modules/materials/R144_7075_FATIGUE.md (MIL-HDBK-5H Fig 3.7.4.1.8(a) p.3-382, 7075-T6, R=-1, Sa 139 MPa at 1e8; ka 0.843, kb 0.90 [EST], ke 0.814, /1.5 = 57). Valid for a design life <= 1e8 cycles (assumed; no life target is set). Use 70 at 1e7 and 50 at 5e8. No hard anodize on the fatigue hot spots (arm/web fillets).
 - Candidate 0 pass → continue with the optimisation. Candidate 0 fail: stop and report.
 - Booked: +0.009 kg robot (R-144).
 - Re-run RV12 sweep and femur clearance on candidate 0 (not yet verified).
