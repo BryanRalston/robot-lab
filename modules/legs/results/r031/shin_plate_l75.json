@@ -1,0 +1,12 @@
+{
+ "AN1": {
+  "gap_to_v5_keepout_mm": 12.5,
+  "with_rev6_blister_mm": 14.5,
+  "envelope_inside_keepout": true
+ },
+ "AN2": {
+  "gap_to_v5_keepout_mm": 32.6,
+  "with_rev6_blister_mm": 34.6,
+  "envelope_inside_keepout": true
+ }
+}

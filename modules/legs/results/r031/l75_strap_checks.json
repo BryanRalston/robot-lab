@@ -1,0 +1,82 @@
+{
+ "fall_equal": {
+  "strap_kN": 24.9,
+  "sigma": 155.3,
+  "SF_net_393": 2.53,
+  "sigma_root_Kt": 233.0,
+  "SF_root_393": 1.69
+ },
+ "fall_65/35": {
+  "strap_kN": 32.3,
+  "sigma": 201.9,
+  "SF_net_393": 1.95,
+  "sigma_root_Kt": 302.9,
+  "SF_root_393": 1.3
+ },
+ "buckling": {
+  "L_free_mm": 31.5,
+  "r_mm": 2.31,
+  "L_r_pinned": 13.6,
+  "sigma_euler_pinned": 3804,
+  "note": "L/r 13.6 pinned (6.8 fixed-fixed) << Johnson transition (~60 for 7075): no buckling; compression governed by yield, same SF as tension. T&R 120 mm pinned basis does not apply (real 31.5 mm, ends fixed)."
+ },
+ "joint": {
+  "bolts": "4 x M6 12.9 per strap end (shank in shear plane), e/D 2.0, pitch 3D",
+  "bolt_shear_MPa": 285,
+  "SF_bolt_shear": 2.57,
+  "bearing_7075_pad_MPa": 168,
+  "SF_bearing_tier455_eD2": 2.7,
+  "bearing_G10_MPa": 112,
+  "G10_note": "G10 bearing/compression allowable: Materials to cite; pad keyed 2 mm into the G10 face both sides (tongue-in-groove) so tension and compression bear on G10, bolts carry preload",
+  "bond_alt": "DP490 at 82 C would need ~4600 mm2 (T&R) -> rejected, bolts"
+ },
+ "L58_clamp_slip": {
+  "required_clamp_normal_kN": 97,
+  "result": "FAIL by friction alone (L61 same finding); fix: clamp ear abuts a positive shoulder on the L22 bonded split collar (axial key), friction only for walk",
+  "walk_check": {
+   "Fz_walk_N": 6728,
+   "required_normal_kN": 22.4
+  }
+ },
+ "G10_web_3mm": {
+  "R_per_block_K_W": 13.8,
+  "R_two_parallel": 6.9
+ },
+ "G10_web_5mm": {
+  "R_per_block_K_W": 23.0,
+  "R_two_parallel": 11.5
+ },
+ "G10_web_6mm": {
+  "R_per_block_K_W": 27.6,
+  "R_two_parallel": 13.8
+ },
+ "G10_rec": "6 mm web -> 13.8 K/W two blocks in parallel (>= 10 K/W, L61/Thermal trunnion basis)",
+ "strap_vs_release_housing": {
+  "min_mm": ">= 21 (straps x -40..-8.5 vs housing front x -61.0 at zero pose; housing pivots, max zmax rise at knee 145 is +1.6 mm, front x shift not swept - FEA clearance step)"
+ },
+ "housing_plate_gap": {
+  "true_OCC_gap_by_knee": {
+   "0": 2.04,
+   "30": 5.28,
+   "90": 7.12,
+   "130": 2.9,
+   "135": 2.12,
+   "140": 1.31,
+   "145": 0.48
+  },
+  "static": false,
+  "why": "the twin housing is trunnion-mounted and pivots with the screw angle: fin tops rise 1.6 mm from knee 0 to 145 (zmax 813.96 -> 815.52)",
+  "min_mm": 0.48,
+  "at_knee": 145,
+  "tolerances_EST": {
+   "housing_machining": 0.2,
+   "plate_flatness": 0.1,
+   "stack_assembly": 0.15,
+   "thermal_growth_dT40": 0.12,
+   "plate_deflection_fall": 0.15
+  },
+  "RSS": 0.33,
+  "worst_case": 0.72,
+  "fix": "raise the L60 top plate + straps 4.0 mm (z 820-828): nominal 4.48 at knee 145, worst-case 4.48-0.72=3.76, RSS 4.15 (>= 3 both); cheeks +4 mm (L60 DZ precedent); ID rev 6 stack/shroud move up 4 mm"
+ }
+}

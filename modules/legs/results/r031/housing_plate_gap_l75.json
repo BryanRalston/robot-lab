@@ -1,0 +1,92 @@
+{
+ "{}": {
+  "housing_seg": "L_thigh",
+  "plate_seg": "L_thigh",
+  "gap_mm": 2.04,
+  "housing_zmax": 813.96
+ },
+ "{'L_knee': 15}": {
+  "housing_seg": "L_thigh",
+  "plate_seg": "L_thigh",
+  "gap_mm": 3.76,
+  "housing_zmax": 812.24
+ },
+ "{'L_knee': 30}": {
+  "housing_seg": "L_thigh",
+  "plate_seg": "L_thigh",
+  "gap_mm": 5.28,
+  "housing_zmax": 810.72
+ },
+ "{'L_knee': 60}": {
+  "housing_seg": "L_thigh",
+  "plate_seg": "L_thigh",
+  "gap_mm": 7.27,
+  "housing_zmax": 808.73
+ },
+ "{'L_knee': 90}": {
+  "housing_seg": "L_thigh",
+  "plate_seg": "L_thigh",
+  "gap_mm": 7.12,
+  "housing_zmax": 808.88
+ },
+ "{'L_knee': 110}": {
+  "housing_seg": "L_thigh",
+  "plate_seg": "L_thigh",
+  "gap_mm": 5.54,
+  "housing_zmax": 810.46
+ },
+ "{'L_knee': 120}": {
+  "housing_seg": "L_thigh",
+  "plate_seg": "L_thigh",
+  "gap_mm": 4.33,
+  "housing_zmax": 811.67
+ },
+ "{'L_knee': 125}": {
+  "housing_seg": "L_thigh",
+  "plate_seg": "L_thigh",
+  "gap_mm": 3.64,
+  "housing_zmax": 812.36
+ },
+ "{'L_knee': 130}": {
+  "housing_seg": "L_thigh",
+  "plate_seg": "L_thigh",
+  "gap_mm": 2.9,
+  "housing_zmax": 813.1
+ },
+ "{'L_knee': 135}": {
+  "housing_seg": "L_thigh",
+  "plate_seg": "L_thigh",
+  "gap_mm": 2.12,
+  "housing_zmax": 813.88
+ },
+ "{'L_knee': 140}": {
+  "housing_seg": "L_thigh",
+  "plate_seg": "L_thigh",
+  "gap_mm": 1.31,
+  "housing_zmax": 814.69
+ },
+ "{'L_knee': 143}": {
+  "housing_seg": "L_thigh",
+  "plate_seg": "L_thigh",
+  "gap_mm": 0.81,
+  "housing_zmax": 815.19
+ },
+ "{'L_knee': 145}": {
+  "housing_seg": "L_thigh",
+  "plate_seg": "L_thigh",
+  "gap_mm": 0.48,
+  "housing_zmax": 815.52
+ },
+ "{'L_hip_pitch': -100, 'L_knee': 135}": {
+  "housing_seg": "L_thigh",
+  "plate_seg": "L_thigh",
+  "gap_mm": 2.12,
+  "housing_zmax": 885.16
+ },
+ "{'L_hip_pitch': 20, 'L_knee': 145}": {
+  "housing_seg": "L_thigh",
+  "plate_seg": "L_thigh",
+  "gap_mm": 0.48,
+  "housing_zmax": 848.56
+ }
+}

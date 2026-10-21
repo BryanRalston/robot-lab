@@ -1,0 +1,68 @@
+{
+ "min": {
+  "pitch": -60,
+  "roll": 0,
+  "yaw": 45,
+  "min_mm": 0.0
+ },
+ "worst5": [
+  {
+   "pitch": -60,
+   "roll": 0,
+   "yaw": 45,
+   "min_mm": 0.0
+  },
+  {
+   "pitch": -107.3,
+   "roll": 45,
+   "yaw": 45,
+   "min_mm": 0.1
+  },
+  {
+   "pitch": -60,
+   "roll": 45,
+   "yaw": 45,
+   "min_mm": 0.1
+  },
+  {
+   "pitch": -30,
+   "roll": 45,
+   "yaw": -35,
+   "min_mm": 0.1
+  },
+  {
+   "pitch": -107.3,
+   "roll": 45,
+   "yaw": 0,
+   "min_mm": 0.2
+  }
+ ],
+ "by_roll": {
+  "-20": {
+   "pitch": -60,
+   "roll": -20,
+   "yaw": 45,
+   "min_mm": 0.3
+  },
+  "0": {
+   "pitch": -60,
+   "roll": 0,
+   "yaw": 45,
+   "min_mm": 0.0
+  },
+  "45": {
+   "pitch": -107.3,
+   "roll": 45,
+   "yaw": 45,
+   "min_mm": 0.1
+  }
+ },
+ "zero_pose": {
+  "pitch": 0,
+  "roll": 0,
+  "yaw": 0,
+  "min_mm": 16.2
+ },
+ "gate": 15,
+ "pass_": false
+}
