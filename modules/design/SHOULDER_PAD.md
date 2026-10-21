@@ -221,3 +221,11 @@ Foam 0.035 + sleeve 0.009 + inserts/anchor 0.006 = **0.050/side, 0.100 kg pair =
 - Roll torque Mx 448 (axial) – 539 (down) N·m, still > CSG-25 369 N·m momentary peak (was 566–773). Driven by the 64 mm pad-centre offset from the roll axis: raised with the Arbiter.
 - Mass: −0.007 kg pair [EST] (core −3.5 g, spreader −1.1, EPP −0.4, PTFE +1.7 per side).
 - Rerun: fea/job1_pad_r9/CASE.md.
+
+## R10 (2026-10-21): per R-119 (03fe1ca) — supersedes R9
+- Core **54.8 × 54.8 × 75.3 mm** 5052 HC 4.5 pcf (1.79 MPa), peak **7.0 kN** at ×1.3, energy **292 J** (0.72 stroke, static plateau). Contact face Y = 102.3 mm (was 87). Tray, boss, 4× M4 unchanged. PTFE skin: option only, not credited.
+- s0 (15° case, shear 0.27 N): **1.81 @ e0, 1.70 @ e5, 1.60 @ e10 — FAIL**. Roll Mx raw 433 (axial) / 618 (down) N·m; clutch-limited ≤ 307 (R-119).
+- Mass: pair **0.065 kg ex Arms' boss** (≤ 0.100 PASS); 0.113 if the 0.024/side boss is counted in the pad cap (FAIL). Core mass is fixed by energy (~16 g/side regardless of F).
+- Envelope: core +15 mm vs R8 (+15 mm proud per side): needs check.
+- Trade: lowering F does not close s0 (core grows to hold 292 J, lever grows): 6.0 kN → 88 mm core, s0 2.04/1.91/1.80. 7.0 kN is the best trade (shortest, lightest proud). **Closes only with Arms: bearing C0 ≥ 26.8 kN (e0) / ≥ 30.4 kN (e10) vs CRBH 6013 24.3**, or Materials-credited μ ≤ 0.15 skin plus e ≤ 5 mm.
+- Rerun: fea/job1_pad_r10/CASE.md.

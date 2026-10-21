@@ -1,0 +1,139 @@
+{
+ "rev": "R10",
+ "ruling": "R-119 (03fe1ca)",
+ "pick": {
+  "F_peak_N": 7000,
+  "core_mm": [
+   54.8,
+   54.8,
+   75.3
+  ],
+  "energy_J": 292,
+  "contact_Y_mm": 102.3,
+  "s0": {
+   "e0": 1.81,
+   "e5": 1.7,
+   "e10": 1.6
+  },
+  "Mx_raw_Nm": {
+   "axial": 433,
+   "down": 618
+  },
+  "Mx_clutch_Nm": 307,
+  "kg_side": {
+   "core": 0.0163,
+   "bond": 0.0005,
+   "spreader": 0.0041,
+   "EPP": 0.0014,
+   "tray": 0.0076,
+   "sleeve": 0.0025,
+   "boss_Arms_EST": 0.024
+  },
+  "kg_pair_all": 0.1128,
+  "kg_pair_ex_boss": 0.0648
+ },
+ "trade_scan": {
+  "6500": {
+   "F_peak_N": 6500,
+   "core_mm": [
+    52.9,
+    52.9,
+    81.1
+   ],
+   "energy_J": 292,
+   "contact_Y_mm": 108.1,
+   "s0": {
+    "e0": 1.92,
+    "e5": 1.8,
+    "e10": 1.7
+   },
+   "Mx_raw_Nm": {
+    "axial": 402,
+    "down": 584
+   },
+   "Mx_clutch_Nm": 307,
+   "kg_side": {
+    "core": 0.0163,
+    "bond": 0.0005,
+    "spreader": 0.0038,
+    "EPP": 0.0013,
+    "tray": 0.0076,
+    "sleeve": 0.0025,
+    "boss_Arms_EST": 0.024
+   },
+   "kg_pair_all": 0.112,
+   "kg_pair_ex_boss": 0.064
+  },
+  "6000": {
+   "F_peak_N": 6000,
+   "core_mm": [
+    50.8,
+    50.8,
+    87.9
+   ],
+   "energy_J": 292,
+   "contact_Y_mm": 114.9,
+   "s0": {
+    "e0": 2.04,
+    "e5": 1.91,
+    "e10": 1.8
+   },
+   "Mx_raw_Nm": {
+    "axial": 371,
+    "down": 549
+   },
+   "Mx_clutch_Nm": 307,
+   "kg_side": {
+    "core": 0.0163,
+    "bond": 0.0005,
+    "spreader": 0.0035,
+    "EPP": 0.0012,
+    "tray": 0.0076,
+    "sleeve": 0.0025,
+    "boss_Arms_EST": 0.024
+   },
+   "kg_pair_all": 0.1112,
+   "kg_pair_ex_boss": 0.0632
+  },
+  "5500": {
+   "F_peak_N": 5500,
+   "core_mm": [
+    48.6,
+    48.6,
+    95.9
+   ],
+   "energy_J": 292,
+   "contact_Y_mm": 122.9,
+   "s0": {
+    "e0": 2.17,
+    "e5": 2.04,
+    "e10": 1.93
+   },
+   "Mx_raw_Nm": {
+    "axial": 340,
+    "down": 515
+   },
+   "Mx_clutch_Nm": 307,
+   "kg_side": {
+    "core": 0.0163,
+    "bond": 0.0005,
+    "spreader": 0.0032,
+    "EPP": 0.0011,
+    "tray": 0.0076,
+    "sleeve": 0.0025,
+    "boss_Arms_EST": 0.024
+   },
+   "kg_pair_all": 0.1104,
+   "kg_pair_ex_boss": 0.0624
+  }
+ },
+ "gates": {
+  "energy>=292": "PASS",
+  "peak<=7.0kN": "PASS",
+  "s0>=2.0": "FAIL (1.81/1.70/1.60)",
+  "pair<=0.100": "PASS ex-boss 0.065 / FAIL 0.113 if Arms' 0.024 boss counted",
+  "envelope": "RISK: core 75.3 vs 60 -> +15 mm proud per side; needs check vs shoulder envelope"
+ },
+ "close_s0": "ID cannot: lowering F raises core height (energy fixed) and lever; s0 reaches 2.0 at e0 only at ~6.0 kN/88 mm core, never at e10 inside envelope. Needs Arms bearing C0 >= ~30.5 kN (e10) / ~27 kN (e0), or slip skin mu<=0.15 credited after Materials test plus e<=5 mm.",
+ "skin_option": "0.25 mm PTFE skin kept as option, not credited (+0.0017/side)"
+}
