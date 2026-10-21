@@ -342,3 +342,13 @@ results/r031/p156_rev5_optionB.md/.json, l60_cutout_optB_l74.py, drive_plate_swe
 - **Shin AN1/AN2:** plates and fairing are both shank-fixed, so the gap is static through knee/ankle ROM including −55° (the ankle moves only the foot). Gap to the v5 shin keep-out surface is 12.5 / 32.6 mm (+2 blister → 14.5 / 34.6). ID's 69.5 inner-face basis is tighter and governs: **5.0 mm** with the blister. shin_plate_l75.py/.json.
 
 - L76 (2026-10-21): G10 allowables per Materials 6b04d2f. Fall-case pad bearing 112 MPa against 128 MPa at 71 C [EST]: margin 1.14, so pass. Sustained bearing is limited to half (64 MPa) until a G5 creep test. Thermal break: the 13.8 K/W assumed through-thickness k 0.288 (cited). In-plane k is 0.5-0.9 [EST], which would give only 4.4 K/W at k 0.9. Requirement added to the L74 strap joint: the G10 blocks are cut from plate so the strap-to-clamp heat path runs through the laminate thickness (flatwise), with no in-plane heat path shorter than 13.5 mm.
+
+## L77 — r116b gap, raised plate, rev 6/8 skirt, P-157 3D, brief addendum, 2026-10-21 (results/r031/l77_l78_fit_checks.md)
+- P-157 3D (Actuators D96): toggle −61.0° (roll 0) / −58.6° (roll ±18); kneel met at −52.5° any roll, −55° only |roll| ≤ ~12°; carrier −6 mm R3 → 4.6 mm at −55°/knee 145. Controls runtime (c3dca07): −52.5° any roll, to −54.7° only |roll| ≤ 10°. PROPOSALS P-157 text updated.
+- r116b housing → plate z 816: 3.50 mm min @145 (4.92 @135); worst-case tol 2.78 @145 → keep the +4 mm raise unless RSS (3.17) is accepted; with +4: 7.5. Raised plate/straps knee+hip ROM PASS (min 7.5 housing, 8.07 hip rods). Stack 3.0 to plate, no strap hit.
+- Rev 6 skirt superseded by rev 8. Rev 8: hem ↔ panel/shroud **0.1 mm** at (10,45,45) FAIL 3; cross-leg 0.0 at (−107.3,−20,−35); panel ↔ housing **1.2–1.4 FAIL**; air path open 1688–2300 mm²; lower panel inserts have no skin (33.5 mm).
+- Brief addendum: K_PEAK 1.0; RV12x5 C0a 27.3 kN vs 18.9 kN (SF 1.44); no mechanical knee stop (contract 0–135 is sim); knee clearance basis 135 + crush, 145 = margin.
+- Knee stop hand: 6.8 kN·m upper bound not survivable (tibia SF 0.12); T_allow 0.69 (45×1.2) / 0.85 (45×1.5) / 1.06 femur kN·m.
+
+## L78 — knee PU stop (D97/P-159) + P-158 pad, 2026-10-21
+D97 r60 1030 N·m: tibia 45×1.5 SF 0.82 FAIL; r75 fallback 830 N·m: tibia 1.02, femur 1.27, tongue 2.86, bolts 7.49, bearing 13.8 → **recommend r75** (pending Actuators energy/travel confirmation); brief T_STOP = 830 N·m. Stacks placed outboard of the cheeks clash the knee lever/rods/eyes (0.0) → Actuators to place. FLAG: 29 kN drive fall case = 1.38 kN·m → tibia SF 0.61 (governs tube walls). P-158 pad min 33.0 mm PASS.

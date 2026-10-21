@@ -1,0 +1,86 @@
+{
+ "stops": [
+  [
+   "X_stop_ny | L_knee lever r47.5 (Actuators STEP)",
+   0.0,
+   "{'L_knee': 120}"
+  ],
+  [
+   "X_stop_py | L_knee lever r47.5 (Actuators STEP)",
+   0.0,
+   "{'L_knee': 120}"
+  ],
+  [
+   "X_stop_ny | L_knee screw -y RV12 roller-screw rod \u00f812",
+   0.0,
+   "{'L_knee': 0}"
+  ],
+  [
+   "X_stop_py | L_knee screw +y RV12 roller-screw rod \u00f812",
+   0.0,
+   "{'L_knee': 0}"
+  ],
+  [
+   "X_stop_ny | L_knee screw -y GE12 C rod-end eye",
+   0.0,
+   "{'L_knee': 90}"
+  ],
+  [
+   "X_stop_py | L_knee screw +y GE12 C rod-end eye",
+   0.0,
+   "{'L_knee': 90}"
+  ],
+  [
+   "X_stop_ny | L_tibia tube 7075 \u00f845x1.2",
+   5.5,
+   "{'L_knee': 130}"
+  ],
+  [
+   "X_stop_py | L_tibia tube 7075 \u00f845x1.2",
+   5.5,
+   "{'L_knee': 130}"
+  ],
+  [
+   "X_stop_ny | L_ankle trunnion bracket strut to tibia [EST]",
+   13.2,
+   "{'L_knee': 141.9}"
+  ],
+  [
+   "X_stop_py | L_ankle trunnion bracket strut to tibia [EST]",
+   13.2,
+   "{'L_knee': 141.9}"
+  ],
+  [
+   "X_stop_ny | L_knee tongue neck into tibia",
+   14.0,
+   "{'L_knee': 120}"
+  ],
+  [
+   "X_stop_py | L_knee tongue neck into tibia",
+   14.0,
+   "{'L_knee': 120}"
+  ]
+ ],
+ "pad": [
+  [
+   "X_pad_P158 | L_knee tongue (shank)",
+   33.0,
+   "{'L_hip_yaw': -35, 'R_hip_yaw': -35}"
+  ],
+  [
+   "X_pad_P158 | L_ankle trunnion bracket top plate (shank) [EST]",
+   40.0,
+   "{'L_hip_pitch': -107.3}"
+  ],
+  [
+   "X_pad_P158 | L_knee screw -y RV12 roller-screw rod \u00f812",
+   70.4,
+   "{'L_hip_pitch': -107.3}"
+  ],
+  [
+   "X_pad_P158 | L_knee screw +y RV12 roller-screw rod \u00f812",
+   70.4,
+   "{'L_hip_pitch': -107.3}"
+  ]
+ ]
+}
