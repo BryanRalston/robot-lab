@@ -83,3 +83,12 @@ def test_carry_box_places_payload_at_p042():
     assert np.allclose(m.body_pos[m.body('payload').id], [0.32, 0.0, 0.415])
     m2, _ = eb.load_box(20.0, payload_pos=eb.LEGS_PAYLOAD)
     assert np.allclose(m2.body_pos[m2.body('payload').id], [0.25, 0.0, 0.10])
+
+
+def test_r118_mass_nominal_and_corners():
+    import randomize_consts as rc
+    m, _ = eb.load_box(0.0)
+    assert abs(float(np.sum(m.body_mass)) - 67.1) < 1e-6
+    m65, _ = eb.load_box(0.0, robot_kg=65.0)
+    assert abs(float(np.sum(m65.body_mass)) - 65.0) < 1e-6
+    assert eb.MASS_CORNERS == rc.ROBOT_MASS_RANGE == (65.0, 68.5)

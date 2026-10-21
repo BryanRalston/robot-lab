@@ -8,7 +8,11 @@ import jax
 from mujoco import mjx
 
 
-def make_randomizer(payload_id, floor_id, foot_ids, carry_low, carry_high, pos_low=None, pos_high=None):
+ROBOT_MASS_RANGE = (65.0, 68.5)  # Arbiter R-118: total robot mass DR (payload excluded)
+
+
+def make_randomizer(payload_id, floor_id, foot_ids, carry_low, carry_high, pos_low=None, pos_high=None,
+                    robot_mass_range=ROBOT_MASS_RANGE):
     """pos_low/pos_high: payload body position box (torso frame), R-117. None keeps the XML position."""
     payload_id = int(payload_id)
     floor_id = int(floor_id)
@@ -29,7 +33,9 @@ def make_randomizer(payload_id, floor_id, foot_ids, carry_low, carry_high, pos_l
                 payload = jax.random.uniform(k, minval=carry_low, maxval=carry_high)
             mass = mass.at[payload_id].set(payload)
             robot = jax.numpy.sum(mass) - mass[0] - mass[payload_id]
-            factor = jax.numpy.minimum(1.0, 66.5 / jax.numpy.maximum(robot, 1.0))
+            rng, k = jax.random.split(rng)
+            target = jax.random.uniform(k, minval=robot_mass_range[0], maxval=robot_mass_range[1])
+            factor = target / jax.numpy.maximum(robot, 1.0)
             mass = mass * factor
             mass = mass.at[0].set(model.body_mass[0])
             mass = mass.at[payload_id].set(payload)

@@ -106,11 +106,13 @@ def policy_action(obs, weights, mean, std):
     return np.tanh(h[:30])
 
 
+MASS_NOMINAL = 67.1   # Arbiter R-118 (gates); training DR 65.0-68.5
+MASS_CORNERS = (65.0, 68.5)   # R-118: walk and P-042 carry are also gated at the DR corners
 P042 = (0.32, 0.0, 0.415)   # R-117 carry gate point, torso frame
 LEGS_PAYLOAD = (0.25, 0.0, 0.10)
 
 
-def load_box(carry_kg=0.0, payload_pos=P042):
+def load_box(carry_kg=0.0, payload_pos=P042, robot_kg=None):
     xml = open(XML_V3, encoding='utf-8').read()
     if carry_kg > 0:
         needle = '<geom name="torso" type="box" pos="0 0 0.180" size="0.11 0.17 0.130"/>'
@@ -127,7 +129,7 @@ def load_box(carry_kg=0.0, payload_pos=P042):
     for i in range(m.nbody):
         if m.body(i).name != 'payload':
             base += float(m.body_mass[i])
-    k = 65.0 / base
+    k = (MASS_NOMINAL if robot_kg is None else float(robot_kg)) / base
     for i in range(m.nbody):
         if m.body(i).name == 'payload':
             continue
@@ -519,8 +521,8 @@ def main():
     fwd['impulse_Ns'] = round(0.6 * float(np.sum(m.body_mass)), 3)
     print('FORWARD', fwd['pass'], 'fell', fwd['fell_at_s'], 'final_v', fwd['final_horiz_speed'], 'up', fwd['final_up'], flush=True)
 
-    def carry_trial(pos):
-        mc, kc = load_box(20.0, payload_pos=pos)
+    def carry_trial(pos, robot_kg=None):
+        mc, kc = load_box(20.0, payload_pos=pos, robot_kg=robot_kg)
         try:
             c, _ = run_episode(
                 mc, policy, gains, ref, cmd=np.array([0.8, 0.0, 0.0]),
@@ -547,6 +549,24 @@ def main():
     carry_legs['gate'] = 'reported only (R-117): same as carry with the payload at Legs (0.25, 0, 0.10)'
     print('CARRY_LEGS', carry_legs['pass'], 'speed', carry_legs['mean_horiz_speed'], 'fell', carry_legs['fell_at_s'], flush=True)
 
+    # R-118 mass corners: walk and P-042 carry at 65.0 and 68.5 kg, same pass rules.
+    corners = []
+    for mk in MASS_CORNERS:
+        mm, _ = load_box(0.0, robot_kg=mk)
+        w, _ = run_episode(mm, policy, gains, ref, cmd=np.array([1.2, 0.0, 0.0]),
+                           seconds=20.0, mode='gait', payload_frac=None)
+        w['drift_ok'] = drift_ok(w)
+        w['pass'] = bool(w['fell_at_s'] is None and w['seconds_ran'] >= 19.9 and w['mean_horiz_speed'] >= 1.15
+                         and w['drift_ok'] and w['net_x_over_t'] >= 1.15)
+        w['robot_kg'] = mk
+        c = carry_trial(P042, robot_kg=mk)
+        c['robot_kg'] = mk
+        tag = str(mk).replace('.', 'p')
+        corners += [(f'walk_m{tag}.json', w), (f'carry_m{tag}.json', c)]
+        print('CORNER', mk, 'walk', w['pass'], 'carry', c['pass'], flush=True)
+    all_pass = bool(walk['pass'] and lat['pass'] and fwd['pass'] and carry['pass'] and all(x['pass'] for _, x in corners))
+    print('ALL_GATES', all_pass, flush=True)
+
     # Drop the bulky per-joint maps from the top level into legs for the walk file only.
     def slim(s, keep_legs=False):
         out = {k: v for k, v in s.items() if k not in ('torque_peak', 'speed_peak', 'sat_fraction', 'tau_lim', 'w_lim')}
@@ -563,7 +583,9 @@ def main():
         ('push_forward.json', slim(fwd)),
         ('carry.json', slim(carry)),
         ('carry_legs.json', slim(carry_legs)),
-    ]
+    ] + [(n, slim(x)) for n, x in corners] + [('gates_summary.json', {
+        'all_pass': all_pass, 'mass_nominal_kg': MASS_NOMINAL, 'mass_corners_kg': list(MASS_CORNERS),
+        'ruling': 'R-117 gates, R-118 mass; carry 0.8 m/s is INTERIM (final G4 per TARGETS.md)'})]
     for name, payload in written:
         payload['policy'] = policy_name
         with open(os.path.join(OUT_DIR, prefix + name), 'w', encoding='utf-8') as f:

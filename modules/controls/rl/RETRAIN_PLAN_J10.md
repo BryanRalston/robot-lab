@@ -132,3 +132,10 @@ Missing data (marked EST in the sim):
 - Measured 67A Shore/E.
 - Head/neck masses vs the credited 1.104 (sim 0.810).
 - A localized harness/covers distribution.
+
+## 8. Arbiter R-118 (2026-10-20): sim mass
+- Nominal **67.1 kg** with total-robot mass DR **65.0–68.5 kg** (payload excluded), for training **and** gates. This is a sim robustness setting only; the T2 66.5 kg limit stands.
+- `make_model.py` MASS_TARGET 65.0 → 67.1 (MJX 67.101 kg; stand settles z 1.1495, up 0.999). `randomize.py` samples the robot total uniformly in 65.0–68.5 after the ±5 % per-body jitter (replaces the 66.5 cap).
+- `eval_box.py` gates at 67.1. The walk and the P-042 carry are also gated at 65.0 and 68.5 (`walk_m65p0/68p5.json`, `carry_m65p0/68p5.json`); `gates_summary.json` `all_pass` requires every gate. 10/10 tests pass.
+- Supersedes the 65.0 kg statements in §5 and §7.
+- Mass rollup ownership: `modules/arbiter/MASS_ROLLUP_OFFICIAL.md` says "Only the Arbiter edits this file" (all commits are Arbiter's). **Not edited.** It is stale at R-031 (credible 65.809). The R-116 running reserve (≈ −0.64 → ≈ 67.14 credible) is the basis for 67.1. The refresh belongs to the Arbiter.
