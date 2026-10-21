@@ -4,14 +4,15 @@ T&R 5842853 / fef9348 ask 2. ID, 2026-10-21. Image: HANDLING_MAP.png.
 
 ## HOLD (lift/carry) zones
 - H1 Torso sides under the armpits (torso cover lateral faces, **z ≈ 1330–1440**): primary two-person lift. (Was z 1420–1560, which ran above Controls' sim torso top at ≈ 1.45 m; now kept ≥ 10 mm below it and clear of the N5 shoulder roll gap. ID CAD check of the cover top edge owed.)
-- H2 Pelvis skirt top rim, rear (pelvis-fixed part above the rev 8 spherical hem): secondary grip, use with H1. **Never the thigh panels** (they move with the legs).
+- H2 Pelvis skirt top rim, rear: pelvis-fixed rim **only where it is ≥ 100 mm above the hem line** (ISO 13854 hand), so fingers can't curl over the hem into the break. Secondary grip, use with H1. **Never the thigh panels** (they move with the legs).
 - H3 Upper arm, mid-humerus: steadying only, no lifting.
 - H4 Thigh front, upper half (above the knee-venting zone): steadying only.
 
 ## NO-HOLD zones
 - N1 **Knee rear outlet shroud, P-156 rev 6 / Option B (HOT)**: shroud rev 6b on the rear/inboard thigh top over the L60 notch (x −100…−20, y 86–150, z 840–904) plus a 30 mm margin, under the P-023 hip skirt. Class (T&R 7f12ce9 §5): **48 °C, no-sustained-contact (contact not likely: inboard/aft, outside the hand-hang and arm-swing envelope)**, target 43; exposure is a person behind the robot and the prone rescue state.
 - N1a **Jet-washed skin above z 845** (rear thigh top and the P-023 skirt rear-inboard panel, y 89–171, z 845–≈ 940 [EST plume, Thermal a32d341]): no-hold, same 48 °C class; skirt inner face foil + ≥ 15 mm gap. H2 grips stay ≥ 50 mm clear of this band.
-- N7 **Hip break gap (P-023 rev 8):** the ≥ 25 mm open arc between the pelvis hem and the thigh panels. No hold, no hands in the gap while the legs can move (backdriving joints, no brakes).
+- N7 **Hip break gap (P-023 rev 8b):** the open arc between the pelvis hem (R 144) and the thigh panels. The gap varies with hip pose, from about 28 mm up to 186 mm, and it **closes with crushing force** (≥ 165 N limp, ≈ 2.2 kN powered). The foam edges are the protection; this zone is supplementary. **No hold and no hands in the gap while the robot is powered or limp** (a limp leg swings under gravity).
+- N8 **Inner-rear thigh between the L/R thigh panels:** the panels close on each other in both-leg adduction or yaw (scissor). No hands, powered or limp.
 - N2 Knee rear inlet grille, z 643–675.
 - N3 Head and neck (fragile shell and sensors).
 - N4 Hands and wrists (pinch points, fragile).
@@ -60,7 +61,7 @@ Controls facts behind this procedure:
    one at the pelvis rim (H2), the third controls the strapped legs. Roll toward the side the arms are on, as a log roll, keeping trunk and pelvis aligned. Expect
    the limbs to flop: keep hands and feet clear of the knee, hip and shoulder pinch zones (N5) and **off the thigh–shank gap** (the knee and hip backdrive freely in the roll: pinch). *(T&R edit 4, legs strapped per step 4 heading)* Keep clear and **never hold the knee
    outlet zone (N1/N1a)** or the head (N3). Do not lever on the chest pad (N6).
-5. **Lift** (supine or prone): 68.4 kg is ≈ 34 kg per person for two carriers, above the NIOSH 23 kg reference, so **at least three people
+5. **Support the thighs (H4 front) before lifting**, so the limp legs can't swing and close the hip break (N7/N8) (T&R ca68f3a). **Lift** (supine or prone): 68.4 kg is ≈ 34 kg per person for two carriers, above the NIOSH 23 kg reference, so **at least three people
    or a board/strap lift aid is mandatory**. *(T&R edit 3)* Use H1 + H2 only, with the CoG (pelvis/lower torso) between the carriers. The
    legs hang limp: the third person supports the shanks below the knee zone (H4 thigh front is steadying only), or use a strap or board. Never lift by a limb: no brake holds it.
 6. **Re-enable checks** before power-up:

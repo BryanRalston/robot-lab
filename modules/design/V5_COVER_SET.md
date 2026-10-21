@@ -416,3 +416,26 @@ Script `cad/covers/hip_skirt_r8.py` → `hip_skirt_r8.json`, `hip_skirt_r8_pelvi
   - Range of motion: the part is thigh-fixed, and the knee cap swings away in flexion. ≥ 3 mm is analytic; **Legs CAD should confirm**.
   - H4 (upper half, z ≈ 710–920) does not overlap and is unchanged.
 - **Mass:** 0.0141/side, **0.028 pair [EST]**. The Arbiter books it.
+
+## P-023 rev 8b — hip pinch fixes (Controls 164eeab asymmetric collisions + T&R ca68f3a R_HIP_PINCH), 2026-10-21
+Scripts: `cad/covers/hip_skirt_r8_asym.py/.json` (L/R asymmetric both-leg sweep) and `hip_skirt_r8b.py/.json` (hem on T&R's 2240-pose grid, roll stops −12/+15 plus 2.5° overtravel).
+- **L ↔ R panels, asymmetric** (20k independent both-leg pairs in pitch −10…45, roll −20…20, yaw −45…45 each): **rev 8 worst 0.1 mm**, 488 poses < 3 mm (Controls found −26.9 with hull geometry).
+  - Cover trims tried: inboard edge at y 70 (304 poses), y 80 (170), y 86 (120), and **y 86 plus a 40 mm inboard-rear chamfer (82 poses; worst still 0.1 mm)**. y 86 is the limit, because the shroud spans y 86–150.
+  - **No cover-only trim reaches ≥ 3 mm without hurting the look.** I adopted the y 86 + chamfer trim for rev 8b: 83 % fewer contact poses, and a wider, cleaner inner-thigh gap. **Controls keep-out recommended** (T&R spec): L↔R min-gap supervisor from both hips' pitch/roll/yaw on the rev 8b panel geometry, **warn 35 / limit 30 / trip 28 mm**, stopping the closing joint pair.
+- **Hem radius:** with the rev 8b panel on T&R's grid:
+  - R 152.8: 21.5 mm with overtravel. FAIL.
+  - R 146.5: 25.8 mm. FAIL.
+  - **R 144.0: 32.6 mm in ROM and 28.3 mm with overtravel at (42.5, 0, −17)**, 26.3 mm with ±2 tolerance, and 0 poses in the 5–25 band. **PASS ≥ 27.5.** Adopted.
+  - Fixed skirt retained **41.3 %** (was 44.4).
+- **Compliant edges (motors-off/limp protection):**
+  - Placement: on both panels' inboard edges (inboard arc plus chamfer, ≈ 110 mm per panel) and on the hem edge (≈ 300 mm per side).
+  - Material: **closed-cell PE foam, 30 kg/m³, skinned black, 28 mm deep × 20 mm wide** (open-cell PU rejected because it takes up water and debris).
+  - Force: CLD about 60 kPa at 80 % compression, so a full-closure finger patch (20 × 20) is ≈ 24 N and a hand width (100 × 20) is ≈ **120 N, ≤ 140 N** (ISO/TS 15066 hand) [EST; TP-G5-18 to measure].
+  - Retention: a 1 mm PC J-channel clipped over the panel or hem edge, plus VHB tape on the foam. Replaceable.
+  - At the closest hem poses the foam fills the gap, so no open finger gap remains.
+- **Mass (per side, same v5 keep-out basis):**
+  - Panel trim −0.0035.
+  - Smaller hem −0.0167 of fixed-skirt PC.
+  - Foam + J-channel + VHB **+0.0138**.
+  - Net **−0.006/side vs rev 8**, so P-023 is about **−0.280** vs v5 [EST].
+- **Still open (T&R):** panel ↔ shank in deep kneel/sit-back (knee 135–145) and panel ↔ floor need Legs CAD. Panel flex under a hand push must stay ≤ 1 mm.
