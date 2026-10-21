@@ -1296,6 +1296,15 @@ Source [EAM]: Elmo *EtherCAT Application Manual*, G-ETHERCATAM Ver. 1.403 (Nov 2
   - keep CL[1]/PL[1] at their commissioned values;
   - on the bench, verify that 0x6072/0x6073 cap the current below CL/PL and the units.
 
+
+**First-drive bring-up checklist (G5 bench, first G-TWI; Controls `controls/limits/DRIVE_DERATE.md` 8cbf083, "Bench-verify").** Record each result in this section.
+- [ ] B1. 0x22A2 against TI[1] and an external thermocouple on the base: does it truncate or round? R-142 (00b3268) already fixes the latch at a reading ≥ 83 °C either way, so this is a record-only item.
+- [ ] B2. Which 0x22A3 sub-index (1–4) equals TI[1]?
+- [ ] B3. Can 0x22A2 be mapped into the cyclic TxPDO and 0x6072 into the RxPDO at 1 kHz (EAM p.21 and p.64 disagree)?
+- [ ] B4. Is 0x6072 per-mille of 0x6075? Command 500 ‰ and measure the current clamp.
+- [ ] B5. Does 0x6072 cap the current below the commissioned CL[1]/PL[1] (min-of behaviour), including during a PL[2] peak?
+- [ ] B6 (earlier). Read WI[35] and WI[36] (§12), and confirm the S vs H variant and the M2 base thread (P-055 Q1).
+
 **Mass (Electronics side).**
 - Drive-to-plate screws: 14 plated drives × 4 × M2 × 6 at 0.15 g = **+8.4 g**. These aren't in D89's 40.8 g, which counts M3 standoff screws only.
 - Temperature sensing and PE (per Q2): 0.
@@ -1309,3 +1318,56 @@ Source [EAM]: Elmo *EtherCAT Application Manual*, G-ETHERCATAM Ver. 1.403 (Nov 2
 4. TI[1] CoE index.
 5. SiF bend radius.
 6. Connector heights.
+
+### 18.6 P-056: Torso 7075 pack-bay torsion box as the pack enclosure, Electronics review (Torso 3c5ef40, `torso/fea_job3c.yaml` bay_box) (2026-10-21)
+**Box (fea_job3c.yaml):** 7075-T651, x −84…106 (190 mm), y ±115 (230 mm), z 0…140, sides 3 mm, front/rear webs 2 mm, lid 1.5 mm. It would replace the CFRP/6061 enclosure (0.75 kg, Torso §3 [EST]) and the rails/latch (0.20 kg [EST]).
+**Existing pack enclosure spec:** none beyond that 0.75 lump. The repo has **no vent, gasket, IP or BMS-mount spec**, so the items below are new requirements, not carry-overs of a drawn part.
+Standard cited: **ANSI/CAN/UL/ULC 2271:2023** (LEV batteries; public IBR copy law.resource.org/pub/us/cfr/ibr/inc/ul/ul.s2271.3.2023.pdf). Clauses: §8.3 liner, §9.2 tool, §9.3 IP3X, §9.4 IPX3, §14.4 bonding 0.1 Ω, §16.5 vents, §45 single-cell failure (> 1 kWh; our pack is 1.62 kWh).
+- UN 38.3 is a transport test set and sets no enclosure-vent design rule.
+- IEC 62133-2 is cell/pack-level; it's not read here and not cited.
+
+**1. Can the box sides and lid be the pack enclosure? Yes, conditionally (electronics side).**
+- Metal enclosure: allowed. Al meets §8.1 corrosion as-is.
+- **Tool removal (§9.2):** the lid must need a screwdriver-class tool, which matches our C1 rule.
+- **Openings:** IP3X (2.5 mm probe, §9.3), which is stricter than our IP2X. The lid seam gap and any vent/connector cut-outs must pass it.
+- **Water:** IPX3 minimum (§9.4), which needs a **lid gasket** (open: material and section not chosen).
+- **Runaway (§45):** single-cell failure must give no fire outside the pack and no explosion for 1 h. That needs a **defined vent and burst path**:
+  - a vent in a web, ducted **down/rearward away from the chest-duct intake** (Torso §11 intake is front-low above the pack lid, so venting must not be on the lid or front web);
+  - with a re-closable valve, UL 1989 pressure-release applies (§16.5);
+  - the lid at 1.5 mm must not be the weakest burst path.
+  - **Vent part, area and burst pressure: open.** Torso/pack must size them; the Electronics review isn't sufficient.
+- **BMS, FET board, busbars:** mount on G10/FR4 standoffs/blocks on the box webs (no metal path), with ≥ 3.0 mm creepage and ≥ 1.5 mm clearance bus ↔ box (E-PCB-1).
+- The box is a structural load path (LC1 29 kN). **Mounts must not be on the land/junction peaks** (DIAGNOSIS SF 0.56–0.86 there); Torso to place them.
+
+**2. Parts that stay (itemised):**
+
+| item | basis | g |
+|---|---|---|
+| insulating liner, all 6 inner faces 0.205 m², **3 layers Nomex 410 0.13 mm** (reinforced, see 3) | 0.205 × 3 × 115 g/m² (DuPont Nomex 410 TDS, §18.2e) | **70.7** |
+| BMS + FET board standoffs, 2 boards × 4, G10 Ø5/Ø2.7 × 8 mm [count, size EST] | 8 × π/4(25 − 7.29) × 8 mm³ × 1.85 g/cm³ (G10FR4, MATERIALS_DB) | **1.6** |
+| busbar insulating blocks | count/size not drawn | open |
+| bond straps: lid → box, box → pelvis main ground terminal, 2 × 0.10 m SiF 1.5 mm² [length EST] | 20 g/m (Lapp SiF, §17.2) | **4.0** |
+| lid gasket (IPX3) | material not chosen | open |
+| vent / burst disc (§45) | not chosen | open |
+| connector bulkhead (pack main: Anderson SBS75X per R-084, Torso) | Torso line | 0 here |
+| BMS CAN FD (ISO1042) cable gland/bulkhead, shielded | part not chosen | open |
+| **cited subtotal** | | **76.3** |
+
+- Booking: these are pack-enclosure contents, not new Electronics additions. **Electronics books 0.**
+- **Torso's credit against the 0.75 + 0.20 must deduct ≥ 0.076 kg**, plus the open gasket, vent, busbar blocks and gland, before any credit. The 0.75 lump presumably contained them [EST].
+
+**3. R-076 isolation to the metal box.**
+- The box is chassis/earth. SELV returns reference chassis (§18.2e), so **bus (cells, busbars, BMS) ↔ box must be reinforced**.
+- Liner: **3 layers Nomex 410 0.13 mm** (0.39 mm). §18.2e used 2 layers as supplementary; for reinforced by thin sheet alone this takes one more layer [EST rule, check against the licensed IEC 60664/62368 thin-sheet clause, as for E-PCB-1].
+  - Seams overlap ≥ 6 mm [EST]; no liner edge inside the creepage path.
+  - **UL 2271 §8.3: the liner must be non-moisture-absorbent.** Nomex 410's moisture uptake is **not cited**, so this is open. If it fails, a polycarbonate-type liner film needs citing.
+- Creepage/clearance at 92 V (E-PCB-1, IEC 60664-1 Tables F.5/F.2, licensed-copy check pending): reinforced **2.8 mm / 0.5 mm** → design rule **≥ 3.0 / ≥ 1.5 mm** bus ↔ box over the liner. Bus ↔ bus is functional, ≥ 0.6 mm.
+- **Earthing / bonding / EMI carried into the box:**
+  - (a) box to the robot main ground terminal ≤ 0.1 Ω (UL 2271 §14.4; Section 32 continuity test at G5);
+  - (b) lid bonded by strap, since the gasket breaks metal contact; bare or masked bond seats (7075 anodize is insulating);
+  - (c) shield of the BMS CAN FD cable terminated 360° at the box gland/bulkhead (part open);
+  - (d) the connector bulkhead plate (SBS75X) bonded to the box;
+  - (e) Elmo drive PE (P-055 Q2) and the box share the same chassis ground terminal;
+  - (f) no SELV 0 V to box except at the one defined chassis point (§18.2e).
+
+**Open:** vent/burst path and part; gasket; busbar blocks; gland part; Nomex moisture compliance; thin-sheet layer rule; BMS mount positions vs the FEA peaks.
