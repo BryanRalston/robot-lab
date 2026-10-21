@@ -1,0 +1,66 @@
+{
+ "ring_kg": 0.0415,
+ "striker_shank_frame_bbox": [
+  20.0,
+  42.0,
+  30.0,
+  230.0,
+  413.0,
+  437.0
+ ],
+ "striker_kg": 0.1537,
+ "seat_bar_kg": 0.2205,
+ "same_segment_min": [
+  [
+   0.0,
+   "seat/bar2",
+   "L_femur tube 7050-T7451 \u00f850x1.2 (R-031; P-047 wall 1.6 pending FEA)"
+  ],
+  [
+   0.0,
+   "seat/bar2",
+   "L_thigh split collar \u00f864 L34 bonded (DP490) + sleeve + 2x \u00f86 pins"
+  ],
+  [
+   5.1,
+   "striker0",
+   "L_ankle screw +y body (ankle_body_x1)"
+  ],
+  [
+   5.1,
+   "striker0",
+   "L_ankle screw -y body (ankle_body_x1)"
+  ],
+  [
+   6.2,
+   "seat/bar2",
+   "L_clamp arm outer step +y (depth 24 to the tines, L37)"
+  ],
+  [
+   6.2,
+   "seat/bar2",
+   "L_clamp arm outer step -y (depth 24 to the tines, L37)"
+  ],
+  [
+   6.2,
+   "seat/bar2",
+   "L_clamp arm root +y (depth 34, r8)"
+  ],
+  [
+   6.2,
+   "seat/bar2",
+   "L_clamp arm root -y (depth 34, r8)"
+  ],
+  [
+   6.7,
+   "striker0",
+   "L_ankle trunnion bracket strut to tibia [EST]"
+  ],
+  [
+   11.4,
+   "seat/bar2",
+   "L_clamp arm eye tine +yi [fork form EST]"
+  ]
+ ],
+ "bar_to_o64_collar_mm": 0.0
+}
