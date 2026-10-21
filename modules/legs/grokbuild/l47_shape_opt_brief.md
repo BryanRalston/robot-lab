@@ -41,6 +41,7 @@
 - **Manufacturability (3-axis + 4th):**
   - pocket floors ≥ 2.5 mm, ribs ≥ 3 mm;
   - internal fillets ≥ R3 (≥ R8 at the web/arm junction and at the bore-lip blends, as in RC);
+  - **L69 (G3 FAIL 334e848):** the RC STEP has a SHARP upper arm/web edge at |y| = 38.5 (z ≈ −10.7) and a sharp lower arm edge near |y| ≈ 50, z ≈ −52. Every candidate must fillet both: design variable `r_arm_edge`, min R5, nominal R8. A fillet filling a concave corner inside the RC bounding |y|/r envelope is exempt from the subset-of-RC rule.
   - no enclosed voids.
 
 ## 4. Method
@@ -103,3 +104,10 @@
   - Legs DECISIONS L47 / L47-R;
   - Actuators DECISIONS (RC measurement);
   - `GROKBUILD_lever_fea_r031.md` (G3).
+
+## L69 addendum — candidate 0 replaces the separate G3 re-run (if Arbiter agrees)
+- Candidate 0 = RC STEP + R8 on the upper arm/web edges (|y| = 38.5) and lower arm edges; nothing else changed. Actuators supplies the STEP.
+- Run it first, same load/BC/mesh ladder as job 2 (Ball r 4 mm, hloc 1.5/1.0/0.6), refinement balls on the new fillets.
+- Pass = converged (< 5 % last two levels) peak ≤ 320 MPa (R-123) and amplitude ≤ 58 MPa. Hand-calc expectation σa ≈ 32 MPa [EST] (results/r031/g3_fail_review.md).
+- Candidate 0 pass counts as the G3 pass; then continue with the optimisation. Candidate 0 fail: stop and report.
+- Re-run RV12 sweep and femur clearance on candidate 0 (not yet verified).
