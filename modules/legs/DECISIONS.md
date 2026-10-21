@@ -493,3 +493,10 @@ Numbered L84 because L83 already holds the tube local-buckling item. Scripts: kn
   - Linear between Δp 10 and 20.
   - **Yaw cut for (2):** toe-out ≤ **16°** per leg when both legs are toed out and Δp < 10°; toe-out 0..16 at roll ≤ −3 (housings 0 at yaw 16, roll −3 mirrored). Otherwise the L92 limit stands.
 - (4)/(5) palm and wrist-fork are handed to Arms/Controls.
+
+## L94 — Robot Lab rulings, 2026-10-21
+- The clevis pocket is CLOSED; D99 stays at **0.871 kg** (CAD).
+- The pitch-coupled roll software limit (L93b) is ACCEPTED for now.
+- The **27° toe-out cap** and the **≥ 30 mm** 8g L↔R gap are KEPT.
+- The D99 taper FEA (grokbuild/d99_taper_arm_fea_brief.md) is QUEUED, waiting on Bryan's OK.
+- Study started: limp first contact at the −10° adduction stop → results/r031/hip_screw_limp_l94.md.
