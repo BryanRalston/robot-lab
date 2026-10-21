@@ -391,3 +391,12 @@ All keep R-076 (reinforced isolation, IEC 60664-1 creepage, IP2X), R-074 (main l
 - Evidence: design/thigh_pin_access_p053.py, design/thigh_pin_access_p053.json (adopted fe09355).
 - Affected owner response: Legs confirmed pin angles and M3 ends
 - Status: adopted (fe09355)
+
+## L65 (Legs, R-130) — femur/tibia side-dent fix: uniform 1.5 mm wall (supersedes P-047 1.6 mm)
+- **Limit:** R-130 "7050 395" = Sy_typ 435/1.1 (R-128 §5/R-127). R-128 §5 fall limit is min(A/S-basis, Sy/1.1) = min(393, 395) = **393** (S-basis Fty, JOB9_SPEC). "No permanent dent" = stay below minimum (S-basis) yield → 393 used (stricter).
+- **Data:** STRUCTURE_FEA_REPORT f58c40a dent table. (Report's "SF" column is vs Sy 503; R-130's 0.56/0.82 are vs single-path 262.) Script `modules/legs/femur_dent_l65.py` → `results/r031/femur_dent_l65.json`.
+- **(c) P-047 1.6 mm as-is:** femur 318.4 → SF **1.23** vs 393; tibia 327.2 → 1.20. PASSES. +0.0995 femur pair, +0.0954 tibia pair.
+- **(a) uniform minimum:** σ∝t^-n fitted on the 1.2/1.6 FEA points [EST] → t_min femur 1.37, tibia 1.40 mm. Chosen **1.5 mm** (standard tube wall, covers interpolation error): femur 347.3 [EST] → SF **1.13**; tibia 357.9 [EST] → **1.10**. Mass +0.0748 femur pair, +0.0717 tibia pair = **+0.147 kg robot vs 1.2 baseline; −0.003 vs P-047's +0.15 booking (vs 1.6 actual −0.049)**.
+- **(b) local step/doubler over 80 mm:** rejected. ~+0.013 pair per tube at 1.4 mm, but the 80 mm is the FE stub length, not a defined impact zone — a side fall can strike any exposed span, so the band can't be placed with evidence. A step adds Kt ~1.5–2 [EST] on the fall bending (220.1 at 1.2 → ~330–440 vs 262 single-path) and fatigue at the step; a local internal step means boring from thicker stock or bonding (DP490 peel, R1 §8 concerns). Saving ≤0.03 kg/pair does not justify it.
+- **Other cases at 1.5:** fall bending and 3 BW scale down from 1.2 (220.1/110.1 MPa at 1.2 → lower at 1.5), so fall SF vs 262 ≥1.19 and fatigue no worse than baseline. Bond/collar ID unchanged (OD held 50/45); internal sleeve 47.6 OD must become ≤47.0 (tube ID 47.0 at 1.5) — flag to self/BOND_SPEC. No thigh-cover load path counted.
+- **Gate:** job 9 b3 re-run at 1.5 mm to confirm dent ≤393.

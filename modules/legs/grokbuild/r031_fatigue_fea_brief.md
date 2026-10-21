@@ -19,6 +19,6 @@ Inputs: `legs/R031_FIXES.md`, `legs/hp_lever_family_r031.py`, `actuators/results
 4. Femur 7050-T7451 1.6 wall and tibia 1.6 wall outside the sleeve (P-047), with dent/bending at the R-023 load. Sleeve-end peel with DP490 cohesive layer E 2.5 GPa.
 5. Femur tongue + A16 dowel, interference 60 MPa, bore opening under fault (P-048).
 6. Foot collar OD edge with R2/taper (P-049).
-7. Knee twin-housing centre web at 3.6 kN/screw (T&R #8), with D69 ø85 frame geometry from Actuators.
+7. Knee twin-housing centre web at 3.6 kN/screw (T&R #8), with D69 ø85 frame geometry from Actuators. Material per R-132 §2 / L66: 7075-T7351, plate 3.501–4.0 in [EST], ST = web thickness (trunnion axis y) [EST]; sustained ST load YES (bearing press fit + bolt preload) → limits 211 static (ST), 221 L/LT-only features, 317 fall (Job 9 interim); results above are held.
 
 Output: `reliability/results/r031_*.json` with the peak, amplitude, Kt, SF and mesh-level table for each run.

@@ -13,3 +13,4 @@
 2026-10-21 08:17 RL Legs: r031_fatigue_fea_brief per R-123 (ca66b9b): 7075 480/560/70 GPa, static allowable 320, peaks 320–335 FAIL; 503/572 source removed
 - 2026-10-21 L: ankle_cross_fea_brief.md FINAL rev D per Materials 95436bf (ANKLE_CROSS_7075.md §4, MIL-HDBK-5H p.3-348): ST 239 stand-in, L/LT 262, tiered bearing 455/381/295 by drawn e/D at ø14, DU liner 250/140 [EST], stock ≤1.500 in.
 - 2026-10-21 Legs L64: R-128 check; job 7 limit kept 262 (T651/T7351 conflict); femur/P-047 re-check; legs DRAWING_NOTES.md.
+- 2026-10-21 Legs L65/L66: femur/tibia dent fix 1.5 mm wall proposed; knee centre web T7351 stock/grain/ST notes.
