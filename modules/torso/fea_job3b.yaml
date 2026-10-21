@@ -1,0 +1,29 @@
+# FEA job 3b (R-127 C(b) sandwich variant): pelvis walls = CF/5052 honeycomb sandwich, homogenized solid [COARSE screening only].
+# Job 3 unchanged. Run: python fea_job3.py --cfg fea_job3b.yaml --out fea/job3b
+# FEA job 3 base: torso pocketing (bryan PC). Units: mm, N, MPa, t (tonne)
+mesh: {size: 6.0, size_coarse: 25.0}
+materials:
+  Al7075T651: {E: 70000, nu: 0.33, rho: 2.81e-9, Sy: 480, UTS: 560, allowable: 320}   # R-123 (ca66b9b) 7075-T6; SF vs 320 allowable
+  SANDWICH_EQ: {E: 9100, nu: 0.30, rho: 0.42e-9, Sy: 60}   # 1.0 mm QI CF skins (E 50 GPa [EST]) on 9 mm HC 6.1 pcf; homogenized over 11 mm: E=50000*2/11, Sy=skin allowable 300*2/11*1.1 [EST]
+  CFRP_QI:    {E: 50000, nu: 0.30, rho: 1.55e-9, Sy: 450}   # [EST] quasi-isotropic, no cited laminate
+geometry:   # robot frame origin = waist centre; x fwd, y left, z up (mm)
+  bulkhead: {mat: Al7075T651, width_y: 300, height_z: 160, t: 12, x0: 40, z0: 300}
+  land: {size: 101, t: 4, z_c: 360}            # sternum land, front face
+  rib: {h: 60, t: 6}                           # integral back rib under the land
+  shoulder_flange: {y_c: 150, bc_dia: 80, n_bolt: 8, bolt_dia: 8.4}
+  grommet: {dia: 22, y_c: 110, z_off: -55}
+  bezel_inserts: {dia: 5.6, pitch: 116}        # 4x M4 on the land corners
+  partition: {mat: CFRP_QI, width_y: 260, height_z: 320, t: 1.0, x0: -10, z0: 0}   # spans pelvis top to bulkhead rib
+  posts: {mat: Al7075T651, y: [-100, 100], w_y: 20}   # waist-ring posts pelvis->bulkhead (bulkhead x0..x0+t)
+  ethercat_bosses: {dia: 3.2, dx: 70, dz: 50, z_c: 90}
+  pelvis: {mat: SANDWICH_EQ, width_y: 260, depth_x: 140, height_z: 60, wall: 11, z0: -60}
+load_cases:   # forces in N, moments in N*mm
+  LC1_chest_pad:   {target: land, F: [-33500, 0, 0]}
+  LC2_side_fall:   {target: shoulder_flange_L, M: [0, 0, 0], F: [0, -9000, 0], note: "D71 <=550 N*m via 61 mm lever"}
+  LC3_waist_reach: {target: pelvis_top, M: [0, 306000, 0]}           # 204 N*m x1.5
+  LC4_pack_10g:    {target: partition, F: [0, 0, -858]}               # 8.75 kg x 9.81 x 10
+  LC5_bosses_50g:  {target: ethercat_bosses, F: [-25, 0, -25]}
+  LC6_stand:       {target: pelvis_top, F: [0, 0, -652]}              # 66.5 kg
+fixed: pelvis_bottom
+criteria: {SF_min: 2.0, land_defl_max: 0.05, mode1_min_hz: 80, buckling_min: 3.0}
+post: {freq_case: LC6_stand, buckle_case: LC1_chest_pad}
