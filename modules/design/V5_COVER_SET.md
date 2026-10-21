@@ -234,3 +234,46 @@ The sole pad is under the foot plate; the P-025 ankle boot hem is re-anchored ab
 - **(3)** The low-ε knee housing callout is removed; foil on the fairing inner face only, housing bare. The 0.18 m outlet height is accepted.
 - **Sweep min 7.0 mm** (outlet passage vs housing top [EST]); shroud vs pelvis 97; rods 11.0 → PASS.
 - **Mass:** P-156 **+0.054 pair [EST]** (+0.015 vs rev 4d); knee-venting total **+0.035 pair**.
+
+### P-156 rev 5 — replan on Legs L72 real geometry (e44c588) + T&R 67e6eed + Thermal 218a541 (supersedes rev 4d/4e routing)
+- **Rev 4d/4e fail as drawn** (Legs L72):
+  - The knee housing is thigh-fixed at x −176.1…−79.4, y 38–222, z 684.9–805.5. The fins (tips −53) face its front across 26.4 mm.
+  - The rear hull (x −135…−181 in the fin z-range) sits **behind** the housing, so a rear grille cannot see the fins. The −82.5 skin plane did not exist.
+  - The L60 trunnion top plate (z 816–824, x −175…−40) and the strut cut the chimney. A rear turn over the housing top would be 4.5 mm tall → 234 mm² ≪ 1200: **FAIL**.
+  - The rear grille is dropped.
+- **Rev 5 route (no mechanism change), cad/covers/thigh_knee_vents_r5.py → thigh_knee_vents.json/.stl:**
+  1. **Inlet:** lower rear hull slope z 643–675 (x −94 → −122), y 104–156, 8 × 4.5 × 40 slots → **1440 mm² free**. Plenum z 643–681.9 (3 mm under the housing bottom).
+  2. **Chimney:** fins + 1 mm Al-taped baffle at x −56 (3 mm off the tips, 22.4 mm to the housing front); PA12 walls y 130 ± 26.5 (side gap 5.0); L58 tabs notched ≥ 3.
+  3. **Transfer duct:** z 793–813 (3 mm under the top plate / strut), x −8.5…−76.4 (3 mm in front of the housing), running **outboard** in y past the housing (222) and the plate edge (228) → section **1358 mm²**.
+  4. **Exit:** outboard side skin x −10…−84, z 785–813, below the trunnion plate. 11 recessed 4.5 × 26 slots, 11 mm inboard of the hood skin → **1287 mm² free**.
+  5. **Hood** (Thermal 218a541): 1.5 mm PC, Al foil inner ε ≤ 0.05, cover colour, R15 blend. **26 mm standoff** (11 recess + 15 proud). Open up/aft **2652 mm²** (≥ 2600) + dilution slots 4.0 × 16 on the lower edge and sides **1024 mm²** (≥ 600). About 5 g/knee.
+- **Height:** inlet → exit centres **H ≈ 0.14 m** (was 0.18): Thermal to re-check.
+- **Housing fairing:** foil on the fairing inner face only (housing bare); gap 10 mm to the housing body (no front fins, L72 b); +2 mm bulge kept; slots 5 × 4.0 ± 0.3 × 20 per end (370 mm² min, ≤ 4.3 mm).
+- **Clearances vs Legs' real geometry:**
+
+| Item | Clearance (mm) |
+|---|---|
+| Baffle–fins | 3.0 |
+| Baffle–housing | 22.4 |
+| Transfer–plate top | 3 |
+| Transfer–strut | 3 |
+| Transfer–housing front | 3.0 |
+| Plenum–housing bottom | 3.0 |
+| Rods–duct (Legs) | 13.8 |
+| Tibia–skin (Legs) | 4.7 |
+| Bosses (Legs, frame moves) | 13.7 / 16.9 — recheck |
+
+  - Hull unchanged, so housing-to-skin is the existing rear opening.
+  - Static minimum **3.0 mm (at the gate)**; Legs CAD ROM recheck required.
+- **Mass:** P-156 rev 5 **≈ 0.0485 kg/side, 0.097 pair [EST]** (transfer duct 15 g and inlet plenum 9.5 g dominate). Knee-venting total **+0.047 pair** (P-154 withdrawn −0.031, window −0.019); +0.043 vs rev 4e.
+- **Compliance verdict:** no-mechanism route found, but only at the 3 mm gates. The exit and hood sit on the **outboard thigh near the hanging-hand zone** (T&R to judge). **Smallest mechanism options** if it is rejected:
+  - (a) an L60 top-plate cut-out ~52 × 40 over the chimney → full-height rear/up outlet (Legs structural check);
+  - (b) a lower housing top would need ≥ 25 mm to reach 1200 mm² rear: not practical.
+- **Legs to confirm:**
+  - transfer duct vs femur/clamps/drives outside the plate box;
+  - outboard side skin at the exit, with L61 cheek windows and P-053 rear window/pins not overlapped;
+  - side skirt hem above z 813 through hip ROM;
+  - inlet plenum vs rods/tibia and the boss frame;
+  - full CAD ROM.
+- **Thermal:** re-run at H 0.14, with the turns, transfer 1358 / exit 1287 / hood 2652 + 1024.
+- **T&R:** hood and recessed webs (touch + probe B) on the outboard thigh; housing-fairing slots.
