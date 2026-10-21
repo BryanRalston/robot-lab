@@ -204,3 +204,22 @@ The sole pad is under the foot plate; the P-025 ankle boot hem is re-anchored ab
 - **Legs to confirm:** skin x −82.5 and the housing front / y extent vs the duct walls ending at x −63; bosses on the bars; P-053 window clear; a CAD ROM recheck with the duct insert.
 - **Thermal to confirm:** 65 % / 1296 mm² free with the duct ending at x −63.
 - **T&R to confirm:** grille touch (TP-G5-15) and IP2X 12 mm / 80 mm on the grille and inlet/outlet.
+
+### P-156 rev 4d (Thermal ec7b49d): fin-tip baffle chimney + housing-fairing foil
+- **Baffle** 1 mm PC, 104 × 52, x −56…−57 (3 mm off the fin tips at −53.0), Al tape (ε ≤ 0.1) on the fin side. It closes the fin channels into a chimney (plate base / duct walls / baffle).
+- The grille (65 %, 4.5 mm slots, low-ε inner) now breathes only the ~25.5 mm outside-air space in front of the baffle. Fin tips to grille 29.5 mm.
+- **Inlet:** z 643–681 at the skin, 1296 mm² free, into a plenum z 643–688 floored off from the grille space.
+- **Outlet:** routed **aft/up**. The chimney rises inside x −34.5…−57 to z 822, then turns aft above the housing (top ~815 [EST]) to the skin opening **z 822–860** (1296 mm² free).
+  - That is **30 mm above the grille top edge**; **H ≈ 0.18 m** inlet-to-outlet centres.
+- **Optional H 0.20 m: NO.** The opening would need z 881, 4 mm under the thigh-fairing top (885) and under the P-023 hip-skirt hem (blocked at hip extension), off the slim line. H 0.18 gets ~−4 K of the −5 K.
+- **Duct insert:** walls y 130 ± 26.5 (side gap 5.0 mm), x −34.5…−57, z 643–860, notched at the L58 tabs (≥ 3 mm).
+- **Fairing over the knee twin housing:** 0.05 mm adhesive Al foil on the inner face (~0.03 m², no foil on the housing); slots 4 × (4 × 20) top (z ~820) and bottom (z ~720) on the outboard cheek, 320 mm² each, clear of the A36 housing airflow.
+  - Gap: the R-113 bulge gives 8 mm to the front-fin tips (< 10), so a **local bulge +2 mm (12.7 → 14.7)** gives **10 mm** (19 mm to the housing body).
+- **Sweep (≥ 3 mm):** rods vs duct 11.0 mm (all angles); outlet passage vs housing top **7 mm [EST]**; housing ROM 18.1 mm (Legs, 145°); shank ≥ 95 → **min 7.0 mm PASS**.
+- **Mass:** baffle +7 g, chimney duct +3 g, foil + slots +6 g, bulge +0.5 g per knee → P-156 **0.0193 kg/side, +0.039 pair** (+0.033 vs rev 4b's +0.006). Knee-venting total **+0.020 pair** (P-154 withdrawn −0.031, window −0.019).
+- **Legs to confirm:**
+  - housing top z (~815) and front x (−66) vs the outlet passage and baffle;
+  - D85 front fins present, and the +2 mm bulge;
+  - outlet z 822–860 vs the fairing top and the skirt hem;
+  - bosses y 112/148, z 684/796;
+  - CAD ROM recheck with the chimney.

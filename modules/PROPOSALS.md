@@ -453,7 +453,8 @@ All keep R-076 (reinforced isolation, IEC 60664-1 creepage, IP2X), R-074 (main l
 - Affected owners: Legs, Actuators, Thermal, Test & Reliability, Arbiter
 - Change: grille integrated in the v5 rear thigh skin (x −82.5) over the D91/D94 fin field, 104 × 52, 8 slots 4.5 mm, 65 % open, Al liner ε ≤ 0.1 inside, cover colour outside; low inlet z 643–681 and high outlet z 799–837, 1296 mm² free each; PA12 duct insert, side gap 5 mm, notched at the L58 tabs, 4× M2.5 into bosses at y 112/148 z 684/796; low-ε knee housing face (Legs/Actuators note).
 - Impact on contracts: none (no mechanism change; v5 skin position unchanged).
-- Impact on targets: +0.006 kg pair [EST]; with the P-154 withdrawal (−0.031) and the window (−0.019) the knee venting total is −0.013 pair (−0.025 vs P-154's +0.012).
+- Impact on targets: rev 4d +0.039 kg pair [EST] (was +0.006); with the P-154 withdrawal (−0.031) and the window (−0.019) the knee-venting total is +0.020 pair.
 - Evidence: design/cad/covers/thigh_knee_vents.py/.json/.stl; V5_COVER_SET.md P-156 section; Thermal 389f91b; Actuators D94 7d22c91.
+- Rev 4d (Thermal ec7b49d): 1 mm Al-taped PC fin-tip baffle (x −56) closes the chimney; outlet aft/up z 822–860 (30 mm above the grille, H ≈ 0.18 m; the H 0.20 option declined: fairing top / skirt hem); housing-fairing 0.05 mm Al foil + 2× 320 mm² slots, local bulge +2 mm for a 10 mm gap. Mass P-156 +0.039 pair [EST] (knee-venting total +0.020).
 - Affected owner response: pending (Legs CAD ROM + housing extent, Thermal areas, T&R touch/IP2X)
 - Status: open
