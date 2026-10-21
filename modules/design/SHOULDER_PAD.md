@@ -302,3 +302,5 @@ Foam 0.035 + sleeve 0.009 + inserts/anchor 0.006 = **0.050/side, 0.100 kg pair =
 - Chamfer, at roll ≤ 127°: pad ≥ **6.5 mm** (at pitch ±30), carrier ≥ 52, housing 59. PASS.
 - **Recommended roll soft limit: 127°**, no torso pocket. Arbiter to set.
 - **ID decision: torso top width 340 (not 330)**, so the Ø110 openings sit on the y ±170 walls. V5_POLISH_PLAN row 4 is updated (R-133). V5_COVER_SET and cover_set_v5.json carry no torso width.
+- **R-133 re-run vs Torso 4b8ac1c** (same 340 width and 45 mm chamfer; vents on the sloped panel, 3.5 mm slots, inlet z 105–155, outlet z 160–214): **3 mm lost at 130°**, **first contact 171–172°** (pad on the upper side wall); chamfer ≥ 6.4 mm at roll ≤ 127°.
+  - Vent zones at roll ≤ 127°: pad ≥ **10.8 mm** (pitch −90), carrier ≥ 54.7, housing ≥ 61.7. No contact or blockage. **Soft limit 127° unchanged.**

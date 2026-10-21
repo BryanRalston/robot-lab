@@ -13,6 +13,44 @@
   "shoulder_open_dia": 110,
   "neck_dia": 90,
   "sternum_zc": 220,
+  "slot_w": 3.5,
+  "slot_pitch": 6.0,
+  "vent_in": {
+   "z": [
+    105,
+    155
+   ],
+   "x_cols": [
+    [
+     -60,
+     -24
+    ],
+    [
+     -18,
+     18
+    ],
+    [
+     24,
+     60
+    ]
+   ]
+  },
+  "vent_out": {
+   "z": [
+    160,
+    214
+   ],
+   "x_cols": [
+    [
+     -102,
+     -62
+    ],
+    [
+     62,
+     102
+    ]
+   ]
+  },
   "sternum_size": 110,
   "sternum_proud": 37,
   "sternum_core": 40,
@@ -26,18 +64,21 @@
     "pad_envelope_w2"
    ],
    "first_contact": [
-    170,
+    171,
     "pad_envelope_w2"
    ],
    "min_gap_full_ROM": {
-    "carrier_w2": 41.7,
-    "pad_envelope_w2": -29.5,
+    "carrier_w2": 41.6,
+    "pad_envelope_w2": -29.2,
     "housing_7013_coaxX": 58.9
    },
    "min_gap_to_chamfer_roll_le127": {
-    "carrier_w2": 64.6,
-    "pad_envelope_w2": 175.3,
-    "housing_7013_coaxX": 58.9
+    "carrier_w2": 64.4,
+    "vent_carrier_w2": 60.8,
+    "pad_envelope_w2": 175.4,
+    "vent_pad_envelope_w2": 19.4,
+    "housing_7013_coaxX": 58.9,
+    "vent_housing_7013_coaxX": 78.0
    }
   },
   "-90": {
@@ -46,16 +87,19 @@
     "pad_envelope_w2"
    ],
    "first_contact": [
-    170,
+    171,
     "pad_envelope_w2"
    ],
    "min_gap_full_ROM": {
-    "carrier_w2": 41.7,
-    "pad_envelope_w2": -29.5,
+    "carrier_w2": 41.6,
+    "pad_envelope_w2": -29.3,
     "housing_7013_coaxX": 58.9
    },
    "min_gap_to_chamfer_roll_le127": {
-    "carrier_w2": 51.9
+    "carrier_w2": 50.8,
+    "vent_carrier_w2": 73.2,
+    "vent_pad_envelope_w2": 10.8,
+    "vent_housing_7013_coaxX": 61.7
    }
   },
   "-30": {
@@ -73,8 +117,11 @@
     "housing_7013_coaxX": 58.9
    },
    "min_gap_to_chamfer_roll_le127": {
-    "pad_envelope_w2": 6.5,
-    "carrier_w2": 81.0
+    "vent_carrier_w2": 58.8,
+    "vent_pad_envelope_w2": 38.0,
+    "vent_housing_7013_coaxX": 73.1,
+    "pad_envelope_w2": 6.4,
+    "carrier_w2": 79.3
    }
   },
   "0": {
@@ -88,11 +135,14 @@
    ],
    "min_gap_full_ROM": {
     "carrier_w2": 41.7,
-    "pad_envelope_w2": -15.8,
+    "pad_envelope_w2": -15.7,
     "housing_7013_coaxX": 58.9
    },
    "min_gap_to_chamfer_roll_le127": {
-    "pad_envelope_w2": 7.0
+    "vent_carrier_w2": 54.7,
+    "vent_pad_envelope_w2": 55.4,
+    "vent_housing_7013_coaxX": 77.6,
+    "pad_envelope_w2": 6.6
    }
   },
   "5": {
@@ -106,11 +156,14 @@
    ],
    "min_gap_full_ROM": {
     "carrier_w2": 41.7,
-    "pad_envelope_w2": -16.4,
+    "pad_envelope_w2": -16.3,
     "housing_7013_coaxX": 58.9
    },
    "min_gap_to_chamfer_roll_le127": {
-    "pad_envelope_w2": 7.0
+    "vent_carrier_w2": 55.3,
+    "vent_pad_envelope_w2": 53.0,
+    "vent_housing_7013_coaxX": 77.5,
+    "pad_envelope_w2": 6.6
    }
   },
   "30": {
@@ -124,12 +177,15 @@
    ],
    "min_gap_full_ROM": {
     "carrier_w2": 41.7,
-    "pad_envelope_w2": -20.7,
+    "pad_envelope_w2": -20.8,
     "housing_7013_coaxX": 58.9
    },
    "min_gap_to_chamfer_roll_le127": {
-    "pad_envelope_w2": 6.5,
-    "carrier_w2": 100.1
+    "vent_carrier_w2": 62.2,
+    "vent_pad_envelope_w2": 37.9,
+    "vent_housing_7013_coaxX": 73.1,
+    "pad_envelope_w2": 6.4,
+    "carrier_w2": 108.1
    }
   }
  }

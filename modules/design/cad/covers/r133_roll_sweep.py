@@ -1,4 +1,4 @@
-"""R-133 sweep: same method as r127 vs Torso cover 35eebd2 (z 50-310, taper 250@z50 -> 340@z220, 45 mm top-shoulder
+"""R-133 sweep (re-run vs Torso 4b8ac1c, vents on sloped panel): same method as r127 vs Torso cover 35eebd2 (z 50-310, taper 250@z50 -> 340@z220, 45 mm top-shoulder
 chamfer, dia110 openings on the pitch axis z 220). Convex YZ profile extruded x -110..110 (corner fillets R20 ignored: conservative)."""
 import trimesh, numpy as np, mujoco, json, os
 H = os.path.dirname(os.path.abspath(__file__)); A = os.path.join(H, '../../../arms/cad/r15')
@@ -22,12 +22,23 @@ def gap(L):
     g = np.where((r < R) & near, np.where(s < 0, R-r, rim), s)
     chamf = (L[:, 2] > zt-c-5) & (L[:, 1] > hs-c-5)
     return g, chamf
+def vent_pts():
+    V = []
+    for key in ("vent_in", "vent_out"):
+        z0, z1 = P[key]["z"]
+        for x0, x1 in P[key]["x_cols"]:
+            X, Z = np.meshgrid(np.linspace(x0, x1, 12), np.linspace(z0, z1, 12)); Y = hb + (hs-hb)*(Z-zb)/(zs-zb)
+            V.append(np.c_[X.ravel(), Y.ravel(), Z.ravel()])
+    return np.vstack(V)
+from scipy.spatial import cKDTree
+VT = cKDTree(vent_pts())
 def ev(sp, sr):
     mujoco.mj_resetData(m, d); d.qpos[2] = 1.16; d.qpos[J('l_shoulder_pitch')] = np.radians(sp); d.qpos[J('l_shoulder_roll')] = np.radians(sr); mujoco.mj_forward(m, d)
     Rs = d.xmat[B('L_shoulderP')].reshape(3, 3); o = (d.xpos[B('L_shoulderP')] + Rs@np.array([0, .112, -.04]))*1000
     Rt, ot = d.xmat[B('torso')].reshape(3, 3), d.xpos[B('torso')]*1000; r, ch = {}, {}
     for f, p in pts.items():
-        g, cm = gap(((Rs@Rx(np.radians(sr))@p.T).T + o - ot)@Rt); r[f] = float(g.min()); ch[f] = float(g[cm].min()) if cm.any() else None
+        Lp = ((Rs@Rx(np.radians(sr))@p.T).T + o - ot)@Rt; g, cm = gap(Lp); r[f] = float(g.min()); ch[f] = float(g[cm].min()) if cm.any() else None
+        ch["vent_"+f] = float(VT.query(Lp)[0].min())
     return r, ch
 out = {"torso_params": P, "pitch_actuator_radial_clearance_mm": P["shoulder_open_dia"]/2 - 96/2, "sweeps": {}}
 for sp in (-150, -90, -30, 0, 5, 30):
@@ -37,6 +48,7 @@ for sp in (-150, -90, -30, 0, 5, 30):
         for k in r:
             wb[k] = min(wb.get(k, 1e9), r[k])
             if ch[k] is not None and sr <= 127: wc[k] = min(wc.get(k, 1e9), ch[k])
+            if sr <= 127: wc["vent_"+k] = min(wc.get("vent_"+k, 1e9), ch["vent_"+k])
         if f3 is None and g < 3: f3 = (sr, min(r, key=r.get))
         if f0 is None and g < 0: f0 = (sr, min(r, key=r.get))
     out["sweeps"][str(sp)] = dict(first_lt3mm=f3, first_contact=f0, min_gap_full_ROM={k: round(v, 1) for k, v in wb.items()},
