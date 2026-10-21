@@ -202,3 +202,25 @@ The ~127 N (L/R) and 114 N (hem) figures are [EST] and are **not accepted as ana
 | Controls keep-out | PASS only with the live 33 mm stopgap (0 untripped; ~1 mm margin); 28 on the 8b model leaves 3–7 untripped → keep stopgap or rebuild on 8f |
 | limp brake | none exists (Actuators/Controls docs); test as-built |
 | hand/finger limp force | **measured gate only**: TP-G5-18 (6) |
+
+## Rev 8f: Controls model verification (Controls 9d96058, "54ca3de" as relayed) + Legs yaw ROM 3f4164b, 2026-10-21 ~10:55 ET
+Scripts: `r_hip_pinch_8f_ctrl.py` → `_full.json` (42c4e50 sample re-run, all poses listed), `r_hip_pinch_8f_verify_ctrl.py`/.json (≈ 4,950 feasible asymmetric pairs per roll range: contract ROM, +2.5°, +3.6°; T&R geometry vs Controls `hip_pinch.gaps` on the 8f STLs), `r_hip_pinch_8f_yawrom.json` (filter to the Legs 3f4164b yaw ROM: L −35…+40, R −40…+35 sim = **both legs −35…+40 in the T&R mirrored convention**).
+
+### Q1. The 15th closure (42c4e50, +2.5°, omitted by the [:6] truncation)
+**L (8.6, −14.1, 33.5), R (−15.7, −6.7, 45.9)** [T&R mirrored; sim right = (−15.7, +6.7, −45.9)]: 25.9 mm on 8f, 30.3 mm on the old 8b model. Under the new yaw ROM it **drops out** (R yaw 45.9 > 40). Of the 15, **9 remain** under the new yaw ROM (nominal 1, +2.5° 4, +3.6° 4), all < 28 mm on 8f and all trip in Controls' 8f model.
+
+### Q2. Hem: sphere vs STL
+- The 8f notched STL **has a real hem edge**: 1,076 boundary vertices within 3 mm of R 141.5 about C1 (r max 143.1).
+- My analytic 30.2 mm assumes hem material in **every** direction at R 141.5. At its governing pose (42.5, −12, −37.5) the sphere point (−105.2, 190.4, 972.1) is **inside ID's notch bbox** (hip_skirt_r8f.json: x −118.8…19.5, y 5.4…250.2, z 964.9…1024.5); the nearest STL surface is 44 mm away; the STL gap at that pose is **69.1 mm**.
+- **Verdict: the STL is right. The sphere is conservative but wrong** (it ignores the notch and the skirt's real extent). Hem gaps on the STL: 65–165 mm typical; across the sweep only 7 pairs came under 60 mm (overtravel only), with Controls reading 0.8–1.0 mm *smaller* than mine (conservative). Hem ↔ panel is not a governing pinch on 8f; no flag to ID needed.
+
+### Q3. Controls model accuracy and thresholds
+| roll range | pairs | L↔R < 28 on 8f (old yaw / new yaw) | Controls − T&R error, gaps < 60 mm (max / min) | untripped at 28 (old / new yaw) |
+|---|---|---|---|---|
+| contract ROM | 4,963 | 6 / 3 | **+0.64** / −0.90 (new yaw: +0.61 / −0.49) | 0 / 0 |
+| +2.5° | 4,948 | 6 / 5 | +0.15 / −1.46 | 0 / 0 |
+| +3.6° | 4,952 | 9 / 6 | +0.38 / −1.17 | 0 / 0 |
+Plus the 15 sample closures read within 0.83 mm (Controls). Worst 8f closures under the new yaw ROM: 19.9 mm in contract ROM, 6.4 mm at +2.5°, 12.1 mm at +3.6° (still real closures, so the keep-out stays mandatory).
+- The largest unconservative error (Controls reads larger) is **+0.64 mm**, within the **1 mm model allowance already inside 28** (25 finger + 2 tol + 1 model).
+- **Recommendation: Controls may return to 35/30/28 on the 8f-STL model** (with the new yaw ROM in place or not). No additional residual margin is needed. Condition: the model stays tied to the 8f STLs (any geometry change → re-verify), and TP-G5-18 (9) measures the trip on hardware. Sampled (≈ 15k pairs), not exhaustive; the 2 mm voxel thin-out bounds the point-cloud error at ≈ 1 mm, consistent with the observed max.
+- Limp: Controls 85cb5e0 added a "limp-mode hip hold" in the supervisor. It is a powered (motor) hold, not a brake; with MO=0/drives off nothing holds (Actuators SAFE_SIT_HOLDING). TP-G5-18 (6) state (a)/(b) remain mandatory; add state (d) supervisor limp-hold active.

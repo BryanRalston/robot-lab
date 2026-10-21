@@ -1,0 +1,335 @@
+{
+ "hem_panel_nominal": [
+  30.2,
+  [
+   42.5,
+   -12,
+   -37.5
+  ],
+  "tol2",
+  28.2
+ ],
+ "hem_panel_ovt2.5": [
+  30.2,
+  [
+   42.5,
+   -14.5,
+   -37.5
+  ],
+  "tol2",
+  28.2
+ ],
+ "hem_panel_ovt3.6": [
+  30.2,
+  [
+   42.5,
+   -12,
+   -37.5
+  ],
+  "tol2",
+  28.2
+ ],
+ "LR_nominal": {
+  "feasible": 7931,
+  "below28_8c": 10,
+  "worst": [
+   4.3,
+   [
+    [
+     23.7,
+     -7.4,
+     42.3
+    ],
+    [
+     38.2,
+     -8.7,
+     29.6
+    ]
+   ]
+  ],
+  "ctrl_trip": 33.0,
+  "untripped_by_ctrl_model": 3,
+  "untripped_at_ctrl_trip": 0,
+  "note": "untripped_by_ctrl_model counts ctrl>=28 (nominal trip); untripped_at_ctrl_trip uses the live stopgap",
+  "examples": [
+   {
+    "a": [
+     -93.5,
+     -3.4,
+     -35.1
+    ],
+    "b": [
+     -74.6,
+     -11.3,
+     -26.8
+    ],
+    "g8c": 24.8,
+    "ctrl": 29.2,
+    "in_contract_roll": true
+   },
+   {
+    "a": [
+     38.9,
+     0.4,
+     37.7
+    ],
+    "b": [
+     23.2,
+     2.8,
+     39.0
+    ],
+    "g8c": 23.2,
+    "ctrl": 28.0,
+    "in_contract_roll": true
+   },
+   {
+    "a": [
+     16.3,
+     0.2,
+     46.0
+    ],
+    "b": [
+     27.6,
+     -0.0,
+     34.7
+    ],
+    "g8c": 24.2,
+    "ctrl": 29.2,
+    "in_contract_roll": true
+   }
+  ],
+  "untripped_in_contract_roll": 3
+ },
+ "LR_ovt2.5": {
+  "feasible": 7923,
+  "below28_8c": 17,
+  "worst": [
+   2.3,
+   [
+    [
+     2.3,
+     -13.9,
+     32.0
+    ],
+    [
+     -15.9,
+     -14.5,
+     40.1
+    ]
+   ]
+  ],
+  "ctrl_trip": 33.0,
+  "untripped_by_ctrl_model": 7,
+  "untripped_at_ctrl_trip": 0,
+  "note": "untripped_by_ctrl_model counts ctrl>=28 (nominal trip); untripped_at_ctrl_trip uses the live stopgap",
+  "examples": [
+   {
+    "a": [
+     -73.4,
+     -13.5,
+     -31.9
+    ],
+    "b": [
+     -37.4,
+     -14.5,
+     -5.2
+    ],
+    "g8c": 26.4,
+    "ctrl": 30.1,
+    "in_contract_roll": false
+   },
+   {
+    "a": [
+     -13.0,
+     -8.7,
+     41.7
+    ],
+    "b": [
+     -14.0,
+     -12.8,
+     22.0
+    ],
+    "g8c": 27.0,
+    "ctrl": 31.2,
+    "in_contract_roll": false
+   },
+   {
+    "a": [
+     -30.2,
+     -14.0,
+     4.6
+    ],
+    "b": [
+     -1.1,
+     -13.8,
+     26.5
+    ],
+    "g8c": 24.4,
+    "ctrl": 28.2,
+    "in_contract_roll": false
+   },
+   {
+    "a": [
+     2.2,
+     -12.8,
+     22.6
+    ],
+    "b": [
+     6.2,
+     1.8,
+     38.0
+    ],
+    "g8c": 27.3,
+    "ctrl": 32.0,
+    "in_contract_roll": false
+   },
+   {
+    "a": [
+     -1.4,
+     -10.3,
+     19.5
+    ],
+    "b": [
+     15.1,
+     -10.3,
+     39.2
+    ],
+    "g8c": 25.9,
+    "ctrl": 29.7,
+    "in_contract_roll": true
+   },
+   {
+    "a": [
+     14.1,
+     -10.0,
+     44.1
+    ],
+    "b": [
+     8.2,
+     -2.9,
+     32.5
+    ],
+    "g8c": 27.4,
+    "ctrl": 31.7,
+    "in_contract_roll": true
+   },
+   {
+    "a": [
+     8.6,
+     -14.1,
+     33.5
+    ],
+    "b": [
+     -15.7,
+     -6.7,
+     45.9
+    ],
+    "g8c": 25.9,
+    "ctrl": 30.3,
+    "in_contract_roll": false
+   }
+  ],
+  "untripped_in_contract_roll": 2
+ },
+ "LR_ovt3.6": {
+  "feasible": 7907,
+  "below28_8c": 15,
+  "worst": [
+   -2.0,
+   [
+    [
+     6.3,
+     -6.6,
+     40.6
+    ],
+    [
+     -1.8,
+     -14.3,
+     26.9
+    ]
+   ]
+  ],
+  "ctrl_trip": 33.0,
+  "untripped_by_ctrl_model": 5,
+  "untripped_at_ctrl_trip": 0,
+  "note": "untripped_by_ctrl_model counts ctrl>=28 (nominal trip); untripped_at_ctrl_trip uses the live stopgap",
+  "examples": [
+   {
+    "a": [
+     5.6,
+     -15.5,
+     39.7
+    ],
+    "b": [
+     -8.9,
+     -5.6,
+     37.8
+    ],
+    "g8c": 24.7,
+    "ctrl": 28.6,
+    "in_contract_roll": false
+   },
+   {
+    "a": [
+     7.9,
+     -14.9,
+     34.3
+    ],
+    "b": [
+     17.7,
+     4.2,
+     37.9
+    ],
+    "g8c": 26.6,
+    "ctrl": 30.9,
+    "in_contract_roll": false
+   },
+   {
+    "a": [
+     -28.3,
+     -15.4,
+     11.2
+    ],
+    "b": [
+     -3.7,
+     -3.5,
+     46.2
+    ],
+    "g8c": 27.6,
+    "ctrl": 31.8,
+    "in_contract_roll": false
+   },
+   {
+    "a": [
+     -67.8,
+     -14.7,
+     -34.5
+    ],
+    "b": [
+     -35.8,
+     -14.5,
+     23.4
+    ],
+    "g8c": 26.4,
+    "ctrl": 30.1,
+    "in_contract_roll": false
+   },
+   {
+    "a": [
+     -7.8,
+     -5.2,
+     29.6
+    ],
+    "b": [
+     3.2,
+     -15.2,
+     28.6
+    ],
+    "g8c": 25.8,
+    "ctrl": 29.7,
+    "in_contract_roll": false
+   }
+  ],
+  "untripped_in_contract_roll": 0
+ }
+}

@@ -6,7 +6,7 @@ from scipy.spatial import cKDTree
 H=os.path.dirname(os.path.abspath(__file__)); ROOT=os.path.abspath(H+'/../..'); D=ROOT+'/modules/design/cad/covers'
 src=open(D+'/hip_skirt_r8c_fix.py').read().split("S=np.vstack")[0]; ns={'__file__':D+'/hip_skirt_r8c_fix.py'}; exec(src,ns)
 T,C1=ns['T'],ns['C1']; P8=ns['panel'](); JCH=3.0
-sys.path.insert(0,ROOT+'/modules/controls/arm'); import hip_pinch as Hc
+sys.path.insert(0,ROOT+'/modules/controls/arm'); import hip_pinch as Hc; Hc.REV='8b'  # reproduce 42c4e50 (d941ca6 = rev 8b model)
 mir=lambda X:X*[1,-1,1]; R=np.radians
 pit=list(range(-105,41,5))+[-107.5,42.5]; yaw=(-37.5,-35,-17,0,22,45,47.5)
 OT={'nominal':(-12,15),'ovt2.5':(-14.5,17.5),'ovt3.6':(-15.6,18.6)}
@@ -28,6 +28,6 @@ for k in ('nominal','ovt2.5','ovt3.6'):
             inrom= bool(-12<=a[1]<=15 and -12<=b[1]<=15)
             if gc>=min(Hc.TRIP,28): untr.append(dict(a=a.round(1).tolist(),b=b.round(1).tolist(),g8c=round(g,1),ctrl=round(gc,1),in_contract_roll=bool(inrom)))
             else: untr_ok=True
-    o['LR_'+k]=dict(feasible=n,below28_8c=below,worst=[round(worst[0],1),worst[1]],ctrl_trip=Hc.TRIP,untripped_by_ctrl_model=len(untr),untripped_at_ctrl_trip=int(sum(u['ctrl']>=Hc.TRIP for u in untr)),note='untripped_by_ctrl_model counts ctrl>=28 (nominal trip); untripped_at_ctrl_trip uses the live stopgap',examples=untr[:6],
+    o['LR_'+k]=dict(feasible=n,below28_8c=below,worst=[round(worst[0],1),worst[1]],ctrl_trip=Hc.TRIP,untripped_by_ctrl_model=len(untr),untripped_at_ctrl_trip=int(sum(u['ctrl']>=Hc.TRIP for u in untr)),note='untripped_by_ctrl_model counts ctrl>=28 (nominal trip); untripped_at_ctrl_trip uses the live stopgap',examples=untr,
         untripped_in_contract_roll=int(sum(u["in_contract_roll"] for u in untr)))
-print(json.dumps(o,indent=1)); json.dump(o,open(H+'/r_hip_pinch_8f_ctrl.json','w'),indent=1)
+print(json.dumps(o,indent=1)); json.dump(o,open(H+'/r_hip_pinch_8f_ctrl_full.json','w'),indent=1)
