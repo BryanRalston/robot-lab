@@ -349,3 +349,25 @@ The cap is 82 wide in y, centred at y 130, and that width already includes the 2
 - **Look / proportion:** a 65 mm square block on a slim chest reads as a "backpack worn backwards" and breaks the Optimus-like line. **Fix (cover-only):** the tapered 21° bezel/fairing blends the bulge into the cover as a faceted sternum keel. It has 4 mm chamfered vertical edges and an R6 front edge, in the cover colour, with the CF face as a dark inset "visor" that echoes the head. Its visual footprint is 150 × 150 at the cover, about 44 % of the chest width.
   - Fairing mass: 1.0 mm PC, about 34,000 mm² → 0.041 kg, minus the rev 1 sidewall (5.6 g) and blend (7.3 g) → **+0.028 kg net [EST]**.
   - Rev 2 total: **+0.032 kg** (fairing + posts) on top of P-052's 0.040, giving **P-052 = 0.072 kg**. The Arbiter books it.
+
+## P-156 rev 6b: shroud after T&R 925d72e (walk-swing hand hit −65 mm) + Legs L75 ae8b9a4 (plate +4 mm, skirt gate FAIL) — 2026-10-21
+- **Plate/straps at z 820–828 (Legs L75).** The lower stack top is now z 817 (3.0 below the plate). The upper transition runs z 831–840 (3.0 above the plate) and moves the mouth inboard to x −76.4…−33.3 × y 100–148 (2069 mm²). **Stack top z 840 (was 860): PENDING Thermal area OK.** Notch area is unchanged at 1323 (Thermal 26cff58 passed it, 71.1 °C standing).
+- **Shroud bounds:** x −100…−20, **y 86–150 (outboard edge 150, ≤ 150 PASS)**, z 840–904. The top slopes from z 861.5 at the front to 904 at the aft. Construction: PC 1.5 (2.0 at the bosses), Al foil inner face, 20 mm standoff over the mouth.
+- **Openings on the aft wall only:**
+  - A 45° inclined louvre panel, 64 × 62 slant, with 11 horizontal slots 4.5 ± 0.3 × 58. Free area **2871 nominal / 2680 min (≥ 2600)**.
+  - A dilution band at z 842–860 with 12 vertical slots 4.0 ± 0.3 × 16: **768 nominal / 710 min (≥ 600)**.
+  - All openings are ≤ 4.8 mm. The side, top and front walls are closed.
+- **Outboard-top edge:** 40° chamfer with R10 blends, plus a **TPU 90A wear strip** 2.0 × 15 × 80, bonded, with 2 M3 at its ends.
+- **100 N hand strike [EST hand calc]:**
+  - TPU spreads the load over about 15 × 20 mm → 0.33 MPa, OK.
+  - The folded 40° corner acts as an angle beam (legs 20/20 × 1.5 PC, Z ≈ 71 mm³). Over an 80 mm span between mounts, M = PL/4 = 2000 N·mm → **28 MPa vs PC yield 62, SF 2.2**.
+  - Mounts are 4 × M3 (2 into stack bosses, 2 into thigh-cover inserts), 50 N shear each. PC bearing is 8.3 MPa at the 2.0 mm boss, SF ≈ 7.
+  - TP-G5-15 should add a 100 N strike test.
+- **Mass:** shroud 0.0327/side (was 0.0102); upper stack 0.0025 (was 0.0067). P-156 = **0.067/side, 0.134 pair [EST]** (+0.037 vs rev 6). Knee-venting total **+0.084 pair**.
+- **P-023 hip skirt rev 6 (`cad/covers/hip_skirt_r6.py/.json/.stl`):**
+  - **Method:** Legs' skirt_outlet_l75 pivots, run on a denser grid of 255 poses (hip pitch −107.3…40, roll −20…45, yaw −35/0/45) against the v5 skirt keep-out. Skirt faces within 5.5 mm of the swept stack + shroud are removed, and the rest is thickened 1.5 mm inward as PC.
+  - **Gate used: ≥ 3 mm, with the outlet air path left open through the relief** (Robot Lab's alternative to 15 mm, which can't be met with a pelvis-fixed skirt). Worst gap **4.0 mm at pitch −40 / roll 15 / yaw 0**; 12.3 mm at zero pose.
+  - **The relief is large:** about 111,000 mm² (≈ 37 % of the skirt), x −143…152, y −15…282, z 793–1013. The thigh sweeps the shroud under most of the skirt band. IP2X: the relief exposes only the shroud's outer face (all its openings ≤ 4.8, ≤ 42 °C) and thigh cover, with no hazardous parts. The remaining inner edge gets a 40 mm Al-foil band.
+  - **Mass:** skirt PC removed −0.200 kg, foil band +0.002 → **−0.198 kg [EST]**. The mesh is the full v5 keep-out.
+  - **ID note:** a cut this size changes the hip look. The better follow-up is a thigh-fixed rear skirt flap carrying the outlet; to be proposed separately.
+  - The STL is a thickened shell; its relief edges are not fully closed (not watertight).

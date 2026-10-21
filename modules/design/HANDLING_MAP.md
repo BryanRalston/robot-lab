@@ -1,5 +1,5 @@
 # Handling map — DRAFT
-**Co-published with Controls** (RL Industrial Design + RL Controls). The rescue procedure is authored by RL Controls (e6dd4b0); ID reviewed it and applied the 7 T&R bec3b82 edits on 2026-10-21.
+**Co-published with Controls** (Robot Lab rulings C1–C5 applied by ID 2026-10-21) (RL Industrial Design + RL Controls). The rescue procedure is authored by RL Controls (e6dd4b0); ID reviewed it and applied the 7 T&R bec3b82 edits on 2026-10-21.
 T&R 5842853 / fef9348 ask 2. ID, 2026-10-21. Image: HANDLING_MAP.png.
 
 ## HOLD (lift/carry) zones
@@ -9,7 +9,7 @@ T&R 5842853 / fef9348 ask 2. ID, 2026-10-21. Image: HANDLING_MAP.png.
 - H4 Thigh front, upper half (above the knee-venting zone): steadying only.
 
 ## NO-HOLD zones
-- N1 **Knee rear outlet shroud, P-156 rev 6 / Option B (HOT)**: shroud on the rear/inboard thigh top over the L60 notch (x −76…−20, y 89–171, z 860–882) plus a 30 mm margin, under the P-023 hip skirt. Class (T&R 7f12ce9 §5): **48 °C, no-sustained-contact (contact not likely: inboard/aft, outside the hand-hang and arm-swing envelope)**, target 43; exposure is a person behind the robot and the prone rescue state.
+- N1 **Knee rear outlet shroud, P-156 rev 6 / Option B (HOT)**: shroud rev 6b on the rear/inboard thigh top over the L60 notch (x −100…−20, y 86–150, z 840–904) plus a 30 mm margin, under the P-023 hip skirt. Class (T&R 7f12ce9 §5): **48 °C, no-sustained-contact (contact not likely: inboard/aft, outside the hand-hang and arm-swing envelope)**, target 43; exposure is a person behind the robot and the prone rescue state.
 - N1a **Jet-washed skin above z 845** (rear thigh top and the P-023 skirt rear-inboard panel, y 89–171, z 845–≈ 940 [EST plume, Thermal a32d341]): no-hold, same 48 °C class; skirt inner face foil + ≥ 15 mm gap. H2 grips stay ≥ 50 mm clear of this band.
 - N2 Knee rear inlet grille, z 643–675.
 - N3 Head and neck (fragile shell and sensors).
@@ -21,7 +21,7 @@ T&R 5842853 / fef9348 ask 2. ID, 2026-10-21. Image: HANDLING_MAP.png.
 - ISO 7010 **W017** "Warning; hot surface", yellow triangle with black border.
 - Size: 25 mm triangle side (ISO 3864-1 min for ~1 m viewing distance), printed vinyl rated to ≥85 °C. **2 per leg** (hem + shroud cap).
 - Placement (rev 6): on the P-023 skirt rear outer face, centred over the outlet but **below the plume band** at the skirt hem (thigh frame x ≈ −90, y ≈ 130, z ≈ 815, on the skirt hem panel, not on the shroud or in the jet), facing aft, upright when standing; visible to a person behind the robot and from above in the prone state. Was x −55, z 830 outboard (rev 5, in the jet).
-- **Second label (prone coverage):** prone puts the rear outlet facing up, and the hem label then sits low on the side, where rescuers leaning over may not see it. So a second W017 goes on the **shroud cap's solid top/rear skin** (cap 56.5 × 82, no slots on the cap; slots are on the walls only), centred at x ≈ −48, y ≈ 130, z 881.5. It faces up and aft when prone, and its surface runs 40–42 °C [EST, Thermal B2], which is within the vinyl rating. It is never placed on the slots. N1 (x −76…−20, y 89–171, z 860–882 + 30 mm) covers the outlet in both standing and prone.
+- **Second label (prone coverage):** prone puts the rear outlet facing up, and the hem label then sits low on the side, where rescuers leaning over may not see it. So a second W017 goes on the **shroud cap's solid top/rear skin** (no slots on the top; rev 6b openings are on the aft wall only), centred at x ≈ −60, y ≈ 118, z ≈ 883 on the sloped solid top (rev 6b). It faces up and aft when prone, and its surface runs 40–42 °C [EST, Thermal B2], which is within the vinyl rating. It is never placed on the slots. N1 (x −100…−20, y 86–150, z 840–904 + 30 mm) covers the outlet in both standing and prone.
 - Optional text: "HOT – do not hold".
 
 Status: draft, co-published with Controls (operator manual and handling SOP).
@@ -40,19 +40,23 @@ Controls facts behind this procedure:
   4–8 % (PRONE_DATA_TR.md). Standing CoG is at z ≈ 0.91 m; upright-kneel CoG is about 0.67 m [EST].
 
 **Procedure** (at least three trained people, or two plus a board/strap lift aid; do not approach a robot in HOLD_DERATED or TUCK until step 1 is done):
-1. **Confirm MO=0 and lock out.** Status shows MO_OFF (or every drive faulted or tripped). Press the E-stop, open the main
-   contactor or battery disconnect, and apply lockout/tag-out. A crouched robot in HOLD_DERATED has energised motors and
-   **will collapse when power is removed**: do not cut power while anyone is near or under it. Cut it from the remote
-   E-stop with the area clear, then let the robot fall or settle. A robot mid-way through the R-146b sequence may still move: **wait for MO_OFF plus 5 s with no motion** before approaching, even with the remote E-stop pressed. *(T&R edit 7)*
-1a. **Battery first.** After any tip, TUCK or fall, check the pack **before approaching and before step 3**: smoke, hissing, a sweet or solvent odour, swelling, or BMS cell temperature rising (use a thermal camera on the pack if available). If any of these, **evacuate, keep clear, and do not roll or lift** (thermal-runaway risk). *(T&R edit 1)*
+*Order of steps 1–1b set by ID per Robot Lab rulings C1/C2 (Controls 6d4c8fb); **T&R to confirm**.*
+1. **Remote E-stop first, from a distance, area clear.** Press the remote E-stop and **hold it** (or keep it latched). Under the
+   R-146(a) interim, a crouched robot in HOLD_DERATED keeps its motors ON and never commands MO_OFF on its own, and it
+   **will collapse when power is removed**, so nobody may be near or under it. Then **wait until MO=0 on every drive plus 5 s with no motion**.
+   *(T&R edit 7, Robot Lab C1)*
+1a. **Approach** only after step 1, with the E-stop still held. Then open the main contactor or battery disconnect and apply lockout/tag-out.
+1b. **Battery check (Robot Lab C2, T&R edit 1),** from the closest safe position with the E-stop held. Look for smoke, hissing, a sweet or
+   solvent odour, swelling, or rising pack/BMS cell temperature (use a thermal camera if available). **If any are present: evacuate, keep
+   clear, and do not roll or lift** (thermal-runaway risk). If none: continue.
 2. **Wait for touch temperatures.** The P-156 rev 6 / B2 **rear outlet shroud and jet-washed skin (N1/N1a)**: prone puts them
-   **facing up, right where rescuers lean over**. The drives latch at 82 °C, so the **knee housing and drive band are hot too**, not only N1.
+   **facing up, right where rescuers lean over**. **The R-146(a) 82 °C interim latch governs until G4 closes** (Robot Lab C5; R-142's 83 °C applies only to the G4 path). Drives can be at 82 °C, so the **knee housing and drive band are hot too**, not only N1.
    Wait for the TP-G5-15 measured cool-down to ≤ 43 °C. Until that is published, treat N1/N1a/N2 and the knee/drive band as hot,
    and use **EN 407 contact-heat level ≥ 1 (100 °C) gloves** for any urgent move. *(T&R edit 2)*
 3. **Remove the payload** if one is attached.
-4. **Two-person roll prone → supine** (only if the robot must be moved). One person at the shoulders (H1 torso sides),
-   one at the pelvis rim (H2). Roll toward the side the arms are on, as a log roll, keeping trunk and pelvis aligned. Expect
-   the limbs to flop: keep hands and feet clear of the knee, hip and shoulder pinch zones (N5) and **off the thigh–shank gap** (the knee and hip backdrive freely in the roll: pinch). **Straighten the legs and strap the knees before rolling.** *(T&R edit 4)* Keep clear and **never hold the knee
+4. **3-person lift crew: strap the legs, then roll prone → supine** (only if the robot must be moved). **Strap both legs first** (knee strap holding them straight; the backdriving screws let them re-flex otherwise; don't put hands in the thigh–shank gap to straighten them, Robot Lab C3). One person at the shoulders (H1 torso sides),
+   one at the pelvis rim (H2), the third controls the strapped legs. Roll toward the side the arms are on, as a log roll, keeping trunk and pelvis aligned. Expect
+   the limbs to flop: keep hands and feet clear of the knee, hip and shoulder pinch zones (N5) and **off the thigh–shank gap** (the knee and hip backdrive freely in the roll: pinch). *(T&R edit 4, legs strapped per step 4 heading)* Keep clear and **never hold the knee
    outlet zone (N1/N1a)** or the head (N3). Do not lever on the chest pad (N6).
 5. **Lift** (supine or prone): 68.4 kg is ≈ 34 kg per person for two carriers, above the NIOSH 23 kg reference, so **at least three people
    or a board/strap lift aid is mandatory**. *(T&R edit 3)* Use H1 + H2 only, with the CoG (pelvis/lower torso) between the carriers. The
@@ -61,7 +65,7 @@ Controls facts behind this procedure:
    - all drive temperatures < 78 °C (R-141 resume), no MF 0xD000 / EMCY 0x4310 latched;
    - **chest cartridge** (*T&R edit 5*): the pad is underneath when prone, so inspect it after the supine roll or on a board lift.
      **Replace** it after any L2/L3/TUCK event regardless of appearance, or if crush indentation is > 2 mm, there is a face mark > 0.5 mm, or the
-     tap test fails. The replacement must be a lot-certified cartridge in the 19.5–22.3 kN band, 100 mm core, bezel 4 × M4 captive at spec torque.
+     tap test fails. The replacement must be a lot-certified cartridge in the 19.5–22.3 kN band, **116 mm core** (Robot Lab C4; Torso 1585e80), bezel 4 × M4 captive at spec torque.
      Inspect the land, backing and bulkhead, with dye-penetrant after any L3/T-031-level event. Record the cartridge lot and the event in the fall log.
      Knee pads and covers intact;
    - after any L2/L3 event (*T&R edit 6*): pack OCV and group voltages, isolation and BMS log unchanged (TP-G5-17 criteria); chest cartridge
