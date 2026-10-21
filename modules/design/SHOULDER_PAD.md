@@ -294,3 +294,11 @@ Foam 0.035 + sleeve 0.009 + inserts/anchor 0.006 = **0.050/side, 0.100 kg pair =
 - **Envelope verdict: 220 (x) × 340 (y) confirmed; height 470 is wrong.** Site v4 / sim torso is z 50–310 (260 tall; glb 200 + skirt). A 470 top would bury the neck (z 370) and head shell. Correct to **z 50–310** (neck opening Ø90 at the top). V5 target stays a taper 330 → 250 with chamfered shoulders (V5_POLISH_PLAN row 4); sternum skin x +147 confirmed (P-052).
 - **ID-corrected cover (z 50–310, Ø110 at z 220):** 3 mm lost at **130°**; the pad then runs ≤ 3 mm along the wall over the opening region, with hard contact at **170°**.
 - **Recommended soft limit: 127°** (130 − 3° margin), with no torso pocket. Arms' 115° is also safe. Arbiter to set.
+
+## R-133: sweep vs Torso cover 35eebd2 — cad/covers/r133_roll_sweep.py/.json
+- Cover: z 50–310; taper 250 (z 50) → 340 (z 220); 45 mm top-shoulder chamfer; Ø110 openings on the pitch axis (z 220); Ø90 neck; sternum x +147. Modelled as a convex YZ profile, with the R20 corner fillets ignored (conservative). Same r127 method: 1° roll 0–180, six pitches, Arms r15 carrier + pad + housing.
+- **3 mm lost at 130°** at every pitch (pad on the upper side wall). **First contact 170–172°.**
+- Pitch-actuator OD96 in the Ø110 opening: **7.0 mm radial**, coaxial, so it holds through the full pitch ROM. PASS.
+- Chamfer, at roll ≤ 127°: pad ≥ **6.5 mm** (at pitch ±30), carrier ≥ 52, housing 59. PASS.
+- **Recommended roll soft limit: 127°**, no torso pocket. Arbiter to set.
+- **ID decision: torso top width 340 (not 330)**, so the Ø110 openings sit on the y ±170 walls. V5_POLISH_PLAN row 4 is updated (R-133). V5_COVER_SET and cover_set_v5.json carry no torso width.

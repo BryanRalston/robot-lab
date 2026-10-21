@@ -1,0 +1,136 @@
+{
+ "torso_params": {
+  "x_back": -110,
+  "x_front": 110,
+  "z_bot": 50,
+  "z_top": 310,
+  "w_bot": 250,
+  "w_shoulder": 340,
+  "z_shoulder": 220,
+  "shoulder_chamfer": 45,
+  "t": 2.0,
+  "corner_fillet": 20,
+  "shoulder_open_dia": 110,
+  "neck_dia": 90,
+  "sternum_zc": 220,
+  "sternum_size": 110,
+  "sternum_proud": 37,
+  "sternum_core": 40,
+  "sternum_blend": 15
+ },
+ "pitch_actuator_radial_clearance_mm": 7.0,
+ "sweeps": {
+  "-150": {
+   "first_lt3mm": [
+    130,
+    "pad_envelope_w2"
+   ],
+   "first_contact": [
+    170,
+    "pad_envelope_w2"
+   ],
+   "min_gap_full_ROM": {
+    "carrier_w2": 41.7,
+    "pad_envelope_w2": -29.5,
+    "housing_7013_coaxX": 58.9
+   },
+   "min_gap_to_chamfer_roll_le127": {
+    "carrier_w2": 64.6,
+    "pad_envelope_w2": 175.3,
+    "housing_7013_coaxX": 58.9
+   }
+  },
+  "-90": {
+   "first_lt3mm": [
+    130,
+    "pad_envelope_w2"
+   ],
+   "first_contact": [
+    170,
+    "pad_envelope_w2"
+   ],
+   "min_gap_full_ROM": {
+    "carrier_w2": 41.7,
+    "pad_envelope_w2": -29.5,
+    "housing_7013_coaxX": 58.9
+   },
+   "min_gap_to_chamfer_roll_le127": {
+    "carrier_w2": 51.9
+   }
+  },
+  "-30": {
+   "first_lt3mm": [
+    130,
+    "pad_envelope_w2"
+   ],
+   "first_contact": [
+    171,
+    "pad_envelope_w2"
+   ],
+   "min_gap_full_ROM": {
+    "carrier_w2": 41.7,
+    "pad_envelope_w2": -20.8,
+    "housing_7013_coaxX": 58.9
+   },
+   "min_gap_to_chamfer_roll_le127": {
+    "pad_envelope_w2": 6.5,
+    "carrier_w2": 81.0
+   }
+  },
+  "0": {
+   "first_lt3mm": [
+    130,
+    "pad_envelope_w2"
+   ],
+   "first_contact": [
+    172,
+    "pad_envelope_w2"
+   ],
+   "min_gap_full_ROM": {
+    "carrier_w2": 41.7,
+    "pad_envelope_w2": -15.8,
+    "housing_7013_coaxX": 58.9
+   },
+   "min_gap_to_chamfer_roll_le127": {
+    "pad_envelope_w2": 7.0
+   }
+  },
+  "5": {
+   "first_lt3mm": [
+    130,
+    "pad_envelope_w2"
+   ],
+   "first_contact": [
+    172,
+    "pad_envelope_w2"
+   ],
+   "min_gap_full_ROM": {
+    "carrier_w2": 41.7,
+    "pad_envelope_w2": -16.4,
+    "housing_7013_coaxX": 58.9
+   },
+   "min_gap_to_chamfer_roll_le127": {
+    "pad_envelope_w2": 7.0
+   }
+  },
+  "30": {
+   "first_lt3mm": [
+    130,
+    "pad_envelope_w2"
+   ],
+   "first_contact": [
+    171,
+    "pad_envelope_w2"
+   ],
+   "min_gap_full_ROM": {
+    "carrier_w2": 41.7,
+    "pad_envelope_w2": -20.7,
+    "housing_7013_coaxX": 58.9
+   },
+   "min_gap_to_chamfer_roll_le127": {
+    "pad_envelope_w2": 6.5,
+    "carrier_w2": 100.1
+   }
+  }
+ }
+}
