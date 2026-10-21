@@ -27,3 +27,6 @@ For T&R `reliability/JOB9_SPEC.md` (7e55be7) item (c). Script `knee_release_r116
 - The "Ø12 trunnion bosses grown to Ø23 (D69 rev B note)" line should read: Ø12 bore in a Ø23 boss, R-116/D80.
 - Pin loads (3634 N max, 2526 N design, 1682 N walk) match D80/Legs L61.
 - The stator bond land is in the body. The 2.0 mm can wall between the bore floor and the stator cavity is the thinnest section near the pins (D80). Mesh ≥ 4 quadratic elements through it.
+
+## R-128/R-132 update (D87)
+- Material for job 9 (c): run **7075-T7351 at 211 MPa static / 317 fall (R-132 §2, ST)**, not 320. The part needs ≥ 4.25 in stock (105.1 mm body + stock), above the 4.0 in limit, so the stock form is open: forging or split nut sections (`STOCK_GRAIN.md`). D80 net 75.7 MPa passes 211.

@@ -30,7 +30,7 @@ Tags: **[CITED]** = a datasheet or repo result (source given); **[ASSUMPTION]** 
 - **Already at the machining minimum:** cad_mass.py sets the 2.0 mm wall from machining, not strength (line 14). **Do not thin the 2.0 mm cylindrical walls.** Pocketing is limited to the regions in §5.
 
 ## 2. Material
-**R-128 update (D87):** stock is 7075-T7351 plate, 3.5 in (hip yaw/roll axis ∥ ST; screw bodies axis ∥ L). The values below are kept for stiffness; strength gates are in §6 per housing.
+**R-128 update (D87):** stock is 7075-T7351 plate, 3.5 in (hip yaw/roll axis ∥ ST; screw bodies axis ∥ L). The values below are kept for stiffness; strength gates are in the Pass criteria (§ "Static") per housing.
 **[CITED]** 7075-T6, as used by G3 and cad_mass.py:
 - ρ 2.81 g/cm³ (cad_mass.py RHO);
 - E 70 GPa, ν 0.33 (R-123(a); 71.7 acceptable for stress-only load-controlled solves, 70 for deflection gates);
