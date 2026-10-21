@@ -7,12 +7,12 @@
   "shoulder_roll_soft_limit_deg": 127,
   "shoulder_roll_soft_limit_ref": "R-133; source of truth limits/soft_limits.json (abduction only, mirrored)",
   "drive_thermal_derate": {
-    "ruling": "R-141 (e8b74e7), R-142 (00b3268); Electronics \u00a718.5 P-055 23f6992 + addendum 430684c, R-145 (5f5bd1d)",
+    "ruling": "R-141 (e8b74e7), R-142 (00b3268); Electronics \u00a718.5 P-055 23f6992 + addendum 430684c, R-145 (5f5bd1d), R-146 (21d1738)",
     "t_start": 75.0,
     "t_half": 82.0,
     "scale_min": 0.5,
-    "t_stop": 83.0,
-    "t_stop_note": "R-142 (00b3268): latch at a 0x22A2 reading >= 83 C, final even if the bench shows rounding",
+    "t_stop": 82.0,
+    "t_stop_note": "R-146(a) INTERIM: latch at a 0x22A2 reading >= 82 C (R-142 had 83). NOT valid for G4.",
     "t_resume": 78.0,
     "t_drive_trip": 85.0,
     "temp_source": "0x22A2:00",
@@ -36,7 +36,7 @@
     "kneel_timeout_s": 1.2,
     "confirm_s": 0.05,
     "support_speed": 0.1,
-    "stop_sequence_note": "R-145: CROUCH (2.0 s derated) -> KNEEL (fall-mode, knee pads) -> CONTACT_CONFIRMED (knee contact + CoM in knee+toe polygon + speed<0.1 m/s for 50 ms) -> MO_OFF. Fallback HOLD_DERATED until drive trip -> TUCK. MO=0 from an unsupported crouch is prohibited.",
+    "stop_sequence_note": "R-146(a) INTERIM (NOT valid for G4): CROUCH (2.0 s derated) -> HOLD_DERATED (derated crouch) -> drive trip -> TUCK, logged as a fall event. Kneel/prone path (R-145/R-146b, D94 MO=0 interlocks) is in code behind kneel_enabled=false.",
     "fall_mode_kneel": {
       "status": "EST, does not reach knee contact in sim (R-145 kneel open)",
       "kneel_w1": {
@@ -62,6 +62,7 @@
       "knee": 7.0,
       "ankle_pitch": 8.0,
       "default": 7.0
-    }
+    },
+    "kneel_enabled": false
   }
 }

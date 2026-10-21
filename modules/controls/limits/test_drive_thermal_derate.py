@@ -22,6 +22,8 @@ class FakeIO(DriveIO):
 
 
 def make(drives=('l_knee', 'r_knee'), **kw):
+    kw.setdefault('kneel_enabled', True)   # kneel-path tests; the R-146 interim default is tested separately
+    kw.setdefault('t_stop', 83.0)
     io = FakeIO(drives)
     sits = []
     sup = DriveDerateSupervisor(drives, io, DerateConfig(**kw), request_safe_sit=sits.append,
@@ -222,7 +224,7 @@ def test_min_combination():
 
 
 def test_sit_timing_numbers():
-    assert DerateConfig().t_stop == 83.0                # R-142
+    assert DerateConfig().t_stop == 82.0                # R-146(a) interim
     assert sit_timing_margin(0.3, 1.2) > 1.5          # plate slope (430684c): 3.3 s for 1 K
     assert sit_timing_margin(1.19, 1.2, t_stop=84.0) < 0   # drive-only bound, 1 K worst-case truncated band
     assert sit_timing_margin(1.19, 1.2) > 0                # 2 K nominal band at 83
@@ -243,3 +245,24 @@ def test_guard_torque_flag_blocks_mo_off_in_supported_contact():
     sup.set_support(True, True, 0.0, static_hold_ok({'l_knee': 20.0}))
     run_n(sup, 3000)
     assert all(io.mo.values()) and sup.state == HOLD_DERATED
+
+
+def test_r146_interim_defaults_crouch_hold_then_tuck_logged_as_fall():
+    c = DerateConfig()
+    assert c.t_stop == 82.0 and c.kneel_enabled is False
+    io = FakeIO(('l_knee', 'r_knee')); tucks = []; falls = []
+    sup = DriveDerateSupervisor(('l_knee', 'r_knee'), io, c)
+    sup.request_tuck = tucks.append; sup.on_fall = falls.append
+    ramp(io, sup, 'l_knee', 70, 81.9, rate_K_s=3.0)
+    assert sup.state == RUN
+    ramp(io, sup, 'l_knee', 81, 82.2, rate_K_s=3.0)
+    assert sup.state == CROUCH
+    sup.set_support(True, True, 0.0, True)          # even with all flags, the interim never kneels or turns MO off
+    run_n(sup, int(c.crouch_s / DT) + 5)
+    assert sup.state == HOLD_DERATED and all(io.mo.values()) and io.limit['l_knee'] == 500
+    run_n(sup, 3000)
+    assert sup.state == HOLD_DERATED
+    io.fault['l_knee'] = (MF_OVERTEMP, EMCY_OVERTEMP); sup.step(DT)
+    assert sup.state == TUCK and len(tucks) == 1 and len(falls) == 1 and len(sup.fall_events) == 1
+    assert all(io.mo.values())
+    assert [s for _, s in sup.log] == [CROUCH, HOLD_DERATED, TUCK]

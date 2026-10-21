@@ -28,7 +28,8 @@ class DerateConfig:
     t_start: float = 75.0          # R-141
     t_half: float = 82.0           # R-141: 0.5 here
     scale_min: float = 0.5
-    t_stop: float = 83.0           # R-142 (00b3268): latch at a reading >= 83 C, final (was 84, R-141)
+    t_stop: float = 82.0           # R-146(a) INTERIM (21d1738): >= 82 C (R-142 had 83, R-141 84). NOT valid for G4.
+    kneel_enabled: bool = False    # R-146(a): kneel/prone path kept in code but disabled; crouch -> HOLD_DERATED -> TUCK
     t_resume: float = 78.0         # R-141 hysteresis
     t_drive_trip: float = 85.0     # drive's own shut-off [CR p.284]
     temp_source: str = '0x22A2:00'  # primary (430684c); '0x22A3:1'..4 candidate; 'sdo' fallback
@@ -172,6 +173,8 @@ class DriveDerateSupervisor:
         self.request_safe_sit = request_safe_sit or (lambda reason: None)
         self.request_kneel = request_kneel or (lambda: None)
         self.request_tuck = request_tuck or (lambda reason: None)
+        self.on_fall = lambda reason: None   # fall-event logger hook (Test fall budget)
+        self.fall_events = []
         self._reset_seq()
         self.last_written = {}
         self.log = []    # (t, state) transitions
@@ -259,7 +262,10 @@ class DriveDerateSupervisor:
             if self._kneel_impossible:
                 self._go(HOLD_DERATED)
             elif self._crouch_done or self._t_state >= self.c.crouch_s:
-                self._go(KNEEL); self.request_kneel()
+                if self.c.kneel_enabled:
+                    self._go(KNEEL); self.request_kneel()
+                else:                      # R-146(a) interim: hold the derated crouch until a drive trips
+                    self._go(HOLD_DERATED)
             elif self._t_state >= self.c.crouch_timeout_s:
                 self._go(HOLD_DERATED)
         elif st == KNEEL:
@@ -277,6 +283,9 @@ class DriveDerateSupervisor:
         elif st == HOLD_DERATED:
             if any_fault:
                 self._go(TUCK); self.request_tuck(self.reason)
+                # R-146(a): the trip-then-tuck end is a FALL event (Test logs it against the fall budget)
+                self.fall_events.append((round(self._t, 4), 'R-146 interim: drive trip -> TUCK', self.reason))
+                self.on_fall(self.reason)
         # limits are written every cycle (cyclic RxPDO), also during the whole stop sequence
         for n, s in self.d.items():
             pm = int(round(self.scale(n) * s.nominal))

@@ -1,5 +1,11 @@
 # Drive thermal derate (R-141)
 
+> **R-146(a) INTERIM, in force (21d1738). NOT valid for G4 sign-off.** Latch at a reading ≥ **82 °C**. Safe stop =
+> CROUCH (2.0 s derated) → **HOLD_DERATED** (hold the derated crouch, MO on) → first drive trip → **TUCK** (fall config),
+> logged as a **fall event** (`fall_events`, `on_fall` hook → Test fall budget). This is acceptable only as a fault path:
+> R-140 keeps the duty below the 75 °C derate start. The kneel/prone path (R-145, R-146b, D94 MO=0 interlocks) stays in
+> code behind `kneel_enabled = false`. Rows below that mention 83 °C or MO_OFF describe that disabled path or earlier rulings.
+
 Sources: Arbiter **R-141** (e8b74e7, modules/RULINGS.md), **R-142** (00b3268: stop latch at a reading ≥83 °C, final); Electronics R1_ARCHITECTURE §18.5 **P-055** (23f6992) and the
 **P-055 addendum** (430684c, citing Elmo *EtherCAT Application Manual* G-ETHERCATAM v1.403 [EAM]).
 Code: `drive_thermal_derate.py`. Tests: `test_drive_thermal_derate.py`. Config: `controller_config.json` → `drive_thermal_derate`.
