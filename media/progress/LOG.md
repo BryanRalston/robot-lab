@@ -33,3 +33,4 @@ One line per image: date, file, module, what changed.
 - 2026-10-14 RL Torso & Power R1.3: power tree with clamp P-045, contactor, fan rail; runtime vs 4.15 V charge cap → 2026-10-14_torso_R1-3_power.png
 - 2026-10-14 legs: v5 fairing keep-outs + knee saddle no-cover zone → media/progress/2026-10-14_legs_v5_keepouts.png (legs/results/v5)
 - 2026-10-14 arms A42: forearm two-tier hand-drive pack in the unchanged Ø66 bore + wrist sphere-rule fork fix — 2026-10-14_arms_A42_forearm_wrist.png (modules/arms/A42_A43_R4.md)
+- 2026-10-21 arms R11: shoulder-pad load path fix after FEA Job 1 fail (roll-axis carrier + CRBH 8016 recommended; gear-upsize case) — 2026-10-21_arms_R11_pad_fix.png (modules/arms/R11_PAD_FIX.md)
