@@ -653,7 +653,7 @@
   "deflector": "stainless 0.5 mm chute on the floor underside, plume turned rearward, exit plane x -107 at sim z ~110 (global ~1390)"
  },
  "tap_fuses": {
-  "part": "fusible element at the cell end of each of 22 taps on the tap FPC/collector; candidate Littelfuse 451/453 Nano2 0.5 A (125 V class, verify datasheet); Littelfuse 438 0603 is 63 VDC max so it fails a full-stack 84 V fault [438 datasheet 05/30/24]"
+  "part": "fusible element at the cell end of each of 22 taps on the tap FPC/collector; Littelfuse 0451.500 NANO2 0.5 A, 125 VAC/VDC, 50 A @125 VDC interrupting, 0.3046 ohm cold (451/453 datasheet, littelfuse.com assetguid 533cd5cc); adds 2x0.30 ohm to the balance path (~146 mV at 240 mA): include in R_CB sizing, measure with balancing paused; Littelfuse 438 0603 is 63 VDC max so it fails a full-stack 84 V fault [438 datasheet 05/30/24]"
  },
  "bms_board": {
   "zone": "x -105..-95 board on 3 mm G10 standoffs; back-side parts <=4.4 mm; 22-way tap connector (vertical dual-row, e.g. Molex Micro-Fit 3.0 24-ckt) and isolation transformers face +x into the 35 mm gap to c7 (mated + wire bend <=30 mm [EST])"
