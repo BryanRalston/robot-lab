@@ -831,3 +831,7 @@ Retention at 1.2 m/s:
 - All four constants come from 3c7b50e with no comment; they are the residual of the v2 ACT_OVERHEAD split. Inferred: rotary 0.03 fasteners, 0.04 cabling/connectors; linear 0.08 the 7202 pair (kept), 0.10 linkage hardware (double with LINKAGE_TABLE).
 - Double counts: 0.04 × 14–18 = 0.56–0.72; 0.10 × 12 = 1.20; leg 0.03 × 4 = 0.12; leg FAST connectors 0.18. Elmo G-TWI 22.2 g (MAN-G-TWI p.10) vs 0.038 placeholder × 32 = −0.506.
 - Recommended credit now −1.63 kg (drive and connectors full, the inferred lines at half); full −2.57 to −2.73 kg after a per-unit bottom-up table.
+
+## D86 (R-127 C(b)) Mg housings: Elektron 43, not AZ91D (`results/R127_MG_HOUSINGS.md`)
+- From CAD volumes: −0.625 kg (equal geometry + 7075 seat inserts) to −0.263 (+25 % stiffness volume) for hip yaw/roll + hip-pitch/ankle bodies. Multi-path only (hip-pitch/ankle): −0.377 / −0.159. Not additive with row 3 (combined ≈ −0.85).
+- Hand proxy passes at A-basis 130 MPa except the ankle eye lug (142 MPa peak) → 7075 bush. Stiffness/ovality needs the G4-Mg FEA (addendum in the file). No Ti in Mg; PEO + sealant + isolated fasteners; Thermal re-check of the unit ΔT.

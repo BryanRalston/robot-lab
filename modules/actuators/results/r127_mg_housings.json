@@ -1,0 +1,82 @@
+{
+ "units": {
+  "hip_yaw": {
+   "n": 2,
+   "path": "single",
+   "m7075": 0.2145,
+   "mMg_equal": 0.1397,
+   "insert_penalty": 0.015,
+   "dA_unit": -0.0598,
+   "dB_unit": -0.0248,
+   "dA_robot": -0.12,
+   "dB_robot": -0.05
+  },
+  "hip_roll": {
+   "n": 2,
+   "path": "single",
+   "m7075": 0.2264,
+   "mMg_equal": 0.1475,
+   "insert_penalty": 0.015,
+   "dA_unit": -0.0639,
+   "dB_unit": -0.0271,
+   "dA_robot": -0.128,
+   "dB_robot": -0.054
+  },
+  "hip_pitch_body": {
+   "n": 4,
+   "path": "multi (twin screw)",
+   "m7075": 0.1425,
+   "mMg_equal": 0.0928,
+   "insert_penalty": 0.0096,
+   "dA_unit": -0.0401,
+   "dB_unit": -0.0169,
+   "dA_robot": -0.16,
+   "dB_robot": -0.068
+  },
+  "ankle_body": {
+   "n": 4,
+   "path": "multi (twin diff.)",
+   "m7075": 0.1924,
+   "mMg_equal": 0.1253,
+   "insert_penalty": 0.0128,
+   "dA_unit": -0.0543,
+   "dB_unit": -0.023,
+   "dA_robot": -0.217,
+   "dB_robot": -0.092
+  }
+ },
+ "totals": {
+  "A": -0.625,
+  "B": -0.263,
+  "A_multi": -0.377,
+  "B_multi": -0.159
+ },
+ "proxy": {
+  "hip_roll_R1_torque_369": {
+   "tau": 13.3,
+   "vm": 23.0
+  },
+  "hip_roll_R2_seat_117Nm_1944N": {
+   "sigma": 11.7
+  },
+  "hip_roll_R3_fatigue_204_amp": {
+   "vm_amp": 12.7
+  },
+  "screw_nut_tube_4542N": {
+   "sigma": 18.5
+  },
+  "screw_nut_tube_fatigue_2030N_amp": {
+   "sigma": 8.3
+  },
+  "ankle_eye_lug_4542N_Kt2.5": {
+   "net": 56.8,
+   "peak": 141.9
+  }
+ },
+ "allow": {
+  "E43_Abasis_static": 130.0,
+  "E43_typ_multi_static": 162.0,
+  "Se_EST": 42.0,
+  "Se_allow": 28.0
+ }
+}
