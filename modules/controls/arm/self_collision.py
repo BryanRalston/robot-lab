@@ -1,7 +1,7 @@
 """Arm self-collision supervisor (RL Controls). 1 kHz, kinematic.
 
 Keep-outs (all margins configurable in controller_config.json["arm_self_collision"]):
-  * chest pad (Arms R18 bf228b1, CHEST_PAD_CLASH_R18.md): torso-frame box x <= +0.185, y +/-0.061, z 0.159..0.281
+  * chest (Arms 0a8a3cc, ID real STEP): torso-frame box x <= +0.185, y +/-0.085, z 0.135..0.305, hand+forearm only
     (116 core + 10 mm gate already inside the box, so margin 0). Checked against forearm capsule + hand box; the hand
     box moves with the wrist joints, so wrist flexion is included.
   * knee rear-outlet shroud N1 (ID P-156 rev 6) on each thigh, rigid on the thigh body (follows hip yaw/roll/pitch),
@@ -33,12 +33,18 @@ ARM_J = ['shoulder_pitch', 'shoulder_roll', 'shoulder_yaw', 'elbow', 'wrist_roll
 
 DEFAULT = dict(
     enabled=True, loop_hz=1000.0,
-    chest=dict(ref='Arms R18 bf228b1', body='torso', x=[0.0, 0.185], y=[-0.061, 0.061], z=[0.159, 0.281], margin=0.0),
+    chest=dict(ref='Arms 0a8a3cc (ID real STEP; replaces R18 bf228b1)', body='torso', x=[0.0, 0.185], y=[-0.085, 0.085], z=[0.135, 0.305], margin=0.0,
+               links=['hand', 'forearm']),
     knee_shroud=dict(ref='ID P-156 rev 6b (baad131); T&R 925d72e', x=[-0.100, -0.020], y=[0.086, 0.150], y_out=0.150,
                      z=[0.840, 0.904], z_top_front=0.8615, chamfer_deg=40.0, chamfer_w=0.015, skin=0.002, status='FINAL rev 6b (valid through rev 8): ID confirmed 40 deg / 15 mm face + R10; z840 final (Thermal PASS 5fd6a54)',
                      note='convex hull: sloped top z 861.5 (x -20) -> 904 (x -100), 40 deg chamfer on the outboard-top edge, '
                           'chamfer 15 mm face (ID confirmed); R10 blends ignored = conservative; '
                           '+2 mm skin (T&R). Set chamfer_w 0 / z_top_front = z[1] for a plain box.'),
+    knee_plate=dict(ref='Legs L77/L78 916c57f (knee_rom_raised_plate_l77.py): raised L60 top plate + twin straps, thigh-fixed',
+                    plate=dict(x=[-0.175, -0.040], y=[0.032, 0.228], z=[0.820, 0.828]),
+                    straps=dict(x=[-0.040, -0.0085], y=[0.084, 0.176], z=[0.820, 0.828]),
+                    note='straps modelled as one box spanning both (conservative); notch ignored (conservative); '
+                         'uses the mode shroud thresholds'),
     plume=dict(ref='T&R 925d72e (a) K_plume', offset=0.030, length=0.060, half_angle_deg=15.0,
                openings='aft face [EST: ID rev 6 slots are on the walls; aft-only per T&R fix 1]',
                transit_max_s=0.5, window_s=10.0, window_frac=0.20, exit_at_s=0.30,
@@ -47,17 +53,10 @@ DEFAULT = dict(
     thresholds_mm=dict(ref='T&R 925d72e', walk=[15, 10, 5], carry=[15, 10, 5], stand=[15, 10, 5],
                        crouch=[20, 15, 10], sit=[20, 15, 10], kneel=[20, 15, 10], lowering=[20, 15, 10]),
     plume_mm=[5, 2, 0],
-    thigh_panels=dict(ref='ID P-023 rev 8 df1e9e3 (hip_skirt_r8_thigh_panel.stl, convex hull, left leg, standing mm)',
-                      stl='modules/design/cad/covers/hip_skirt_r8_thigh_panel.stl', mm=[10, 5, 3],
-                      mm_note='target/warn/trip L<->R panel gap; ID gate fails at < 3 mm',
-                      leg_dofs=['hip_yaw', 'hip_roll', 'hip_pitch']),
-    bilateral_soft_limit=dict(ref='ID df1e9e3 smallest fix; backstop to the panel distance pair',
-                              pitch_flex_deg=-35.0, pitch_note='ID: pitch <= -40 on both legs; 5 deg margin',
-                              inward_roll_both_max_deg=0.0,
-                              inward_roll_note='sim/ID sign: inward (adduction) = l_hip_roll < 0, r_hip_roll > 0. '
-                                               'At both pitches <= -35, min(inward_l, inward_r) <= 0 (not both inward)',
-                              toe_out_sum_max_deg=80.0,
-                              toe_out_note='toe-out = +l_hip_yaw, -r_hip_yaw; ID fails at both 45 (sum 90); 10 deg margin'),
+    hip_pinch=dict(ref='T&R R_HIP_PINCH.md ca68f3a on ID P-023 rev 8b acb9bd5', module='modules/controls/arm/hip_pinch.py',
+                   warn_mm=35, limit_mm=30, trip_mm=28, modes='all motors-on (walk, carry, stand, crouch, kneel, sit, R-146 lowering)',
+                   note='L<->R panels + hem<->panel from both hips (pitch, roll, yaw); at trip the closing joint pair stops. '
+                        'Replaces the rev 8 mesh pair and the two coupled backup rules (dropped per Robot Lab). Motors-off: ID foam edges.'),
     payload=dict(ref='P-042 (carry_balance_r1, legs scenarios CARRY_POS)', body='torso', pos=[0.32, 0.0, 0.415],
                  size_full=[0.212, 0.274, 0.212],
                  size_note='sim has no payload geom; box sized from the sim inertia (20 kg, diag 0.2/0.15/0.2) [DERIVED]',
@@ -106,15 +105,14 @@ def build_model(cfg=None, xml_text=None):
         g = (f'<geom name="ko_shroud_{side.lower()}" type="mesh" mesh="m_shroud_{side.lower()}" contype="0" conaffinity="0" '
              f'group="5" mass="0"/>' + _box(f'ko_plume_{side.lower()}', plo, phi, THIGH0, sg))
         x = re.sub(rf'(<body name="{side}_thigh"[^>]*>)', lambda mm: mm.group(1) + g, x, count=1)
-    tp = cfg.get('thigh_panels')
-    if tp:
-        import trimesh
-        V = np.asarray(trimesh.load(ROOT / tp['stl']).vertices) / 1000.0
+    kp = cfg.get('knee_plate')
+    if kp:
         for side, sg in (('L', 1), ('R', -1)):
-            vv = ' '.join(f'{a - THIGH0[0]:.4f} {sg * (b - THIGH0[1]):.4f} {c - THIGH0[2]:.4f}' for a, b, c in V)
-            assets += f'<mesh name="m_panel_{side.lower()}" vertex="{vv}"/>'
-            g = (f'<geom name="ko_panel_{side.lower()}" type="mesh" mesh="m_panel_{side.lower()}" contype="0" '
-                 f'conaffinity="0" group="5" mass="0"/>')
+            g = ''
+            for nm in ('plate', 'straps'):
+                b = kp[nm]
+                g += _box(f'ko_{nm}_{side.lower()}', np.array([b['x'][0], b['y'][0], b['z'][0]]),
+                          np.array([b['x'][1], b['y'][1], b['z'][1]]), THIGH0, sg)
             x = re.sub(rf'(<body name="{side}_thigh"[^>]*>)', lambda mm: mm.group(1) + g, x, count=1)
     if '<asset>' in x: x = x.replace('<asset>', '<asset>' + assets, 1)
     else: x = re.sub(r'(<worldbody>)', lambda mm: f'<asset>{assets}</asset>' + mm.group(1), x, count=1)
@@ -157,22 +155,19 @@ class Supervisor:
         for side in 'lr':
             for ln in s.cfg['links']:
                 ag = m.geom(f'{side}_{ln}').id
-                s.pairs.append(Pair(f'{side}_{ln}:chest', ag, m.geom('ko_chest').id, 'chest', side))
+                if any(k in ln for k in s.cfg['chest'].get('links', [ln])): s.pairs.append(Pair(f'{side}_{ln}:chest', ag, m.geom('ko_chest').id, 'chest', side))
                 for ss in 'lr':
-                    for kd in ('shroud', 'plume'):
-                        s.pairs.append(Pair(f'{side}_{ln}:{kd}_{ss}', ag, m.geom(f'ko_{kd}_{ss}').id, kd, side))
+                    for kd in ('shroud', 'plume') + (('plate', 'straps') if s.cfg.get('knee_plate') else ()):
+                        s.pairs.append(Pair(f'{side}_{ln}:{kd}_{ss}', ag, m.geom(f'ko_{kd}_{ss}').id,
+                                            'shroud' if kd in ('plate', 'straps') else kd, side))
         if 'ko_payload' in [m.geom(i).name for i in range(m.ngeom)]:
             for ss in 'lr':
                 for kd in ('shroud', 'plume'):
                     s.pairs.append(Pair(f'payload:{kd}_{ss}', m.geom('ko_payload').id, m.geom(f'ko_{kd}_{ss}').id,
                                         kd, 'payload'))
-        if s.cfg.get('thigh_panels'):
-            s.pairs.append(Pair('panel_l:panel_r', m.geom('ko_panel_l').id, m.geom('ko_panel_r').id, 'panel', 'legs'))
         s.arm_dofs = {sd: np.array([m.jnt_dofadr[m.joint(f'{sd}_{j}').id] for j in ARM_J]) for sd in 'lr'}
         dt = 1.0 / s.cfg['loop_hz']; pl = s.cfg['plume']
         s.timers = {sd: TransitTimer(dt, pl['transit_max_s'], pl['window_s'], pl['window_frac']) for sd in 'lr'}
-        s.arm_dofs['legs'] = np.array([m.jnt_dofadr[m.joint(f'{sd}_{j}').id] for sd in 'lr'
-                                       for j in s.cfg.get('thigh_panels', {}).get('leg_dofs', [])], int)
         s._jp1 = np.zeros((3, m.nv)); s._jp2 = np.zeros((3, m.nv)); s._ft = np.zeros(6)
         s.last = []; s.events = []; s.mode = 'stand'; s.t = 0.0
 
@@ -181,7 +176,6 @@ class Supervisor:
         mode = mode or s.mode
         if kind == 'chest': return (s.cfg['chest']['margin'],) * 3
         if kind == 'plume': return tuple(v / 1000 for v in s.cfg['plume_mm'])
-        if kind == 'panel': return tuple(v / 1000 for v in s.cfg['thigh_panels']['mm'])
         return tuple(v / 1000 for v in s.cfg['thresholds_mm'][mode])
 
     def distances(s, kin=True):
@@ -243,16 +237,6 @@ class Supervisor:
             if not hit: break
         return qd
 
-    def leg_constraint_rows(s):
-        """Bilateral panel pair as a WBC inequality on the hip dofs: [(row (nv), lower bound on d_dot)]. The arm
-        filter does not move legs; the WBC (or filter(..., legs=True)) applies it."""
-        out = []
-        for p, dist, row in s.last:
-            if p.side != 'legs' or row is None: continue
-            lb = s._lb(dist, s.thresholds('panel')[0])
-            if lb is not None: out.append((row, lb))
-        return out
-
     def repulsive_tasks(s, hook: WBCHook | None = None):
         tasks = []
         for p, dist, row in s.last:
@@ -276,23 +260,6 @@ class Supervisor:
             res.append((dd - s.thresholds(p.kind, mode)[2], p.name))
         s.d.qpos[:] = save; mujoco.mj_kinematics(s.m, s.d)
         w = min(res); return w[0] >= 0, w
-
-def bilateral_soft_limit(q: dict, cfg=None):
-    """Coupled both-leg soft limit (ID df1e9e3 backstop). q: joint name -> rad. Returns (ok, clamped q, reasons).
-    Clamp moves the leg with the smaller violation back to the limit."""
-    c = (cfg or load_cfg())['bilateral_soft_limit']; q = dict(q); why = []
-    deg = lambda n: np.degrees(q.get(n, 0.0))
-    if deg('l_hip_pitch') <= c['pitch_flex_deg'] and deg('r_hip_pitch') <= c['pitch_flex_deg']:
-        il, ir = -deg('l_hip_roll'), deg('r_hip_roll')
-        if min(il, ir) > c['inward_roll_both_max_deg']:
-            why.append('both legs inward roll in flexion')
-            if il <= ir: q['l_hip_roll'] = -np.radians(c['inward_roll_both_max_deg'])
-            else: q['r_hip_roll'] = np.radians(c['inward_roll_both_max_deg'])
-    tl, tr = deg('l_hip_yaw'), -deg('r_hip_yaw')
-    if tl + tr > c['toe_out_sum_max_deg']:
-        why.append('toe-out sum'); ex = tl + tr - c['toe_out_sum_max_deg']
-        q['l_hip_yaw'] = np.radians(tl - ex / 2); q['r_hip_yaw'] = -np.radians(tr - ex / 2)
-    return not why, q, why
 
 def write_config_entry():
     c = json.loads(CFG.read_text())

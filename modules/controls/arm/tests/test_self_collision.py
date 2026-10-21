@@ -75,35 +75,29 @@ def test_wbc_hook():
     s.repulsive_tasks(H())
     assert got and all(g[0] == (m.nv,) and g[1] > 0 for g in got)
 
-def test_panels_follow_thighs_and_id_worst_collides():
+
+def test_knee_plate_keepout_both_leg_yaw_minus35():
+    """Legs L77 916c57f: hand placeholder 0.0 mm to the raised L60 plate at both-leg yaw -35. Supervisor must hold >= target."""
     m, d, s = _mk(); ft = np.zeros(6)
-    def g(**kw):
-        d.qpos[7:] = 0; _set(m, d, **kw); mujoco.mj_kinematics(m, d)
-        return mujoco.mj_geomDistance(m, d, m.geom('ko_panel_l').id, m.geom('ko_panel_r').id, 0.3, ft)
-    assert g() > 0.10
-    assert g(l_hip_pitch=-100, r_hip_pitch=-100, l_hip_roll=-20, r_hip_roll=20) < 0.003  # ID df1e9e3 worst
-    assert g(l_hip_yaw=45, r_hip_yaw=-45) < 0.003
-
-def test_bilateral_soft_limit():
-    r = np.radians
-    ok, q, why = S.bilateral_soft_limit({'l_hip_pitch': r(-100), 'r_hip_pitch': r(-100), 'l_hip_roll': r(-20), 'r_hip_roll': r(20)})
-    assert not ok and min(-q['l_hip_roll'], q['r_hip_roll']) <= 1e-9
-    ok, q, _ = S.bilateral_soft_limit({'l_hip_yaw': r(45), 'r_hip_yaw': r(-45)})
-    assert not ok and np.degrees(q['l_hip_yaw'] - q['r_hip_yaw']) <= 80 + 1e-6
-    assert S.bilateral_soft_limit({'l_hip_pitch': r(-100), 'r_hip_pitch': r(-100), 'l_hip_roll': r(-20)})[0]  # one leg only
-
-def test_leg_rows_stop_bilateral_approach():
-    m, d, s = _mk(); dt = 1e-3
-    legs = s.arm_dofs['legs']
+    _set(m, d, l_hip_yaw=-35, r_hip_yaw=35)  # left toe-in -35 and its mirror
+    mujoco.mj_kinematics(m, d)
+    d0 = mujoco.mj_geomDistance(m, d, m.geom('l_hand').id, m.geom('ko_plate_l').id, 1, ft)
+    assert d0 < 0.020  # the open-loop pose is inside the stand target
     for _ in range(1500):
-        qd = np.zeros(m.nv)
-        for sd, sg in (('l', 1), ('r', -1)):
-            qd[m.jnt_dofadr[m.joint(f'{sd}_hip_pitch').id]] = -2.0
-            qd[m.jnt_dofadr[m.joint(f'{sd}_hip_roll').id]] = -1.0 * sg
-        s.filter(np.zeros(m.nv), 'crouch')
-        for row, lb in s.leg_constraint_rows():  # WBC stand-in: min-norm on the hip dofs
-            e = lb - row @ qd; a = row[legs]
-            if e > 0 and a @ a > 1e-12: qd[legs] += a * e / (a @ a)
-        _step(m, d, qd)
-    dmin = min(x for p, x, _ in s.last if p.kind == 'panel')
-    assert dmin >= 0.005  # >= warn
+        _step(m, d, s.filter(np.zeros(m.nv), 'stand'))
+    dmin = min(x for p, x, _ in s.last if 'plate' in p.name or 'straps' in p.name)
+    assert dmin >= 0.015
+
+def test_chest_step_box_roll127_elbow_fold():
+    """Arms 0a8a3cc: (30, 127, 60, -140) reaches 0.5 mm to the real chest pad STEP without the box. Supervisor holds >= 0."""
+    m, d, s = _mk(); ft = np.zeros(6)
+    ch = S.load_cfg()['chest']; assert ch['y'] == [-0.085, 0.085] and ch['z'] == [0.135, 0.305]
+    assert not any('upper_arm' in p.name for p in s.pairs if p.kind == 'chest')
+    _set(m, d, l_shoulder_pitch=30, l_shoulder_roll=127, l_shoulder_yaw=60)
+    mujoco.mj_kinematics(m, d)
+    tgt = np.zeros(m.nv); tgt[m.jnt_dofadr[m.joint('l_elbow').id]] = -3.0
+    for _ in range(1500):
+        _step(m, d, s.filter(tgt, 'stand'))
+    mujoco.mj_kinematics(m, d)
+    dist = min(mujoco.mj_geomDistance(m, d, m.geom(g).id, m.geom('ko_chest').id, 1, ft) for g in ('l_hand', 'l_forearm'))
+    assert dist >= 0.0

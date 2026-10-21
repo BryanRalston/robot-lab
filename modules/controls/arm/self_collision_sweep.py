@@ -36,6 +36,7 @@ def run(m, d, cfg, mode, arm_tgt, leg_tgt, side='l', T=1.6, v_arm=3.0, v_leg=2.0
         qs = sup.filter(qd, mode, bypass=not sup_on)
         for p, dist, _ in sup.last:
             mins[p.kind] = min(mins.get(p.kind, 9), dist)
+            if 'plate' in p.name or 'straps' in p.name: mins['plate'] = min(mins.get('plate', 9), dist)
             if p.kind == 'shroud': mins['shroud_' + p.name] = min(mins.get('shroud_' + p.name, 9), dist)
         for sd in 'lr':
             tm = sup.timers[sd]
@@ -47,7 +48,7 @@ def run(m, d, cfg, mode, arm_tgt, leg_tgt, side='l', T=1.6, v_arm=3.0, v_leg=2.0
             d.qpos[a] = np.clip(d.qpos[a] + qs[dv] * dt, m.jnt_range[j, 0], m.jnt_range[j, 1])  # jnt_range is rad
     trips = [e for e in sup.events if e[1] == 'trip']
     return dict(min_shroud_mm=round(1000 * mins.get('shroud', 9), 1), min_chest_mm=round(1000 * mins.get('chest', 9), 1),
-                min_plume_mm=round(1000 * mins.get('plume', 9), 1), plume_s=round(sum(plume_in.values()), 3),
+                min_plume_mm=round(1000 * mins.get('plume', 9), 1), min_plate_mm=round(1000 * mins.get('plate', 9), 1), plume_s=round(sum(plume_in.values()), 3),
                 max_transit_s=round(maxcur, 3), max_window_frac=round(maxwin, 3), trip_cycles=len(trips))
 
 def arm_dict(side, a): return {f'{side}_{j}': v for j, v in zip(S.ARM_J, a)}
@@ -64,6 +65,9 @@ def main():
         ('hanging + crouch hip -105', 'crouch', [0] * 7, {'l_hip_pitch': -105, 'l_knee': 135}),
         ('wrist-flexed chest fold', 'stand', [-60, -15, -100, -130, 0, 70, 0], {}),
         ('hands together at chest', 'carry', [-60, -15, -60, -100, 0, 0, 0], {}),
+        ('roll 127 elbow fold (Arms 0a8a3cc)', 'stand', [30, 127, 60, -140, 0, 0, 0], {}),
+        ('both-leg yaw -35 (Legs L77 knee plate)', 'stand', [0] * 7, {'l_hip_yaw': -35, 'r_hip_yaw': 35}),
+        ('both-leg yaw -35 + adduction -15', 'walk', [0, -15, 0, 0, 0, 0, -14.3], {'l_hip_yaw': -35, 'r_hip_yaw': 35}),
     ]
     for nm, mode, a, l in worst:
         for on in (False, True):

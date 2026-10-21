@@ -78,21 +78,25 @@
     "enabled": true,
     "loop_hz": 1000.0,
     "chest": {
-      "ref": "Arms R18 bf228b1",
+      "ref": "Arms 0a8a3cc (ID real STEP; replaces R18 bf228b1)",
       "body": "torso",
       "x": [
         0.0,
         0.185
       ],
       "y": [
-        -0.061,
-        0.061
+        -0.085,
+        0.085
       ],
       "z": [
-        0.159,
-        0.281
+        0.135,
+        0.305
       ],
-      "margin": 0.0
+      "margin": 0.0,
+      "links": [
+        "hand",
+        "forearm"
+      ]
     },
     "knee_shroud": {
       "ref": "ID P-156 rev 6b (baad131); T&R 925d72e",
@@ -115,6 +119,38 @@
       "skin": 0.002,
       "status": "FINAL rev 6b (valid through rev 8): ID confirmed 40 deg / 15 mm face + R10; z840 final (Thermal PASS 5fd6a54)",
       "note": "convex hull: sloped top z 861.5 (x -20) -> 904 (x -100), 40 deg chamfer on the outboard-top edge, chamfer 15 mm face (ID confirmed); R10 blends ignored = conservative; +2 mm skin (T&R). Set chamfer_w 0 / z_top_front = z[1] for a plain box."
+    },
+    "knee_plate": {
+      "ref": "Legs L77/L78 916c57f (knee_rom_raised_plate_l77.py): raised L60 top plate + twin straps, thigh-fixed",
+      "plate": {
+        "x": [
+          -0.175,
+          -0.04
+        ],
+        "y": [
+          0.032,
+          0.228
+        ],
+        "z": [
+          0.82,
+          0.828
+        ]
+      },
+      "straps": {
+        "x": [
+          -0.04,
+          -0.0085
+        ],
+        "y": [
+          0.084,
+          0.176
+        ],
+        "z": [
+          0.82,
+          0.828
+        ]
+      },
+      "note": "straps modelled as one box spanning both (conservative); notch ignored (conservative); uses the mode shroud thresholds"
     },
     "plume": {
       "ref": "T&R 925d72e (a) K_plume",
@@ -171,29 +207,14 @@
       2,
       0
     ],
-    "thigh_panels": {
-      "ref": "ID P-023 rev 8 df1e9e3 (hip_skirt_r8_thigh_panel.stl, convex hull, left leg, standing mm)",
-      "stl": "modules/design/cad/covers/hip_skirt_r8_thigh_panel.stl",
-      "mm": [
-        10,
-        5,
-        3
-      ],
-      "mm_note": "target/warn/trip L<->R panel gap; ID gate fails at < 3 mm",
-      "leg_dofs": [
-        "hip_yaw",
-        "hip_roll",
-        "hip_pitch"
-      ]
-    },
-    "bilateral_soft_limit": {
-      "ref": "ID df1e9e3 smallest fix; backstop to the panel distance pair",
-      "pitch_flex_deg": -35.0,
-      "pitch_note": "ID: pitch <= -40 on both legs; 5 deg margin",
-      "inward_roll_both_max_deg": 0.0,
-      "inward_roll_note": "sim/ID sign: inward (adduction) = l_hip_roll < 0, r_hip_roll > 0. At both pitches <= -35, min(inward_l, inward_r) <= 0 (not both inward)",
-      "toe_out_sum_max_deg": 80.0,
-      "toe_out_note": "toe-out = +l_hip_yaw, -r_hip_yaw; ID fails at both 45 (sum 90); 10 deg margin"
+    "hip_pinch": {
+      "ref": "T&R R_HIP_PINCH.md ca68f3a on ID P-023 rev 8b acb9bd5",
+      "module": "modules/controls/arm/hip_pinch.py",
+      "warn_mm": 35,
+      "limit_mm": 30,
+      "trip_mm": 28,
+      "modes": "all motors-on (walk, carry, stand, crouch, kneel, sit, R-146 lowering)",
+      "note": "L<->R panels + hem<->panel from both hips (pitch, roll, yaw); at trip the closing joint pair stops. Replaces the rev 8 mesh pair and the two coupled backup rules (dropped per Robot Lab). Motors-off: ID foam edges."
     },
     "payload": {
       "ref": "P-042 (carry_balance_r1, legs scenarios CARRY_POS)",

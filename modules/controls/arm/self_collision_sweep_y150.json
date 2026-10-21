@@ -5,6 +5,7 @@
    "min_shroud_mm": -58.9,
    "min_chest_mm": 150.0,
    "min_plume_mm": -5.1,
+   "min_plate_mm": -46.4,
    "plume_s": 0.0,
    "max_transit_s": 0.0,
    "max_window_frac": 0.0,
@@ -16,7 +17,8 @@
   {
    "min_shroud_mm": 17.2,
    "min_chest_mm": 150.0,
-   "min_plume_mm": 9.0,
+   "min_plume_mm": 78.4,
+   "min_plate_mm": 17.2,
    "plume_s": 0.0,
    "max_transit_s": 0.0,
    "max_window_frac": 0.0,
@@ -26,9 +28,10 @@
    "supervisor": true
   },
   {
-   "min_shroud_mm": -34.7,
+   "min_shroud_mm": -50.3,
    "min_chest_mm": 150.0,
    "min_plume_mm": -41.5,
+   "min_plate_mm": -50.3,
    "plume_s": 0.0,
    "max_transit_s": 0.0,
    "max_window_frac": 0.0,
@@ -38,21 +41,23 @@
    "supervisor": false
   },
   {
-   "min_shroud_mm": 20.0,
+   "min_shroud_mm": 19.3,
    "min_chest_mm": 150.0,
-   "min_plume_mm": -52.8,
-   "plume_s": 1.427,
-   "max_transit_s": 0.301,
-   "max_window_frac": 0.143,
-   "trip_cycles": 4,
+   "min_plume_mm": -46.2,
+   "min_plate_mm": 19.3,
+   "plume_s": 1.026,
+   "max_transit_s": 0.302,
+   "max_window_frac": 0.103,
+   "trip_cycles": 6,
    "case": "walk-residual worst",
    "mode": "walk",
    "supervisor": true
   },
   {
-   "min_shroud_mm": 2.0,
+   "min_shroud_mm": -7.5,
    "min_chest_mm": 150.0,
    "min_plume_mm": 64.0,
+   "min_plate_mm": -7.5,
    "plume_s": 0.0,
    "max_transit_s": 0.0,
    "max_window_frac": 0.0,
@@ -64,7 +69,8 @@
   {
    "min_shroud_mm": 19.0,
    "min_chest_mm": 150.0,
-   "min_plume_mm": 78.1,
+   "min_plume_mm": 84.5,
+   "min_plate_mm": 19.0,
    "plume_s": 0.0,
    "max_transit_s": 0.0,
    "max_window_frac": 0.0,
@@ -77,6 +83,7 @@
    "min_shroud_mm": -33.5,
    "min_chest_mm": 150.0,
    "min_plume_mm": 17.4,
+   "min_plate_mm": -33.3,
    "plume_s": 0.0,
    "max_transit_s": 0.0,
    "max_window_frac": 0.0,
@@ -88,7 +95,8 @@
   {
    "min_shroud_mm": 19.0,
    "min_chest_mm": 150.0,
-   "min_plume_mm": 0.8,
+   "min_plume_mm": 61.6,
+   "min_plate_mm": 19.0,
    "plume_s": 0.0,
    "max_transit_s": 0.0,
    "max_window_frac": 0.0,
@@ -98,9 +106,10 @@
    "supervisor": true
   },
   {
-   "min_shroud_mm": 87.0,
+   "min_shroud_mm": 11.0,
    "min_chest_mm": 150.0,
    "min_plume_mm": 40.9,
+   "min_plate_mm": 11.0,
    "plume_s": 0.0,
    "max_transit_s": 0.0,
    "max_window_frac": 0.0,
@@ -110,9 +119,10 @@
    "supervisor": false
   },
   {
-   "min_shroud_mm": 87.0,
+   "min_shroud_mm": 24.0,
    "min_chest_mm": 150.0,
    "min_plume_mm": 40.9,
+   "min_plate_mm": 24.0,
    "plume_s": 0.0,
    "max_transit_s": 0.0,
    "max_window_frac": 0.0,
@@ -122,9 +132,10 @@
    "supervisor": true
   },
   {
-   "min_shroud_mm": 73.2,
-   "min_chest_mm": -46.6,
+   "min_shroud_mm": 26.4,
+   "min_chest_mm": -70.6,
    "min_plume_mm": 94.1,
+   "min_plate_mm": 26.4,
    "plume_s": 0.0,
    "max_transit_s": 0.0,
    "max_window_frac": 0.0,
@@ -134,9 +145,10 @@
    "supervisor": false
   },
   {
-   "min_shroud_mm": 79.3,
+   "min_shroud_mm": 26.4,
    "min_chest_mm": 4.0,
    "min_plume_mm": 94.1,
+   "min_plate_mm": 26.4,
    "plume_s": 0.0,
    "max_transit_s": 0.0,
    "max_window_frac": 0.0,
@@ -146,9 +158,10 @@
    "supervisor": true
   },
   {
-   "min_shroud_mm": 74.5,
-   "min_chest_mm": 0.1,
+   "min_shroud_mm": 26.4,
+   "min_chest_mm": -2.7,
    "min_plume_mm": 94.1,
+   "min_plate_mm": 26.4,
    "plume_s": 0.0,
    "max_transit_s": 0.0,
    "max_window_frac": 0.0,
@@ -158,9 +171,10 @@
    "supervisor": false
   },
   {
-   "min_shroud_mm": 79.9,
+   "min_shroud_mm": 26.4,
    "min_chest_mm": 4.0,
    "min_plume_mm": 94.1,
+   "min_plate_mm": 26.4,
    "plume_s": 0.0,
    "max_transit_s": 0.0,
    "max_window_frac": 0.0,
@@ -170,10 +184,88 @@
    "supervisor": true
   },
   {
+   "min_shroud_mm": 26.4,
+   "min_chest_mm": -23.9,
+   "min_plume_mm": 94.1,
+   "min_plate_mm": 26.4,
+   "plume_s": 0.0,
+   "max_transit_s": 0.0,
+   "max_window_frac": 0.0,
+   "trip_cycles": 0,
+   "case": "roll 127 elbow fold (Arms 0a8a3cc)",
+   "mode": "stand",
+   "supervisor": false
+  },
+  {
+   "min_shroud_mm": 26.4,
+   "min_chest_mm": 4.0,
+   "min_plume_mm": 94.1,
+   "min_plate_mm": 26.4,
+   "plume_s": 0.0,
+   "max_transit_s": 0.0,
+   "max_window_frac": 0.0,
+   "trip_cycles": 0,
+   "case": "roll 127 elbow fold (Arms 0a8a3cc)",
+   "mode": "stand",
+   "supervisor": true
+  },
+  {
+   "min_shroud_mm": -17.9,
+   "min_chest_mm": 150.0,
+   "min_plume_mm": 20.3,
+   "min_plate_mm": -17.9,
+   "plume_s": 0.0,
+   "max_transit_s": 0.0,
+   "max_window_frac": 0.0,
+   "trip_cycles": 0,
+   "case": "both-leg yaw -35 (Legs L77 knee plate)",
+   "mode": "stand",
+   "supervisor": false
+  },
+  {
+   "min_shroud_mm": 19.0,
+   "min_chest_mm": 150.0,
+   "min_plume_mm": 50.2,
+   "min_plate_mm": 19.0,
+   "plume_s": 0.0,
+   "max_transit_s": 0.0,
+   "max_window_frac": 0.0,
+   "trip_cycles": 0,
+   "case": "both-leg yaw -35 (Legs L77 knee plate)",
+   "mode": "stand",
+   "supervisor": true
+  },
+  {
+   "min_shroud_mm": -17.9,
+   "min_chest_mm": 150.0,
+   "min_plume_mm": 20.3,
+   "min_plate_mm": -17.9,
+   "plume_s": 0.0,
+   "max_transit_s": 0.0,
+   "max_window_frac": 0.0,
+   "trip_cycles": 0,
+   "case": "both-leg yaw -35 + adduction -15",
+   "mode": "walk",
+   "supervisor": false
+  },
+  {
+   "min_shroud_mm": 18.7,
+   "min_chest_mm": 150.0,
+   "min_plume_mm": 52.1,
+   "min_plate_mm": 18.7,
+   "plume_s": 0.0,
+   "max_transit_s": 0.0,
+   "max_window_frac": 0.0,
+   "trip_cycles": 0,
+   "case": "both-leg yaw -35 + adduction -15",
+   "mode": "walk",
+   "supervisor": true
+  },
+  {
    "case": "walk random x12",
    "mode": "walk",
    "supervisor": false,
-   "min_shroud_mm": 23.1,
+   "min_shroud_mm": -20.7,
    "min_chest_mm": 150.0,
    "min_plume_mm": 26.7,
    "plume_s": 0.0,
@@ -183,9 +275,9 @@
    "case": "walk random x12",
    "mode": "walk",
    "supervisor": true,
-   "min_shroud_mm": 23.1,
+   "min_shroud_mm": 19.0,
    "min_chest_mm": 150.0,
-   "min_plume_mm": 26.7,
+   "min_plume_mm": 52.2,
    "plume_s": 0.0,
    "trip_cycles": 0
   },
@@ -193,8 +285,8 @@
    "case": "carry random x12",
    "mode": "carry",
    "supervisor": false,
-   "min_shroud_mm": 87.0,
-   "min_chest_mm": 148.4,
+   "min_shroud_mm": 26.4,
+   "min_chest_mm": 124.6,
    "min_plume_mm": 94.1,
    "plume_s": 0.0,
    "trip_cycles": 0
@@ -203,8 +295,8 @@
    "case": "carry random x12",
    "mode": "carry",
    "supervisor": true,
-   "min_shroud_mm": 87.0,
-   "min_chest_mm": 148.4,
+   "min_shroud_mm": 26.4,
+   "min_chest_mm": 124.6,
    "min_plume_mm": 94.1,
    "plume_s": 0.0,
    "trip_cycles": 0
@@ -213,8 +305,8 @@
    "case": "stand random x12",
    "mode": "stand",
    "supervisor": false,
-   "min_shroud_mm": 57.3,
-   "min_chest_mm": 71.7,
+   "min_shroud_mm": -24.3,
+   "min_chest_mm": 59.0,
    "min_plume_mm": -14.9,
    "plume_s": 0.0,
    "trip_cycles": 0
@@ -223,9 +315,9 @@
    "case": "stand random x12",
    "mode": "stand",
    "supervisor": true,
-   "min_shroud_mm": 64.2,
-   "min_chest_mm": 71.7,
-   "min_plume_mm": 14.9,
+   "min_shroud_mm": 19.0,
+   "min_chest_mm": 59.0,
+   "min_plume_mm": 25.3,
    "plume_s": 0.0,
    "trip_cycles": 0
   },
@@ -233,8 +325,8 @@
    "case": "crouch random x12",
    "mode": "crouch",
    "supervisor": false,
-   "min_shroud_mm": 87.0,
-   "min_chest_mm": 69.1,
+   "min_shroud_mm": 11.0,
+   "min_chest_mm": 45.4,
    "min_plume_mm": 40.9,
    "plume_s": 0.0,
    "trip_cycles": 0
@@ -243,16 +335,17 @@
    "case": "crouch random x12",
    "mode": "crouch",
    "supervisor": true,
-   "min_shroud_mm": 87.0,
-   "min_chest_mm": 70.5,
-   "min_plume_mm": 43.9,
+   "min_shroud_mm": 25.2,
+   "min_chest_mm": 56.6,
+   "min_plume_mm": 53.7,
    "plume_s": 0.0,
    "trip_cycles": 0
   },
   {
-   "min_shroud_mm": -21.0,
+   "min_shroud_mm": -58.2,
    "min_chest_mm": 150.0,
    "min_plume_mm": -67.4,
+   "min_plate_mm": -58.2,
    "plume_s": 0.0,
    "max_transit_s": 0.0,
    "max_window_frac": 0.0,
@@ -262,12 +355,13 @@
    "supervisor": false
   },
   {
-   "min_shroud_mm": 21.2,
+   "min_shroud_mm": 17.9,
    "min_chest_mm": 150.0,
-   "min_plume_mm": -68.0,
-   "plume_s": 2.476,
+   "min_plume_mm": -46.2,
+   "min_plate_mm": 17.9,
+   "plume_s": 2.326,
    "max_transit_s": 0.301,
-   "max_window_frac": 0.178,
+   "max_window_frac": 0.163,
    "trip_cycles": 10,
    "case": "walk swing 12 s (hip -60..+20 at 1 Hz), arm residual pushed aft/inward",
    "mode": "walk",
@@ -279,71 +373,71 @@
    "pose": "tuck B",
    "legs": "stand",
    "clear": true,
-   "worst": "l_hand:shroud_l",
-   "slack_vs_trip10_mm": 77.0
+   "worst": "l_hand:plate_l",
+   "slack_vs_trip10_mm": 1.0
   },
   {
    "pose": "tuck B",
    "legs": "crouch hip-105",
    "clear": true,
-   "worst": "r_hand:shroud_r",
-   "slack_vs_trip10_mm": 77.0
+   "worst": "r_hand:plate_r",
+   "slack_vs_trip10_mm": 16.4
   },
   {
    "pose": "tuck B",
    "legs": "POSE_PRONE",
    "clear": true,
-   "worst": "l_hand:shroud_l",
-   "slack_vs_trip10_mm": 77.0
+   "worst": "l_hand:plate_l",
+   "slack_vs_trip10_mm": 1.0
   },
   {
    "pose": "tuck B",
    "legs": "KNEEL_W1",
    "clear": true,
-   "worst": "r_forearm:shroud_r",
-   "slack_vs_trip10_mm": 195.9
+   "worst": "r_hand:plate_r",
+   "slack_vs_trip10_mm": 176.6
   },
   {
    "pose": "tuck B",
    "legs": "side-fall hip roll+15",
-   "clear": true,
-   "worst": "l_hand:shroud_l",
-   "slack_vs_trip10_mm": 24.2
+   "clear": false,
+   "worst": "l_hand:plate_l",
+   "slack_vs_trip10_mm": -43.6
   },
   {
    "pose": "LB fallback",
    "legs": "stand",
    "clear": true,
-   "worst": "r_hand:shroud_r",
-   "slack_vs_trip10_mm": 77.0
+   "worst": "r_hand:plate_r",
+   "slack_vs_trip10_mm": 16.4
   },
   {
    "pose": "LB fallback",
    "legs": "crouch hip-105",
    "clear": true,
-   "worst": "r_hand:shroud_r",
-   "slack_vs_trip10_mm": 77.0
+   "worst": "r_hand:plate_r",
+   "slack_vs_trip10_mm": 16.4
   },
   {
    "pose": "LB fallback",
    "legs": "POSE_PRONE",
    "clear": true,
-   "worst": "r_hand:shroud_r",
-   "slack_vs_trip10_mm": 77.0
+   "worst": "r_hand:plate_r",
+   "slack_vs_trip10_mm": 16.4
   },
   {
    "pose": "LB fallback",
    "legs": "KNEEL_W1",
    "clear": true,
-   "worst": "r_forearm:shroud_r",
-   "slack_vs_trip10_mm": 195.9
+   "worst": "r_hand:plate_r",
+   "slack_vs_trip10_mm": 176.6
   },
   {
    "pose": "LB fallback",
    "legs": "side-fall hip roll+15",
    "clear": true,
-   "worst": "r_hand:shroud_r",
-   "slack_vs_trip10_mm": 77.0
+   "worst": "r_hand:plate_r",
+   "slack_vs_trip10_mm": 16.4
   }
  ]
 }

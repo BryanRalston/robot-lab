@@ -63,12 +63,12 @@
   "total": 56479,
   "torso_self": 3371,
   "cross": 3764,
-  "sup_block": 291,
-  "sup_block_cross": 115,
+  "sup_block": 396,
+  "sup_block_cross": 148,
   "r18_block": 1338,
   "r18_block_cross": 501,
-  "sup_only": 81,
-  "r18_only": 1128
+  "sup_only": 142,
+  "r18_only": 1084
  },
  "roll_ge0_breaks": [
   "LB fallback +30/-15/+30/-75 (roll -15)",
@@ -77,13 +77,13 @@
  ],
  "attenuation_walk_10k": {
   "n": 10000,
-  "start_inside_target": 1122,
-  "clear_starts": 8878,
-  "frac_attenuated": 0.0569,
-  "mean_attenuation": 0.0077,
-  "p95_attenuation": 0.0139,
-  "p99_attenuation": 0.2454,
-  "frac_over_50pct": 0.0018
+  "start_inside_target": 2154,
+  "clear_starts": 7846,
+  "frac_attenuated": 0.0883,
+  "mean_attenuation": 0.0125,
+  "p95_attenuation": 0.0709,
+  "p99_attenuation": 0.3037,
+  "frac_over_50pct": 0.0033
  },
  "attenuation_carry_10k": {
   "n": 10000,
