@@ -212,3 +212,12 @@ Foam 0.035 + sleeve 0.009 + inserts/anchor 0.006 = **0.050/side, 0.100 kg pair =
 2. Is the contact point during the arm tuck on the lateral shoulder face (pad centre) or higher on the deltoid? If it's higher, the pad moves.
 3. Does the 40 mm pad (about 10 mm more lateral) change the topple geometry or the knee-drop timing?
 4. What sensitivity to shoulder energy above 220 J should we design for (worst-case push)?
+
+## R9 (2026-10-21): response to job1 FAIL (a556d44)
+- **Failing interface: CRBH 6013 static s0 (Arms' roll bearing)**, axial-shear cases 1.45 @0 / 1.29 @10 mm. The tray and M4s pass (tab bearing SF 1.62, no slip 593 < 825 N). No tray/washer/doubler change can fix s0: it is set by pad force and lever arm.
+- ID-side fix (pad_r9.py/.json): core **55.3 × 55.3 × 60** 4.5 pcf (peak 7.0 kN at ×1.3, was ~9 kN) + **0.25 mm PTFE-faced slip skin** on the EPP face (μ ≤ 0.15 caps tangential shear). Tray, boss, 4× M4 unchanged; core centred on tray.
+- Hand-calc s0 (same P0 as fea_job1.py): **2.32 @ e0, 2.13 @ e5, 1.97 @ e10**. Reaching 2.0 at e10 needs Arms (qualify e ≤ 5 mm or a bearing with C0 ≳ 27 kN). Proposed to Arms; not imposed.
+- Energy 237 J ≥ 220 J (A44 cap) but < 265 J R3 design energy: needs the 220 J basis confirmed.
+- Roll torque Mx 448 (axial) – 539 (down) N·m, still > CSG-25 369 N·m momentary peak (was 566–773). Driven by the 64 mm pad-centre offset from the roll axis: raised with the Arbiter.
+- Mass: −0.007 kg pair [EST] (core −3.5 g, spreader −1.1, EPP −0.4, PTFE +1.7 per side).
+- Rerun: fea/job1_pad_r9/CASE.md.
