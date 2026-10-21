@@ -2,6 +2,14 @@ mesh:
 mesh:
   size: 6.0
   size_coarse: 25.0
+  refine:
+    c:
+    - 56
+    - 95
+    - 278
+    r: 30
+    h: 1.0
+    note: local fine-mesh submodel around the iteration-4 bulkhead hot spot
 materials:
   Al7075T651:
     E: 70000
@@ -61,7 +69,7 @@ geometry:
     height_z: 22
     t: 1.0
     x0: -63
-    z0: 278
+    z0: 281.0
   posts:
     path: single
     stock: 7075 waist path stand-in
@@ -93,7 +101,7 @@ geometry:
     note: 'model_v4 frame: pelvis 1126-1230, deck top 1206.6 (global) = sim-torso -154/-50/-73.4'
     open: true
     reinf:
-      lip_w: 20
+      lip_w: 16
       lip_t: 8
       rib_t: 8
       rib_y:
@@ -103,7 +111,7 @@ geometry:
         bumpers (under deck), HP1/HP2 plates outside rear wall'
       ring:
       - 55
-      - 66
+      - 61
   bay_box:
     vent:
       'on': floor
@@ -116,44 +124,38 @@ geometry:
     x_front: 106.5
     x_rear: -107
     z0: 121.6
-    z1: 278
+    z1: 281.0
     t_side: 3
     t_web: 2
-    t_lid: 1.5
+    t_lid: 4.5
     path: single
     mat: Al7075T651
     allowable: 257
     note: '3c-final Option A (P-057): pack notched 52x110x100 front-top, rear at shell inner (x -107); box follows the notch (socket walls y+-50.5..54.5, notch floor z167-171, land is the notch rear wall);
       bulkhead web removed inside the box (wings + strip above lid remain); lid-top doubler 3 mm x30-106.5 |y|<70 (needs Thor bay +9 mm)'
-    t_floor: 8
+    t_floor: 6
     front_window:
       y: 50.5
       z0: 171
       z1: 276.5
     land_web:
       y: 54.5
-      t: 8
+      t: 6
       z0: 167
-      z1: 278
+      z1: 281.0
     inbox_cut: true
     notch_floor:
       x0: 52
       y: 54.5
-      z0: 163
-      t: 8
+      z0: 165
+      t: 6
     thor_cut:
       y: 151
     gussets:
     - - 52
-      - 64
-      - 100
-      - 112
-      - 250
-      - 276.5
-    - - 52
       - 106.5
       - 54.5
-      - 80
+      - 112
       - 272.5
       - 276.5
     - - 52
@@ -167,13 +169,7 @@ geometry:
       - 115
       - 122
       - 240
-      - 278
-    - - 30
-      - 106.5
-      - 0.01
-      - 70
-      - 277.99
-      - 281
+      - 281.0
   waist:
     path: single
     stock: 7075 torso waist bracket (model_v4 single +y cheek 70x8) + waist actuator stand-ins (solid Al, stiff)
@@ -192,8 +188,8 @@ geometry:
     floor_z: 121.6
     note: 'model_v4 build_upper: waist_yaw axis dk+35, waist_pitch axis dk+143 (global 1349.6), torso bracket = +y cheek 70x8 from wp-30 to tb + floor plate at tb (1409.6). Sim-torso z = global-1280.'
     yoke2:
-      t: 14
-      D: 140
+      t: 11
+      D: 130
       z_bot: 19.6
       y_in: 103
       hub_d: 100
@@ -201,13 +197,13 @@ geometry:
       brg_w: 13
       note: 'two-sided yoke (Robot Lab decision 10:18): cheeks = box side walls carried down (outer face y+-115); +y actuator output flange + Al spacer; -y THK RB7013 crossed-roller (d70 D100 B13, C0 27.7
         kN, 0.35 kg) on a stub from the waistY -y cheek + spacer'
-    yoke_t: 16
+    yoke_t: 12
     cheek_D: 120
     cradle:
       y0: 47
       z1: 69.6
-      web_t: 6
-      web_z1: 50
+      web_t: 4
+      web_z1: 40
   yoke:
     path: single
     stock: '7075-T651 plate 1.0 in (25.4) [R-128 band: 271?] cheeks'

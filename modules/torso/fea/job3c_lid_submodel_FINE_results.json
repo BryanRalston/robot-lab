@@ -1,0 +1,343 @@
+{
+ "mesh_h": 25.0,
+ "element": "C3D10",
+ "solver": "calculix",
+ "nodes": 137483,
+ "elements_skipped_not_tet10": 0,
+ "parts": {
+  "bulkhead": 79155,
+  "partition": 87,
+  "pelvis": 3341,
+  "waist": 1771,
+  "posts": 0,
+  "yoke": 574
+ },
+ "set_sizes": {
+  "fixed": 264,
+  "land": 177,
+  "land_off": 61,
+  "shoulder_flange_L": 63,
+  "pelvis_top": 484,
+  "partition": 55,
+  "ethercat_bosses": 12
+ },
+ "shared_nodes": {
+  "bulkhead|partition": 69,
+  "bulkhead|pelvis": 0,
+  "bulkhead|waist": 0,
+  "bulkhead|yoke": 112,
+  "partition|pelvis": 0,
+  "partition|waist": 0,
+  "partition|yoke": 0,
+  "pelvis|waist": 219,
+  "pelvis|yoke": 0,
+  "waist|yoke": 187
+ },
+ "mass_kg": {
+  "bulkhead": 3.0273,
+  "partition": 0.0089,
+  "pelvis": 3.3711,
+  "waist": 7.3796,
+  "yoke": 1.1544
+ },
+ "mass_kg_total": 14.9413,
+ "mass_detail": {
+  "bulkhead": {
+   "mat": "Al7075T651",
+   "volume_mm3": 1077333.9,
+   "kg": 3.0273
+  },
+  "partition": {
+   "mat": "CFRP_QI",
+   "volume_mm3": 5720.0,
+   "kg": 0.0089
+  },
+  "pelvis": {
+   "mat": "Al7075T651",
+   "volume_mm3": 1199688.3,
+   "kg": 3.3711
+  },
+  "waist": {
+   "mat": "Al7075T651",
+   "volume_mm3": 2626202.2,
+   "kg": 7.3796
+  },
+  "yoke": {
+   "mat": "Al7075T651",
+   "volume_mm3": 410823.3,
+   "kg": 1.1544
+  }
+ },
+ "quality_min": 0.0,
+ "quality_lt_0.01": 280,
+ "singularity_band_mm": 5.0,
+ "criteria": {
+  "SF_min": 1.0,
+  "land_defl_max": 5.5,
+  "mode1_min_hz": 80,
+  "buckling_min": 1.5,
+  "note": "T&R b1fe48f: SF>=2 stacking and 0.05 mm gate deleted; SF 1.0 against per-case allowables; LC2 R-127 (vM<=A-basis/1.5)"
+ },
+ "cases": {
+  "LC1a_29kN_normal": {
+   "deck": "/tmp/fm/LC1a_29kN_normal.inp",
+   "solved": true,
+   "seconds": 215.9,
+   "ccx_rc": 0,
+   "applied_F": [
+    -29000,
+    0,
+    0
+   ],
+   "reaction_F": [
+    29000.034,
+    0.001,
+    0.001
+   ],
+   "force_residual_N": 0.0343,
+   "equilibrium_pass": true,
+   "checks": {
+    "SF_bulkhead": {
+     "path": "single",
+     "allowable": 386,
+     "vm_max": 4357.21,
+     "vm_loc_mm": [
+      55.77,
+      -96.84,
+      278.0
+     ],
+     "vm_struct": 4357.21,
+     "vm_struct_loc_mm": [
+      55.77,
+      -96.84,
+      278.0
+     ],
+     "SF": 0.089,
+     "SF_raw": 0.089,
+     "pass": false
+    },
+    "SF_partition": {
+     "path": "multi",
+     "allowable": 450,
+     "vm_max": 5.52,
+     "vm_loc_mm": [
+      -62.12,
+      -107.09,
+      283.5
+     ],
+     "vm_struct": 5.52,
+     "vm_struct_loc_mm": [
+      -62.12,
+      -107.09,
+      283.5
+     ],
+     "SF": 81.583,
+     "SF_raw": 81.583,
+     "pass": true,
+     "SF_vs_320": 58.015
+    },
+    "SF_pelvis": {
+     "path": "single",
+     "allowable": 406,
+     "vm_max": 199.3,
+     "vm_loc_mm": [
+      84.0,
+      -11.98,
+      -75.64
+     ],
+     "vm_struct": 199.3,
+     "vm_struct_loc_mm": [
+      84.0,
+      -11.98,
+      -75.64
+     ],
+     "SF": 2.037,
+     "SF_raw": 2.037,
+     "pass": true
+    },
+    "SF_waist": {
+     "path": "single",
+     "allowable": 386,
+     "vm_max": 157.65,
+     "vm_loc_mm": [
+      -32.01,
+      51.0,
+      25.31
+     ],
+     "vm_struct": 157.65,
+     "vm_struct_loc_mm": [
+      -32.01,
+      51.0,
+      25.31
+     ],
+     "SF": 2.449,
+     "SF_raw": 2.449,
+     "pass": true
+    },
+    "SF_yoke": {
+     "path": "single",
+     "allowable": 386,
+     "vm_max": 169.84,
+     "vm_loc_mm": [
+      66.2,
+      -115.0,
+      116.22
+     ],
+     "vm_struct": 169.84,
+     "vm_struct_loc_mm": [
+      66.2,
+      -115.0,
+      116.22
+     ],
+     "SF": 2.273,
+     "SF_raw": 2.273,
+     "pass": true
+    },
+    "land_defl": {
+     "mm": 3.32395,
+     "limit_mm": 5.5,
+     "pass": true
+    },
+    "buckling": {
+     "factor": 9.294,
+     "all": [
+      9.294,
+      10.013
+     ],
+     "pass": true
+    },
+    "equilibrium": {
+     "residual_N": 0.0343,
+     "pass": true
+    }
+   }
+  },
+  "LC1b_29kN_offset25": {
+   "deck": "/tmp/fm/LC1b_29kN_offset25.inp",
+   "solved": true,
+   "seconds": 63.0,
+   "ccx_rc": 0,
+   "applied_F": [
+    -29000,
+    0,
+    0
+   ],
+   "reaction_F": [
+    29000.012,
+    0.0,
+    0.0
+   ],
+   "force_residual_N": 0.0117,
+   "equilibrium_pass": true,
+   "checks": {
+    "SF_bulkhead": {
+     "path": "single",
+     "allowable": 386,
+     "vm_max": 4856.91,
+     "vm_loc_mm": [
+      55.77,
+      -96.84,
+      278.0
+     ],
+     "vm_struct": 4856.91,
+     "vm_struct_loc_mm": [
+      55.77,
+      -96.84,
+      278.0
+     ],
+     "SF": 0.079,
+     "SF_raw": 0.079,
+     "pass": false
+    },
+    "SF_partition": {
+     "path": "multi",
+     "allowable": 450,
+     "vm_max": 8.39,
+     "vm_loc_mm": [
+      -62.12,
+      -107.09,
+      283.5
+     ],
+     "vm_struct": 8.39,
+     "vm_struct_loc_mm": [
+      -62.12,
+      -107.09,
+      283.5
+     ],
+     "SF": 53.628,
+     "SF_raw": 53.628,
+     "pass": true,
+     "SF_vs_320": 38.136
+    },
+    "SF_pelvis": {
+     "path": "single",
+     "allowable": 406,
+     "vm_max": 218.76,
+     "vm_loc_mm": [
+      84.0,
+      -11.98,
+      -75.64
+     ],
+     "vm_struct": 218.76,
+     "vm_struct_loc_mm": [
+      84.0,
+      -11.98,
+      -75.64
+     ],
+     "SF": 1.856,
+     "SF_raw": 1.856,
+     "pass": true
+    },
+    "SF_waist": {
+     "path": "single",
+     "allowable": 386,
+     "vm_max": 189.62,
+     "vm_loc_mm": [
+      -32.01,
+      51.0,
+      25.31
+     ],
+     "vm_struct": 189.62,
+     "vm_struct_loc_mm": [
+      -32.01,
+      51.0,
+      25.31
+     ],
+     "SF": 2.036,
+     "SF_raw": 2.036,
+     "pass": true
+    },
+    "SF_yoke": {
+     "path": "single",
+     "allowable": 386,
+     "vm_max": 178.02,
+     "vm_loc_mm": [
+      66.2,
+      115.0,
+      116.22
+     ],
+     "vm_struct": 178.02,
+     "vm_struct_loc_mm": [
+      66.2,
+      115.0,
+      116.22
+     ],
+     "SF": 2.168,
+     "SF_raw": 2.168,
+     "pass": true
+    },
+    "land_defl": {
+     "mm": 3.90114,
+     "limit_mm": 5.5,
+     "pass": true
+    },
+    "equilibrium": {
+     "residual_N": 0.0117,
+     "pass": true
+    }
+   }
+  }
+ },
+ "overall": "FAIL",
+ "wall_s": 283.8
+}

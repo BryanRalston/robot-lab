@@ -181,3 +181,34 @@ Layout: pack/pack_layout_optA.{py,json,svg}, pack/pack_layout_optA_tables.md.
    - Floor at (−90, 0), sim z 121.6 = **global 1401.6**.
    - A 0.5 mm stainless deflector on the floor underside turns the plume rearward, exiting at x −107, global z ≈ 1390. It's torso-mounted, so it moves with the torso through the pitch and yaw range.
    - 54 mm from the pitch housing surface. All hip-yaw drives, bumpers and harness are below global 1206.6, so the vent stays clear of them.
+
+## 3c-final rev C (10:37): fine-mesh lid submodel + mass round
+**(1) Fine submodel:** a local Ball refinement in the full model (h 1.0 within r 30 of (56, 95, 278), h 25 elsewhere; `--refine`, `mesh.refine`). 137k nodes, 4.7 min, LC1a/b only.
+- Results: fea/job3c_lid_submodel_FINE_results.json.
+- **SF did not converge** (0.081 coarse → 0.089 fine; the peak moved to the mirrored −y corner). It's a sharp step/edge singularity at the lid-to-doubler/gusset junction on a 1.5 mm lid, so **it did not clear**.
+- I redesigned rather than keep the doubler: **lid 4.5 mm**, no top doubler, no sliver gusset; the under-lid c1/c2 doubler runs continuously to |y| 112. The lid top is at 281, so the **Thor bay stays at +9 mm (ID: chamfer 15 mm)**.
+
+**(2) Mass round:**
+- Pelvis lip 16 × 8 (was 20 × 8); ring r 55–61 (was 66); ribs 8.
+- waistY webs 4 mm to z 40 (was 6 to z 50); yoke plate 12 (was 16).
+- Cheeks t 11 × D 130 (was 14 × 140).
+- Floor 6 (was 8); socket walls and notch floor 6; spacer tubes Ø100/92.
+- Rib T-caps were tried in run 4 and made the pelvis worse (0.60), so they were removed.
+
+| run | bulkhead LC1a/b/c/u | pelvis | waistY | yoke | defl a/b mm | Hz |
+|---|---|---|---|---|---|---|
+| m1 (cuts, no top doubler) | 0.29/0.17/0.39/0.25 | 1.07/0.95/0.74/0.89 | ≥ 1.14 | ≥ 1.50 | 5.68/6.70 | 167 |
+| m2 (+top doubler) | 0.16/0.13/0.19/0.14 | 1.22/1.09/0.86/1.01 | ≥ 1.22 | ≥ 1.56 | 5.16/5.95 | 179 |
+| m3 (lid 3, no doubler) | 0.81/0.48/0.77/0.70 | 1.22/1.08/0.87/1.01 | ≥ 1.15 | ≥ 1.54 | 5.20/6.01 | 176 |
+| m4 (lid 4.5 + rib caps) | 1.01/0.60/0.86/0.88 | 0.85/0.76/0.60/0.70 | ≥ 1.12 | ≥ 1.58 | 5.01/5.72 | 178 |
+| **m5 final (lid 4.5)** | **1.00/0.65/0.87/0.87** | **1.22/1.09/0.87/1.01** | **≥ 1.17** | **≥ 1.56** | **5.13/5.89** | **169** |
+
+- **m5 FAILS:** bulkhead LC1b/c/u (peaks at the wing/lid corner (40, 113, 280) and the notch floor front corner (100, 52, 168)); pelvis LC1c 0.87 (rib top at the lip, (−35, 59, −53)); LC1b deflection 5.89 > 5.5 (k 4.9 MN/m offset; 5.65 MN/m centred). Mode 1 169 Hz and buckling 12.4 pass.
+- **Mass (m5):**
+  - Box + bulkhead 3.034 (mesh); cheeks 0.842 (mesh); spacers 0.225; RB7013 0.35; waistY +0.411; pelvis +0.637; stop / fuses / Electronics +0.11.
+  - Credits −2.978.
+  - **Net +2.63 kg, target ≤ 1.5 NOT met.**
+  - The remaining big items are the 4.5 mm lid (~0.41) and the bay box itself. The next lever is architectural: the land load into the side walls should not go through the lid (for example, socket-to-side-wall diagonal struts in the c1/c2 zone).
+- **COM:** Δz ≈ +4.6 mm since the booked state [EST, robot COM z ≈ 1.0 m] → cumulative ≈ 11.3 mm, **> 10 mm. Controls flagged; not booked** (sim_torso_body/model_v4 unchanged).
+
+**(3) Tap fuse:** **Littelfuse 0451.500** (NANO2, 0.5 A, **125 VAC/VDC**, 50 A @125 VDC interrupting, 0.3046 Ω cold), from the Littelfuse 451/453 datasheet. Rated ≥ 84 V DC, so it passes. Its 2 × 0.30 Ω in the balance path gives ≈ 146 mV at 240 mA: include it in R_CB sizing, and measure with balancing paused.

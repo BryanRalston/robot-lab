@@ -64,3 +64,8 @@
   - Bulkhead lid sliver SF 0.06–0.10 FAIL (fine-mesh check needed). Pelvis is 35 % of the remaining compliance.
   - Net +3.47 kg. COM would reach ≈15 mm (>10) → Controls flagged, not booked.
   - Vent at floor (−90, 0, global 1401.6) with a rearward deflector.
+- 2026-10-21 11:05 ET RL Torso: 3c rev C.
+  - Fine lid submodel (h 1.0 local): the singular step did not converge → redesigned to a 4.5 mm lid, no top doubler.
+  - Mass round m1–m5. Final: bulkhead 1.00/0.65/0.87/0.87, pelvis LC1c 0.87, LC1b deflection 5.89 mm: FAIL. 169 Hz PASS.
+  - Net +2.63 kg (target ≤1.5 not met). COM would reach ≈11.3 mm → Controls flagged, not booked.
+  - Tap fuse Littelfuse 0451.500 (125 VDC).

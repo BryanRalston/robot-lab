@@ -96,6 +96,8 @@ def build(c):
         li = occ.addBox(-xi+L_, -yi_+L_, zt_-rf["lip_t"]-1, 2*(xi-L_), 2*(yi_-L_), rf["lip_t"]+2)
         lip, _ = occ.cut([(3, lo)], [(3, li)])
         rb = [occ.addBox(-xi-0.01, yy-rf["rib_t"]/2, dz_, 2*xi+0.02, rf["rib_t"], zt_-dz_) for yy in rf["rib_y"]]
+        if rf.get("rib_cap"):   # T-flange on each rib top (rib_cap = [width, thickness])
+            cw, ct = rf["rib_cap"]; rb += [occ.addBox(-xi-0.01, yy-cw/2, zt_-ct, 2*xi+0.02, cw, ct) for yy in rf["rib_y"]]
         if rf.get("ring"):   # annular rib around the waist-yaw housing seat, deck top -> pelvis top
             r0, r1 = rf["ring"]
             ro = occ.addCylinder(0, 0, dz_, 0, 0, zt_-dz_, r1); ri = occ.addCylinder(0, 0, dz_-1, 0, 0, zt_-dz_+2, r0)
@@ -406,7 +408,7 @@ def main():
     ap.add_argument("--cfg", required=True); ap.add_argument("--out", required=True)
     ap.add_argument("--coarse", action="store_true"); ap.add_argument("--no-solve", action="store_true")
     ap.add_argument("--ccx"); ap.add_argument("--mesh-size", type=float, default=0.0)
-    ap.add_argument("--cases", default="", help="comma-separated load case names; default all")
+    ap.add_argument("--refine", action="store_true"); ap.add_argument("--cases", default="", help="comma-separated load case names; default all")
     a = ap.parse_args(); c = yaml.safe_load(open(a.cfg)); os.makedirs(a.out, exist_ok=True)
     t0 = time.time()
     gmsh.initialize(); gmsh.option.setNumber("General.Terminal", 0)
@@ -416,6 +418,15 @@ def main():
     tags = build(c); gmsh.write(os.path.join(a.out, "torso_r1.step"))
     h = a.mesh_size if a.mesh_size > 0 else c["mesh"]["size_coarse" if a.coarse else "size"]
     gmsh.option.setNumber("Mesh.MeshSizeMax", h); gmsh.option.setNumber("Mesh.MeshSizeMin", h/4)
+    rfn = c["mesh"].get("refine") if getattr(a, "refine", False) else None
+    if rfn:   # local submodel-style refinement (Ball field) around a hot spot, rest stays coarse
+        gmsh.option.setNumber("Mesh.MeshSizeMin", rfn["h"]/2)
+        fb = gmsh.model.mesh.field.add("Ball")
+        for k_, v_ in zip(("XCenter", "YCenter", "ZCenter"), rfn["c"]): gmsh.model.mesh.field.setNumber(fb, k_, v_)
+        gmsh.model.mesh.field.setNumber(fb, "Radius", rfn["r"]); gmsh.model.mesh.field.setNumber(fb, "Thickness", rfn["r"])
+        gmsh.model.mesh.field.setNumber(fb, "VIn", rfn["h"]); gmsh.model.mesh.field.setNumber(fb, "VOut", h)
+        gmsh.model.mesh.field.setAsBackgroundMesh(fb)
+        gmsh.option.setNumber("Mesh.MeshSizeExtendFromBoundary", 0)
     gmsh.option.setNumber("Mesh.SecondOrderLinear", 1)  # straight-sided tets: no negative jacobians on coarse curved edges
     print(f"MESH h={h}", flush=True)
     gmsh.model.mesh.generate(3); gmsh.model.mesh.setOrder(2)
