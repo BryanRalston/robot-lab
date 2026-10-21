@@ -1558,3 +1558,6 @@ Evidence: 32 passive topples peak at 17 deg chest angle, none reached 25 deg. Th
 
 ## R-160 — P-161 crown liner booked (ID 8e0c0d6) — 2026-10-21
 +0.022 kg [EST], an addition, booked at full. Head-first HIGH item: noted that Robot Lab directs a passive neck breakaway with a bypass load path (owner Actuators). Its mass will be booked when it lands, and the HIGH item stays OPEN until test or sim evidence closes it. LEDGER: ~72.50 -> ~72.52 kg vs T2 66.5, 6.02 kg OVER.
+
+## R-161 — F19 waist hold: open trade study (Controls d5c0abc) — 2026-10-21
+Evidence: holding the waist at 204 N.m cuts head-first landings 11/11 -> 2/11, but chest-pad v_n rises to 5.4-5.5 m/s, which FAILS T&R criterion 2 (4.24 m/s). It also exceeds the 170 N.m D102c slip setting. RULING: no power-off waist brake is adopted. The neck breakaway plus the crown liner remain the main fix. OPEN TRADE (next session; Torso, Actuators, T&R, Controls; Arbiter decides on evidence): (a) a brake downstream of the limiter, (b) a higher slip setting, (c) neck breakaway alone. Each option must report head-first rate, chest v_n vs 4.24, waist/limiter loads vs 2.5 kN.m and 170 N.m, and mass. No mass booked. Ledger ~72.52.
