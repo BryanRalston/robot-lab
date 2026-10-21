@@ -1122,3 +1122,13 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
 
 ## R-118 (2026-10-20) J10 sim mass
 - Train and gate at the credible rollup: **67.1 kg nominal, randomization 65.0-68.5 kg** (consistent with the ~-0.64 reserve against 66.5). This is a sim robustness setting only; the 66.5 kg hard limit is unchanged, and so is the mass-down obligation. Controls refreshes the stale rollup file.
+
+## R-119 (2026-10-21) Shoulder-pad roll torque and energy basis (ID R9 a688e28, job1 a556d44)
+- Evidence: job1 R8B Mx 566-773 N·m; R9 hand calc 448 (axial, 7.0 kN x 0.064 m) - 539 (down shear) N·m, against CSG-25-100 momentary 369 N·m. Fails the gear on its own.
+- **Remedy: the shoulder_roll slip clutch already in CONTRACTS (row "rotary + 300 N·m slip clutch") is the design basis.** Mx at the gear is capped at the clutch slip torque. No new mass. CSG-32 rejected (adds mass and diameter against a -0.64 kg reserve, and is not needed). Pad relocation alone rejected: <=307 N·m (369/1.2) at 7.0 kN needs offset <=44 mm with zero shear, and 539 N·m down-shear cases still exceed it; 64 mm stays unless Arms finds a zero-mass move.
+- Conditions: Actuators cites the clutch mass (confirm it is inside the contract row, else book it full), the envelope (74x87 + clutch TBD) and the slip-torque tolerance band; **max slip incl. tolerance and rate must be <=307 N·m (>=20% under 369)**. G5: clutch slip torque measured on impact rig. This is the shoulder **roll** clutch; R-057 (no shoulder-pitch clutch) is unchanged.
+- **Energy basis: 265 J design energy governs** (R-049/R-052), with the >=10% worst-case margin at 15° (>=292 J) from my earlier pad ruling. 220 J (A44) is a load cap, not the absorption basis. R9 at 237 J **fails**. Clutch slip energy gets no credit until T-030 shows it (R-049).
+- ID: resize the R9 core to >=292 J worst case at peak <=7.0 kN x1.3 (about 48-50 mm usable crush at the plateau), within the 0.100 kg pair cap. Rerun job1 R9 with Mx reported both raw and clutch-limited; s0 >=2.0 still applies (Arms: e <=5 mm or C0 >=27 kN bearing).
+- Slip skin mu <=0.15: **Materials test required** (PTFE skin on EPP vs the R5/floor surfaces, dry and dusty, static and kinetic). It is G5. Until it is measured, FEA keeps the 15° (0.27 Fn) case as governing for s0 and Mx.
+- Mass: R9 -0.007 pair [EST] at half credit = **-0.0035 kg, held** until the energy-compliant core is defined (the resize will likely remove it). Nothing booked now.
+- Owed: ID (core resize to >=292 J, rerun); Arms (s0 at e10, eccentricity limit or bearing, pad move check); Actuators (clutch mass, envelope, slip band <=307 N·m); Materials (mu test, G5).
