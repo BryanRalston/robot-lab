@@ -68,8 +68,10 @@ geometry:
     width_y: 260
     height_z: 22
     t: 1.0
-    x0: -63
+    x0: -78
     z0: 278.0
+    note: 'Thermal 1ce8963: Thor fin exhaust rises through the gap behind Thor (rear face x -57) -> gap widened 6 -> 21 mm; partition gasketed to shell/lid on both sides + top; EtherCAT junction stays forward
+      of x -63 (intake side)'
   posts:
     path: single
     stock: 7075 waist path stand-in
@@ -124,6 +126,7 @@ geometry:
       dia: 25
       part: GORE MultiVent + stainless deflector (torso floor underside) turning the plume rearward, exit at x -107 z ~110
       note: y~0 per Robot Lab; 54 mm from the pitch housing surface; away from hip-yaw drives/bumpers (all below z -73)
+      deflector: 0.5 mm 304 SS chute, riveted (A2 SS blind rivets) or spot/TIG welded to the floor underside; NOT bonded (Thermal 1ce8963)
     y: 115
     x_front: 106.5
     x_rear: -107
@@ -162,7 +165,7 @@ geometry:
       - 54.5
       - 112
       - 165
-      - 171
+      - 169
     - - 52
       - 106.5
       - 54.5
@@ -171,7 +174,7 @@ geometry:
       - 274.5
     - - 52
       - 106.5
-      - 109
+      - 110
       - 112
       - 125.5
       - 274.5
@@ -186,7 +189,7 @@ geometry:
       - 54.5
       - 112
       - 125.5
-      - 129.6
+      - 127.6
     - - 52
       - 106.5
       - 0
@@ -199,6 +202,15 @@ geometry:
       - 118
       - 240
       - 278
+    keepout_harness:
+      x_max: -95
+      z_global:
+      - 1360
+      - 1420
+      z_torso:
+      - 80
+      - 140
+      note: no harness/connectors; BMS board z>=145 torso, SBS75X at z 160 (global 1440) clear
   waist:
     path: single
     stock: 7075 torso waist bracket (model_v4 single +y cheek 70x8) + waist actuator stand-ins (solid Al, stiff)
@@ -217,7 +229,7 @@ geometry:
     floor_z: 121.6
     note: 'model_v4 build_upper: waist_yaw axis dk+35, waist_pitch axis dk+143 (global 1349.6), torso bracket = +y cheek 70x8 from wp-30 to tb + floor plate at tb (1409.6). Sim-torso z = global-1280.'
     yoke2:
-      t: 11
+      t: 8
       D: 130
       z_bot: 19.6
       y_in: 103
@@ -345,3 +357,5 @@ criteria:
 post:
   freq_case: LC6_stand
   buckle_case: LC1a_29kN_normal
+lightening: '3c-light (from b3811cc rev E, CAD/config only, NOT run): yoke cheeks t 11->8; lower shelf 6->4 mm; side-wall front doubler 3->2 mm; floor strips 4->2 mm. Coarse l1 (before the outer wing doubler
+  was restored) failed bulkhead LC1b 0.64 at the wing/lid corner, so the wing doubler is back; needs the PC run.'

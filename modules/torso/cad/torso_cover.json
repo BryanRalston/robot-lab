@@ -55,7 +55,20 @@
   "sternum_size": 110,
   "sternum_proud": 65,
   "sternum_core": 68,
-  "sternum_blend": 15
+  "sternum_blend": 15,
+  "rear_port": {
+   "y": [
+    -25,
+    25
+   ],
+   "zc": 110,
+   "n": 7,
+   "slot_w": 4.0,
+   "pitch": 6.0,
+   "exit_mm2": 600,
+   "patch_margin": 40,
+   "patch_t": 0.3
+  }
  },
  "bbox_mm": [
   -110.0,
@@ -65,8 +78,8 @@
   170.0,
   310.0
  ],
- "volume_mm3": 684648,
- "mass_kg_CFRP_1550": 1.061,
+ "volume_mm3": 681848,
+ "mass_kg_CFRP_1550": 1.057,
  "sternum_skin_x_mm": 175,
  "vents_per_side": {
   "in": [
@@ -86,5 +99,30 @@
   "chamfer_line": "|y| = 170 - (z - 265) outer; at |y| 101 the chamfer is at z 334 > top 310",
   "margin_to_|y|<125_mm": 24,
   "verdict": "clears with the 45 mm chamfer; no change to 35 mm needed"
+ },
+ "rear_port": {
+  "open_area_mm2": 1400.0,
+  "exit_area_mm2": 600,
+  "ratio": 2.33,
+  "slot_w_mm": 4.0,
+  "port_y": [
+   -25,
+   25
+  ],
+  "port_z_torso": [
+   90.0,
+   130.0
+  ],
+  "global_z_centre": 1390,
+  "ss_patch": {
+   "t_mm": 0.3,
+   "size_mm": [
+    130,
+    120.0
+   ],
+   "inner_face": true,
+   "mass_kg": 0.0337,
+   "material": "AISI 304 0.3 mm (rho 7.9 [EST std])"
+  }
  }
 }

@@ -92,3 +92,4 @@
   - Net +2.57 kg (floor ≈ +2.2; ≤1.5 unreachable). COM would reach ≈10.7 mm → Controls flagged, not booked.
 - 2026-10-21 11:45 ET RL Torso: 3c rev E final coarse: all SFs ≥1.04, 4.91 mm offset, 207 Hz PASS. Net +2.63 kg (floor ≈ +2.2), COM ≈10.9 mm [EST] → R1 overrun note (T&R BC/LC1 or Arbiter acceptance).
 - 2026-10-21 11:01 ET Thermal: Torso 9700df9/b3811cc vent + Thor partition check (T9700_VENT_THOR_CHECK.md): runaway plume FAILS rear PC cover at 10 mm → cover port + SS/mica patch; legs/hip/knee PASS; partition x −63 PASS conditional (no exhaust through 6 mm gap, gasketed).
+- 2026-10-21 12:05 ET RL Torso: FEA_SPEC_job3d (+fea_job3d.yaml) for the bryan PC: IR BC + envelope check, LC1 29 kN, waist V/M output, P-160 2.5/3.75 kN·m. Job 3e (17.9/26.9 kN) is a PENDING draft: Materials grade/1.60 data and the Controls 25° case are not in the repo. 3c-light geometry (config only). Thermal 1ce8963 cover port + SS patch (+0.034 kg), partition moved to x −78.

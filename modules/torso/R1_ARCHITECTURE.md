@@ -643,3 +643,11 @@ A full ring flange instead of the cheek (≈0.4 kg [EST]) would give ≈ +2 mm z
 - **Options:**
   1. T&R revisits the BC (a fixed pelvis is conservative for a chest fall, where the real reaction is whole-body inertia) and/or the LC1 magnitude.
   2. The Arbiter accepts the mass overrun (≈ +1.1 kg over the +1.5 target) and Controls accepts the COM total.
+
+### Thermal 1ce8963 items: cover port, deflector, keep-out, partition (2026-10-21, CAD/config only)
+- **Rear cover port:** 7 slots of 4 mm (≤ 5 mm), y ±25, torso z 90–130 (global z 1390 centre), aligned with the deflector exit at x −107. Open area 1400 mm² = 2.33× the 600 mm² exit.
+- **Patch:** 0.3 mm 304 SS on the inner face, ±40 mm around the port (130 × 120). **+0.034 kg** (Thermal estimated ≈ 0.01; area × 0.3 mm × 7.9 g/cm³ gives 0.034). The cover CFRP loses ≈ 0.002 kg to the slots.
+- **Deflector:** 0.5 mm SS, riveted or welded, **not bonded**.
+- **Keep-out:** no harness or connectors at x < −95, global z 1360–1420. BMS board at torso z ≥ 145. The SBS75X at global z 1440 is clear.
+- **Partition:** Thor's fin exhaust rises behind Thor (exhaust upper back centre), so the 6 mm gap would carry it. Partition moved **x −63 → −78 (21 mm gap)**, gasketed to the shell/lid on both sides and the top. EtherCAT junction stays forward of x −63 (intake side). Mass: 0 (moved).
+- **Net for these items: +0.032 kg.**

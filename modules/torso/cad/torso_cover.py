@@ -8,7 +8,8 @@ P = dict(x_back=-110, x_front=110, z_bot=50, z_top=310, w_bot=250, w_shoulder=34
          shoulder_chamfer=45, t=2.0, corner_fillet=20, shoulder_open_dia=110, neck_dia=90,
          sternum_zc=220, slot_w=3.5, slot_pitch=6.0,
          vent_in=dict(z=(105, 155), x_cols=((-60, -24), (-18, 18), (24, 60))),
-         vent_out=dict(z=(160, 214), x_cols=((-102, -62), (62, 102))), sternum_size=110, sternum_proud=65, sternum_core=68, sternum_blend=15)
+         vent_out=dict(z=(160, 214), x_cols=((-102, -62), (62, 102))), sternum_size=110, sternum_proud=65, sternum_core=68, sternum_blend=15,
+         rear_port=dict(y=(-25, 25), zc=110, n=7, slot_w=4.0, pitch=6.0, exit_mm2=600, patch_margin=40, patch_t=0.3))   # Thermal 1ce8963: vent-deflector exit x -107, global z 1390 = torso z 110
 def build(p=P):
     L = p["x_front"]-p["x_back"]; xc = (p["x_front"]+p["x_back"])/2
     hb, hs, c = p["w_bot"]/2, p["w_shoulder"]/2, p["shoulder_chamfer"]
@@ -32,7 +33,18 @@ def build(p=P):
                     cut = cq.Workplane("XY").box(x1-x0, 80, p["slot_w"]).translate(((x0+x1)/2, sg*160, z))
                     sh = sh.cut(cut)
             z += p["slot_pitch"]
+    rp = p["rear_port"]   # louvred open port in the rear wall, slots <= 5 mm, aligned with the battery-vent deflector exit
+    for i in range(rp["n"]):
+        z = rp["zc"] + (i - (rp["n"]-1)/2)*rp["pitch"]
+        sh = sh.cut(cq.Workplane("XY").box(8, rp["y"][1]-rp["y"][0], rp["slot_w"]).translate((p["x_back"], sum(rp["y"])/2, z)))
     return sh
+def rear_port_info(p=P):
+    rp = p["rear_port"]; w = rp["y"][1]-rp["y"][0]; A = rp["n"]*w*rp["slot_w"]
+    hz = (rp["n"]-1)*rp["pitch"] + rp["slot_w"]; m = 2*rp["patch_margin"]
+    patch = ((w+m)*(hz+m) - A)*rp["patch_t"]*7.9e-6
+    return {"open_area_mm2": A, "exit_area_mm2": rp["exit_mm2"], "ratio": round(A/rp["exit_mm2"], 2), "slot_w_mm": rp["slot_w"],
+            "port_y": rp["y"], "port_z_torso": [round(rp["zc"]-hz/2, 1), round(rp["zc"]+hz/2, 1)], "global_z_centre": rp["zc"]+1280,
+            "ss_patch": {"t_mm": rp["patch_t"], "size_mm": [w+m, hz+m], "inner_face": True, "mass_kg": round(patch, 4), "material": "AISI 304 0.3 mm (rho 7.9 [EST std])"}}
 def vent_area(v, p=P):
     n = int((v["z"][1]-v["z"][0]-p["slot_w"])//p["slot_pitch"]) + 1
     return n, round(n*sum((b-a) for a, b in v["x_cols"])*p["slot_w"]/100, 1)   # cm2 per side (projected on x-z; true area on the 14.8 deg slope is larger)
@@ -49,5 +61,5 @@ if __name__ == "__main__":
                "volume_mm3": round(vol), "mass_kg_CFRP_1550": round(vol*1.55e-6, 3),
                "sternum_skin_x_mm": P["x_front"]+P["sternum_proud"],
                "vents_per_side": {"in": vent_area(P["vent_in"]), "out": vent_area(P["vent_out"]), "rule": "A35 >=25 cm2 in/out per bay; slots 3.5 mm wide (>=3 mm), IP2X: 12 mm finger cannot enter, live parts >=80 mm reach behind slots"},
-               "thor_duct_check": THOR}, open(os.path.join(d, "torso_cover.json"), "w"), indent=1)
+               "thor_duct_check": THOR, "rear_port": rear_port_info()}, open(os.path.join(d, "torso_cover.json"), "w"), indent=1)
     print([round(v) for v in (bb.xmin, bb.ymin, bb.zmin, bb.xmax, bb.ymax, bb.zmax)], round(vol*1.55e-6, 3))
