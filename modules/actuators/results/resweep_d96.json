@@ -1,0 +1,138 @@
+{
+ "AN1": {
+  "cand": [
+   "L_shank",
+   [
+    56,
+    60
+   ],
+   [
+    40,
+    130,
+    215
+   ],
+   "+x"
+  ],
+  "min": 3.5,
+  "lim": "L_tibia tube 7075 \u00f845x1.2 @{'L_ankle_pitch': -55}",
+  "near": {
+   "L_tibia tube 7075 \u00f845x1.2": 3.5,
+   "R_tibia tube 7075 \u00f845x1.2": 3.5,
+   "L_tibia internal doubler sleeve 0.5x100 (r8)": 4.7,
+   "R_tibia internal doubler sleeve 0.5x100 (r8)": 4.7,
+   "R_ankle screw -y RV12 roller-screw rod \u00f812": 8.1,
+   "L_ankle screw -y RV12 roller-screw rod \u00f812": 11.0
+  },
+  "pass": true
+ },
+ "AN2": {
+  "cand": [
+   "L_shank",
+   [
+    56,
+    60
+   ],
+   [
+    40,
+    130,
+    290
+   ],
+   "+x"
+  ],
+  "min": 3.5,
+  "lim": "L_tibia tube 7075 \u00f845x1.2 @{'L_ankle_pitch': -55}",
+  "near": {
+   "L_tibia tube 7075 \u00f845x1.2": 3.5,
+   "R_tibia tube 7075 \u00f845x1.2": 3.5,
+   "L_tibia internal doubler sleeve 0.5x100 (r8)": 4.7,
+   "R_tibia internal doubler sleeve 0.5x100 (r8)": 4.7,
+   "R_ankle screw +y body (ankle_body_x1)": 7.9,
+   "L_ankle screw -y RV12 roller-screw rod \u00f812": 11.0
+  },
+  "pass": true
+ },
+ "HP1": {
+  "cand": [
+   "pelvis",
+   [
+    84,
+    84
+   ],
+   [
+    -88,
+    45,
+    1178
+   ],
+   "-x"
+  ],
+  "min": 3.0,
+  "lim": "pelvis shell 7075 4 mm (open top/bottom) @{'L_ankle_pitch': -55}",
+  "near": {
+   "pelvis shell 7075 4 mm (open top/bottom)": 3.0,
+   "hip yaw + waist mount deck (pelvis) [EST]": 8.0,
+   "L_hip yaw output yoke plate [EST]": 24.5,
+   "L_hip_yaw PU bumper + bracket -35\u00b0 (L39)": 29.7,
+   "L_hip yaw yoke rear cheek (roll housing back face) [EST]": 48.5
+  },
+  "pass": true
+ },
+ "HP2": {
+  "cand": [
+   "pelvis",
+   [
+    84,
+    84
+   ],
+   [
+    -88,
+    135,
+    1178
+   ],
+   "-x"
+  ],
+  "min": 3.0,
+  "lim": "pelvis shell 7075 4 mm (open top/bottom) @{'L_ankle_pitch': -55}",
+  "near": {
+   "pelvis shell 7075 4 mm (open top/bottom)": 3.0,
+   "hip yaw + waist mount deck (pelvis) [EST]": 8.0,
+   "L_hip yaw output yoke plate [EST]": 18.0,
+   "L_hip_yaw PU bumper + bracket -35\u00b0 (L39)": 29.6,
+   "L_hip yaw yoke rear cheek (roll housing back face) [EST]": 35.4
+  },
+  "pass": true
+ },
+ "_housing_to_L60_top_plate_mm": {
+  "{'L_knee': 0}": 4.86,
+  "{'L_knee': 5}": 5.37,
+  "{'L_knee': 10}": 5.87,
+  "{'L_knee': 15}": 6.36,
+  "{'L_knee': 20}": 6.82,
+  "{'L_knee': 25}": 7.27,
+  "{'L_knee': 30}": 7.68,
+  "{'L_knee': 35}": 8.07,
+  "{'L_knee': 40}": 8.43,
+  "{'L_knee': 45}": 8.74,
+  "{'L_knee': 50}": 9.02,
+  "{'L_knee': 55}": 9.25,
+  "{'L_knee': 60}": 9.43,
+  "{'L_knee': 65}": 9.55,
+  "{'L_knee': 70}": 9.62,
+  "{'L_knee': 75}": 9.63,
+  "{'L_knee': 80}": 9.58,
+  "{'L_knee': 85}": 9.47,
+  "{'L_knee': 90}": 9.29,
+  "{'L_knee': 95}": 9.04,
+  "{'L_knee': 100}": 8.73,
+  "{'L_knee': 105}": 8.35,
+  "{'L_knee': 110}": 7.91,
+  "{'L_knee': 115}": 7.41,
+  "{'L_knee': 120}": 6.85,
+  "{'L_knee': 125}": 6.25,
+  "{'L_knee': 130}": 5.6,
+  "{'L_knee': 135}": 4.92,
+  "{'L_knee': 140}": 4.22,
+  "{'L_knee': 145}": 3.5,
+  "{'L_hip_pitch': 20, 'L_knee': 145}": 3.5,
+  "{'L_hip_pitch': -107.3}": 4.86
+ }
+}

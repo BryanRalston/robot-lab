@@ -1,0 +1,16 @@
+{
+ "GAP": 3.5,
+ "knee_hits_mm3": {
+  "0": 15.6,
+  "140": 23.96,
+  "145": 44.01
+ },
+ "removed_mm3": 83.6,
+ "removed_g": 0.23,
+ "area_m2_before": 0.17977,
+ "area_m2_after": 0.17958,
+ "area_loss_m2": 0.000189,
+ "fin_area_loss_pct_of_0p0703": 0.27,
+ "valid": true,
+ "step": "cad/knee_twin_housing_release_r116b.step"
+}

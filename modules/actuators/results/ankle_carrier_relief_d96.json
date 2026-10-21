@@ -1,0 +1,116 @@
+{
+ "YN": 18.0,
+ "D": 6.0,
+ "removed_mm3": 8424.0,
+ "removed_g_per_ankle": 23.7,
+ "rows": [
+  {
+   "roll": 0,
+   "q": -45,
+   "min_mm": 6.1,
+   "to": "L_ankle fork cheek +y"
+  },
+  {
+   "roll": 0,
+   "q": -50,
+   "min_mm": 5.7,
+   "to": "L_ankle fork cheek +y"
+  },
+  {
+   "roll": 0,
+   "q": -52.5,
+   "min_mm": 5.1,
+   "to": "L_ankle fork cheek -y"
+  },
+  {
+   "roll": 0,
+   "q": -55,
+   "min_mm": 4.6,
+   "to": "L_ankle fork cheek -y"
+  },
+  {
+   "roll": 0,
+   "q": -57.5,
+   "min_mm": 4.1,
+   "to": "L_ankle fork cheek -y"
+  },
+  {
+   "roll": 0,
+   "q": -60,
+   "min_mm": 3.7,
+   "to": "L_ankle fork cheek +y"
+  },
+  {
+   "roll": 18,
+   "q": -45,
+   "min_mm": 6.1,
+   "to": "L_ankle fork cheek +y"
+  },
+  {
+   "roll": 18,
+   "q": -50,
+   "min_mm": 5.7,
+   "to": "L_ankle fork cheek +y"
+  },
+  {
+   "roll": 18,
+   "q": -52.5,
+   "min_mm": 5.1,
+   "to": "L_ankle fork cheek -y"
+  },
+  {
+   "roll": 18,
+   "q": -55,
+   "min_mm": 4.6,
+   "to": "L_ankle fork cheek -y"
+  },
+  {
+   "roll": 18,
+   "q": -57.5,
+   "min_mm": 4.1,
+   "to": "L_ankle fork cheek -y"
+  },
+  {
+   "roll": 18,
+   "q": -60,
+   "min_mm": 3.7,
+   "to": "L_ankle fork cheek +y"
+  },
+  {
+   "roll": -18,
+   "q": -45,
+   "min_mm": 6.1,
+   "to": "L_ankle fork cheek +y"
+  },
+  {
+   "roll": -18,
+   "q": -50,
+   "min_mm": 5.7,
+   "to": "L_ankle fork cheek +y"
+  },
+  {
+   "roll": -18,
+   "q": -52.5,
+   "min_mm": 5.1,
+   "to": "L_ankle fork cheek -y"
+  },
+  {
+   "roll": -18,
+   "q": -55,
+   "min_mm": 4.6,
+   "to": "L_ankle fork cheek -y"
+  },
+  {
+   "roll": -18,
+   "q": -57.5,
+   "min_mm": 4.1,
+   "to": "L_ankle fork cheek -y"
+  },
+  {
+   "roll": -18,
+   "q": -60,
+   "min_mm": 3.7,
+   "to": "L_ankle fork cheek +y"
+  }
+ ]
+}
