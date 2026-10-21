@@ -277,3 +277,20 @@ The sole pad is under the foot plate; the P-025 ankle boot hem is re-anchored ab
   - full CAD ROM.
 - **Thermal:** re-run at H 0.14, with the turns, transfer 1358 / exit 1287 / hood 2652 + 1024.
 - **T&R:** hood and recessed webs (touch + probe B) on the outboard thigh; housing-fairing slots.
+
+### P-156 rev 5a: outboard hood IP2X fix (T&R 5842853)
+- The open top/aft of the hood are **louvred**: 1.0 mm PC blades, **gaps 4.5 ± 0.3 (≤ 4.8 mm, ≤ 5.0 incl. tolerance)**, pitch 5.5, 6 mm deep, angled 30° up/aft.
+  - Hood lengthened to 90 mm (x −10…−100), still 26 mm standoff.
+  - Louvred faces: top 90 × 26, aft end 28 × 26, and the upper 12 mm band of the outer face (blades up).
+- **Free open area 3394 mm²** (4148 gross × 0.818, ≥ 2600); dilution slots 4.0 ± 0.3 × 16 on the lower edge and sides **1024 nominal / 947 min mm²** (≥ 600).
+- IP2X: no hood opening > 4.8 mm, so the 12 mm finger (80 mm reach) cannot enter; the exit webs sit 11 mm further inboard.
+- Mass: hood 5 → 12.5 g/side (blades + 16 mm length) → P-156 **0.056 kg/side, 0.112 pair [EST]** (+0.015 vs rev 5); knee-venting total **+0.062 pair**.
+
+### Option B (needs a Legs mechanism/structure change): L60 top-plate cut-out
+- A **~52 × 40 mm cut-out** in the L60 trunnion bracket top plate (y 104–156, x ~−40…−80, z 816–824) over the chimney lets the fin chimney rise straight through to a rear/up outlet. The rear outlet must vent clear of the P-023 skirt (skirt slotted locally or hem raised: ID/Legs).
+- **Legs structural check required:** the plate is a load path to the femur (L60/D60); edge stiffening likely.
+- **Est. benefit vs rev 5:**
+  - Thermal: H ≈ 0.18–0.20 m, straight path, no 90° turns → about **−4 to −6 K** drive base (Thermal 0.12 → 0.20 trend), with more margin to 80 °C.
+  - ID mass: drop the transfer duct (15 g) and side hood (12.5 g), add a riser + rear hood (~10 g) → **≈ −0.035 pair**.
+  - Cut 7075 −0.047 kg/side [EST] before any reinforcement (Legs ledger).
+  - Removes the outboard exhaust near the hand zone.
