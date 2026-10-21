@@ -1,0 +1,113 @@
+{
+ "R_hem": 141.5,
+ "JCH": 3.0,
+ "hem_nominal_ROM": [
+  -35.2,
+  [
+   42.5,
+   -4,
+   -17
+  ]
+ ],
+ "hem_nominal_ROM_tol2": -37.2,
+ "hem_nominal_ROM_band5_25_tol2": 490,
+ "notch_panel_nominal_ROM": [
+  52.8,
+  [
+   42.5,
+   15,
+   -37.5
+  ]
+ ],
+ "notch_shroud_nominal_ROM": [
+  31.8,
+  [
+   42.5,
+   15,
+   -35
+  ]
+ ],
+ "notch_shroud_nominal_ROM_tol2": 29.8,
+ "hem_ovt2.5": [
+  -35.2,
+  [
+   42.5,
+   -14.5,
+   -35
+  ]
+ ],
+ "hem_ovt2.5_tol2": -37.2,
+ "hem_ovt2.5_band5_25_tol2": 630,
+ "notch_panel_ovt2.5": [
+  52.7,
+  [
+   42.5,
+   17.5,
+   -37.5
+  ]
+ ],
+ "notch_shroud_ovt2.5": [
+  30.6,
+  [
+   42.5,
+   17.5,
+   0
+  ]
+ ],
+ "notch_shroud_ovt2.5_tol2": 28.6,
+ "hem_ovt3.6": [
+  -35.2,
+  [
+   42.5,
+   -14.5,
+   -35
+  ]
+ ],
+ "hem_ovt3.6_tol2": -37.2,
+ "hem_ovt3.6_band5_25_tol2": 770,
+ "notch_panel_ovt3.6": [
+  52.7,
+  [
+   42.5,
+   17.5,
+   -37.5
+  ]
+ ],
+ "notch_shroud_ovt3.6": [
+  29.8,
+  [
+   42.5,
+   -15.6,
+   45
+  ]
+ ],
+ "notch_shroud_ovt3.6_tol2": 27.8,
+ "hem_ovt5.8": [
+  -35.2,
+  [
+   42.5,
+   -14.5,
+   -35
+  ]
+ ],
+ "hem_ovt5.8_tol2": -37.2,
+ "hem_ovt5.8_band5_25_tol2": 910,
+ "notch_panel_ovt5.8": [
+  52.7,
+  [
+   42.5,
+   17.5,
+   -37.5
+  ]
+ ],
+ "notch_shroud_ovt5.8": [
+  27.0,
+  [
+   42.5,
+   -17.8,
+   47.5
+  ]
+ ],
+ "notch_shroud_ovt5.8_tol2": 25.0,
+ "stl": "r8f_pelvis_notched"
+}
