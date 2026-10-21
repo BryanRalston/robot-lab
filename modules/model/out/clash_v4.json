@@ -7,21 +7,31 @@
   "hip_yaw": {
    "limit": [
     -35,
-    45
+    40
    ],
    "free": [
     -35,
-    45
+    40
    ],
    "clashes": [],
    "arm_leg": [
     {
+     "angle": -15,
+     "pairs": [
+      [
+       "L_palm 7075-T6 machined shell 1.5 mm w/ openings (P-021/A32, palm_7075.py)",
+       "L_knee trunnion bracket top plate (thigh) [EST]",
+       106.9
+      ]
+     ]
+    },
+    {
      "angle": -30,
      "pairs": [
       [
-       "L_finger1 phalanx1 [EST]",
+       "L_palm 7075-T6 machined shell 1.5 mm w/ openings (P-021/A32, palm_7075.py)",
        "L_knee trunnion bracket top plate (thigh) [EST]",
-       1027.9
+       249.0
       ]
      ]
     },
@@ -29,9 +39,63 @@
      "angle": -35,
      "pairs": [
       [
-       "L_finger1 phalanx1 [EST]",
+       "L_palm 7075-T6 machined shell 1.5 mm w/ openings (P-021/A32, palm_7075.py)",
        "L_knee trunnion bracket top plate (thigh) [EST]",
-       1413.7
+       612.9
+      ],
+      [
+       "L_thumb phalanx1 [EST]",
+       "L_knee trunnion bracket top plate (thigh) [EST]",
+       4.4
+      ]
+     ]
+    }
+   ],
+   "full_range_clear": true
+  },
+  "hip_yaw_R": {
+   "limit": [
+    -40,
+    35
+   ],
+   "free": [
+    -40,
+    35
+   ],
+   "clashes": [],
+   "arm_leg": [
+    {
+     "angle": 15,
+     "pairs": [
+      [
+       "R_palm 7075-T6 machined shell 1.5 mm w/ openings (P-021/A32, palm_7075.py)",
+       "R_knee trunnion bracket top plate (thigh) [EST]",
+       106.9
+      ]
+     ]
+    },
+    {
+     "angle": 30,
+     "pairs": [
+      [
+       "R_palm 7075-T6 machined shell 1.5 mm w/ openings (P-021/A32, palm_7075.py)",
+       "R_knee trunnion bracket top plate (thigh) [EST]",
+       249.0
+      ]
+     ]
+    },
+    {
+     "angle": 35,
+     "pairs": [
+      [
+       "R_palm 7075-T6 machined shell 1.5 mm w/ openings (P-021/A32, palm_7075.py)",
+       "R_knee trunnion bracket top plate (thigh) [EST]",
+       612.9
+      ],
+      [
+       "R_thumb phalanx1 [EST]",
+       "R_knee trunnion bracket top plate (thigh) [EST]",
+       4.4
       ]
      ]
     }
@@ -53,24 +117,24 @@
      "angle": -12,
      "pairs": [
       [
-       "R_palm (7075 skeleton + PA12) [EST]",
+       "R_palm 7075-T6 machined shell 1.5 mm w/ openings (P-021/A32, palm_7075.py)",
        "R_hip_pitch screw -y RV12 roller-screw rod \u00f812",
-       84.4
+       761.8
+      ],
+      [
+       "R_finger1 phalanx1 [EST]",
+       "R_hip_pitch screw -y body (hip_pitch_body_x1)",
+       628.7
       ],
       [
        "R_finger1 phalanx2 [EST]",
        "R_hip_pitch screw -y body (hip_pitch_body_x1)",
-       443.3
+       297.6
       ],
       [
        "R_finger1 phalanx3 [EST]",
        "R_hip_pitch screw -y body (hip_pitch_body_x1)",
-       243.7
-      ],
-      [
-       "R_finger2 phalanx1 [EST]",
-       "R_hip_pitch screw -y RV12 roller-screw rod \u00f812",
-       215.7
+       2.5
       ]
      ]
     },
@@ -78,24 +142,24 @@
      "angle": 15,
      "pairs": [
       [
-       "L_palm (7075 skeleton + PA12) [EST]",
+       "L_palm 7075-T6 machined shell 1.5 mm w/ openings (P-021/A32, palm_7075.py)",
        "L_hip_pitch screw +y RV12 roller-screw rod \u00f812",
-       279.1
+       845.3
       ],
       [
-       "L_finger2 phalanx1 [EST]",
-       "L_hip_pitch screw +y RV12 roller-screw rod \u00f812",
-       47.9
+       "L_finger1 phalanx2 [EST]",
+       "L_femur tube 7050-T7451 \u00f850x1.2 (R-031; P-047 wall 1.6 pending FEA)",
+       12.9
       ],
       [
-       "L_finger2 phalanx2 [EST]",
-       "L_hip_pitch screw +y body (hip_pitch_body_x1)",
-       790.9
+       "L_finger1 phalanx3 [EST]",
+       "L_femur tube 7050-T7451 \u00f850x1.2 (R-031; P-047 wall 1.6 pending FEA)",
+       159.3
       ],
       [
-       "L_finger2 phalanx3 [EST]",
-       "L_hip_pitch screw +y body (hip_pitch_body_x1)",
-       406.3
+       "L_finger1 phalanx3 [EST]",
+       "L_femur internal doubler sleeve 0.5x100 (r8)",
+       45.9
       ]
      ]
     }
@@ -112,7 +176,38 @@
     40
    ],
    "clashes": [],
-   "arm_leg": [],
+   "arm_leg": [
+    {
+     "angle": -15,
+     "pairs": [
+      [
+       "L_palm 7075-T6 machined shell 1.5 mm w/ openings (P-021/A32, palm_7075.py)",
+       "L_knee trunnion bracket top plate (thigh) [EST]",
+       26.9
+      ]
+     ]
+    },
+    {
+     "angle": -30,
+     "pairs": [
+      [
+       "L_palm 7075-T6 machined shell 1.5 mm w/ openings (P-021/A32, palm_7075.py)",
+       "L_knee trunnion bracket top plate (thigh) [EST]",
+       248.6
+      ]
+     ]
+    },
+    {
+     "angle": -45,
+     "pairs": [
+      [
+       "L_palm 7075-T6 machined shell 1.5 mm w/ openings (P-021/A32, palm_7075.py)",
+       "L_knee trunnion bracket top plate (thigh) [EST]",
+       9.0
+      ]
+     ]
+    }
+   ],
    "full_range_clear": true
   },
   "knee": {
@@ -169,9 +264,9 @@
      "angle": -15,
      "pairs": [
       [
-       "R_finger1 phalanx1 [EST]",
+       "R_palm 7075-T6 machined shell 1.5 mm w/ openings (P-021/A32, palm_7075.py)",
        "R_knee trunnion bracket top plate (thigh) [EST]",
-       268.9
+       396.1
       ]
      ]
     },
@@ -179,24 +274,24 @@
      "angle": -30,
      "pairs": [
       [
-       "R_finger1 phalanx1 [EST]",
-       "R_knee twin housing (Actuators D59 STEP, shared centre web)",
-       686.2
+       "R_palm 7075-T6 machined shell 1.5 mm w/ openings (P-021/A32, palm_7075.py)",
+       "R_knee twin housing (Actuators D96 r116b release STEP: 9 mm front fins, rear fin-tip trim; shared centre web)",
+       335.7
       ],
       [
-       "R_finger1 phalanx1 [EST]",
+       "R_palm 7075-T6 machined shell 1.5 mm w/ openings (P-021/A32, palm_7075.py)",
        "R_knee trunnion bracket top plate (thigh) [EST]",
-       1413.7
+       1157.0
       ],
       [
-       "R_finger1 phalanx2 [EST]",
-       "R_knee twin housing (Actuators D59 STEP, shared centre web)",
-       279.0
+       "R_palm 7075-T6 machined shell 1.5 mm w/ openings (P-021/A32, palm_7075.py)",
+       "R_knee trunnion cheek -y [EST]",
+       693.5
       ],
       [
-       "R_finger1 phalanx3 [EST]",
-       "R_knee twin housing (Actuators D59 STEP, shared centre web)",
-       60.4
+       "R_finger1 phalanx1 [EST]",
+       "R_knee twin housing (Actuators D96 r116b release STEP: 9 mm front fins, rear fin-tip trim; shared centre web)",
+       1114.1
       ]
      ]
     },
@@ -204,19 +299,34 @@
      "angle": -45,
      "pairs": [
       [
-       "R_finger1 phalanx1 [EST]",
+       "R_palm 7075-T6 machined shell 1.5 mm w/ openings (P-021/A32, palm_7075.py)",
        "R_knee trunnion bracket top plate (thigh) [EST]",
-       1284.5
+       1160.5
+      ],
+      [
+       "R_finger1 phalanx1 [EST]",
+       "R_knee twin housing (Actuators D96 r116b release STEP: 9 mm front fins, rear fin-tip trim; shared centre web)",
+       1195.2
       ],
       [
        "R_finger1 phalanx2 [EST]",
-       "R_knee twin housing (Actuators D59 STEP, shared centre web)",
-       765.0
+       "R_knee twin housing (Actuators D96 r116b release STEP: 9 mm front fins, rear fin-tip trim; shared centre web)",
+       431.9
       ],
       [
-       "R_finger1 phalanx3 [EST]",
-       "R_knee twin housing (Actuators D59 STEP, shared centre web)",
-       124.7
+       "R_finger2 phalanx1 [EST]",
+       "R_knee twin housing (Actuators D96 r116b release STEP: 9 mm front fins, rear fin-tip trim; shared centre web)",
+       72.7
+      ]
+     ]
+    },
+    {
+     "angle": -60,
+     "pairs": [
+      [
+       "R_thumb phalanx2 [EST]",
+       "R_knee trunnion bracket top plate (thigh) [EST]",
+       33.1
       ]
      ]
     },
@@ -224,9 +334,9 @@
      "angle": 15,
      "pairs": [
       [
-       "L_finger1 phalanx1 [EST]",
+       "L_palm 7075-T6 machined shell 1.5 mm w/ openings (P-021/A32, palm_7075.py)",
        "L_knee trunnion bracket top plate (thigh) [EST]",
-       268.9
+       396.1
       ]
      ]
     },
@@ -234,24 +344,24 @@
      "angle": 30,
      "pairs": [
       [
-       "L_finger1 phalanx1 [EST]",
-       "L_knee twin housing (Actuators D59 STEP, shared centre web)",
-       686.2
+       "L_palm 7075-T6 machined shell 1.5 mm w/ openings (P-021/A32, palm_7075.py)",
+       "L_knee twin housing (Actuators D96 r116b release STEP: 9 mm front fins, rear fin-tip trim; shared centre web)",
+       335.7
       ],
       [
-       "L_finger1 phalanx1 [EST]",
+       "L_palm 7075-T6 machined shell 1.5 mm w/ openings (P-021/A32, palm_7075.py)",
        "L_knee trunnion bracket top plate (thigh) [EST]",
-       1413.7
+       1157.0
       ],
       [
-       "L_finger1 phalanx2 [EST]",
-       "L_knee twin housing (Actuators D59 STEP, shared centre web)",
-       279.0
+       "L_palm 7075-T6 machined shell 1.5 mm w/ openings (P-021/A32, palm_7075.py)",
+       "L_knee trunnion cheek +y [EST]",
+       693.5
       ],
       [
-       "L_finger1 phalanx3 [EST]",
-       "L_knee twin housing (Actuators D59 STEP, shared centre web)",
-       60.4
+       "L_finger1 phalanx1 [EST]",
+       "L_knee twin housing (Actuators D96 r116b release STEP: 9 mm front fins, rear fin-tip trim; shared centre web)",
+       1113.9
       ]
      ]
     },
@@ -259,19 +369,34 @@
      "angle": 45,
      "pairs": [
       [
-       "L_finger1 phalanx1 [EST]",
+       "L_palm 7075-T6 machined shell 1.5 mm w/ openings (P-021/A32, palm_7075.py)",
        "L_knee trunnion bracket top plate (thigh) [EST]",
-       1284.5
+       1160.5
+      ],
+      [
+       "L_finger1 phalanx1 [EST]",
+       "L_knee twin housing (Actuators D96 r116b release STEP: 9 mm front fins, rear fin-tip trim; shared centre web)",
+       1195.1
       ],
       [
        "L_finger1 phalanx2 [EST]",
-       "L_knee twin housing (Actuators D59 STEP, shared centre web)",
-       765.0
+       "L_knee twin housing (Actuators D96 r116b release STEP: 9 mm front fins, rear fin-tip trim; shared centre web)",
+       431.9
       ],
       [
-       "L_finger1 phalanx3 [EST]",
-       "L_knee twin housing (Actuators D59 STEP, shared centre web)",
-       124.7
+       "L_finger2 phalanx1 [EST]",
+       "L_knee twin housing (Actuators D96 r116b release STEP: 9 mm front fins, rear fin-tip trim; shared centre web)",
+       72.7
+      ]
+     ]
+    },
+    {
+     "angle": 60,
+     "pairs": [
+      [
+       "L_thumb phalanx2 [EST]",
+       "L_knee trunnion bracket top plate (thigh) [EST]",
+       33.1
       ]
      ]
     }
@@ -288,7 +413,33 @@
     60
    ],
    "clashes": [],
-   "arm_leg": [],
+   "arm_leg": [
+    {
+     "angle": 15,
+     "pairs": [
+      [
+       "L_palm 7075-T6 machined shell 1.5 mm w/ openings (P-021/A32, palm_7075.py)",
+       "L_knee trunnion bracket top plate (thigh) [EST]",
+       234.4
+      ],
+      [
+       "L_palm 7075-T6 machined shell 1.5 mm w/ openings (P-021/A32, palm_7075.py)",
+       "L_knee trunnion cheek +y [EST]",
+       199.5
+      ],
+      [
+       "R_palm 7075-T6 machined shell 1.5 mm w/ openings (P-021/A32, palm_7075.py)",
+       "R_knee trunnion bracket top plate (thigh) [EST]",
+       234.4
+      ],
+      [
+       "R_palm 7075-T6 machined shell 1.5 mm w/ openings (P-021/A32, palm_7075.py)",
+       "R_knee trunnion cheek -y [EST]",
+       199.5
+      ]
+     ]
+    }
+   ],
    "full_range_clear": true
   },
   "shoulder_pitch": {
@@ -301,7 +452,18 @@
     60
    ],
    "clashes": [],
-   "arm_leg": [],
+   "arm_leg": [
+    {
+     "angle": 15,
+     "pairs": [
+      [
+       "L_palm 7075-T6 machined shell 1.5 mm w/ openings (P-021/A32, palm_7075.py)",
+       "L_knee trunnion bracket top plate (thigh) [EST]",
+       67.0
+      ]
+     ]
+    }
+   ],
    "full_range_clear": true
   },
   "shoulder_roll": {
@@ -362,17 +524,17 @@
       [
        "L_forearm shell (6 tendon drives inside) [EST]",
        "L_hip roll housing (Actuators STEP, CRBH output)",
-       1897.6
+       2539.3
       ],
       [
        "L_wrist_roll strain-wave housing (motor+CSG) OD56 [EST]",
-       "L_hip roll housing (Actuators STEP, CRBH output)",
-       3398.8
+       "L_hip_pitch lever B needle hub (Actuators STEP; G2 rework queued)",
+       4.1
       ],
       [
-       "L_forearm wrist end cap [EST]",
-       "L_hip roll housing (Actuators STEP, CRBH output)",
-       924.9
+       "L_wrist pitch/yaw cross (2x micro strain-wave drive in forearm, push rods) [EST]",
+       "L_hip_pitch lever B needle hub (Actuators STEP; G2 rework queued)",
+       480.8
       ]
      ]
     },
@@ -380,24 +542,24 @@
      "angle": -5,
      "pairs": [
       [
-       "L_finger1 phalanx3 [EST]",
+       "L_palm 7075-T6 machined shell 1.5 mm w/ openings (P-021/A32, palm_7075.py)",
+       "L_hip_pitch screw +y RV12 roller-screw rod \u00f812",
+       277.8
+      ],
+      [
+       "L_finger1 phalanx2 [EST]",
        "L_hip_pitch screw +y body (hip_pitch_body_x1)",
-       26.2
+       144.1
+      ],
+      [
+       "L_finger2 phalanx1 [EST]",
+       "L_hip_pitch screw +y RV12 roller-screw rod \u00f812",
+       563.0
       ],
       [
        "L_finger2 phalanx2 [EST]",
-       "L_hip_pitch screw +y RV12 roller-screw rod \u00f812",
-       257.3
-      ],
-      [
-       "L_finger2 phalanx3 [EST]",
        "L_hip_pitch screw +y body (hip_pitch_body_x1)",
-       158.0
-      ],
-      [
-       "L_finger2 phalanx3 [EST]",
-       "L_hip_pitch screw +y RV12 roller-screw rod \u00f812",
-       227.0
+       232.0
       ]
      ]
     },
@@ -407,22 +569,22 @@
       [
        "L_forearm shell (6 tendon drives inside) [EST]",
        "L_hip roll housing (Actuators STEP, CRBH output)",
-       1391.5
+       1390.8
       ],
       [
-       "L_forearm wrist end cap [EST]",
-       "L_hip roll housing (Actuators STEP, CRBH output)",
-       153.9
-      ],
-      [
-       "L_wrist pitch/yaw cross (2x micro strain-wave drive in forearm, push rods) [EST]",
+       "L_wrist_roll strain-wave housing (motor+CSG) OD56 [EST]",
        "L_roll-output bracket pad +y (bolts to lever cheek top) [EST]",
-       471.4
+       4385.6
+      ],
+      [
+       "L_wrist_roll strain-wave housing (motor+CSG) OD56 [EST]",
+       "L_hip_pitch lever B needle hub (Actuators STEP; G2 rework queued)",
+       79.8
       ],
       [
        "L_wrist pitch/yaw cross (2x micro strain-wave drive in forearm, push rods) [EST]",
        "L_hip_pitch lever B needle hub (Actuators STEP; G2 rework queued)",
-       321.4
+       17.5
       ]
      ]
     }
@@ -446,7 +608,32 @@
       [
        "L_thumb phalanx2 [EST]",
        "L_hip_pitch screw +y RV12 roller-screw rod \u00f812",
-       1197.6
+       1229.8
+      ]
+     ]
+    },
+    {
+     "angle": -105,
+     "pairs": [
+      [
+       "L_thumb phalanx1 [EST]",
+       "L_knee trunnion bracket top plate (thigh) [EST]",
+       19.9
+      ],
+      [
+       "L_thumb phalanx2 [EST]",
+       "L_knee trunnion bracket top plate (thigh) [EST]",
+       54.2
+      ]
+     ]
+    },
+    {
+     "angle": -120,
+     "pairs": [
+      [
+       "L_thumb phalanx2 [EST]",
+       "L_knee trunnion bracket top plate (thigh) [EST]",
+       32.9
       ]
      ]
     }
@@ -494,7 +681,32 @@
       [
        "L_thumb phalanx2 [EST]",
        "L_hip_pitch screw +y RV12 roller-screw rod \u00f812",
-       1197.6
+       1229.8
+      ]
+     ]
+    },
+    {
+     "angle": -105,
+     "pairs": [
+      [
+       "L_thumb phalanx1 [EST]",
+       "L_knee trunnion bracket top plate (thigh) [EST]",
+       19.9
+      ],
+      [
+       "L_thumb phalanx2 [EST]",
+       "L_knee trunnion bracket top plate (thigh) [EST]",
+       54.2
+      ]
+     ]
+    },
+    {
+     "angle": -120,
+     "pairs": [
+      [
+       "L_thumb phalanx2 [EST]",
+       "L_knee trunnion bracket top plate (thigh) [EST]",
+       32.9
       ]
      ]
     }
@@ -507,51 +719,18 @@
     70
    ],
    "free": [
-    -40,
-    40
+    -70,
+    70
    ],
-   "clashes": [
+   "clashes": [],
+   "arm_leg": [
     {
-     "angle": -45,
+     "angle": 15,
      "pairs": [
       [
-       "L_wrist roll output fork [EST]",
-       "L_palm (7075 skeleton + PA12) [EST]",
-       3.7
-      ]
-     ]
-    },
-    {
-     "angle": 45,
-     "pairs": [
-      [
-       "L_wrist roll output fork [EST]",
-       "L_palm (7075 skeleton + PA12) [EST]",
-       3.7
-      ]
-     ]
-    }
-   ],
-   "arm_leg": [],
-   "full_range_clear": false
-  },
-  "wrist_yaw": {
-   "limit": [
-    -40,
-    40
-   ],
-   "free": [
-    -25,
-    25
-   ],
-   "clashes": [
-    {
-     "angle": -30,
-     "pairs": [
-      [
-       "L_wrist roll output fork [EST]",
-       "L_palm (7075 skeleton + PA12) [EST]",
-       39.1
+       "L_palm 7075-T6 machined shell 1.5 mm w/ openings (P-021/A32, palm_7075.py)",
+       "L_knee trunnion bracket top plate (thigh) [EST]",
+       11.9
       ]
      ]
     },
@@ -559,9 +738,52 @@
      "angle": 30,
      "pairs": [
       [
+       "L_palm 7075-T6 machined shell 1.5 mm w/ openings (P-021/A32, palm_7075.py)",
+       "L_knee trunnion bracket top plate (thigh) [EST]",
+       223.8
+      ]
+     ]
+    },
+    {
+     "angle": 45,
+     "pairs": [
+      [
+       "L_palm 7075-T6 machined shell 1.5 mm w/ openings (P-021/A32, palm_7075.py)",
+       "L_knee trunnion bracket top plate (thigh) [EST]",
+       25.5
+      ]
+     ]
+    }
+   ],
+   "full_range_clear": true
+  },
+  "wrist_yaw": {
+   "limit": [
+    -40,
+    40
+   ],
+   "free": [
+    -30,
+    30
+   ],
+   "clashes": [
+    {
+     "angle": -35,
+     "pairs": [
+      [
        "L_wrist roll output fork [EST]",
-       "L_palm (7075 skeleton + PA12) [EST]",
-       39.1
+       "L_palm 7075-T6 machined shell 1.5 mm w/ openings (P-021/A32, palm_7075.py)",
+       22.2
+      ]
+     ]
+    },
+    {
+     "angle": 35,
+     "pairs": [
+      [
+       "L_wrist roll output fork [EST]",
+       "L_palm 7075-T6 machined shell 1.5 mm w/ openings (P-021/A32, palm_7075.py)",
+       22.2
       ]
      ]
     }
@@ -571,24 +793,24 @@
      "angle": -15,
      "pairs": [
       [
+       "L_palm 7075-T6 machined shell 1.5 mm w/ openings (P-021/A32, palm_7075.py)",
+       "L_hip_pitch screw +y RV12 roller-screw rod \u00f812",
+       9.5
+      ],
+      [
+       "L_finger1 phalanx1 [EST]",
+       "L_hip_pitch screw +y RV12 roller-screw rod \u00f812",
+       174.8
+      ],
+      [
+       "L_finger1 phalanx2 [EST]",
+       "L_hip_pitch screw +y body (hip_pitch_body_x1)",
+       219.9
+      ],
+      [
        "L_finger1 phalanx2 [EST]",
        "L_hip_pitch screw +y RV12 roller-screw rod \u00f812",
-       48.1
-      ],
-      [
-       "L_finger1 phalanx3 [EST]",
-       "L_hip_pitch screw +y body (hip_pitch_body_x1)",
-       52.9
-      ],
-      [
-       "L_finger1 phalanx3 [EST]",
-       "L_hip_pitch screw +y RV12 roller-screw rod \u00f812",
-       200.1
-      ],
-      [
-       "L_finger2 phalanx3 [EST]",
-       "L_hip_pitch screw +y body (hip_pitch_body_x1)",
-       305.5
+       636.9
       ]
      ]
     },
@@ -596,64 +818,74 @@
      "angle": -30,
      "pairs": [
       [
+       "L_finger1 phalanx2 [EST]",
+       "L_femur tube 7050-T7451 \u00f850x1.2 (R-031; P-047 wall 1.6 pending FEA)",
+       50.6
+      ],
+      [
        "L_finger1 phalanx3 [EST]",
-       "L_femur tube 7075 \u00f850x1.2",
-       119.4
+       "L_femur tube 7050-T7451 \u00f850x1.2 (R-031; P-047 wall 1.6 pending FEA)",
+       258.1
       ],
       [
-       "L_finger4 phalanx3 [EST]",
-       "L_hip_pitch screw +y body (hip_pitch_body_x1)",
-       129.3
+       "L_finger1 phalanx3 [EST]",
+       "L_femur internal doubler sleeve 0.5x100 (r8)",
+       71.0
       ],
       [
-       "L_finger4 phalanx3 [EST]",
+       "L_finger3 phalanx1 [EST]",
        "L_hip_pitch screw +y RV12 roller-screw rod \u00f812",
-       240.8
+       104.8
       ]
      ]
     },
     {
-     "angle": -20,
+     "angle": -40,
      "pairs": [
       [
-       "L_finger2 phalanx2 [EST]",
-       "L_hip_pitch screw +y RV12 roller-screw rod \u00f812",
-       23.4
+       "L_finger1 phalanx1 [EST]",
+       "L_femur tube 7050-T7451 \u00f850x1.2 (R-031; P-047 wall 1.6 pending FEA)",
+       258.7
       ],
       [
-       "L_finger2 phalanx3 [EST]",
-       "L_hip_pitch screw +y body (hip_pitch_body_x1)",
-       22.4
+       "L_finger1 phalanx1 [EST]",
+       "L_knee trunnion bracket strut to femur [EST]",
+       547.3
       ],
       [
-       "L_finger2 phalanx3 [EST]",
-       "L_hip_pitch screw +y RV12 roller-screw rod \u00f812",
-       436.4
+       "L_finger1 phalanx2 [EST]",
+       "L_femur tube 7050-T7451 \u00f850x1.2 (R-031; P-047 wall 1.6 pending FEA)",
+       243.7
       ],
       [
-       "L_finger3 phalanx3 [EST]",
-       "L_hip_pitch screw +y body (hip_pitch_body_x1)",
-       345.9
+       "L_finger1 phalanx3 [EST]",
+       "L_femur tube 7050-T7451 \u00f850x1.2 (R-031; P-047 wall 1.6 pending FEA)",
+       134.1
       ]
      ]
     },
     {
-     "angle": -25,
+     "angle": -35,
      "pairs": [
       [
-       "L_finger3 phalanx3 [EST]",
-       "L_hip_pitch screw +y body (hip_pitch_body_x1)",
-       55.4
+       "L_finger1 phalanx1 [EST]",
+       "L_femur tube 7050-T7451 \u00f850x1.2 (R-031; P-047 wall 1.6 pending FEA)",
+       11.3
       ],
       [
-       "L_finger3 phalanx3 [EST]",
-       "L_hip_pitch screw +y RV12 roller-screw rod \u00f812",
-       425.7
+       "L_finger1 phalanx2 [EST]",
+       "L_femur tube 7050-T7451 \u00f850x1.2 (R-031; P-047 wall 1.6 pending FEA)",
+       372.0
       ],
       [
-       "L_finger4 phalanx3 [EST]",
-       "L_hip_pitch screw +y body (hip_pitch_body_x1)",
-       305.3
+       "L_finger1 phalanx3 [EST]",
+       "L_femur tube 7050-T7451 \u00f850x1.2 (R-031; P-047 wall 1.6 pending FEA)",
+       36.4
+      ],
+      [
+       "L_finger2 phalanx3 [EST]",
+       "L_femur tube 7050-T7451 \u00f850x1.2 (R-031; P-047 wall 1.6 pending FEA)",
+       185.1
       ]
      ]
     }
