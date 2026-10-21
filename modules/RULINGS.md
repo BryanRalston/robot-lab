@@ -1505,3 +1505,6 @@ The R-027 palm credit change (-0.120 to -0.097 pair) is the same +0.023 as the R
 1. Booked into CONTRACTS §2 ROM: PU stop contact at 133° (r75, 40.1 J × 1.1 design energy, top-out ≤143.6°); motors-off bottoming is a fault case that Test covers in G5; kneel ≤125° with no exemption; TUCK keeps the knee drives on with a 95–125° damping ramp at ≤50 N·m and drops them last; swing-leg tuck for side falls. Controls' R-150/R-151 sequence must respect the 125° kneel limit.
 2. Tibia wall 2.0 mm replaces R-135's 1.5 mm for the tibia. This is a mass ADDITION that is not yet booked. Legs states the kg delta vs the R-135 booking (CALC from CAD), and it is booked at full on receipt. The femur stays per R-135 pending T&R's dynamic factor.
 3. Actuators D98 +0.807 knee stop is not booked (Robot Lab rejected it; D99 ≤0.35 pending). P-057 +0.050 is already booked in R-151, not again. Credible mass ~68.78 kg plus the open tibia delta.
+
+## R-153 — P-057 correction (Electronics a0c28ae) — 2026-10-21
+Link B replaces the 10 mm² front-low main, -0.018. It is credited at full because it is cited density on a removed item from the same ledger. P-057 nets +0.032. Credible mass ~68.78 → ~68.76 kg, plus the open tibia delta (R-152). The floor vent over the +y hip-yaw drive and PU bumpers stays with Torso and Electronics; ducting it or moving it is a G2/G3 item.
