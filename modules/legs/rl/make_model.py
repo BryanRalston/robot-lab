@@ -11,7 +11,7 @@ import mujoco
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, '..', '..', '..'))
 XML_V3 = os.path.join(ROOT, 'sim', 'v3', 'humanoid_v3.xml')
-REF_DIR = os.path.join(ROOT, 'modules', 'legs', 'results', 'r7', 'ref_ds25')
+REF_DIR = os.path.join(ROOT, 'modules', 'legs', 'results', 'r8', 'ref_ds25')   # r8 ankle-bound plans (stance ankle >= -0.88 rad), 2026-10-21
 OUT_XML = os.path.join(HERE, 'humanoid_mjx.xml')
 OUT_ROUGH = os.path.join(HERE, 'humanoid_mjx_rough.xml')
 OUT_REF = os.path.join(HERE, 'ref_cycle.npz')

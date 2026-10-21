@@ -30,7 +30,7 @@
       <site name="imu"/>
       <body name="L_hipY" pos="0 0.13 0">
         <inertial pos="0.0059 0 -0.1058" mass="2.1325" diaginertia="0.00339857 0.00457339 0.00363983"/>
-        <joint name="l_hip_yaw" range="-0.610865 0.785398" armature="0.079" damping="0.5" frictionloss="0.3"/>
+        <joint name="l_hip_yaw" range="-0.610865 0.698132" armature="0.079" damping="0.5" frictionloss="0.3"/>
         <body name="L_hipR" pos="0 0 -0.115">
           <inertial pos="0 0.0023 -0.1151" mass="1.95942" diaginertia="0.00392304 0.00340906 0.00288459"/>
           <joint name="l_hip_roll" range="-0.20944 0.261799" armature="0.441" damping="0.5" frictionloss="0.3" axis="1 0 0"/>
@@ -56,7 +56,7 @@
       </body>
       <body name="R_hipY" pos="0 -0.13 0">
         <inertial pos="0.0059 0 -0.1058" mass="2.1325" diaginertia="0.00339857 0.00457339 0.00363983"/>
-        <joint name="r_hip_yaw" range="-0.785398 0.610865" armature="0.079" damping="0.5" frictionloss="0.3"/>
+        <joint name="r_hip_yaw" range="-0.698132 0.610865" armature="0.079" damping="0.5" frictionloss="0.3"/>
         <body name="R_hipR" pos="0 0 -0.115">
           <inertial pos="0 0.0106 -0.1151" mass="1.95942" diaginertia="0.00371326 0.00340906 0.0026748"/>
           <joint name="r_hip_roll" range="-0.261799 0.20944" armature="0.441" damping="0.5" frictionloss="0.3" axis="1 0 0"/>
