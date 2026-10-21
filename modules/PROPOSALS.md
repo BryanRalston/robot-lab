@@ -506,3 +506,18 @@ All keep R-076 (reinforced isolation, IEC 60664-1 creepage, IP2X), R-074 (main l
   - T&R: confirm the moment basis and the energy. Is a fixed pelvis the right reaction for a chest fall? It's conservative.
   - Actuators: confirm stop geometry inside the waist pitch housing envelope, and gear protection (torque limiter?).
 - **Mass:** +0.05 kg [EST], not in the FEA. Owner Torso; consulted T&R and Actuators.
+
+#### P-160 update (Torso, 2026-10-21): energy case, sizing ON HOLD until Actuators D102c
+- **Upper-body inertia about the waist-pitch axis** (sim/v3/humanoid_v3.xml bodies torso, L/R shoulderP, upper_arm, forearm, hand, neckY, head; arms per modules/arms/arm_inertials_r3.json as applied in sim v3; parallel-axis sum, Iyy):
+  - arms down: **1.44 kg·m²** (M 32.5 kg);
+  - arms horizontal forward: **3.52 kg·m²** [CALC, rigid-arm rotation about the shoulder pitch];
+  - plus reflected rotor 0.24 kg·m² (TBM2G Jm 0.239 kg·cm² × 100², waist_stop_interface_d102.py).
+- **Energy at 6.3 rad/s:** ½·I·ω² = 33 J (arms down + rotor) to 75 J (arms forward + rotor). **Hold target per Actuators: 68.9 J (drivetrain 0.652 kg·m²), peak possibly ≈ 0.7 kN·m (slip clutch under study).** No sizing is committed.
+- **Parameters recorded for the hold:**
+  - Lug location: torso-cheek lugs at r_lug = 100 mm (range 60–120) from the pitch axis, in the band |y| 72–100. That's outside the Ø100 spacer tubes and clear of the waistY plate (|y| ≤ 70). The strike faces are waistY plate wings.
+  - Two lug pairs, one per range end (−30°, +60°).
+  - Travel envelope (linear stop, θ = 2E/T_peak):
+    - 68.9 J at 0.7 kN·m → θ 11.3° (19.7 mm at r 100).
+    - 68.9 J at 4.36 kN·m → θ 1.8° (3.2 mm).
+  - So the stop engages θ before each range end, or bottoms θ beyond it. The choice and the ROM impact wait for D102c.
+- **Candidate part family (not selected):** ACE TUBUS TA co-polyester profile dampers, e.g. TA43-18: 112 Nm/cycle continuous, 165 emergency, 18 mm stroke, 0.051 kg (ACE TUBUS TA datasheet, acecontrols.co.uk ACE_TUBUS_TA_OPERATING-MOUNTING_EN_21_22_0019). Its force–stroke curve must be checked against the peak torque once D102c sets it.
