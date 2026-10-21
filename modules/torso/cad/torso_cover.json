@@ -1,37 +1,33 @@
 {
+ "source": "ID e874653 SHOULDER_PAD.md; V5_POLISH_PLAN row 4",
  "params": {
   "x_back": -110,
   "x_front": 110,
-  "half_w": 170,
-  "z_bot": 0,
-  "z_top": 470,
+  "z_bot": 50,
+  "z_top": 310,
+  "w_bot": 250,
+  "w_shoulder": 340,
+  "z_shoulder": 220,
+  "shoulder_chamfer": 45,
   "t": 2.0,
-  "fillet": 25,
-  "sternum_c": [
-   360
-  ],
+  "corner_fillet": 20,
+  "shoulder_open_dia": 110,
+  "neck_dia": 90,
+  "sternum_zc": 220,
   "sternum_size": 110,
   "sternum_proud": 37,
   "sternum_core": 40,
-  "sternum_blend": 15,
-  "shoulder_y": 170,
-  "shoulder_z": 380,
-  "shoulder_open_dia": 130,
-  "neck_dia": 90,
-  "waist_open": [
-   200,
-   280
-  ]
+  "sternum_blend": 15
  },
  "bbox_mm": [
   -110.0,
   -170.0,
-  0.0,
+  50.0,
   147.0,
   170.0,
-  470.0
+  310.0
  ],
- "volume_mm3": 983297.9089057022,
- "mass_kg_CFRP_1550": 1.524,
+ "volume_mm3": 684742,
+ "mass_kg_CFRP_1550": 1.061,
  "sternum_skin_x_mm": 147
 }

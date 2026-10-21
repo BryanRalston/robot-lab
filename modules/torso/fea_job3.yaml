@@ -4,13 +4,13 @@ materials:
   Al7075T651: {E: 70000, nu: 0.33, rho: 2.81e-9, Sy: 480, UTS: 560, allowable: 320}   # R-123: 320 = multi-path only; single-path per-part 'allowable' (R-128 MIL-HDBK-5H A-basis/1.5) overrides
   CFRP_QI:    {E: 50000, nu: 0.30, rho: 1.55e-9, Sy: 450}   # [EST] quasi-isotropic, no cited laminate
 geometry:   # robot frame origin = waist centre; x fwd, y left, z up (mm)
-  bulkhead: {path: single, stock: '7075-T651 plate 3.0 in (76 mm; 12 web + 4 land + 60 rib integral)', grain: 'L along y (span); LT/ST governs', allowable: 257, mat: Al7075T651, width_y: 300, height_z: 160, t: 12, x0: 40, z0: 300}
-  land: {size: 101, t: 4, z_c: 360}            # sternum land, front face
+  bulkhead: {path: single, stock: '7075-T651 plate 3.0 in (76 mm; 12 web + 4 land + 60 rib integral)', grain: 'L along y (span); LT/ST governs', allowable: 257, mat: Al7075T651, width_y: 300, height_z: 160, t: 12, x0: 40, z0: 140}   # centre z 220 = shoulder pitch axis (ID e874653)
+  land: {size: 101, t: 4, z_c: 220}            # sternum land, front face
   rib: {h: 60, t: 6}                           # integral back rib under the land
   shoulder_flange: {y_c: 150, bc_dia: 80, n_bolt: 8, bolt_dia: 8.4}
   grommet: {dia: 22, y_c: 110, z_off: -55}
   bezel_inserts: {dia: 5.6, pitch: 116}        # 4x M4 on the land corners
-  partition: {path: multi, stock: 'CFRP QI 1.0 mm laminate', grain: 'QI 0/±45/90', mat: CFRP_QI, width_y: 260, height_z: 320, t: 1.0, x0: -10, z0: 0}   # spans pelvis top to bulkhead rib
+  partition: {path: multi, stock: 'CFRP QI 1.0 mm laminate', grain: 'QI 0/±45/90', mat: CFRP_QI, width_y: 260, height_z: 300, t: 1.0, x0: -10, z0: 0}   # spans pelvis top to bulkhead rib
   posts: {path: single, stock: 'from bulkhead stock 3.0 in', grain: 'L along z', allowable: 257, mat: Al7075T651, y: [-100, 100], w_y: 20}   # waist-ring posts pelvis->bulkhead (bulkhead x0..x0+t)
   ethercat_bosses: {dia: 3.2, dx: 70, dz: 50, z_c: 90}
   pelvis: {path: single, stock: '7075-T651 plate 2.5 in (63.5 mm)', grain: 'L along y', allowable: 271, mat: Al7075T651, width_y: 260, depth_x: 140, height_z: 60, wall: 6, z0: -60}
