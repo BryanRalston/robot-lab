@@ -1,0 +1,63 @@
+{
+ "rev": 7,
+ "poses": 255,
+ "skirt_area_mm2": 298676,
+ "cut_mm2": 178374,
+ "cut_pct": 59.7,
+ "jet_only_cut_mm2": 58455,
+ "worst_gap_mm": 5.5,
+ "worst_pose_pitch_roll_yaw": [
+  -107.3,
+  45,
+  -35
+ ],
+ "jet_to_fixed_skirt_min_mm": 8.3,
+ "edge_gap_range_mm": [
+  5.5,
+  93.3
+ ],
+ "finger_trap_poses_5_25": 112,
+ "trap_examples": [
+  [
+   -100,
+   -20,
+   -35
+  ],
+  [
+   -100,
+   -20,
+   0
+  ],
+  [
+   -100,
+   -20,
+   45
+  ],
+  [
+   -100,
+   0,
+   -35
+  ],
+  [
+   -100,
+   0,
+   0
+  ],
+  [
+   -100,
+   15,
+   -35
+  ],
+  [
+   -100,
+   15,
+   0
+  ],
+  [
+   -100,
+   15,
+   45
+  ]
+ ],
+ "skirt_pc_removed_kg": -0.3211
+}

@@ -351,7 +351,7 @@ The cap is 82 wide in y, centred at y 130, and that width already includes the 2
   - Rev 2 total: **+0.032 kg** (fairing + posts) on top of P-052's 0.040, giving **P-052 = 0.072 kg**. The Arbiter books it.
 
 ## P-156 rev 6b: shroud after T&R 925d72e (walk-swing hand hit −65 mm) + Legs L75 ae8b9a4 (plate +4 mm, skirt gate FAIL) — 2026-10-21
-- **Plate/straps at z 820–828 (Legs L75).** The lower stack top is now z 817 (3.0 below the plate). The upper transition runs z 831–840 (3.0 above the plate) and moves the mouth inboard to x −76.4…−33.3 × y 100–148 (2069 mm²). **Stack top z 840 (was 860): PENDING Thermal area OK.** Notch area is unchanged at 1323 (Thermal 26cff58 passed it, 71.1 °C standing).
+- **Plate/straps at z 820–828 (Legs L75).** The lower stack top is now z 817 (3.0 below the plate). The upper transition runs z 831–840 (3.0 above the plate) and moves the mouth inboard to x −76.4…−33.3 × y 100–148 (2069 mm²). **Stack top z 840 (was 860): Thermal 5fd6a54 PASS.** Notch area is unchanged at 1323 (Thermal 26cff58 passed it, 71.1 °C standing).
 - **Shroud bounds:** x −100…−20, **y 86–150 (outboard edge 150, ≤ 150 PASS)**, z 840–904. The top slopes from z 861.5 at the front to 904 at the aft. Construction: PC 1.5 (2.0 at the bosses), Al foil inner face, 20 mm standoff over the mouth.
 - **Openings on the aft wall only:**
   - A 45° inclined louvre panel, 64 × 62 slant, with 11 horizontal slots 4.5 ± 0.3 × 58. Free area **2871 nominal / 2680 min (≥ 2600)**.
@@ -371,3 +371,20 @@ The cap is 82 wide in y, centred at y 130, and that width already includes the 2
   - **Mass:** skirt PC removed −0.200 kg, foil band +0.002 → **−0.198 kg [EST]**. The mesh is the full v5 keep-out.
   - **ID note:** a cut this size changes the hip look. The better follow-up is a thigh-fixed rear skirt flap carrying the outlet; to be proposed separately.
   - The STL is a thickened shell; its relief edges are not fully closed (not watertight).
+
+## P-023 rev 7 study — thigh-fixed rear skirt flap carrying the rev 6b shroud (Robot Lab approval of the ID proposal), 2026-10-21: **does NOT meet intent; ruling needed**
+Script `cad/covers/hip_skirt_r7.py` → `hip_skirt_r7.json/.stl`; image media/progress/2026-10-21_hip_skirt_r7_study.png.
+- **Flap:** PC 1.5 panel hugging the thigh skin (≤ 3 mm offset), 15 mm above the shroud, held by 4 new P-023 inserts on the thigh skin (no mechanism change). It carries the rev 6b shroud unchanged: foil, 20 mm standoff, aft-only 4.5 ± 0.3 louvres (2680 min free, 710 dilution), y ≤ 150, 40°/R10 chamfer with a TPU strip. Mass ≈ +0.022/side [EST: panel 18 g + inserts 4 g].
+- **Rules applied over Legs' 255 hip poses:** cut the fixed skirt wherever the flap, stack or shroud passes within 5.5 mm. **Thermal 5fd6a54:** no fixed skirt panel in the jet path, with the jet modelled as the louvre panel extruded 150 mm along its 45° up/aft normal, ±10 mm.
+- **Result:**
+  - **Cut 59.7 %** of the skirt (178,000 mm²; 58,500 of it is the jet rule alone), against 37 % for rev 6.
+  - Worst flap/shroud-to-skirt gap **5.5 mm at pitch −107.3 / roll 45 / yaw −35** (≥ 3 PASS). Jet to the fixed skirt is ≥ 8.3 mm at all poses.
+  - **Pinch: FAIL.** The cut-edge gap ranges 5.5–93 mm, and **112 of 255 poses sit in the 5–25 mm finger-trap band** (e.g. every pose at hip pitch −100).
+  - Fixed-skirt PC removed −0.321 kg.
+- **Why:** the cut is set by the swept volume of a 20 mm-standoff shroud about 100 mm from the hip pitch axis, not by the flap. A flap can't shrink that sweep, and the jet rule adds the jet's sweep on top. A ≤ 5 mm gap or overlapping lip isn't possible around an opening that moves this much.
+- **Options for Robot Lab (ID view):**
+  - (i) **Split the rear skirt per leg:** the whole rear-lower skirt panel becomes thigh-fixed, and the pelvis-fixed skirt ends at a raised hem, with an overlapping lip (≤ 5 mm) on a short arc near the hip axis where the relative motion is small. This is the Optimus-like look anyway.
+  - (ii) Keep rev 6 (37 % cut, 4.0 mm) and add brush/TPU fringe edges against the finger trap.
+  - (iii) A hip-pitch ROM keep-out for sit/kneel (Controls) to shrink the sweep.
+  - **ID recommends (i).** Rev 7 is not adopted, and HANDLING_MAP zones are unchanged.
+- **Thermal note (recorded):** in sit/kneel (hip pitch −40…−107) the jet points up at the pelvis rear cover. Thermal is adding a TP-G5-15 thermocouple there. A 40 mm foil band goes on any skirt edge near the outlet; full skirt foil isn't needed.
