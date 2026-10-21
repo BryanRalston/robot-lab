@@ -1,0 +1,154 @@
+{
+ "sign": {
+  "L_roll_-10_footY": -38.8,
+  "L_roll_0": 130.0,
+  "R_roll_-10_footY": -298.8,
+  "R_roll_0": -130.0
+ },
+ "adduction_sign": {
+  "L": -1,
+  "R": 1
+ },
+ "res": {
+  "single_straight_add0": {
+   "hip_pitch screw": 40.0,
+   "ankle screw": 88.0,
+   "knee twin housing": 55.24
+  },
+  "double_add0": {
+   "hip_pitch screw": 40.0,
+   "ankle screw": 88.0,
+   "knee twin housing": 55.24
+  },
+  "single_straight_add3": {
+   "hip_pitch screw": 19.43,
+   "ankle screw": 54.36,
+   "knee twin housing": 40.65
+  },
+  "double_add3": {
+   "hip_pitch screw": 0.0,
+   "ankle screw": 20.62,
+   "knee twin housing": 25.95
+  },
+  "single_straight_add6": {
+   "hip_pitch screw": 0.0,
+   "ankle screw": 20.96,
+   "knee twin housing": 26.68
+  },
+  "double_add6": {
+   "hip_pitch screw": 0.0,
+   "ankle screw": 0.0,
+   "knee twin housing": 0.0
+  },
+  "single_straight_add8": {
+   "hip_pitch screw": 0.0,
+   "ankle screw": 0.0,
+   "knee twin housing": 18.11
+  },
+  "double_add8": {
+   "hip_pitch screw": 0.0,
+   "ankle screw": 0.0,
+   "knee twin housing": 0.0
+  },
+  "single_straight_add10": {
+   "hip_pitch screw": 0.0,
+   "ankle screw": 0.0,
+   "knee twin housing": 11.14
+  },
+  "double_add10": {
+   "hip_pitch screw": 0.0,
+   "ankle screw": 0.0,
+   "knee twin housing": 0.0
+  },
+  "single_straight_add12": {
+   "hip_pitch screw": 0.0,
+   "ankle screw": 0.0,
+   "knee twin housing": 4.99
+  },
+  "double_add12": {
+   "hip_pitch screw": 0.0,
+   "ankle screw": 0.0,
+   "knee twin housing": 0.0
+  },
+  "walk_stanceLadd4_swingRpitch-25": {
+   "hip_pitch screw": 69.02,
+   "ankle screw": 135.62,
+   "knee twin housing": 69.52
+  },
+  "walk_stanceLadd4_swingRpitch-25_Radd6.1": {
+   "hip_pitch screw": 38.09,
+   "ankle screw": 79.61,
+   "knee twin housing": 33.34
+  },
+  "walk_stanceLadd4_swingRpitch25": {
+   "hip_pitch screw": 68.59,
+   "ankle screw": 259.32,
+   "knee twin housing": 65.27
+  },
+  "walk_stanceLadd4_swingRpitch25_Radd6.1": {
+   "hip_pitch screw": 35.21,
+   "ankle screw": 224.31,
+   "knee twin housing": 41.12
+  },
+  "walk_stanceLadd6_swingRpitch-25": {
+   "hip_pitch screw": 58.71,
+   "ankle screw": 120.27,
+   "knee twin housing": 63.34
+  },
+  "walk_stanceLadd6_swingRpitch-25_Radd6.1": {
+   "hip_pitch screw": 31.37,
+   "ankle screw": 72.5,
+   "knee twin housing": 31.23
+  },
+  "walk_stanceLadd6_swingRpitch25": {
+   "hip_pitch screw": 59.31,
+   "ankle screw": 248.39,
+   "knee twin housing": 55.71
+  },
+  "walk_stanceLadd6_swingRpitch25_Radd6.1": {
+   "hip_pitch screw": 28.98,
+   "ankle screw": 220.28,
+   "knee twin housing": 34.68
+  },
+  "walk_stanceLadd7.6_swingRpitch-25": {
+   "hip_pitch screw": 50.69,
+   "ankle screw": 108.89,
+   "knee twin housing": 59.11
+  },
+  "walk_stanceLadd7.6_swingRpitch-25_Radd6.1": {
+   "hip_pitch screw": 26.67,
+   "ankle screw": 68.82,
+   "knee twin housing": 29.2
+  },
+  "walk_stanceLadd7.6_swingRpitch25": {
+   "hip_pitch screw": 52.51,
+   "ankle screw": 240.59,
+   "knee twin housing": 48.11
+  },
+  "walk_stanceLadd7.6_swingRpitch25_Radd6.1": {
+   "hip_pitch screw": 24.71,
+   "ankle screw": 218.32,
+   "knee twin housing": 29.37
+  },
+  "walk_stanceLadd10_swingRpitch-25": {
+   "hip_pitch screw": 39.22,
+   "ankle screw": 93.75,
+   "knee twin housing": 54.73
+  },
+  "walk_stanceLadd10_swingRpitch-25_Radd6.1": {
+   "hip_pitch screw": 21.05,
+   "ankle screw": 67.08,
+   "knee twin housing": 26.32
+  },
+  "walk_stanceLadd10_swingRpitch25": {
+   "hip_pitch screw": 43.56,
+   "ankle screw": 230.74,
+   "knee twin housing": 36.8
+  },
+  "walk_stanceLadd10_swingRpitch25_Radd6.1": {
+   "hip_pitch screw": 19.65,
+   "ankle screw": 217.35,
+   "knee twin housing": 19.21
+  }
+ }
+}

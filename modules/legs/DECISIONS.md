@@ -481,3 +481,15 @@ Numbered L84 because L83 already holds the tube local-buckling item. Scripts: kn
   - The tangent path also never reaches the clevis bridge (bridge is forward at x 3..43; stack ends x ≈ −10). The bridge cannot hold the seat without a ≥ 40 mm rearward extension that runs into the femur-tube end.
   - Free volume (stack minus non-neck clashes): 21–34 cm³ against a needed 62 cm³ PU, so it is also volume-short.
   - Best case r60 × 56: 33.8 cm³ free, lever clash 2.6 cm³.
+
+### L93b — roll clash results (roll_clash_l93.json; L adduction = −roll, R adduction = +roll)
+- **Reproduced (1).** One leg adducted, other leg straight at 0: hip_pitch screw bodies 40.0 mm at 0°, 19.4 at 3°, **0.0 at 6°** (≥ 3 mm up to ≈ 5.5° [interp]). Ankle screws 54.4 at 3°, 21.0 at 6°, **0.0 at 8°** (Controls (3): 10°). Knee housings 40.7 / 26.7 / 18.1 / 11.1 / 5.0 at 3/6/8/10/12°.
+- **Double (both adducted, mirrored):** screws **0.0 at 3°**. **Max ≈ 2.8° each** for ≥ 3 mm [interp from 40.0 at 0].
+- **Walking (stance L adducted; swing R at hip pitch ±25, knee 40, R roll −3 or +6.1):** every gap is **≥ 19.2 mm up to stance adduction 10°** (hip_pitch screws ≥ 19.7, knee housings ≥ 19.2, ankle ≥ 67). The swing-leg pitch offset separates the screws. Single stance at the measured −7.6..+6.1 passes with ≥ 24.7 mm.
+- **Proposed final limit (Controls software coupling; the mechanical roll stop stays at contact −10 / −12.3 crushed):**
+  - Let Δp = |L hip pitch − R hip pitch|.
+  - **Δp < 10° (legs side by side):** adduction ≤ **5°** for the adducting leg with the other at ≤ 0 adduction; **≤ 2.5° each** if both adduct (double stance).
+  - **Δp ≥ 20° (walking stance/swing):** adduction up to **10°** (the hardware stop).
+  - Linear between Δp 10 and 20.
+  - **Yaw cut for (2):** toe-out ≤ **16°** per leg when both legs are toed out and Δp < 10°; toe-out 0..16 at roll ≤ −3 (housings 0 at yaw 16, roll −3 mirrored). Otherwise the L92 limit stands.
+- (4)/(5) palm and wrist-fork are handed to Arms/Controls.
