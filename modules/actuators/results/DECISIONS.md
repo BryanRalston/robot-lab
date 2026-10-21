@@ -826,3 +826,8 @@ Retention at 1.2 m/s:
 - Arm/waist fasteners: counted 1.265 kg vs booked 0.39 (conservative; v3 0.03/unit + D70 0.015) → **+0.875 kg** (range +0.475..+0.875). `FASTENER_BOM.md`.
 - G3 and G4 briefs → E 70, Sy 480, Su 560, static 320, overload 400; Se unchanged. cad_mass.py lever SF on 480: hip 2.00, knee 2.50.
 - Re-check (`results/R123_RECHECK.md`): one stale result fails 320 (h4 needle lever 332 MPa in PROOF_TEST); no live part fails.
+
+## D85 (R-126) v3 actuator() adders traced (`results/R126_V3_ADDERS.md`)
+- All four constants come from 3c7b50e with no comment; they are the residual of the v2 ACT_OVERHEAD split. Inferred: rotary 0.03 fasteners, 0.04 cabling/connectors; linear 0.08 the 7202 pair (kept), 0.10 linkage hardware (double with LINKAGE_TABLE).
+- Double counts: 0.04 × 14–18 = 0.56–0.72; 0.10 × 12 = 1.20; leg 0.03 × 4 = 0.12; leg FAST connectors 0.18. Elmo G-TWI 22.2 g (MAN-G-TWI p.10) vs 0.038 placeholder × 32 = −0.506.
+- Recommended credit now −1.63 kg (drive and connectors full, the inferred lines at half); full −2.57 to −2.73 kg after a per-unit bottom-up table.
