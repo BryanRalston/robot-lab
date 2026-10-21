@@ -486,8 +486,21 @@ Mass vs 8c: +0.0095 kg/side. `cad/covers/hip_skirt_r8d_standoff.json`.
 - Mass 0.069 kg/side (+0.059 vs 8d).
 - **Recommendation:** don't build. No pointwise rigid stop can protect a hand across the sliding/angled closures. Use a load-limited fix instead: a limp clamp measured at ≤140 N (TP-G5-18), damped limp, or a Controls powered keep-out plus limp brake.
 
-## P-023 rev 8f — CURRENT (Robot Lab ruling), 2026-10-21
+## P-023 rev 8f (Robot Lab ruling; see 8g), 2026-10-21
 **Rev 8d stops and rev 8e stop-in-cup: WITHDRAWN.** The 8d stops stood 10 mm apart at stand, a 5–25 mm trap. 8e seats in ≤2 % of closures.
 Rev 8f = rev 8c geometry (d58ffa4; LD29 foam: hem/notch 15 × 40, L/R 20 × 40 × 130) + the 8d notch (+1.5 mm → shroud 29.8 / 27.8 mm with tol at 3.6° overtravel, PASS) + a 14.5 mm J-channel press fit. No stops or cups. Skirt retained 34.2 %.
 **Hand protection is load-limited:** powered, Controls keep-out on the panel surfaces (warn 35 / limit 30 / trip 28 mm); limp, clamp force ≤140 N measured in TP-G5-18 (EST ~127 N via foam spread; limp hold pending Actuators/Controls).
 Files: `hip_skirt_r8f_pelvis_notched.stl`, `hip_skirt_r8f_thigh_panel.stl`, `hip_skirt_r8f.json`. **Mass: P-023 ≈ −0.296 kg vs v5 [EST].**
+
+## P-023 rev 8g — geometry-only re-sweep (Actuators D100 31875a1), 2026-10-21
+
+No limp brake, so every gap must be safe by geometry. Fresh sweep (`cad/covers/r8g/`, `hip_skirt_r8g.json`) on Legs' `skirt_r8c_sweep_l79.py` pose convention and surfaces, J-channel 3 mm, foam compliant, tol 2 mm.
+
+| Gap | Option | Worst | Pose (p, r, y) | Lever to roll / yaw axis (mm) | Verdict |
+|---|---|---|---|---|---|
+| Hem ↔ panel | (a) | 49.6 mm (tol) | 42.5, 17.5, −37.5 | 109 / 168 | PASS |
+| Hem ↔ shroud | (a) | 27.8 mm (tol) | 42.5, −15.6, 45 | 82 / 104 | PASS |
+| L ↔ R panel | (b) needed | 0.0 mm raw (cut to y150: 10.4) | −107.5, −12, −37.5 both | 180 / 150 | FAIL |
+| L ↔ R shroud | (b) needed | 0.0 mm raw | 42.5, −15.6, 47.5 both | 133 / 131 | FAIL |
+
+L↔R closes to 0 mm even in nominal ROM (both legs adducted, yaw 45°). No panel cutback reaches the ≥ 30 mm rigid standoff, and the rigid shroud (y 86–150, Thermal) is itself an L↔R hazard. Robot Lab to rule: crushable shroud + panel inboard zone at ≤ 140 N sustained over ≥ 30 mm (TP-G5-18 item 6), or a Legs hip adduction + yaw hard stop. Legs L79 −35.2 mm at (42.5, −14.5, −35) is the un-notched sphere metric; real gaps there are 67.3 (panel) / 31.7 mm (shroud). Geometry = 8f; mass ≈ −0.296 kg vs v5 [EST]. J-channel aged VHB pull-off test is in TP-G5-18.
