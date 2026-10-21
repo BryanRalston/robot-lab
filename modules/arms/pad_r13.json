@@ -1,0 +1,92 @@
+{
+ "check": {
+  "s0_7013": {
+   "e0": 2.31,
+   "e5": 2.16,
+   "e10": 2.04
+  },
+  "Mx_raw_Nm": 321,
+  "CSG25_SF_fault": 1.1,
+  "note": "reproduces R-120 2.31/2.16/2.04, 321 N.m, SF 1.10"
+ },
+ "bolts": {
+  "ID_6xM4_PCD50_EST": {
+   "per_bolt_N": 3304,
+   "SF": 1.51
+  },
+  "R13_8xM4_PCD62": {
+   "per_bolt_N": 2168,
+   "SF": 2.31
+  },
+  "friction_8xM4_12.9_preload_4.6kN_mu0.15_N": 5520,
+  "verdict": "joint is bearing-type: 2 dowels dia4 m6 carry shear, bolts clamp; 6xM4 PCD50 SF 1.53 too thin"
+ },
+ "ribs": {
+  "sigma_Fs_bend_MPa": 124,
+  "sigma_FnZ_bend_MPa": 90,
+  "sigma_axial_MPa": 23,
+  "sigma_sum_MPa": 146,
+  "allow_MPa": "503/1.5=335 (7075-T6)",
+  "SF": 2.29,
+  "note": "strong-axis only; weak-axis (5 mm) and plate pocket need FEA (Job 8 add-on)"
+ },
+ "mass_parts": {
+  "ID_EST": {
+   "face_plate": 0.0194,
+   "web_neck": 0.0177,
+   "roll_flange_OD60": 0.0141
+  },
+  "R13_CALC": {
+   "face_plate": 0.0194,
+   "web_neck": 0.0177,
+   "roll_flange_OD70x5": 0.0309,
+   "dowels_bolts": 0.004,
+   "total_side": 0.072
+  }
+ },
+ "housing": {
+  "old": {
+   "seat_flange": 0.0498,
+   "hub": 0.0572,
+   "clamp": 0.0169
+  },
+  "new": {
+   "seat_flange": 0.0551,
+   "hub": 0.0876,
+   "clamp": 0.0187
+  },
+  "delta_side": 0.0375
+ },
+ "mass": {
+  "stand_off_side": 0.072,
+  "stand_off_net_pair_vs_boss_booked": 0.096,
+  "housing_growth_pair": 0.075,
+  "bearing_pair_cited": 0.1,
+  "booked_R120": {
+   "bearing": 0.1,
+   "housing": 0.06,
+   "standoff_net": 0.052
+  },
+  "R13_total_pair": 0.271,
+  "delta_vs_booked_pair": 0.059
+ },
+ "tolerance": {
+  "contributors_mm": {
+   "bearing seat in housing (H7, position)": 0.05,
+   "CRBH 7013 A runout/width centre": 0.05,
+   "roll-output hub face to bearing plane": 0.1,
+   "stand-off flange thickness/flatness": 0.05,
+   "flange dowel location (2xdia4 m6/H7)": 0.03,
+   "rib/face plate machined position (one setup)": 0.1,
+   "tray M4 clearance float (4.5 holes, tray not doweled)": 0.25,
+   "tray lip to core (bond fixture)": 0.5,
+   "core cut position/squareness over 75.3": 0.5,
+   "link/stand-off elastic deflection at 7 kN [EST, FEA]": 0.5
+  },
+  "worst_case_mm": 2.13,
+  "rss_mm": 0.92,
+  "budget_mm": 5.0,
+  "margin_wc_mm": 2.87,
+  "note": "as-built e <= 2.1 mm worst case; remaining ~2.9 mm is for impact-centroid shift on the core, which FEA (e 0/5/10) brackets"
+ }
+}

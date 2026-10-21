@@ -107,3 +107,10 @@ Checked against the R-065 criteria with sim/v3:
 **Job 2: T-030/T-031** (Controls `modules/controls/fall/`, d43f14a, 2422c87).
 - Tuck B instead of the −30 tuck. Pad lever 0.064 m (pitch), e ≤ 0.010 (roll).
 - Log pitch-gear torque (gate 369), CRBH P0 (s0 ≥ 2), hand–thigh distance, and impact points outside the core.
+
+**Job 8 add-on (Arms R13, R-120): pad stand-off + CRBH 7013 A FEA.** Queue via Robot Lab on the bryan PC, one Grok Build session at a time. Not launched. Supersedes the job1 R10 case (Z −64, 6013), which must not run.
+- Geometry: `modules/arms/R13_STANDOFF_7013.md` + `pad_r13.json`, and ID `modules/design/pad_r10_standoff.json` (00ff254) with the Arms flange (OD 70/ID 44 × 5, 8 × M4 12.9 PCD 62 + 2 × Ø4 dowels). Hub Ø70/Ø54. CRBH 7013 A as a bearing element (C0 27.7 kN, dp 85). Housing seat OD 108/Ø100.
+- Load: R10 core pressure patch 54.8², 7.0 kN peak at 15° (Fn 6.76, Fs 1.81, applied axial and downward = worst), pad centre Z −20, contact Y 102.3, e = 0/5/10 mm. Sensitivity case mu 0.15 (not credited).
+- Report: s0 (≥ 2.0 at e5), Mx raw and CSG-25 SF at fault ×1.05 (≥ 1.0), rib weak-axis and face-pocket von Mises ≤ 335 MPa, flange bolt/dowel shear, no M4 separation, pad deflection (feeds the e stack, 0.5 mm assumed).
+- Clash in CAD: pad + stand-off + housing Ø108 axial gap ≥ 3 mm, abduction −15…180 × pitch with the head shell (not the sphere), overhead pitch ≤ −150 / roll ≥ 170 vs the torso cover, tuck B, ID cover trims.
+- Output: `modules/arms/results/job8_r13_*` md/json/png.
