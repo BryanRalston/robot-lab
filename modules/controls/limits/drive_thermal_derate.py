@@ -43,7 +43,12 @@ class DerateConfig:
     jump_confirm: int = 3          # a jumped value is accepted if repeated this many consecutive reads
     limit_object: str = '0x6072'   # or '0x6073'
     nominal_permille: int = 1000   # per drive default (commissioned value), per-mille of 0x6075 [bench-verify]
-    sit_timeout_s: float = 3.0     # MO=0 even if the sit-done flag never comes
+    # R-145 (5f5bd1d) stop sequence
+    crouch_s: float = 2.0          # measured derated crouch (2b38a45)
+    crouch_timeout_s: float = 2.6  # guard; crouch_s normally ends CROUCH first
+    kneel_timeout_s: float = 1.2   # no supported contact by then -> HOLD_DERATED [EST; sim kneel time + margin]
+    confirm_s: float = 0.05        # contact + support must hold this long before MO=0
+    support_speed: float = 0.10    # m/s CoM speed limit for 'supported'
 
     @classmethod
     def from_controller_config(cls, path=CFG_PATH):
@@ -122,17 +127,40 @@ class _DriveState:
         return min(s, self.c.stale_scale) if self.stale else s
 
 
-RUN, STOPPING, STOPPED = 'RUN', 'STOPPING', 'STOPPED'
+RUN = 'RUN'
+CROUCH = 'CROUCH'                        # R-145: 2.0 s derated crouch (WBC)
+KNEEL = 'KNEEL'                          # controlled kneel to ground contact (fall-mode config, knee pads)
+CONTACT_CONFIRMED = 'CONTACT_CONFIRMED'  # knee contact + CoM supported, held for confirm_s
+MO_OFF = 'MO_OFF'                        # MO=0 on all drives (only reachable from CONTACT_CONFIRMED)
+HOLD_DERATED = 'HOLD_DERATED'            # fallback: kneel not possible -> hold derated torque until a drive trips
+TUCK = 'TUCK'                            # fallback after the trip: fall-mode tuck
+STOP_STATES = (CROUCH, KNEEL, CONTACT_CONFIRMED, MO_OFF, HOLD_DERATED, TUCK)
+# legacy names kept for callers of the R-141 version
+STOPPING, STOPPED = CROUCH, MO_OFF
+
+
+class UnsupportedMoOff(RuntimeError):
+    """MO=0 requested without knee contact + CoM support (R-145 prohibits MO=0 from an unsupported crouch)."""
 
 
 class DriveDerateSupervisor:
     """One per robot. step() every control cycle.
 
-    request_safe_sit(): called once when the stop latches (WBC/fall-mode path: safe posture or sit).
-    sit_done(): set by the WBC when the robot is seated/safe; then MO=0 on every drive.
+    R-145 stop sequence (whole robot, latched):
+      RUN --(any drive reading >= t_stop, drive over-temp fault, or no temperature for stale_stop_s)--> CROUCH
+      CROUCH: request_safe_sit(reason); WBC runs the derated crouch (crouch_s, 2.0 s). crouch_done() or crouch_s
+              elapsed -> KNEEL (request_kneel()). crouch_timeout_s without progress -> HOLD_DERATED.
+      KNEEL: WBC/fall-mode kneels to the knee pads. set_support(knee_contact, com_supported, com_speed) each cycle.
+             all flags true (contact, CoM inside knee+toe polygon, speed < support_speed) -> CONTACT_CONFIRMED.
+             kneel_timeout_s, or kneel_impossible() -> HOLD_DERATED.
+      CONTACT_CONFIRMED: flags must hold for confirm_s, then MO=0 on all drives -> MO_OFF. Flags lost -> KNEEL.
+      HOLD_DERATED: keep MO on at the derated limit (no brake/backdrive hold assumed); first drive trip
+                    (MF 0xD000/EMCY 0x4310) -> TUCK (request_tuck()). MO is never commanded off here.
+      MO_OFF: re_enable() when every drive < t_resume.
+    MO=0 is sent only by _mo_off(), which raises UnsupportedMoOff unless the support flags are confirmed.
     """
     def __init__(self, drives, io: DriveIO, c: DerateConfig = None, nominal_permille=None,
-                 request_safe_sit=None, tau_nominal=None):
+                 request_safe_sit=None, tau_nominal=None, request_kneel=None, request_tuck=None):
         self.c = c or DerateConfig()
         self.io = io
         nominal_permille = nominal_permille or {}
@@ -141,53 +169,112 @@ class DriveDerateSupervisor:
         self.state = RUN
         self.reason = ''
         self.request_safe_sit = request_safe_sit or (lambda reason: None)
-        self._sit_done = False
-        self._stop_t = 0.0
+        self.request_kneel = request_kneel or (lambda: None)
+        self.request_tuck = request_tuck or (lambda reason: None)
+        self._reset_seq()
         self.last_written = {}
+        self.log = []    # (t, state) transitions
 
-    # ---- WBC hooks
-    def sit_done(self):
-        self._sit_done = True
+    def _reset_seq(self):
+        self._t_state = 0.0
+        self._t = getattr(self, '_t', 0.0)
+        self._crouch_done = False
+        self._kneel_impossible = False
+        self._support = (False, False, math.inf)
+        self._confirm_t = 0.0
+
+    # ---- WBC / fall-mode hooks
+    def crouch_done(self):
+        self._crouch_done = True
+
+    def sit_done(self):          # R-141 name: now only means the crouch finished
+        self.crouch_done()
+
+    def kneel_impossible(self):
+        self._kneel_impossible = True
+
+    def set_support(self, knee_contact, com_supported, com_speed):
+        self._support = (bool(knee_contact), bool(com_supported), float(com_speed))
+
+    def supported(self):
+        k, c, v = self._support
+        return k and c and v < self.c.support_speed
+
+    def _go(self, state):
+        self.state, self._t_state = state, 0.0
+        self.log.append((round(self._t, 4), state))
+
+    def _mo_off(self):
+        if not (self.state == CONTACT_CONFIRMED and self.supported() and self._confirm_t >= self.c.confirm_s):
+            raise UnsupportedMoOff(f'MO=0 refused in {self.state}: support {self._support}')
+        for n in self.d:
+            self.io.set_mo(n, False)
+        self._go(MO_OFF)
 
     def re_enable(self):
-        """Explicit operator/supervisor re-enable. Only succeeds when every drive is fresh and < t_resume and no fault."""
-        if self.state != STOPPED:
+        """Explicit operator/supervisor re-enable. Only from MO_OFF, every drive fresh, < t_resume, no fault."""
+        if self.state != MO_OFF:
             return self.state == RUN
         if all((not s.stale) and s.t < self.c.t_resume and not s.fault for s in self.d.values()):
             for n in self.d:
                 self.io.write_limit(n, self.d[n].nominal)   # restore nominal
                 self.last_written[n] = self.d[n].nominal
                 self.io.set_mo(n, True)
-            self.state, self.reason, self._sit_done = RUN, '', False
+            self.reason = ''
+            self._reset_seq()
+            self._go(RUN)
             return True
         return False
 
     def _latch(self, reason):
         if self.state == RUN:
-            self.state, self.reason, self._stop_t, self._sit_done = STOPPING, reason, 0.0, False
+            self.reason = reason
+            self._reset_seq()
+            self._go(CROUCH)
             self.request_safe_sit(reason)
 
     # ---- cycle
     def step(self, dt=None):
         dt = dt or 1.0 / self.c.loop_hz
+        self._t += dt
+        any_fault = False
         for n, s in self.d.items():
             s.update(self.io.read_temp(n), dt)
             mf, emcy = self.io.read_fault(n)
             # current fault input (not sticky here; the robot stop latch is sticky)
             s.fault = (mf & MF_OVERTEMP) == MF_OVERTEMP or emcy == EMCY_OVERTEMP
+            any_fault |= s.fault
             if s.fault:
                 self._latch(f'{n}: drive over-temperature fault (MF 0xD000/EMCY 0x4310)')
             elif s.t is not None and not s.stale and s.t >= self.c.t_stop:
                 self._latch(f'{n}: {s.t:.0f} C >= {self.c.t_stop:.0f} C')
             elif s.stale and s.age > self.c.stale_stop_s:
                 self._latch(f'{n}: no valid temperature for {s.age:.1f} s')
-        if self.state == STOPPING:
-            self._stop_t += dt
-            if self._sit_done or self._stop_t >= self.c.sit_timeout_s:
-                for n in self.d:
-                    self.io.set_mo(n, False)
-                self.state = STOPPED
-        # limits are written every cycle (cyclic RxPDO), also while stopping (the sit runs derated)
+        self._t_state += dt
+        st = self.state
+        if st == CROUCH:
+            if self._kneel_impossible:
+                self._go(HOLD_DERATED)
+            elif self._crouch_done or self._t_state >= self.c.crouch_s:
+                self._go(KNEEL); self.request_kneel()
+            elif self._t_state >= self.c.crouch_timeout_s:
+                self._go(HOLD_DERATED)
+        elif st == KNEEL:
+            if self._kneel_impossible or self._t_state >= self.c.kneel_timeout_s:
+                self._go(HOLD_DERATED)
+            elif self.supported():
+                self._go(CONTACT_CONFIRMED); self._confirm_t = 0.0
+        elif st == CONTACT_CONFIRMED:
+            if not self.supported():
+                self._go(KNEEL)
+            else:
+                self._confirm_t += dt
+                if self._confirm_t >= self.c.confirm_s:
+                    self._mo_off()
+        elif st == HOLD_DERATED:
+            if any_fault:
+                self._go(TUCK); self.request_tuck(self.reason)
+        # limits are written every cycle (cyclic RxPDO), also during the whole stop sequence
         for n, s in self.d.items():
             pm = int(round(self.scale(n) * s.nominal))
             self.io.write_limit(n, pm)

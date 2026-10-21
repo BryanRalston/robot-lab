@@ -2,7 +2,8 @@
 import math
 import pytest
 from drive_thermal_derate import (DerateConfig, DriveIO, DriveDerateSupervisor, curve, combine_min,
-                                  sit_timing_margin, RUN, STOPPING, STOPPED, MF_OVERTEMP, EMCY_OVERTEMP)
+                                  sit_timing_margin, RUN, STOPPING, STOPPED, MF_OVERTEMP, EMCY_OVERTEMP,
+                                  CROUCH, KNEEL, CONTACT_CONFIRMED, MO_OFF, HOLD_DERATED, TUCK, UnsupportedMoOff)
 
 DT = 0.001
 
@@ -56,37 +57,110 @@ def test_ramp_derate_writes_permille_and_never_cl_pl():
     assert tl['l_knee'] == pytest.approx(258 * curve(79, sup.c)) and tl['r_knee'] == 258
 
 
-def test_stop_latch_whole_robot_then_mo_off_after_sit():
+def run_n(sup, n):
+    for _ in range(n):
+        sup.step(DT)
+
+
+def to_contact(io, sup):
+    """latch -> crouch done -> kneel -> supported contact -> MO_OFF"""
+    ramp(io, sup, 'l_knee', 70, 83.2, rate_K_s=3.0)
+    sup.crouch_done(); sup.step(DT)
+    assert sup.state == KNEEL
+    sup.set_support(True, True, 0.02)
+    run_n(sup, 1)
+    assert sup.state == CONTACT_CONFIRMED
+    run_n(sup, 60)
+    assert sup.state == MO_OFF
+
+
+def test_stop_latch_whole_robot_crouch_kneel_contact_mo_off():
     io, sup, sits = make()
+    kneels = []
+    sup.request_kneel = lambda: kneels.append(1)
     ramp(io, sup, 'l_knee', 70, 82.9, rate_K_s=3.0)
     assert sup.state == RUN
     ramp(io, sup, 'l_knee', 82, 83.2, rate_K_s=3.0)
-    assert sup.state == STOPPING and len(sits) == 1 and 'l_knee' in sits[0]
-    assert all(io.mo.values())                     # still powered during the sit
+    assert sup.state == CROUCH and len(sits) == 1 and 'l_knee' in sits[0]
+    assert all(io.mo.values())
     assert io.limit['l_knee'] == 500 and io.limit['r_knee'] == 1000
-    sup.sit_done(); sup.step(DT)
-    assert sup.state == STOPPED and not any(io.mo.values())   # every drive off, not only the hot one
+    sup.crouch_done(); sup.step(DT)
+    assert sup.state == KNEEL and kneels == [1] and all(io.mo.values())
+    sup.set_support(True, True, 0.02); run_n(sup, 60)
+    assert sup.state == MO_OFF and not any(io.mo.values())   # every drive off
+    assert [s for _, s in sup.log] == [CROUCH, KNEEL, CONTACT_CONFIRMED, MO_OFF]
 
 
-def test_sit_timeout_forces_mo_off():
-    io, sup, _ = make(sit_timeout_s=0.5)
-    ramp(io, sup, 'r_knee', 70, 84.5, rate_K_s=5.0)
-    for _ in range(600):
-        sup.step(DT)
-    assert sup.state == STOPPED and not any(io.mo.values())
+def test_crouch_ends_on_crouch_s_without_flag():
+    io, sup, _ = make()
+    ramp(io, sup, 'l_knee', 70, 83.2, rate_K_s=5.0)
+    run_n(sup, int(sup.c.crouch_s / DT) + 2)
+    assert sup.state == KNEEL and all(io.mo.values())
+
+
+def test_guard_mo_never_off_without_contact_and_support():
+    """MO=0 must never be written unless knee contact AND CoM support AND low speed were confirmed."""
+    for flags in [(False, False, 0.0), (True, False, 0.0), (False, True, 0.0), (True, True, 0.5)]:
+        io, sup, _ = make()
+        ramp(io, sup, 'l_knee', 70, 83.2, rate_K_s=5.0)
+        sup.crouch_done()
+        sup.set_support(*flags)
+        run_n(sup, 10000)                      # well past every timeout
+        assert all(io.mo.values()), flags
+        assert sup.state == HOLD_DERATED
+    # direct call is refused too
+    io, sup, _ = make()
+    ramp(io, sup, 'l_knee', 70, 83.2, rate_K_s=5.0)
+    with pytest.raises(UnsupportedMoOff):
+        sup._mo_off()
+    assert all(io.mo.values())
+
+
+def test_contact_flicker_returns_to_kneel():
+    io, sup, _ = make()
+    ramp(io, sup, 'l_knee', 70, 83.2, rate_K_s=5.0)
+    sup.crouch_done(); sup.step(DT)
+    sup.set_support(True, True, 0.02); run_n(sup, 20)       # 20 ms < confirm_s 50 ms
+    assert sup.state == CONTACT_CONFIRMED and all(io.mo.values())
+    sup.set_support(True, False, 0.02); sup.step(DT)
+    assert sup.state == KNEEL and all(io.mo.values())
+
+
+def test_kneel_timeout_holds_derated_then_tuck_on_trip():
+    io, sup, _ = make()
+    tucks = []
+    sup.request_tuck = tucks.append
+    ramp(io, sup, 'l_knee', 70, 83.2, rate_K_s=5.0)
+    sup.crouch_done(); sup.step(DT)
+    run_n(sup, int(sup.c.kneel_timeout_s / DT) + 2)
+    assert sup.state == HOLD_DERATED and all(io.mo.values()) and io.limit['l_knee'] == 500
+    run_n(sup, 2000)
+    assert sup.state == HOLD_DERATED and not tucks
+    io.fault['l_knee'] = (MF_OVERTEMP, EMCY_OVERTEMP); sup.step(DT)
+    assert sup.state == TUCK and len(tucks) == 1 and all(io.mo.values())   # tuck still uses torque
+
+
+def test_kneel_impossible_and_crouch_timeout():
+    io, sup, _ = make()
+    ramp(io, sup, 'l_knee', 70, 83.2, rate_K_s=5.0)
+    sup.kneel_impossible(); sup.step(DT)
+    assert sup.state == HOLD_DERATED
+    io, sup, _ = make(crouch_s=5.0, crouch_timeout_s=1.0)
+    ramp(io, sup, 'l_knee', 70, 83.2, rate_K_s=5.0)
+    run_n(sup, 1002)
+    assert sup.state == HOLD_DERATED and all(io.mo.values())
 
 
 def test_hysteresis_and_explicit_reenable():
     io, sup, _ = make()
-    ramp(io, sup, 'l_knee', 70, 84.5, rate_K_s=3.0)
-    sup.sit_done(); sup.step(DT)
+    to_contact(io, sup)
     ramp(io, sup, 'l_knee', 84, 79, rate_K_s=3.0)
-    assert sup.re_enable() is False and sup.state == STOPPED      # 79 >= 78
+    assert sup.re_enable() is False and sup.state == MO_OFF      # 79 >= 78
     ramp(io, sup, 'l_knee', 79, 77, rate_K_s=3.0)
-    for _ in range(5): sup.step(DT)
-    assert sup.state == STOPPED                                    # no auto-resume
+    run_n(sup, 5)
+    assert sup.state == MO_OFF                                   # no auto-resume
     assert sup.re_enable() is True and sup.state == RUN
-    assert all(io.mo.values()) and io.limit['l_knee'] == 1000      # nominal restored on re-enable; next cycle applies the curve
+    assert all(io.mo.values()) and io.limit['l_knee'] == 1000    # nominal restored on re-enable
     sup.step(DT)
     assert io.limit['l_knee'] == round(curve(77, sup.c) * 1000)
 
@@ -96,7 +170,7 @@ def test_drive_fault_latches_stop():
     sup.step(DT)
     io.fault['r_knee'] = (MF_OVERTEMP, EMCY_OVERTEMP)
     sup.step(DT)
-    assert sup.state == STOPPING and 'fault' in sits[0]
+    assert sup.state == CROUCH and 'fault' in sits[0]
 
 
 def test_stale_reads_failsafe_then_stop():
@@ -108,7 +182,7 @@ def test_stale_reads_failsafe_then_stop():
     for _ in range(5): sup.step(DT)
     assert sup.scale('l_knee') == 0.5 and sup.state == RUN    # fail-safe derate
     for _ in range(1000): sup.step(DT)
-    assert sup.state == STOPPING and 'no valid temperature' in sits[0]
+    assert sup.state == CROUCH and 'no valid temperature' in sits[0]
 
 
 def test_sdo_rate_stale_window():
@@ -131,7 +205,7 @@ def test_sensor_jump_rejected_then_confirmed():
     assert sup.state == RUN and sup.d['l_knee'].t == 40.0
     io.temp['l_knee'] = 95.0                      # persistent -> accepted after confirm -> stop
     for _ in range(3): sup.step(DT)
-    assert sup.state == STOPPING
+    assert sup.state == CROUCH
 
 
 def test_min_combination():

@@ -7,11 +7,12 @@
   "shoulder_roll_soft_limit_deg": 127,
   "shoulder_roll_soft_limit_ref": "R-133; source of truth limits/soft_limits.json (abduction only, mirrored)",
   "drive_thermal_derate": {
-    "ruling": "R-141 (e8b74e7), R-142 (00b3268); Electronics \u00a718.5 P-055 23f6992 + addendum 430684c",
+    "ruling": "R-141 (e8b74e7), R-142 (00b3268); Electronics \u00a718.5 P-055 23f6992 + addendum 430684c, R-145 (5f5bd1d)",
     "t_start": 75.0,
     "t_half": 82.0,
     "scale_min": 0.5,
-    "t_stop": 83.0, "t_stop_note": "R-142 (00b3268): latch at a 0x22A2 reading >= 83 C, final even if the bench shows rounding",
+    "t_stop": 83.0,
+    "t_stop_note": "R-142 (00b3268): latch at a 0x22A2 reading >= 83 C, final even if the bench shows rounding",
     "t_resume": 78.0,
     "t_drive_trip": 85.0,
     "temp_source": "0x22A2:00",
@@ -28,8 +29,13 @@
     "limit_object": "0x6072",
     "limit_object_note": "0x6072 Max torque (RxPDO 0x160D/0x1605), per-mille of 0x6075 [bench-verify]; alternative 0x6073 Max current (0x160E). CL[1]/PL[1] stay commissioned: never written, never SV.",
     "nominal_permille": 1000,
-    "sit_timeout_s": 3.0,
     "module": "limits/drive_thermal_derate.py",
-    "doc": "limits/DRIVE_DERATE.md"
+    "doc": "limits/DRIVE_DERATE.md",
+    "crouch_s": 2.0,
+    "crouch_timeout_s": 2.6,
+    "kneel_timeout_s": 1.2,
+    "confirm_s": 0.05,
+    "support_speed": 0.1,
+    "stop_sequence_note": "R-145: CROUCH (2.0 s derated) -> KNEEL (fall-mode, knee pads) -> CONTACT_CONFIRMED (knee contact + CoM in knee+toe polygon + speed<0.1 m/s for 50 ms) -> MO_OFF. Fallback HOLD_DERATED until drive trip -> TUCK. MO=0 from an unsupported crouch is prohibited."
   }
 }
