@@ -1,0 +1,15 @@
+{
+  "fell_at_s": null,
+  "seconds_ran": 0.0,
+  "mean_horiz_speed": 0.0,
+  "final_y": 0.0,
+  "final_heading_deg": 0.0,
+  "net_x_over_t": 0.0,
+  "error": "obs index 12 is 999950.0 sigma from the training normalizer at t=0: replay does not match the training env",
+  "pass_legacy": false,
+  "drift_ok": true,
+  "pass": false,
+  "gate": "20 kg torso payload at (0.25, 0, 0.10), command 0.8 m/s, 20 s, mean horizontal speed >= 0.8, no fall",
+  "payload_kg": 20.0,
+  "policy": "policy_walk_a.npz"
+}

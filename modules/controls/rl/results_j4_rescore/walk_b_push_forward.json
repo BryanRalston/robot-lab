@@ -1,0 +1,33 @@
+{
+  "seconds_ran": 2.64,
+  "fell_at_s": 2.12,
+  "fall_why": "pelvis",
+  "z0": 1.1481,
+  "mean_horiz_speed": 0.5793,
+  "mean_forward": 0.729,
+  "mean_vx_world": 0.5575,
+  "mean_vy_world": 0.0782,
+  "net_x_over_t": 0.5588,
+  "final_y": 0.211,
+  "final_heading_deg": -158.39,
+  "payload_frac_obs": 5.0000002374872565e-05,
+  "obs_z_max_t0": 2.89,
+  "min_z": 0.0838,
+  "min_up": -0.0425,
+  "final_up": -0.0425,
+  "final_horiz_speed": 0.001,
+  "ds_fraction": 0.8409,
+  "flight_fraction": 0.053,
+  "ankle_roll_peak_rad": [
+    0.1687,
+    0.1385
+  ],
+  "ankle_roll_peak_deg": [
+    9.67,
+    7.94
+  ],
+  "pass": false,
+  "gate": "forward push: +0.6 m/s COM velocity from the policy stand at t=1; upright and horizontal speed < 0.5 at t=3 (2 s later)",
+  "impulse_Ns": 39.0,
+  "policy": "policy_walk_b.npz"
+}

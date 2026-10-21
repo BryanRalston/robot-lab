@@ -50,6 +50,12 @@ def _env_from_stage(stage, noise=1.0):
         'njmax': int(stage.get('njmax', 256)),
         'dr_gains': True,
     }
+    # J10 knobs (RETRAIN_PLAN_J10.md). Absent keys keep the job-4 defaults.
+    for key in ('heading_obs', 'tracking_sigma', 'heading_sigma', 'leg_action_mult', 'knee_cont_nm', 'resample_steps'):
+        if key in stage:
+            overrides[key] = stage[key]
+    for key, val in (stage.get('rewards') or {}).items():
+        overrides[f'reward_scales.{key}'] = float(val)
     return HumanoidWalk(xml_path=os.path.join(HERE, xml), config_overrides=overrides)
 
 
@@ -200,7 +206,24 @@ def _save_policy_npz(step, params, path):
     return sorted(blob)
 
 
-def smoke_step(n=8):
+def _write_meta(npz_path, env, stage, name):
+    """Sidecar that eval_box.py reads so the replay matches the training env exactly."""
+    cfg = env._config
+    meta = {
+        'stage': name,
+        'policy_obs_dim': int(env.observation_size['state'][0]) if isinstance(env.observation_size, dict) else None,
+        'heading_obs': bool(cfg.heading_obs),
+        'leg_action_mult': float(cfg.leg_action_mult),
+        'payload_empty_frac': 0.0,
+        'xml': os.path.basename(env.xml_path),
+        'model_mass_kg': float(env.mj_model.body_mass.sum()),
+    }
+    with open(npz_path[:-4] + '.meta.json', 'w', encoding='utf-8') as f:
+        json.dump(meta, f, indent=2)
+    return meta
+
+
+def smoke_step(n=8, stage_override=None):
     import jax
     from mujoco_playground._src.wrapper import wrap_for_brax_training
 
@@ -211,6 +234,8 @@ def smoke_step(n=8):
         'push_force': [50.0, 150.0], 'push_gate_prob': 0.2,
         'ref_weight': 1.0, 'carry': [0.001, 0.001], 'rough': False,
     }
+    if stage_override is not None:
+        stage = dict(stage_override)
     env = _env_from_stage(stage)
     print('obs', env.observation_size, 'act', env.action_size, flush=True)
     rngs = jax.random.split(jax.random.PRNGKey(0), n)
@@ -321,6 +346,8 @@ def train_stage(name, stage, cfg, num_envs, timesteps, num_evals, run_evals=True
         f'devices {jax.devices()}',
         flush=True,
     )
+    # Meta for mid-run checkpoints (logs/<stage>_policy_latest.npz) so eval_box can score them.
+    _write_meta(os.path.join(HERE, 'logs', f'{name}_policy_latest.npz'), env, stage, name)
     make_policy, params, metrics = ppo_train.train(
         environment=env,
         num_timesteps=int(timesteps),
@@ -357,6 +384,7 @@ def train_stage(name, stage, cfg, num_envs, timesteps, num_evals, run_evals=True
     )
     final = os.path.join(HERE, 'logs', f'{name}_final.npz')
     _save_policy_npz(timesteps, params, final)
+    _write_meta(final, env, stage, name)
     print(f'DONE {name} wall_s {time.time() - t0:.1f} vram {_vram()}', flush=True)
     return params
 
@@ -371,7 +399,9 @@ def main():
     p.add_argument('--no-eval', action='store_true')
     args = p.parse_args()
     if args.smoke_step:
-        smoke_step()
+        # --smoke-step alone keeps the job-4 smoke; with --stage j10_* it smokes that stage's env.
+        override = _load_cfg()['stages'][args.stage] if args.stage.startswith('j10') else None
+        smoke_step(stage_override=override)
         return
     cfg = _load_cfg()
     os.environ['XLA_PYTHON_CLIENT_MEM_FRACTION'] = str(cfg.get('mem_fraction', 0.70))

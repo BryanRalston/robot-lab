@@ -1,0 +1,34 @@
+{
+  "seconds_ran": 5.08,
+  "fell_at_s": 4.56,
+  "fall_why": "airborne",
+  "z0": 1.021,
+  "mean_horiz_speed": 1.249,
+  "mean_forward": 1.2693,
+  "mean_vx_world": 1.1092,
+  "mean_vy_world": 0.4282,
+  "net_x_over_t": 1.1109,
+  "final_y": 2.175,
+  "final_heading_deg": 163.97,
+  "payload_frac_obs": 5.0000002374872565e-05,
+  "obs_z_max_t0": 2.52,
+  "min_z": 0.1837,
+  "min_up": 0.0117,
+  "final_up": 0.1335,
+  "final_horiz_speed": 0.086,
+  "ds_fraction": 0.1102,
+  "flight_fraction": 0.1181,
+  "ankle_roll_peak_rad": [
+    0.1586,
+    0.1525
+  ],
+  "ankle_roll_peak_deg": [
+    9.08,
+    8.74
+  ],
+  "pass": false,
+  "note": "fell during the 2 s recovery window",
+  "gate": "300 N * 0.2 s = 60 N\u00b7s along +Y on the torso at t=4 during a 1.2 m/s walk; no fall through t=6",
+  "push_Ns": 60.0,
+  "policy": "policy_walk_a.npz"
+}

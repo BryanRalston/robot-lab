@@ -56,9 +56,45 @@ def load_policy(path):
             std = np.asarray(z[key], dtype=np.float64).reshape(-1)
     if mean is None or std is None:
         raise SystemExit('normalizer mean/std not in ' + path + ' keys ' + ','.join(z.files[:40]))
-    if mean.shape != (107,) or std.shape != (107,):
-        raise SystemExit(f'normalizer shape {mean.shape} {std.shape}')
-    return weights, mean, std
+    meta = load_meta(path)
+    dim = int(meta.get('policy_obs_dim') or (109 if meta.get('heading_obs') else 107))
+    if mean.shape != (dim,) or std.shape != (dim,):
+        raise SystemExit(f'normalizer shape {mean.shape} {std.shape}, expected {dim}')
+    return weights, mean, std, meta
+
+
+def load_meta(path):
+    """Sidecar written by train.py (J10). Job-4 policies have none: infer the legacy layout."""
+    side = path[:-4] + '.meta.json'
+    if os.path.isfile(side):
+        with open(side, encoding='utf-8') as f:
+            return json.load(f)
+    return {'policy_obs_dim': 107, 'heading_obs': False, 'leg_action_mult': 1.0, 'payload_empty_frac': None}
+
+
+def empty_payload_frac(policy):
+    """payload_frac the policy saw with no payload in training.
+
+    Job 4 trained walk_a/walk_b with a 0.001 kg placeholder, so payload_frac was 5e-5 and the
+    normalizer std was its 1e-6 floor. Feeding 0.0 gave a -50 sigma input and the falls in <1 s
+    (RETRAIN_PLAN_J10.md section 2.1). J10 policies train with exactly 0.
+    """
+    weights, mean, std, meta = policy
+    if meta.get('payload_empty_frac') is not None:
+        return float(meta['payload_empty_frac'])
+    if std[12] < 1e-3:
+        return float(mean[12])
+    return 0.0
+
+
+OBS_Z_MAX = 8.0
+
+
+def obs_z_check(obs, mean, std, names=None):
+    """Largest |normalized obs| and its index. A replay mismatch shows up here first."""
+    z = np.abs((obs - mean) / std)
+    i = int(np.argmax(z))
+    return float(z[i]), i
 
 
 def policy_action(obs, weights, mean, std):
@@ -121,7 +157,12 @@ def _is_stand(cmd):
     return abs(cmd[0]) < 0.12 and abs(cmd[1]) < 0.12 and abs(cmd[2]) < 0.2
 
 
-def _obs(d, cmd, phase, last, payload_frac, home_q):
+def _yaw(q):
+    w, x, y, z = q
+    return float(np.arctan2(2.0 * (w * z + x * y), 1.0 - 2.0 * (y * y + z * z)))
+
+
+def _obs(d, cmd, phase, last, payload_frac, home_q, heading_ref=None):
     R = _quat_R(d.qpos[3:7])
     lin = R.T @ d.qvel[0:3]
     gyro = d.qvel[3:6].copy()
@@ -134,7 +175,13 @@ def _obs(d, cmd, phase, last, payload_frac, home_q):
         lin, gyro, grav, np.asarray(cmd, dtype=np.float64),
         np.array([payload_frac]),
         d.qpos[7:] - home_q, d.qvel[6:], last, phase_obs,
-    ])
+    ] + ([] if heading_ref is None else [_heading_obs(d, heading_ref)]))
+
+
+def _heading_obs(d, heading_ref):
+    e = _yaw(d.qpos[3:7]) - heading_ref
+    e = np.arctan2(np.sin(e), np.cos(e))
+    return np.array([np.sin(e), np.cos(e)])
 
 
 def _foot_fz(m, d):
@@ -169,14 +216,21 @@ def run_episode(m, policy, gains, ref, cmd, seconds, mode, payload_frac,
     push: (t0, t1, fx, fy) world-frame force on the torso, or None.
     kick_vx: added to world vx at kick_after_s (the forward-push gate).
     """
-    weights, mean, std = policy
+    weights, mean, std, meta = policy
+    use_heading = bool(meta.get('heading_obs'))
+    dim = mean.shape[0]
+    if payload_frac is None:
+        payload_frac = empty_payload_frac(policy)
     home_q = np.asarray(gains['home_q'], dtype=np.float64)
     home_qpos = np.asarray(gains['home_qpos'], dtype=np.float64)
     kp = np.asarray(gains['kp'], dtype=np.float64)
     kd = np.asarray(gains['kd'], dtype=np.float64)
     tau_lim = np.asarray(gains['tau_lim'], dtype=np.float64)
     w_lim = np.asarray(gains['w_lim'], dtype=np.float64)
-    scale = np.asarray(gains['action_scale'], dtype=np.float64)
+    scale = np.asarray(gains['action_scale'], dtype=np.float64).copy()
+    legj = np.array([n[:2] in ('l_', 'r_') and any(n.endswith(j) for j in (
+        'hip_roll', 'hip_pitch', 'knee', 'ankle_pitch', 'ankle_roll')) for n in [str(s) for s in gains['joint_names'].tolist()]])
+    scale[legj] *= float(meta.get('leg_action_mult', 1.0))
     carry = np.asarray(gains['carry_offset'], dtype=np.float64)
     names = [str(s) for s in gains['joint_names'].tolist()]
     lo = m.actuator_ctrlrange[:, 0].copy()
@@ -231,6 +285,10 @@ def run_episode(m, policy, gains, ref, cmd, seconds, mode, payload_frac,
     renderer = record
     aroll = [i for i, n in enumerate(names) if n.endswith('ankle_roll')]
     t_log = []
+    heading_ref = _yaw(d.qpos[3:7])
+    z_first = None
+    knee_idx = [i for i, n in enumerate(names) if n.endswith('knee')]
+    knee_sq = []
 
     for k in range(n_ctrl):
         t = k * CTRL_DT
@@ -238,9 +296,15 @@ def run_episode(m, policy, gains, ref, cmd, seconds, mode, payload_frac,
             d.qvel[0] += float(kick_vx)
             kicked = True
             mujoco.mj_forward(m, d)
-        obs = _obs(d, cmd, phase, last, payload_frac, home_q)
-        if obs.shape != (107,):
-            raise SystemExit(f'obs {obs.shape}')
+        obs = _obs(d, cmd, phase, last, payload_frac, home_q, heading_ref if use_heading else None)
+        if obs.shape != (dim,):
+            raise SystemExit(f'obs {obs.shape} vs normalizer {dim}')
+        if k == 0:
+            z_first = obs_z_check(obs, mean, std)
+            if z_first[0] > OBS_Z_MAX:
+                raise SystemExit(f'obs index {z_first[1]} is {z_first[0]:.1f} sigma from the training '
+                                 f'normalizer at t=0: replay does not match the training env')
+        heading_ref += float(cmd[2]) * CTRL_DT
         action = policy_action(obs, weights, mean, std)
         stand = _is_stand(cmd)
         if stand:
@@ -267,6 +331,7 @@ def run_episode(m, policy, gains, ref, cmd, seconds, mode, payload_frac,
             d.xfrc_applied[torso, 1] = fy
             mujoco.mj_step(m, d)
         tau_peak = np.maximum(tau_peak, np.abs(tau))
+        knee_sq.append([float(tau[i]) ** 2 for i in knee_idx])
         w_peak = np.maximum(w_peak, np.abs(d.qvel[6:]))
         sat += (np.abs(tau) > 0.95 * np.maximum(tmax, 1e-6)).astype(np.float64)
         R = _quat_R(d.qpos[3:7])
@@ -319,6 +384,11 @@ def run_episode(m, policy, gains, ref, cmd, seconds, mode, payload_frac,
         'mean_vx_world': round(float(np.mean(vx_w)) if vx_w else 0.0, 4),
         'mean_vy_world': round(float(np.mean(vy_w)) if vy_w else 0.0, 4),
         'net_x_over_t': round(float(d.qpos[0] / max(d.time, 1e-6)), 4),
+        'final_y': round(float(d.qpos[1]), 3),
+        'final_heading_deg': round(float(np.degrees(_yaw(d.qpos[3:7]))), 2),
+        'payload_frac_obs': payload_frac,
+        'knee_rms_nm': [round(float(np.sqrt(np.mean(np.asarray(knee_sq)[:, j]))), 1) for j in range(len(knee_idx))] if knee_sq else None,
+        'obs_z_max_t0': None if z_first is None else round(z_first[0], 2),
         'min_z': round(float(np.min(z_log)) if z_log else 0.0, 4),
         'min_up': round(float(np.min(up_log)) if up_log else 0.0, 4),
         'final_up': round(float(up_log[-1]) if up_log else 0.0, 4),
@@ -334,6 +404,15 @@ def run_episode(m, policy, gains, ref, cmd, seconds, mode, payload_frac,
         'w_lim': {names[i]: round(float(w_lim[i]), 3) for i in range(m.nu)},
     }
     return summary, frames
+
+
+DRIFT_Y_MAX_M = 0.5
+DRIFT_HEADING_MAX_DEG = 5.0
+
+
+def drift_ok(s):
+    """J10 no-drift gate for a straight command: |final y| <= 0.5 m and |heading| <= 5 deg."""
+    return bool(abs(s['final_y']) <= DRIFT_Y_MAX_M and abs(s['final_heading_deg']) <= DRIFT_HEADING_MAX_DEG)
 
 
 def record_cam(d):
@@ -367,9 +446,13 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--policy', required=True)
     ap.add_argument('--gif', action='store_true')
+    ap.add_argument('--xml', default=None, help='MJCF to evaluate (default sim/v3/humanoid_v3.xml)')
     ap.add_argument('--tag', default='', help='prefix for results JSON and the GIF, so policies do not overwrite each other')
     args = ap.parse_args()
     os.makedirs(OUT_DIR, exist_ok=True)
+    if args.xml:
+        global XML_V3
+        XML_V3 = os.path.abspath(args.xml)
     gains = np.load(os.path.join(HERE, 'gains.npz'))
     ref = np.load(os.path.join(HERE, 'ref_cycle.npz'))
     policy = load_policy(args.policy)
@@ -386,11 +469,13 @@ def main():
 
     walk, frames = run_episode(
         m, policy, gains, ref, cmd=np.array([1.2, 0.0, 0.0]),
-        seconds=20.0, mode='gait', payload_frac=0.0, record=renderer,
+        seconds=20.0, mode='gait', payload_frac=None, record=renderer,
     )
     walk_pass = walk['fell_at_s'] is None and walk['seconds_ran'] >= 19.9 and walk['mean_horiz_speed'] >= 1.15
-    walk['pass'] = bool(walk_pass)
-    walk['gate'] = 'walk 20s at 1.2 m/s command, mean horizontal pelvis speed >= 1.15, no fall'
+    walk['pass_legacy'] = bool(walk_pass)
+    walk['drift_ok'] = drift_ok(walk)
+    walk['pass'] = bool(walk_pass and walk['drift_ok'] and walk['net_x_over_t'] >= 1.15)
+    walk['gate'] = 'walk 20s at 1.2 m/s, mean horizontal speed and net x/t >= 1.15, no fall, |y| <= 0.5 m, |heading| <= 5 deg'
     walk['legs'] = _leg_rows(walk)
     print('WALK', walk['pass'], 'speed', walk['mean_horiz_speed'], 'fwd', walk['mean_forward'],
           'x/t', walk['net_x_over_t'], 'fell', walk['fell_at_s'], walk['fall_why'], flush=True)
@@ -398,7 +483,7 @@ def main():
     # Lateral 60 N·s during the walk, applied at t=4.0 whether or not the walk is good.
     lat, _ = run_episode(
         m, policy, gains, ref, cmd=np.array([1.2, 0.0, 0.0]),
-        seconds=8.0, mode='gait', payload_frac=0.0,
+        seconds=8.0, mode='gait', payload_frac=None,
         push=(4.0, 4.2, 0.0, 300.0),
     )
     # Recovery window is (4 s, 6 s]. A fall before the push means the walk never got there.
@@ -419,7 +504,7 @@ def main():
 
     fwd, _ = run_episode(
         m, policy, gains, ref, cmd=np.array([0.0, 0.0, 0.0]),
-        seconds=3.0, mode='stand', payload_frac=0.0,
+        seconds=3.0, mode='stand', payload_frac=None,
         kick_vx=0.6, kick_after_s=1.0,
     )
     # Kick at 1.0 s. Recover by 3.0 s: still up, and horizontal speed back under 0.5.
@@ -432,11 +517,18 @@ def main():
 
     m20, k20 = load_box(20.0)
     print('carry mass', round(float(np.sum(m20.body_mass)), 3), 'scale', round(k20, 6), flush=True)
-    carry, _ = run_episode(
-        m20, policy, gains, ref, cmd=np.array([0.8, 0.0, 0.0]),
-        seconds=20.0, mode='gait', payload_frac=1.0,
-    )
-    carry['pass'] = bool(carry['fell_at_s'] is None and carry['seconds_ran'] >= 19.9 and carry['mean_horiz_speed'] >= 0.8)
+    try:
+        carry, _ = run_episode(
+            m20, policy, gains, ref, cmd=np.array([0.8, 0.0, 0.0]),
+            seconds=20.0, mode='gait', payload_frac=1.0,
+        )
+    except SystemExit as exc:
+        # A policy trained without payload has a ~1e-6 std on payload_frac: carry is out of scope.
+        carry = {'fell_at_s': None, 'seconds_ran': 0.0, 'mean_horiz_speed': 0.0, 'final_y': 0.0,
+                 'final_heading_deg': 0.0, 'net_x_over_t': 0.0, 'error': str(exc)}
+    carry['pass_legacy'] = bool(carry['fell_at_s'] is None and carry['seconds_ran'] >= 19.9 and carry['mean_horiz_speed'] >= 0.8)
+    carry['drift_ok'] = drift_ok(carry)
+    carry['pass'] = bool(carry['pass_legacy'] and carry['drift_ok'] and carry['net_x_over_t'] >= 0.8)
     carry['gate'] = '20 kg torso payload at (0.25, 0, 0.10), command 0.8 m/s, 20 s, mean horizontal speed >= 0.8, no fall'
     carry['payload_kg'] = 20.0
     print('CARRY', carry['pass'], 'speed', carry['mean_horiz_speed'], 'fell', carry['fell_at_s'], flush=True)

@@ -43,6 +43,12 @@ def default_config() -> config_dict.ConfigDict:
         ref_weight=1.0,
         resample_steps=500,
         dr_gains=True,
+        # J10 (RETRAIN_PLAN_J10.md). heading_obs appends sin/cos of the heading error (obs 109).
+        heading_obs=False,
+        tracking_sigma=0.25,
+        heading_sigma=0.1,
+        leg_action_mult=1.0,
+        knee_cont_nm=76.9,
         reward_scales=config_dict.create(
             tracking_lin=2.0,
             tracking_ang=0.8,
@@ -57,12 +63,14 @@ def default_config() -> config_dict.ConfigDict:
             vel_limit=0.15,
             joint_limit=0.8,
             alive=0.8,
+            heading=0.0,
+            knee_thermal=0.0,
         ),
     )
 
 
-def obs_layout():
-    """Policy observation, 107 numbers. Privileged adds the clean copy plus extras."""
+def obs_layout(heading_obs=False):
+    """Policy observation, 107 numbers (109 with heading_obs). Privileged adds extras."""
     names = []
     names += [f'linvel_{c}' for c in 'xyz']
     names += [f'gyro_{c}' for c in 'xyz']
@@ -73,6 +81,8 @@ def obs_layout():
     names += [f'qd_{i}' for i in range(30)]
     names += [f'last_act_{i}' for i in range(30)]
     names += ['phase_sin', 'phase_cos', 'phase_sin_swap', 'phase_cos_swap']
+    if heading_obs:
+        names += ['heading_err_sin', 'heading_err_cos']
     priv = list(names)
     priv += ['pelvis_z']
     priv += [f'tau_frac_{i}' for i in range(30)]
@@ -108,7 +118,12 @@ class HumanoidWalk(mjx_env.MjxEnv):
         self._kd = jp.array(gains['kd'])
         self._tau_lim = jp.array(gains['tau_lim'])
         self._w_lim = jp.array(gains['w_lim'])
-        self._action_scale = jp.array(gains['action_scale'])
+        leg = np.array([n[:2] in ('l_', 'r_') and any(n.endswith(j) for j in (
+            'hip_roll', 'hip_pitch', 'knee', 'ankle_pitch', 'ankle_roll')) for n in self._joint_names])
+        scale = np.asarray(gains['action_scale'], dtype=np.float64)
+        scale = np.where(leg, scale * float(self._config.leg_action_mult), scale)
+        self._action_scale = jp.array(scale)
+        self._knee_mask = jp.array([n.endswith('knee') for n in self._joint_names], dtype=jp.float32)
         self._carry = jp.array(gains['carry_offset'])
         self._home_q = jp.array(gains['home_q'])
         self._home_qpos = jp.array(gains['home_qpos'])
@@ -185,8 +200,19 @@ class HumanoidWalk(mjx_env.MjxEnv):
         return rng, jp.array([vx, vy, wz]), stand
 
     def _payload_frac(self):
+        # J10: the 0.001 kg placeholder must read exactly 0. Job 4 gave 5e-5 with a 1e-6
+        # normalizer std, so any eval feeding 0.0 put a -50 sigma input into walk_a/walk_b.
         mass = self._mjx_model.body_mass[self._payload]
-        return jp.clip(mass / 20.0, 0.0, 1.5)
+        return jp.where(mass < 0.05, 0.0, jp.clip(mass / 20.0, 0.0, 1.5))
+
+    @staticmethod
+    def _yaw(data):
+        w, x, y, z = data.qpos[3], data.qpos[4], data.qpos[5], data.qpos[6]
+        return jp.arctan2(2.0 * (w * z + x * y), 1.0 - 2.0 * (y * y + z * z))
+
+    def _heading_err(self, data, info):
+        e = self._yaw(data) - info['heading_ref']
+        return jp.arctan2(jp.sin(e), jp.cos(e))
 
     def _is_stand(self, cmd):
         return (jp.abs(cmd[0]) < 0.12) & (jp.abs(cmd[1]) < 0.12) & (jp.abs(cmd[2]) < 0.2)
@@ -222,11 +248,15 @@ class HumanoidWalk(mjx_env.MjxEnv):
         phase = self._phase_obs(info['phase'])
         cmd = info['command']
         last = info['last_action']
-        state = jp.concatenate([
-            lin_n, gyro_n, grav_n, cmd, jp.array([payload]), q_n, qd_n, last, phase,
-        ])
-        priv = jp.concatenate([
-            lin, gyro, grav, cmd, jp.array([payload]), q, qd, last, phase,
+        parts = [lin_n, gyro_n, grav_n, cmd, jp.array([payload]), q_n, qd_n, last, phase]
+        cparts = [lin, gyro, grav, cmd, jp.array([payload]), q, qd, last, phase]
+        if bool(self._config.heading_obs):
+            he = self._heading_err(data, info)
+            hobs = jp.array([jp.sin(he), jp.cos(he)])
+            parts.append(hobs)
+            cparts.append(hobs)
+        state = jp.concatenate(parts)
+        priv = jp.concatenate(cparts + [
             jp.array([data.qpos[2]]),
             tau / self._tau_lim,
             fz / 500.0,
@@ -337,6 +367,9 @@ class HumanoidWalk(mjx_env.MjxEnv):
             'init_phase': phase,
             'init_prev_target': target,
             'init_next_push': next_push,
+            'heading_ref': yaw,
+            'init_heading_ref': yaw,
+            'knee_ms': jp.float32(0.0),
         }
         fz = jp.zeros(2)
         contact = jp.zeros(2, dtype=bool)
@@ -374,9 +407,14 @@ class HumanoidWalk(mjx_env.MjxEnv):
         mid = 0.5 * (self._high + self._low)
         norm = jp.abs(data.qpos[7:] - mid) / (0.5 * span)
         soft = jp.maximum(norm - 0.95, 0.0)
+        sig = float(self._config.tracking_sigma)
+        he = self._heading_err(data, info)
+        knee_rms = jp.sqrt(jp.maximum(info['knee_ms'], 0.0))
         terms = {
-            'tracking_lin': jp.exp(-lin_err / 0.25),
-            'tracking_ang': jp.exp(-yaw_err / 0.25),
+            'tracking_lin': jp.exp(-lin_err / sig),
+            'tracking_ang': jp.exp(-yaw_err / sig),
+            'heading': jp.exp(-jp.square(he) / float(self._config.heading_sigma)),
+            'knee_thermal': -jp.maximum(knee_rms / float(self._config.knee_cont_nm) - 1.0, 0.0),
             'upright': jp.exp(-jp.square(1.0 - up) / 0.05),
             'height': jp.exp(-jp.square(data.qpos[2] - z_tgt) / 0.02),
             'ref_pose': jp.exp(-jp.mean(jp.square(data.qpos[7:] - pose_ref)) / 0.05),
@@ -440,13 +478,17 @@ class HumanoidWalk(mjx_env.MjxEnv):
         ])
         contact = fz > 20.0
         air = info['feet_air_time']
+        # Knee thermal proxy: ~10 s EMA of mean knee tau^2 vs rev B 76.9 N·m continuous.
+        knee_sq = jp.sum(jp.square(tau) * self._knee_mask) / jp.maximum(jp.sum(self._knee_mask), 1.0)
+        info['knee_ms'] = 0.998 * info['knee_ms'] + 0.002 * knee_sq
+        info['heading_ref'] = info['heading_ref'] + cmd[2] * self.dt
         up = mjx_env.get_sensor_data(self.mj_model, data, 'upvector')[2]
         nan = jp.isnan(data.qpos).any() | jp.isnan(data.qvel).any()
         fell = (data.qpos[2] < 0.70) | (up < 0.50) | nan
         done = fell.astype(jp.float32)
 
         # Air-time reward reads the timer before contact zeros it. Pass a copy via info.
-        info_air = dict(info)
+        info_air = dict(info)  # carries heading_ref and knee_ms updated above
         info_air['feet_air_time'] = air
         # _rewards uses info['command'] and info['phase'] and info['last_action'].
         dummy_obs_info = info_air
@@ -485,6 +527,8 @@ class HumanoidWalk(mjx_env.MjxEnv):
         cmd_age = jp.where(d, jp.int32(0), cmd_age)
         new_air = jp.where(d, jp.zeros(2), new_air)
         contact_store = jp.where(d, jp.zeros(2, dtype=bool), contact)
+        heading_ref = jp.where(d, info['init_heading_ref'], info['heading_ref'])
+        knee_ms = jp.where(d, 0.0, info['knee_ms'])
         kp_scale = jp.where(d, new_kp, info['kp_scale'])
         strength = jp.where(d, new_str, info['strength'])
         latency = jp.where(d, new_lat, info['latency'])
@@ -505,6 +549,8 @@ class HumanoidWalk(mjx_env.MjxEnv):
             'cmd_age': cmd_age,
             'feet_air_time': new_air,
             'last_contact': contact_store,
+            'heading_ref': heading_ref,
+            'knee_ms': knee_ms,
         })
         obs, rng, lin, _ = self._observe(data, info, tau, fz, contact, new_air, rng)
         info['rng'] = rng

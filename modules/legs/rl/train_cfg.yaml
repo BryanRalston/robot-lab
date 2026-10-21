@@ -67,3 +67,82 @@ stages:
     carry: [0.0, 20.0]
     rough: true
     restore: walk_b
+
+  # ---- Job 10 (modules/controls/rl/RETRAIN_PLAN_J10.md). From scratch: obs is 109 (heading
+  # error), leg residual 0.40 rad, so job-4 checkpoints cannot be restored.
+  j10_walk:
+    timesteps: 50000000
+    vx: [0.3, 1.35]
+    vy: [-0.2, 0.2]
+    yaw: [-0.4, 0.4]
+    stand_prob: 0.10
+    gait_init_prob: 0.80
+    push: true
+    push_force: [50.0, 150.0]
+    push_gate_prob: 0.0
+    ref_weight: 0.6
+    carry: [0.001, 0.001]
+    rough: false
+    restore: null
+    heading_obs: true
+    tracking_sigma: 0.10
+    heading_sigma: 0.10
+    leg_action_mult: 1.6
+    rewards: {tracking_lin: 2.0, tracking_ang: 1.0, heading: 1.0, knee_thermal: 0.5}
+  j10_push:
+    timesteps: 30000000
+    vx: [0.0, 1.35]
+    vy: [-0.2, 0.2]
+    yaw: [-0.4, 0.4]
+    stand_prob: 0.25
+    gait_init_prob: 0.75
+    push: true
+    push_force: [50.0, 350.0]
+    push_gate_prob: 0.30
+    ref_weight: 0.3
+    carry: [0.001, 0.001]
+    rough: false
+    restore: j10_walk
+    heading_obs: true
+    tracking_sigma: 0.10
+    heading_sigma: 0.10
+    leg_action_mult: 1.6
+    rewards: {tracking_lin: 2.0, tracking_ang: 1.0, heading: 1.0, knee_thermal: 0.5}
+  j10_carry:
+    timesteps: 30000000
+    vx: [0.3, 1.3]
+    vy: [-0.2, 0.2]
+    yaw: [-0.4, 0.4]
+    stand_prob: 0.15
+    gait_init_prob: 0.80
+    push: true
+    push_force: [50.0, 300.0]
+    push_gate_prob: 0.15
+    ref_weight: 0.3
+    carry: [0.0, 22.0]
+    rough: false
+    restore: j10_push
+    heading_obs: true
+    tracking_sigma: 0.10
+    heading_sigma: 0.10
+    leg_action_mult: 1.6
+    rewards: {tracking_lin: 2.0, tracking_ang: 1.0, heading: 1.0, knee_thermal: 0.5}
+  j10_rough:
+    timesteps: 10000000
+    vx: [0.3, 1.3]
+    vy: [-0.2, 0.2]
+    yaw: [-0.4, 0.4]
+    stand_prob: 0.15
+    gait_init_prob: 0.80
+    push: true
+    push_force: [50.0, 300.0]
+    push_gate_prob: 0.15
+    ref_weight: 0.3
+    carry: [0.0, 22.0]
+    rough: true
+    restore: j10_carry
+    heading_obs: true
+    tracking_sigma: 0.10
+    heading_sigma: 0.10
+    leg_action_mult: 1.6
+    rewards: {tracking_lin: 2.0, tracking_ang: 1.0, heading: 1.0, knee_thermal: 0.5}
