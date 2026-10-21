@@ -71,6 +71,8 @@ def build(c):
             cuts.append((3, occ.addCylinder(bx["x_rear"]-1, vt["y"], vt["z"], bx["t_web"]+2, 0, 0, vt["dia"]/2)))
     if bx and bx.get("inbox_cut"):   # Option A: bulkhead web cannot pass through the cells; keep wings |y|>=Y-t_side and the strip above the lid
         cuts.append((3, occ.addBox(b["x0"]-0.5, -(bx["y"]-bx["t_side"]), bx["z0"]-1, b["t"]+0.5, 2*(bx["y"]-bx["t_side"]), bx["z1"]-bx["z0"]+1)))
+        if bx.get("thor_cut"):   # Thor bay footprint above the lid: no bulkhead strip there
+            tc_ = bx["thor_cut"]; cuts.append((3, occ.addBox(b["x0"]-0.5, -tc_["y"], bx["z1"]-0.01, b["t"]+1, 2*tc_["y"], b["z0"]+b["height_z"]-bx["z1"]+1)))
     bulk, _ = occ.cut(bulk, cuts)
     p = g["partition"]; part = occ.addBox(p["x0"], -p["width_y"]/2, p["z0"], p["t"], p["width_y"], p["height_z"])
     pv = g["pelvis"]; w = pv["wall"]
@@ -89,7 +91,16 @@ def build(c):
               occ.addBox(-35, -W["cheek_y"]-8, W["yoke_z0"]+8, 70, 8, W["pitch_z"]+30-(W["yoke_z0"]+8)),
               occ.addCylinder(0, -W["cheek_y"], W["pitch_z"], 0, 2*W["cheek_y"], 0, W["pitch_d"]/2),
               occ.addCylinder(0, W["cheek_y"]-0.01, W["pitch_z"], 0, W["flange_t"]+0.01, 0, W["pitch_d"]/2),
-              occ.addBox(-35, W["cheek_y"]+W["flange_t"]-0.01, W["pitch_z"]-30, 70, W["bracket_t"]+0.01, W["floor_z"]-(W["pitch_z"]-30))]
+              ] + ([occ.addBox(-35, W["cheek_y"]+W["flange_t"]-0.01, W["pitch_z"]-30, 70, W["bracket_t"]+0.01, W["floor_z"]-(W["pitch_z"]-30))] if not W.get("yoke2") else [])
+        Y2 = W.get("yoke2")   # two-sided yoke: box side walls carried down as cheeks; +y output flange + spacer, -y support bearing (THK RB7013) + spacer
+        if Y2:
+            yi, tc, D = Y2["y_in"], Y2["t"], Y2["D"]
+            wl += [occ.addCylinder(0, W["cheek_y"]+W["flange_t"]-0.01, W["pitch_z"], 0, yi-(W["cheek_y"]+W["flange_t"])+0.02, 0, Y2["hub_d"]/2),
+                   occ.addCylinder(0, -W["cheek_y"]-8-Y2["brg_w"], W["pitch_z"], 0, Y2["brg_w"]+0.01, 0, Y2["brg_od"]/2),
+                   occ.addCylinder(0, -yi-0.01, W["pitch_z"], 0, yi-(W["cheek_y"]+8+Y2["brg_w"])+0.02, 0, Y2["hub_d"]/2)]
+            for sg in (1, -1):
+                y0 = yi if sg > 0 else -yi-tc
+                wl.append(occ.addBox(-D/2, y0, Y2["z_bot"], D, tc, W["floor_z"]-Y2["z_bot"]))
         wv, _ = occ.fuse([(3, wl[0])], [(3, t) for t in wl[1:]])
     out, fmap = occ.fragment(bulk + pel + wv, [(3, part)])   # conformal: shared faces -> shared nodes
     occ.synchronize()
@@ -203,6 +214,14 @@ def split_posts(E, N, c):
             bulk.append((e, ns))
     E["bulkhead"] = bulk
     E["posts"] = posts
+    W = c["geometry"].get("waist") or {}
+    if W.get("yoke2"):   # torso yoke cheeks (two-sided) reported as their own part
+        Y2 = W["yoke2"]; yk, rest = [], []
+        for e, ns in E.get("waist", []):
+            p = [N[i] for i in ns[:4]]
+            cy = sum(q[1] for q in p)/4; cz = sum(q[2] for q in p)/4
+            (yk if abs(cy) >= Y2["y_in"]-0.2 and cz >= Y2["z_bot"]-0.2 else rest).append((e, ns))
+        E["waist"] = rest; E["yoke"] = yk
     return E
 
 def element_info(E, N):
@@ -397,7 +416,7 @@ def main():
             shared[f"{k}|{m}"] = len(node_sets[k] & node_sets[m])
     def npair(a, b):
         return shared.get(f"{a}|{b}", shared.get(f"{b}|{a}", 0))
-    pairs = ([("waist", "pelvis"), ("waist", "bulkhead")] if c["geometry"].get("waist") else []) + [("posts", "pelvis"), ("posts", "bulkhead"), ("partition", "bulkhead")] + ([] if c["geometry"].get("bay_box") else [("partition", "pelvis")]) + ([("bulkhead", "pelvis")] if c["geometry"].get("bay_box") and not c["geometry"]["posts"]["y"] and not c["geometry"].get("waist") else [])
+    pairs = (([("waist", "pelvis")] + ([("yoke", "waist"), ("yoke", "bulkhead")] if c["geometry"]["waist"].get("yoke2") else [("waist", "bulkhead")])) if c["geometry"].get("waist") else []) + [("posts", "pelvis"), ("posts", "bulkhead"), ("partition", "bulkhead")] + ([] if c["geometry"].get("bay_box") else [("partition", "pelvis")]) + ([("bulkhead", "pelvis")] if c["geometry"].get("bay_box") and not c["geometry"]["posts"]["y"] and not c["geometry"].get("waist") else [])
     for a_, b_ in pairs:
         if not node_sets.get(a_) or not node_sets.get(b_):
             continue   # part absent in this config (e.g. 3c has no posts)

@@ -1,4 +1,4 @@
-# FEA job 3c-final Option A, 3 mm lid variant (T&R b1fe48f; Electronics P-057 6b976bd). Waist path per model_v4 (no posts). Run: python fea_job3.py --cfg fea_job3c.yaml --out fea/job3c --coarse
+mesh:
 mesh:
   size: 6.0
   size_coarse: 25.0
@@ -94,7 +94,7 @@ geometry:
       part: GORE MultiVent
       note: 'Option A: rear web is against the shell; vent through the floor at (-80,80), outlet down into the pelvis open top, >=40 mm from the waist cheeks/joints; SBS75X on rear web'
     y: 115
-    x_front: 108.5
+    x_front: 106.5
     x_rear: -107
     z0: 121.6
     z1: 278
@@ -122,6 +122,8 @@ geometry:
       y: 54.5
       z0: 167
       t: 4
+    thor_cut:
+      y: 112.5
   waist:
     path: single
     stock: 7075 torso waist bracket (model_v4 single +y cheek 70x8) + waist actuator stand-ins (solid Al, stiff)
@@ -139,6 +141,22 @@ geometry:
     bracket_t: 8
     floor_z: 121.6
     note: 'model_v4 build_upper: waist_yaw axis dk+35, waist_pitch axis dk+143 (global 1349.6), torso bracket = +y cheek 70x8 from wp-30 to tb + floor plate at tb (1409.6). Sim-torso z = global-1280.'
+    yoke2:
+      t: 14
+      D: 140
+      z_bot: 19.6
+      y_in: 103
+      hub_d: 100
+      brg_od: 100
+      brg_w: 13
+      note: 'two-sided yoke (Robot Lab decision 10:18): cheeks = box side walls carried down (outer face y+-115); +y actuator output flange + Al spacer; -y THK RB7013 crossed-roller (d70 D100 B13, C0 27.7
+        kN, 0.35 kg) on a stub from the waistY -y cheek + spacer'
+  yoke:
+    path: single
+    stock: '7075-T651 plate 1.0 in (25.4) [R-128 band: 271?] cheeks'
+    grain: L along z
+    allowable: 257
+    mat: Al7075T651
 load_cases:
   LC1a_29kN_normal:
     target: land
@@ -154,6 +172,7 @@ load_cases:
       pelvis: 406
       partition: 450
       waist: 386
+      yoke: 386
   LC1b_29kN_offset25:
     target: land_off
     F:
@@ -168,6 +187,7 @@ load_cases:
       pelvis: 406
       partition: 450
       waist: 386
+      yoke: 386
   LC1c_25deg:
     target: land
     F:
@@ -182,6 +202,7 @@ load_cases:
       pelvis: 406
       partition: 450
       waist: 386
+      yoke: 386
   LC1u_43p5kN_ultimate:
     target: land
     F:
@@ -195,6 +216,7 @@ load_cases:
       pelvis: 504
       partition: 600
       waist: 504
+      yoke: 504
   LC2_side_fall:
     target: shoulder_flange_L
     M:

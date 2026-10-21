@@ -83,3 +83,46 @@
 - the bulkhead strip z 278–300 vs Thor (x −57…73) is unchecked;
 - the box front web at 108.5 is beyond the shell inner at 107 (pre-existing).
 Layout: pack/pack_layout_optA.{py,json,svg}, pack/pack_layout_optA_tables.md.
+
+## 3c-final: two-sided yoke (Robot Lab decision 10:18), coarse h 25, 3 iterations
+**Design:** the box side walls are carried down as cheeks at y ±(103…117), D 140 (x ±70), from z 19.6 to the floor (121.6).
+- **+y side:** the waist-pitch actuator output flange plus an Al spacer Ø100/88 (40 mm).
+- **−y side:** a **THK RB7013** crossed-roller ring (d 70, D 100, B 13; C 19.4 kN, C0 27.7 kN, 0.35 kg; THK catalog A18-24, tech.thk.com/en/products/pdfs/en_a18_024.pdf) on a stub from the waistY −y cheek, plus a 27 mm spacer.
+- Bearing static check: P0 = Fr + 0.44 Fa = 14.5 + 0.44 × 9.9 = 18.9 kN (LC1c, half of 29 kN radial), fs = 1.47. At ultimate the radial load alone is 21.75 kN, fs = 1.27.
+- The model_v4 single +y bracket cheek is deleted.
+
+**Iterations:**
+1. t 12: bulkhead SF 0.009 at the Thor-cut sliver corner (a geometry artefact; the strip cut is widened to |y| < 112.5).
+2. t 20: yoke SF 2.07/3.05/2.33/1.80 (LC1a/b/c/u).
+3. **t 14, final:** yoke SF **1.92/1.97/1.98/1.67**, LC2 4.07. The cheeks pass.
+
+**Rest of the path (t 14):**
+- Bulkhead wing/lid corner (49, 112.8, 278): **0.136/0.082/0.185/0.119**.
+- waistY −y cheek root (model_v4 8 mm, (31, −57, 26)): **0.24/0.20/0.14/0.21**.
+- Pelvis 4 mm shell at the deck: **0.34/0.31/0.41/0.28**.
+- Land deflection 31.3 mm, **k 0.93 MN/m** (≥ 5.3 needed). Moving the cheeks from t 12 to t 20 changed deflection by < 0.1 mm, so the compliance is in the waistY yoke, the pelvis shell and the bulkhead/socket, not the cheeks.
+- **Mode 1 41.6 Hz** (≥ 80 needed). Buckling 6.3 (pass).
+
+**The fixed-pelvis BC is kept and is conservative:** in a chest fall the real reaction is whole-body inertia.
+
+**Pitch torque:** the LC1 moment about the pitch axis is 29 kN × 0.150 m = 4.36 kN·m, against a 116 N·m motor. A yoke hard stop must carry it (open: T&R / Actuators).
+
+**Clearances:**
+- **Pitch −30/+60° (sim v3):**
+  - The cheek corner radius is 86 mm, so its lowest point is z −16.4, 33.6 mm above the pelvis top (−50). The cheeks sit at |y| ≥ 103, clear of the waistY plate and cheek (|y| ≤ 70).
+  - At +60° the box front-bottom corner reaches (x 98, z 3.4). That's outside the pelvis footprint (x ≤ 85) and clear of the yoke plate (|x| ≤ 60).
+- **Yaw ±90°:** nothing static sits above z −50 within r 157 except the waist yaw housing (r 55). Pass.
+- **Hip sweep:** the hips are below the pelvis deck (sim z ≤ −73); the torso parts stay ≥ 33 mm above the pelvis top. Pass.
+- **Thor (model_v4, x −57…73, y ±100, z 273.6–313.6):**
+  - The bulkhead strip at z 278–300 clashed. It is now removed for |y| < 112.5 (wings only).
+  - **The lid top at 278 overlaps the Thor bottom by 4.4 mm.** Minimum change: raise the Thor bay 6 mm (tb + 170). Cover chamfer clearance goes from 24 to 18 mm; head/cover recheck open (ID).
+  - The duct partition at x −10, z 278–300 sits inside the Thor footprint (pre-existing; Thermal/Electronics to check).
+- **Front web:** moved from 108.5 to 106.5, 0.5 mm inside the 107 shell inner. The c1/c2 FET/busbar zone (x 52–104.5) is unaffected.
+
+**Mass:**
+- Box + bulkhead 2.73 kg (mesh); cheeks 1.08 kg (mesh); spacers 0.335 kg [CALC Ø100/88]; RB7013 0.35 kg.
+- Credits: job 3 baseline −1.99; sim "waist ring 7075" −0.25 (replaced by the yoke); enclosure credit −0.738 (still to itemise).
+- Electronics P-057: +0.05.
+- **Net +1.56 kg.** The 3 mm lid adds about +0.19 (yaml updated, not re-run with the yoke).
+
+**COM:** whole robot Δ ≈ (−0.2, 0, +6.3) mm [EST; robot COM z ≈ 1.0 m assumed]. That brings the cumulative total to ≈ 6.7 mm, under the 10 mm limit.

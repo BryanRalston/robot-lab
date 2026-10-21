@@ -47,3 +47,8 @@
 - The ~4 s walk fall is old. The fall at 2.8 s (walk_a 2.6 s) is a regression from the ddfcff8 ankle range: the walk rested on the −45° stop. Needs a Legs gait retune; not fixed.
 - Kneel candidate (straight-arm plant, 49 N·m [EST] proposal): chest contact 0.26–0.30 m/s, ≤1.7 kN. FAIL on 0.1 m/s and on Arms R19 plant (≈1.2 kN, 0.6 m/s per hand).
 - job10_brief wording: the repin was RL Controls' decision. No pinned input changed.
+- 2026-10-21 10:25 ET RL Torso: job 3c-final two-sided yoke + Option A pack (media/progress/2026-10-21_torso_yoke.png).
+  - Yoke cheeks t14×D140 pass: SF 1.92/1.97/1.98/1.67 (LC1a/b/c/u).
+  - Path still FAILS: bulkhead wing/lid corner SF 0.08–0.19; model_v4 waistY 8 mm cheek 0.14–0.24; pelvis 0.28–0.41. k 0.93 MN/m (≥5.3), mode 1 41.6 Hz (≥80). Fixed-pelvis BC kept (conservative).
+  - Net +1.56 kg; whole-robot COM ≈ +6.3 mm z [EST].
+  - Thor overlaps the lid by 4.4 mm → raise the Thor bay 6 mm. Front web is now 106.5.
