@@ -68,7 +68,11 @@
       40.0,
       12.0
     ],
-    "safe_stop_zmp_k_note": "CoM-xy PD gains (kx, dx) applied ONLY in the kneel/safe-stop moves (R-146b). Global WBC balance gains are unchanged (stock kx 2.5; zmp_k unset outside safe-stop)."
+    "safe_stop_zmp_k_note": "CoM-xy PD gains (kx, dx) applied ONLY in the kneel/safe-stop moves (R-146b). Global WBC balance gains are unchanged (stock kx 2.5; zmp_k unset outside safe-stop).",
+    "ankle_pitch_soft_min_rad": -0.916,
+    "ankle_pitch_stop_rad": -0.96,
+    "ankle_roll_couple_deg": 10.0,
+    "ankle_note": "P-157 (Legs a676435) / D96 (Actuators da63827): dorsiflexion past -52.5 deg (-0.916) only with |ankle roll| <= 10 deg; -55 deg (-0.960) is the mechanical end stop and is never commanded. Enforced by drive_thermal_derate.ankle_pitch_min/check_ankles (kneel -> HOLD_DERATED on violation). sim/v3 XML range still -45 deg (not regenerated, see DRIVE_DERATE.md)."
   },
   "arm_self_collision": {
     "enabled": true,

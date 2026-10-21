@@ -26,7 +26,8 @@ import gait_lib as GL
 from drive_thermal_derate import (DerateConfig, DriveDerateSupervisor, MO_OFF, KNEEL, CONTACT_CONFIRMED,
                                   friction_hold, static_hold_ok)
 
-ANKLE_MIN = -0.79          # rad, ankle dorsiflexion stop (Legs may extend it; config value)
+from drive_thermal_derate import ankle_pitch_min, ANKLE_PITCH_STOP
+ANKLE_MIN = ankle_pitch_min(0.0)   # P-157/D96: -0.955 rad at |roll|<=10 deg (stop -0.960); -0.916 if |roll|>10 deg. Was -0.79.
 FOOT_PITCH = 0.5           # rad heel-up at the end of P1
 P1_PZ, P1_PITCH, P1_CX = 0.74, 0.0, TOE - 0.04   # IK search result: knee origin 0.29 m, CoM 0.68 m over the toes
 T1A = 0.8                  # P1a: flat-foot CoM shift to the toe line (before the heel lifts)

@@ -301,3 +301,26 @@ def test_chest_lower_wbc_contact_speed_nominal():
     assert r['chest_contact_speed_mps'] is not None and r['chest_contact_speed_mps'] <= 0.10
     assert r['peak_chest_N'] <= 8800 and r['t_d94_flag_mo0_s'] is not None
     assert r['peak_tau_Nm']['elbow'] <= 38.0 + 1e-6
+
+
+def test_ankle_roll_coupling_soft_limit():
+    import math
+    from drive_thermal_derate import ankle_pitch_min, ankle_limit_ok, clamp_ankle, ANKLE_PITCH_STOP
+    r = math.radians
+    assert abs(ankle_pitch_min(0.0) - (ANKLE_PITCH_STOP + 0.005)) < 1e-12
+    assert abs(ankle_pitch_min(r(10.0)) - (ANKLE_PITCH_STOP + 0.005)) < 1e-12
+    assert abs(ankle_pitch_min(r(-12.0)) - r(-52.5)) < 1e-12
+    assert ankle_limit_ok(r(-54.0), r(5.0)) and not ankle_limit_ok(r(-54.0), r(15.0))
+    assert ankle_limit_ok(r(-52.4), r(18.0))
+    assert not ankle_limit_ok(-0.960, 0.0)                     # the end stop itself is never allowed
+    assert abs(clamp_ankle(-1.2, r(15.0)) - r(-52.5)) < 1e-12
+
+
+def test_supervisor_ankle_violation_in_kneel_goes_hold_derated():
+    import math
+    import drive_thermal_derate as D
+    io, sv, _ = make()
+    sv.state = D.KNEEL
+    assert sv.check_ankles({'l': (math.radians(-54), math.radians(15)), 'r': (0.0, 0.0)}) is False
+    assert sv._kneel_impossible
+    assert sv.check_ankles({'l': (math.radians(-54), math.radians(5)), 'r': (0.0, 0.0)}) is True

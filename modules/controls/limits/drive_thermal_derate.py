@@ -197,6 +197,16 @@ class DriveDerateSupervisor:
     def kneel_impossible(self):
         self._kneel_impossible = True
 
+    def check_ankles(self, ankles):
+        """ankles: {side: (pitch_rad, roll_rad)} measured. D96 coupling violated while kneeling -> kneel_impossible()
+        (-> HOLD_DERATED); in any state the violation is logged. Returns True if all ankles are inside the limit."""
+        bad = [sd for sd, (p, r) in ankles.items() if not ankle_limit_ok(p, r)]
+        if bad:
+            self.log.append((self._t, f'ankle_limit {",".join(bad)}'))
+            if self.state == KNEEL:
+                self.kneel_impossible()
+        return not bad
+
     def set_support(self, knee_contact, com_supported, com_speed, torque_ok=False):
         """torque_ok: static holding torque of the settled pose is below the friction hold at EVERY joint
         (Actuators D94, 7d22c91: no brakes, roller screws backdrive, hold ~7-9 N·m). Use static_hold_ok()."""
@@ -345,6 +355,25 @@ def default_tau_nominal():
     import numpy as np
     g = np.load(os.path.join(HERE, '..', '..', 'legs', 'rl', 'gains.npz'))
     return {str(n): float(t) for n, t in zip(g['joint_names'].tolist(), g['tau_lim'])}
+
+
+# ---- D96 / P-157 ankle dorsiflexion soft limit with roll coupling (Actuators da63827, Legs a676435)
+ANKLE_PITCH_SOFT_MIN = math.radians(-52.5)    # -0.916 rad: controlled limit at any roll (q<0 = dorsiflexion)
+ANKLE_PITCH_STOP = -0.960                     # rad (-55.0 deg): mechanical end stop (P-157)
+ANKLE_ROLL_COUPLE = math.radians(10.0)        # past -52.5 deg only with |roll| <= 10 deg (screw toggle -58.6 at roll 18)
+
+
+def ankle_pitch_min(roll_rad):
+    """Lowest allowed ankle pitch command (rad) at this ankle roll. The end stop is never commanded."""
+    return ANKLE_PITCH_STOP + 0.005 if abs(roll_rad) <= ANKLE_ROLL_COUPLE else ANKLE_PITCH_SOFT_MIN
+
+
+def ankle_limit_ok(pitch_rad, roll_rad):
+    return pitch_rad >= ankle_pitch_min(roll_rad) - 1e-9
+
+
+def clamp_ankle(pitch_cmd, roll_rad):
+    return max(float(pitch_cmd), ankle_pitch_min(roll_rad))
 
 
 class ProneLowerGuard:
