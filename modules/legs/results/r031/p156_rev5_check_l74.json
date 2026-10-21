@@ -1,0 +1,256 @@
+{
+ "housing_bbox": [
+  -184.1,
+  -61.0,
+  27.6,
+  232.4,
+  684.9,
+  814.0
+ ],
+ "min_pairs": [
+  [
+   "V_transfer | L_palm 7075-T6 machined shell 1.5 mm w/ openings (P-021/A32, palm_7075.py)",
+   0.0,
+   "{}"
+  ],
+  [
+   "V_hood | L_palm 7075-T6 machined shell 1.5 mm w/ openings (P-021/A32, palm_7075.py)",
+   0.0,
+   "{}"
+  ],
+  [
+   "V_transfer | L_finger1 phalanx1 [EST]",
+   0.0,
+   "{'L_hip_yaw': -35}"
+  ],
+  [
+   "V_transfer | L_finger2 phalanx1 [EST]",
+   0.0,
+   "{'L_hip_yaw': -35}"
+  ],
+  [
+   "V_hood | L_finger3 phalanx1 [EST]",
+   0.0,
+   "{'L_hip_yaw': -35}"
+  ],
+  [
+   "V_hood | L_finger4 phalanx1 [EST]",
+   0.0,
+   "{'L_hip_yaw': -35}"
+  ],
+  [
+   "V_transfer | L_hip_pitch screw +y RV12 roller-screw rod \u00f812",
+   0.0,
+   "{}"
+  ],
+  [
+   "V_transfer | L_knee twin housing (Actuators D59 STEP, shared centre web)",
+   0.0,
+   "{}"
+  ],
+  [
+   "V_plenum | L_tibia tube 7075 \u00f845x1.2",
+   0.0,
+   "{'L_knee': 145}"
+  ],
+  [
+   "V_plenum | L_tibia internal doubler sleeve 0.5x100 (r8)",
+   0.0,
+   "{'L_knee': 145}"
+  ],
+  [
+   "V_transfer | L_thumb phalanx2 [EST]",
+   0.0,
+   "{'L_hip_pitch': -60}"
+  ],
+  [
+   "V_transfer | L_thumb phalanx3 [EST]",
+   0.0,
+   "{'L_hip_pitch': -60}"
+  ],
+  [
+   "V_hood | L_thumb phalanx2 [EST]",
+   0.5,
+   "{'L_hip_pitch': -60}"
+  ],
+  [
+   "V_transfer | L_femur tube 7050-T7451 \u00f850x1.2 (R-031; P-047 wall 1.6 pending FEA)",
+   1.5,
+   "{}"
+  ],
+  [
+   "V_hood | L_thumb phalanx3 [EST]",
+   1.5,
+   "{'L_hip_pitch': -60}"
+  ],
+  [
+   "V_hood | L_finger2 phalanx1 [EST]",
+   2.5,
+   "{}"
+  ],
+  [
+   "V_transfer | L_knee trunnion bracket top plate (thigh) [EST]",
+   3.0,
+   "{}"
+  ],
+  [
+   "V_transfer | L_knee trunnion bracket strut to femur [EST]",
+   3.0,
+   "{}"
+  ],
+  [
+   "V_transfer | L_finger3 phalanx1 [EST]",
+   3.3,
+   "{'L_hip_yaw': -35}"
+  ],
+  [
+   "V_hood | L_finger1 phalanx1 [EST]",
+   5.3,
+   "{}"
+  ],
+  [
+   "V_baffle | L_knee twin housing (Actuators D59 STEP, shared centre web)",
+   6.3,
+   "{}"
+  ],
+  [
+   "V_wall_py | L_knee twin housing (Actuators D59 STEP, shared centre web)",
+   6.7,
+   "{}"
+  ],
+  [
+   "V_wall_ny | L_knee twin housing (Actuators D59 STEP, shared centre web)",
+   6.7,
+   "{}"
+  ],
+  [
+   "V_transfer | L_thumb phalanx1 [EST]",
+   9.5,
+   "{'L_hip_yaw': -35}"
+  ],
+  [
+   "V_hood | L_thumb phalanx1 [EST]",
+   9.5,
+   "{'L_hip_yaw': -35}"
+  ]
+ ],
+ "under_3mm": [
+  [
+   "V_transfer | L_palm 7075-T6 machined shell 1.5 mm w/ openings (P-021/A32, palm_7075.py)",
+   0.0,
+   "{}"
+  ],
+  [
+   "V_hood | L_palm 7075-T6 machined shell 1.5 mm w/ openings (P-021/A32, palm_7075.py)",
+   0.0,
+   "{}"
+  ],
+  [
+   "V_transfer | L_finger1 phalanx1 [EST]",
+   0.0,
+   "{'L_hip_yaw': -35}"
+  ],
+  [
+   "V_transfer | L_finger2 phalanx1 [EST]",
+   0.0,
+   "{'L_hip_yaw': -35}"
+  ],
+  [
+   "V_hood | L_finger3 phalanx1 [EST]",
+   0.0,
+   "{'L_hip_yaw': -35}"
+  ],
+  [
+   "V_hood | L_finger4 phalanx1 [EST]",
+   0.0,
+   "{'L_hip_yaw': -35}"
+  ],
+  [
+   "V_transfer | L_hip_pitch screw +y RV12 roller-screw rod \u00f812",
+   0.0,
+   "{}"
+  ],
+  [
+   "V_transfer | L_knee twin housing (Actuators D59 STEP, shared centre web)",
+   0.0,
+   "{}"
+  ],
+  [
+   "V_plenum | L_tibia tube 7075 \u00f845x1.2",
+   0.0,
+   "{'L_knee': 145}"
+  ],
+  [
+   "V_plenum | L_tibia internal doubler sleeve 0.5x100 (r8)",
+   0.0,
+   "{'L_knee': 145}"
+  ],
+  [
+   "V_transfer | L_thumb phalanx2 [EST]",
+   0.0,
+   "{'L_hip_pitch': -60}"
+  ],
+  [
+   "V_transfer | L_thumb phalanx3 [EST]",
+   0.0,
+   "{'L_hip_pitch': -60}"
+  ],
+  [
+   "V_hood | L_thumb phalanx2 [EST]",
+   0.5,
+   "{'L_hip_pitch': -60}"
+  ],
+  [
+   "V_transfer | L_femur tube 7050-T7451 \u00f850x1.2 (R-031; P-047 wall 1.6 pending FEA)",
+   1.5,
+   "{}"
+  ],
+  [
+   "V_hood | L_thumb phalanx3 [EST]",
+   1.5,
+   "{'L_hip_pitch': -60}"
+  ],
+  [
+   "V_hood | L_finger2 phalanx1 [EST]",
+   2.5,
+   "{}"
+  ]
+ ],
+ "hood_vs_skirt_keepout": [
+  {
+   "hip_pitch": -107.3,
+   "max_penetration_mm": 0.0,
+   "min_outside_mm": 15.6
+  },
+  {
+   "hip_pitch": -80,
+   "max_penetration_mm": 0.0,
+   "min_outside_mm": 12.8
+  },
+  {
+   "hip_pitch": -60,
+   "max_penetration_mm": 0.0,
+   "min_outside_mm": 11.6
+  },
+  {
+   "hip_pitch": -30,
+   "max_penetration_mm": 0.0,
+   "min_outside_mm": 10.8
+  },
+  {
+   "hip_pitch": 0,
+   "max_penetration_mm": 0.0,
+   "min_outside_mm": 10.3
+  },
+  {
+   "hip_pitch": 20,
+   "max_penetration_mm": 0.0,
+   "min_outside_mm": 10.1
+  },
+  {
+   "hip_pitch": 40,
+   "max_penetration_mm": 0.0,
+   "min_outside_mm": 12.4
+  }
+ ]
+}

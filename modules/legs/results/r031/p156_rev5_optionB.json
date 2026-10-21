@@ -1,0 +1,120 @@
+{
+ "ID_52x40_x-40..-80": {
+  "band_mm": 0,
+  "result": "FAIL: cut starts at x -40, strut lands at x -45..-40 inside y 104-156 -> no load path from the ligaments to the strut (band 0); ID x -40 edge also cuts the 5 mm strut overlap"
+ },
+ "bands": [
+  {
+   "b": 6,
+   "sigma_design": 541.2,
+   "SF_design_262": 0.48,
+   "sigma_amp_Kt": 360.3,
+   "SF_fatigue_58": 0.16,
+   "tau": 90.2,
+   "SF_shear": 1.68,
+   "fall_capacity_kN_at393": 6.3
+  },
+  {
+   "b": 8,
+   "sigma_design": 304.5,
+   "SF_design_262": 0.86,
+   "sigma_amp_Kt": 202.7,
+   "SF_fatigue_58": 0.29,
+   "tau": 67.7,
+   "SF_shear": 2.23,
+   "fall_capacity_kN_at393": 11.2
+  },
+  {
+   "b": 10,
+   "sigma_design": 194.8,
+   "SF_design_262": 1.34,
+   "sigma_amp_Kt": 129.7,
+   "SF_fatigue_58": 0.45,
+   "tau": 54.1,
+   "SF_shear": 2.79,
+   "fall_capacity_kN_at393": 17.5
+  },
+  {
+   "b": 12,
+   "sigma_design": 135.3,
+   "SF_design_262": 1.94,
+   "sigma_amp_Kt": 90.1,
+   "SF_fatigue_58": 0.64,
+   "tau": 45.1,
+   "SF_shear": 3.35,
+   "fall_capacity_kN_at393": 25.2
+  },
+  {
+   "b": 15,
+   "sigma_design": 86.6,
+   "SF_design_262": 3.03,
+   "sigma_amp_Kt": 57.7,
+   "SF_fatigue_58": 1.01,
+   "tau": 36.1,
+   "SF_shear": 4.19,
+   "fall_capacity_kN_at393": 39.3
+  },
+  {
+   "b": 18,
+   "sigma_design": 60.1,
+   "SF_design_262": 4.36,
+   "sigma_amp_Kt": 40.0,
+   "SF_fatigue_58": 1.45,
+   "tau": 30.1,
+   "SF_shear": 5.03,
+   "fall_capacity_kN_at393": 56.6
+  }
+ ],
+ "net_section_cut52": {
+  "R5": {
+   "Kt_inglis": 5.56,
+   "gross": 5.5,
+   "net": 7.5,
+   "peak_design": 30.7,
+   "SF_design": 8.53,
+   "amp_peak": 10.2,
+   "SF_fatigue": 5.67,
+   "SF_fall_net_393": 52.3
+  },
+  "R8": {
+   "Kt_inglis": 4.61,
+   "gross": 5.5,
+   "net": 7.5,
+   "peak_design": 25.4,
+   "SF_design": 10.3,
+   "amp_peak": 8.5,
+   "SF_fatigue": 6.85,
+   "SF_fall_net_393": 52.3
+  },
+  "R10": {
+   "Kt_inglis": 4.22,
+   "gross": 5.5,
+   "net": 7.5,
+   "peak_design": 23.3,
+   "SF_design": 11.23,
+   "amp_peak": 7.8,
+   "SF_fatigue": 7.47,
+   "SF_fall_net_393": 52.3
+  }
+ },
+ "rec_band18_x-63..-88_R8": {
+  "cut_LxW": [
+   25,
+   52
+  ],
+  "r": 8,
+  "area_mm2": 1245,
+  "dm_kg_side": -0.028,
+  "dm_kg_pair": -0.056
+ },
+ "ID_area_band15_x-60..-85_R8": {
+  "cut_LxW": [
+   25,
+   52
+  ],
+  "r": 8,
+  "area_mm2": 1245,
+  "dm_kg_side": -0.028,
+  "dm_kg_pair": -0.056
+ }
+}
