@@ -1033,6 +1033,7 @@ class WalkController:
             for i in range(nu):
                 tau[i] = tau_dof[self.act_va[i]] / max(self.gear[i], 1e-8)
             tau = np.clip(tau, -self.tau_max, self.tau_max)
+            tau = self._waist_zone(d, tau)
             self.last_tau = tau
             self.last_status = 'ok'
             for i, s in enumerate('lr'):
@@ -1046,6 +1047,16 @@ class WalkController:
             self.dbg_qacc_knee = float(qacc[self.va['rknee']]) if 'rknee' in self.va else 0.0
         d.ctrl[:] = self.last_tau
         return self.last_tau
+
+    def _waist_zone(self, d, tau):
+        """Actuators D102 (bd21ff0) waist-pitch stop-zone torque zero, soft_limits.apply_waist_stop_zone (1ed4d73)."""
+        import sys as _s, os as _o
+        _p = _o.path.join(_o.path.dirname(_o.path.abspath(__file__)), '..', '..', 'controls', 'limits')
+        if _p not in _s.path: _s.path.insert(0, _p)
+        from soft_limits import apply_waist_stop_zone
+        m = self.m if hasattr(self, 'm') else None
+        names = [m.actuator(i).name for i in range(m.nu)] if m is not None else []
+        return apply_waist_stop_zone(names, lambda n: float(d.qpos[self.act_qa[names.index(n)]]), tau)
 
     def _solve(self, P, q, A, l, u):
         Ps = sp.csc_matrix(np.triu(P))
@@ -2030,7 +2041,7 @@ class WalkController:
             tau = np.zeros(nu)
             for i in range(nu):
                 tau[i] = tau_dof[self.act_va[i]] / max(self.gear[i], 1e-8)
-            self.last_tau = np.clip(tau, -self.tau_max, self.tau_max)
+            self.last_tau = self._waist_zone(d, np.clip(tau, -self.tau_max, self.tau_max))
             self.last_status = 'ok'
             self.x_prev = x
             for i, s in enumerate('lr'):

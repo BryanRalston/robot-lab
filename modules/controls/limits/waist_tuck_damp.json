@@ -1,0 +1,618 @@
+[
+ {
+  "mass": 72.1,
+  "lean": 0.0,
+  "waist_B": null,
+  "waist0": 20,
+  "push": 120,
+  "held": true,
+  "range_deg": [
+   -30,
+   60
+  ],
+  "peak_w": 10.92,
+  "lo_end": null,
+  "hi_end": {
+   "w": 7.009,
+   "I": 2.95,
+   "E_J": 72.5,
+   "t": 0.599,
+   "E_model_rot_J": 78.4,
+   "E_P160_arms_down_J": 41.3,
+   "E_P160_arms_fwd_J": 92.4
+  },
+  "first_contact": "R_shank",
+  "head_contact_speed": null,
+  "torso_pack_contact_speed": 1.18,
+  "pelvis_peak_normal_N": 2372,
+  "cell": "72.1kg w+20 120Ns held"
+ },
+ {
+  "mass": 72.1,
+  "lean": 0.0,
+  "waist_B": null,
+  "waist0": 0,
+  "push": 60,
+  "held": true,
+  "range_deg": [
+   -30,
+   60
+  ],
+  "peak_w": 4.01,
+  "lo_end": null,
+  "hi_end": null,
+  "first_contact": "L_hand",
+  "head_contact_speed": 5.41,
+  "torso_pack_contact_speed": 1.76,
+  "pelvis_peak_normal_N": 3281,
+  "cell": "72.1kg w0 60Ns held"
+ },
+ {
+  "mass": 68.0,
+  "lean": 0.0,
+  "waist_B": null,
+  "waist0": 20,
+  "push": 120,
+  "held": true,
+  "range_deg": [
+   -30,
+   60
+  ],
+  "peak_w": 10.37,
+  "lo_end": null,
+  "hi_end": {
+   "w": 5.031,
+   "I": 2.609,
+   "E_J": 33.0,
+   "t": 0.602,
+   "E_model_rot_J": 36.1,
+   "E_P160_arms_down_J": 21.3,
+   "E_P160_arms_fwd_J": 47.6
+  },
+  "first_contact": "L_shank",
+  "head_contact_speed": null,
+  "torso_pack_contact_speed": 1.36,
+  "pelvis_peak_normal_N": 3549,
+  "cell": "68kg w+20 120Ns held"
+ },
+ {
+  "mass": 68.0,
+  "lean": 0.3,
+  "waist_B": null,
+  "waist0": null,
+  "push": 0.0,
+  "held": false,
+  "range_deg": [
+   -30,
+   60
+  ],
+  "peak_w": 6.86,
+  "lo_end": null,
+  "hi_end": {
+   "w": 6.153,
+   "I": 2.352,
+   "E_J": 44.5,
+   "t": 0.565,
+   "E_model_rot_J": 49.1,
+   "E_P160_arms_down_J": 31.8,
+   "E_P160_arms_fwd_J": 71.2
+  },
+  "first_contact": "L_hand",
+  "head_contact_speed": 2.01,
+  "torso_pack_contact_speed": null,
+  "pelvis_peak_normal_N": 0,
+  "cell": "D99 crouch_collapse lean0.3"
+ },
+ {
+  "mass": 68.0,
+  "lean": 0.3,
+  "waist_B": null,
+  "waist0": null,
+  "push": 0.0,
+  "held": false,
+  "range_deg": [
+   -30,
+   60
+  ],
+  "peak_w": 6.24,
+  "lo_end": null,
+  "hi_end": null,
+  "first_contact": "L_shank",
+  "head_contact_speed": 0.9,
+  "torso_pack_contact_speed": null,
+  "pelvis_peak_normal_N": 0,
+  "cell": "D99 forward_fall lean0.3"
+ },
+ {
+  "mass": 68.0,
+  "lean": 0.3,
+  "waist_B": null,
+  "waist0": null,
+  "push": 0.0,
+  "held": false,
+  "range_deg": [
+   -30,
+   60
+  ],
+  "peak_w": 1.06,
+  "lo_end": null,
+  "hi_end": null,
+  "first_contact": "L_shank",
+  "head_contact_speed": null,
+  "torso_pack_contact_speed": 2.61,
+  "pelvis_peak_normal_N": 743,
+  "cell": "D99 kneel_tip lean0.3"
+ },
+ {
+  "mass": 72.1,
+  "lean": 0.0,
+  "waist_B": 15.0,
+  "waist0": 20,
+  "push": 120,
+  "held": true,
+  "range_deg": [
+   -30,
+   60
+  ],
+  "peak_w": 10.6,
+  "lo_end": null,
+  "hi_end": {
+   "w": 4.091,
+   "I": 2.043,
+   "E_J": 17.1,
+   "t": 0.147,
+   "E_model_rot_J": 19.1,
+   "E_P160_arms_down_J": 14.1,
+   "E_P160_arms_fwd_J": 31.5
+  },
+  "first_contact": "R_hand",
+  "head_contact_speed": 8.74,
+  "torso_pack_contact_speed": 3.82,
+  "pelvis_peak_normal_N": 3350,
+  "cell": "72.1kg w+20 120Ns held"
+ },
+ {
+  "mass": 72.1,
+  "lean": 0.0,
+  "waist_B": 15.0,
+  "waist0": 0,
+  "push": 60,
+  "held": true,
+  "range_deg": [
+   -30,
+   60
+  ],
+  "peak_w": 11.15,
+  "lo_end": {
+   "w": -4.676,
+   "I": 1.604,
+   "E_J": 17.5,
+   "t": 0.911,
+   "E_model_rot_J": 20.2,
+   "E_P160_arms_down_J": 18.4,
+   "E_P160_arms_fwd_J": 41.1
+  },
+  "hi_end": {
+   "w": 2.611,
+   "I": 2.074,
+   "E_J": 7.1,
+   "t": 0.347,
+   "E_model_rot_J": 7.9,
+   "E_P160_arms_down_J": 5.7,
+   "E_P160_arms_fwd_J": 12.8
+  },
+  "first_contact": "L_hand",
+  "head_contact_speed": 6.01,
+  "torso_pack_contact_speed": 1.57,
+  "pelvis_peak_normal_N": 1128,
+  "cell": "72.1kg w0 60Ns held"
+ },
+ {
+  "mass": 68.0,
+  "lean": 0.0,
+  "waist_B": 15.0,
+  "waist0": 20,
+  "push": 120,
+  "held": true,
+  "range_deg": [
+   -30,
+   60
+  ],
+  "peak_w": 10.32,
+  "lo_end": null,
+  "hi_end": {
+   "w": 3.955,
+   "I": 1.931,
+   "E_J": 15.1,
+   "t": 0.147,
+   "E_model_rot_J": 17.0,
+   "E_P160_arms_down_J": 13.1,
+   "E_P160_arms_fwd_J": 29.4
+  },
+  "first_contact": "L_shank",
+  "head_contact_speed": 8.35,
+  "torso_pack_contact_speed": 3.83,
+  "pelvis_peak_normal_N": 3194,
+  "cell": "68kg w+20 120Ns held"
+ },
+ {
+  "mass": 68.0,
+  "lean": 0.3,
+  "waist_B": 15.0,
+  "waist0": null,
+  "push": 0.0,
+  "held": false,
+  "range_deg": [
+   -30,
+   60
+  ],
+  "peak_w": 6.86,
+  "lo_end": null,
+  "hi_end": {
+   "w": 4.802,
+   "I": 2.379,
+   "E_J": 27.4,
+   "t": 0.571,
+   "E_model_rot_J": 30.2,
+   "E_P160_arms_down_J": 19.4,
+   "E_P160_arms_fwd_J": 43.4
+  },
+  "first_contact": "L_hand",
+  "head_contact_speed": 2.0,
+  "torso_pack_contact_speed": null,
+  "pelvis_peak_normal_N": 0,
+  "cell": "D99 crouch_collapse lean0.3"
+ },
+ {
+  "mass": 68.0,
+  "lean": 0.3,
+  "waist_B": 15.0,
+  "waist0": null,
+  "push": 0.0,
+  "held": false,
+  "range_deg": [
+   -30,
+   60
+  ],
+  "peak_w": 6.25,
+  "lo_end": null,
+  "hi_end": null,
+  "first_contact": "L_shank",
+  "head_contact_speed": 0.9,
+  "torso_pack_contact_speed": null,
+  "pelvis_peak_normal_N": 0,
+  "cell": "D99 forward_fall lean0.3"
+ },
+ {
+  "mass": 68.0,
+  "lean": 0.3,
+  "waist_B": 15.0,
+  "waist0": null,
+  "push": 0.0,
+  "held": false,
+  "range_deg": [
+   -30,
+   60
+  ],
+  "peak_w": 1.06,
+  "lo_end": null,
+  "hi_end": null,
+  "first_contact": "L_shank",
+  "head_contact_speed": null,
+  "torso_pack_contact_speed": 2.61,
+  "pelvis_peak_normal_N": 743,
+  "cell": "D99 kneel_tip lean0.3"
+ },
+ {
+  "mass": 72.1,
+  "lean": 0.0,
+  "waist_B": 40.0,
+  "waist0": 20,
+  "push": 120,
+  "held": true,
+  "range_deg": [
+   -30,
+   60
+  ],
+  "peak_w": 10.5,
+  "lo_end": null,
+  "hi_end": {
+   "w": 3.086,
+   "I": 2.08,
+   "E_J": 9.9,
+   "t": 0.155,
+   "E_model_rot_J": 11.0,
+   "E_P160_arms_down_J": 8.0,
+   "E_P160_arms_fwd_J": 17.9
+  },
+  "first_contact": "L_hand",
+  "head_contact_speed": 8.72,
+  "torso_pack_contact_speed": 3.81,
+  "pelvis_peak_normal_N": 3446,
+  "cell": "72.1kg w+20 120Ns held"
+ },
+ {
+  "mass": 72.1,
+  "lean": 0.0,
+  "waist_B": 40.0,
+  "waist0": 0,
+  "push": 60,
+  "held": true,
+  "range_deg": [
+   -30,
+   60
+  ],
+  "peak_w": 11.23,
+  "lo_end": {
+   "w": -4.548,
+   "I": 1.607,
+   "E_J": 16.6,
+   "t": 0.907,
+   "E_model_rot_J": 19.1,
+   "E_P160_arms_down_J": 17.4,
+   "E_P160_arms_fwd_J": 38.9
+  },
+  "hi_end": {
+   "w": 0.329,
+   "I": 2.181,
+   "E_J": 0.1,
+   "t": 0.528,
+   "E_model_rot_J": 0.1,
+   "E_P160_arms_down_J": 0.1,
+   "E_P160_arms_fwd_J": 0.2
+  },
+  "first_contact": "L_hand",
+  "head_contact_speed": 5.79,
+  "torso_pack_contact_speed": 1.48,
+  "pelvis_peak_normal_N": 1100,
+  "cell": "72.1kg w0 60Ns held"
+ },
+ {
+  "mass": 68.0,
+  "lean": 0.0,
+  "waist_B": 40.0,
+  "waist0": 20,
+  "push": 120,
+  "held": true,
+  "range_deg": [
+   -30,
+   60
+  ],
+  "peak_w": 10.3,
+  "lo_end": null,
+  "hi_end": {
+   "w": 2.925,
+   "I": 1.966,
+   "E_J": 8.4,
+   "t": 0.155,
+   "E_model_rot_J": 9.4,
+   "E_P160_arms_down_J": 7.2,
+   "E_P160_arms_fwd_J": 16.1
+  },
+  "first_contact": "R_shank",
+  "head_contact_speed": 8.4,
+  "torso_pack_contact_speed": 3.85,
+  "pelvis_peak_normal_N": 3245,
+  "cell": "68kg w+20 120Ns held"
+ },
+ {
+  "mass": 68.0,
+  "lean": 0.3,
+  "waist_B": 40.0,
+  "waist0": null,
+  "push": 0.0,
+  "held": false,
+  "range_deg": [
+   -30,
+   60
+  ],
+  "peak_w": 6.86,
+  "lo_end": null,
+  "hi_end": {
+   "w": 4.312,
+   "I": 2.394,
+   "E_J": 22.3,
+   "t": 0.575,
+   "E_model_rot_J": 24.5,
+   "E_P160_arms_down_J": 15.6,
+   "E_P160_arms_fwd_J": 35.0
+  },
+  "first_contact": "L_hand",
+  "head_contact_speed": 2.0,
+  "torso_pack_contact_speed": null,
+  "pelvis_peak_normal_N": 0,
+  "cell": "D99 crouch_collapse lean0.3"
+ },
+ {
+  "mass": 68.0,
+  "lean": 0.3,
+  "waist_B": 40.0,
+  "waist0": null,
+  "push": 0.0,
+  "held": false,
+  "range_deg": [
+   -30,
+   60
+  ],
+  "peak_w": 6.27,
+  "lo_end": null,
+  "hi_end": null,
+  "first_contact": "L_shank",
+  "head_contact_speed": 0.9,
+  "torso_pack_contact_speed": null,
+  "pelvis_peak_normal_N": 0,
+  "cell": "D99 forward_fall lean0.3"
+ },
+ {
+  "mass": 68.0,
+  "lean": 0.3,
+  "waist_B": 40.0,
+  "waist0": null,
+  "push": 0.0,
+  "held": false,
+  "range_deg": [
+   -30,
+   60
+  ],
+  "peak_w": 1.06,
+  "lo_end": null,
+  "hi_end": null,
+  "first_contact": "L_shank",
+  "head_contact_speed": null,
+  "torso_pack_contact_speed": 2.61,
+  "pelvis_peak_normal_N": 743,
+  "cell": "D99 kneel_tip lean0.3"
+ },
+ {
+  "mass": 72.1,
+  "lean": 0.0,
+  "waist_B": 100.0,
+  "waist0": 20,
+  "push": 120,
+  "held": true,
+  "range_deg": [
+   -30,
+   60
+  ],
+  "peak_w": 10.52,
+  "lo_end": null,
+  "hi_end": {
+   "w": 2.689,
+   "I": 2.099,
+   "E_J": 7.6,
+   "t": 0.159,
+   "E_model_rot_J": 8.5,
+   "E_P160_arms_down_J": 6.1,
+   "E_P160_arms_fwd_J": 13.6
+  },
+  "first_contact": "L_hand",
+  "head_contact_speed": 8.59,
+  "torso_pack_contact_speed": 3.8,
+  "pelvis_peak_normal_N": 3481,
+  "cell": "72.1kg w+20 120Ns held"
+ },
+ {
+  "mass": 72.1,
+  "lean": 0.0,
+  "waist_B": 100.0,
+  "waist0": 0,
+  "push": 60,
+  "held": true,
+  "range_deg": [
+   -30,
+   60
+  ],
+  "peak_w": 10.83,
+  "lo_end": {
+   "w": -3.496,
+   "I": 1.619,
+   "E_J": 9.9,
+   "t": 0.909,
+   "E_model_rot_J": 11.4,
+   "E_P160_arms_down_J": 10.3,
+   "E_P160_arms_fwd_J": 23.0
+  },
+  "hi_end": null,
+  "first_contact": "L_hand",
+  "head_contact_speed": 5.68,
+  "torso_pack_contact_speed": 1.46,
+  "pelvis_peak_normal_N": 1150,
+  "cell": "72.1kg w0 60Ns held"
+ },
+ {
+  "mass": 68.0,
+  "lean": 0.0,
+  "waist_B": 100.0,
+  "waist0": 20,
+  "push": 120,
+  "held": true,
+  "range_deg": [
+   -30,
+   60
+  ],
+  "peak_w": 10.27,
+  "lo_end": null,
+  "hi_end": {
+   "w": 2.469,
+   "I": 1.989,
+   "E_J": 6.1,
+   "t": 0.16,
+   "E_model_rot_J": 6.8,
+   "E_P160_arms_down_J": 5.1,
+   "E_P160_arms_fwd_J": 11.5
+  },
+  "first_contact": "L_shank",
+  "head_contact_speed": 8.35,
+  "torso_pack_contact_speed": 3.86,
+  "pelvis_peak_normal_N": 3322,
+  "cell": "68kg w+20 120Ns held"
+ },
+ {
+  "mass": 68.0,
+  "lean": 0.3,
+  "waist_B": 100.0,
+  "waist0": null,
+  "push": 0.0,
+  "held": false,
+  "range_deg": [
+   -30,
+   60
+  ],
+  "peak_w": 6.86,
+  "lo_end": null,
+  "hi_end": {
+   "w": 4.132,
+   "I": 2.402,
+   "E_J": 20.5,
+   "t": 0.577,
+   "E_model_rot_J": 22.6,
+   "E_P160_arms_down_J": 14.3,
+   "E_P160_arms_fwd_J": 32.1
+  },
+  "first_contact": "L_hand",
+  "head_contact_speed": 2.0,
+  "torso_pack_contact_speed": null,
+  "pelvis_peak_normal_N": 0,
+  "cell": "D99 crouch_collapse lean0.3"
+ },
+ {
+  "mass": 68.0,
+  "lean": 0.3,
+  "waist_B": 100.0,
+  "waist0": null,
+  "push": 0.0,
+  "held": false,
+  "range_deg": [
+   -30,
+   60
+  ],
+  "peak_w": 6.3,
+  "lo_end": null,
+  "hi_end": null,
+  "first_contact": "L_shank",
+  "head_contact_speed": 0.89,
+  "torso_pack_contact_speed": null,
+  "pelvis_peak_normal_N": 0,
+  "cell": "D99 forward_fall lean0.3"
+ },
+ {
+  "mass": 68.0,
+  "lean": 0.3,
+  "waist_B": 100.0,
+  "waist0": null,
+  "push": 0.0,
+  "held": false,
+  "range_deg": [
+   -30,
+   60
+  ],
+  "peak_w": 1.06,
+  "lo_end": null,
+  "hi_end": null,
+  "first_contact": "L_shank",
+  "head_contact_speed": null,
+  "torso_pack_contact_speed": 2.61,
+  "pelvis_peak_normal_N": 743,
+  "cell": "D99 kneel_tip lean0.3"
+ }
+]

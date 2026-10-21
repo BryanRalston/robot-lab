@@ -6,7 +6,7 @@ import numpy as np, mujoco
 L = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'limits'); sys.path.insert(0, L)
 import prone_data as P, knee_stop_impact as K
 from drive_thermal_derate import friction_hold
-from fall_mode import knee_fall_torque
+from fall_mode import knee_fall_torque  # waist drive is off here (tau=0), so the D102 zero (1ed4d73) is a no-op
 out = []
 for case in K.CASES:
   for lean in [l for l in (0.1, 0.3, 0.5) ]:

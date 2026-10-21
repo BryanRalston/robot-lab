@@ -8,7 +8,8 @@ import numpy as np, mujoco
 H = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, os.path.join(H, '..', 'limits'))
 import prone_data as P, knee_stop_impact as K
 from drive_thermal_derate import friction_hold
-from fall_mode import knee_fall_torque
+from fall_mode import knee_fall_torque, waist_fall_torque
+from soft_limits import waist_stop_zone_tau
 
 def setup(mass, pose, lean):
     s = P.Sim(mass); m, d = s.m, s.d
@@ -26,7 +27,7 @@ def I_axis(m, d, wj):
         I += float(a @ (m.body_inertia[b] * a)) + m.body_mass[b] * float(rp @ rp)
     return I
 
-def run(mass, pose, lean, waist0=None, push=0.0, held=False, T=2.0):
+def run(mass, pose, lean, waist0=None, push=0.0, held=False, T=2.0, waist_B=None, ramp_deg=20.0):
     s, m, d, wj, q = setup(mass, pose, lean)
     wq, wv = m.jnt_qposadr[wj], m.jnt_dofadr[wj]; rng = m.jnt_range[wj].copy()
     wi = [i for i, n in enumerate(s.names) if 'waist' in n and 'pitch' in n]
@@ -49,6 +50,11 @@ def run(mass, pose, lean, waist0=None, push=0.0, held=False, T=2.0):
             if wi: keep[wi[0]] = tau[wi[0]]
             tau = keep
         for j in range(2): tau[ki[j]] = knee_fall_torque(float(d.qpos[kq[j]]), float(d.qvel[kv[j]]), float(lim[ki[j]]))
+        if wi:
+            xw, vw = float(d.qpos[wq]), float(d.qvel[wv])
+            if waist_B is not None:   # TUCK waist damping (fall_mode.waist_fall_torque), replaces the hold
+                tau[wi[0]] = waist_fall_torque(xw, vw, waist_B, float(lim[wi[0]]), ramp_deg)
+            tau[wi[0]] = waist_stop_zone_tau(xw, tau[wi[0]])   # D102 zero (1ed4d73)
         d.ctrl[:] = tau
         d.xfrc_applied[pel, 0] = -push / 0.1 if k * m.opt.timestep < 0.1 else 0.0
         mujoco.mj_step(m, d)
@@ -65,7 +71,7 @@ def run(mass, pose, lean, waist0=None, push=0.0, held=False, T=2.0):
             if bb == head and hv is None: hv = round(float(np.linalg.norm(d.cvel[head][3:])), 2)
             if bb == tor and tv is None: tv = round(float(np.linalg.norm(d.cvel[tor][3:])), 2)
             if bb == pel: mujoco.mj_contactForce(m, d, c, f6); pF = max(pF, abs(f6[0]))
-    return dict(mass=mass, lean=lean, waist0=waist0, push=push, held=held, range_deg=[round(math.degrees(r)) for r in rng],
+    return dict(mass=mass, lean=lean, waist_B=waist_B, waist0=waist0, push=push, held=held, range_deg=[round(math.degrees(r)) for r in rng],
                 peak_w=round(vmax, 2), lo_end=ends['lo'], hi_end=ends['hi'], first_contact=first,
                 head_contact_speed=hv, torso_pack_contact_speed=tv, pelvis_peak_normal_N=round(pF))
 
