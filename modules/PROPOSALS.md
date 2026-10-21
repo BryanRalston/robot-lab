@@ -333,7 +333,7 @@ Any change to CONTRACTS.md or TARGETS.md, or to another module's files, starts h
   - **Thermal:** confirm (c), and the shoulder at 43–50 N·m.
 - Status: OPEN
 
-### P-053: Materials: hollow ankle pitch/roll pins (ø12 steel, ø6 bore)
+### P-151 (renumbered from P-053 by R-123): Materials: hollow ankle pitch/roll pins (ø12 steel, ø6 bore)
 - Date: 2026-10-21
 - Module / proposer: Materials / RL Materials
 - Affected owners: Legs (job 7 ankle cross, pins), Arbiter (mass)
@@ -346,13 +346,13 @@ Any change to CONTRACTS.md or TARGETS.md, or to another module's files, starts h
 - Risks: pin bending stress +6.7 %, which Legs checks in the job-7 FEA; plug the bore ends against debris.
 - Status: OPEN
 
-### P-054: Materials: Ti-6Al-4V ankle pins instead of steel (alternative to P-053, higher risk)
+### P-054: Materials: Ti-6Al-4V ankle pins instead of steel (alternative to P-151, higher risk)
 - Date: 2026-10-21
 - Module / proposer: Materials / RL Materials
 - Affected owners: Legs, Arbiter
 - Change: solid Ti-6Al-4V (ρ 4.4, YS 910, MIFTi64) ankle pins with a nitrided or DLC running surface, in DU bushes.
 - Evidence: 95 g/leg → 54 g/leg, **−0.082 kg robot [EST]**. Ti pins are ~1.8× as flexible as steel (E 110 vs 190).
-- Risks: Ti galls and wears without a hard coating (coating spec and supplier data not yet in repo); galvanic to 7075 is worse than steel (both need the bush/sealant); cost. Not combinable with P-053 (pick one). Recommend P-053 first.
+- Risks: Ti galls and wears without a hard coating (coating spec and supplier data not yet in repo); galvanic to 7075 is worse than steel (both need the bush/sealant); cost. Not combinable with P-151 (pick one). Recommend P-151 first.
 - Status: OPEN
 
 ### P-145..P-150: Torso & Power mass cuts (Torso, 2026-10-21; R-079 FEA priority)

@@ -1176,3 +1176,73 @@ Ruling: R13 geometry adopted. Mass is an addition, so it is booked at full: pair
 - **Freeze:** no additions >0.005 without a ruling (R-066 stands).
 - **Deadline: end of R13.** Owners deliver FEA/CAD mass for their rows (Robot Lab queues Grok Build jobs on the bryan PC, one at a time: torso pocketing, housing pocketing, L47, ankle cross, palm, A15 tube, Job 8 flange). If the reserve is not >=0.30 by then, the Arbiter takes options A-D to Bryan.
 - Robot Lab's other two items are closed: CSG-25 overload by R-119/R-120 (stand-off + CRBH 7013 A, Mx 321 N·m raw, gear SF 1.10, no clutch credit; job1 R8B/R10 geometry superseded, Job 8 add-on runs R-120 geometry); Arms +0.059 by R-121.
+
+## R-123 (2026-10-21) Combined ruling: 7075-T6 allowable basis, P-053 duplicate, actuator fasteners/R-122 row 3, stand-off R11 mass
+Evidence checked on origin/main (ec12542). Credit rules unchanged: cited or measured values full, EST or calc half, additions full, no double counting.
+
+### (a) Legs: 7075-T6 property conflict. **MATERIALS_DB governs: Sy 480 / Su 560 / E 70 GPa, static allowable 480/1.5 = 320 MPa.**
+- The "repo datasheet" behind 503/572/71.7 (REPO_AL7075 = `v3/datasheets/al7075.pdf`) is **not a datasheet**. It is a 146-byte nginx "404 Not Found" HTML page. 503/572/71.7 therefore have **no cited source in the repo**. They match typical (handbook-average) 7075-T6 values, not an MMPDS A- or B-basis allowable for a stated product form or thickness. The 480/560 set (MIF) is also typical but is the lower, conservative set, so it governs.
+- Thickness: 7075-T6/T651 allowables fall with section thickness (thick plate is lower). No part may claim more than 480 without a cited A- or B-basis value for its actual product form and thickness. Parts machined from plate thicker than about 25 mm: Materials to cite the product-form allowable before G3 sign-off; until then 480 stands, flagged.
+- **Peaks of 320–335 MPa are a FAIL at the G3 static gate**, not a pass and not a flag-only. To clear, the owner either redesigns to ≤320 or Materials cites an A/B-basis Fty ≥ 1.5 × peak for that product form and thickness (then that allowable governs for that part only).
+- E: use 70 GPa for deflection or stiffness gates (conservative); a 71.7 solve in a load-controlled linear stress run is acceptable for stress only (L47 brief note stands).
+- Fixes owed:
+  - **Materials** keeps MATERIALS_DB AL7075T6 at 480/560/70, marks the row "typical (MIF), not A/B-basis", and replaces REPO_AL7075 (404 placeholder) with a real source or deletes the reference. It adds the A/B-basis citation by product form when available.
+  - **Actuators** (G3 brief owner) changes 503/572/71.7 to 480/560/70 and the 335 allowable to 320. The same correction applies to `torso/FEA_SPEC_torso_pocketing.md` (Torso), `actuators/cad_mass.py` lever SF (503 → 480), `legs/grokbuild/r031_fatigue_fea_brief.md` (Legs), `materials/T031_CHEST_CRUSH.md` (Materials, cites "Sy 503 from MATERIALS_DB" in error) and ID `fea/job1_pad_r11/CASE.md` (337/503 → 320/480).
+  - L47-SO and ankle-cross briefs (e147a33) already use 320: they stand.
+  - Results already reported against 335 or 503 are re-read against 320 by their owners; any peak in 320–335 reopens that part.
+- Fatigue: R-031 Se 87 MPa stands, unchanged.
+
+### (b) Robot Lab: duplicate P-053. **Renumbered Materials' hollow ankle pins P-053 → P-151.**
+- The first use of P-053 was ID thigh pin access (7658a01 / fe09355, 2026-10-20 22:19–22:21; `design/thigh_pin_access_p053.*`, V5_COVER_SET, cover_set_v5). It was never entered in PROPOSALS.md. Materials' hollow ankle pins were added later (a2bf811, 2026-10-21 07:54; restored 0f5cea1).
+- The later one gets the next free number. **P-151** comes after P-145..P-150. P-054 (Ti pins) keeps its number, and its "alternative to P-053" text now reads P-151.
+- References updated in the same commit: `modules/PROPOSALS.md`, `modules/legs/BOM.md` (P2 row), `modules/legs/grokbuild/ankle_cross_fea_brief.md`, `modules/materials/R_SWAP_SCAN_R7.md`, `LOG.md` (07:56 Legs entry annotated). ID's P-053 references are unchanged.
+- ID must add a PROPOSALS.md entry for P-053 (thigh pin access rev 2) so the number is registered.
+
+### (c) Actuators D82 (7b6353a): leg fastener under-booking, R-122 row 3, Ti swap
+- **Verified from the repo.** `fastener_bom.json` gives leg units (hip yaw, hip roll, hip-pitch, knee and ankle RV12 screws, both legs) at **0.819 kg** steel. `cad_mass.py` books FAST rotary 0.0498 and linear 0.0236 per unit, including 0.015 and 0.010 connector allowances. Legs: 2 × (2 × 0.0498 + 6 × 0.0236) = 0.482 kg, of which **screws 0.302** and connectors 0.180.
+- Credibility of the 0.82 count:
+  - The counts and sizes are cited (HD Tables 24 and 27, the cad_mass patterns, the Elmo guide); only the lengths and the clamp-ring set are EST.
+  - The booked figure omits the flexspline and circular-spline bolts entirely, and HD component-set weights exclude bolts, so the gap is real, not a double count.
+  - The connector allowance is a separate line and is not touched.
+  - Any doubt resolves conservatively, so the count is accepted.
+- **Ruling: book +0.517 kg (0.819 − 0.302) as an ADDITION at full.** If Actuators' G4 CAD fastener count comes in lower, it is credited at full then (measured).
+- **Arm and waist units:** counted 1.264 kg. Their booked fastener lines (for example d70 wrist 0.015) look similarly low, but no consolidated booked figure exists. Not booked here. Arms and Actuators must give the booked-vs-counted delta by the R13 regeneration. This is an **open risk against the reserve**, likely adverse.
+- **R-122 row 3 corrected.**
+  - Basis: **2.221 kg** of leg housings (CAD-measured, G4 brief §1), not 0.78 kg.
+  - Pocketing full **−0.316** [EST], credit now **−0.158** (was −0.16 full / −0.08).
+  - Tube windows (−0.038 more) only if Thermal accepts. Ankle ring fins (−0.265) are Thermal-owned and not in the plan.
+  - Gate: G3/G4 static and fatigue at the rear cap and flange scallops (against 320, per (a)).
+- **New R-122 row 12: Ti-6Al-4V non-structural actuator fasteners.**
+  - Scope: 384 screws (rear caps, readheads, drive mounts); steel 0.209 → Ti 0.118, **−0.091 full [CALC], credit now −0.046**. If Thermal keeps steel drive-mount screws: −0.074 full / −0.037.
+  - Conditions:
+    - **Non-structural only.** No Ti in any torque, bearing-retention or joint path; 12.9 steel stays there.
+    - Galling: Ti-in-7075 threads must use a hard-anodized or coated Ti screw plus an anti-seize compatible with aluminium, assembled to a torque spec (no dry Ti-in-Al), and installed wet with sealant or primer.
+    - Galvanic: 7075 is anodic to Ti. The small cathode (screw) against the large anode is acceptable only with the wet install and isolation above. Materials confirms coating and anti-seize with a cited source.
+    - Thermal accepts Ti for the Elmo drive-mount clamp.
+  - Gates: Materials qualification (G1 cite) and Thermal sign-off.
+  - The Ti saving applies to mass now booked in this ruling, so there is no double count.
+
+### (d) ID stand-off R11 (ec12542). **Design accepted pending Arms' confirmation; mass +0.060 pair booked at full.**
+- Arithmetic reconciled:
+  - R-121's +0.096 pair was a delta net of the old boss: R13 stand-off 0.072/side × 2 = 0.144, minus the boss 0.048 pair = 0.096.
+  - R11 is 0.102/side [CALC] = 0.204 pair. Against the boss: 0.204 − 0.048 = 0.156.
+  - Over R-121's booking: 0.156 − 0.096 = **+0.060**. ID's figure is right. The gross 0.204 − 0.096 = 0.108 mixes a gross figure with a net one and is not used.
+  - R-120's boss under-booking (0.108 solid) stays superseded and is not added again.
+- Booked as an ADDITION at full: **+0.060 kg**.
+- Strength:
+  - Box 215 MPa (hand calc ×2.86, calibrated to R10 FEA) is below **320 MPa** (governing allowable from (a)), SF on 480 = 2.23. Plate 149 MPa. Dowels Ø6 SF 2.62. Deflection 0.69 mm ≤ 1.0 mm.
+  - It **passes by hand calc only**. The calibration factor was taken from the ribs and applied to a different section, so this is [EST] until FEA.
+  - ID's 337 MPa (0.67 × 503) limit and "503 hard" are withdrawn; CASE.md must use 320/480.
+- **Arms owns and must confirm** the design: one-piece versus bolted, R3 root fillets, Ø6 m6 dowels and ring ligament on PCD62, the e≤5 mm tolerance stack including 0.69 mm of deflection, and clash with the OD108 housing flange.
+- After Arms confirms, **Robot Lab routes `fea/job1_pad_r11/CASE.md`** as the Job 8 add-on rerun on the bryan PC, one Grok Build session at a time.
+- FEA pass: vM ≤ 320, s0 ≥ 2.0 at e0/e5, Mx ≤ 351 N·m, deflection ≤ 1 mm, dowel/bolt no slip. A fail comes back to me.
+- R-122 row 7 (flange or hub thinning) stays at ≤ −0.03, with 0 credit until FEA.
+
+### Reserve and R-122 reachability
+- **Chain:** R-122 −0.893; (c) fasteners +0.517 → −1.410; (d) +0.060 → **reserve −1.470 kg (credible ≈ 67.97 kg against the 66.5 hard limit).** This is still inside the J10 sim randomization of 65.0–68.5 (R-118), but the 67.1 nominal is now stale. Controls should use 68.0 nominal at the next sim regeneration (the range is unchanged; the top margin is now 0.53 kg).
+- **R-122 totals revised:**
+  - Current-evidence credit: −0.616, then row 3 −0.078 more and row 12 −0.046 = **−0.740 → reserve −0.73**.
+  - Design-phase best case (rows 1–9 and 12, all full): −0.944 − 0.156 − 0.091 = **−1.191 → reserve −0.28**.
+  - Row 11 (6013 bearing, G5 only) −0.16 → best case −0.12.
+- **R-122 conclusion changes.** Not only is +0.30 unreachable; **even the 66.5 hard limit (reserve 0) is now unreachable on the full design-phase plan** (short by about 0.28 kg best case and about 0.73 kg on present credit). To reach +0.30 needs about 1.77 kg credited. The arm and waist fastener delta is likely to worsen this.
+- The **options for Bryan (A–D in R-122) are now due, not at the end of R13**. Option A alone (accepting a smaller reserve) no longer suffices; it needs B (raise T2), C (deeper redesign) or a combination. The Arbiter brings this to Bryan now. The R-066 freeze stands.

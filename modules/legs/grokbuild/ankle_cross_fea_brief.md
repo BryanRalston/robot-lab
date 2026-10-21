@@ -1,7 +1,7 @@
 # Grok Build brief: 7075-T7351 ankle cross, pocketed (R-069, Robot Lab confirmed). Run on the bryan PC after L47-SO, NOT the box
 **Why not the box:** gmsh can't load (libGLU missing), and a converged 3D P2 study needs about 4 GB. Our box hand model is `legs/ankle_cross_pocket_est.py` (mass only, [EST]).
 
-**Status: FINAL rev B 2026-10-21** (Robot Lab job 7). Rev B applies Materials a2bf811 `modules/materials/ANKLE_CROSS_7075.md` (§1–§4) and P-053 hollow pins (Materials, `modules/PROPOSALS.md`). Self-contained; no open TODOs. Unverifiable items marked [EST] or in Assumptions.
+**Status: FINAL rev B 2026-10-21** (Robot Lab job 7). Rev B applies Materials a2bf811 `modules/materials/ANKLE_CROSS_7075.md` (§1–§4) and P-151 hollow pins (Materials, `modules/PROPOSALS.md`). Self-contained; no open TODOs. Unverifiable items marked [EST] or in Assumptions.
 
 ## Allowables (Materials a2bf811 `ANKLE_CROSS_7075.md` §1–§2; MATERIALS_DB)
 - **Material: 7075-T7351 plate ONLY.** T6/T651 is not allowed: SCC risk in short-transverse under sustained press-fit hoop stress at the bores (§1). If the lightest W/F passes only at T6 values, re-size; never drop to T6.
@@ -16,7 +16,7 @@
 ## Assumptions (unresolved in repo)
 - B1: stop-block positions (±21, ±38, −25) and the "stop carrier" are [EST]; L29 places 2 blocks 20×12×10 at r 45 mm. Use L29 (r 45) for load, the coordinates for geometry.
 - B2: pitch stubs are **pressed steel** (42CrMo4 Q&T or 17-4PH H1025), mandatory per §3 (integral 7075 stubs not acceptable). All four ø12 bores carry pressed PTFE-lined DU bushes; no hard anodize in bores.
-- B5 (P-053 hollow pins, adopted): all 4 pins/leg (2 pitch stubs, 2 roll pins) are gun-drilled ø12/ø6 tubes, OD unchanged. −24 g/leg, −0.048 kg robot [EST, Materials]. Conditions: (a) the run checks pin bending/shear on the hollow section (Z −6 %, stress +6.7 %) against 42CrMo4 Sy 990 / fatigue 650 at all cases; (b) pitch-stub press-fit interference re-derived for the hollow section (lower radial stiffness → lower contact pressure; report pull-out margin vs one-screw fault axial load); (c) bore ends plugged against debris. No conflict found: interfaces and OD unchanged; P-054 (Ti pins) is not taken.
+- B5 (P-151 hollow pins, adopted): all 4 pins/leg (2 pitch stubs, 2 roll pins) are gun-drilled ø12/ø6 tubes, OD unchanged. −24 g/leg, −0.048 kg robot [EST, Materials]. Conditions: (a) the run checks pin bending/shear on the hollow section (Z −6 %, stress +6.7 %) against 42CrMo4 Sy 990 / fatigue 650 at all cases; (b) pitch-stub press-fit interference re-derived for the hollow section (lower radial stiffness → lower contact pressure; report pull-out margin vs one-screw fault axial load); (c) bore ends plugged against debris. No conflict found: interfaces and OD unchanged; P-054 (Ti pins) is not taken.
 - B3: A38 rev D and R-099…R-115 do not touch the ankle; no change taken from them. Proof rule is R-020 / BOND_SPEC §5.
 - B4: ankle screw forces derived from `actuators/ankle_v4.py` / LINKAGE_TABLE; the run must cite the extracted values in the load table.
 
@@ -28,7 +28,7 @@
 ## Goal
 Replace the Ti-6Al-4V ankle cross (booked 0.120 kg/leg, unverified; model_v4 l.198 solid box 30×46×30) with **pocketed 7075-T7351**.
 - Hand-model mass: W5/F5 **0.078 kg/leg** (−0.042/leg, **−0.084 robot**); W4/F4 0.067 [both T6-era hand model].
-- DU bushes add ≈ +4 g/leg [EST, §3] and must be in the FEA mass. Expected net ≈ −0.076 kg robot [EST, §4], less if T7351 forces W5/F5 → W6/F6. P-053 pins −0.048 robot [EST] reported separately.
+- DU bushes add ≈ +4 g/leg [EST, §3] and must be in the FEA mass. Expected net ≈ −0.076 kg robot [EST, §4], less if T7351 forces W5/F5 → W6/F6. P-151 pins −0.048 robot [EST] reported separately.
 - Confirm by FEA, and report a measured CAD mass.
 
 ## Geometry inputs

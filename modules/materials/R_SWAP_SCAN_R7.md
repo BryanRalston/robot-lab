@@ -5,7 +5,7 @@ RL Materials. Scan of the module BOM/mass files in the repo. [EST] = estimate. R
 |---|---|---|---|---|
 | 1 | Pocketed 7075-T7351 ankle cross (vs Ti, incl. +8 g DU bushes) | **−0.076 [EST]** | med (FEA job 7) | approved R-073, see ANKLE_CROSS_7075 |
 | 2 | Ti-6Al-4V ankle pins with DLC/nitride (P-054) | −0.082 [EST] | high (galling, coating) | alternative to 3 |
-| 3 | Hollow ø12/ø6 steel ankle pins (P-053) | **−0.048 [EST]** | low | new |
+| 3 | Hollow ø12/ø6 steel ankle pins (P-151) | **−0.048 [EST]** | low | new |
 | 4 | Hybrid palm 7075 → PA12 + 7075 inserts (MASS_DOWN_R069 #2) | −0.080 [EST] | med (FEA queued, grip test) | open |
 | 5 | Covers PC → PA12 small panels (COVER_TRIMS_REVIEW) | ≈ −0.015 | low-med (kneel-fall test) | open |
 | 6 | Steel → Ti fasteners, non-structural (covers, brackets) | unknown: no fastener count in any BOM | low | blocked: needs a fastener list |

@@ -22,7 +22,7 @@ No legs BOM file existed before this; mass lines remain in DECISIONS.md / result
 | # | location | size | /leg | /robot | material | source |
 |---|---|---|---|---|---|---|
 | P1 | thigh collar bond backup (L63-R) | ø7×10 m6, outer end tapped M3 | 8 | 16 | 42CrMo4 | results/a38/CROSS_PIN_BACKUP.md; grokbuild/l63_fea_brief.md |
-| P2 | ankle pitch stubs | ø12 (ø6 bore, P-053) ×18+12 press | 2 | 4 | 42CrMo4 Q&T / 17-4PH | grokbuild/ankle_cross_fea_brief.md rev B |
+| P2 | ankle pitch stubs | ø12 (ø6 bore, P-151) ×18+12 press | 2 | 4 | 42CrMo4 Q&T / 17-4PH | grokbuild/ankle_cross_fea_brief.md rev B |
 | P3 | ankle roll pins | ø12 (ø6 bore) ×12 each side | 2 | 4 | same | same |
 | P4 | stop-block dowels | size n/a | 2 | 4 | not stated | a14_r7.py l.18 |
 
