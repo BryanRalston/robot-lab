@@ -44,5 +44,11 @@ Ankle plates go on the shin front, normal +x, at (40, 130, 215/290): 3.5 mm, PAS
 ## D96 (R-146/R-147 P-157, Legs L73–L75) Ankle toggle 3D, carrier relief, knee fin-tip trim, knee stop/peak
 3D toggle −61.0° at roll 0 (Legs' 62/44 N·m at −52.5/−55 confirmed). It moves to −58.6° at roll ±18 (37.8/21.9 N·m), so kneel only at −52.5° or |roll| ≤ 10°. Carrier relief (|y| ≥ 18 lowered 6 mm, R3) gives 4.6 mm at −55° / knee 145, SF 2.4, −0.047 kg. Knee housing rear fin-tip spot trim (12 tips, −0.27 % fin area, forging margin unchanged) gives 3.5 mm to the L60 plate over knee 0–145 (r116b STEP). No knee mechanical stop exists (sim limit only; screw not bottoming), so a separate PU stop is proposed and STOP_IMPACT_N is TBD. K_PEAK = 1.0 (7267 N pair = motor peak). Details: results/D96_ANKLE_TOGGLE_CARRIER_KNEE_TRIM.md.
 
+## D98 (Robot Lab r75 ruling; Legs 916c57f, Controls b5890e1, T&R 513a7d5) r75 PU knee stop, contact 133°
+- Armature: sim/v3 0.2018 = one stale 06808 rotor × 92². True value J_refl(q) = 1.552e-4·N(q)²: 0.553 at 75°, 0.083 at 135°. Flex sign from model_v4.
+- Contact at 135° cannot give 830 N·m at 66 J × 1.4 within 143.6° (≥1027). Contact moved to 133°: 834 N·m at 66 J, 815 at 62.7 J, bottoming at 92.5 J / 143.6°.
+- Rotor reaction on the stop: +flexion, adds to the pad load. It puts the screws in tension and relieves the motor's compression. Worst screw load 0.13 C0a.
+- Placement: outboard of the knee screws with tibia strikers. The t0 −20 sweep passes (min 6.4 mm). P-159 → +0.807 kg. Evidence: results/KNEE_STOP_PU_D98.md.
+
 ## D97 (Controls 0fb7c0e, Robot Lab D96 approval) PU knee stop pair at 135°
 Each pad is 3 × 12 mm cast PU 90A (Freelin-Wade PUR90A) + steel shims, 30 × 30 face, r 60 mm. 62.7 J per knee (rotors 17 %). Peak 1030 N·m at 6.9° stroke (max 141.9°), energy SF 1.54, stiffness ≈ 8.6 kN·m/rad. Screw axial from rotor deceleration 1840–2590 N per screw (0.095 C0a). +0.263 kg robot (P-159). Legs owes the tongue/clevis check at 17.2 kN. results/KNEE_STOP_PU_D97.md.
