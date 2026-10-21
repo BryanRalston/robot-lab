@@ -500,3 +500,4 @@ Numbered L84 because L83 already holds the tube local-buckling item. Scripts: kn
 - The **27° toe-out cap** and the **≥ 30 mm** 8g L↔R gap are KEPT.
 - The D99 taper FEA (grokbuild/d99_taper_arm_fea_brief.md) is QUEUED, waiting on Bryan's OK.
 - Study started: limp first contact at the −10° adduction stop → results/r031/hip_screw_limp_l94.md.
+- **L94 limp study (partial):** first contact at −10 limp is the **inboard hip_pitch screw bodies + eye-stub flange (body↔body)**, single and double, not housings or bumpers. The Legs-only interim is PU 95A pads on a clamp band around the inboard bodies (needs Actuators' OK). The final fix is an Actuators screw-line splay/clock. See results/r031/hip_screw_limp_l94.md.

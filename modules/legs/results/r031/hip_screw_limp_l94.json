@@ -1,0 +1,73 @@
+{
+ "L-10_Rstraight": [
+  [
+   0.0,
+   "hip_pitch screw -y body (hip_pitch_body_x1)",
+   "hip_pitch screw +y body (hip_pitch_body_x1)"
+  ],
+  [
+   0.0,
+   "hip_pitch screw -y eye stub flange \u00f830 [EST]",
+   "hip_pitch screw +y body (hip_pitch_body_x1)"
+  ],
+  [
+   2.25,
+   "hip_pitch screw -y axial GE12 C eye \u00f830x12 on body end",
+   "hip_pitch screw +y body (hip_pitch_body_x1)"
+  ],
+  [
+   4.39,
+   "hip_pitch screw -y eye stub \u00f812 [EST]",
+   "hip_pitch screw +y body (hip_pitch_body_x1)"
+  ]
+ ],
+ "both-10": [
+  [
+   0.0,
+   "hip_pitch screw -y RV12 roller-screw rod \u00f812",
+   "hip_pitch screw +y body (hip_pitch_body_x1)"
+  ],
+  [
+   0.0,
+   "hip_pitch screw -y body (hip_pitch_body_x1)",
+   "hip_pitch screw +y RV12 roller-screw rod \u00f812"
+  ],
+  [
+   0.0,
+   "hip_pitch screw -y body (hip_pitch_body_x1)",
+   "hip_pitch screw +y body (hip_pitch_body_x1)"
+  ],
+  [
+   0.0,
+   "hip_pitch screw -y body (hip_pitch_body_x1)",
+   "hip_pitch screw +y eye stub flange \u00f830 [EST]"
+  ],
+  [
+   0.0,
+   "hip_pitch screw -y eye stub flange \u00f830 [EST]",
+   "hip_pitch screw +y body (hip_pitch_body_x1)"
+  ],
+  [
+   0.0,
+   "hip_pitch screw -y eye stub flange \u00f830 [EST]",
+   "hip_pitch screw +y eye stub flange \u00f830 [EST]"
+  ],
+  [
+   0.0,
+   "hip_pitch screw -y eye stub flange \u00f830 [EST]",
+   "hip_pitch screw +y eye stub \u00f812 [EST]"
+  ],
+  [
+   0.0,
+   "hip_pitch screw -y eye stub \u00f812 [EST]",
+   "hip_pitch screw +y eye stub flange \u00f830 [EST]"
+  ]
+ ],
+ "both-3": [
+  [
+   0.0,
+   "hip_pitch screw -y body (hip_pitch_body_x1)",
+   "hip_pitch screw +y body (hip_pitch_body_x1)"
+  ]
+ ]
+}
