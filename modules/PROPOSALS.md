@@ -413,5 +413,5 @@ All keep R-076 (reinforced isolation, IEC 60664-1 creepage, IP2X), R-074 (main l
 - Impact on contracts: sleeve mass −0.004 kg/sleeve [EST: π/4(47.6²−46.8²)·34·2.81e-6]; booking unchanged (+0.15, R-135).
 - Impact on targets: none beyond L65.
 - Evidence: legs/femur_dent_l65.py, results/r031/femur_dent_l65.json, BOND_SPEC §3, RULINGS R-135 (b8a2c69).
-- Affected owner response: pending (Actuators)
+- Affected owner response: **Actuators co-signs (2026-10-21).** The collar (ID 50 × 34) and the hip-pitch output side are unchanged; the collar bore still mates the ø50 tube OD; no actuator load or contract value changes. Co-sign stays conditional on the P-152 fallback (JOB9 b3) passing.
 - Status: open
