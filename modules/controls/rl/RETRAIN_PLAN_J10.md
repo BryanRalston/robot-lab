@@ -155,3 +155,26 @@ Missing data (marked EST in the sim):
 ## 10. Arbiter R-123 (2026-10-21): sim nominal 68.0 kg
 - R-123 (d) chain: reserve −1.470 → credible ≈ 67.97 kg; "Controls should use 68.0 nominal" (RULINGS.md R-123). The DR range stays 65.0–68.5 (R-118).
 - `make_model.py` MASS_TARGET 67.1 → **68.0** (MJX 68.001 kg; stand settles z 1.1495, up 0.999). `eval_box.py` nominal gate is 68.0; the corner gates at 65.0 and 68.5 are unchanged. Supersedes the 67.1 in §8. 13/13 tests pass.
+
+
+## Repin 2026-10-21 (Bryan: fix before job 10): sim/v3 ddfcff8, inputs ddfcff8
+- **r_hip_yaw −45…35°** (mirror of left −35…45), per **Legs L39** (yaw stops at −35/+45 per leg, mirrored). The old sim had
+  −35…45 on both sides, so the policy could learn 45° right toe-in that the hardware can't do. The `gen_v3.py` mirror rule now
+  includes hip_yaw.
+- **ankle_pitch hard range −0.916 rad (−52.48°)**, per **P-157** (Legs L75, Arbiter R-147 5deb2be) and Actuators D96. The
+  −0.955 rad extension (|ankle_roll| ≤ 10°) is a runtime soft limit only (`controller_config.json`
+  `ankle_dorsiflexion_soft_limit`).
+- **Mirroring audit, all L/R ranges** (sim/v3 xml):
+  - hip_roll mirrored ✔ (−12…15 / −15…12)
+  - shoulder_roll mirrored ✔ (−15…180 / −180…15)
+  - ankle_roll ±18, shoulder_yaw ±150, wrist_roll ±170, wrist_yaw ±40: symmetric, so no mirror is needed ✔
+  - pitch-axis joints (hip/ankle/shoulder/wrist pitch, knee, elbow) are not mirrored by design ✔
+  - **Only hip_yaw was wrong.**
+  - Noted, not changed: `gen_v3.py` LIM has ankle_roll ±25 vs the xml's ±18 (pre-existing drift; the xml is hand-maintained). The
+    CONTRACTS l.116 ROM row quotes a single hip_yaw −35…45; it needs per-side ranges (Arbiter's file, not edited).
+- make_model: mass 68.001, stand settle z 1.1495 up 0.999 (unchanged). `humanoid_mjx*.xml` changed (ranges only); gains and
+  ref_cycle unchanged.
+- RL tests: 12/13. `test_walk_a_stays_up` fails on the job-4 walk_a policy (falls at 2.6 s); bisected to the ankle change.
+  This is expected for a policy trained on −45°; job 10 retrains.
+- Sweeps: shroud supervisor minimums unchanged. Thigh-panel sim-range sweep worst −26.9 → −42.5 mm (right toe-out now reaches
+  45). Controller poses and the walk/carry range are unchanged (≥ 120 / 54.9 mm).

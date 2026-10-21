@@ -3,7 +3,7 @@
 Owner: RL Controls. Plan and evidence: `modules/controls/rl/RETRAIN_PLAN_J10.md`. Use the same WSL venv and repo clone as job 4 (JAX 0.11.2, Playground 0.2.0, Brax 0.14.2, MuJoCo/MJX 3.15.0). Report honestly: no numbers you did not measure.
 
 **Pinned inputs:**
-- sim/v3 = **4115f6e** (J10 hardware update: forearm 287, knee rev B fins, fallback SP 67A 6 mm sole, chest pad, neck XM430; 64.827 kg). Robot mass per **Arbiter R-118/R-123**: nominal 68.0 kg, DR 65.0–68.5 kg in training, gates at 68.0 plus the 65.0/68.5 corners.
+- sim/v3 = **ddfcff8** (repin 2026-10-21, Bryan's decision: fix before job 10). On top of 4115f6e (J10 hardware update: forearm 287, knee rev B fins, fallback SP 67A 6 mm sole, chest pad, neck XM430; 64.827 kg): **r_hip_yaw −45…35° mirrored per Legs L39** (was −35…45, which allowed 45° right toe-in the hardware can't do) and **ankle_pitch hard range −0.916 rad (−52.48°) per P-157 / R-147 / Actuators D96** (was −45°). The −0.955 rad roll-coupled extension is a Controls runtime soft limit only (controller_config.json), not in the MJCF. Robot mass per **Arbiter R-118/R-123**: nominal 68.0 kg, DR 65.0–68.5 kg in training, gates at 68.0 plus the 65.0/68.5 corners.
 - Gates per **Arbiter R-117**.
 - Usage MODE (`/workspace/usage/status.md`): **NORMAL**, both Grok Bot and the Grok subscription. The file was last updated 2026-10-14, so re-check the Grok Build log first; if the subscription is ≥ 75 % (CAUTION), ask Bryan via Robot Lab before starting the ~13 h run.
 
@@ -14,15 +14,20 @@ git log -1 --format='%h %s' ; git log -1 --format='%h' -- sim/v3/humanoid_v3.xml
 cd modules/legs/rl
 export XLA_PYTHON_CLIENT_PREALLOCATE=false MUJOCO_GL=egl RL_RUNS=/root/rl-runs-j10
 ```
-Record both hashes in the report. **If the sim/v3 hash is not 4115f6e, stop and report** (the model changed under the plan). Training inputs (make_model output, R-118 mass, randomize/eval_box, obs clip, knee peak) are pinned at **d786dff**: `git merge-base --is-ancestor d786dff HEAD` must succeed, and `git diff d786dff HEAD -- modules/legs/rl sim/v3` must be empty except for this brief's own outputs. Use a new `RL_RUNS` dir so job-4 checkpoints are not picked up by `restore`.
+Record both hashes in the report. **If the sim/v3 hash is not ddfcff8, stop and report** (the model changed under the plan). Training inputs (make_model output, R-118 mass, randomize/eval_box, obs clip, knee peak) are pinned at **ddfcff8** (was d786dff; make_model regen for L39/P-157): `git merge-base --is-ancestor ddfcff8 HEAD` must succeed, and `git diff ddfcff8 HEAD -- modules/legs/rl sim/v3` must be empty except for this brief's own outputs. Use a new `RL_RUNS` dir so job-4 checkpoints are not picked up by `restore`.
 
 R-133 (ID e874653) shoulder-roll soft limit **127°** (replaces R-127's 115°) is a Controls runtime limit (`controls/limits/soft_limits.json`). The MJCF hard range −15…180° is unchanged, so the training inputs are unchanged and the pin above stays valid. The policy's arm targets stay within ±0.25 rad (~14°) of the carry pose, well inside 115°.
+
+**Known at repin (ddfcff8):** `test_eval_box.py::test_walk_a_stays_up_with_matched_obs` now FAILS (old job-4 walk_a policy falls
+at 2.6 s at 1.2 m/s). Bisected: the ankle range change causes it (hip-yaw mirror alone: 13/13 pass). That policy was trained on
+the old −45° ankle and is replaced by this job; treat the test as a job-4 legacy check and re-baseline it on the job-10 policy.
+Do not widen the ankle back.
 
 ## 1. Regenerate the MJX model from the current sim/v3 (CPU, ~1 min)
 ```bash
 python make_model.py
 ```
-Expect `mass 68.001` and `stand settle z 1.1495 up 0.999` (sim/v3 4115f6e, R-123). The files should be unchanged against the repo; if they differ, report the diff. Commit any diff in `humanoid_mjx*.xml`, `gains.npz` or `ref_cycle.npz` with the report.
+Expect `mass 68.001` and `stand settle z 1.1495 up 0.999` (sim/v3 ddfcff8, R-123; verified 2026-10-21). The files should be unchanged against the repo; if they differ, report the diff. Commit any diff in `humanoid_mjx*.xml`, `gains.npz` or `ref_cycle.npz` with the report.
 
 ## 2. Harness tests and smoke (must pass before training)
 ```bash
