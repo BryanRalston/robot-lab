@@ -7,10 +7,16 @@ RL Materials, 2026-10-21. Basis: legs/grokbuild/ankle_cross_fea_brief.md (R-069/
 | YS / UTS MPa | 480 / 560 (repo uses 503 YS) | 410 / 500 | MIF 7075-T6; https://www.makeitfrom.com/material-properties/7075-T73-Aluminum |
 | fatigue (MIF, basis unstated) | 160 | 160 | same |
 | SCC | susceptible in short-transverse (MATERIALS_DB) | overaged to maximise SCC resistance (MIF text) | same |
-| density | 2.81 repo | same alloy | REPO_AL7075 |
+| density | 2.81 repo-wide nominal | same alloy | MATERIALS_DB (REPO_AL7075 removed, R-123) |
 - **Why:** the cross is a thick, pocketed block. Pin bores and press fits put sustained hoop tension through the short-transverse (ST) grain in a sweaty, salt-exposed foot zone. T6 in ST under sustained press-fit stress is the classic SCC case, so we take T7351.
 - **Cost:** yield is −15 %. The FEA limit becomes 410/1.5 = **273 MPa** design/fault, vs 335 in the brief. Bearing becomes ≤ 1.5 × 410/2 = 308 MPa. **Legs: run the FEA at T7351 limits.** If the lightest W/F passes only at T6, re-size; do not drop to T6.
 - Fatigue: the same 160 MPa MIF value. Keep the R-031 §6 Se 87 basis and 58 MPa amplitude, since the brief already includes the knock-downs. For local checks at the bores and pocket corners, see §2.
+
+### R-123 update: thick-plate A/B basis
+- The cross is machined from plate of about 30 mm, so it falls in the MMPDS 1.001–2.000 in band.
+- 7075-T7351 Fty A/B = 57/59 ksi = **393/407 MPa** (Ftu 68/70 ksi). **Unverified:** taken from a web-search synthesis of a third-party stress report quoting MMPDS, not seen in an MMPDS table.
+- If A-basis governs (single load path): the static limit is 393/1.5 = **262 MPa**, not 273. Bearing is 1.5 × 393/2 = 295 MPa.
+- Legs should use 262 until a verified MMPDS table or a mill cert (AMS-QQ-A-250/12 or AMS 4078) is in hand.
 
 ## 2. Fatigue at features [EST, Shigley/Peterson method]
 - Machined surface: ka = 4.51·Sut^−0.265 = 4.51·500^−0.265 ≈ **0.87**.

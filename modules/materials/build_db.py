@@ -8,7 +8,8 @@ S={
  "MIF4140QT":"https://www.makeitfrom.com/material-properties/Quenched-and-Tempered-4140-Cr-Mo-Steel",
  "MIFPC":"https://www.makeitfrom.com/material-properties/Polycarbonate-PC",
  "MIFPTFE":"https://www.makeitfrom.com/material-properties/Polytetrafluoroethylene-PTFE",
- "REPO_AL7075":"v3/datasheets/al7075.pdf (repo copy; density 2.81 used repo-wide)",
+ "MMPDS_PLATE_UNVERIFIED":"https://www.scribd.com/document/932439234/Cove2U-Analysis-G730PLOAD0R1A-F0R2-W0R2-f1-Correct-Loads-A (third-party stress report quoting MMPDS, AMS-QQ-A-250/12 plate 0.5-1.0 in; UNVERIFIED: not MMPDS itself)",
+ "MMPDS01_FORGING":"http://files.engineering.com/files/3c296b91-f1e2-478d-a42d-61448c22faf7/AR-MMPDS-01_table3.7.6.0e2.pdf (MMPDS-01 Table 3.7.6.0(e2), 7075-T73 die forging; extract hosted by a third party)",
  "DP490_A":"https://multimedia.3m.com/mws/media/2409614O/3m-scotch-weld-epoxy-adhesive-dp490.pdf (via modules/legs/BOND_SPEC.md)",
  "DP490_B":"https://multimedia.3m.com/mws/media/82790O/dp490-scotch-weld-tm-adhesive.pdf (via BOND_SPEC.md)",
  "SKF_GE12C":"modules/actuators/datasheets/skf_ge12c.html (SKF https://www.skf.com/products/plain-bearings/spherical-plain-bearings-rod-ends/radial/productid-GE%2012%20C)",
@@ -54,9 +55,9 @@ def M(id,name,where,rho=None,E=None,ys=None,uts=None,fat=None,elong=None,tmax=No
   return dict(id=id,name=name,used_in=where,density_g_cc=rho,E_GPa=E,yield_MPa=ys,UTS_MPa=uts,fatigue_MPa=fat,elongation_pct=elong,
     T_max_mech_C=tmax,toughness=None,other=other or {},cost_hint=cost,sources=list(src),notes=notes)
 DB=[
- M("AL7075T6","Al 7075-T6/T651","femur/tibia tubes, collars, sleeves, clevises, tongue, fork, foot, levers, palm (P-021), pelvis shell, yokes",
-   2.81,70,480,560,160,7.9,200,{"shear_MPa":330,"CTE_um_mK":23,"calomel_mV":-750},"base metal price 10% rel. (MIF)",["REPO_AL7075","MIF7075"],
-   "MIF density rounds to 3.0; repo 2.81 kept. Fatigue = MIF value (cycle basis not stated). K1C not verified. SCC-susceptible in T6 (short transverse)."),
+ M("AL7075T6","Al 7075-T6/T651 [typical (MakeItFrom), not A/B-basis]","femur/tibia tubes, collars, sleeves, clevises, tongue, fork, foot, levers, palm (P-021), pelvis shell, yokes",
+   2.81,70,480,560,160,7.9,200,{"shear_MPa":330,"CTE_um_mK":23,"calomel_mV":-750},"base metal price 10% rel. (MIF)",["MIF7075"],
+   "TYPICAL (MakeItFrom), NOT A/B-basis (R-123). Static allowable 480/1.5 = 320 MPa. Thick plate A/B (MMPDS via unverified secondary source): T651 0.5-1.0 in Fty A/B 441/462 MPa (64/67 ksi), Ftu 510/524; T7351 0.5-1.0 in Fty 393/421 (57/61 ksi); T7351 1.001-2.0 in Fty 393/407 (57/59 ksi), Ftu 469/483 (68/70 ksi) [search synthesis only, not seen in a table]. T73 die forging <=1 in Fty(L) A/B 386/421 (56/61 ksi, MMPDS-01). T651 >1 in: not found. MIF density rounds to 3.0; repo-wide 2.81 kept (no cited source; MIF 3.0 2-sig-fig, nominal 2.81 handbook value [EST]). Fatigue = MIF value (cycle basis not stated). K1C not verified. SCC-susceptible in T6 (short transverse)."),
  M("AL7050T7451","Al 7050-T7451 (candidate)","alternative for 7075 plate parts",3.1,70,480,540,200,10,190,{"shear_MPa":310},"10% rel.",["MIF7050"],
    "MIF density 2-sig-fig. Overaged temper chosen for SCC/exfoliation/toughness balance (MIF text)."),
  M("AL6061T6","Al 6061-T6","head neck deck sheet",2.7,69,270,310,96,10,170,{"calomel_mV":-740},"9.5% rel.",["MIF6061"]),

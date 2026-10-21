@@ -150,7 +150,7 @@ Notes:
 
 ---
 # Part 4: 7075-T6 doubler replacing saddle + band + guide posts (R-060, ID R5 cd5e88c), 2026-10-14
-Properties: AL7075T6 in MATERIALS_DB: yield 480 MPa, UTS 560, shear 330, E 70 GPa, ρ 2.81 (MIF7075/REPO_AL7075). HC5052_4.5 has L-shear 340 psi = 2.34 MPa (HEX_CRIII). [EST] = hand-calc assumption. **FEA** = needs FEA.
+Properties: AL7075T6 in MATERIALS_DB: yield 480 MPa, UTS 560, shear 330, E 70 GPa, ρ 2.81 (MIF7075; typical, not A/B-basis per R-123). HC5052_4.5 has L-shear 340 psi = 2.34 MPa (HEX_CRIII). [EST] = hand-calc assumption. **FEA** = needs FEA.
 Loads: 9.17 kN axial into the roll housing, 2.46 kN side shear (15°), cartridge on 4 × M4. Core footprint 62 × 62 = 3 844 mm², so the core pressure is **2.39 MPa**.
 
 ## Roll-housing data in the repo
