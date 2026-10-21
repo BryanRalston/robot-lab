@@ -122,4 +122,10 @@ Per `legs/R031_FIXES.md`: 5 ASTM D1002 coupons per lot at 23 and 60 °C, part-eq
   - (b) stumble side fall with the swing leg crossing, i.e. knee-first if it occurs, ×5;
   - (c) side tip from an upright kneel (failed R-146), ×3;
   - (d) modal tap test of the leg frontal mode and the shank f₁.
-- **Pass:** frontal bending σ ≤ 393 MPa equivalent at every gauge (SF ≥ 1.0 extrapolated to the worst run ×1.3 DLF if fewer than 5 runs); hip-roll torque peak ≤ 292 N·m; no permanent set (gauge zero shift < 50 µε); covers intact.
+- **Pass:** frontal bending σ ≤ 393 MPa equivalent at every gauge (SF ≥ 1.0 extrapolated to the worst run ×1.1 DLF if fewer than 5 runs); no permanent set (gauge zero shift < 50 µε); covers intact.
+- **Rev B (L39 bumper):**
+  - hip-roll encoder angle past the −12/+15 contact and bumper crush: ≤ 2.3° (linear), never ≥ 3.6° (bottom-out);
+  - stop energy from the measured contact speed: ½ I ω_c² ≤ 6.6 J;
+  - hip-roll joint moment (motor + bumper) ≤ 600 N·m;
+  - bumper inspection/replacement after any event > 4 J;
+  - bench: PU bumper quasi-static and drop-weight compression curve (k, 25 %/40 % points, energy) on production parts.
