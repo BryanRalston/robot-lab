@@ -206,3 +206,22 @@ DR: mass 65 / 68 / 68.5 kg × timeconst × lean (99 runs).
   - The knee pads are never reached, so there is no knee-pad contact speed yet. Phase times: P1a 0.8 s; P1b–P4 not
     valid against the 3.3 s total.
   - The stance QP is flat-foot only; a toe-support task-space controller (as in chest_lower_wbc.py) is the next step.
+
+## D97 PU knee stop (Actuators 770da54): nonlinear PU spring, re-run (knee_stop_impact.py MODE='pu_d97')
+- **Model:** joint-space torque applied past 135°, taken from the D97 table (0.7° 119 … 8.6° 1258 N·m). Unloading
+  follows 0.34 × the loading curve, so rebound energy is 34 % (66 % lost). There is no rigid limit up to 170°.
+- **Knee armature:** sim/v3 carries 0.2018 kg·m² per knee. The DR set uses 0.553 (D97 rotors) / 0.2018 / 0.
+- **Cases:** same 99 as before (3 cases × leans × mass 65/68/68.5 × armature).
+
+| Case | Speed at stop, nominal → DR max (rad/s) | Peak torque, DR max (N·m) | Peak penetration, DR max (°) | Max knee (°) |
+|---|---|---|---|---|
+| forward fall | 5.72–5.92 → 6.37 | **1095** | **7.40** | 142.4 |
+| crouch collapse | 5.08–5.13 → 5.61 | 929 | 6.22 | 141.2 |
+| kneel tip back | 2.39–2.63 → 2.64 | 823 | 5.48 | 140.5 |
+| kneel tip forward | stop not reached | – | – | 89.9 |
+
+- **No case over 8.6° or 1258 N·m.** The worst case uses 78 % of the strain stroke and 87 % of the torque at the
+  limit. That is about 6 % above Actuators' ~1030 N·m at 6.9°.
+- The armature barely matters: 1083 → 1095 N·m from 0 → 0.553.
+- Kneel tip back is mostly a static sit on the stops (about 800 N·m at only 2.5 rad/s).
+- The knee stays inside the 145° clash-free range in every case.
