@@ -499,3 +499,16 @@ All keep R-076 (reinforced isolation, IEC 60664-1 creepage, IP2X), R-074 (main l
 - **[WITHDRAWN: stops were a 10 mm standing trap; notch + J-channel carried into 8f] P-023 rev 8d (T&R 76de66a):** notch +1.5 mm → shroud 29.8 mm (27.8 tol) at 3.6° overtravel PASS; 2 × 55 mm PA12 foam-capped stops per panel inboard edge (rigid 110 mm, foam faces 30 mm, ~0 N on hand), +0.010 kg/side; J-channel 14.5 mm press fit; empty r8c_pelvis.stl deleted. Retained 34.2 %.
 - **[WITHDRAWN: seats in ≤2 % of closures] P-023 rev 8e (option a, stop-in-cup):** drawn (hip_skirt_r8e_stops.*); seats in ≤2.2 % of closing both-leg poses (median miss 87 mm) → FAIL as a hand guard; GF30 + breakaway needed for powered; 0.069 kg/side. Recommend load-limited limp (≤140 N measured / damped) instead.
 - **P-023 rev 8f (CURRENT):** 8c geometry (d58ffa4, LD29 15×40 hem/notch, 20×40×130 L/R) + 8d notch (27.8 mm with tol at 3.6°) + 14.5 J-channel press fit, no stops. Load-limited hand protection: Controls keep-out warn 35/limit 30/trip 28 mm on panel surfaces (powered); limp clamp ≤140 N measured in TP-G5-18 (EST ~127 N, limp hold pending Actuators/Controls). ≈ −0.296 kg vs v5 [EST]. hip_skirt_r8f.*
+
+### P-160: Torso: waist-pitch yoke hard stop rated 4.36 kN·m (for T&R + Actuators), +0.05 kg [EST]
+- **Why:** with the two-sided yoke (3c-final), the LC1 chest load puts 29 kN × 0.150 m = **4.36 kN·m** about the waist-pitch axis (ultimate 6.54 kN·m). The waist_pitch motor is rated 116 N·m (sim v3 ctrlrange), so the moment has to go into a hard stop, not the gear train.
+- **Requirement (draft):**
+  - Mechanical stops at both ends of the pitch range, −30° and +60° (sim v3).
+  - Rated **4.36 kN·m at limit with no permanent set, and 6.54 kN·m at ultimate with no rupture** (T&R b1fe48f factors).
+  - The stop reacts torso cheek to waistY cheek directly, bypassing the actuator output bearing and gear.
+  - Engage ≤ 2° before the soft limit. Elastomer face [EST] sized by Actuators for the impact energy of LC1 (T&R to set it).
+  - At an assumed lever of 60 mm from the pitch axis, the stop force is 73 kN limit / 109 kN ultimate, so 2 stop lugs per side.
+- **Asks:**
+  - T&R: confirm the moment basis and the energy. Is a fixed pelvis the right reaction for a chest fall? It's conservative.
+  - Actuators: confirm stop geometry inside the waist pitch housing envelope, and gear protection (torque limiter?).
+- **Mass:** +0.05 kg [EST], not in the FEA. Owner Torso; consulted T&R and Actuators.

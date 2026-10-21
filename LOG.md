@@ -58,3 +58,9 @@
 - job 10 ref_cycle.npz needs ankle past −0.916 (min −1.019 at 1.2 m/s). Recommend holding job 10 until the ref is regenerated. Pin not changed.
 - clash_v4: the knee 0–135 sweep is clean; the 15–60 claim is false. The L/R knee housings clash at hip_yaw 45° instead (committed json stale).
 - Details: modules/legs/wbc/RETUNE_2026-10-21.md
+- 2026-10-21 10:50 ET RL Torso: job 3c-final rev B, 4 coarse iterations (media/progress/2026-10-21_torso_yoke_revB.png).
+  - Changes: closed-section waistY; pelvis internal lip, ribs and ring (outer surface unchanged); lid/socket gussets; Thor +9 mm; partition moved to x −63; hard stop P-160.
+  - Results: k 8.4 MN/m PASS; mode 1 239 Hz PASS; pelvis SF ≥1.54, waistY ≥2.07, yoke ≥1.98 PASS.
+  - Bulkhead lid sliver SF 0.06–0.10 FAIL (fine-mesh check needed). Pelvis is 35 % of the remaining compliance.
+  - Net +3.47 kg. COM would reach ≈15 mm (>10) → Controls flagged, not booked.
+  - Vent at floor (−90, 0, global 1401.6) with a rearward deflector.

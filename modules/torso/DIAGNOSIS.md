@@ -126,3 +126,58 @@ Layout: pack/pack_layout_optA.{py,json,svg}, pack/pack_layout_optA_tables.md.
 - **Net +1.56 kg.** The 3 mm lid adds about +0.19 (yaml updated, not re-run with the yoke).
 
 **COM:** whole robot Δ ≈ (−0.2, 0, +6.3) mm [EST; robot COM z ≈ 1.0 m assumed]. That brings the cumulative total to ≈ 6.7 mm, under the 10 mm limit.
+
+## 3c-final rev B (10:25 ruling: waist yaw/pitch + pelvis shell are Torso parts), 4 coarse iterations
+**Model fix:** the FEA pelvis was a closed box. The model_v4 shell is open top and bottom, and the open shell is now modelled.
+
+**Changes:**
+- (a) Bulkhead/lid: the strip above the lid is removed. Added an internal corner gusset (x 52–64, |y| 100–112, z 250–276.5), a lid underside doubler in the c1/c2 zone (x 52–106.5, |y| 54.5–80, 4 mm), a land-top cap (x 52–64, |y| < 54.5, z 270.5–276.5), and an external wing gusset (x 52–72, |y| 115–122, z 240–278). Iteration 4 added a **lid-top doubler 3 mm, x 30–106.5, |y| < 70**. Socket walls are 8 mm and the notch floor is 8 mm (z 163–171).
+- (b) waistY: yoke plate 8 → 16 mm. Both cheeks are 120 deep (x). The −y cheek is 8 mm; the +y side is a stator cradle (y 47–55) to z 69.6. Fore/aft closing webs, 6 mm, run to z 50, making a closed section.
+- (c) Hard stop: P-160.
+- (d) **Thor bay raised +9 mm** (6 for the lid plus 3 for the lid-top doubler). ID must recheck the chamfer clearance, now **15 mm** (was 24; 18 with +6 only). The duct partition moved to x −63, 6 mm behind Thor's rear face (Thermal to confirm the duct function).
+- **Pelvis reinforcement (internal only; outer surface unchanged):**
+  - Top lip ring 20 × 8 inside the walls.
+  - Transverse ribs 8 mm at y ±(57…65), from the deck top to the pelvis top.
+  - Annular rib r 55–66 around the waist-yaw seat.
+  - Deck widened to touch the fore/aft walls (162).
+  - Clearances: the hip-yaw housings and L39 bumpers are below the deck. The ribs and ring sit ≥ 7 mm outside a bolt-pattern keep-out (r 58 about (0, ±130), i.e. y ≥ 72). HP1/HP2 plates are outside the rear wall and untouched.
+  - Hip range of motion acts below the deck, so the ≥ 3 mm clearance holds through the full range.
+
+**Iterations (LC1a/b/c/u SF; LC1a deflection; mode 1):**
+
+| it | bulkhead | pelvis | waistY+act | yoke | defl mm | Hz |
+|---|---|---|---|---|---|---|
+| 1 | 0.46/0.26/0.35/0.40 | 0.72/0.65/0.93/0.60 | 1.18/1.06/1.43/1.03 | 2.0/1.8/2.0/1.75 | 9.21 | 138 |
+| 2 | 0.74/0.30/0.69/0.64 | 1.16/1.02/0.79/0.96 | ≥ 2.0 | ≥ 1.6 | 5.67 | 175 |
+| 3 | 0.28/0.19/0.39/0.25 | 1.19/1.10/0.83/0.99 | ≥ 2.1 | ≥ 1.9 | 4.64 | 184 |
+| 4 | **0.08/0.06/0.10/0.07** | **2.13/1.95/1.54/1.76** | **2.45/2.07/2.86/2.14** | **2.27/2.08/2.16/1.98** | **3.44 (k 8.4 MN/m; LC1b 3.95)** | **239** |
+
+- Buckling 10.8 (pass). LC2: bulkhead 0.21, all others ≥ 2.1.
+- **The bulkhead still fails.** In iteration 4 the peak moved to a lid sliver at (56, 95, 278): 1.5 mm lid between the doubler, cap and gusset edges, at h 25. The SF fell as the stiffening went up, which points to a mesh/sliver singularity. Needs a fine-mesh (h 6) check of the lid/socket corner before any redesign. **Not claimed as a pass.**
+
+**Pelvis compliance:**
+- Diagnostic with a rigid pelvis: LC1a deflection 3.44 → 2.22 mm, so the **pelvis shell is 35 % of the remaining land compliance** (52 % before the reinforcement, iteration 1).
+- The fixed-pelvis BC is kept and is conservative.
+
+**Mass (iteration 4):**
+- Box + bulkhead 3.026 kg (mesh); yoke cheeks 1.165 (mesh); spacers 0.335; RB7013 0.35; waistY delta +0.657 [CALC]; pelvis reinforcement +0.804 (mesh 3.373 − open shell 2.569); hard stop +0.05; tap fuses/FPC +0.01; Electronics +0.05.
+- Credits: −1.99 job 3, −0.25 waist ring, −0.738 enclosure.
+- **Net +3.47 kg.** Mass critical. The obvious cuts are the lid-top doubler (if the fine mesh clears the sliver) and pocketing the pelvis lip/ring.
+
+**COM:**
+- Since the last tracker entry: about +0.30 kg near the lid (global ≈ 1550), +0.66 waistY (≈ 1300), +0.80 pelvis (≈ 1218). That's Δz ≈ **+8.4 mm** [EST, robot COM z ≈ 1.0 m assumed]. The cumulative total would be ≈ 15 mm, **> 10 mm**.
+- **Controls flagged; NOT booked:** sim_torso_body_r1.json and model_v4 are unchanged for rev B.
+
+**Electronics §18.7 items 1–4** (details in pack/pack_layout_optA.json):
+1. **Tap fuses:** a fusible element at the cell end of each of the 22 taps, on the tap FPC/collector.
+   - Candidate: Littelfuse 451/453 Nano2 0.5 A, 125 V class. Voltage rating to be verified on the datasheet.
+   - Littelfuse 438 0603 is rejected: 63 VDC max is below an 84 V full-stack fault (438 datasheet rev 05/30/24).
+2. **BMS board:** on the rear web, x −105…−95, on 3 mm G10 standoffs, with back-side parts ≤ 4.4 mm. The 22-way tap connector (vertical dual-row, e.g. Molex Micro-Fit 3.0 24-ckt [part EST]) and the isolation transformers face +x into the 35 mm gap to c7 (≤ 30 mm with mated plug and wire bend [EST]).
+3. **SBS75X faces inward:**
+   - Mounted on a G10 bracket off the rear web at (−100, −60, 160), mating face +x.
+   - The robot-side half mates inside the box; the main cable exits through a side-wall gland at (−80, −112, 150).
+   - 72 mm from the vent.
+4. **Vent at y ≈ 0 (not blocked):**
+   - Floor at (−90, 0), sim z 121.6 = **global 1401.6**.
+   - A 0.5 mm stainless deflector on the floor underside turns the plume rearward, exiting at x −107, global z ≈ 1390. It's torso-mounted, so it moves with the torso through the pitch and yaw range.
+   - 54 mm from the pitch housing surface. All hip-yaw drives, bumpers and harness are below global 1206.6, so the vent stays clear of them.
