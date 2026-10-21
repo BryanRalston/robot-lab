@@ -1,11 +1,11 @@
 # FEA spec: chest-pad crush (T-031 / R-146), bryan PC. **FINAL: decks complete, unvalidated (OpenRadioss could not be downloaded on the box)**
-- **Part:** HexWeb CR III 5052 1/8 4.5 pcf, 98 × 98 × **100** mm (R-146 ruling; face x +159 torso = +159 global, z 1451–1549 global), pre-crushed, lot band 19.5–22.3 kN (0°). 1 mm CF face, 1.5 mm PC bezel (4 × M4 captive), bonded to the 7075 101 × 101 land on the 12 mm bulkhead plus 60 × 6 rib.
+- **Part:** HexWeb CR III 5052 1/8 4.5 pcf, 98 × 98 × **116** mm (ID 341ef4a; face x +175 torso = +175 global, z 1451–1549 global; ribbon L along z; 8 mm land socket wall recommended), pre-crushed, lot band 19.5–22.3 kN (0°). 1 mm CF face, 1.5 mm PC bezel (4 × M4 captive), bonded to the 7075 101 × 101 land on the 12 mm bulkhead plus 60 × 6 rib.
 - **Solver choice: OpenRadioss** (free, open source, explicit, Windows and Linux). Honeycomb **/MAT/LAW28** (orthotropic honeycomb, plateau yield curves per direction) or LAW126/LAW70 crushable foam as a check. Rigid moving wall /RWALL with mass m and /INIVEL v. CalculiX is rejected (implicit, no crush densification). LS-DYNA MAT_126 is equivalent but licensed.
   - **Calibration:** plateau = lot band (1.79 MPa typical at 4.5 pcf; 19.5 / 22.3 kN over 98 × 98), dynamic factor 1.10–1.30, angle factors 0.98/0.93/0.73 (HC_ANGLE_PMC), densification at ε 0.75.
 - **Cases:** 0°, 15°, 25° at 64 kg and 34.9 kg (Controls), v 5.67 m/s; kneel-tip prone landing at 34.9 kg, 3.0 m/s [EST]; each at both lot bounds.
 - **Outputs:** force–stroke curve, peak g on the pack (F/m and filtered SAE CFC 600), rail loads (pack mass × pack g), pulse duration and Δv.
 - **Convergence:** cell 8 / 4 / 2 mm; peak force and stroke change ≤5 % between the last two.
-- **Pass:** stroke margin ≥10 % of 0.70 × 100; quasi-static ceiling ≤22.35 kN; pack g ≤107 g (UN T4 level, R146_pack_shock.md) and rail load ≤8.9 kN; Δv beyond 4.0 m/s is flagged for the G5 drop test.
+- **Pass:** stroke margin ≥10 % of 0.70 × 116 = 81.2 mm; quasi-static ceiling ≤22.35 kN; pack g ≤107 g (UN T4 level, R146_pack_shock.md) and rail load ≤8.9 kN; Δv beyond 4.0 m/s is flagged for the G5 drop test.
 - **Files:** `fea_chest_pad.yaml`, `fea_chest_pad.py`.
 - **Run:**
   - Screen: `python modules/torso/fea_chest_pad.py --cfg modules/torso/fea_chest_pad.yaml --out modules/torso/fea/chest_pad`.

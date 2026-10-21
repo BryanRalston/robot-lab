@@ -1,6 +1,6 @@
-# Robot Lab R-146 ruling: 100 mm core (+0.006). land 216 MPa @ 24.4 kN (Materials c859e43) -> 8.85 MPa/kN; rail 272 MPa @ 8.9 kN -> 30.6 MPa/kN [EST section]
+# ID 341ef4a ruling: 116 mm core (+0.015), supersedes 100 mm. land 216 MPa @ 24.4 kN (Materials c859e43) -> 8.85 MPa/kN; rail 272 MPa @ 8.9 kN -> 30.6 MPa/kN [EST section]
 # Chest-pad crush job (T-031 / R-146). Units SI. Solver: OpenRadioss (free, explicit), plus a 1-DOF plateau model for screening.
-core: {name: HexWeb CR III 5052 1/8 4.5 pcf, size_mm: [98, 98, 100], crush_typ_MPa: 1.79, dyn_factor: [1.10, 1.30],
+core: {name: HexWeb CR III 5052 1/8 4.5 pcf, size_mm: [98, 98, 116], crush_typ_MPa: 1.79, dyn_factor: [1.10, 1.30],
        angle_factor: {0: 0.98, 15: 0.93, 25: 0.73}, densification_strain: 0.70}   # MATERIALS_DB HC5052_4.5, HEX_CRIII, HC_ANGLE_PMC
 lot_plateau_0deg_kN: [19.5, 22.3]          # R-102 acceptance band (quasi-static, 0 deg equivalent)
 stack: {face: CF 1 mm, bezel: PC 1.5 mm ring (4x M4 captive), land: 7075 101x101 on 12 mm bulkhead + 60x6 rib}

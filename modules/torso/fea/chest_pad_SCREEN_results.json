@@ -7,8 +7,8 @@
     "F_kN": 21.45,
     "elastic": false,
     "stroke_mm": 47.9,
-    "stroke_avail_mm": 70.0,
-    "margin": 0.315,
+    "stroke_avail_mm": 81.2,
+    "margin": 0.41,
     "bottomed": false,
     "pulse_ms": 16.9,
     "peak_g": 34.2,
@@ -53,8 +53,8 @@
     "F_kN": 28.99,
     "elastic": false,
     "stroke_mm": 35.5,
-    "stroke_avail_mm": 70.0,
-    "margin": 0.493,
+    "stroke_avail_mm": 81.2,
+    "margin": 0.563,
     "bottomed": false,
     "pulse_ms": 12.5,
     "peak_g": 46.2,
@@ -98,28 +98,28 @@
    "note": "\u0394v beyond UN T4 envelope -> TP-G5-17 drop test",
    "decks": [
     {
-     "base": "/tmp/cp2/fall_0deg_64_lo_c8",
-     "elems": 1728
+     "base": "/tmp/cp3/fall_0deg_64_lo_c8",
+     "elems": 2016
     },
     {
-     "base": "/tmp/cp2/fall_0deg_64_hi_c8",
-     "elems": 1728
+     "base": "/tmp/cp3/fall_0deg_64_hi_c8",
+     "elems": 2016
     },
     {
-     "base": "/tmp/cp2/fall_0deg_64_lo_c4",
-     "elems": 14400
+     "base": "/tmp/cp3/fall_0deg_64_lo_c4",
+     "elems": 16704
     },
     {
-     "base": "/tmp/cp2/fall_0deg_64_hi_c4",
-     "elems": 14400
+     "base": "/tmp/cp3/fall_0deg_64_hi_c4",
+     "elems": 16704
     },
     {
-     "base": "/tmp/cp2/fall_0deg_64_lo_c2",
-     "elems": 120050
+     "base": "/tmp/cp3/fall_0deg_64_lo_c2",
+     "elems": 139258
     },
     {
-     "base": "/tmp/cp2/fall_0deg_64_hi_c2",
-     "elems": 120050
+     "base": "/tmp/cp3/fall_0deg_64_hi_c2",
+     "elems": 139258
     }
    ]
   },
@@ -129,8 +129,8 @@
     "F_kN": 20.36,
     "elastic": false,
     "stroke_mm": 50.5,
-    "stroke_avail_mm": 70.0,
-    "margin": 0.278,
+    "stroke_avail_mm": 81.2,
+    "margin": 0.378,
     "bottomed": false,
     "pulse_ms": 17.8,
     "peak_g": 32.4,
@@ -175,8 +175,8 @@
     "F_kN": 27.51,
     "elastic": false,
     "stroke_mm": 37.4,
-    "stroke_avail_mm": 70.0,
-    "margin": 0.466,
+    "stroke_avail_mm": 81.2,
+    "margin": 0.54,
     "bottomed": false,
     "pulse_ms": 13.2,
     "peak_g": 43.8,
@@ -220,28 +220,28 @@
    "note": "\u0394v beyond UN T4 envelope -> TP-G5-17 drop test",
    "decks": [
     {
-     "base": "/tmp/cp2/fall_15deg_64_lo_c8",
-     "elems": 1728
+     "base": "/tmp/cp3/fall_15deg_64_lo_c8",
+     "elems": 2016
     },
     {
-     "base": "/tmp/cp2/fall_15deg_64_hi_c8",
-     "elems": 1728
+     "base": "/tmp/cp3/fall_15deg_64_hi_c8",
+     "elems": 2016
     },
     {
-     "base": "/tmp/cp2/fall_15deg_64_lo_c4",
-     "elems": 14400
+     "base": "/tmp/cp3/fall_15deg_64_lo_c4",
+     "elems": 16704
     },
     {
-     "base": "/tmp/cp2/fall_15deg_64_hi_c4",
-     "elems": 14400
+     "base": "/tmp/cp3/fall_15deg_64_hi_c4",
+     "elems": 16704
     },
     {
-     "base": "/tmp/cp2/fall_15deg_64_lo_c2",
-     "elems": 120050
+     "base": "/tmp/cp3/fall_15deg_64_lo_c2",
+     "elems": 139258
     },
     {
-     "base": "/tmp/cp2/fall_15deg_64_hi_c2",
-     "elems": 120050
+     "base": "/tmp/cp3/fall_15deg_64_hi_c2",
+     "elems": 139258
     }
    ]
   },
@@ -251,8 +251,8 @@
     "F_kN": 15.98,
     "elastic": false,
     "stroke_mm": 64.4,
-    "stroke_avail_mm": 70.0,
-    "margin": 0.081,
+    "stroke_avail_mm": 81.2,
+    "margin": 0.207,
     "bottomed": false,
     "pulse_ms": 22.7,
     "peak_g": 25.4,
@@ -309,8 +309,8 @@
     "F_kN": 21.59,
     "elastic": false,
     "stroke_mm": 47.6,
-    "stroke_avail_mm": 70.0,
-    "margin": 0.32,
+    "stroke_avail_mm": 81.2,
+    "margin": 0.414,
     "bottomed": false,
     "pulse_ms": 16.8,
     "peak_g": 34.4,
@@ -351,39 +351,39 @@
     ]
    },
    "checks": {
-    "stroke_margin": false,
+    "stroke_margin": true,
     "ceiling_quasistatic": true,
     "pack_g": true,
     "land_stress": true,
     "rail_stress": true,
     "pack_dv_enveloped_by_T4": false
    },
-   "pass": false,
+   "pass": true,
    "note": "\u0394v beyond UN T4 envelope -> TP-G5-17 drop test",
    "decks": [
     {
-     "base": "/tmp/cp2/fall_25deg_64_lo_c8",
-     "elems": 1728
+     "base": "/tmp/cp3/fall_25deg_64_lo_c8",
+     "elems": 2016
     },
     {
-     "base": "/tmp/cp2/fall_25deg_64_hi_c8",
-     "elems": 1728
+     "base": "/tmp/cp3/fall_25deg_64_hi_c8",
+     "elems": 2016
     },
     {
-     "base": "/tmp/cp2/fall_25deg_64_lo_c4",
-     "elems": 14400
+     "base": "/tmp/cp3/fall_25deg_64_lo_c4",
+     "elems": 16704
     },
     {
-     "base": "/tmp/cp2/fall_25deg_64_hi_c4",
-     "elems": 14400
+     "base": "/tmp/cp3/fall_25deg_64_hi_c4",
+     "elems": 16704
     },
     {
-     "base": "/tmp/cp2/fall_25deg_64_lo_c2",
-     "elems": 120050
+     "base": "/tmp/cp3/fall_25deg_64_lo_c2",
+     "elems": 139258
     },
     {
-     "base": "/tmp/cp2/fall_25deg_64_hi_c2",
-     "elems": 120050
+     "base": "/tmp/cp3/fall_25deg_64_hi_c2",
+     "elems": 139258
     }
    ]
   },
@@ -393,8 +393,8 @@
     "F_kN": 21.45,
     "elastic": false,
     "stroke_mm": 26.1,
-    "stroke_avail_mm": 70.0,
-    "margin": 0.627,
+    "stroke_avail_mm": 81.2,
+    "margin": 0.678,
     "bottomed": false,
     "pulse_ms": 9.2,
     "peak_g": 62.7,
@@ -423,8 +423,8 @@
     "F_kN": 28.99,
     "elastic": false,
     "stroke_mm": 19.3,
-    "stroke_avail_mm": 70.0,
-    "margin": 0.724,
+    "stroke_avail_mm": 81.2,
+    "margin": 0.762,
     "bottomed": false,
     "pulse_ms": 6.8,
     "peak_g": 84.7,
@@ -456,28 +456,28 @@
    "note": "\u0394v beyond UN T4 envelope -> TP-G5-17 drop test",
    "decks": [
     {
-     "base": "/tmp/cp2/fall_0deg_34p9_lo_c8",
-     "elems": 1728
+     "base": "/tmp/cp3/fall_0deg_34p9_lo_c8",
+     "elems": 2016
     },
     {
-     "base": "/tmp/cp2/fall_0deg_34p9_hi_c8",
-     "elems": 1728
+     "base": "/tmp/cp3/fall_0deg_34p9_hi_c8",
+     "elems": 2016
     },
     {
-     "base": "/tmp/cp2/fall_0deg_34p9_lo_c4",
-     "elems": 14400
+     "base": "/tmp/cp3/fall_0deg_34p9_lo_c4",
+     "elems": 16704
     },
     {
-     "base": "/tmp/cp2/fall_0deg_34p9_hi_c4",
-     "elems": 14400
+     "base": "/tmp/cp3/fall_0deg_34p9_hi_c4",
+     "elems": 16704
     },
     {
-     "base": "/tmp/cp2/fall_0deg_34p9_lo_c2",
-     "elems": 120050
+     "base": "/tmp/cp3/fall_0deg_34p9_lo_c2",
+     "elems": 139258
     },
     {
-     "base": "/tmp/cp2/fall_0deg_34p9_hi_c2",
-     "elems": 120050
+     "base": "/tmp/cp3/fall_0deg_34p9_hi_c2",
+     "elems": 139258
     }
    ]
   },
@@ -487,8 +487,8 @@
     "F_kN": 20.36,
     "elastic": false,
     "stroke_mm": 27.5,
-    "stroke_avail_mm": 70.0,
-    "margin": 0.607,
+    "stroke_avail_mm": 81.2,
+    "margin": 0.661,
     "bottomed": false,
     "pulse_ms": 9.7,
     "peak_g": 59.5,
@@ -517,8 +517,8 @@
     "F_kN": 27.51,
     "elastic": false,
     "stroke_mm": 20.4,
-    "stroke_avail_mm": 70.0,
-    "margin": 0.709,
+    "stroke_avail_mm": 81.2,
+    "margin": 0.749,
     "bottomed": false,
     "pulse_ms": 7.2,
     "peak_g": 80.4,
@@ -550,28 +550,28 @@
    "note": "\u0394v beyond UN T4 envelope -> TP-G5-17 drop test",
    "decks": [
     {
-     "base": "/tmp/cp2/fall_15deg_34p9_lo_c8",
-     "elems": 1728
+     "base": "/tmp/cp3/fall_15deg_34p9_lo_c8",
+     "elems": 2016
     },
     {
-     "base": "/tmp/cp2/fall_15deg_34p9_hi_c8",
-     "elems": 1728
+     "base": "/tmp/cp3/fall_15deg_34p9_hi_c8",
+     "elems": 2016
     },
     {
-     "base": "/tmp/cp2/fall_15deg_34p9_lo_c4",
-     "elems": 14400
+     "base": "/tmp/cp3/fall_15deg_34p9_lo_c4",
+     "elems": 16704
     },
     {
-     "base": "/tmp/cp2/fall_15deg_34p9_hi_c4",
-     "elems": 14400
+     "base": "/tmp/cp3/fall_15deg_34p9_hi_c4",
+     "elems": 16704
     },
     {
-     "base": "/tmp/cp2/fall_15deg_34p9_lo_c2",
-     "elems": 120050
+     "base": "/tmp/cp3/fall_15deg_34p9_lo_c2",
+     "elems": 139258
     },
     {
-     "base": "/tmp/cp2/fall_15deg_34p9_hi_c2",
-     "elems": 120050
+     "base": "/tmp/cp3/fall_15deg_34p9_hi_c2",
+     "elems": 139258
     }
    ]
   },
@@ -581,7 +581,7 @@
     "F_kN": 13.3,
     "elastic": true,
     "stroke_mm": 0.0,
-    "stroke_avail_mm": 70.0,
+    "stroke_avail_mm": 81.2,
     "margin": 1.0,
     "bottomed": false,
     "peak_g": 38.8,
@@ -593,7 +593,7 @@
     "F_kN": 13.3,
     "elastic": true,
     "stroke_mm": 0.0,
-    "stroke_avail_mm": 70.0,
+    "stroke_avail_mm": 81.2,
     "margin": 1.0,
     "bottomed": false,
     "peak_g": 38.8,
@@ -617,8 +617,8 @@
     "F_kN": 21.45,
     "elastic": false,
     "stroke_mm": 7.3,
-    "stroke_avail_mm": 70.0,
-    "margin": 0.896,
+    "stroke_avail_mm": 81.2,
+    "margin": 0.91,
     "bottomed": false,
     "pulse_ms": 4.9,
     "peak_g": 62.7,
@@ -639,8 +639,8 @@
     "F_kN": 28.99,
     "elastic": false,
     "stroke_mm": 5.4,
-    "stroke_avail_mm": 70.0,
-    "margin": 0.923,
+    "stroke_avail_mm": 81.2,
+    "margin": 0.933,
     "bottomed": false,
     "pulse_ms": 3.6,
     "peak_g": 84.7,
@@ -664,28 +664,28 @@
    "note": "",
    "decks": [
     {
-     "base": "/tmp/cp2/kneel_tip_prone_lo_c8",
-     "elems": 1728
+     "base": "/tmp/cp3/kneel_tip_prone_lo_c8",
+     "elems": 2016
     },
     {
-     "base": "/tmp/cp2/kneel_tip_prone_hi_c8",
-     "elems": 1728
+     "base": "/tmp/cp3/kneel_tip_prone_hi_c8",
+     "elems": 2016
     },
     {
-     "base": "/tmp/cp2/kneel_tip_prone_lo_c4",
-     "elems": 14400
+     "base": "/tmp/cp3/kneel_tip_prone_lo_c4",
+     "elems": 16704
     },
     {
-     "base": "/tmp/cp2/kneel_tip_prone_hi_c4",
-     "elems": 14400
+     "base": "/tmp/cp3/kneel_tip_prone_hi_c4",
+     "elems": 16704
     },
     {
-     "base": "/tmp/cp2/kneel_tip_prone_lo_c2",
-     "elems": 120050
+     "base": "/tmp/cp3/kneel_tip_prone_lo_c2",
+     "elems": 139258
     },
     {
-     "base": "/tmp/cp2/kneel_tip_prone_hi_c2",
-     "elems": 120050
+     "base": "/tmp/cp3/kneel_tip_prone_hi_c2",
+     "elems": 139258
     }
    ]
   }

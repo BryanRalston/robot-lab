@@ -75,3 +75,26 @@ Prone geometry: gap = pad face x − head frontmost x (104.7), level body. Neede
 d = height of the head's frontmost point above the pad centre, **150–200 mm [EST]** (head origin z +370 torso; ID to give the exact head-shell point).
 
 **Recommendation:** keep (a) (face +0.159). Controls holds the TUCK chest pitch **head-up 5°–15°** at pad contact. That passes the 68 mm head clearance with margin and keeps stroke margin ≥10 % (≤15° is verified; 25° is marginal on densification). Do not grow the bulge to 63 mm (ID shape, core length). Recessing the land does nothing for the head.
+
+## 5. ID 341ef4a ruling: 116 mm core (+0.015), supersedes §4.1's 100 mm
+- **Stack:** land unchanged (7075 101 × 101 on the 12 mm bulkhead + 60 × 6 rib). Core 98 × 98 × **116** HexWeb CR III 5052 1/8 4.5 pcf, **ribbon (L) along z**. 1 mm CF face + 2K PU clear (R-095). **Skin x = +0.175 torso = +175 global** (+28 from the original 147).
+  - Global (torso + (0, 0, 1280)): core y ±49, z 1451–1549. Bulge **65 mm proud** of the 110 cover front, with ID trim ring. Cover CAD updated (bbox x max 175).
+- **Head clearance verified:** 175 − 104.7 = **70.3 mm level**; tilted worst 41.8 + 28 = **69.8 mm** (ID). Against 68 needed: **PASS, +1.8**. The tuck head-up angle in §4.4 is no longer required, but it adds margin.
+- **Plateau unchanged** (same 98 × 98 area): lot 19.5–22.3 kN, ceiling 22.35. Stroke available 0.70 × 116 = **81.2 mm**. Screen margins:
+  - 0° at 64 kg: 41 %
+  - 15°: 38 %
+  - **25°: 20.7 % (PASS; the 100 mm FAIL is resolved)**
+  - 34.9 kg: ≥66 %
+  - T&R's 57 mm gate: 30 %
+  - Kneel 13.3 kN: elastic, PASS.
+- **Column / shear stability (h/w = 116/98 = 1.18):**
+  - Global Euler buckling does not apply at h/w ≈ 1.2 (block, not column); the progressive cell-wall fold is the crush mode itself.
+  - Tangential load at 25° / friction μ 0.4: about 8.6–9 kN. Shear stress 9 kN / 98² = **0.94 MPa**, against HEX_CRIII 4.5 pcf min plate shear **L 285 psi = 1.97 MPa (SF 2.1)**, W 168 psi = 1.16 (SF 1.2). That is why **ribbon L goes along z** (fall-tangential direction).
+  - Shear tilt δ = F·h / (G·A) = 9e3 × 0.116 / (214e6 × 0.0096) = **0.5 mm**. Stable. Stress is independent of height; only tilt and the base moment grow, +16 % vs 100 mm.
+- **Bonded hold:** base moment 9 kN × 116 mm = 1.04 kN·m → edge tension 1.04 / (0.098³/6) = 6.6 MPa, less uniform compression 2.3 MPa = **+4.3 MPa net edge tension at 25° [EST]**. The flatwise-tensile bond to 5052 4.5 pcf is **not cited**, so this is **OPEN**.
+  - **Mitigation (recommended):** an 8 mm-tall, 2 mm 7075 **socket wall** machined up from the land around the core base (land face unchanged). It gives a shear/moment key and cuts the bond's edge tension to near zero. **+0.006 kg [EST]**.
+  - Add a 25°, 9 kN tangential coupon to the R-102 lot test.
+- **Bezel:** the face is now 65 mm proud of the land inserts. The 1.5 mm PC bezel/trim ring (ID) rides on **4 crushable PA66 stand-off posts** on the existing M4 inserts. The posts sit **outside the 98 × 98 core** (centres ≥ 55 mm from the pad axis) and must buckle below 0.2 kN, so they never carry crush load. It is a secondary hold only (handling/snag). +0.004 kg [EST].
+- **W2 carriers** (R-125/R-127 shoulder-roll wrap carrier, inboard edge y ≈ ±116, ID): pad core y ±49, bezel/trim ±64. **Lateral clearance 52 mm (trim) / 67 mm (core). PASS** for roll ≥ 0. Arms to confirm no adducted or cross-body pose sweeps into |y| < 70 at z 1436–1564 forward of x 110.
+- **Mass:** core +0.015 (ruled) + socket wall +0.006 [EST] + stand-off posts +0.004 [EST]. The two extras (+0.010) are proposed, not booked.
+- Decks regenerated at 116 (`fea_chest_pad.yaml`), including `kneel_tip_13p3kN`; screen results are in `fea/chest_pad_SCREEN_results.json`.

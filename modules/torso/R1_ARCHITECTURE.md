@@ -540,3 +540,6 @@ Rated on the kitting duty cycle at **4.55 h**; no bigger pack.
    - Motor leads (0.45–0.6 m) go down outboard to the hip pitch motors through the yaw/roll service loop.
    - **R-076:** the bus pair goes in its own sleeved bundle (reinforced insulation). Signal (EtherCAT/STO) stays ≥20 mm from bus and phase conductors. Phase leads are treated as bus potential. No grommet, because there is no wall crossing.
    - If ID closes the pelvis top, use a Ø16 grommet pair at y ±183? No: the plates span to y 177, so a top-edge notch is used instead.
+
+### Sternum stack update (ID 341ef4a, 2026-10-21)
+The core is 116 mm (supersedes 88 and 100). Skin x +0.175, 65 mm proud of the cover. Ribbon L along z. A land socket wall (+0.006 [EST]) and PA66 bezel stand-offs (+0.004 [EST]) are proposed. Head clearance 69.8 mm against 68 needed: PASS. See R146_pack_shock.md §5.

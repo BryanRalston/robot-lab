@@ -8,7 +8,7 @@ P = dict(x_back=-110, x_front=110, z_bot=50, z_top=310, w_bot=250, w_shoulder=34
          shoulder_chamfer=45, t=2.0, corner_fillet=20, shoulder_open_dia=110, neck_dia=90,
          sternum_zc=220, slot_w=3.5, slot_pitch=6.0,
          vent_in=dict(z=(105, 155), x_cols=((-60, -24), (-18, 18), (24, 60))),
-         vent_out=dict(z=(160, 214), x_cols=((-102, -62), (62, 102))), sternum_size=110, sternum_proud=49, sternum_core=52, sternum_blend=15)
+         vent_out=dict(z=(160, 214), x_cols=((-102, -62), (62, 102))), sternum_size=110, sternum_proud=65, sternum_core=68, sternum_blend=15)
 def build(p=P):
     L = p["x_front"]-p["x_back"]; xc = (p["x_front"]+p["x_back"])/2
     hb, hs, c = p["w_bot"]/2, p["w_shoulder"]/2, p["shoulder_chamfer"]
