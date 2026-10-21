@@ -1419,3 +1419,6 @@ Evidence: against Torso's real cover, 3 mm clearance is lost at 130° roll at al
 ## R-138 — P-152 bonded sleeve OD and CONTRACTS §1c row (Legs ced62f5) — 2026-10-21
 1. Sleeve OD 46.80 is accepted: bore 47.0 - 46.80 = 0.20 diametral, which meets BOND_SPEC (0.08 min bond line); 46.9 is rejected. Fallback: 46.60 with a 1.6 mm wall, tied to the R-135 Job 9 b3 outcome. The §1c mounting row is added to CONTRACTS, marked Actuators co-sign pending; it becomes binding when Actuators co-signs. No mass change beyond R-135.
 2. Knee web stock: already ruled in R-137 §6. The web is integral with the knee twin housing, made as a 7075-T7352/7050-T7452 hand forging with a Materials-cited allowable; 211/317 interim.
+
+## R-139 — Shoulder roll bearing seat housing (Actuators D88 addendum 85787c9) — 2026-10-21
+The +0.36 pair bearing delta is confirmed by catalog (IKO 4010 0.15 vs 7013 0.38 kg), so R-137 §3 stands as cited. The roll housing resized for the 7013 seat is (0.450 - 0.269) × 2 = 0.362 pair, less R-121's +0.075 = +0.287 pair, booked at full as an addition. If Arms' R13 roll-housing CAD mass exists, it replaces this figure when Arms publishes it. Credible mass ~67.98 → ~68.27 kg.
