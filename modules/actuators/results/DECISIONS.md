@@ -813,3 +813,7 @@ Retention at 1.2 m/s:
 - Job1 Mx is spin about the **shoulder_roll** axis from the side-fall pad (9.17 kN, pad 64 mm off-axis, CRBH 6013). Not the D76 wrist roll; forearm cap unaffected. Superseded by R-120/R-121 (Z −20, CRBH 7013 A): Mx 321 N·m, CSG-25-100 SF 1.09 at ×1.05, ratchet 650 SF 1.93, s0 2.04–2.31.
 - Options costed (`results/FOREARM_ROLL_TORQUE.md`): CSG-32 +≈1.1 kg pair [EST incl. housing], CSG-40 +2.56 kg gears alone, SHG same ratings heavier, clutch 1.6–4.0 kg (R-057), current limit gives no impact credit.
 - Decision: keep CSG-25-100 + CRBH 7013 A, no clutch; P-055 removes the clutch from the shoulder_roll contract row. Gate Job 8 Mx ≤ 351 N·m; fallbacks CSG-25-120 (0 kg) then CSG-32-100.
+
+## D82 (R-122) Actuators mass-down rows and fastener BOM (`r122_actuators.py`)
+- Row 3 housing pocketing: R-122 basis 0.78 kg is one-of-each; robot is 2.221 kg. Candidate-region estimate −0.316 full (−0.354 with Thermal-gated tube windows), half credit −0.158. Ankle ring fins −0.265 only if Thermal accepts. `results/R122_ACTUATORS.md`.
+- Fastener BOM (`results/FASTENER_BOM.md`): 1234 screws, 2.08 kg steel; 384 non-structural, Ti64 swap −0.091 kg (−0.074 without drive mounts). Flag: legs counted 0.82 vs 0.30 kg booked (+0.5 kg risk).

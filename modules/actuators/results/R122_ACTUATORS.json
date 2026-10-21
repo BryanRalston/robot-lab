@@ -1,0 +1,36 @@
+{
+ "per_unit": {
+  "hip_yaw": {
+   "n": 2,
+   "base_kg": 0.2145,
+   "rear_cap_windows": 0.0223,
+   "flange_scallops": 0.011,
+   "tube_windows_THERMAL": 0.009
+  },
+  "hip_roll": {
+   "n": 2,
+   "base_kg": 0.2264,
+   "rear_cap_windows": 0.0223,
+   "flange_scallops": 0.011,
+   "tube_windows_THERMAL": 0.0098
+  },
+  "hip_pitch_body": {
+   "n": 4,
+   "base_kg": 0.1425,
+   "rear_cap_windows": 0.0163,
+   "cone_windows": 0.007
+  },
+  "ankle_body": {
+   "n": 4,
+   "base_kg": 0.1924,
+   "rear_cap_windows": 0.0105,
+   "cone_windows": 0.0039,
+   "eye_lug_trim": 0.0081,
+   "ring_fins_THERMAL": 0.0662
+  }
+ },
+ "robot_basis_kg": 2.221,
+ "full_no_thermal_items": 0.316,
+ "full_with_tube_windows": 0.354,
+ "fins_if_thermal_accepts": 0.265
+}
