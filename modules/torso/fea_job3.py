@@ -23,7 +23,7 @@ def build(c):
     zc0 = b["z0"] + b["height_z"]/2
     al = [occ.addBox(b["x0"], -b["width_y"]/2, b["z0"], b["t"], b["width_y"], b["height_z"]),
           occ.addBox(b["x0"]+b["t"], -L["size"]/2, L["z_c"]-L["size"]/2, L["t"], L["size"], L["size"]),
-          occ.addBox(b["x0"]-R["h"], -R["t"]/2, L["z_c"]-L["size"]/2, R["h"], R["t"], L["size"])]
+          ] + ([occ.addBox(b["x0"]-R["h"], -R["t"]/2, L["z_c"]-L["size"]/2, R["h"], R["t"], L["size"])] if R["h"] > 0 else [])
     P = g["posts"]
     for y in P["y"]:
         al.append(occ.addBox(b["x0"], y-P["w_y"]/2, 0, b["t"], P["w_y"], b["z0"]))
@@ -40,6 +40,8 @@ def build(c):
             lw = bx["land_web"]
             for yy in (-lw["y"], lw["y"]-lw["t"]):
                 al.append(occ.addBox(b["x0"], yy, lw["z0"], xf_-b["x0"], lw["t"], lw["z1"]-lw["z0"]))
+        if bx.get("notch_floor"):   # Option A: socket floor under the pad core (box follows the notched pack)
+            nf = bx["notch_floor"]; al.append(occ.addBox(nf["x0"], -nf["y"], nf["z0"], xf_-nf["x0"], 2*nf["y"], nf["t"]))
     sb = g.get("sternum_box")   # job 3c: closed sternum box behind the bulkhead (webs + top cap) tied to the bay rear web
     if sb:
         for yy in sb["web_y"]:
@@ -62,7 +64,13 @@ def build(c):
     if bx and bx.get("front_window"):   # land/core window through the front web
         fw = bx["front_window"]; cuts.append((3, occ.addBox(bx["x_front"]-bx["t_web"]-1, -fw["y"], fw["z0"], bx["t_web"]+2, 2*fw["y"], fw["z1"]-fw["z0"])))
     if bx and bx.get("vent"):   # UL 2271 vent/burst port in the rear web, aimed down/rearward
-        vt = bx["vent"]; cuts.append((3, occ.addCylinder(bx["x_rear"]-1, vt["y"], vt["z"], bx["t_web"]+2, 0, 0, vt["dia"]/2)))
+        vt = bx["vent"]
+        if vt.get("on") == "floor":   # vent through the floor, outlet down into the pelvis open top
+            cuts.append((3, occ.addCylinder(vt["x"], vt["y"], bx["z0"]-1, 0, 0, bx.get("t_floor", 8)+2, vt["dia"]/2)))
+        else:
+            cuts.append((3, occ.addCylinder(bx["x_rear"]-1, vt["y"], vt["z"], bx["t_web"]+2, 0, 0, vt["dia"]/2)))
+    if bx and bx.get("inbox_cut"):   # Option A: bulkhead web cannot pass through the cells; keep wings |y|>=Y-t_side and the strip above the lid
+        cuts.append((3, occ.addBox(b["x0"]-0.5, -(bx["y"]-bx["t_side"]), bx["z0"]-1, b["t"]+0.5, 2*(bx["y"]-bx["t_side"]), bx["z1"]-bx["z0"]+1)))
     bulk, _ = occ.cut(bulk, cuts)
     p = g["partition"]; part = occ.addBox(p["x0"], -p["width_y"]/2, p["z0"], p["t"], p["width_y"], p["height_z"])
     pv = g["pelvis"]; w = pv["wall"]
@@ -70,12 +78,25 @@ def build(c):
     pi_ = occ.addBox(-pv["depth_x"]/2+w, -pv["width_y"]/2+w, pv["z0"]+w, pv["depth_x"]-2*w, pv["width_y"]-2*w, pv["height_z"]-2*w)
     pel, _ = occ.cut([(3, po)], [(3, pi_)])
     if pv.get("deck_t"):   # waist/hip-yaw deck (model_v4 160 x 364 x 8) on the pelvis top
-        dk = occ.addBox(-pv["deck_x"]/2, -pv["deck_y"]/2, pv["z0"]+pv["height_z"]-pv["deck_t"], pv["deck_x"], pv["deck_y"], pv["deck_t"])
+        dz_ = pv.get("deck_ztop", pv["z0"]+pv["height_z"])
+        dk = occ.addBox(-pv["deck_x"]/2, -pv["deck_y"]/2, dz_-pv["deck_t"], pv["deck_x"], pv["deck_y"], pv["deck_t"])
         pel, _ = occ.fuse(pel, [(3, dk)])
-    occ.fragment(bulk + pel, [(3, part)])   # conformal: shared faces -> shared nodes
+    wv = []
+    W = g.get("waist")   # model_v4 waist interface: yaw housing + yoke + -y cheek + pitch housing/output + torso bracket cheek (+y) to the floor
+    if W:
+        wl = [occ.addCylinder(0, 0, W["yaw_z0"], 0, 0, W["yaw_z1"]-W["yaw_z0"], W["yaw_d"]/2),
+              occ.addBox(-60, -70, W["yoke_z0"], 120, 140, 8),
+              occ.addBox(-35, -W["cheek_y"]-8, W["yoke_z0"]+8, 70, 8, W["pitch_z"]+30-(W["yoke_z0"]+8)),
+              occ.addCylinder(0, -W["cheek_y"], W["pitch_z"], 0, 2*W["cheek_y"], 0, W["pitch_d"]/2),
+              occ.addCylinder(0, W["cheek_y"]-0.01, W["pitch_z"], 0, W["flange_t"]+0.01, 0, W["pitch_d"]/2),
+              occ.addBox(-35, W["cheek_y"]+W["flange_t"]-0.01, W["pitch_z"]-30, 70, W["bracket_t"]+0.01, W["floor_z"]-(W["pitch_z"]-30))]
+        wv, _ = occ.fuse([(3, wl[0])], [(3, t) for t in wl[1:]])
+    out, fmap = occ.fragment(bulk + pel + wv, [(3, part)])   # conformal: shared faces -> shared nodes
     occ.synchronize()
-    tags = {"bulkhead": [], "partition": [], "pelvis": []}
+    wset = {t for i in range(len(bulk)+len(pel), len(bulk)+len(pel)+len(wv)) for _, t in fmap[i]}
+    tags = {"bulkhead": [], "partition": [], "pelvis": [], "waist": []}
     for d, t in gmsh.model.getEntities(3):
+        if t in wset: tags["waist"].append(t); continue
         x0, y0, z0, x1, y1, z1 = gmsh.model.getBoundingBox(d, t)
         if x1 - x0 < 1.5 * p["t"] + 0.01: tags["partition"].append(t)
         elif z1 <= pv["z0"] + pv["height_z"] + 0.01: tags["pelvis"].append(t)
@@ -376,7 +397,7 @@ def main():
             shared[f"{k}|{m}"] = len(node_sets[k] & node_sets[m])
     def npair(a, b):
         return shared.get(f"{a}|{b}", shared.get(f"{b}|{a}", 0))
-    pairs = [("posts", "pelvis"), ("posts", "bulkhead"), ("partition", "bulkhead")] + ([] if c["geometry"].get("bay_box") else [("partition", "pelvis")]) + ([("bulkhead", "pelvis")] if c["geometry"].get("bay_box") and not c["geometry"]["posts"]["y"] else [])
+    pairs = ([("waist", "pelvis"), ("waist", "bulkhead")] if c["geometry"].get("waist") else []) + [("posts", "pelvis"), ("posts", "bulkhead"), ("partition", "bulkhead")] + ([] if c["geometry"].get("bay_box") else [("partition", "pelvis")]) + ([("bulkhead", "pelvis")] if c["geometry"].get("bay_box") and not c["geometry"]["posts"]["y"] and not c["geometry"].get("waist") else [])
     for a_, b_ in pairs:
         if not node_sets.get(a_) or not node_sets.get(b_):
             continue   # part absent in this config (e.g. 3c has no posts)

@@ -1,0 +1,128 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="700" height="300" viewBox="-120 -130 520 260" font-size="6">
+<rect x="-107" y="-115" width="215.5" height="230" fill="none" stroke="black"/><text x="-100" y="-118">T1 (top view, x right = fwd)</text>
+<rect x="52" y="-54.5" width="56.5" height="109" fill="#fcc" stroke="red"/><text x="56" y="0">notch</text>
+<circle cx="39.2" cy="11.0" r="10.8" fill="#cfc" stroke="#333" stroke-width="0.3"/>
+<circle cx="39.2" cy="33.0" r="10.8" fill="#cfc" stroke="#333" stroke-width="0.3"/>
+<circle cx="39.2" cy="55.0" r="10.8" fill="#cfc" stroke="#333" stroke-width="0.3"/>
+<circle cx="39.2" cy="77.0" r="10.8" fill="#cfc" stroke="#333" stroke-width="0.3"/>
+<circle cx="39.2" cy="99.0" r="10.8" fill="#cfc" stroke="#333" stroke-width="0.3"/>
+<text x="33.2" y="57.0">S1</text>
+<circle cx="39.2" cy="-11.0" r="10.8" fill="#cfc" stroke="#333" stroke-width="0.3"/>
+<circle cx="39.2" cy="-33.0" r="10.8" fill="#cfc" stroke="#333" stroke-width="0.3"/>
+<circle cx="39.2" cy="-55.0" r="10.8" fill="#cfc" stroke="#333" stroke-width="0.3"/>
+<circle cx="39.2" cy="-77.0" r="10.8" fill="#cfc" stroke="#333" stroke-width="0.3"/>
+<circle cx="39.2" cy="-99.0" r="10.8" fill="#cfc" stroke="#333" stroke-width="0.3"/>
+<text x="33.2" y="-53.0">S2</text>
+<circle cx="17.2" cy="-11.0" r="10.8" fill="#cfc" stroke="#333" stroke-width="0.3"/>
+<circle cx="17.2" cy="-33.0" r="10.8" fill="#cfc" stroke="#333" stroke-width="0.3"/>
+<circle cx="17.2" cy="-55.0" r="10.8" fill="#cfc" stroke="#333" stroke-width="0.3"/>
+<circle cx="17.2" cy="-77.0" r="10.8" fill="#cfc" stroke="#333" stroke-width="0.3"/>
+<circle cx="17.2" cy="-99.0" r="10.8" fill="#cfc" stroke="#333" stroke-width="0.3"/>
+<text x="11.2" y="-53.0">S3</text>
+<circle cx="17.2" cy="11.0" r="10.8" fill="#cfc" stroke="#333" stroke-width="0.3"/>
+<circle cx="17.2" cy="33.0" r="10.8" fill="#cfc" stroke="#333" stroke-width="0.3"/>
+<circle cx="17.2" cy="55.0" r="10.8" fill="#cfc" stroke="#333" stroke-width="0.3"/>
+<circle cx="17.2" cy="77.0" r="10.8" fill="#cfc" stroke="#333" stroke-width="0.3"/>
+<circle cx="17.2" cy="99.0" r="10.8" fill="#cfc" stroke="#333" stroke-width="0.3"/>
+<text x="11.2" y="57.0">S4</text>
+<circle cx="-4.8" cy="11.0" r="10.8" fill="#cfc" stroke="#333" stroke-width="0.3"/>
+<circle cx="-4.8" cy="33.0" r="10.8" fill="#cfc" stroke="#333" stroke-width="0.3"/>
+<circle cx="-4.8" cy="55.0" r="10.8" fill="#cfc" stroke="#333" stroke-width="0.3"/>
+<circle cx="-4.8" cy="77.0" r="10.8" fill="#cfc" stroke="#333" stroke-width="0.3"/>
+<circle cx="-4.8" cy="99.0" r="10.8" fill="#cfc" stroke="#333" stroke-width="0.3"/>
+<text x="-10.8" y="57.0">S5</text>
+<circle cx="-4.8" cy="-11.0" r="10.8" fill="#cfc" stroke="#333" stroke-width="0.3"/>
+<circle cx="-4.8" cy="-33.0" r="10.8" fill="#cfc" stroke="#333" stroke-width="0.3"/>
+<circle cx="-4.8" cy="-55.0" r="10.8" fill="#cfc" stroke="#333" stroke-width="0.3"/>
+<circle cx="-4.8" cy="-77.0" r="10.8" fill="#cfc" stroke="#333" stroke-width="0.3"/>
+<circle cx="-4.8" cy="-99.0" r="10.8" fill="#cfc" stroke="#333" stroke-width="0.3"/>
+<text x="-10.8" y="-53.0">S6</text>
+<circle cx="-26.8" cy="-11.0" r="10.8" fill="#cfc" stroke="#333" stroke-width="0.3"/>
+<circle cx="-26.8" cy="-33.0" r="10.8" fill="#cfc" stroke="#333" stroke-width="0.3"/>
+<circle cx="-26.8" cy="-55.0" r="10.8" fill="#cfc" stroke="#333" stroke-width="0.3"/>
+<circle cx="-26.8" cy="-77.0" r="10.8" fill="#cfc" stroke="#333" stroke-width="0.3"/>
+<circle cx="-26.8" cy="-99.0" r="10.8" fill="#cfc" stroke="#333" stroke-width="0.3"/>
+<text x="-32.8" y="-53.0">S7</text>
+<circle cx="-26.8" cy="11.0" r="10.8" fill="#cfc" stroke="#333" stroke-width="0.3"/>
+<circle cx="-26.8" cy="33.0" r="10.8" fill="#cfc" stroke="#333" stroke-width="0.3"/>
+<circle cx="-26.8" cy="55.0" r="10.8" fill="#cfc" stroke="#333" stroke-width="0.3"/>
+<circle cx="-26.8" cy="77.0" r="10.8" fill="#cfc" stroke="#333" stroke-width="0.3"/>
+<circle cx="-26.8" cy="99.0" r="10.8" fill="#cfc" stroke="#333" stroke-width="0.3"/>
+<text x="-32.8" y="57.0">S8</text>
+<circle cx="-48.8" cy="-11.0" r="10.8" fill="#9cf" stroke="#333" stroke-width="0.3"/>
+<circle cx="-48.8" cy="-33.0" r="10.8" fill="#9cf" stroke="#333" stroke-width="0.3"/>
+<circle cx="-48.8" cy="-55.0" r="10.8" fill="#9cf" stroke="#333" stroke-width="0.3"/>
+<circle cx="-48.8" cy="-77.0" r="10.8" fill="#9cf" stroke="#333" stroke-width="0.3"/>
+<circle cx="-48.8" cy="-99.0" r="10.8" fill="#9cf" stroke="#333" stroke-width="0.3"/>
+<text x="-54.8" y="-53.0">S19</text>
+<circle cx="-48.8" cy="11.0" r="10.8" fill="#9cf" stroke="#333" stroke-width="0.3"/>
+<circle cx="-48.8" cy="33.0" r="10.8" fill="#9cf" stroke="#333" stroke-width="0.3"/>
+<circle cx="-48.8" cy="55.0" r="10.8" fill="#9cf" stroke="#333" stroke-width="0.3"/>
+<circle cx="-48.8" cy="77.0" r="10.8" fill="#9cf" stroke="#333" stroke-width="0.3"/>
+<circle cx="-48.8" cy="99.0" r="10.8" fill="#9cf" stroke="#333" stroke-width="0.3"/>
+<text x="-54.8" y="57.0">S20</text>
+<rect x="-105" y="-60" width="10" height="120" fill="#fd8"/><text x="-104" y="70">BMS</text>
+<rect x="153" y="-115" width="215.5" height="230" fill="none" stroke="black"/><text x="160" y="-118">T2 (top view, x right = fwd)</text>
+<rect x="312" y="-54.5" width="56.5" height="109" fill="#fcc" stroke="red"/><text x="316" y="0">notch</text>
+<circle cx="233.2" cy="11.0" r="10.8" fill="#cfc" stroke="#333" stroke-width="0.3"/>
+<circle cx="233.2" cy="33.0" r="10.8" fill="#cfc" stroke="#333" stroke-width="0.3"/>
+<circle cx="233.2" cy="55.0" r="10.8" fill="#cfc" stroke="#333" stroke-width="0.3"/>
+<circle cx="233.2" cy="77.0" r="10.8" fill="#cfc" stroke="#333" stroke-width="0.3"/>
+<circle cx="233.2" cy="99.0" r="10.8" fill="#cfc" stroke="#333" stroke-width="0.3"/>
+<text x="227.2" y="57.0">S9</text>
+<circle cx="233.2" cy="-11.0" r="10.8" fill="#cfc" stroke="#333" stroke-width="0.3"/>
+<circle cx="233.2" cy="-33.0" r="10.8" fill="#cfc" stroke="#333" stroke-width="0.3"/>
+<circle cx="233.2" cy="-55.0" r="10.8" fill="#cfc" stroke="#333" stroke-width="0.3"/>
+<circle cx="233.2" cy="-77.0" r="10.8" fill="#cfc" stroke="#333" stroke-width="0.3"/>
+<circle cx="233.2" cy="-99.0" r="10.8" fill="#cfc" stroke="#333" stroke-width="0.3"/>
+<text x="227.2" y="-53.0">S10</text>
+<circle cx="255.2" cy="-11.0" r="10.8" fill="#cfc" stroke="#333" stroke-width="0.3"/>
+<circle cx="255.2" cy="-33.0" r="10.8" fill="#cfc" stroke="#333" stroke-width="0.3"/>
+<circle cx="255.2" cy="-55.0" r="10.8" fill="#cfc" stroke="#333" stroke-width="0.3"/>
+<circle cx="255.2" cy="-77.0" r="10.8" fill="#cfc" stroke="#333" stroke-width="0.3"/>
+<circle cx="255.2" cy="-99.0" r="10.8" fill="#cfc" stroke="#333" stroke-width="0.3"/>
+<text x="249.2" y="-53.0">S11</text>
+<circle cx="255.2" cy="11.0" r="10.8" fill="#cfc" stroke="#333" stroke-width="0.3"/>
+<circle cx="255.2" cy="33.0" r="10.8" fill="#cfc" stroke="#333" stroke-width="0.3"/>
+<circle cx="255.2" cy="55.0" r="10.8" fill="#cfc" stroke="#333" stroke-width="0.3"/>
+<circle cx="255.2" cy="77.0" r="10.8" fill="#cfc" stroke="#333" stroke-width="0.3"/>
+<circle cx="255.2" cy="99.0" r="10.8" fill="#cfc" stroke="#333" stroke-width="0.3"/>
+<text x="249.2" y="57.0">S12</text>
+<circle cx="277.2" cy="11.0" r="10.8" fill="#cfc" stroke="#333" stroke-width="0.3"/>
+<circle cx="277.2" cy="33.0" r="10.8" fill="#cfc" stroke="#333" stroke-width="0.3"/>
+<circle cx="277.2" cy="55.0" r="10.8" fill="#cfc" stroke="#333" stroke-width="0.3"/>
+<circle cx="277.2" cy="77.0" r="10.8" fill="#cfc" stroke="#333" stroke-width="0.3"/>
+<circle cx="277.2" cy="99.0" r="10.8" fill="#cfc" stroke="#333" stroke-width="0.3"/>
+<text x="271.2" y="57.0">S13</text>
+<circle cx="277.2" cy="-11.0" r="10.8" fill="#cfc" stroke="#333" stroke-width="0.3"/>
+<circle cx="277.2" cy="-33.0" r="10.8" fill="#cfc" stroke="#333" stroke-width="0.3"/>
+<circle cx="277.2" cy="-55.0" r="10.8" fill="#cfc" stroke="#333" stroke-width="0.3"/>
+<circle cx="277.2" cy="-77.0" r="10.8" fill="#cfc" stroke="#333" stroke-width="0.3"/>
+<circle cx="277.2" cy="-99.0" r="10.8" fill="#cfc" stroke="#333" stroke-width="0.3"/>
+<text x="271.2" y="-53.0">S14</text>
+<circle cx="299.2" cy="-11.0" r="10.8" fill="#cfc" stroke="#333" stroke-width="0.3"/>
+<circle cx="299.2" cy="-33.0" r="10.8" fill="#cfc" stroke="#333" stroke-width="0.3"/>
+<circle cx="299.2" cy="-55.0" r="10.8" fill="#cfc" stroke="#333" stroke-width="0.3"/>
+<circle cx="299.2" cy="-77.0" r="10.8" fill="#cfc" stroke="#333" stroke-width="0.3"/>
+<circle cx="299.2" cy="-99.0" r="10.8" fill="#cfc" stroke="#333" stroke-width="0.3"/>
+<text x="293.2" y="-53.0">S15</text>
+<circle cx="299.2" cy="11.0" r="10.8" fill="#cfc" stroke="#333" stroke-width="0.3"/>
+<circle cx="299.2" cy="33.0" r="10.8" fill="#cfc" stroke="#333" stroke-width="0.3"/>
+<circle cx="299.2" cy="55.0" r="10.8" fill="#cfc" stroke="#333" stroke-width="0.3"/>
+<circle cx="299.2" cy="77.0" r="10.8" fill="#cfc" stroke="#333" stroke-width="0.3"/>
+<circle cx="299.2" cy="99.0" r="10.8" fill="#cfc" stroke="#333" stroke-width="0.3"/>
+<text x="293.2" y="57.0">S16</text>
+<circle cx="211.2" cy="11.0" r="10.8" fill="#9cf" stroke="#333" stroke-width="0.3"/>
+<circle cx="211.2" cy="33.0" r="10.8" fill="#9cf" stroke="#333" stroke-width="0.3"/>
+<circle cx="211.2" cy="55.0" r="10.8" fill="#9cf" stroke="#333" stroke-width="0.3"/>
+<circle cx="211.2" cy="77.0" r="10.8" fill="#9cf" stroke="#333" stroke-width="0.3"/>
+<circle cx="211.2" cy="99.0" r="10.8" fill="#9cf" stroke="#333" stroke-width="0.3"/>
+<text x="205.2" y="57.0">S17</text>
+<circle cx="211.2" cy="-11.0" r="10.8" fill="#9cf" stroke="#333" stroke-width="0.3"/>
+<circle cx="211.2" cy="-33.0" r="10.8" fill="#9cf" stroke="#333" stroke-width="0.3"/>
+<circle cx="211.2" cy="-55.0" r="10.8" fill="#9cf" stroke="#333" stroke-width="0.3"/>
+<circle cx="211.2" cy="-77.0" r="10.8" fill="#9cf" stroke="#333" stroke-width="0.3"/>
+<circle cx="211.2" cy="-99.0" r="10.8" fill="#9cf" stroke="#333" stroke-width="0.3"/>
+<text x="205.2" y="-53.0">S18</text>
+<rect x="155" y="-60" width="10" height="120" fill="#fd8"/><text x="156" y="70">BMS</text>
+</svg>

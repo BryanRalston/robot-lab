@@ -591,3 +591,29 @@ Job 3 FAILED. All pocketing credit is withdrawn. P-148/P-149 are on hold; P-145/
 If the refined job 3c needs the 3 mm lid: +0.184 more (0.876).
 
 **Geometry OPEN (found while doing this):** the job 3c box (torso z 0–140) and model_v4's pack envelope (185 × 220 × 144 at x −80.5…+104.5) do not line up in z. The pad core (x 56–172, z 171–269 torso) may intersect the pack's front-top corner (x ≤ 104.5). The box height must grow to hold the 144 mm pack (z1 ≥ 150 + gasket), and the land/core-to-pack clearance must be checked in model_v4 before the refined run (deflection gate: 1.5 mm + 2 mm).
+
+## Option A pack notch: Torso cell-holder layout (P-057, 2026-10-21)
+- **Layout:** cells vertical, 2 tiers (z 131.6–201.6 / 203.6–273.6), pitch 22 mm [EST, Electronics]. Each 5P group is 5 cells along y (half-row).
+- **Front block, columns c3–c7:** x 39.2, 17.2, −4.8, −26.8, −48.8; cell block x −59.8…50.2. Columns c1/c2 (x 52–104.5) carry no cells: the notch sits at |y| < 54.5, and the outboard space holds the FET (left) and busbar blocks (right). Rear zone x −105…−60 holds the BMS on the rear web.
+- **Notch depth: 2 tiers (100 mm), not ≤ 72.** The core z 171–269 cuts the lower tier (top at 201.6) by 30.6 mm. One tier would need the core raised ≥ 32 mm, but head clearance is only 69.8 against 68 needed, so that's out. **4 groups relocated (S17–S20), 20 cells.** Whole groups only.
+- **Series path:**
+  - T1 S1–S8, serpentine c3→c6, then up to T2 S9–S16 serpentine c6→c3.
+  - **Link A** (12 mm², 0.19 m [EST]) runs from S16 to S17.
+  - S17–S20 in c7 (the rear column of the block, facing the BMS).
+  - **Link B** (12 mm², 0.19 m) runs from pack − at S1 (front-low) to the SBS75X.
+  - The BQ79616 split stays at S10/S11 (a group boundary); NTCs move with their groups.
+- **Taps:** 22 sense leads (2 × VC0–VC10); route lengths 72–269 mm [EST] (table in pack/).
+- **SBS75X:** rear web at (−105, −60, 160), 147 mm from the floor vent (≥ 40 mm).
+- **Vent:** floor at (−80, 80), outlet down into the pelvis open top.
+- **Liner:** continuous around the notch re-entrant corner (socket walls, floor and land), ≥ 3.0 mm creepage and ≥ 1.5 mm clearance.
+- **BQ79616 balance current:** **240 mA max** (internal CBFET; abs-max table, "max of 8 cells balancing at 75 °C ambient"), TI BQ79616-Q1 datasheet SLUSE14 Rev F (ti.com/lit/ds/symlink/bq79616-q1.pdf). I_CB = V_cell/(2·R_CB + R_DS(on)), per TI SLVAE87B §4.2. The voltage error from a 0.2 m tap at 240 mA is 3.3 mV, so measure with balancing paused.
+- **COM:**
+  - Pack Δ = **(−16.1, 0, +1.0) mm**, mass 8.80 kg.
+  - Whole robot (65.809 kg credible): **(−2.2, 0, +0.1) mm**.
+  - sim_torso_body_r1.json is updated (battery pos (−0.0261, 0, 0.111), 8.80 kg) for Controls.
+- **Electronics to confirm:**
+  1. The BQ79616 tap harness: 22 leads at 72–269 mm, VC0 for #2 at the S10/S11 split at c6 T2, routed under the liner.
+  2. Links A/B at 12 mm² × 0.19 m, and link B replacing the 10 mm² front-low main run.
+  3. The BMS board at the rear-web zone x −105…−95 (10 mm deep) with c7 35 mm forward, and the FET/busbar blocks moved to the c1/c2 outboard space.
+  4. SBS75X position.
+  5. Floor vent outlet into the pelvis.

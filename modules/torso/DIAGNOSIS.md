@@ -51,3 +51,35 @@
   - 1.5 mm lid: box + bulkhead 4.47 + posts 0.57 = 5.04 kg, against job 3's 1.99 kg → +3.05 gross. With the same enclosure credit as before (−0.74), net **+2.31 kg [CALC]**.
   - 3 mm lid: 5.20 kg → +3.21 gross, net **+2.47 kg**.
   - This supersedes the +0.692 net figure.
+
+## 3c-final Option A: waist load path + notched pack (2026-10-21, supersedes the 3c-final section above)
+**Waist path (model_v4 build_upper).** The torso hangs on the waist_pitch output through ONE torso bracket: a +y cheek 70×8 from wp−30 to tb, plus the 220×340×8 floor plate at tb. waistY is a yoke plate 120×140×8 + a −y cheek 70×8 on the waist_yaw output (yaw axis dk+35, pitch axis dk+143 = global 1349.6, tb 1409.6).
+- Modelled as is: no posts. Pelvis at its true height (sim z −154…−50, deck top −73.4).
+- Actuator housings are solid Al stand-ins (stiffer than real).
+- BC: pelvis bottom fixed (conservative for a fall: the real reaction is whole-body inertia).
+
+**Geometry, Option A (P-057):**
+- The box follows the notched pack: socket walls at y ±50.5…54.5, notch floor z 167–171, and the land is the notch rear wall.
+- The bulkhead web is removed inside the box (wings at |y| ≥ 112 plus the strip above the lid remain). The rib and sternum box are deleted (they passed through cells).
+- Box x −107 (rear web at the shell inner) … 108.5, z 121.6–278.
+- The vent moved to the floor (−80, 80), outlet down into the pelvis open top.
+
+**Coarse results (h 25), lid 1.5 / lid 3:**
+- LC1a/b/c/u SF: bulkhead 0.13/0.08/0.16/0.12 (lid 3: 0.18/0.11/0.23/0.16), peak at the wing/lid corner (40, 112, 278). Waist 0.23/0.19/0.15/0.20, peak at the −y yoke cheek root. Pelvis 0.34/0.30/0.42/0.28.
+- LC2: bulkhead 0.46, waist 0.13.
+- Land deflection 50.7 mm at 29 kN, **k ≈ 0.57 MN/m** (needs ≥ 5.3). **Mode 1 40.7/38.7 Hz** (needs ≥ 80). Buckling 5.2 (pass).
+- Verdict: **the model_v4 single-cheek waist bracket cannot carry LC1**. Only 21 shared nodes at the cheek/floor (coarse). This is a load-path design problem, not a mesh artefact.
+- Minimum fixes for the next run (not done):
+  - (a) a double-sided torso bracket (±y cheeks) / full ring flange on the pitch output;
+  - (b) the box side walls carried down as the yoke;
+  - (c) T&R to confirm the BC: a fixed pelvis for a chest fall.
+
+**Mass (mesh):**
+- Box + bulkhead **2.92 kg** (lid 3: 3.11). Waist stand-in 5.22 kg is the existing actuators/yoke, so it is excluded; the bracket cheek 0.13 kg is existing (model_v4 torso bracket).
+- Against job 3's 1.99: +0.93 gross. Enclosure credit −0.738 (unchanged, still to be itemised with Electronics). Electronics P-057 +0.050.
+- **Net +0.24 kg** (lid 3: +0.43). Supersedes +2.31.
+
+**Clash:** the core plus socket now clears the pack (cells x ≤ 50.2, with 1.5 mm air + liner to the land at x 52). Residual flags:
+- the bulkhead strip z 278–300 vs Thor (x −57…73) is unchecked;
+- the box front web at 108.5 is beyond the shell inner at 107 (pre-existing).
+Layout: pack/pack_layout_optA.{py,json,svg}, pack/pack_layout_optA_tables.md.

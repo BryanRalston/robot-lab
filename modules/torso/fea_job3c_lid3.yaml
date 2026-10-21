@@ -1,4 +1,4 @@
-# job 3c-final variant: 3 mm lid
+# FEA job 3c-final Option A, 3 mm lid variant (T&R b1fe48f; Electronics P-057 6b976bd). Waist path per model_v4 (no posts). Run: python fea_job3.py --cfg fea_job3c.yaml --out fea/job3c --coarse
 mesh:
   size: 6.0
   size_coarse: 25.0
@@ -32,7 +32,7 @@ geometry:
     t: 4
     z_c: 220
   rib:
-    h: 60
+    h: 0
     t: 6
   shoulder_flange:
     y_c: 150
@@ -52,19 +52,17 @@ geometry:
     grain: "QI 0/\xB145/90"
     mat: CFRP_QI
     width_y: 260
-    height_z: 20
+    height_z: 22
     t: 1.0
     x0: -10
-    z0: 280
+    z0: 278
   posts:
     path: single
     stock: 7075 waist path stand-in
     grain: L along z
     allowable: 257
     mat: Al7075T651
-    y:
-    - -60
-    - 60
+    y: []
     w_y: 60
   ethercat_bosses:
     dia: 3.2
@@ -81,29 +79,24 @@ geometry:
     depth_x: 170
     height_z: 104
     wall: 4
-    z0: -104
+    z0: -154
     deck_t: 8
     deck_x: 160
     deck_y: 364
-  sternum_box:
-    web_y:
-    - -60
-    - 60
-    x_rear: -84
-    t: 3
-    t_cap: 3
-    note: 'closed sternum box: 2 shear webs + top cap tie the bulkhead/land back to the bay rear web; full mass'
+    deck_ztop: -73.4
+    note: 'model_v4 frame: pelvis 1126-1230, deck top 1206.6 (global) = sim-torso -154/-50/-73.4'
   bay_box:
     vent:
+      'on': floor
+      x: -80
+      y: 80
       dia: 25
-      y: 0
-      z: 160
       part: GORE MultiVent
-      note: rear web low, >=40 mm from joints
+      note: 'Option A: rear web is against the shell; vent through the floor at (-80,80), outlet down into the pelvis open top, >=40 mm from the waist cheeks/joints; SBS75X on rear web'
     y: 115
     x_front: 108.5
-    x_rear: -84.5
-    z0: 120
+    x_rear: -107
+    z0: 121.6
     z1: 278
     t_side: 3
     t_web: 2
@@ -111,18 +104,41 @@ geometry:
     path: single
     mat: Al7075T651
     allowable: 257
-    note: '3c-final: aligned to model_v4 pack 185x220x144 (global z 1409.6-1553.6 = sim-torso z 129.6-273.6, x -80.5..104.5, y +-110); floor = model_v4 torso floor 8 mm (existing torso line); front window
-      for land/core (pack notch option)'
+    note: '3c-final Option A (P-057): pack notched 52x110x100 front-top, rear at shell inner (x -107); box follows the notch (socket walls y+-50.5..54.5, notch floor z167-171, land is the notch rear wall);
+      bulkhead web removed inside the box (wings + strip above lid remain)'
     t_floor: 8
     front_window:
-      y: 56
-      z0: 165
-      z1: 275
+      y: 50.5
+      z0: 171
+      z1: 276.5
     land_web:
-      y: 56
+      y: 54.5
       t: 4
-      z0: 160
+      z0: 167
       z1: 278
+    inbox_cut: true
+    notch_floor:
+      x0: 52
+      y: 54.5
+      z0: 167
+      t: 4
+  waist:
+    path: single
+    stock: 7075 torso waist bracket (model_v4 single +y cheek 70x8) + waist actuator stand-ins (solid Al, stiff)
+    grain: L along z
+    allowable: 257
+    mat: Al7075T651
+    yaw_z0: -73.4
+    yaw_z1: 4.6
+    yaw_d: 110
+    yoke_z0: 4.6
+    cheek_y: 55
+    pitch_z: 69.6
+    pitch_d: 100
+    flange_t: 8
+    bracket_t: 8
+    floor_z: 121.6
+    note: 'model_v4 build_upper: waist_yaw axis dk+35, waist_pitch axis dk+143 (global 1349.6), torso bracket = +y cheek 70x8 from wp-30 to tb + floor plate at tb (1409.6). Sim-torso z = global-1280.'
 load_cases:
   LC1a_29kN_normal:
     target: land
@@ -133,11 +149,11 @@ load_cases:
     SF_min: 1.0
     defl_max: 5.5
     note: T&R b1fe48f limit, uniform on land
-    allowables: &id001
+    allowables:
       bulkhead: 386
-      posts: 386
       pelvis: 406
       partition: 450
+      waist: 386
   LC1b_29kN_offset25:
     target: land_off
     F:
@@ -147,7 +163,11 @@ load_cases:
     SF_min: 1.0
     defl_max: 5.5
     note: offset +25 y/+25 z (quadrant patch)
-    allowables: *id001
+    allowables:
+      bulkhead: 386
+      pelvis: 406
+      partition: 450
+      waist: 386
   LC1c_25deg:
     target: land
     F:
@@ -157,7 +177,11 @@ load_cases:
     SF_min: 1.0
     defl_max: 5.5
     note: '25 deg: 21.2 kN normal + 9.9 kN sideways'
-    allowables: *id001
+    allowables:
+      bulkhead: 386
+      pelvis: 406
+      partition: 450
+      waist: 386
   LC1u_43p5kN_ultimate:
     target: land
     F:
@@ -168,9 +192,9 @@ load_cases:
     note: 'ultimate: no rupture'
     allowables:
       bulkhead: 504
-      posts: 504
       pelvis: 504
       partition: 600
+      waist: 504
   LC2_side_fall:
     target: shoulder_flange_L
     M:
