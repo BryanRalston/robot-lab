@@ -49,7 +49,7 @@ json.dump(out,open(os.path.join(H,'hip_skirt_r8d_fix.json'),'w'),indent=1,defaul
 R2=141.5; NM=float(os.environ.get('NM','4.0')); SH=shroud(); OV=[q for q in TR if -15.6<=q[1]<=18.6]  # rev 8d: T&R 76de66a 3.6 deg bottom-out overtravel
 SW=cKDTree(np.vstack([T(SH,*q) for q in OV]))
 keep2=(np.linalg.norm(M.triangles_center-C1,axis=1)<=R2)&(SW.query(M.triangles_center)[0]>GATE+JCH+NM)
-K2=trimesh.Trimesh(M.vertices,M.faces[keep2]); K2.remove_unreferenced_vertices(); K2.export(os.path.join(H,'hip_skirt_r8d_pelvis_notched.stl'))
+K2=trimesh.Trimesh(M.vertices,M.faces[keep2]); K2.remove_unreferenced_vertices(); K2.export(os.path.join(H,'hip_skirt_r8f_pelvis_notched.stl'))
 nc=M.triangles_center[(np.linalg.norm(M.triangles_center-C1,axis=1)<=R2)&~keep2]
 KS=cKDTree(np.vstack([K2.vertices,K2.triangles_center]))
 g_pan=min((float(KS.query(T(panel(),*q))[0].min())-JCH,q) for q in OV); g_sh=min((float(KS.query(T(SH,*q))[0].min())-JCH,q) for q in OV)

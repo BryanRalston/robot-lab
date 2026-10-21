@@ -1,0 +1,76 @@
+{
+ "rev": "P-023 rev 8f (Robot Lab ruling): rev 8c d58ffa4 geometry + 8d notch (+1.5) + 14.5 J-channel press fit; NO stops/cups",
+ "files": {
+  "pelvis": "hip_skirt_r8f_pelvis_notched.stl",
+  "thigh_panel": "hip_skirt_r8f_thigh_panel.stl (= r8c panel: R152 relief, +2.0 knee-housing blister, return flange)",
+  "script": "hip_skirt_r8d_fix.py (notch margin NM=4.0)"
+ },
+ "hem": {
+  "R_mm": 141.5,
+  "JCH_mm": 3.0,
+  "notch_margin_mm": 4.0,
+  "notch_bbox": [
+   [
+    -118.8,
+    5.4,
+    964.9
+   ],
+   [
+    19.5,
+    250.2,
+    1024.5
+   ]
+  ],
+  "retained_pct": 34.2
+ },
+ "gates": {
+  "shroud_3p6deg_ovt_mm": [
+   29.8,
+   [
+    42.5,
+    -15.6,
+    45
+   ]
+  ],
+  "shroud_with_tol2_mm": 27.8,
+  "panel_ovt_mm": [
+   52.7,
+   [
+    42.5,
+    17.5,
+    -37.5
+   ]
+  ],
+  "hem_panel_TR_with_tol": 28.2,
+  "legs_roll45_outside_ROM": [
+   -2.5,
+   [
+    40,
+    45,
+    -35
+   ]
+  ]
+ },
+ "foam": {
+  "material": "Materials 3dd50e4: Zotefoams Plastazote LD29, cross-linked LDPE 29 kg/m3, 61 kPa @25% / 126 kPa @50% (PIS-A008), 95 C max",
+  "hem_notch": "15 x 40",
+  "LR": "20 x 40 x 130",
+  "hem_force_N": 113.8,
+  "LR_limp_N": "~127 EST (load-limited)"
+ },
+ "jchannel": {
+  "inner_width_mm": 14.5,
+  "strip_mm": 15,
+  "retention": "0.5 mm press fit + 3 mm lip + VHB"
+ },
+ "stops": "none (8d/8e withdrawn)",
+ "hand_protection": {
+  "basis": "load-limited",
+  "powered": "Controls keep-out on panel surfaces: warn 35 / limit 30 / trip 28 mm",
+  "limp": "clamp <=140 N measured in TP-G5-18 (EST ~127 N via foam spread); limp hold pending Actuators/Controls"
+ },
+ "mass": {
+  "vs_v5_kg": -0.296,
+  "note": "[EST] 8c -0.294; deeper notch -0.002; J-channel ~0"
+ }
+}

@@ -1,9 +1,0 @@
-{"rev":"P-023 rev 8d","source":"T&R 76de66a; Robot Lab rulings",
-"notch":{"deepened_mm":1.5,"margin_mm":"2.5 -> 4.0 (+JCH 3.0)","shroud_gap_3p6deg_ovt":29.8,"with_tol2":27.8,"gate":">=25 with tol","result":"PASS","worst_pose":[42.5,-15.6,45],"retained_pct":34.2,"stl":"hip_skirt_r8d_pelvis_notched.stl"},
-"rigid_standoff":{"material":"PA12 (PA66-GF30 alt), I-section 20x8 web 3 mm","per_panel":2,"location":"panel inboard edge, at phi 40 and 70 deg of the R150 panel (top and bottom of the inboard edge), y=inboard edge, pointing inboard (+/-y)","height_mm_from_panel_face":55,"foam_depth_mm":40,"tip":"protrudes 15 mm past the 40 mm foam face, tip capped 5 mm LD29",
-"bottom_out":{"rigid_edge_to_edge_mm":110,"foam_face_to_face_mm":30,"hand_30mm_force_N":"~0 (no foam compression), independent of foam stiffness","finger_at_stop_tip":"foam-covered 5 mm cap; flagged: tip contact load up to limp 165 N on cap"},
-"trap_check":"foam faces >=30 mm at bottom-out -> >=25 open; no 5-25 band; stop tips meet only each other (foam-capped)",
-"mass_kg_side":0.010,"mass_note":"[EST] 2 x 4.6 g PA12 + caps 0.8 g",
-"open":"Controls keep-out/hip_pinch.py must use stop tips (110 mm rigid) as the new rigid basis; stops not yet swept against the shank in ROM"},
-"jchannel":{"inner_width_mm":14.5,"strip_mm":15,"interference_mm":0.5,"retention":"mechanical press fit (3.3% foam compression) + 3 mm lip + VHB","prev":15.5},
-"mass_delta_kg_side_vs_8c":0.0095}

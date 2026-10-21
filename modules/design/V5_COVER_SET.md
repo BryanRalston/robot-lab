@@ -472,16 +472,22 @@ Script `cad/covers/hip_skirt_r8c_fix.py/.json`. New STLs: `hip_skirt_r8c_pelvis_
 - **L/R inboard strips: kept 20 × 40 × 130.** They are load-limited by the 165 N limp closure, so a hand takes 165 × 100/130 = **127 N ≤ 140 PASS** whatever the foam stiffness. At equilibrium the strips sit around 63 kPa (about 26 % strain on LD29). No narrowing needed.
 - **Mass:** foam is 11.8 g (hem + notch) + 3.0 g (L/R) per side. With the narrower channel that is **−3.9 g/side vs the previous 8c**, so P-023 ≈ **−0.294 kg** vs v5 [EST].
 
-## P-023 rev 8d — T&R 76de66a fixes, 2026-10-21
+## [WITHDRAWN → rev 8f] P-023 rev 8d — T&R 76de66a fixes, 2026-10-21
 1. **Shroud notch deepened 1.5 mm** (margin 2.5 → 4.0 mm + JCH 3.0). T&R 3.6° bottom-out overtravel (roll −15.6/+18.6) re-run: shroud gap **29.8 mm (27.8 with −2 tol) PASS** (was 26.7/24.7), worst pitch 42.5 / roll −15.6 / yaw 45. Retained skirt 34.2 % (was 34.6). `cad/covers/hip_skirt_r8d_fix.py/.json`, `hip_skirt_r8d_pelvis_notched.stl`. 5.8° case ignored per ruling.
 2. **Rigid L/R standoffs:** 2 PA12 I-section stops (20 × 8, 3 mm web) per panel on the inboard edge at φ40°/φ70°, 55 mm tall (15 mm past the 40 mm foam face, 5 mm LD29 tip caps). Limp bottom-out: rigid 110 mm, foam faces 30 mm apart → a 30 mm hand sees ~0 N regardless of foam stiffness; ≥25 mm open, no 5–25 mm trap. +0.010 kg/side [EST]. Open: Controls to use stop tips as the rigid basis; stop-tip finger contact only foam-capped.
 3. **J-channel inner width 15.5 → 14.5 mm**: 0.5 mm press fit on the 15 mm strip + lip + VHB (mechanical retention).
 4. Empty `hip_skirt_r8c_pelvis.stl` **deleted**; notched mesh is the only pelvis hem.
 Mass vs 8c: +0.0095 kg/side. `cad/covers/hip_skirt_r8d_standoff.json`.
 
-## P-023 rev 8e — option (a) stop-in-cup, 2026-10-21 (NOT RECOMMENDED)
+## [WITHDRAWN → rev 8f] P-023 rev 8e — stop-in-cup, 2026-10-21
 - Geometry (`cad/covers/hip_skirt_r8e_stops.py/.step/.stl/.json`, contact-pose local frame): each panel carries one stop + one cup, mirror-paired (L stop φ40 / cup φ70; R reversed). Stop PA66-GF30 tube ø25/ø17, 95 mm from face. Cup ø35 OD, ø29 bore (2.0 mm radial entry gap ≤4, ø12 finger cannot enter), 45 tall (5 mm proud of foam → no trap), floor 15 mm, 30 mm engagement, 45° lead-in to ø45 (±8 mm capture). Rigid 110 mm / foam faces 30 mm kept.
 - **Alignment FAILS:** over 57,600 both-leg poses (pitch −10..45, yaw 0..45, roll ±20 each), 16,668 close past stand; the tip lands within 8/16 mm capture in only 101/365 (≤2.2 %). Median lateral miss 87 mm (p90 153, max 245), stop axis 44° off median. It seats only when both legs move nearly together (pitch/roll matched within ~±5°/±3° EST). Elsewhere the tip bears on the other panel's foam → rigid path on a hand, the same as 8d.
 - Strength (tube Z 1206 mm³, 95 mm lever, 44° side load): limp 165 N 9 MPa OK; powered 2.2 kN 120 MPa vs PA66-GF30 ~130–180 (SF 1.1–1.5, marginal) → breakaway (2× M4 PA66 shear screws, ~1.0 kN lateral); fall 1 kN [EST] 55 MPa OK. PA12 ø16 solid: 361 MPa, FAIL.
 - Mass 0.069 kg/side (+0.059 vs 8d).
 - **Recommendation:** don't build. No pointwise rigid stop can protect a hand across the sliding/angled closures. Use a load-limited fix instead: a limp clamp measured at ≤140 N (TP-G5-18), damped limp, or a Controls powered keep-out plus limp brake.
+
+## P-023 rev 8f — CURRENT (Robot Lab ruling), 2026-10-21
+**Rev 8d stops and rev 8e stop-in-cup: WITHDRAWN.** The 8d stops stood 10 mm apart at stand, a 5–25 mm trap. 8e seats in ≤2 % of closures.
+Rev 8f = rev 8c geometry (d58ffa4; LD29 foam: hem/notch 15 × 40, L/R 20 × 40 × 130) + the 8d notch (+1.5 mm → shroud 29.8 / 27.8 mm with tol at 3.6° overtravel, PASS) + a 14.5 mm J-channel press fit. No stops or cups. Skirt retained 34.2 %.
+**Hand protection is load-limited:** powered, Controls keep-out on the panel surfaces (warn 35 / limit 30 / trip 28 mm); limp, clamp force ≤140 N measured in TP-G5-18 (EST ~127 N via foam spread; limp hold pending Actuators/Controls).
+Files: `hip_skirt_r8f_pelvis_notched.stl`, `hip_skirt_r8f_thigh_panel.stl`, `hip_skirt_r8f.json`. **Mass: P-023 ≈ −0.296 kg vs v5 [EST].**
