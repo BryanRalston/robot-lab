@@ -28,3 +28,4 @@
 2026-10-21 08:51 RL Thermal: R-143 rev 4 (knee fin guard) → R131_ELMO_MG.md: guarded rev3 UA 0.189 h8 (T&R confirmed), standing base 81.4 FAIL; min fix fins 13→18 mm + PC guard with low-ε (≤0.1) inner face, 10 mm standoff: UA 0.246 h8, base ≤75.5 °C, guard face ≤40.3 °C PASS; +0.066 kg vs rev3 (+0.026 over T&R), protrusion 29.5 mm; black guard fallback = 58 °C base touch cap
 - 2026-10-21 RL Legs: L47-SO brief per R-144 (single-path 294/271, candidate 0 own ladder), DECISIONS L70.
 - 2026-10-21 08:53 ET RL Legs: 58 MPa hip lever fatigue amplitude CONFIRMED (Materials e21dafd/6d01d59, R144_7075_FATIGUE.md; <=1e8 cycles, 70@1e7, 50@5e8); no hard anodize on hot spots. l47_shape_opt_brief.md, r031_fatigue_fea_brief.md.
+- 2026-10-21 RL Legs: L71 P-153/P-154 knee window + guard check, ROM min 13.3-18.1 mm PASS (results/r031/p153_window_check.md)

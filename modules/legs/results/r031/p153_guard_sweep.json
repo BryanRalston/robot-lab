@@ -1,20 +1,38 @@
 {
- "GUARD_x40_64p5": {
+ "G295_ID_x34p5": {
   "cand": {
    "seg": "thigh",
    "size": [
-    24.5,
-    66,
-    110
+    29.5,
+    52,
+    104
    ],
    "c": [
-    -52.25,
+    -49.25,
     130,
     740
    ]
   },
-  "min": 14.8,
+  "min": 18.1,
+  "lim": "L_knee twin housing (Actuators D59 STEP, shared centre web) @{'L_hip_pitch': 20, 'L_knee': 145}",
+  "max_outside_thigh_fairing_mm": -52.7
+ },
+ "G295_cons_x40": {
+  "cand": {
+   "seg": "thigh",
+   "size": [
+    29.5,
+    52,
+    104
+   ],
+   "c": [
+    -54.75,
+    130,
+    740
+   ]
+  },
+  "min": 13.3,
   "lim": "L_knee twin housing (Actuators D59 STEP, shared centre web) @{'L_knee': 145}",
-  "max_outside_thigh_fairing_mm": -49.5
+  "max_outside_thigh_fairing_mm": -48.6
  }
 }
