@@ -328,3 +328,6 @@ New baseline: **53.8 mm** (Torso: the 100 mm core puts the pad face out 12 mm, t
   - Fit: the pad (y ±49) stays well inboard of the R-125 W2 carriers (inboard edge about y ±116) and the upper arms, so the roll sweep is unaffected for roll ≥ 0. Arms should confirm there are no adducted or cross-body poses. The pad stands about 65 mm proud of the torso cover front, with an ID trim ring.
 - **Option 2, head-shell change:** move the head front from x +104.7 to **≤ +89.5** (−15.2 mm) by flattening the visor front. The shell itself gets about 5 g lighter. But the visor carries the front sensors/cameras, so the change likely moves the sensor window and FOV, which is the head module's call and probably not cover-only. **Not recommended**, except as a hybrid: +8 mm core plus a 7 mm visor flattening.
 - **Recommendation:** Option 1, a 116 mm core, **+0.015 kg**, pending Torso's clearance numbers and the Arbiter's mass booking.
+
+### Rev 6 shroud outboard edge check (T&R 2e9b25c passes B2) — confirmed
+The cap is 82 wide in y, centred at y 130, and that width already includes the 20 mm standoff walls. That puts the outboard edge at **y 171.0 nominal and y 172.0 max** with ±1.0 thermoform/fit tolerance, so it is **≤ 176: PASS** (5 mm margin). The inboard edge is y 89.0. Second W017 goes on the solid cap top (HANDLING_MAP.md).
