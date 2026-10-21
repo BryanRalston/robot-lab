@@ -105,20 +105,20 @@
  "sweeps": {
   "sim_v3_joint_ranges_independent": {
    "n": 20000,
-   "min_mm": -26.9,
+   "min_mm": -42.5,
    "worst": {
-    "l_hip_yaw": 43.5,
-    "l_hip_roll": 2.1,
-    "l_hip_pitch": 27.1,
-    "r_hip_yaw": -31.0,
-    "r_hip_roll": 10.6,
-    "r_hip_pitch": 32.3,
-    "l_knee": 90.5,
-    "r_knee": 62.7
+    "l_hip_yaw": 36.6,
+    "l_hip_roll": -10.3,
+    "l_hip_pitch": 32.5,
+    "r_hip_yaw": -35.2,
+    "r_hip_roll": 11.0,
+    "r_hip_pitch": 26.9,
+    "l_knee": 83.9,
+    "r_knee": 25.3
    },
-   "frac_below_target": 0.0042,
-   "trip_but_rule_ok": 29,
-   "rule_blocks_but_clear": 889
+   "frac_below_target": 0.0056,
+   "trip_but_rule_ok": 48,
+   "rule_blocks_but_clear": 1021
   },
   "walk_carry_assumed": {
    "n": 10000,

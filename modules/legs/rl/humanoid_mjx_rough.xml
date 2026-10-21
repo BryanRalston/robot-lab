@@ -111,7 +111,7 @@
               <geom name="l_calf" size="0.045 0.07" pos="-0.06 0 -0.19" type="capsule"/>
               <body name="L_foot" pos="0 0 -0.42">
                 <inertial pos="0.0535 0.0007 -0.0317" quat="0.707098 -0.00336595 -0.00307188 0.707101" mass="2.77655" diaginertia="0.021411 0.0152394 0.011322"/>
-                <joint name="l_ankle_pitch" range="-0.785398 0.698132" armature="0.289" damping="0.5" frictionloss="0.3" axis="0 1 0"/>
+                <joint name="l_ankle_pitch" range="-0.915949 0.698132" armature="0.289" damping="0.5" frictionloss="0.3" axis="0 1 0"/>
                 <joint name="l_ankle_roll" solreflimit="0.004" solimplimit="0.95 0.99" range="-0.314159 0.314159" armature="0.0944" damping="0.5" frictionloss="0.3" axis="1 0 0"/>
                 <geom name="l_foot" size="0.12 0.05 0.012" pos="0.06 0 -0.074" type="box"/>
                 <site name="l_sole" size="0.2" pos="0.06 0 -0.086"/>
@@ -122,7 +122,7 @@
       </body>
       <body name="R_hipY" pos="0 -0.13 0">
         <inertial pos="0.0059 0 -0.1058" mass="2.1325" diaginertia="0.00339857 0.00457339 0.00363983"/>
-        <joint name="r_hip_yaw" range="-0.610865 0.785398" armature="0.079" damping="0.5" frictionloss="0.3"/>
+        <joint name="r_hip_yaw" range="-0.785398 0.610865" armature="0.079" damping="0.5" frictionloss="0.3"/>
         <body name="R_hipR" pos="0 0 -0.115">
           <inertial pos="0 0.0106 -0.1151" mass="1.95942" diaginertia="0.00371326 0.00340906 0.0026748"/>
           <joint name="r_hip_roll" range="-0.261799 0.20944" armature="0.441" damping="0.5" frictionloss="0.3" axis="1 0 0"/>
@@ -137,7 +137,7 @@
               <geom name="r_calf" size="0.045 0.07" pos="-0.06 0 -0.19" type="capsule"/>
               <body name="R_foot" pos="0 0 -0.42">
                 <inertial pos="0.0535 -0.0007 -0.0317" quat="0.707101 -0.00307188 -0.00336595 0.707098" mass="2.77655" diaginertia="0.021411 0.0152394 0.011322"/>
-                <joint name="r_ankle_pitch" range="-0.785398 0.698132" armature="0.289" damping="0.5" frictionloss="0.3" axis="0 1 0"/>
+                <joint name="r_ankle_pitch" range="-0.915949 0.698132" armature="0.289" damping="0.5" frictionloss="0.3" axis="0 1 0"/>
                 <joint name="r_ankle_roll" solreflimit="0.004" solimplimit="0.95 0.99" range="-0.314159 0.314159" armature="0.0944" damping="0.5" frictionloss="0.3" axis="1 0 0"/>
                 <geom name="r_foot" size="0.12 0.05 0.012" pos="0.06 0 -0.074" type="box"/>
                 <site name="r_sole" size="0.2" pos="0.06 0 -0.086"/>

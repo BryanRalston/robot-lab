@@ -228,5 +228,12 @@
     "fall_override": "only if fall_pose_clear()",
     "module": "modules/controls/arm/self_collision.py",
     "doc": "modules/controls/arm/SELF_COLLISION.md"
+  },
+  "ankle_dorsiflexion_soft_limit": {
+    "ref": "P-157 accepted (Legs L75, Arbiter R-147 5deb2be), Actuators D96",
+    "hard_mjcf_rad": -0.916,
+    "extension_rad": -0.955,
+    "extension_condition_abs_ankle_roll_deg_max": 10.0,
+    "note": "MJCF hard range is -0.916 rad (controlled). The -0.955 extension (toward the -0.960 mech stop) is a runtime soft limit only, allowed when |ankle_roll| <= 10 deg (D96: 3D toggle moves to -58.6 deg at roll +/-18). Not in the MJCF; the RL policy never sees it."
   }
 }
