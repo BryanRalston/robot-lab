@@ -471,3 +471,10 @@ Script `cad/covers/hip_skirt_r8c_fix.py/.json`. New STLs: `hip_skirt_r8c_pelvis_
 - **Hem + notch-edge strip: narrowed to 15 mm wide**, still 40 mm deep, so intrusion is unchanged. The worst strain stays 31 %, which gives **76.0 kPa** on LD29. Over a 100 × 15 hand patch that is **114 N ≤ 140 PASS** (it would be 153 N at 20 mm wide). The J-channel inner width shrinks from 20 to 15.5 mm (1.0 PC wall), with 3 mm lip engagement plus VHB, so the strip stays retained.
 - **L/R inboard strips: kept 20 × 40 × 130.** They are load-limited by the 165 N limp closure, so a hand takes 165 × 100/130 = **127 N ≤ 140 PASS** whatever the foam stiffness. At equilibrium the strips sit around 63 kPa (about 26 % strain on LD29). No narrowing needed.
 - **Mass:** foam is 11.8 g (hem + notch) + 3.0 g (L/R) per side. With the narrower channel that is **−3.9 g/side vs the previous 8c**, so P-023 ≈ **−0.294 kg** vs v5 [EST].
+
+## P-023 rev 8d — T&R 76de66a fixes, 2026-10-21
+1. **Shroud notch deepened 1.5 mm** (margin 2.5 → 4.0 mm + JCH 3.0). T&R 3.6° bottom-out overtravel (roll −15.6/+18.6) re-run: shroud gap **29.8 mm (27.8 with −2 tol) PASS** (was 26.7/24.7), worst pitch 42.5 / roll −15.6 / yaw 45. Retained skirt 34.2 % (was 34.6). `cad/covers/hip_skirt_r8d_fix.py/.json`, `hip_skirt_r8d_pelvis_notched.stl`. 5.8° case ignored per ruling.
+2. **Rigid L/R standoffs:** 2 PA12 I-section stops (20 × 8, 3 mm web) per panel on the inboard edge at φ40°/φ70°, 55 mm tall (15 mm past the 40 mm foam face, 5 mm LD29 tip caps). Limp bottom-out: rigid 110 mm, foam faces 30 mm apart → a 30 mm hand sees ~0 N regardless of foam stiffness; ≥25 mm open, no 5–25 mm trap. +0.010 kg/side [EST]. Open: Controls to use stop tips as the rigid basis; stop-tip finger contact only foam-capped.
+3. **J-channel inner width 15.5 → 14.5 mm**: 0.5 mm press fit on the 15 mm strip + lip + VHB (mechanical retention).
+4. Empty `hip_skirt_r8c_pelvis.stl` **deleted**; notched mesh is the only pelvis hem.
+Mass vs 8c: +0.0095 kg/side. `cad/covers/hip_skirt_r8d_standoff.json`.
