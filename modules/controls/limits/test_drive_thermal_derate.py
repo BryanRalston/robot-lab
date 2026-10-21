@@ -293,3 +293,11 @@ def test_safe_stop_zmp_k_scoped_to_kneel_mode():
     assert c['safe_stop_zmp_k'] == [40.0, 12.0]
     src = open(os.path.join(here, 'kneel_prone_wbc.py')).read()
     assert 'ZMP_K = (12.0, 7.0)' in src
+
+
+def test_chest_lower_wbc_contact_speed_nominal():
+    import chest_lower_wbc as C
+    r = C.run()
+    assert r['chest_contact_speed_mps'] is not None and r['chest_contact_speed_mps'] <= 0.10
+    assert r['peak_chest_N'] <= 8800 and r['t_d94_flag_mo0_s'] is not None
+    assert r['peak_tau_Nm']['elbow'] <= 38.0 + 1e-6

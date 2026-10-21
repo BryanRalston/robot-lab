@@ -142,3 +142,34 @@ lowering to prone/chest-pad (or the robot keeps derated torque, i.e. HOLD_DERATE
 | same, ANKLE_MIN −1.1 (diagnostic only) | 0.8 s | 0.136 m | CoM stays forward (0.11 m) but knee hits its limit and the feet bounce: unstable |
 
 P2–P4 are never reached, so no phase times are valid against the ≤3.3 s gate. The ankle dorsiflexion stop is the binding constraint (Legs check needed).
+
+## R-146(b) WBC chest-supported lower, standalone (chest_lower_wbc.py, 2026-10-21, sim/v3 68 kg, legs + arms ×0.5)
+**Prone stays FORBIDDEN as a routine safe-sit** until the full G4 chain (kneel → pads → hands → this lower) passes in
+sim and on the bench. This result covers the lower phase only, started from a supported hands-and-knees pose.
+
+Controller: task-space WBC (damped weighted least squares on the floating-base Jacobian, 1 kHz). It holds the hands
+and knee pads in place, keeps each elbow over its hand (gradually), and tracks the chest-pad descent velocity at
+0.9 × ProneLowerGuard.speed_limit(gap), with a reference governor (lead ≤ 10 mm) and measured-speed feedback. The
+trunk pitch is slaved to the gap, and only the pitch-plane joints move. Joint PD plus a contact-consistent
+gravity feed-forward. Sequence: contact → hold until settled (|vz| < 5 mm/s for 0.2 s) → torque relax over 0.8 s
+→ D94 flag (all |τ| < friction hold, chest still) → MO=0.
+
+| Case | Contact speed m/s (≤ 0.10) | Peak chest N (≤ 8800) | Lower time s | MO=0 at s | Elbow peak N·m | Shoulder pitch peak N·m |
+|---|---|---|---|---|---|---|
+| nominal 68 kg, pad tc 0.02 | **0.081** | 271 | 3.02 | 3.95 | 25.0 | 55.9 |
+| DR 65–68.5 kg × pad tc 0.005/0.02/0.04 (6 runs) | **≤ 0.082** | ≤ 430 | 3.00–3.02 | 3.90–4.00 | ≤ 25.2 | ≤ 56.0 |
+
+- The descent speed stayed under the guard limit throughout (max speed − limit = −0.016 m/s).
+- **Torque caps:**
+  - Elbow cap in force: 38 N·m (0.5 × 76). That is below the 69 N·m hard cap and below the 40 N·m / 180 s thermal
+    limit. The 25 N·m peak is under the 28 N·m continuous limit too.
+  - Shoulder pitch: 83.5 cap. Hip pitch: 34.6 of 175.
+- **Open issue (end pose):** the knee pads roll off and the robot rests on the thigh fronts about 27 mm above the
+  knee joint (pads [EST]). At MO=0 the split is chest 271 N, thighs 275 N, hands 121 N, knee pads 0 N.
+  - Holding the shank orientation keeps the pads loaded, but then the elbows hit the 38 N·m cap and the lower
+    stalls at a 50–60 mm gap.
+  - Adding a CoM-share task lands on the pads (chest 292 / pads 233 / hands 94 / feet 48 N) but overshoots the
+    speed limit (contact 0.11–0.41 m/s).
+  - Needs: a longer pad up the thigh front (ID), or more elbow budget, or a better arm-load schedule.
+- The trunk ends about 0.2 rad head-down (pitch 1.78) with no head contact.
+- GIF: media/progress/2026-10-21_controls_r146b_chest_lower_wbc.gif
