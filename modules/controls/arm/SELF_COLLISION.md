@@ -101,23 +101,25 @@ The raised L60 top plate is x −175…−40, y 32–228, z 820–828 mm. The tw
 - Reach cost: commands starting inside the walk target rise from 11.2% to 21.5%; attenuated commands rise from 5.7% to 8.8% (mean 0.8% → 1.25%, p95 1.4% → 7.1%). Carry stays at 0%.
 - **Conflict:** with legs in side-fall (hip roll +15), fall pose tuck B puts the left hand 43.6 mm past trip into the plate, so `fall_pose_clear()` refuses the tuck B override there. LB fallback still clears (16.4 mm). Tuck B in stand and in prone has only 1.0 mm of slack.
 
-## Hip-pinch keep-out (T&R ca68f3a/04c7199, ID rev 8b acb9bd5): hip_pinch.py
-Gaps are measured rigid edge to rigid edge, ignoring the foam. Pairs: L↔R panel, and hem↔panel on each side. The geometry comes from ID's hip_skirt_r8 (hem R144) plus the r8_asym panel (y86, 40 mm chamfer). Thresholds: warn 35, limit 30, trip 28 mm. Below limit+10 the closing rate is damped to 0 at 30 mm; at trip the closing joint pair is stopped. It applies in every motors-on mode. The two backup rules are dropped.
-Exact symmetric boundary (`hip_pinch_boundary.json`; grid pitch −105…40 step 5, roll −12…15 step 1, yaw ±45 step 2.5). The table gives, for each roll, the |yaw| at which trip starts and the pitch range affected:
+## Hip-pinch keep-out, rev 8c (T&R 76de66a, ID ee80543/ec4dde7/d58ffa4, Actuators D100 31875a1): hip_pinch.py
+Geometry comes from ID's rev 8c STLs: `hip_skirt_r8c_thigh_panel.stl` (R152 relief, y86 + chamfer) and `hip_skirt_r8c_pelvis_notched.stl` (R141.5 with the shroud notch). Both are thinned to a 2 mm voxel. The 3.0 mm rigid J-channel is subtracted on both the L↔R edges and the hem; foam is excluded.
+Thresholds are **35/30/28**. The 40/35/33 stopgap (d941ca6) was retired once this rebuild landed.
 
-| roll | trip at yaw ≥ | toe-in ≤ | pitch range |
+Agreement with T&R (L↔R, rigid):
+
+| pose L / R (p, r, y) | this model | T&R 8c | Δ |
 |---|---|---|---|
-| −12 | 17.5 | −17.5 | −15…40 at max yaw |
-| −8 | 22.5 | −22.5 | −10…40 |
-| −4 | 27.5 | −30 | 0…40 |
-| 0 | 32.5 | −35 | 10…40 |
-| +4 | 37.5 | — | 20…40 |
-| +8 | 42.5 | — | 30…40 |
-| ≥ +12 | none | none | |
+| (23.1, −13.0, 38.0) / (40.4, +2.7, 46.1) | −2.87 | −1.74 | 1.13 (ours is more conservative: STL hull vs T&R's point grid) |
+| (38.9, 0.1, 37.7) / (23.2, 3.2, 39.0) | 23.64 | 23.66 (T&R json 23.6) | 0.02 |
 
-Compared with T&R's rough rule (roll > −4 and yaw < 15 is safe; closure from roll −12, and at yaw ≥ 22 with roll ≤ 0), the exact boundary depends on pitch (closure needs extension) and moves to larger yaw as roll increases. T&R's rough rule is therefore conservative everywhere except that closures continue up to roll +11 at large yaw.
-- Single-leg hem minimum: 32.5 mm at (40, 0, −30). This is warn only and never trips.
-- 4000 asymmetric random samples: 0.1% below trip, minimum 11.5 mm.
-- T&R 0.77 mm case (+23/+40, yaw 38/46): this model gives **21.6 mm** (L↔R). It is below trip, so the test asserts a trip. The 21 mm difference from T&R is unresolved.
-- Controller poses (stand, kneel, R-146, lowering, sit, fall) are all ≥ 104 mm, except hip extension +40 at the limit (32.9, warn).
-- Assumed walk/carry: ≥ 75 mm. Job 10 action space (ref_cycle ± 0.25 rad, 600 samples each): uniform 57.4 mm, corners 43.6 mm, with no warn and no trip. Stand corners: 30.5 mm, 6 warn, 0 trip. **Job 10 needs no pose limit.** These are sampled results.
+The 0.77 vs 21.6 mm difference on rev 8b was a sign error in the test pose, not a geometry error (T&R diag: the same model gives 0.77 with the right leg mirrored).
+- Hem: the notched STL gives 65–165 mm in the cases checked. T&R models the hem as a plain R141.5 sphere (30.2 mm minimum), which ignores the notch. That is a geometry difference: ours follows ID's shipped STL.
+- Job 10 action space (ref_cycle ± 0.25 rad, 600 samples each): uniform 53.6 mm, corners **39.5 mm**, no trips. No pose limit needed. Stand-mode corner residuals: 26.3 mm, 15/400 trip (the guard acts).
+
+**D100 rules (they replace the limp hold, which was dropped):**
+- (a) `mo_off_rule.py`: a commanded MO=0 is refused unless the robot is kneeling or sitting (or in contact_confirmed). drive_thermal_derate already enforces this (MO_OFF only from CONTACT_CONFIRMED), and a test covers both. Planned-fault exceptions are listed in the module (E-stop/STO, power loss, BMS cutoff, drive hardware trip, watchdog); there the passive 8c foam is the only protection.
+- (b) The powered keep-out stays at 35/30/28 on rev 8c.
+- (c) `hip_pinch_cap.py` / `Supervisor.hip_torque_cap`: hip roll and yaw torque are capped at ±14 N·m while the gap ≤ 35 mm. Pitch is not capped. Check (`hip_pinch_cap_check.json`, side_fall.py tuck, S1/S2b/S2c × L/R × 68 kg × 250/550 N): the gap stays ≥ 103 mm, the cap never engages, and the results are identical with and without it.
+  - Walk/carry: ≥ 119 mm (assumed gait) and job 10 ≥ 39.5 mm, so it never engages.
+  - Kneel/sit/R-146 controller poses: ≥ 104 mm, so it never engages.
+  - Only the stand-mode corner residuals and the +40 extension limit reach the zone.

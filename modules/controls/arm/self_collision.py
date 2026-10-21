@@ -248,15 +248,12 @@ class Supervisor:
             if hook is not None: hook.add_nullspace_task('sc_' + p.name, row, rate, w)
         return tasks
 
-    def limp_hip(s, hip_q: dict, mo_on: bool, planned_mo_off: bool = False):
-        """TP-G5-18 limp-mode hip hold (limp_hip_hold.py). mo_on: low-current hip roll/yaw hold commands.
-        planned_mo_off: MO=0 is allowed only once the hip-pinch gaps are >= warn (pre-limp posture reached).
-        Returns (commands, mo_off_allowed, gaps)."""
-        try: import limp_hip_hold as L
-        except ImportError: from . import limp_hip_hold as L
-        if not hasattr(s, '_lhh'): s._lhh = L.LimpHipHold()
-        ok, g = s._lhh.mo_off_allowed(hip_q) if planned_mo_off else (None, None)
-        return s._lhh.limp_command(hip_q, mo_on), ok, g
+    def hip_torque_cap(s, tau: dict, hip_q: dict, t: float):
+        """D100 fallback: hip roll/yaw torque <= 14 N.m while the hip-pinch gap is <= warn (hip_pinch_cap.py)."""
+        try: import hip_pinch_cap as C
+        except ImportError: from . import hip_pinch_cap as C
+        if not hasattr(s, '_hcap'): s._hcap = C.HipPinchTorqueCap()
+        return s._hcap.apply(tau, hip_q, t)
     def fall_pose_clear(s, target: dict, mode='crouch'):
         """Distances at the commanded fall pose with the CURRENT leg/waist pose. Clear = chest >= 0, shroud >= trip
         of `mode`, plume entry allowed (fall is transient). Returns (clear, (worst_slack, pair))."""
