@@ -305,3 +305,26 @@ Robot face down on a flat floor, resting on the chest pad (CF face at x ≈ +147
 - Dilution: 947 mm² min of 4.0±0.3 slots (≥600, ≤5) — yes.
 - Top/aft/upper outer-face openings louvred, gaps ≤4.8 incl. tol (0b3fab9) — yes.
 - Foil inner face: already specified as "PC, Al foil inner ε≤0.05" in thigh_knee_vents.json hood.material. Its mass is already inside hood kg_side 0.0125, so the mass is unchanged (pair +0.112).
+
+## P-156 rev 6 — Option B rear outlet (Robot Lab ruling after T&R 7f12ce9; Thermal B2 a32d341; Legs L74 af1b331) — 2026-10-21
+Script `cad/covers/thigh_knee_vents_r6.py` → `thigh_knee_vents.json/.stl`. The rev 5 transfer duct and the outboard side exit/hood are **removed**.
+- **Route:** lower-rear-hull inlet (unchanged, 1440 mm² free) → fin chimney (baffle x −56/−57, section 21.5 × 52 = 1118 mm²) → rises **straight through the Legs L60 notch x −34.5…−61 × y 104–156, R8 (≈ 1323 mm²)**. That replaces the 52 × 40 cut-out, which Legs found severs the strut; Legs fits twin straps instead. The notch edges form the duct (both parts are thigh-fixed), with foam seals. The stack runs z 827–860 (PA12 1.2) and **ends in a shroud** (Thermal B2, H 0.217 m, 70.6 °C standing).
+- **Shroud (rev 4e type):** PC 1.5 with an Al-foil inner face (ε ≤ 0.05), cap 56.5 × 82, 20 mm standoff, top at z 881.5.
+  - Openings: 35 slots of 4.5 ± 0.3 × 18 on the aft and side walls; the front wall is closed. Free area 2835 nominal / **2646 min (≥ 2600)**.
+  - Dilution: a bottom ring of 12 slots, 4.0 ± 0.3 × 16, 768 nominal / **710 min (≥ 600)**.
+  - IP2X: every opening is ≤ 4.8 mm including tolerance, and the stack mouth sits ≥ 20 mm behind them. **No exposed louvre blades.**
+- **P-023 skirt:** 0.05 Al foil on the inner face over the outlet, with a **≥ 15 mm gap** to the shroud. Add a local +6 mm bulge if the hip-ROM CAD shows less than 15 mm (Legs CAD check). The hem stays at z 793.4, below the exit.
+- **Clearances:** baffle to fins 3.0; baffle to the release-housing front fins 4.0; stack to the plate 3.0 below and 3.0 above; plenum to the housing 3.0. Fin tips are 41 mm from the inlet grille and ≥ 70 mm from the shroud slots (≥ 10). Every P-156 part is thigh-fixed, so the knee ROM is unaffected; the hip ROM matters only against the skirt (15 mm gate). Legs flag (not ID): the housing top sits 2.0 mm under the plate.
+- **Mass:** **0.0485 kg/side, 0.097 pair [EST]** (−0.015 vs rev 5a's 0.112). Knee-venting total **+0.047 pair**. The Legs plate/straps change of ≈ −0.029 pair goes in the Legs ledger.
+- **PENDING:** the notch needs the Legs FEA, fall case and thermal-break check (L74). Thermal is rechecking whether 1320 mm² of notch area is enough; the 1118 mm² chimney section below the notch is also below the 1200 target, so Thermal should check that too. The shroud and the skirt inner face need TP-G5-15 thermocouples.
+
+## Shin fairing vs D95 ankle plates AN1/AN2 (Legs L74: 3.0 mm, at the gate) — cover-only fix
+The drive and PCB outer face is at x 66.5; the shin fairing inner face is at x 69.5. Add a local thermoformed **+2.0 mm front blister** to the shin fairing over z 180–325 (80 mm wide in y, centred y 130, R10 blend). The fairing pushes outward only, so there is no mechanism change. Result: **5.0 mm clearance (target ≥ 4–5)**. Mass ≈ +0.001/side, **+0.002 pair [EST]** (draw only, same material area + 3 %). Legs to re-run the sweep.
+
+## Head clearance for the T-031 full fall gate (≥ 68 mm; T&R R-146 §7) — ID proposal
+New baseline: **53.8 mm** (Torso: the 100 mm core puts the pad face out 12 mm, to x ≈ +0.159 torso frame). That leaves a **14.2 mm shortfall**. Torso's own face-out vs. land-recessed head numbers are still pending. In the level prone pose the gap tracks pad-face offset minus head-front offset about 1:1.
+- **Option 1, deeper core (recommended):** go from 100 to **116 mm** (+16 mm), with the land and face unchanged. The pad face moves to x ≈ +0.175, giving **69.8 mm** (+1.8 margin). The plateau and peak force are unchanged, and usable stroke goes 70 → 81 mm, so the T-031 57 mm stroke margin improves.
+  - Mass: honeycomb 98 × 98 × 16 at 72 kg/m³ is 11 g, plus a longer cartridge sleeve and cover lip at about 4 g, for **+0.015 kg [EST]** (Torso part; Arbiter books it).
+  - Fit: the pad (y ±49) stays well inboard of the R-125 W2 carriers (inboard edge about y ±116) and the upper arms, so the roll sweep is unaffected for roll ≥ 0. Arms should confirm there are no adducted or cross-body poses. The pad stands about 65 mm proud of the torso cover front, with an ID trim ring.
+- **Option 2, head-shell change:** move the head front from x +104.7 to **≤ +89.5** (−15.2 mm) by flattening the visor front. The shell itself gets about 5 g lighter. But the visor carries the front sensors/cameras, so the change likely moves the sensor window and FOV, which is the head module's call and probably not cover-only. **Not recommended**, except as a hybrid: +8 mm core plus a 7 mm visor flattening.
+- **Recommendation:** Option 1, a 116 mm core, **+0.015 kg**, pending Torso's clearance numbers and the Arbiter's mass booking.

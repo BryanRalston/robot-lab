@@ -1,181 +1,127 @@
 {
- "part": "P-156 rev 5 thigh knee venting (ID)",
- "basis": "Legs L72 e44c588; T&R 67e6eed; Thermal 218a541",
- "real_geometry": {
-  "housing": {
-   "x": [
-    -176.1,
-    -79.4
-   ],
-   "y": [
-    38,
-    222
-   ],
-   "z": [
-    684.9,
-    805.5
-   ]
-  },
-  "trunnion_top_plate": {
-   "x": [
-    -175,
-    -40
-   ],
-   "y": [
-    32,
-    228
-   ],
-   "z": [
-    816,
-    824
-   ]
-  },
-  "strut": {
-   "x": [
-    -45,
-    5
-   ],
-   "y": [
-    110,
-    150
-   ],
-   "z": [
-    816,
-    824
-   ]
-  }
- },
- "finding_rear_route": "FAIL: rear turn over housing top only 4.5 mm tall (234 mm2 free) and rear hull is behind the housing; the -82.5 skin plane does not exist (2.6 mm to housing at 145)",
- "inlet": {
-  "where": "lower rear hull slope z 643-675 (x -94.1 -> -122), y 104-156",
-  "slots": 8,
-  "slot_w": 4.5,
-  "slot_len": 40,
-  "plenum": "z 643-681.9 (3 mm under housing bottom 684.9), x -34.5 -> hull, y 104-156",
-  "free_mm2": 1440.0,
-  "gross_mm2": 2211
- },
- "baffle": {
+ "part": "P-156 rev 6 thigh knee venting (ID), Option B",
+ "basis": "T&R 7f12ce9; Thermal a32d341 B2; Legs L74 af1b331",
+ "notch": {
   "x": [
-   -56,
-   -57
+   -61,
+   -34.5
   ],
   "y": [
    104,
    156
   ],
   "z": [
-   688,
-   792
+   816,
+   824
   ],
-  "t": 1.0,
-  "fin_side": "Al tape eps<=0.1",
-  "to_fin_tips": 3.0,
-  "to_housing_front": -22.4
+  "r": 8
  },
- "chimney_walls": "PA12 1.2, y 130+-26.5 (side gap 5.0), x -34.5..-56, z 682-793; L58 tabs notched >=3",
- "transfer_duct": {
-  "z": [
-   793,
-   813
-  ],
+ "notch_status": "PENDING Legs FEA + fall case + thermal-break (L74); Thermal area recheck (notch 1320 / chimney 1118 mm2)",
+ "inlet": {
+  "where": "lower rear hull slope z 643-675, y 104-156 (rev 5, unchanged)",
+  "slots": 8,
+  "slot_w": 4.5,
+  "slot_len": 40,
+  "free_mm2": 1440.0
+ },
+ "chimney": {
   "x": [
-   -8.5,
-   -76.4
+   -56,
+   -34.5
   ],
   "y": [
    104,
-   248
+   156
   ],
-  "section_mm2": 1358,
-  "to_plate_top": 3,
-  "to_housing_front": 3.0,
-  "to_housing_top": "n/a (in front of the housing, x > -79.4)",
-  "to_strut": 3,
-  "route": "outboard in y past the housing (y 222) and the plate edge (228) to the side skin"
- },
- "exit": {
-  "where": "outboard side skin, x -10..-84, z 785-813 (below the trunnion top plate, below the rear skirt keep-out line z 793 is NOT required at the side: side skirt hem Legs to confirm)",
-  "slots": 11,
-  "slot_w": 4.5,
-  "slot_len": 26,
-  "recessed_mm": 11,
-  "webs": "recessed 4.5 mm slots 11 mm inboard of the hood skin (Thermal: thermally equal to plain webs)",
-  "free_mm2": 1287.0,
-  "gross_mm2": 2072
- },
- "hood": {
-  "t": 1.5,
-  "material": "PC, Al foil inner eps<=0.05, cover colour outside, R15 blend",
-  "standoff_mm": 26,
-  "proud_of_skin_mm": 15,
-  "dilution": "lower edge 10x 4.0+-0.3x16 + sides 2x3x 4.0+-0.3x16 = 1024 mm2 nominal / 947 min (>=600)",
-  "kg_side": 0.0125,
-  "open_free_mm2": 3394,
-  "rev": "5a (T&R 5842853 IP2X fix)",
-  "length_x_mm": 90,
-  "x": [
-   -10,
-   -100
+  "z": [
+   682,
+   813
   ],
-  "louvres": "PC blades 1.0 mm, gaps 4.5 +-0.3 (<=4.8, <=5.0 incl. tol), pitch 5.5, blade depth 6 mm angled 30 deg up/aft; on the top (90x26), aft end (28x26) and the upper 12 mm band of the outer face (90x12, blades up)",
-  "gross_mm2": 4148,
-  "louvre_frac": 0.818,
-  "IP2X": "all hood openings <=4.8 mm: 12 mm finger (80 mm reach) cannot enter; exit webs 11 mm further inboard behind the louvres"
+  "section_mm2": 1118,
+  "baffle": "1.0 PC Al-taped x -56..-57, 3.0 to fin tips, 4.0 to release-housing front fins (x -61)"
  },
- "H_inlet_to_exit_m": 0.14,
- "rear_grille": "DROPPED (fins not visible from the rear hull; pocket sealed by baffle + duct)",
- "housing_fairing": {
-  "foil": "0.05 mm Al on fairing inner face only (~0.03 m2), housing bare",
-  "gap": "10 mm to the housing body (no front fins, Legs L72 b); +2 mm bulge kept",
-  "slots": "5x 4.0+-0.3 x 20 top + 5x bottom: <=4.3 mm, 370 mm2 min per end",
-  "kg_side": 0.006
+ "stack": {
+  "lower_top_z": 813,
+  "gap_to_plate_underside": 3.0,
+  "pass_through": "notch edges are the duct (thigh-fixed, static); closed-cell silicone foam seal top+bottom",
+  "upper": {
+   "z": [
+    827,
+    860
+   ],
+   "section": [
+    26.5,
+    52
+   ],
+   "walls": "PA12 1.2 just outside the notch outline",
+   "gap_to_plate_top": 3.0
+  },
+  "free_through_notch_mm2": 1323.0
  },
+ "shroud": {
+  "material": "PC 1.5, Al foil inner eps<=0.05, cover colour outside",
+  "cap": [
+   56.5,
+   82
+  ],
+  "standoff_mm": 20,
+  "z_top": 881.5,
+  "wall_slots": "35x 4.5+-0.3 x 18 on aft + both side walls (front wall closed)",
+  "free_nom_mm2": 2835.0,
+  "free_min_mm2": 2646,
+  "dilution": "bottom ring 12x 4.0+-0.3 x 16",
+  "dil_nom_mm2": 768,
+  "dil_min_mm2": 710,
+  "IP2X": "all openings <=4.8 incl tol; stack mouth >=20 mm behind them; no exposed louvre blades",
+  "kg_side": 0.0102
+ },
+ "skirt": {
+  "part": "P-023 hip skirt, local",
+  "foil": "0.05 Al on inner face over the outlet, ~90 x 110",
+  "gap_min_mm": 15,
+  "note": "local +6 mm bulge if CAD shows <15 through hip ROM (Legs CAD check)",
+  "kg_side": 0.002
+ },
+ "removed": [
+  "rev 5 transfer duct (-0.015/side)",
+  "rev 5a side exit + hood (-0.0125/side)"
+ ],
+ "H_m_Thermal": 0.217,
  "clearances_mm": {
   "baffle_to_fins": 3.0,
-  "baffle_to_housing": 22.4,
-  "transfer_to_plate_top": 3,
-  "transfer_to_strut": 3,
-  "transfer_to_housing_front": 3.0,
+  "baffle_to_housing_front_fins": 4.0,
+  "lower_stack_to_plate": 3.0,
+  "upper_stack_to_plate_top": 3.0,
   "plenum_to_housing_bottom": 3.0,
-  "rods_to_duct_Legs": 13.8,
-  "tibia_to_skin_Legs": 4.7,
-  "housing_to_skin": "hull unchanged (no -82.5 plane); housing rear exposed through the existing rear opening",
-  "bosses_Legs": "13.7/16.9 at 145/60 deg (boss positions move with the inlet/transfer frame: Legs recheck)"
+  "fin_tips_to_inlet_grille": 41,
+  "fin_tips_to_shroud_slots": ">=70",
+  "shroud_to_skirt_inner": ">=15 (gate) through hip ROM [Legs CAD]",
+  "housing_top_to_plate": "2.0 FLAG (Legs L74, Actuators/Legs, not ID)",
+  "ROM": "all P-156 parts thigh-fixed: knee ROM unaffected; hip ROM only vs skirt (15 mm gate)"
  },
- "sweep": "all new parts thigh-fixed; static gaps >=3.0 to housing/plate/strut; moving: rods 13.8, tibia 4.7 (Legs CAD) -> min 3.0 mm static PASS (at gate), Legs CAD recheck required",
+ "areas_mm2": {
+  "inlet": 1440,
+  "chimney": 1118,
+  "notch": 1323.0,
+  "shroud_free_nom": 2835.0,
+  "shroud_free_min": 2646,
+  "dilution_min": 710
+ },
  "mass_kg": {
   "baffle": 0.007,
   "chimney_walls": 0.007,
-  "transfer_duct": 0.015,
   "inlet_plenum": 0.0095,
   "skin_slots": -0.002,
-  "hood": 0.0125,
   "housing_fairing": 0.006,
   "bulge": 0.0005,
-  "fasteners": 0.0006
+  "fasteners": 0.0006,
+  "notch_seal": 0.001,
+  "upper_stack": 0.0067,
+  "shroud": 0.0102,
+  "skirt_foil_bulge": 0.002
  },
- "kg_side": 0.0561,
- "kg_pair": 0.112,
- "smallest_mechanism_options": [
-  "L60 top-plate cut-out ~52 x 40 over the chimney (y 104-156, x -40..-79) -> rear/up outlet with full height; Legs structural check",
-  "lower the housing top 5-10 mm (Actuators) -> rear turn >=10 mm tall still < 1200 mm2 unless 25 mm"
- ],
- "confirm": {
-  "Legs": [
-   "clearance of the transfer duct (x -8.5..-76.4, z 793-813, y 104-248) to femur/clamps/drives outside the plate box",
-   "outboard side skin at x -10..-84 z 785-813 exists; L61 cheek windows not overlapped; P-053 rear window/pins elsewhere",
-   "side skirt hem above z 813 at the outboard side through hip ROM",
-   "inlet plenum vs rods/tibia (13.8 / 4.7) and the new boss frame",
-   "full CAD ROM with rev 5"
-  ],
-  "Thermal": [
-   "re-run with H 0.14 m (was 0.18), 90-deg turns, transfer section 1358 mm2, exit 1287 mm2 free",
-   "hood 26 mm standoff, 2652 mm2 open + 1024 dilution"
-  ],
-  "TR": [
-   "hood/exit on the outboard thigh is near the hanging-hand zone: touch + probe B on the hood and recessed webs",
-   "housing-fairing slots 4.0+-0.3"
-  ]
- }
+ "kg_side": 0.0485,
+ "kg_pair": 0.097,
+ "knee_venting_total_pair": 0.047,
+ "legs_plate_delta_pair": -0.029
 }
