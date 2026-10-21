@@ -17,10 +17,6 @@
 2026-10-21 09:05 RL Thermal: R-131 → modules/thermal/R131_ELMO_MG.md: (1) G-TWI no-heatsink credit valid, but mounts FAIL as booked: knee thigh plate ~174 °C cont/120 duty (needs ~0.03 m² finned plate +35–40 g/leg), hip_pitch/ankle drives on housing exceed 85 °C baseplate (own standoff plates), firmware drive-temp derate 75→85 °C; net credit ≈ −0.25…−0.30 kg; (2) D86 Elektron 43 ΔT +1–2.5 K hip/ankle, knee/shoulder unchanged (knee stays Al): PASS with hot-sized/bonded stator fit + PEO
 - 2026-10-21 Legs L67 (R-135): P-152 sleeve OD 46.80; knee web stock 4.25 in from CAD (no permitted plate, 211/317 provisional); JOB9 b3 min-wall re-run request.
 
-## 2026-10-21 — Arms R17 clevis + roll-yaw link pocketing study (R-132 §5); Job 8c torsion gate
-- R17: −0.296 kg/side (−0.59 pair) [CALC on EST geometry]; half credit (~−0.30 pair) until CAD and Job 8d FEA. The lugs must go 8 → 9 mm (245/294 MPa). The roll-yaw link becomes a 4 mm-wall box (35/308 MPa). Job 8d spec in §G, not launched. Image: media/progress/2026-10-21_arms_R17_clevis_link.png
-- Job 8c §G (b9e8f03): Controls gate 8f80c42. Assembly k_t ≥ 2.9 kN·m/rad. Modes with CSG-14 in series: ≥ 15 Hz at T5 0.2 kg·m², ≥ 40 Hz hand-only. CF hand calc 20.1 / 460 Hz, pass. R16 estimate corrected.
-
 - 2026-10-21 Legs L68: knee web → hand forging (R-137 §6/R-138), P-152 sleeve OD 46.80 accepted pending Actuators co-sign.
 2026-10-21 08:55 RL Thermal: R-131 rev 2 (D90 heat plates) → R131_ELMO_MG.md: knee plate FAIL (1.17 mm fin gaps dead; base 107–112 °C duty h8, 151–158 cont; femur gap not the driver, min 3 mm; ~3 W into femur, bond ≈70–72); hip_pitch 84 mm 68.8 °C duty h8 PASS only if back face sees ≤50 °C structure; R-140 h8 OK for exposed black faces walking/standing, not for <5 mm channels/enclosed faces
 2026-10-21 09:05 RL Thermal: R-131 rev 3 (D91 knee shell-window plate) → R131_ELMO_MG.md: fins η .994; outer UA 0.14–0.23 walking, 0.12 standing (h8 optimistic standing); base duty 62–78 °C PASS, cont 80–105 FAIL→derate; femur 0.3–0.9 W, bond 68.2–69.1 PASS; shell PASS; touch/snag FAIL until guard or 60 °C touch cap + ID OK

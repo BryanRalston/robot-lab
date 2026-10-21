@@ -1,0 +1,490 @@
+{
+ "named": {
+  "tuck_B": {
+   "pose": [
+    5,
+    0,
+    0,
+    0
+   ],
+   "infeasible_torso": false,
+   "before": 198.30610332036701,
+   "before_part": "W2_carrier",
+   "after": 198.30610332036701,
+   "after_part": "W2_carrier"
+  },
+  "roll_soft_127": {
+   "pose": [
+    -30,
+    127,
+    0,
+    0
+   ],
+   "infeasible_torso": false,
+   "before": 142.02554002805934,
+   "before_part": "W2_carrier",
+   "after": 142.02554002805934,
+   "after_part": "W2_carrier"
+  },
+  "hand_to_opp_shoulder": {
+   "pose": [
+    -60,
+    -15,
+    -90,
+    -140
+   ],
+   "infeasible_torso": true,
+   "before": 18.446848891878954,
+   "before_part": "forearm",
+   "after": 18.446848891878954,
+   "after_part": "forearm"
+  },
+  "hand_to_opp_shoulder_high": {
+   "pose": [
+    -90,
+    -15,
+    -60,
+    -140
+   ],
+   "infeasible_torso": true,
+   "before": 42.176946346639355,
+   "before_part": "hand",
+   "after": 42.176946346639355,
+   "after_part": "hand"
+  },
+  "hands_together_chest": {
+   "pose": [
+    -60,
+    -15,
+    -60,
+    -100
+   ],
+   "infeasible_torso": false,
+   "before": 27.900017437199555,
+   "before_part": "hand",
+   "after": 11.900017437199567,
+   "after_part": "hand"
+  },
+  "hands_together_low": {
+   "pose": [
+    -30,
+    -10,
+    -45,
+    -90
+   ],
+   "infeasible_torso": false,
+   "before": 116.99254601481871,
+   "before_part": "forearm",
+   "after": 105.14633508464284,
+   "after_part": "forearm"
+  },
+  "P042_two_hand_carry": {
+   "pose": [
+    -45,
+    -10,
+    -30,
+    -90
+   ],
+   "infeasible_torso": false,
+   "before": 144.08308138734756,
+   "before_part": "forearm",
+   "after": 131.73627138304218,
+   "after_part": "forearm"
+  },
+  "P042_carry_close": {
+   "pose": [
+    -25,
+    -10,
+    -40,
+    -110
+   ],
+   "infeasible_torso": false,
+   "before": 69.17782342954509,
+   "before_part": "forearm",
+   "after": 54.810671615572076,
+   "after_part": "hand"
+  },
+  "forearm_across_chest": {
+   "pose": [
+    -20,
+    -15,
+    -90,
+    -130
+   ],
+   "infeasible_torso": true,
+   "before": 0.0,
+   "before_part": "hand",
+   "after": 0.0,
+   "after_part": "hand"
+  },
+  "elbow_fold_front": {
+   "pose": [
+    -90,
+    0,
+    0,
+    -140
+   ],
+   "infeasible_torso": false,
+   "before": 191.00242216651074,
+   "before_part": "upper_arm",
+   "after": 191.00242216651074,
+   "after_part": "upper_arm"
+  }
+ },
+ "n_poses": 61170,
+ "n_feasible": 57938,
+ "min_before": {
+  "pose": [
+   -120,
+   -15,
+   -120,
+   -110
+  ],
+  "infeasible_torso": false,
+  "before": 0.0,
+  "before_part": "forearm",
+  "after": 0.0,
+  "after_part": "forearm"
+ },
+ "n_lt10_before": 192,
+ "n_contact_before": 123,
+ "min_after": {
+  "pose": [
+   -120,
+   -15,
+   -120,
+   -110
+  ],
+  "infeasible_torso": false,
+  "before": 0.0,
+  "before_part": "forearm",
+  "after": 0.0,
+  "after_part": "forearm"
+ },
+ "n_lt10_after": 269,
+ "n_contact_after": 205,
+ "n_new_fail": 77,
+ "new_fail_examples": [
+  {
+   "pose": [
+    -120,
+    15,
+    -105,
+    -120
+   ],
+   "infeasible_torso": false,
+   "before": 13.579443386160106,
+   "before_part": "hand",
+   "after": 0.0,
+   "after_part": "hand"
+  },
+  {
+   "pose": [
+    -120,
+    30,
+    -105,
+    -130
+   ],
+   "infeasible_torso": false,
+   "before": 13.70969011488063,
+   "before_part": "hand",
+   "after": 0.0,
+   "after_part": "hand"
+  },
+  {
+   "pose": [
+    -110,
+    5,
+    -120,
+    -120
+   ],
+   "infeasible_torso": false,
+   "before": 10.033144404368521,
+   "before_part": "hand",
+   "after": 0.0,
+   "after_part": "hand"
+  },
+  {
+   "pose": [
+    -90,
+    -10,
+    -105,
+    -100
+   ],
+   "infeasible_torso": false,
+   "before": 14.770779679754638,
+   "before_part": "hand",
+   "after": 0.0,
+   "after_part": "hand"
+  },
+  {
+   "pose": [
+    -90,
+    -10,
+    -90,
+    -100
+   ],
+   "infeasible_torso": false,
+   "before": 11.720029809400872,
+   "before_part": "forearm",
+   "after": 0.0,
+   "after_part": "forearm"
+  },
+  {
+   "pose": [
+    -90,
+    -10,
+    -75,
+    -100
+   ],
+   "infeasible_torso": false,
+   "before": 14.011150676153393,
+   "before_part": "hand",
+   "after": 0.0,
+   "after_part": "hand"
+  },
+  {
+   "pose": [
+    -90,
+    15,
+    -105,
+    -120
+   ],
+   "infeasible_torso": false,
+   "before": 10.466246488390368,
+   "before_part": "hand",
+   "after": 0.0,
+   "after_part": "hand"
+  },
+  {
+   "pose": [
+    -90,
+    30,
+    -105,
+    -130
+   ],
+   "infeasible_torso": false,
+   "before": 15.601919316012513,
+   "before_part": "hand",
+   "after": 0.0,
+   "after_part": "hand"
+  },
+  {
+   "pose": [
+    -90,
+    30,
+    -90,
+    -130
+   ],
+   "infeasible_torso": false,
+   "before": 14.65400544108722,
+   "before_part": "hand",
+   "after": 0.0,
+   "after_part": "hand"
+  },
+  {
+   "pose": [
+    -70,
+    5,
+    -60,
+    -120
+   ],
+   "infeasible_torso": false,
+   "before": 10.249214363125452,
+   "before_part": "hand",
+   "after": 0.0,
+   "after_part": "hand"
+  },
+  {
+   "pose": [
+    -60,
+    5,
+    -60,
+    -120
+   ],
+   "infeasible_torso": false,
+   "before": 10.005614309380878,
+   "before_part": "hand",
+   "after": 0.0,
+   "after_part": "hand"
+  },
+  {
+   "pose": [
+    -60,
+    15,
+    -75,
+    -120
+   ],
+   "infeasible_torso": false,
+   "before": 12.220416117255603,
+   "before_part": "hand",
+   "after": 0.0,
+   "after_part": "hand"
+  },
+  {
+   "pose": [
+    -60,
+    30,
+    -90,
+    -130
+   ],
+   "infeasible_torso": false,
+   "before": 12.130019048460245,
+   "before_part": "hand",
+   "after": 0.0,
+   "after_part": "hand"
+  },
+  {
+   "pose": [
+    -60,
+    30,
+    -75,
+    -130
+   ],
+   "infeasible_torso": false,
+   "before": 14.886817634478245,
+   "before_part": "hand",
+   "after": 0.0,
+   "after_part": "hand"
+  },
+  {
+   "pose": [
+    -50,
+    5,
+    -60,
+    -120
+   ],
+   "infeasible_torso": false,
+   "before": 13.560240608414182,
+   "before_part": "hand",
+   "after": 0.0,
+   "after_part": "hand"
+  }
+ ],
+ "fail_parts_after": {
+  "upper_arm": 0,
+  "forearm": 53,
+  "hand": 216,
+  "W2_carrier": 0
+ },
+ "fail_ranges_after": {
+  "pitch": [
+   -120,
+   -10
+  ],
+  "roll": [
+   -15,
+   30
+  ],
+  "yaw": [
+   -120,
+   -45
+  ],
+  "elbow": [
+   -140,
+   -90
+  ]
+ },
+ "newfail_ranges": {
+  "pitch": [
+   -120,
+   -10
+  ],
+  "roll": [
+   -15,
+   30
+  ],
+  "yaw": [
+   -120,
+   -45
+  ],
+  "elbow": [
+   -140,
+   -90
+  ]
+ },
+ "after_fail_by_elbow": {
+  "-140": {
+   "yaw_fail": [
+    -120,
+    -45
+   ],
+   "pitch_fail": [
+    -120,
+    -10
+   ]
+  },
+  "-130": {
+   "yaw_fail": [
+    -120,
+    -45
+   ],
+   "pitch_fail": [
+    -120,
+    -20
+   ]
+  },
+  "-120": {
+   "yaw_fail": [
+    -120,
+    -45
+   ],
+   "pitch_fail": [
+    -120,
+    -20
+   ]
+  },
+  "-110": {
+   "yaw_fail": [
+    -120,
+    -60
+   ],
+   "pitch_fail": [
+    -120,
+    -20
+   ]
+  },
+  "-100": {
+   "yaw_fail": [
+    -105,
+    -75
+   ],
+   "pitch_fail": [
+    -120,
+    -40
+   ]
+  },
+  "-90": {
+   "yaw_fail": [
+    -90,
+    -90
+   ],
+   "pitch_fail": [
+    -110,
+    -70
+   ]
+  },
+  "-80": null,
+  "-70": null,
+  "-60": null,
+  "-50": null,
+  "-40": null,
+  "-30": null,
+  "-20": null,
+  "-10": null,
+  "0": null
+ },
+ "roll127_min_after": {
+  "pose": [
+   30,
+   127,
+   60,
+   -140
+  ],
+  "infeasible_torso": false,
+  "before": 10.587678181932437,
+  "before_part": "hand",
+  "after": 10.587678181932437,
+  "after_part": "hand"
+ }
+}
