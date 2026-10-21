@@ -540,3 +540,16 @@ Script r131_optB_r6.py (same model; chimney section as an extra loss, Cd 0.8 [ES
 - Walking (pumped): 62–72 °C [EST]. PASS.
 - Fin channels (≈ 650 mm²) remain the controlling restriction; 1118 vs 1200 costs ≈ 0.1 K. Jet +1 K → shroud/skirt specs unchanged.
 - **Verdict: rev 6 PASS, 71.7 °C standing (8.3 K margin).** The 1200 mm² rule can be relaxed to **≥ 1000 mm²** for the chimney and the notch on this route (keeps ≥ 8 K margin and tolerance for seals and burrs [EST]).
+
+### Option B, ID rev 6b (baad131): stack top z 840, offset mouth, aft-only shroud — 2026-10-21 EDT
+Script r131_optB_r6b.py: H 0.197 (z 643→840), chimney 1118, notch 1323, offset transition z 831–840 to the 2069 mm² inboard mouth (offset-bend K 0.5, worst 1.5 [EST]), shroud 2680 min + 710 dilution.
+
+| case | ṁ (g/s) | jet at mouth (°C) | drive base standing (°C) |
+|---|---|---|---|
+| rev 6 reference (z 860) | 0.160 | 81.5 | 72.0 |
+| **rev 6b, z 840 + offset bend** | 0.153 | 83.6 | **73.1** (73.2 at K 1.5) → PASS 6.9 K |
+- Offset bend costs ≤ 0.2 K; the z 860 → 840 drop costs ≈ 1 K. Walking (pumped) 62–72 °C [EST]. PASS.
+- **Shroud face:** 20 mm foil-lined standoff, exhaust 84 °C (< rev 4e's 90) → outer face **≈ 40–42 °C [EST]**: PASS 48 (and 43). Louvre/dilution plane mixed air ≈ 65–70 °C [EST]: slots ≤ 4.8 mm, IP2X, no finger contact with the stream.
+- **Skirt:** with the rev 6 relief the skirt no longer sits over the mouth; the 4 mm worst gap is to the shroud's **outer** face (≤ 42 °C) — no touch or heat concern there (radiation from a 42 °C face is negligible). The ≥ 15 mm rule applied to a skirt over the jet; it is **replaced by**: no skirt panel within the jet path aft of the louvres. **Keep the 40 mm Al-foil band on the relief's inner edge** (in some pitch-back poses the plume washes that edge: ≈ 50–55 °C bare [EST] → foil band needed). Full-panel skirt foil no longer needed.
+- **Aft-only louvres (45°, aft/up):** the jet leaves aft-and-up from x −100, y 86–150. The nearest part on that path is the rear torso cover at x ≈ −117.5, but the pelvis/torso cover starts at z ≥ 1126, ≥ 220 mm above — the plume is < 45 °C by then [EST, dilution]. The hand zone is outboard/forward (T&R walk swing at the outboard edge); aft-only openings point away from it. Nearby back skin (rear thigh cover below z 840) is upstream of the jet. **PASS**, but in hip pitch −40…−107 (sitting/kneel) the aft jet points up toward the buttock cover/torso underside → confirm with TP-G5-15 (thermocouple on the pelvis rear cover in a sitting pose).
+- **Verdict: rev 6b PASS, 73.1 °C standing (6.9 K margin).**
