@@ -1,0 +1,155 @@
+{
+ "rev": "8 (open break)",
+ "poses": 255,
+ "thigh_panel": {
+  "R": 150,
+  "axis": "hip pitch (x0,z920, along y)",
+  "phi": [
+   35,
+   60
+  ],
+  "y": [
+   60,
+   200
+  ],
+  "carries": "rev 6b shroud aft louvres in its skin (Thermal 5fd6a54 specs unchanged)",
+  "mount": "4 new P-023 inserts on the thigh skin"
+ },
+ "pelvis_hem": {
+  "type": "spherical about the yaw/roll intersection C1",
+  "C1": [
+   0.0,
+   130.0,
+   1045.0
+  ],
+  "R": 152.8,
+  "break_line": "one clean symmetric arc per side"
+ },
+ "fixed_skirt_retained_pct": 44.4,
+ "gap_hem_to_panel": {
+  "min": 25.7,
+  "pose": [
+   40,
+   -20,
+   -35
+  ],
+  "trap_5_25": 0
+ },
+ "gap_panel_to_thigh": "static: panel on the thigh skin (bonded/insert lip, <=1 mm) PASS; panel to shank NOT modelled (no shank skin in this model): Legs CAD knee 145",
+ "gap_LR": {
+  "min": 0.0,
+  "bad_total": 50,
+  "bad_single_leg": 0,
+  "bad_cover_cause": 16,
+  "examples": [
+   {
+    "q": [
+     -100,
+     -20,
+     0
+    ],
+    "q2": [
+     -100,
+     -20,
+     0
+    ],
+    "gap": 0.1,
+    "thigh_axes_mm": 176.9,
+    "cause": "cover (both-leg adduction roll -20 in flexion, or both-leg yaw 45)"
+   },
+   {
+    "q": [
+     -90,
+     -20,
+     0
+    ],
+    "q2": [
+     -90,
+     -20,
+     0
+    ],
+    "gap": 0.2,
+    "thigh_axes_mm": 174.5,
+    "cause": "cover (both-leg adduction roll -20 in flexion, or both-leg yaw 45)"
+   },
+   {
+    "q": [
+     -80,
+     -20,
+     0
+    ],
+    "q2": [
+     -80,
+     -20,
+     0
+    ],
+    "gap": 0.1,
+    "thigh_axes_mm": 124.6,
+    "cause": "cover (both-leg adduction roll -20 in flexion, or both-leg yaw 45)"
+   },
+   {
+    "q": [
+     -70,
+     -20,
+     0
+    ],
+    "q2": [
+     -70,
+     -20,
+     0
+    ],
+    "gap": 0.0,
+    "thigh_axes_mm": 76.2,
+    "cause": "cover (both-leg adduction roll -20 in flexion, or both-leg yaw 45)"
+   },
+   {
+    "q": [
+     -50,
+     -20,
+     45
+    ],
+    "q2": [
+     -50,
+     -20,
+     45
+    ],
+    "gap": 0.4,
+    "thigh_axes_mm": 215.0,
+    "cause": "cover (both-leg adduction roll -20 in flexion, or both-leg yaw 45)"
+   },
+   {
+    "q": [
+     -40,
+     -20,
+     45
+    ],
+    "q2": [
+     -40,
+     -20,
+     45
+    ],
+    "gap": 0.3,
+    "thigh_axes_mm": 210.3,
+    "cause": "cover (both-leg adduction roll -20 in flexion, or both-leg yaw 45)"
+   }
+  ]
+ },
+ "jet_to_fixed_skirt_min": [
+  27.0,
+  [
+   40,
+   -20,
+   -35
+  ]
+ ],
+ "cuff_study": {
+  "result": "REJECTED: panel/cuff edge gap 3.0 -> 236 mm over pitch (scissor), jet 1.4 mm to cuff"
+ },
+ "mass_kg_side": {
+  "panel": 0.0165,
+  "edge_lips_inserts": 0.006,
+  "foil_band_40mm": 0.002
+ },
+ "kg_side": 0.0245,
+ "fixed_skirt_removed_kg": -0.2988
+}

@@ -388,3 +388,19 @@ Script `cad/covers/hip_skirt_r7.py` → `hip_skirt_r7.json/.stl`; image media/pr
   - (iii) A hip-pitch ROM keep-out for sit/kneel (Controls) to shrink the sweep.
   - **ID recommends (i).** Rev 7 is not adopted, and HANDLING_MAP zones are unchanged.
 - **Thermal note (recorded):** in sit/kneel (hip pitch −40…−107) the jet points up at the pelvis rear cover. Thermal is adding a TP-G5-15 thermocouple there. A 40 mm foil band goes on any skirt edge near the outlet; full skirt foil isn't needed.
+
+## P-023 rev 8 — split rear skirt per leg (Robot Lab ruling, option i), 2026-10-21
+Script `cad/covers/hip_skirt_r8.py` → `hip_skirt_r8.json`, `hip_skirt_r8_pelvis.stl` (pelvis-fixed skirt kept), `hip_skirt_r8_thigh_panel.stl`; image media/progress/2026-10-21_hip_skirt_r8.png.
+- **Thigh panel per leg (thigh-fixed):** PC 1.5, a cylinder of R 150 about the hip pitch axis, φ 35–60° (rear-lower), y 60–200, held by 4 new P-023 inserts on the thigh skin (no mechanism change). It carries the rev 6b shroud, with the shroud's aft louvre wall forming the panel skin. Thermal 5fd6a54 specs are unchanged: aft-only 4.5 ± 0.3 louvres (2680 min free, 710 dilution), foil, 20 mm standoff, y ≤ 150, 40°/R10 chamfer and TPU strip, stack at z 840.
+- **Pelvis hem:** a **spherical hem about the hip yaw/roll intersection (0, 130, 1045), R 152.8**, which gives one clean, symmetric arc per side as the break line (the Optimus-like hip cut).
+  - The hem radius is sized so the panel stays **≥ 25 mm** away at every pose. That makes the break a deliberate open gap, never a pinch.
+  - The ≤ 5 mm overlap lip near the hip axis **is not used**. A sliding cuff/lip was tried and rejected: its edge gap scissors from 3 to 236 mm over the 147° pitch range, and the jet came 1.4 mm from the cuff.
+- **Fixed skirt retained: 44.4 %** (fine-mesh area), so 55.6 % moves onto the thigh panels or is open break.
+- **Gate results (255 poses):**
+  - Pelvis hem ↔ thigh panel: **min 25.7 mm at pitch 40 / roll −20 / yaw −35, no 5–25 mm gaps. PASS.**
+  - Panel ↔ thigh: static (panel on the thigh skin, ≤ 1 mm lip). PASS.
+  - Panel ↔ shank: **not modelled** (no shank skin in this model). Legs CAD check needed at knee 145.
+  - Jet ↔ fixed skirt: min 27.0 mm. PASS: no fixed panel in the jet. In sit/kneel the jet points at the pelvis rear cover; Thermal's TP-G5-15 thermocouple is recorded.
+  - **Panel L ↔ panel R: FAIL in bilateral poses only.** 0 of 255 single-leg poses fail (other leg at zero). 50 symmetric both-leg poses fail: 34 where the thighs themselves collide (infeasible) and **16 cover-caused**: both-leg adduction (roll −20) with flexion ≤ −40, or both-leg yaw 45 (e.g. pitch −100 / roll −20 / yaw 0, gap 0.1).
+- **Smallest fix (not ID's to make):** a Controls bilateral keep-out, with no simultaneous both-leg roll < 0 at pitch ≤ −40 and no simultaneous both-leg yaw 45. These postures also bring the thighs within 60–200 mm and are already self-collision-adjacent. The single-leg ROM is untouched. Cover alternative: trim the panels' inboard edge. Inboard edges at y 60 / 70 / 80 were tried and don't remove the bilateral cases.
+- **Mass:** panel + lips/inserts + foil band = **0.0245 kg per panel**; fixed-skirt PC removed **−0.299** → net **−0.274 kg**, vs rev 6 (−0.198) **−0.076 kg lighter** [EST, same v5 keep-out basis].

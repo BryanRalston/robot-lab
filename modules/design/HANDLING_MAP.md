@@ -4,13 +4,14 @@ T&R 5842853 / fef9348 ask 2. ID, 2026-10-21. Image: HANDLING_MAP.png.
 
 ## HOLD (lift/carry) zones
 - H1 Torso sides under the armpits (torso cover lateral faces, **z ≈ 1330–1440**): primary two-person lift. (Was z 1420–1560, which ran above Controls' sim torso top at ≈ 1.45 m; now kept ≥ 10 mm below it and clear of the N5 shoulder roll gap. ID CAD check of the cover top edge owed.)
-- H2 Pelvis/hip skirt top rim, rear: secondary grip, use with H1.
+- H2 Pelvis skirt top rim, rear (pelvis-fixed part above the rev 8 spherical hem): secondary grip, use with H1. **Never the thigh panels** (they move with the legs).
 - H3 Upper arm, mid-humerus: steadying only, no lifting.
 - H4 Thigh front, upper half (above the knee-venting zone): steadying only.
 
 ## NO-HOLD zones
 - N1 **Knee rear outlet shroud, P-156 rev 6 / Option B (HOT)**: shroud rev 6b on the rear/inboard thigh top over the L60 notch (x −100…−20, y 86–150, z 840–904) plus a 30 mm margin, under the P-023 hip skirt. Class (T&R 7f12ce9 §5): **48 °C, no-sustained-contact (contact not likely: inboard/aft, outside the hand-hang and arm-swing envelope)**, target 43; exposure is a person behind the robot and the prone rescue state.
 - N1a **Jet-washed skin above z 845** (rear thigh top and the P-023 skirt rear-inboard panel, y 89–171, z 845–≈ 940 [EST plume, Thermal a32d341]): no-hold, same 48 °C class; skirt inner face foil + ≥ 15 mm gap. H2 grips stay ≥ 50 mm clear of this band.
+- N7 **Hip break gap (P-023 rev 8):** the ≥ 25 mm open arc between the pelvis hem and the thigh panels. No hold, no hands in the gap while the legs can move (backdriving joints, no brakes).
 - N2 Knee rear inlet grille, z 643–675.
 - N3 Head and neck (fragile shell and sensors).
 - N4 Hands and wrists (pinch points, fragile).

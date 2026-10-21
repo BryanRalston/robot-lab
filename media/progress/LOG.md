@@ -46,3 +46,4 @@ One line per image: date, file, module, what changed.
 - 2026-10-21 arms R18: chest-pad 116 mm core (ID 341ef4a) vs left-arm cross-body sweep (61k poses): min gap 0 mm both before (100 core) and after. <10 mm poses 192 → 269 (+77), contacts 123 → 205; hand/forearm only; carrier and upper arm are clear; roll-127 and tuck B are unaffected. A keep-out zone is needed, not a hard joint limit — 2026-10-21_arms_R18_chest_pad_clash.png
 - 2026-10-21 ID: P-052 rev 2 chest bezel/tapered fairing on PA66 crush posts for the 116 mm core (65 mm bulge, head 69.8 PASS), W2 vs bezel neg-roll min 180.5 mm (no image)
 - 2026-10-21 ID: P-023 rev 7 flap study FAIL (59.7 % cut, 112/255 finger-trap poses); recommend per-leg split rear skirt — 2026-10-21_hip_skirt_r7_study.png
+- 2026-10-21 ID: P-023 rev 8 split rear skirt (thigh panel + spherical pelvis hem R152.8), 44.4 % fixed kept, hem gap ≥25.7, bilateral L/R fails 16 poses → Controls keep-out — 2026-10-21_hip_skirt_r8.png
