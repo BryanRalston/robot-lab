@@ -1119,3 +1119,6 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
 ## R-117 (2026-10-20) J10 gates (Controls 5ecdbf4)
 - No-drift gate accepted: 1.2 m/s for 20 s, |final y| <=0.5 m, |heading| <=5 deg, net x/t >=1.15. Carry >=0.8 m/s is an **interim** gate; the final G4 carry gate follows TARGETS.md.
 - Carry payload: use **P-042 (0.32, 0, 0.415)**, the basis for the R-079/R-081/R-096 thermal and carry rulings. Add payload-position randomization covering at least Legs (0.25, 0, 0.10) to P-042 before job 10.
+
+## R-118 (2026-10-20) J10 sim mass
+- Train and gate at the credible rollup: **67.1 kg nominal, randomization 65.0-68.5 kg** (consistent with the ~-0.64 reserve against 66.5). This is a sim robustness setting only; the 66.5 kg hard limit is unchanged, and so is the mass-down obligation. Controls refreshes the stale rollup file.
