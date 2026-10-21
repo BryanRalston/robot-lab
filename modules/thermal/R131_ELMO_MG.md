@@ -454,3 +454,37 @@ Basis:
 - Outlet webs: polymer is fine.
 - Shroud flow penalty: +0.2 K.
 - H 0.18: drive base 73.2 °C standing.
+
+## Rev 5: ID P-156 rev 5 (a065aa3), outboard transfer duct + side exit/hood, H 0.14 — 2026-10-21 09:12 EDT
+Basis: the rev 4d/4e chimney, plus these losses:
+- transfer duct 1358 mm² with 2 × 90° turns (K 1.0 each) + friction 0.3;
+- exit 1287 mm² and hood 3676 mm² (2652 + 1024) at Cd 0.6, at hot-air density;
+- inlet 1440 mm².
+Q 7.5 W.
+
+| case | ṁ (g/s) | exhaust ΔT (K) | drive base standing (°C) |
+|---|---|---|---|
+| **rev 5, H 0.14, all losses** | 0.134 | 55.4 | **76.8 ≤ 80: PASS** (3.2 K) |
+| rev 5 without the duct/hood losses | 0.138 | 53.9 | 76.0 |
+| Option B: L60 cut-out, rear/up exit, H 0.25 [assumed: inlet z ≈ 660 → exit ≈ z 910 through the top-plate cut-out], no hood | 0.179 | 41.7 | **69.3** |
+| Option B + hood | 0.173 | 43.1 | 70.1 |
+
+- **Flow:** the fin channels still control it. The duct, turns and hood cost only ≈ 0.8 K; the 0.14 m height (vs 0.18) costs ≈ 3.6 K against rev 4e's 73.2.
+- **Walking:** pumped flow through the inlet gives a drive base of ≈ 62–74 °C [EST, as rev 4c]. PASS.
+- **Hood** (PC, foil inner ε ≤ 0.05, 26 mm standoff, 2652 + 1024 mm²): exhaust ≈ 90 °C at 35 °C ambient, the same case as rev 4e, so the outer face is ≈ **41–43 °C**.
+  - Against 48: PASS. Against 43: thin margin.
+  - The larger 26 mm standoff helps slightly.
+  - The location is the outboard thigh, in the hanging-hand zone. T&R must say whether long contact (43) applies there. I recommend classing it as brief contact (48).
+- **Grille face:** the rear grille is dropped, so there is no grille face. The fin field is behind the hull and baffle. N/A.
+- **Transfer duct, 3 mm in front of the 90–100 °C housing front face:**
+  - **Pickup:** the series path is radiation + 3 mm gas gap (≈ 17 W/m²K), the PA12 1.5 mm wall, and the inner h ≈ 5, over ≈ 0.002 m². That gives ≈ 0.08 W at the hot duct air, and < 0.5 W even with a 1 mm wall and h 8.
+  - **Effect on the chimney:** an extra +0.5 W raises the exhaust ≈ +2 K and slightly *raises* the buoyancy head. ṁ goes up and the drive base is unchanged (≤ 0.1 K). **No penalty.**
+  - **Housing cooling:** the duct shades ≈ 2000 mm² of the housing's front face, which has no fins (L72 b). That is < 3 % of the housing's radiating area and outside the A36 fin path, so the knee winding rises **≤ +0.3 K** [EST] against the 4.7 K margin. PASS.
+  - **Condition:** no contact between the duct and the housing (3 mm gap kept), and the duct does not overlap the rev B fins or the A36 inlet.
+- **Fairing over the housing** (foil inner face, gap 10 mm, slots 5 × 4.0 × 20 per end = 370 mm², ≤ 4.3 mm): the duct is at the front, outside that region, so it stays at **40.6–41.5 °C. PASS** (IP2X OK).
+- **Femur bond:** unchanged, 68.2–69.1 °C. PASS.
+
+**Verdict:**
+- **Rev 5: PASS** (standing 76.8 °C; hood 41–43 °C; duct OK; fairing OK).
+- The 3.2 K margin standing is thinner than rev 4e's 6.8 K.
+- **Option B** (L60 cut-out, H ≈ 0.25 assumed) gives **69–70 °C** (≈ 10 K margin) and a rear/up exit away from the hand zone. Worth it only if T&R rejects the side hood or Legs clears the top plate structurally.
