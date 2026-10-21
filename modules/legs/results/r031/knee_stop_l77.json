@@ -1,0 +1,34 @@
+{
+ "drive_case_knee_torque_kNm": 1.38,
+ "femur 50x1.5": {
+  "Z_mm3": 2691,
+  "sigma_at_6p8": 2527,
+  "SF_393": 0.16,
+  "T_allow_kNm": 1.06
+ },
+ "tibia 45x1.5": {
+  "Z_mm3": 2158,
+  "sigma_at_6p8": 3152,
+  "SF_393": 0.12,
+  "T_allow_kNm": 0.85
+ },
+ "tibia 45x1.2 (model)": {
+  "Z_mm3": 1761,
+  "sigma_at_6p8": 3861,
+  "SF_393": 0.1,
+  "T_allow_kNm": 0.69
+ },
+ "straps_if_stop_via_L60": {
+  "strap_kN": 42.5,
+  "sigma_root": 398,
+  "SF_393": 0.99,
+  "T_allow_kNm": 6.71
+ },
+ "T_allow_kNm": 0.69,
+ "PU_requirement": {
+  "E_J_est": 4.8,
+  "k_theta_max_Nm_per_rad": 49542,
+  "travel_min_deg": 0.8,
+  "note": "linear PU: T_max = sqrt(2 E k); use Controls whole-body energy if larger than this shank-only estimate"
+ }
+}

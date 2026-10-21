@@ -1,0 +1,126 @@
+{
+ "min_pairs": [
+  [
+   "N_plate | L_knee trunnion cheek -y [EST]",
+   0.0,
+   "{}"
+  ],
+  [
+   "N_plate | L_knee trunnion cheek +y [EST]",
+   0.0,
+   "{}"
+  ],
+  [
+   "N_plate | L_palm 7075-T6 machined shell 1.5 mm w/ openings (P-021/A32, palm_7075.py)",
+   0.0,
+   "{'L_hip_yaw': -35, 'R_hip_yaw': -35}"
+  ],
+  [
+   "N_plate | L_thumb phalanx1 [EST]",
+   0.0,
+   "{'L_hip_yaw': -35, 'R_hip_yaw': -35}"
+  ],
+  [
+   "N_plate | L_thumb phalanx3 [EST]",
+   5.6,
+   "{'L_hip_pitch': -100, 'L_knee': 135}"
+  ],
+  [
+   "N_plate | L_knee twin housing (Actuators D59 STEP, shared centre web)",
+   7.5,
+   "{'L_knee': 145}"
+  ],
+  [
+   "N_plate | L_hip_pitch screw -y RV12 roller-screw rod \u00f812",
+   8.07,
+   "{}"
+  ],
+  [
+   "N_plate | L_hip_pitch screw +y RV12 roller-screw rod \u00f812",
+   8.07,
+   "{}"
+  ],
+  [
+   "N_strap_ny | L_femur tube 7050-T7451 \u00f850x1.2 (R-031; P-047 wall 1.6 pending FEA)",
+   12.12,
+   "{}"
+  ],
+  [
+   "N_strap_py | L_femur tube 7050-T7451 \u00f850x1.2 (R-031; P-047 wall 1.6 pending FEA)",
+   12.12,
+   "{}"
+  ],
+  [
+   "N_strap_ny | L_hip_pitch screw -y RV12 roller-screw rod \u00f812",
+   17.0,
+   "{}"
+  ],
+  [
+   "N_strap_py | L_hip_pitch screw +y RV12 roller-screw rod \u00f812",
+   17.0,
+   "{}"
+  ],
+  [
+   "N_plate | L_ankle fork bridge",
+   18.19,
+   "{'L_knee': 145}"
+  ],
+  [
+   "N_plate | L_ankle fork cheek -y",
+   20.25,
+   "{'L_knee': 145}"
+  ],
+  [
+   "N_plate | L_ankle fork cheek +y",
+   20.25,
+   "{'L_knee': 145}"
+  ],
+  [
+   "N_plate | L_thumb phalanx2 [EST]",
+   24.69,
+   "{'L_hip_pitch': -100, 'L_knee': 135}"
+  ],
+  [
+   "N_plate | L_tibia tube 7075 \u00f845x1.2",
+   31.69,
+   "{'L_knee': 145}"
+  ],
+  [
+   "N_strap_ny | L_knee twin housing (Actuators D59 STEP, shared centre web)",
+   36.39,
+   "{'L_hip_pitch': -100, 'L_knee': 135}"
+  ],
+  [
+   "N_strap_py | L_knee twin housing (Actuators D59 STEP, shared centre web)",
+   36.39,
+   "{'L_hip_pitch': -100, 'L_knee': 135}"
+  ],
+  [
+   "N_plate | L_hip_pitch screw -y GE12 C rod-end eye",
+   38.74,
+   "{'L_hip_pitch': 20, 'L_knee': 145}"
+  ]
+ ],
+ "under_3": [
+  [
+   "N_plate | L_knee trunnion cheek -y [EST]",
+   0.0,
+   "{}"
+  ],
+  [
+   "N_plate | L_knee trunnion cheek +y [EST]",
+   0.0,
+   "{}"
+  ],
+  [
+   "N_plate | L_palm 7075-T6 machined shell 1.5 mm w/ openings (P-021/A32, palm_7075.py)",
+   0.0,
+   "{'L_hip_yaw': -35, 'R_hip_yaw': -35}"
+  ],
+  [
+   "N_plate | L_thumb phalanx1 [EST]",
+   0.0,
+   "{'L_hip_yaw': -35, 'R_hip_yaw': -35}"
+  ]
+ ]
+}

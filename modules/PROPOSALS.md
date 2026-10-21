@@ -471,6 +471,7 @@ All keep R-076 (reinforced isolation, IEC 60664-1 creepage, IP2X), R-074 (main l
 - Change: CONTRACTS ROM ankle_pitch mechanical −60…+40° → **−55…+40°** (toggle at ≈ −61°; −60° has a 1.7 mm moment arm), loaded −50…+40° → **−52.5…+40°** for the kneel only; sim MJCF −0.785 → −0.916 rad (controlled) with a −0.960 hard stop.
 - Evidence: modules/legs/results/r146/ankle_stop_extension.md (torque 62/44 N·m avail vs 29 N·m kneel [EST]; screw 1043/1465 N < walk peak 1734 N).
 - Conditions: Actuators confirm the toggle angle and torque in 3D CAD and relieve the [EST] ankle-roll stop carrier corners (0.9 mm to the fork cheek at −45°). Controls: the extension does not reach knee-pad contact (needs ≈ −78°); the kneel still needs a CoM-ahead-of-toe drop of ≈ 90–140 mm [EST].
+- D96 (Actuators da63827) 3D confirmation: toggle −61.0° at roll 0, −58.6° at roll ±18°; kneel met at −52.5° for all roll, at −55° only for |roll| ≤ ~12°. **Controls restriction: command ankle_pitch past −52.5° (−0.916 rad) only with |ankle_roll| ≤ 10°.** Carrier lowered 6 mm with R3 corners → 4.6 mm at −55° / knee 145°. Accepted R-147 (5deb2be).
 - Affected owners: Actuators, Controls, Arbiter (contract). Status: open
 
 ### P-158: Torso: pack rail-end stop shoulders (R-146 ruling)

@@ -50,3 +50,9 @@ Write `results/r031/L74_TWIN_STRAP_FEA.md` + json: mesh stats, convergence table
 
 ## Addendum L76: G10 orientation
 The G10 isolator blocks must be cut so the strap-to-clamp heat path runs through the laminate thickness (k 0.288, ASTM C177). Any in-plane heat path must be 13.5 mm or longer (k 0.9 [EST]). Bearing allowables: 128 MPa fall, 64 MPa sustained (Materials 6b04d2f).
+
+## Addendum L77 (Actuators D96 da63827)
+- **K_PEAK = 1.0**: 7267 N is already the motor peak (pair); continuous is 1307 N per screw. No scaling.
+- **RV12x5 static rating check per screw (fall):** 14.5 kN × 0.65/0.5 → 18.9 kN on the leading screw < **C0a 27.3 kN** (SF 1.44). Report it; the screw is the fuse only above that.
+- **Knee stop:** there is **no mechanical knee stop**; CONTRACTS l.116 knee 0–135° is the sim limit. Actuators proposes a PU stop pair at 135°. **STOP_IMPACT_N stays TBD** (needs the Controls impact speed). Our clearance sweeps use 145° (conservative). Arbiter should set the contract ROM: if the PU stop at 135° is adopted, 135° + stop compression is the clearance basis, and 145° is a margin case only.
+- Housing: use **knee_twin_housing_release_r116b.step** (rear fin tips trimmed) for all clearance checks.

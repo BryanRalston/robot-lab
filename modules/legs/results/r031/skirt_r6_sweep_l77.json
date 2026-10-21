@@ -1,0 +1,88 @@
+{
+ "n_poses": 336,
+ "worst_outlet": {
+  "pose": [
+   30,
+   45,
+   -35
+  ],
+  "outlet_min": 0.1,
+  "housing_min": 31.1
+ },
+ "worst_housing": {
+  "pose": [
+   -90,
+   -10,
+   45
+  ],
+  "outlet_min": 1.0,
+  "housing_min": 0.1
+ },
+ "pass_3mm": false,
+ "free_area_worst5": [
+  {
+   "pose": [
+    30,
+    45,
+    -35
+   ],
+   "outlet_min": 0.1,
+   "curtain_mm2": 4014,
+   "face_open_mm2": 992,
+   "est_free_mm2": 2381
+  },
+  {
+   "pose": [
+    -60,
+    -20,
+    -35
+   ],
+   "outlet_min": 0.2,
+   "curtain_mm2": 2806,
+   "face_open_mm2": 1048,
+   "est_free_mm2": 2381
+  },
+  {
+   "pose": [
+    -50,
+    -10,
+    45
+   ],
+   "outlet_min": 0.2,
+   "curtain_mm2": 3692,
+   "face_open_mm2": 1612,
+   "est_free_mm2": 2381
+  },
+  {
+   "pose": [
+    40,
+    45,
+    -35
+   ],
+   "outlet_min": 0.2,
+   "curtain_mm2": 3859,
+   "face_open_mm2": 699,
+   "est_free_mm2": 2381
+  },
+  {
+   "pose": [
+    40,
+    45,
+    0
+   ],
+   "outlet_min": 0.2,
+   "curtain_mm2": 3887,
+   "face_open_mm2": 1052,
+   "est_free_mm2": 2381
+  }
+ ],
+ "zero": {
+  "pose": [
+   0,
+   0,
+   0
+  ],
+  "outlet_min": 12.3,
+  "housing_min": 0.2
+ }
+}
