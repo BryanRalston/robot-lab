@@ -34,3 +34,6 @@ Re-run brief: GROKBUILD_lever_fea_r031.md §G3-R2.
 
 ## D93 (Thermal rev 4 44b7c36, ID e61cbf2, R-143) Knee plate rev 4: 18.5 mm fins + lower taper under ID's low-ε PC guard
 Fins are 8 × 18.5 × 1 at 6 mm pitch, with R0.5 tips and the lower ends tapered 45° × 8 to match ID's guard chamfer. The taper alone (18 mm) gives 76.1 °C standing, over 75.5, so the fins go +0.5 mm: UA 0.248 at h 8, 75.2 °C standing duty. The corner screws are replaced by PEM FHS-M3 studs (no fin cut). ID's guard is used as-is but its inner face moves out 0.5 mm (proud 30.0); the edge seal is inboard and clears the 4 mm flange. Mass booked +0.066 kg vs rev 3 (P-153). Thermal re-check and an ID rod-sweep re-run are requested.
+
+## D94 (Legs L71) Knee plate rev 4b: 46 mm wide (y 107–153)
+8 fins × 0.75 mm at 5.75 pitch (5.0 gap), 18.5 mm, taper kept. UA 0.247, 75.4 °C standing duty (scaled from Thermal rev 4). −21 g robot. The guard must narrow to a 50 mm wall, and it still sits 1 mm from the L58 tabs (ID/Legs). Taper accepted at 18.5 mm (R-145 §4).

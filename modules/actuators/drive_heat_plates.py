@@ -42,10 +42,10 @@ def finned(L,W,tb,nf,hf,tf,nd=1,side="femur"):
             p=p.cut(cq.Workplane("XY").circle(1.7).extrude(tb+hf+2).translate((sx*(W/2-3),sy*(L/2-3),-hf-1)))
     return p
 import sys,os
-FH=float(os.environ.get("FH",18)); TAPER=float(os.environ.get("TAPER",8))
+FH=float(os.environ.get("FH",18.5)); FT=float(os.environ.get("FT",0.75)); KN0=8; KW=float(os.environ.get("KW",46)); KN=int(os.environ.get("KN",8)); TAPER=float(os.environ.get("TAPER",8))
 HP=float(sys.argv[1]) if len(sys.argv)>1 else 84.0
 PLATES={ # name: (qty, drives/plate, carry W/drive, L, W, tb, nfins, hfin, tfin[, fin side, standoff mm])
- "knee":      (4,2,6.0,100,48,1.5,8,FH,1.0,"out",0.0),    # D93 rev4 (D91: fins outward at 6 mm pitch (48/8), in stream beyond L51 26
+ "knee":      (4,2,6.0,100,KW,1.5,KN,FH,FT,"out",0.0),    # D93 rev4 (D91: fins outward at 6 mm pitch (48/8), in stream beyond L51 26
  "hip_pitch": (4,1,6.2, HP,HP,1.5, 0,0,0),
  "ankle":     (4,1,3.0, 60,56,1.5, 0,0,0),
  "shoulder_pitch":(2,1,4.2,80,80,1.5,0,0,0),
@@ -66,7 +66,7 @@ for n,(q,nd,pc,L,W,tb,nf,hf,tf,side,so) in PLATES.items():
         A=(L*W + nf*2*hf*L + nf*tf*L - nf*tf*L)/1e6 - 0.0  # base outer (roots~tips), fin faces
         A-=nd*4*math.pi*1.2**2/1e6
         A-=nf*2*(TAPER**2/2)/1e6   # D93 45 deg taper: triangle lost on both fin faces
-        A_ref=(L*W+nf*2*18.0*L)/1e6-nd*4*math.pi*1.2**2/1e6   # Thermal rev4 reference: 18 mm, no taper -> UA 0.246, standing 0.135
+        A_ref=(L*48+8*2*18.0*L)/1e6-nd*4*math.pi*1.2**2/1e6   # Thermal rev4 reference: 18 mm, no taper -> UA 0.246, standing 0.135
         thermal_rev4=dict(UA_h8_cal=round(0.246*A/A_ref,4),UA_stand_cal=round(0.135*A/A_ref,4),
             T_stand_duty_C=round(35+(75.5-35-3.6*RPAD)*A_ref/A+3.6*RPAD,1))
     res={}

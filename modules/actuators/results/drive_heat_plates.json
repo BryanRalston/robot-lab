@@ -5,25 +5,25 @@
   "standoff_mm": 0.0,
   "drives_per_plate": 2,
   "L": 100,
-  "W": 48,
+  "W": 46.0,
   "t_base": 1.5,
   "fins": 8,
   "fin_h": 18.5,
-  "fin_t": 1.0,
-  "area_m2": 0.0339,
-  "fin_eta": 0.989,
-  "mass_g": 58.4,
+  "fin_t": 0.75,
+  "area_m2": 0.0337,
+  "fin_eta": 0.986,
+  "mass_g": 47.8,
   "T_base_C": {
-   "duty_h8": 63.0,
-   "carry_cont_h8": 81.6,
-   "carry_cont_h12": 66.7
+   "duty_h8": 63.2,
+   "carry_cont_h8": 82.0,
+   "carry_cont_h12": 66.9
   },
   "pass_duty_h8": true,
-  "UA_h8_WK": 0.2679,
+  "UA_h8_WK": 0.2654,
   "thermal_rev4_scaled": {
-   "UA_h8_cal": 0.2481,
-   "UA_stand_cal": 0.1362,
-   "T_stand_duty_C": 75.2
+   "UA_h8_cal": 0.2466,
+   "UA_stand_cal": 0.1354,
+   "T_stand_duty_C": 75.4
   },
   "taper_mm": 8.0,
   "step": "cad/drive_plate_knee.step"
@@ -98,9 +98,9 @@
   "step": "cad/drive_plate_shoulder_pitch.step"
  },
  "_total": {
-  "plates_g": 335.1,
+  "plates_g": 314.0,
   "standoff_hw_g": 43.2,
-  "total_kg": 0.378,
+  "total_kg": 0.357,
   "r136_booked_as_addition_kg": "in -0.25 net Elmo credit (Thermal +0.21..0.26)"
  },
  "_L51_envelope": {
@@ -109,7 +109,7 @@
   "fin_protrusion_beyond_26_mm": 18.5,
   "fin_top_mm": 44.5,
   "depth_margin_mm": 7.0,
-  "y_margin_mm": 4,
+  "y_margin_mm": 6.0,
   "z_margin_mm": 4,
   "drives_on_plate_z_mm": 75.0,
   "ok": true
