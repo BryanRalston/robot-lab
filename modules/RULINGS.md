@@ -1435,3 +1435,13 @@ The +0.36 pair bearing delta is confirmed by catalog (IKO 4010 0.15 vs 7013 0.38
 ## R-142 — Safe-sit latch threshold (Controls 8cbf083) and heat plates rev 2 (Actuators P-153/D90 af482e1) — 2026-10-21
 1. The R-141 controlled stop latches at a 0x22A2 reading ≥83 °C. If the drive truncates, a reading of 83 means the true temperature is no higher than 83.99, leaving ≥1.0 K before the 85 °C trip, or about 3.3 s at 0.3 K/s, which covers the 1.25 s [EST] sit about 2.6×. 84 °C leaves zero margin in the worst case and is rejected. The rest of the curve and the <78 resume are unchanged. 83 °C stays even if Electronics' bench shows rounding; tightening further needs a ruling. Controls must measure the real sit time in sim; if it exceeds 2.5 s, this comes back.
 2. Heat plates rev 2: +0.008 booked at full (hip pitch plate 84 mm for ≤72 °C, knee fins moved, PE washers). Credible mass ~68.32 → ~68.33 kg. Knee stack clash closed at 23.0/26 mm, so the R-141 §3 item is closed; Thermal's check of the 4 mm femur gap and fin airflow is still pending.
+
+## R-143 — Knee heat plate rev 3, 13 mm external fins (Actuators P-153/D90-D91 194f615) — 2026-10-21
+1. R-142 §2 knee closure is superseded: Thermal failed rev 2. Rev 3 (UA 0.203 vs 0.185 needed, 71.5 °C at duty, 26 mm depth unchanged, 7 mm plug gap) meets the thermal requirement.
+2. The 13 mm fin protrusion is CONDITIONALLY accepted:
+   a. ID and Legs sweep the full range of motion (knee 0–145°, leg-to-leg, seated, kneeling) with ≥3 mm clearance.
+   b. Touch safety: the exposed fins are a human-contact surface at ~71.5 °C. Test & Reliability checks them against ISO 13732-1 contact-burn thresholds for bare or anodised metal. If they fail, a perforated guard is required (mass at full, and Thermal re-checks the UA with the guard).
+   c. Fall/side impact: Legs shows the fins and window survive the R-127 fall case or are sacrificial without opening the drive bay.
+   Until a–c pass, the protrusion is held and G2/G3 stay open.
+3. Binding interface condition: the back faces of the hip pitch, ankle and shoulder plates face structure at ≤50 °C, never the hip pitch housing. This goes into CONTRACTS §1c when the plate drawings publish.
+4. Mass: plates total 0.355, +0.008 over R-142, booked at full. Credible mass ~68.33 → ~68.34 kg.
