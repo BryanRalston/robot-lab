@@ -34,3 +34,20 @@
 ## 5. Cartridge spec additions (T&R b1fe48f)
 - **Dynamic crush coupon per lot:** drop or impact at **5.7 m/s**. Peak force ≤ **29.0 kN** (98 × 98 face, 0°), plateau within the R-102 band (quasi-static equivalent 19.5–22.3 kN). Record densification strain.
 - **Pre-crush inspection:** pre-crush depth and evenness (no cell tearing; first-peak removed, initial peak ≤ 1.05 × plateau), dimensional check 98 × 98 × 116 ±0.5, bond-face flatness ≤ 0.2 mm, ribbon direction marked (L along z).
+
+## 3c-final (aligned to model_v4 pack), coarse run 2026-10-21
+- **Geometry:** bay box set to the model_v4 pack envelope (pack x −80.5…104.5, y ±110, sim z 129.6–273.6, 144 mm tall) plus a 4 mm wall: box x −84.5…108.5, y ±115, z 120–278. 4 mm land webs under the land. Front window y ±56. Lid 1.5 mm is the baseline; 3 mm is the variant (fea_job3c_lid3.yaml). **R3 fillets were NOT modelled** (left for the fine mesh).
+- **CLASH: OPEN.** The 116 mm core plus socket wall (land x 56–59, core x 56–172, z 171–269) overlaps the pack's front-top corner and the box front web by about 48–52 mm in x. The bulkhead also sits inside the pack envelope. Minimum-change options:
+  - (i) Notch the pack's front-top corner by about 52×110×100 mm and relocate about 10 cells [EST] (Electronics). Can be combined with moving the pack rear 26.5 mm to the shell inner wall. This is the recommended option.
+  - (ii) Move the skin out 52 mm to x ≈227 (ID standout).
+  - (iii) A 64 mm core fails the 57 mm stroke, so it is rejected.
+- **Coarse results, 1.5 mm lid / 3 mm lid:**
+  - SF_bulkhead: LC1a 0.74/0.80, LC1b 0.43/0.52, LC1c 1.01/1.10, LC1u 0.64/0.70.
+  - SF_pelvis: about 0.33/0.27/0.41/0.28.
+  - SF_posts: about 0.16/0.13/0.20/0.14.
+  - Land deflection 138 mm at 29 kN: fails. Mode 1: 37.6/36.5 Hz, fails. Buckling 18/17, passes. LC2 passes.
+  - **Model artefact:** the aligned box floor (z 120) no longer touches the pelvis, so the whole load path runs through the two stand-in posts. The previous box run (floor tied to the pelvis) gave about 19 MN/m and 382 Hz. Next step: tie the floor to the pelvis deck (the floor at z 120 needs to meet the pelvis top) or make the box sides the waist path. Re-run after that.
+- **Mass (mesh, full):**
+  - 1.5 mm lid: box + bulkhead 4.47 + posts 0.57 = 5.04 kg, against job 3's 1.99 kg → +3.05 gross. With the same enclosure credit as before (−0.74), net **+2.31 kg [CALC]**.
+  - 3 mm lid: 5.20 kg → +3.21 gross, net **+2.47 kg**.
+  - This supersedes the +0.692 net figure.

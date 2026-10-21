@@ -1,4 +1,4 @@
-# FEA job 3c (T&R b1fe48f CHEST_DESIGN_LOAD.md; R-149; Robot Lab job 3 ruling): closed pack-bay torsion box replaces posts (full mass), model_v4 pelvis + 8 mm deck, partition above pack.
+# FEA job 3c-final (T&R b1fe48f; R-149; Electronics 1a23584): bay box aligned to model_v4 pack, land window + 4 mm land webs, waist posts, partition above lid. Lid variant: set bay_box.t_lid 3.0.
 # Run: python fea_job3.py --cfg fea_job3c.yaml --out fea/job3c
 mesh:
   size: 6.0
@@ -53,23 +53,25 @@ geometry:
     grain: "QI 0/\xB145/90"
     mat: CFRP_QI
     width_y: 260
-    height_z: 95
+    height_z: 20
     t: 1.0
     x0: -10
-    z0: 205
+    z0: 280
   posts:
     path: single
-    stock: from bulkhead stock 3.0 in
+    stock: 7075 waist path stand-in
     grain: L along z
     allowable: 257
     mat: Al7075T651
-    y: []
-    w_y: 20
+    y:
+    - -60
+    - 60
+    w_y: 60
   ethercat_bosses:
     dia: 3.2
     dx: 70
-    dz: 50
-    z_c: 250
+    dz: 8
+    z_c: 290
   pelvis:
     path: single
     stock: 7075-T651 plate 2.5 in (63.5 mm)
@@ -84,21 +86,44 @@ geometry:
     deck_t: 8
     deck_x: 160
     deck_y: 364
-  sternum_box: {web_y: [-60, 60], x_rear: -84, t: 3, t_cap: 3, note: 'closed sternum box: 2 shear webs + top cap tie the bulkhead/land back to the bay rear web; full mass'}
-  bay_box:
-    vent: {dia: 25, y: 0, z: 40, part: 'GORE MultiVent (opens 50 mbar, 50 L/s @ 180 mbar)', note: 'rear web, >=40 mm from web/lid joints'}
-    y: 115
-    x_front: 106
+  sternum_box:
+    web_y:
+    - -60
+    - 60
     x_rear: -84
-    z0: 0
-    z1: 140
+    t: 3
+    t_cap: 3
+    note: 'closed sternum box: 2 shear webs + top cap tie the bulkhead/land back to the bay rear web; full mass'
+  bay_box:
+    vent:
+      dia: 25
+      y: 0
+      z: 160
+      part: GORE MultiVent
+      note: rear web low, >=40 mm from joints
+    y: 115
+    x_front: 108.5
+    x_rear: -84.5
+    z0: 120
+    z1: 278
     t_side: 3
     t_web: 2
     t_lid: 1.5
     path: single
     mat: Al7075T651
     allowable: 257
-    note: job 3c closed pack-bay torsion box (sides = pack rail walls, lid = pack lid); full mass
+    note: '3c-final: aligned to model_v4 pack 185x220x144 (global z 1409.6-1553.6 = sim-torso z 129.6-273.6, x -80.5..104.5, y +-110); floor = model_v4 torso floor 8 mm (existing torso line); front window
+      for land/core (pack notch option)'
+    t_floor: 8
+    front_window:
+      y: 56
+      z0: 165
+      z1: 275
+    land_web:
+      y: 56
+      t: 4
+      z0: 160
+      z1: 278
 load_cases:
   LC1a_29kN_normal:
     target: land

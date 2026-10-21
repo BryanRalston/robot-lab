@@ -1,0 +1,1116 @@
+{
+ "mesh_h": 25.0,
+ "element": "C3D10",
+ "solver": "calculix",
+ "nodes": 26319,
+ "elements_skipped_not_tet10": 0,
+ "parts": {
+  "bulkhead": 9283,
+  "partition": 222,
+  "pelvis": 3399,
+  "posts": 432
+ },
+ "set_sizes": {
+  "fixed": 537,
+  "land": 285,
+  "land_off": 73,
+  "shoulder_flange_L": 94,
+  "pelvis_top": 873,
+  "partition": 146,
+  "ethercat_bosses": 54
+ },
+ "shared_nodes": {
+  "bulkhead|partition": 186,
+  "bulkhead|pelvis": 0,
+  "bulkhead|posts": 169,
+  "partition|pelvis": 0,
+  "partition|posts": 0,
+  "pelvis|posts": 66
+ },
+ "mass_kg": {
+  "bulkhead": 4.4703,
+  "partition": 0.0081,
+  "pelvis": 3.2131,
+  "posts": 0.5662
+ },
+ "mass_kg_total": 8.2577,
+ "mass_detail": {
+  "bulkhead": {
+   "mat": "Al7075T651",
+   "volume_mm3": 1590861.5,
+   "kg": 4.4703
+  },
+  "partition": {
+   "mat": "CFRP_QI",
+   "volume_mm3": 5200.0,
+   "kg": 0.0081
+  },
+  "pelvis": {
+   "mat": "Al7075T651",
+   "volume_mm3": 1143456.0,
+   "kg": 3.2131
+  },
+  "posts": {
+   "mat": "Al7075T651",
+   "volume_mm3": 201497.5,
+   "kg": 0.5662
+  }
+ },
+ "quality_min": 0.00107,
+ "quality_lt_0.01": 223,
+ "singularity_band_mm": 5.0,
+ "criteria": {
+  "SF_min": 1.0,
+  "land_defl_max": 5.5,
+  "mode1_min_hz": 80,
+  "buckling_min": 1.5,
+  "note": "T&R b1fe48f: SF>=2 stacking and 0.05 mm gate deleted; SF 1.0 against per-case allowables; LC2 R-127 (vM<=A-basis/1.5)"
+ },
+ "cases": {
+  "LC1a_29kN_normal": {
+   "deck": "/tmp/fea_job3c/LC1a_29kN_normal.inp",
+   "solved": true,
+   "seconds": 11.0,
+   "ccx_rc": 0,
+   "applied_F": [
+    -29000,
+    0,
+    0
+   ],
+   "reaction_F": [
+    28999.891,
+    -0.0,
+    -0.001
+   ],
+   "force_residual_N": 0.1094,
+   "equilibrium_pass": true,
+   "checks": {
+    "SF_bulkhead": {
+     "path": "single",
+     "allowable": 386,
+     "vm_max": 525.34,
+     "vm_loc_mm": [
+      106.0,
+      -53.0,
+      163.75
+     ],
+     "vm_struct": 525.34,
+     "vm_struct_loc_mm": [
+      106.0,
+      -53.0,
+      163.75
+     ],
+     "SF": 0.735,
+     "SF_raw": 0.735,
+     "pass": false
+    },
+    "SF_partition": {
+     "path": "multi",
+     "allowable": 450,
+     "vm_max": 12.09,
+     "vm_loc_mm": [
+      -9.75,
+      49.72,
+      282.12
+     ],
+     "vm_struct": 12.09,
+     "vm_struct_loc_mm": [
+      -9.75,
+      49.72,
+      282.12
+     ],
+     "SF": 37.207,
+     "SF_raw": 37.207,
+     "pass": true,
+     "SF_vs_320": 26.458
+    },
+    "SF_pelvis": {
+     "path": "single",
+     "allowable": 406,
+     "vm_max": 1216.96,
+     "vm_loc_mm": [
+      34.26,
+      86.65,
+      -2.0
+     ],
+     "vm_struct": 1216.96,
+     "vm_struct_loc_mm": [
+      34.26,
+      86.65,
+      -2.0
+     ],
+     "SF": 0.334,
+     "SF_raw": 0.334,
+     "pass": false
+    },
+    "SF_posts": {
+     "path": "single",
+     "allowable": 386,
+     "vm_max": 2467.45,
+     "vm_loc_mm": [
+      41.5,
+      86.56,
+      12.79
+     ],
+     "vm_struct": 2467.45,
+     "vm_struct_loc_mm": [
+      41.5,
+      86.56,
+      12.79
+     ],
+     "SF": 0.156,
+     "SF_raw": 0.156,
+     "pass": false,
+     "vm_ligament": 1487.46,
+     "vm_ligament_loc_mm": [
+      41.5,
+      -85.58,
+      60.0
+     ],
+     "n_ligament": 130,
+     "SF_ligament": 0.26
+    },
+    "land_defl": {
+     "mm": 138.10166,
+     "limit_mm": 5.5,
+     "pass": false
+    },
+    "buckling": {
+     "factor": 18.407,
+     "all": [
+      18.407,
+      27.292
+     ],
+     "pass": true
+    },
+    "equilibrium": {
+     "residual_N": 0.1094,
+     "pass": true
+    }
+   }
+  },
+  "LC1b_29kN_offset25": {
+   "deck": "/tmp/fea_job3c/LC1b_29kN_offset25.inp",
+   "solved": true,
+   "seconds": 3.2,
+   "ccx_rc": 0,
+   "applied_F": [
+    -29000,
+    0,
+    0
+   ],
+   "reaction_F": [
+    28999.979,
+    0.0,
+    -0.002
+   ],
+   "force_residual_N": 0.0211,
+   "equilibrium_pass": true,
+   "checks": {
+    "SF_bulkhead": {
+     "path": "single",
+     "allowable": 386,
+     "vm_max": 982.38,
+     "vm_loc_mm": [
+      55.49,
+      49.35,
+      267.15
+     ],
+     "vm_struct": 902.95,
+     "vm_struct_loc_mm": [
+      106.0,
+      -53.0,
+      163.75
+     ],
+     "SF": 0.427,
+     "SF_raw": 0.393,
+     "pass": false
+    },
+    "SF_partition": {
+     "path": "multi",
+     "allowable": 450,
+     "vm_max": 42.66,
+     "vm_loc_mm": [
+      -9.75,
+      49.72,
+      282.12
+     ],
+     "vm_struct": 42.66,
+     "vm_struct_loc_mm": [
+      -9.75,
+      49.72,
+      282.12
+     ],
+     "SF": 10.548,
+     "SF_raw": 10.548,
+     "pass": true,
+     "SF_vs_320": 7.5
+    },
+    "SF_pelvis": {
+     "path": "single",
+     "allowable": 406,
+     "vm_max": 1502.61,
+     "vm_loc_mm": [
+      34.26,
+      86.65,
+      -2.0
+     ],
+     "vm_struct": 1502.61,
+     "vm_struct_loc_mm": [
+      34.26,
+      86.65,
+      -2.0
+     ],
+     "SF": 0.27,
+     "SF_raw": 0.27,
+     "pass": false
+    },
+    "SF_posts": {
+     "path": "single",
+     "allowable": 386,
+     "vm_max": 3063.88,
+     "vm_loc_mm": [
+      41.5,
+      86.56,
+      12.79
+     ],
+     "vm_struct": 3063.88,
+     "vm_struct_loc_mm": [
+      41.5,
+      86.56,
+      12.79
+     ],
+     "SF": 0.126,
+     "SF_raw": 0.126,
+     "pass": false,
+     "vm_ligament": 1814.14,
+     "vm_ligament_loc_mm": [
+      41.5,
+      85.14,
+      60.0
+     ],
+     "n_ligament": 130,
+     "SF_ligament": 0.213
+    },
+    "land_defl": {
+     "mm": 167.42714,
+     "limit_mm": 5.5,
+     "pass": false
+    },
+    "equilibrium": {
+     "residual_N": 0.0211,
+     "pass": true
+    }
+   }
+  },
+  "LC1c_25deg": {
+   "deck": "/tmp/fea_job3c/LC1c_25deg.inp",
+   "solved": true,
+   "seconds": 3.1,
+   "ccx_rc": 0,
+   "applied_F": [
+    -21200,
+    9900,
+    0
+   ],
+   "reaction_F": [
+    21200.011,
+    -9899.988,
+    0.001
+   ],
+   "force_residual_N": 0.0163,
+   "equilibrium_pass": true,
+   "checks": {
+    "SF_bulkhead": {
+     "path": "single",
+     "allowable": 386,
+     "vm_max": 382.23,
+     "vm_loc_mm": [
+      106.0,
+      -53.0,
+      163.75
+     ],
+     "vm_struct": 382.23,
+     "vm_struct_loc_mm": [
+      106.0,
+      -53.0,
+      163.75
+     ],
+     "SF": 1.01,
+     "SF_raw": 1.01,
+     "pass": true
+    },
+    "SF_partition": {
+     "path": "multi",
+     "allowable": 450,
+     "vm_max": 9.34,
+     "vm_loc_mm": [
+      -9.75,
+      49.72,
+      282.12
+     ],
+     "vm_struct": 9.34,
+     "vm_struct_loc_mm": [
+      -9.75,
+      49.72,
+      282.12
+     ],
+     "SF": 48.18,
+     "SF_raw": 48.18,
+     "pass": true,
+     "SF_vs_320": 34.262
+    },
+    "SF_pelvis": {
+     "path": "single",
+     "allowable": 406,
+     "vm_max": 1001.24,
+     "vm_loc_mm": [
+      34.26,
+      86.65,
+      -2.0
+     ],
+     "vm_struct": 1001.24,
+     "vm_struct_loc_mm": [
+      34.26,
+      86.65,
+      -2.0
+     ],
+     "SF": 0.405,
+     "SF_raw": 0.405,
+     "pass": false
+    },
+    "SF_posts": {
+     "path": "single",
+     "allowable": 386,
+     "vm_max": 1937.02,
+     "vm_loc_mm": [
+      41.5,
+      86.56,
+      12.79
+     ],
+     "vm_struct": 1937.02,
+     "vm_struct_loc_mm": [
+      41.5,
+      86.56,
+      12.79
+     ],
+     "SF": 0.199,
+     "SF_raw": 0.199,
+     "pass": false,
+     "vm_ligament": 1100.72,
+     "vm_ligament_loc_mm": [
+      41.5,
+      85.14,
+      60.0
+     ],
+     "n_ligament": 130,
+     "SF_ligament": 0.351
+    },
+    "land_defl": {
+     "mm": 101.33521,
+     "limit_mm": 5.5,
+     "pass": false
+    },
+    "equilibrium": {
+     "residual_N": 0.0163,
+     "pass": true
+    }
+   }
+  },
+  "LC1u_43p5kN_ultimate": {
+   "deck": "/tmp/fea_job3c/LC1u_43p5kN_ultimate.inp",
+   "solved": true,
+   "seconds": 3.1,
+   "ccx_rc": 0,
+   "applied_F": [
+    -43500,
+    0,
+    0
+   ],
+   "reaction_F": [
+    43500.12,
+    0.001,
+    0.002
+   ],
+   "force_residual_N": 0.1198,
+   "equilibrium_pass": true,
+   "checks": {
+    "SF_bulkhead": {
+     "path": "single",
+     "allowable": 504,
+     "vm_max": 788.02,
+     "vm_loc_mm": [
+      106.0,
+      -53.0,
+      163.75
+     ],
+     "vm_struct": 788.02,
+     "vm_struct_loc_mm": [
+      106.0,
+      -53.0,
+      163.75
+     ],
+     "SF": 0.64,
+     "SF_raw": 0.64,
+     "pass": false
+    },
+    "SF_partition": {
+     "path": "multi",
+     "allowable": 600,
+     "vm_max": 18.14,
+     "vm_loc_mm": [
+      -9.75,
+      49.72,
+      282.12
+     ],
+     "vm_struct": 18.14,
+     "vm_struct_loc_mm": [
+      -9.75,
+      49.72,
+      282.12
+     ],
+     "SF": 33.072,
+     "SF_raw": 33.072,
+     "pass": true,
+     "SF_vs_320": 17.639
+    },
+    "SF_pelvis": {
+     "path": "single",
+     "allowable": 504,
+     "vm_max": 1825.46,
+     "vm_loc_mm": [
+      34.26,
+      86.65,
+      -2.0
+     ],
+     "vm_struct": 1825.46,
+     "vm_struct_loc_mm": [
+      34.26,
+      86.65,
+      -2.0
+     ],
+     "SF": 0.276,
+     "SF_raw": 0.276,
+     "pass": false
+    },
+    "SF_posts": {
+     "path": "single",
+     "allowable": 504,
+     "vm_max": 3701.2,
+     "vm_loc_mm": [
+      41.5,
+      86.56,
+      12.79
+     ],
+     "vm_struct": 3701.2,
+     "vm_struct_loc_mm": [
+      41.5,
+      86.56,
+      12.79
+     ],
+     "SF": 0.136,
+     "SF_raw": 0.136,
+     "pass": false,
+     "vm_ligament": 2231.2,
+     "vm_ligament_loc_mm": [
+      41.5,
+      -85.58,
+      60.0
+     ],
+     "n_ligament": 130,
+     "SF_ligament": 0.226
+    },
+    "land_defl": {
+     "mm": 207.15384,
+     "limit_mm": 5.5,
+     "pass": false
+    },
+    "equilibrium": {
+     "residual_N": 0.1198,
+     "pass": true
+    }
+   }
+  },
+  "LC2_side_fall": {
+   "deck": "/tmp/fea_job3c/LC2_side_fall.inp",
+   "solved": true,
+   "seconds": 2.8,
+   "ccx_rc": 0,
+   "applied_F": [
+    0,
+    -9000,
+    0
+   ],
+   "reaction_F": [
+    -0.0,
+    9000.002,
+    0.001
+   ],
+   "force_residual_N": 0.0019,
+   "equilibrium_pass": true,
+   "checks": {
+    "SF_bulkhead": {
+     "path": "single",
+     "allowable": 257,
+     "vm_max": 58.0,
+     "vm_loc_mm": [
+      44.5,
+      -28.03,
+      142.99
+     ],
+     "vm_struct": 48.58,
+     "vm_struct_loc_mm": [
+      33.65,
+      29.12,
+      124.0
+     ],
+     "SF": 5.291,
+     "SF_raw": 4.431,
+     "pass": true
+    },
+    "SF_partition": {
+     "path": "multi",
+     "allowable": 450,
+     "vm_max": 17.97,
+     "vm_loc_mm": [
+      -9.75,
+      -49.73,
+      282.12
+     ],
+     "vm_struct": 17.97,
+     "vm_struct_loc_mm": [
+      -9.75,
+      -49.73,
+      282.12
+     ],
+     "SF": 25.043,
+     "SF_raw": 25.043,
+     "pass": true,
+     "SF_vs_320": 17.808
+    },
+    "SF_pelvis": {
+     "path": "single",
+     "allowable": 271,
+     "vm_max": 229.19,
+     "vm_loc_mm": [
+      59.99,
+      -92.05,
+      -2.0
+     ],
+     "vm_struct": 229.19,
+     "vm_struct_loc_mm": [
+      59.99,
+      -92.05,
+      -2.0
+     ],
+     "SF": 1.182,
+     "SF_raw": 1.182,
+     "pass": true
+    },
+    "SF_posts": {
+     "path": "single",
+     "allowable": 257,
+     "vm_max": 249.75,
+     "vm_loc_mm": [
+      50.5,
+      86.56,
+      12.79
+     ],
+     "vm_struct": 249.75,
+     "vm_struct_loc_mm": [
+      50.5,
+      86.56,
+      12.79
+     ],
+     "SF": 1.029,
+     "SF_raw": 1.029,
+     "pass": true,
+     "vm_ligament": 61.45,
+     "vm_ligament_loc_mm": [
+      47.5,
+      85.78,
+      41.41
+     ],
+     "n_ligament": 130,
+     "SF_ligament": 4.182
+    },
+    "land_defl": {
+     "mm": 1.96064,
+     "limit_mm": 5.5,
+     "pass": null
+    },
+    "equilibrium": {
+     "residual_N": 0.0019,
+     "pass": true
+    }
+   }
+  },
+  "LC3_waist_reach": {
+   "deck": "/tmp/fea_job3c/LC3_waist_reach.inp",
+   "solved": true,
+   "seconds": 2.7,
+   "ccx_rc": 0,
+   "applied_F": [
+    0,
+    0,
+    0
+   ],
+   "reaction_F": [
+    0.0,
+    -0.0,
+    0.001
+   ],
+   "force_residual_N": 0.0005,
+   "equilibrium_pass": true,
+   "checks": {
+    "SF_bulkhead": {
+     "path": "single",
+     "allowable": 257,
+     "vm_max": 0.09,
+     "vm_loc_mm": [
+      45.98,
+      24.85,
+      122.0
+     ],
+     "vm_struct": 0.09,
+     "vm_struct_loc_mm": [
+      45.98,
+      24.85,
+      122.0
+     ],
+     "SF": 2718.645,
+     "SF_raw": 2718.645,
+     "pass": true
+    },
+    "SF_partition": {
+     "path": "multi",
+     "allowable": 450,
+     "vm_max": 0.0,
+     "vm_loc_mm": [
+      -9.75,
+      -70.06,
+      282.12
+     ],
+     "vm_struct": 0.0,
+     "vm_struct_loc_mm": [
+      -9.75,
+      -70.06,
+      282.12
+     ],
+     "SF": 213846.416,
+     "SF_raw": 213846.416,
+     "pass": true,
+     "SF_vs_320": 152068.562
+    },
+    "SF_pelvis": {
+     "path": "single",
+     "allowable": 271,
+     "vm_max": 5.25,
+     "vm_loc_mm": [
+      81.75,
+      -97.0,
+      -3.0
+     ],
+     "vm_struct": 5.25,
+     "vm_struct_loc_mm": [
+      81.75,
+      -97.0,
+      -3.0
+     ],
+     "SF": 51.633,
+     "SF_raw": 51.633,
+     "pass": true
+    },
+    "SF_posts": {
+     "path": "single",
+     "allowable": 257,
+     "vm_max": 4.33,
+     "vm_loc_mm": [
+      46.0,
+      32.5,
+      3.0
+     ],
+     "vm_struct": 2.17,
+     "vm_struct_loc_mm": [
+      43.0,
+      84.06,
+      6.79
+     ],
+     "SF": 118.644,
+     "SF_raw": 59.357,
+     "pass": true,
+     "vm_ligament": 0.25,
+     "vm_ligament_loc_mm": [
+      47.5,
+      85.78,
+      41.41
+     ],
+     "n_ligament": 130,
+     "SF_ligament": 1033.08
+    },
+    "land_defl": {
+     "mm": 0.01439,
+     "limit_mm": 5.5,
+     "pass": null
+    },
+    "equilibrium": {
+     "residual_N": 0.0005,
+     "pass": true
+    }
+   }
+  },
+  "LC4_pack_10g": {
+   "deck": "/tmp/fea_job3c/LC4_pack_10g.inp",
+   "solved": true,
+   "seconds": 2.7,
+   "ccx_rc": 0,
+   "applied_F": [
+    0,
+    0,
+    -858
+   ],
+   "reaction_F": [
+    -0.0,
+    0.0,
+    858.0
+   ],
+   "force_residual_N": 0.0003,
+   "equilibrium_pass": true,
+   "checks": {
+    "SF_bulkhead": {
+     "path": "single",
+     "allowable": 257,
+     "vm_max": 11.94,
+     "vm_loc_mm": [
+      106.0,
+      -53.0,
+      163.75
+     ],
+     "vm_struct": 11.94,
+     "vm_struct_loc_mm": [
+      106.0,
+      -53.0,
+      163.75
+     ],
+     "SF": 21.532,
+     "SF_raw": 21.532,
+     "pass": true
+    },
+    "SF_partition": {
+     "path": "multi",
+     "allowable": 450,
+     "vm_max": 23.06,
+     "vm_loc_mm": [
+      -9.5,
+      70.06,
+      282.12
+     ],
+     "vm_struct": 23.06,
+     "vm_struct_loc_mm": [
+      -9.5,
+      70.06,
+      282.12
+     ],
+     "SF": 19.513,
+     "SF_raw": 19.513,
+     "pass": true,
+     "SF_vs_320": 13.876
+    },
+    "SF_pelvis": {
+     "path": "single",
+     "allowable": 271,
+     "vm_max": 13.08,
+     "vm_loc_mm": [
+      34.26,
+      86.65,
+      -2.0
+     ],
+     "vm_struct": 13.08,
+     "vm_struct_loc_mm": [
+      34.26,
+      86.65,
+      -2.0
+     ],
+     "SF": 20.712,
+     "SF_raw": 20.712,
+     "pass": true
+    },
+    "SF_posts": {
+     "path": "single",
+     "allowable": 257,
+     "vm_max": 22.95,
+     "vm_loc_mm": [
+      41.5,
+      -86.49,
+      12.94
+     ],
+     "vm_struct": 22.95,
+     "vm_struct_loc_mm": [
+      41.5,
+      -86.49,
+      12.94
+     ],
+     "SF": 11.196,
+     "SF_raw": 11.196,
+     "pass": true,
+     "vm_ligament": 15.78,
+     "vm_ligament_loc_mm": [
+      41.5,
+      -85.58,
+      60.0
+     ],
+     "n_ligament": 130,
+     "SF_ligament": 16.291
+    },
+    "land_defl": {
+     "mm": 1.43254,
+     "limit_mm": 5.5,
+     "pass": null
+    },
+    "equilibrium": {
+     "residual_N": 0.0003,
+     "pass": true
+    }
+   }
+  },
+  "LC5_bosses_50g": {
+   "deck": "/tmp/fea_job3c/LC5_bosses_50g.inp",
+   "solved": true,
+   "seconds": 2.8,
+   "ccx_rc": 0,
+   "applied_F": [
+    -25,
+    0,
+    -25
+   ],
+   "reaction_F": [
+    25.0,
+    0.0,
+    25.0
+   ],
+   "force_residual_N": 0.0,
+   "equilibrium_pass": true,
+   "checks": {
+    "SF_bulkhead": {
+     "path": "single",
+     "allowable": 257,
+     "vm_max": 1.32,
+     "vm_loc_mm": [
+      106.0,
+      -53.0,
+      163.75
+     ],
+     "vm_struct": 1.32,
+     "vm_struct_loc_mm": [
+      106.0,
+      -53.0,
+      163.75
+     ],
+     "SF": 195.155,
+     "SF_raw": 195.155,
+     "pass": true
+    },
+    "SF_partition": {
+     "path": "multi",
+     "allowable": 450,
+     "vm_max": 1.39,
+     "vm_loc_mm": [
+      -9.75,
+      -2.93,
+      294.88
+     ],
+     "vm_struct": 1.39,
+     "vm_struct_loc_mm": [
+      -9.75,
+      -2.93,
+      294.88
+     ],
+     "SF": 323.253,
+     "SF_raw": 323.253,
+     "pass": true,
+     "SF_vs_320": 229.869
+    },
+    "SF_pelvis": {
+     "path": "single",
+     "allowable": 271,
+     "vm_max": 1.75,
+     "vm_loc_mm": [
+      34.26,
+      86.65,
+      -2.0
+     ],
+     "vm_struct": 1.75,
+     "vm_struct_loc_mm": [
+      34.26,
+      86.65,
+      -2.0
+     ],
+     "SF": 154.52,
+     "SF_raw": 154.52,
+     "pass": true
+    },
+    "SF_posts": {
+     "path": "single",
+     "allowable": 257,
+     "vm_max": 3.48,
+     "vm_loc_mm": [
+      41.5,
+      86.56,
+      12.79
+     ],
+     "vm_struct": 3.48,
+     "vm_struct_loc_mm": [
+      41.5,
+      86.56,
+      12.79
+     ],
+     "SF": 73.755,
+     "SF_raw": 73.755,
+     "pass": true,
+     "vm_ligament": 2.3,
+     "vm_ligament_loc_mm": [
+      41.5,
+      -85.58,
+      60.0
+     ],
+     "n_ligament": 130,
+     "SF_ligament": 111.693
+    },
+    "land_defl": {
+     "mm": 0.21012,
+     "limit_mm": 5.5,
+     "pass": null
+    },
+    "equilibrium": {
+     "residual_N": 0.0,
+     "pass": true
+    }
+   }
+  },
+  "LC6_stand": {
+   "deck": "/tmp/fea_job3c/LC6_stand.inp",
+   "solved": true,
+   "seconds": 10.1,
+   "ccx_rc": 0,
+   "applied_F": [
+    0,
+    0,
+    -652
+   ],
+   "reaction_F": [
+    -0.0,
+    0.0,
+    652.0
+   ],
+   "force_residual_N": 0.0,
+   "equilibrium_pass": true,
+   "checks": {
+    "SF_bulkhead": {
+     "path": "single",
+     "allowable": 257,
+     "vm_max": 0.09,
+     "vm_loc_mm": [
+      45.98,
+      24.85,
+      122.0
+     ],
+     "vm_struct": 0.09,
+     "vm_struct_loc_mm": [
+      45.98,
+      24.85,
+      122.0
+     ],
+     "SF": 2806.408,
+     "SF_raw": 2806.408,
+     "pass": true
+    },
+    "SF_partition": {
+     "path": "multi",
+     "allowable": 450,
+     "vm_max": 0.0,
+     "vm_loc_mm": [
+      -9.5,
+      70.06,
+      282.12
+     ],
+     "vm_struct": 0.0,
+     "vm_struct_loc_mm": [
+      -9.5,
+      70.06,
+      282.12
+     ],
+     "SF": 233291.255,
+     "SF_raw": 233291.255,
+     "pass": true,
+     "SF_vs_320": 165896.004
+    },
+    "SF_pelvis": {
+     "path": "single",
+     "allowable": 271,
+     "vm_max": 2.25,
+     "vm_loc_mm": [
+      82.75,
+      128.03,
+      -2.0
+     ],
+     "vm_struct": 2.25,
+     "vm_struct_loc_mm": [
+      82.75,
+      128.03,
+      -2.0
+     ],
+     "SF": 120.511,
+     "SF_raw": 120.511,
+     "pass": true
+    },
+    "SF_posts": {
+     "path": "single",
+     "allowable": 257,
+     "vm_max": 1.59,
+     "vm_loc_mm": [
+      43.0,
+      -83.99,
+      6.94
+     ],
+     "vm_struct": 1.59,
+     "vm_struct_loc_mm": [
+      43.0,
+      -83.99,
+      6.94
+     ],
+     "SF": 161.558,
+     "SF_raw": 161.558,
+     "pass": true,
+     "vm_ligament": 0.22,
+     "vm_ligament_loc_mm": [
+      47.5,
+      85.78,
+      41.41
+     ],
+     "n_ligament": 130,
+     "SF_ligament": 1172.076
+    },
+    "land_defl": {
+     "mm": 0.07546,
+     "limit_mm": 5.5,
+     "pass": null
+    },
+    "mode1_hz": {
+     "hz": 37.64,
+     "all_hz": [
+      37.64,
+      140.91,
+      178.63
+     ],
+     "pass": false
+    },
+    "equilibrium": {
+     "residual_N": 0.0,
+     "pass": true
+    }
+   }
+  }
+ },
+ "overall": "FAIL",
+ "wall_s": 43.1
+}

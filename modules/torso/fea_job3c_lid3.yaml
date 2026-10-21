@@ -1,0 +1,219 @@
+# job 3c-final variant: 3 mm lid
+mesh:
+  size: 6.0
+  size_coarse: 25.0
+materials:
+  Al7075T651:
+    E: 70000
+    nu: 0.33
+    rho: 2.81e-09
+    Sy: 480
+    UTS: 560
+    allowable: 320
+  CFRP_QI:
+    E: 50000
+    nu: 0.3
+    rho: 1.55e-09
+    Sy: 450
+geometry:
+  bulkhead:
+    path: single
+    stock: 7075-T651 plate 3.0 in (76 mm; 12 web + 4 land + 60 rib integral)
+    grain: L along y (span); LT/ST governs
+    allowable: 257
+    mat: Al7075T651
+    width_y: 300
+    height_z: 160
+    t: 12
+    x0: 40
+    z0: 140
+  land:
+    size: 101
+    t: 4
+    z_c: 220
+  rib:
+    h: 60
+    t: 6
+  shoulder_flange:
+    y_c: 150
+    bc_dia: 80
+    n_bolt: 8
+    bolt_dia: 8.4
+  grommet:
+    dia: 22
+    y_c: 110
+    z_off: -55
+  bezel_inserts:
+    dia: 5.6
+    pitch: 116
+  partition:
+    path: multi
+    stock: CFRP QI 1.0 mm laminate
+    grain: "QI 0/\xB145/90"
+    mat: CFRP_QI
+    width_y: 260
+    height_z: 20
+    t: 1.0
+    x0: -10
+    z0: 280
+  posts:
+    path: single
+    stock: 7075 waist path stand-in
+    grain: L along z
+    allowable: 257
+    mat: Al7075T651
+    y:
+    - -60
+    - 60
+    w_y: 60
+  ethercat_bosses:
+    dia: 3.2
+    dx: 70
+    dz: 8
+    z_c: 290
+  pelvis:
+    path: single
+    stock: 7075-T651 plate 2.5 in (63.5 mm)
+    grain: L along y
+    allowable: 271
+    mat: Al7075T651
+    width_y: 370
+    depth_x: 170
+    height_z: 104
+    wall: 4
+    z0: -104
+    deck_t: 8
+    deck_x: 160
+    deck_y: 364
+  sternum_box:
+    web_y:
+    - -60
+    - 60
+    x_rear: -84
+    t: 3
+    t_cap: 3
+    note: 'closed sternum box: 2 shear webs + top cap tie the bulkhead/land back to the bay rear web; full mass'
+  bay_box:
+    vent:
+      dia: 25
+      y: 0
+      z: 160
+      part: GORE MultiVent
+      note: rear web low, >=40 mm from joints
+    y: 115
+    x_front: 108.5
+    x_rear: -84.5
+    z0: 120
+    z1: 278
+    t_side: 3
+    t_web: 2
+    t_lid: 3.0
+    path: single
+    mat: Al7075T651
+    allowable: 257
+    note: '3c-final: aligned to model_v4 pack 185x220x144 (global z 1409.6-1553.6 = sim-torso z 129.6-273.6, x -80.5..104.5, y +-110); floor = model_v4 torso floor 8 mm (existing torso line); front window
+      for land/core (pack notch option)'
+    t_floor: 8
+    front_window:
+      y: 56
+      z0: 165
+      z1: 275
+    land_web:
+      y: 56
+      t: 4
+      z0: 160
+      z1: 278
+load_cases:
+  LC1a_29kN_normal:
+    target: land
+    F:
+    - -29000
+    - 0
+    - 0
+    SF_min: 1.0
+    defl_max: 5.5
+    note: T&R b1fe48f limit, uniform on land
+    allowables: &id001
+      bulkhead: 386
+      posts: 386
+      pelvis: 406
+      partition: 450
+  LC1b_29kN_offset25:
+    target: land_off
+    F:
+    - -29000
+    - 0
+    - 0
+    SF_min: 1.0
+    defl_max: 5.5
+    note: offset +25 y/+25 z (quadrant patch)
+    allowables: *id001
+  LC1c_25deg:
+    target: land
+    F:
+    - -21200
+    - 9900
+    - 0
+    SF_min: 1.0
+    defl_max: 5.5
+    note: '25 deg: 21.2 kN normal + 9.9 kN sideways'
+    allowables: *id001
+  LC1u_43p5kN_ultimate:
+    target: land
+    F:
+    - -43500
+    - 0
+    - 0
+    SF_min: 1.0
+    note: 'ultimate: no rupture'
+    allowables:
+      bulkhead: 504
+      posts: 504
+      pelvis: 504
+      partition: 600
+  LC2_side_fall:
+    target: shoulder_flange_L
+    M:
+    - 0
+    - 0
+    - 0
+    F:
+    - 0
+    - -9000
+    - 0
+    note: D71 <=550 N*m via 61 mm lever
+    SF_min: 1.0
+  LC3_waist_reach:
+    target: pelvis_top
+    M:
+    - 0
+    - 306000
+    - 0
+  LC4_pack_10g:
+    target: partition
+    F:
+    - 0
+    - 0
+    - -858
+  LC5_bosses_50g:
+    target: ethercat_bosses
+    F:
+    - -25
+    - 0
+    - -25
+  LC6_stand:
+    target: pelvis_top
+    F:
+    - 0
+    - 0
+    - -652
+fixed: pelvis_bottom
+criteria:
+  SF_min: 1.0
+  land_defl_max: 5.5
+  mode1_min_hz: 80
+  buckling_min: 1.5
+  note: 'T&R b1fe48f: SF>=2 stacking and 0.05 mm gate deleted; SF 1.0 against per-case allowables; LC2 R-127 (vM<=A-basis/1.5)'
+post:
+  freq_case: LC6_stand
+  buckle_case: LC1a_29kN_normal

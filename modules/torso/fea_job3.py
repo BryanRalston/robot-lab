@@ -35,6 +35,11 @@ def build(c):
         al.append(occ.addBox(xf_-bx["t_web"], -Y, z0_, bx["t_web"], 2*Y, z1_-z0_))
         al.append(occ.addBox(xr_, -Y, z0_, bx["t_web"], 2*Y, z1_-z0_))
         al.append(occ.addBox(xr_, -Y, z1_-bx["t_lid"], xf_-xr_, 2*Y, bx["t_lid"]))
+        if bx.get("t_floor"): al.append(occ.addBox(xr_, -Y, z0_, xf_-xr_, 2*Y, bx["t_floor"]))
+        if bx.get("land_web"):   # 4 mm local webs under the land (side walls of the land window), R3 fillets via fillet_r
+            lw = bx["land_web"]
+            for yy in (-lw["y"], lw["y"]-lw["t"]):
+                al.append(occ.addBox(b["x0"], yy, lw["z0"], xf_-b["x0"], lw["t"], lw["z1"]-lw["z0"]))
     sb = g.get("sternum_box")   # job 3c: closed sternum box behind the bulkhead (webs + top cap) tied to the bay rear web
     if sb:
         for yy in sb["web_y"]:
@@ -54,6 +59,8 @@ def build(c):
     for dy in (-1, 1):
         for dz in (-1, 1):
             cuts.append((3, occ.addCylinder(xf+1, dy*bi["pitch"]*0.4, L["z_c"]+dz*bi["pitch"]*0.4, -9, 0, 0, bi["dia"]/2)))
+    if bx and bx.get("front_window"):   # land/core window through the front web
+        fw = bx["front_window"]; cuts.append((3, occ.addBox(bx["x_front"]-bx["t_web"]-1, -fw["y"], fw["z0"], bx["t_web"]+2, 2*fw["y"], fw["z1"]-fw["z0"])))
     if bx and bx.get("vent"):   # UL 2271 vent/burst port in the rear web, aimed down/rearward
         vt = bx["vent"]; cuts.append((3, occ.addCylinder(bx["x_rear"]-1, vt["y"], vt["z"], bx["t_web"]+2, 0, 0, vt["dia"]/2)))
     bulk, _ = occ.cut(bulk, cuts)
@@ -369,7 +376,7 @@ def main():
             shared[f"{k}|{m}"] = len(node_sets[k] & node_sets[m])
     def npair(a, b):
         return shared.get(f"{a}|{b}", shared.get(f"{b}|{a}", 0))
-    pairs = [("posts", "pelvis"), ("posts", "bulkhead"), ("partition", "bulkhead")] + ([] if c["geometry"].get("bay_box") else [("partition", "pelvis")]) + ([("bulkhead", "pelvis")] if c["geometry"].get("bay_box") else [])
+    pairs = [("posts", "pelvis"), ("posts", "bulkhead"), ("partition", "bulkhead")] + ([] if c["geometry"].get("bay_box") else [("partition", "pelvis")]) + ([("bulkhead", "pelvis")] if c["geometry"].get("bay_box") and not c["geometry"]["posts"]["y"] else [])
     for a_, b_ in pairs:
         if not node_sets.get(a_) or not node_sets.get(b_):
             continue   # part absent in this config (e.g. 3c has no posts)
