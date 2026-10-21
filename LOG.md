@@ -11,3 +11,4 @@
 2026-10-21 08:40 RL Thermal: T2 68.0 kg margins (561eb35 condition) → modules/thermal/T2_68KG_MARGINS.md: MET conditionally; knee 115.3 °C at h8 under R-096 duty (4.7 K), hip needs A35 vents (h≥15 ≈108), ankle/shoulder/elbow PASS; bond worst 67.6 ≤70; R-120 pad 56 °C PASS; +1–1.5 K vs 67.1 kg, no pass→fail flips
 2026-10-21 08:17 RL Legs: job 7 ankle-cross brief FINAL rev C per Materials e98d18d/R-125(b): 262 MPa L/LT (MIL-HDBK-5H p.3-348 A-basis 393), stock ≤1.500 in plate (30 mm cross fits, z=ST), σ_ST ≤239 checked, bearing re-derived 295 (was 308), pins P-151
 2026-10-21 08:17 RL Legs: r031_fatigue_fea_brief per R-123 (ca66b9b): 7075 480/560/70 GPa, static allowable 320, peaks 320–335 FAIL; 503/572 source removed
+- 2026-10-21 L: ankle_cross_fea_brief.md FINAL rev D per Materials 95436bf (ANKLE_CROSS_7075.md §4, MIL-HDBK-5H p.3-348): ST 239 stand-in, L/LT 262, tiered bearing 455/381/295 by drawn e/D at ø14, DU liner 250/140 [EST], stock ≤1.500 in.
