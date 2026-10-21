@@ -1,0 +1,62 @@
+{
+ "M": 72.1,
+ "scale": 1.0603,
+ "com": [
+  0.004,
+  0.001,
+  1.032
+ ],
+ "pad_face": [
+  0.144,
+  0.0,
+  1.5
+ ],
+ "Icm": 14.33,
+ "toe": [
+  0.18,
+  0.0,
+  0.0
+ ],
+ "knee": [
+  0.0,
+  0.0,
+  0.5
+ ],
+ "toe_pivot": {
+  "Ip": 93.39,
+  "r_pad": 1.5,
+  "omega": 3.36,
+  "v_pad": 5.04,
+  "v_n": 4.57,
+  "m_eff": 50.5,
+  "E_pad": 527.0,
+  "E_x1.5": 790.5,
+  "stroke_mm": 85.9,
+  "excess_J": 43.0,
+  "bottomed_peak_kN": 30.6,
+  "plateau_to_fit_73.8_kN": 14.7
+ },
+ "knee_pivot": {
+  "Ip": 34.76,
+  "r_pad": 1.01,
+  "omega": 5.51,
+  "v_pad": 5.56,
+  "v_n": 5.04,
+  "m_eff": 41.5,
+  "E_pad": 527.0,
+  "E_x1.5": 790.5,
+  "stroke_mm": 85.9,
+  "excess_J": 43.0,
+  "bottomed_peak_kN": 30.6,
+  "plateau_to_fit_73.8_kN": 14.7
+ },
+ "free_d0.468": {
+  "m_eff": 34.3,
+  "v_n": 4.57,
+  "E_pad": 358.0,
+  "E_x1.5": 537.0,
+  "stroke_mm": 58.3,
+  "plateau_to_fit_73.8_kN": 10.0
+ },
+ "plateau25_kN": 9.21
+}

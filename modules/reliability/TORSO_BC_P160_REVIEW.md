@@ -208,3 +208,28 @@ LC1 for job 3e stays **17.9 kN limit / 26.9 kN ultimate** with the IR BC.
 ### Backward-fall waist case
 - **Agreed with Controls:** 72.1 kg model; starts at −30° and +60° waist; log the waist moment, speed at stop contact and stop energy.
 - **PENDING (Controls).**
+
+## L3 25° chest-only (Arbiter R-158; Controls 1021e37), 2026-10-21 ~11:20 ET
+Script `l3_25deg_pad.py` → `l3_25deg_pad.json` (MuJoCo 3.15 on modules/legs/rl/humanoid_mjx.xml, zero/standing pose, masses ×1.0603 → 72.1 kg).
+
+**(1) Basis found in the repo.** L3 = R-146 uncontrolled tip from standing (HOLD_DERATED → trip → TUCK fails, rigid forward fall), ΔPE 549 J, **527 J to the pad** (R146_PRONE_LANDING.md; this review §basis). Governing energy per RULINGS = 527 × 1.5 = **791 J** (the 824 J = ΔPE × 1.5 in 3eacd56 was my conservative variant and over-counts the 22 J that never reaches the pad). "25°": CHEST_DESIGN_LOAD §3 off-axis factor (25° → ×0.73 normal plateau); Controls 1021e37 defines it as the chest-normal angle off the floor normal at first pad contact. I take it as the angle between the pad normal and the pad-point velocity [EST, equal for a rigid topple]. Pad: chest_pad geom, face at (0.144, 0, 1.50) m standing; 101 × 101 land, 116 mm core, 81.2 mm usable / 73.8 mm with 10 % margin; core CR III 5/32-5052-3.8 (Materials b359af8): 13.0 kN nominal 0° → at 25° ×0.73 and −3 % lot [EST] = **9.21 kN**. Bottomed stiffness k_land ≥ 5.3 MN/m (CHEST_DESIGN_LOAD LC1).
+
+**(2) Energy into the pad (rigid body, pivot impact).** Mass props (scaled): CoM z 1.032 m, I_cm,yy 14.3 kg·m².
+| bound | I about pivot | pad radius | ω at contact | v_pad / v_n (×cos 25°) | m_eff at pad (normal) | E into pad | ×1.5 |
+|---|---|---|---|---|---|---|---|
+| (a1) pivot at toes (standing tip, feet hold) | 93.4 kg·m² | 1.50 m | 3.36 rad/s | 5.04 / 4.57 m/s | 50.5 kg | **527 J (all)** | **791 J** |
+| (a2) pivot at knees | 34.8 | 1.01 | 5.51 | 5.56 / 5.04 | 41.5 | **527 J (all)** | **791 J** |
+| (b) free body (feet/knees slide; same pre-impact state) | – | CoM ⟂ distance to the pad normal 0.468 m | – | 4.57 | 1/(1/m + d²/I_cm) = **34.3 kg** | **358 J** [EST] | **537 J** |
+- **Key point:** with a held pivot the body has one DOF, so a normal pad impulse stops the whole rotation: **all of the KE goes into the pad, whatever the 25° obliquity** (m_eff = I_p/(r cos25)², v_n = ωr cos25 → ½I_pω²). Controls' "full energy into the pad" arithmetic is therefore **correct for the pivoted case**; the rotation only helps when the pivot slides (free body).
+- Free-body caveat: the 169 J not taken at first impact stays in the body; the legs/arms then land (knees, hands). If the knees land *after* the pad, part of that returns to the pad as the trunk rotates about it [not modelled; sim must show].
+
+**(3) Stroke vs 81.2 / 73.8 mm at 9.21 kN.**
+- (a) pivoted, 791 J: **85.9 mm > 81.2 → bottoms** by 43 J. Bottomed peak ≈ 9.21 + √(2 × 43 J × 5.3 MN/m) = **30.6 kN [EST]**, above job 3e's 17.9 limit / 26.9 ultimate (and above 3d's 29.0 limit). At ×1.0 (527 J): 57 mm, fits.
+- (b) free body, 537 J: **58.3 mm ≤ 73.8 → fits** (16 mm spare).
+- To fit (a) at 73.8 mm: 0° nominal plateau ≥ **14.7 kN** (vs 13.0); its dynamic upper bound would be ≈ 19.7 kN (×1.34) > 17.9 LC1 → **not compatible with 3e's reduced LC1.** Equivalent velocity gate: pad-point normal velocity ≤ **4.24 m/s** (toe pivot) / **4.67 m/s** (knee pivot) at first pad contact (E ≤ 453 J).
+
+**(4) R-158: HOLD 3e** (3d at 29.0/43.5 kN continues). Release 3e when Controls' sim (pivot-impact, plateau pad model, ≥ 20 DR runs of the L3 25° topple) shows **either**:
+1. **engagement order**: knees and/or hands/forearm (shoulder pad, LC2) touch **before or within 10 ms of** the chest pad, with log of contact forces showing the chest takes ≤ 680 J (= 9.21 kN × 73.8 mm) incl. the ×1.5; **or**
+2. **pad-point normal velocity** at first pad contact ≤ 4.24 m/s (toe-held) / ≤ 4.67 m/s (knee-held), i.e. E_pad ≤ 453 J; **or**
+3. the feet/knees **slide** (no held pivot) so the free-body bound applies, with the second-stage trunk rotation onto the pad included in the logged pad energy.
+Sim must also log: torso pitch/roll at contact (the 25° definition), CoM height at contact, the pad crush history and any bottoming. Otherwise the fix is outside 3e: a deeper core (stroke ≥ 86 mm usable → ≈ 123 mm core, outside the 116 envelope) or keep LC1 29.0 kN.
