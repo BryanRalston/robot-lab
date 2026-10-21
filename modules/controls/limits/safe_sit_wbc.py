@@ -21,6 +21,7 @@ sys.path[:0] = [LEGS, os.path.join(LEGS, 'wbc')]
 from gait_lib import load, LEG, SOLE
 import controller as _wbcmod
 from controller import WalkController, HALF_W, FC, measured_cop
+from gait_lib import HALFW
 from gait_lib import quat_pitch
 
 # Pelvis pitch reference. controller._wbc holds the pelvis at rpy_R(0, 0, yaw_ref) (line ~841), and that is its
@@ -43,9 +44,26 @@ _src = textwrap.dedent(inspect.getsource(_wbcmod.WalkController._wbc))
 _lit = 'kp, kd, w = 16.0, 3.0, 0.12'
 assert _src.count(_lit) == 1, 'controller._wbc leg posture literal changed'
 _src = _src.replace(_lit, "kp, kd, w = LEG_POSTURE['kp'], LEG_POSTURE['kd'], LEG_POSTURE['w']")
+# R-146(b) toe-pivot contact mode: the sole wrench cone's heel line comes from self.heel_line (default HEEL, the stock
+# value), so a pivoting foot's CoP is confined to the toe line.
+_h = 'heel = HEEL\n'
+assert _src.count(_h) == 1, 'controller._wbc heel-line literal changed'
+_src = _src.replace(_h, "heel = getattr(self, 'heel_line', HEEL)\n")
 _ns = dict(vars(_wbcmod)); _ns['LEG_POSTURE'] = LEG_POSTURE
 exec(compile(_src, _wbcmod.__file__ + ':_wbc[patched]', 'exec'), _ns)
 _wbcmod.WalkController._wbc = _ns['_wbc']
+
+_corners0 = _wbcmod.WalkController._sole_corners
+def _sole_corners_pivot(self, ankle_xy, yaw, margin=0.01):
+    """Support polygon for the ZMP projection. With self.toe_xy set (toe pivot), it is the toe line band
+    [toe - 0.03, toe - 0.005] instead of the flat sole."""
+    tx = getattr(self, 'toe_xy', None)
+    if tx is None:
+        return _corners0(self, ankle_xy, yaw, margin)
+    side = 'l' if ankle_xy[1] > 0 else 'r'
+    t = tx[side]; c, s_ = np.cos(yaw), np.sin(yaw); R = np.array([[c, -s_], [s_, c]])
+    return [t + R @ np.array([x, y]) for x in (-0.03, -0.005) for y in (-HALFW + margin, HALFW - margin)]
+_wbcmod.WalkController._sole_corners = _sole_corners_pivot
 
 DERATE = 0.5
 SETTLE = 0.5
@@ -272,7 +290,7 @@ def run_kneel(T_crouch=2.0, T_kneel=0.8, pel_z=0.85, frames=None, fps=25, hold_a
     floor = [i for i in range(m.ngeom) if m.geom_type[i] == mujoco.mjtGeom.mjGEOM_PLANE]
     io = _SimIO(names, 83.0)
     ev = {}
-    sup = DriveDerateSupervisor(names, io, DerateConfig(), request_safe_sit=lambda r: ev.setdefault('latch', d.time),
+    sup = DriveDerateSupervisor(names, io, DerateConfig(kneel_enabled=True, t_stop=83.0), request_safe_sit=lambda r: ev.setdefault('latch', d.time),
                                 request_kneel=lambda: ev.setdefault('kneel', d.time))
     res = dict(T_crouch=T_crouch, T_kneel=T_kneel, fell=None, peak_pad_force_N=0.0, peak_shank_force_N=0.0,
                tau_frac_crouch=0.0, tau_frac_kneel=0.0, first_contact=None, t_supported=None, t_mo_off=None)
