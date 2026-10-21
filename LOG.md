@@ -16,3 +16,7 @@
 - 2026-10-21 Legs L65/L66: femur/tibia dent fix 1.5 mm wall proposed; knee centre web T7351 stock/grain/ST notes.
 2026-10-21 09:05 RL Thermal: R-131 → modules/thermal/R131_ELMO_MG.md: (1) G-TWI no-heatsink credit valid, but mounts FAIL as booked: knee thigh plate ~174 °C cont/120 duty (needs ~0.03 m² finned plate +35–40 g/leg), hip_pitch/ankle drives on housing exceed 85 °C baseplate (own standoff plates), firmware drive-temp derate 75→85 °C; net credit ≈ −0.25…−0.30 kg; (2) D86 Elektron 43 ΔT +1–2.5 K hip/ankle, knee/shoulder unchanged (knee stays Al): PASS with hot-sized/bonded stator fit + PEO
 - 2026-10-21 Legs L67 (R-135): P-152 sleeve OD 46.80; knee web stock 4.25 in from CAD (no permitted plate, 211/317 provisional); JOB9 b3 min-wall re-run request.
+
+## 2026-10-21 — Arms R17 clevis + roll-yaw link pocketing study (R-132 §5); Job 8c torsion gate
+- R17: −0.296 kg/side (−0.59 pair) [CALC on EST geometry]; half credit (~−0.30 pair) until CAD and Job 8d FEA. The lugs must go 8 → 9 mm (245/294 MPa). The roll-yaw link becomes a 4 mm-wall box (35/308 MPa). Job 8d spec in §G, not launched. Image: media/progress/2026-10-21_arms_R17_clevis_link.png
+- Job 8c §G (b9e8f03): Controls gate 8f80c42. Assembly k_t ≥ 2.9 kN·m/rad. Modes with CSG-14 in series: ≥ 15 Hz at T5 0.2 kg·m², ≥ 40 Hz hand-only. CF hand calc 20.1 / 460 Hz, pass. R16 estimate corrected.

@@ -26,7 +26,11 @@ The elbow clevis (0.27), wrist end cap and roll-yaw link stay 7075. They become 
 ## Findings
 - **Upper arm: not worth it.** The link is 87 mm long, so the bonded joints are nearly the whole tube, and the result is +0.013 kg pair. Reject.
 - **Forearm: −0.09 kg pair realistic** [CALC]. The shell is the flexor thermal clamp (R5/R8 ladder B), and CF conducts about 100× worse through its thickness, so it needs a 7075 inner sleeve. Thermal must re-run ladder B.
-  - Torsional stiffness drops to 0.14×. That's acceptable only with a ±45° braid overwrap (+~0.01/side [EST]) if Controls needs the wrist-roll stiffness.
+  - Torsional stiffness drops to 0.14× of 7075 (k_t ≈ 9.8 kN·m/rad). Controls' gate (8f80c42) is assembly k_t ≥ 2.9, so it **passes** on hand calc.
+  - With the CSG-14-100 wrist-roll gear in series (4.7 kN·m/rad) the series stiffness is 3.18 kN·m/rad.
+  - First torsion mode: **≈ 20.1 Hz** at 0.2 kg·m² (T5, gate ≥ 15) and ≈ 460 Hz hand-only (gate ≥ 40). Both pass.
+  - This replaces the earlier wrong ≈ 50 Hz estimate (wrong payload inertia, no gear in series).
+  - The ±45° braid overwrap (+~0.01/side [EST]) is needed only if the Job 8c FE assembly k_t < 2.9.
   - Galvanic isolation (glass scrim or a primed bondline) between CF and 7075 is required (Materials).
   - Credit at half (calc/EST): about **−0.045 kg**. It is **not** a reserve fix; R-122 needs > 1 kg.
 - Bigger C(b) mass sits in the 7075 clevis and roll-yaw link (0.27 + 0.34/side), not the tubes. A CF monocoque replacing those needs CAD and FEA and is not sized here.
