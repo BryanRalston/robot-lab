@@ -139,3 +139,4 @@ Per `legs/R031_FIXES.md`: 5 ASTM D1002 coupons per lot at 23 and 60 °C, part-eq
 - Motors-off fall at the 92.5 J fault energy, on a ballast rig or a sacrificial leg, with gauges on the tibia 45 × 2.0 and femur 50 × 1.5 near the knee.
 - **Pass:** no rupture, no local buckling/crippling, permanent set measured.
 - Also: a D99 stop drop test at 44 J (moment and rate factor) and to bottoming.
+- **TP-G5-20 add (L60 rev C.1, D99):** **measure the PUR90A rate factor** (stop moment at the fall rate vs quasi-static, up to 8.22 rad/s) to confirm ×1.3 [EST]; drop test at 44.1 J and at 95.8 J bottoming.

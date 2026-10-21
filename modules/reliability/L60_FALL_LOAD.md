@@ -90,7 +90,7 @@ The L60 bracket only reacts **the twin knee roller-screw thrust** (trunnion pins
 ## Decision recorded (Robot Lab, 2026-10-21 10:01 ET)
 **Controls knee-torque cap ≤ 50 N·m within 10° of the 135° stop + tibia wall 1.7 mm** (femur 50 × 1.5 kept). Design knee moment 0.92 kN·m → tibia 45 × 1.7 SF ≈ 1.03 (393 fall), femur 1.14. L60 bracket fall load 13.1 kN. Stop energy ≤ 62.7 J/knee to be shown by Controls.
 
-# Rev C (2026-10-21 ~10:20 ET): tibia 45 × 2.0, D98 interim, **pending D99 re-check**
+# Rev C (2026-10-21 ~10:20 ET): tibia 45 × 2.0, D98 interim, D99 checked in rev C.1 below
 Robot Lab rulings:
 - tibia wall **2.0 mm**;
 - knee drives stay on through TUCK (knee cap ≤ 50 N·m within 10° of the stop);
@@ -126,3 +126,12 @@ Section moduli: tibia 45 × 2.0 **Z 2781 mm³**; femur 50 × 1.5 **Z 2691 mm³**
 5. striker/pad placement and mass (≤ 0.35 kg).
 
 Pass gates for D99: (M_44J × rate + 50) × 1.05 ≤ 1093 N·m (tibia SF ≥ 1.0) and ≤ 1058 N·m (femur); bottoming moment × 1.05 ≤ 469 × Z (no rupture: tibia 1242 N·m, femur 1202 N·m).
+
+# Rev C.1 (2026-10-21 ~10:25 ET): D99 check (Actuators 63f9a24, results/KNEE_STOP_PU_D99.md)
+This replaces the D98 interim. Tibia 45×2.0 Z 2781 mm³; femur 50×1.5 Z 2691 mm³; DLF 1.05.
+- **Contact at 130°.**
+- **Normal, 44.1 J:** stop 544 N·m; with rate ×1.3 [EST, PUR90A, unmeasured]: (544×1.3 + 50)×1.05 = **795 N·m**. **Tibia SF 1.37, femur SF 1.33** vs 393. **PASS.**
+- **Fault, bottoming at 95.8 J (motors off):** stop 789 N·m → **1077 N·m** in the tube. **Tibia 387 MPa** (≤ 393, no yield), **femur 400 MPa** (slight set). Both are ≤ Ftu S 469, so no rupture; D/t 22.5/33, no local buckling (rev C §C2). **PASS with inspection item F1.** Bottoming energy 95.8 ≥ 92.5 J, so the fault case is bounded.
+- **Speed cap:** 5.58 rad/s at stop contact gives 44.1 J; **8.22 rad/s reaches bottoming**.
+- **Mass: FAIL**, 0.484 kg vs 0.35 kg budget. Legs/Actuators to resolve; re-check the moments if the pad changes.
+- The rate factor ×1.3 is still [EST], to be measured in TP-G5-20.
