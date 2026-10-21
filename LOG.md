@@ -91,3 +91,4 @@
   - Final n6: bulkhead ≥1.04, waistY ≥1.17, yoke ≥1.90; 4.36/5.21 mm PASS; 190 Hz PASS. Pelvis 0.89–1.08 FAIL (ribs back to 8 mm, not run).
   - Net +2.57 kg (floor ≈ +2.2; ≤1.5 unreachable). COM would reach ≈10.7 mm → Controls flagged, not booked.
 - 2026-10-21 11:45 ET RL Torso: 3c rev E final coarse: all SFs ≥1.04, 4.91 mm offset, 207 Hz PASS. Net +2.63 kg (floor ≈ +2.2), COM ≈10.9 mm [EST] → R1 overrun note (T&R BC/LC1 or Arbiter acceptance).
+- 2026-10-21 11:01 ET Thermal: Torso 9700df9/b3811cc vent + Thor partition check (T9700_VENT_THOR_CHECK.md): runaway plume FAILS rear PC cover at 10 mm → cover port + SS/mica patch; legs/hip/knee PASS; partition x −63 PASS conditional (no exhaust through 6 mm gap, gasketed).
