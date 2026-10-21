@@ -185,7 +185,7 @@ The sole pad is under the foot plate; the P-025 ankle boot hem is re-anchored ab
 - **Low inlet z 643–681 / high outlet z 799–837**, same width, 8 slots 4.5 × 36 → **1296 mm² free each** (≥ 1200; 1976 gross), aligned with the channels.
   - 6 mm solid bars at z 681–687 / 793–799 carry the 4 ribbed PA12 bosses Ø6 × ≥ 5 at y 112/148, z 684/796 (P-154 positions reused), 4× M2.5 A2 per side.
 - **Duct insert (PA12 1.2):** side walls at y 130 ± 26.5 → **side gap 5.0 mm** to the outer fin faces (≤ 5), from x −34.5 to −63 (pocket beyond), z 643–837; notched 10 × 7 at the L58 tabs (≥ 3 mm).
-- Knee twin housing face toward the grille: **low-ε (≤ 0.1) finish, Legs/Actuators part (note only).**
+- Knee twin housing: bare (low-ε callout removed, rev 4e).
 - P-053 layout unchanged (rear 40 × 50 window region is outside z 643–837 / y 104–156: Legs to confirm). L61 cheek windows (incl. the 14 mm boss window) are on the outboard cheek, ≥ 69 mm from the grille edge, on separate faces: no interaction.
 - **ROM (≥ 3 mm):** grille and duct are thigh-fixed and inside the r143 30.0 mm swept envelope.
 
@@ -223,3 +223,14 @@ The sole pad is under the foot plate; the P-025 ankle boot hem is re-anchored ab
   - outlet z 822–860 vs the fairing top and the skirt hem;
   - bosses y 112/148, z 684/796;
   - CAD ROM recheck with the chimney.
+
+### P-156 rev 4e (T&R 67e6eed fixes)
+- **(1) Outlet shroud.** The outlet slot face is recessed 11 mm (to x −71.5), and the v5 skin swells +6 mm locally over it (1.0 mm PC, cover colour, R20 blend into the thigh line) → **17 mm standoff**.
+  - Extent y 96–164, z 815–865. Closed bottom; **open up (1156 mm²) and at both upper sides (1530 mm²) → 2686 mm² ≥ 2592** (2 × 1296).
+  - The jet goes up/aft along the rear thigh, away from hand-hold zones; the 50 mm sphere cannot enter.
+  - Clears the fairing top 885 by 20 mm and the pelvis underside by 97 mm at hip −105…+40°. **Legs to confirm the P-023 hip-skirt hem stays above z 865 or is slotted.**
+  - Mass **+0.015 pair** (vs T&R's ~+0.008; 1.0 mm PC over 6.1 cm² of walls per side).
+- **(2) Knee-housing fairing slots:** **5 × 4.0 ± 0.3 × 20** at each end (top z ~820, bottom z ~720, outboard cheek) → ≤ 4.3 mm (≤ 5.0 incl. tolerance), **400 mm² nominal / 370 mm² min** per end (≥ 300).
+- **(3)** The low-ε knee housing callout is removed; foil on the fairing inner face only, housing bare. The 0.18 m outlet height is accepted.
+- **Sweep min 7.0 mm** (outlet passage vs housing top [EST]); shroud vs pelvis 97; rods 11.0 → PASS.
+- **Mass:** P-156 **+0.054 pair [EST]** (+0.015 vs rev 4d); knee-venting total **+0.035 pair**.

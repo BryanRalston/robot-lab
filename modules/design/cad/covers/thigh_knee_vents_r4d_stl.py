@@ -9,7 +9,10 @@ B = [box(-84.0, -82.5, 104, 156, 643, 860),            # skin: inlet 643-681, gr
      box(-57.0, -34.5, 102.9, 104.1, 643, 860), box(-57.0, -34.5, 155.9, 157.1, 643, 860),   # chimney duct walls
      box(-82.5, -57.0, 104, 156, 687.4, 688.6),        # inlet plenum floor (separates the grille space)
      box(-82.5, -57.0, 104, 156, 816.4, 817.6),        # outlet passage floor (above the housing top ~815)
-     box(-57.0, -56.0, 104, 156, 792, 817)]            # chimney front wall to the outlet turn
+     box(-57.0, -56.0, 104, 156, 792, 817),
+     box(-72.5, -71.5, 104, 156, 822, 860),             # recessed outlet slot face (x -71.5)
+     box(-89.5, -88.5, 96, 164, 815, 865),              # rev 4e shroud outer skin (+6 mm swell), open top/upper sides
+     box(-88.5, -71.5, 96, 164, 814, 815)]              # shroud closed bottom            # chimney front wall to the outlet turn
 H = os.path.dirname(os.path.abspath(__file__))
 with open(os.path.join(H, "thigh_knee_vents.stl"), "w") as f:
     f.write("solid v\n")
