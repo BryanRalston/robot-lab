@@ -54,7 +54,7 @@ DEFAULT = dict(
                        crouch=[20, 15, 10], sit=[20, 15, 10], kneel=[20, 15, 10], lowering=[20, 15, 10]),
     plume_mm=[5, 2, 0],
     hip_pinch=dict(ref='T&R R_HIP_PINCH.md ca68f3a on ID P-023 rev 8b acb9bd5', module='modules/controls/arm/hip_pinch.py',
-                   warn_mm=35, limit_mm=30, trip_mm=28, modes='all motors-on (walk, carry, stand, crouch, kneel, sit, R-146 lowering)',
+                   warn_mm=40, limit_mm=35, trip_mm=33, nominal_mm=[35, 30, 28], stopgap='T&R 76de66a +5 mm', modes='all motors-on (walk, carry, stand, crouch, kneel, sit, R-146 lowering)',
                    note='L<->R panels + hem<->panel from both hips (pitch, roll, yaw); at trip the closing joint pair stops. '
                         'Replaces the rev 8 mesh pair and the two coupled backup rules (dropped per Robot Lab). Motors-off: ID foam edges.'),
     payload=dict(ref='P-042 (carry_balance_r1, legs scenarios CARRY_POS)', body='torso', pos=[0.32, 0.0, 0.415],

@@ -15,7 +15,7 @@ ROOT = Path(__file__).resolve().parents[3]
 ID_SCRIPT = ROOT / 'modules/design/cad/covers/hip_skirt_r8.py'
 ASYM = ROOT / 'modules/design/cad/covers/hip_skirt_r8_asym.py'
 HEM_R = 144.0  # rev 8b
-WARN, LIMIT, TRIP = 35.0, 30.0, 28.0
+WARN, LIMIT, TRIP = 40.0, 35.0, 33.0  # T&R 76de66a stopgap (+5 mm); nominal 35/30/28
 HIP = ['hip_pitch', 'hip_roll', 'hip_yaw']
 _G = {}
 
