@@ -1,0 +1,18 @@
+{
+ "exhaust_C": [
+  74.1,
+  90.1
+ ],
+ "no_dilution_hi3_ex74": 44.0,
+ "no_dilution_hi3_ex90": 47.7,
+ "no_dilution_hi5_ex74": 48.0,
+ "no_dilution_hi5_ex90": 53.4,
+ "1to1_dilution_hi3_ex74": 39.5,
+ "1to1_dilution_hi3_ex90": 41.4,
+ "1to1_dilution_hi5_ex74": 41.5,
+ "1to1_dilution_hi5_ex90": 44.2,
+ "outlet_webs_C": [
+  74.1,
+  90.1
+ ]
+}
