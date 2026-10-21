@@ -252,3 +252,9 @@ Foam 0.035 + sleeve 0.009 + inserts/anchor 0.006 = **0.050/side, 0.100 kg pair =
 - Trims: COVER_TRIMS_R120.md. Fasteners: FASTENERS_BOM.json.
 
 - **Booking (R-123(d), ca66b9b): stand-off R11 +0.060 kg pair booked in full** (addition). FEA gates: vM ≤ 320 / 480 ultimate, s0 ≥ 2.0 at e 0/5, Mx ≤ 351 N·m, deflection ≤ 1 mm.
+
+## Stand-off R11 / pad placement: ON HOLD pending Arbiter R-12x (Arms R14, 4b47656)
+- ID CAD error fixed: CRBH 7013 A housing is **coaxial with X** (roll axis), not Y. cad/shoulder_pad/ now uses Arms' real dims: bearing r35–50 × W13 (x ±6.5), seat flange r50–54 (OD108) × W15 (x ±7.5).
+- Around X, the stand-off and pad intersect the housing (Arms: 2.16 / 12.38 cm³). Placement goes to the Arbiter; no ID placement redesign until R-12x.
+- Arms R14 interface changes accepted as inputs: flange/hub shoulder OD76; ring bore Ø36 under the box; 2× Ø6 m6 dowels on PCD57; 3× Ø8 plate access holes for the M4s; one-piece 7075; R4 corners.
+- Stand-off flange fasteners/dowels now listed only in modules/arms/FASTENER_BOM.csv.

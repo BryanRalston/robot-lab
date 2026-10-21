@@ -1,6 +1,60 @@
-{"frame": "X roll-axis/fore-aft, Y outward, Z up; origin on roll axis at stand-off flange seat (Y 0)",
- "housing": {"part": "CRBH 7013 A roll housing (Arms; PLACEHOLDER position)", "bearing_OD": 100, "bore_ID": 70, "bearing_W": 13, "flange_OD": 108, "flange_t": 5, "y0": -18},
- "standoff_R11": {"owner": "Arms", "flange_OD": 70, "flange_ID": 44, "flange_t": 5, "bolts": "8xM4 PCD62 + 2x dia6 dowels", "box": 44, "box_wall": 2.5, "box_H": 23, "box_zc": -15, "plate": "62x62", "plate_t": 4},
- "pad": {"tray_t": 0.5, "pattern": "4xM4 +-24", "centre_Z": -20, "mount_face_Y": 27},
- "core": {"side": 54.8, "h": 75.3, "material": "5052 HC 4.5 pcf"},
- "cover": {"part": "local shoulder cover (PC 1.5)", "half_x": 70, "half_z": 75, "y_inner": 12, "t": 1.5, "window": "68x68 R6 at (X0,Z-20)", "housing_relief_OD": 114}}
+{
+ "frame": "X = roll axis (sim l_shoulder_roll), Y outboard, Z up; origin on roll axis at bearing plane (Arms R14 frame)",
+ "housing": {
+  "part": "CRBH 7013 A envelope + seat flange, COAXIAL WITH X (Arms R14 4b47656, modules/arms/cad/r14/housing_7013_r14.step / housing_7013_real_coaxX.stl)",
+  "bearing_ri": 35,
+  "bearing_ro": 50,
+  "bearing_W": 13,
+  "bearing_x": [
+   -6.5,
+   6.5
+  ],
+  "flange_ri": 50,
+  "flange_ro": 54,
+  "flange_W": 15,
+  "flange_x": [
+   -7.5,
+   7.5
+  ]
+ },
+ "standoff_R11": {
+  "owner": "Arms",
+  "flange_OD": 76,
+  "flange_ID": 44,
+  "flange_t": 5,
+  "bolts": "8xM4 PCD62 + 2x dia6 dowels",
+  "box": 44,
+  "box_wall": 2.5,
+  "box_H": 23,
+  "box_zc": -15,
+  "plate": "62x62",
+  "plate_t": 4,
+  "status": "ON HOLD pending R-12x (placement intersects housing around X)",
+  "bore_under_box": 36,
+  "dowels": "2x dia6 m6 on PCD57",
+  "plate_access": "3x dia8 for M4",
+  "corners": "R4",
+  "build": "one-piece 7075 (Arms R14)"
+ },
+ "pad": {
+  "tray_t": 0.5,
+  "pattern": "4xM4 +-24",
+  "centre_Z": -20,
+  "mount_face_Y": 27,
+  "status": "ON HOLD pending R-12x"
+ },
+ "core": {
+  "side": 54.8,
+  "h": 75.3,
+  "material": "5052 HC 4.5 pcf"
+ },
+ "cover": {
+  "part": "local shoulder cover (PC 1.5)",
+  "half_x": 70,
+  "half_z": 75,
+  "y_inner": 12,
+  "t": 1.5,
+  "window": "68x68 R6 at (X0,Z-20)",
+  "housing_relief_OD": 114
+ }
+}

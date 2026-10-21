@@ -59,5 +59,14 @@
   "dowels dia 6 m6 (or shoulder bolts) and ring ligament with 8x M4 + 2x dia 6 on PCD62",
   "box footprint Z +7..-37 vs OD70 ring and CRBH 7013 inner ring; hollow box keeps access to the 8x M4 heads? (box ID 39 inside ring ID 44: M4 heads on PCD62 sit outside box, OK)",
   "e<=5 stack with 0.6 mm defl; clash vs OD108 housing flange (>=3 mm fore-aft)"
- ]
+ ],
+ "status": "PLACEMENT ON HOLD pending Arbiter R-12x (Arms R14 4b47656: housing is coaxial with X; stand-off and pad intersect it)",
+ "Arms_R14_accepted_inputs": {
+  "flange_hub_shoulder_OD": 76,
+  "ring_bore_under_box": 36,
+  "dowels": "2x dia6 m6 on PCD57",
+  "plate_access_holes": "3x dia8 for the M4s",
+  "build": "one-piece 7075",
+  "corners": "R4"
+ }
 }

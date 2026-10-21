@@ -1,6 +1,6 @@
 """Lightweight parametric shoulder-pad envelope CAD (no deps; ASCII STL per body + assembly).
-Frame (matches FEA job1/R10): X = roll axis direction (fore-aft), Y = outward (lateral), Z = up; origin on roll axis at the
-stand-off flange seat face. Simple solids only, for the section G clash checks (Arms runs them).
+Frame (Arms R14): X = roll axis, Y outboard, Z up; origin on roll axis at bearing plane. Housing COAXIAL WITH X (R14 fix).
+Stand-off/pad placement ON HOLD pending Arbiter R-12x: they intersect the housing as placed. Simple solids only, for the section G clash checks (Arms runs them).
 CadQuery is not installed on the RL box (1 GB free RAM); for STEP, run shoulder_pad_cad.py --step on the bryan PC (needs cadquery)."""
 import json, math, sys, os
 G = json.load(open(os.path.join(os.path.dirname(__file__), "geometry.json")))
@@ -30,9 +30,9 @@ def stl(name, tris):
         f.write(f"endsolid {name}\n")
 s, h, p, c, cv = G["standoff_R11"], G["housing"], G["pad"], G["core"], G["cover"]
 bodies = {
- "housing_7013": ring('y', (0,0,0), h["bearing_OD"]/2, h["bore_ID"]/2, h["y0"], h["y0"]+h["bearing_W"]),
- "housing_flange_OD108": ring('y', (0,0,0), h["flange_OD"]/2, h["bearing_OD"]/2, h["y0"]+h["bearing_W"]-h["flange_t"], h["y0"]+h["bearing_W"]),
- "standoff_flange": ring('y', (0,0,0), s["flange_OD"]/2, s["flange_ID"]/2, -s["flange_t"], 0),
+ "housing_7013": ring('x', (0,0,0), h["bearing_ro"], h["bearing_ri"], *h["bearing_x"]),
+ "housing_flange_OD108": ring('x', (0,0,0), h["flange_ro"], h["flange_ri"], *h["flange_x"]),
+ "standoff_flange": ring('y', (0,0,0), s["flange_OD"]/2, s["bore_under_box"]/2, -s["flange_t"], 0),
  "standoff_box": box(-s["box"]/2, s["box"]/2, 0, s["box_H"], s["box_zc"]-s["box"]/2, s["box_zc"]+s["box"]/2),
  "standoff_plate": box(-31, 31, s["box_H"], s["box_H"]+s["plate_t"], -20-31, -20+31),
  "tray": box(-31, 31, 27, 27.5, -51, 11),
