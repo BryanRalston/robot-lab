@@ -1473,3 +1473,17 @@ The +0.36 pair bearing delta is confirmed by catalog (IKO 4010 0.15 vs 7013 0.38
 1. R-147 §1 conditions are met by D96 (toggle in 3D: -61.0° at roll 0, -58.6° at roll 18°; carrier relief 4.6 mm). CONTRACTS ankle_pitch is updated: mechanical -55…+40°, loaded -52.5° for the kneel only, sim -0.916 controlled / -0.960 hard stop, and |ankle_roll| ≤ 10° beyond -52.5° (keeps ≥3.6° from the rolled toggle). Knee stop: a separate PU pair at 135°, housing r116b. This is a contract change, not a TARGETS change.
 2. Booked at full: chest core 116 mm +0.015 (beyond R-147's 100 mm +0.006), socket wall +0.006, bezel posts +0.004, shin blister +0.002 = +0.027. The P-158 rail stop +0.010 is the same item R-147 §4 booked and is not added again. Credible mass ~68.44 → ~68.47 kg.
 3. Knee venting rev 6 (0.097 pair, net +0.047 vs the R-145 +0.066 baseline): the -0.019 credit waits for Test's grille touch check per R-146 §3. L75 twin straps are accepted per Robot Lab, but the -0.029 (net of the 4 mm plate rise and clamp shoulder, which ID/Legs must state) stays at 0 until the FEA passes.
+
+## R-149 — Torso job 3/3b FAIL (ff59d8f, torso/fea/job3/REPORT.md) and mass ledger (ID df1e9e3/77dbea6; Actuators D97/P-159 770da54) — 2026-10-21
+1. Job 3/3b FAIL is accepted as reported: the LC1 chest case fails deflection, buckling, ligament SF and Mode 1 (64.1 vs 80 Hz), and LC2 posts SF 0.77, on both the solid-wall and sandwich pelvis. Consequences:
+   a. Torso pocketing (-0.125 conditional, R-129) and pelvis sandwich (R-129) remain at 0 and are now void until a structure passes.
+   b. AUDIT of the load case: LC1 is 33.5 kN on the sternum land (~50× body weight) with a 0.05 mm deflection gate. Torso must cite the source for both numbers in TARGETS/T8 or the fall analysis. A deflection gate of 0.05 mm under a crash load is not a credible structural criterion. Until cited, LC1 is under review, but the mode 1 (64 Hz) and LC2 failures stand on their own.
+   c. Torso proposes a revised load path (e.g. a closed sternum box or a continuous bulkhead-to-pelvis shear web instead of posts) with mass at full, re-run as job 3c on the bryan PC via Robot Lab. G3 stays NOT MET for the torso.
+2. Mass ledger:
+   - knee PU stop pair +0.263 (P-159), required safety item, booked at full; a lighter r75 variant is credited only when Legs proves it
+   - thigh knee pad +0.028 (P-158/77dbea6), full, booked once
+   - sternum bezel rev 2 +0.032, full
+   - knee venting rev 6b total +0.084 vs the R-145 +0.066 baseline, so the heavier +0.018 excess is booked now, at full
+   - hip skirt rev 8 -0.274 [EST] credited at half, -0.137
+   - shin blister already booked in R-148, not added again
+   Net +0.204. Credible mass ~68.47 → ~68.67 kg.
