@@ -135,5 +135,11 @@
   "envelope": "RISK: core 75.3 vs 60 -> +15 mm proud per side; needs check vs shoulder envelope"
  },
  "close_s0": "ID cannot: lowering F raises core height (energy fixed) and lever; s0 reaches 2.0 at e0 only at ~6.0 kN/88 mm core, never at e10 inside envelope. Needs Arms bearing C0 >= ~30.5 kN (e10) / ~27 kN (e0), or slip skin mu<=0.15 credited after Materials test plus e<=5 mm.",
- "skin_option": "0.25 mm PTFE skin kept as option, not credited (+0.0017/side)"
+ "skin_option": "0.25 mm PTFE skin kept as option, not credited (+0.0017/side)",
+ "tolerances_R125_W2": {
+  "tray_lip_mm": "<=+-0.3",
+  "core_cut_mm": "<=+-0.3",
+  "e_drawing_limit_mm": 2.4,
+  "basis": "Arbiter R-125 W2 (pad on roll axis); Arms stack passes by 0.11 mm"
+ }
 }

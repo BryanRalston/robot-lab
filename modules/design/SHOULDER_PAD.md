@@ -258,3 +258,9 @@ Foam 0.035 + sleeve 0.009 + inserts/anchor 0.006 = **0.050/side, 0.100 kg pair =
 - Around X, the stand-off and pad intersect the housing (Arms: 2.16 / 12.38 cm³). Placement goes to the Arbiter; no ID placement redesign until R-12x.
 - Arms R14 interface changes accepted as inputs: flange/hub shoulder OD76; ring bore Ø36 under the box; 2× Ø6 m6 dowels on PCD57; 3× Ø8 plate access holes for the M4s; one-piece 7075; R4 corners.
 - Stand-off flange fasteners/dowels now listed only in modules/arms/FASTENER_BOM.csv.
+
+## R-125 W2 adopted (placement hold lifted)
+- Placement hold resolved: **W2 adopted, pad on the roll axis; carrier drawn by Arms in modules/arms/cad/r15/** (supersedes the R11 stand-off placement above).
+- Drawing limit **e ≤ 2.4 mm**; Arms' stack passes by 0.11 mm at:
+  - **tray lip tolerance ≤ ±0.3 mm**
+  - **core cut tolerance ≤ ±0.3 mm**

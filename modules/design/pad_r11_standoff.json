@@ -60,7 +60,7 @@
   "box footprint Z +7..-37 vs OD70 ring and CRBH 7013 inner ring; hollow box keeps access to the 8x M4 heads? (box ID 39 inside ring ID 44: M4 heads on PCD62 sit outside box, OK)",
   "e<=5 stack with 0.6 mm defl; clash vs OD108 housing flange (>=3 mm fore-aft)"
  ],
- "status": "PLACEMENT ON HOLD pending Arbiter R-12x (Arms R14 4b47656: housing is coaxial with X; stand-off and pad intersect it)",
+ "status": "R-125 W2 adopted: pad on the roll axis; carrier drawn by Arms in modules/arms/cad/r15/ (R11 stand-off placement superseded)",
  "Arms_R14_accepted_inputs": {
   "flange_hub_shoulder_OD": 76,
   "ring_bore_under_box": 36,
@@ -68,5 +68,11 @@
   "plate_access_holes": "3x dia8 for the M4s",
   "build": "one-piece 7075",
   "corners": "R4"
+ },
+ "tolerances_R125_W2": {
+  "tray_lip_mm": "<=+-0.3",
+  "core_cut_mm": "<=+-0.3",
+  "e_drawing_limit_mm": 2.4,
+  "basis": "Arbiter R-125 W2 (pad on roll axis); Arms stack passes by 0.11 mm"
  }
 }
