@@ -1362,3 +1362,9 @@ Evidence: MIL-HDBK-5H (page numbers verified, table numbers inferred) is accepte
 3. Femur and tibia tubes are specified 7050-T73511 extrusion, with a single-path limit of 262 MPa (S-basis 393 ÷1.5). The model_v4 "T7451" label is corrected. Legs re-checks the femur tube and P-047.
 4. 6061-T6: 241 confirmed; single-path 161, multi-path 184.
 5. Fall/fault limits (R-127) are recomputed as min(A-basis band, Sy_typ/1.1) for each band.
+
+## R-129 — Option C(b), torso share (Torso b697350, R127_sandwich_plates.md) — 2026-10-21
+Evidence: Torso & Power's core-shear checks. Shoulder bulkhead 3.49 vs 1.25 MPa at a 30 mm core (needs 50–84 mm, no fit): FAIL. Pelvis side walls 3.85 vs 1.25 MPa (side fall): FAIL. Pelvis top/bottom: PASS by calc, −0.10 kg [CALC]. Waist ring, rails and nodes stay 7075.
+Ruling: the sandwich is rejected for the bulkhead, pelvis side walls, waist ring, rails and nodes. Pelvis top/bottom sandwich is accepted as a candidate at −0.10 [CALC], booked at 0 until all of: a cited insert pull-out datasheet, Legs' stiffness acceptance, fine-mesh job 3b, the G3 coupon, and R-076 earthing plus glass isolation (+0.005, full, added on adoption). Then it is credited at half (−0.05, net −0.045) until measured. Cost ~$2.0–2.5k [EST, quote needed].
+Torso pocketing (job 3) plus P-145–P-150, −0.25 [EST], replaces R-122 row 2 (−0.20); it is not additive with it. Credit is half (−0.125) after the job 3 FEA passes against the R-128 band allowables.
+Option C(b) now: the torso yields ~−0.05 instead of the −0.4 share assumed in R-126; the C(b) estimate falls accordingly, pending the Actuators Mg and Arms CF returns.
