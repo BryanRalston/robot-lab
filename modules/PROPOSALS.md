@@ -380,3 +380,14 @@ All keep R-076 (reinforced isolation, IEC 60664-1 creepage, IP2X), R-074 (main l
 - Evidence: actuators/forearm_roll_torque.py, results/FOREARM_ROLL_TORQUE.md; R-120 (Mx 321 N·m, SF 1.10).
 - Affected owner response: pending
 - Status: open
+
+### P-053: ID: thigh pin access (L63-R), band and hatches deleted
+- Date: 2026-10-21
+- Module / proposer: Design / RL Industrial Design
+- Affected owners: Legs, Arbiter
+- Change: 218° thigh band, L30 front hatch and rear panel deleted; front skin runs continuous. Fairing covers 5 of 8 pin ends (180° end visible through rear 40×50 window; 225/270° face the open inboard side, as L30; cosmetic). Pins extracted on the bench only; ends tapped M3 (Legs confirmed angles 0/90/180/270°, 45/135/225/315°).
+- Impact on contracts: none (no mechanism change); fairing fasteners TBD under A29 CAD.
+- Impact on targets: mass −0.036 kg robot [EST].
+- Evidence: design/thigh_pin_access_p053.py, design/thigh_pin_access_p053.json (adopted fe09355).
+- Affected owner response: Legs confirmed pin angles and M3 ends
+- Status: adopted (fe09355)

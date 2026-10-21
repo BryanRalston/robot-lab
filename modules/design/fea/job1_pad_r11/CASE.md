@@ -4,5 +4,11 @@ Supersedes job1_pad_r10/CASE.md geometry for the stand-off. Reuse job1_pad_r10/f
 - Pad: 0.5 mm tray, 4×M4 ±24, core 54.8² centred (e, −20); contact Y 102.3. CRBH 7013 A.
 - Loads: 7.0 kN at 15° governing (Fn 6761, Fs 1812), axial + down; μ 0.15 sensitivity only. e = 0, 5 qualified; 10 informative.
 - Mesh: ≥3 elements through the 2.5 mm wall and 4 mm plate; report filtered and absolute peaks.
-- Report: s0, raw roll Mx + CSG-25 SF, box/plate vM (limit 337 = 0.67 Sy target, 503 yield hard), pad deflection (≤1 mm), dowel/bolt shear with fitted dowels, bond, slip, tab.
+- Report: s0, raw roll Mx + CSG-25 SF, box/plate vM (working limit 320 MPa; ultimate check 480 MPa, per R-123), pad deflection (≤1 mm), dowel/bolt shear with fitted dowels, bond, slip, tab.
 - ID hand calc expectation: box 215 MPa (calibrated ×2.86 to R10 FEA ribs), plate 149 MPa, deflection ≤0.69 mm (calibrated), dowel SF 2.6.
+
+## Gates (R-123(d), ca66b9b) — 7075-T6 basis 480/560/70 GPa
+- von Mises ≤ 320 MPa working (any case); 480 MPa ultimate check
+- s0 ≥ 2.0 at e = 0 and 5 mm (10 mm informative)
+- roll torque Mx ≤ 351 N·m (369 / 1.05, raw, no clutch credit)
+- pad deflection ≤ 1 mm

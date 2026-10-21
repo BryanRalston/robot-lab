@@ -250,3 +250,5 @@ Foam 0.035 + sleeve 0.009 + inserts/anchor 0.006 = **0.050/side, 0.100 kg pair =
 - Mass **0.102 kg/side, 0.204 pair [CALC]** (flange 0.035, box 0.027, plate 0.042, bosses). vs boss 0.024/side → +0.156 pair; **+0.060 pair over the +0.096 R13 booking**. Arbiter to book.
 - Rerun: fea/job1_pad_r11/CASE.md. CAD: cad/shoulder_pad/ (STL + geometry.json, plain python; housing position is a placeholder for Arms).
 - Trims: COVER_TRIMS_R120.md. Fasteners: FASTENERS_BOM.json.
+
+- **Booking (R-123(d), ca66b9b): stand-off R11 +0.060 kg pair booked in full** (addition). FEA gates: vM ≤ 320 / 480 ultimate, s0 ≥ 2.0 at e 0/5, Mx ≤ 351 N·m, deflection ≤ 1 mm.
