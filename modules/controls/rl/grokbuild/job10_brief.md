@@ -1,3 +1,10 @@
+> **⛔ JOB 10 HELD (RL Controls, 2026-10-21 10:40 ET). Do not start the run until a new pin is issued.**
+> - `modules/legs/rl/ref_cycle.npz` asks for ankle pitch past the sim/v3 ddfcff8 hard limit of −0.916 rad: min −0.937 / −0.982 / −1.019 rad at 0.8 / 1.0 / 1.2 m/s.
+> - The reference comes from gait plans that leaned on the old −45° MJCF stop, which the hardware does not have.
+> - The plans and ref_cycle are being regenerated with the ankle bound built in (stance ankle ≥ −0.88 rad, native heel lift).
+> - The hip-yaw ranges also change to the Legs ruling: L −35…+40, R −40…+35.
+> - The pin below is NOT valid for launch until it is replaced.
+
 # Grok Build brief: job 10, RL walk retrain (bryan PC, RTX 5060, WSL2)
 
 Owner: RL Controls. Plan and evidence: `modules/controls/rl/RETRAIN_PLAN_J10.md`. Use the same WSL venv and repo clone as job 4 (JAX 0.11.2, Playground 0.2.0, Brax 0.14.2, MuJoCo/MJX 3.15.0). Report honestly: no numbers you did not measure.

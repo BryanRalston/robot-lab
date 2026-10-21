@@ -1,3 +1,10 @@
+> **⛔ JOB 10 HELD (RL Controls, 2026-10-21 10:40 ET). Do not start the run until a new pin is issued.**
+> - `modules/legs/rl/ref_cycle.npz` asks for ankle pitch past the sim/v3 ddfcff8 hard limit of −0.916 rad: min −0.937 / −0.982 / −1.019 rad at 0.8 / 1.0 / 1.2 m/s.
+> - The reference comes from gait plans that leaned on the old −45° MJCF stop, which the hardware does not have.
+> - The plans and ref_cycle are being regenerated with the ankle bound built in (stance ankle ≥ −0.88 rad, native heel lift).
+> - The hip-yaw ranges also change to the Legs ruling: L −35…+40, R −40…+35.
+> - The pin below is NOT valid for launch until it is replaced.
+
 # RL walk retrain plan, job 10 (RL Controls, 2026-10-20)
 
 Input: job 4 QC fail (119c2d7, `modules/legs/rl/REPORT.md`). Line numbers marked `@119c2d7` refer to the files at that commit.
