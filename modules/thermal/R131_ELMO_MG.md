@@ -345,3 +345,63 @@ Basis: rev 4 / 4b model (`r131_rev4_guard.py`). 2 × 6.0 W carry, duty 0.6, 35 �
   - the drive derate stays for continuous carry.
 - The thinner fins and the narrower plate cost < 1.5 % UA.
 - Margin standing is thin (1.5–3.8 K). TP-G5-15 should measure the standing drive base in the fairing.
+
+## Rev 4d: pocket air, grille and knee-housing fairing (T&R 241369d) — 2026-10-21 09:03 EDT
+Script: `modules/thermal/r131_rev4d_chimney.py`.
+Chimney model:
+- Buoyancy head: ρ g H 0.8 ΔT / T, with H from inlet to outlet.
+- Losses: inlet and outlet orifices (Cd 0.6, or T&R's 0.4) plus the fin channels (laminar 12 μ L V / s², s 5 mm, L 0.1, A 650 mm², plus 1.5 dynamic heads).
+- Q = 7.5 W (plate 7.2 W at duty plus the knee housing face).
+
+### (1) Pocket air rise
+| case | ṁ (g/s) | outlet ΔT (K) | mean (K) |
+|---|---|---|---|
+| T&R basis (Cd 0.4, H 0.12, 1200 mm²) | 0.12 | 62 | 31 |
+| Cd 0.6 | 0.13 | 58 | 29 |
+| 2 × free area | 0.13 | 55 | 28 |
+| H 0.20 m | 0.16 | 47 | 23 |
+| 2 × area + H 0.20 | 0.17 | 44 | 22 |
+
+- **The fin channels, not the openings, control the flow.** At Ra_s ≈ 16 the flow is fully developed, so the air leaves near fin temperature. Extra free area buys only about 3 K.
+- **T&R is right.** Pocket air at +28–31 K mean sets the grille temperature. My 39 °C (rev 4b and 4c) counted only radiation through the ε 0.1 face and treated the 30 mm fin-tip-to-grille gap as ambient. In the ducted pocket that gap is part of the exhaust path.
+- Grille check with exhaust air at about 65 °C on the inner face (h 3) plus 0.7 W/m²K of radiation, and outer face h 4 + 6 radiation: ≈ 44 °C. T&R's 45.6 is the upper bound.
+- **Grille: FAIL against 45 / 43 °C.**
+- Drive base standing, chimney-limited (ṁcp 0.131 W/K × 0.9 + 0.055 W/K other paths): ≈ 77.7 °C at H 0.12. That matches rev 4c and T&R's 78.3 at 25 °C ambient; T&R's 87.5 at 35 °C is a derate-cap assumption.
+
+### (2) Getting the grille to ≤ 43 °C standing
+| option | grille face | drive base standing | mass/knee | verdict |
+|---|---|---|---|---|
+| larger free area (×2) | ≈ 43–45 | −1 K | +0 (fairing cut) | not enough |
+| low-ε grille inner face | already in the base case | — | — | already included |
+| taller chimney (outlet at H 0.20 m) | ≈ 41–43 | **72.1** | ≈ +5 g duct | marginal on its own |
+| **baffle: duct wall between the fin tips and the grille** | **≈ 37–39** | 77.7 (lost radiation ≈ 0) | **≈ +7 g** | **PASS, minimum** |
+
+**Minimum change (the baffle):**
+- **Baffle part:** 1 mm PC/PA12 at fin tips + 3 mm, 104 × 52, with Al tape (ε ≤ 0.1) on the fin side.
+- **Chimney path:** this closes the fin channels into a chimney, from the low inlet through the fins to the high outlet.
+- **Grille-side space:** the ≈ 25 mm between baffle and grille breathes to ambient through the grille only, so the grille sees inlet-temperature air.
+- **Outlet location:** route the outlet aft/up, ≥ 30 mm from the grille top edge, so the exhaust does not wash the grille.
+- **Mass:** ≈ 7 g/knee, **+0.014 kg robot**.
+- **Optional:** raise the outlet to H ≥ 0.20 m for a −5 K drive base margin (+5 g/knee).
+
+### (3) Fairing over the knee twin housing (case 90–100 °C)
+Model: PC 1.5 mm, ≈ 8 mm gap, housing ε 0.85, outer face h 4 + 6 radiation to 35 °C ambient.
+
+| fairing configuration | outer face |
+|---|---|
+| black PC inner face, closed gap | **≈ 58–66 °C, FAIL** (48 / 43) |
+| inner-face Al foil (ε 0.05), closed gap | ≈ 51.5 °C, FAIL |
+| **inner-face foil + gap ≥ 10 mm, vented top and bottom (A36 stream walking, chimney standing)** | **≈ 40–41.5 °C, PASS** (≤ 43) |
+
+- **Do not put foil on the housing.** Its radiation is part of the knee rev B fin cooling, and the knee margin is only 4.7 K.
+- **Fix specification:**
+  - 0.05 mm Al foil with PSA on the fairing inner face over the housing area;
+  - gap ≥ 10 mm;
+  - ≥ 300 mm² slots at the bottom and top, clear of the housing fins' A36 path.
+- **Mass:** ≈ 6 g/knee [EST, ≈ 0.03 m²], **+0.012 kg robot**.
+
+**Verdict:**
+- (1) T&R's number is right: pocket air dominates, and the grille is ≈ 44–45.6 °C as built.
+- (2) PASS with the fin-to-grille baffle and an aft/up outlet: grille ≈ 37–39 °C, **+0.014 kg**.
+- (3) The knee-housing fairing FAILS as drawn; it PASSES with inner foil and a vented gap of ≥ 10 mm (≈ 40–41.5 °C), **+0.012 kg**.
+- Total: **+0.026 kg**.
