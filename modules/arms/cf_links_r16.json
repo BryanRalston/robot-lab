@@ -1,0 +1,54 @@
+{
+ "upper_arm": {
+  "link": "upper arm",
+  "L_mm": 87,
+  "al_kg": 0.0737,
+  "cf_tube_kg": 0.0302,
+  "bond_length_each_mm": 40,
+  "spigots_kg": 0.0482,
+  "new_kg": 0.0804,
+  "delta_side_kg": 0.0066,
+  "overlap_fraction": 0.92,
+  "sigma_cf_MPa": 38.7,
+  "tau_bond_peak_MPa": 4.5,
+  "tau_allow": 4.6,
+  "EI_ratio": 0.83,
+  "GJ_ratio": 0.14,
+  "twist_deg_at_T": 0.519,
+  "twist_al_deg": 0.075
+ },
+ "forearm": {
+  "link": "forearm",
+  "L_mm": 194,
+  "al_kg": 0.2329,
+  "cf_tube_kg": 0.0952,
+  "bond_length_each_mm": 20.0,
+  "spigots_kg": 0.0347,
+  "new_kg": 0.1313,
+  "delta_side_kg": -0.1016,
+  "overlap_fraction": 0.21,
+  "sigma_cf_MPa": 14.4,
+  "tau_bond_peak_MPa": 3.32,
+  "tau_allow": 4.6,
+  "EI_ratio": 0.82,
+  "GJ_ratio": 0.14,
+  "twist_deg_at_T": 0.211,
+  "twist_al_deg": 0.03
+ },
+ "thermal": {
+  "issue": "forearm shell is the flexor thermal clamp (R5 ladder B, hand board gap pad); CF k_transverse ~0.5-1 W/mK [EST] vs 7075 ~130",
+  "fix": "0.8 mm 7075 inner heat-spreader sleeve over the 120 mm motor zone, bonded to the CF",
+  "sleeve_kg": 0.0561
+ },
+ "forearm_net_with_sleeve_side": -0.0455,
+ "saving_pair_kg": {
+  "ua": 0.013,
+  "forearm_no_sleeve": -0.203,
+  "forearm_with_sleeve": -0.091
+ },
+ "cost": {
+  "ua_tube_usd": 9.14,
+  "fa_tube_ref_usd": 32.46,
+  "note": "UA from Easy 50/47 per metre; forearm \u00d870 is outside stock ranges (Easy max 60), so it needs custom roll-wrapping: Rock West 2.0-in-ID price per length scaled as a lower bound [no cited \u00d870 price]; spigot machining extra"
+ }
+}

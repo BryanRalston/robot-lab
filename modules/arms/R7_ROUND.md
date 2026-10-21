@@ -149,3 +149,18 @@ Checked against the R-065 criteria with sim/v3:
   - Carrier stock is 7075-T651 **2.5 in plate**, grain L = Y (arm), LT = X, ST = Z, so the single-path vM gate is **294 MPa** (2.001–2.5 in, LT). The ≤ 2 in band (308) is not available: the carrier is 73 × 63.4 × 62.
   - Report stresses by grain axis (L = Y, LT = X), and any ST (Z) component against 271.
   - Other gates unchanged: e ≤ 2.3 (Arms proposes 2.2), gap 3.4 ± 0.2, ≥ 3.0 loaded, Mx ≤ 351, s0 ≥ 2.0, deflection ≤ 1 mm.
+**Job 8c (Arms R16, option C(b)): CF forearm link FEA.** Not launched. Run after Job 8b, via Robot Lab, one Grok Build session at a time.
+- Geometry:
+  - CF tube Ø70/67 × 194: roll-wrapped 0/90 with an optional ±45 braid overwrap, laminate per `cf_links_r16.py` [E 75 / G 5 GPa EST until Materials cites]
+  - 2 × 7075-T651 spigots Ø67/64, 20 mm bond length, 0.15 mm DP460 bondline
+  - 0.8 mm 7075 heat-spreader sleeve over 120 mm
+  - elbow and wrist end fittings per model_v4
+  - upper-arm CF is rejected (R16), so it is not run
+- Loads: bending 78 N·m (fall) and 69 N·m (elbow cap), torsion 36 N·m (wrist roll), P-042 20 kg carry (elbow 14.6), all combined at worst phase.
+- Gates:
+  - 7075 fittings vM ≤ the R-128 band for their stock (`STOCK_GRAIN.md`; spigots 1.0 in plate → 313; unstated 257), R-125/R-127 fall/fault = min(A-band, Sy/1.1)
+  - bond peak shear ≤ 4.6 MPa and peel reported
+  - CF ply failure index (Tsai-Wu) ≤ 1/1.5
+  - stiffness: EI ≥ 0.8 and GJ reported vs 7075 (Controls to set a GJ floor)
+  - thermal: hand-off to Thermal ladder B with the sleeve
+- Output: `modules/arms/results/job8c_*`.
