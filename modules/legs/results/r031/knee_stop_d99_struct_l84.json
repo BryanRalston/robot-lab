@@ -1,0 +1,53 @@
+{
+ "striker_design": {
+  "F_N": 3650.0,
+  "sigma_root": 169,
+  "SF": 1.55,
+  "sigma_root_Kt": 237,
+  "SF_Kt": 1.11,
+  "shear_MPa": 20.3
+ },
+ "striker_bottoming": {
+  "F_N": 5250.0,
+  "sigma_root": 243,
+  "SF": 1.62,
+  "sigma_root_Kt": 340,
+  "SF_Kt": 1.15,
+  "shear_MPa": 29.2
+ },
+ "seat_design": {
+  "sigma": 36,
+  "SF": 7.18
+ },
+ "seat_bottoming": {
+  "sigma": 52,
+  "SF": 7.49
+ },
+ "collar_bond_design": {
+  "tau_MPa": 1.37,
+  "SF_vs_2p85MPa_82C": 2.09,
+  "pins_2xo6_shear_SF": 4.65
+ },
+ "collar_bond_bottoming": {
+  "tau_MPa": 1.97,
+  "SF_vs_2p85MPa_82C": 1.45,
+  "pins_2xo6_shear_SF": 3.23
+ },
+ "fatigue": "design 3.65 kN root 169 x Kt 1.4 = 237 MPa > 58 (1e8 basis) -> acceptable only as a rare-event part (<=1e4 contacts) [EST]; if Controls kneel uses the stop every kneel, Materials to give 7075-T7351 S-N at 1e4",
+ "mass": {
+  "lugs_kg_knee": 0.0319,
+  "seats_kg_knee": 0.0252,
+  "compensation": -0.004,
+  "growth_kg_knee": 0.053,
+  "growth_kg_robot": 0.1061,
+  "D99_line_robot": 0.45,
+  "cap": 0.35,
+  "breaks_cap": true
+ },
+ "tibia_839Nm": {
+  "SF": 1.3
+ },
+ "femur_839Nm": {
+  "SF": 1.26
+ }
+}

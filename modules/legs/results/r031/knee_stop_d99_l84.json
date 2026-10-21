@@ -1,0 +1,86 @@
+{
+ "min_pairs": [
+  [
+   "S_striker0 | L_knee clevis bridge 40x70x22 + 16 mm pad over cheeks (fea_r8, L36)",
+   0.0,
+   "{'L_knee': 140}"
+  ],
+  [
+   "S_striker1 | L_knee clevis bridge 40x70x22 + 16 mm pad over cheeks (fea_r8, L36)",
+   0.0,
+   "{'L_knee': 140}"
+  ],
+  [
+   "S_striker0 | L_knee lever r47.5 (Actuators STEP)",
+   0.5,
+   "{'L_knee': 0}"
+  ],
+  [
+   "S_striker1 | L_knee lever r47.5 (Actuators STEP)",
+   0.5,
+   "{'L_knee': 0}"
+  ],
+  [
+   "S_seat0 | L_thigh split collar \u00f864 L34 bonded (DP490) + sleeve + 2x \u00f86 pins",
+   2.1,
+   "{'L_knee': 0}"
+  ],
+  [
+   "S_seat1 | L_thigh split collar \u00f864 L34 bonded (DP490) + sleeve + 2x \u00f86 pins",
+   2.1,
+   "{'L_knee': 0}"
+  ],
+  [
+   "S_striker0 | L_femur tube 7050-T7451 \u00f850x1.2 (R-031; P-047 wall 1.6 pending FEA)",
+   2.3,
+   "{'L_knee': 145}"
+  ],
+  [
+   "S_striker1 | L_femur tube 7050-T7451 \u00f850x1.2 (R-031; P-047 wall 1.6 pending FEA)",
+   2.3,
+   "{'L_knee': 145}"
+  ],
+  [
+   "S_striker0 | L_knee screw -y GE12 C rod-end eye",
+   7.0,
+   "{'L_knee': 0}"
+  ],
+  [
+   "S_striker1 | L_knee screw +y GE12 C rod-end eye",
+   7.0,
+   "{'L_knee': 0}"
+  ],
+  [
+   "S_striker0 | L_knee tongue neck into tibia",
+   8.0,
+   "{'L_knee': 0}"
+  ],
+  [
+   "S_striker1 | L_knee tongue neck into tibia",
+   8.0,
+   "{'L_knee': 0}"
+  ],
+  [
+   "S_striker0 | L_tibia tube 7075 \u00f845x1.2",
+   9.0,
+   "{'L_knee': 0}"
+  ],
+  [
+   "S_striker1 | L_tibia tube 7075 \u00f845x1.2",
+   9.0,
+   "{'L_knee': 0}"
+  ]
+ ],
+ "striker_to_own_seat_by_pose": {
+  "{'L_knee': 110}": 20.2,
+  "{'L_knee': 120}": 10.0,
+  "{'L_knee': 125}": 4.2,
+  "{'L_knee': 130}": 0.0,
+  "{'L_knee': 135}": 0.0,
+  "{'L_knee': 140}": 0.0,
+  "{'L_knee': 143.6}": 0.0,
+  "{'L_knee': 145}": 0.0,
+  "{'L_hip_pitch': -105, 'L_knee': 135}": 0.0,
+  "{'L_hip_pitch': 40, 'L_knee': 130}": 0.0
+ }
+}
