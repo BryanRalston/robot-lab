@@ -671,3 +671,7 @@ A full ring flange instead of the cheek (≈0.4 kg [EST]) would give ≈ +2 mm z
 - **Update 2026-10-21 (R-158c):** the Mayr EAS-compact is **rejected**. Actuators is integrating a **≤ 0.4 kg friction limiter** into the waist-pitch drive.
   - The torque-limiter keep-out will shrink: the final envelope is due from Actuators.
   - **Mass note: ≤ +0.4 kg [EST, Actuators line]**, replacing the +2.77 kg above. The torso spacer stays until the envelope is fixed. Not booked.
+
+### Waist limiter + stops mass note (D102c eb5520f, 2026-10-21)
+Friction limiter +0.394 kg (CAD, ø90/66 × 23) replaces Mayr keep-out. PU end stops 4 × 0.24 = +0.97 kg (PUR90A, D99 data).
+Total +1.36 kg. Stops miss the 1.7 kN·m peak (2.32 kN·m at 17°); see torso/WAIST_STOP_PU_D102c.md.
