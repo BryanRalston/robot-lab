@@ -3,7 +3,7 @@
 Owner: RL Controls. Plan and evidence: `modules/controls/rl/RETRAIN_PLAN_J10.md`. Use the same WSL venv and repo clone as job 4 (JAX 0.11.2, Playground 0.2.0, Brax 0.14.2, MuJoCo/MJX 3.15.0). Report honestly: no numbers you did not measure.
 
 **Pinned inputs:**
-- sim/v3 = **4115f6e** (J10 hardware update: forearm 287, knee rev B fins, fallback SP 67A 6 mm sole, chest pad, neck XM430; 64.827 kg). Robot mass per **Arbiter R-118**: nominal 67.1 kg, DR 65.0–68.5 kg in training, gates at 67.1 plus the 65.0/68.5 corners.
+- sim/v3 = **4115f6e** (J10 hardware update: forearm 287, knee rev B fins, fallback SP 67A 6 mm sole, chest pad, neck XM430; 64.827 kg). Robot mass per **Arbiter R-118/R-123**: nominal 68.0 kg, DR 65.0–68.5 kg in training, gates at 68.0 plus the 65.0/68.5 corners.
 - Gates per **Arbiter R-117**.
 - Usage MODE (`/workspace/usage/status.md`): **NORMAL**, both Grok Bot and the Grok subscription. The file was last updated 2026-10-14, so re-check the Grok Build log first; if the subscription is ≥ 75 % (CAUTION), ask Bryan via Robot Lab before starting the ~13 h run.
 
@@ -14,13 +14,13 @@ git log -1 --format='%h %s' ; git log -1 --format='%h' -- sim/v3/humanoid_v3.xml
 cd modules/legs/rl
 export XLA_PYTHON_CLIENT_PREALLOCATE=false MUJOCO_GL=egl RL_RUNS=/root/rl-runs-j10
 ```
-Record both hashes in the report. **If the sim/v3 hash is not 4115f6e, stop and report** (the model changed under the plan). Training inputs (make_model output, R-118 mass, randomize/eval_box, obs clip, knee peak) are pinned at **a66cd8d**: `git merge-base --is-ancestor a66cd8d HEAD` must succeed, and `git diff a66cd8d HEAD -- modules/legs/rl sim/v3` must be empty except for this brief's own outputs. Use a new `RL_RUNS` dir so job-4 checkpoints are not picked up by `restore`.
+Record both hashes in the report. **If the sim/v3 hash is not 4115f6e, stop and report** (the model changed under the plan). Training inputs (make_model output, R-118 mass, randomize/eval_box, obs clip, knee peak) are pinned at **d786dff**: `git merge-base --is-ancestor d786dff HEAD` must succeed, and `git diff d786dff HEAD -- modules/legs/rl sim/v3` must be empty except for this brief's own outputs. Use a new `RL_RUNS` dir so job-4 checkpoints are not picked up by `restore`.
 
 ## 1. Regenerate the MJX model from the current sim/v3 (CPU, ~1 min)
 ```bash
 python make_model.py
 ```
-Expect `mass 67.101` and `stand settle z 1.1495 up 0.999` (sim/v3 4115f6e, R-118). The files should be unchanged against the repo; if they differ, report the diff. Commit any diff in `humanoid_mjx*.xml`, `gains.npz` or `ref_cycle.npz` with the report.
+Expect `mass 68.001` and `stand settle z 1.1495 up 0.999` (sim/v3 4115f6e, R-123). The files should be unchanged against the repo; if they differ, report the diff. Commit any diff in `humanoid_mjx*.xml`, `gains.npz` or `ref_cycle.npz` with the report.
 
 ## 2. Harness tests and smoke (must pass before training)
 ```bash
