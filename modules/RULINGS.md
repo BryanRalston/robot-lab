@@ -1564,3 +1564,10 @@ Evidence: holding the waist at 204 N.m cuts head-first landings 11/11 -> 2/11, b
 
 ## R-161a — Amends R-161: P-162 output-side waist brake enters the trade — 2026-10-21
 T&R withdraws criterion 2 (v_n 4.24 m/s) for waist-held runs in favour of the energy gate: 518-539 J vs 680, no bottoming. ACCEPTED, provided the T&R basis is committed in the repo before the trade study. An output/yoke-side brake bypasses D102c, so the R-161 limiter conflict is cleared. P-162 (fail-safe power-off brake or detent, >=204 N.m flexion, extension from the Controls 204/300/400/600 sweep, within 2.5 kN.m waist and 0.61 kN.m bearing tilt, with 3e re-checked on waist-held runs) replaces R-161 options (a) and (b). NEXT SESSION trade: P-162 vs the neck breakaway, alone or combined, judged on head-first rate, chest energy, limits and mass. Nothing starts before the 11:30 stop. Ledger ~72.52.
+
+## CHECKPOINT — session stop 2026-10-21 11:27 AM ET
+HELD for next session (nothing booked):
+- D102c stop gate: the 356 J / 0.30 rad PU stop fails at 2.32 kN.m vs the 1.7 limit (Torso a19dbaa). Reconcile with Actuators and T&R: 183 J (x1.5 of 50-122 J) plus the 178 J drive-fault check, OR 23.5 deg travel, OR a hydraulic stop.
+- Torso 5d2afd8 closes P-160 at +1.13 kg [EST] total for limiter plus stops (vs 0.394 booked in R-159). Booking rule: book only the delta beyond 0.394, with no double count.
+- Trade study P-162 vs neck breakaway (R-161a).
+Ledger ~72.52 kg (6.02 over T2).
