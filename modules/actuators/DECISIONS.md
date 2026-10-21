@@ -44,6 +44,10 @@ Ankle plates go on the shin front, normal +x, at (40, 130, 215/290): 3.5 mm, PAS
 ## D96 (R-146/R-147 P-157, Legs L73–L75) Ankle toggle 3D, carrier relief, knee fin-tip trim, knee stop/peak
 3D toggle −61.0° at roll 0 (Legs' 62/44 N·m at −52.5/−55 confirmed). It moves to −58.6° at roll ±18 (37.8/21.9 N·m), so kneel only at −52.5° or |roll| ≤ 10°. Carrier relief (|y| ≥ 18 lowered 6 mm, R3) gives 4.6 mm at −55° / knee 145, SF 2.4, −0.047 kg. Knee housing rear fin-tip spot trim (12 tips, −0.27 % fin area, forging margin unchanged) gives 3.5 mm to the L60 plate over knee 0–145 (r116b STEP). No knee mechanical stop exists (sim limit only; screw not bottoming), so a separate PU stop is proposed and STOP_IMPACT_N is TBD. K_PEAK = 1.0 (7267 N pair = motor peak). Details: results/D96_ANKLE_TOGGLE_CARRIER_KNEE_TRIM.md.
 
+## D99 (T&R 8c7ac56, Controls 3d1da26, Robot Lab 44 J ruling) r75 stop re-sized: contact 130°, E25 95.8 J
+- Design 44.1 J → 544 N·m (×1.3 rate [EST, Sarva 2007]); fault 92.5 J inside 25 % → 789 N·m. Against T&R limits: C1 tibia SF 1.37, C2 tibia 387 / femur 400 MPa (no rupture), top-out 143.6°: PASS. Sweep t0 −20 min 10.3 mm: PASS.
+- Mass 0.484 kg robot: FAIL vs ≤ 0.35. Integration route ≈ 0.34 needs Legs. Evidence: results/KNEE_STOP_PU_D99.md.
+
 ## D98 (Robot Lab r75 ruling; Legs 916c57f, Controls b5890e1, T&R 513a7d5) r75 PU knee stop, contact 133°
 - Armature: sim/v3 0.2018 = one stale 06808 rotor × 92². True value J_refl(q) = 1.552e-4·N(q)²: 0.553 at 75°, 0.083 at 135°. Flex sign from model_v4.
 - Contact at 135° cannot give 830 N·m at 66 J × 1.4 within 143.6° (≥1027). Contact moved to 133°: 834 N·m at 66 J, 815 at 62.7 J, bottoming at 92.5 J / 143.6°.

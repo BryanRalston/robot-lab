@@ -1,0 +1,212 @@
+{
+ "J_reflected_kgm2": {
+  "0": 0.079,
+  "30": 0.314,
+  "60": 0.524,
+  "75": 0.553,
+  "90": 0.506,
+  "120": 0.23,
+  "135": 0.083,
+  "143.6": 0.027
+ },
+ "arm_mm_135": 22.8,
+ "N_135": 28.6,
+ "E_physical_J": 57.6,
+ "E_rotor_J": 2.6,
+ "E_design_J": 44.1,
+ "E_required_25pct_J": 92.5,
+ "pad": "2 stacks 24(y) x 20(radial) face, 7 x 10.17 mm PUR90A + 6 x 1.0 mm 7075 shims + 2 x 3 mm end plates + \u00f86 guide pin, centroid r 75",
+ "shape_factor": 0.5,
+ "V_cm3": 64.3,
+ "E_bottom_25pct_J": 95.8,
+ "energy_SF_vs_66": 2.17,
+ "at_physical": {
+  "E_J": 57.56042379228562,
+  "strain": 0.192,
+  "knee_deg": 140.45,
+  "pad_force_kN": 8.28,
+  "torque_Nm": 621
+ },
+ "at_powered_40p1": {
+  "E_J": 40.1,
+  "strain": 0.16,
+  "knee_deg": 138.69,
+  "pad_force_kN": 6.94,
+  "torque_Nm": 521
+ },
+ "at_design_44p1": {
+  "E_J": 44.1,
+  "strain": 0.167,
+  "knee_deg": 139.1,
+  "pad_force_kN": 7.25,
+  "torque_Nm": 544
+ },
+ "at_62p7": {
+  "E_J": 62.7,
+  "strain": 0.201,
+  "knee_deg": 140.95,
+  "pad_force_kN": 8.65,
+  "torque_Nm": 649
+ },
+ "at_66": {
+  "E_J": 66.0,
+  "strain": 0.206,
+  "knee_deg": 141.22,
+  "pad_force_kN": 8.84,
+  "torque_Nm": 663
+ },
+ "at_25pct": {
+  "E_J": 95.7757911346827,
+  "strain": 0.25,
+  "knee_deg": 143.6,
+  "pad_force_kN": 10.53,
+  "torque_Nm": 789
+ },
+ "fault_92p5": {
+  "E_J": 92.5,
+  "strain": 0.25,
+  "knee_deg": 143.6,
+  "pad_force_kN": 10.53,
+  "torque_Nm": 790,
+  "note": "beyond 25 %: tangent-slope continuation of the D575 curve [EST]; inspect/replace pads after"
+ },
+ "top_out_25pct_deg": 143.6,
+ "alt_contact_for_830": [
+  {
+   "contact_deg": 135,
+   "T_mm": 45.0,
+   "A_mm2": 1379,
+   "torque_66J_Nm": 844
+  },
+  {
+   "contact_deg": 133,
+   "T_mm": 55.5,
+   "A_mm2": 1119,
+   "torque_66J_Nm": 685
+  },
+  {
+   "contact_deg": 132,
+   "T_mm": 60.7,
+   "A_mm2": 1023,
+   "torque_66J_Nm": 626
+  },
+  {
+   "contact_deg": 131,
+   "T_mm": 66.0,
+   "A_mm2": 941,
+   "torque_66J_Nm": 576
+  },
+  {
+   "contact_deg": 130,
+   "T_mm": 71.2,
+   "A_mm2": 872,
+   "torque_66J_Nm": 534
+  }
+ ],
+ "rotor": {
+  "alpha_rad_s2": 192,
+  "tau_rotor_on_shank_Nm": 24.4,
+  "sign": "+flexion (same sense as the impact; the pad reacts it)",
+  "F_rotor_pair_N": 1070,
+  "F_rotor_per_screw_N": 535,
+  "screw_dL_dq_mm_per_deg": -0.397,
+  "screw_rotor_load": "tension (screw shortens with flexion; rotor keeps driving shortening)",
+  "F_motor_peak_pair_N": 7267,
+  "per_screw_worst_N": 3634,
+  "C0a_frac": 0.133
+ },
+ "mass_kg_per_knee": 0.242,
+ "mass_kg_robot": 0.484,
+ "curve": [
+  {
+   "strain": 0.0,
+   "knee_deg": 130.0,
+   "torque_Nm": 0,
+   "pad_force_kN": 0.0,
+   "energy_J": 0.0
+  },
+  {
+   "strain": 0.02,
+   "knee_deg": 131.09,
+   "torque_Nm": 75,
+   "pad_force_kN": 1.0,
+   "energy_J": 0.7
+  },
+  {
+   "strain": 0.05,
+   "knee_deg": 132.72,
+   "torque_Nm": 152,
+   "pad_force_kN": 2.02,
+   "energy_J": 3.9
+  },
+  {
+   "strain": 0.1,
+   "knee_deg": 135.44,
+   "torque_Nm": 329,
+   "pad_force_kN": 4.39,
+   "energy_J": 15.4
+  },
+  {
+   "strain": 0.15,
+   "knee_deg": 138.16,
+   "torque_Nm": 491,
+   "pad_force_kN": 6.54,
+   "energy_J": 34.8
+  },
+  {
+   "strain": 0.2,
+   "knee_deg": 140.88,
+   "torque_Nm": 645,
+   "pad_force_kN": 8.6,
+   "energy_J": 61.8
+  },
+  {
+   "strain": 0.25,
+   "knee_deg": 143.6,
+   "torque_Nm": 790,
+   "pad_force_kN": 10.53,
+   "energy_J": 95.8
+  }
+ ],
+ "D99_checks": {
+  "rate_factor": 1.3,
+  "strain_rate_per_s": 6.7,
+  "C1_44J": {
+   "M_stop_qs": 544,
+   "M_tube": 795,
+   "tibia_SF": 1.37,
+   "femur_SF": 1.33,
+   "limit": "SF>=1.0 vs 393",
+   "pass_": true
+  },
+  "bottoming": {
+   "E25_J": 95.8,
+   "limit": ">=92.5 J",
+   "pass_": true
+  },
+  "C2_fault": {
+   "M_stop_25pct_qs": 789,
+   "M_tube": 1077,
+   "tibia_MPa": 387,
+   "femur_MPa": 400,
+   "limit": "no rupture: <=469 MPa (yield 393 accepted w/ inspect)",
+   "pass_": true,
+   "elastic": false
+  },
+  "top_out": {
+   "deg": 143.6,
+   "limit": "<=143.6",
+   "pass_": true
+  },
+  "speed_cap": {
+   "w_44J_rad_s": 5.58,
+   "w_bottom_rad_s": 8.22,
+   "note": "contact speed at 130 deg for 44.1 J / 25 % bottoming (I_body 2.71 + J_refl(130))"
+  },
+  "mass": {
+   "robot_kg": 0.484,
+   "limit": "<=0.35",
+   "pass_": false
+  }
+ }
+}
