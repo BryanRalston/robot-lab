@@ -174,7 +174,7 @@ def build_leg(s):
         _,a0k,uk,bdk=screw_unit(S(f'knee screw {"+" if sy>0 else "-"}y'),'knee_body_x1',S('thigh'),(ktx,y+sy*P['knee_dy'],ktz),S('shank'),(kx,y+sy*P['knee_dy'],kz+kzz),(0,1,0),S('kn_act'),chain(S('shank')),skip_body=True)
         if sy>0: a0p=a0k
         else: a0m=a0k
-    add(S('knee twin housing (Actuators D59 STEP, shared centre web)'),S('thigh'),frame(step('knee_twin_housing'),tuple((a0p+a0m)/2),uk,bdk),'actuator',S('kn_act'),posed=True,deps=chain(S('shank')))
+    add(S('knee twin housing (Actuators D96 r116b release STEP: 9 mm front fins, rear fin-tip trim; shared centre web)'),S('thigh'),frame(step('knee_twin_housing_release_r116b'),tuple((a0p+a0m)/2),uk,bdk),'actuator',S('kn_act'),posed=True,deps=chain(S('shank')))
     add(S('knee trunnion bracket top plate (thigh)'),S('thigh'),box(-40-(ktx-45),196,8,((-40+ktx-45)/2,y,ktz+50)),est=True,asm=S('kn_br'))
     add(S('knee trunnion bracket strut to femur'),S('thigh'),box(50,40,8,(-20,y,ktz+50)),est=True,asm=S('kn_br'))
     for sy in (-1,1):
