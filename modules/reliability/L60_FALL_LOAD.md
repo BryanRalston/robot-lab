@@ -89,3 +89,40 @@ The L60 bracket only reacts **the twin knee roller-screw thrust** (trunnion pins
 
 ## Decision recorded (Robot Lab, 2026-10-21 10:01 ET)
 **Controls knee-torque cap ≤ 50 N·m within 10° of the 135° stop + tibia wall 1.7 mm** (femur 50 × 1.5 kept). Design knee moment 0.92 kN·m → tibia 45 × 1.7 SF ≈ 1.03 (393 fall), femur 1.14. L60 bracket fall load 13.1 kN. Stop energy ≤ 62.7 J/knee to be shown by Controls.
+
+# Rev C (2026-10-21 ~10:20 ET): tibia 45 × 2.0, D98 interim, **pending D99 re-check**
+Robot Lab rulings:
+- tibia wall **2.0 mm**;
+- knee drives stay on through TUCK (knee cap ≤ 50 N·m within 10° of the stop);
+- powered falls ≤ 40.1 J (Controls 3d1da26/464b25b);
+- **D99 designed at 44 J** (40.1 × 1.1);
+- motors-off falls up to 92.5 J are a **FAULT case** that may bottom the stop.
+
+D98 is rejected for mass, and D99 is not in the repo yet, so the D98 curve is used as an interim.
+
+Section moduli: tibia 45 × 2.0 **Z 2781 mm³**; femur 50 × 1.5 **Z 2691 mm³**. Structural DLF 1.05 (rev B).
+
+## C1. Normal case (powered fall, 44 J)
+- D98 (results/KNEE_STOP_PU_D98.md, DECISIONS D98): 815 N·m at 62.7 J, 834 at 66 J, bottoming 92.5 J / 143.6°. Effective secant k = 815²/(2 × 62.7) ≈ 5.3 kN·m/rad → **at 44 J: M_stop ≈ 683 N·m** (interim; a D99 sized for 44 J will have its own curve).
+- **PU rate margin ×1.2 on moment** [EST, cast PU 90A at a fall strain rate; no rate data in the repo. Actuators' D98 ×1.4 is on energy, not moment]. → 820 N·m.
+- Tube M = (820 + 50 cap) × 1.05 = **913 N·m** → **tibia σ 328, SF 1.20; femur σ 339, SF 1.16** (vs 393). Without the rate margin: 770 N·m → 1.42 / 1.37. **PASS.**
+
+## C2. Fault case (motors off, bottoming at 92.5 J): no rupture
+- Interim bottoming moment from D98: **978 N·m + 50 cap = 1028 N·m** (conservative: with motors off the cap moment is 0) × 1.05 = **1079 N·m**. Beyond 92.5 J the stop is rigid and the moment is unbounded, so the fault case is valid only up to the 92.5 J Robot Lab bound.
+- **Allowables** (MATERIALS_DB AL7050_TUBE, MIL-HDBK-5H, 7050-T73511 extrusion): **Ftu S-basis L/LT 483/469 MPa** (the repo has no A-basis for T73511; S is used as given, and LT 469 is taken conservatively). The fall limit 393 = Fty-based.
+- **Tibia 45 × 2.0:** σ = 1079e3 / 2781 = **388 MPa ≤ 393** (no yield). Rupture margin 469/388 = **1.21. PASS.**
+- **Femur 50 × 1.5:** σ = 401 MPa. That is slight yield (> 393, permanent set possible) but ≤ Ftu 469, margin 1.17. **No rupture: PASS (inspect and replace).**
+- **Local buckling / crippling in bending:**
+  - Tibia D/t 22.5, femur 33.3; E/Fty = 71 000/393 ≈ 181.
+  - Classical elastic local buckling σcr ≈ 0.6 E t/R ≈ 3800 MPa (tibia) / 2600 (femur). With a bending knockdown of ~0.3–0.5 [EST] it is still ≫ Fty, so the tubes yield before they buckle elastically.
+  - Inelastic slenderness, using the AISC 360 round-HSS flexure limits as a proxy [uncertain for Al]: compact ≤ 0.07 E/Fy ≈ 12.7, noncompact ≤ 0.31 E/Fy ≈ 56. Both tubes are **noncompact**: they reach first yield (M_y), not the full plastic moment, before local buckling. The fault moments are ≤ ≈ M_y (tibia 0.99 M_y, femur 1.02 M_y), so **no local buckling expected**. Verify with the Al ADM round-tube formula in the Legs FEA (nonlinear, with imperfection).
+- **Permanent set accepted for the fault case**, with inspect and replace: see INSPECTION_SCHEDULE.md item F1.
+
+## C3. D99 inputs needed (to replace the interim)
+1. Stop moment at the **44 J design energy** (quasi-static and at the fall rate);
+2. stop moment and angle at the **bottoming energy** (and the bottoming energy itself; it must be ≥ 92.5 J for the fault case to stay bounded, else state the rigid-hit moment);
+3. **PU rate factor** (moment, at the knee speed of the fall), from a supplier or a drop test;
+4. the **Controls fall-mode knee speed cap** (rad/s at stop contact) used to set the 44 J;
+5. striker/pad placement and mass (≤ 0.35 kg).
+
+Pass gates for D99: (M_44J × rate + 50) × 1.05 ≤ 1093 N·m (tibia SF ≥ 1.0) and ≤ 1058 N·m (femur); bottoming moment × 1.05 ≤ 469 × Z (no rupture: tibia 1242 N·m, femur 1202 N·m).

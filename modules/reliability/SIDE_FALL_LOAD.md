@@ -106,3 +106,39 @@ The hip-roll joint moment is motor (204 N·m peak, backdriving) **in parallel wi
 ## B6. Missing inputs (Legs/Controls)
 - **Legs:** a supplier PU 90A compression curve for ø20 × 10 (k, stiffening and bottom-out), bumper rating basis (4 J), lug/bracket stiffness when bottomed, and space for a ø24 × 16 bumper.
 - **Controls:** relative hip-roll speed ω_c at stop contact and the hip-roll angle history in the side-fall set (S1 planted-foot, S2b kneel tip). The pass gate is E_stop ≤ 6.6 J (current) / ≤ 10 J (proposed).
+
+# Rev C (2026-10-21 ~10:20 ET): Controls 464b25b sim moments, tibia 45 × 2.0
+Source: controls/limits/SIDE_FALL.md, side_fall_results.json (54 runs/variant), hip-roll history. Swing-leg tuck **adopted** (Robot Lab). Hip-roll damping rejected (raises S1/S2b energy).
+
+| scenario (tuck) | bumper E / ω_c | bumper peak / pen | hip motor peak | tube M = (bump + motor) × 1.1 | tibia 45×2.0 SF | femur 50×1.5 SF |
+|---|---|---|---|---|---|---|
+| S1 planted | 1.66 J / 0.58 | 120 N·m / 0.82° | 102 | 244 | **4.48** | **4.33** |
+| S2b kneel tip | 3.65 J / 1.23 | 224 / 1.53° | 74 | 328 | **3.33** | **3.22** |
+| S2c with tuck | 1.33 J / 0.85 | 147 / 1.0° | 102 | 274 | **4.00** | **3.87** |
+| (S2c base, no tuck: for reference) | 10.62 J / 1.32 | 377 / 2.37° | 102 | 527 | 2.07 | 2.01 (but bumper over its linear 6.6 J and rated 4 J) |
+
+**Verdicts:**
+- **S1 PASS, S2b PASS, S2c PASS with the swing tuck** (0/54 bumper fails, feet always first).
+- **S2c knee-first (walking stumble) is still pending** Controls' mid-gait stumble run (not reproduced from stand/kneel ICs: 0/216 knee-first).
+- The bumper energy stays ≤ 4 J (rated) with the tuck in every case.
+- **Bottom-out (3.6°) is never reached.** The max penetration is 2.37° (base) / 1.53° (tuck) **< the 2.5° overtravel used in R_HIP_PINCH**, so the hem gap 28.3 mm / 26.3 mm with tolerance stands for powered falls. A motors-off fault fall could exceed it (unknown). That is noted as a fault case and covered by inspection.
+- The rev B ø24 × 16 bumper is **not needed** with the tuck. Keep it as the fallback if the stumble run exceeds 4–6.6 J.
+
+## C-foot: swing-foot landing 1.40 → 1.70 m/s (tuck), foot/ankle/fasteners [EST]
+- The repo has no landing-force output (the Controls rows log velocity only).
+- Scaling for a contact-spring landing: F ∝ v → **×1.21**; energy ∝ v² → **×1.47** (≈ 33 → 49 J at m_eff ≈ 34 kg [EST: leg + half body]).
+- With 20–40 mm of effective stroke (6 mm sole pad + backdriving ankle/knee screws [EST]): **F ≈ 1.2–2.5 kN**.
+- **Existing foot load cases** (Legs STRUCTURE_FEA_REPORT): fall 3914 N (6 BW) at toe/heel; 3 BW 1957 N.
+  - Fall heel SF 4.4 (yield).
+  - Fall toe: element max 520 MPa (SF 0.97, singular, mesh-dependent) but 99th percentile 132.7 MPa (SF 3.79). **Open from R1: the toe/flange element maximum.**
+- **Verdict: CONDITIONAL PASS.** The tucked landing is within the 3914 N fall case if the peak foot force is ≤ 3.9 kN (my bound is 2.5 kN, ×1.21 vs 1.40 m/s). The existing fall toe open item stays.
+- **Ankle:**
+  - Side landing onto the foot edge drives inversion into the rigid ±18° roll stop (L29, 2 × 7075 blocks 20×12×10, **M4 × 10, grade not stated** in BOM F5).
+  - Roll moment ≈ F × 74 mm edge lever ≈ 90–185 N·m at 1.2–2.5 kN [EST] vs the ankle roll avail 177.
+  - **Stop block bolts and lever radius are not in the repo, so this is unchecked (OPEN, Legs).** Pitch screws (C0a basis) see ≤ 2.5 kN × 0.18 m toe lever ≈ 450 N·m ankle pitch moment [EST] vs the contract 305 N·m need, so the screws backdrive. Fine for the screws (fuse); the pitch hard stop at −0.96 rad is not engaged in a flat landing.
+- **Fasteners:**
+  - foot F/T steel flange OD60 (bolt pattern in Legs CAD): covered by the 3914 N case if F ≤ 3.9 kN;
+  - **ankle roll stop M4 × 10: OPEN** (grade unspecified, load ≈ 185 N·m / r_stop);
+  - sole pad bond: Legs T8 drop test.
+- **Needed:** Controls to log the peak foot contact force (normal + lateral) and the ankle roll angle/stop contact in the tuck runs. Legs to give the ankle roll stop radius and bolt grade.
+- **G5:** TP-G5-19 item (e) below.

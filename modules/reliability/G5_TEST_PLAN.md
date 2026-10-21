@@ -129,3 +129,12 @@ Per `legs/R031_FIXES.md`: 5 ASTM D1002 coupons per lot at 23 and 60 °C, part-eq
   - hip-roll joint moment (motor + bumper) ≤ 600 N·m;
   - bumper inspection/replacement after any event > 4 J;
   - bench: PU bumper quasi-static and drop-weight compression curve (k, 25 %/40 % points, energy) on production parts.
+- **Rev C:**
+  - (e) side falls with the swing tuck: foot force plate under the landing foot, peak ≤ 3.9 kN normal (fall case) and lateral logged; ankle roll angle (stop contact at ±18°) and stop block bolt check after the runs;
+  - (f) mid-walk stumble side falls (S2c), when Controls has the run: knee-first incidence, tube gauges ≤ 393 MPa.
+  - Tube gauges are now on the tibia 45 × 2.0.
+
+## TP-G5-20 Knee stop fault case (L60 rev C)
+- Motors-off fall at the 92.5 J fault energy, on a ballast rig or a sacrificial leg, with gauges on the tibia 45 × 2.0 and femur 50 × 1.5 near the knee.
+- **Pass:** no rupture, no local buckling/crippling, permanent set measured.
+- Also: a D99 stop drop test at 44 J (moment and rate factor) and to bottoming.
