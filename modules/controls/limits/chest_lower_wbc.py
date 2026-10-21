@@ -61,15 +61,25 @@ def static_ff(m, d, sup, act):
     return d.qfrc_bias[act] - (Jc[:, act].T @ f)
 
 
-def run(mass=68.0, pad_tc=0.02, frames=None, fps=25):
-    s = P.Sim(mass, 1.0, pad_tc); m, d = s.m, s.d
+def make_sim(mass=68.0, pad_tc=0.02):
+    s = P.Sim(mass, 1.0, pad_tc); m = s.m
     arm = np.array([any(n.endswith(a) for a in ARM) for n in s.names])
     s.lim = np.where(arm, 0.5 * m.actuator_ctrlrange[:, 1], s.lim)
     el = np.array([n.endswith('elbow') for n in s.names])
     s.lim = np.where(el, np.minimum(s.lim, ELBOW_HARD), s.lim)
-    s.place(SPAWN, SPAWN_PITCH); qs = s.target(SPAWN)
-    for _ in range(1500):
-        d.ctrl[:] = s.pd(qs); mujoco.mj_step(m, d)
+    return s
+
+
+def run(mass=68.0, pad_tc=0.02, frames=None, fps=25, sim=None):
+    """sim=None: standalone (spawn hands-and-knees). sim given: continue from its current state (joined sequence)."""
+    if sim is None:
+        s = make_sim(mass, pad_tc); m, d = s.m, s.d
+        s.place(SPAWN, SPAWN_PITCH); qs = s.target(SPAWN)
+        for _ in range(1500):
+            d.ctrl[:] = s.pd(qs); mujoco.mj_step(m, d)
+    else:
+        s = sim; m, d = s.m, s.d
+    el = np.array([n.endswith('elbow') for n in s.names])
     sup = [m.geom(g).id for g in SUPPORT]
     p0 = {g: d.geom_xpos[g].copy() for g in sup}
     hand_ids = {m.geom('l_hand').id, m.geom('r_hand').id}
