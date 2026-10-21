@@ -1,0 +1,82 @@
+{
+ "deck_top": 1206.6,
+ "pelvis_top": 1230,
+ "reinf_min": [
+  [
+   15.2,
+   "rib+y",
+   "L_hip_yaw stop tab 10x12x70 (L39)",
+   "{'L_hip_yaw': 0, 'R_hip_yaw': 0, 'L_hip_pitch': -105, 'R_hip_pitch': -105, 'L_hip_roll': -14.5, 'R_hip_roll': 14.5}"
+  ],
+  [
+   15.2,
+   "rib+y",
+   "L_hip_yaw stop tab 10x12x70 (L39)",
+   "{'L_hip_yaw': 0, 'R_hip_yaw': 0, 'L_hip_pitch': -105, 'R_hip_pitch': -105, 'L_hip_roll': 0, 'R_hip_roll': 0}"
+  ],
+  [
+   15.2,
+   "rib+y",
+   "L_hip_yaw stop tab 10x12x70 (L39)",
+   "{'L_hip_yaw': 0, 'R_hip_yaw': 0, 'L_hip_pitch': -105, 'R_hip_pitch': -105, 'L_hip_roll': 17.5, 'R_hip_roll': -17.5}"
+  ],
+  [
+   15.2,
+   "rib+y",
+   "L_hip_yaw stop tab 10x12x70 (L39)",
+   "{'L_hip_yaw': 0, 'R_hip_yaw': 0, 'L_hip_pitch': 0, 'R_hip_pitch': 0, 'L_hip_roll': -14.5, 'R_hip_roll': 14.5}"
+  ],
+  [
+   15.2,
+   "rib+y",
+   "L_hip_yaw stop tab 10x12x70 (L39)",
+   "{'L_hip_yaw': 0, 'R_hip_yaw': 0, 'L_hip_pitch': 0, 'R_hip_pitch': 0, 'L_hip_roll': 0, 'R_hip_roll': 0}"
+  ],
+  [
+   15.2,
+   "rib+y",
+   "L_hip_yaw stop tab 10x12x70 (L39)",
+   "{'L_hip_yaw': 0, 'R_hip_yaw': 0, 'L_hip_pitch': 0, 'R_hip_pitch': 0, 'L_hip_roll': 17.5, 'R_hip_roll': -17.5}"
+  ],
+  [
+   15.2,
+   "rib+y",
+   "L_hip_yaw stop tab 10x12x70 (L39)",
+   "{'L_hip_yaw': 0, 'R_hip_yaw': 0, 'L_hip_pitch': 40, 'R_hip_pitch': 40, 'L_hip_roll': -14.5, 'R_hip_roll': 14.5}"
+  ],
+  [
+   15.2,
+   "rib+y",
+   "L_hip_yaw stop tab 10x12x70 (L39)",
+   "{'L_hip_yaw': 0, 'R_hip_yaw': 0, 'L_hip_pitch': 40, 'R_hip_pitch': 40, 'L_hip_roll': 0, 'R_hip_roll': 0}"
+  ]
+ ],
+ "plume_hits": [
+  [
+   84.2,
+   "R_shoulder pitch output flange [EST]",
+   "{'waist_yaw': -45, 'waist_pitch': -20}"
+  ],
+  [
+   89.8,
+   "R_shoulder roll bracket [EST]",
+   "{'waist_yaw': -45, 'waist_pitch': -20}"
+  ],
+  [
+   97.4,
+   "R_shoulder_roll strain-wave housing (motor+CSG) OD84 [EST]",
+   "{'waist_yaw': -45, 'waist_pitch': -20}"
+  ],
+  [
+   97.4,
+   "R_shoulder_yaw strain-wave housing (motor+CSG) OD76 [EST]",
+   "{'waist_yaw': -45, 'waist_pitch': -20}"
+  ],
+  [
+   99.0,
+   "R_shoulder_yaw hard-stop lug [EST]",
+   "{'waist_yaw': -45, 'waist_pitch': -20}"
+  ]
+ ],
+ "max_leg_side_part_z": 1875.0
+}
