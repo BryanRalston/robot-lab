@@ -78,7 +78,7 @@
    "exits": "open up (68 x 17 = 1156 mm2) and both upper sides (2 x 45 x 17 = 1530 mm2), closed bottom",
    "exit_free_mm2": 2686,
    "req_mm2": 2592,
-   "jet": "up/aft along the rear thigh under the skirt line, away from the front/side hand-hold zones; 50 mm sphere cannot enter (17 mm gap); probe B cannot reach the webs (recess 11 + 17 > 80 mm? no: webs at 28 mm depth -> T&R probe check)",
+   "jet": "up/aft along the rear thigh under the skirt line, away from the front/side hand-hold zones; 50 mm sphere cannot enter (17 mm gap); outlet webs sit 28 mm behind the shroud skin, within probe B 80 mm reach -> T&R probe/touch check on the webs and shroud",
    "fairing_top_clear_mm": 20,
    "kg_pair": 0.015
   }
