@@ -171,7 +171,7 @@ def main():
             if not r["solved"]: r["log_tail"] = p_.stdout[-800:]
             chk = {}
             for part, vm in d["S"].items():
-                Sy = c["materials"][g[part.lower()]["mat"]]["Sy"]; sf = Sy/vm if vm else float("inf")
+                Mt = c["materials"][g[part.lower()]["mat"]]; Sy = Mt.get("allowable", Mt["Sy"]); sf = Sy/vm if vm else float("inf")  # R-123: SF vs static allowable where given
                 chk[f"SF_{part.lower()}"] = {"vm_max": round(vm, 2), "SF": round(sf, 3), "pass": sf >= cr["SF_min"]}
             if d["U"]: um = max(d["U"]); chk["land_defl"] = {"mm": round(um, 5), "pass": (um <= cr["land_defl_max"]) if name == "LC1_chest_pad" else None}
             if d["freq"]: chk["mode1_hz"] = {"hz": round(d["freq"][0], 2), "pass": d["freq"][0] >= cr["mode1_min_hz"]}

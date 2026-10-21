@@ -1,7 +1,7 @@
 # FEA job 3: torso pocketing (bryan PC). Units: mm, N, MPa, t (tonne)
 mesh: {size: 6.0, size_coarse: 25.0}
 materials:
-  Al7075T651: {E: 71700, nu: 0.33, rho: 2.81e-9, Sy: 503}   # cited (MATERIALS_DB)
+  Al7075T651: {E: 70000, nu: 0.33, rho: 2.81e-9, Sy: 480, UTS: 560, allowable: 320}   # R-123 (ca66b9b) 7075-T6; SF vs 320 allowable
   CFRP_QI:    {E: 50000, nu: 0.30, rho: 1.55e-9, Sy: 450}   # [EST] quasi-isotropic, no cited laminate
 geometry:   # robot frame origin = waist centre; x fwd, y left, z up (mm)
   bulkhead: {mat: Al7075T651, width_y: 300, height_z: 160, t: 12, x0: 40, z0: 300}
