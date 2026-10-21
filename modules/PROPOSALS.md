@@ -424,6 +424,7 @@ All keep R-076 (reinforced isolation, IEC 60664-1 creepage, IP2X), R-074 (main l
 - **Evidence:** modules/actuators/drive_heat_plates.py, results/drive_heat_plates.json, results/DRIVE_HEAT_PLATES.md rev 3, cad/drive_plate_*.step; Thermal R131_ELMO_MG.md rev 2.
 - **Open:** Thermal verification of rev 3, the R-140 conditions (Controls duty sim), and Electronics confirming the mated plug fits the 7 mm femur gap.
 
+- **Rev 4 update (D93, 2026-10-21):** knee fins 13 → 18.5 mm with a 45° × 8 lower taper, plus ID's P-154 low-ε PC guard (2 × ≈20.3 g). **+0.066 kg vs rev 3 booked in full** (the plate and the guard). **P-153 total: +0.082 kg vs R-140** (0.016 + 0.066). Envelope: the guard is 30.0 mm proud of L51 (ID rev 4 had 29.5, +0.5 for the taper compensation). Gates: Thermal re-check of rev 4 at 18.5 mm with the taper, and the ID rod sweep at 30.0 mm.
 ### P-154: ID: knee fin guard (perforated PC over Actuators D91 knee plate rev 3)
 - Date: 2026-10-21
 - Module / proposer: Design / RL Industrial Design
