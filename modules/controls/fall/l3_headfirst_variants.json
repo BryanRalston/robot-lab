@@ -1,0 +1,1415 @@
+{
+ "A_waist204": {
+  "holds_Nm": {
+   "waist_pitch": 204.0
+  },
+  "head_first": 2,
+  "rows": [
+   {
+    "seed": 0,
+    "first": "head",
+    "order": [
+     [
+      "head",
+      1.087
+     ],
+     [
+      "chest_pad",
+      1.12
+     ],
+     [
+      "L_hand",
+      1.158
+     ]
+    ],
+    "head_first": true,
+    "head_speed": 5.53,
+    "head_vn": 5.5,
+    "dz_chest_mm": 64.0,
+    "dz_LR_shoulder_mm": [
+     195.0,
+     195.1
+    ],
+    "chest_E_x1p5": 81.8,
+    "pad_vn": 0.13,
+    "span_deg": {
+     "waist_pitch": [
+      -30.3,
+      0.3
+     ],
+     "l_knee": [
+      -0.2,
+      4.7
+     ],
+     "r_knee": [
+      -0.2,
+      4.8
+     ]
+    }
+   },
+   {
+    "seed": 2,
+    "first": "L_hand",
+    "order": [
+     [
+      "L_hand",
+      0.822
+     ],
+     [
+      "R_hand",
+      0.822
+     ],
+     [
+      "L_forearm",
+      0.832
+     ]
+    ],
+    "head_first": false,
+    "head_speed": 4.98,
+    "head_vn": 4.92,
+    "dz_chest_mm": -23.7,
+    "dz_LR_shoulder_mm": [
+     36.3,
+     35.7
+    ],
+    "chest_E_x1p5": 518.6,
+    "pad_vn": 5.45,
+    "span_deg": {
+     "waist_pitch": [
+      -2.0,
+      2.2
+     ],
+     "l_knee": [
+      -0.6,
+      18.5
+     ],
+     "r_knee": [
+      -0.6,
+      18.6
+     ]
+    }
+   },
+   {
+    "seed": 3,
+    "first": "L_hand",
+    "order": [
+     [
+      "L_shank",
+      0.0
+     ],
+     [
+      "R_shank",
+      0.0
+     ],
+     [
+      "L_hand",
+      0.542
+     ]
+    ],
+    "head_first": false,
+    "head_speed": 0.38,
+    "head_vn": 0.38,
+    "dz_chest_mm": -23.8,
+    "dz_LR_shoulder_mm": [
+     43.6,
+     40.7
+    ],
+    "chest_E_x1p5": 302.2,
+    "pad_vn": 3.44,
+    "span_deg": {
+     "waist_pitch": [
+      -0.4,
+      0.5
+     ],
+     "l_knee": [
+      0.3,
+      89.9
+     ],
+     "r_knee": [
+      0.3,
+      89.9
+     ]
+    }
+   },
+   {
+    "seed": 6,
+    "first": "L_hand",
+    "order": [
+     [
+      "L_hand",
+      0.988
+     ],
+     [
+      "R_hand",
+      0.988
+     ],
+     [
+      "L_forearm",
+      0.996
+     ]
+    ],
+    "head_first": false,
+    "head_speed": 4.99,
+    "head_vn": 4.93,
+    "dz_chest_mm": -23.7,
+    "dz_LR_shoulder_mm": [
+     37.8,
+     36.8
+    ],
+    "chest_E_x1p5": 520.1,
+    "pad_vn": 5.48,
+    "span_deg": {
+     "waist_pitch": [
+      -1.8,
+      2.3
+     ],
+     "l_knee": [
+      -0.6,
+      18.5
+     ],
+     "r_knee": [
+      -0.6,
+      18.6
+     ]
+    }
+   },
+   {
+    "seed": 9,
+    "first": "L_hand",
+    "order": [
+     [
+      "L_shank",
+      0.0
+     ],
+     [
+      "R_shank",
+      0.0
+     ],
+     [
+      "L_hand",
+      0.618
+     ]
+    ],
+    "head_first": false,
+    "head_speed": 0.25,
+    "head_vn": 0.01,
+    "dz_chest_mm": -21.1,
+    "dz_LR_shoulder_mm": [
+     43.0,
+     44.8
+    ],
+    "chest_E_x1p5": 260.1,
+    "pad_vn": 3.81,
+    "span_deg": {
+     "waist_pitch": [
+      -4.4,
+      0.5
+     ],
+     "l_knee": [
+      -0.8,
+      89.9
+     ],
+     "r_knee": [
+      -0.7,
+      89.9
+     ]
+    }
+   },
+   {
+    "seed": 10,
+    "first": "L_hand",
+    "order": [
+     [
+      "L_hand",
+      0.813
+     ],
+     [
+      "R_hand",
+      0.813
+     ],
+     [
+      "L_forearm",
+      0.822
+     ]
+    ],
+    "head_first": false,
+    "head_speed": 4.94,
+    "head_vn": 4.88,
+    "dz_chest_mm": -23.9,
+    "dz_LR_shoulder_mm": [
+     35.7,
+     35.3
+    ],
+    "chest_E_x1p5": 523.4,
+    "pad_vn": 5.41,
+    "span_deg": {
+     "waist_pitch": [
+      -2.1,
+      1.8
+     ],
+     "l_knee": [
+      -0.6,
+      18.7
+     ],
+     "r_knee": [
+      -0.6,
+      18.7
+     ]
+    }
+   },
+   {
+    "seed": 14,
+    "first": "L_hand",
+    "order": [
+     [
+      "L_hand",
+      0.864
+     ],
+     [
+      "R_hand",
+      0.864
+     ],
+     [
+      "L_forearm",
+      0.874
+     ]
+    ],
+    "head_first": false,
+    "head_speed": 5.0,
+    "head_vn": 4.95,
+    "dz_chest_mm": -23.7,
+    "dz_LR_shoulder_mm": [
+     36.2,
+     36.0
+    ],
+    "chest_E_x1p5": 517.7,
+    "pad_vn": 5.47,
+    "span_deg": {
+     "waist_pitch": [
+      -1.9,
+      2.2
+     ],
+     "l_knee": [
+      -0.6,
+      18.7
+     ],
+     "r_knee": [
+      -0.6,
+      18.3
+     ]
+    }
+   },
+   {
+    "seed": 16,
+    "first": "L_hand",
+    "order": [
+     [
+      "L_hand",
+      1.159
+     ],
+     [
+      "R_hand",
+      1.159
+     ],
+     [
+      "L_forearm",
+      1.166
+     ]
+    ],
+    "head_first": false,
+    "head_speed": 4.99,
+    "head_vn": 4.92,
+    "dz_chest_mm": -23.5,
+    "dz_LR_shoulder_mm": [
+     36.8,
+     36.4
+    ],
+    "chest_E_x1p5": 535.6,
+    "pad_vn": 5.49,
+    "span_deg": {
+     "waist_pitch": [
+      -1.9,
+      2.1
+     ],
+     "l_knee": [
+      -0.5,
+      18.6
+     ],
+     "r_knee": [
+      -0.5,
+      18.5
+     ]
+    }
+   },
+   {
+    "seed": 17,
+    "first": "L_hand",
+    "order": [
+     [
+      "L_shank",
+      0.0
+     ],
+     [
+      "R_shank",
+      0.0
+     ],
+     [
+      "L_hand",
+      0.631
+     ]
+    ],
+    "head_first": false,
+    "head_speed": 4.95,
+    "head_vn": 4.88,
+    "dz_chest_mm": 0.3,
+    "dz_LR_shoulder_mm": [
+     59.7,
+     58.1
+    ],
+    "chest_E_x1p5": 300.9,
+    "pad_vn": 3.85,
+    "span_deg": {
+     "waist_pitch": [
+      -4.9,
+      0.7
+     ],
+     "l_knee": [
+      -1.5,
+      89.9
+     ],
+     "r_knee": [
+      -1.3,
+      89.9
+     ]
+    }
+   },
+   {
+    "seed": 20,
+    "first": "L_hand",
+    "order": [
+     [
+      "L_hand",
+      1.151
+     ],
+     [
+      "R_hand",
+      1.151
+     ],
+     [
+      "L_forearm",
+      1.156
+     ]
+    ],
+    "head_first": false,
+    "head_speed": 4.86,
+    "head_vn": 4.8,
+    "dz_chest_mm": -24.1,
+    "dz_LR_shoulder_mm": [
+     37.7,
+     37.2
+    ],
+    "chest_E_x1p5": 519.3,
+    "pad_vn": 5.38,
+    "span_deg": {
+     "waist_pitch": [
+      -1.9,
+      2.1
+     ],
+     "l_knee": [
+      -0.6,
+      18.7
+     ],
+     "r_knee": [
+      -0.6,
+      18.6
+     ]
+    }
+   },
+   {
+    "seed": 22,
+    "first": "head",
+    "order": [
+     [
+      "head",
+      0.959
+     ],
+     [
+      "L_hand",
+      1.088
+     ],
+     [
+      "R_hand",
+      1.088
+     ]
+    ],
+    "head_first": true,
+    "head_speed": 5.26,
+    "head_vn": 5.22,
+    "dz_chest_mm": 127.8,
+    "dz_LR_shoulder_mm": [
+     259.0,
+     259.0
+    ],
+    "chest_E_x1p5": 0.0,
+    "pad_vn": null,
+    "span_deg": {
+     "waist_pitch": [
+      -17.5,
+      0.8
+     ],
+     "l_knee": [
+      -0.1,
+      10.6
+     ],
+     "r_knee": [
+      -0.0,
+      10.3
+     ]
+    }
+   }
+  ]
+ },
+ "B_knee129": {
+  "holds_Nm": {
+   "l_knee": 129.0,
+   "r_knee": 129.0
+  },
+  "head_first": 9,
+  "rows": [
+   {
+    "seed": 0,
+    "first": "head",
+    "order": [
+     [
+      "head",
+      0.942
+     ],
+     [
+      "L_hand",
+      1.134
+     ],
+     [
+      "R_hand",
+      1.134
+     ]
+    ],
+    "head_first": true,
+    "head_speed": 3.83,
+    "head_vn": 3.8,
+    "dz_chest_mm": 252.7,
+    "dz_LR_shoulder_mm": [
+     335.8,
+     335.8
+    ],
+    "chest_E_x1p5": 0.0,
+    "pad_vn": null,
+    "span_deg": {
+     "waist_pitch": [
+      0.0,
+      61.9
+     ],
+     "l_knee": [
+      -0.0,
+      0.6
+     ],
+     "r_knee": [
+      -0.0,
+      0.6
+     ]
+    }
+   },
+   {
+    "seed": 2,
+    "first": "head",
+    "order": [
+     [
+      "head",
+      0.776
+     ],
+     [
+      "L_hand",
+      0.845
+     ],
+     [
+      "R_hand",
+      0.845
+     ]
+    ],
+    "head_first": true,
+    "head_speed": 5.03,
+    "head_vn": 4.95,
+    "dz_chest_mm": 105.1,
+    "dz_LR_shoulder_mm": [
+     228.6,
+     229.1
+    ],
+    "chest_E_x1p5": 75.6,
+    "pad_vn": 0.61,
+    "span_deg": {
+     "waist_pitch": [
+      -3.8,
+      47.7
+     ],
+     "l_knee": [
+      -0.3,
+      0.2
+     ],
+     "r_knee": [
+      -0.3,
+      0.2
+     ]
+    }
+   },
+   {
+    "seed": 3,
+    "first": "L_thigh",
+    "order": [
+     [
+      "L_shank",
+      0.0
+     ],
+     [
+      "R_shank",
+      0.0
+     ],
+     [
+      "L_thigh",
+      0.602
+     ]
+    ],
+    "head_first": false,
+    "head_speed": 4.3,
+    "head_vn": 4.29,
+    "dz_chest_mm": 87.5,
+    "dz_LR_shoulder_mm": [
+     199.5,
+     199.5
+    ],
+    "chest_E_x1p5": 77.1,
+    "pad_vn": 0.41,
+    "span_deg": {
+     "waist_pitch": [
+      -10.0,
+      56.0
+     ],
+     "l_knee": [
+      89.5,
+      90.1
+     ],
+     "r_knee": [
+      89.5,
+      90.1
+     ]
+    }
+   },
+   {
+    "seed": 6,
+    "first": "head",
+    "order": [
+     [
+      "head",
+      0.905
+     ],
+     [
+      "R_hand",
+      1.027
+     ],
+     [
+      "L_hand",
+      1.028
+     ]
+    ],
+    "head_first": true,
+    "head_speed": 4.49,
+    "head_vn": 4.43,
+    "dz_chest_mm": 164.8,
+    "dz_LR_shoulder_mm": [
+     290.0,
+     290.3
+    ],
+    "chest_E_x1p5": 58.6,
+    "pad_vn": 0.3,
+    "span_deg": {
+     "waist_pitch": [
+      -2.1,
+      61.3
+     ],
+     "l_knee": [
+      -0.3,
+      0.2
+     ],
+     "r_knee": [
+      -0.3,
+      0.2
+     ]
+    }
+   },
+   {
+    "seed": 9,
+    "first": "L_thigh",
+    "order": [
+     [
+      "L_shank",
+      0.0
+     ],
+     [
+      "R_shank",
+      0.0
+     ],
+     [
+      "L_thigh",
+      0.679
+     ]
+    ],
+    "head_first": false,
+    "head_speed": 4.04,
+    "head_vn": 4.02,
+    "dz_chest_mm": 105.4,
+    "dz_LR_shoulder_mm": [
+     222.9,
+     222.9
+    ],
+    "chest_E_x1p5": 53.7,
+    "pad_vn": 0.49,
+    "span_deg": {
+     "waist_pitch": [
+      -17.6,
+      60.5
+     ],
+     "l_knee": [
+      89.5,
+      90.2
+     ],
+     "r_knee": [
+      89.5,
+      90.2
+     ]
+    }
+   },
+   {
+    "seed": 10,
+    "first": "head",
+    "order": [
+     [
+      "head",
+      0.744
+     ],
+     [
+      "L_hand",
+      0.84
+     ],
+     [
+      "R_hand",
+      0.84
+     ]
+    ],
+    "head_first": true,
+    "head_speed": 4.72,
+    "head_vn": 4.67,
+    "dz_chest_mm": 147.8,
+    "dz_LR_shoulder_mm": [
+     268.6,
+     268.9
+    ],
+    "chest_E_x1p5": 95.1,
+    "pad_vn": 0.98,
+    "span_deg": {
+     "waist_pitch": [
+      -1.4,
+      60.7
+     ],
+     "l_knee": [
+      -0.4,
+      0.2
+     ],
+     "r_knee": [
+      -0.3,
+      0.2
+     ]
+    }
+   },
+   {
+    "seed": 14,
+    "first": "head",
+    "order": [
+     [
+      "head",
+      0.825
+     ],
+     [
+      "L_hand",
+      0.885
+     ],
+     [
+      "R_hand",
+      0.885
+     ]
+    ],
+    "head_first": true,
+    "head_speed": 5.16,
+    "head_vn": 5.06,
+    "dz_chest_mm": 82.7,
+    "dz_LR_shoulder_mm": [
+     207.9,
+     207.8
+    ],
+    "chest_E_x1p5": 79.8,
+    "pad_vn": 0.91,
+    "span_deg": {
+     "waist_pitch": [
+      -9.1,
+      40.7
+     ],
+     "l_knee": [
+      -0.1,
+      0.2
+     ],
+     "r_knee": [
+      -0.1,
+      0.2
+     ]
+    }
+   },
+   {
+    "seed": 16,
+    "first": "head",
+    "order": [
+     [
+      "head",
+      1.059
+     ],
+     [
+      "R_hand",
+      1.203
+     ],
+     [
+      "L_hand",
+      1.204
+     ]
+    ],
+    "head_first": true,
+    "head_speed": 4.34,
+    "head_vn": 4.31,
+    "dz_chest_mm": 184.5,
+    "dz_LR_shoulder_mm": [
+     304.9,
+     305.0
+    ],
+    "chest_E_x1p5": 26.4,
+    "pad_vn": 0.1,
+    "span_deg": {
+     "waist_pitch": [
+      -0.0,
+      61.5
+     ],
+     "l_knee": [
+      -0.1,
+      0.5
+     ],
+     "r_knee": [
+      -0.1,
+      0.3
+     ]
+    }
+   },
+   {
+    "seed": 17,
+    "first": "head",
+    "order": [
+     [
+      "L_shank",
+      0.0
+     ],
+     [
+      "R_shank",
+      0.0
+     ],
+     [
+      "head",
+      0.652
+     ]
+    ],
+    "head_first": true,
+    "head_speed": 3.86,
+    "head_vn": 3.86,
+    "dz_chest_mm": 134.6,
+    "dz_LR_shoulder_mm": [
+     241.6,
+     240.9
+    ],
+    "chest_E_x1p5": 31.0,
+    "pad_vn": 0.36,
+    "span_deg": {
+     "waist_pitch": [
+      -31.0,
+      61.4
+     ],
+     "l_knee": [
+      89.7,
+      90.2
+     ],
+     "r_knee": [
+      89.7,
+      90.2
+     ]
+    }
+   },
+   {
+    "seed": 20,
+    "first": "head",
+    "order": [
+     [
+      "head",
+      1.075
+     ],
+     [
+      "L_hand",
+      1.187
+     ],
+     [
+      "R_hand",
+      1.187
+     ]
+    ],
+    "head_first": true,
+    "head_speed": 4.58,
+    "head_vn": 4.49,
+    "dz_chest_mm": 150.5,
+    "dz_LR_shoulder_mm": [
+     281.2,
+     281.1
+    ],
+    "chest_E_x1p5": 86.3,
+    "pad_vn": 1.18,
+    "span_deg": {
+     "waist_pitch": [
+      -0.9,
+      61.0
+     ],
+     "l_knee": [
+      -0.4,
+      0.2
+     ],
+     "r_knee": [
+      -0.4,
+      0.2
+     ]
+    }
+   },
+   {
+    "seed": 22,
+    "first": "head",
+    "order": [
+     [
+      "head",
+      0.894
+     ],
+     [
+      "L_hand",
+      1.107
+     ],
+     [
+      "R_hand",
+      1.107
+     ]
+    ],
+    "head_first": true,
+    "head_speed": 3.84,
+    "head_vn": 3.8,
+    "dz_chest_mm": 254.5,
+    "dz_LR_shoulder_mm": [
+     338.4,
+     338.5
+    ],
+    "chest_E_x1p5": 0.0,
+    "pad_vn": null,
+    "span_deg": {
+     "waist_pitch": [
+      0.0,
+      62.0
+     ],
+     "l_knee": [
+      -0.0,
+      0.6
+     ],
+     "r_knee": [
+      -0.0,
+      0.6
+     ]
+    }
+   }
+  ]
+ },
+ "C_both": {
+  "holds_Nm": {
+   "waist_pitch": 204.0,
+   "l_knee": 129.0,
+   "r_knee": 129.0
+  },
+  "head_first": 3,
+  "rows": [
+   {
+    "seed": 0,
+    "first": "head",
+    "order": [
+     [
+      "head",
+      1.108
+     ],
+     [
+      "chest_pad",
+      1.12
+     ],
+     [
+      "L_hand",
+      1.161
+     ]
+    ],
+    "head_first": true,
+    "head_speed": 5.59,
+    "head_vn": 5.53,
+    "dz_chest_mm": 44.0,
+    "dz_LR_shoulder_mm": [
+     168.5,
+     168.5
+    ],
+    "chest_E_x1p5": 140.5,
+    "pad_vn": 2.17,
+    "span_deg": {
+     "waist_pitch": [
+      -21.3,
+      0.3
+     ],
+     "l_knee": [
+      -0.2,
+      0.2
+     ],
+     "r_knee": [
+      -0.2,
+      0.2
+     ]
+    }
+   },
+   {
+    "seed": 2,
+    "first": "L_hand",
+    "order": [
+     [
+      "L_hand",
+      0.819
+     ],
+     [
+      "R_hand",
+      0.819
+     ],
+     [
+      "L_forearm",
+      0.829
+     ]
+    ],
+    "head_first": false,
+    "head_speed": 5.02,
+    "head_vn": 4.97,
+    "dz_chest_mm": -24.7,
+    "dz_LR_shoulder_mm": [
+     35.5,
+     34.3
+    ],
+    "chest_E_x1p5": 524.5,
+    "pad_vn": 5.47,
+    "span_deg": {
+     "waist_pitch": [
+      -2.2,
+      1.2
+     ],
+     "l_knee": [
+      -0.1,
+      0.7
+     ],
+     "r_knee": [
+      -0.1,
+      0.7
+     ]
+    }
+   },
+   {
+    "seed": 3,
+    "first": "L_hand",
+    "order": [
+     [
+      "L_shank",
+      0.0
+     ],
+     [
+      "R_shank",
+      0.0
+     ],
+     [
+      "L_hand",
+      0.593
+     ]
+    ],
+    "head_first": false,
+    "head_speed": 4.67,
+    "head_vn": 4.61,
+    "dz_chest_mm": 3.3,
+    "dz_LR_shoulder_mm": [
+     60.4,
+     61.6
+    ],
+    "chest_E_x1p5": 267.8,
+    "pad_vn": 3.43,
+    "span_deg": {
+     "waist_pitch": [
+      -5.8,
+      0.4
+     ],
+     "l_knee": [
+      89.6,
+      90.2
+     ],
+     "r_knee": [
+      89.6,
+      90.1
+     ]
+    }
+   },
+   {
+    "seed": 6,
+    "first": "L_hand",
+    "order": [
+     [
+      "L_hand",
+      0.986
+     ],
+     [
+      "R_hand",
+      0.986
+     ],
+     [
+      "L_forearm",
+      0.994
+     ]
+    ],
+    "head_first": false,
+    "head_speed": 5.01,
+    "head_vn": 4.95,
+    "dz_chest_mm": -24.6,
+    "dz_LR_shoulder_mm": [
+     35.6,
+     35.1
+    ],
+    "chest_E_x1p5": 539.0,
+    "pad_vn": 5.49,
+    "span_deg": {
+     "waist_pitch": [
+      -2.3,
+      1.2
+     ],
+     "l_knee": [
+      -0.1,
+      0.7
+     ],
+     "r_knee": [
+      -0.1,
+      0.7
+     ]
+    }
+   },
+   {
+    "seed": 9,
+    "first": "head",
+    "order": [
+     [
+      "L_shank",
+      0.0
+     ],
+     [
+      "R_shank",
+      0.0
+     ],
+     [
+      "head",
+      0.701
+     ]
+    ],
+    "head_first": true,
+    "head_speed": 5.02,
+    "head_vn": 5.02,
+    "dz_chest_mm": 25.4,
+    "dz_LR_shoulder_mm": [
+     84.7,
+     84.8
+    ],
+    "chest_E_x1p5": 167.7,
+    "pad_vn": 2.56,
+    "span_deg": {
+     "waist_pitch": [
+      -6.3,
+      0.2
+     ],
+     "l_knee": [
+      89.7,
+      90.5
+     ],
+     "r_knee": [
+      89.7,
+      90.5
+     ]
+    }
+   },
+   {
+    "seed": 10,
+    "first": "L_hand",
+    "order": [
+     [
+      "L_hand",
+      0.81
+     ],
+     [
+      "R_hand",
+      0.811
+     ],
+     [
+      "L_forearm",
+      0.819
+     ]
+    ],
+    "head_first": false,
+    "head_speed": 4.6,
+    "head_vn": 4.56,
+    "dz_chest_mm": -23.9,
+    "dz_LR_shoulder_mm": [
+     37.4,
+     36.8
+    ],
+    "chest_E_x1p5": 526.8,
+    "pad_vn": 5.44,
+    "span_deg": {
+     "waist_pitch": [
+      -2.2,
+      1.4
+     ],
+     "l_knee": [
+      -0.1,
+      0.7
+     ],
+     "r_knee": [
+      -0.1,
+      0.7
+     ]
+    }
+   },
+   {
+    "seed": 14,
+    "first": "L_hand",
+    "order": [
+     [
+      "L_hand",
+      0.859
+     ],
+     [
+      "R_hand",
+      0.859
+     ],
+     [
+      "L_forearm",
+      0.869
+     ]
+    ],
+    "head_first": false,
+    "head_speed": 5.01,
+    "head_vn": 4.96,
+    "dz_chest_mm": -25.1,
+    "dz_LR_shoulder_mm": [
+     33.8,
+     34.4
+    ],
+    "chest_E_x1p5": 530.3,
+    "pad_vn": 5.47,
+    "span_deg": {
+     "waist_pitch": [
+      -2.2,
+      1.3
+     ],
+     "l_knee": [
+      -0.1,
+      0.7
+     ],
+     "r_knee": [
+      -0.1,
+      0.7
+     ]
+    }
+   },
+   {
+    "seed": 16,
+    "first": "L_hand",
+    "order": [
+     [
+      "L_hand",
+      1.156
+     ],
+     [
+      "R_hand",
+      1.156
+     ],
+     [
+      "L_forearm",
+      1.164
+     ]
+    ],
+    "head_first": false,
+    "head_speed": 5.02,
+    "head_vn": 4.96,
+    "dz_chest_mm": -23.4,
+    "dz_LR_shoulder_mm": [
+     37.7,
+     37.3
+    ],
+    "chest_E_x1p5": 531.0,
+    "pad_vn": 5.52,
+    "span_deg": {
+     "waist_pitch": [
+      -2.0,
+      1.4
+     ],
+     "l_knee": [
+      -0.1,
+      0.7
+     ],
+     "r_knee": [
+      -0.1,
+      0.7
+     ]
+    }
+   },
+   {
+    "seed": 17,
+    "first": "L_hand",
+    "order": [
+     [
+      "L_shank",
+      0.0
+     ],
+     [
+      "R_shank",
+      0.0
+     ],
+     [
+      "L_hand",
+      0.64
+     ]
+    ],
+    "head_first": false,
+    "head_speed": 5.04,
+    "head_vn": 5.04,
+    "dz_chest_mm": 41.3,
+    "dz_LR_shoulder_mm": [
+     87.8,
+     87.5
+    ],
+    "chest_E_x1p5": 84.4,
+    "pad_vn": 1.51,
+    "span_deg": {
+     "waist_pitch": [
+      -6.3,
+      0.2
+     ],
+     "l_knee": [
+      89.6,
+      90.5
+     ],
+     "r_knee": [
+      89.6,
+      90.5
+     ]
+    }
+   },
+   {
+    "seed": 20,
+    "first": "L_hand",
+    "order": [
+     [
+      "L_hand",
+      1.148
+     ],
+     [
+      "R_hand",
+      1.148
+     ],
+     [
+      "L_forearm",
+      1.153
+     ]
+    ],
+    "head_first": false,
+    "head_speed": 4.87,
+    "head_vn": 4.81,
+    "dz_chest_mm": -24.3,
+    "dz_LR_shoulder_mm": [
+     38.1,
+     37.0
+    ],
+    "chest_E_x1p5": 524.1,
+    "pad_vn": 5.39,
+    "span_deg": {
+     "waist_pitch": [
+      -2.0,
+      1.7
+     ],
+     "l_knee": [
+      -0.1,
+      0.7
+     ],
+     "r_knee": [
+      -0.1,
+      0.7
+     ]
+    }
+   },
+   {
+    "seed": 22,
+    "first": "head",
+    "order": [
+     [
+      "head",
+      0.967
+     ],
+     [
+      "R_hand",
+      1.09
+     ],
+     [
+      "L_hand",
+      1.091
+     ]
+    ],
+    "head_first": true,
+    "head_speed": 5.27,
+    "head_vn": 5.25,
+    "dz_chest_mm": 122.1,
+    "dz_LR_shoulder_mm": [
+     254.9,
+     255.0
+    ],
+    "chest_E_x1p5": 0.0,
+    "pad_vn": null,
+    "span_deg": {
+     "waist_pitch": [
+      -20.8,
+      0.8
+     ],
+     "l_knee": [
+      -0.1,
+      0.3
+     ],
+     "r_knee": [
+      -0.1,
+      0.3
+     ]
+    }
+   }
+  ]
+ }
+}

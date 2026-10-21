@@ -7,6 +7,7 @@ import numpy as np, mujoco
 H = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, os.path.join(H, '..', 'limits'))
 import prone_data as P
 from drive_thermal_derate import friction_hold
+HOLD = {}   # joint name -> torque limit (N.m); torque-limited stiff PD hold at the post-settle angle (slip clutch model)
 FP, ST, KB = 9210.0, 0.0812, 5.3e6
 def low(m, d, g):
     if m.geom_type[g] == 3:
@@ -36,9 +37,14 @@ def run(seed, mass=68.0, roll=0.0, lean_o=None, piv_o=None, sp_o=None, hp_o=None
     feet = {m.body('L_foot').id, m.body('R_foot').id}; kn = {m.body('L_shank').id, m.body('R_shank').id}
     p0 = {b: d.xpos[b][:2].copy() for b in feet | kn}
     cmax = 0.0; E = 0.0; first = None; tfirst = None; tchest = None; vn = None; att = None; hist = []; bott = False; F = 0.0; dt = m.opt.timestep
+    hold = [(m.jnt_dofadr[m.joint(n).id], m.jnt_qposadr[m.joint(n).id], float(d.qpos[m.jnt_qposadr[m.joint(n).id]]), L) for n, L in HOLD.items()]
+    jx = {n: [m.jnt_qposadr[m.joint(n).id], 9.0, -9.0] for n in ('waist_pitch', 'l_knee', 'r_knee')}
     hb = m.body('head').id; head = None; order = {}; trunk = []; wb = m.body('waistY').id
     for k in range(int(2.5 / dt)):
         d.ctrl[:] = 0; t = k * dt
+        d.qfrc_applied[:] = 0
+        for dv, qa, q0, L in hold: d.qfrc_applied[dv] = float(np.clip(5000.0 * (q0 - d.qpos[qa]) - 100.0 * d.qvel[dv], -L, L))
+        for n, v in jx.items(): v[1] = min(v[1], float(d.qpos[v[0]])); v[2] = max(v[2], float(d.qpos[v[0]]))
         R = d.geom_xmat[cp].reshape(3, 3); hs = m.geom_size[cp]
         pts = [d.geom_xpos[cp] + R @ np.array([hs[0], sy*hs[1], sz*hs[2]]) for sy in (-1, 1) for sz in (-1, 1)]
         pf = min(pts, key=lambda p: p[2]); c = max(0.0, -pf[2])
@@ -98,7 +104,7 @@ def run(seed, mass=68.0, roll=0.0, lean_o=None, piv_o=None, sp_o=None, hp_o=None
     return dict(seed=seed, pivot=piv, friction=round(fr, 2), lean=round(lean, 3), yaw=round(yaw, 3), shoulder_pitch=round(pose['shoulder_pitch'], 2),
                 first_contact=first, gap_to_chest_ms=gap, chest_contact=tchest is not None, chest_E_J=round(E, 1), chest_E_x1p5=E15, pad_vn=vn, at_contact=att,
                 max_crush_mm=round(cmax * 1000, 1), bottomed=bott, slide_mm=slide, crush_hist=hist,
-                C1=c1, head=head, contact_order=sorted(order.items(), key=lambda x: x[1])[:6], trunk_hist=trunk, mass=mass, roll=roll, tilt_deg=None if att is None else round(90 - att['pitch_deg'], 1), C2=(vn is not None and vn <= vlim), C3=any(v > 20 for v in slide.values()))
+                C1=c1, joint_span_deg={n: [round(math.degrees(v[1]), 1), round(math.degrees(v[2]), 1)] for n, v in jx.items()}, head=head, contact_order=sorted(order.items(), key=lambda x: x[1])[:6], trunk_hist=trunk, mass=mass, roll=roll, tilt_deg=None if att is None else round(90 - att['pitch_deg'], 1), C2=(vn is not None and vn <= vlim), C3=any(v > 20 for v in slide.values()))
 if __name__ == '__main__':
   rows = [run(i) for i in range(24)]
   for x in rows: print({k: x[k] for k in x if k != 'crush_hist'}, flush=True)

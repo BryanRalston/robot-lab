@@ -82,3 +82,22 @@ All 11 remain head-first. The head is 50–254 mm below the chest-pad plane and 
 alone, with the shoulders far off the floor, so a shoulder cover would not intercept it in these topples.
 Worst seed 14: full pose at head contact in `l3_headfirst_worst_pose.json` (all body positions, torso/shoulder/upper-arm/head quats);
 upper-arm lowest point 231 mm (L) / 231 mm (R) above the floor.
+
+---
+# Head-first variants (T&R hypothesis on 0ef2d9e) — `l3_headfirst_variants.json`
+Same 11 seeds, head 1.104 kg (torso reduced, 68 kg total), all drives MO=0 except the holds. Hold = PD at the post-settle angle
+(Kp 5000 N·m/rad, Kd 100) clipped at ±L applied as joint torque: a torque-limited stiff hold; when saturated it gives ±L, i.e. slip at L
+(slip friction = L, approximated by the clip, not a separate Coulomb model). Waist L = 204 N·m output. **Knee L = 129 N·m = the sim/v3
+drive peak (prone_data s.lim)**, not the D99 stop. Head speed = world frame at the head's first contact (later than first contact when not head-first).
+| variant | head-first /11 | notes |
+|---|---|---|
+| baseline (free, 0ef2d9e) | 11 | waist flexes to +60 (flexion stop) |
+| A waist 204 | **2** (seeds 0, 22) | waist slipped to −30.3/−17.5 (extension) in those 2; 9 others: hands first, waist within ±5° |
+| B knees 129 | **9** | 2 knee-pivot seeds (3, 9) thigh-first; waist still flexes to 41–62° |
+| C both | **3** (0, 9, 22) | seed 9 waist −6.3° yet head-first after shanks |
+- **The free waist is the main cause: holding the waist cuts head-first from 11 to 2; holding the knees alone does almost nothing (9).**
+- Cost: with the waist held, chest-pad energy ×1.5 rises to 518–539 J in toe runs (pad speed 5.4–5.5 m/s, above C2's 4.24 limit);
+  knee-pivot runs 260–302 J at 3.4–3.9 m/s. Still ≤ 680 J (C1) and no bottoming (from previous runs' max crush; not re-logged here).
+- In hand-first runs the head lands 21–24 mm *above* the chest-pad plane (dz −24) and 35–60 mm below the shoulders.
+- Remaining head-first in A/C: the waist slips into extension (holding torque 204 N·m exceeded); head speed 5.26–5.59 m/s, 44–128 mm below the pad.
+Per-seed first body, offsets, head speed, chest E×1.5, pad speed and waist/knee spans are in the json.
