@@ -1508,3 +1508,7 @@ The R-027 palm credit change (-0.120 to -0.097 pair) is the same +0.023 as the R
 
 ## R-153 — P-057 correction (Electronics a0c28ae) — 2026-10-21
 Link B replaces the 10 mm² front-low main, -0.018. It is credited at full because it is cited density on a removed item from the same ledger. P-057 nets +0.032. Credible mass ~68.78 → ~68.76 kg, plus the open tibia delta (R-152). The floor vent over the +y hip-yaw drive and PU bumpers stays with Torso and Electronics; ducting it or moving it is a G2/G3 item.
+
+## R-154 — Tibia wall mass (Legs 8e92b89) and D99 knee stop vs cap (6a3d84c) — 2026-10-21
+1. Tibia 2.0 mm wall: +0.114 per robot over R-135 [CAD], booked at full. Credible mass ~68.76 → ~68.87 kg.
+2. D99 knee stop at 0.487 kg vs Robot Lab's 0.35 cap: not booked until Robot Lab adopts it. It replaces the R-149/R-151 r75 booking (+0.303) only on adoption, as one reconciled delta. Arbiter constraints on the options: (a) raising the cap is Robot Lab's budget call and does not need TARGETS. (b) Cutting fault energy needs Controls/Test evidence that the motors-off bottoming energy is below 40.1 J × 1.1 across domain randomisation. (c) Lowering the arm SF is rejected below the existing gate minimums (SF ≥2 static fall on the R-128 band, Goodman over 5 years).
