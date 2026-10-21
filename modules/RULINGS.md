@@ -1150,3 +1150,29 @@ Arbiter rulings on disputed proposals. Rulings are made only against TARGETS.md 
 ## R-121 — Shoulder roll stand-off/flange mass (Arms R13 1ee8d73) — 2026-10-21
 Evidence: Arms R13 shows the ID flange (OD60) is under the CRBH 7013 bore (Ø70) and its 6×M4 on PCD50 gives SF 1.51 (fails). R13 uses 8×M4 12.9 on PCD62 + 2 dowels (SF 2.31). Tolerance stack worst 2.13 / RSS 0.92 mm passes e≤5. Clash check passes; the 135° overhead soft limit stays (9.4 mm at pitch ≤−150 with roll ≥170). R-120 numbers reproduced.
 Ruling: R13 geometry adopted. Mass is an addition, so it is booked at full: pair +0.271 [CALC] (bearing +0.100, housing +0.075, stand-off +0.096), replacing R-120's +0.212, so net +0.059. Reserve about −0.83 → −0.89 kg. A thinner flange or hub may be proposed only with the Job 8 FEA showing joint SF ≥2.0 and s0 ≥2.0 at e≤5; the credit is decided then. The ID flange must match the R13 interface.
+
+## R-122 (2026-10-21) Reserve recovery plan (Robot Lab request; R-066/R-079 mass-down)
+- **Verified reserve: -0.893 kg (credible ~67.39 kg vs 66.5 hard).** Chain: R-116 -0.64; R-120 +0.194 -> -0.834; R-121 +0.059 -> **-0.893**. Robot Lab's -0.64 is stale (pre R-120/R-121). `arbiter/MASS_ROLLUP_OFFICIAL.md` is stale at R-031 (65.809) and is not the current figure; Arbiter regenerates it from the ruling chain at the end of R13. This is a T2 violation (over the hard limit), not only a reserve shortfall. To reach +0.30: remove **>=1.193 kg credited**.
+- Excluded (rejected earlier): knee-fin cut (R-073), soldered splices (R-071), 2.5 mm2 battery link (R-074), CSG-32 (R-119), CRBH 8016 (R-120), CF femur tubes (Materials: not recommended), shin fairing (already deleted). Battery 20S5P (8.750) is held by T7 and is not a candidate.
+- Ranked plan (credit now = half on EST/calc; full only on CAD-measured mass with the gate passed):
+
+| # | item | owner | full kg | basis | credit if booked on current evidence | gate risk |
+|---|---|---|---|---|---|---|
+| 1 | Release leg-tube hold (A15, GB r2 FEA) | Legs | -0.267 | R-023 hold; release in full on FEA | 0 until FEA, then -0.267 | G3 |
+| 2 | Pelvis/web pocketing (FEA_SPEC_torso_pocketing) | Torso & Power | -0.15..-0.25 (mid -0.20) | [EST] Torso R1 | -0.10 | G3 |
+| 3 | Hip/ankle housing pocketing (~0.78 kg housings) | Actuators | ~-0.16 (20 %) | [EST] | -0.08 | G3, thermal path (Thermal checks) |
+| 4 | L47 hip-lever shape opt (0.464/lever) | Legs | -0.13..-0.17 (mid -0.15) | [EST] R-069 | -0.075 | G3 fatigue |
+| 5 | Ankle cross Ti64 -> pocketed 7075 | Legs + Materials | -0.088 | cited density, calc | -0.044 | G3 fatigue, anti-galling |
+| 6 | Hybrid PA12/7075 palm | Arms + Materials | -0.080 | [EST] A32 CAD | -0.040 | G3 grip FEA, G5 grip test |
+| 7 | Shoulder flange/hub thinning after Job 8 | Arms | <= -0.03 | [EST] | 0 until FEA (R-121) | G3 joint SF>=2.0, s0>=2.0 |
+| 8 | Cover residual trims (C1/F1/G) | Industrial Design | -0.015 | calc | -0.008 | G5 dent/fall |
+| 9 | Bond cross pins d6 -> d5 (residual) | Legs | -0.004 | calc | -0.002 | G3 |
+| 10 | Lighter pluggable drive connectors (R-071 b) | Electronics | unquantified | must cite | 0 until cited | G1 |
+| 11 | Roll bearing CRBH 7013 -> 6013 if mu<=0.15 measured | Materials + Arms | -0.16 | cited | 0 (G5-only; not available in the design phase) | G5 |
+
+- **Totals.** Design-phase best case (rows 1-9, all FEA pass, all CAD-measured, full credit): **-0.944** -> reserve **+0.05**. On current evidence at half credit (row 1 at full once FEA passes): **-0.616** -> reserve **-0.28** (still over 66.5). Row 11 adds -0.16 only after G5 hardware.
+- **Ruling: +0.30 is not reachable on design-phase evidence. Shortfall vs +0.30: ~0.25 kg best case, ~0.58 kg on present credit rules.** Even reaching 0 (meeting the hard limit) needs every FEA item to pass and be CAD-measured.
+- **Options for Bryan (not decided here; T2 and the floor are his):** (A) accept a reserve below the 0.30 floor (for example >=0) once the plan lands; (B) raise the T2 hard limit (for example 66.5 -> 67.0 or 67.5); only Bryan can approve; (C) authorize deeper redesign beyond this list (for example more 3D-printed or CF structure, or re-sizing for a lighter carry case), with new trade studies and gate risk; (D) hold T2 and keep the freeze until FEA credits land, accepting schedule risk.
+- **Freeze:** no additions >0.005 without a ruling (R-066 stands).
+- **Deadline: end of R13.** Owners deliver FEA/CAD mass for their rows (Robot Lab queues Grok Build jobs on the bryan PC, one at a time: torso pocketing, housing pocketing, L47, ankle cross, palm, A15 tube, Job 8 flange). If the reserve is not >=0.30 by then, the Arbiter takes options A-D to Bryan.
+- Robot Lab's other two items are closed: CSG-25 overload by R-119/R-120 (stand-off + CRBH 7013 A, Mx 321 N·m raw, gear SF 1.10, no clutch credit; job1 R8B/R10 geometry superseded, Job 8 add-on runs R-120 geometry); Arms +0.059 by R-121.
