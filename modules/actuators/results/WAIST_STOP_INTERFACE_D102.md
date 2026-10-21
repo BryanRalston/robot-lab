@@ -136,3 +136,6 @@ Model: drive 0.652 through the nonlinear CSG-25 stiffness (Table 43) → output 
   - EMF reaches 95 V at 6.5 krpm cold (6.8 rad/s).
   - At 8.32 rad/s (7.9 krpm) EMF is 117 V cold / 104 V hot, **above the drive's 95 V absolute max**. This needs a regen sink: battery charge acceptance, or a bus clamp/shunt.
 - **Answer:** active braking is possible up to ≈ 5.7 rad/s (bus-limited), with the gear's grease momentary limit at 5.9 rad/s. **Controls' 2.8 rad/s is conservative but uncited. The cited figures are 3.67 rad/s average (gear) and 5.75 rad/s (bus).** Above ≈ 6.8 rad/s back-driving can over-volt the drive, so tripped 7–8.3 rad/s events also need the regen clamp. Braking cannot replace the limiter: the braking torque (≤ 115 N·m) is below the stop loads and does not cap gear wind-up at contact.
+
+## Correction 2026-10-21 (after Torso c2db98c)
+The 356 J PU stop gate double-counted. 216 J already includes ×1.5 on ½(3.52+0.652)·8.32² = 144 J, and the drive inertia (0.652) sheds its energy through limiter slip, not the PU. **PU stop gate = 1.5 × ½·3.52·8.32² = 183 J** (torso only). Torso's wing stop at 1.19 kN·m peak / 0.71 kg meets it. The gear peak stays ≤193 N·m (set by slip torque + drive inertia, independent of stop stiffness). P-162 brake reaction: use a bolt circle or keep the pin ≤14 mm from the CRBH plane (tilt 0.63 vs 0.61 kN·m).
