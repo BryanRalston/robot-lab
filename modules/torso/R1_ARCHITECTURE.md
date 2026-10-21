@@ -617,3 +617,15 @@ If the refined job 3c needs the 3 mm lid: +0.184 more (0.876).
   3. The BMS board at the rear-web zone x −105…−95 (10 mm deep) with c7 35 mm forward, and the FET/busbar blocks moved to the c1/c2 outboard space.
   4. SBS75X position.
   5. Floor vent outlet into the pelvis.
+
+### Option A COM: Controls conditions (2026-10-21)
+1. The −2.2 mm whole-robot COM shift (and the sim_torso_body_r1.json update) goes into **model_v4 and the next sim/v3 rev only**. It does NOT go into job 10's pinned ddfcff8.
+2. **Cumulative whole-robot COM shift tracker** (Torso-originated, against sim/v3 ddfcff8). Notify Controls if |Δ| exceeds 10 mm.
+
+| item | Δx mm | Δy mm | Δz mm | status |
+|---|---|---|---|---|
+| Option A pack notch / re-layout (ea6fc57) | −2.2 | 0 | +0.1 | accepted by Controls |
+| Waist yoke fix, −y torso bracket cheek 70×8×82 7075 (0.13 kg at y −67, z sim ≈ +81) | 0 | −0.13 | ≈ +0.7 [EST, robot COM z ≈ 1.0 m assumed] | proposed, not modelled |
+| **Cumulative** | **−2.2** | **−0.13** | **≈ +0.8** | **2.3 mm < 10 mm** |
+
+A full ring flange instead of the cheek (≈0.4 kg [EST]) would give ≈ +2 mm z. That's still under the limit.
