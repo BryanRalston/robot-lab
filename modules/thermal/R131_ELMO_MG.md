@@ -488,3 +488,26 @@ Q 7.5 W.
 - **Rev 5: PASS** (standing 76.8 °C; hood 41–43 °C; duct OK; fairing OK).
 - The 3.2 K margin standing is thinner than rev 4e's 6.8 K.
 - **Option B** (L60 cut-out, H ≈ 0.25 assumed) gives **69–70 °C** (≈ 10 K margin) and a rear/up exit away from the hand zone. Worth it only if T&R rejects the side hood or Legs clears the top plate structurally.
+
+## Option B: rear/up outlet through the L60 top-plate cut-out (Robot Lab ruling after T&R 7f12ce9) — 2026-10-21 EDT
+Script: r131_optB.py (rev 4d chimney model; Tb = 47.2 + 3.97e-3/ṁ fitted to the rev 4e H 0.12/0.18/0.20 table). Q 7.5 W, 35 °C ambient.
+Geometry read from repo (replaces the rev 5 "H 0.25 assumed"):
+- chimney/duct z 643–837 (legs/p156_vent_check_l72.py); L60 top plate z 816–824 + 1.5 (DECISIONS L60) → **817.5–825.5**, 8 mm thick, plate itself [EST] in model_v4;
+- cut-out 52 × 40 = 2080 mm² gross, y 104–156 (R143 §5), x −40…−80 [EST, cut-out x not yet drawn by Legs]; inlet 1440 mm² as rev 5.
+- **Real H is 0.18 m (to plate top) or 0.22 m with a stack to z 860, not 0.25.**
+
+| case | H (m) | ṁ (g/s) | jet at exit (°C) | drive base standing (°C) | vs 80 |
+|---|---|---|---|---|---|
+| B1 exit flush at plate top, skin grille 60 % (1250 free) | 0.182 | 0.152 | 83.9 | **73.3** | PASS 6.7 K |
+| B2 stack to z 860 + shroud (2600 + 600 dilution) | 0.217 | 0.170 | 78.9 | **70.6** | PASS 9.4 K |
+| B3 stack to z 860, grille only | 0.217 | 0.164 | 80.3 | 71.4 | PASS |
+- **Walking:** pumped flow ≈ 62–72 °C [EST, as rev 4c]. PASS.
+- **Touch vs 48 °C no-sustained-contact:**
+  - Jet at exit 79–84 °C: **FAIL** if exposed. Mixed with dilution slots: 66 °C (600 mm²), 58 °C (1200 mm²) [EST] — still > 48 at the exit plane, so the jet must stay behind a shroud.
+  - Bare PC louvre webs in the jet: ≈ 65–75 °C [EST] → **FAIL 48**.
+  - Shroud per rev 4e (PC, foil inner ε ≤ 0.05, ≥ 15 mm standoff, ≥ 2600 free + ≥ 600 dilution): outer face ≈ **40–42 °C** [EST, scaled from rev 4e at 90 °C exhaust] → **PASS 48** (and 43).
+  - Plume falls below 48 °C ≈ 40–60 mm past the shroud [EST]; this is inside the P-023 skirt (hem z 793, below the exit) → skirt inner face over the outlet needs Al foil and ≥ 15 mm gap, else ≈ 50–55 °C [EST] FAIL.
+- Housing, fairing (40.6–41.5 °C), femur bond (68–69 °C): unchanged. PASS.
+- No CFD needed; G5/TP-G5-15 thermocouple check of the shroud and skirt inner face confirms.
+
+**Verdict: Option B PASS with the B2 build** (stack to z 860 + rev 4e shroud + foil on skirt inner face): 70.6 °C standing, skin ≤ 42 °C. Conditions: Legs structural OK on the cut-out; Legs to give the cut-out x-range.
