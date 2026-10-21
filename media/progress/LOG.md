@@ -52,3 +52,6 @@ One line per image: date, file, module, what changed.
 ## 2026-10-21 ~10:35 ET — Controls: knee stop-zone cap (513a7d5)
 - Cap ≤50 N·m at knee ≥125° in fall/TUCK/R-146 states, on top of the derate (soft_limits.py, drive_thermal_derate, chest_lower, safe_sit kneel). Tests: test_knee_stop_cap.py.
 - Fall set (90 runs): MO=0 fails 62.7 J in 18/90 (max 92.5 J, forward fall). Knee-only pre-stop damping ramp + cap: 0/90 fail, max 40.1 J. Toe kneel conflicts with cap (knee 134.5°, falls) — open.
+
+## 2026-10-21 — Controls: side-fall set (T&R 3c73260/3b4c449)
+- side_fall.py, 54 runs × 4 variants, knee cap on. Base: S2c bumper 10.6 J (17/54 > 6.6 J). Swing-leg tuck (fall_mode.py): 0/54, max 1.66 J. Hip-roll damping not adopted. S2c knee-first not reproduced. See modules/controls/limits/SIDE_FALL.md.
